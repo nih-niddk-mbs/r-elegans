@@ -14,6 +14,41 @@ It deliberately does **not** claim biological calibration yet. Empirical
 connectome ingestion, the neuromuscular adapter, Gymnax environments, and
 closed-loop chemotaxis are later milestones described in [PRD.md](PRD.md).
 
+## External scientific data
+
+Raw data, processed arrays, learned parameters, and simulation results are
+never stored in this Git repository. Select an external directory explicitly:
+
+```bash
+export R_ELEGANS_DATA_DIR="~/OneDrive/r-elegans"
+```
+
+On macOS development machines, `~/OneDrive` may itself be a stable alias for
+the institution-managed OneDrive location.
+
+The code rejects a data root located inside the source checkout. The standard
+external layout separates immutable source artifacts, derived data, manifests,
+caches, and results:
+
+```text
+r-elegans/
+├── raw/
+│   ├── connectome/cook2019/
+│   ├── neurotransmitters/
+│   ├── physiology/
+│   └── functional/
+├── processed/
+│   ├── connectome/
+│   └── parameters/
+├── manifests/
+├── cache/
+└── results/
+```
+
+Every acquired artifact must have a manifest recording its source URL, DOI or
+citation, retrieval date, license, SHA-256 digest, and processing-code version.
+Only those small metadata manifests may be copied into Git for reproducibility.
+
 ## Development
 
 Use Python 3.10 or newer, create an isolated environment, and install:
@@ -30,4 +65,3 @@ pytest
 - Gap-junction masks and strengths must be symmetric.
 - Body coordinates use a center-of-geometry frame internally and world-space
   position plus heading externally.
-

@@ -1,0 +1,24 @@
+# Python and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+
+# Local configuration
+.env
+
+# Scientific data must live under R_ELEGANS_DATA_DIR, never in Git.
+/data/
+/artifacts/
+/results/
+*.csv
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.parquet
+*.xls
+*.xlsx
+
