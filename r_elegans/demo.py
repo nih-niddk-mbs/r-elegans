@@ -19,9 +19,20 @@ from r_elegans.model import load_builtin_model
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Run the bundled C. elegans chemotaxis checkpoint"
+        description=(
+            "Run the bundled engineered-sensory/motor-teacher chemotaxis "
+            "baseline; the recurrent connectome is not active"
+        )
     )
-    parser.add_argument("--mode", choices=("neural", "direct"), default="neural")
+    parser.add_argument(
+        "--mode",
+        choices=("neural", "direct"),
+        default="neural",
+        help=(
+            "'neural' uses the supervised 302-output motor teacher and NMJs; "
+            "'direct' sends commands to the fitted body gait"
+        ),
+    )
     parser.add_argument("--steps", type=int, default=500)
     parser.add_argument("--source-x", type=float, default=-0.6771441)
     parser.add_argument("--source-y", type=float, default=0.34037605)
@@ -60,6 +71,16 @@ def main() -> None:
     final_distance = float(observations.distance_to_source[-1])
     print(f"model={model.model_id}")
     print(f"mode={args.mode} steps={args.steps} duration_s={args.steps * 0.02:.2f}")
+    print("sensory_controller=engineered-seven-parameter-policy")
+    print(
+        "motor_path="
+        + (
+            "supervised-302-output-teacher+anatomical-nmj"
+            if args.mode == "neural"
+            else "direct-fitted-body-gait"
+        )
+    )
+    print("recurrent_connectome_active=False")
     print(f"minimum_distance={minimum_distance:.6f}")
     print(f"final_distance={final_distance:.6f}")
     print(f"reached_food={minimum_distance < 0.12}")

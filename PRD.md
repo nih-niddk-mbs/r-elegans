@@ -1,217 +1,300 @@
-# Product Requirements Document (PRD): `r-elegans`
+# Product Requirements Document: `r-elegans`
 
-**Project Name:** `r-elegans`  
-**Target Stack:** JAX / Diffrax / Gymnax (Vectorized & Differentiable RL Environment)  
-**Primary Objective:** Build a GPU-accelerated, biophysically constrained Reinforcement Learning (RL) environment and differentiable simulator for *Caenorhabditis elegans* (*C. elegans*) continuous neural dynamics, neuromuscular activation, and low-Reynolds hydrodynamics.
+**Status:** Living specification
 
----
+**Last updated:** 2026-09-01
 
-## 1. Project Overview & High-Level Goals
+**Target stack:** JAX, Diffrax, and a vectorized JAX environment interface
 
-### Strategic Goal
-Create an open-source, ultra-fast, end-to-end differentiable simulation and RL platform that allows researchers and AI agents to study biological sensorimotor control, neural circuit optimization, and chemotaxis behavior in *C. elegans*.
+**Long-term objective:** A differentiable, anatomically constrained model in
+which environmental stimuli enter identified sensory neurons, recurrent
+302-neuron dynamics generate motor-neuron activity, anatomical neuromuscular
+connections activate the body, and behavior changes the sensed environment.
 
-### Core Technical Objectives
-* **JAX-Native & Hardware Acceleration:** Entire pipeline (brain ODEs, body physics, environment step logic) must run natively on JAX to support vectorization (`vmap`), parallel multi-environment rollout (`pmap`), and GPU acceleration.
-* **End-to-End Differentiability:** Enable reverse-mode automatic differentiation through time (via `diffrax`) to allow gradient-based optimization of neural parameters (e.g., synaptic weights, gap conductances) alongside traditional RL policies.
-* **Biological Grounding:** Constrain the agent's neural architecture strictly to the empirical 302-neuron connectome topology and biophysical membrane potential dynamics.
-* **Gymnax/Gymnasium Compatibility:** Expose a standardized interface (`reset`, `step`) for seamless integration with modern JAX RL frameworks (e.g., PureJaxRL, CleanRL).
+## 1. Scope and scientific claim
 
----
+`r-elegans` is a staged research simulator. It combines experimentally derived
+anatomical topology with explicit models for neural dynamics, muscles, body
+mechanics, sensory environments, and learning.
 
-## 2. System Architecture & System Boundaries
+The project must distinguish four different forms of completeness:
 
-The system is structured as a closed-loop sensorimotor framework:
+1. **Anatomical completeness:** canonical cells and observed connection
+   topology are present.
+2. **Dynamical completeness:** every modeled cell and edge has enough numerical
+   parameters to integrate the equations.
+3. **Behavioral completeness:** the closed loop can generate locomotion and
+   task-directed behavior.
+4. **Biological calibration:** numerical parameters are constrained by
+   measurements with documented evidence and uncertainty.
 
-```
-                  ┌─────────────────────────────────────────┐
-                  │              ENVIRONMENT                │
-                  │                                         │
-                  │  ┌──────────────┐     ┌──────────────┐  │
-                  │  │ External     │     │ 2D Planar    │  │
-                  │  │ Gradients    │     │ Hydrodynamics│  │
-                  │  │ (Food, Odor) │     │ (Viscous)    │  │
-                  │  └──────┬───────┘     └──────▲───────┘  │
-                  └─────────┼────────────────────┼──────────┘
-                            │ Sensory            │ Muscle Actuations
-                            │ Stimuli (I_ext)    │ (Dorsal/Ventral)
-                            ▼                    │
-                  ┌──────────────────────────────┴──────────┐
-                  │                 AGENT                   │
-                  │                                         │
-                  │      Constrained 302-Neuron Brain       │
-                  │     (Continuous Graded Potentials)      │
-                  │                                         │
-                  │  Policy Parameters:                     │
-                  │  - Synaptic Weights (W_chem ⊙ M_chem)   │
-                  │  - Gap Conductances (G_gap ⊙ M_gap)     │
-                  │  - Channel Reversal Potentials (E_syn)  │
-                  └─────────────────────────────────────────┘
-```
+Possessing a 302-neuron adjacency matrix satisfies only part of anatomical
+completeness. It does not by itself create a functioning or biologically
+calibrated brain.
 
-### Module Interface Specifications
+## 2. Current implementation baseline
 
-| Interface Element | Component | Definition / Bounds |
-| :--- | :--- | :--- |
-| **Observation Space ($S_t$)** | Environment → Agent | - Continuous membrane voltages ($V_i, i \in [1..302]$)<br>- Segment body bend angles ($\theta_k, k \in [1..N-1]$)<br>- Local chemical gradient concentration ($C(x,y)$) |
-| **Action Space ($A_t$)** | Agent → Environment | - 95 muscle activation potentials, or high-level $N$-segment dorsal/ventral bending moments ($M_d, M_v$) |
-| **Policy Parameters ($\theta$)** | Optimizer → Agent | - Synaptic weight matrix ($W_{\text{chem}}$)<br>- Gap junction conductance matrix ($G_{\text{gap}}$)<br>- Element-wise masked by empirical connectome matrices ($M_{\text{chem}}, M_{\text{gap}}$) |
+The repository currently provides:
 
----
+- canonical ordering and sparse counts for 302 neurons, 3,709 directed chemical
+  edges, and 1,093 undirected gap-junction pairs;
+- 956 neuron-to-body-wall-muscle edges, with conservative polarity assigned to
+  880;
+- general differentiable graded-potential recurrent equations constrained by
+  chemical and gap-junction masks;
+- detailed single-compartment channel equations, with published whole-cell
+  parameter fits for AWCON and RMD only;
+- a 95-muscle, 12-segment planar body with normalized resistive-force mechanics;
+- a fitted continuous `[speed, steering]` gait;
+- a supervised 13-feature command/phase-to-302-output motor teacher;
+- a circular Petri dish, finite diffusing food pulse, and head-local
+  concentration measurement;
+- a fitted seven-parameter engineered sensory controller that produces
+  `[speed, steering]` from concentration history and gait phase.
 
-## 3. Directory Structure & Setup Commands
+The current food-finding demo does not pass sensory input through the recurrent
+connectome. Its active path is:
 
-To initialize the repository layout execute:
-
-```bash
-mkdir -p r-elegans/{r_elegans/{data,brain,body,envs,utils},tests,notebooks,scripts}
-touch r-elegans/pyproject.toml
-touch r-elegans/README.md
-touch r-elegans/LICENSE
+```text
+food at head
+  → engineered seven-parameter sensory controller
+  → [speed, steering]
+  → either fitted body gait directly
+     or supervised 302-output motor teacher + anatomical NMJs
+  → 95 muscles
+  → body mechanics
 ```
 
-Target repository layout:
+The neuron-to-neuron topology is bundled and loadable but is not active in this
+baseline. See [CURRENT_MODEL.md](CURRENT_MODEL.md) for exact equations,
+parameters, fit protocol, and measured results.
 
-```
-r-elegans/
-├── pyproject.toml
-├── README.md
-├── LICENSE
-├── r_elegans/
-│   ├── __init__.py
-│   ├── data/
-│   │   ├── __init__.py
-│   │   ├── connectome_loader.py    # Downloads/parses Cook 2019 & PyOpenWorm
-│   │   └── eigenworm_loader.py     # Parses Stephens et al. PCA shape vectors
-│   ├── brain/
-│   │   ├── __init__.py
-│   │   └── dynamics.py             # Diffrax ODE continuous graded dynamics
-│   ├── body/
-│   │   ├── __init__.py
-│   │   └── mechanics.py            # 2D low-Reynolds Resistive Force Theory
-│   ├── envs/
-│   │   ├── __init__.py
-│   │   └── foraging_env.py         # Gymnax / Gym-compatible JAX environment
-│   └── utils/
-│       ├── __init__.py
-│       └── metrics.py              # Eigenworm posture MSE & trajectory loss
-├── tests/
-│   ├── test_connectome.py
-│   ├── test_brain.py
-│   └── test_differentiability.py
-└── scripts/
-    └── extract_data.py             # CLI runner for connectome preprocessing
+## 3. Target closed-loop architecture
+
+The target system is:
+
+```text
+diffusing chemical field
+    ↓ local receptor stimulus
+identified chemosensory neurons
+    ↓ recurrent chemical synapses and gap junctions
+302-neuron graded-potential network
+    ↓ anatomical neuron-to-muscle connections
+95 body-wall muscles
+    ↓ local dorsal/ventral projection
+12–24 segment body and substrate mechanics
+    ↓ movement changes head and body position
+diffusing chemical field
 ```
 
----
+No target coordinate, bearing, distance-to-food, reward, or privileged
+environment state may be supplied as neural input. Those quantities may be
+used by a training objective or evaluator only.
 
-## 4. Dependency Specification (`pyproject.toml`)
+## 4. Functional requirements
 
-```toml
-[build-system]
-requires = ["flit_core >=3.2,<4.0"]
-build-backend = "flit_core.buildapi"
+### 4.1 Runtime and packaging
 
-[project]
-name = "r-elegans"
-version = "0.1.0"
-description = "A JAX-native RL environment and differentiable simulator for C. elegans"
-authors = [{ name = "r-elegans Contributors" }]
-license = { file = "LICENSE" }
-readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-    "jax>=0.4.25",
-    "jaxlib>=0.4.25",
-    "diffrax>=0.5.0",
-    "equinox>=0.11.0",
-    "gymnax>=0.0.8",
-    "numpy>=1.24.0",
-    "pandas>=2.0.0",
-    "scipy>=1.10.0",
-    "requests>=2.31.0",
-]
+- A fresh clone must run a representative checkpoint after installing declared
+  Python dependencies.
+- The compact runtime asset must be versioned in the repository and include all
+  inference-critical topology, ordering, and learned parameters.
+- Raw publications, spreadsheets, validation traces, full optimizer histories,
+  and generated trajectories must remain outside Git.
+- Every bundled or external scientific artifact must have source attribution,
+  transformation notes, indexing conventions, checksum, and schema version.
+- The runtime loader must validate array shapes, identifiers, finite values,
+  nonnegative counts, and gap-junction symmetry.
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0.0",
-    "pyopenworm>=0.11.0",
-    "matplotlib>=3.7.0",
-]
+### 4.2 Connectome and cell identity
+
+- All neuron-to-neuron matrices use `[postsynaptic, presynaptic]` indexing.
+- Chemical masks are directed; gap-junction masks and effective conductances are
+  symmetric.
+- Canonical ordering must be shared by recurrent state, sensory inputs, motor
+  outputs, and neuromuscular matrices.
+- Anatomical contact count must remain distinct from fitted effective strength.
+- Neurotransmitter identity must remain distinct from receptor-dependent edge
+  effect. Unknown polarity must remain explicit rather than guessed.
+
+### 4.3 Neural dynamics
+
+The recurrent baseline uses continuous graded potentials:
+
+```text
+dV_i/dt = (I_leak,i + I_gap,i + I_chem,i + I_ext,i) / tau_i
 ```
 
----
+Required mechanisms:
 
-## 5. Detailed Component Specifications
+- leak toward a neuron-specific reversal potential;
+- bidirectional gap current proportional to connected voltage differences;
+- presynaptic sigmoid activation for chemical transmission;
+- reversal-potential-dependent chemical current;
+- external sensory current delivered only to identified sensory neurons;
+- stable JAX/Diffrax integration and differentiability through time.
 
-### 5.1 Data Pipeline & Connectome Ingestion
-* **Source Dataset:** Empirical hermaphrodite connectome from Cook et al. (2019) / PyOpenWorm.
-* **Ingestion Task:** Automated parser (`r_elegans/data/connectome_loader.py`) that downloads, filters, and formats adjacency matrices into JAX arrays.
-* **Key Artifacts Generated:**
-  * `mask_chem`: $302 \times 302$ binary mask of chemical synapses.
-  * `weight_chem`: $302 \times 302$ initial weight matrix derived from physical synapse counts.
-  * `mask_gap`: $302 \times 302$ symmetric binary mask of electrical gap junctions.
-  * `weight_gap`: $302 \times 302$ initial gap junction conductance matrix.
+The model must expose anatomical masks separately from trainable chemical
+strengths and gap conductances. It must support parameter sharing by neuron
+class as well as neuron-specific values.
 
-### 5.2 Continuous Neural Dynamics (Brain)
-* **Mathematical Model:** Continuous non-spiking (graded potential) differential equations solved via `diffrax` (`r_elegans/brain/dynamics.py`).
-* **State Variable:** Membrane voltage vector $V \in \mathbb{R}^{302}$.
-* **Governing Equation:**
-  $$\frac{dV_i}{dt} = \frac{1}{\tau_i} \left[ (E_L - V_i) + I_{\text{gap}, i} + I_{\text{chem}, i} + I_{\text{ext}, i} \right]$$
-* **Mechanisms:**
-  * **Gap Junction Currents:** Bi-directional flow proportional to voltage differences between connected neurons, masked by $M_{\text{gap}}$:
-    $$I_{\text{gap}, i} = \sum_j G_{ij} \cdot M_{\text{gap}, ij} \cdot (V_j - V_i)$$
-  * **Chemical Synaptic Currents:** Unidirectional flow governed by a sigmoidal activation function operating on presynaptic voltages, masked by $M_{\text{chem}}$:
-    $$I_{\text{chem}, i} = \sum_j W_{ij} \cdot M_{\text{chem}, ij} \cdot \sigma\left(\frac{V_j - V_{\text{th}}}{V_{\text{slope}}}\right) \cdot (E_{\text{rev}, j} - V_i)$$
-  * **External Input ($I_{\text{ext}}$):** Sensory current injected into specific sensory neurons (e.g., AWA, AWC, ASE) based on environmental stimuli.
+### 4.4 Sensory system
 
-### 5.3 Low-Reynolds Hydrodynamics (Body Physics)
-* **Kinematic Structure:** $N$-link planar chain ($N \approx 12\text{--}24$ segments) representing the worm's longitudinal midline (`r_elegans/body/mechanics.py`).
-* **Physics Framework:** Resistive Force Theory (RFT) in low-Reynolds-number viscous regimes (e.g., fluid or agar medium).
-* **Force Decomposition:**
-  * Perpendicular drag force: $F_\perp = -C_\perp \cdot v_\perp$
-  * Parallel drag force: $F_\parallel = -C_\parallel \cdot v_\parallel$
-  * Drag anisotropy ratio: $\frac{C_\perp}{C_\parallel} \approx 1.5 \text{ to } 40.0$ (reflecting physical media properties).
+The first biological sensory milestone is chemotaxis. It must specify:
 
-### 5.4 Vectorized Environment Logic (Foraging & Chemotaxis)
-* **Task:** Navigate a 2D spatial plane to locate chemical sources via gradient ascent (`r_elegans/envs/foraging_env.py`).
-* **Reward Structure:**
-  * **Chemotaxis Progress:** Positive reward proportional to distance decreased toward peak gradient concentrations ($r_t = d_{t-1} - d_t$).
-  * **Posture Smoothness:** Regularization penalty on rapid, unphysiological changes in segment bending.
-  * **Energy Efficiency:** Penalty on excessive muscle activation magnitude.
-* **Termination Conditions:** Reaching target food source radius, exceeding maximum step budget, or numerical instability bounds.
+- which amphid neurons receive food-related input;
+- whether each neuron responds to absolute level, increases, decreases,
+  derivatives, or temporal filters;
+- receptor/transduction kinetics and adaptation state;
+- left/right or head-motion geometry where supported;
+- stimulus-to-current units and saturation;
+- sensory delays, noise, and uncertainty where evidence exists.
 
----
+The current engineered seven-parameter controller is a behavioral teacher and
+benchmark. It is not an acceptable final sensory-neural implementation.
 
-## 6. Phased Execution & Development Roadmap
+### 4.5 Neuromuscular system
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      PHASED EXECUTION ROADMAP                           │
-└─────────────────────────────────────────────────────────────────────────┘
-  Phase 1: Project Setup & Automated Connectome Extraction
-  ├── Establish repository structure & dependency locks (pyproject.toml)
-  └── Implement automated downloading & matrix formatting for Cook et al. (2019)
-  
-  Phase 2: Differentiable Neural Engine (Diffrax ODE)
-  ├── Implement graded potential ODE vector fields
-  └── Build differentiability test suite to verify gradient flow through diffrax solvers
-  
-  Phase 3: Body Physics & Hydrodynamics (Resistive Force Theory)
-  ├── Implement 2D N-link kinematics and RFT drag calculations
-  └── Validate undulatory locomotion dynamics (e.g., wave propagation)
-  
-  Phase 4: Gymnax Environment & Closed-Loop Reinforcement Learning
-  ├── Integrate Brain + Body + Environment into standardized Gymnax API
-  └── Implement benchmark training pipeline (PPO/Gradient-based optimization)
-```
+- Neural voltage must be transformed through the fixed `[95, 302]`
+  neuron-to-muscle topology.
+- Contact counts, polarity, neural thresholds, neural slopes, muscle thresholds,
+  and muscle slopes must remain independently inspectable.
+- The 95 anatomical muscle identities and dorsal/ventral quadrants must be
+  preserved.
+- Local projection to body joints must not destroy anterior/posterior ordering.
+- Unknown NMJ signs must be excluded, marginalized, or fitted under explicit
+  uncertainty; they must not silently become excitatory.
 
----
+### 4.6 Body mechanics
 
-## 7. Acceptance & Verification Criteria
+- The body is an articulated planar midline with explicit joint angles and
+  dorsal-minus-ventral activation state.
+- Passive bending stiffness, damping, muscle moment, activation kinetics,
+  substrate drag, and joint limits are separate parameters.
+- Low-Reynolds force and torque balance determines rigid-body translation and
+  rotation from shape change.
+- The current normalized mechanics are suitable for controller development but
+  must not be described as an adult-worm biomechanical calibration.
+- A later calibration must fit posture wavelength, frequency, speed, turning
+  radius, and medium-dependent drag to measured trajectories.
 
-To declare the PRD implementation complete, the codebase must pass three functional acceptance gates:
+### 4.7 Petri-dish environment
 
-1. **Connectome Topology Gate:** The processed adjacency matrices must map exactly to 302 canonical neuron identifiers, with non-zero entries strictly matching the empirical chemical synapse and gap junction masks.
-2. **Gradient Flow & Differentiability Gate:** Reverse-mode automatic differentiation through the `diffrax` ODE solver must execute without generating `NaN` values or zero-gradient deadlocks across a 1,000-step unroll.
-3. **Locomotion & Chemotaxis Gate:** The closed-loop environment must achieve stable undulatory locomotion in 2D space, demonstrating non-zero forward displacement driven by asymmetric dorsal/ventral muscle contractions.
+- The environment contains a circular boundary, body pose, chemical source,
+  concentration field, and time.
+- The initial food field may use an analytic Gaussian diffusion pulse.
+- A later version should solve diffusion with a no-flux dish boundary and
+  configurable source deposition/consumption.
+- Sensory functions may query concentration only at modeled receptor locations.
+- Training/evaluation may access source distance, but the neural controller may
+  not.
+- Episodes must support randomized source location, initial heading, posture,
+  concentration width, diffusion coefficient, and noise.
+
+### 4.8 Learning strategy
+
+Training proceeds in inexpensive stages:
+
+1. Fit body motion primitives and the continuous action interface.
+2. Fit neural motor outputs to the muscle/body motion library.
+3. Fit a compact engineered sensory controller as a closed-loop behavioral
+   teacher.
+4. Fit the recurrent network by supervised trajectory matching to sensory and
+   motor teachers while preserving connectome masks.
+5. Fine-tune the recurrent closed loop through differentiable behavior loss.
+6. Use RL only for tasks with delayed reward, partial observability, competing
+   objectives, or exploration that supervised/differentiable objectives do not
+   cover.
+
+RL is not required merely to demonstrate locomotion or gradient following.
+
+## 5. Current quantitative baseline
+
+The current sensory-controller fit used 16 randomized training episodes and 24
+held-out episodes, each 500 steps at `dt=0.02`.
+
+| Path | Held-out food-zone success | Meaning |
+| --- | ---: | --- |
+| Unfitted sensory controller | 16.7% | Initialization baseline |
+| Fitted controller → body gait | 91.7% | Engineered policy/body performance |
+| Fitted controller → motor teacher → NMJs → body | 62.5% | Surrogate neural-output validation |
+| Sensory neurons → recurrent connectome → NMJs → body | Not implemented | Target brain-driven behavior |
+
+Success means minimum head-to-source distance below `0.12` normalized body
+lengths. These scores must not be relabeled as recurrent-brain training.
+
+## 6. Roadmap and status
+
+| Phase | Deliverable | Status |
+| --- | --- | --- |
+| 1 | Repository, JAX foundation, external-data policy | Complete |
+| 2 | Canonical neuron and neuromuscular topology | Complete |
+| 3 | Graded-potential and single-compartment equations | Implemented; sparsely calibrated |
+| 4 | Muscle body and continuous action space | Implemented; normalized/fitted baseline |
+| 5 | Supervised 302-output motor teacher | Complete baseline; not recurrent |
+| 6 | Petri dish and engineered chemotaxis teacher | Complete baseline |
+| 7 | Biological sensory transduction into identified neurons | Not started |
+| 8 | Recurrent connectome fit to neural/motor teachers | Not started |
+| 9 | Closed-loop recurrent chemotaxis | Not started |
+| 10 | Gymnax-style batched RL tasks | Not started |
+| 11 | Whole-animal biological calibration and validation | Not started |
+
+## 7. Acceptance gates
+
+### Gate A: self-contained inference
+
+- A clean installation runs `r-elegans-demo` without an external data root.
+- Bundled topology and parameter assets pass schema and checksum validation.
+- No training trajectory or raw source file is required for inference.
+
+### Gate B: anatomical integrity
+
+- Exactly 302 canonical neuron identifiers are present.
+- Chemical nonzeros match the derived directed topology.
+- Gap-junction matrices are symmetric.
+- NMJ arrays retain 95 muscles in canonical order.
+
+### Gate C: numerical integrity
+
+- Neural, muscle, body, and environment steps are finite and JIT-compatible.
+- Gradients through representative unrolls are finite and nonzero where
+  expected.
+- Batched execution produces the same result as individual execution within
+  numerical tolerance.
+
+### Gate D: motor reconstruction
+
+- The supervised motor teacher reproduces held-out command trajectories within
+  documented muscle and endpoint error tolerances.
+- Evaluation passes through the fixed neuromuscular topology and body, not only
+  a direct command comparison.
+
+### Gate E: recurrent sensory-motor closure
+
+This gate is **not yet satisfied**. It requires:
+
+- environmental concentration converted to currents in identified sensory
+  neurons;
+- recurrent 302-neuron integration using the anatomical chemical and gap masks;
+- recurrent voltages driving the anatomical NMJ projection;
+- movement changing subsequent sensory input;
+- held-out food finding without the engineered sensory controller or supervised
+  command-to-voltage motor teacher.
+
+### Gate F: biological validation
+
+This gate is **not yet satisfied**. It requires comparison with experimental
+neural traces, locomotor statistics, sensory ablations, and behavior across
+multiple stimulus geometries, with uncertainty and provenance reported.
+
+## 8. Explicit nonclaims
+
+Until Gates E and F are passed, documentation and results must not claim that:
+
+- the recurrent 302-neuron brain has been trained;
+- the connectome itself finds food;
+- all neuron-to-neuron weights or signs are known;
+- all 302 neurons have calibrated ion-channel compositions;
+- the body is quantitatively adult-worm accurate;
+- the current behavior is an RL result;
+- topology alone constitutes a complete functional brain.
