@@ -3,18 +3,20 @@
 `r-elegans` is an experimental JAX-native foundation for a differentiable,
 connectome-constrained *C. elegans* simulator.
 
-The current milestone contains three independently testable systems:
+The current milestone contains four independently testable systems:
 
 - a conductance-based, single-compartment neuron with the 17 ionic-current
   terms used in the published AWCON and RMD models;
 - a 302-neuron-compatible graded-potential model with masked chemical and
   electrical connectivity, plus Diffrax integration;
 - an overdamped planar body model that uses resistive-force theory (RFT) to
-  turn prescribed joint-angle waves into locomotion.
+  turn muscle activation into locomotion;
+- a polarity-aware adapter from 302 neural voltages through the 95 anatomical
+  body-wall muscles to the body's 11 bending joints.
 
-Biophysical calibration currently applies only to AWCON and RMD. Empirical
-connectome ingestion, the neuromuscular adapter, Gymnax environments, and
-closed-loop chemotaxis are later milestones described in [PRD.md](PRD.md).
+Biophysical calibration currently applies only to AWCON and RMD. Whole-animal
+parameter fitting, Gymnax environments, and closed-loop chemotaxis are later
+milestones described in [PRD.md](PRD.md).
 
 ## Single-compartment electrophysiology
 
@@ -69,13 +71,65 @@ maximum joint angle so each can later be fitted to external biomechanical data.
 Primary mechanics references: [Fang-Yen et al., PNAS 2010](https://doi.org/10.1073/pnas.1003016107)
 and [Shen et al., Biophysical Journal 2012](https://doi.org/10.1016/j.bpj.2012.05.012).
 
+## Neuromuscular adapter
+
+Cook et al.'s hermaphrodite chemical-connectivity matrix is ingested in fixed
+`[95 muscles, 302 neurons]` order. Its 956 reported neuron-to-muscle edges
+contain 5,515 serial-section contacts and reach every body-wall muscle. The
+muscles retain their dorsal/ventral quadrant and anterior/posterior row, then a
+fixed local projection maps them to the 11 joints of the default 12-segment
+body.
+
+```python
+import jax.numpy as jnp
+
+from r_elegans.body import (
+    NeuromuscularParams,
+    build_muscle_projection,
+    default_muscle_body_params,
+    initialize_muscle_body,
+    neuromuscular_body_step,
+)
+from r_elegans.data import (
+    load_neuromuscular_connectome,
+)
+
+connectome = load_neuromuscular_connectome()
+params = NeuromuscularParams(
+    synapse_weights=connectome.chemical_counts,
+    synapse_signs=connectome.synapse_signs,
+    neuron_threshold=jnp.full((302,), -20.0),
+    neuron_slope=jnp.full((302,), 5.0),
+    muscle_threshold=jnp.full((95,), 0.05),
+    muscle_slope=jnp.full((95,), 0.25),
+)
+state, muscle_activity = neuromuscular_body_step(
+    initialize_muscle_body(12),
+    default_muscle_body_params(12),
+    jnp.full((302,), -60.0),
+    params,
+    build_muscle_projection(11),
+    dt=0.01,
+)
+```
+
+Polarity is intentionally separate from contact count. Wang et al.'s updated
+transmitter atlas supports acetylcholine-only edges as excitatory and GABA-only
+edges as inhibitory; ambiguous or receptor-dependent transmitter classes stay
+zero instead of being guessed. This assigns a supported sign to 880 of 956
+edges (5,142 of 5,515 section contacts). The sigmoid thresholds, gains, and
+effective contact strengths remain calibration parameters.
+
+Primary anatomy sources: [Cook et al., Nature 2019](https://doi.org/10.1038/s41586-019-1352-7)
+and [Wang et al., eLife 2024](https://doi.org/10.7554/eLife.95402).
+
 ## External scientific data
 
 Raw data, processed arrays, learned parameters, and simulation results are
 never stored in this Git repository. Select an external directory explicitly:
 
 ```bash
-export R_ELEGANS_DATA_DIR="~/OneDrive/r-elegans"
+export R_ELEGANS_DATA_DIR="$HOME/OneDrive/r-elegans"
 ```
 
 On macOS development machines, `~/OneDrive` may itself be a stable alias for
