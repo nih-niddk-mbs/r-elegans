@@ -42,6 +42,33 @@ them.
 
 Primary model source: [Nicoletti et al., PLOS ONE 2019](https://doi.org/10.1371/journal.pone.0218738).
 
+## Muscle-driven body
+
+The planar body now accepts one dorsal and one ventral activation value per
+joint. Opposing muscles generate active bending moments; elastic and viscous
+body terms resist bending; and resistive-force theory solves the rigid-body
+translation and rotation required by force and torque balance. A complete
+muscle-driven rollout is:
+
+```python
+from r_elegans.body import (
+    default_muscle_body_params,
+    simulate_muscle_wave,
+)
+
+params = default_muscle_body_params(num_segments=12)
+final_state, trajectory = simulate_muscle_wave(params, steps=500, dt=0.01)
+```
+
+The default parameters are normalized and intended for controller development,
+gradient tests, and integration. They are not yet an adult-worm mechanical
+calibration. The parameter interface separates substrate drag, passive bending
+stiffness and damping, muscle moment scale, activation time constant, and the
+maximum joint angle so each can later be fitted to external biomechanical data.
+
+Primary mechanics references: [Fang-Yen et al., PNAS 2010](https://doi.org/10.1073/pnas.1003016107)
+and [Shen et al., Biophysical Journal 2012](https://doi.org/10.1016/j.bpj.2012.05.012).
+
 ## External scientific data
 
 Raw data, processed arrays, learned parameters, and simulation results are

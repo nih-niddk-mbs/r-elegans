@@ -57,6 +57,17 @@ def relative_segment_centers(joint_angles: Array, segment_length: Array) -> Arra
     return centers - jnp.mean(centers, axis=0, keepdims=True)
 
 
+def world_segment_centers(state: BodyState, params: BodyParams) -> Array:
+    """Return segment centers transformed into world coordinates."""
+
+    centers = relative_segment_centers(
+        state.joint_angles, params.segment_length
+    )
+    cosine, sine = jnp.cos(state.heading), jnp.sin(state.heading)
+    body_to_world = jnp.array(((cosine, -sine), (sine, cosine)))
+    return centers @ body_to_world.T + state.position
+
+
 def _wrench(positions: Array, drag_tensors: Array, velocities: Array) -> Array:
     forces = -jnp.einsum("nij,nj->ni", drag_tensors, velocities)
     torque = jnp.sum(positions[:, 0] * forces[:, 1] - positions[:, 1] * forces[:, 0])
@@ -176,4 +187,3 @@ def simulate_traveling_wave(
         return next_state, next_state
 
     return jax.lax.scan(advance, initial, xs=jnp.arange(steps))
-
