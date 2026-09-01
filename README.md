@@ -123,6 +123,21 @@ effective contact strengths remain calibration parameters.
 Primary anatomy sources: [Cook et al., Nature 2019](https://doi.org/10.1038/s41586-019-1352-7)
 and [Wang et al., eLife 2024](https://doi.org/10.7554/eLife.95402).
 
+## Body motion fitting
+
+The first motor-learning stage fits a compact periodic controller directly
+through the differentiable body. It emits all 95 muscle activations while
+learning wave amplitude, frequency, wavelength, phase, and steering bias:
+
+```bash
+python scripts/fit_body_controller.py --iterations 100
+```
+
+The objective rewards positive-x displacement and penalizes lateral drift,
+heading drift, activation energy, and excessive curvature. Use `--output` to
+write the fitted trajectory to the external results directory; generated
+rollouts must not be committed to Git.
+
 ## External scientific data
 
 Raw data, processed arrays, learned parameters, and simulation results are
