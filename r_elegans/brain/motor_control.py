@@ -16,6 +16,35 @@ Array = jax.Array
 MOTOR_FEATURE_COUNT = 13
 
 
+def motor_features_from_phase(command: Array, phase: Array) -> Array:
+    """Encode one or more ``[speed, steering]`` commands at a supplied phase."""
+
+    command = jnp.asarray(command)
+    speed, steering = command[..., 0], command[..., 1]
+    forward = jnp.maximum(speed, 0.0)
+    reverse = jnp.maximum(-speed, 0.0)
+    sine, cosine = jnp.sin(phase), jnp.cos(phase)
+    ones = jnp.ones_like(speed)
+    return jnp.stack(
+        (
+            ones,
+            forward,
+            reverse,
+            forward * sine,
+            forward * cosine,
+            reverse * sine,
+            reverse * cosine,
+            forward * steering,
+            reverse * steering,
+            forward * steering * sine,
+            forward * steering * cosine,
+            reverse * steering * sine,
+            reverse * steering * cosine,
+        ),
+        axis=-1,
+    )
+
+
 def motor_command_features(
     commands: Array,
     times: Array,
@@ -33,28 +62,8 @@ def motor_command_features(
     def encode(command: Array) -> Array:
         gait = controller_for_command(command, gait_params)
         phase = gait.phase_offset - 2.0 * jnp.pi * gait.frequency * times
-        sine, cosine = jnp.sin(phase), jnp.cos(phase)
-        speed, steering = command
-        forward = jnp.maximum(speed, 0.0)
-        reverse = jnp.maximum(-speed, 0.0)
-        ones = jnp.ones_like(times)
-        return jnp.stack(
-            (
-                ones,
-                forward * ones,
-                reverse * ones,
-                forward * sine,
-                forward * cosine,
-                reverse * sine,
-                reverse * cosine,
-                forward * steering * ones,
-                reverse * steering * ones,
-                forward * steering * sine,
-                forward * steering * cosine,
-                reverse * steering * sine,
-                reverse * steering * cosine,
-            ),
-            axis=-1,
+        return motor_features_from_phase(
+            jnp.broadcast_to(command, (times.shape[0], 2)), phase
         )
 
     return jax.vmap(encode)(commands)
@@ -79,6 +88,17 @@ def neural_motor_voltage(
     return voltage_min + (voltage_max - voltage_min) * jax.nn.sigmoid(logits)
 
 
+def effective_neural_motor_coefficients(
+    coefficients: Array,
+    trainable_neurons: Array,
+) -> Array:
+    """Apply the resting bias and freeze neurons without signed NMJ outputs."""
+
+    mask = jnp.asarray(trainable_neurons)[:, None]
+    resting = jnp.zeros_like(coefficients).at[:, 0].set(-4.0)
+    return resting + mask * coefficients
+
+
 def neural_motor_loss(
     coefficients: Array,
     features: Array,
@@ -89,8 +109,9 @@ def neural_motor_loss(
     """Return supervised muscle loss and predicted neural/muscle trajectories."""
 
     mask = jnp.asarray(trainable_neurons)[:, None]
-    resting = jnp.zeros_like(coefficients).at[:, 0].set(-4.0)
-    effective_coefficients = resting + mask * coefficients
+    effective_coefficients = effective_neural_motor_coefficients(
+        coefficients, trainable_neurons
+    )
     voltage = neural_motor_voltage(effective_coefficients, features)
     muscles = muscle_activations_from_voltage(voltage, neuromuscular_params)
     muscle_mse = jnp.mean((muscles - target_muscles) ** 2)

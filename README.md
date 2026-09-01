@@ -3,7 +3,7 @@
 `r-elegans` is an experimental JAX-native foundation for a differentiable,
 connectome-constrained *C. elegans* simulator.
 
-The current milestone contains four independently testable systems:
+The current milestone contains five independently testable systems:
 
 - a conductance-based, single-compartment neuron with the 17 ionic-current
   terms used in the published AWCON and RMD models;
@@ -13,10 +13,13 @@ The current milestone contains four independently testable systems:
   turn muscle activation into locomotion;
 - a polarity-aware adapter from 302 neural voltages through the 95 anatomical
   body-wall muscles to the body's 11 bending joints.
+- a circular Petri-dish environment with a finite diffusing food pulse,
+  head-local chemosensation, sensory adaptation, and closed-loop chemotaxis.
 
-Biophysical calibration currently applies only to AWCON and RMD. Whole-animal
-parameter fitting, Gymnax environments, and closed-loop chemotaxis are later
-milestones described in [PRD.md](PRD.md).
+Biophysical calibration currently applies only to AWCON and RMD. The body and
+Petri dish use normalized units; whole-animal parameter calibration and a
+recurrent connectome-constrained controller remain later milestones described
+in [PRD.md](PRD.md).
 
 ## Single-compartment electrophysiology
 
@@ -166,6 +169,37 @@ Cook contact counts and Wang transmitter signs remain fixed. This is a cheap
 supervised neural-output teacher, not yet the recurrent 302-neuron brain. Its
 saved voltage trajectories will become targets for the connectome-constrained
 brain after the neuron-to-neuron matrices are operational.
+
+## Virtual Petri dish and chemotaxis
+
+The first closed-loop task places the modeled worm in a circular dish and a
+finite food pulse at a randomized location. Food follows the analytic solution
+for a two-dimensional Gaussian diffusion pulse. A head-local sensor observes
+only concentration and its recent history; source coordinates are available to
+the training loss but never to the sensory policy. The seven-parameter policy
+modulates the continuous `[speed, steering]` interface using sensory adaptation
+and gait-phase sampling, a compact approximation of klinotaxis.
+
+```bash
+python scripts/train_petri_chemotaxis.py \
+  --data-root "$R_ELEGANS_DATA_DIR" \
+  --iterations 300
+```
+
+Training differentiates directly through the 95-muscle body, then evaluates
+the learned commands through the fitted 302-voltage motor teacher and the fixed
+Cook/Wang neuromuscular projection. This is behavior optimization, not yet RL:
+RL becomes useful when the task includes richer sensory state, choices, and
+delayed reward. It is also not yet a complete biological sensory circuit. The
+head sensor and compact policy stand in for amphid transduction and recurrent
+interneuron dynamics.
+
+The initial environment uses normalized dimensions, clips the body center at
+the dish margin, and treats diffusion as an unbounded Gaussian rather than a
+no-flux circular-domain solution. Those approximations are explicit so they can
+be replaced independently without changing the policy/body interface. Generated
+fit artifacts and trajectories are written beneath `results/behavior/` in the
+external data root and must not be committed.
 
 ## External scientific data
 

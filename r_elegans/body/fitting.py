@@ -163,6 +163,20 @@ def periodic_muscle_activations(
     return jnp.clip(activation, 0.0, 1.0)
 
 
+def commanded_muscle_activations(
+    phase: Array,
+    command: Array,
+    params: CommandedControllerParams,
+) -> tuple[Array, PeriodicControllerParams]:
+    """Generate 95 muscles from a command while preserving external phase."""
+
+    controller = controller_for_command(command, params)
+    phase_controller = controller._replace(
+        frequency=jnp.asarray(0.0), phase_offset=phase
+    )
+    return periodic_muscle_activations(0.0, phase_controller), controller
+
+
 @partial(jax.jit, static_argnames=("num_segments", "steps"))
 def simulate_periodic_controller(
     controller_params: PeriodicControllerParams,

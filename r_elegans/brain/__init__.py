@@ -9,7 +9,9 @@ from .dynamics import (
 )
 from .motor_control import (
     MOTOR_FEATURE_COUNT,
+    effective_neural_motor_coefficients,
     motor_command_features,
+    motor_features_from_phase,
     neural_motor_loss,
     neural_motor_voltage,
 )
@@ -35,11 +37,13 @@ __all__ = [
     "SingleCompartmentState",
     "effective_chemical_weights",
     "effective_gap_weights",
+    "effective_neural_motor_coefficients",
     "integrate_neural_state",
     "initial_single_compartment_state",
     "integrate_single_compartment",
     "ionic_currents",
     "motor_command_features",
+    "motor_features_from_phase",
     "neural_motor_loss",
     "neural_motor_voltage",
     "neural_rhs",
