@@ -5,6 +5,9 @@ import numpy as np
 from r_elegans.body import (
     BODY_WALL_MUSCLE_NAMES,
     body_motion_loss,
+    commanded_body_motion_loss,
+    controller_for_command,
+    decode_commanded_controller,
     decode_periodic_controller,
     default_muscle_body_params,
     periodic_muscle_activations,
@@ -65,3 +68,62 @@ def test_negative_spatial_wave_moves_in_positive_x_direction() -> None:
 
     assert final.position[0] > 0.05
     np.testing.assert_allclose(final.time, 5.0, atol=1e-5)
+
+
+def test_zero_speed_command_produces_no_muscle_activation() -> None:
+    raw = jnp.asarray(
+        [
+            0.0,
+            -0.5,
+            -0.35,
+            0.0,
+            0.0,
+            0.0,
+            -0.5,
+            0.35,
+            0.0,
+            0.0,
+            0.2,
+            -0.2,
+            0.5,
+            0.0,
+        ]
+    )
+    params = decode_commanded_controller(raw)
+    controller = controller_for_command(jnp.asarray([0.0, 1.0]), params)
+    activation = periodic_muscle_activations(jnp.asarray(0.5), controller)
+
+    np.testing.assert_allclose(activation, 0.0)
+
+
+def test_commanded_loss_is_differentiable_across_motion_grid() -> None:
+    raw = jnp.asarray(
+        [
+            0.0,
+            -0.5,
+            -0.35,
+            0.0,
+            0.0,
+            0.0,
+            -0.5,
+            0.35,
+            0.0,
+            0.0,
+            0.2,
+            -0.2,
+            0.5,
+            0.0,
+        ]
+    )
+    commands = jnp.asarray([[-1.0, 0.0], [1.0, -0.5], [1.0, 0.5]])
+    body_params = default_muscle_body_params(12)
+
+    loss, gradient = jax.value_and_grad(
+        lambda value: commanded_body_motion_loss(
+            value, body_params, commands, steps=30
+        )
+    )(raw)
+
+    assert jnp.isfinite(loss)
+    assert jnp.all(jnp.isfinite(gradient))
+    assert jnp.linalg.norm(gradient) > 1e-7

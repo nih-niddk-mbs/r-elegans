@@ -138,6 +138,17 @@ heading drift, activation energy, and excessive curvature. Use `--output` to
 write the fitted trajectory to the external results directory; generated
 rollouts must not be committed to Git.
 
+The continuous behavioral action interface is fitted over a grid of forward,
+reverse, left, and right commands with:
+
+```bash
+python scripts/fit_commanded_body_controller.py --iterations 300
+```
+
+Its action is `[speed, steering]` in `[-1, 1]²`; zero speed produces zero
+muscle activation. The internal controller maintains gait phase and converts
+each command into the full 95-muscle trajectory.
+
 ## External scientific data
 
 Raw data, processed arrays, learned parameters, and simulation results are
