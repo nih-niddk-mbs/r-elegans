@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -15,8 +16,9 @@ from r_elegans.brain.single_compartment import (
     CHANNEL_NAMES,
     SingleCompartmentParams,
 )
+from r_elegans.assets import load_asset_document
 
-from .paths import data_path
+from .paths import DATA_ROOT_ENV, data_path
 
 DEFAULT_PARAMETER_FILE = "processed/parameters/single_compartment_v1.json"
 EVIDENCE_LEVELS = frozenset(
@@ -64,10 +66,17 @@ def load_neuron_parameters(
     root: str | Path | None = None,
     relative_path: str = DEFAULT_PARAMETER_FILE,
 ) -> NeuronParameterRecord:
-    """Load and validate one neuron class from the external parameter catalog."""
+    """Load a bundled neuron class or an external parameter-catalog override."""
 
-    path = data_path(*Path(relative_path).parts, root=root)
-    document = json.loads(path.read_text(encoding="utf-8"))
+    if (
+        root is None
+        and not os.environ.get(DATA_ROOT_ENV)
+        and relative_path == DEFAULT_PARAMETER_FILE
+    ):
+        document = load_asset_document("single_compartment_v1.json")
+    else:
+        path = data_path(*Path(relative_path).parts, root=root)
+        document = json.loads(path.read_text(encoding="utf-8"))
     if document.get("schema_version") != 1:
         raise ValueError("Unsupported single-compartment parameter schema")
     try:

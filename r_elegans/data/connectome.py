@@ -9,7 +9,10 @@ from __future__ import annotations
 from typing import NamedTuple, Sequence
 
 import jax
+import jax.numpy as jnp
 import numpy as np
+
+from r_elegans.assets import load_asset_document
 
 
 class Connectome(NamedTuple):
@@ -43,3 +46,24 @@ def validate_connectome(
     if not np.array_equal(gap, gap.T):
         raise ValueError("gap-junction counts must be symmetric")
 
+
+def load_connectome() -> Connectome:
+    """Load the bundled 302-neuron Cook topology in ``[post, pre]`` order."""
+
+    document = load_asset_document("runtime_model_v1.json")
+    neuron_ids = tuple(document["neuron_ids"])
+    sparse = document["connectome"]
+    chemical = np.zeros((302, 302), dtype=np.float32)
+    chemical[
+        np.asarray(sparse["chemical_post"], dtype=np.int32),
+        np.asarray(sparse["chemical_pre"], dtype=np.int32),
+    ] = np.asarray(sparse["chemical_count"], dtype=np.float32)
+    gap = np.zeros((302, 302), dtype=np.float32)
+    gap_a = np.asarray(sparse["gap_neuron_a"], dtype=np.int32)
+    gap_b = np.asarray(sparse["gap_neuron_b"], dtype=np.int32)
+    gap_count = np.asarray(sparse["gap_count"], dtype=np.float32)
+    gap[gap_a, gap_b] = gap_count
+    gap[gap_b, gap_a] = gap_count
+    result = Connectome(neuron_ids, jnp.asarray(chemical), jnp.asarray(gap))
+    validate_connectome(*result)
+    return result

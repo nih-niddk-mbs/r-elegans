@@ -1,6 +1,6 @@
-"""Stable schemas and external storage for empirical scientific data."""
+"""Stable schemas for bundled runtime assets and external scientific data."""
 
-from .connectome import Connectome, validate_connectome
+from .connectome import Connectome, load_connectome, validate_connectome
 from .integrity import sha256_file, verify_sha256
 from .neuromuscular import (
     COOK_CONNECTOME_WORKBOOK,
@@ -8,6 +8,7 @@ from .neuromuscular import (
     WANG_NEUROTRANSMITTER_WORKBOOK,
     NeuromuscularConnectome,
     infer_nmj_signs,
+    load_builtin_neuromuscular_connectome,
     load_neuromuscular_connectome,
     parse_cook_neuromuscular_workbook,
     parse_wang_neurotransmitter_workbook,
@@ -47,6 +48,8 @@ __all__ = [
     "get_data_root",
     "initialize_data_root",
     "load_electrophysiology_trace",
+    "load_connectome",
+    "load_builtin_neuromuscular_connectome",
     "load_neuromuscular_connectome",
     "load_neuron_parameters",
     "parse_cook_neuromuscular_workbook",

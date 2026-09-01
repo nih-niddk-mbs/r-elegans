@@ -1,8 +1,10 @@
 """Resolve and initialize the external scientific-data directory.
 
-Datasets are intentionally excluded from the source repository. Every caller
-must select a data root explicitly through ``R_ELEGANS_DATA_DIR`` or a function
-argument. Repository-local roots are rejected as an additional safety check.
+Raw datasets and complete training artifacts are intentionally excluded from
+the source repository. Callers that need them must select a data root explicitly
+through ``R_ELEGANS_DATA_DIR`` or a function argument. The small inference
+checkpoint is bundled separately under :mod:`r_elegans.assets`. Repository-local
+external-data roots are rejected as an additional safety check.
 """
 
 from __future__ import annotations
@@ -88,4 +90,3 @@ def data_path(
     if must_exist and not candidate.exists():
         raise FileNotFoundError(f"Data path does not exist: {candidate}")
     return candidate
-

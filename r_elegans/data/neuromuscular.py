@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import os
 import re
 from typing import NamedTuple
 
@@ -10,8 +11,9 @@ import jax.numpy as jnp
 import numpy as np
 
 from r_elegans.body.neuromuscular import BODY_WALL_MUSCLE_NAMES
+from r_elegans.assets import load_asset_document
 
-from .paths import data_path
+from .paths import DATA_ROOT_ENV, data_path
 
 COOK_CONNECTOME_WORKBOOK = (
     "raw/connectome/cook2019/41586_2019_1352_MOESM9_ESM.xlsx"
@@ -214,7 +216,14 @@ def load_neuromuscular_connectome(
     root: str | Path | None = None,
     relative_path: str = DEFAULT_NEUROMUSCULAR_FILE,
 ) -> NeuromuscularConnectome:
-    """Load the processed Cook NMJ artifact from external storage."""
+    """Load the NMJ artifact, falling back to the bundled runtime topology."""
+
+    if (
+        root is None
+        and not os.environ.get(DATA_ROOT_ENV)
+        and relative_path == DEFAULT_NEUROMUSCULAR_FILE
+    ):
+        return load_builtin_neuromuscular_connectome()
 
     path = data_path(*Path(relative_path).parts, root=root)
     with np.load(path, allow_pickle=False) as archive:
@@ -228,5 +237,31 @@ def load_neuromuscular_connectome(
                 else None
             ),
         )
+    validate_neuromuscular_connectome(*result)
+    return result
+
+
+def load_builtin_neuromuscular_connectome() -> NeuromuscularConnectome:
+    """Load the package-shipped sparse NMJ topology regardless of environment."""
+
+    document = load_asset_document("runtime_model_v1.json")
+    neuron_ids = tuple(document["neuron_ids"])
+    sparse = document["nmj"]
+    muscle_index = np.asarray(sparse["muscle_index"], dtype=np.int32)
+    neuron_index = np.asarray(sparse["neuron_index"], dtype=np.int32)
+    counts = np.zeros((95, len(neuron_ids)), dtype=np.float32)
+    signs = np.zeros_like(counts)
+    counts[muscle_index, neuron_index] = np.asarray(
+        sparse["contact_count"], dtype=np.float32
+    )
+    signs[muscle_index, neuron_index] = np.asarray(
+        sparse["sign"], dtype=np.float32
+    )
+    result = NeuromuscularConnectome(
+        neuron_ids,
+        BODY_WALL_MUSCLE_NAMES,
+        jnp.asarray(counts),
+        jnp.asarray(signs),
+    )
     validate_neuromuscular_connectome(*result)
     return result

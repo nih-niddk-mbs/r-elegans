@@ -3,6 +3,29 @@
 `r-elegans` is an experimental JAX-native foundation for a differentiable,
 connectome-constrained *C. elegans* simulator.
 
+## Run the bundled model
+
+The repository ships a compact runtime checkpoint, so cloning and installing
+the package is enough to run a neural-to-body chemotaxis episode:
+
+```bash
+python -m pip install -e .
+r-elegans-demo
+```
+
+No external data directory is required for this demo. The bundled checkpoint
+contains the canonical 302-neuron ordering, 3,709 directed chemical edges,
+1,093 undirected gap-junction pairs, 956 neuron-to-muscle edges, conservative
+polarity for 880 of those edges, the fitted neural motor coefficients, body
+gait, sensory policy, and the calibrated AWCON/RMD single-compartment
+parameters. Use `--help` to select the source position, heading, duration,
+direct-body mode, or an output archive.
+
+Raw publications, electrophysiology traces, fit histories, and generated
+trajectories remain external because they are needed for auditing or
+retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)
+for the bundled checkpoint's sources and limitations.
+
 The current milestone contains five independently testable systems:
 
 - a conductance-based, single-compartment neuron with the 17 ionic-current
@@ -203,8 +226,10 @@ external data root and must not be committed.
 
 ## External scientific data
 
-Raw data, processed arrays, learned parameters, and simulation results are
-never stored in this Git repository. Select an external directory explicitly:
+The small inference checkpoint is distributed with the package. Raw data,
+complete training artifacts, and simulation results are never stored in this
+Git repository. Select an external directory when reproducing fits or auditing
+source data:
 
 ```bash
 export R_ELEGANS_DATA_DIR="$HOME/OneDrive/r-elegans"

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "description": "Nicoletti et al. 2019 neuron-calibrated single-compartment presets. Conductances are whole-cell fitted, not direct channel counts.",
+  "sources": {
+    "nicoletti2019": {
+      "citation": "Nicoletti M et al. Biophysical modeling of C. elegans neurons: Single ion currents and whole-cell dynamics of AWCon and RMD. PLOS ONE 14:e0218738 (2019).",
+      "doi": "10.1371/journal.pone.0218738",
+      "usage": "Equations, neuron-calibrated kinetics, Table 2 conductances, capacitance, calcium parameters"
+    }
+  },
+  "neurons": {
+    "AWCON": {
+      "capacitance_pF": 3.1,
+      "conductances_nS": {
+        "SHL1": 2.9,
+        "SHK1": 0.1,
+        "KVS1": 0.8,
+        "EGL2": 0.85,
+        "EGL36": 0.0,
+        "KQT3": 0.55,
+        "EGL19": 1.55,
+        "UNC2": 1.0,
+        "CCA1": 0.7,
+        "SLO1_EGL19": 0.11,
+        "SLO1_UNC2": 0.11,
+        "SLO2_EGL19": 0.1,
+        "SLO2_UNC2": 0.1,
+        "KCNL": 0.06,
+        "NCA": 0.06,
+        "IRK": 0.25,
+        "LEAK": 0.27
+      },
+      "potassium_reversal_mV": -80.0,
+      "calcium_reversal_mV": 60.0,
+      "sodium_reversal_mV": 30.0,
+      "leak_reversal_mV": -90.0,
+      "cell_volume_um3": 31.16,
+      "calcium_equilibrium_uM": 0.05,
+      "calcium_removal_ms": 50.0,
+      "free_calcium_fraction": 0.001,
+      "evidence": {
+        "SHL1": "whole_cell_fit",
+        "SHK1": "whole_cell_fit",
+        "KVS1": "whole_cell_fit",
+        "EGL2": "whole_cell_fit",
+        "EGL36": "expression_inference",
+        "KQT3": "whole_cell_fit",
+        "EGL19": "whole_cell_fit",
+        "UNC2": "whole_cell_fit",
+        "CCA1": "whole_cell_fit",
+        "SLO1_EGL19": "whole_cell_fit",
+        "SLO1_UNC2": "whole_cell_fit",
+        "SLO2_EGL19": "whole_cell_fit",
+        "SLO2_UNC2": "whole_cell_fit",
+        "KCNL": "whole_cell_fit",
+        "NCA": "whole_cell_fit",
+        "IRK": "whole_cell_fit",
+        "LEAK": "whole_cell_fit"
+      },
+      "source_ids": ["nicoletti2019"]
+    },
+    "RMD": {
+      "capacitance_pF": 1.2,
+      "conductances_nS": {
+        "SHL1": 2.5,
+        "SHK1": 1.1,
+        "KVS1": 0.0,
+        "EGL2": 0.0,
+        "EGL36": 1.3,
+        "KQT3": 0.0,
+        "EGL19": 0.99,
+        "UNC2": 0.9,
+        "CCA1": 3.1,
+        "SLO1_EGL19": 0.3,
+        "SLO1_UNC2": 0.3,
+        "SLO2_EGL19": 0.3,
+        "SLO2_UNC2": 0.3,
+        "KCNL": 0.06,
+        "NCA": 0.05,
+        "IRK": 0.2,
+        "LEAK": 0.4
+      },
+      "potassium_reversal_mV": -80.0,
+      "calcium_reversal_mV": 60.0,
+      "sodium_reversal_mV": 30.0,
+      "leak_reversal_mV": -80.0,
+      "cell_volume_um3": 5.65,
+      "calcium_equilibrium_uM": 0.05,
+      "calcium_removal_ms": 50.0,
+      "free_calcium_fraction": 0.001,
+      "evidence": {
+        "SHL1": "whole_cell_fit",
+        "SHK1": "whole_cell_fit",
+        "KVS1": "expression_inference",
+        "EGL2": "expression_inference",
+        "EGL36": "whole_cell_fit",
+        "KQT3": "expression_inference",
+        "EGL19": "whole_cell_fit",
+        "UNC2": "whole_cell_fit",
+        "CCA1": "whole_cell_fit",
+        "SLO1_EGL19": "whole_cell_fit",
+        "SLO1_UNC2": "whole_cell_fit",
+        "SLO2_EGL19": "whole_cell_fit",
+        "SLO2_UNC2": "whole_cell_fit",
+        "KCNL": "whole_cell_fit",
+        "NCA": "whole_cell_fit",
+        "IRK": "whole_cell_fit",
+        "LEAK": "whole_cell_fit"
+      },
+      "source_ids": ["nicoletti2019"]
+    }
+  }
+}
