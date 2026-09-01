@@ -7,6 +7,12 @@ from .dynamics import (
     integrate_neural_state,
     neural_rhs,
 )
+from .motor_control import (
+    MOTOR_FEATURE_COUNT,
+    motor_command_features,
+    neural_motor_loss,
+    neural_motor_voltage,
+)
 from .single_compartment import (
     CHANNEL_INDEX,
     CHANNEL_NAMES,
@@ -20,10 +26,11 @@ from .single_compartment import (
 )
 
 __all__ = [
-    "NeuralParams",
     "CHANNEL_INDEX",
     "CHANNEL_NAMES",
     "GATE_COUNT",
+    "MOTOR_FEATURE_COUNT",
+    "NeuralParams",
     "SingleCompartmentParams",
     "SingleCompartmentState",
     "effective_chemical_weights",
@@ -32,6 +39,9 @@ __all__ = [
     "initial_single_compartment_state",
     "integrate_single_compartment",
     "ionic_currents",
+    "motor_command_features",
+    "neural_motor_loss",
+    "neural_motor_voltage",
     "neural_rhs",
     "single_compartment_rhs",
 ]

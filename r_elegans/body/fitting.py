@@ -193,6 +193,31 @@ def simulate_periodic_controller(
     return final, trajectory, activations
 
 
+@partial(jax.jit, static_argnames=("num_segments",))
+def simulate_muscle_trajectory(
+    muscle_activations: Array,
+    body_params: MuscleBodyParams,
+    *,
+    num_segments: int = 12,
+    dt: float = 0.02,
+) -> tuple[MuscleBodyState, MuscleBodyState]:
+    """Roll out an externally supplied ``[time, 95]`` muscle trajectory."""
+
+    initial = initialize_muscle_body(num_segments)
+    projection = build_muscle_projection(num_segments - 1)
+
+    def advance(
+        state: MuscleBodyState, activation: Array
+    ) -> tuple[MuscleBodyState, MuscleBodyState]:
+        dorsal, ventral = project_muscles_to_joints(activation, projection)
+        next_state = muscle_body_step(
+            state, body_params, dorsal, ventral, dt
+        )
+        return next_state, next_state
+
+    return jax.lax.scan(advance, initial, muscle_activations)
+
+
 def body_motion_loss(
     raw_controller: Array,
     body_params: MuscleBodyParams,

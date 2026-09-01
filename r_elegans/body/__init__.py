@@ -30,6 +30,7 @@ from .fitting import (
     decode_periodic_controller,
     periodic_muscle_activations,
     simulate_periodic_controller,
+    simulate_muscle_trajectory,
 )
 from .neuromuscular import (
     BODY_WALL_MUSCLE_NAMES,
@@ -76,6 +77,7 @@ __all__ = [
     "simulate_traveling_wave",
     "simulate_muscle_wave",
     "simulate_periodic_controller",
+    "simulate_muscle_trajectory",
     "world_segment_centers",
     "validate_neuromuscular_params",
 ]

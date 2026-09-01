@@ -138,14 +138,14 @@ def muscle_activations_from_voltage(
     """Transform neural voltage into bounded muscle activation."""
 
     voltage = jnp.asarray(voltage)
-    if voltage.shape != params.neuron_threshold.shape:
+    if voltage.shape[-1:] != params.neuron_threshold.shape:
         raise ValueError("Voltage must have one value per neuron")
     presynaptic = jax.nn.sigmoid(
         (voltage - params.neuron_threshold) / params.neuron_slope
     )
     signed_weights = params.synapse_weights * params.synapse_signs
     scale = jnp.maximum(jnp.sum(params.synapse_weights, axis=1), 1.0)
-    drive = (signed_weights @ presynaptic) / scale
+    drive = jnp.einsum("mn,...n->...m", signed_weights, presynaptic) / scale
     connected = jnp.any(params.synapse_weights > 0.0, axis=1)
     raw_activation = jax.nn.sigmoid(
         (drive - params.muscle_threshold) / params.muscle_slope

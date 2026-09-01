@@ -149,6 +149,24 @@ Its action is `[speed, steering]` in `[-1, 1]²`; zero speed produces zero
 muscle activation. The internal controller maintains gait phase and converts
 each command into the full 95-muscle trajectory.
 
+## Supervised neural motor fitting
+
+The next stage fits bounded outputs for all 302 neurons so that the fixed Cook
+neuron-to-muscle topology reproduces the motion library:
+
+```bash
+python scripts/fit_neural_motor_controller.py \
+  --data-root "$R_ELEGANS_DATA_DIR" \
+  --iterations 500
+```
+
+Only the 129 neurons with signed neuromuscular projections are trainable in
+this stage. A compact 13-feature command/phase map generates their voltages;
+Cook contact counts and Wang transmitter signs remain fixed. This is a cheap
+supervised neural-output teacher, not yet the recurrent 302-neuron brain. Its
+saved voltage trajectories will become targets for the connectome-constrained
+brain after the neuron-to-neuron matrices are operational.
+
 ## External scientific data
 
 Raw data, processed arrays, learned parameters, and simulation results are
