@@ -29,6 +29,10 @@ data = [
 ]
 env = [
   "gymnax>=0.0.8",
+  "optax>=0.2",
+]
+demo = [
+  "matplotlib>=3.8",
 ]
 
 [tool.pytest.ini_options]

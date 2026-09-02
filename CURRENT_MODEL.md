@@ -17,6 +17,13 @@ The current food-finding baseline has three learned layers:
 3. A seven-parameter engineered sensory controller maps head concentration
    history and gait phase to `[speed, steering]`.
 
+That seven-parameter controller can be fitted two ways: by differentiating
+directly through the body/gait simulator (the baseline described below), or
+by treating the same simulator as a black-box Gymnax environment and applying
+model-free reinforcement learning (see "Body-direct reinforcement learning").
+Both produce the identical controller shape and can be evaluated
+interchangeably; only the fitting method differs.
+
 The 302×302 chemical and gap-junction topology is bundled and the graded-
 potential recurrent equations are implemented, but that recurrent network is
 not in the active food-finding path. Its weights, cell parameters, sensory
@@ -37,7 +44,7 @@ transduction, and motor behavior have not been fitted as one closed loop.
 | Diffusing food field | Yes | Hand-specified normalized parameters | Yes |
 | Biological sensory-neuron model | No | No | No |
 | Seven-parameter sensory controller | Yes | Differentiable behavior fit | Yes |
-| RL policy | No | No | No |
+| RL policy | Yes, body-direct only | On-policy actor-critic (Gymnax) | Optional alternative to the row above |
 
 ## Active food-finding computation
 
@@ -163,6 +170,54 @@ Results using a target radius of `0.12` body-length units:
 The reduction from 91.7% to 62.5% measures accumulated approximation error in
 the motor teacher and neuromuscular transform. It is not a recurrent-brain
 score.
+
+## Body-direct reinforcement learning (alternative fitting method)
+
+`r_elegans.envs.gymnax_petri_dish.PetriDishGymnaxEnv` exposes the identical
+body-direct food field, gait, and body mechanics through a Gymnax-compatible
+`reset`/`step` interface. It reveals only the same four sensed quantities
+(adapted-response, its derivative, and gait-phase sine/cosine) plus relative
+concentration, and accepts the same `[speed, steering]` command; the
+environment is agnostic to how that command is produced.
+
+`r_elegans.rl` fits the seven raw parameters against this environment with an
+on-policy actor-critic policy-gradient update (generalized advantage
+estimation, no importance-ratio clipping) instead of differentiating through
+the simulator. A small MLP critic supplies the value baseline used to compute
+advantages; it is discarded after training and is not part of the deployed
+controller. The mean action reproduces
+`r_elegans.envs.petri_dish.decode_sensory_policy` exactly
+(`r_elegans.rl.policy.action_mean`); a state-independent learned log-standard-
+deviation drives exploration only during training.
+
+Reward per step is `10 · (previous distance − new distance) − 0.001 ·
+steering² + 5 · [distance < 0.12]`; an episode terminates early on reaching the
+target radius and truncates at the configured step budget. Source position and
+initial heading are randomized every reset; the controller never observes
+them, matching the differentiable-fit protocol above.
+
+A run of `scripts/train_rl_chemotaxis.py` with 64 parallel environments, 250
+steps per episode, and 300 updates (learning rate `0.003`, 4 full-batch epochs
+per update) reached, on the same 24 held-out source/heading pairs used for the
+differentiable fit:
+
+| Evaluation | Success | Mean minimum distance |
+| --- | ---: | ---: |
+| Unfitted sensory controller, held out | 16.7% | 0.3584 |
+| RL-trained controller, held out | 75.0% | 0.0658 |
+| Differentiable-fit controller, held out (for reference) | 91.7% | 0.0451 |
+
+RL reaches a large majority of held-out sources but does not match the
+differentiable fit, which back-propagates an exact analytic gradient through
+every simulated step rather than estimating a policy gradient from sampled
+rollouts. This gap is the expected price of treating the simulator as a
+black box; it is not evidence that the RL path is broken. Both paths deploy
+the same seven-number controller shape, so an RL-trained checkpoint can be
+evaluated, validated through the motor teacher, or visualized with the same
+functions (`simulate_petri_dish`, `simulate_neural_petri_dish`) used for the
+differentiable-fit checkpoint. `scripts/demo_rl_chemotaxis.py` trains a
+controller this way and animates the resulting 12-segment body moving through
+the dish.
 
 ## Supervised motor teacher
 

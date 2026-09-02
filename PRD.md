@@ -198,7 +198,10 @@ Training proceeds in inexpensive stages:
 1. Fit body motion primitives and the continuous action interface.
 2. Fit neural motor outputs to the muscle/body motion library.
 3. Fit a compact engineered sensory controller as a closed-loop behavioral
-   teacher.
+   teacher, by differentiating through the simulator or, as an alternative
+   body-direct-only fitting method, by model-free reinforcement learning
+   against a Gymnax-compatible wrapper of the same environment (see
+   `r_elegans.rl`).
 4. Fit the recurrent network by supervised trajectory matching to sensory and
    motor teachers while preserving connectome masks.
 5. Fine-tune the recurrent closed loop through differentiable behavior loss.
@@ -236,7 +239,7 @@ lengths. These scores must not be relabeled as recurrent-brain training.
 | 7 | Biological sensory transduction into identified neurons | Not started |
 | 8 | Recurrent connectome fit to neural/motor teachers | Not started |
 | 9 | Closed-loop recurrent chemotaxis | Not started |
-| 10 | Gymnax-style batched RL tasks | Not started |
+| 10 | Gymnax-style batched RL tasks | Body-direct only; recurrent-connectome RL not started |
 | 11 | Whole-animal biological calibration and validation | Not started |
 
 ## 7. Acceptance gates
