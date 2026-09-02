@@ -44,7 +44,7 @@ transduction, and motor behavior have not been fitted as one closed loop.
 | Diffusing food field | Yes | Hand-specified normalized parameters | Yes |
 | Biological sensory-neuron model | No | No | No |
 | Seven-parameter sensory controller | Yes | Differentiable behavior fit | Yes |
-| RL policy | Yes, body-direct only | On-policy actor-critic (Gymnax) | Optional alternative to the row above |
+| RL policy | Yes, body-direct only | PPO or A2C (Gymnax) | Optional alternative to the row above |
 
 ## Active food-finding computation
 
@@ -180,15 +180,25 @@ body-direct food field, gait, and body mechanics through a Gymnax-compatible
 concentration, and accepts the same `[speed, steering]` command; the
 environment is agnostic to how that command is produced.
 
-`r_elegans.rl` fits the seven raw parameters against this environment with an
-on-policy actor-critic policy-gradient update (generalized advantage
-estimation, no importance-ratio clipping) instead of differentiating through
-the simulator. A small MLP critic supplies the value baseline used to compute
-advantages; it is discarded after training and is not part of the deployed
-controller. The mean action reproduces
-`r_elegans.envs.petri_dish.decode_sensory_policy` exactly
-(`r_elegans.rl.policy.action_mean`); a state-independent learned log-standard-
-deviation drives exploration only during training.
+`r_elegans.rl` fits the seven raw parameters against this environment with
+model-free reinforcement learning instead of differentiating through the
+simulator, using generalized advantage estimation and a small MLP critic that
+supplies the value baseline used to compute advantages; the critic is
+discarded after training and is not part of the deployed controller. Two
+update rules are implemented, sharing the same rollout collection and GAE:
+
+- **PPO** (`r_elegans.rl.make_ppo_train_step`, the default): the clipped
+  surrogate objective. Each update collects one on-policy rollout, then runs
+  several epochs over randomly shuffled minibatches of that batch, clipping
+  the policy-ratio so a batch can be reused for multiple gradient steps
+  without the policy drifting too far off the data that generated it.
+- **A2C** (`r_elegans.rl.make_a2c_train_step`): plain policy gradient with the
+  same GAE baseline but no ratio clipping, taking full-batch gradient steps
+  directly.
+
+The mean action reproduces `r_elegans.envs.petri_dish.decode_sensory_policy`
+exactly (`r_elegans.rl.policy.action_mean`); a state-independent learned
+log-standard-deviation drives exploration only during training.
 
 Reward per step is `10 · (previous distance − new distance) − 0.001 ·
 steering² + 5 · [distance < 0.12]`; an episode terminates early on reaching the
@@ -197,21 +207,25 @@ initial heading are randomized every reset; the controller never observes
 them, matching the differentiable-fit protocol above.
 
 A run of `scripts/train_rl_chemotaxis.py` with 64 parallel environments, 250
-steps per episode, and 300 updates (learning rate `0.003`, 4 full-batch epochs
-per update) reached, on the same 24 held-out source/heading pairs used for the
+steps per episode, and 300 updates (learning rate `0.003`, 4 epochs per
+update; PPO additionally split each batch into 4 minibatches with clip range
+`0.2`) reached, on the same 24 held-out source/heading pairs used for the
 differentiable fit:
 
 | Evaluation | Success | Mean minimum distance |
 | --- | ---: | ---: |
 | Unfitted sensory controller, held out | 16.7% | 0.3584 |
-| RL-trained controller, held out | 75.0% | 0.0658 |
+| A2C-trained controller, held out | 75.0% | 0.0658 |
+| PPO-trained controller, held out | 87.5% | 0.0523 |
 | Differentiable-fit controller, held out (for reference) | 91.7% | 0.0451 |
 
-RL reaches a large majority of held-out sources but does not match the
-differentiable fit, which back-propagates an exact analytic gradient through
-every simulated step rather than estimating a policy gradient from sampled
-rollouts. This gap is the expected price of treating the simulator as a
-black box; it is not evidence that the RL path is broken. Both paths deploy
+Both RL update rules reach a large majority of held-out sources; PPO's
+ratio clipping lets it use its rollouts more effectively than A2C's
+full-batch updates at the same training budget, closing most of the gap to
+the differentiable fit, which back-propagates an exact analytic gradient
+through every simulated step rather than estimating a policy gradient from
+sampled rollouts. This gap is the expected price of treating the simulator as
+a black box; it is not evidence that the RL path is broken. Both paths deploy
 the same seven-number controller shape, so an RL-trained checkpoint can be
 evaluated, validated through the motor teacher, or visualized with the same
 functions (`simulate_petri_dish`, `simulate_neural_petri_dish`) used for the

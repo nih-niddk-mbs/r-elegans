@@ -3,10 +3,11 @@
 Unlike ``scripts/train_petri_chemotaxis.py``, which fits the same seven
 numbers by differentiating directly through the muscle/body simulator, this
 script treats the Petri dish as a black-box Gymnax environment
-(:mod:`r_elegans.envs.gymnax_petri_dish`) and optimizes the controller with an
-on-policy actor-critic policy-gradient update (:mod:`r_elegans.rl`). Only the
-body-direct path is covered; the supervised motor teacher and neuromuscular
-projection are untouched.
+(:mod:`r_elegans.envs.gymnax_petri_dish`) and optimizes the controller with
+model-free reinforcement learning (:mod:`r_elegans.rl`): PPO's clipped
+surrogate objective by default, or a simpler A2C policy gradient via
+``--algorithm a2c``. Only the body-direct path is covered; the supervised
+motor teacher and neuromuscular projection are untouched.
 
 Requires the optional ``env`` extra: ``pip install -e ".[env]"``.
 """
@@ -82,10 +83,18 @@ def print_metrics(label: str, metrics: dict[str, np.ndarray]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--algorithm", choices=("ppo", "a2c"), default="ppo",
+        help="RL update rule: PPO's clipped surrogate objective (default) or plain A2C",
+    )
     parser.add_argument("--episode-steps", type=int, default=250)
     parser.add_argument("--num-envs", type=int, default=64)
     parser.add_argument("--num-updates", type=int, default=300)
     parser.add_argument("--update-epochs", type=int, default=4)
+    parser.add_argument(
+        "--num-minibatches", type=int, default=4, help="PPO minibatches per epoch"
+    )
+    parser.add_argument("--clip-eps", type=float, default=0.2, help="PPO clip range")
     parser.add_argument("--learning-rate", type=float, default=3e-3)
     parser.add_argument("--entropy-coef", type=float, default=1e-3)
     parser.add_argument("--seed", type=int, default=0)
@@ -93,9 +102,14 @@ def main() -> None:
     parser.add_argument("--eval-steps", type=int, default=500)
     parser.add_argument("--log-every", type=int, default=20)
     parser.add_argument(
-        "--output", type=Path, default=Path("results/behavior/petri_chemotaxis_rl_v1.npz")
+        "--output",
+        type=Path,
+        default=None,
+        help="Defaults to results/behavior/petri_chemotaxis_<algorithm>_v1.npz",
     )
     args = parser.parse_args()
+    if args.output is None:
+        args.output = Path(f"results/behavior/petri_chemotaxis_{args.algorithm}_v1.npz")
 
     model = load_builtin_model()
     body_params = default_muscle_body_params(12)
@@ -107,10 +121,19 @@ def main() -> None:
         num_steps=args.episode_steps,
         num_updates=args.num_updates,
         update_epochs=args.update_epochs,
+        num_minibatches=args.num_minibatches,
+        clip_eps=args.clip_eps,
         learning_rate=args.learning_rate,
         entropy_coef=args.entropy_coef,
     )
-    agent, history = train(env, env_params, config, seed=args.seed, log_every=args.log_every)
+    agent, history = train(
+        env,
+        env_params,
+        config,
+        algorithm=args.algorithm,
+        seed=args.seed,
+        log_every=args.log_every,
+    )
     raw_policy = agent.actor.raw_sensory_policy
 
     test_sources, test_headings = make_trials(19, args.test_episodes)
@@ -138,6 +161,7 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(
         args.output,
+        algorithm=args.algorithm,
         raw_policy=np.asarray(raw_policy),
         log_std=np.asarray(agent.actor.log_std),
         history_update=np.asarray([m["update"] for m in history]),

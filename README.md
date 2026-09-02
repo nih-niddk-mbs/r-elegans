@@ -251,28 +251,33 @@ The same seven-parameter controller and body-direct simulator are also
 reachable through a Gymnax-compatible environment,
 `r_elegans.envs.gymnax_petri_dish.PetriDishGymnaxEnv`, so they can be fitted
 with model-free reinforcement learning instead of by differentiating through
-the simulator. `r_elegans.rl` implements an on-policy actor-critic
-policy-gradient update (generalized advantage estimation, a small MLP value
-baseline used only during training) around the identical controller formula
-in `r_elegans.envs.petri_dish.decode_sensory_policy`. Only this body-direct
-path is covered; the supervised motor teacher and neuromuscular projection are
-not part of the RL loop.
+the simulator. `r_elegans.rl` implements two update rules around the
+identical controller formula in
+`r_elegans.envs.petri_dish.decode_sensory_policy`, both using generalized
+advantage estimation with a small MLP value baseline used only during
+training: **PPO** (the clipped surrogate objective, default) and a simpler
+**A2C** policy gradient with no ratio clipping. Only this body-direct path is
+covered; the supervised motor teacher and neuromuscular projection are not
+part of the RL loop.
 
 ```bash
 pip install -e ".[env,demo]"
-python scripts/train_rl_chemotaxis.py --num-updates 300
+python scripts/train_rl_chemotaxis.py --num-updates 300            # PPO (default)
+python scripts/train_rl_chemotaxis.py --num-updates 300 --algorithm a2c
 python scripts/demo_rl_chemotaxis.py --num-updates 200
 ```
 
 `train_rl_chemotaxis.py` trains and reports held-out success/distance exactly
-as `train_petri_chemotaxis.py` does, so the two fitting methods are directly
+as `train_petri_chemotaxis.py` does, so the fitting methods are directly
 comparable. `demo_rl_chemotaxis.py` trains (or loads a saved policy via
 `--load`) and animates the resulting 12-segment body moving through the dish
 toward the food source. On the same 24 held-out source/heading pairs used for
-the differentiable fit, 300 updates of RL reached 75.0% success (mean minimum
-distance 0.0658) versus 91.7% (0.0451) for the differentiable fit and 16.7%
-for the unfitted controller -- RL finds a strong majority of sources without
-ever differentiating through the physics, but does not match an exact
+the differentiable fit, 300 updates reached 87.5% success (mean minimum
+distance 0.0523) with PPO and 75.0% (0.0658) with A2C, versus 91.7% (0.0451)
+for the differentiable fit and 16.7% for the unfitted controller -- both RL
+rules find a strong majority of sources without ever differentiating through
+the physics, and PPO's clipped surrogate lets it reuse each rollout more
+effectively than A2C at the same budget, but neither matches an exact
 analytic gradient. See `CURRENT_MODEL.md` for the full protocol and numbers.
 
 ## External scientific data

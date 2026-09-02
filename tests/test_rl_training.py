@@ -17,6 +17,7 @@ from r_elegans.rl import (
     compute_gae,
     deterministic_action,
     init_actor_params,
+    make_ppo_train_step,
     sample_action,
     train,
 )
@@ -90,18 +91,23 @@ def test_sample_action_log_prob_is_finite_and_decreases_with_distance() -> None:
     assert jnp.all(action <= jnp.array([1.0, 1.0]))
 
 
-def test_compute_gae_is_zero_for_zero_reward_zero_value() -> None:
-    steps, envs = 5, 3
+def _zero_transition(steps: int, envs: int) -> Transition:
     zeros = jnp.zeros((steps, envs))
-    trajectory = Transition(
+    return Transition(
         obs=jnp.zeros((steps, envs, 5)),
         raw_action=jnp.zeros((steps, envs, 2)),
+        log_prob=zeros,
         reward=zeros,
         done=jnp.zeros((steps, envs), dtype=bool),
         value=zeros,
         distance_to_source=zeros,
         success=jnp.zeros((steps, envs), dtype=bool),
     )
+
+
+def test_compute_gae_is_zero_for_zero_reward_zero_value() -> None:
+    envs = 3
+    trajectory = _zero_transition(5, envs)
     advantages, returns = compute_gae(
         trajectory, jnp.zeros((envs,)), gamma=0.99, gae_lambda=0.95
     )
@@ -112,14 +118,9 @@ def test_compute_gae_is_zero_for_zero_reward_zero_value() -> None:
 def test_compute_gae_masks_bootstrap_across_episode_boundary() -> None:
     """A `done` flag must zero out the bootstrap term at that step."""
 
-    trajectory = Transition(
-        obs=jnp.zeros((2, 1, 5)),
-        raw_action=jnp.zeros((2, 1, 2)),
+    trajectory = _zero_transition(2, 1)._replace(
         reward=jnp.array([[1.0], [0.0]]),
         done=jnp.array([[True], [False]]),
-        value=jnp.array([[0.0], [0.0]]),
-        distance_to_source=jnp.zeros((2, 1)),
-        success=jnp.zeros((2, 1), dtype=bool),
     )
     advantages, _ = compute_gae(
         trajectory, jnp.array([100.0]), gamma=0.99, gae_lambda=0.95
@@ -128,21 +129,36 @@ def test_compute_gae_masks_bootstrap_across_episode_boundary() -> None:
     assert float(advantages[0, 0]) == pytest.approx(1.0, abs=1e-5)
 
 
-def test_short_training_run_stays_finite_and_yields_a_valid_controller() -> None:
+def test_make_ppo_train_step_rejects_indivisible_minibatch_count() -> None:
+    env = make_env()
+    config = TrainingConfig(num_envs=8, num_steps=5, num_minibatches=3)
+    with pytest.raises(ValueError, match="divisible"):
+        make_ppo_train_step(env, config)
+
+
+@pytest.mark.parametrize("algorithm", ["ppo", "a2c"])
+def test_short_training_run_stays_finite_and_yields_a_valid_controller(
+    algorithm: str,
+) -> None:
     """A short RL run should stay numerically stable and produce a usable policy.
 
     This does not assert improvement over the initial controller: eight
     updates is too short to guarantee that reliably, and asserting it would
-    make the test flaky. ``test_gymnax_petri_dish`` and the smoke run in
+    make the test flaky. ``test_gymnax_petri_dish`` and the smoke runs in
     ``scripts/train_rl_chemotaxis.py`` cover behavior at scale.
     """
 
     env = make_env()
     params = env.default_params.replace(max_steps_in_episode=48)
     config = TrainingConfig(
-        num_envs=8, num_steps=48, num_updates=8, update_epochs=2, learning_rate=5e-3
+        num_envs=8,
+        num_steps=48,
+        num_updates=8,
+        update_epochs=2,
+        num_minibatches=4,
+        learning_rate=5e-3,
     )
-    agent, history = train(env, params, config, seed=0, log_every=1000)
+    agent, history = train(env, params, config, algorithm=algorithm, seed=0, log_every=1000)
 
     assert len(history) == config.num_updates
     for metrics in history:
@@ -167,3 +183,9 @@ def test_short_training_run_stays_finite_and_yields_a_valid_controller() -> None
         steps=200,
     )
     assert jnp.all(jnp.isfinite(trained_obs.head_position))
+
+
+def test_train_rejects_unknown_algorithm() -> None:
+    env = make_env()
+    with pytest.raises(ValueError, match="ppo"):
+        train(env, env.default_params, TrainingConfig(num_updates=1), algorithm="reinforce")

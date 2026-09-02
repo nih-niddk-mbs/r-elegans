@@ -3,10 +3,11 @@
 This is the end-to-end demo for the body-direct reinforcement-learning path:
 it trains the seven-parameter sensory controller against the Gymnax-compatible
 Petri dish (:mod:`r_elegans.envs.gymnax_petri_dish`, :mod:`r_elegans.rl`) with
-an on-policy actor-critic policy-gradient update, then rolls the trained
-controller out deterministically through the same differentiable body/gait
-simulator used elsewhere in this repository and renders the full 12-segment
-body moving through the dish toward the food source.
+PPO's clipped surrogate objective by default (``--algorithm a2c`` selects a
+simpler policy-gradient update instead), then rolls the trained controller out
+deterministically through the same differentiable body/gait simulator used
+elsewhere in this repository and renders the full 12-segment body moving
+through the dish toward the food source.
 
 Requires the optional ``env`` and ``demo`` extras:
 
@@ -29,10 +30,18 @@ import numpy as np
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--algorithm", choices=("ppo", "a2c"), default="ppo",
+        help="RL update rule: PPO's clipped surrogate objective (default) or plain A2C",
+    )
     parser.add_argument("--episode-steps", type=int, default=250)
     parser.add_argument("--num-envs", type=int, default=64)
     parser.add_argument("--num-updates", type=int, default=200)
     parser.add_argument("--update-epochs", type=int, default=4)
+    parser.add_argument(
+        "--num-minibatches", type=int, default=4, help="PPO minibatches per epoch"
+    )
+    parser.add_argument("--clip-eps", type=float, default=0.2, help="PPO clip range")
     parser.add_argument("--learning-rate", type=float, default=3e-3)
     parser.add_argument("--entropy-coef", type=float, default=1e-3)
     parser.add_argument("--seed", type=int, default=0)
@@ -95,11 +104,20 @@ def main() -> None:
             num_steps=args.episode_steps,
             num_updates=args.num_updates,
             update_epochs=args.update_epochs,
+            num_minibatches=args.num_minibatches,
+            clip_eps=args.clip_eps,
             learning_rate=args.learning_rate,
             entropy_coef=args.entropy_coef,
         )
-        print("training the seven-parameter sensory controller with RL ...")
-        agent, _ = train(env, env_params, config, seed=args.seed, log_every=args.log_every)
+        print(f"training the seven-parameter sensory controller with {args.algorithm.upper()} ...")
+        agent, _ = train(
+            env,
+            env_params,
+            config,
+            algorithm=args.algorithm,
+            seed=args.seed,
+            log_every=args.log_every,
+        )
         raw_policy = agent.actor.raw_sensory_policy
 
     print(f"trained_policy={decode_sensory_policy(raw_policy)}")
