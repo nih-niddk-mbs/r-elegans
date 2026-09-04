@@ -280,6 +280,54 @@ the physics, and PPO's clipped surrogate lets it reuse each rollout more
 effectively than A2C at the same budget, but neither matches an exact
 analytic gradient. See `CURRENT_MODEL.md` for the full protocol and numbers.
 
+## Connectome-subcircuit chemotaxis
+
+The seven-parameter controller can also be replaced by a real, hand-selected
+14-neuron subcircuit of the bundled connectome
+(`r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES`: chemosensory
+`AWCL/AWCR/ASEL/ASER` → interneurons `AIYL/AIYR` → `AIZL/AIZR` → integrator
+`RIAL/RIAR` → dorsal/ventral head-motor readout `RMDDL/RMDDR/RMDVL/RMDVR`),
+using the real graded-potential equations
+(`r_elegans.brain.dynamics.neural_rhs`) restricted to real anatomical
+connectivity (63 chemical synapses, 8 gap junctions among exactly these 14
+neurons in the bundled asset) rather than the analytic formula. Only
+`steering` is connectome-driven; `speed` keeps the analytic controller's
+food-proximity-slowing formula. Everything else in the body-direct
+pipeline -- food field, gait, body mechanics, reward -- is unchanged, and
+`r_elegans.rl.actor_interface.ActorInterface` lets the same PPO/A2C
+implementation train either actor.
+
+Training proceeds in two stages: supervised pretraining (imitating the
+bundled differentiable-fit controller by backpropagating through a full
+episode unroll of the subcircuit's own recurrence), then optional RL
+fine-tuning.
+
+```bash
+pip install -e ".[env,demo]"
+python scripts/pretrain_connectome_circuit.py --iterations 600
+python scripts/train_rl_chemotaxis.py --actor connectome \
+    --pretrained-checkpoint results/behavior/connectome_pretrain_v1.npz \
+    --learning-rate 1e-4 --entropy-coef 1e-4 --num-updates 200
+python scripts/demo_rl_chemotaxis.py --actor connectome \
+    --load results/behavior/petri_chemotaxis_connectome_ppo_v1.npz
+```
+
+On the same 24 held-out source/heading pairs: an untrained subcircuit
+succeeds 4.2% of the time (mean minimum distance 0.6372); supervised
+pretraining alone reaches 45.8% (0.1888) -- well below the seven-parameter
+controller, consistent with 14 real neurons being a far more constrained
+function class than a formula hand-designed for this task. RL fine-tuning at
+the same learning rate used for the analytic controller's from-scratch
+training actively hurt the pretrained checkpoint (down to 8.3%): its critic
+starts randomly initialized against an already-good actor, and early noisy
+value estimates drove destabilizing updates. A substantially gentler
+fine-tuning learning rate (`1e-4` vs. `3e-3`) avoided that regression and
+slightly improved mean minimum distance (0.1702) without raising success in
+this run. This gap and the fine-tuning instability are reported as current,
+honest limitations, not resolved results -- see `CURRENT_MODEL.md`'s
+"Connectome-subcircuit chemotaxis" section for the full account of what is
+and is not biologically grounded here.
+
 ## External scientific data
 
 The small inference checkpoint is distributed with the package. Raw data,

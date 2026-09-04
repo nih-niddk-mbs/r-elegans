@@ -154,6 +154,24 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
             ]
         )
 
+    def _state_at(
+        self, source_position: Array, heading: Array, params: PetriGymnaxParams
+    ) -> PetriGymnaxState:
+        body = initialize_muscle_body(self.num_segments, heading=heading)
+        dish = self._dish_params(params, source_position)
+        head = head_position(body, self.body_params)
+        concentration, _ = food_concentration(head, body.time, dish)
+        log_concentration = jnp.log(concentration + dish.concentration_floor)
+
+        return PetriGymnaxState(
+            body=body,
+            phase=self.gait_params.forward.phase_offset,
+            adapted_log_concentration=log_concentration,
+            previous_log_concentration=log_concentration,
+            source_position=jnp.asarray(source_position),
+            time=0,
+        )
+
     def reset_env(
         self, key: Array, params: PetriGymnaxParams
     ) -> tuple[Array, PetriGymnaxState]:
@@ -165,20 +183,27 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         source_position = radius * jnp.array([jnp.cos(angle), jnp.sin(angle)])
         heading = jax.random.uniform(heading_key, (), minval=-jnp.pi, maxval=jnp.pi)
 
-        body = initialize_muscle_body(self.num_segments, heading=heading)
-        dish = self._dish_params(params, source_position)
-        head = head_position(body, self.body_params)
-        concentration, _ = food_concentration(head, body.time, dish)
-        log_concentration = jnp.log(concentration + dish.concentration_floor)
+        state = self._state_at(source_position, heading, params)
+        return self.get_obs(state, params), state
 
-        state = PetriGymnaxState(
-            body=body,
-            phase=self.gait_params.forward.phase_offset,
-            adapted_log_concentration=log_concentration,
-            previous_log_concentration=log_concentration,
-            source_position=source_position,
-            time=0,
-        )
+    def reset_at(
+        self,
+        source_position: Array,
+        heading: Array,
+        params: PetriGymnaxParams | None = None,
+    ) -> tuple[Array, PetriGymnaxState]:
+        """Deterministically (re)start an episode at a chosen source and heading.
+
+        Unlike :meth:`reset_env` (used during training, where the source and
+        heading are randomized per episode via a PRNG key), this is for
+        reproducible evaluation and rendering against a fixed set of held-out
+        trials -- the same role :func:`r_elegans.envs.petri_dish.initialize_petri_worm`
+        plays for the differentiable simulator.
+        """
+
+        if params is None:
+            params = self.default_params
+        state = self._state_at(source_position, heading, params)
         return self.get_obs(state, params), state
 
     def step_env(

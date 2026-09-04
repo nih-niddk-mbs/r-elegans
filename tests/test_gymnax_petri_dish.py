@@ -118,6 +118,22 @@ def test_head_toward_source_yields_positive_progress_reward() -> None:
     assert jnp.isfinite(total_reward)
 
 
+def test_reset_at_is_deterministic_and_matches_chosen_source_and_heading() -> None:
+    env = make_env()
+    params = env.default_params
+    source = jnp.asarray([0.5, -0.3])
+    heading = jnp.asarray(1.2)
+
+    obs_a, state_a = env.reset_at(source, heading, params)
+    obs_b, state_b = env.reset_at(source, heading, params)
+
+    assert jnp.array_equal(obs_a, obs_b)
+    assert jnp.array_equal(state_a.body.heading, state_b.body.heading)
+    assert jnp.allclose(state_a.source_position, source)
+    assert jnp.allclose(state_a.body.heading, heading)
+    assert state_a.time == 0
+
+
 def test_action_is_clipped_to_declared_bounds() -> None:
     env = make_env()
     params = env.default_params

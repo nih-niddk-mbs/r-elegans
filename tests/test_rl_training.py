@@ -102,6 +102,7 @@ def _zero_transition(steps: int, envs: int) -> Transition:
         value=zeros,
         distance_to_source=zeros,
         success=jnp.zeros((steps, envs), dtype=bool),
+        carry_in=jnp.zeros((steps, envs, 0)),
     )
 
 

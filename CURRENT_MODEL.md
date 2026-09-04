@@ -29,6 +29,17 @@ potential recurrent equations are implemented, but that recurrent network is
 not in the active food-finding path. Its weights, cell parameters, sensory
 transduction, and motor behavior have not been fitted as one closed loop.
 
+A real, hand-selected 14-neuron *subset* of that connectome (chemosensory
+AWC/ASE through interneurons AIY/AIZ, an RIA integrator, to dorsal/ventral
+RMD head-motor readout) has been fitted as a closed loop and can replace the
+seven-parameter controller as the body-direct actor -- see "Connectome-
+subcircuit chemotaxis" below. This is not the 302-neuron recurrent network
+described in the paragraph above; it is a small, literature-guided slice of
+it, fitted by supervised imitation and then reinforcement-learning
+fine-tuning, with speed control still handled by the same engineered formula
+as the analytic controller. It should not be read as evidence that "the
+connectome" performs chemotaxis.
+
 ## Status table
 
 | Component | Present | Fitted | Active in food demo |
@@ -44,7 +55,9 @@ transduction, and motor behavior have not been fitted as one closed loop.
 | Diffusing food field | Yes | Hand-specified normalized parameters | Yes |
 | Biological sensory-neuron model | No | No | No |
 | Seven-parameter sensory controller | Yes | Differentiable behavior fit | Yes |
-| RL policy | Yes, body-direct only | PPO or A2C (Gymnax) | Optional alternative to the row above |
+| RL policy (analytic controller) | Yes, body-direct only | PPO or A2C (Gymnax) | Optional alternative to the row above |
+| 14-neuron chemotaxis subcircuit (real anatomy, hand-selected) | Yes | Supervised pretrain + RL fine-tune | Optional alternative body-direct actor |
+| Sensory transduction into the subcircuit | Engineered signal into real neurons | Trainable gains, not biophysical | Yes, when the subcircuit actor is used |
 
 ## Active food-finding computation
 
@@ -233,6 +246,103 @@ differentiable-fit checkpoint. `scripts/demo_rl_chemotaxis.py` trains a
 controller this way and animates the resulting 12-segment body moving through
 the dish.
 
+## Connectome-subcircuit chemotaxis (partial, body-direct only)
+
+The seven-parameter controller can also be replaced entirely by a real,
+hand-selected 14-neuron subcircuit of the bundled connectome, trained by
+supervised imitation and then reinforcement learning, while everything else
+in the body-direct pipeline (food field, gait, body mechanics, reward) stays
+identical. This is a step toward, not the completion of, the "connectome-
+driven worm" described below -- 14 of 302 neurons, not the full recurrent
+network.
+
+**The subcircuit** (`r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES`):
+chemosensory `AWCL/AWCR/ASEL/ASER`, interneurons `AIYL/AIYR` then
+`AIZL/AIZR`, integrator `RIAL/RIAR`, and dorsal/ventral head-motor readout
+`RMDDL/RMDDR/RMDVL/RMDVR`. This is not an assumed pathway: the bundled
+connectome asset contains 63 real chemical synapses and 8 real gap junctions
+among exactly these 14 neurons (e.g. `AIYL→AIZL` count 67, `RIAL→RMDDL` count
+48, `RIAR→RMDDR` count 53), matching the textbook AWC/ASE→AIY→AIZ→RIA→RMD
+klinotaxis pathway. The dorsal/ventral RMD subclasses are read out (rather
+than the more obviously bilateral RMDL/RMDR) because the simulator's
+`steering` command is itself a dorsal-minus-ventral bending bias, and RIA is
+the documented site where left/right sensory asymmetry becomes exactly that
+bias.
+
+**Dynamics**: the existing graded-potential equations
+(`r_elegans.brain.dynamics.neural_rhs`) integrated with a fixed-step RK4
+(`integrate_neural_fixed_step`), in the same normalized unit system as the
+rest of the body-direct simulator (not the separate, literal-mV/ms
+`single_compartment.py` model, which is calibrated for only 2 of 302 neuron
+classes and has no cross-neuron coupling). Anatomical chemical/gap masks are
+protected from gradient updates (`jax.lax.stop_gradient` in
+`effective_chemical_weights`/`effective_gap_weights`) so training can never
+drift the fixed 0/1 topology into arbitrary floats; per-neuron time constant
+and activation slope are trained through a positivity floor rather than as
+bare unconstrained values, matching this repository's existing `decode_*`
+convention. `synapse_reversal` (excitatory/inhibitory character) has no real
+per-edge sign dataset in this repository; it is initialized mostly excitatory
+with one literature fact hand-set (AIY inhibits AIZ) and is otherwise
+trainable -- a disclosed judgment call, not a fitted quantity.
+
+**Sensory transduction and readout are only partly biological.** `response`
+and `derivative` (adapted log-concentration and its rate) are the same
+signal real ASE/AWC neurons are documented to encode as ON/OFF adaptation,
+injected as current into the real sensory neuron indices through trainable
+gains -- but AWC and ASE currently receive the *same* underlying signal, and
+`sin(phase)/cos(phase)` (an explicit stand-in for proprioceptive/CPG
+coupling, since gait phase is not itself a modeled biological quantity here)
+is injected the same way. Only `steering` is connectome-driven; `speed` keeps
+the analytic controller's plain food-proximity-slowing formula, to keep the
+biological claim (about steering/klinotaxis specifically) falsifiable and to
+keep failure modes separable.
+
+**Training proceeded in two stages**, per the roadmap in "What remains for a
+connectome-driven worm": supervised pretraining first
+(`scripts/pretrain_connectome_circuit.py`), then RL fine-tuning
+(`scripts/train_rl_chemotaxis.py --actor connectome`). Pretraining
+back-propagates an MSE loss through a full within-episode unroll of the
+subcircuit's own recurrence to imitate the bundled differentiable-fit
+controller's trajectories -- this stage is not subject to the RL rollout's
+stop-gradient boundary, so, unlike RL, it can and does differentiate through
+time. On the same 24 held-out source/heading pairs used throughout this
+document:
+
+| Evaluation | Success | Mean minimum distance |
+| --- | ---: | ---: |
+| Untrained subcircuit, held out | 4.2% | 0.6372 |
+| Supervised-pretrained subcircuit, held out | 45.8% | 0.1888 |
+| + gentle PPO fine-tuning (`lr=1e-4`), held out | 45.8% | 0.1702 |
+| Seven-parameter PPO, held out (for reference) | 87.5% | 0.0523 |
+
+Supervised pretraining alone recovers a large majority of held-out sources
+from a real anatomical subcircuit with mostly-engineered sensory input --
+substantially below the seven-parameter controller, consistent with a
+14-neuron slice being a much more constrained function class than a
+hand-designed 7-parameter formula tuned specifically for this task. RL
+fine-tuning at the same learning rate used for the analytic controller's
+from-scratch training (`3e-3`) *degraded* the pretrained checkpoint (down to
+8.3% success) rather than improving it: the actor starts from a good
+supervised optimum while its critic starts randomly initialized, and early
+noisy value estimates produced large, destabilizing policy updates. A
+substantially smaller fine-tuning learning rate (`1e-4`, with a matching
+smaller entropy coefficient) avoided this degradation and modestly improved
+mean minimum distance, though it did not raise the held-out success rate in
+this run. This is reported as an honest, current limitation, not smoothed
+over: further tuning of the fine-tuning learning-rate schedule, reward
+shaping, or a critic warm-start are the most likely paths to closing more of
+the remaining gap to the analytic controller.
+
+`r_elegans.rl.actor_interface.ActorInterface` is the abstraction that lets
+`r_elegans.rl.training`'s PPO/A2C implementation train either actor
+architecture unchanged: the connectome's recurrent voltage is carried as
+extra rollout state (like an RNN policy's hidden state) alongside the
+environment's own state, stored per-transition, with the loss recomputing
+each step's action distribution from that *stored* incoming voltage --
+a deliberate, truncated credit-assignment simplification (no
+backpropagation-through-time across the recurrence during RL), consistent
+with how practical recurrent-policy PPO implementations are usually built.
+
 ## Supervised motor teacher
 
 The motor teacher receives `[speed, steering]` and gait phase. Its 13 features
@@ -289,6 +399,16 @@ with a single recurrent computation:
 RL is optional at that stage. Supervised trajectory matching and differentiable
 behavior optimization are cheaper first steps; RL becomes appropriate for
 delayed reward, state uncertainty, competing objectives, and richer tasks.
+
+"Connectome-subcircuit chemotaxis" above is a narrow, partial step along
+items 1, 3, and 5 for a hand-selected 14-neuron slice only -- not items 2, 4,
+or 6, and not the full 302-neuron network. Item 1 in particular is only
+partly addressed: sensory current reaches real chemosensory neuron indices,
+but through the same engineered adaptation signal the analytic controller
+uses, not a documented receptor/transduction model. The fixed neuromuscular
+projection (item 4) is still not driven by recurrent voltages; the subcircuit
+drives `[speed, steering]` into the existing fitted gait, exactly like the
+analytic controller.
 
 ## Terminology used by this project
 

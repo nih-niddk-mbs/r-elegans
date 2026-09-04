@@ -1,9 +1,20 @@
 """Continuous neural dynamics."""
 
+from .circuit import (
+    INHIBITORY_NEURON_NAMES,
+    READOUT_DORSAL_LOCAL_INDICES,
+    READOUT_VENTRAL_LOCAL_INDICES,
+    RawSubcircuitParams,
+    SENSORY_LOCAL_INDICES,
+    SUBCIRCUIT_NEURON_NAMES,
+    build_subcircuit_params,
+    decode_subcircuit_params,
+)
 from .dynamics import (
     NeuralParams,
     effective_chemical_weights,
     effective_gap_weights,
+    integrate_neural_fixed_step,
     integrate_neural_state,
     neural_rhs,
 )
@@ -14,6 +25,14 @@ from .motor_control import (
     motor_features_from_phase,
     neural_motor_loss,
     neural_motor_voltage,
+)
+from .sensory import (
+    SENSORY_OBSERVATION_CHANNELS,
+    SUBCIRCUIT_NEURON_COUNT,
+    SensoryGains,
+    init_sensory_gains,
+    inject_sensory_current,
+    steering_from_voltage,
 )
 from .single_compartment import (
     CHANNEL_INDEX,
@@ -31,13 +50,27 @@ __all__ = [
     "CHANNEL_INDEX",
     "CHANNEL_NAMES",
     "GATE_COUNT",
+    "INHIBITORY_NEURON_NAMES",
     "MOTOR_FEATURE_COUNT",
     "NeuralParams",
+    "READOUT_DORSAL_LOCAL_INDICES",
+    "READOUT_VENTRAL_LOCAL_INDICES",
+    "RawSubcircuitParams",
+    "SENSORY_LOCAL_INDICES",
+    "SENSORY_OBSERVATION_CHANNELS",
+    "SUBCIRCUIT_NEURON_COUNT",
+    "SUBCIRCUIT_NEURON_NAMES",
+    "SensoryGains",
     "SingleCompartmentParams",
     "SingleCompartmentState",
+    "build_subcircuit_params",
+    "decode_subcircuit_params",
     "effective_chemical_weights",
     "effective_gap_weights",
     "effective_neural_motor_coefficients",
+    "init_sensory_gains",
+    "inject_sensory_current",
+    "integrate_neural_fixed_step",
     "integrate_neural_state",
     "initial_single_compartment_state",
     "integrate_single_compartment",
@@ -48,4 +81,5 @@ __all__ = [
     "neural_motor_voltage",
     "neural_rhs",
     "single_compartment_rhs",
+    "steering_from_voltage",
 ]

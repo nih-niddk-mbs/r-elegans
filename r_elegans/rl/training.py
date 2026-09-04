@@ -24,20 +24,15 @@ Two update rules share the same rollout collection and GAE:
 
 from __future__ import annotations
 
-from typing import Any, NamedTuple
+from typing import Any, Callable, NamedTuple
 
 import jax
 import jax.numpy as jnp
 import optax
 
+from .actor_interface import ANALYTIC_ACTOR_INTERFACE, ActorInterface
 from .critic import CriticParams, critic_value, init_critic_params
-from .policy import (
-    ActorParams,
-    action_distribution,
-    gaussian_log_prob,
-    init_actor_params,
-    sample_action,
-)
+from .policy import ActorParams, gaussian_log_prob, init_actor_params
 
 Array = jax.Array
 
@@ -77,6 +72,12 @@ class Transition(NamedTuple):
     value: Array
     distance_to_source: Array
     success: Array
+    carry_in: Array = jnp.zeros((0,))
+    """The actor's recurrent carry *before* this step (see ``ActorInterface``).
+
+    Zero-size and unused for the memoryless analytic controller; the
+    subcircuit's incoming voltage for the recurrent connectome actor.
+    """
 
 
 def _rollout(
@@ -86,6 +87,8 @@ def _rollout(
     rng: Array,
     num_envs: int,
     num_steps: int,
+    *,
+    actor_interface: ActorInterface = ANALYTIC_ACTOR_INTERFACE,
 ) -> tuple[Transition, Array, Array]:
     """Collect one on-policy batch of parallel episodes."""
 
@@ -93,33 +96,42 @@ def _rollout(
     reset_rngs = jax.random.split(reset_rng, num_envs)
     obs, state = jax.vmap(env.reset, in_axes=(0, None))(reset_rngs, env_params)
 
-    def step_fn(carry, _):
-        obs, state, rng = carry
+    initial_carry = actor_interface.init_carry(agent.actor)
+    carry = jnp.broadcast_to(initial_carry, (num_envs,) + initial_carry.shape)
+
+    def step_fn(carry_tuple, _):
+        obs, state, carry, rng = carry_tuple
         rng, action_rng, step_rng = jax.random.split(rng, 3)
         action_rngs = jax.random.split(action_rng, num_envs)
-        raw_action, action, log_prob = jax.vmap(sample_action, in_axes=(None, 0, 0))(
-            agent.actor, obs, action_rngs
-        )
+        raw_action, action, log_prob, new_carry = jax.vmap(
+            actor_interface.step, in_axes=(None, 0, 0, 0)
+        )(agent.actor, carry, obs, action_rngs)
         value = jax.vmap(critic_value, in_axes=(None, 0))(agent.critic, obs)
         step_rngs = jax.random.split(step_rng, num_envs)
         next_obs, next_state, reward, terminated, truncated, info = jax.vmap(
             env.step, in_axes=(0, 0, 0, None)
         )(step_rngs, state, action, env_params)
         done = jnp.logical_or(terminated, truncated)
+        # Reset the actor's recurrent carry (if any) at episode boundaries,
+        # exactly as the environment resets obs/state -- otherwise a
+        # recurrent actor's hidden state would leak across episodes.
+        done_broadcast = done.reshape((num_envs,) + (1,) * initial_carry.ndim)
+        reset_carry = jnp.where(done_broadcast, initial_carry, new_carry)
         transition = Transition(
             obs=obs,
             raw_action=raw_action,
             log_prob=log_prob,
+            carry_in=carry,
             reward=reward,
             done=done,
             value=value,
             distance_to_source=info["distance_to_source"],
             success=info["success"],
         )
-        return (next_obs, next_state, rng), transition
+        return (next_obs, next_state, reset_carry, rng), transition
 
-    (final_obs, _, rng), trajectory = jax.lax.scan(
-        step_fn, (obs, state, rng), xs=None, length=num_steps
+    (final_obs, _, _, rng), trajectory = jax.lax.scan(
+        step_fn, (obs, state, carry, rng), xs=None, length=num_steps
     )
     last_value = jax.vmap(critic_value, in_axes=(None, 0))(agent.critic, final_obs)
     return trajectory, last_value, rng
@@ -157,12 +169,17 @@ def _a2c_loss(
     agent: AgentParams,
     obs: Array,
     raw_action: Array,
+    carry_in: Array,
     advantage: Array,
     returns: Array,
     entropy_coef: float,
     value_coef: float,
+    *,
+    actor_interface: ActorInterface,
 ) -> tuple[Array, dict[str, Array]]:
-    mean, std = jax.vmap(action_distribution, in_axes=(None, 0))(agent.actor, obs)
+    mean, std = jax.vmap(actor_interface.distribution, in_axes=(None, 0, 0))(
+        agent.actor, carry_in, obs
+    )
     log_prob = jnp.sum(gaussian_log_prob(raw_action, mean, std), axis=-1)
     policy_loss = -jnp.mean(log_prob * _normalize(advantage))
 
@@ -182,14 +199,19 @@ def _ppo_loss(
     agent: AgentParams,
     obs: Array,
     raw_action: Array,
+    carry_in: Array,
     old_log_prob: Array,
     advantage: Array,
     returns: Array,
     clip_eps: float,
     entropy_coef: float,
     value_coef: float,
+    *,
+    actor_interface: ActorInterface,
 ) -> tuple[Array, dict[str, Array]]:
-    mean, std = jax.vmap(action_distribution, in_axes=(None, 0))(agent.actor, obs)
+    mean, std = jax.vmap(actor_interface.distribution, in_axes=(None, 0, 0))(
+        agent.actor, carry_in, obs
+    )
     new_log_prob = jnp.sum(gaussian_log_prob(raw_action, mean, std), axis=-1)
     log_ratio = new_log_prob - old_log_prob
     ratio = jnp.exp(log_ratio)
@@ -216,7 +238,12 @@ def _ppo_loss(
     }
 
 
-def make_a2c_train_step(env: Any, config: TrainingConfig):
+def make_a2c_train_step(
+    env: Any,
+    config: TrainingConfig,
+    *,
+    actor_interface: ActorInterface = ANALYTIC_ACTOR_INTERFACE,
+):
     """Build a jitted function running one rollout-then-update A2C iteration."""
 
     optimizer = optax.chain(
@@ -228,10 +255,12 @@ def make_a2c_train_step(env: Any, config: TrainingConfig):
             agent,
             batch["obs"],
             batch["raw_action"],
+            batch["carry_in"],
             batch["advantage"],
             batch["returns"],
             config.entropy_coef,
             config.value_coef,
+            actor_interface=actor_interface,
         ),
         has_aux=True,
     )
@@ -241,18 +270,31 @@ def make_a2c_train_step(env: Any, config: TrainingConfig):
     ):
         rng, rollout_rng = jax.random.split(rng)
         trajectory, last_value, _ = _rollout(
-            agent, env, env_params, rollout_rng, config.num_envs, config.num_steps
+            agent,
+            env,
+            env_params,
+            rollout_rng,
+            config.num_envs,
+            config.num_steps,
+            actor_interface=actor_interface,
         )
         advantages, returns = compute_gae(
             trajectory, last_value, config.gamma, config.gae_lambda
         )
+        # An explicit batch size (rather than `reshape(-1, ...)`) avoids a
+        # divide-by-zero in shape inference when `carry_in`'s trailing
+        # dimension is zero (the memoryless analytic actor's trivial carry).
+        batch_size = config.num_envs * config.num_steps
         batch = {
-            "obs": trajectory.obs.reshape((-1, trajectory.obs.shape[-1])),
+            "obs": trajectory.obs.reshape((batch_size, trajectory.obs.shape[-1])),
             "raw_action": trajectory.raw_action.reshape(
-                (-1, trajectory.raw_action.shape[-1])
+                (batch_size, trajectory.raw_action.shape[-1])
             ),
-            "advantage": advantages.reshape((-1,)),
-            "returns": returns.reshape((-1,)),
+            "carry_in": trajectory.carry_in.reshape(
+                (batch_size,) + trajectory.carry_in.shape[2:]
+            ),
+            "advantage": advantages.reshape((batch_size,)),
+            "returns": returns.reshape((batch_size,)),
         }
 
         def epoch(carry, _):
@@ -279,7 +321,12 @@ def make_a2c_train_step(env: Any, config: TrainingConfig):
     return jax.jit(train_step), optimizer
 
 
-def make_ppo_train_step(env: Any, config: TrainingConfig):
+def make_ppo_train_step(
+    env: Any,
+    config: TrainingConfig,
+    *,
+    actor_interface: ActorInterface = ANALYTIC_ACTOR_INTERFACE,
+):
     """Build a jitted function running one rollout-then-update PPO iteration."""
 
     batch_size = config.num_envs * config.num_steps
@@ -300,12 +347,14 @@ def make_ppo_train_step(env: Any, config: TrainingConfig):
             agent,
             batch["obs"],
             batch["raw_action"],
+            batch["carry_in"],
             batch["log_prob"],
             batch["advantage"],
             batch["returns"],
             config.clip_eps,
             config.entropy_coef,
             config.value_coef,
+            actor_interface=actor_interface,
         ),
         has_aux=True,
     )
@@ -315,7 +364,13 @@ def make_ppo_train_step(env: Any, config: TrainingConfig):
     ):
         rng, rollout_rng, shuffle_rng = jax.random.split(rng, 3)
         trajectory, last_value, _ = _rollout(
-            agent, env, env_params, rollout_rng, config.num_envs, config.num_steps
+            agent,
+            env,
+            env_params,
+            rollout_rng,
+            config.num_envs,
+            config.num_steps,
+            actor_interface=actor_interface,
         )
         advantages, returns = compute_gae(
             trajectory, last_value, config.gamma, config.gae_lambda
@@ -324,6 +379,9 @@ def make_ppo_train_step(env: Any, config: TrainingConfig):
             "obs": trajectory.obs.reshape((batch_size, trajectory.obs.shape[-1])),
             "raw_action": trajectory.raw_action.reshape(
                 (batch_size, trajectory.raw_action.shape[-1])
+            ),
+            "carry_in": trajectory.carry_in.reshape(
+                (batch_size,) + trajectory.carry_in.shape[2:]
             ),
             "log_prob": trajectory.log_prob.reshape((batch_size,)),
             "advantage": advantages.reshape((batch_size,)),
@@ -379,6 +437,9 @@ def train(
     config: TrainingConfig = TrainingConfig(),
     *,
     algorithm: str = "ppo",
+    actor_interface: ActorInterface = ANALYTIC_ACTOR_INTERFACE,
+    init_actor: Callable[[], Any] = init_actor_params,
+    initial_actor_params: Any = None,
     seed: int = 0,
     log_every: int = 10,
 ) -> tuple[AgentParams, list[dict[str, float]]]:
@@ -386,9 +447,14 @@ def train(
 
     ``algorithm`` selects the update rule: ``"ppo"`` (default, clipped
     surrogate objective) or ``"a2c"`` (plain policy gradient with the same
-    GAE baseline, no clipping). Returns the final agent
-    (``agent.actor.raw_sensory_policy`` is the trained seven-parameter
-    controller) and a per-update metrics history.
+    GAE baseline, no clipping). ``actor_interface`` selects the actor
+    architecture (default: the memoryless analytic seven-parameter
+    controller; pass
+    ``r_elegans.rl.actor_interface.make_connectome_actor_interface()`` to
+    train the recurrent connectome subcircuit instead). ``initial_actor_params``
+    seeds the actor from an existing (e.g. supervised-pretrained) checkpoint
+    when given, otherwise ``init_actor()`` constructs a fresh one. Returns the
+    final agent and a per-update metrics history.
     """
 
     if algorithm not in _ALGORITHMS:
@@ -396,10 +462,11 @@ def train(
 
     rng = jax.random.PRNGKey(seed)
     critic_key, rng = jax.random.split(rng)
-    agent = AgentParams(
-        actor=init_actor_params(), critic=init_critic_params(critic_key)
+    actor_params = initial_actor_params if initial_actor_params is not None else init_actor()
+    agent = AgentParams(actor=actor_params, critic=init_critic_params(critic_key))
+    train_step, optimizer = _ALGORITHMS[algorithm](
+        env, config, actor_interface=actor_interface
     )
-    train_step, optimizer = _ALGORITHMS[algorithm](env, config)
     opt_state = optimizer.init(agent)
 
     history: list[dict[str, float]] = []

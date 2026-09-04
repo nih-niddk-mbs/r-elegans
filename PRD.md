@@ -203,8 +203,13 @@ Training proceeds in inexpensive stages:
    against a Gymnax-compatible wrapper of the same environment (see
    `r_elegans.rl`).
 4. Fit the recurrent network by supervised trajectory matching to sensory and
-   motor teachers while preserving connectome masks.
+   motor teachers while preserving connectome masks. (Done for a
+   hand-selected 14-neuron chemotaxis subcircuit, not the full 302-neuron
+   network; see `CURRENT_MODEL.md`'s "Connectome-subcircuit chemotaxis".)
 5. Fine-tune the recurrent closed loop through differentiable behavior loss.
+   (For the same 14-neuron subcircuit, fine-tuned through RL rather than a
+   differentiable loss, since the Gymnax environment treats the simulator as
+   a black box; see the same section.)
 6. Use RL only for tasks with delayed reward, partial observability, competing
    objectives, or exploration that supervised/differentiable objectives do not
    cover.
@@ -236,10 +241,10 @@ lengths. These scores must not be relabeled as recurrent-brain training.
 | 4 | Muscle body and continuous action space | Implemented; normalized/fitted baseline |
 | 5 | Supervised 302-output motor teacher | Complete baseline; not recurrent |
 | 6 | Petri dish and engineered chemotaxis teacher | Complete baseline |
-| 7 | Biological sensory transduction into identified neurons | Not started |
-| 8 | Recurrent connectome fit to neural/motor teachers | Not started |
-| 9 | Closed-loop recurrent chemotaxis | Not started |
-| 10 | Gymnax-style batched RL tasks | Body-direct only; recurrent-connectome RL not started |
+| 7 | Biological sensory transduction into identified neurons | Partial: engineered signal into real chemosensory indices for a 14-neuron subcircuit; no receptor/transduction model |
+| 8 | Recurrent connectome fit to neural/motor teachers | Partial: 14-neuron subcircuit fitted by supervised imitation + RL fine-tune; full 302-neuron network not started |
+| 9 | Closed-loop recurrent chemotaxis | Partial: 14-neuron subcircuit closes the loop for `[speed, steering]`; full-network, NMJ-driven closed loop not started |
+| 10 | Gymnax-style batched RL tasks | Body-direct analytic and 14-neuron-subcircuit actors both trained; full-connectome RL not started |
 | 11 | Whole-animal biological calibration and validation | Not started |
 
 ## 7. Acceptance gates

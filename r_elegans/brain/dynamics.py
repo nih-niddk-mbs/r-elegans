@@ -34,14 +34,16 @@ class NeuralParams(NamedTuple):
 def effective_chemical_weights(params: NeuralParams) -> Array:
     """Return nonnegative chemical strengths restricted to the fixed mask."""
 
-    return jax.nn.softplus(params.raw_chemical) * params.chemical_mask
+    mask = jax.lax.stop_gradient(params.chemical_mask)
+    return jax.nn.softplus(params.raw_chemical) * mask
 
 
 def effective_gap_weights(params: NeuralParams) -> Array:
     """Return symmetric, nonnegative gap conductances under the fixed mask."""
 
     raw_symmetric = 0.5 * (params.raw_gap + params.raw_gap.T)
-    mask_symmetric = params.gap_mask * params.gap_mask.T
+    mask = jax.lax.stop_gradient(params.gap_mask)
+    mask_symmetric = mask * mask.T
     return jax.nn.softplus(raw_symmetric) * mask_symmetric
 
 
@@ -113,4 +115,41 @@ def integrate_neural_state(
         max_steps=4096,
     )
     return solution.ys[0]
+
+
+def integrate_neural_fixed_step(
+    voltage: Array,
+    params: NeuralParams,
+    external_current: Array,
+    dt: float | Array,
+    *,
+    substeps: int = 4,
+) -> Array:
+    """Integrate one interval with fixed-step RK4, without Diffrax.
+
+    Intended for hot loops (an RL rollout, or a supervised-pretraining
+    unroll) where re-tracing an adaptive solver at every call would dominate
+    runtime. Callers should keep ``dt / substeps`` small relative to the
+    smallest trainable ``time_constant`` (see ``r_elegans.brain.circuit``'s
+    ``tau_min``) to stay inside explicit RK4's stability region.
+    """
+
+    inner_dt = jnp.asarray(dt) / substeps
+
+    def rk4_step(current_voltage: Array, _: Array) -> tuple[Array, None]:
+        k1 = neural_rhs(0.0, current_voltage, (params, external_current))
+        k2 = neural_rhs(
+            0.0, current_voltage + 0.5 * inner_dt * k1, (params, external_current)
+        )
+        k3 = neural_rhs(
+            0.0, current_voltage + 0.5 * inner_dt * k2, (params, external_current)
+        )
+        k4 = neural_rhs(0.0, current_voltage + inner_dt * k3, (params, external_current))
+        next_voltage = current_voltage + (inner_dt / 6.0) * (
+            k1 + 2.0 * k2 + 2.0 * k3 + k4
+        )
+        return next_voltage, None
+
+    final_voltage, _ = jax.lax.scan(rk4_step, voltage, xs=None, length=substeps)
+    return final_voltage
 
