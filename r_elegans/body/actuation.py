@@ -17,7 +17,12 @@ from typing import NamedTuple
 import jax
 import jax.numpy as jnp
 
-from .mechanics import BodyParams, BodyState, body_velocity
+from .mechanics import (
+    BodyParams,
+    BodyState,
+    body_velocity,
+    torque_driven_body_velocity,
+)
 
 Array = jax.Array
 
@@ -135,10 +140,14 @@ def muscle_body_step(
     )
 
     active_moment = params.muscle_moment_scale * activation
-    passive_moment = params.bending_stiffness * state.joint_angles
-    unconstrained_rate = (
-        active_moment - passive_moment
-    ) / params.bending_damping
+    _, unconstrained_rate = torque_driven_body_velocity(
+        state.joint_angles,
+        active_moment,
+        params.mechanics,
+        params.bending_stiffness,
+        params.bending_damping,
+        dt_array,
+    )
     unconstrained_angles = state.joint_angles + dt_array * unconstrained_rate
     next_angles = jnp.clip(
         unconstrained_angles,
@@ -147,6 +156,8 @@ def muscle_body_step(
     )
     realized_rate = (next_angles - state.joint_angles) / dt_array
 
+    # Clipping changes the realized shape velocity, so recompute the force-free
+    # rigid motion from that velocity only when a joint hits its hard limit.
     velocity = body_velocity(state.joint_angles, realized_rate, params.mechanics)
     cosine, sine = jnp.cos(state.heading), jnp.sin(state.heading)
     body_to_world = jnp.array(((cosine, -sine), (sine, cosine)))

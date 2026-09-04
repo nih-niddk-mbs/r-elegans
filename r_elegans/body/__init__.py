@@ -14,9 +14,11 @@ from .mechanics import (
     BodyParams,
     BodyState,
     body_velocity,
+    generalized_resistance_matrix,
     prescribed_traveling_wave,
     relative_segment_centers,
     simulate_traveling_wave,
+    torque_driven_body_velocity,
     world_segment_centers,
 )
 from .fitting import (
@@ -44,6 +46,15 @@ from .neuromuscular import (
     project_muscles_to_joints,
     validate_neuromuscular_params,
 )
+from .calibration import (
+    AdultWormCalibration,
+    MediumCalibration,
+    agar_medium_calibration,
+    lighthill_drag_per_length,
+    liquid_medium_calibration,
+    physical_muscle_body_params,
+    reynolds_number,
+)
 
 __all__ = [
     "BodyParams",
@@ -56,8 +67,12 @@ __all__ = [
     "MuscleProjection",
     "NeuromuscularParams",
     "PeriodicControllerParams",
+    "AdultWormCalibration",
+    "MediumCalibration",
+    "agar_medium_calibration",
     "as_body_state",
     "body_velocity",
+    "generalized_resistance_matrix",
     "body_motion_loss",
     "commanded_body_motion_loss",
     "commanded_muscle_activations",
@@ -67,6 +82,8 @@ __all__ = [
     "decode_periodic_controller",
     "decode_commanded_controller",
     "initialize_muscle_body",
+    "lighthill_drag_per_length",
+    "liquid_medium_calibration",
     "muscle_body_step",
     "muscle_activations_from_voltage",
     "muscle_longitudinal_positions",
@@ -74,9 +91,12 @@ __all__ = [
     "periodic_muscle_activations",
     "prescribed_muscle_wave",
     "prescribed_traveling_wave",
+    "physical_muscle_body_params",
     "project_muscles_to_joints",
     "relative_segment_centers",
+    "reynolds_number",
     "simulate_traveling_wave",
+    "torque_driven_body_velocity",
     "simulate_muscle_wave",
     "simulate_periodic_controller",
     "simulate_muscle_trajectory",

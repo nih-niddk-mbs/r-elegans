@@ -49,10 +49,12 @@ The current milestone contains five independently testable systems:
 - a circular Petri-dish environment with a finite diffusing food pulse and an
   engineered-controller closed-loop chemotaxis baseline.
 
-Biophysical calibration currently applies only to AWCON and RMD. The body and
-Petri dish use normalized units; whole-animal parameter calibration and a
-recurrent connectome-constrained controller remain later milestones described
-in [PRD.md](PRD.md).
+Biophysical calibration applies to AWCON and RMD, and the body now has explicit
+adult liquid-swimming and agar-crawling calibrations in SI units. The existing
+food task still uses its legacy normalized body while its gait and dish are
+re-fitted; it must not be mixed with an SI-valued body. A recurrent
+connectome-constrained controller remains a later milestone described in
+[PRD.md](PRD.md).
 
 ## Single-compartment electrophysiology
 
@@ -83,11 +85,12 @@ Primary model source: [Nicoletti et al., PLOS ONE 2019](https://doi.org/10.1371/
 
 ## Muscle-driven body
 
-The planar body now accepts one dorsal and one ventral activation value per
-joint. Opposing muscles generate active bending moments; elastic and viscous
-body terms resist bending; and resistive-force theory solves the rigid-body
-translation and rotation required by force and torque balance. A complete
-muscle-driven rollout is:
+The planar body accepts one dorsal and one ventral activation value per joint.
+Opposing muscles generate active bending moments. A coupled overdamped solve
+then balances those moments against body elasticity, internal viscosity, and
+environmental resistance while imposing zero net external force and torque.
+Finite-segment rotational drag is included as well as centerline translation.
+A normalized muscle-driven rollout is:
 
 ```python
 from r_elegans.body import (
@@ -99,14 +102,25 @@ params = default_muscle_body_params(num_segments=12)
 final_state, trajectory = simulate_muscle_wave(params, steps=500, dt=0.01)
 ```
 
-The default parameters are normalized and intended for controller development,
-gradient tests, and integration. They are not yet an adult-worm mechanical
-calibration. The parameter interface separates substrate drag, passive bending
-stiffness and damping, muscle moment scale, activation time constant, and the
-maximum joint angle so each can later be fitted to external biomechanical data.
+`default_muscle_body_params` remains the backwards-compatible normalized mode.
+For physical simulations, construct an adult body explicitly:
+
+```python
+from r_elegans.body import physical_muscle_body_params
+
+swimmer = physical_muscle_body_params(12, medium="liquid")
+crawler = physical_muscle_body_params(12, medium="agar")
+```
+
+These factories use meters, seconds, newton-meters, and kilogram-based drag
+units. Liquid drag is computed from viscosity, body radius, and gait wavelength
+with Lighthill local RFT. Agar uses published effective whole-worm coefficients
+with perpendicular/parallel drag ratio 40. Absolute load now affects joint
+dynamics; viscosity is no longer canceled out of the actuation model. See
+[PHYSICS.md](PHYSICS.md) for equations, provenance, tests, and validity limits.
 
 Primary mechanics references: [Fang-Yen et al., PNAS 2010](https://doi.org/10.1073/pnas.1003016107)
-and [Shen et al., Biophysical Journal 2012](https://doi.org/10.1016/j.bpj.2012.05.012).
+and [Boyle et al., Frontiers in Computational Neuroscience 2012](https://doi.org/10.3389/fncom.2012.00010).
 
 ## Neuromuscular adapter
 

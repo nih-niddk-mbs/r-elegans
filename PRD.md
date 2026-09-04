@@ -44,7 +44,8 @@ The repository currently provides:
   chemical and gap-junction masks;
 - detailed single-compartment channel equations, with published whole-cell
   parameter fits for AWCON and RMD only;
-- a 95-muscle, 12-segment planar body with normalized resistive-force mechanics;
+- a 95-muscle, 12-segment planar body with normalized and SI-calibrated
+  liquid/agar resistive-force mechanics;
 - a fitted continuous `[speed, steering]` gait;
 - a supervised 13-feature command/phase-to-302-output motor teacher;
 - a circular Petri dish, finite diffusing food pulse, and head-local
@@ -170,13 +171,16 @@ benchmark. It is not an acceptable final sensory-neural implementation.
 - The body is an articulated planar midline with explicit joint angles and
   dorsal-minus-ventral activation state.
 - Passive bending stiffness, damping, muscle moment, activation kinetics,
-  substrate drag, and joint limits are separate parameters.
-- Low-Reynolds force and torque balance determines rigid-body translation and
-  rotation from shape change.
-- The current normalized mechanics are suitable for controller development but
-  must not be described as an adult-worm biomechanical calibration.
-- A later calibration must fit posture wavelength, frequency, speed, turning
-  radius, and medium-dependent drag to measured trajectories.
+  medium drag, and joint limits are separate parameters.
+- One coupled low-Reynolds solve determines joint rates and force/torque-free
+  rigid-body motion. Environmental load must resist bending, not merely scale a
+  post-hoc propulsion calculation.
+- Adult SI factories provide Lighthill liquid RFT and effective agar surface
+  drag, measured bending modulus, an internal-viscosity upper bound, and
+  documented geometry.
+- The normalized mode remains available only for backwards compatibility.
+- The active gait must next be re-fitted separately to measured liquid and agar
+  posture wavelength, frequency, speed, amplitude, and turning radius.
 
 ### 4.7 Petri-dish environment
 

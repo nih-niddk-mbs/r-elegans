@@ -51,7 +51,7 @@ connectome" performs chemotaxis.
 | Other neuron conductances | Interface only | No | No |
 | 302-channel motor-output teacher | Yes | Supervised | Yes, neural mode |
 | 956 neuron-to-muscle edges | Yes | Counts fixed; 880 signs assigned | Yes, neural mode |
-| 95-muscle/12-segment body | Yes | Gait fitted; mechanics normalized | Yes |
+| 95-muscle/12-segment body | Yes | SI liquid/agar mechanics; active gait fitted only in legacy normalized mode | Yes, legacy mode |
 | Diffusing food field | Yes | Hand-specified normalized parameters | Yes |
 | Biological sensory-neuron model | No | No | No |
 | Seven-parameter sensory controller | Yes | Differentiable behavior fit | Yes |

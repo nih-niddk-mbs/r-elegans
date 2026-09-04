@@ -68,10 +68,69 @@ def world_segment_centers(state: BodyState, params: BodyParams) -> Array:
     return centers @ body_to_world.T + state.position
 
 
-def _wrench(positions: Array, drag_tensors: Array, velocities: Array) -> Array:
-    forces = -jnp.einsum("nij,nj->ni", drag_tensors, velocities)
-    torque = jnp.sum(positions[:, 0] * forces[:, 1] - positions[:, 1] * forces[:, 0])
-    return jnp.concatenate((jnp.sum(forces, axis=0), torque[None]))
+def _regularized(matrix: Array, relative_regularization: Array) -> Array:
+    """Add a dimensionally consistent relative diagonal regularizer."""
+
+    diagonal = jnp.diag(matrix)
+    scale = jnp.maximum(jnp.abs(diagonal), jnp.finfo(matrix.dtype).tiny)
+    return matrix + relative_regularization * jnp.diag(scale)
+
+
+def generalized_resistance_matrix(
+    joint_angles: Array,
+    params: BodyParams,
+) -> Array:
+    """Return the RFT resistance matrix for rigid and joint velocities.
+
+    Generalized velocities are ``[vx, vy, L*omega, L*qdot...]``. Scaling the
+    angular coordinates by body length keeps the SI-valued matrix well
+    conditioned. Besides translational drag at each segment center, the
+    calculation includes each finite rod's rotational drag about its center.
+    """
+
+    positions = relative_segment_centers(joint_angles, params.segment_length)
+    orientations = segment_orientations(joint_angles)
+    tangents = jnp.stack((jnp.cos(orientations), jnp.sin(orientations)), axis=1)
+    normals = jnp.stack((-tangents[:, 1], tangents[:, 0]), axis=1)
+    segment_drag = params.segment_length * (
+        params.parallel_drag * jnp.einsum("ni,nj->nij", tangents, tangents)
+        + params.perpendicular_drag * jnp.einsum("ni,nj->nij", normals, normals)
+    )
+
+    count = positions.shape[0]
+    body_length = params.segment_length * count
+    shape_jacobian = jax.jacfwd(relative_segment_centers, argnums=0)(
+        joint_angles, params.segment_length
+    )
+    translation = jnp.broadcast_to(jnp.eye(2), (count, 2, 2))
+    rotation = jnp.stack((-positions[:, 1], positions[:, 0]), axis=1)[..., None]
+    point_jacobian = jnp.concatenate(
+        (translation, rotation / body_length, shape_jacobian / body_length), axis=2
+    )
+    resistance = jnp.einsum(
+        "nci,ncd,ndj->ij", point_jacobian, segment_drag, point_jacobian
+    )
+
+    # A finite segment rotating about its center also dissipates energy. The
+    # coefficient is the exact integral of c_perp*x^2 over a uniform rod.
+    joint_count = joint_angles.shape[0]
+    joint_rotation = jnp.tril(
+        jnp.ones((count, joint_count), dtype=joint_angles.dtype), k=-1
+    )
+    angular_jacobian = jnp.concatenate(
+        (
+            jnp.zeros((count, 2), dtype=joint_angles.dtype),
+            jnp.ones((count, 1), dtype=joint_angles.dtype) / body_length,
+            joint_rotation / body_length,
+        ),
+        axis=1,
+    )
+    rotational_drag = (
+        params.perpendicular_drag * params.segment_length**3 / 12.0
+    )
+    return resistance + rotational_drag * jnp.einsum(
+        "ni,nj->ij", angular_jacobian, angular_jacobian
+    )
 
 
 def body_velocity(
@@ -81,36 +140,61 @@ def body_velocity(
 ) -> Array:
     """Solve for body-frame ``[forward, lateral, angular]`` velocity."""
 
-    positions = relative_segment_centers(joint_angles, params.segment_length)
-    orientations = segment_orientations(joint_angles)
-    tangents = jnp.stack((jnp.cos(orientations), jnp.sin(orientations)), axis=1)
-    normals = jnp.stack((-tangents[:, 1], tangents[:, 0]), axis=1)
-    drag_tensors = params.segment_length * (
-        params.parallel_drag * jnp.einsum("ni,nj->nij", tangents, tangents)
-        + params.perpendicular_drag * jnp.einsum("ni,nj->nij", normals, normals)
+    resistance = generalized_resistance_matrix(joint_angles, params)
+    rigid = resistance[:3, :3]
+    coupling = resistance[:3, 3:]
+    body_length = params.segment_length * (joint_angles.shape[0] + 1)
+    scaled_shape_rate = body_length * joint_rates
+    scaled_rigid_velocity = jnp.linalg.solve(
+        _regularized(rigid, params.solve_regularization),
+        -(coupling @ scaled_shape_rate),
     )
+    return scaled_rigid_velocity.at[2].divide(body_length)
 
-    shape_jacobian = jax.jacfwd(relative_segment_centers, argnums=0)(
-        joint_angles, params.segment_length
+
+def torque_driven_body_velocity(
+    joint_angles: Array,
+    active_moments: Array,
+    params: BodyParams,
+    bending_stiffness: Array,
+    bending_damping: Array,
+    dt: Array,
+) -> tuple[Array, Array]:
+    """Solve coupled low-Re body motion from joint moments.
+
+    The Schur complement removes force-free rigid motion from the full RFT
+    resistance matrix. A backward-Euler elastic term keeps the overdamped
+    solve stable for physical SI parameters. Returns body-frame rigid velocity
+    and joint angular rates.
+    """
+
+    resistance = generalized_resistance_matrix(joint_angles, params)
+    rigid = resistance[:3, :3]
+    coupling = resistance[:3, 3:]
+    shape = resistance[3:, 3:]
+    rigid_solve = jnp.linalg.solve(
+        _regularized(rigid, params.solve_regularization), coupling
     )
-    shape_velocity = jnp.einsum("nck,k->nc", shape_jacobian, joint_rates)
+    reduced = shape - coupling.T @ rigid_solve
 
-    count = positions.shape[0]
-    x_translation = jnp.broadcast_to(jnp.array([1.0, 0.0]), (count, 2))
-    y_translation = jnp.broadcast_to(jnp.array([0.0, 1.0]), (count, 2))
-    rotation = jnp.stack((-positions[:, 1], positions[:, 0]), axis=1)
-
-    resistance = jnp.stack(
-        (
-            _wrench(positions, drag_tensors, x_translation),
-            _wrench(positions, drag_tensors, y_translation),
-            _wrench(positions, drag_tensors, rotation),
-        ),
-        axis=1,
+    body_length = params.segment_length * (joint_angles.shape[0] + 1)
+    joint_count = joint_angles.shape[0]
+    identity = jnp.eye(joint_count, dtype=joint_angles.dtype)
+    # Coordinates in the resistance matrix are L*qdot; transform the physical
+    # joint torques and Kelvin--Voigt coefficients into those coordinates.
+    system = reduced + (
+        bending_damping / body_length**2
+        + dt * bending_stiffness / body_length**2
+    ) * identity
+    right_hand_side = (
+        active_moments - bending_stiffness * joint_angles
+    ) / body_length
+    scaled_shape_rate = jnp.linalg.solve(
+        _regularized(system, params.solve_regularization), right_hand_side
     )
-    shape_wrench = _wrench(positions, drag_tensors, shape_velocity)
-    stabilized = resistance - params.solve_regularization * jnp.eye(3)
-    return jnp.linalg.solve(stabilized, -shape_wrench)
+    scaled_rigid_velocity = -(rigid_solve @ scaled_shape_rate)
+    rigid_velocity = scaled_rigid_velocity.at[2].divide(body_length)
+    return rigid_velocity, scaled_shape_rate / body_length
 
 
 def prescribed_traveling_wave(
