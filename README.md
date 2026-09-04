@@ -285,14 +285,16 @@ python scripts/demo_rl_chemotaxis.py --num-updates 200
 as `train_petri_chemotaxis.py` does, so the fitting methods are directly
 comparable. `demo_rl_chemotaxis.py` trains (or loads a saved policy via
 `--load`) and animates the resulting 12-segment body moving through the dish
-toward the food source. On the same 24 held-out source/heading pairs used for
-the differentiable fit, 300 updates reached 87.5% success (mean minimum
+toward the food source. In historical normalized-body runs on the same 24
+held-out source/heading pairs used for the differentiable fit, 300 updates reached 87.5% success (mean minimum
 distance 0.0523) with PPO and 75.0% (0.0658) with A2C, versus 91.7% (0.0451)
 for the differentiable fit and 16.7% for the unfitted controller -- both RL
 rules find a strong majority of sources without ever differentiating through
 the physics, and PPO's clipped surrogate lets it reuse each rollout more
 effectively than A2C at the same budget, but neither matches an exact
-analytic gradient. See `CURRENT_MODEL.md` for the full protocol and numbers.
+analytic gradient. These numbers predate the corrected recurrent/time-limit
+training logic and body-physics upgrade, so they must be rerun before being
+treated as current WormGym benchmarks. See `CURRENT_MODEL.md` for scope.
 
 ## Connectome-subcircuit chemotaxis
 

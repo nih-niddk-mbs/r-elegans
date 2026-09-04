@@ -82,6 +82,7 @@ def main() -> None:
         learning_rate=args.learning_rate,
         weight_l2=args.weight_l2,
         log_every=args.log_every,
+        dt=env_params.dt,
     )
     print(f"final_loss={losses[-1]:.6f}")
 

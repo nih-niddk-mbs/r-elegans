@@ -14,6 +14,7 @@ from r_elegans.rl import (
     ActorParams,
     TrainingConfig,
     action_mean,
+    action_std,
     compute_gae,
     deterministic_action,
     init_actor_params,
@@ -91,6 +92,13 @@ def test_sample_action_log_prob_is_finite_and_decreases_with_distance() -> None:
     assert jnp.all(action <= jnp.array([1.0, 1.0]))
 
 
+def test_exploration_standard_deviation_is_bounded() -> None:
+    std = action_std(jnp.asarray([-1000.0, 1000.0]))
+    assert jnp.all(jnp.isfinite(std))
+    assert float(std[0]) > 0.0
+    assert float(std[1]) < 3.0
+
+
 def _zero_transition(steps: int, envs: int) -> Transition:
     zeros = jnp.zeros((steps, envs))
     return Transition(
@@ -100,6 +108,9 @@ def _zero_transition(steps: int, envs: int) -> Transition:
         reward=zeros,
         done=jnp.zeros((steps, envs), dtype=bool),
         value=zeros,
+        bootstrap_value=zeros,
+        terminated=jnp.zeros((steps, envs), dtype=bool),
+        truncated=jnp.zeros((steps, envs), dtype=bool),
         distance_to_source=zeros,
         success=jnp.zeros((steps, envs), dtype=bool),
         carry_in=jnp.zeros((steps, envs, 0)),
@@ -130,11 +141,35 @@ def test_compute_gae_masks_bootstrap_across_episode_boundary() -> None:
     assert float(advantages[0, 0]) == pytest.approx(1.0, abs=1e-5)
 
 
+def test_compute_gae_bootstraps_time_limit_without_crossing_reset() -> None:
+    trajectory = _zero_transition(2, 1)._replace(
+        reward=jnp.array([[1.0], [100.0]]),
+        done=jnp.array([[True], [False]]),
+        truncated=jnp.array([[True], [False]]),
+        bootstrap_value=jnp.array([[2.0], [0.0]]),
+    )
+    advantages, _ = compute_gae(
+        trajectory, jnp.zeros((1,)), gamma=0.9, gae_lambda=0.95
+    )
+
+    # Includes the final observation's value (2), but not the next reset
+    # episode's reward (100).
+    assert float(advantages[0, 0]) == pytest.approx(2.8, abs=1e-5)
+
+
 def test_make_ppo_train_step_rejects_indivisible_minibatch_count() -> None:
     env = make_env()
     config = TrainingConfig(num_envs=8, num_steps=5, num_minibatches=3)
     with pytest.raises(ValueError, match="divisible"):
         make_ppo_train_step(env, config)
+
+
+def test_training_config_rejects_invalid_hyperparameters() -> None:
+    env = make_env()
+    with pytest.raises(ValueError, match="num_envs"):
+        make_ppo_train_step(env, TrainingConfig(num_envs=0))
+    with pytest.raises(ValueError, match="gamma"):
+        make_ppo_train_step(env, TrainingConfig(gamma=1.1))
 
 
 @pytest.mark.parametrize("algorithm", ["ppo", "a2c"])

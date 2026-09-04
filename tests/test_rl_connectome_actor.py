@@ -22,6 +22,7 @@ from r_elegans.rl import (
     make_connectome_actor_interface,
     train,
 )
+from r_elegans.rl.training import _sequence_distributions
 
 RAW_GAIT = jnp.asarray(
     [
@@ -121,6 +122,48 @@ def test_connectome_actor_interface_step_and_distribution_agree_on_mean() -> Non
     assert jnp.all(action >= ACTION_LOW) and jnp.all(action <= ACTION_HIGH)
     assert jnp.isfinite(log_prob)
     assert new_carry.shape == (14,)
+
+
+def test_connectome_exploration_scale_is_bounded_in_bptt_path() -> None:
+    connectome = load_connectome()
+    actor = init_connectome_actor_params(
+        connectome, jax.random.PRNGKey(9)
+    )._replace(log_std=jnp.asarray([-1000.0, 1000.0]))
+    interface = make_connectome_actor_interface()
+    _, std, _ = interface.distribution_step(
+        actor,
+        initial_voltage(actor),
+        jnp.array([0.1, 0.0, 0.0, 1.0, 0.5]),
+    )
+
+    assert jnp.all(jnp.isfinite(std))
+    assert float(std[0]) > 0.0
+    assert float(std[1]) < 3.0
+
+
+def test_recurrent_training_distribution_backpropagates_through_time() -> None:
+    """A late action must depend on parameters through earlier voltage states."""
+
+    connectome = load_connectome()
+    actor = init_connectome_actor_params(connectome, jax.random.PRNGKey(8))
+    interface = make_connectome_actor_interface()
+    observations = jnp.zeros((5, 1, 5)).at[0, 0].set(
+        jnp.array([0.2, -0.1, 0.5, 0.86, 0.4])
+    )
+    starts = jnp.array([[True], [False], [False], [False], [False]])
+
+    def late_steering(sensory_weights):
+        candidate = actor._replace(
+            sensory_gains=actor.sensory_gains._replace(weights=sensory_weights)
+        )
+        means, _ = _sequence_distributions(
+            candidate, observations, starts, interface
+        )
+        return means[-1, 0, 1]
+
+    gradient = jax.grad(late_steering)(actor.sensory_gains.weights)
+    assert jnp.all(jnp.isfinite(gradient))
+    assert jnp.linalg.norm(gradient) > 1e-7
 
 
 def test_short_connectome_training_run_stays_finite() -> None:

@@ -28,7 +28,7 @@ data = [
   "openpyxl>=3.1",
 ]
 env = [
-  "gymnax>=0.0.8",
+  "gymnax>=1.0.0,<2",
   "optax>=0.2",
 ]
 demo = [

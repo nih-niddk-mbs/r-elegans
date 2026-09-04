@@ -6,12 +6,10 @@ connectome-subcircuit actor (:mod:`r_elegans.rl.connectome_actor`) instead
 carries genuine hidden state (neuron voltage) across environment steps, like
 an RNN policy's carry. ``ActorInterface`` lets ``training.py``'s rollout and
 loss functions handle both uniformly: for the analytic controller, ``carry``
-is a fixed, zero-size array that ``step``/``distribution`` ignore; for the
-connectome actor, it is the subcircuit's voltage, threaded through the
-rollout and stored per-transition so the loss can recompute that step's
-action distribution from the *stored* incoming voltage (see
-``r_elegans.rl.training``'s module docstring for why this is a deliberate,
-truncated credit-assignment simplification rather than an oversight).
+is a fixed, zero-size array; for the connectome actor, it is the subcircuit's
+voltage. PPO and A2C recompute complete time-ordered actor sequences during
+optimization, reset voltage at episode boundaries, and backpropagate through
+the recurrence rather than treating stored voltages as independent samples.
 """
 
 from __future__ import annotations
@@ -32,6 +30,7 @@ from .policy import (
     ACTION_LOW,
     ActorParams,
     action_distribution,
+    action_std,
     deterministic_action,
     gaussian_log_prob,
     sample_action,
@@ -41,13 +40,18 @@ Array = jax.Array
 
 
 class ActorInterface(NamedTuple):
-    """The three operations ``training.py`` needs from any actor architecture."""
+    """Operations ``training.py`` needs from any actor architecture."""
 
     step: Callable[[object, Array, Array, Array], tuple[Array, Array, Array, Array]]
     """``(actor_params, carry, obs, key) -> (raw_action, action, log_prob, new_carry)``."""
 
     distribution: Callable[[object, Array, Array], tuple[Array, Array]]
     """``(actor_params, carry, obs) -> (mean, std)``, differentiable in ``actor_params``."""
+
+    distribution_step: Callable[
+        [object, Array, Array], tuple[Array, Array, Array]
+    ]
+    """``(actor_params, carry, obs) -> (mean, std, new_carry)`` for BPTT."""
 
     init_carry: Callable[[object], Array]
     """``(actor_params) -> carry``, the value each episode (re)starts from."""
@@ -74,6 +78,13 @@ def _analytic_distribution(
     return action_distribution(actor_params, obs)
 
 
+def _analytic_distribution_step(
+    actor_params: ActorParams, carry: Array, obs: Array
+) -> tuple[Array, Array, Array]:
+    mean, std = action_distribution(actor_params, obs)
+    return mean, std, carry
+
+
 def _analytic_init_carry(actor_params: ActorParams) -> Array:
     del actor_params
     return jnp.zeros((0,))
@@ -88,6 +99,7 @@ def _analytic_deterministic_step(
 ANALYTIC_ACTOR_INTERFACE = ActorInterface(
     step=_analytic_step,
     distribution=_analytic_distribution,
+    distribution_step=_analytic_distribution_step,
     init_carry=_analytic_init_carry,
     deterministic_step=_analytic_deterministic_step,
 )
@@ -104,6 +116,11 @@ def make_connectome_actor_interface(
     for keeping the two in sync.
     """
 
+    if dt <= 0.0:
+        raise ValueError("dt must be positive")
+    if substeps <= 0:
+        raise ValueError("substeps must be positive")
+
     def step(
         actor_params: RecurrentConnectomeActorParams,
         carry: Array,
@@ -113,7 +130,7 @@ def make_connectome_actor_interface(
         mean, new_carry = connectome_action_mean_and_next_voltage(
             actor_params, carry, obs, dt=dt, substeps=substeps
         )
-        std = jnp.exp(actor_params.log_std)
+        std = action_std(actor_params.log_std)
         noise = jax.random.normal(key, shape=mean.shape)
         raw_action = mean + std * noise
         action = jnp.clip(raw_action, ACTION_LOW, ACTION_HIGH)
@@ -126,8 +143,17 @@ def make_connectome_actor_interface(
         mean, _ = connectome_action_mean_and_next_voltage(
             actor_params, carry, obs, dt=dt, substeps=substeps
         )
-        std = jnp.exp(actor_params.log_std)
+        std = action_std(actor_params.log_std)
         return mean, std
+
+    def distribution_step(
+        actor_params: RecurrentConnectomeActorParams, carry: Array, obs: Array
+    ) -> tuple[Array, Array, Array]:
+        mean, new_carry = connectome_action_mean_and_next_voltage(
+            actor_params, carry, obs, dt=dt, substeps=substeps
+        )
+        std = action_std(actor_params.log_std)
+        return mean, std, new_carry
 
     def deterministic_step(
         actor_params: RecurrentConnectomeActorParams, carry: Array, obs: Array
@@ -140,6 +166,7 @@ def make_connectome_actor_interface(
     return ActorInterface(
         step=step,
         distribution=distribution,
+        distribution_step=distribution_step,
         init_carry=initial_voltage,
         deterministic_step=deterministic_step,
     )

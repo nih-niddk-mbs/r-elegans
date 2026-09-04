@@ -202,12 +202,13 @@ update rules are implemented, sharing the same rollout collection and GAE:
 
 - **PPO** (`r_elegans.rl.make_ppo_train_step`, the default): the clipped
   surrogate objective. Each update collects one on-policy rollout, then runs
-  several epochs over randomly shuffled minibatches of that batch, clipping
-  the policy-ratio so a batch can be reused for multiple gradient steps
-  without the policy drifting too far off the data that generated it.
+  several epochs over randomly shuffled environment-sequence minibatches,
+  clipping the policy-ratio so a batch can be reused for multiple gradient
+  steps without drifting too far off-policy. Time order is preserved within
+  every sequence for recurrent actors.
 - **A2C** (`r_elegans.rl.make_a2c_train_step`): plain policy gradient with the
-  same GAE baseline but no ratio clipping, taking full-batch gradient steps
-  directly.
+  same GAE baseline but no ratio clipping, taking exactly one full-batch
+  gradient step per freshly collected rollout.
 
 The mean action reproduces `r_elegans.envs.petri_dish.decode_sensory_policy`
 exactly (`r_elegans.rl.policy.action_mean`); a state-independent learned
@@ -218,6 +219,17 @@ steering² + 5 · [distance < 0.12]`; an episode terminates early on reaching th
 target radius and truncates at the configured step budget. Source position and
 initial heading are randomized every reset; the controller never observes
 them, matching the differentiable-fit protocol above.
+
+Natural terminations have zero bootstrap value. Time-limit truncations instead
+bootstrap from Gymnax's pre-reset final observation, and GAE is cut at the
+episode boundary so returns never leak into the automatically reset episode.
+Training success is successes divided by completed episodes, not the fraction
+of individual timesteps carrying a success flag.
+
+The following numbers are historical results from the earlier normalized-body
+RL implementation. They have not yet been reproduced after the corrected
+time-limit handling, recurrent BPTT update, and body-mechanics upgrade, and are
+not current WormGym benchmarks.
 
 A run of `scripts/train_rl_chemotaxis.py` with 64 parallel environments, 250
 steps per episode, and 300 updates (learning rate `0.003`, 4 epochs per
@@ -304,9 +316,10 @@ connectome-driven worm": supervised pretraining first
 back-propagates an MSE loss through a full within-episode unroll of the
 subcircuit's own recurrence to imitate the bundled differentiable-fit
 controller's trajectories -- this stage is not subject to the RL rollout's
-stop-gradient boundary, so, unlike RL, it can and does differentiate through
-time. On the same 24 held-out source/heading pairs used throughout this
-document:
+stop-gradient boundary and differentiates through time. Corrected recurrent
+PPO/A2C now also backpropagates through the actor recurrence while continuing
+to treat environment dynamics as a black box. The following measurements are
+historical results from before that RL correction and require reproduction:
 
 | Evaluation | Success | Mean minimum distance |
 | --- | ---: | ---: |
@@ -315,7 +328,7 @@ document:
 | + gentle PPO fine-tuning (`lr=1e-4`), held out | 45.8% | 0.1702 |
 | Seven-parameter PPO, held out (for reference) | 87.5% | 0.0523 |
 
-Supervised pretraining alone recovers a large majority of held-out sources
+Supervised pretraining alone recovered 45.8% of held-out sources
 from a real anatomical subcircuit with mostly-engineered sensory input --
 substantially below the seven-parameter controller, consistent with a
 14-neuron slice being a much more constrained function class than a
@@ -333,15 +346,12 @@ over: further tuning of the fine-tuning learning-rate schedule, reward
 shaping, or a critic warm-start are the most likely paths to closing more of
 the remaining gap to the analytic controller.
 
-`r_elegans.rl.actor_interface.ActorInterface` is the abstraction that lets
-`r_elegans.rl.training`'s PPO/A2C implementation train either actor
-architecture unchanged: the connectome's recurrent voltage is carried as
-extra rollout state (like an RNN policy's hidden state) alongside the
-environment's own state, stored per-transition, with the loss recomputing
-each step's action distribution from that *stored* incoming voltage --
-a deliberate, truncated credit-assignment simplification (no
-backpropagation-through-time across the recurrence during RL), consistent
-with how practical recurrent-policy PPO implementations are usually built.
+`r_elegans.rl.actor_interface.ActorInterface` lets PPO/A2C train either actor
+architecture. The connectome voltage is carried alongside environment state
+during collection. During each update the actor is unrolled again over each
+time-ordered environment sequence, resetting at episode boundaries and using
+backpropagation through time. PPO shuffles whole sequences between minibatches,
+never isolated recurrent timesteps.
 
 ## Supervised motor teacher
 

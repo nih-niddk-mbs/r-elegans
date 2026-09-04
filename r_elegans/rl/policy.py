@@ -27,6 +27,8 @@ Array = jax.Array
 
 ACTION_LOW = jnp.asarray([0.0, -1.0])
 ACTION_HIGH = jnp.asarray([1.0, 1.0])
+MIN_LOG_STD = -5.0
+MAX_LOG_STD = 1.0
 
 
 class ActorParams(NamedTuple):
@@ -68,8 +70,14 @@ def action_distribution(actor: ActorParams, observation: Array) -> tuple[Array, 
     """Return the Gaussian mean and standard deviation for ``observation``."""
 
     mean = action_mean(actor.raw_sensory_policy, observation)
-    std = jnp.exp(actor.log_std)
+    std = action_std(actor.log_std)
     return mean, std
+
+
+def action_std(log_std: Array) -> Array:
+    """Decode a finite exploration scale and prevent variance blow-ups."""
+
+    return jnp.exp(jnp.clip(log_std, MIN_LOG_STD, MAX_LOG_STD))
 
 
 def gaussian_log_prob(x: Array, mean: Array, std: Array) -> Array:
@@ -109,10 +117,13 @@ def deterministic_action(raw_sensory_policy: Array, observation: Array) -> Array
 __all__ = [
     "ACTION_HIGH",
     "ACTION_LOW",
+    "MAX_LOG_STD",
+    "MIN_LOG_STD",
     "ActorParams",
     "action_distribution",
     "action_log_prob",
     "action_mean",
+    "action_std",
     "deterministic_action",
     "gaussian_log_prob",
     "init_actor_params",

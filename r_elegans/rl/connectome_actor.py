@@ -7,11 +7,11 @@ Gymnax environment, because ``r_elegans.envs.gymnax_petri_dish.PetriDishGymnaxEn
 deliberately stops gradients on everything it returns (the environment is a
 black box, by design, for model-free RL). Any trainable connectome parameter
 must therefore live in ``agent.actor`` so that ``r_elegans.rl.training``'s
-loss functions -- which freshly and differentiably recompute the action
-distribution from stored ``(obs, raw_action, carry_in)`` -- can differentiate
-it. See ``r_elegans.rl.actor_interface`` for how this voltage carry is
-threaded through the rollout and update loop alongside the analytic
-controller's (trivial, zero-size) carry.
+loss functions can differentiate it. During optimization, the actor is
+unrolled again over each complete environment sequence, enabling temporal
+credit assignment through voltage recurrence. See
+``r_elegans.rl.actor_interface`` for how the carry is threaded through the
+rollout and update loop alongside the analytic controller's trivial carry.
 """
 
 from __future__ import annotations

@@ -93,10 +93,16 @@ def pretrain_loss(
     teacher_action_batch: Array,
     *,
     weight_l2: float = 1e-4,
+    dt: float = 0.02,
+    substeps: int = 4,
 ) -> tuple[Array, dict[str, Array]]:
     """MSE between the subcircuit's unrolled ``[speed, steering]`` and the teacher's."""
 
-    predicted = jax.vmap(unroll_student, in_axes=(None, 0))(actor, obs_batch)
+    predicted = jax.vmap(
+        lambda observations: unroll_student(
+            actor, observations, dt=dt, substeps=substeps
+        )
+    )(obs_batch)
     mse = jnp.mean((predicted - teacher_action_batch) ** 2)
     weight_penalty = weight_l2 * jnp.mean(actor.neural_params.raw_chemical**2)
     return mse + weight_penalty, {"mse": mse, "weight_penalty": weight_penalty}
@@ -112,6 +118,8 @@ def fit(
     weight_l2: float = 1e-4,
     max_grad_norm: float = 0.5,
     log_every: int = 25,
+    dt: float = 0.02,
+    substeps: int = 4,
 ) -> tuple[RecurrentConnectomeActorParams, list[float]]:
     """Adam-optimize ``pretrain_loss``, printing progress every ``log_every`` steps."""
 
@@ -121,7 +129,14 @@ def fit(
     opt_state = optimizer.init(actor)
     grad_fn = jax.jit(
         jax.value_and_grad(
-            lambda a: pretrain_loss(a, obs_batch, teacher_action_batch, weight_l2=weight_l2),
+            lambda a: pretrain_loss(
+                a,
+                obs_batch,
+                teacher_action_batch,
+                weight_l2=weight_l2,
+                dt=dt,
+                substeps=substeps,
+            ),
             has_aux=True,
         )
     )
