@@ -155,6 +155,7 @@ def deterministic_rollout(
     *,
     actor_interface: ActorInterface,
     steps: int,
+    rng: Array = jax.random.PRNGKey(0),
 ) -> tuple[Any, Array, Array]:
     """Deterministically roll any actor through the Gymnax env from a fixed start.
 
@@ -173,6 +174,11 @@ def deterministic_rollout(
     ``r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES`` for the neuron order;
     a zero-width ``[steps, 0]`` array for the memoryless analytic actor).
 
+    ``rng`` only matters when ``env_params.sensory_noise_std`` is nonzero (it
+    seeds each step's observation noise draw); the rollout and the actor's
+    behavior are otherwise fully deterministic (a fixed default key keeps the
+    noise-free case reproducible without callers needing to think about it).
+
     Jitted with ``env``/``actor_interface``/``steps`` static, mirroring
     ``r_elegans.envs.petri_dish.simulate_petri_dish``'s own
     ``static_argnames=("steps",)`` -- without this, each call in a held-out
@@ -181,23 +187,25 @@ def deterministic_rollout(
     itself for anything but a trivial number of trials.
     """
 
-    obs, state = env.reset_at(source_position, heading, env_params)
+    rng, reset_key = jax.random.split(rng)
+    obs, state = env.reset_at(source_position, heading, env_params, key=reset_key)
     carry = actor_interface.init_carry(actor_params)
 
     def step_fn(carry_tuple, _):
-        obs, state, carry = carry_tuple
+        obs, state, carry, rng = carry_tuple
+        rng, step_key = jax.random.split(rng)
         action, new_carry = actor_interface.deterministic_step(actor_params, carry, obs)
         next_obs, next_state, _, _, info = env.step_env(
-            jax.random.PRNGKey(0), state, action, env_params
+            step_key, state, action, env_params
         )
-        return (next_obs, next_state, new_carry), (
+        return (next_obs, next_state, new_carry, rng), (
             next_state.body,
             info["distance_to_source"],
             new_carry,
         )
 
     _, (body_trajectory, distances, carry_trajectory) = jax.lax.scan(
-        step_fn, (obs, state, carry), xs=None, length=steps
+        step_fn, (obs, state, carry, rng), xs=None, length=steps
     )
     return body_trajectory, distances, carry_trajectory
 

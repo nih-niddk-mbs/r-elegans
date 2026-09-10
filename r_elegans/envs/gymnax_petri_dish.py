@@ -75,6 +75,15 @@ class PetriGymnaxParams(environment.EnvParams):
     progress_reward_scale: float = 10.0
     steering_penalty_scale: float = 1e-3
     success_bonus: float = 5.0
+    sensory_noise_std: float = 0.0
+    """Std of independent Gaussian noise added to the ``response`` and
+    ``derivative`` observation channels only -- a per-step sensor-reading
+    corruption. The environment's own internal adaptation trace
+    (``adapted_log_concentration``/``previous_log_concentration``) is
+    computed from the true, noise-free concentration; only what the actor
+    perceives is noisy. Zero (the default) reproduces the original
+    noise-free behavior exactly.
+    """
 
 
 class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxParams]):
@@ -144,6 +153,10 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         _, relative, log_concentration, _ = self._sense(state, dish)
         response = log_concentration - state.adapted_log_concentration
         derivative = (log_concentration - state.previous_log_concentration) / params.dt
+        if key is not None:
+            noise = params.sensory_noise_std * jax.random.normal(key, shape=(2,))
+            response = response + noise[0]
+            derivative = derivative + noise[1]
         return jnp.array(
             [
                 response,
@@ -175,7 +188,7 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
     def reset_env(
         self, key: Array, params: PetriGymnaxParams
     ) -> tuple[Array, PetriGymnaxState]:
-        angle_key, radius_key, heading_key = jax.random.split(key, 3)
+        angle_key, radius_key, heading_key, noise_key = jax.random.split(key, 4)
         angle = jax.random.uniform(angle_key, (), minval=-jnp.pi, maxval=jnp.pi)
         radius = jax.random.uniform(
             radius_key, (), minval=params.source_radius_min, maxval=params.source_radius_max
@@ -184,13 +197,15 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         heading = jax.random.uniform(heading_key, (), minval=-jnp.pi, maxval=jnp.pi)
 
         state = self._state_at(source_position, heading, params)
-        return self.get_obs(state, params), state
+        return self.get_obs(state, params, key=noise_key), state
 
     def reset_at(
         self,
         source_position: Array,
         heading: Array,
         params: PetriGymnaxParams | None = None,
+        *,
+        key: Array | None = None,
     ) -> tuple[Array, PetriGymnaxState]:
         """Deterministically (re)start an episode at a chosen source and heading.
 
@@ -198,13 +213,15 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         heading are randomized per episode via a PRNG key), this is for
         reproducible evaluation and rendering against a fixed set of held-out
         trials -- the same role :func:`r_elegans.envs.petri_dish.initialize_petri_worm`
-        plays for the differentiable simulator.
+        plays for the differentiable simulator. Pass ``key`` to also draw the
+        initial noisy observation reproducibly when ``params.sensory_noise_std``
+        is nonzero; omit it for the original noise-free behavior.
         """
 
         if params is None:
             params = self.default_params
         state = self._state_at(source_position, heading, params)
-        return self.get_obs(state, params), state
+        return self.get_obs(state, params, key=key), state
 
     def step_env(
         self,
@@ -258,7 +275,7 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         )
         terminated = success
 
-        obs = self.get_obs(next_state, params)
+        obs = self.get_obs(next_state, params, key=key)
         info = {"distance_to_source": distance, "success": success}
         return (
             jax.lax.stop_gradient(obs),

@@ -1,6 +1,7 @@
 import pytest
 
 pytest.importorskip("gymnax")
+pytest.importorskip("optax")
 
 import jax
 import jax.numpy as jnp
@@ -132,6 +133,61 @@ def test_reset_at_is_deterministic_and_matches_chosen_source_and_heading() -> No
     assert jnp.allclose(state_a.source_position, source)
     assert jnp.allclose(state_a.body.heading, heading)
     assert state_a.time == 0
+
+
+def test_sensory_noise_is_off_by_default() -> None:
+    env = make_env()
+    params = env.default_params
+    assert params.sensory_noise_std == 0.0
+
+    source = jnp.asarray([0.5, -0.3])
+    heading = jnp.asarray(1.2)
+    obs_key, state = env.reset_at(source, heading, params, key=jax.random.PRNGKey(0))
+    obs_none, _ = env.reset_at(source, heading, params, key=None)
+
+    # With sensory_noise_std=0.0, a real key must still reproduce the
+    # noise-free observation exactly (zero-magnitude noise, not skipped math).
+    assert jnp.array_equal(obs_key, obs_none)
+
+
+def test_sensory_noise_varies_response_and_derivative_only() -> None:
+    env = make_env()
+    params = env.default_params.replace(sensory_noise_std=0.5)
+    source = jnp.asarray([0.5, -0.3])
+    heading = jnp.asarray(1.2)
+
+    obs_a, _ = env.reset_at(source, heading, params, key=jax.random.PRNGKey(1))
+    obs_b, _ = env.reset_at(source, heading, params, key=jax.random.PRNGKey(2))
+
+    assert not jnp.allclose(obs_a[:2], obs_b[:2])
+    # sin(phase), cos(phase), relative_concentration are untouched by noise.
+    assert jnp.array_equal(obs_a[2:], obs_b[2:])
+
+
+def test_deterministic_rollout_noise_is_reproducible_per_rng() -> None:
+    from r_elegans.rl import ANALYTIC_ACTOR_INTERFACE, deterministic_rollout, init_actor_params
+
+    env = make_env()
+    params = env.default_params.replace(sensory_noise_std=0.5, max_steps_in_episode=10)
+    actor = init_actor_params()
+    source = jnp.asarray([0.7, 0.0])
+    heading = jnp.asarray(0.0)
+
+    _, distances_a, _ = deterministic_rollout(
+        actor, env, params, source, heading,
+        actor_interface=ANALYTIC_ACTOR_INTERFACE, steps=10, rng=jax.random.PRNGKey(0),
+    )
+    _, distances_a_repeat, _ = deterministic_rollout(
+        actor, env, params, source, heading,
+        actor_interface=ANALYTIC_ACTOR_INTERFACE, steps=10, rng=jax.random.PRNGKey(0),
+    )
+    _, distances_b, _ = deterministic_rollout(
+        actor, env, params, source, heading,
+        actor_interface=ANALYTIC_ACTOR_INTERFACE, steps=10, rng=jax.random.PRNGKey(1),
+    )
+
+    assert jnp.array_equal(distances_a, distances_a_repeat)
+    assert not jnp.array_equal(distances_a, distances_b)
 
 
 def test_action_is_clipped_to_declared_bounds() -> None:

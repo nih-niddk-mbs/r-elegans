@@ -49,6 +49,18 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--log-every", type=int, default=25)
     parser.add_argument(
+        "--source-radius-min", type=float, default=0.65,
+        help="Nearest a food source can be sampled, in body lengths",
+    )
+    parser.add_argument(
+        "--source-radius-max", type=float, default=0.85,
+        help="Farthest a food source can be sampled, in body lengths",
+    )
+    parser.add_argument(
+        "--sensory-noise-std", type=float, default=0.0,
+        help="Std of Gaussian noise added to the response/derivative sensory channels",
+    )
+    parser.add_argument(
         "--output", type=Path, default=Path("results/behavior/connectome_pretrain_v1.npz")
     )
     args = parser.parse_args()
@@ -56,7 +68,12 @@ def main() -> None:
     model = load_builtin_model()
     body_params = default_muscle_body_params(12)
     env = PetriDishGymnaxEnv(body_params, model.gait_params)
-    env_params = env.default_params.replace(max_steps_in_episode=args.episode_steps)
+    env_params = env.default_params.replace(
+        max_steps_in_episode=args.episode_steps,
+        source_radius_min=args.source_radius_min,
+        source_radius_max=args.source_radius_max,
+        sensory_noise_std=args.sensory_noise_std,
+    )
 
     if args.teacher_checkpoint is not None:
         with np.load(args.teacher_checkpoint, allow_pickle=False) as data:

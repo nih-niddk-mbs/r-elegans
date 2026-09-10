@@ -1,0 +1,90 @@
+# Predicted chemical-synapse signs for this project's 14-neuron chemotaxis
+# subcircuit (r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES).
+#
+# Source: Fenyves, B. G., Szilagyi, G. S., Vassy, Z., Soti, C., & Csermely, P.
+# (2020). "Synaptic polarity and sign-balance prediction using gene
+# expression data in the Caenorhabditis elegans chemical synapse neuronal
+# connectome network." PLOS Computational Biology, 16(12), e1007974.
+# https://doi.org/10.1371/journal.pcbi.1007974
+# License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) --
+# reproduced here under attribution; cite the paper above if you reuse this
+# file.
+#
+# Hand-extracted on 2026-09-07 from that paper's Supporting Information,
+# "S1 Data" (predictions based on both neurotransmitter and receptor
+# expression), sheet "5. Sign prediction", filtered to edges where both the
+# presynaptic and postsynaptic neuron are in our subcircuit. contact_weight
+# matches this repository's own bundled Cook et al. 2019 connectome exactly
+# for every row (verified by direct comparison), confirming no neuron-naming
+# mismatch between the two sources.
+#
+# predicted_sign values: "+" (excitatory), "-" (inhibitory), "complex"
+# (postsynaptic side expresses receptors for both signs -- genuinely mixed,
+# not missing data), "no pred" (insufficient expression data to predict).
+# This is a model PREDICTION from gene expression, not a direct measurement --
+# Cook et al. 2019 itself contains no synapse-sign data (see
+# CURRENT_MODEL.md/MODEL_ASSET_PROVENANCE.md for that distinction).
+presynaptic,postsynaptic,contact_weight,primary_neurotransmitter,predicted_sign
+AWCL,AWCR,11,Glu,no pred
+AWCL,ASER,1,Glu,no pred
+AWCL,AIYL,22,Glu,-
+AWCL,AIZL,1,Glu,no pred
+AWCL,RIAL,6,Glu,complex
+AWCR,AWCL,17,Glu,no pred
+AWCR,ASEL,8,Glu,no pred
+AWCR,ASER,5,Glu,no pred
+AWCR,AIYL,12,Glu,-
+AWCR,AIYR,22,Glu,-
+AWCR,RIAL,3,Glu,complex
+ASEL,AWCL,16,Glu,no pred
+ASEL,AWCR,11,Glu,no pred
+ASEL,ASER,2,Glu,no pred
+ASEL,AIYL,32,Glu,-
+ASEL,AIYR,21,Glu,-
+ASEL,AIZL,1,Glu,no pred
+ASEL,RIAR,2,Glu,complex
+ASER,AWCL,1,Glu,no pred
+ASER,AWCR,1,Glu,no pred
+ASER,ASEL,3,Glu,no pred
+ASER,AIYL,9,Glu,-
+ASER,AIYR,38,Glu,-
+ASER,AIZL,1,Glu,no pred
+AIYL,AWCL,5,ACh,no pred
+AIYL,AWCR,3,ACh,no pred
+AIYL,ASER,1,ACh,no pred
+AIYL,AIZL,67,ACh,-
+AIYL,RIAL,51,ACh,-
+AIYR,ASEL,2,ACh,no pred
+AIYR,ASER,4,ACh,no pred
+AIYR,AIYL,7,ACh,+
+AIYR,AIZR,70,ACh,-
+AIYR,RIAR,50,ACh,-
+AIZL,AWCR,2,Glu,no pred
+AIZL,ASEL,4,Glu,no pred
+AIZL,RIAL,29,Glu,complex
+AIZR,AWCR,2,Glu,no pred
+AIZR,ASER,2,Glu,no pred
+AIZR,RIAR,25,Glu,complex
+RIAL,AIZL,1,Glu,no pred
+RIAL,RIAR,23,Glu,complex
+RIAL,RMDDL,48,Glu,+
+RIAL,RMDDR,35,Glu,+
+RIAL,RMDVL,48,Glu,+
+RIAL,RMDVR,48,Glu,+
+RIAR,RIAL,38,Glu,complex
+RIAR,RIAR,3,Glu,complex
+RIAR,RMDDL,48,Glu,+
+RIAR,RMDDR,53,Glu,+
+RIAR,RMDVL,57,Glu,+
+RIAR,RMDVR,47,Glu,+
+RMDDL,RIAL,1,ACh,-
+RMDDL,RMDVL,1,ACh,-
+RMDDL,RMDVR,22,ACh,-
+RMDDR,RMDDL,1,ACh,-
+RMDDR,RMDVL,26,ACh,-
+RMDDR,RMDVR,3,ACh,-
+RMDVL,RMDDR,41,ACh,-
+RMDVL,RMDVR,1,ACh,-
+RMDVR,RIAR,1,ACh,-
+RMDVR,RMDDL,43,ACh,-
+RMDVR,RMDVR,2,ACh,-

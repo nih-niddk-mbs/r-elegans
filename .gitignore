@@ -22,3 +22,7 @@ htmlcov/
 *.xls
 *.xlsx
 
+# Exception: a small (~3KB), hand-extracted, CC BY 4.0-licensed derived table
+# (not raw scientific data) -- see the file's own header for full provenance.
+!scripts/data/fenyves2020_subcircuit_signs.csv
+

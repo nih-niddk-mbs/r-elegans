@@ -52,12 +52,14 @@ from r_elegans.rl import (
 INITIAL_RAW_POLICY = jnp.asarray([0.0, 0.05, -0.05, 0.05, -0.05, 0.0, -2.0])
 
 
-def make_trials(seed: int, count: int) -> tuple[jnp.ndarray, jnp.ndarray]:
+def make_trials(
+    seed: int, count: int, *, radius_min: float = 0.65, radius_max: float = 0.85
+) -> tuple[jnp.ndarray, jnp.ndarray]:
     """Sample source locations and initial headings reproducibly."""
 
     generator = np.random.default_rng(seed)
     angles = generator.uniform(-np.pi, np.pi, count)
-    radii = generator.uniform(0.65, 0.85, count)
+    radii = generator.uniform(radius_min, radius_max, count)
     sources = np.column_stack((radii * np.cos(angles), radii * np.sin(angles)))
     headings = generator.uniform(-np.pi, np.pi, count)
     return jnp.asarray(sources, dtype=jnp.float32), jnp.asarray(
@@ -93,7 +95,8 @@ def evaluate_direct(
 
 
 def evaluate_via_env(
-    actor_params, env, env_params, sources, headings, *, actor_interface, steps: int
+    actor_params, env, env_params, sources, headings, *, actor_interface, steps: int,
+    eval_seed: int = 12345,
 ) -> dict[str, np.ndarray]:
     """Deterministically roll a (possibly recurrent) actor through the Gymnax env.
 
@@ -101,15 +104,19 @@ def evaluate_via_env(
     ``evaluate_direct`` cannot drive (they hardcode
     ``decode_sensory_policy``'s analytic formula). Uses
     ``PetriDishGymnaxEnv.reset_at`` to fix each trial's source/heading, so
-    results are directly comparable to ``evaluate_direct``'s.
+    results are directly comparable to ``evaluate_direct``'s. Each trial gets
+    an independent noise sequence (derived from ``eval_seed``) when
+    ``env_params.sensory_noise_std`` is nonzero, so the reported average
+    isn't biased by one particular noise draw shared across every trial.
     """
 
     minimum_distances = []
     final_distances = []
-    for source, heading in zip(sources, headings):
+    trial_rngs = jax.random.split(jax.random.PRNGKey(eval_seed), len(sources))
+    for source, heading, trial_rng in zip(sources, headings, trial_rngs):
         _, distances, _ = deterministic_rollout(
             actor_params, env, env_params, source, heading,
-            actor_interface=actor_interface, steps=steps,
+            actor_interface=actor_interface, steps=steps, rng=trial_rng,
         )
         distances = np.asarray(distances)
         minimum_distances.append(distances.min())
@@ -166,6 +173,18 @@ def main() -> None:
     parser.add_argument("--eval-steps", type=int, default=500)
     parser.add_argument("--log-every", type=int, default=20)
     parser.add_argument(
+        "--source-radius-min", type=float, default=0.65,
+        help="Nearest a food source can be sampled, in body lengths",
+    )
+    parser.add_argument(
+        "--source-radius-max", type=float, default=0.85,
+        help="Farthest a food source can be sampled, in body lengths",
+    )
+    parser.add_argument(
+        "--sensory-noise-std", type=float, default=0.0,
+        help="Std of Gaussian noise added to the response/derivative sensory channels",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=None,
@@ -180,7 +199,12 @@ def main() -> None:
     model = load_builtin_model()
     body_params = default_muscle_body_params(12)
     env = PetriDishGymnaxEnv(body_params, model.gait_params)
-    env_params = env.default_params.replace(max_steps_in_episode=args.episode_steps)
+    env_params = env.default_params.replace(
+        max_steps_in_episode=args.episode_steps,
+        source_radius_min=args.source_radius_min,
+        source_radius_max=args.source_radius_max,
+        sensory_noise_std=args.sensory_noise_std,
+    )
 
     config = TrainingConfig(
         num_envs=args.num_envs,
@@ -224,7 +248,10 @@ def main() -> None:
         train_kwargs["init_actor"] = init_actor
     agent, history = train(env, env_params, config, **train_kwargs)
 
-    test_sources, test_headings = make_trials(19, args.test_episodes)
+    test_sources, test_headings = make_trials(
+        19, args.test_episodes,
+        radius_min=args.source_radius_min, radius_max=args.source_radius_max,
+    )
     if args.actor == "connectome":
         initial_metrics = evaluate_via_env(
             initial_actor_for_eval,
