@@ -31,6 +31,11 @@ is not on this demo's active computation path. See
 [CURRENT_MODEL.md](CURRENT_MODEL.md) for the complete data flow, fitted
 parameters, results, and limitations.
 
+The [behavior catalog](BEHAVIOR_CATALOG.md) maps documented animal behaviors to
+measurable assays and missing simulator capabilities. The companion
+[WormGym training protocols](TRAINING_PROTOCOLS.md) define the proposed
+imitation/RL curriculum, biological controls, and validation gates.
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)
