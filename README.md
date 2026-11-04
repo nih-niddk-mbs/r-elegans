@@ -332,6 +332,23 @@ including start skew, rather than summing individual throughput estimates.
 Each cohort has a ten-minute timeout; worker logs/reports and aggregate speedup
 are retained in a unique timestamped directory. Run after other benchmarks finish.
 
+For an exploratory one-hour training pilot on mbslnx2, use
+`python -u scripts/run_cpu_training.py --minutes 60 --output-dir /path/outside/repo/results`
+under `nohup`. It launches four seeds on disjoint four-core CPU allocations,
+each with 128 environments, 250-step episodes, two PPO epochs and learning rate
+`1e-3`. The wall-clock budget includes compilation and periodic validation,
+with up to one minute reserved for final evaluation; finalization may extend
+slightly beyond the requested duration. The supervisor allows five minutes of
+grace before requesting a stop, then kills an unresponsive worker after thirty
+seconds. Each seed writes a progress log, metrics, five-minute atomic training
+checkpoints (agent, optimizer, RNG, update count), and initial/best/final actor
+archives. Best-model selection uses eight validation trials (seed 37); initial,
+final and selected-best actors are tested on the same separate 24 trials (seed
+19). A failed numerical update cannot overwrite the previous finite state.
+This pilot trains only the existing 14-neuron steering baseline in the legacy
+normalized dish. Its outcomes are exploratory and do not validate the full
+302-neuron model or the physical gait calibration.
+
 The seven-parameter controller can also be replaced by a real, hand-selected
 14-neuron subcircuit of the bundled connectome
 (`r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES`: chemosensory
