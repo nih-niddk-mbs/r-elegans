@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 from importlib.metadata import version
 import json
 import math
+import os
 from pathlib import Path
 import platform
 import statistics
@@ -133,6 +134,18 @@ def main() -> None:
         "git_dirty": bool(working_tree.stdout) if working_tree.returncode == 0 else None,
         "hostname": platform.node(),
         "architecture": platform.machine(),
+        "cpu_affinity": (
+            sorted(os.sched_getaffinity(0))
+            if hasattr(os, "sched_getaffinity")
+            else None
+        ),
+        "thread_environment": {
+            name: os.environ.get(name)
+            for name in (
+                "OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+                "NUMEXPR_NUM_THREADS",
+            )
+        },
         "python": platform.python_version(),
         "packages": {
             name: version(name)

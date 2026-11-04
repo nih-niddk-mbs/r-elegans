@@ -311,6 +311,17 @@ training settings. This measures the legacy normalized dish and 14-neuron actor;
 it does not train or validate the full 302-neuron model. Progress is written to
 stderr and the JSON report to stdout; no checkpoints are saved.
 
+For unattended Linux CPU comparisons, use
+`python -u scripts/benchmark_cpu.py --output-dir /path/outside/repo/results`.
+The sequential sweep compares 4/16/32 allowed physical cores (one hardware
+thread per core when topology is available), with 32/128 environments. Each
+case gets a fresh process, CPU-only JAX, an affinity restriction, bounded BLAS
+threads, a ten-minute timeout, and separate compile/training timings. Results
+go to a unique timestamped directory with individual logs and `summary.json`.
+Affinity limits eligibility; actual CPU utilization must still be measured.
+Run after other performance jobs finish. The Mac is appropriate for development
+and runs lasting at most a few hours; use the Linux workstations for longer jobs.
+
 The seven-parameter controller can also be replaced by a real, hand-selected
 14-neuron subcircuit of the bundled connectome
 (`r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES`: chemosensory
