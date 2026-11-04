@@ -71,18 +71,25 @@ def integrate_frozen_conductance(voltage, params, external, dt, substeps):
 
 
 def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
-                                      train_group="all", train_neurons=None):
+                                      train_group="all", train_neurons=None,
+                                      input_mode="chemical"):
     """Keep all 302 nodes and all topology while choosing which fields learn.
 
     Groups: all, neural, nmj, sensory. Neuron selection restricts incoming
     chemical rows, incident electrical edges, per-neuron fields, sensory rows,
     and presynaptic NMJ columns. Muscle-wide fields/noise freeze with a neuron
     subset. Selection changes gradients, never the forward computation.
+
+    ``input_mode='current'`` accepts explicit [302] applied currents for motor
+    system identification. These are experimental stimulation, not chemical
+    senses or biological command pathways. Default chemical input stays [3].
     """
     if dt <= 0 or substeps < 1:
         raise ValueError("dt and substeps must be positive")
     if train_group not in ("all", "neural", "nmj", "sensory"):
         raise ValueError("Unknown train_group")
+    if input_mode not in ("chemical", "current"):
+        raise ValueError("Unknown input_mode")
     ids = model.neuron_ids
     names = ids if train_neurons is None else tuple(train_neurons)
     if not names or set(names) - set(ids):
@@ -125,7 +132,12 @@ def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
     def distribution_step(actor, voltage, obs):
         actor = project(actor)
         params = decode_subcircuit_params(actor.neural)
-        external = jnp.zeros((302,)).at[sensory_indices].set(actor.sensory_weights @ jnp.tanh(obs))
+        if input_mode == "current":
+            if obs.shape != (302,):
+                raise ValueError("Applied current input must have shape [302]")
+            external = obs
+        else:
+            external = jnp.zeros((302,)).at[sensory_indices].set(actor.sensory_weights @ jnp.tanh(obs))
         next_voltage = integrate_frozen_conductance(voltage, params, external, dt, substeps)
         # NMJ activation uses the SAME normalized voltage units as the circuit.
         # No silent substitution of the older mV teacher's thresholds.

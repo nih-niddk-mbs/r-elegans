@@ -200,6 +200,7 @@ def main() -> int:
         "initial_actor": str(args.initial_actor) if args.initial_actor else None,
         "neuron_ids": list(model.neuron_ids) if args.actor == "full-network" else None,
         "body_units": "legacy_normalized_uncalibrated",
+        "muscle_projection": "anterior_to_head_at_last_segment" if args.actor == "full-network" else "historical_baseline",
         "chemical_edges": int(np.count_nonzero(model.connectome.chemical_counts)),
         "gap_pairs": int(np.count_nonzero(np.triu(np.asarray(model.connectome.gap_counts), 1))),
         "nmj_edges": int(np.count_nonzero(model.neuromuscular_params.synapse_weights)),

@@ -76,14 +76,55 @@ smooth dorsal/ventral envelope. A 64-step training sequence is verified over
 the Mac, took about 18 seconds: muscle RMSE 0.455 → 0.0099, body-angle relative
 RMSE 109% → 12.6%, and longer-hold error 13.7%. The bend gate requires <0.03
 muscle RMSE, <20% body/hold relative error, and correct bend direction. These
-checks reject straight or oppositely bent bodies. Only this small milestone
-has passed; command control, alternating bends and locomotion remain unproven.
+checks reject straight or oppositely bent bodies. This run established only a
+held bend; the following stage adds controlled alternation. Locomotion remains
+unproven.
 
 Actor archives, optimizer checkpoints, loss history, provenance and predicted
 versus target muscle/body trajectories are stored outside Git. The best actor
 is compatible with full-network actor loading. It is not yet a viable
 food-seeking initialization: establish controlled bends, a slow traveling wave,
 forward/reverse locomotion and turns before progressing to sensory-task RL.
+
+### Controlled alternating bends
+
+`scripts/train_motor_alternation.py` continues from the bend checkpoint, using
+slow signed commands (dorsal, neutral, ventral). A fixed anatomy-derived vector
+applies external currents only to NMJ-projecting neurons. This is artificial
+stimulation for system identification, not a biological command pathway or a
+chemical sensory model. All 302 nodes and recurrent edges remain present;
+only neural parameters learn. NMJs and muscle transfer fields freeze. There
+is no command-to-muscle bypass. Targets are used only for supervised loss.
+
+Training has a sinusoid and a stop/reverse sequence. Validation changes rate,
+phase, command levels and order and doubles the horizon. Each sequence must
+satisfy muscle RMSE <0.025, body-angle relative RMSE <25%, mean bend correlation
+>0.9, and bend-direction agreement >95% during active bends. This rejects
+constant outputs and inverted responses. It does not demonstrate an autonomous
+rhythm, traveling-wave locomotion, or natural sensory control.
+
+A seed-0 continuation of the held-bend checkpoint passed after 1,200 supervised
+updates (about four minutes on the Mac). On the slower sinusoid and unseen
+stop/reverse sequence, respectively: muscle RMSE 0.0041/0.0054, body-angle
+relative error 16.9%/18.6%, bend correlation 0.997/0.992, and direction agreement
+100%/100%. These are synthetic command-following checks for one fitted seed,
+not evidence of biological fidelity or ensemble reliability. Longer mbslnx2
+runs assess whether the result is reproducible across seeds.
+
+`scripts/run_motor_curriculum.py` supplies an unattended mbslnx2 CPU ensemble:
+four disjoint four-core workers, separate seeds, bend then alternation, with a
+wall-clock budget and checkpoints. A failed stage stops that seed's progression;
+the runner does not start RL or advance to unimplemented motor stages.
+
+### Anatomical muscle ordering
+
+The full-network dish and supervised motor body now explicitly map anterior
+muscle rows to the final body joint, adjacent to the segment used by
+`head_position`. The previous projection mapped anterior rows to the opposite
+end. Symmetric static targets concealed this mismatch; traveling-wave targets
+would propagate in the wrong anatomical direction. The historical bundled
+gait baselines retain their old projection convention so their fitted numbers
+remain reproducible. New full-network manifests record the corrected ordering.
 
 ### Whole-network and subset optimization
 

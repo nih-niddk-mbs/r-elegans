@@ -35,7 +35,7 @@ def neural_muscle_sequence(actor, interface, steps):
 
 def muscle_sequence_body(muscles, *, dt=0.02):
     params = default_muscle_body_params(12)
-    projection = build_muscle_projection(11)
+    projection = build_muscle_projection(11, head_at_end=True)
     def step(body, activation):
         dorsal, ventral = project_muscles_to_joints(activation, projection)
         body = muscle_body_step(body, params, dorsal, ventral, dt)
@@ -77,3 +77,52 @@ def bend_passes(metrics):
     return (metrics["muscle_rmse"] < 0.03 and metrics["body_relative_rmse"] < 0.2
             and metrics["hold_relative_rmse"] < 0.2
             and metrics["mean_final_joint_angle"] * metrics["target_mean_final_joint_angle"] > 0)
+
+
+def motor_stimulation_vector(model, gain=0.1):
+    """Fixed research input into NMJ-projecting neurons, inferred from anatomy.
+
+    A positive command excites neurons whose signed outgoing contacts favor
+    dorsal over ventral muscle activation, and suppresses the converse. It is
+    artificial distributed stimulation, NOT a known sensory/motor command organ.
+    It never supplies target muscle activations to the forward computation.
+    """
+    dorsal = jnp.asarray([n.startswith("d") for n in BODY_WALL_MUSCLE_NAMES])
+    weights = model.neuromuscular_params.synapse_weights
+    signed = weights * model.neuromuscular_params.synapse_signs
+    score = jnp.sum(signed * jnp.where(dorsal, 1., -1.)[:, None], axis=0)
+    score /= jnp.maximum(weights.sum(axis=0), 1.)
+    return gain * score
+
+
+def commanded_bend_target(commands, amplitude=0.04):
+    spatial = bend_target(2, amplitude=amplitude)[0] - 0.4
+    return 0.4 + jnp.asarray(commands)[:, None] * spatial[None, :]
+
+
+def commanded_muscle_sequence(actor, interface, commands, stimulation):
+    def step(voltage, command):
+        muscles, voltage = interface.deterministic_step(actor, voltage, command * stimulation)
+        return voltage, muscles
+    return jax.lax.scan(step, interface.init_carry(actor), commands)[1]
+
+
+def alternating_metrics(predicted, target):
+    body = muscle_sequence_body(predicted)
+    reference = muscle_sequence_body(target)
+    angles, expected = body.joint_angles, reference.joint_angles
+    scale = jnp.sqrt(jnp.mean(expected ** 2))
+    mean, desired = angles.mean(axis=1), expected.mean(axis=1)
+    centered, centered_target = mean - mean.mean(), desired - desired.mean()
+    correlation = jnp.sum(centered * centered_target) / jnp.maximum(
+        jnp.linalg.norm(centered) * jnp.linalg.norm(centered_target), 1e-8)
+    active = jnp.abs(desired) > 0.3 * jnp.max(jnp.abs(desired))
+    direction = jnp.sum(active * (mean * desired > 0)) / jnp.maximum(jnp.sum(active), 1)
+    return dict(muscle_rmse=jnp.sqrt(jnp.mean((predicted - target) ** 2)),
+                body_relative_rmse=jnp.sqrt(jnp.mean((angles - expected) ** 2)) / jnp.maximum(scale, 1e-8),
+                bend_correlation=correlation, direction_agreement=direction)
+
+
+def alternating_passes(metrics):
+    return (metrics["muscle_rmse"] < 0.025 and metrics["body_relative_rmse"] < 0.25
+            and metrics["bend_correlation"] > 0.9 and metrics["direction_agreement"] > 0.95)

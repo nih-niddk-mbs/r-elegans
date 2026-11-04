@@ -22,8 +22,12 @@ fitting of one static dorsal bend, with only full-network neural parameters
 learning and a fixed NMJ/muscle transform. It passed a longer-hold body check
 for seed 0. This precedes alternating bends, traveling waves, forward/reverse
 motion and turns. Do not use food-seeking RL as the first motor-learning task.
-This single bend is an infrastructure milestone, not a completed biological
-behavior protocol or a command-conditioned motor policy.
+The static bend is an infrastructure milestone, not a completed biological
+behavior protocol. The next implemented stage fits commanded alternating
+bends with artificial currents to NMJ-projecting neurons, while keeping NMJs
+and muscle transfer parameters fixed. Validation changes command order, levels,
+phase and rate, at twice the training horizon. The mbslnx2 motor curriculum
+runner stops a seed when its stage fails; it never launches food-seeking RL.
 
 Test whether a constrained embodied model can reproduce the animal's behavior
 across stimuli, context, and experience. Task reward establishes usefulness;

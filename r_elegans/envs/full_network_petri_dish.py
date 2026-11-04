@@ -17,6 +17,8 @@ class FullNetworkPetriDishEnv(PetriDishGymnaxEnv):
     def __init__(self, body_params, *, num_segments=12):
         # The base constructor stores gait_params; this environment never uses it.
         super().__init__(body_params, None, num_segments=num_segments)
+        from r_elegans.body import build_muscle_projection
+        self.muscle_projection = build_muscle_projection(num_segments - 1, head_at_end=True)
         self.obs_shape = (3,)
 
     def _state_at(self, source_position, heading, params):

@@ -59,13 +59,20 @@ def muscle_longitudinal_positions() -> Array:
     return row_indices / 23.0
 
 
-def build_muscle_projection(num_joints: int = 11) -> MuscleProjection:
-    """Build local, normalized interpolation from muscle rows to joints."""
+def build_muscle_projection(num_joints: int = 11, *, head_at_end: bool = False) -> MuscleProjection:
+    """Build local interpolation, with an explicit anatomical/body convention.
+
+    Anatomical muscle rows run anterior to posterior. The body/dish identifies
+    its final segment as the head, so new embodied models use head_at_end=True.
+    The default retains historical ordering for bundled fitted gait baselines.
+    """
 
     if num_joints < 1:
         raise ValueError("A muscle projection requires at least one joint")
     positions = muscle_longitudinal_positions()
     joint_positions = jnp.linspace(0.0, 1.0, num_joints)
+    if head_at_end:
+        joint_positions = 1.0 - joint_positions
     spacing = 1.0 if num_joints == 1 else 1.0 / (num_joints - 1)
     local = jnp.maximum(
         1.0 - jnp.abs(joint_positions[:, None] - positions[None, :]) / spacing,

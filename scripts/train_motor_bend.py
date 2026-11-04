@@ -67,6 +67,7 @@ def main():
         train_group="neural", fixed_nmj=True, input="zero", seed=args.seed, dt=0.02,
         training_steps=args.steps, evaluation_steps=args.steps * 2, amplitude=args.amplitude,
         iterations=args.iterations, learning_rate=args.learning_rate, body_units="legacy_normalized",
+        muscle_projection="anterior_to_head_at_last_segment",
         git_revision=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip(),
         git_dirty=bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=repo, text=True)),
         source_sha256={str(Path(p).resolve().relative_to(repo)): hashlib.sha256(Path(p).read_bytes()).hexdigest()

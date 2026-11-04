@@ -332,11 +332,61 @@ artifacts for inspection; they do not advance the curriculum.
 A seed-0 Mac run (500 supervised updates, about 18 s) reduced evaluation muscle
 RMSE from 0.455 to 0.0099 and body-angle relative error from 109% to 12.6%,
 passing the longer-hold check. This establishes one autonomous held bend in
-normalized mechanics. It does not establish command-controlled movement,
-alternating bends, swimming or biological fidelity. The next milestone is
-controlled alternating bends, followed by a slow traveling wave, then
+normalized mechanics. That run did not establish command-controlled movement,
+alternating bends, swimming or biological fidelity. The subsequent milestone is
+controlled alternating bends (below), followed by a slow traveling wave, then
 forward/reverse motion and turns. Food-seeking RL comes after those motor
 policies work. The longer RL commands below remain available for later use.
+
+For command-controlled alternating bends, start with the held-bend checkpoint:
+
+```bash
+python scripts/train_motor_alternation.py \
+  --initial-actor /external/bend/actor_best.npz \
+  --output-dir /external/alternation --iterations 2000
+```
+
+This stage supplies a scalar dorsal/ventral command as fixed, artificial
+currents to NMJ-projecting neurons. The distribution is derived from signed
+outgoing muscle contacts. It is a research stimulation interface, not an
+identified biological command circuit. Commands never bypass the recurrent
+neurons or the fixed NMJs. Sensory gains and all NMJ/muscle transfer parameters
+stay frozen; recurrent neural parameters learn. A held-out slower sinusoid and
+changed stop/reverse command sequence run twice as long as training. Each must
+pass muscle RMSE <0.025, body-angle relative RMSE <25%, bend correlation >0.9,
+and direction agreement >95%. A constant bend cannot pass these gates. This
+does not establish an autonomous oscillator or locomotion.
+
+A seed-0 Mac continuation passed these checks after 1,200 supervised updates
+(about four minutes): body-angle error 16.9%/18.6%, correlation 0.997/0.992 and
+direction agreement 100% on the two unseen sequences. This is one fitted seed;
+the Linux ensemble below is intended to assess reliability across seeds.
+
+The full-network dish and these motor checks now explicitly map anterior
+muscle rows to the head end of the body. The old projection reversed that
+relationship; it remains available for reproducing historical fitted gaits.
+Wave targets must use the corrected ordering.
+
+For an unattended, approximately one-hour supervised run on mbslnx2, in the
+activated `r-elegans` environment:
+
+```bash
+git pull --ff-only
+nohup python -u scripts/run_motor_curriculum.py --minutes 60 \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-curriculum.log 2>&1 < /dev/null &
+```
+
+It runs four independent seeds, each on four disjoint physical CPU cores.
+Each seed must pass held-bend fitting before it can train alternating bends.
+Checkpoints, losses, command sequences and muscle/body verification arrays
+remain outside Git. The time budget includes the initial bend stage; final
+verification can extend slightly beyond it. A failed bend gate retains that
+seed's artifacts and stops its progression. Exit code 2 means a motor gate
+failed (or the worker was interrupted); numerical errors are reported in each
+stage's summary. The runner never starts food-seeking RL or automatically
+advances beyond alternating bends. For single-device GPU fitting, invoke the
+stage script directly with `CUDA_VISIBLE_DEVICES=0` and CPU pinning omitted.
 
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized

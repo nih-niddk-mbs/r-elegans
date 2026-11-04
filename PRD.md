@@ -56,6 +56,12 @@ The repository currently provides:
   sensory cells, all 302 recurrent neurons, anatomical NMJs and 95 muscles;
   supports whole-network or subset parameter training without slicing the
   simulated network. Integration/gradient checks pass; behavior is unvalidated.
+- supervised full-network motor stages: a held bend, then commanded dorsal,
+  neutral and ventral bends. The latter uses explicitly artificial stimulation
+  of NMJ-projecting neurons, with NMJs/muscle transfer fixed. One seed passes
+  longer unseen command sequences; locomotion and sensory-task success remain
+  unestablished. New full-network/body checks align anterior muscle rows with
+  the head end of the body; historical gait baselines retain their old ordering.
 
 The current food-finding demo does not pass sensory input through the recurrent
 connectome. Its active path is:

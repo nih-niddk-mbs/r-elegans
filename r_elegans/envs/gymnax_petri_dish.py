@@ -100,6 +100,7 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         self.body_params = body_params
         self.gait_params = gait_params
         self.num_segments = num_segments
+        self.muscle_projection = build_muscle_projection(num_segments - 1)
         self.obs_shape = (5,)
 
     @property
@@ -219,7 +220,7 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         previous_distance = jnp.linalg.norm(head - state.source_position)
 
         muscles, next_phase, effort = self.motor_command(state, command, params)
-        projection = build_muscle_projection(self.num_segments - 1)
+        projection = self.muscle_projection
         dorsal, ventral = project_muscles_to_joints(muscles, projection)
         body = muscle_body_step(state.body, self.body_params, dorsal, ventral, params.dt)
 

@@ -13,6 +13,8 @@ from r_elegans.model import load_builtin_model
 from r_elegans.rl.full_network_actor import init_full_network_actor, make_full_network_actor_interface
 from r_elegans.rl.motor_curriculum import (
     bend_target, neural_muscle_sequence, make_bend_update, bend_metrics, bend_passes,
+    motor_stimulation_vector, commanded_bend_target, commanded_muscle_sequence,
+    alternating_metrics, alternating_passes,
 )
 
 
@@ -48,3 +50,43 @@ def test_bend_gate_checks_actual_body_and_rejects_no_bend():
     assert not bend_passes(straight)
     wrong_direction = jax.jit(bend_metrics)(0.8 - target, target)
     assert not bend_passes(wrong_direction)
+
+
+def test_motor_stimulation_keeps_default_senses_and_anatomical_outputs_separate():
+    model = load_builtin_model()
+    actor = init_full_network_actor(model, jax.random.PRNGKey(0))
+    current = make_full_network_actor_interface(model, input_mode="current", train_group="neural")
+    chemical = make_full_network_actor_interface(model, train_group="neural")
+    voltage = chemical.init_carry(actor)
+    for a, b in zip(current.distribution_step(actor, voltage, jnp.zeros(302)),
+                    chemical.distribution_step(actor, voltage, jnp.zeros(3))):
+        np.testing.assert_array_equal(a, b)
+    with pytest.raises(ValueError, match="shape"):
+        current.deterministic_step(actor, voltage, jnp.zeros(3))
+    stimulation = motor_stimulation_vector(model)
+    outside = np.asarray(model.neuromuscular_params.synapse_weights.sum(axis=0)) == 0
+    np.testing.assert_array_equal(np.asarray(stimulation)[outside], 0)
+    assert np.linalg.norm(stimulation) > 0
+    plus = commanded_muscle_sequence(actor, current, jnp.ones(8), stimulation)
+    minus = commanded_muscle_sequence(actor, current, -jnp.ones(8), stimulation)
+    assert plus.shape == (8, 95)
+    assert np.linalg.norm(plus - minus) > 0
+
+
+def test_alternation_gate_rejects_static_or_reversed_output():
+    commands = jnp.sin(jnp.arange(192) * .02 * 2 * jnp.pi / 2.4)
+    target = commanded_bend_target(commands)
+    metrics = jax.jit(alternating_metrics)
+    assert alternating_passes(metrics(target, target))
+    assert not alternating_passes(metrics(jnp.full_like(target, .4), target))
+    assert not alternating_passes(metrics(.8 - target, target))
+
+
+def test_curriculum_requires_completed_run_as_well_as_a_passing_checkpoint():
+    from scripts.run_motor_curriculum import stage_passed
+    assert stage_passed(dict(passed=True, exit_code=0, status="completed"))
+    assert stage_passed(dict(passed=True, exit_code=0))  # static-bend summary
+    assert not stage_passed(dict(passed=True, exit_code=2, status="failed"))
+    assert not stage_passed(dict(passed=True, exit_code=0, status="interrupted"))
+    assert not stage_passed(dict(passed=False, exit_code=0, status="completed"))
+    assert not stage_passed({})

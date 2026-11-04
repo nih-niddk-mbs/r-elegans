@@ -82,6 +82,17 @@ def test_uniform_muscles_project_to_uniform_joint_commands() -> None:
     np.testing.assert_allclose(ventral, 0.0, atol=1e-6)
 
 
+def test_anterior_muscle_rows_reach_head_end_of_embodied_model():
+    from r_elegans.envs.petri_dish import head_position
+    body = initialize_muscle_body(12)
+    assert head_position(body, default_muscle_body_params(12))[0] > 0
+    projection = build_muscle_projection(11, head_at_end=True)
+    anterior, _ = project_muscles_to_joints(jnp.zeros(95).at[0].set(1.), projection)
+    posterior, _ = project_muscles_to_joints(jnp.zeros(95).at[23].set(1.), projection)
+    assert int(jnp.argmax(anterior)) == 10
+    assert int(jnp.argmax(posterior)) == 0
+
+
 def test_signed_synapses_drive_excitation_and_inhibition() -> None:
     params = synthetic_params()
     resting = muscle_activations_from_voltage(jnp.asarray([-30.0, -30.0]), params)
