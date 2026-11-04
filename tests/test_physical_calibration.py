@@ -1,3 +1,4 @@
+import jax
 import jax.numpy as jnp
 import numpy as np
 
@@ -60,6 +61,24 @@ def test_generalized_resistance_is_symmetric_positive_definite() -> None:
 
     np.testing.assert_allclose(resistance, resistance.T, rtol=1e-5, atol=1e-12)
     assert np.all(eigenvalues > 0.0)
+
+
+def test_float32_resistance_matches_float64_reference() -> None:
+    """GPU tensor-core shortcuts must not corrupt the physical resistance."""
+
+    params = physical_muscle_body_params(12, medium="liquid")
+    angles = 0.2 * jnp.sin(jnp.linspace(0.0, 2.0 * jnp.pi, 11))
+    resistance = jax.jit(generalized_resistance_matrix)(angles, params.mechanics)
+
+    with jax.experimental.enable_x64():
+        mechanics64 = jax.tree_util.tree_map(
+            lambda value: value.astype(jnp.float64), params.mechanics
+        )
+        reference = np.asarray(jax.jit(generalized_resistance_matrix)(
+            angles.astype(jnp.float64), mechanics64
+        ))
+
+    np.testing.assert_allclose(resistance, reference, rtol=2e-5, atol=1e-12)
 
 
 def test_prescribed_shape_motion_has_zero_net_force_and_torque() -> None:

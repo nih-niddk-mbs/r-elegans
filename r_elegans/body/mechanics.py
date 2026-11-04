@@ -16,6 +16,11 @@ import jax.numpy as jnp
 
 Array = jax.Array
 
+# Resistance assembly and Schur-complement subtraction are cancellation
+# sensitive. Require full float32 products on GPUs instead of reduced-mantissa
+# tensor-core products (the dtype alone does not select multiplication precision).
+_PHYSICS_PRECISION = jax.lax.Precision.HIGHEST
+
 
 class BodyParams(NamedTuple):
     """Physical parameters shared by every segment."""
@@ -65,7 +70,9 @@ def world_segment_centers(state: BodyState, params: BodyParams) -> Array:
     )
     cosine, sine = jnp.cos(state.heading), jnp.sin(state.heading)
     body_to_world = jnp.array(((cosine, -sine), (sine, cosine)))
-    return centers @ body_to_world.T + state.position
+    return jnp.matmul(
+        centers, body_to_world.T, precision=_PHYSICS_PRECISION
+    ) + state.position
 
 
 def _regularized(matrix: Array, relative_regularization: Array) -> Array:
@@ -93,8 +100,12 @@ def generalized_resistance_matrix(
     tangents = jnp.stack((jnp.cos(orientations), jnp.sin(orientations)), axis=1)
     normals = jnp.stack((-tangents[:, 1], tangents[:, 0]), axis=1)
     segment_drag = params.segment_length * (
-        params.parallel_drag * jnp.einsum("ni,nj->nij", tangents, tangents)
-        + params.perpendicular_drag * jnp.einsum("ni,nj->nij", normals, normals)
+        params.parallel_drag * jnp.einsum(
+            "ni,nj->nij", tangents, tangents, precision=_PHYSICS_PRECISION
+        )
+        + params.perpendicular_drag * jnp.einsum(
+            "ni,nj->nij", normals, normals, precision=_PHYSICS_PRECISION
+        )
     )
 
     count = positions.shape[0]
@@ -108,7 +119,11 @@ def generalized_resistance_matrix(
         (translation, rotation / body_length, shape_jacobian / body_length), axis=2
     )
     resistance = jnp.einsum(
-        "nci,ncd,ndj->ij", point_jacobian, segment_drag, point_jacobian
+        "nci,ncd,ndj->ij",
+        point_jacobian,
+        segment_drag,
+        point_jacobian,
+        precision=_PHYSICS_PRECISION,
     )
 
     # A finite segment rotating about its center also dissipates energy. The
@@ -129,7 +144,10 @@ def generalized_resistance_matrix(
         params.perpendicular_drag * params.segment_length**3 / 12.0
     )
     return resistance + rotational_drag * jnp.einsum(
-        "ni,nj->ij", angular_jacobian, angular_jacobian
+        "ni,nj->ij",
+        angular_jacobian,
+        angular_jacobian,
+        precision=_PHYSICS_PRECISION,
     )
 
 
@@ -147,7 +165,7 @@ def body_velocity(
     scaled_shape_rate = body_length * joint_rates
     scaled_rigid_velocity = jnp.linalg.solve(
         _regularized(rigid, params.solve_regularization),
-        -(coupling @ scaled_shape_rate),
+        -jnp.matmul(coupling, scaled_shape_rate, precision=_PHYSICS_PRECISION),
     )
     return scaled_rigid_velocity.at[2].divide(body_length)
 
@@ -175,7 +193,9 @@ def torque_driven_body_velocity(
     rigid_solve = jnp.linalg.solve(
         _regularized(rigid, params.solve_regularization), coupling
     )
-    reduced = shape - coupling.T @ rigid_solve
+    reduced = shape - jnp.matmul(
+        coupling.T, rigid_solve, precision=_PHYSICS_PRECISION
+    )
 
     body_length = params.segment_length * (joint_angles.shape[0] + 1)
     joint_count = joint_angles.shape[0]
@@ -192,7 +212,9 @@ def torque_driven_body_velocity(
     scaled_shape_rate = jnp.linalg.solve(
         _regularized(system, params.solve_regularization), right_hand_side
     )
-    scaled_rigid_velocity = -(rigid_solve @ scaled_shape_rate)
+    scaled_rigid_velocity = -jnp.matmul(
+        rigid_solve, scaled_shape_rate, precision=_PHYSICS_PRECISION
+    )
     rigid_velocity = scaled_rigid_velocity.at[2].divide(body_length)
     return rigid_velocity, scaled_shape_rate / body_length
 
@@ -263,7 +285,9 @@ def simulate_traveling_wave(
             waves_along_body=waves_along_body,
         )
         next_state = BodyState(
-            position=state.position + dt * (body_to_world @ velocity[:2]),
+            position=state.position + dt * jnp.matmul(
+                body_to_world, velocity[:2], precision=_PHYSICS_PRECISION
+            ),
             heading=state.heading + dt * velocity[2],
             joint_angles=next_angles,
             time=next_time,

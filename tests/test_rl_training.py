@@ -1,6 +1,10 @@
+import importlib.util
+
 import pytest
 
-pytest.importorskip("gymnax")
+if importlib.util.find_spec("gymnax") is None:
+    pytest.skip("gymnax extra not installed", allow_module_level=True)
+import gymnax
 pytest.importorskip("optax")
 
 import jax

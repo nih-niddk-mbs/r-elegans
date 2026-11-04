@@ -17,6 +17,13 @@ rigid translation and rotation under zero net force and torque. The remaining
 joint system balances environmental resistance, passive Kelvin--Voigt bending,
 and active muscle moments. Elasticity is stepped implicitly for stability.
 
+Physics matrix products explicitly request `jax.lax.Precision.HIGHEST`. On
+accelerators such as the A100, float32 arrays can otherwise use reduced-mantissa
+matrix multiplication. Cancellation in resistance assembly and the Schur
+complement makes that shortcut inappropriate here. This preserves the existing
+physics-test tolerances rather than relaxing them for GPU results. A separate
+float64-reference test checks resistance accuracy on the executing backend.
+
 This coupling is important: absolute environmental drag now changes the
 response to a muscle command. The old implementation prescribed joint rates
 before applying drag, so viscosity could not resist bending.
@@ -63,6 +70,7 @@ unit system together, and physical gaits will be fitted before RL begins.
 - the published agar coefficients and ratio 40;
 - conversion of continuum bending properties to discrete joints;
 - symmetry and positive definiteness of the resistance matrix;
+- float32 resistance accuracy against a float64 reference;
 - reduced bending under increased environmental load;
 - radius- and length-based Reynolds-number calculations.
 

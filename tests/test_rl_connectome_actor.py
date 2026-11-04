@@ -1,9 +1,13 @@
+import importlib.util
+
 import jax
 import jax.numpy as jnp
 import numpy as np
 import pytest
 
-pytest.importorskip("gymnax")
+if importlib.util.find_spec("gymnax") is None:
+    pytest.skip("gymnax extra not installed", allow_module_level=True)
+import gymnax
 pytest.importorskip("optax")
 
 from r_elegans.body import decode_commanded_controller, default_muscle_body_params

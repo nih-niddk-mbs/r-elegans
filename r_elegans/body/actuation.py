@@ -162,7 +162,9 @@ def muscle_body_step(
     cosine, sine = jnp.cos(state.heading), jnp.sin(state.heading)
     body_to_world = jnp.array(((cosine, -sine), (sine, cosine)))
     return MuscleBodyState(
-        position=state.position + dt_array * (body_to_world @ velocity[:2]),
+        position=state.position + dt_array * jnp.matmul(
+            body_to_world, velocity[:2], precision=jax.lax.Precision.HIGHEST
+        ),
         heading=state.heading + dt_array * velocity[2],
         joint_angles=next_angles,
         muscle_activation=activation,
