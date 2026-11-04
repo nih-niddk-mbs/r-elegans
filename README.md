@@ -426,6 +426,13 @@ searches both directions, after initial settling. Tests reject uniform bends
 and reversed waves. Passing does not establish propulsion; net displacement,
 forward/reverse gaits and turning remain subsequent milestones.
 
+A warm-started local seed passed after 3,000 wave updates (about ten minutes
+on the Mac). Body-angle error was 10.7%/16.9% and anterior/posterior body-band
+lags were 160/140 ms against 140 ms targets on the two longer validation
+sequences. The first 1,500-update fit failed one propagation check; continuing
+the same checkpoint passed the fixed criteria. This is one externally paced
+traveling-bend fit, not demonstrated autonomous swimming or an ensemble result.
+
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
 graded-potential cells and engineered chemical sensors. Anatomical counts

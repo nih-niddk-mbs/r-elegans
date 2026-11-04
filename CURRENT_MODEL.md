@@ -139,6 +139,18 @@ pass over a horizon twice as long as training. Uniform and backward waves
 fail unit tests. Net propulsion is not a gate yet: it remains a separate
 locomotion milestone after a small traveling bend works.
 
+One local seed continued from the Mac alternating-bend checkpoint and passed
+after 3,000 wave updates (two 1,500-update fits, about ten minutes total). The
+first fit failed the stop/reverse propagation gate; the continuation passed
+without changing the criteria. On the two longer validation sequences:
+body-angle error 10.7%/16.9%, body-band lag 160/140 ms versus a 140 ms target,
+and muscle-band lag 180/100 ms versus a 140 ms target. Both sequences passed
+the shape, direction, correlation and propagation gates. These band delays
+are distinct from the 400 ms target delay across the entire muscle axis.
+This establishes a small externally paced traveling bend for one local seed;
+the resumed mbslnx2 ensemble is needed to assess reliability. Autonomous
+oscillation, propulsion and reverse/turn primitives remain outstanding.
+
 On mbslnx2, `scripts/run_motor_curriculum.py --resume-latest` resumes the newest
 passed four-seed alternation run under the selected output root into waves.
 Each seed uses its own checkpoint; all source gates and files are checked
