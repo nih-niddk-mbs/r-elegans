@@ -5,6 +5,16 @@ Design baseline: 2026-11-03. Companion inventory:
 the existing Gaussian-cue Gymnax environment is the only current RL environment.
 This is a plan for implementation, not a report of completed training.
 
+Implementation update (2026-11-04): `scripts/train_timed.py --actor full-network`
+now trains all 302 recurrent neurons and the anatomical 95-muscle readout in a
+separate normalized-dish environment. The default train group is `all`;
+`--train-group` and `--train-neurons` freeze parameters without removing nodes.
+`--initial-actor` carries parameters between stages with a fresh optimizer and
+critic. The deployed full actor has no fitted gait or phase input. This is
+training infrastructure with smoke-test validation, not a completed P00–P13
+curriculum or evidence of real-animal behavioral agreement. Known NMJ signs
+and anatomical edge masks remain constraints; unknown NMJ signs can learn.
+
 ## Scientific objective
 
 Test whether a constrained embodied model can reproduce the animal's behavior

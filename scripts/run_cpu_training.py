@@ -33,10 +33,22 @@ def main() -> int:
     parser.add_argument("--workers", type=positive_int, default=4)
     parser.add_argument("--cores-per-worker", type=positive_int, default=4)
     parser.add_argument("--seed-start", type=int, default=0)
-    parser.add_argument("--num-envs", type=positive_int, default=128)
-    parser.add_argument("--episode-steps", type=positive_int, default=250)
-    parser.add_argument("--learning-rate", type=float, default=1e-3)
+    parser.add_argument("--num-envs", type=positive_int, default=None)
+    parser.add_argument("--episode-steps", type=positive_int, default=None)
+    parser.add_argument("--learning-rate", type=float, default=None)
+    parser.add_argument("--actor", choices=("connectome", "full-network"), default="full-network")
+    parser.add_argument("--train-group", choices=("all", "neural", "nmj", "sensory"), default="all")
+    parser.add_argument("--train-neurons", nargs="+")
+    parser.add_argument("--initial-actor", type=Path)
     args = parser.parse_args()
+    if args.num_envs is None:
+        args.num_envs = 32 if args.actor == "full-network" else 128
+    if args.episode_steps is None:
+        args.episode_steps = 250
+    if args.learning_rate is None:
+        args.learning_rate = 1e-4 if args.actor == "full-network" else 1e-3
+    if args.actor != "full-network" and (args.train_group != "all" or args.train_neurons or args.initial_actor):
+        parser.error("Subset controls and initial-actor require --actor full-network")
     if not sys.platform.startswith("linux") or not hasattr(os, "sched_getaffinity"):
         parser.error("Run on a Linux workstation such as mbslnx2")
     if not math.isfinite(args.minutes) or args.minutes <= 0:
@@ -59,7 +71,7 @@ def main() -> int:
     run_dir = output_root / datetime.now(timezone.utc).strftime("training-%Y%m%dT%H%M%S%fZ")
     run_dir.mkdir(parents=True, exist_ok=False)
     print(f"Run directory: {run_dir}", flush=True)
-    print(f"Exploratory 14-neuron normalized-dish PPO pilot; {args.workers} independent seeds", flush=True)
+    print(f"Exploratory {args.actor} normalized-dish PPO pilot; {args.workers} independent seeds", flush=True)
     stopped = False
 
     def stop_workers(signum, frame):
@@ -88,7 +100,12 @@ def main() -> int:
                     "--minutes", str(args.minutes), "--num-envs", str(args.num_envs),
                     "--episode-steps", str(args.episode_steps),
                     "--learning-rate", str(args.learning_rate),
+                    "--actor", args.actor, "--train-group", args.train_group,
                 ]
+                if args.train_neurons:
+                    command.extend(["--train-neurons", *args.train_neurons])
+                if args.initial_actor:
+                    command.extend(["--initial-actor", str(args.initial_actor.expanduser().resolve())])
                 log = files.enter_context((output / "worker.log").open("w"))
                 process = subprocess.Popen(
                     command, cwd=repo, env=child_env, stdout=log,

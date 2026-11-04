@@ -52,6 +52,10 @@ The repository currently provides:
   concentration measurement;
 - a fitted seven-parameter engineered sensory controller that produces
   `[speed, steering]` from concentration history and gait phase.
+- a separate full-network PPO path: engineered chemical sensors into four
+  sensory cells, all 302 recurrent neurons, anatomical NMJs and 95 muscles;
+  supports whole-network or subset parameter training without slicing the
+  simulated network. Integration/gradient checks pass; behavior is unvalidated.
 
 The current food-finding demo does not pass sensory input through the recurrent
 connectome. Its active path is:
@@ -71,6 +75,10 @@ baseline. See [CURRENT_MODEL.md](CURRENT_MODEL.md) for exact equations,
 parameters, fit protocol, and measured results.
 
 ## 3. Target closed-loop architecture
+
+The full-network trainer now implements this computational loop with generic
+normalized cell dynamics and engineered chemical sensor proxies. Biological
+sensory/cellular calibration and behavioral validation remain outstanding.
 
 The target system is:
 

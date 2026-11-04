@@ -1,7 +1,8 @@
 """Measure PPO compilation and synchronized training throughput.
 
 Uses the legacy normalized dish and either the analytic controller or the
-14-neuron actor. This is a compute benchmark, not biological validation. Select
+14-neuron actor, or the full 302-neuron/95-muscle actor. This is a compute
+benchmark, not biological validation. Select
 one GPU with CUDA_VISIBLE_DEVICES and pass --require-gpu to forbid CPU fallback.
 The JSON report goes to stdout; progress goes to stderr. No fits are saved.
 """
@@ -48,7 +49,7 @@ def positive_int(value: str) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--actor", choices=("analytic", "connectome"), default="connectome")
+    parser.add_argument("--actor", choices=("analytic", "connectome", "full-network"), default="connectome")
     parser.add_argument("--num-envs", type=positive_int, default=32)
     parser.add_argument("--num-steps", type=positive_int, default=128)
     parser.add_argument("--updates", type=positive_int, default=5)
@@ -56,11 +57,16 @@ def main() -> None:
     parser.add_argument("--update-epochs", type=positive_int, default=2)
     parser.add_argument("--num-minibatches", type=positive_int, default=4)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--learning-rate", type=float, default=None)
     parser.add_argument("--require-gpu", action="store_true")
     parser.add_argument("--ready-file", type=Path)
     parser.add_argument("--start-file", type=Path)
     parser.add_argument("--start-timeout-seconds", type=positive_int, default=600)
     args = parser.parse_args()
+    if args.learning_rate is None:
+        args.learning_rate = 1e-4 if args.actor == "full-network" else 3e-3
+    if not math.isfinite(args.learning_rate) or args.learning_rate <= 0:
+        parser.error("--learning-rate must be finite and positive")
     if (args.ready_file is None) != (args.start_file is None):
         parser.error("--ready-file and --start-file must be provided together")
 
@@ -71,7 +77,11 @@ def main() -> None:
         parser.error("--num-envs must be divisible by --num-minibatches")
 
     model = load_builtin_model()
-    env = PetriDishGymnaxEnv(default_muscle_body_params(12), model.gait_params)
+    if args.actor == "full-network":
+        from r_elegans.envs.full_network_petri_dish import FullNetworkPetriDishEnv
+        env = FullNetworkPetriDishEnv(default_muscle_body_params(12))
+    else:
+        env = PetriDishGymnaxEnv(default_muscle_body_params(12), model.gait_params)
     env_params = env.default_params.replace(max_steps_in_episode=args.num_steps)
     config = TrainingConfig(
         num_envs=args.num_envs,
@@ -79,15 +89,20 @@ def main() -> None:
         num_updates=args.updates,
         update_epochs=args.update_epochs,
         num_minibatches=args.num_minibatches,
+        learning_rate=args.learning_rate,
     )
     rng, actor_key, critic_key = jax.random.split(jax.random.PRNGKey(args.seed), 3)
-    if args.actor == "connectome":
+    if args.actor == "full-network":
+        from r_elegans.rl.full_network_actor import init_full_network_actor, make_full_network_actor_interface
+        actor = init_full_network_actor(model, actor_key)
+        interface = make_full_network_actor_interface(model, dt=env_params.dt)
+    elif args.actor == "connectome":
         actor = init_connectome_actor_params(model.connectome, actor_key)
         interface = make_connectome_actor_interface(dt=env_params.dt)
     else:
         actor = init_actor_params()
         interface = ANALYTIC_ACTOR_INTERFACE
-    agent = AgentParams(actor=actor, critic=init_critic_params(critic_key))
+    agent = AgentParams(actor=actor, critic=init_critic_params(critic_key, observation_dim=env.obs_shape[0]))
     train_step, optimizer = make_ppo_train_step(env, config, actor_interface=interface)
     opt_state = optimizer.init(agent)
     # Finish setup work before timing compilation or a training update.
@@ -173,9 +188,9 @@ def main() -> None:
         "devices": [str(device) for device in jax.devices()],
         "device_kinds": [device.device_kind for device in jax.devices()],
         "matmul_precision": str(jax.config.jax_default_matmul_precision),
-        "environment": "legacy_normalized_petri_dish",
+        "environment": env.name,
         "actor": args.actor,
-        "actor_neurons": 14 if args.actor == "connectome" else None,
+        "actor_neurons": 302 if args.actor == "full-network" else 14 if args.actor == "connectome" else None,
         "seed": args.seed,
         "training_config": config._asdict(),
         "warmup_updates": args.warmup_updates,

@@ -2,8 +2,8 @@
 
 This document describes what the repository executes today. It distinguishes
 anatomical data, implemented equations, fitted surrogate controllers, and the
-future recurrent brain so that “302-neuron model” is not mistaken for “the
-connectome currently controls behavior.”
+full recurrent training path so anatomical availability, trainable models,
+and demonstrated behavior are distinguished.
 
 ## Executive summary
 
@@ -24,10 +24,10 @@ model-free reinforcement learning (see "Body-direct reinforcement learning").
 Both produce the identical controller shape and can be evaluated
 interchangeably; only the fitting method differs.
 
-The 302×302 chemical and gap-junction topology is bundled and the graded-
-potential recurrent equations are implemented, but that recurrent network is
-not in the active food-finding path. Its weights, cell parameters, sensory
-transduction, and motor behavior have not been fitted as one closed loop.
+The bundled demo retains this baseline. A separate full-network trainer now
+puts all 302 recurrent neurons and anatomical NMJs in the control path. It has
+passed integration and gradient checks; successful food finding and biological
+behavior have not yet been established for this full-network actor.
 
 A real, hand-selected 14-neuron *subset* of that connectome (chemosensory
 AWC/ASE through interneurons AIY/AIZ, an RIA integrator, to dorsal/ventral
@@ -58,6 +58,60 @@ connectome" performs chemotaxis.
 | RL policy (analytic controller) | Yes, body-direct only | PPO or A2C (Gymnax) | Optional alternative to the row above |
 | 14-neuron chemotaxis subcircuit (real anatomy, hand-selected) | Yes | Supervised pretrain + RL fine-tune | Optional alternative body-direct actor |
 | Sensory transduction into the subcircuit | Engineered signal into real neurons | Trainable gains, not biophysical | Yes, when the subcircuit actor is used |
+| Full 302-neuron recurrent actor with 95-muscle output | Yes, separate training path | Smoke-tested PPO; behavior unvalidated | No, use full-network trainer |
+
+## Full-network training path
+
+`scripts/train_timed.py` and `scripts/run_cpu_training.py` now default to
+`--actor full-network`. Explicit `--actor connectome` retains the historical
+14-neuron steering baseline. `scripts/benchmark_rl.py --actor full-network`
+benchmarks the new workload; earlier throughput figures do not apply to it.
+
+```text
+head concentration → adapted response, derivative, relative concentration
+  → trainable current injection into AWCL/AWCR/ASEL/ASER
+  → 302 recurrent normalized graded-potential neurons
+  → anatomical 956-edge NMJ map → 95 muscle activations
+  → local joint projection → overdamped RFT body → next head concentration
+```
+
+There is no gait phase input, speed formula, fitted gait, motor teacher, or
+direct sensory-to-muscle readout in this actor. During exploration, Gaussian
+noise is applied to muscle logits; deterministic evaluation uses brain-driven
+muscle activations. PPO recomputes full recurrent sequences for temporal
+gradients, with voltage reset at episode boundaries.
+
+All anatomical chemical strengths and symmetric gap conductances are eligible
+to learn, along with membrane fields, four sensory input rows, NMJ magnitudes,
+unknown NMJ polarities, muscle transfer parameters and exploration scales.
+Chemical/gap masks and known NMJ signs remain fixed. Chemical excitation versus
+inhibition is determined by trainable presynaptic reversal potentials. Counts
+initialize relative strengths; these are not measured conductances. All cells
+use normalized generic dynamics, not the AWCON/RMD ion-channel fits.
+
+`--train-group all|neural|nmj|sensory` and optional `--train-neurons AWCL AWCR ...`
+restrict gradients, while the same 302-node model continues to run. Neuron
+selection trains incoming chemical rows, incident gap edges, selected cell
+fields and corresponding sensory/NMJ columns; muscle-wide fields and noise
+freeze with a neuron subset. Use `--initial-actor /external/path/actor_final.npz`
+to carry fitted parameters into another stage; the optimizer and critic reset.
+Dropping subset restrictions enables whole-network optimization. Eligibility
+does not imply every parameter receives a useful task gradient: disconnected
+or behaviorally irrelevant circuits require additional organs/tasks, and no
+anatomical edges are invented to make them influence locomotion.
+
+Integration uses four frozen-conductance exponential-Euler substeps per 20 ms
+interval. Scalar relaxation remains stable at large positive conductances;
+accuracy is first order and needs substep convergence checks after fitting.
+Tests compare to a fine-step RK4 reference and check stability, temporal
+gradients, fixed masks, parameter freezing, body movement and actual PPO updates.
+The NMJ transfer uses normalized cell thresholds and a smooth sigmoid with
+resting tone, rather than the older mV motor teacher's rest-subtracted transfer.
+
+The dish and body remain in the legacy normalized configuration. Sensors are
+engineered proxies, and motion/food-finding in this model does not yet establish
+real-worm behavioral fidelity. Checkpoints and generated results stay outside
+the repository. See README for background launch commands.
 
 ## Active food-finding computation
 
@@ -386,14 +440,14 @@ The bundled runtime asset contains:
 - 95 anatomical body-wall muscle identifiers.
 
 All matrices use `[postsynaptic, presynaptic]` indexing. The topology is needed
-to construct the future recurrent model, but topology alone does not determine
+to initialize the recurrent training model, but topology alone does not determine
 synaptic conductance, receptor sign, membrane dynamics, sensory encoding, or a
 behavioral policy.
 
 ## What remains for a connectome-driven worm
 
-The next model must replace the engineered sensory controller and motor teacher
-with a single recurrent computation:
+The full-network trainer now replaces the engineered controller and motor
+teacher with recurrent computation. Biological validation still requires:
 
 1. Map food concentration and its dynamics to identified chemosensory neurons
    such as ASE, AWA, and AWC using documented receptor/transduction models.
@@ -415,10 +469,11 @@ items 1, 3, and 5 for a hand-selected 14-neuron slice only -- not items 2, 4,
 or 6, and not the full 302-neuron network. Item 1 in particular is only
 partly addressed: sensory current reaches real chemosensory neuron indices,
 but through the same engineered adaptation signal the analytic controller
-uses, not a documented receptor/transduction model. The fixed neuromuscular
-projection (item 4) is still not driven by recurrent voltages; the subcircuit
-drives `[speed, steering]` into the existing fitted gait, exactly like the
-analytic controller.
+uses, not a documented receptor/transduction model. In that 14-neuron baseline,
+the neuromuscular projection (item 4) is not driven by recurrent voltages; it
+uses the fitted gait. The separate full-network actor now drives muscles from
+recurrent voltages and supports closed-loop PPO, but lacks biological sensory
+and cellular calibration and a successful behavioral validation result.
 
 ## Terminology used by this project
 

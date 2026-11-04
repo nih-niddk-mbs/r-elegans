@@ -213,14 +213,12 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         action: Array,
         params: PetriGymnaxParams,
     ) -> tuple[Array, PetriGymnaxState, Array, Array, dict[Any, Any]]:
-        command = jnp.clip(jnp.asarray(action), ACTION_LOW, ACTION_HIGH)
+        command = jnp.asarray(action)
         dish = self._dish_params(params, state.source_position)
         _, _, log_concentration, head = self._sense(state, dish)
         previous_distance = jnp.linalg.norm(head - state.source_position)
 
-        muscles, gait = commanded_muscle_activations(
-            state.phase, command, self.gait_params
-        )
+        muscles, next_phase, effort = self.motor_command(state, command, params)
         projection = build_muscle_projection(self.num_segments - 1)
         dorsal, ventral = project_muscles_to_joints(muscles, projection)
         body = muscle_body_step(state.body, self.body_params, dorsal, ventral, params.dt)
@@ -232,7 +230,6 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         )
         body = body._replace(position=bounded_position)
 
-        next_phase = state.phase - 2.0 * jnp.pi * gait.frequency * params.dt
         adaptation_fraction = -jnp.expm1(-params.dt / params.adaptation_time_constant)
         adapted = state.adapted_log_concentration + adaptation_fraction * (
             log_concentration - state.adapted_log_concentration
@@ -253,7 +250,7 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
         success = distance < params.target_radius
         reward = (
             params.progress_reward_scale * progress
-            - params.steering_penalty_scale * command[1] ** 2
+            - params.steering_penalty_scale * effort
             + params.success_bonus * success.astype(jnp.float32)
         )
         terminated = success
@@ -267,6 +264,12 @@ class PetriDishGymnaxEnv(environment.Environment[PetriGymnaxState, PetriGymnaxPa
             terminated,
             info,
         )
+
+    def motor_command(self, state, action, params):
+        command = jnp.clip(action, ACTION_LOW, ACTION_HIGH)
+        muscles, gait = commanded_muscle_activations(state.phase, command, self.gait_params)
+        phase = state.phase - 2.0 * jnp.pi * gait.frequency * params.dt
+        return muscles, phase, command[1] ** 2
 
     @property
     def name(self) -> str:

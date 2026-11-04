@@ -1,9 +1,9 @@
 """Wall-clock-bounded PPO training with checkpoints and independent evaluation.
 
-Uses the existing normalized dish and 14-neuron steering actor. Designed for
-one externally pinned CPU worker; run_cpu_training.py launches independent seeds.
-Artifacts must live outside the repository. This is an exploratory baseline,
-not a full-connectome or biologically calibrated worm experiment.
+Uses the normalized dish with either the legacy 14-neuron steering actor or
+the full 302-neuron/95-muscle actor. run_cpu_training.py launches independent
+CPU seeds; this script can also run on one GPU. Artifacts stay outside the
+repository. These are exploratory, biologically uncalibrated experiments.
 """
 
 from __future__ import annotations
@@ -57,10 +57,12 @@ def save_json(path: Path, content: dict) -> None:
 
 
 def save_actor(path: Path, actor) -> None:
+    from r_elegans.rl.full_network_actor import FullNetworkActorParams, actor_to_arrays as full_arrays
+    full = isinstance(actor, FullNetworkActorParams)
     temporary = path.with_name(path.name + ".tmp")
     with temporary.open("wb") as output:
-        np.savez_compressed(output, actor="connectome", **{
-            name: np.asarray(value) for name, value in actor_to_arrays(actor).items()
+        np.savez_compressed(output, actor="full-network" if full else "connectome", **{
+            name: np.asarray(value) for name, value in (full_arrays(actor) if full else actor_to_arrays(actor)).items()
         })
         output.flush()
         os.fsync(output.fileno())
@@ -98,11 +100,15 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--minutes", type=float, default=60.0)
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--num-envs", type=int, default=128)
-    parser.add_argument("--episode-steps", type=int, default=250)
+    parser.add_argument("--actor", choices=("connectome", "full-network"), default="full-network")
+    parser.add_argument("--train-group", choices=("all", "neural", "nmj", "sensory"), default="all")
+    parser.add_argument("--train-neurons", nargs="+", help="Freeze parameters outside these neurons; simulate all 302")
+    parser.add_argument("--initial-actor", type=Path, help="Full-network actor NPZ to start another training stage; optimizer resets")
+    parser.add_argument("--num-envs", type=int, default=None)
+    parser.add_argument("--episode-steps", type=int, default=None)
     parser.add_argument("--update-epochs", type=int, default=2)
     parser.add_argument("--num-minibatches", type=int, default=4)
-    parser.add_argument("--learning-rate", type=float, default=1e-3)
+    parser.add_argument("--learning-rate", type=float, default=None)
     parser.add_argument("--checkpoint-seconds", type=float, default=300.0)
     parser.add_argument("--eval-episodes", type=int, default=24)
     parser.add_argument("--validation-episodes", type=int, default=8)
@@ -110,6 +116,14 @@ def main() -> int:
     parser.add_argument("--max-updates", type=int, default=None,
                         help="Optional update cap for smoke tests; normally use the time budget")
     args = parser.parse_args()
+    if args.num_envs is None:
+        args.num_envs = 32 if args.actor == "full-network" else 128
+    if args.episode_steps is None:
+        args.episode_steps = 250
+    if args.learning_rate is None:
+        args.learning_rate = 1e-4 if args.actor == "full-network" else 1e-3
+    if args.actor != "full-network" and (args.train_neurons or args.train_group != "all" or args.initial_actor):
+        parser.error("Subset controls require --actor full-network")
     if not math.isfinite(args.minutes) or args.minutes <= 0:
         parser.error("--minutes must be finite and positive")
     if not math.isfinite(args.checkpoint_seconds) or args.checkpoint_seconds <= 0:
@@ -141,7 +155,11 @@ def main() -> int:
     # compiled operation cannot be interrupted at an exact wall-clock deadline.
     training_deadline = started + budget - min(60.0, budget * 0.1)
     model = load_builtin_model()
-    env = PetriDishGymnaxEnv(default_muscle_body_params(12), model.gait_params)
+    if args.actor == "full-network":
+        from r_elegans.envs.full_network_petri_dish import FullNetworkPetriDishEnv
+        env = FullNetworkPetriDishEnv(default_muscle_body_params(12))
+    else:
+        env = PetriDishGymnaxEnv(default_muscle_body_params(12), model.gait_params)
     params = env.default_params.replace(max_steps_in_episode=args.episode_steps)
     config = TrainingConfig(
         num_envs=args.num_envs, num_steps=args.episode_steps, num_updates=1,
@@ -149,9 +167,25 @@ def main() -> int:
         learning_rate=args.learning_rate,
     )
     rng, init_key, critic_key = jax.random.split(jax.random.PRNGKey(args.seed), 3)
-    initial_actor = init_connectome_actor_params(model.connectome, init_key)
-    agent = AgentParams(actor=initial_actor, critic=init_critic_params(critic_key))
-    interface = make_connectome_actor_interface(dt=params.dt)
+    if args.actor == "full-network":
+        from r_elegans.rl.full_network_actor import init_full_network_actor, make_full_network_actor_interface
+        initial_actor = init_full_network_actor(model, init_key)
+        if args.initial_actor:
+            from r_elegans.rl.full_network_actor import actor_from_arrays
+            with np.load(args.initial_actor, allow_pickle=False) as arrays:
+                if str(arrays["actor"]) != "full-network":
+                    parser.error("--initial-actor must be a full-network checkpoint")
+                initial_actor = actor_from_arrays(arrays)
+            expected = init_full_network_actor(model, init_key).neural
+            for name in ("chemical_mask", "gap_mask"):
+                if not np.array_equal(getattr(initial_actor.neural, name), getattr(expected, name)):
+                    parser.error("Checkpoint topology differs from bundled connectome")
+        interface = make_full_network_actor_interface(model, dt=params.dt,
+            train_group=args.train_group, train_neurons=args.train_neurons)
+    else:
+        initial_actor = init_connectome_actor_params(model.connectome, init_key)
+        interface = make_connectome_actor_interface(dt=params.dt)
+    agent = AgentParams(actor=initial_actor, critic=init_critic_params(critic_key, observation_dim=env.obs_shape[0]))
     train_step, optimizer = make_ppo_train_step(env, config, actor_interface=interface)
     opt_state = optimizer.init(agent)
     revision = subprocess.run(
@@ -160,7 +194,17 @@ def main() -> int:
     manifest = {
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "hostname": platform.node(), "seed": args.seed, "minutes": args.minutes,
-        "environment": "legacy_normalized_petri_dish", "actor_neurons": 14,
+        "environment": env.name, "actor": args.actor,
+        "actor_neurons": 302 if args.actor == "full-network" else 14,
+        "train_group": args.train_group, "train_neurons": args.train_neurons,
+        "initial_actor": str(args.initial_actor) if args.initial_actor else None,
+        "neuron_ids": list(model.neuron_ids) if args.actor == "full-network" else None,
+        "body_units": "legacy_normalized_uncalibrated",
+        "chemical_edges": int(np.count_nonzero(model.connectome.chemical_counts)),
+        "gap_pairs": int(np.count_nonzero(np.triu(np.asarray(model.connectome.gap_counts), 1))),
+        "nmj_edges": int(np.count_nonzero(model.neuromuscular_params.synapse_weights)),
+        "full_network_integrator": "frozen_conductance_exponential_euler_4_substeps" if args.actor == "full-network" else None,
+        "nmj_sign_constraints": "known signs fixed, unknown signs trainable" if args.actor == "full-network" else None,
         "backend": jax.default_backend(),
         "cpu_affinity": sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None,
         "git_revision": revision.stdout.strip(),

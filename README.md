@@ -36,6 +36,13 @@ measurable assays and missing simulator capabilities. The companion
 [WormGym training protocols](TRAINING_PROTOCOLS.md) define the proposed
 imitation/RL curriculum, biological controls, and validation gates.
 
+Full recurrent training is now available separately from the bundled demo:
+`scripts/train_timed.py --actor full-network` runs all 302 recurrent neurons
+and anatomical NMJs to 95 muscles, with no fitted gait or motor teacher.
+Whole-network optimization is the default; optional parameter subsets leave
+all 302 neurons in the simulation. This path is smoke-tested; full-network
+food-finding and biological behavioral fidelity remain unvalidated.
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)
@@ -301,6 +308,60 @@ analytic gradient. These numbers predate the corrected recurrent/time-limit
 training logic and body-physics upgrade, so they must be rerun before being
 treated as current WormGym benchmarks. See `CURRENT_MODEL.md` for scope.
 
+## Full recurrent network training
+
+The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
+pairs and the 956-edge projection to 95 muscles. It uses generic normalized
+graded-potential cells and engineered chemical sensors. Anatomical counts
+initialize relative strengths. Known NMJ signs and topology stay fixed;
+unknown NMJ signs can learn. This is an experimental training model, without
+validated biological behavior or a calibrated physical gait.
+
+Benchmark this larger workload on mbslnx2 before choosing CPU versus GPU:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_PREALLOCATE=false \
+JAX_DEFAULT_MATMUL_PRECISION=highest \
+python scripts/benchmark_rl.py --actor full-network --require-gpu \
+  --num-envs 32 --num-steps 128 > /home/carsonc/r-elegans-results/full-a100.json
+```
+
+For a one-hour run on one A100, from the activated `r-elegans` environment:
+
+```bash
+run_dir="/home/carsonc/r-elegans-results/full-$(date -u +%Y%m%dT%H%M%SZ)"
+mkdir -p "$run_dir"
+nohup env CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_PREALLOCATE=false \
+  JAX_DEFAULT_MATMUL_PRECISION=highest \
+  python -u scripts/train_timed.py --actor full-network --train-group all \
+  --minutes 60 --num-envs 32 --episode-steps 250 --learning-rate 1e-4 \
+  --output-dir "$run_dir" > "$run_dir/run.log" 2>&1 < /dev/null &
+echo "PID=$! log=$run_dir/run.log"
+```
+
+It saves finite agent/optimizer/RNG checkpoints every five minutes, plus
+initial, validation-selected best, and final actors. The budget includes
+compilation and evaluation; a running update/final evaluation can extend past
+the deadline. Earlier CPU/GPU throughput results used the 14-neuron actor and
+do not predict this workload. A Mac smoke benchmark (32 environments, 128 steps,
+two PPO epochs) measured about 2,794 steps/s; this is throughput, not learning
+success. A three-update functional smoke run remained finite and had zero
+food-zone successes; no full-network behavioral success is claimed.
+
+For four independent CPU seeds, use `scripts/run_cpu_training.py --actor
+full-network --minutes 60 --output-dir /home/carsonc/r-elegans-results` under
+`nohup`. Defaults now select the full network, 32 environments per worker,
+250-step episodes and learning rate `1e-4`. Each worker gets four physical
+cores. Pass `--actor connectome` explicitly to reproduce the old pilot.
+
+To train a subset, add `--train-group neural` (or `nmj`, `sensory`) and optionally
+`--train-neurons AWCL AWCR ...`. All 302 cells continue evolving. Start a later
+stage with `--initial-actor /external/run/actor_final.npz`; omit subset options
+to optimize the entire model. This transfers actor parameters and resets the
+critic/optimizer. Parameters that cannot influence the current task may have
+zero gradients; locomotion alone cannot constrain every circuit. See
+[CURRENT_MODEL.md](CURRENT_MODEL.md) for exact parameter selection and dynamics.
+
 ## Connectome-subcircuit chemotaxis
 
 For compute qualification, `python scripts/benchmark_rl.py --actor connectome`
@@ -333,7 +394,7 @@ Each cohort has a ten-minute timeout; worker logs/reports and aggregate speedup
 are retained in a unique timestamped directory. Run after other benchmarks finish.
 
 For an exploratory one-hour training pilot on mbslnx2, use
-`python -u scripts/run_cpu_training.py --minutes 60 --output-dir /path/outside/repo/results`
+`python -u scripts/run_cpu_training.py --actor connectome --minutes 60 --output-dir /path/outside/repo/results`
 under `nohup`. It launches four seeds on disjoint four-core CPU allocations,
 each with 128 environments, 250-step episodes, two PPO epochs and learning rate
 `1e-3`. The wall-clock budget includes compilation and periodic validation,
