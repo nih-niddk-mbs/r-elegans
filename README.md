@@ -303,6 +303,14 @@ treated as current WormGym benchmarks. See `CURRENT_MODEL.md` for scope.
 
 ## Connectome-subcircuit chemotaxis
 
+For compute qualification, `python scripts/benchmark_rl.py --actor connectome`
+reports PPO compilation time separately from synchronized update throughput.
+Use `--require-gpu` on GPU hosts and `CUDA_VISIBLE_DEVICES=0` to benchmark one
+device. Run each batch size in a separate process with identical precision and
+training settings. This measures the legacy normalized dish and 14-neuron actor;
+it does not train or validate the full 302-neuron model. Progress is written to
+stderr and the JSON report to stdout; no checkpoints are saved.
+
 The seven-parameter controller can also be replaced by a real, hand-selected
 14-neuron subcircuit of the bundled connectome
 (`r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES`: chemosensory
