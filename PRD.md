@@ -62,6 +62,11 @@ The repository currently provides:
   longer unseen command sequences; locomotion and sensory-task success remain
   unestablished. New full-network/body checks align anterior muscle rows with
   the head end of the body; historical gait baselines retain their old ordering.
+- an externally paced traveling-bend stage with causal anterior-to-posterior
+  delayed targets, fixed NMJs, and explicit muscle/body propagation gates.
+  Its scalar neural input matches alternating bends; delayed muscle targets
+  appear only in supervision. The Linux runner can resume matching passed
+  alternation checkpoints per seed, without retraining earlier stages.
 
 The current food-finding demo does not pass sensory input through the recurrent
 connectome. Its active path is:

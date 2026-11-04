@@ -384,9 +384,47 @@ remain outside Git. The time budget includes the initial bend stage; final
 verification can extend slightly beyond it. A failed bend gate retains that
 seed's artifacts and stops its progression. Exit code 2 means a motor gate
 failed (or the worker was interrupted); numerical errors are reported in each
-stage's summary. The runner never starts food-seeking RL or automatically
-advances beyond alternating bends. For single-device GPU fitting, invoke the
+stage's summary. Fresh runs stop at alternating bends; the explicit resume
+options below start wave fitting. The runner never starts food-seeking RL.
+For single-device GPU fitting, invoke the
 stage script directly with `CUDA_VISIBLE_DEVICES=0` and CPU pinning omitted.
+
+After all four alternating-bend seeds pass, continue them into slow traveling
+bends on mbslnx2. Activate the existing conda environment before launching:
+
+```bash
+source /home/carsonc/miniconda3/etc/profile.d/conda.sh
+conda activate r-elegans
+git pull --ff-only
+nohup python -u scripts/run_motor_curriculum.py --resume-latest --minutes 60 \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-wave.log 2>&1 < /dev/null &
+```
+
+`--resume-latest` chooses the newest `motor-*` directory with passed alternation
+summaries and matching checkpoints for every requested seed. It reuses each
+seed's own `alternation/actor_best.npz`; optimizers reset. Use `--resume-run
+/path/to/motor-RUN` to select a run explicitly. Results go to a fresh `wave-*`
+directory; earlier runs are preserved. Dependency preflight rejects a Python
+environment missing JAX/Optax/Flax before launching workers.
+
+The wave stage uses the same scalar artificial stimulation command, with no
+phase, spatial delay or target-muscle input supplied to the brain. Only the
+supervised target delays that command progressively along the anatomical
+muscle rows: 0.4 seconds from anterior to posterior at the initial amplitude
+of four percentage points per side. Commands are slow sinusoids or held
+bends; the target is causal and uses zero command before time zero. This
+tests a small externally paced traveling bend, not autonomous oscillation or
+net locomotion. NMJ/muscle parameters remain fixed; neural dynamics must learn
+the spatial timing. Validation changes command rate, phase, levels and order,
+and doubles the training horizon.
+
+In addition to the alternating-bend gates, both muscle and body signals must
+show posterior following anterior by at least 40 ms, and their lags must match
+the corresponding target within 60 ms. Overlap-normalized cross-correlation
+searches both directions, after initial settling. Tests reject uniform bends
+and reversed waves. Passing does not establish propulsion; net displacement,
+forward/reverse gaits and turning remain subsequent milestones.
 
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized

@@ -15,6 +15,7 @@ from r_elegans.rl.motor_curriculum import (
     bend_target, neural_muscle_sequence, make_bend_update, bend_metrics, bend_passes,
     motor_stimulation_vector, commanded_bend_target, commanded_muscle_sequence,
     alternating_metrics, alternating_passes,
+    traveling_bend_target, traveling_metrics, traveling_passes,
 )
 
 
@@ -90,3 +91,41 @@ def test_curriculum_requires_completed_run_as_well_as_a_passing_checkpoint():
     assert not stage_passed(dict(passed=True, exit_code=0, status="interrupted"))
     assert not stage_passed(dict(passed=False, exit_code=0, status="completed"))
     assert not stage_passed({})
+
+
+def test_wave_gate_requires_real_forward_propagation_in_muscles_and_body():
+    from scripts.train_motor_alternation import command_sequences
+    commands = command_sequences(384, held_out=True)
+    metrics = jax.jit(traveling_metrics)
+    for command in commands:
+        target = traveling_bend_target(command)
+        perfect = metrics(target, target)
+        assert traveling_passes(perfect)
+        assert float(perfect["target_muscle_lag"]) >= .08
+        assert float(perfect["target_body_lag"]) >= .08
+        uniform = commanded_bend_target(command)
+        assert not traveling_passes(metrics(uniform, target))
+        reverse = traveling_bend_target(command[::-1])[::-1]
+        assert not traveling_passes(metrics(reverse, target))
+
+
+def test_wave_targets_are_causal_and_resume_matches_seed_and_gate(tmp_path):
+    import json
+    from scripts.run_motor_curriculum import resume_checkpoints, find_resume_run
+    command = jnp.zeros(192).at[90:].set(1.)
+    target = traveling_bend_target(command)
+    np.testing.assert_allclose(target[:90], .4, atol=1e-7)
+    run = tmp_path / "motor-0001"
+    folder = run / "seed-3/alternation"
+    folder.mkdir(parents=True)
+    (folder / "actor_best.npz").write_bytes(b"checkpoint")
+    summary = dict(workers=[dict(seed=3, stages=dict(alternation=dict(passed=True, exit_code=0, status="completed")))])
+    (run / "summary.json").write_text(json.dumps(summary))
+    assert resume_checkpoints(run, [3])[3] == folder / "actor_best.npz"
+    assert find_resume_run(tmp_path, [3])[0] == run
+    with pytest.raises(ValueError):
+        resume_checkpoints(run, [0])
+    summary["workers"][0]["stages"]["alternation"]["exit_code"] = 2
+    (run / "summary.json").write_text(json.dumps(summary))
+    with pytest.raises(ValueError):
+        resume_checkpoints(run, [3])

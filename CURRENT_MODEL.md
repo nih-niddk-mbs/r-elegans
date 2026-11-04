@@ -109,14 +109,43 @@ stop/reverse sequence, respectively: muscle RMSE 0.0041/0.0054, body-angle
 relative error 16.9%/18.6%, bend correlation 0.997/0.992, and direction agreement
 100%/100%. These are synthetic command-following checks for one fitted seed,
 not evidence of biological fidelity or ensemble reliability. Longer mbslnx2
-runs assess whether the result is reproducible across seeds.
+runs subsequently completed for all four seeds: each passed both motor stages
+after roughly 17,800–18,000 alternating-bend updates. Held-out body-angle error
+was 5.1–5.8%, correlation exceeded 0.9998, and active-bend direction agreement
+was 100% on both sequences for every seed. These synthetic checks support
+advancing to the small traveling-bend stage; they do not establish propulsion.
 
 `scripts/run_motor_curriculum.py` supplies an unattended mbslnx2 CPU ensemble:
 four disjoint four-core workers, separate seeds, bend then alternation, with a
 wall-clock budget and checkpoints. A failed stage stops that seed's progression;
 the runner does not start RL or advance to unimplemented motor stages.
 
-### Anatomical muscle ordering
+### Slow traveling-bend fitting
+
+The wave stage is `scripts/train_motor_alternation.py --stage wave`. It takes
+the same scalar neural stimulation as controlled alternation; only the
+supervision target changes. Anatomical muscle rows follow a causal delayed
+version of the command, with a default 0.4-second anterior-to-posterior delay
+across the body. No delayed input or target array is given to the brain. The
+302-cell network must learn spatial timing with fixed NMJs and muscle transfer.
+This stage remains externally paced, not an autonomous oscillator.
+
+The existing muscle/body matching gates are augmented with propagation gates:
+both muscle and body anterior/posterior bands must have positive lag >=40 ms,
+within 60 ms of their respective target lags. Lag is estimated by normalized
+overlap correlation over positive and negative shifts, excluding initial
+settling. Both changed-rate sinusoids and unseen stop/reverse commands must
+pass over a horizon twice as long as training. Uniform and backward waves
+fail unit tests. Net propulsion is not a gate yet: it remains a separate
+locomotion milestone after a small traveling bend works.
+
+On mbslnx2, `scripts/run_motor_curriculum.py --resume-latest` resumes the newest
+passed four-seed alternation run under the selected output root into waves.
+Each seed uses its own checkpoint; all source gates and files are checked
+before launch. Fresh wave directories preserve earlier artifacts. Explicit
+`--resume-run` selects a particular run. No food-seeking RL is launched.
+
+### Anatomical muscle ordering (projection convention)
 
 The full-network dish and supervised motor body now explicitly map anterior
 muscle rows to the final body joint, adjacent to the segment used by

@@ -1,7 +1,9 @@
-"""Unattended mbslnx2 CPU seeds: held bend, then controlled alternating bends.
+"""Unattended mbslnx2 CPU motor stages, with resume into slow traveling bends.
 
 Only a seed that passes its bend gate advances. No RL or food task is launched.
 This supervisor imports no JAX; affinity is set before each worker imports it.
+--resume-latest or --resume-run continues each passed alternation seed into
+wave fitting, with fresh optimizers and the previous actor weights.
 """
 import argparse
 from contextlib import ExitStack
@@ -41,6 +43,29 @@ def stage_passed(result):
             and result.get("status", "completed") == "completed")
 
 
+def resume_checkpoints(root, seeds):
+    """Require the matching seed's successful alternation AND its checkpoint."""
+    summary = json.loads((root / "summary.json").read_text())
+    workers = {w["seed"]: w for w in summary["workers"]}
+    paths = {}
+    for seed in seeds:
+        result = workers.get(seed, {}).get("stages", {}).get("alternation", {})
+        path = root / f"seed-{seed}/alternation/actor_best.npz"
+        if not stage_passed(result) or not path.is_file():
+            raise ValueError(f"Seed {seed} lacks a passed alternation stage/checkpoint in {root}")
+        paths[seed] = path
+    return paths
+
+
+def find_resume_run(output_root, seeds):
+    for root in sorted(output_root.glob("motor-*"), reverse=True):
+        try:
+            return root, resume_checkpoints(root, seeds)
+        except (OSError, ValueError, KeyError, TypeError):
+            continue
+    raise ValueError("No completed motor run with passed alternation checkpoints for all requested seeds")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -49,11 +74,17 @@ def main():
     parser.add_argument("--cores-per-worker", type=positive_int, default=4)
     parser.add_argument("--seed-start", type=int, default=0)
     parser.add_argument("--alternation-iterations", type=positive_int, default=100000)
+    resume = parser.add_mutually_exclusive_group()
+    resume.add_argument("--resume-run", type=Path, help="Start wave stage from this passed motor run")
+    resume.add_argument("--resume-latest", action="store_true", help="Start waves from latest passed motor run under output-dir")
     args = parser.parse_args()
     if not sys.platform.startswith("linux") or not hasattr(os, "sched_getaffinity"):
         parser.error("Run on Linux, such as mbslnx2")
     if not math.isfinite(args.minutes) or args.minutes <= 0:
         parser.error("Minutes must be finite and positive")
+    dependencies = subprocess.run([sys.executable, "-c", "import jax, optax, flax"], capture_output=True, text=True)
+    if dependencies.returncode:
+        parser.error(f"Training dependencies unavailable in {sys.executable}; activate conda r-elegans first.\n{dependencies.stderr}")
     candidates, known = physical_core_cpus(sorted(os.sched_getaffinity(0)))
     if not known:
         parser.error("Physical CPU topology is required")
@@ -65,7 +96,18 @@ def main():
     output_root = args.output_dir.expanduser().resolve()
     if output_root == repo or repo in output_root.parents:
         parser.error("Results must stay outside Git")
-    root = output_root / datetime.now(timezone.utc).strftime("motor-%Y%m%dT%H%M%S%fZ")
+    seeds = list(range(args.seed_start, args.seed_start + args.workers))
+    resume_root, initial_actors = None, {}
+    try:
+        if args.resume_run:
+            resume_root = args.resume_run.expanduser().resolve()
+            initial_actors = resume_checkpoints(resume_root, seeds)
+        elif args.resume_latest:
+            resume_root, initial_actors = find_resume_run(output_root, seeds)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        parser.error(str(error))
+    prefix = "wave-" if initial_actors else "motor-"
+    root = output_root / (prefix + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
     root.mkdir(parents=True, exist_ok=False)
     deadline = time.perf_counter() + args.minutes * 60
     stopped = False
@@ -75,11 +117,20 @@ def main():
     signal.signal(signal.SIGTERM, stop)
     signal.signal(signal.SIGINT, stop)
     print(f"Run directory: {root}\nSupervised motor curriculum; no RL; {args.workers} independent seeds", flush=True)
+    if resume_root:
+        print(f"Resuming each seed's passed alternation checkpoint from: {resume_root}", flush=True)
     jobs = []
     with ExitStack() as files:
         def launch(job, stage):
             remaining = max(.01, (deadline - time.perf_counter()) / 60.)
-            command = stage_command(repo, job["output"], job["seed"], stage, remaining, args.alternation_iterations)
+            if stage == "wave":
+                command = [sys.executable, "-u", str(repo / "scripts/train_motor_alternation.py"),
+                    "--stage", "wave", "--seed", str(job["seed"]), "--minutes", str(remaining),
+                    "--iterations", str(args.alternation_iterations),
+                    "--initial-actor", str(initial_actors[job["seed"]]),
+                    "--output-dir", str(job["output"] / "wave")]
+            else:
+                command = stage_command(repo, job["output"], job["seed"], stage, remaining, args.alternation_iterations)
             child_env = os.environ.copy()
             child_env.update(JAX_PLATFORMS="cpu", CUDA_VISIBLE_DEVICES="",
                 JAX_DEFAULT_MATMUL_PRECISION="highest", OMP_NUM_THREADS=str(len(job["cpus"])),
@@ -96,7 +147,7 @@ def main():
                 output = root / f"seed-{seed}"
                 output.mkdir()
                 job = dict(seed=seed, cpus=cpus, output=output, done=False, stages={})
-                launch(job, "bend")
+                launch(job, "wave" if initial_actors else "bend")
                 jobs.append(job)
             next_status = time.perf_counter() + 60
             while any(not job["done"] for job in jobs):
@@ -135,9 +186,10 @@ def main():
                 except subprocess.TimeoutExpired:
                     job["process"].kill()
                     job["process"].wait()
-    summary = dict(requested_minutes=args.minutes, stopped=stopped,
+    summary = dict(requested_minutes=args.minutes, stopped=stopped, resume_run=str(resume_root) if resume_root else None,
         workers=[dict(seed=j["seed"], cpus=j["cpus"], stages=j["stages"]) for j in jobs])
-    passed = all(stage_passed(j["stages"].get("alternation", {})) for j in jobs)
+    final_stage = "wave" if initial_actors else "alternation"
+    passed = all(stage_passed(j["stages"].get(final_stage, {})) for j in jobs)
     (root / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     for worker in summary["workers"]:
         print(json.dumps(worker), flush=True)

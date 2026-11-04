@@ -126,3 +126,67 @@ def alternating_metrics(predicted, target):
 def alternating_passes(metrics):
     return (metrics["muscle_rmse"] < 0.025 and metrics["body_relative_rmse"] < 0.25
             and metrics["bend_correlation"] > 0.9 and metrics["direction_agreement"] > 0.95)
+
+
+def traveling_bend_target(commands, *, delay=0.4, dt=0.02, amplitude=0.04):
+    """A causal anterior-to-posterior delayed command, for supervision only.
+
+    No delayed commands or target phases are injected into neurons. The brain
+    receives the SAME scalar stimulation as in alternation, and must learn the
+    spatial timing through its own dynamics. This is an externally paced wave.
+    """
+    if delay <= 0 or dt <= 0:
+        raise ValueError("Positive propagation delay and dt required")
+    times = jnp.arange(commands.shape[0]) * dt
+    delayed = jax.vmap(lambda p: jnp.interp(times - delay * p, times, commands, left=0.0))(
+        muscle_longitudinal_positions()).T
+    return 0.4 + delayed * (bend_target(2, amplitude=amplitude)[0] - 0.4)
+
+
+def signal_lag(front, rear, *, dt=0.02, max_lag_steps=30):
+    """Normalized overlap correlation; positive lag means posterior follows.
+
+    Ignore initial settling. Both lag signs are searched, so reverse waves
+    cannot be mistaken for forward propagation. Resolution is one time step.
+    """
+    indices = jnp.arange(front.shape[0])
+    lags = jnp.arange(-max_lag_steps, max_lag_steps + 1)
+    def correlation(lag):
+        shifted = indices + lag
+        mask = (indices >= front.shape[0] // 4) & (shifted >= 0) & (shifted < front.shape[0])
+        count = jnp.maximum(mask.sum(), 1)
+        b = rear[jnp.clip(shifted, 0, front.shape[0] - 1)]
+        a = front - jnp.sum(front * mask) / count
+        b = b - jnp.sum(b * mask) / count
+        return jnp.sum(a * b * mask) / jnp.maximum(
+            jnp.sqrt(jnp.sum(a*a*mask) * jnp.sum(b*b*mask)), 1e-10)
+    scores = jax.vmap(correlation)(lags)
+    return lags[jnp.argmax(scores)] * dt
+
+
+def traveling_metrics(predicted, target):
+    metrics = alternating_metrics(predicted, target)
+    positions = muscle_longitudinal_positions()
+    dorsal = jnp.asarray([n.startswith("d") for n in BODY_WALL_MUSCLE_NAMES])
+    def band(muscles, low, high):
+        selected = (positions >= low) & (positions <= high)
+        d, v = selected & dorsal, selected & ~dorsal
+        return (jnp.sum(muscles * d, axis=1) / d.sum()
+                - jnp.sum(muscles * v, axis=1) / v.sum())
+    def muscle_lag(m):
+        return signal_lag(band(m, .2, .4), band(m, .6, .8))
+    def body_lag(m):
+        angles = muscle_sequence_body(m).joint_angles
+        return signal_lag(angles[:, 6:9].mean(axis=1), angles[:, 2:5].mean(axis=1))
+    metrics.update(muscle_lag=muscle_lag(predicted), target_muscle_lag=muscle_lag(target),
+                   body_lag=body_lag(predicted), target_body_lag=body_lag(target))
+    return metrics
+
+
+def traveling_passes(metrics):
+    # Float32 lag ticks (20 ms) must not fail exactly on a gate boundary.
+    eps = 1e-6
+    return (alternating_passes(metrics) and metrics["muscle_lag"] + eps >= .04
+            and metrics["body_lag"] + eps >= .04
+            and abs(metrics["muscle_lag"] - metrics["target_muscle_lag"]) <= .06 + eps
+            and abs(metrics["body_lag"] - metrics["target_body_lag"]) <= .06 + eps)

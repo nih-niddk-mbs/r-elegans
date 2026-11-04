@@ -17,6 +17,15 @@ and anatomical edge masks remain constraints; unknown NMJ signs can learn.
 
 ## Scientific objective
 
+The next motor stage is implemented as `train_motor_alternation.py --stage
+wave`: a causal 0.4-second anterior-to-posterior target delay with the same
+scalar artificial stimulation input. No phase/delayed muscle pattern enters
+the forward neural computation. Both muscle and body propagation are gated,
+in addition to trajectory matching. `run_motor_curriculum.py --resume-latest`
+continues each passed alternation seed into this stage, with fixed NMJs and
+fresh optimizers. This is externally paced wave fitting; autonomous rhythm,
+net propulsion and real-animal fidelity have not been established.
+
 Current first motor step: `scripts/train_motor_bend.py` performs supervised
 fitting of one static dorsal bend, with only full-network neural parameters
 learning and a fixed NMJ/muscle transform. It passed a longer-hold body check

@@ -1,4 +1,4 @@
-"""Supervised command-controlled bends; full recurrent brain, fixed NMJs.
+"""Supervised alternating/traveling bends; full recurrent brain, fixed NMJs.
 
 Commands supply artificial motor-neuron currents, not food or biological sensory
 input. Validation uses unseen command sequences and a longer horizon. No RL.
@@ -25,6 +25,7 @@ from r_elegans.rl.full_network_actor import (
 from r_elegans.rl.motor_curriculum import (
     motor_stimulation_vector, commanded_bend_target, commanded_muscle_sequence,
     alternating_metrics, alternating_passes, muscle_sequence_body,
+    traveling_bend_target, traveling_metrics, traveling_passes,
 )
 from r_elegans.rl import motor_curriculum, full_network_actor
 if __package__:
@@ -56,10 +57,14 @@ def main():
     parser.add_argument("--stimulation-gain", type=float, default=0.1)
     parser.add_argument("--minutes", type=float, help="Optional wall-clock training budget, with checkpoint on exit")
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--stage", choices=("alternation", "wave"), default="alternation")
+    parser.add_argument("--propagation-delay", type=float, default=0.4)
     args = parser.parse_args()
     if args.steps < 32 or args.iterations < 1:
         parser.error("At least 32 steps and one iteration required")
-    for value in (args.learning_rate, args.stimulation_gain, args.minutes if args.minutes is not None else 1.):
+    if args.stage == "wave" and (args.steps < 128 or not .2 <= args.propagation_delay <= .8):
+        parser.error("Wave fitting requires at least 128 steps and propagation delay in [0.2, 0.8] seconds")
+    for value in (args.learning_rate, args.stimulation_gain, args.propagation_delay, args.minutes if args.minutes is not None else 1.):
         if not math.isfinite(value) or value <= 0:
             parser.error("Rates, gain and optional minutes must be finite and positive")
     repo = Path(__file__).resolve().parents[1]
@@ -87,7 +92,11 @@ def main():
     interface = make_full_network_actor_interface(model, train_group="neural", input_mode="current")
     stimulation = motor_stimulation_vector(model, args.stimulation_gain)
     commands = command_sequences(args.steps)
-    targets = jax.vmap(commanded_bend_target)(commands)
+    target_fn = (lambda cmd: traveling_bend_target(cmd, delay=args.propagation_delay)) if args.stage == "wave" else commanded_bend_target
+    metric_fn = traveling_metrics if args.stage == "wave" else alternating_metrics
+    pass_fn = traveling_passes if args.stage == "wave" else alternating_passes
+    stage_name = "slow_traveling_bend" if args.stage == "wave" else "controlled_alternating_bends"
+    targets = jax.vmap(target_fn)(commands)
     def predict(a, cmd):
         return commanded_muscle_sequence(a, interface, cmd, stimulation)
     def objective(a):
@@ -101,8 +110,8 @@ def main():
         updates, state = optimizer.update(gradient, state, a)
         return optax.apply_updates(a, updates), state, loss
     validation_commands = command_sequences(args.steps * 2, held_out=True)
-    validation_target = jax.vmap(commanded_bend_target)(validation_commands)
-    evaluate = jax.jit(lambda a: jax.vmap(alternating_metrics)(
+    validation_target = jax.vmap(target_fn)(validation_commands)
+    evaluate = jax.jit(lambda a: jax.vmap(metric_fn)(
         jax.vmap(lambda c: predict(a, c))(validation_commands), validation_target))
     def validation(a):
         metrics = evaluate(a)
@@ -111,7 +120,8 @@ def main():
         return [{k: float(v[i]) for k, v in metrics.items()} for i in range(len(validation_commands))]
     initial = validation(actor)
     save_actor(output / "actor_initial.npz", actor)
-    save_json(output / "manifest.json", dict(stage="controlled_alternating_bends", actor_neurons=302,
+    save_json(output / "manifest.json", dict(stage=stage_name, actor_neurons=302,
+        propagation_delay=args.propagation_delay if args.stage == "wave" else None,
         input_mode="current", command_interface="artificial_NMJ_projecting_neuron_stimulation",
         timestamp_utc=datetime.now(timezone.utc).isoformat(), train_group="neural", fixed_nmj=True,
         stimulation_gain=args.stimulation_gain, initial_actor=str(args.initial_actor), seed=args.seed,
@@ -156,18 +166,20 @@ def main():
         save_actor(output / "actor_final.npz", actor)
         save_actor(output / "actor_best.npz", best)
     final = validation(best)
-    passed = all(alternating_passes(m) for m in final)
+    passed = all(pass_fn(m) for m in final)
     muscles = jax.jit(jax.vmap(lambda c: predict(best, c)))(validation_commands)
     body = jax.vmap(muscle_sequence_body)(muscles)
     reference = jax.vmap(muscle_sequence_body)(validation_target)
     np.savez_compressed(output / "verification.npz", commands=np.asarray(validation_commands),
         stimulation=np.asarray(stimulation), predicted_muscles=np.asarray(muscles),
         target_muscles=np.asarray(validation_target), joint_angles=np.asarray(body.joint_angles),
-        target_joint_angles=np.asarray(reference.joint_angles))
-    result = dict(stage="controlled_alternating_bends", status=status, error=error, iterations=iteration,
+        target_joint_angles=np.asarray(reference.joint_angles), position=np.asarray(body.position),
+        heading=np.asarray(body.heading), target_position=np.asarray(reference.position),
+        target_heading=np.asarray(reference.heading))
+    result = dict(stage=stage_name, status=status, error=error, iterations=iteration,
         passed=passed, initial=initial, final=final, elapsed_seconds=time.perf_counter() - started,
         stop_reason="signal" if stop else "time_budget" if time.perf_counter() >= deadline else "iteration_cap",
-        next_stage="slow traveling wave" if passed else "stay on controlled bend fitting",
+        next_stage=("locomotion validation" if args.stage == "wave" else "slow traveling wave") if passed else "stay on current motor stage",
         limitations="Artificial neural stimulation; no autonomous oscillator or locomotion demonstrated")
     save_json(output / "summary.json", result)
     print(json.dumps(result, indent=2), flush=True)
