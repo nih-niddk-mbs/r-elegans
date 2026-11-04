@@ -62,6 +62,31 @@ connectome" performs chemotaxis.
 
 ## Full-network training path
 
+### First supervised motor milestone
+
+`scripts/train_motor_bend.py` fits one small static dorsal bend before any RL.
+All 302 neurons evolve, but only neural parameters learn. Anatomical NMJ
+strengths/signs, muscle transfer fields and sensory gains remain fixed.
+The brain free-runs from its resting voltage with zero external input; the
+synthetic target muscles appear only in the loss, never in the forward path.
+
+The target is 40% baseline muscle activation plus/minus a four-percentage-point
+smooth dorsal/ventral envelope. A 64-step training sequence is verified over
+128 steps through the actual muscle-to-body dynamics. Seed 0, 500 updates on
+the Mac, took about 18 seconds: muscle RMSE 0.455 → 0.0099, body-angle relative
+RMSE 109% → 12.6%, and longer-hold error 13.7%. The bend gate requires <0.03
+muscle RMSE, <20% body/hold relative error, and correct bend direction. These
+checks reject straight or oppositely bent bodies. Only this small milestone
+has passed; command control, alternating bends and locomotion remain unproven.
+
+Actor archives, optimizer checkpoints, loss history, provenance and predicted
+versus target muscle/body trajectories are stored outside Git. The best actor
+is compatible with full-network actor loading. It is not yet a viable
+food-seeking initialization: establish controlled bends, a slow traveling wave,
+forward/reverse locomotion and turns before progressing to sensory-task RL.
+
+### Whole-network and subset optimization
+
 `scripts/train_timed.py` and `scripts/run_cpu_training.py` now default to
 `--actor full-network`. Explicit `--actor connectome` retains the historical
 14-neuron steering baseline. `scripts/benchmark_rl.py --actor full-network`

@@ -310,6 +310,34 @@ treated as current WormGym benchmarks. See `CURRENT_MODEL.md` for scope.
 
 ## Full recurrent network training
 
+Start with supervised motor milestones before food seeking. The first
+implemented milestone fits **one small static dorsal bend**, with all 302
+neurons running and only recurrent neural parameters learning. NMJ strengths,
+muscle transfer parameters and sensory gains stay fixed. There is no RL or
+teacher/clock input to the brain:
+
+```bash
+python scripts/train_motor_bend.py \
+  --output-dir "$HOME/OneDrive/r-elegans/results/motor_curriculum/bend-$(date -u +%Y%m%dT%H%M%SZ)"
+```
+
+The target is a mild, synthetic 95-muscle pattern around 40% activation, with
+a smooth dorsal/ventral difference of at most four percentage points per side.
+Training uses 64 steps (1.28 s); verification free-runs the brain for twice as
+long, then drives the body with its actual muscle outputs. Passing requires
+muscle RMSE <0.03, body-angle relative RMSE <20%, last-quarter hold error <20%,
+and the correct bend direction. Failed gates return exit code 2 and retain
+artifacts for inspection; they do not advance the curriculum.
+
+A seed-0 Mac run (500 supervised updates, about 18 s) reduced evaluation muscle
+RMSE from 0.455 to 0.0099 and body-angle relative error from 109% to 12.6%,
+passing the longer-hold check. This establishes one autonomous held bend in
+normalized mechanics. It does not establish command-controlled movement,
+alternating bends, swimming or biological fidelity. The next milestone is
+controlled alternating bends, followed by a slow traveling wave, then
+forward/reverse motion and turns. Food-seeking RL comes after those motor
+policies work. The longer RL commands below remain available for later use.
+
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
 graded-potential cells and engineered chemical sensors. Anatomical counts

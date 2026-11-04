@@ -17,6 +17,14 @@ and anatomical edge masks remain constraints; unknown NMJ signs can learn.
 
 ## Scientific objective
 
+Current first motor step: `scripts/train_motor_bend.py` performs supervised
+fitting of one static dorsal bend, with only full-network neural parameters
+learning and a fixed NMJ/muscle transform. It passed a longer-hold body check
+for seed 0. This precedes alternating bends, traveling waves, forward/reverse
+motion and turns. Do not use food-seeking RL as the first motor-learning task.
+This single bend is an infrastructure milestone, not a completed biological
+behavior protocol or a command-conditioned motor policy.
+
 Test whether a constrained embodied model can reproduce the animal's behavior
 across stimuli, context, and experience. Task reward establishes usefulness;
 agreement with independent real-animal observations establishes behavioral
