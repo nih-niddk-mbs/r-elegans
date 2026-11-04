@@ -322,6 +322,16 @@ Affinity limits eligibility; actual CPU utilization must still be measured.
 Run after other performance jobs finish. The Mac is appropriate for development
 and runs lasting at most a few hours; use the Linux workstations for longer jobs.
 
+To measure independent-worker scaling, use
+`python -u scripts/benchmark_cpu_parallel.py --output-dir /path/outside/repo/results`.
+It compares a single four-core worker with four concurrent workers on disjoint
+physical cores, using 128 environments and 20 measured updates per worker.
+Compilation/warmup completes before a common start signal. Aggregate throughput
+uses total steps divided by the time span covering all workers' measurements,
+including start skew, rather than summing individual throughput estimates.
+Each cohort has a ten-minute timeout; worker logs/reports and aggregate speedup
+are retained in a unique timestamped directory. Run after other benchmarks finish.
+
 The seven-parameter controller can also be replaced by a real, hand-selected
 14-neuron subcircuit of the bundled connectome
 (`r_elegans.brain.circuit.SUBCIRCUIT_NEURON_NAMES`: chemosensory

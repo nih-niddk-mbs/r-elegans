@@ -57,7 +57,12 @@ def main() -> None:
     parser.add_argument("--num-minibatches", type=positive_int, default=4)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--require-gpu", action="store_true")
+    parser.add_argument("--ready-file", type=Path)
+    parser.add_argument("--start-file", type=Path)
+    parser.add_argument("--start-timeout-seconds", type=positive_int, default=600)
     args = parser.parse_args()
+    if (args.ready_file is None) != (args.start_file is None):
+        parser.error("--ready-file and --start-file must be provided together")
 
     backend = jax.default_backend()
     if args.require_gpu and backend != "gpu":
@@ -104,7 +109,19 @@ def main() -> None:
     for _ in range(args.warmup_updates):
         update()
 
+    if args.ready_file is not None:
+        if args.start_file.exists():
+            raise RuntimeError("Start file already exists; use fresh barrier paths")
+        with args.ready_file.open("x") as ready:
+            ready.write("ready\n")
+        deadline = time.perf_counter() + args.start_timeout_seconds
+        while not args.start_file.exists():
+            if time.perf_counter() > deadline:
+                raise TimeoutError("Timed out waiting for the benchmark start signal")
+            time.sleep(0.05)
+
     durations = []
+    measurement_started = time.perf_counter()
     for index in range(args.updates):
         started = time.perf_counter()
         metrics = update()
@@ -114,6 +131,7 @@ def main() -> None:
             file=sys.stderr,
             flush=True,
         )
+    measurement_finished = time.perf_counter()
 
     # Validation and host copies occur outside the timed updates. A fast run
     # with nonfinite parameters must never be reported as a successful result.
@@ -163,6 +181,9 @@ def main() -> None:
         "warmup_updates": args.warmup_updates,
         "compile_seconds": compile_seconds,
         "update_seconds": durations,
+        "measurement_start_monotonic_seconds": measurement_started,
+        "measurement_end_monotonic_seconds": measurement_finished,
+        "measured_environment_steps": args.num_envs * args.num_steps * args.updates,
         "median_update_seconds": statistics.median(durations),
         "environment_steps_per_second": (
             args.num_envs * args.num_steps * args.updates / math.fsum(durations)
