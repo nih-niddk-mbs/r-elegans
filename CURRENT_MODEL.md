@@ -149,13 +149,47 @@ the shape, direction, correlation and propagation gates. These band delays
 are distinct from the 400 ms target delay across the entire muscle axis.
 This establishes a small externally paced traveling bend for one local seed;
 the resumed mbslnx2 ensemble is needed to assess reliability. Autonomous
-oscillation, propulsion and reverse/turn primitives remain outstanding.
+oscillation, useful propulsion and reverse/turn primitives remain outstanding.
 
 On mbslnx2, `scripts/run_motor_curriculum.py --resume-latest` resumes the newest
 passed four-seed alternation run under the selected output root into waves.
 Each seed uses its own checkpoint; all source gates and files are checked
 before launch. Fresh wave directories preserve earlier artifacts. Explicit
 `--resume-run` selects a particular run. No food-seeking RL is launched.
+
+### Locomotion validation and small amplitude steps
+
+`scripts/assess_locomotion.py` freezes the fitted brain and drives the actual
+body for four startup plus six measured cycles at periods 2.4, 3.0 and 3.7 s.
+Centroid positions are compared at identical command phases. Progress is
+projected on the tail-to-head segment-center axis: mechanics' `heading` alone
+is the first rod's orientation, not the worm's axis. Shape closure and cycle
+consistency distinguish steady strokes from startup deformation.
+
+The assay halves dt from 20 to 10 ms and includes zero-command and isotropic-
+drag controls. Detectable translation must exceed 1e-6 body lengths/cycle,
+five times control drift and three times timestep discrepancy, with consistent
+direction and shape closure. The stronger readiness gate additionally requires
+approximately straight travel and >=0.001 body lengths/cycle at every pacing
+period. These thresholds are engineering criteria, not biological calibration.
+
+A local seed's 0.04-amplitude wave gives sustained forward progress of
+0.00032–0.00042 body lengths/cycle. The rest control stays still, isotropic-drag
+drift is <2e-10, and timestep discrepancies are 0.5–1.4%. A supervised amplitude
+step to 0.05 (1,000 updates, neural parameters only) retains passed wave gates
+and raises progress to 0.00051–0.00066 body lengths/cycle, approximately 59%
+more. Shape closes and progress repeats across measured cycles. Neither
+amplitude reaches the stronger readiness threshold; natural swimming and
+autonomous rhythm have not been established.
+
+`run_motor_curriculum.py --resume-latest --assess-locomotion` selects passed
+wave checkpoints for a frozen four-seed diagnostic. `--increase-amplitude 0.05`
+instead checks baseline propulsion, trains the next small amplitude only when
+the baseline is valid, gates the wave fit, then repeats the locomotion assay.
+The increase is capped at 30% per stage. Earlier artifacts and successful
+intermediate wave checkpoints remain external and available for continuation.
+Exit code 2 with completed status and no error means an unmet motor/readiness
+gate, not a software crash. No RL or sensory-task reward is introduced.
 
 ### Anatomical muscle ordering (projection convention)
 

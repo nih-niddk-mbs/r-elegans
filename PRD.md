@@ -67,6 +67,12 @@ The repository currently provides:
   Its scalar neural input matches alternating bends; delayed muscle targets
   appear only in supervision. The Linux runner can resume matching passed
   alternation checkpoints per seed, without retraining earlier stages.
+- a frozen-policy locomotion assay with startup exclusion, phase-matched
+  centroid progress, actual body-axis projection, timestep refinement and
+  rest/isotropic-drag controls. One local wave model shows small forward
+  translation; a guarded 0.04 → 0.05 amplitude step increases it but has not
+  reached the declared locomotion-readiness threshold. Four-seed continuation
+  and reassessment run outside the repository without RL.
 
 The current food-finding demo does not pass sensory input through the recurrent
 connectome. Its active path is:

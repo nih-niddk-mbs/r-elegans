@@ -33,8 +33,8 @@ def neural_muscle_sequence(actor, interface, steps):
     return jax.lax.scan(step, interface.init_carry(actor), None, length=steps)[1]
 
 
-def muscle_sequence_body(muscles, *, dt=0.02):
-    params = default_muscle_body_params(12)
+def muscle_sequence_body(muscles, *, dt=0.02, body_params=None):
+    params = default_muscle_body_params(12) if body_params is None else body_params
     projection = build_muscle_projection(11, head_at_end=True)
     def step(body, activation):
         dorsal, ventral = project_muscles_to_joints(activation, projection)

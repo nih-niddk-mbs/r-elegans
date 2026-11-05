@@ -17,6 +17,16 @@ and anatomical edge masks remain constraints; unknown NMJ signs can learn.
 
 ## Scientific objective
 
+Locomotion is now assessed separately from wave imitation: frozen neural
+weights, complete phase-matched cycles after startup, actual body centroid and
+axis, timestep refinement, rest and isotropic-drag controls. One local seed
+shows small sustained forward translation. A 0.04 → 0.05 supervised amplitude
+step preserves wave gates and increases displacement by about 59%, but remains
+below the declared 0.001 body-length/cycle readiness threshold. The Linux
+runner can assess passed wave ensembles or perform one guarded amplitude step
+and re-assess. These engineering criteria in normalized mechanics do not
+substitute for measured animal locomotion or SI calibration.
+
 The next motor stage is implemented as `train_motor_alternation.py --stage
 wave`: a causal 0.4-second anterior-to-posterior target delay with the same
 scalar artificial stimulation input. No phase/delayed muscle pattern enters

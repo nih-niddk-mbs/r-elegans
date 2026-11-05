@@ -59,11 +59,14 @@ def main():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--stage", choices=("alternation", "wave"), default="alternation")
     parser.add_argument("--propagation-delay", type=float, default=0.4)
+    parser.add_argument("--amplitude", type=float, default=0.04, help="Synthetic muscle target amplitude; increase in small stages")
     args = parser.parse_args()
     if args.steps < 32 or args.iterations < 1:
         parser.error("At least 32 steps and one iteration required")
     if args.stage == "wave" and (args.steps < 128 or not .2 <= args.propagation_delay <= .8):
         parser.error("Wave fitting requires at least 128 steps and propagation delay in [0.2, 0.8] seconds")
+    if not 0 < args.amplitude <= .1:
+        parser.error("Amplitude must be in (0, 0.1]")
     for value in (args.learning_rate, args.stimulation_gain, args.propagation_delay, args.minutes if args.minutes is not None else 1.):
         if not math.isfinite(value) or value <= 0:
             parser.error("Rates, gain and optional minutes must be finite and positive")
@@ -92,7 +95,8 @@ def main():
     interface = make_full_network_actor_interface(model, train_group="neural", input_mode="current")
     stimulation = motor_stimulation_vector(model, args.stimulation_gain)
     commands = command_sequences(args.steps)
-    target_fn = (lambda cmd: traveling_bend_target(cmd, delay=args.propagation_delay)) if args.stage == "wave" else commanded_bend_target
+    target_fn = ((lambda cmd: traveling_bend_target(cmd, delay=args.propagation_delay, amplitude=args.amplitude))
+                 if args.stage == "wave" else (lambda cmd: commanded_bend_target(cmd, amplitude=args.amplitude)))
     metric_fn = traveling_metrics if args.stage == "wave" else alternating_metrics
     pass_fn = traveling_passes if args.stage == "wave" else alternating_passes
     stage_name = "slow_traveling_bend" if args.stage == "wave" else "controlled_alternating_bends"
@@ -122,6 +126,7 @@ def main():
     save_actor(output / "actor_initial.npz", actor)
     save_json(output / "manifest.json", dict(stage=stage_name, actor_neurons=302,
         propagation_delay=args.propagation_delay if args.stage == "wave" else None,
+        amplitude=args.amplitude,
         input_mode="current", command_interface="artificial_NMJ_projecting_neuron_stimulation",
         timestamp_utc=datetime.now(timezone.utc).isoformat(), train_group="neural", fixed_nmj=True,
         stimulation_gain=args.stimulation_gain, initial_actor=str(args.initial_actor), seed=args.seed,

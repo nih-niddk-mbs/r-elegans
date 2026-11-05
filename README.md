@@ -433,6 +433,59 @@ sequences. The first 1,500-update fit failed one propagation check; continuing
 the same checkpoint passed the fixed criteria. This is one externally paced
 traveling-bend fit, not demonstrated autonomous swimming or an ensemble result.
 
+To assess sustained locomotion of the latest passed wave ensemble, with
+weights frozen, use:
+
+```bash
+python -u scripts/run_motor_curriculum.py --resume-latest --assess-locomotion \
+  --output-dir /home/carsonc/r-elegans-results
+```
+
+This is a short diagnostic, not another hour of training. It runs three pacing
+periods (2.4, 3.0, 3.7 s), discards four startup cycles, and measures six complete
+cycles at matching command phases. Progress uses the segment-center centroid
+and actual tail-to-head axis, rather than head-tip movement. Shape closure,
+cycle consistency, lateral motion and yaw are reported. Timestep refinement
+(20 → 10 ms), zero-command rest and isotropic-drag controls check numerical
+drift. All trajectories stay outside Git.
+
+`detectable_translation` requires periodic shape, consistent signed progress,
+agreement between timesteps and translation above numerical/control floors.
+The stronger `passed` gate also requires approximately straight movement and
+at least 0.001 body lengths per cycle at every pacing period. These are declared
+engineering criteria in normalized mechanics, not measured biological speeds.
+Completed diagnostics can return exit code 2 for insufficient progress, with
+`error: null`; startup or numerical failures are distinct.
+
+A local wave checkpoint shows real but small forward progress:
+0.00032–0.00042 body lengths/cycle, rest drift zero, isotropic-drag drift below
+2e-10 body lengths/cycle, and 0.5–1.4% timestep differences. Increasing the
+synthetic target amplitude from 0.04 to 0.05 and fitting 1,000 further updates
+passes wave checks and raises progress to 0.00051–0.00066 body lengths/cycle,
+about 59% more. Both remain below the stronger 0.001 threshold. This is one
+local seed, not a completed locomotion ensemble or natural swimming result.
+
+To make that same small amplitude step on the passed mbslnx2 wave ensemble:
+
+```bash
+nohup python -u scripts/run_motor_curriculum.py --resume-latest \
+  --increase-amplitude 0.05 --minutes 60 \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-locomotion.log 2>&1 < /dev/null &
+```
+
+Each seed is first assessed without training. Only real, stable, approximately
+straight baseline propulsion advances to fitting. The target changes by at
+most 30% per stage; neural parameters learn while the stimulation gain, NMJs
+and muscle transfer remain fixed. Only a passed wave fit advances to a new
+locomotion assay. A result that still falls below the progress threshold stays
+at this milestone; no RL is launched. Passing wave checkpoints are preserved
+even if the stronger locomotion check fails, allowing another small amplitude
+step later. `--resume-latest` selects the newest wave cohort with matching
+passed wave checkpoints, including such partially completed cohorts. Use an
+explicit `--resume-run` to choose an earlier cohort. Always activate the
+`r-elegans` conda environment first.
+
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
 graded-potential cells and engineered chemical sensors. Anatomical counts

@@ -3,7 +3,8 @@
 Only a seed that passes its bend gate advances. No RL or food task is launched.
 This supervisor imports no JAX; affinity is set before each worker imports it.
 --resume-latest or --resume-run continues each passed alternation seed into
-wave fitting, with fresh optimizers and the previous actor weights.
+wave fitting, with fresh optimizers and the previous actor weights. Assessment
+and amplitude-continuation modes instead read passed wave checkpoints.
 """
 import argparse
 from contextlib import ExitStack
@@ -43,27 +44,36 @@ def stage_passed(result):
             and result.get("status", "completed") == "completed")
 
 
-def resume_checkpoints(root, seeds):
-    """Require the matching seed's successful alternation AND its checkpoint."""
+def baseline_valid(result):
+    """Weak but real propulsion can justify a small amplitude step, not promotion."""
+    return (result.get("status") == "completed" and result.get("exit_code") in (0, 2)
+            and result.get("error") is None and len(result.get("periods", [])) >= 3
+            and all(p.get("detectable_translation") is True and p.get("approximately_straight") is True
+                    for p in result["periods"]))
+
+
+def resume_checkpoints(root, seeds, stage="alternation"):
+    """Require the matching seed's successful source stage AND its checkpoint."""
     summary = json.loads((root / "summary.json").read_text())
     workers = {w["seed"]: w for w in summary["workers"]}
     paths = {}
     for seed in seeds:
-        result = workers.get(seed, {}).get("stages", {}).get("alternation", {})
-        path = root / f"seed-{seed}/alternation/actor_best.npz"
+        result = workers.get(seed, {}).get("stages", {}).get(stage, {})
+        path = root / f"seed-{seed}/{stage}/actor_best.npz"
         if not stage_passed(result) or not path.is_file():
-            raise ValueError(f"Seed {seed} lacks a passed alternation stage/checkpoint in {root}")
+            raise ValueError(f"Seed {seed} lacks a passed {stage} stage/checkpoint in {root}")
         paths[seed] = path
     return paths
 
 
-def find_resume_run(output_root, seeds):
-    for root in sorted(output_root.glob("motor-*"), reverse=True):
+def find_resume_run(output_root, seeds, stage="alternation"):
+    pattern = "wave-*" if stage == "wave" else "motor-*"
+    for root in sorted(output_root.glob(pattern), reverse=True):
         try:
-            return root, resume_checkpoints(root, seeds)
+            return root, resume_checkpoints(root, seeds, stage)
         except (OSError, ValueError, KeyError, TypeError):
             continue
-    raise ValueError("No completed motor run with passed alternation checkpoints for all requested seeds")
+    raise ValueError(f"No completed run with passed {stage} checkpoints for all requested seeds")
 
 
 def main():
@@ -74,10 +84,18 @@ def main():
     parser.add_argument("--cores-per-worker", type=positive_int, default=4)
     parser.add_argument("--seed-start", type=int, default=0)
     parser.add_argument("--alternation-iterations", type=positive_int, default=100000)
+    parser.add_argument("--assess-locomotion", action="store_true", help="Diagnose passed wave checkpoints without training")
+    parser.add_argument("--increase-amplitude", type=float, help="Resume passed waves, fit a slightly larger target, then assess locomotion")
     resume = parser.add_mutually_exclusive_group()
-    resume.add_argument("--resume-run", type=Path, help="Start wave stage from this passed motor run")
-    resume.add_argument("--resume-latest", action="store_true", help="Start waves from latest passed motor run under output-dir")
+    resume.add_argument("--resume-run", type=Path, help="Read passed source checkpoints from this run")
+    resume.add_argument("--resume-latest", action="store_true", help="Select latest passed source run under output-dir for the requested mode")
     args = parser.parse_args()
+    if (args.assess_locomotion or args.increase_amplitude is not None) and not (args.resume_run or args.resume_latest):
+        parser.error("Locomotion assessment/amplitude continuation requires --resume-latest or --resume-run")
+    if args.assess_locomotion and args.increase_amplitude is not None:
+        parser.error("Choose assessment or amplitude continuation")
+    if args.increase_amplitude is not None and not (0 < args.increase_amplitude <= .1):
+        parser.error("Amplitude must be finite and in (0, 0.1]")
     if not sys.platform.startswith("linux") or not hasattr(os, "sched_getaffinity"):
         parser.error("Run on Linux, such as mbslnx2")
     if not math.isfinite(args.minutes) or args.minutes <= 0:
@@ -98,15 +116,22 @@ def main():
         parser.error("Results must stay outside Git")
     seeds = list(range(args.seed_start, args.seed_start + args.workers))
     resume_root, initial_actors = None, {}
+    source_stage = "wave" if args.assess_locomotion or args.increase_amplitude is not None else "alternation"
     try:
         if args.resume_run:
             resume_root = args.resume_run.expanduser().resolve()
-            initial_actors = resume_checkpoints(resume_root, seeds)
+            initial_actors = resume_checkpoints(resume_root, seeds, source_stage)
         elif args.resume_latest:
-            resume_root, initial_actors = find_resume_run(output_root, seeds)
+            resume_root, initial_actors = find_resume_run(output_root, seeds, source_stage)
     except (OSError, ValueError, KeyError, TypeError) as error:
         parser.error(str(error))
-    prefix = "wave-" if initial_actors else "motor-"
+    if args.increase_amplitude is not None:
+        for seed, checkpoint_path in initial_actors.items():
+            source_manifest = json.loads((checkpoint_path.parent / "manifest.json").read_text())
+            old_amplitude = source_manifest.get("amplitude", .04)
+            if not old_amplitude < args.increase_amplitude <= old_amplitude * 1.3 + 1e-8:
+                parser.error(f"Seed {seed}: increase amplitude from {old_amplitude} by at most 30% per stage")
+    prefix = "locomotion-" if args.assess_locomotion else "wave-" if initial_actors else "motor-"
     root = output_root / (prefix + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
     root.mkdir(parents=True, exist_ok=False)
     deadline = time.perf_counter() + args.minutes * 60
@@ -118,17 +143,25 @@ def main():
     signal.signal(signal.SIGINT, stop)
     print(f"Run directory: {root}\nSupervised motor curriculum; no RL; {args.workers} independent seeds", flush=True)
     if resume_root:
-        print(f"Resuming each seed's passed alternation checkpoint from: {resume_root}", flush=True)
+        print(f"Using each seed's passed {source_stage} checkpoint from: {resume_root}", flush=True)
     jobs = []
     with ExitStack() as files:
         def launch(job, stage):
             remaining = max(.01, (deadline - time.perf_counter()) / 60.)
-            if stage == "wave":
+            if stage in ("locomotion", "baseline_locomotion"):
+                checkpoint_path = (job["output"] / "wave/actor_best.npz"
+                    if args.increase_amplitude is not None and stage == "locomotion" else initial_actors[job["seed"]])
+                command = [sys.executable, "-u", str(repo / "scripts/assess_locomotion.py"),
+                    "--seed", str(job["seed"]), "--initial-actor", str(checkpoint_path),
+                    "--output-dir", str(job["output"] / stage)]
+            elif stage == "wave":
                 command = [sys.executable, "-u", str(repo / "scripts/train_motor_alternation.py"),
                     "--stage", "wave", "--seed", str(job["seed"]), "--minutes", str(remaining),
                     "--iterations", str(args.alternation_iterations),
                     "--initial-actor", str(initial_actors[job["seed"]]),
                     "--output-dir", str(job["output"] / "wave")]
+                if args.increase_amplitude is not None:
+                    command.extend(["--amplitude", str(args.increase_amplitude)])
             else:
                 command = stage_command(repo, job["output"], job["seed"], stage, remaining, args.alternation_iterations)
             child_env = os.environ.copy()
@@ -147,7 +180,8 @@ def main():
                 output = root / f"seed-{seed}"
                 output.mkdir()
                 job = dict(seed=seed, cpus=cpus, output=output, done=False, stages={})
-                launch(job, "wave" if initial_actors else "bend")
+                launch(job, "baseline_locomotion" if args.increase_amplitude is not None else
+                    "locomotion" if args.assess_locomotion else "wave" if initial_actors else "bend")
                 jobs.append(job)
             next_status = time.perf_counter() + 60
             while any(not job["done"] for job in jobs):
@@ -164,6 +198,13 @@ def main():
                         if (job["stage"] == "bend" and stage_passed(job["stages"]["bend"])
                                 and not stopped and now < deadline):
                             launch(job, "alternation")
+                        elif (job["stage"] == "baseline_locomotion" and not stopped and now < deadline
+                                and baseline_valid(job["stages"]["baseline_locomotion"])):
+                            print(f"seed={job['seed']} baseline propulsion is real and stable; fitting amplitude={args.increase_amplitude}", flush=True)
+                            launch(job, "wave")
+                        elif (job["stage"] == "wave" and args.increase_amplitude is not None
+                                and stage_passed(job["stages"]["wave"]) and not stopped):
+                            launch(job, "locomotion")
                         else:
                             job["done"] = True
                         continue
@@ -188,7 +229,7 @@ def main():
                     job["process"].wait()
     summary = dict(requested_minutes=args.minutes, stopped=stopped, resume_run=str(resume_root) if resume_root else None,
         workers=[dict(seed=j["seed"], cpus=j["cpus"], stages=j["stages"]) for j in jobs])
-    final_stage = "wave" if initial_actors else "alternation"
+    final_stage = "locomotion" if args.assess_locomotion or args.increase_amplitude is not None else "wave" if initial_actors else "alternation"
     passed = all(stage_passed(j["stages"].get(final_stage, {})) for j in jobs)
     (root / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     for worker in summary["workers"]:
