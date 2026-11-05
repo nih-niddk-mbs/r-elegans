@@ -182,6 +182,21 @@ more. Shape closes and progress repeats across measured cycles. Neither
 amplitude reaches the stronger readiness threshold; natural swimming and
 autonomous rhythm have not been established.
 
+The four-seed mbslnx2 0.05 continuation subsequently passed every wave fit and
+showed stable, approximately straight forward translation in all three pacing
+conditions. Progress was 0.000535–0.000605 body lengths/cycle, 52–67% above each
+seed's baseline. All assays completed without errors but remained below the
+0.001 readiness threshold; exit code 2 indicated this unmet gate.
+
+A local 0.05 → 0.06 continuation (1,000 supervised updates, same pacing and
+0.4-second target delay) passes both longer wave checks: body error 10.6%/17.2%.
+Its sustained progress is 0.000749/0.000888/0.000965 body lengths/cycle at periods
+2.4/3.0/3.7 s, respectively, another 45–46% increase. Shape and cycle direction
+remain stable; rest/isotropic controls are negligible and timestep differences
+are 0.4–1.3%. This is one local seed and still below the unchanged readiness
+gate. The corresponding four-seed continuation uses the completed 0.05 wave
+checkpoints; it does not restart the curriculum or introduce RL.
+
 `run_motor_curriculum.py --resume-latest --assess-locomotion` selects passed
 wave checkpoints for a frozen four-seed diagnostic. `--increase-amplitude 0.05`
 instead checks baseline propulsion, trains the next small amplitude only when

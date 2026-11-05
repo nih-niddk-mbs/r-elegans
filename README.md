@@ -486,6 +486,17 @@ passed wave checkpoints, including such partially completed cohorts. Use an
 explicit `--resume-run` to choose an earlier cohort. Always activate the
 `r-elegans` conda environment first.
 
+The completed mbslnx2 0.05 ensemble retained passed wave fits and stable forward
+propulsion for all four seeds, improving progress by 52–67% to
+0.000535–0.000605 body lengths/cycle. The readiness threshold was not reached.
+Continue from those passed wave checkpoints with `--increase-amplitude 0.06`;
+the increase is 20%, with pacing, target propagation delay and gates unchanged.
+A local 1,000-update continuation passes wave checks and reaches
+0.000749–0.000965 body lengths/cycle, 45–46% above its 0.05 baseline, while
+remaining below the 0.001 readiness threshold. Replication across seeds remains
+the purpose of the next mbslnx2 run. Use `--resume-run /path/to/completed-0.05-run`
+to select that cohort explicitly, preserving all previous artifacts.
+
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
 graded-potential cells and engineered chemical sensors. Anatomical counts
