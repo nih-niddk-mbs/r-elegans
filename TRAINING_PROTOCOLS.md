@@ -15,6 +15,26 @@ training infrastructure with smoke-test validation, not a completed P00–P13
 curriculum or evidence of real-animal behavioral agreement. Known NMJ signs
 and anatomical edge masks remain constraints; unknown NMJ signs can learn.
 
+## Current motor milestone (2026-11-05)
+
+The externally paced 302-neuron 0.07 ensemble has passed forward locomotion
+readiness for three of four seeds. All four pass wave fitting; seed 2 misses
+the 0.001 body-length/cycle floor at its slowest pacing rate (0.0009956).
+No natural sensory input or autonomous rhythm is demonstrated.
+
+The next implemented protocol is `assess_stop_restart.py`, also exposed by
+`run_motor_curriculum.py --stop-restart --resume-run <wave-cohort>`.
+Test existing weights first: continuous go/zero/go commands, six cycles per
+block, last three measured, at three pacing periods. Keep neural and body
+state across transitions. Require <=10% residual centroid path length and
+joint-angle speed during the late stop window, 80–120% recovered progress,
+and the unchanged moving-window propulsion gates, timestep refinement and
+isotropic controls. Record `control_passed` separately from overall readiness
+so a borderline propulsion floor is not confused with inability to stop.
+This is a frozen diagnostic, not completed remote validation or added RL.
+If it fails, use the failed criterion to design the next supervised fit;
+do not discard the established forward-motion checkpoint.
+
 ## Scientific objective
 
 Locomotion is now assessed separately from wave imitation: frozen neural
@@ -33,8 +53,9 @@ scalar artificial stimulation input. No phase/delayed muscle pattern enters
 the forward neural computation. Both muscle and body propagation are gated,
 in addition to trajectory matching. `run_motor_curriculum.py --resume-latest`
 continues each passed alternation seed into this stage, with fixed NMJs and
-fresh optimizers. This is externally paced wave fitting; autonomous rhythm,
-net propulsion and real-animal fidelity have not been established.
+fresh optimizers. This is externally paced wave fitting; the later assays
+above establish model propulsion, while autonomous rhythm and real-animal
+fidelity remain unestablished.
 
 Current first motor step: `scripts/train_motor_bend.py` performs supervised
 fitting of one static dorsal bend, with only full-network neural parameters

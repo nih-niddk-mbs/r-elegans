@@ -497,6 +497,40 @@ remaining below the 0.001 readiness threshold. Replication across seeds remains
 the purpose of the next mbslnx2 run. Use `--resume-run /path/to/completed-0.05-run`
 to select that cohort explicitly, preserving all previous artifacts.
 
+The subsequent mbslnx2 0.06 ensemble passed all wave fits and reached
+0.000772–0.000922 body lengths/cycle. At 0.07 all four wave fits passed,
+and three seeds passed locomotion readiness at every pacing rate. Seed 2
+reached 0.0009956 at the slowest rate, narrowly below the unchanged 0.001 gate.
+All conditions remained periodic, consistent, approximately straight and
+forward; progress improved 29–35% over 0.06. These are externally paced,
+normalized-model results, not biological speed calibration.
+
+The next stage tests **stop and restart with frozen weights** before adding
+training. It carries neural and body state continuously through six pacing
+cycles each of moving, zero command, and moving again. The last three cycles
+of each block are measured; the first three allow settling. Both centroid
+path length and body-angle speed during the stop must fall below 10% of the
+initial moving window, and restarted forward progress must recover to
+80–120%. Moving windows retain the existing propulsion, straightness and
+0.001 body-length/cycle gates. The assay repeats at 2.4/3.0/3.7-second periods,
+20/10-ms timesteps, and with isotropic drag. It measures late settling,
+not immediate stopping or a biological response latency.
+
+Run on mbslnx2 using the completed 0.07 cohort explicitly:
+
+```bash
+nohup python -u scripts/run_motor_curriculum.py --stop-restart \
+  --resume-run /home/carsonc/r-elegans-results/wave-20261105T214835887935Z \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-stop-restart.log 2>&1 < /dev/null &
+```
+
+This is a short diagnostic, with no optimizer or RL. Results go into a fresh
+`stop-restart-*` directory. `control_passed` distinguishes successful stopping
+and recovery from the stronger overall `passed` gate, which also retains
+the progress floor. Seed 2 may still miss that floor. A failed gate preserves
+all source checkpoints and does not automatically launch another stage.
+
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
 graded-potential cells and engineered chemical sensors. Anatomical counts

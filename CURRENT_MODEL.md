@@ -206,6 +206,42 @@ intermediate wave checkpoints remain external and available for continuation.
 Exit code 2 with completed status and no error means an unmet motor/readiness
 gate, not a software crash. No RL or sensory-task reward is introduced.
 
+### Forward readiness and continuous stop/restart
+
+The mbslnx2 0.06 ensemble reached 0.000772–0.000922 body lengths/cycle, with
+all wave fits passed. The 0.07 ensemble then improved progress by 29–35%:
+seeds 0, 1 and 3 passed all locomotion readiness conditions, while seed 2
+missed the unchanged 0.001 floor only at 3.7-second pacing (0.0009956).
+All conditions retained stable, periodic, approximately straight forward
+motion. This establishes an externally paced forward primitive in normalized
+mechanics, without establishing natural-animal speed or autonomous rhythm.
+
+`scripts/assess_stop_restart.py` is the next diagnostic. With weights frozen,
+one continuous neural/body trajectory contains six moving cycles, six
+zero-command cycles and six restarted moving cycles. Each block's first
+three cycles settle; its last three are measured. Stop centroid path length
+and RMS joint-angle speed must be <=10% of the initial moving window, so
+zero net displacement cannot hide reciprocal motion. Restarted forward
+progress must be 80–120% of its original value. Both moving windows also
+retain the existing propulsion and 0.001 progress gates, with 20/10-ms
+refinement and isotropic controls at all three pacing rates.
+
+`run_motor_curriculum.py --stop-restart --resume-run <wave-cohort>` runs all
+requested seed checkpoints without training and saves fresh external
+trajectories and summaries. `control_passed` reports stop/recovery success
+separately from overall readiness. No neuron/body state is reset between
+command blocks, and the checkpoint's stimulation gain is preserved.
+This measures settling after 7.2–11.1 seconds of zero command, not an animal's
+stopping latency. Testing the 0.07 remote ensemble remains necessary.
+
+A local frozen 0.06 checkpoint passes `control_passed` at all three periods:
+late stop centroid motion is below the saved trajectory's floating-point
+resolution, RMS body-angle speed is <0.000004 of the moving value, and
+restarted progress recovers to within 0.002% of the initial window.
+Overall `passed` remains false because that checkpoint's forward progress
+is below 0.001. This checks the new assay against a real fitted brain/body
+trajectory; it is not a result for the remote 0.07 cohort.
+
 ### Anatomical muscle ordering (projection convention)
 
 The full-network dish and supervised motor body now explicitly map anterior
