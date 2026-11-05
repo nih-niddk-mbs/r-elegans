@@ -34,12 +34,14 @@ def stop_restart_metrics(position, heading, angles, *, period_steps, dt,
     return reports
 
 
-def assess_stop_restart(coarse, fine, isotropic):
+def assess_stop_restart(coarse, fine, isotropic, *, direction="forward"):
     """Keep the propulsion floor; require <=10% residual motion and >=80% recovery.
 
     The stop window starts three pacing cycles after command removal. These
     are engineering gates, not a biological stopping latency claim.
     """
+    if direction not in ("forward", "reverse"):
+        raise ValueError("Direction must be forward or reverse")
     phases = {label: assess_propulsion(coarse[label], fine[label], fine["stop"],
         isotropic=isotropic[label]) for label in ("go", "restart")}
     ratios = {}
@@ -50,12 +52,13 @@ def assess_stop_restart(coarse, fine, isotropic):
             stop_shape_speed_ratio=report["stop"]["shape_speed_rms"] /
                 max(report["go"]["shape_speed_rms"], 1e-12),
             restart_progress_ratio=report["restart"]["mean_forward_body_lengths"] /
-                max(report["go"]["mean_forward_body_lengths"], 1e-12))
+                np.copysign(max(abs(report["go"]["mean_forward_body_lengths"]), 1e-12),
+                            report["go"]["mean_forward_body_lengths"]))
     stopped = all(r["stop_path_ratio"] <= .1 and r["stop_shape_speed_ratio"] <= .1
                   for r in ratios.values())
     recovered = all(.8 <= r["restart_progress_ratio"] <= 1.2 for r in ratios.values())
     forward = all(p["detectable_translation"] and p["approximately_straight"]
-                  and p["direction"] == "forward" for p in phases.values())
+                  and p["direction"] == direction for p in phases.values())
     control_passed = bool(stopped and recovered and forward)
     return dict(passed=bool(control_passed and all(p["passed"] for p in phases.values())),
         control_passed=control_passed, stopped=bool(stopped), recovered=bool(recovered),

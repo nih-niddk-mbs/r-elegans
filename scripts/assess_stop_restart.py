@@ -15,7 +15,8 @@ import numpy as np
 from r_elegans.body import initialize_muscle_body, default_muscle_body_params
 from r_elegans.model import load_builtin_model
 from r_elegans.rl.full_network_actor import actor_from_arrays, init_full_network_actor, make_full_network_actor_interface
-from r_elegans.rl.motor_curriculum import commanded_muscle_sequence, motor_stimulation_vector, muscle_sequence_body
+from r_elegans.rl.motor_curriculum import (directional_muscle_sequence, reverse_context_vector,
+    motor_stimulation_vector, muscle_sequence_body)
 from r_elegans.rl import stop_restart
 from r_elegans.rl.stop_restart import stop_restart_commands, stop_restart_metrics, assess_stop_restart
 if __package__:
@@ -29,6 +30,7 @@ def main():
     parser.add_argument("--initial-actor", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--direction", choices=("forward", "reverse"), default="forward")
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     output = args.output_dir.expanduser().resolve()
@@ -39,6 +41,10 @@ def main():
             or source.get("muscle_projection") != "anterior_to_head_at_last_segment"):
         parser.error("Requires a normalized, head-aligned current-input checkpoint")
     gain = source["stimulation_gain"]
+    context_gain = source.get("reverse_context_gain")
+    if args.direction == "reverse" and (source.get("reverse_context_scheme") != "fixed_random_NMJ_neurons_seed719_v1"
+            or context_gain is None or not math.isfinite(context_gain) or context_gain <= 0):
+        parser.error("Reverse assay requires a checkpoint fitted with the matching direction context")
     if not math.isfinite(gain) or gain <= 0:
         parser.error("Stimulation gain must be finite and positive")
     model = load_builtin_model()
@@ -52,6 +58,7 @@ def main():
     started = time.perf_counter()
     save_json(output / "manifest.json", dict(stage="stop_restart_assay", training=False,
         actor_neurons=302, seed=args.seed, initial_actor=str(args.initial_actor),
+        direction=args.direction, reverse_context_gain=context_gain,
         initial_actor_sha256=hashlib.sha256(args.initial_actor.read_bytes()).hexdigest(),
         timestamp_utc=datetime.now(timezone.utc).isoformat(), backend=jax.default_backend(),
         stimulation_gain=gain, command_amplitude=.85, periods_seconds=[2.4, 3., 3.7],
@@ -64,6 +71,7 @@ def main():
         git_revision=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip(),
         git_dirty=bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=repo, text=True))))
     stimulation = motor_stimulation_vector(model, gain)
+    context = reverse_context_vector(model, context_gain or .05)
     results = []
     for period in (2.4, 3., 3.7):
         reports = {}
@@ -77,7 +85,8 @@ def main():
                     perpendicular_drag=params.mechanics.parallel_drag))
             @jax.jit
             def simulate():
-                muscles = commanded_muscle_sequence(actor, interface, commands, stimulation)
+                muscles = directional_muscle_sequence(actor, interface, commands, stimulation,
+                    context=context, reverse=args.direction == "reverse")
                 return muscle_sequence_body(muscles, dt=dt, body_params=params)
             body = jax.block_until_ready(simulate())
             if not finite_tree(body):
@@ -91,11 +100,11 @@ def main():
                 time=states.time, position=states.position, heading=states.heading,
                 joint_angles=states.joint_angles, muscle_activation=states.muscle_activation)
         result = dict(period_seconds=period, **assess_stop_restart(
-            reports["coarse"], reports["fine"], reports["isotropic"]), cycles=reports)
+            reports["coarse"], reports["fine"], reports["isotropic"], direction=args.direction), cycles=reports)
         results.append(result)
         print(json.dumps({k: v for k, v in result.items() if k != "cycles"}), flush=True)
     passed = all(r["passed"] for r in results)
-    summary = dict(stage="stop_restart_assay", status="completed", error=None, passed=passed,
+    summary = dict(stage="stop_restart_assay", direction=args.direction, status="completed", error=None, passed=passed,
         control_passed=all(r["control_passed"] for r in results), periods=results,
         elapsed_seconds=time.perf_counter()-started,
         limitations="Artificial pacing, normalized body; late settling windows, not biological stopping latency",

@@ -86,15 +86,16 @@ def main():
     parser.add_argument("--alternation-iterations", type=positive_int, default=100000)
     parser.add_argument("--assess-locomotion", action="store_true", help="Diagnose passed wave checkpoints without training")
     parser.add_argument("--stop-restart", action="store_true", help="Test continuous go/stop/restart with frozen wave checkpoints")
+    parser.add_argument("--reverse", action="store_true", help="Fit reverse waves with forward rehearsal, then assess both directions")
     parser.add_argument("--increase-amplitude", type=float, help="Resume passed waves, fit a slightly larger target, then assess locomotion")
     resume = parser.add_mutually_exclusive_group()
     resume.add_argument("--resume-run", type=Path, help="Read passed source checkpoints from this run")
     resume.add_argument("--resume-latest", action="store_true", help="Select latest passed source run under output-dir for the requested mode")
     args = parser.parse_args()
-    if (args.assess_locomotion or args.stop_restart or args.increase_amplitude is not None) and not (args.resume_run or args.resume_latest):
+    if (args.assess_locomotion or args.stop_restart or args.reverse or args.increase_amplitude is not None) and not (args.resume_run or args.resume_latest):
         parser.error("Assessment or amplitude continuation requires --resume-latest or --resume-run")
-    if sum((args.assess_locomotion, args.stop_restart, args.increase_amplitude is not None)) > 1:
-        parser.error("Choose one of locomotion assessment, stop/restart, or amplitude continuation")
+    if sum((args.assess_locomotion, args.stop_restart, args.reverse, args.increase_amplitude is not None)) > 1:
+        parser.error("Choose one of locomotion assessment, stop/restart, reverse fitting, or amplitude continuation")
     if args.increase_amplitude is not None and not (0 < args.increase_amplitude <= .1):
         parser.error("Amplitude must be finite and in (0, 0.1]")
     if not sys.platform.startswith("linux") or not hasattr(os, "sched_getaffinity"):
@@ -117,7 +118,7 @@ def main():
         parser.error("Results must stay outside Git")
     seeds = list(range(args.seed_start, args.seed_start + args.workers))
     resume_root, initial_actors = None, {}
-    source_stage = "wave" if args.assess_locomotion or args.stop_restart or args.increase_amplitude is not None else "alternation"
+    source_stage = "wave" if args.assess_locomotion or args.stop_restart or args.reverse or args.increase_amplitude is not None else "alternation"
     try:
         if args.resume_run:
             resume_root = args.resume_run.expanduser().resolve()
@@ -132,7 +133,7 @@ def main():
             old_amplitude = source_manifest.get("amplitude", .04)
             if not old_amplitude < args.increase_amplitude <= old_amplitude * 1.3 + 1e-8:
                 parser.error(f"Seed {seed}: increase amplitude from {old_amplitude} by at most 30% per stage")
-    prefix = "stop-restart-" if args.stop_restart else "locomotion-" if args.assess_locomotion else "wave-" if initial_actors else "motor-"
+    prefix = "reverse-" if args.reverse else "stop-restart-" if args.stop_restart else "locomotion-" if args.assess_locomotion else "wave-" if initial_actors else "motor-"
     root = output_root / (prefix + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
     root.mkdir(parents=True, exist_ok=False)
     deadline = time.perf_counter() + args.minutes * 60
@@ -149,19 +150,23 @@ def main():
     with ExitStack() as files:
         def launch(job, stage):
             remaining = max(.01, (deadline - time.perf_counter()) / 60.)
-            if stage in ("locomotion", "baseline_locomotion", "stop_restart"):
+            if stage in ("locomotion", "baseline_locomotion", "stop_restart", "forward_retention", "reverse_locomotion"):
                 checkpoint_path = (job["output"] / "wave/actor_best.npz"
                     if args.increase_amplitude is not None and stage == "locomotion" else initial_actors[job["seed"]])
-                script = "assess_stop_restart.py" if stage == "stop_restart" else "assess_locomotion.py"
+                if stage in ("forward_retention", "reverse_locomotion"):
+                    checkpoint_path = job["output"] / "reverse/actor_best.npz"
+                script = "assess_stop_restart.py" if stage in ("stop_restart", "forward_retention", "reverse_locomotion") else "assess_locomotion.py"
                 command = [sys.executable, "-u", str(repo / "scripts" / script),
                     "--seed", str(job["seed"]), "--initial-actor", str(checkpoint_path),
                     "--output-dir", str(job["output"] / stage)]
-            elif stage == "wave":
+                if stage == "reverse_locomotion":
+                    command.extend(["--direction", "reverse"])
+            elif stage in ("wave", "reverse"):
                 command = [sys.executable, "-u", str(repo / "scripts/train_motor_alternation.py"),
-                    "--stage", "wave", "--seed", str(job["seed"]), "--minutes", str(remaining),
+                    "--stage", stage, "--seed", str(job["seed"]), "--minutes", str(max(.01, remaining - 1) if stage == "reverse" else remaining),
                     "--iterations", str(args.alternation_iterations),
                     "--initial-actor", str(initial_actors[job["seed"]]),
-                    "--output-dir", str(job["output"] / "wave")]
+                    "--output-dir", str(job["output"] / stage)]
                 if args.increase_amplitude is not None:
                     command.extend(["--amplitude", str(args.increase_amplitude)])
             else:
@@ -183,6 +188,7 @@ def main():
                 output.mkdir()
                 job = dict(seed=seed, cpus=cpus, output=output, done=False, stages={})
                 launch(job, "baseline_locomotion" if args.increase_amplitude is not None else
+                    "reverse" if args.reverse else
                     "stop_restart" if args.stop_restart else
                     "locomotion" if args.assess_locomotion else "wave" if initial_actors else "bend")
                 jobs.append(job)
@@ -208,6 +214,12 @@ def main():
                         elif (job["stage"] == "wave" and args.increase_amplitude is not None
                                 and stage_passed(job["stages"]["wave"]) and not stopped):
                             launch(job, "locomotion")
+                        elif (job["stage"] == "reverse" and result.get("status") == "completed"
+                                and result.get("error") is None and process.returncode in (0, 2) and not stopped):
+                            # Diagnose the saved candidate even when its imitation gate fails.
+                            launch(job, "forward_retention")
+                        elif job["stage"] == "forward_retention" and not stopped:
+                            launch(job, "reverse_locomotion")
                         else:
                             job["done"] = True
                         continue
@@ -232,8 +244,11 @@ def main():
                     job["process"].wait()
     summary = dict(requested_minutes=args.minutes, stopped=stopped, resume_run=str(resume_root) if resume_root else None,
         workers=[dict(seed=j["seed"], cpus=j["cpus"], stages=j["stages"]) for j in jobs])
-    final_stage = "stop_restart" if args.stop_restart else "locomotion" if args.assess_locomotion or args.increase_amplitude is not None else "wave" if initial_actors else "alternation"
+    final_stage = "reverse_locomotion" if args.reverse else "stop_restart" if args.stop_restart else "locomotion" if args.assess_locomotion or args.increase_amplitude is not None else "wave" if initial_actors else "alternation"
     passed = all(stage_passed(j["stages"].get(final_stage, {})) for j in jobs)
+    if args.reverse:
+        passed = passed and all(stage_passed(j["stages"].get(stage, {}))
+            for j in jobs for stage in ("reverse", "forward_retention"))
     (root / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     for worker in summary["workers"]:
         print(json.dumps(worker), flush=True)

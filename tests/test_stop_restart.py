@@ -60,3 +60,12 @@ def test_stop_restart_keeps_progress_floor_and_timestep_controls():
     different = {k: v | dict(mean_forward_body_lengths=v["mean_forward_body_lengths"] * 3)
                  for k, v in good.items()}
     assert not assess_stop_restart(different, good, control(good))["passed"]
+
+
+def test_reverse_recovery_uses_signed_progress_and_requires_reverse_direction():
+    good = reports()
+    reverse = {k: v | dict(mean_forward_body_lengths=-v["mean_forward_body_lengths"],
+        forward_per_cycle=[-x for x in v["forward_per_cycle"]]) for k, v in good.items()}
+    assert assess_stop_restart(reverse, reverse, control(reverse), direction="reverse")["passed"]
+    assert not assess_stop_restart(reverse, reverse, control(reverse))["passed"]
+    assert not assess_stop_restart(good, good, control(good), direction="reverse")["passed"]

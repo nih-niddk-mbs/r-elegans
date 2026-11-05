@@ -531,6 +531,43 @@ and recovery from the stronger overall `passed` gate, which also retains
 the progress floor. Seed 2 may still miss that floor. A failed gate preserves
 all source checkpoints and does not automatically launch another stage.
 
+The completed mbslnx2 stop/restart assay subsequently passed `control_passed`
+for all four seeds at all three rates, without training. Residual shape speed
+was <0.024% of its moving value; restarted progress recovered within 0.1%.
+Seeds 0/1/3 passed overall readiness. Seed 2 retained the same slow-rate
+progress-floor miss, independently of successful stopping and restarting.
+
+For the next supervised stage, `--reverse` continues the forward-wave
+checkpoints into a shared forward/reverse policy. A fixed artificial binary
+direction context adds reproducible +/-0.05 currents to NMJ-projecting
+neurons in reverse mode; forward mode retains the previous scalar input.
+This is an experimental interface, not an identified biological command
+pathway. Reverse targets propagate causally from posterior to anterior at
+the source checkpoint's amplitude/delay. All 302 neurons evolve, only neural
+parameters learn, and NMJ/muscle parameters remain fixed. Equal-weight
+forward rehearsal matches the frozen source actor, including stop/hold
+commands. Validation changes timing and command levels and checks both
+reverse wave propagation and forward retention.
+
+```bash
+nohup python -u scripts/run_motor_curriculum.py --reverse --minutes 180 \
+  --resume-run /home/carsonc/r-elegans-results/wave-20261105T214835887935Z \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-reverse.log 2>&1 < /dev/null &
+```
+
+Four independent seeds use four CPU cores each. About 179 minutes are
+available for fitting, leaving a minute for final assays; compilation and
+shutdown can extend elapsed time slightly. Checkpoints are saved every 100
+updates. Fresh `reverse-*` folders preserve the original wave checkpoints.
+Each finite completed candidate, including one that misses its imitation
+gate, receives forward and reverse go/stop/restart diagnostics with timestep
+and isotropic controls. Overall success requires the fit, forward retention,
+and reverse propulsion/stop/restart gates. Reverse progress must be negative
+along the body axis and meet the unchanged 0.001 magnitude floor. These
+assays hold direction fixed; switching between directions during motion is
+a later test. No RL is launched.
+
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
 graded-potential cells and engineered chemical sensors. Anatomical counts

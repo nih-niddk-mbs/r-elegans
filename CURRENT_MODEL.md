@@ -242,6 +242,43 @@ Overall `passed` remains false because that checkpoint's forward progress
 is below 0.001. This checks the new assay against a real fitted brain/body
 trajectory; it is not a result for the remote 0.07 cohort.
 
+The remote 0.07 stop/restart ensemble subsequently passed control checks for
+all four seeds at all three pacing periods. Maximum residual shape speed was
+0.024% of the moving value; restart progress differed by <0.1%. Overall gates
+passed for seeds 0/1/3. Seed 2 missed only the unchanged slow-rate propulsion
+floor, at approximately 0.000995 body lengths/cycle. These results required
+no new training and do not establish immediate stopping latency.
+
+### Reverse-wave fitting with forward rehearsal
+
+`train_motor_alternation.py --stage reverse` loads the forward checkpoint's
+amplitude, stimulation gain and propagation delay. Its reverse muscle target
+delays the scalar command by distance from the posterior, yielding negative
+front/rear lags. The existing positive-lag gates are sign-aware for this mode.
+A new fixed direction context supplies +/-0.05 normalized current to
+NMJ-projecting neurons (deterministic random signs, seed 719). Forward mode
+uses the old input exactly; reverse mode adds the context, including during
+stops. It is an artificial research interface, not a biological command model
+and not a target phase/delay supplied to the recurrent network.
+
+The supervised loss equally weights reverse target matching and rehearsal of
+the frozen source actor's forward outputs. Both use sine and stop/hold command
+sequences. All recurrent neural parameters can learn; topology and NMJ/muscle
+parameters stay fixed. Longer held-out sequences check reverse wave lags and
+forward trajectory retention. The best training-loss checkpoint, latest actor,
+optimizer and final actor remain outside Git.
+
+`run_motor_curriculum.py --reverse --minutes 180 --resume-run <wave-cohort>`
+fits four seeds for approximately 179 minutes, then assesses forward and
+reverse go/stop/restart independently. Both timesteps, isotropic controls,
+actual centroid progress and existing magnitude/straightness/stop/recovery
+gates apply. All fit and behavioral gates are required for overall success.
+Completed finite fits receive diagnostics even when imitation fails, without
+automatic promotion. The original forward checkpoints are preserved.
+This stage is implemented and tested; successful reverse learning in the
+remote ensemble is not yet established. Direction switching within a single
+trajectory is not tested yet. No RL is introduced.
+
 ### Anatomical muscle ordering (projection convention)
 
 The full-network dish and supervised motor body now explicitly map anterior

@@ -16,6 +16,7 @@ from r_elegans.rl.motor_curriculum import (
     motor_stimulation_vector, commanded_bend_target, commanded_muscle_sequence,
     alternating_metrics, alternating_passes,
     traveling_bend_target, traveling_metrics, traveling_passes,
+    reverse_context_vector, directional_muscle_sequence,
 )
 
 
@@ -129,3 +130,56 @@ def test_wave_targets_are_causal_and_resume_matches_seed_and_gate(tmp_path):
     (run / "summary.json").write_text(json.dumps(summary))
     with pytest.raises(ValueError):
         resume_checkpoints(run, [3])
+
+
+def test_reverse_target_is_causal_and_requires_opposite_propagation():
+    from scripts.train_motor_alternation import command_sequences
+    commands = command_sequences(384, held_out=True)
+    metrics = jax.jit(traveling_metrics)
+    for command in commands:
+        reverse = traveling_bend_target(command, reverse=True)
+        perfect = metrics(reverse, reverse)
+        assert traveling_passes(perfect, reverse=True)
+        assert not traveling_passes(perfect)
+        assert float(perfect["target_muscle_lag"]) <= -.08
+        forward = traveling_bend_target(command)
+        assert not traveling_passes(metrics(forward, reverse), reverse=True)
+    step = jnp.zeros(192).at[90:].set(1.)
+    np.testing.assert_allclose(traveling_bend_target(step, reverse=True)[:90], .4, atol=1e-7)
+
+
+def test_direction_selector_preserves_forward_input_and_trains_neural_fields_only():
+    model = load_builtin_model()
+    actor = init_full_network_actor(model, jax.random.PRNGKey(0))
+    interface = make_full_network_actor_interface(model, train_group="neural", input_mode="current")
+    stimulation = motor_stimulation_vector(model)
+    context = reverse_context_vector(model)
+    command = jnp.sin(jnp.arange(12) * .1)
+    original = commanded_muscle_sequence(actor, interface, command, stimulation)
+    forward = directional_muscle_sequence(actor, interface, command, stimulation, context=context)
+    np.testing.assert_array_equal(forward, original)
+    backward = directional_muscle_sequence(actor, interface, command, stimulation, context=context, reverse=True)
+    assert np.linalg.norm(backward - forward) > 0
+    outside = np.asarray(model.neuromuscular_params.synapse_weights.sum(axis=0)) == 0
+    np.testing.assert_array_equal(np.asarray(context)[outside], 0)
+    def loss(a):
+        return jnp.mean(directional_muscle_sequence(a, interface, command, stimulation, context=context, reverse=True)**2)
+    gradient = jax.jit(jax.grad(loss))(actor)
+    assert np.linalg.norm(gradient.neural.leak_reversal) > 0
+    for field in ("raw_nmj", "unknown_polarity", "muscle_threshold", "raw_muscle_slope", "sensory_weights"):
+        np.testing.assert_array_equal(getattr(gradient, field), 0)
+    np.testing.assert_array_equal(gradient.neural.chemical_mask, 0)
+
+
+def test_reversing_target_wave_reverses_actual_body_translation():
+    from r_elegans.rl.motor_curriculum import muscle_sequence_body
+    # After settling, measure complete equal-phase cycles rather than a head tip.
+    steps_per_cycle = 120
+    commands = .85 * jnp.sin(2*jnp.pi*jnp.arange(steps_per_cycle * 8)/steps_per_cycle)
+    displacement = []
+    for reverse in (False, True):
+        muscles = traveling_bend_target(commands, amplitude=.07, reverse=reverse)
+        body = jax.jit(muscle_sequence_body)(muscles)
+        displacement.append(float(body.position[-1, 0] - body.position[4*steps_per_cycle-1, 0]))
+    assert displacement[0] > .001
+    assert displacement[1] < -.001

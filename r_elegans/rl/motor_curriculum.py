@@ -128,18 +128,21 @@ def alternating_passes(metrics):
             and metrics["bend_correlation"] > 0.9 and metrics["direction_agreement"] > 0.95)
 
 
-def traveling_bend_target(commands, *, delay=0.4, dt=0.02, amplitude=0.04):
-    """A causal anterior-to-posterior delayed command, for supervision only.
+def traveling_bend_target(commands, *, delay=0.4, dt=0.02, amplitude=0.04, reverse=False):
+    """Causal delayed command, anterior-to-posterior or reverse, for targets only.
 
     No delayed commands or target phases are injected into neurons. The brain
-    receives the SAME scalar stimulation as in alternation, and must learn the
-    spatial timing through its own dynamics. This is an externally paced wave.
+    receives scalar pacing and must learn spatial timing through its own
+    dynamics. The reverse curriculum also supplies a fixed direction context.
+    This is an externally paced wave.
     """
     if delay <= 0 or dt <= 0:
         raise ValueError("Positive propagation delay and dt required")
     times = jnp.arange(commands.shape[0]) * dt
-    delayed = jax.vmap(lambda p: jnp.interp(times - delay * p, times, commands, left=0.0))(
-        muscle_longitudinal_positions()).T
+    positions = muscle_longitudinal_positions()
+    if reverse:
+        positions = 1.0 - positions
+    delayed = jax.vmap(lambda p: jnp.interp(times - delay * p, times, commands, left=0.0))(positions).T
     return 0.4 + delayed * (bend_target(2, amplitude=amplitude)[0] - 0.4)
 
 
@@ -183,10 +186,33 @@ def traveling_metrics(predicted, target):
     return metrics
 
 
-def traveling_passes(metrics):
+def traveling_passes(metrics, *, reverse=False):
     # Float32 lag ticks (20 ms) must not fail exactly on a gate boundary.
     eps = 1e-6
-    return (alternating_passes(metrics) and metrics["muscle_lag"] + eps >= .04
-            and metrics["body_lag"] + eps >= .04
+    sign = -1 if reverse else 1
+    return (alternating_passes(metrics) and sign * metrics["muscle_lag"] + eps >= .04
+            and sign * metrics["body_lag"] + eps >= .04
             and abs(metrics["muscle_lag"] - metrics["target_muscle_lag"]) <= .06 + eps
             and abs(metrics["body_lag"] - metrics["target_body_lag"]) <= .06 + eps)
+
+
+def reverse_context_vector(model, gain=.05):
+    """Fixed artificial direction selector, not a biological command circuit.
+
+    A reproducible random +/- current on NMJ-projecting neurons distinguishes
+    reverse mode. Forward mode adds zero current and preserves the old input.
+    Neither spatial delays nor target muscle values enter the brain.
+    """
+    projecting = model.neuromuscular_params.synapse_weights.sum(axis=0) > 0
+    signs = jnp.where(jax.random.bernoulli(jax.random.PRNGKey(719), shape=(302,)), 1., -1.)
+    return gain * projecting * signs
+
+
+def directional_muscle_sequence(actor, interface, commands, stimulation, *, context, reverse=False):
+    if not reverse:
+        return commanded_muscle_sequence(actor, interface, commands, stimulation)
+    def step(voltage, command):
+        current = command * stimulation + context
+        muscles, voltage = interface.deterministic_step(actor, voltage, current)
+        return voltage, muscles
+    return jax.lax.scan(step, interface.init_carry(actor), commands)[1]

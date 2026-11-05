@@ -31,9 +31,25 @@ joint-angle speed during the late stop window, 80–120% recovered progress,
 and the unchanged moving-window propulsion gates, timestep refinement and
 isotropic controls. Record `control_passed` separately from overall readiness
 so a borderline propulsion floor is not confused with inability to stop.
-This is a frozen diagnostic, not completed remote validation or added RL.
+The subsequent remote diagnostic passed stop/recovery for all four seeds;
+overall readiness remained passed for seeds 0/1/3, with seed 2 still below
+the slow-rate progress floor. No additional training was needed.
 If it fails, use the failed criterion to design the next supervised fit;
 do not discard the established forward-motion checkpoint.
+
+Next implemented fit: `run_motor_curriculum.py --reverse --minutes 180`.
+Use the 0.07 forward cohort explicitly. Teach a posterior-to-anterior target
+with a fixed artificial direction context, while rehearsing the original
+actor's forward outputs with equal loss weight. Keep the source amplitude,
+delay, pacing gain, full 302-neuron simulation and fixed NMJ/muscle transform.
+Validate reverse lags and forward imitation on longer unseen commands, then
+run go/stop/restart physics assays independently in each direction. Negative
+signed progress is required for reverse; the same absolute progress floor,
+straightness, stop/recovery and numerical controls remain. Overall success
+requires forward retention as well as reverse behavior. Save every outcome;
+an unsuccessful fit must not replace the original forward checkpoint.
+This is supervised motor construction, with held direction per assay; rapid
+direction switching and sensory-task RL remain later stages.
 
 ## Scientific objective
 

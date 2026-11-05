@@ -26,6 +26,7 @@ from r_elegans.rl.motor_curriculum import (
     motor_stimulation_vector, commanded_bend_target, commanded_muscle_sequence,
     alternating_metrics, alternating_passes, muscle_sequence_body,
     traveling_bend_target, traveling_metrics, traveling_passes,
+    reverse_context_vector, directional_muscle_sequence,
 )
 from r_elegans.rl import motor_curriculum, full_network_actor
 if __package__:
@@ -57,13 +58,13 @@ def main():
     parser.add_argument("--stimulation-gain", type=float, default=0.1)
     parser.add_argument("--minutes", type=float, help="Optional wall-clock training budget, with checkpoint on exit")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--stage", choices=("alternation", "wave"), default="alternation")
+    parser.add_argument("--stage", choices=("alternation", "wave", "reverse"), default="alternation")
     parser.add_argument("--propagation-delay", type=float, default=0.4)
     parser.add_argument("--amplitude", type=float, default=0.04, help="Synthetic muscle target amplitude; increase in small stages")
     args = parser.parse_args()
     if args.steps < 32 or args.iterations < 1:
         parser.error("At least 32 steps and one iteration required")
-    if args.stage == "wave" and (args.steps < 128 or not .2 <= args.propagation_delay <= .8):
+    if args.stage in ("wave", "reverse") and (args.steps < 128 or not .2 <= args.propagation_delay <= .8):
         parser.error("Wave fitting requires at least 128 steps and propagation delay in [0.2, 0.8] seconds")
     if not 0 < args.amplitude <= .1:
         parser.error("Amplitude must be in (0, 0.1]")
@@ -84,6 +85,21 @@ def main():
     signal.signal(signal.SIGTERM, request_stop)
     signal.signal(signal.SIGINT, request_stop)
     model = load_builtin_model()
+    reverse_stage = args.stage == "reverse"
+    context_gain = .05
+    if reverse_stage:
+        if not args.initial_actor:
+            parser.error("Reverse fitting requires a passed forward-wave checkpoint")
+        source = json.loads((args.initial_actor.parent / "manifest.json").read_text())
+        if (source.get("input_mode") != "current" or source.get("body_units") != "legacy_normalized"
+                or source.get("muscle_projection") != "anterior_to_head_at_last_segment"):
+            parser.error("Reverse fitting requires a matching current-input, head-aligned checkpoint")
+        args.amplitude = source["amplitude"]
+        args.stimulation_gain = source["stimulation_gain"]
+        args.propagation_delay = source["propagation_delay"]
+        if (not all(math.isfinite(v) and v > 0 for v in (args.amplitude, args.stimulation_gain, args.propagation_delay))
+                or args.amplitude > .1 or not .2 <= args.propagation_delay <= .8):
+            parser.error("Invalid source motor parameters")
     actor = init_full_network_actor(model, jax.random.PRNGKey(args.seed))
     if args.initial_actor:
         with np.load(args.initial_actor, allow_pickle=False) as data:
@@ -94,18 +110,30 @@ def main():
         actor = restored
     interface = make_full_network_actor_interface(model, train_group="neural", input_mode="current")
     stimulation = motor_stimulation_vector(model, args.stimulation_gain)
+    context = reverse_context_vector(model, context_gain)
     commands = command_sequences(args.steps)
-    target_fn = ((lambda cmd: traveling_bend_target(cmd, delay=args.propagation_delay, amplitude=args.amplitude))
-                 if args.stage == "wave" else (lambda cmd: commanded_bend_target(cmd, amplitude=args.amplitude)))
-    metric_fn = traveling_metrics if args.stage == "wave" else alternating_metrics
-    pass_fn = traveling_passes if args.stage == "wave" else alternating_passes
-    stage_name = "slow_traveling_bend" if args.stage == "wave" else "controlled_alternating_bends"
+    target_fn = ((lambda cmd: traveling_bend_target(cmd, delay=args.propagation_delay,
+                    amplitude=args.amplitude, reverse=reverse_stage))
+                 if args.stage in ("wave", "reverse") else (lambda cmd: commanded_bend_target(cmd, amplitude=args.amplitude)))
+    metric_fn = traveling_metrics if args.stage in ("wave", "reverse") else alternating_metrics
+    pass_fn = (lambda m: traveling_passes(m, reverse=reverse_stage)) if args.stage in ("wave", "reverse") else alternating_passes
+    stage_name = "controlled_reverse_wave" if reverse_stage else "slow_traveling_bend" if args.stage == "wave" else "controlled_alternating_bends"
     targets = jax.vmap(target_fn)(commands)
     def predict(a, cmd):
-        return commanded_muscle_sequence(a, interface, cmd, stimulation)
+        return directional_muscle_sequence(a, interface, cmd, stimulation,
+            context=context, reverse=reverse_stage)
+    # Rehearse the original forward policy on both smooth and stop/hold commands.
+    # Frozen teacher values appear only in the loss. All 302 neurons still run.
+    teacher = actor
+    forward_targets = jax.lax.stop_gradient(jax.vmap(lambda c:
+        commanded_muscle_sequence(teacher, interface, c, stimulation))(commands)) if reverse_stage else None
     def objective(a):
         muscles = jax.vmap(lambda cmd: predict(a, cmd))(commands)
-        return jnp.mean((muscles - targets) ** 2)
+        loss = jnp.mean((muscles - targets) ** 2)
+        if reverse_stage:
+            forward = jax.vmap(lambda c: commanded_muscle_sequence(a, interface, c, stimulation))(commands)
+            loss = .5 * (loss + jnp.mean((forward - forward_targets) ** 2))
+        return loss
     optimizer = optax.chain(optax.clip_by_global_norm(1.), optax.adam(args.learning_rate))
     opt_state = optimizer.init(actor)
     @jax.jit
@@ -125,7 +153,10 @@ def main():
     initial = validation(actor)
     save_actor(output / "actor_initial.npz", actor)
     save_json(output / "manifest.json", dict(stage=stage_name, actor_neurons=302,
-        propagation_delay=args.propagation_delay if args.stage == "wave" else None,
+        propagation_delay=args.propagation_delay if args.stage in ("wave", "reverse") else None,
+        reverse_context_gain=context_gain if reverse_stage else None,
+        reverse_context_scheme="fixed_random_NMJ_neurons_seed719_v1" if reverse_stage else None,
+        forward_rehearsal=reverse_stage,
         amplitude=args.amplitude,
         input_mode="current", command_interface="artificial_NMJ_projecting_neuron_stimulation",
         timestamp_utc=datetime.now(timezone.utc).isoformat(), train_group="neural", fixed_nmj=True,
@@ -158,6 +189,7 @@ def main():
                     print(f"iteration={iteration} muscle_mse={float(loss):.7f} elapsed_min={(time.perf_counter()-started)/60:.1f}", flush=True)
                     checkpoint(output / "latest.msgpack", actor, opt_state, jax.random.PRNGKey(args.seed), iteration)
                     save_actor(output / "actor_latest.npz", actor)
+                    save_actor(output / "actor_best.npz", best)
         if stop:
             status = "interrupted"
         if iteration == 0:
@@ -172,20 +204,32 @@ def main():
         save_actor(output / "actor_best.npz", best)
     final = validation(best)
     passed = all(pass_fn(m) for m in final)
+    forward_retention = None
+    if reverse_stage:
+        forward_metrics = jax.jit(lambda a: jax.vmap(alternating_metrics)(
+            jax.vmap(lambda c: commanded_muscle_sequence(a, interface, c, stimulation))(validation_commands),
+            jax.vmap(lambda c: commanded_muscle_sequence(teacher, interface, c, stimulation))(validation_commands)))(best)
+        if not finite_tree(forward_metrics):
+            raise RuntimeError("Nonfinite forward retention validation")
+        forward_retention = [{k: float(v[i]) for k, v in forward_metrics.items()}
+                             for i in range(len(validation_commands))]
+        passed = passed and all(alternating_passes(m) for m in forward_retention)
     muscles = jax.jit(jax.vmap(lambda c: predict(best, c)))(validation_commands)
     body = jax.vmap(muscle_sequence_body)(muscles)
     reference = jax.vmap(muscle_sequence_body)(validation_target)
     np.savez_compressed(output / "verification.npz", commands=np.asarray(validation_commands),
         stimulation=np.asarray(stimulation), predicted_muscles=np.asarray(muscles),
+        reverse_mode=reverse_stage, reverse_context=np.asarray(context) if reverse_stage else np.zeros(302),
         target_muscles=np.asarray(validation_target), joint_angles=np.asarray(body.joint_angles),
         target_joint_angles=np.asarray(reference.joint_angles), position=np.asarray(body.position),
         heading=np.asarray(body.heading), target_position=np.asarray(reference.position),
         target_heading=np.asarray(reference.heading))
     result = dict(stage=stage_name, status=status, error=error, iterations=iteration,
+        forward_retention=forward_retention,
         passed=passed, initial=initial, final=final, elapsed_seconds=time.perf_counter() - started,
         stop_reason="signal" if stop else "time_budget" if time.perf_counter() >= deadline else "iteration_cap",
-        next_stage=("locomotion validation" if args.stage == "wave" else "slow traveling wave") if passed else "stay on current motor stage",
-        limitations="Artificial neural stimulation; no autonomous oscillator or locomotion demonstrated")
+        next_stage=("forward retention and reverse stop/restart assays" if reverse_stage else "locomotion validation" if args.stage == "wave" else "slow traveling wave") if passed else "stay on current motor stage",
+        limitations="Artificial neural stimulation; imitation requires separate locomotion assays; no autonomous oscillator")
     save_json(output / "summary.json", result)
     print(json.dumps(result, indent=2), flush=True)
     return 0 if passed and status == "completed" else 2
