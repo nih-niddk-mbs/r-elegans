@@ -568,6 +568,49 @@ along the body axis and meet the unchanged 0.001 magnitude floor. These
 assays hold direction fixed; switching between directions during motion is
 a later test. No RL is launched.
 
+The completed three-hour reverse ensemble learned backward translation in all
+four seeds and passed stop/restart control in both directions at all pacing
+rates. Reverse readiness passed all rates for seeds 2/3, and forward readiness
+only for seed 3. Reverse imitation passed seeds 0/2; seed 1 failed a changed
+hold-command sequence and seed 3 exceeded wave-lag tolerance. No seed passed
+every gate. Training loss alone did not protect forward propulsion.
+
+Continue these models for eight hours with the refinement mode:
+
+```bash
+nohup python -u scripts/run_motor_curriculum.py --refine-reverse \
+  --resume-latest --minutes 480 \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-reverse-refinement.log 2>&1 < /dev/null &
+```
+
+This mode selects the latest **completed reverse cohort**, including candidates
+that missed imitation/readiness gates, provided all seeds completed both motor
+control assays successfully. It is continuation for learning, not promotion.
+The original forward reference must still exist and match its saved checksum.
+It is recovered from each candidate's provenance; the weaker continued forward
+policy is never substituted as teacher. `--resume-run` selects a cohort
+explicitly. Confirm the chosen directory in the startup log.
+
+`scripts/refine_reverse.py` trains eight command sequences with four pacing
+periods, varied phases/levels and stop/hold intervals. Training horizons are
+7.68 seconds and tuning horizons 15.36 seconds, versus 3.84/7.68 in the first
+reverse run. Random minibatches contain two cases. Forward relative muscle
+error has weight 4 and reverse error weight 1; the learning rate is 0.0003.
+Every 500 updates, both directions undergo body/muscle wave validation on
+eight different sequences. The best checkpoint is chosen by failed validation
+case count, then worst normalized error, then mean error, rather than training
+loss. Validation data used for selection are tuning data, not an independent
+test set. All scientific gates and motor-input definitions remain unchanged.
+
+Checkpoints save every 100 updates. Approximately 479 minutes are reserved
+for fitting, followed by independent long forward and reverse physics assays
+including stop/restart, timestep refinement and isotropic controls. The fresh
+`reverse-*` folder preserves both earlier cohorts. The iteration cap is one
+million, so the wall-clock budget normally governs; increase `--minutes` for
+a longer run. This implementation is smoke-tested, not a completed eight-hour
+experiment or evidence of improved behavioral success yet.
+
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
 graded-potential cells and engineered chemical sensors. Anatomical counts

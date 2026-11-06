@@ -279,6 +279,44 @@ This stage is implemented and tested; successful reverse learning in the
 remote ensemble is not yet established. Direction switching within a single
 trajectory is not tested yet. No RL is introduced.
 
+### Eight-hour bidirectional refinement
+
+The three-hour reverse ensemble completed without errors: all four seeds
+showed actual reverse translation and passed stop/restart control in both
+directions at every rate. Reverse imitation passed seeds 0/2. Seed 1 failed
+the changed hold-command sequence; seed 3 overshot target wave timing.
+Reverse propulsion readiness passed seeds 2/3, while forward readiness passed
+only seed 3. Seeds 0–2 retained forward translation but fell below its progress
+floor. No model met every criterion. The original forward checkpoints remain
+available and unchanged.
+
+`scripts/refine_reverse.py` addresses these failures with longer, broader
+commands and stronger original-forward retention. It resumes the learned
+reverse candidate but loads the original forward teacher from its provenance,
+verifying its checksum and input/body conventions. Fixed NMJ/muscle fields
+must still equal their original initialization. All 302 recurrent neurons run;
+only neural parameters learn. The amplitude, delay and direction context stay
+unchanged. Normalized forward muscle error has weight 4 versus 1 for reverse,
+with learning rate 0.0003 and fresh optimizer.
+
+Eight 384-step training cases cover four pacing rates and varied phases,
+levels and stops; random minibatches contain two cases. Eight separate
+768-step tuning cases use different rates and command sequences. Every 500
+updates, forward and reverse wave/body validation chooses the best checkpoint
+by failed-case count, worst normalized criterion error, then mean error.
+Training loss does not select the best actor. Initial, best, latest and final
+actors, optimizer/RNG state, validation history and command banks stay outside
+Git. Existing wave and propulsion thresholds are unchanged.
+
+`run_motor_curriculum.py --refine-reverse --resume-latest --minutes 480`
+selects a completed reverse cohort with successful motor control in both
+directions, even if stronger imitation/readiness gates were missed. This is
+permission to refine, not a successful stage declaration. The supervisor
+checks the original forward reference before launching workers. After roughly
+479 minutes of fitting, both independent long physics assays still run and
+must pass for overall success. The larger run is prepared and smoke-tested;
+its outcome is not yet known. Direction switching and RL remain later stages.
+
 ### Anatomical muscle ordering (projection convention)
 
 The full-network dish and supervised motor body now explicitly map anterior

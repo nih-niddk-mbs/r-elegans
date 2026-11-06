@@ -51,6 +51,24 @@ an unsuccessful fit must not replace the original forward checkpoint.
 This is supervised motor construction, with held direction per assay; rapid
 direction switching and sensory-task RL remain later stages.
 
+Three-hour outcome: reverse translation and stop/restart control in both
+directions passed for all four seeds, but no seed passed every imitation and
+propulsion gate. Forward progress weakened in seeds 0–2; seed 1 failed changed
+hold commands and seed 3 missed reverse wave timing. Preserve these learned
+models and the original forward references.
+
+The next implemented protocol, `--refine-reverse --resume-latest --minutes
+480`, resumes the reverse candidates with the **original** forward actor as
+teacher (checksum required). Use eight longer training sequences at multiple
+pacing rates and eight different tuning sequences at twice the horizon.
+Give forward relative muscle error weight 4 and reverse error weight 1;
+use a smaller learning rate of 0.0003. Select checkpoints jointly on forward
+and reverse body/muscle validation every 500 updates, prioritizing failed
+case count and worst error. Do not call tuning data used for selection an
+independent test. After fitting, run the existing long physical go/stop/go
+assays in both directions. Keep all previous thresholds, fixed NMJ/muscle
+mapping and artificial direction context. No automatic turning or RL follows.
+
 ## Scientific objective
 
 Locomotion is now assessed separately from wave imitation: frozen neural
