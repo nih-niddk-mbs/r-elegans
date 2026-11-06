@@ -15,6 +15,25 @@ training infrastructure with smoke-test validation, not a completed P00–P13
 curriculum or evidence of real-animal behavioral agreement. Known NMJ signs
 and anatomical edge masks remain constraints; unknown NMJ signs can learn.
 
+## Working hypothesis: motor curriculum before task RL
+
+[H1 in the laboratory notebook](LAB_NOTEBOOK.md#h1--build-the-motor-repertoire-before-task-rl)
+records the user's hypothesis: establish and retain an effective motor
+repertoire through small motor-learning stages (currently supervised) before
+downstream sensory-task RL.
+The literature terms are **curriculum learning** and **motor-skill pretraining**;
+learned skill priors and hierarchical RL are related potential extensions.
+The hypothesis is specific to this project, not a universal prerequisite for RL.
+Its predicted benefit is more effective exploration and better task learning
+per total compute/sample budget, counting pretraining costs.
+
+Current motion remains externally paced. Reliable skill retention, endogenous
+rhythm and sensory-guided choice are separate milestones. Neither a hierarchy
+nor a learned probabilistic skill prior has been implemented. A controlled
+comparison of incremental pretraining, abrupt pretraining and no pretraining
+is proposed in H1; it has not been run. Preserve physical progress and old-skill
+gates at each step rather than assuming imitation scores establish readiness.
+
 ## Current motor milestone (updated 2026-11-06)
 
 For the chronological protocol/outcome record and replication checklist, see

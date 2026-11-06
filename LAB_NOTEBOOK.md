@@ -37,6 +37,69 @@ Storage roots:
 - New server archives: `/home/carsonc/r-elegans-archives`, separate from live
   results. Same-disk copies are not off-machine backups.
 
+## H1 — build the motor repertoire before task RL
+
+Recorded explicitly 2026-11-06 from the user's working hypothesis, following
+E015–E016. **Status: hypothesis, not an established result of this project.**
+
+For this embodied connectome model, establish and retain useful motor policies
+through small, progressively harder steps before asking task RL to discover
+sensory-guided behavior. A viable, accessible motor repertoire should make
+exploration more productive: task learning can refine or coordinate movements
+that already affect the environment rather than also discovering locomotion
+from ineffective muscle outputs. The user's phrase "sketch out the policy
+space" refers to constructing that repertoire/initialization, not enumerating
+the complete mathematical policy space or fixing the final solution.
+
+**Literature connections:**
+
+- **Curriculum learning:** sequence training from easier to harder problems,
+  related to behavioral shaping in animal learning.
+  Bengio et al. (2009), [Curriculum Learning](https://ronan.collobert.com/pub/2009_curriculum_icml.pdf).
+- **Motor-skill pretraining:** learn useful behaviors before downstream tasks.
+  Florensa, Duan and Abbeel (2017), [Stochastic Neural Networks for Hierarchical
+  Reinforcement Learning](https://arxiv.org/abs/1704.03012).
+- **Learned skill priors:** use previous behavioral experience to guide later
+  exploration. Pertsch, Lee and Lim, CoRL 2020 / PMLR 2021, [Accelerating
+  Reinforcement Learning with Learned Skill Priors](https://proceedings.mlr.press/v155/pertsch21a.html).
+  Our current controller has no learned probabilistic skill-prior distribution;
+  this is a related direction, not an algorithm already implemented here.
+- **Hierarchical RL/options:** a future task policy could select temporally
+  extended skills. Sutton, Precup and Singh (1999), [Between MDPs and semi-MDPs](https://people.cs.umass.edu/~barto/courses/cs687/Sutton-Precup-Singh-AIJ99.pdf).
+  We have no implemented high-level skill selector or formal options with
+  initiation/termination rules. Direct fine-tuning of the same network is
+  another possible route; architecture has not been decided.
+
+The most accurate current description is **curriculum learning with motor-skill
+pretraining**. This is not a claim that all successful RL requires pretraining,
+nor that motor pretraining alone will resolve interference, objective mismatch,
+autonomous rhythm or sensory encoding.
+
+**Project observations motivating H1:** direct food-task training produced no
+success in E004; staged supervision subsequently produced driven motion and
+stop/restart. These experiments were not a controlled comparison, so they do
+not establish that a curriculum causes better downstream RL performance.
+E014–E015 also show that new skills can interfere and imitation can fail to
+preserve propulsion. Retention must be tested at each step, rather than
+assuming progress is monotonic.
+
+**Proposed sequence, not yet tested:**
+retain forward/reverse/stop control; add turning in small increments; then
+progressively replace external rhythmic pacing with internally generated
+motor activity; finally introduce sensory tasks using the established motor
+repertoire. Commandable internally generated movement is distinct from
+autonomous action selection. Present results remain externally driven.
+
+**Falsifiable test, planned only:** compare task RL from random initialization,
+abrupt full-skill pretraining, and incremental motor pretraining, with the same
+network, physical model, sensory information and task distribution. Hold total
+compute/environment interaction budgets comparable and charge pretraining to
+its budget. Use multiple independent seeds, separate tuning/test tasks, RL
+success versus samples/time, and motor retention/robustness after task learning.
+If incremental pretraining gives no reliable advantage, or restricts task
+performance, revise H1 rather than treating it as a prerequisite by definition.
+No such downstream comparison has been run.
+
 ## Fixed scope and acceptance criteria
 
 The active motor model simulates all 302 generic graded-potential neurons,
@@ -326,6 +389,19 @@ separate invocation records, and corruption detection. Agent instructions in
 **Status:** implementation/testing recorded in the accompanying commit; remote
 archive creation and off-machine copying are still pending user execution.
 This infrastructure does not change the learning objective or claim a new fit.
+
+### E017 — 2026-11-06: state H1 and connect it to the literature
+
+**User proposal:** RL may become tractable when a useful policy repertoire is
+established first, in small steps. **Action:** record H1 above with its scope,
+literature links, predicted benefit, present evidence and a falsifiable future
+comparison. The broad name is curriculum learning; motor-skill pretraining
+describes the current preparation. Learned skill priors and hierarchical RL
+are related approaches with additional machinery not currently implemented.
+**Decision:** preserve this as the organizing hypothesis, requiring physical
+behavior and old-skill retention checks at each stage. Distinguish driven
+control, endogenous rhythm and sensory-driven task choice. **Outcome/status:**
+documentation and literature review only; no new learning run or proof of H1.
 
 ## Replication and recordkeeping procedure
 
