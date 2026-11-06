@@ -104,6 +104,11 @@ with `archive_motor_run.py --latest-under <results> --pattern 'steering-*'
 of the notebook. These controllers are not a calibrated biological turning
 range or a runtime skill-switching implementation.
 
+The subsequent server run reports supervisor exit code 0 (E020), indicating
+all configured steering workers passed. Only a truncated result tail has been
+received; full per-seed summaries and remote checkpoint verification remain
+pending. Head sweeps are the next standalone skill target.
+
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) is the chronological experiment record,
 including hypotheses, methods, negative results, decisions, code/artifact
 lineage and explicit evidence gaps. Small [reported-result summaries](experiments/records)

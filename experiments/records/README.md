@@ -18,6 +18,10 @@ It does not claim a completed remote steering ensemble. The evidence index
 lists the reported server transcripts; locally verified trial files remain in
 their separately checksummed scientific archive.
 
+E020 is truncated reported server stdout. Its aggregate supervisor exit code
+is available, but the visible condition's seed and pacing rate are explicitly
+null. Do not infer missing per-seed statistics from that excerpt.
+
 For full reconstruction, archive the remote run and recursive dependencies,
 then retain the archive on separate storage. See the notebook for the exact
 procedure, historical gaps and limitations on exact numerical replication.

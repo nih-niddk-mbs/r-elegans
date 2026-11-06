@@ -59,8 +59,10 @@ there is no shared-policy rehearsal loss. Tuning uses a real turning/progress
 probe, and final tests require body-axis and centroid-path turning to agree
 through all three pacing rates and numerical controls. The original models
 are not overwritten. H1.1 permits separate policies for the two signs.
-See E019 and [SKILL_REPERTOIRE.md](SKILL_REPERTOIRE.md) for evidence/status;
-the mbslnx2 ensemble is prepared, not independently observed running.
+See E019/E020 and [SKILL_REPERTOIRE.md](SKILL_REPERTOIRE.md) for evidence/status.
+The server steering run subsequently reported supervisor exit code 0, indicating
+all configured workers passed. The provided stdout is a truncated tail;
+complete seed-level tables and checkpoint/source verification remain pending.
 
 Local E019 body-trajectory fits now pass for both signs, each from the same
 archived 0.06 forward parent with target amplitude raised to 0.07. Each ran

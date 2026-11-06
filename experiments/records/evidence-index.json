@@ -34,5 +34,11 @@
     "evidence_type": "user_reported_server_stdout",
     "evidence_sha256": "822a154f05c30a2160043252d0b670af225f159e2ecc7f31c3c30bd8e4dc50eb",
     "evidence_file": "notebook/evidence/E015/reported-server-results.txt"
+  },
+  {
+    "entry": "E020",
+    "evidence_type": "user_reported_truncated_server_stdout",
+    "evidence_sha256": "9adbb97af601a028a09ccfabdc628d3c064fae8f11c5cde6008a71b083e3c842",
+    "evidence_file": "notebook/evidence/E020/reported-server-results.txt"
   }
 ]

@@ -55,7 +55,7 @@ categories. No numeric biological parameter ranges are assumed without data.
 | MOT-05 | Pause/stop; requested duration | Low residual centroid path and body-angle speed after settling | Driven evidence in fixed-direction go/zero/go assays, E013–E015; MOV-07 |
 | MOT-06 | Start/restart a run; direction, duration | Recover progress without resetting brain/body between stop and restart | Driven evidence within a held direction, E013–E015; MOV-07 |
 | MOT-07 | Speed/intensity modulation; target level and ramp time | Measured displacement response versus input, including slowing/acceleration | Amplitude continuations show changes between fitted models; continuous speed control in one recurrent policy remains candidate; MOV-01/02/09, FOR-01/02 |
-| MOT-08 | Shallow steering; signed turn angle/rate, duration | Controlled heading change during progress, with limited unwanted drift | Driven local evidence: independent +/-0.006-bias policies pass three pacing rates and controls (E019), one parent model; broader ranges and server replication pending; MOV-03 |
+| MOT-08 | Shallow steering; signed turn angle/rate, duration | Controlled heading change during progress, with limited unwanted drift | Local +/-0.006 variants pass three rates/controls (E019); server supervisor reports cohort success (E020, truncated stdout); full seed tables/checkpoint verification and broader ranges pending; MOV-03 |
 | MOT-09 | Head sweep/local head bend; extent, rate, hold | Head excursion relative to trunk with controlled body displacement | Candidate; MOV-06 |
 | MOT-10 | Forward/backward transition; requested direction and switching time | Reverse signed progress with a valid continuous-state transition | Candidate; separate fixed-direction assays do not establish switching; MOV-02/07 |
 | MOT-11 | Omega-shaped deep turn; signed exit angle and completion time | High-curvature reorientation with valid head/body contact and exit heading | Extension: contact-qualified mechanics needed; MOV-04 |
@@ -71,8 +71,9 @@ Signed steering is defined in the planar world frame; do not impose equal
 dorsal/ventral performance or symmetric biological turn distributions.
 
 MOT-08 standalone fitting is implemented as `train_steering.py`; local positive
-and negative variants passed E019. Priority for further coverage: replicate
-these steering variants, then independently fit MOT-09 head sweeps, alongside
+and negative variants passed E019; E020 reports server cohort success, with
+complete remote records still to retrieve. Priority for further coverage:
+independently fit MOT-09 head sweeps, alongside
 independent forward/backward intensity variants.
 Do not first spend another run forcing all successful behaviors into one
 parameter set. This order is a proposed backlog; no new fit is launched here.

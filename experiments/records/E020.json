@@ -1,0 +1,74 @@
+{
+  "entry": "E020",
+  "evidence_type": "user_reported_truncated_server_stdout",
+  "evidence_sha256": "9adbb97af601a028a09ccfabdc628d3c064fae8f11c5cde6008a71b083e3c842",
+  "evidence_file": "notebook/evidence/E020/reported-server-results.txt",
+  "supervisor_exit_code": 0,
+  "interpretation": "Supervisor reports all configured workers passed; intended steering cohort has four workers. Full per-worker summaries absent from pasted tail.",
+  "visible_seed": null,
+  "visible_period_seconds": null,
+  "visible_stage_elapsed_seconds": 28782.01176020503,
+  "visible_stop_reason": "time_budget",
+  "visible_turn": {
+    "axis_turn": true,
+    "path_turn": true,
+    "consistent_turn": true,
+    "axis_path_agreement": true,
+    "minimum_axis_turn": 5e-05,
+    "minimum_path_turn": 5e-05
+  },
+  "above_numerical_controls": true,
+  "axis_turn_radians_per_cycle": -0.00014928044767104076,
+  "path_turn_radians_per_cycle": -0.00014118364197202027,
+  "visible_fine_metrics": {
+    "forward_per_cycle": [
+      0.0011674736552659173,
+      0.0011676545784287627,
+      0.0011677572615363607,
+      0.0011678022233549469,
+      0.0011678378912034473,
+      0.0011678591355326156
+    ],
+    "lateral_per_cycle": [
+      -9.029664275018549e-07,
+      -8.821946762704032e-07,
+      -8.730425607608196e-07,
+      -8.642951749073487e-07,
+      -8.572933363354613e-07,
+      -8.574928062296078e-07
+    ],
+    "mean_forward_body_lengths": 0.0011677307908870085,
+    "mean_lateral_body_lengths": -8.728808303342492e-07,
+    "std_forward_body_lengths": 1.3271095471989983e-07,
+    "direction_agreement": 1.0,
+    "max_shape_closure_relative": 0.000710826428618206,
+    "mean_abs_yaw_per_cycle": 0.00014928044767104076,
+    "total_displacement_body_lengths": [
+      0.007006380707025528,
+      9.008836059365422e-06
+    ],
+    "warmup_cycles": 4,
+    "measured_cycles": 6,
+    "mean_signed_yaw_per_cycle": -0.00014928044767104076,
+    "yaw_per_cycle": [
+      -0.00014651961133055336,
+      -0.0001484761829085024,
+      -0.0001494208741786851,
+      -0.00015021792213310015,
+      -0.00015047644510396418,
+      -0.00015057165037143938
+    ],
+    "mean_path_turn_per_cycle": -0.00014118364197202027,
+    "path_turn_per_cycle": [
+      -0.0001286105252802372,
+      -0.00014057231601327658,
+      -0.00014190166257321835,
+      -0.00014419981744140387,
+      -0.0001506339176557958
+    ],
+    "path_turn_defined": true
+  },
+  "visible_rest_forward_drift": 1.3942875569068675e-09,
+  "visible_isotropic_forward_drift": 7.408501663814731e-11,
+  "verification": "Partial reported stdout; exact source revision, cohort path, individual seed results and remote checkpoint hashes not independently verified."
+}

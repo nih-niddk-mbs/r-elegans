@@ -66,6 +66,13 @@ Detailed predeclaration, development failures and results are in E019. No
 autonomous rhythm, biological turning calibration, or inter-policy state
 handoff is claimed. The server run is not launched by the coding agent.
 
+Subsequent user report E020 shows `MOTOR_CURRICULUM_EXIT_CODE=0`: all configured
+steering workers passed according to the supervisor. The pasted tail includes
+a valid negative-turn condition but not the complete per-seed results. Preserve
+the aggregate reported success and retrieve full archives before reporting
+seed statistics or independent checkpoint verification. Head sweeps are the
+next proposed standalone coverage target, not a fit already run.
+
 For the chronological protocol/outcome record and replication checklist, see
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). The historical stages below describe
 progression, not a claim that all current models pass every stage.

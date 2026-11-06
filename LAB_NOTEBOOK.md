@@ -536,6 +536,34 @@ mbslnx2 workers, source 0.07 wave cohort, even seeds positive/odd negative bias,
 480-minute budget and complete final physical assays. Not launched remotely
 by the agent. Head sweeps remain a subsequent coverage target.
 
+### E020 — 2026-11-06: server steering success reported (partial transcript)
+
+**Parent/protocol:** intended E019 mbslnx2 standalone-steering cohort, four
+independent candidates with alternating bias sign and 480-minute budget.
+**Reported aggregate result:** `MOTOR_CURRICULUM_EXIT_CODE=0`. Under the
+published supervisor this means every configured worker's steering stage
+passed with completed status. This is reported cohort success, not independent
+inspection of each remote checkpoint or confirmation of the exact invocation.
+
+The pasted excerpt begins inside a JSON record. It does not identify the
+visible seed or pacing rate; these remain unknown rather than inferred from
+print order. Its visible fine-step condition shows forward progress
+0.0011677308 body lengths/cycle, signed body-axis turn -0.0001492804 rad/cycle
+and centroid-path turn -0.0001411836 rad/cycle. Axis/path direction, consistency,
+agreement and numerical controls are true. Rest forward drift is 1.39e-9 and
+isotropic forward drift 7.41e-11 body lengths/cycle. Visible stage elapsed
+time is 28,782.01 seconds with stop reason `time_budget`.
+
+**Evidence:** [E020 metadata](experiments/records/E020.json) and checksummed
+partial stdout preserved in the OneDrive evidence directory. Full per-seed
+summaries, selected iterations, actual run path, manifests and checkpoint
+hashes still require server archive retrieval. No ranges or seed statistics
+are reconstructed from this tail alone. **Interpretation:** standalone driven
+steering passes the server supervisor's configured gates, supporting skill
+coverage beyond the local pilot; no autonomy or skill-switching claim.
+**Next coverage target:** independent head sweeps (MOT-09), retaining all prior
+policies. This entry records results only and does not launch a new fit.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,
