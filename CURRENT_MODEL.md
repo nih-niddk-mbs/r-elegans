@@ -51,6 +51,25 @@ connectome" performs chemotaxis.
 
 ## Status table
 
+Standalone steering development now uses `train_steering.py` (MOT-08).
+An inherited forward brain is fitted independently for one signed curvature
+bias, with fixed anatomical NMJs and muscle transfer. A differentiated
+body-joint/centroid-trajectory loss supplements normalized muscle error;
+there is no shared-policy rehearsal loss. Tuning uses a real turning/progress
+probe, and final tests require body-axis and centroid-path turning to agree
+through all three pacing rates and numerical controls. The original models
+are not overwritten. H1.1 permits separate policies for the two signs.
+See E019 and [SKILL_REPERTOIRE.md](SKILL_REPERTOIRE.md) for evidence/status;
+the mbslnx2 ensemble is prepared, not independently observed running.
+
+Local E019 body-trajectory fits now pass for both signs, each from the same
+archived 0.06 forward parent with target amplitude raised to 0.07. Each ran
+300 updates and selected update 100. Both pass all three pacing rates,
+actual centroid/body turn agreement, the unchanged progress floor, timestep
+and rest/isotropic controls. This expands driven normalized steering coverage
+in two separate policies; it does not establish autonomy, broad angle control,
+biological gait calibration, a shared controller or multi-seed replication.
+
 | Component | Present | Fitted | Active in food demo |
 | --- | --- | --- | --- |
 | 302 canonical neuron identifiers | Yes | Not applicable | Used for ordering |

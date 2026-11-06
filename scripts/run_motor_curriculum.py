@@ -125,18 +125,22 @@ def main():
     parser.add_argument("--stop-restart", action="store_true", help="Test continuous go/stop/restart with frozen wave checkpoints")
     parser.add_argument("--reverse", action="store_true", help="Fit reverse waves with forward rehearsal, then assess both directions")
     parser.add_argument("--refine-reverse", action="store_true", help="Continue a completed reverse cohort with broader commands and stronger original-forward retention")
+    parser.add_argument("--steering", action="store_true", help="Fit independent signed shallow-steering policies from forward-wave checkpoints")
+    parser.add_argument("--steering-bias", type=float, default=.006)
     parser.add_argument("--refinement-iterations", type=positive_int, default=1000000)
     parser.add_argument("--increase-amplitude", type=float, help="Resume passed waves, fit a slightly larger target, then assess locomotion")
     resume = parser.add_mutually_exclusive_group()
     resume.add_argument("--resume-run", type=Path, help="Read passed source checkpoints from this run")
     resume.add_argument("--resume-latest", action="store_true", help="Select latest passed source run under output-dir for the requested mode")
     args = parser.parse_args()
-    if (args.assess_locomotion or args.stop_restart or args.reverse or args.refine_reverse or args.increase_amplitude is not None) and not (args.resume_run or args.resume_latest):
+    if (args.assess_locomotion or args.stop_restart or args.reverse or args.refine_reverse or args.steering or args.increase_amplitude is not None) and not (args.resume_run or args.resume_latest):
         parser.error("Assessment or amplitude continuation requires --resume-latest or --resume-run")
-    if sum((args.assess_locomotion, args.stop_restart, args.reverse, args.refine_reverse, args.increase_amplitude is not None)) > 1:
-        parser.error("Choose one of locomotion assessment, stop/restart, reverse fitting, or amplitude continuation")
+    if sum((args.assess_locomotion, args.stop_restart, args.reverse, args.refine_reverse, args.steering, args.increase_amplitude is not None)) > 1:
+        parser.error("Choose one motor training/continuation/assessment mode")
     if args.increase_amplitude is not None and not (0 < args.increase_amplitude <= .1):
         parser.error("Amplitude must be finite and in (0, 0.1]")
+    if args.steering and (not math.isfinite(args.steering_bias) or not 0<args.steering_bias<=.012):
+        parser.error("Steering bias magnitude must be finite and in (0,.012]")
     if not sys.platform.startswith("linux") or not hasattr(os, "sched_getaffinity"):
         parser.error("Run on Linux, such as mbslnx2")
     if not math.isfinite(args.minutes) or args.minutes <= 0:
@@ -157,7 +161,7 @@ def main():
         parser.error("Results must stay outside Git")
     seeds = list(range(args.seed_start, args.seed_start + args.workers))
     resume_root, initial_actors = None, {}
-    source_stage = "reverse" if args.refine_reverse else "wave" if args.assess_locomotion or args.stop_restart or args.reverse or args.increase_amplitude is not None else "alternation"
+    source_stage = "reverse" if args.refine_reverse else "wave" if args.assess_locomotion or args.stop_restart or args.reverse or args.steering or args.increase_amplitude is not None else "alternation"
     try:
         if args.resume_run:
             resume_root = args.resume_run.expanduser().resolve()
@@ -172,7 +176,7 @@ def main():
             old_amplitude = source_manifest.get("amplitude", .04)
             if not old_amplitude < args.increase_amplitude <= old_amplitude * 1.3 + 1e-8:
                 parser.error(f"Seed {seed}: increase amplitude from {old_amplitude} by at most 30% per stage")
-    prefix = "reverse-" if args.reverse or args.refine_reverse else "stop-restart-" if args.stop_restart else "locomotion-" if args.assess_locomotion else "wave-" if initial_actors else "motor-"
+    prefix = "steering-" if args.steering else "reverse-" if args.reverse or args.refine_reverse else "stop-restart-" if args.stop_restart else "locomotion-" if args.assess_locomotion else "wave-" if initial_actors else "motor-"
     root = output_root / (prefix + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
     root.mkdir(parents=True, exist_ok=False)
     capture_run_record(root, repo, args)
@@ -202,6 +206,12 @@ def main():
                     "--output-dir", str(job["output"] / stage)]
                 if stage == "reverse_locomotion":
                     command.extend(["--direction", "reverse"])
+            elif stage == "steering":
+                signed_bias=args.steering_bias*(1 if job['seed']%2==0 else -1)
+                command=[sys.executable,'-u',str(repo/'scripts/train_steering.py'),
+                    '--seed',str(job['seed']),'--bias',str(signed_bias),'--minutes',str(remaining),
+                    '--iterations',str(args.refinement_iterations),
+                    '--initial-actor',str(initial_actors[job['seed']]),'--output-dir',str(job['output']/'steering')]
             elif stage == "reverse" and args.refine_reverse:
                 command = [sys.executable, "-u", str(repo / "scripts/refine_reverse.py"),
                     "--seed", str(job["seed"]), "--minutes", str(max(.01, remaining - 1)),
@@ -235,6 +245,7 @@ def main():
                 output.mkdir()
                 job = dict(seed=seed, cpus=cpus, output=output, done=False, stages={})
                 launch(job, "baseline_locomotion" if args.increase_amplitude is not None else
+                    "steering" if args.steering else
                     "reverse" if args.reverse or args.refine_reverse else
                     "stop_restart" if args.stop_restart else
                     "locomotion" if args.assess_locomotion else "wave" if initial_actors else "bend")
@@ -291,7 +302,7 @@ def main():
                     job["process"].wait()
     summary = dict(requested_minutes=args.minutes, stopped=stopped, resume_run=str(resume_root) if resume_root else None,
         workers=[dict(seed=j["seed"], cpus=j["cpus"], stages=j["stages"]) for j in jobs])
-    final_stage = "reverse_locomotion" if args.reverse or args.refine_reverse else "stop_restart" if args.stop_restart else "locomotion" if args.assess_locomotion or args.increase_amplitude is not None else "wave" if initial_actors else "alternation"
+    final_stage = "steering" if args.steering else "reverse_locomotion" if args.reverse or args.refine_reverse else "stop_restart" if args.stop_restart else "locomotion" if args.assess_locomotion or args.increase_amplitude is not None else "wave" if initial_actors else "alternation"
     passed = all(stage_passed(j["stages"].get(final_stage, {})) for j in jobs)
     if args.reverse or args.refine_reverse:
         passed = passed and all(stage_passed(j["stages"].get(stage, {}))

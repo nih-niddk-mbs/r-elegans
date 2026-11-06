@@ -1,0 +1,357 @@
+{
+  "entry": "E019",
+  "evidence_type": "locally_verified_artifacts",
+  "archive": "results/motor_curriculum/steering-20261106-local-seed0",
+  "trials": {
+    "oracle": {
+      "status": "completed",
+      "error": null,
+      "passed": true,
+      "oracle_only": true,
+      "iterations": 0,
+      "manifest_sha256": "71125d2f0b8ab27ff17893e8fa9393cd875a625172dc15da62fc2df014c7171c",
+      "summary_sha256": "6c6a5714a382b048f5820724e2438818d6ec5dd4a099e7394cd702e705756a29",
+      "source_record_sha256": {
+        "run_records/20261106T141648324790Z-61a84cca/source_record.json": "cf8608481be6042bc4199fc0ea47d44e99e177da465608ae675f51204e79941a"
+      },
+      "periods": []
+    },
+    "muscle-only-positive": {
+      "status": "completed",
+      "error": null,
+      "passed": false,
+      "iterations": 1200,
+      "selected_iteration": 1200,
+      "elapsed_seconds": 242.65903270799754,
+      "steering_bias": 0.006,
+      "manifest_sha256": "2b6f62f50fd4b9d60124d099a4f3a4ee13b978416a3d33acd763dca5bc09b440",
+      "summary_sha256": "d514bfe8fc4b1796f83a47f55f5d58e3bb17b0f9683389831b7d84c759ecf6e1",
+      "actor_best_sha256": "ee00ebcf0ca7db1e96be3a721f611b915254fc960919e948cc368eed534c13b5",
+      "source_record_sha256": {
+        "run_records/20261106T141722400613Z-07127528/source_record.json": "cf8608481be6042bc4199fc0ea47d44e99e177da465608ae675f51204e79941a"
+      },
+      "selection_key": [
+        1,
+        0.6849364638328552,
+        0.434421379471088
+      ],
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.0010070919029010054,
+            "timestep_difference": 1.2095720038686388e-05,
+            "rest_drift_body_lengths_per_cycle": 2.4897210758836383e-11,
+            "isotropic_drift_body_lengths_per_cycle": 5.902741768971731e-12,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5.964885466869241e-05,
+            "minimum_path_turn": 5.966669414192438e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": 9.527647323585853e-05,
+          "path_turn_radians_per_cycle": 9.512998803984374e-05,
+          "axis_timestep_difference": 5.101808036126891e-07,
+          "path_timestep_difference": 2.0875449990853667e-07
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.001190058112551663,
+            "timestep_difference": 8.319179907358447e-06,
+            "rest_drift_body_lengths_per_cycle": 3.1453338147103014e-12,
+            "isotropic_drift_body_lengths_per_cycle": 8.809689218991195e-11,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5.506760382410769e-05,
+            "minimum_path_turn": 5.507569221663289e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": 0.00012686797015798446,
+          "path_turn_radians_per_cycle": 0.00012672101729549468,
+          "axis_timestep_difference": 5.72056698770198e-08,
+          "path_timestep_difference": 5.6461431086063385e-09
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.001290678930348498,
+            "timestep_difference": 4.376388120667929e-06,
+            "rest_drift_body_lengths_per_cycle": 0.0,
+            "isotropic_drift_body_lengths_per_cycle": 3.7204701166661414e-10,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5e-05,
+            "minimum_path_turn": 5e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": 0.0001584933642618571,
+          "path_turn_radians_per_cycle": 0.00015818761312402785,
+          "axis_timestep_difference": 4.359781017593267e-07,
+          "path_timestep_difference": 4.837202141061425e-07
+        }
+      ]
+    },
+    "body-positive": {
+      "status": "completed",
+      "error": null,
+      "passed": true,
+      "iterations": 300,
+      "selected_iteration": 100,
+      "elapsed_seconds": 71.80574087500281,
+      "steering_bias": 0.006,
+      "manifest_sha256": "2738eab4ad06e0f9be517d99f245347b99f728a3ed16c572d6d82fd9d128b804",
+      "summary_sha256": "864f69123da59e29b41e7cdd50ba529af3d29402f0064fa7d38c2a1ed72e7232",
+      "actor_best_sha256": "d26f443e823ddf33eaa10b1ed9f8c201845d350013d8a1783982f7d14becd669",
+      "source_record_sha256": {
+        "run_records/20261106T142137531104Z-f5542b0a/source_record.json": "14c54d6e3072bc2903552b1dd83b9d3d3dd84a53f76a90506b594e2864457767"
+      },
+      "selection_key": [
+        0,
+        0.7504618763923645,
+        0.46392317130294036
+      ],
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.0011967198051540861,
+            "timestep_difference": 1.441995258384893e-05,
+            "rest_drift_body_lengths_per_cycle": 1.584018418779057e-11,
+            "isotropic_drift_body_lengths_per_cycle": 3.0848617958230717e-10,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5.964885466869241e-05,
+            "minimum_path_turn": 5.966669414192438e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": 0.00010652746049159834,
+          "path_turn_radians_per_cycle": 0.00010642909910529852,
+          "axis_timestep_difference": 6.035406687245477e-07,
+          "path_timestep_difference": 6.444024620577693e-07
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.0014259825746486168,
+            "timestep_difference": 1.0016001101845022e-05,
+            "rest_drift_body_lengths_per_cycle": 7.579122049994947e-13,
+            "isotropic_drift_body_lengths_per_cycle": 3.608063949553667e-10,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5.506760382410769e-05,
+            "minimum_path_turn": 5.507569221663289e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": 0.00014175769817875253,
+          "path_turn_radians_per_cycle": 0.00014183888561092317,
+          "axis_timestep_difference": 1.1363944453455783e-06,
+          "path_timestep_difference": 9.884679457172751e-07
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.0015584163830808673,
+            "timestep_difference": 5.326313866236762e-06,
+            "rest_drift_body_lengths_per_cycle": 0.0,
+            "isotropic_drift_body_lengths_per_cycle": 5.134230584748382e-11,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5e-05,
+            "minimum_path_turn": 5e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": 0.00017865126530131523,
+          "path_turn_radians_per_cycle": 0.000178577916813083,
+          "axis_timestep_difference": 1.6769065762645141e-06,
+          "path_timestep_difference": 1.3574899639934301e-06
+        }
+      ]
+    },
+    "body-negative": {
+      "status": "completed",
+      "error": null,
+      "passed": true,
+      "iterations": 300,
+      "selected_iteration": 100,
+      "elapsed_seconds": 73.9269999169992,
+      "steering_bias": -0.006,
+      "manifest_sha256": "fa597192aa0275ba65e477200a82b29456d0d513c74c68cf4eea57a180df0656",
+      "summary_sha256": "a268691663b4f7da96b8dfe1b6053fa10d3895eadb1f74e7706aef8e9afdc342",
+      "actor_best_sha256": "10a0994227c75cd2b63ad13d8345889299830438d81064377f807850b2018796",
+      "source_record_sha256": {
+        "run_records/20261106T142305253125Z-9213eb44/source_record.json": "383fb18619a40db84d1c307276a108377e5bd71c3d714fd4675e0ce60944cfcd"
+      },
+      "selection_key": [
+        0,
+        0.7339559197425842,
+        0.5097670879123573
+      ],
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.0011997205250466362,
+            "timestep_difference": 1.5134132041522228e-05,
+            "rest_drift_body_lengths_per_cycle": 8.527919554220583e-13,
+            "isotropic_drift_body_lengths_per_cycle": 9.31051825399844e-11,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5.9646748602898425e-05,
+            "minimum_path_turn": 5.968564801150933e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": -9.281567524431489e-05,
+          "path_turn_radians_per_cycle": -9.281677193939686e-05,
+          "axis_timestep_difference": 2.5693009545607604e-06,
+          "path_timestep_difference": 2.1987143554724753e-06
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.001426038618064124,
+            "timestep_difference": 1.0731716199411344e-05,
+            "rest_drift_body_lengths_per_cycle": 0.0,
+            "isotropic_drift_body_lengths_per_cycle": 9.307813291220697e-11,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5.5065029388232566e-05,
+            "minimum_path_turn": 5.4974923841655254e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": -0.00010127674160805474,
+          "path_turn_radians_per_cycle": -0.00010109804861713201,
+          "axis_timestep_difference": 1.8989536896181909e-06,
+          "path_timestep_difference": 1.6705162124708295e-06
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "propulsion": {
+            "passed": true,
+            "detectable_translation": true,
+            "periodic_shape": true,
+            "consistent_cycles": true,
+            "approximately_straight": true,
+            "direction": "forward",
+            "refined_forward_body_lengths_per_cycle": 0.0015561105383317135,
+            "timestep_difference": 6.036466304671804e-06,
+            "rest_drift_body_lengths_per_cycle": 0.0,
+            "isotropic_drift_body_lengths_per_cycle": 2.1319501686861677e-10,
+            "minimum_useful_progress": 0.001
+          },
+          "turn": {
+            "axis_turn": true,
+            "path_turn": true,
+            "consistent_turn": true,
+            "axis_path_agreement": true,
+            "minimum_axis_turn": 5e-05,
+            "minimum_path_turn": 5e-05
+          },
+          "above_numerical_controls": true,
+          "axis_turn_radians_per_cycle": -9.234921951815911e-05,
+          "path_turn_radians_per_cycle": -9.237169433617964e-05,
+          "axis_timestep_difference": 1.32909961730876e-06,
+          "path_timestep_difference": 1.0360527085140347e-06
+        }
+      ]
+    }
+  },
+  "initial_actor_sha256": "59055b430818fb8afa72d652fa010f18b05678672cb3bb182d92fc87b3047f7a"
+}

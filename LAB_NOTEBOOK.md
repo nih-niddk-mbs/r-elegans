@@ -447,6 +447,95 @@ unique, relative documentation links resolved, and whitespace checks passed.
 **Outcome/status:** strategy/catalog update only; no new behavioral
 competence, options implementation or autonomous policy demonstrated.
 
+### E019 — 2026-11-06: standalone shallow-steering protocol and local results
+
+**Question:** can an independently fitted full recurrent brain drive a shallow
+curved forward path, expanding MOT-08 coverage without consolidating earlier
+skills? **Parent:** preserve the original forward-wave checkpoints; local
+development uses the archived 0.06 seed-0 forward fit and server training will
+use the original 0.07 wave cohort. No changes to parent files or NMJ/muscle
+mapping. Artificial pacing remains; autonomy is not claimed.
+
+**Stage A, simulator feasibility (planned):** apply a synthetic forward muscle
+wave plus a constant mild dorsal/ventral bias. Examine bias magnitudes
+0.003/0.006/0.012 and both signs, before fitting any neural controller. Establish
+whether the actual body centroid follows a turning trajectory, rather than
+counting a changed head-tip pose as steering. This is oracle calibration, not
+a learned-skill result. If these fail physical criteria, revise the protocol
+explicitly before a neural fit; do not silently relabel the outcome.
+
+**Stage B, neural fits (planned):** separate signed-bias policies are acceptable;
+all 302 cells evolve and only neural fields learn, with fixed NMJs. Supervision
+is a muscle target; no target muscle command enters the neural forward path.
+Select/check candidate effects in the actual body. Preserve forward/reverse
+skill checkpoints rather than enforcing cross-skill retention.
+
+**Predeclared physical checks:** four startup plus six measured phase-matched
+cycles at periods 2.4/3.0/3.7 s; 20/10-ms refinement; zero pacing and isotropic
+drag controls. Forward progress floor remains 0.001 body lengths/cycle.
+Signed body-axis yaw and signed centroid-path turning must agree with the
+oracle and each other. Use >=0.00005 rad/cycle detectable turn as an engineering
+floor, require the signal above numerical/control differences, periodic shape
+and consistent cycle signs. A fitted candidate must recover at least half the
+oracle's turn magnitude. No biological turning range is inferred from these
+normalized engineering criteria.
+
+**Development amendment before the next fit:** the initial muscle-only local
+pilot creates the desired turn but its tuning probe remains just below the
+forward-progress floor after 1,000 updates. Preserve that attempt rather than
+loosening the floor. Add a differentiable body-trajectory objective (joint
+angles and actual centroid positions relative to the same oracle) alongside
+muscle supervision, and test finite gradients before fitting. Default planned
+body-loss weight 0.5, learning rate 0.0003. Physical checkpoint selection and
+independent refinement/control assays still decide success. Isotropic drag
+controls translation; it is not assumed to forbid geometric body rotation.
+**Local outcomes (artifact verified):** direct-body oracle calibration passed
+at all three pacing rates for target amplitude 0.07 and bias 0.006; the sign
+of the bias correctly sets the sign of both body and centroid-path rotation.
+The initial calibration screen examined the predeclared smaller/larger biases;
+0.006 was chosen to leave margin above the minimum detectable-turn criterion.
+That exploratory screen used five phase increments and survives in tool
+stdout, not as a complete archived run. The archived selected-bias oracle and
+all fitted-policy acceptance assays use the declared six measured cycles.
+The oracle is not itself a neural controller.
+
+| Trial | Updates / selected | Result | Interpretation |
+| --- | --- | --- | --- |
+| Positive, muscle-only objective | 1,200 / 1,200 | Overall fail; coarse tuning-probe progress below 0.001 | Final fine-timestep physical assays pass, but conservative coarse selection gate remains unmet; do not erase this borderline attempt |
+| Positive, body-trajectory objective | 300 / 100 | Pass, all three rates and controls | Independently learned positive steering |
+| Negative, body-trajectory objective | 300 / 100 | Pass, all three rates and controls | Independently learned negative steering |
+
+The body-objective fits took 71.81 and 73.93 seconds on the Mac. Positive
+signed body turns are 0.0001065/0.0001418/0.0001787 rad/cycle at
+2.4/3.0/3.7 s; negative turns are -0.0000928/-0.0001013/-0.0000923. Forward
+progress across the two policies is 0.0011967–0.0015584 body lengths/cycle.
+Centroid-path turning agrees in sign and magnitude with body-axis turning;
+20/10-ms refinement, zero-pacing rest and isotropic translation controls pass.
+Both neural candidates pass the longer waveform checks and actual coarse
+turning/progress selection probe. NMJ/muscle/sensory/noise fields and topology
+were verified unchanged; parent checkpoint bytes are preserved.
+
+**Evidence:** [E019 metadata](experiments/records/E019.json). Full trial records,
+all four calibration/fit attempts, startup code/environment snapshots, input
+checkpoint copy, raw trajectories, plots and checksums are archived at
+`results/motor_curriculum/steering-20261106-local-seed0` under OneDrive r-elegans.
+Original upstream forward-training history remains in the earlier motor
+archives; the included input copy is sufficient to repeat these steering
+fits with rebased paths. Dirty development source snapshots, rather than a
+clean commit alone, identify the actual trial code. The muscle-only and body
+fits are a development comparison, not a matched-budget causal study.
+
+**Software validation:** 162 tests passed, including gradient checks through
+actual body trajectories, rejection of pose-only/stationary false turns,
+progress/numerical controls and independent signed server dispatch.
+**Coverage:** MOT-08 now has two independently learned driven variants from
+one parent model, not a calibrated biological turning range, autonomous skill,
+multi-seed replication, or a validated controller handoff. The originals and
+the below-gate pilot remain available. **Next prepared run:** four independent
+mbslnx2 workers, source 0.07 wave cohort, even seeds positive/odd negative bias,
+480-minute budget and complete final physical assays. Not launched remotely
+by the agent. Head sweeps remain a subsequent coverage target.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,

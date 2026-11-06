@@ -46,6 +46,26 @@ plus validated parameters/duration. No high-level selector is implemented yet.
 This update supersedes the consolidation-first proposals below; completed
 experiments remain historical evidence.
 
+Implemented next standalone fit: `--steering --minutes 480` from the original
+0.07 wave cohort. Four seed-matched policies, signs alternating by seed parity,
+expand MOT-08 independently. Target amplitude 0.07 plus signed muscle bias
+0.006; same pacing gain and 0.4-second target propagation delay. Learning rate
+0.0003. Objective: normalized muscle MSE plus 0.5 times the mean normalized
+joint-angle/centroid-position trajectory error through the physical body.
+No cross-skill retention loss. Initial local 0.06 development advances target
+amplitude to 0.07 (16.7%); server parents already use 0.07.
+
+Every 250 updates, selection checks longer waveform commands and a 4-startup/
+6-measured-cycle actual turning probe. Final tests at 2.4/3.0/3.7 s, 20/10 ms,
+rest and isotropic drag require positive progress >=0.001 body lengths/cycle,
+signed centroid/body turning >=0.00005 rad/cycle and at least half the oracle
+turn, consistent signs and agreement above numerical floors. Isotropic drag
+checks translation, not the absence of geometric rotation. The coarse tuning
+probe also requires >=0.001, giving a conservative additional selection gate.
+Detailed predeclaration, development failures and results are in E019. No
+autonomous rhythm, biological turning calibration, or inter-policy state
+handoff is claimed. The server run is not launched by the coding agent.
+
 For the chronological protocol/outcome record and replication checklist, see
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). The historical stages below describe
 progression, not a claim that all current models pass every stage.

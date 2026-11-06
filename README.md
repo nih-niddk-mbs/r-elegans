@@ -77,6 +77,33 @@ compositions, later sensory tasks and organ/3D/developmental extensions,
 mapping all 62 entries in the biological behavior catalog. It marks observed,
 candidate and blocked capabilities without claiming a working skill selector.
 
+Standalone shallow-steering training is now available with
+`scripts/run_motor_curriculum.py --steering`. Each worker fits its own signed
+turn from the matching forward-wave checkpoint; even seeds receive positive
+muscle bias and odd seeds negative bias. Parent models are preserved, with no
+shared forward/reverse retention requirement. The trainer differentiates
+muscle, body-joint and centroid-trajectory errors, and selects on actual
+centroid-path/body-axis turning as well as waveform quality. Full final
+assays retain the 0.001 progress floor, timestep/refinement and rest/isotropic
+translation controls. This is externally paced, normalized steering.
+
+On mbslnx2, after activating conda `r-elegans` and pulling the current code:
+
+```bash
+nohup python -u scripts/run_motor_curriculum.py --steering --minutes 480 \
+  --resume-run /home/carsonc/r-elegans-results/wave-20261105T214835887935Z \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-steering.log 2>&1 < /dev/null &
+```
+
+Four workers use four physical CPU cores each, two candidates per turn sign.
+Fresh `steering-*` cohorts include complete provenance and independent actor
+checkpoints; no other skill is launched on success. Archive a finished cohort
+with `archive_motor_run.py --latest-under <results> --pattern 'steering-*'
+--output-dir <archives>`. Local development and results are recorded in E019
+of the notebook. These controllers are not a calibrated biological turning
+range or a runtime skill-switching implementation.
+
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) is the chronological experiment record,
 including hypotheses, methods, negative results, decisions, code/artifact
 lineage and explicit evidence gaps. Small [reported-result summaries](experiments/records)

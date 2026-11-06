@@ -126,7 +126,8 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     mode=parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--run",type=Path)
-    mode.add_argument("--latest-under",type=Path,help="Latest finished reverse-* cohort under this directory")
+    mode.add_argument("--latest-under",type=Path,help="Latest finished cohort matching --pattern under this directory")
+    parser.add_argument("--pattern",default="reverse-*",help="Cohort glob for --latest-under; e.g. steering-*")
     mode.add_argument("--verify",type=Path)
     parser.add_argument("--output-dir",type=Path,help="Parent directory for a fresh archive")
     args=parser.parse_args()
@@ -138,9 +139,9 @@ def main():
         parser.error("--output-dir is required when archiving")
     root=args.run
     if args.latest_under:
-        candidates=[p for p in sorted(args.latest_under.glob('reverse-*'),reverse=True) if (p/'summary.json').is_file()]
+        candidates=[p for p in sorted(args.latest_under.glob(args.pattern),reverse=True) if (p/'summary.json').is_file()]
         if not candidates:
-            parser.error("No finished reverse cohort found")
+            parser.error("No finished matching cohort found")
         root=candidates[0]
     output=args.output_dir.expanduser()/(root.name+'-archive-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
     metadata=archive_run(root.expanduser(),output,Path(__file__).resolve().parents[1])
