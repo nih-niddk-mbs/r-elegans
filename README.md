@@ -70,6 +70,13 @@ connectome-constrained controller remains a later milestone described in
 
 ## Laboratory records and replication
 
+The current strategy is **skill coverage first**: preserve separately trained
+full-network controllers and defer shared-weight consolidation. The
+[skill repertoire](SKILL_REPERTOIRE.md) lists motor primitives, search/state
+compositions, later sensory tasks and organ/3D/developmental extensions,
+mapping all 62 entries in the biological behavior catalog. It marks observed,
+candidate and blocked capabilities without claiming a working skill selector.
+
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) is the chronological experiment record,
 including hypotheses, methods, negative results, decisions, code/artifact
 lineage and explicit evidence gaps. Small [reported-result summaries](experiments/records)

@@ -22,3 +22,7 @@ Maintain [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) for scientific work in this repo.
   and date corrections rather than silently rewriting scientific history.
 - Tests validate software. Wave imitation, physical movement, and biological
   fidelity are separate claims. Record which was actually demonstrated.
+- Current user strategy H1.1 prioritizes skill coverage. Maintain
+  SKILL_REPERTOIRE.md and preserve good independent full-network checkpoints.
+  Shared-weight interference is recorded but does not block adding standalone
+  skills. Defer consolidation; retain physical/numerical criteria per skill.

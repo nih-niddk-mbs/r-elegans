@@ -6,6 +6,11 @@ list captures every natural behavior. Proposed training recipes live in
 [TRAINING_PROTOCOLS.md](TRAINING_PROTOCOLS.md). Neither document adds executable
 environments or trained behaviors.
 
+Operational update (2026-11-06): [SKILL_REPERTOIRE.md](SKILL_REPERTOIRE.md) maps
+every current behavior ID to a motor skill, composition or explicit model
+extension, with status and observable targets. The strategy is coverage first,
+using independent policies when needed; shared-weight consolidation is deferred.
+
 ## Scope and interpretation
 
 The first reference animal should be an age-matched adult N2 hermaphrodite in a
@@ -24,8 +29,8 @@ that it is selected appropriately in those contexts.
 
 | Key | Required capability | Current repository status |
 | --- | --- | --- |
-| M | Physical crawling/swimming with muscle control | Coupled planar RFT and SI parameter factories exist; gaits still need experimental fitting |
-| R | Reverse, pause, shallow turn, deep reorientation | Normalized gait has forward/reverse/steering; Gymnax action currently permits forward speed only; deep-turn/contact model absent |
+| M | Physical crawling/swimming with muscle control | Coupled planar RFT and normalized driven motion exist; SI active gaits still need experimental fitting |
+| R | Reverse, pause, shallow turn, deep reorientation | Driven full-network forward/reverse/stop recorded; switching and shallow turns unvalidated; contact-qualified deep turns absent |
 | C | Local chemical transduction and distinct modalities | Gaussian cue and engineered memory exist; calibrated receptor/neuron responses absent |
 | K | Mechanical contact and distributed touch | Absent; center clipping at a dish margin is not contact mechanics |
 | T | Temperature field and thermosensation | Absent |

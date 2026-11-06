@@ -36,6 +36,16 @@ gates at each step rather than assuming imitation scores establish readiness.
 
 ## Current motor milestone (updated 2026-11-06)
 
+**Current priority, user revision H1.1:** expand the independently validated
+[skill repertoire](SKILL_REPERTOIRE.md). Separate full-network skill policies
+and checkpoints are acceptable. Do not block learning steering/head sweeps
+on consolidating forward/reverse into one weight set. Retain physical gates
+per skill and save prior successful policies; track interference and address
+consolidation later. The intended downstream RL action is a skill identifier
+plus validated parameters/duration. No high-level selector is implemented yet.
+This update supersedes the consolidation-first proposals below; completed
+experiments remain historical evidence.
+
 For the chronological protocol/outcome record and replication checklist, see
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). The historical stages below describe
 progression, not a claim that all current models pass every stage.
@@ -97,9 +107,11 @@ passed 0/1, but no seed passed reverse propulsion readiness. All retained
 backward translation and stop/restart control, and every stage completed
 without errors. Reverse go magnitudes remained 0.0005968–0.0009962 body
 lengths/cycle, below 0.001; seed 3 also missed one forward tuning case.
-Do not equate passing imitation with passing behavior. Proposed next protocol:
-incorporate actual movement into optimization and selection, preserving all
-control/numerical gates. That change has not been implemented or run here.
+Do not equate passing imitation with passing behavior. The earlier proposal
+was to improve joint movement optimization/selection. H1.1 instead prioritizes
+independent skill coverage now; physical movement criteria still apply to
+each skill. Neither a new movement objective nor the new skill fits have
+been implemented or run by this strategy update.
 
 ## Scientific objective
 

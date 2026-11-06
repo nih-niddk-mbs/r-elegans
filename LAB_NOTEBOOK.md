@@ -42,6 +42,16 @@ Storage roots:
 Recorded explicitly 2026-11-06 from the user's working hypothesis, following
 E015–E016. **Status: hypothesis, not an established result of this project.**
 
+**H1.1, user-directed revision on 2026-11-06:** prioritize coverage of the
+motor repertoire, preserving successful independent full-network checkpoints.
+Joint retention in one parameter set is no longer a prerequisite for adding
+the next skill. The intended downstream design is a parameterized skill action
+space for a high-level RL selector; the runtime hierarchy is not implemented.
+Consolidation/interference mitigation is deferred. This supersedes the
+consolidation-first next-step proposals after E014–E017; those historical
+results and decisions remain recorded below. The operational list is
+[SKILL_REPERTOIRE.md](SKILL_REPERTOIRE.md).
+
 For this embodied connectome model, establish and retain useful motor policies
 through small, progressively harder steps before asking task RL to discover
 sensory-guided behavior. A viable, accessible motor repertoire should make
@@ -67,8 +77,9 @@ the complete mathematical policy space or fixing the final solution.
 - **Hierarchical RL/options:** a future task policy could select temporally
   extended skills. Sutton, Precup and Singh (1999), [Between MDPs and semi-MDPs](https://people.cs.umass.edu/~barto/courses/cs687/Sutton-Precup-Singh-AIJ99.pdf).
   We have no implemented high-level skill selector or formal options with
-  initiation/termination rules. Direct fine-tuning of the same network is
-  another possible route; architecture has not been decided.
+  initiation/termination rules. H1.1 selects skill-based downstream control as
+  the intended direction; runtime composition and later consolidation remain
+  to be designed and tested.
 
 The most accurate current description is **curriculum learning with motor-skill
 pretraining**. This is not a claim that all successful RL requires pretraining,
@@ -80,15 +91,19 @@ success in E004; staged supervision subsequently produced driven motion and
 stop/restart. These experiments were not a controlled comparison, so they do
 not establish that a curriculum causes better downstream RL performance.
 E014–E015 also show that new skills can interfere and imitation can fail to
-preserve propulsion. Retention must be tested at each step, rather than
-assuming progress is monotonic.
+preserve propulsion. Under H1.1, preserve independent successful checkpoints
+and track interference; do not require joint retention to expand the library.
+Each individual skill must still demonstrate physically valid effects.
 
 **Proposed sequence, not yet tested:**
-retain forward/reverse/stop control; add turning in small increments; then
-progressively replace external rhythmic pacing with internally generated
-motor activity; finally introduce sensory tasks using the established motor
-repertoire. Commandable internally generated movement is distinct from
-autonomous action selection. Present results remain externally driven.
+preserve forward/backward/stop checkpoints; independently add steering, head
+sweeps and other motor variants in small increments; extend mechanics for
+contact-dependent/3D or specialized organ behaviors; progressively replace
+external rhythmic pacing with internally generated motor activity; then train
+skill selection/composition for sensory tasks. These tracks can progress
+without forcing one shared weight set to perform every skill first.
+Commandable internally generated movement is distinct from autonomous action
+selection. Present results remain externally driven.
 
 **Falsifiable test, planned only:** compare task RL from random initialization,
 abrupt full-skill pretraining, and incremental motor pretraining, with the same
@@ -402,6 +417,35 @@ are related approaches with additional machinery not currently implemented.
 behavior and old-skill retention checks at each stage. Distinguish driven
 control, endogenous rhythm and sensory-driven task choice. **Outcome/status:**
 documentation and literature review only; no new learning run or proof of H1.
+
+### E018 — 2026-11-06: prioritize repertoire coverage over consolidation
+
+**User direction:** build the worm's skill repertoire and map a structured
+action space before downstream autonomous-motion/search RL; do not make
+interference between skills the immediate bottleneck. **Strategy H1.1:**
+learn and preserve separate policies/checkpoints when useful, measure each
+skill's physical effects and parameter support, and defer consolidation into
+one network parameter set. Interference is recorded, not a gate blocking
+the next standalone skill. All 302 neurons may remain in every candidate;
+separate policies do not imply pruning the brain or granting biological
+fidelity. Existing physical/numerical criteria remain.
+
+**Action:** add the operational [skill repertoire](SKILL_REPERTOIRE.md), with
+50 entries (15 motor, 8 sequence/state, 12 sensory-control and 15 extension
+families), mapping all 62 entries of the existing biological inventory.
+Candidate variants have parameters, observable targets and evidence/status.
+Deep turns/contact, organ programs, male/dauer and 3D behavior require the
+listed model extensions. Roaming, search and navigation are policy patterns,
+not additional atomic muscle commands. Standalone controllers still need
+state-handoff/transition validation before runtime composition.
+
+**Next coverage priorities proposed:** shallow signed steering, head sweeps
+and independent movement-intensity variants, preserving the better previous
+forward and reverse checkpoints. No new fit is launched by this documentation
+change. **Validation:** all 62 biological IDs mapped, all 50 repertoire IDs
+unique, relative documentation links resolved, and whitespace checks passed.
+**Outcome/status:** strategy/catalog update only; no new behavioral
+competence, options implementation or autonomous policy demonstrated.
 
 ## Replication and recordkeeping procedure
 

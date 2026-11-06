@@ -7,6 +7,15 @@ and demonstrated behavior are distinguished.
 
 ## Executive summary
 
+**Training strategy update, 2026-11-06:** prioritize coverage of independent
+[motor skills](SKILL_REPERTOIRE.md), preserving separate full-network policies
+where needed. Interference in a shared weight set no longer blocks adding
+steering, head sweeps or other skills. Each skill still needs valid physical
+effects and a recorded input/parameter contract. Downstream skill selection
+and parameter modulation are the intended RL interface; no runtime hierarchy
+or autonomous repertoire has been implemented. Earlier consolidation-first
+recommendations in the historical training discussion are superseded by H1.1.
+
 The current food-finding baseline has three learned layers:
 
 1. A 14-parameter body gait maps `[speed, steering]` to 95 body-wall muscle
