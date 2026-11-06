@@ -20,8 +20,10 @@ from r_elegans.rl.motor_curriculum import (directional_muscle_sequence, reverse_
 from r_elegans.rl import stop_restart
 from r_elegans.rl.stop_restart import stop_restart_commands, stop_restart_metrics, assess_stop_restart
 if __package__:
+    from .experiment_records import capture_run_record
     from .train_timed import save_json, finite_tree
 else:
+    from experiment_records import capture_run_record
     from train_timed import save_json, finite_tree
 
 
@@ -55,6 +57,7 @@ def main():
         if not np.array_equal(getattr(actor.neural, name), getattr(expected, name)):
             parser.error("Checkpoint topology mismatch")
     output.mkdir(parents=True, exist_ok=False)
+    capture_run_record(output, repo, args)
     started = time.perf_counter()
     save_json(output / "manifest.json", dict(stage="stop_restart_assay", training=False,
         actor_neurons=302, seed=args.seed, initial_actor=str(args.initial_actor),

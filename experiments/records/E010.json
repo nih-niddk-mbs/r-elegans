@@ -1,0 +1,369 @@
+{
+  "entry": "E010",
+  "evidence_type": "user_reported_server_stdout",
+  "evidence_sha256": "3980f1286568a852a1fbc9b0feefc5a5be9b89e6e6416075c97d9617718ab7fb",
+  "evidence_file": "notebook/evidence/E010/reported-server-results.txt",
+  "verification": "Parsed from user-supplied text; original remote artifacts, code revision, environment and checkpoint hashes not independently verified",
+  "workers": [
+    {
+      "seed": 0,
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "stages": {
+        "baseline_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.719918698014226,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.00035764424911131676
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.000348414529604092
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.00032625636493565437
+            }
+          ]
+        },
+        "wave": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "iterations": 17943,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 3564.3458583439933,
+          "final_imitation_metrics": [
+            {
+              "bend_correlation": 0.9997349977493286,
+              "body_lag": 0.14000000059604645,
+              "body_relative_rmse": 0.07542281597852707,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.14000000059604645,
+              "muscle_rmse": 0.003680336521938443,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            },
+            {
+              "bend_correlation": 0.9985198378562927,
+              "body_lag": 0.1599999964237213,
+              "body_relative_rmse": 0.09664059430360794,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.1599999964237213,
+              "muscle_rmse": 0.006308313459157944,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            }
+          ]
+        },
+        "locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.649839200021233,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005964033045402567
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005780634440358255
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005385614986089807
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "stages": {
+        "baseline_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.857710791984573,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0003655518388929468
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0003635664334740542
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.000343623323723495
+            }
+          ]
+        },
+        "wave": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "iterations": 17866,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 3564.511082441022,
+          "final_imitation_metrics": [
+            {
+              "bend_correlation": 0.9997031092643738,
+              "body_lag": 0.14000000059604645,
+              "body_relative_rmse": 0.06364527344703674,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.1599999964237213,
+              "muscle_rmse": 0.0034477286972105503,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            },
+            {
+              "bend_correlation": 0.9990640878677368,
+              "body_lag": 0.14000000059604645,
+              "body_relative_rmse": 0.07823880761861801,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.14000000059604645,
+              "muscle_rmse": 0.005521597806364298,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            }
+          ]
+        },
+        "locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.648311875993386,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0006047199123669819
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005952681031370597
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005680888796116766
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "cpu_affinity": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "stages": {
+        "baseline_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.724418413010426,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0003773458557402427
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.00037167454727129117
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0003501908900935436
+            }
+          ]
+        },
+        "wave": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "iterations": 17923,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 3564.3115850230097,
+          "final_imitation_metrics": [
+            {
+              "bend_correlation": 0.9995207190513611,
+              "body_lag": 0.14000000059604645,
+              "body_relative_rmse": 0.06830146908760071,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.14000000059604645,
+              "muscle_rmse": 0.00354740209877491,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            },
+            {
+              "bend_correlation": 0.9980230927467346,
+              "body_lag": 0.1599999964237213,
+              "body_relative_rmse": 0.105980284512043,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.1599999964237213,
+              "muscle_rmse": 0.006632782518863678,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            }
+          ]
+        },
+        "locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.601699349004775,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005902945824961941
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005746022011315432
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005351587200741855
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 3,
+      "cpu_affinity": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "stages": {
+        "baseline_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.983774306019768,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.00037200145062338095
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.000373838364153816
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.00036276761407096737
+            }
+          ]
+        },
+        "wave": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "iterations": 17826,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 3564.3335369469714,
+          "final_imitation_metrics": [
+            {
+              "bend_correlation": 0.99973064661026,
+              "body_lag": 0.14000000059604645,
+              "body_relative_rmse": 0.06985361874103546,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.1599999964237213,
+              "muscle_rmse": 0.0036413692869246006,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            },
+            {
+              "bend_correlation": 0.9986775517463684,
+              "body_lag": 0.1599999964237213,
+              "body_relative_rmse": 0.10875235497951508,
+              "direction_agreement": 1.0,
+              "muscle_lag": 0.14000000059604645,
+              "muscle_rmse": 0.007467243354767561,
+              "target_body_lag": 0.14000000059604645,
+              "target_muscle_lag": 0.14000000059604645
+            }
+          ]
+        },
+        "locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "elapsed_seconds": 13.677825164981186,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005950731485469648
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005790056758216786
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "refined_forward_body_lengths_per_cycle": 0.0005496427174471004
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

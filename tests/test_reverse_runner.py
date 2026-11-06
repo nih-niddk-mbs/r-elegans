@@ -56,6 +56,7 @@ def test_reverse_runner_checks_both_directions_even_after_a_failed_gate(tmp_path
     monkeypatch.setattr(runner.subprocess, "Popen", Process)
     monkeypatch.setattr(runner.time, "sleep", lambda _: None)
     monkeypatch.setattr(runner.signal, "signal", lambda *a: None)
+    monkeypatch.setattr(runner, "capture_run_record", lambda *a: None)
     budget = 480 if refine else 180
     monkeypatch.setattr(runner.sys, "argv", ["runner", "--refine-reverse" if refine else "--reverse", "--minutes", str(budget),
         "--workers", "1", "--cores-per-worker", "1", "--resume-run", str(source),

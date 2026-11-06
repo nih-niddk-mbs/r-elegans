@@ -1,0 +1,1193 @@
+{
+  "entry": "E015",
+  "evidence_type": "user_reported_server_stdout",
+  "evidence_sha256": "822a154f05c30a2160043252d0b670af225f159e2ecc7f31c3c30bd8e4dc50eb",
+  "evidence_file": "notebook/evidence/E015/reported-server-results.txt",
+  "verification": "Parsed from user-supplied text; original remote artifacts, code revision, environment and checkpoint hashes not independently verified",
+  "workers": [
+    {
+      "seed": 0,
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "stages": {
+        "reverse": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "iterations": 36125,
+          "selected_iteration": 19500,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 28741.117316810007,
+          "selected_validation_key": [
+            0,
+            0.6666667759418488,
+            0.1343019626219757
+          ],
+          "failed_validation_cases": {
+            "forward": 0,
+            "reverse": 0
+          }
+        },
+        "forward_retention": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "control_passed": true,
+          "elapsed_seconds": 10.99250817700522,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010883591269976373,
+                  "timestep_difference": 2.4688024606642168e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010907783438980716,
+                  "timestep_difference": 2.472057782778648e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 9.661912268303803e-08,
+                  "stop_shape_speed_ratio": 0.0002650419961567002,
+                  "restart_progress_ratio": 1.0022027549489207
+                },
+                "fine": {
+                  "stop_path_ratio": 1.0637933279884992e-07,
+                  "stop_shape_speed_ratio": 0.00026595709313564903,
+                  "restart_progress_ratio": 1.0022228112398046
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010770509162951654,
+                  "timestep_difference": 2.4612904683685415e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010784742913388559,
+                  "timestep_difference": 2.4641868096774962e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 8.09982580721767e-08,
+                  "stop_shape_speed_ratio": 0.00021057439495850621,
+                  "restart_progress_ratio": 1.001318313653515
+                },
+                "fine": {
+                  "stop_path_ratio": 8.176594251321595e-08,
+                  "stop_shape_speed_ratio": 0.0002117244271179192,
+                  "restart_progress_ratio": 1.0013215485193463
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010397547373522744,
+                  "timestep_difference": 2.3582970595633235e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010405345038479558,
+                  "timestep_difference": 2.3596106483225092e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 5.7084774070658495e-08,
+                  "stop_shape_speed_ratio": 0.00015808487291717335,
+                  "restart_progress_ratio": 1.0007456731547717
+                },
+                "fine": {
+                  "stop_path_ratio": 5.811146786227487e-08,
+                  "stop_shape_speed_ratio": 0.0001591421351422115,
+                  "restart_progress_ratio": 1.0007499523374783
+                }
+              }
+            }
+          ]
+        },
+        "reverse_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "control_passed": true,
+          "elapsed_seconds": 10.891747988993302,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0006536492355056789,
+                  "timestep_difference": 1.2618591621337905e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0006531194935529668,
+                  "timestep_difference": 1.261362424567617e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.6431450918014752e-05,
+                  "restart_progress_ratio": 0.9991813580488593
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.6391900079584568e-05,
+                  "restart_progress_ratio": 0.9991895623463825
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0006340512441389565,
+                  "timestep_difference": 8.605932784810726e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0006336120983292821,
+                  "timestep_difference": 8.604833719962914e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.8069215510405104e-05,
+                  "restart_progress_ratio": 0.9992996242247333
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.8010680533902887e-05,
+                  "restart_progress_ratio": 0.9993073969750335
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0005968284784029617,
+                  "timestep_difference": 4.854450892159863e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0005965115629234958,
+                  "timestep_difference": 4.861115632692108e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.7490276855192475e-05,
+                  "restart_progress_ratio": 0.9994533878093288
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.7911274541731757e-05,
+                  "restart_progress_ratio": 0.9994690007415298
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "stages": {
+        "reverse": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "iterations": 35774,
+          "selected_iteration": 35000,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 28741.363126794982,
+          "selected_validation_key": [
+            0,
+            0.6666667759418488,
+            0.1291464591364881
+          ],
+          "failed_validation_cases": {
+            "forward": 0,
+            "reverse": 0
+          }
+        },
+        "forward_retention": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "control_passed": true,
+          "elapsed_seconds": 10.983915873977821,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.001104130974655472,
+                  "timestep_difference": 3.610426483595603e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0011048051759119835,
+                  "timestep_difference": 3.610014461899393e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.7310318771186746e-05,
+                  "restart_progress_ratio": 1.0005876691197935
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.723121021295861e-05,
+                  "restart_progress_ratio": 1.000610617102488
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010794708611255794,
+                  "timestep_difference": 3.53279558849512e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010800185585831924,
+                  "timestep_difference": 3.5326177377879766e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 8.274386458850499e-06,
+                  "restart_progress_ratio": 1.0004897017670018
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 8.02536132011525e-06,
+                  "restart_progress_ratio": 1.0005073758610232
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.001075450917575136,
+                  "timestep_difference": 3.379028042091838e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010758585430662643,
+                  "timestep_difference": 3.3791417569590046e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 3.4832640306820702e-06,
+                  "restart_progress_ratio": 1.0003685065435168
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 3.44284848789408e-06,
+                  "restart_progress_ratio": 1.0003790275171716
+                }
+              }
+            }
+          ]
+        },
+        "reverse_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "control_passed": true,
+          "elapsed_seconds": 11.037404822011013,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0009849528322689888,
+                  "timestep_difference": 2.8755260145555046e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0009845440883384114,
+                  "timestep_difference": 2.8763123185379332e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 2.0046718117754475e-05,
+                  "restart_progress_ratio": 0.9995643086925262
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 2.0532569695219367e-05,
+                  "restart_progress_ratio": 0.999585011670421
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.000996226577793986,
+                  "timestep_difference": 2.4855994993433408e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0009958231260621196,
+                  "timestep_difference": 2.485921013179143e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 9.75773987085267e-06,
+                  "restart_progress_ratio": 0.9995813473483497
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 9.741799496839784e-06,
+                  "restart_progress_ratio": 0.9995950201080162
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0009499948660723236,
+                  "timestep_difference": 2.1108939133438268e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.000949674927286554,
+                  "timestep_difference": 2.1111844969778806e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 4.471147596800347e-06,
+                  "restart_progress_ratio": 0.9996524388918518
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 4.190758254484333e-06,
+                  "restart_progress_ratio": 0.9996632205107673
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "cpu_affinity": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "stages": {
+        "reverse": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 0,
+          "passed": true,
+          "iterations": 36063,
+          "selected_iteration": 35500,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 28741.132965216995,
+          "selected_validation_key": [
+            0,
+            1.00000003973643,
+            0.12267187340088034
+          ],
+          "failed_validation_cases": {
+            "forward": 0,
+            "reverse": 0
+          }
+        },
+        "forward_retention": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "control_passed": true,
+          "elapsed_seconds": 10.966152486973442,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010682514200070238,
+                  "timestep_difference": 2.7114747115826628e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010696492068052088,
+                  "timestep_difference": 2.7112245558117386e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 2.5077968957819415e-08,
+                  "stop_shape_speed_ratio": 0.00010501672344416587,
+                  "restart_progress_ratio": 1.0012738071362388
+                },
+                "fine": {
+                  "stop_path_ratio": 2.2588871912858326e-08,
+                  "stop_shape_speed_ratio": 0.0001053195754135308,
+                  "restart_progress_ratio": 1.0013084811047346
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": true,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.001019659118607215,
+                  "timestep_difference": 2.4952241724811135e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": true,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0010206467721420463,
+                  "timestep_difference": 2.496441994301519e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 3.0289481175596314e-09,
+                  "stop_shape_speed_ratio": 5.315679397553856e-05,
+                  "restart_progress_ratio": 1.0009571327586535
+                },
+                "fine": {
+                  "stop_path_ratio": 2.3102809597363003e-09,
+                  "stop_shape_speed_ratio": 5.303505441729949e-05,
+                  "restart_progress_ratio": 1.0009686114867293
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009387080356303663,
+                  "timestep_difference": 2.234553204081191e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009394139336601409,
+                  "timestep_difference": 2.2356735046617283e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 2.5869846507477293e-05,
+                  "restart_progress_ratio": 1.0007461613584325
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 2.5911162631462953e-05,
+                  "restart_progress_ratio": 1.0007519889070733
+                }
+              }
+            }
+          ]
+        },
+        "reverse_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "control_passed": true,
+          "elapsed_seconds": 10.945515156025067,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0008434045887631375,
+                  "timestep_difference": 9.602698007096181e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.000842409808844922,
+                  "timestep_difference": 9.609336020162916e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 5.572094323310426e-05,
+                  "restart_progress_ratio": 0.9987989737821604
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 5.555945379622248e-05,
+                  "restart_progress_ratio": 0.9988205187267545
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0008040700654278654,
+                  "timestep_difference": 4.296618058051232e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0008031809971949256,
+                  "timestep_difference": 4.302314988375742e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 3.114890615405616e-05,
+                  "restart_progress_ratio": 0.998881226719633
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 3.115732332881661e-05,
+                  "restart_progress_ratio": 0.99889429009838
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0007304716891193428,
+                  "timestep_difference": 8.506279767281745e-07,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0007297733087340474,
+                  "timestep_difference": 8.585918067936316e-07,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.7853268848885086e-05,
+                  "restart_progress_ratio": 0.9990319026505969
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.7823072741017767e-05,
+                  "restart_progress_ratio": 0.999043932303335
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 3,
+      "cpu_affinity": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "stages": {
+        "reverse": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "iterations": 35807,
+          "selected_iteration": 2000,
+          "stop_reason": "time_budget",
+          "elapsed_seconds": 28741.675013890956,
+          "selected_validation_key": [
+            1,
+            1.6052309274673462,
+            0.22170325014546205
+          ],
+          "failed_validation_cases": {
+            "forward": 1,
+            "reverse": 0
+          }
+        },
+        "forward_retention": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "control_passed": true,
+          "elapsed_seconds": 10.98440048500197,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009451549166345783,
+                  "timestep_difference": 9.296493259375186e-07,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009460325922715824,
+                  "timestep_difference": 9.283248989015941e-07,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 2.0998039318030417e-05,
+                  "restart_progress_ratio": 1.000930921989141
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 2.100872472735917e-05,
+                  "restart_progress_ratio": 1.0009286050588715
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009509714401970564,
+                  "timestep_difference": 5.415421490250188e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009516474998413127,
+                  "timestep_difference": 5.412098787585312e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.0057690718258374e-05,
+                  "restart_progress_ratio": 1.0007185003674879
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.0078428671090431e-05,
+                  "restart_progress_ratio": 1.000710914771653
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009545144720650356,
+                  "timestep_difference": 7.248183767495208e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "forward",
+                  "refined_forward_body_lengths_per_cycle": 0.0009549705464576593,
+                  "timestep_difference": 7.250581587277564e-06,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 5.140816627882303e-06,
+                  "restart_progress_ratio": 1.0004789324590626
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 5.1506560302409085e-06,
+                  "restart_progress_ratio": 1.0004778077294492
+                }
+              }
+            }
+          ]
+        },
+        "reverse_locomotion": {
+          "status": "completed",
+          "error": null,
+          "exit_code": 2,
+          "passed": false,
+          "control_passed": true,
+          "elapsed_seconds": 11.075292552995961,
+          "periods": [
+            {
+              "period_seconds": 2.4,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0008207800543063181,
+                  "timestep_difference": 1.736827008595092e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0008201735971913325,
+                  "timestep_difference": 1.73732040029944e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 1.3078912174725531e-09,
+                  "stop_shape_speed_ratio": 1.9143185905778486e-05,
+                  "restart_progress_ratio": 0.9992823189160722
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 1.9014719340565458e-05,
+                  "restart_progress_ratio": 0.9992611210374768
+                }
+              }
+            },
+            {
+              "period_seconds": 3.0,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0008085613057149136,
+                  "timestep_difference": 1.9936467153776186e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0008080530471012811,
+                  "timestep_difference": 1.9938976191890613e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 9.043862149335686e-06,
+                  "restart_progress_ratio": 0.9993895583161715
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 9.030179008117836e-06,
+                  "restart_progress_ratio": 0.9993714037389123
+                }
+              }
+            },
+            {
+              "period_seconds": 3.7,
+              "passed": false,
+              "control_passed": true,
+              "stopped": true,
+              "recovered": true,
+              "propulsion": {
+                "go": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0007701400876921723,
+                  "timestep_difference": 2.089519429420957e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                },
+                "restart": {
+                  "passed": false,
+                  "direction": "reverse",
+                  "refined_forward_body_lengths_per_cycle": -0.0007697688587892387,
+                  "timestep_difference": 2.0896604910225817e-05,
+                  "detectable_translation": true,
+                  "periodic_shape": true,
+                  "consistent_cycles": true,
+                  "approximately_straight": true
+                }
+              },
+              "ratios": {
+                "coarse": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 4.7024467058463235e-06,
+                  "restart_progress_ratio": 0.9995324882526242
+                },
+                "fine": {
+                  "stop_path_ratio": 0.0,
+                  "stop_shape_speed_ratio": 4.710348888270339e-06,
+                  "restart_progress_ratio": 0.9995179722379521
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

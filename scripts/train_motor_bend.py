@@ -23,8 +23,10 @@ from r_elegans.rl.motor_curriculum import (
 )
 from r_elegans.rl import motor_curriculum
 if __package__:
+    from .experiment_records import capture_run_record
     from .train_timed import finite_tree, save_actor, save_json, checkpoint
 else:
+    from experiment_records import capture_run_record
     from train_timed import finite_tree, save_actor, save_json, checkpoint
 
 
@@ -46,6 +48,7 @@ def main():
     if output == repo or repo in output.parents:
         parser.error("Keep artifacts outside the repository")
     output.mkdir(parents=True, exist_ok=False)
+    capture_run_record(output, repo, args)
     started = time.perf_counter()
     model = load_builtin_model()
     actor = init_full_network_actor(model, jax.random.PRNGKey(args.seed))

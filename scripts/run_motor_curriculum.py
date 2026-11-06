@@ -20,9 +20,11 @@ import sys
 import time
 
 if __package__:
+    from .experiment_records import capture_run_record
     from .benchmark_cpu import physical_core_cpus, positive_int
     from .benchmark_cpu_parallel import worker_cpu_groups
 else:
+    from experiment_records import capture_run_record
     from benchmark_cpu import physical_core_cpus, positive_int
     from benchmark_cpu_parallel import worker_cpu_groups
 
@@ -173,6 +175,7 @@ def main():
     prefix = "reverse-" if args.reverse or args.refine_reverse else "stop-restart-" if args.stop_restart else "locomotion-" if args.assess_locomotion else "wave-" if initial_actors else "motor-"
     root = output_root / (prefix + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
     root.mkdir(parents=True, exist_ok=False)
+    capture_run_record(root, repo, args)
     deadline = time.perf_counter() + args.minutes * 60
     stopped = False
     def stop(signum, frame):

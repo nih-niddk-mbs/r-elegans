@@ -314,8 +314,24 @@ directions, even if stronger imitation/readiness gates were missed. This is
 permission to refine, not a successful stage declaration. The supervisor
 checks the original forward reference before launching workers. After roughly
 479 minutes of fitting, both independent long physics assays still run and
-must pass for overall success. The larger run is prepared and smoke-tested;
-its outcome is not yet known. Direction switching and RL remain later stages.
+must pass for overall success.
+
+The eight-hour results were reported on 2026-11-06: seeds 0/1/2 passed tuning
+imitation, forward readiness passed 0/1, and every seed missed reverse
+readiness. Reverse go progress magnitudes were 0.0005968–0.0009962 body
+lengths/cycle, below the unchanged 0.001 floor. All seeds retained real reverse
+motion and stop/restart control; all stages completed without errors. Seed 3
+missed one forward tuning case. Selected updates were 19,500/35,000/35,500/2,000
+for seeds 0–3, versus about 36k updates actually executed each. Thus more
+training did not guarantee the selected model passed the movement criteria.
+No seed met every gate. Optimizing and selecting directly for displacement is
+the proposed next change, not an experiment already run. Direction switching
+and RL remain later stages.
+
+The chronological [laboratory notebook](LAB_NOTEBOOK.md) records this history,
+exact reported summaries and evidence gaps. Future invocations also capture
+commands, installed packages, numerical environment and source snapshots;
+`archive_motor_run.py` preserves dependency cohorts and checksums externally.
 
 ### Anatomical muscle ordering (projection convention)
 

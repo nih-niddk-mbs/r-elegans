@@ -30,8 +30,10 @@ from r_elegans.rl.motor_curriculum import (
 )
 from r_elegans.rl import motor_curriculum, full_network_actor
 if __package__:
+    from .experiment_records import capture_run_record
     from .train_timed import finite_tree, save_actor, save_json, checkpoint
 else:
+    from experiment_records import capture_run_record
     from train_timed import finite_tree, save_actor, save_json, checkpoint
 
 
@@ -76,6 +78,7 @@ def main():
     if output == repo or repo in output.parents:
         parser.error("Artifacts must stay outside Git")
     output.mkdir(parents=True, exist_ok=False)
+    capture_run_record(output, repo, args)
     started = time.perf_counter()
     deadline = started + args.minutes * 60 if args.minutes else float("inf")
     stop = False

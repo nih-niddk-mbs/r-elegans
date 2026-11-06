@@ -1,0 +1,38 @@
+[
+  {
+    "entry": "E010",
+    "evidence_type": "user_reported_server_stdout",
+    "evidence_sha256": "3980f1286568a852a1fbc9b0feefc5a5be9b89e6e6416075c97d9617718ab7fb",
+    "evidence_file": "notebook/evidence/E010/reported-server-results.txt"
+  },
+  {
+    "entry": "E011",
+    "evidence_type": "user_reported_server_stdout",
+    "evidence_sha256": "d2de6530a4e51512713e2677a0a9a5d2d0f7949360c8eae2ebcd7f15cf393be6",
+    "evidence_file": "notebook/evidence/E011/reported-server-results.txt"
+  },
+  {
+    "entry": "E012",
+    "evidence_type": "user_reported_server_stdout",
+    "evidence_sha256": "b91c5b0d6e345ba549e2e9b597e1e936149aef066e1e8956613c140956551298",
+    "evidence_file": "notebook/evidence/E012/reported-server-results.txt"
+  },
+  {
+    "entry": "E013",
+    "evidence_type": "user_reported_server_stdout",
+    "evidence_sha256": "12f9bc5c17ac91af17965258922b266a8907f0d5f11c368c3615b7c4a4366a87",
+    "evidence_file": "notebook/evidence/E013/reported-server-results.txt"
+  },
+  {
+    "entry": "E014",
+    "evidence_type": "user_reported_server_stdout",
+    "evidence_sha256": "9d24cb6a32e435d22d32c9d2909d4197a9d11afe8832642e43a214ef45552e4c",
+    "evidence_file": "notebook/evidence/E014/reported-server-results.txt"
+  },
+  {
+    "entry": "E015",
+    "evidence_type": "user_reported_server_stdout",
+    "evidence_sha256": "822a154f05c30a2160043252d0b670af225f159e2ecc7f31c3c30bd8e4dc50eb",
+    "evidence_file": "notebook/evidence/E015/reported-server-results.txt"
+  }
+]

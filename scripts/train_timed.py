@@ -33,8 +33,10 @@ from r_elegans.rl import (
 )
 
 if __package__:
+    from .experiment_records import capture_run_record
     from .train_rl_chemotaxis import evaluate_via_env, make_trials
 else:
+    from experiment_records import capture_run_record
     from train_rl_chemotaxis import evaluate_via_env, make_trials
 
 
@@ -139,6 +141,7 @@ def main() -> int:
     if output == repo or repo in output.parents:
         parser.error("--output-dir must be outside the repository")
     output.mkdir(parents=True, exist_ok=True)
+    capture_run_record(output, repo, args)
     if (output / "manifest.json").exists():
         parser.error("Output already contains a run; use a fresh output directory")
 

@@ -15,7 +15,11 @@ training infrastructure with smoke-test validation, not a completed P00–P13
 curriculum or evidence of real-animal behavioral agreement. Known NMJ signs
 and anatomical edge masks remain constraints; unknown NMJ signs can learn.
 
-## Current motor milestone (2026-11-05)
+## Current motor milestone (updated 2026-11-06)
+
+For the chronological protocol/outcome record and replication checklist, see
+[LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). The historical stages below describe
+progression, not a claim that all current models pass every stage.
 
 The externally paced 302-neuron 0.07 ensemble has passed forward locomotion
 readiness for three of four seeds. All four pass wave fitting; seed 2 misses
@@ -68,6 +72,15 @@ case count and worst error. Do not call tuning data used for selection an
 independent test. After fitting, run the existing long physical go/stop/go
 assays in both directions. Keep all previous thresholds, fixed NMJ/muscle
 mapping and artificial direction context. No automatic turning or RL follows.
+
+Eight-hour outcome: tuning imitation passed seeds 0/1/2 and forward readiness
+passed 0/1, but no seed passed reverse propulsion readiness. All retained
+backward translation and stop/restart control, and every stage completed
+without errors. Reverse go magnitudes remained 0.0005968–0.0009962 body
+lengths/cycle, below 0.001; seed 3 also missed one forward tuning case.
+Do not equate passing imitation with passing behavior. Proposed next protocol:
+incorporate actual movement into optimization and selection, preserving all
+control/numerical gates. That change has not been implemented or run here.
 
 ## Scientific objective
 

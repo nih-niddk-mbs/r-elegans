@@ -18,8 +18,10 @@ from r_elegans.rl.full_network_actor import actor_from_arrays, init_full_network
 from r_elegans.rl.motor_curriculum import commanded_muscle_sequence, motor_stimulation_vector, muscle_sequence_body
 from r_elegans.rl.locomotion import cycle_metrics, assess_propulsion
 if __package__:
+    from .experiment_records import capture_run_record
     from .train_timed import save_json, finite_tree
 else:
+    from experiment_records import capture_run_record
     from train_timed import save_json, finite_tree
 
 
@@ -38,6 +40,7 @@ def main():
     if output == repo or repo in output.parents:
         parser.error("Artifacts must stay outside Git")
     output.mkdir(parents=True, exist_ok=False)
+    capture_run_record(output, repo, args)
     started = time.perf_counter()
     model = load_builtin_model()
     source_manifest = json.loads((args.initial_actor.parent / "manifest.json").read_text())

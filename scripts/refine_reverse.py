@@ -25,8 +25,10 @@ from r_elegans.rl.motor_curriculum import (directional_muscle_sequence, motor_st
 from r_elegans.rl import bidirectional_curriculum, motor_curriculum, full_network_actor
 from r_elegans.rl.bidirectional_curriculum import command_bank, validation_key
 if __package__:
+    from .experiment_records import capture_run_record
     from .train_timed import save_actor, save_json, checkpoint, finite_tree
 else:
+    from experiment_records import capture_run_record
     from train_timed import save_actor, save_json, checkpoint, finite_tree
 
 
@@ -97,6 +99,7 @@ def main():
         return a
     actor, teacher = load(args.initial_actor), load(reference_path)
     output.mkdir(parents=True, exist_ok=False)
+    capture_run_record(output, repo, args)
     started, stop = time.perf_counter(), False
     deadline = started + args.minutes*60
     def request_stop(signum, frame):

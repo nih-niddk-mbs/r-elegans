@@ -68,6 +68,20 @@ re-fitted; it must not be mixed with an SI-valued body. A recurrent
 connectome-constrained controller remains a later milestone described in
 [PRD.md](PRD.md).
 
+## Laboratory records and replication
+
+[LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) is the chronological experiment record,
+including hypotheses, methods, negative results, decisions, code/artifact
+lineage and explicit evidence gaps. Small [reported-result summaries](experiments/records)
+stay in Git; raw data and checkpoints remain external. Future training and
+assessment invocations automatically save exact commands, package/platform
+records, numerical settings and source snapshots under `run_records/`.
+
+Preserve a finished server cohort and all checkpoint dependencies with
+`scripts/archive_motor_run.py`; see the notebook for archive/verification and
+replay procedures. A same-disk archive is not an off-machine backup, and
+collection-time metadata does not replace missing historical run environments.
+
 ## Single-compartment electrophysiology
 
 `r_elegans.brain.single_compartment` implements the voltage-gated K, Ca,
@@ -608,8 +622,17 @@ for fitting, followed by independent long forward and reverse physics assays
 including stop/restart, timestep refinement and isotropic controls. The fresh
 `reverse-*` folder preserves both earlier cohorts. The iteration cap is one
 million, so the wall-clock budget normally governs; increase `--minutes` for
-a longer run. This implementation is smoke-tested, not a completed eight-hour
-experiment or evidence of improved behavioral success yet.
+a longer run.
+
+The eight-hour result has now been reported: imitation passed seeds 0/1/2,
+and forward readiness passed 0/1. All seeds retained reverse translation and
+stop/restart control, but every reverse readiness assay missed the 0.001
+progress floor (go magnitudes 0.0005968–0.0009962 body lengths/cycle).
+Seed 3 also missed one forward tuning case. Every stage completed without
+errors; no model met every criterion. The remaining mismatch is imitation
+versus actual propulsion. No further learning-objective change has been run.
+See [E015 in the notebook](LAB_NOTEBOOK.md#e015--reported-2026-11-06-eight-hour-refinement)
+for per-seed updates, selection and evidence limitations.
 
 The full-network actor runs all 302 neurons, 3,709 chemical edges, 1,093 gap
 pairs and the 956-edge projection to 95 muscles. It uses generic normalized
