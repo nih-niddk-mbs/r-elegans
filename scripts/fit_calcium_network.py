@@ -23,6 +23,7 @@ from r_elegans.brain.conductance_network import (
     ConductanceNetworkConfig,initialize_conductance_network,
     network_recording_intervals,network_recording,save_network,load_network,
 )
+from r_elegans.brain.fit_constraints import conservative_fit_constraints,project_unknowns,frozen_parameter_changes
 from r_elegans.data.calcium import load_identified_calcium
 from r_elegans.model import load_builtin_model
 from r_elegans.rl.full_network_actor import actor_from_arrays
@@ -45,6 +46,7 @@ def main():
     source.add_argument('--initial-network',type=Path,help='Preserve an existing all-cell channel/kinetics configuration')
     parser.add_argument('--qualify-rhythms',action='store_true',help='Return nonzero if initial/final candidates lack sustained RMD activity in a separate 20 s assay')
     parser.add_argument('--experiment-id',default='E026')
+    parser.add_argument('--constraints',type=Path,help='External JSON of additionally frozen channels/edges, with source/reason')
     parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--frames',type=int,default=16)
     parser.add_argument('--iterations',type=int,default=20)
@@ -70,10 +72,16 @@ def main():
         config=ConductanceNetworkConfig()
         initial,fixed=initialize_conductance_network(parent,model.neuron_ids,config)
     save_network(output/'network_initial.npz',initial,fixed,config)
+    extra=json.loads(args.constraints.read_text()) if args.constraints else None
+    masks,policy=conservative_fit_constraints(fixed,model.neuron_ids,data['names'],extra)
+    if args.constraints:shutil.copy2(args.constraints,output/'source_constraints.json')
+    (output/'fit_policy.json').write_text(json.dumps(policy,indent=2)+'\n')
+    np.savez_compressed(output/'trainable_masks.npz',channels=np.asarray(masks.channels),
+        chemical=np.asarray(masks.chemical),gap=np.asarray(masks.gap))
     intervals=jnp.asarray(data['intervals_s']); indices=jnp.asarray(data['indices'])
     target=jnp.asarray(data['normalized']); ntrain=data['train_frames']
     substeps=math.ceil(float(intervals.max())*1000./args.max_step_ms)
-    predict=jax.jit(lambda p:network_recording_intervals(p,fixed,intervals,substeps,config).indicator[:,indices])
+    predict=jax.jit(lambda p:network_recording_intervals(project_unknowns(p,initial,masks),fixed,intervals,substeps,config).indicator[:,indices])
     started=time.monotonic()
     initial_signal=predict(initial)
     initial_signal.block_until_ready()
@@ -85,9 +93,10 @@ def main():
     def loss(p):
         prediction=normalized_prediction(p)
         fit=jnp.mean((prediction[:ntrain]-target[:ntrain])**2)
-        prior=jnp.mean(p.log_channel_scale**2)
-        for value,start,mask in ((p.raw_chemical,initial.raw_chemical,fixed.chemical_mask),
-                                (p.raw_gap,initial.raw_gap,fixed.gap_mask)):
+        p=project_unknowns(p,initial,masks)
+        prior=jnp.sum(((p.log_channel_scale-initial.log_channel_scale)*masks.channels)**2)/jnp.maximum(masks.channels.sum(),1.)
+        for value,start,mask in ((p.raw_chemical,initial.raw_chemical,masks.chemical),
+                                (p.raw_gap,initial.raw_gap,masks.gap)):
             prior+=jnp.sum(((value-start)*mask)**2)/jnp.maximum(mask.sum(),1.)
         return fit+.001*prior
     optimizer=optax.chain(optax.clip_by_global_norm(1.),optax.adam(args.learning_rate))
@@ -97,10 +106,10 @@ def main():
         value,gradient=jax.value_and_grad(loss)(p)
         updates,state=optimizer.update(gradient,state,p)
         new=optax.apply_updates(p,updates)
-        new=new._replace(log_channel_scale=jnp.clip(new.log_channel_scale,-jnp.log(10.),jnp.log(10.)),
+        new=new._replace(log_channel_scale=jnp.clip(new.log_channel_scale,initial.log_channel_scale-jnp.log(10.),initial.log_channel_scale+jnp.log(10.)),
             raw_chemical=jnp.where(fixed.chemical_mask,jnp.clip(new.raw_chemical,initial.raw_chemical-2.,initial.raw_chemical+2.),initial.raw_chemical),
             raw_gap=jnp.where(fixed.gap_mask,jnp.clip(new.raw_gap,initial.raw_gap-2.,initial.raw_gap+2.),initial.raw_gap))
-        return new,state,value
+        return project_unknowns(new,initial,masks),state,value
     initial_pred=np.asarray(normalized_prediction(initial))
     history=[]; p=initial
     for iteration in range(args.iterations):
@@ -149,6 +158,9 @@ def main():
             'No target voltage, fluorescence or behavioral teacher forcing',
             'Neuron identity coverage differs from complete 302-cell simulation'],
         model_evidence='Calcium-constrained candidate; no unique channel/synapse identification')
+    summary['fit_policy']=dict(version=policy['version'],trainable=policy['trainable'],
+        frozen_parameter_changes=frozen_parameter_changes(p,initial,masks),
+        constraints_sha256=sha(args.constraints) if args.constraints else None)
     summary['train_improved']=summary['final_train_mse']<summary['initial_train_mse']
     summary['heldout_improved']=summary['final_heldout_mse']<summary['initial_heldout_mse']
     summary['finite']=all(np.isfinite(x).all() for x in jax.tree_util.tree_leaves(trajectory))

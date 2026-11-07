@@ -359,6 +359,54 @@ displacement alone never sets `locomotion_demonstrated=true`. Snapshots retain
 all gates/calcium/body state; the CLI does not yet expose exact checkpoint resume.
 The Linux queue itself remains unexecuted until the user launches it on mbslnx2.
 
+## Conservative fitting policy (E029, 2026-11-07)
+
+User-directed default: **fix stereotypical properties and fit explicit unknowns**.
+`brain/fit_constraints.py` now creates and enforces an `unknown-only-v1` policy
+for every calcium fit. Earlier E026/E027 all-conductance runs remain historical
+experiments; they do not describe the new default.
+
+Fixed: channel gating equations/rates, ionic reversals, calcium handling,
+capacitance, leak reversal, anatomical masks, release/reversal priors, indicator
+constants/readout and the NMJ/muscle/body contract. LEAK conductance is additionally
+fixed to the initial value as a conductance-scale anchor. Established RMD class
+profiles and the high-CCA1 exploratory profile stay fixed. Channel priors of
+unobserved cells remain fixed in a given recording. These last choices are
+conservative model assumptions, **not a declaration that all such values are
+known biological constants**. Capacitance/leak need not be identical across cells.
+
+Trainable: other unknown channel densities in observed, unanchored cells, plus
+unmeasured chemical/electrical strengths on existing anatomical edges. Contact
+counts constrain topology/initialization, not measured conductances. The mask
+policy never creates edges or fits new capacitance/reversal/kinetic fields.
+The parent-relative penalty/bounds now use the supplied initial checkpoint,
+including its nonzero multipliers, rather than pulling those multipliers to zero.
+
+Every run saves `fit_policy.json` and `trainable_masks.npz`, with per-cell reasons,
+fixed-property evidence categories and actual trainable counts. Frozen entries
+are masked in the forward/gradient path and restored after every optimizer step,
+so momentum cannot move them. Summary reports frozen-parameter change counts.
+Use `--constraints /external/constraints.json` to freeze additional sourced known
+channels/edges. Example (freezes current values; does not assign measurements):
+
+```json
+{
+  "frozen_channels": [
+    {"neuron": "ASEL", "channel": "UNC2", "source": "recording/model identifier", "reason": "hold independently constrained value"}
+  ],
+  "frozen_edges": [
+    {"kind": "gap", "post": "AVAL", "pre": "LUAL", "source": "recording/model identifier", "reason": "hold independently constrained conductance"}
+  ]
+}
+```
+
+Supply a checkpoint containing the intended constrained values; record whether
+the source is direct measurement, a published estimate, expression inference,
+or a modeling assumption. A gap constraint freezes both directions. Source/reason
+and canonical/existing-edge validation are required; unknown schema fields fail.
+No universal left/right or motor-neuron equality is imposed without supporting
+evidence. Biology, prior assumptions and numerical scale anchors remain distinct.
+
 ## Status table
 
 Standalone steering development now uses `train_steering.py` (MOT-08).

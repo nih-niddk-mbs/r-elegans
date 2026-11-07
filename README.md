@@ -76,6 +76,11 @@ A [bounded mbslnx2 diagnostic launcher](CURRENT_MODEL.md#launch-the-bounded-mbsl
 runs neural/muscle/body controls under `nohup`, with external inputs/results and
 a 45-minute budget. The user launches it; no remote run is assumed.
 
+Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
+shared physiological properties and reference leak stay fixed; only explicitly
+eligible unknown channel densities and existing synaptic strengths fit. Each run
+saves its exact masks and distinguishes measured constraints from fixed estimates.
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)

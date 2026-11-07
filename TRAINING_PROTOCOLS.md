@@ -143,6 +143,24 @@ neither a static bend, startup relaxation nor nonzero drift establishes gait.
 The local liquid candidate produces small periodic bends but negligible net
 displacement. Useful locomotion and body-feedback qualification remain pending.
 
+## Fix stereotypical properties; fit explicit unknowns (E029)
+
+New calcium-fitting default supersedes the all-conductance E026/E027 experiments.
+Use `unknown-only-v1`: fixed channel kinetics, reversals, calcium handling,
+capacitance, leak reversal, topology, release fields and observation/readout.
+Fix reference LEAK conductance as a scale anchor, RMD class/exploratory profiles
+as held hypotheses, and unobserved cell channel priors for each recording.
+Only remaining unknown observed-cell channel densities and unmeasured strengths
+on existing chemical/gap edges vary. This preserves whole-network simulation;
+an unobserved prior being held is not evidence that it is biologically known.
+
+Store policy/masks, sources/reasons and fixed-versus-trainable counts, and verify
+frozen fields remain exactly unchanged after optimization. Additional known channel
+or edge freezes are external provenance-bearing constraints; electrical pairs
+freeze symmetrically. Do not use synapse contact counts as conductance measurements
+or force arbitrary bilateral equality. The E028 workstation run remains entirely
+fixed-parameter and is unaffected by these optimizer defaults.
+
 ## Working hypothesis: motor curriculum before task RL
 
 [H1 in the laboratory notebook](LAB_NOTEBOOK.md#h1--build-the-motor-repertoire-before-task-rl)

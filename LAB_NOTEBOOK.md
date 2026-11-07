@@ -1471,6 +1471,83 @@ transfer bundle. Final targeted recheck after diagnostic metadata additions:
 4 passed in 5.71 s. No remote process started. Local OneDrive verification does
 not establish completed cloud synchronization.
 
+### E029 — 2026-11-07: freeze stereotypical properties, fit explicit unknowns (verified)
+
+**User direction:** "fix as many things as we can", "only fit what is truly
+unknown", and "fix parameters that are stereotypical." This changes fitting
+defaults; E028 remains a fixed-parameter diagnostic, not a training run.
+
+**Policy:** keep shared channel gating laws/rate constants, ionic reversals,
+calcium handling, capacitance, leak reversal, topology, release/reversal priors,
+NMJ/muscle/body readout and indicator constants fixed. Additionally anchor LEAK
+conductance in every cell to prevent it drifting against the conductance/time
+scale. Keep established RMD class profiles and the exploratory active RMD
+profile fixed; the latter remains a model hypothesis, not measured biology.
+Hold unobserved cells' channel priors fixed for each recording. Fit remaining
+unknown channel densities only in observed, unanchored cells, and unmeasured
+strengths on existing chemical/electrical edges. Counts/topology are known;
+edge conductances are not established by contact count.
+
+**Evidence distinctions:** many capacitance/leak/reversal values and transferred
+profiles are current model estimates, not universal empirical constants. Fixing
+them is the user's conservative modeling choice; do not relabel guesses as
+known or force bilateral cells to be identical without evidence (ASE/AWC
+asymmetry remains relevant). Additional externally supplied channel/edge freezes
+must retain a source and reason. Gap freezes apply to both directions. No
+kinetic or capacitance/reversal optimizer fields are added.
+
+**Implementation/verification plan:** save a per-run fit-policy manifest and
+exact trainable masks. Mask forward/gradient paths and project every optimizer
+update back onto frozen values, preserving them bit-for-bit even with optimizer
+momentum. Anchor priors and bounds to the supplied initial checkpoint, rather
+than treating loaded nonzero log multipliers as deviations from zero. Test
+mask/gradient/optimizer behavior, symmetry, invalid constraints, and a one-update
+real-recording integration check. Preserve known/held-by-assumption labels and
+report exact trainable counts/frozen changes. No long fit or remote launch is
+authorized by this policy update.
+
+**Implementation:** `brain/fit_constraints.py`, integrated into the calcium
+fitter as its default with no broad all-parameter override. Every run saves
+`fit_policy.json`, `trainable_masks.npz` and summary counts/frozen changes.
+Masks act in the forward/gradient path and after each optimizer update. LEAK
+is now fixed too, superseding the earlier statement during E028 that leak
+conductance was trainable under the old default. Channel/edge prior penalties
+and log-scale bounds are relative to the supplied initial checkpoint.
+
+**Real-recording integration command:**
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.fit_calcium_network --recording /Users/carsonc/OneDrive/r-elegans/raw/calcium/atanas_kim_2023/2022-06-14-01-data.h5 --labels /Users/carsonc/OneDrive/r-elegans/raw/calcium/atanas_kim_2023/neuropal_label.json.bz2 --uid 2022-06-14-01 --initial-network /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E027/r-elegans-E027-connected-default/network_candidate.npz --qualify-rhythms --experiment-id E029 --output-dir /tmp/r-elegans-E029-constraints --frames 8 --iterations 1 --learning-rate .001 --max-step-ms .1 --minutes 15
+```
+
+Only one update to test constraint enforcement, not a new physiological fit.
+55 identified cells: 848 eligible channel conductances (53 unanchored observed
+cells x16 non-LEAK components), 3709 existing chemical strengths, 1093 independent
+gap strengths. All 302 neurons still evolve. Frozen change counts are exactly
+zero for channel, chemical and electrical masks. Separately compared 20 fixed
+checkpoint fields (cell constants, fixed network fields, config, IDs/schema):
+all bit-identical. Capacitance, leak/reference and reversals were not fitted.
+No identities or topology changed. RMD profile remains a fixed hypothesis.
+
+Train MSE 1.094283 -> 1.094277; held-out 5.100195 -> 5.100143, still not a good
+predictive fit or better than the constant baseline. Independent 20 s rhythm
+qualification passes before and after. This verifies the restricted optimizer
+path and persistence check, not the correctness/identifiability of fitted values.
+
+**Tests:** targeted policy tests 3 passed in 3.31 s; full suite **190 passed
+in 69.82 s**. Tests enforce class/unobserved/reference anchors, zero gradients,
+fixed values despite deliberately injected optimizer momentum, symmetric known
+gap freezes, and source/schema validation. No long training/server run started.
+
+**Archive:** `/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E029/` contains
+the full integration run, original stdout, policy/masks, input/final states,
+optimizer, traces and fixed-field audit. 163 copied files SHA-256 verified;
+manifest `SHA256SUMS.json` hash
+`6ab2197a36693f146fee675038bce9d952c56412fe8daad1cafd602acc092be1`.
+Small summary/hashes: `experiments/records/E029.json`. Exact source/environment
+snapshots retain the dirty pre-commit state. Local copy verification does not
+establish cloud synchronization. E028 diagnostic inputs/equations are unchanged.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,
