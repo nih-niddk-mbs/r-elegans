@@ -63,6 +63,13 @@ compositions are transferred priors, and no spiking rule is imposed. Initial
 short-window fits have not established predictive accuracy or preserved motor
 skills; use the existing operating model until this branch is qualified.
 
+An [unpaced activity assay](CURRENT_MODEL.md#sustained-channel-dynamics-qualification-e027-2026-11-07)
+now demonstrates persistent channel-driven oscillations in an exploratory RMD
+profile, including three RMD cells in the full connected network. Calcium-current
+ablation removes the qualifying rhythms. This establishes a dynamical candidate,
+not physiological calibration or autonomous locomotion. Calcium fitting can start
+from its saved channel checkpoint and optionally check that activity persists.
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)

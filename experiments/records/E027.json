@@ -1,0 +1,2338 @@
+{
+  "experiment": "E027",
+  "evidence": "locally_executed_conductance_model_assays",
+  "outcome": "Persistent model dynamics established; biological calibration/gait not established",
+  "runs": [
+    {
+      "run": "rmd-grid",
+      "summary": {
+        "experiment": "E027",
+        "scope": "isolated RMD conductance-model regime, not calibrated motor physiology",
+        "duration_s": 10.0,
+        "sample_dt_s": 0.002,
+        "integration_step_ms": 0.05,
+        "initial_voltage_mV": -35.0,
+        "applied_current_pA": 0.0,
+        "passed_candidates": 0,
+        "calcium_finite": true,
+        "calcium_range_uM": [
+          0.05310140177607536,
+          0.8731554746627808
+        ],
+        "qualifying_results": [],
+        "tested_conditions": 49,
+        "control_passes": null
+      },
+      "summary_sha256": "9284b20b0a2eda211c6cf579fe01a1932bbafd68dfd0cd58c43897ef1ee91cfa"
+    },
+    {
+      "run": "rmd-grid-corrected",
+      "summary": {
+        "experiment": "E027",
+        "scope": "isolated RMD conductance-model regime, not calibrated motor physiology",
+        "duration_s": 10.0,
+        "sample_dt_s": 0.002,
+        "integration_step_ms": 0.05,
+        "initial_voltage_mV": -35.0,
+        "applied_current_pA": 0.0,
+        "passed_candidates": 6,
+        "calcium_finite": true,
+        "calcium_range_uM": [
+          0.05310140177607536,
+          0.9330691695213318
+        ],
+        "qualifying_results": [
+          {
+            "leak_nS": 0.03,
+            "cca1_nS": 10.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 15,
+              "window_amplitudes_mV": [
+                34.82451009750366,
+                34.86864519119263,
+                34.88405656814575,
+                34.88828372955322,
+                34.89866399765015
+              ],
+              "amplitude_retention": 1.0021293594637473,
+              "median_period_s": 0.338,
+              "period_cv": 0.002236476171652234,
+              "voltage_min_mV": -29.551179885864258,
+              "voltage_max_mV": 6.156494140625
+            }
+          },
+          {
+            "leak_nS": 0.03,
+            "cca1_nS": 20.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 21,
+              "window_amplitudes_mV": [
+                29.598783493041992,
+                29.64716339111328,
+                29.696235179901123,
+                29.72432851791382,
+                29.73048210144043
+              ],
+              "amplitude_retention": 1.004449460175598,
+              "median_period_s": 0.242,
+              "period_cv": 0.004869816655329041,
+              "voltage_min_mV": -24.429061889648438,
+              "voltage_max_mV": 6.496254920959473
+            }
+          },
+          {
+            "leak_nS": 0.03,
+            "cca1_nS": 30.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 22,
+              "window_amplitudes_mV": [
+                24.67632532119751,
+                24.7700252532959,
+                24.800618648529053,
+                24.835993766784668,
+                24.859580039978027
+              ],
+              "amplitude_retention": 1.0074263374467307,
+              "median_period_s": 0.226,
+              "period_cv": 0.005701917820470012,
+              "voltage_min_mV": -20.47262191772461,
+              "voltage_max_mV": 6.667991638183594
+            }
+          },
+          {
+            "leak_nS": 0.045,
+            "cca1_nS": 20.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 22,
+              "window_amplitudes_mV": [
+                23.79603910446167,
+                23.920724749565125,
+                23.86853337287903,
+                18.33118200302124,
+                23.789985060691833
+              ],
+              "amplitude_retention": 0.9997455860724023,
+              "median_period_s": 0.22,
+              "period_cv": 0.1368307231913453,
+              "voltage_min_mV": -25.25124740600586,
+              "voltage_max_mV": 5.312216758728027
+            }
+          },
+          {
+            "leak_nS": 0.045,
+            "cca1_nS": 30.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 23,
+              "window_amplitudes_mV": [
+                21.85559606552124,
+                21.931936144828796,
+                21.978759825229645,
+                21.99729323387146,
+                22.012998163700104
+              ],
+              "amplitude_retention": 1.0072019128513807,
+              "median_period_s": 0.22,
+              "period_cv": 0.004545415414980636,
+              "voltage_min_mV": -22.297348022460938,
+              "voltage_max_mV": 5.628084659576416
+            }
+          },
+          {
+            "leak_nS": 0.045,
+            "cca1_nS": 50.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 27,
+              "window_amplitudes_mV": [
+                14.328767538070679,
+                14.459434986114502,
+                14.528398752212524,
+                14.56922173500061,
+                14.594720602035522
+              ],
+              "amplitude_retention": 1.0185607773493583,
+              "median_period_s": 0.186,
+              "period_cv": 0.005094557027247093,
+              "voltage_min_mV": -16.96221923828125,
+              "voltage_max_mV": 5.8692731857299805
+            }
+          }
+        ],
+        "tested_conditions": 49,
+        "control_passes": null
+      },
+      "summary_sha256": "4b0ed57597f1cee702db0784476a3b03080bc76252b5f0f49c313be65df1c836"
+    },
+    {
+      "run": "confirm",
+      "summary": {
+        "experiment": "E027",
+        "scope": "isolated RMD conductance-model regime, not calibrated motor physiology",
+        "duration_s": 30.0,
+        "sample_dt_s": 0.002,
+        "integration_step_ms": 0.05,
+        "initial_voltage_mV": -35.0,
+        "applied_current_pA": 0.0,
+        "passed_candidates": 3,
+        "calcium_finite": true,
+        "calcium_range_uM": [
+          0.05021575838327408,
+          1.0292099714279175
+        ],
+        "substep_refinement": {
+          "maximum_voltage_difference_mV": 17.417194366455078,
+          "voltage_rmse_mV": 4.582825660705566,
+          "qualifying_refined_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        "mode": "isolated_confirmation",
+        "conditions": [
+          "candidate",
+          "initial_minus34",
+          "initial_minus70",
+          "CCA1_removed",
+          "ordinary_RMD_control"
+        ],
+        "qualifying_results": [
+          {
+            "leak_nS": 0.045,
+            "cca1_nS": 30.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 69,
+              "window_amplitudes_mV": [
+                22.029079884290695,
+                22.02949568629265,
+                22.02956873178482,
+                22.029518872499466,
+                22.029508650302887
+              ],
+              "amplitude_retention": 1.0000194636369037,
+              "median_period_s": 0.22,
+              "period_cv": 0.004211899201610142,
+              "voltage_min_mV": -22.29994773864746,
+              "voltage_max_mV": 5.628084659576416
+            }
+          },
+          {
+            "leak_nS": 0.045,
+            "cca1_nS": 30.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 69,
+              "window_amplitudes_mV": [
+                22.029217302799225,
+                22.02946299314499,
+                22.02953416109085,
+                22.0296089053154,
+                22.029416650533676
+              ],
+              "amplitude_retention": 1.0000090492427267,
+              "median_period_s": 0.22,
+              "period_cv": 0.004265479678355292,
+              "voltage_min_mV": -22.299951553344727,
+              "voltage_max_mV": 5.6357102394104
+            }
+          },
+          {
+            "leak_nS": 0.045,
+            "cca1_nS": 30.0,
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 69,
+              "window_amplitudes_mV": [
+                22.029246479272842,
+                22.02940535545349,
+                22.02952128648758,
+                22.029484540224075,
+                22.02946275472641
+              ],
+              "amplitude_retention": 1.0000098176509928,
+              "median_period_s": 0.22,
+              "period_cv": 0.004211899201610142,
+              "voltage_min_mV": -64.62200164794922,
+              "voltage_max_mV": 27.84494400024414
+            }
+          }
+        ],
+        "tested_conditions": 5,
+        "control_passes": [
+          true,
+          true,
+          true,
+          false,
+          false
+        ],
+        "cycle_comparisons": {
+          "0": {
+            "passed": true,
+            "period_relative_error": 0.001828153564899377,
+            "amplitude_relative_error": 0.001256454482694024,
+            "phase_aligned_waveform_rmse_mV": 0.03506035195103585,
+            "coarse_period_s": 0.2192,
+            "fine_period_s": 0.21880000000000002,
+            "pointwise_rmse_mV": 5.909860610961914
+          },
+          "1": {
+            "passed": true,
+            "period_relative_error": 0.001828153564899377,
+            "amplitude_relative_error": 0.001219492229946532,
+            "phase_aligned_waveform_rmse_mV": 0.16656126928135126,
+            "coarse_period_s": 0.2192,
+            "fine_period_s": 0.21880000000000002,
+            "pointwise_rmse_mV": 5.909094333648682
+          },
+          "2": {
+            "passed": true,
+            "period_relative_error": 0.001828153564899377,
+            "amplitude_relative_error": 0.0012481003841271156,
+            "phase_aligned_waveform_rmse_mV": 0.06577133040091011,
+            "coarse_period_s": 0.2192,
+            "fine_period_s": 0.21880000000000002,
+            "pointwise_rmse_mV": 5.930227756500244
+          }
+        }
+      },
+      "summary_sha256": "169db398270a7b82627172e9f4f11410bd9ad043a17356ec0255197c091fea54"
+    },
+    {
+      "run": "connected-default",
+      "summary": {
+        "experiment": "E027",
+        "scope": "full 302-cell channel network; exploratory RMD prior",
+        "duration_s": 20.0,
+        "sample_dt_s": 0.002,
+        "integration_step_ms": 0.1,
+        "initial_voltage_mV": -35.0,
+        "applied_current_pA": 0.0,
+        "passed_candidates": 3,
+        "calcium_finite": true,
+        "calcium_range_uM": [
+          0.05000000074505806,
+          0.8709143400192261
+        ],
+        "substep_refinement": {
+          "maximum_voltage_difference_mV": 19.50963592529297,
+          "voltage_rmse_mV": 0.6072263717651367,
+          "qualifying_refined_indices": [
+            194,
+            195,
+            196
+          ]
+        },
+        "mode": "connected_network",
+        "coupling_scale": 1.0,
+        "synaptic_unit_nS": 0.03,
+        "parent_sha256": "c3fe2ece3a2ea090412655588a2c2fd3fbdfa8e4e848e8533ecdf7c5980aeed6",
+        "rmd_neurons": [
+          "RMDDL",
+          "RMDDR",
+          "RMDL",
+          "RMDR",
+          "RMDVL",
+          "RMDVR"
+        ],
+        "qualifying_results": [
+          {
+            "neuron": "RMDL",
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                21.18915295600891,
+                21.189301192760468,
+                21.18603366613388,
+                21.181008517742157,
+                21.173101365566254
+              ],
+              "amplitude_retention": 0.9992424619107719,
+              "median_period_s": 0.216,
+              "period_cv": 0.004582106511270065,
+              "voltage_min_mV": -22.15210723876953,
+              "voltage_max_mV": 5.490380764007568
+            }
+          },
+          {
+            "neuron": "RMDR",
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                20.286508202552795,
+                20.309680461883545,
+                20.328835606575012,
+                20.34518325328827,
+                20.353463768959045
+              ],
+              "amplitude_retention": 1.0033004973422595,
+              "median_period_s": 0.216,
+              "period_cv": 0.003696857670979671,
+              "voltage_min_mV": -21.998939514160156,
+              "voltage_max_mV": 5.332021236419678
+            }
+          },
+          {
+            "neuron": "RMDVL",
+            "metrics": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                11.805851936340332,
+                11.706602096557617,
+                11.659486770629883,
+                11.641084671020508,
+                11.635117530822754
+              ],
+              "amplitude_retention": 0.9855381546000903,
+              "median_period_s": 0.216,
+              "period_cv": 0.003970248328025813,
+              "voltage_min_mV": -21.631572723388672,
+              "voltage_max_mV": 4.82249641418457
+            }
+          }
+        ],
+        "tested_conditions": 302,
+        "control_passes": null,
+        "cycle_comparisons": {
+          "194": {
+            "passed": true,
+            "period_relative_error": 0.0037037037037038097,
+            "amplitude_relative_error": 0.00249638346243349,
+            "phase_aligned_waveform_rmse_mV": 0.12034173195923169,
+            "coarse_period_s": 0.21680000000000002,
+            "fine_period_s": 0.216,
+            "pointwise_rmse_mV": 7.201731204986572
+          },
+          "195": {
+            "passed": true,
+            "period_relative_error": 0.0018518518518519048,
+            "amplitude_relative_error": 0.0027368989928001977,
+            "phase_aligned_waveform_rmse_mV": 0.061486655593846966,
+            "coarse_period_s": 0.2164,
+            "fine_period_s": 0.216,
+            "pointwise_rmse_mV": 6.894916534423828
+          },
+          "196": {
+            "passed": true,
+            "period_relative_error": 0.0018518518518519048,
+            "amplitude_relative_error": 0.001377198141168284,
+            "phase_aligned_waveform_rmse_mV": 0.02101700864227872,
+            "coarse_period_s": 0.2164,
+            "fine_period_s": 0.216,
+            "pointwise_rmse_mV": 3.3785412311553955
+          }
+        }
+      },
+      "summary_sha256": "b3d7cb15e1591ca3a5c575b4b0212e9e3aaeff25e9cbbdd26070d36e992916b7"
+    },
+    {
+      "run": "connected-cca-removed",
+      "summary": {
+        "experiment": "E027",
+        "scope": "full 302-cell channel network; exploratory RMD prior",
+        "duration_s": 20.0,
+        "sample_dt_s": 0.002,
+        "integration_step_ms": 0.1,
+        "initial_voltage_mV": -35.0,
+        "applied_current_pA": 0.0,
+        "passed_candidates": 0,
+        "calcium_finite": true,
+        "calcium_range_uM": [
+          0.05000000074505806,
+          0.07385286688804626
+        ],
+        "substep_refinement": {
+          "maximum_voltage_difference_mV": 0.02429962158203125,
+          "voltage_rmse_mV": 0.006319514010101557,
+          "cycle_comparisons": [
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            },
+            {
+              "passed": false,
+              "reason": "not_enough_cycles"
+            }
+          ],
+          "qualifying_refined_indices": []
+        },
+        "mode": "connected_network",
+        "coupling_scale": 1.0,
+        "synaptic_unit_nS": 0.03,
+        "parent_sha256": "c3fe2ece3a2ea090412655588a2c2fd3fbdfa8e4e848e8533ecdf7c5980aeed6",
+        "rmd_cca1_removed": true,
+        "rmd_neurons": [
+          "RMDDL",
+          "RMDDR",
+          "RMDL",
+          "RMDR",
+          "RMDVL",
+          "RMDVR"
+        ],
+        "qualifying_results": [],
+        "tested_conditions": 302,
+        "control_passes": null
+      },
+      "summary_sha256": "e8c00adf7d45aff811d0ce504e8431937ef90aa15ab9f4cc5b3a6263d1f32135"
+    },
+    {
+      "run": "calcium-integration",
+      "summary": {
+        "experiment": "E027",
+        "status": "completed",
+        "installed": false,
+        "uid": "2022-06-14-01",
+        "parent_model": "/private/tmp/r-elegans-E027-connected-default/network_candidate.npz",
+        "parent_sha256": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+        "parent_model_type": "conductance-network",
+        "recording_sha256": "aabca135ef82e4be6821bf515cd2e936ae2f78014bf2979ed8a10aeaa7c4ac11",
+        "labels_sha256": "b371e3dae9a0f78c6f6b9ba63c7076a55aa8fccecb650f579f53918d10402684",
+        "initial_sha256": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+        "final_sha256": "9ce41cce63a56fbd6e4527dad6887ca81d8e6a148cc00439505abaee83d60234",
+        "config": {
+          "voltage_scale_mV": 100.0,
+          "voltage_offset_mV": -25.0,
+          "synaptic_unit_nS": 0.03,
+          "transferred_channel_scale": 0.01,
+          "indicator_kd_uM": 0.3,
+          "indicator_hill": 2.0,
+          "indicator_tau_s": 0.5
+        },
+        "neurons": 302,
+        "channel_components_per_neuron": 17,
+        "gates_per_neuron": 35,
+        "observed_neurons": [
+          "I1L",
+          "I1R",
+          "I2L",
+          "I3",
+          "M1",
+          "M3L",
+          "M3R",
+          "NSML",
+          "AWBL",
+          "ASEL",
+          "URXL",
+          "URXR",
+          "FLPL",
+          "IL2DL",
+          "IL2L",
+          "IL2R",
+          "IL2VL",
+          "CEPDL",
+          "CEPDR",
+          "CEPVR",
+          "URYDL",
+          "URYDR",
+          "OLLL",
+          "OLQDL",
+          "OLQDR",
+          "OLQVL",
+          "OLQVR",
+          "IL1DL",
+          "IL1DR",
+          "IL1L",
+          "IL1R",
+          "URBL",
+          "URBR",
+          "AUAL",
+          "AIZL",
+          "AVHL",
+          "AIBL",
+          "AIBR",
+          "SAAVL",
+          "RIAL",
+          "AVEL",
+          "AVER",
+          "RMFL",
+          "URADL",
+          "RMEL",
+          "RMER",
+          "RMED",
+          "RMEV",
+          "RMDDL",
+          "RMDDR",
+          "RIVL",
+          "SMDDL",
+          "SMDDR",
+          "SMDVL",
+          "SMDVR"
+        ],
+        "observation_indices": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          11,
+          12,
+          18,
+          28,
+          30,
+          46,
+          47,
+          62,
+          77,
+          79,
+          80,
+          81,
+          83,
+          84,
+          86,
+          87,
+          88,
+          91,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          108,
+          109,
+          115,
+          117,
+          132,
+          148,
+          149,
+          154,
+          167,
+          171,
+          172,
+          173,
+          184,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          198,
+          205,
+          206,
+          207,
+          208
+        ],
+        "source_rows": [
+          91,
+          6,
+          65,
+          36,
+          37,
+          86,
+          75,
+          89,
+          66,
+          34,
+          70,
+          17,
+          16,
+          62,
+          60,
+          2,
+          73,
+          21,
+          41,
+          31,
+          47,
+          29,
+          67,
+          48,
+          52,
+          0,
+          83,
+          50,
+          92,
+          69,
+          94,
+          101,
+          100,
+          5,
+          23,
+          25,
+          96,
+          77,
+          19,
+          104,
+          76,
+          102,
+          24,
+          1,
+          53,
+          93,
+          68,
+          43,
+          74,
+          49,
+          58,
+          97,
+          55,
+          46,
+          95
+        ],
+        "confidence": [
+          5.0,
+          4.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0,
+          4.0,
+          5.0,
+          5.0,
+          4.0,
+          5.0,
+          5.0,
+          4.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0,
+          5.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          5.0,
+          5.0
+        ],
+        "excluded_labels": 24,
+        "frames": 8,
+        "training_frames": 6,
+        "heldout_frames": 2,
+        "elapsed_seconds": 41.72260329200071,
+        "iterations": 1,
+        "substeps": 6417,
+        "maximum_step_ms": 0.0999979425186269,
+        "initial_train_mse": 1.0942834615707397,
+        "final_train_mse": 1.0941877365112305,
+        "initial_heldout_mse": 5.100195407867432,
+        "final_heldout_mse": 5.099836826324463,
+        "training_mean_baseline_heldout_mse": 5.071310043334961,
+        "substep_refinement_prediction_rmse": 0.00029976540827192366,
+        "final_objective": 1.0941879749298096,
+        "history": [
+          1.0942836999893188
+        ],
+        "maximum_log_channel_change": 0.0009999929461628199,
+        "maximum_chemical_parameter_change": 0.0009999871253967285,
+        "maximum_gap_parameter_change": 0.0009996891021728516,
+        "voltage_range_mV": [
+          -80.27693176269531,
+          -1.8468724489212036
+        ],
+        "limitations": [
+          "Short-window candidate, not unique physiological parameters or validated behavior",
+          "Transferred channel priors for most neurons; normalized-to-physical migration includes bounds",
+          "No known sensory drive, proprioception, neuromodulation or latent input fitted",
+          "GCaMP7f observation uses uncalibrated effective Hill/low-pass kinetics, not nuclear transport",
+          "No target voltage, fluorescence or behavioral teacher forcing",
+          "Neuron identity coverage differs from complete 302-cell simulation"
+        ],
+        "model_evidence": "Calcium-constrained candidate; no unique channel/synapse identification",
+        "train_improved": true,
+        "heldout_improved": true,
+        "finite": true,
+        "rhythm_qualification": {
+          "initial": {
+            "passed": true,
+            "cells": {
+              "RMDDL": {
+                "passed": false,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": false,
+                  "amplitude_retained": true,
+                  "multiple_cycles": false
+                },
+                "late_peaks": 0,
+                "window_amplitudes_mV": [
+                  0.12129402160644531,
+                  0.1123809814453125,
+                  0.10618972778320312,
+                  0.10144233703613281,
+                  0.09737968444824219
+                ],
+                "amplitude_retention": 0.8028399352129951,
+                "median_period_s": null,
+                "period_cv": null,
+                "voltage_min_mV": -22.4238338470459,
+                "voltage_max_mV": 4.2491278648376465
+              },
+              "RMDDR": {
+                "passed": false,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": false,
+                  "amplitude_retained": true,
+                  "multiple_cycles": false
+                },
+                "late_peaks": 0,
+                "window_amplitudes_mV": [
+                  0.14225387573242188,
+                  0.14363479614257812,
+                  0.1453990936279297,
+                  0.147369384765625,
+                  0.14982986450195312
+                ],
+                "amplitude_retention": 1.053256817998981,
+                "median_period_s": null,
+                "period_cv": null,
+                "voltage_min_mV": -23.4914493560791,
+                "voltage_max_mV": 2.7226898670196533
+              },
+              "RMDL": {
+                "passed": true,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": true,
+                  "amplitude_retained": true,
+                  "multiple_cycles": true
+                },
+                "late_peaks": 46,
+                "window_amplitudes_mV": [
+                  21.189099550247192,
+                  21.18935763835907,
+                  21.186049342155457,
+                  21.18101942539215,
+                  21.17311453819275
+                ],
+                "amplitude_retention": 0.9992456021070392,
+                "median_period_s": 0.216,
+                "period_cv": 0.004582106511270065,
+                "voltage_min_mV": -22.152114868164062,
+                "voltage_max_mV": 5.490378379821777
+              },
+              "RMDR": {
+                "passed": true,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": true,
+                  "amplitude_retained": true,
+                  "multiple_cycles": true
+                },
+                "late_peaks": 46,
+                "window_amplitudes_mV": [
+                  20.286499857902527,
+                  20.309703946113586,
+                  20.328824520111084,
+                  20.345195412635803,
+                  20.353448390960693
+                ],
+                "amplitude_retention": 1.0033001519989702,
+                "median_period_s": 0.216,
+                "period_cv": 0.003696857670979671,
+                "voltage_min_mV": -21.998937606811523,
+                "voltage_max_mV": 5.332019805908203
+              },
+              "RMDVL": {
+                "passed": true,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": true,
+                  "amplitude_retained": true,
+                  "multiple_cycles": true
+                },
+                "late_peaks": 46,
+                "window_amplitudes_mV": [
+                  11.806479454040527,
+                  11.70754337310791,
+                  11.658798217773438,
+                  11.641128540039062,
+                  11.635174751281738
+                ],
+                "amplitude_retention": 0.9854906195004504,
+                "median_period_s": 0.216,
+                "period_cv": 0.003970248328025813,
+                "voltage_min_mV": -21.631568908691406,
+                "voltage_max_mV": 4.82249641418457
+              },
+              "RMDVR": {
+                "passed": false,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": false,
+                  "amplitude_retained": false,
+                  "multiple_cycles": false
+                },
+                "late_peaks": 0,
+                "window_amplitudes_mV": [
+                  0.15289688110351562,
+                  0.1384868621826172,
+                  0.12665176391601562,
+                  0.11880111694335938,
+                  0.1118316650390625
+                ],
+                "amplitude_retention": 0.7314188767745315,
+                "median_period_s": null,
+                "period_cv": null,
+                "voltage_min_mV": -22.320938110351562,
+                "voltage_max_mV": 4.154653549194336
+              }
+            }
+          },
+          "final": {
+            "passed": true,
+            "cells": {
+              "RMDDL": {
+                "passed": false,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": false,
+                  "amplitude_retained": false,
+                  "multiple_cycles": false
+                },
+                "late_peaks": 0,
+                "window_amplitudes_mV": [
+                  0.12958717346191406,
+                  0.1644001007080078,
+                  0.18152809143066406,
+                  0.1825542449951172,
+                  0.16179656982421875
+                ],
+                "amplitude_retention": 1.2485538923477724,
+                "median_period_s": null,
+                "period_cv": null,
+                "voltage_min_mV": -22.464872360229492,
+                "voltage_max_mV": 4.206411838531494
+              },
+              "RMDDR": {
+                "passed": false,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": false,
+                  "amplitude_retained": true,
+                  "multiple_cycles": false
+                },
+                "late_peaks": 0,
+                "window_amplitudes_mV": [
+                  0.13735580444335938,
+                  0.1367931365966797,
+                  0.14776039123535156,
+                  0.15173912048339844,
+                  0.14738082885742188
+                ],
+                "amplitude_retention": 1.0729858083150499,
+                "median_period_s": null,
+                "period_cv": null,
+                "voltage_min_mV": -23.482162475585938,
+                "voltage_max_mV": 2.7278432846069336
+              },
+              "RMDL": {
+                "passed": true,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": true,
+                  "amplitude_retained": true,
+                  "multiple_cycles": true
+                },
+                "late_peaks": 45,
+                "window_amplitudes_mV": [
+                  20.671660780906677,
+                  20.69848895072937,
+                  20.80879271030426,
+                  20.880138278007507,
+                  20.907517910003662
+                ],
+                "amplitude_retention": 1.0114096845723608,
+                "median_period_s": 0.22,
+                "period_cv": 0.005235559040013877,
+                "voltage_min_mV": -22.166913986206055,
+                "voltage_max_mV": 5.43790864944458
+              },
+              "RMDR": {
+                "passed": true,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": true,
+                  "amplitude_retained": true,
+                  "multiple_cycles": true
+                },
+                "late_peaks": 47,
+                "window_amplitudes_mV": [
+                  20.62152409553528,
+                  20.551252961158752,
+                  20.456743597984314,
+                  20.47325086593628,
+                  20.537256598472595
+                ],
+                "amplitude_retention": 0.9959136144994769,
+                "median_period_s": 0.216,
+                "period_cv": 0.004568542093993203,
+                "voltage_min_mV": -21.993810653686523,
+                "voltage_max_mV": 5.368829250335693
+              },
+              "RMDVL": {
+                "passed": true,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": true,
+                  "amplitude_retained": true,
+                  "multiple_cycles": true
+                },
+                "late_peaks": 51,
+                "window_amplitudes_mV": [
+                  10.446918487548828,
+                  10.580260276794434,
+                  10.887449264526367,
+                  10.324567794799805,
+                  10.399751663208008
+                ],
+                "amplitude_retention": 0.9954850969310198,
+                "median_period_s": 0.198,
+                "period_cv": 0.05031775148685947,
+                "voltage_min_mV": -21.619762420654297,
+                "voltage_max_mV": 4.766416072845459
+              },
+              "RMDVR": {
+                "passed": false,
+                "gates": {
+                  "bounded": true,
+                  "sustained_amplitude": false,
+                  "amplitude_retained": false,
+                  "multiple_cycles": false
+                },
+                "late_peaks": 0,
+                "window_amplitudes_mV": [
+                  0.17026519775390625,
+                  0.23140907287597656,
+                  0.2547340393066406,
+                  0.2525348663330078,
+                  0.2179889678955078
+                ],
+                "amplitude_retention": 1.2802908096966439,
+                "median_period_s": null,
+                "period_cv": null,
+                "voltage_min_mV": -22.287782669067383,
+                "voltage_max_mV": 4.216320991516113
+              }
+            }
+          },
+          "duration_s": 20.0,
+          "sample_dt_s": 0.002,
+          "substeps": 20,
+          "scope": "Exploratory persistence gate, not animal phenotype or coordinated gait"
+        }
+      },
+      "summary_sha256": "9da45501fbb6a32669b741f7917ac460bd903d1e0d9cbc7db8ef70741e114a37"
+    }
+  ],
+  "artifacts": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E027",
+  "verified_files": 897,
+  "manifest_sha256": "4b7dd1f606fc1cdac13db26eb65d17c78f1eb2d36ff44015e6f8864c635dd6b0",
+  "software_tests_passed": 183,
+  "operating_model_changed": false
+}

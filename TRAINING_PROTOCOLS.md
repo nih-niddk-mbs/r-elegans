@@ -92,6 +92,33 @@ error by doubling substeps. Whole-network gradients do not make every cell or
 edge identifiable from partial head recordings. Requalify motor oscillation and
 body motion before promoting any calcium-fitted candidate into skill execution.
 
+## Preserve self-sustained dynamics before further activity fitting (E027)
+
+The user prioritizes channel kinetics capable of sustained activity. Existing
+Ca/K gate feedback is sufficient in a literature-inspired RMD conductance regime;
+additional channel names alone do not ensure it. First qualify persistence without
+periodic input, separating an oscillatory attractor from a plateau or long transient.
+Use washout plus five late windows, >=2 mV amplitude in each, amplitude retention
+0.8..1.2, >=5 peaks and bounded voltage. These gates target the tested fast RMD
+regime; slow brain states need longer assays, not an assumption of universal failure.
+
+Confirm from multiple initial conditions, remove the regenerative calcium current,
+retain ordinary non-oscillatory controls, then reconnect the anatomical network.
+RMD's CCA1-dependent candidate must not be mislabeled as an UNC2-dependent A-motor
+model. Compare refinement by both raw trajectories and phase-aligned late cycles:
+period error <1%, amplitude error <2%, waveform RMS <0.5 mV. Retain phase drift
+rather than claiming pointwise identity over arbitrarily many cycles.
+
+`fit_calcium_network.py --initial-network /external/network_candidate.npz` retains
+the candidate's full channel/config initialization. Add `--qualify-rhythms` to run
+a separate 20 s unpaced persistence assay on initial and final parameters; both
+must retain at least one qualifying RMD cell for a zero exit code. This guard does
+not promise all six RMD cells oscillate or that a candidate matches biology.
+Use small integration steps and refine in each fitted regime. The current candidate
+is not promoted into motor execution; body feedback and gait qualification remain
+required. Do not trade away the recorded E026 calcium-fit failures or call a
+one-update integration check a successful recording fit.
+
 ## Working hypothesis: motor curriculum before task RL
 
 [H1 in the laboratory notebook](LAB_NOTEBOOK.md#h1--build-the-motor-repertoire-before-task-rl)

@@ -242,6 +242,60 @@ nearly flat. All 180 software tests pass, but the candidate is **not a successfu
 calcium fit** and has not been promoted. Better class/indicator priors and
 input/initial-state inference are needed before large fitting runs.
 
+## Sustained channel dynamics qualification (E027, 2026-11-07)
+
+The existing channel kinetics **can sustain activity** in an appropriate
+conductance regime. E027 adds `brain/rhythm_qualification.py` and
+`scripts/assay_channel_rhythms.py` to distinguish persistent cycles from plateaus,
+decaying transients and numerical instability. No new channel or phase clock
+was needed for this demonstration. This does not establish complete kinetics
+for the real motor system; isolated SLO channels and other motor-class priors
+from the 2024 models remain unported.
+
+A literature-inspired RMD profile (full existing RMD preset, leak 0.045 nS,
+CCA1 30 nS) oscillates with **zero applied/compensation current** for 30 s,
+from -35, -34 and -70 mV initial conditions. After the first 15 s, 69 cycles
+remain, period ~0.219 s and amplitude ~22 mV without decay. CCA1 removal and
+the ordinary RMD preset settle rather than cycle. This is a dynamical-model
+candidate, not a measured channel composition; its high CCA1 conductance and
+waveform are not claimed to reproduce animal RMD or DA/VA physiology. It is
+not the reduced Morris–Lecar model of E024.
+
+Starting from E026's preserved initial channel network, apply this profile only
+to six RMD cells, zero their compensation bias, retain all other cell parameters
+and **all original anatomical chemical/gap weights** at the original 0.03 nS
+weight-unit scale. RMDL, RMDR and RMDVL retain sustained cycles in the connected
+302-neuron simulation over 20 s (~46 cycles in the final ten seconds; period
+~0.216 s). Other RMD cells are quenched or fail the persistence gates under
+coupling. Removing CCA1 from the six profile cells eliminates qualifying rhythms
+in the network control. Other cells retain their original constant compensation
+bias; no time-varying neural input or target forcing is introduced.
+
+Doubling substeps preserves qualifying rhythms. Small period changes accumulate
+large pointwise phase differences over long recordings, so raw errors are retained
+and cycle periods/amplitudes/phase-aligned waveform errors are reported separately.
+Connected qualifying cells differ by <=0.371% in period, <=0.274% in amplitude,
+and <=0.121 mV in phase-aligned waveform RMS under refinement. This supports the
+existence/shape of the simulated cycles, not pointwise long-horizon equality.
+
+The candidate is saved as a complete external `network_candidate.npz` with its
+actual channels/configuration. `fit_calcium_network.py --initial-network` loads
+it directly; `--qualify-rhythms` checks initial and final candidates in a separate
+20 s unpaced assay and returns nonzero if all RMD activity collapses. This is a
+persistence guard, not a successful calcium-fit or biological-validity criterion.
+It never installs a candidate automatically. Example qualification:
+
+```bash
+python -m scripts.assay_channel_rhythms \
+  --initial-network /external/preserved-channel-network.npz \
+  --duration 20 --max-step-ms .1 --output-dir /external/fresh-rhythm-assay
+```
+
+The positive finding establishes a self-sustained **neural** dynamical regime.
+Coordinated muscle waves, proprioceptive control, correct A/B motor physiology,
+animal-matched calcium activity and body propulsion remain separate requirements.
+The operating driven-skill model remains unchanged.
+
 ## Status table
 
 Standalone steering development now uses `train_steering.py` (MOT-08).

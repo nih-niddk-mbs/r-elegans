@@ -1161,6 +1161,177 @@ it is not duplicated into Git. Small summary/hashes: `experiments/records/E026.j
 Run source records retain the actual dirty pre-commit state. Verified local
 OneDrive copies do not establish completed cloud synchronization.
 
+### E027 — 2026-11-07: sustained conductance dynamics (local qualification)
+
+**User direction:** get enough channel kinetics for self-sustained dynamics,
+before further activity fitting. Investigate channel balance/kinetics rather
+than assuming adding channel names guarantees oscillations. All 302 channel
+states and old skills remain preserved. No periodic command or target-derived
+current may masquerade as self-drive.
+
+**Evidence/plan:** Nicoletti 2019 reports stable periodic solutions in its RMD
+17-current model when leak/CCA1 balance changes (Fig.11, ~200 ms periods, ~5 mV
+oscillations around -30 mV). First reproduce a sustained regime using existing
+kinetics and published parameter scales; distinguish this modeled RMD regime
+from an experimentally fitted DA/VA pacemaker. Gao 2018 implicates UNC-2 in
+A-motor rhythm; a CCA1-dependent RMD cycle is not a substitute for that phenotype.
+Nicoletti 2024 motor source inspected at commit
+`84726a72a37230f02cecc1814c896232ead195ec`; motor models include isolated SLO2
+with calcium-dependent activation and fitted recovery multiplier absent from
+our nanodomain-only SLO2 library. Source text downloaded externally, not run.
+
+**Planned first experiment:** isolated RMD prior, leak grid 0.03..0.12 nS,
+CCA1 0.3..3.1 nS, other published conductances/capacitance/calcium settings fixed;
+no applied or compensation current. Start in depolarized basin (-35 mV) to test
+whether activity persists, then repeat from rest/perturbed states. Initial
+voltage is a condition, not pacing. 10 s screening with >=5 s washout, then
+longer confirmation for candidates. Require nondecaying amplitude across final
+windows, multiple cycles, bounded voltage/calcium and integration convergence;
+remove regenerative calcium current to test causality. Retain stable/non-
+oscillatory controls and negatives. After cellular qualification test the full
+anatomical network, noting coupling may quench or alter oscillations. Do not
+claim a propagating gait or calcium-recording fit from activity alone.
+
+**Implementation plan:** add explicit optional per-cell kinetic parameters and
+isolated SLO channel kinetics based on source evidence where necessary; version
+new checkpoints and preserve old behavior/config. Record which kinetic fields
+are published versus hypothetical/tuned. Exact run records and outcomes follow.
+
+**Screening correction:** the first 49-case grid (CCA1 <=3.1 nS) produced no
+persistent cycles. Inspection of the original Fig.11 image resolved mathematical
+labels missing from the web text: its CCA1 axis reaches ~70 nS, while its leak
+axis is 0.03..0.12 nS. The text's approximate periodic interval was not an
+appropriate CCA1 grid. Repeat with CCA1 [0.3,3.1,10,20,30,50,65] nS and the
+same leak levels/initial state/protocol; preserve the failed original screen.
+These large conductances are a modeled bifurcation regime, not fitted animal
+values or a justification for assigning them to motor neurons generally.
+
+**Implemented/decision:** the current 17-current/35-gate machinery is already
+sufficient for persistent cycles in an appropriate conductance regime. Added
+`brain/rhythm_qualification.py` and `scripts/assay_channel_rhythms.py` for isolated
+screens, causal/initial-state controls, and anatomical-network tests. No new
+rate constant, phase oscillator, periodic current or synthetic waveform was
+introduced. The planned isolated-SLO/kinetic extensions remain future work for
+better motor-class fidelity; they were not required for this dynamical proof.
+This is not claimed to reproduce the full published bifurcation diagram or to
+fit an animal's channel composition. E024's reduced oscillator is separate.
+
+**Run commands (Mac, external output; each invocation has its own source/env record):**
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assay_channel_rhythms --output-dir /tmp/r-elegans-E027-rmd-grid
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assay_channel_rhythms --output-dir /tmp/r-elegans-E027-rmd-grid-corrected
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assay_channel_rhythms --output-dir /tmp/r-elegans-E027-confirm --confirm --duration 30
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assay_channel_rhythms --initial-network /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E026/r-elegans-E026-calcium-fine/network_initial.npz --coupling-scale 1 --duration 20 --max-step-ms 0.1 --output-dir /tmp/r-elegans-E027-connected-default
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assay_channel_rhythms --initial-network /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E026/r-elegans-E026-calcium-fine/network_initial.npz --remove-rmd-cca1 --duration 20 --max-step-ms 0.1 --output-dir /tmp/r-elegans-E027-connected-cca-removed
+```
+
+**Screen outcomes:** original grid 0/49 pass, all finite; corrected grid 6/49
+pass. Passing candidates have leak 0.03/0.045 nS, CCA1 10..50 nS, with various
+combinations. No relaxation of persistence criteria was used: voltage bounded
+(-120,80) mV, final half divided into five windows with amplitude >=2 mV in
+each, final/first late amplitude 0.8..1.2, >=5 late peaks (prominence >=1 mV).
+These gates target a fast RMD-mode assay, not all possible neural timescales.
+
+**30 s isolated confirmation:** selected leak 0.045 nS, CCA1 30 nS, all other
+RMD preset conductances/passive/calcium values intact. Bias and synapses zero.
+Starting voltages -35/-34/-70 mV all sustain cycles; final 15 s contain 69 peaks,
+~22.03 mV peak-to-peak, median period 0.220 s, late amplitude retention within
+0.002% of one. Starting from -70 mV includes an initial large transient that is
+excluded by washout; the subsequent late cycle is the same regime. CCA1=0 and
+ordinary RMD (CCA1=3.1, leak=0.4 nS) controls settle; neither passes. Calcium is
+finite, 0.0502..1.0292 uM across all confirmation conditions. The first confirmation
+summary accidentally labels the ordinary control leak as 0.045 because its grid
+metadata preceded the explicit 0.4 override. Actual simulated leak is 0.4 in the
+captured source; a separate metadata-correction record retains that fact. Raw
+summary/arrays are not rewritten. Future CLI output reports the corrected pair.
+
+**Full-network outcome:** parent E026 initial network (before its unsuccessful
+calcium fit), with six RMD cells reset to the selected full RMD profile and
+published passive settings; their log multipliers set to zero and compensation
+bias removed. Other 296 cells, all chemical/gap raw values/masks, and global
+synaptic unit 0.03 nS unchanged. Other cells retain their constant parent intrinsic-
+current compensation, so this is unpaced activity under steady conditions, not
+a claim that every current in the network is zero. No applied time-varying input,
+teacher signal, phase variable or body feedback is used.
+
+In 20 s simulations, RMDL/RMDR/RMDVL pass late persistence gates at original and
+refined steps. Each has ~46 peaks in the final ten seconds, median period
+0.216 s; late amplitudes ~21.17,20.35,11.64 mV. Calcium peak-to-peak amplitudes
+in the final ten seconds are 0.2643,0.2537,0.1278 uM. The other RMD cells are
+quenched or fail the gates. Full-network CCA1 removal from the six RMD cells
+eliminates all qualifying rhythms (0/302), with finite calcium. This is a positive
+model-level causal control, not a biological CCA1-knockout prediction or evidence
+for the UNC2-dependent DA/VA phenotype. All full anatomical weights remain
+present; they are not fitted in these rhythm assays.
+
+**Numerical controls:** isolated step 0.05 vs 0.025 ms; network step 0.1 vs
+0.05 ms. Passing cells remain passing at refinement. Small frequency errors
+accumulate phase over 20–30 s: raw maximum voltage differences are 17.42 mV
+isolated and 19.51 mV connected, so pointwise trajectories are not identical.
+Post hoc cycle analysis aligns and averages the last five peak-to-peak cycles,
+retains raw errors, and requires period change <1%, amplitude change <2%,
+phase-aligned waveform RMS <0.5 mV. Isolated positives: relative period change
+0.183%, amplitude <=0.126%, waveform RMS <=0.167 mV. Connected positives:
+period <=0.371%, amplitude <=0.274%, waveform RMS <=0.121 mV. All pass. This
+supports a persistent oscillatory regime, not exact long-horizon phase prediction.
+Analysis JSONs are labeled post hoc and kept alongside original trajectories;
+these tests were not used to lower the original persistence gates.
+
+**Calcium-pipeline integration:** fitter now accepts `--initial-network`,
+preserving fixed channels/kinetics/config instead of rebuilding from a generic
+parent. `--qualify-rhythms` independently runs a 20 s unpaced assay before/after
+fitting and returns nonzero if no RMD cell qualifies. It does not install a model
+or assert animal fidelity. Example actually run:
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.fit_calcium_network --recording /Users/carsonc/OneDrive/r-elegans/raw/calcium/atanas_kim_2023/2022-06-14-01-data.h5 --labels /Users/carsonc/OneDrive/r-elegans/raw/calcium/atanas_kim_2023/neuropal_label.json.bz2 --uid 2022-06-14-01 --initial-network /tmp/r-elegans-E027-connected-default/network_candidate.npz --qualify-rhythms --experiment-id E027 --output-dir /tmp/r-elegans-E027-calcium-integration --frames 8 --iterations 1 --learning-rate .001 --max-step-ms .1 --minutes 15
+```
+
+This is a one-update integration/control test, not a meaningful fitted activity
+model. Parent SHA-256
+`870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a`;
+saved initial checkpoint has the same hash. Final SHA-256
+`9ce41cce63a56fbd6e4527dad6887ca81d8e6a148cc00439505abaee83d60234`.
+Three RMD cells qualify before and after; periods can change under fitting.
+Train MSE 1.094283 -> 1.094188 and held-out 5.100195 -> 5.099837, still worse
+than the constant training-mean predictor (1 train, 5.071310 held out). Thus no
+successful calcium fit is claimed. The run's elapsed_seconds=41.72 covers fitting
+and refinement only, before the two persistence assays; later code corrects
+total timing and retains fit/refinement time separately. No total wall time is
+invented for the earlier run. Initial/final weights, optimizer state, exact
+input/source/environment and data traces retained.
+
+**Software:** initial targeted suite 8 passed, full suite **183 passed in 65.68 s**.
+The three rhythm tests repeated after phase-comparison assertions: **3 passed
+in 4.14 s**. Later edits clarify metadata/CLI errors and timing, not integration
+equations. Tests include sustained full-channel cycles, calcium-current removal,
+phase-aligned convergence, plateau/transient/blowup rejection, and exact preservation
+of unmodified cells and anatomical weights by the profile application.
+
+**Conclusion/limits:** a self-sustained, calcium-cycling conductance-network
+candidate now exists and can seed subsequent fitting without an imposed clock.
+This does not establish animal-matched kinetics/composition, A/B motor physiology,
+coordinated muscle waves, proprioceptive control, locomotion, or a predictive
+calcium fit. Preserve it as an experimental branch; the operating driven skills
+remain unchanged. Artifact/archive identifiers and checksums follow below.
+
+**Archive:** all six run directories, original complete stdout, copied parent
+networks/data, initial/final models and optimizer state where fitting occurred,
+raw/refined trajectories, post hoc cycle-comparison JSON, explicit prototype
+metadata corrections, source/environment snapshots and plot PNG/PDF with source
+copied to `/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E027/`.
+Upstream 2019 HTML/figure and pinned 2024 source text kept under `source_evidence`
+for audit, with citation/repository metadata. All 897 copied files SHA-256
+verified; manifest `SHA256SUMS.json` hash:
+`4b7dd1f606fc1cdac13db26eb65d17c78f1eb2d36ff44015e6f8864c635dd6b0`.
+Candidate for future inference:
+`r-elegans-E027-connected-default/network_candidate.npz` inside that archive.
+Small summary/hashes in `experiments/records/E027.json`. The archival records
+retain actual dirty pre-commit source. Rebase `/tmp` parent paths to copied
+archive equivalents only in replay copies, verifying hashes. Local OneDrive
+verification is not evidence of completed cloud synchronization.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,
