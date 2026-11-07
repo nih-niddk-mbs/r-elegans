@@ -564,6 +564,59 @@ coverage beyond the local pilot; no autonomy or skill-switching claim.
 **Next coverage target:** independent head sweeps (MOT-09), retaining all prior
 policies. This entry records results only and does not launch a new fit.
 
+### E021 — 2026-11-06: stationary head-sweep skill (planned)
+
+**User request:** run the next independent skill after reported steering
+success. **Question:** can the full brain oscillate the head relative to a
+quiet trunk, adding MOT-09 without consolidating earlier skills?
+**Parent:** original forward-wave checkpoints; local development uses the
+archived 0.06 seed-0 forward input. All 302 neurons remain recurrent, topology
+and NMJ/muscle fields remain fixed. Separate head-sweep weights are acceptable.
+
+**Planned target/interface:** synthetic bidirectional head oscillation around
+0.4 muscle activation, amplitude 0.04, anterior envelope exp(-(p/0.18)^2),
+where anatomical position p=0 is head. Applied artificial pacing currents
+are weighted by anterior NMJ contacts; no target muscle pattern enters the
+brain as a supplied muscle output. Anterior localization is partly specified
+by this experimental input map, not discovered de novo; it is a deliberate
+scaffold, not a known biological command pathway. No forward locomotion is
+requested. Retain scalar pacing, body-trajectory
+supervision, independent checkpoints and complete run/environment/source records.
+
+**Predeclared engineering gates:** four settling plus six measured cycles,
+2.4/3.0/3.7-second pacing, 20/10-ms refinement. Require head-angle peak-to-peak
+>=0.02 rad and >=half the oracle, head-center lateral excursion relative to
+the trunk >=0.0005 body lengths and >=half the oracle. Posterior eight-joint
+dynamic RMS must be <=25% of anterior three-joint RMS; static head bending
+and rigid whole-body rotation must not count. Require periodic shape closure
+<0.1, stable sweep amplitudes, bounded phase-matched centroid drift <=0.0001
+body lengths/cycle, and net trunk orientation drift <=0.002 rad/cycle.
+Amplitude signals must exceed numerical/rest differences; zero-pacing rest
+must have <=10% residual sweep amplitude. The 0.001 propulsion minimum from
+locomotion is inapplicable to a deliberately stationary skill. Isotropic drag
+is recorded as a mechanics control, not used to require disappearance of a
+head oscillation. No biological amplitude/frequency calibration is claimed.
+
+**Plan:** validate the body-only oracle first; test finite gradients and false
+positives; fit/check a local pilot; then prepare the four-seed eight-hour
+mbslnx2 run from the original forward cohort. No runtime handoff or autonomous
+head motion is claimed. **Status:** planned; outcomes to be appended.
+
+**Local development update:** the body-only oracle passes all three periods.
+A 1,000-update local neural pilot passes every physical head-scan test and
+control, but longer-command body trajectory errors 0.352/0.360 exceed the
+unchanged 0.25 imitation gate. Preserve that below-gate attempt. Continue its
+selected checkpoint for another 1,000 updates with a fresh optimizer, same
+target/input/objective and all gates unchanged. This is a staged continuation,
+not exact optimizer-state resume, and does not justify reducing the gate.
+
+**Continuation outcome / final local refinement plan:** the additional 1,000
+updates again pass all physical tests; trajectory errors improve to
+0.253/0.269, still above 0.25. Preserve both below-gate fits and run one final
+1,000-update local continuation with identical settings, fresh optimizer and
+unchanged criteria. The server stage is already software-tested; these local
+continuations assess fit convergence, not new biological hypotheses.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,

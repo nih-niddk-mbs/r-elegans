@@ -73,6 +73,26 @@ the aggregate reported success and retrieve full archives before reporting
 seed statistics or independent checkpoint verification. Head sweeps are the
 next proposed standalone coverage target, not a fit already run.
 
+Head-sweep implementation E021: `--head-sweep --minutes 480`, using the
+original wave cohort. Four independent full-brain policies train at-rest,
+bidirectional anterior scans with target amplitude 0.04 and envelope width
+0.18 along anatomical position. Input is a fixed anterior-NMJ-weighted
+artificial current times scalar pacing. No forward/reverse/steering retention
+is required. Parent models, all neural nodes and fixed NMJs are preserved.
+The shared standalone trainer keeps muscle/body-joint/centroid trajectory
+losses and validation-based selection, with separate head-specific metrics.
+
+Head gates: angle peak-to-peak >=0.02 rad and half the oracle; head-center
+lateral excursion relative to trunk >=0.0005 body lengths and half the oracle;
+posterior/anterior joint dynamic RMS ratio <=0.25; cycle centroid drift
+<=0.0001 body lengths and trunk rotation drift <=0.002 rad. Require periodic
+shape, stable cycle amplitudes, timestep agreement and <=10% residual scan
+under zero pacing. This intentionally replaces propulsion gates with
+stationary-scan gates, not a relaxed test of locomotion. Isotropic drag is
+recorded as a load control; an isolated head oscillation need not disappear
+under isotropic drag. Commands, targets, source, environment, input/checkpoint
+hashes and full physical trajectories remain external and reproducible.
+
 For the chronological protocol/outcome record and replication checklist, see
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). The historical stages below describe
 progression, not a claim that all current models pass every stage.

@@ -56,7 +56,7 @@ categories. No numeric biological parameter ranges are assumed without data.
 | MOT-06 | Start/restart a run; direction, duration | Recover progress without resetting brain/body between stop and restart | Driven evidence within a held direction, E013–E015; MOV-07 |
 | MOT-07 | Speed/intensity modulation; target level and ramp time | Measured displacement response versus input, including slowing/acceleration | Amplitude continuations show changes between fitted models; continuous speed control in one recurrent policy remains candidate; MOV-01/02/09, FOR-01/02 |
 | MOT-08 | Shallow steering; signed turn angle/rate, duration | Controlled heading change during progress, with limited unwanted drift | Local +/-0.006 variants pass three rates/controls (E019); server supervisor reports cohort success (E020, truncated stdout); full seed tables/checkpoint verification and broader ranges pending; MOV-03 |
-| MOT-09 | Head sweep/local head bend; extent, rate, hold | Head excursion relative to trunk with controlled body displacement | Candidate; MOV-06 |
+| MOT-09 | Head sweep/local head bend; extent, rate, hold | Head excursion relative to trunk with controlled body displacement | Stationary-scan trainer/assays implemented (E021); body-only oracle passes; neural/server evidence tracked separately; MOV-06 |
 | MOT-10 | Forward/backward transition; requested direction and switching time | Reverse signed progress with a valid continuous-state transition | Candidate; separate fixed-direction assays do not establish switching; MOV-02/07 |
 | MOT-11 | Omega-shaped deep turn; signed exit angle and completion time | High-curvature reorientation with valid head/body contact and exit heading | Extension: contact-qualified mechanics needed; MOV-04 |
 | MOT-12 | Delta-shaped deep reorientation; geometry and exit angle | Reconstructed coiled path with valid geometry and contact | Extension: self-occlusion/contact and potentially out-of-plane mechanics; MOV-05 |
@@ -73,7 +73,7 @@ dorsal/ventral performance or symmetric biological turn distributions.
 MOT-08 standalone fitting is implemented as `train_steering.py`; local positive
 and negative variants passed E019; E020 reports server cohort success, with
 complete remote records still to retrieve. Priority for further coverage:
-independently fit MOT-09 head sweeps, alongside
+independently fit/validate MOT-09 head sweeps (stationary stage implemented), alongside
 independent forward/backward intensity variants.
 Do not first spend another run forcing all successful behaviors into one
 parameter set. This order is a proposed backlog; no new fit is launched here.

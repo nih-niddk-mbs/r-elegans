@@ -8,7 +8,8 @@ from scripts import run_motor_curriculum as runner
 
 
 @pytest.mark.parametrize('seed,sign',[(0,1),(1,-1)])
-def test_standalone_steering_job_uses_forward_checkpoint_and_expected_bias(tmp_path,monkeypatch,seed,sign):
+@pytest.mark.parametrize('head_mode',[False,True])
+def test_standalone_job_uses_forward_checkpoint_and_expected_skill(tmp_path,monkeypatch,seed,sign,head_mode):
     source=tmp_path/'wave-source';checkpoint=source/f'seed-{seed}/wave/actor_best.npz'
     checkpoint.parent.mkdir(parents=True);checkpoint.write_bytes(b'forward actor')
     (source/'summary.json').write_text(json.dumps(dict(workers=[dict(seed=seed,stages=dict(
@@ -29,11 +30,12 @@ def test_standalone_steering_job_uses_forward_checkpoint_and_expected_bias(tmp_p
     monkeypatch.setattr(runner.subprocess,'Popen',Process)
     monkeypatch.setattr(runner.signal,'signal',lambda *a:None)
     monkeypatch.setattr(runner.time,'sleep',lambda _:None)
-    monkeypatch.setattr(runner.sys,'argv',['runner','--steering','--minutes','480','--workers','1',
+    monkeypatch.setattr(runner.sys,'argv',['runner','--head-sweep' if head_mode else '--steering','--minutes','480','--workers','1',
         '--cores-per-worker','1','--seed-start',str(seed),'--resume-run',str(source),'--output-dir',str(tmp_path/'results')])
     assert runner.main()==0
     assert len(launched)==1
     command=launched[0]
-    assert command[2].endswith('train_steering.py')
+    assert command[2].endswith('train_head_sweep.py' if head_mode else 'train_steering.py')
     assert command[command.index('--initial-actor')+1]==str(checkpoint)
-    assert float(command[command.index('--bias')+1])==pytest.approx(sign*.006)
+    if head_mode:assert '--bias' not in command
+    else:assert float(command[command.index('--bias')+1])==pytest.approx(sign*.006)

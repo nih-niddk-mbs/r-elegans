@@ -109,6 +109,33 @@ all configured steering workers passed. Only a truncated result tail has been
 received; full per-seed summaries and remote checkpoint verification remain
 pending. Head sweeps are the next standalone skill target.
 
+The stationary head-sweep stage is implemented as `train_head_sweep.py` and
+`run_motor_curriculum.py --head-sweep`. It fits an anterior-localized scan with
+the posterior trunk quiet, using the same full recurrent brain and fixed NMJs.
+Its artificial pacing current is weighted by anterior NMJ contacts. The target
+is not supplied as muscle output; the input map does provide an explicit
+anterior-localization prior. Positive/negative scan phases
+occur within each policy; these are not two separate skills or a locomotor
+turn. Physical tests use head angle/lateral motion relative to the trunk,
+localization, bounded drift, periodicity, rest and timestep controls. No minimum
+forward progress is required for this deliberately stationary skill.
+
+Run the independent four-seed head-sweep cohort on mbslnx2 after pulling:
+
+```bash
+nohup python -u scripts/run_motor_curriculum.py --head-sweep --minutes 480 \
+  --resume-run /home/carsonc/r-elegans-results/wave-20261105T214835887935Z \
+  --output-dir /home/carsonc/r-elegans-results \
+  > /home/carsonc/r-elegans-results/motor-head-sweep.log 2>&1 < /dev/null &
+```
+
+Fresh `head-sweep-*` directories preserve all previous locomotion/steering
+models. Archive the finished run with `--pattern 'head-sweep-*'`. This is
+externally driven, normalized scanning, with no biological amplitude/frequency
+calibration or runtime policy handoff. E021 in the notebook records the
+predeclared protocol and development results; the agent cannot launch the
+password-authenticated server command itself.
+
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) is the chronological experiment record,
 including hypotheses, methods, negative results, decisions, code/artifact
 lineage and explicit evidence gaps. Small [reported-result summaries](experiments/records)

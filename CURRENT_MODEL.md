@@ -72,6 +72,14 @@ and rest/isotropic controls. This expands driven normalized steering coverage
 in two separate policies; it does not establish autonomy, broad angle control,
 biological gait calibration, a shared controller or multi-seed replication.
 
+Stationary head-sweep training (MOT-09) is implemented in
+`scripts/train_head_sweep.py` using the standalone trainer with a localized
+head target and anterior-NMJ-weighted pacing. Relative head/trunk geometry
+and quiet-posterior/drift tests prevent global rotation or whole-body bends
+from counting as a scan. No locomotion progress floor applies at rest.
+Initial physics-only oracle checks pass; E021 records neural development and
+the prepared four-seed server run. The agent has not launched that remote run.
+
 | Component | Present | Fitted | Active in food demo |
 | --- | --- | --- | --- |
 | 302 canonical neuron identifiers | Yes | Not applicable | Used for ordering |
