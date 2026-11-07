@@ -49,6 +49,19 @@ fine-tuning, with speed control still handled by the same engineered formula
 as the analytic controller. It should not be read as evidence that "the
 connectome" performs chemotaxis.
 
+## Self-drive and proprioception gap (reviewed 2026-11-07)
+
+The skill drivers are recurrent in neural voltage but open-loop with respect
+to the body: they first generate a muscle trace, then simulate its mechanical
+effect. Body curvature/stretch is not supplied back to the neurons during
+these executions. Body-trajectory gradients used in fitting are different
+from runtime proprioceptive feedback. The full actor uses generic neural
+dynamics; intrinsic motor-oscillator physiology is not calibrated or validated.
+Thus full topology and successful paced movement do not establish endogenous
+rhythm. E023 in [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) records the biological
+evidence and a proposed closed-loop, nonperiodically driven motor test.
+That loop has not been implemented by this documentation change.
+
 ## Status table
 
 Standalone steering development now uses `train_steering.py` (MOT-08).

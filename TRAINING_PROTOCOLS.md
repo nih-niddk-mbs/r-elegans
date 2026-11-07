@@ -175,6 +175,15 @@ been implemented or run by this strategy update.
 
 ## Scientific objective
 
+Autonomous-rhythm prerequisite identified in E023: account for distributed
+motor oscillators, descending state drive and proprioceptive coupling, and
+close the body-to-neuron execution loop. Current body-loss differentiation
+does not provide that feedback. A future test should require sustained,
+coordinated motion with no externally periodic signal, starting with a tonic
+permissive command or brief trigger, while measuring load/posture robustness.
+This is distinct from sensory-guided action selection. It is a proposed
+mechanistic milestone, not a new implemented model or replacement of H1.1.
+
 Locomotion is now assessed separately from wave imitation: frozen neural
 weights, complete phase-matched cycles after startup, actual body centroid and
 axis, timestep refinement, rest and isotropic-drag controls. One local seed

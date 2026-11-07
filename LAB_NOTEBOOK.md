@@ -692,6 +692,59 @@ autonomous rhythm, sensory selection, calibrated biological behavior or safe
 runtime skill handoff. Next proposed standalone coverage target: movement
 intensity/speed modulation (MOT-07); no new training is launched in this entry.
 
+### E023 — 2026-11-07: biological self-drive and the missing feedback loop
+
+**User question:** how does the real network sustain movement without our
+external pacing? **Action/status:** primary-literature review and code-path
+inspection, not a new training experiment or implemented autonomy mechanism.
+
+**Evidence from the animal:**
+
+- Distributed forward rhythm generation is supported by perturbation/ablation
+  experiments: [Fouad et al. (2018)](https://elifesciences.org/articles/29913).
+  A single master head clock is not a sufficient general description.
+- Descending AVB electrical input can shift B-type motor neurons into an
+  oscillatory regime; proprioceptive coupling coordinates propagating forward
+  bends: [Xu et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29686107/).
+  Their model uses sustained depolarized AVB drive, not a supplied sinusoid.
+- A-class motor neurons can generate intrinsic oscillatory activity for
+  backward locomotion, with UNC-2 calcium-current involvement:
+  [Gao et al. (2018)](https://elifesciences.org/articles/29915).
+- Body bending provides motor-circuit proprioceptive input that coordinates
+  waves; B-type neurons transduce such signals:
+  [Wen et al. (2012)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3508473/).
+- State selection is more complex than a symmetric AVA/AVB switch. Tonic and
+  phasic AVA effects act on different timescales:
+  [Meng et al. (2024)](https://pubmed.ncbi.nlm.nih.gov/38598630/).
+  Additional circuit context and physiological conditions matter; this review
+  does not claim a complete, uniquely established locomotor mechanism.
+
+**Current implementation check:** `commanded_muscle_sequence` carries neural
+voltage and artificial command only. `muscle_sequence_body` subsequently
+simulates the resulting muscle trace. `full_network_actor` accepts applied
+currents (or engineered chemical observations); these motor drivers do not
+compute body-dependent proprioceptive input. Neural recurrence is present,
+but motor execution is open-loop with respect to body feedback. Differentiating
+the body loss teaches parameters; it does not feed sensed curvature back at
+execution time. The generic graded-potential full actor also lacks validated
+A/B-specific pacemaking-channel physiology. Its nonlinear recurrent dynamics
+might support oscillations; their existence, robustness and biological
+mechanism have not been established by the driven skill tests.
+
+**Interpretation:** wiring/counts alone do not specify mechanosensory
+transduction, cell-specific dynamics or extrasynaptic state modulation. A
+biological autonomous motor model must account for these functions. Preserved
+driven skills remain useful reference trajectories, not proof of self-drive.
+
+**Proposed future milestone, not implemented/run:** couple neural and body
+state in one execution loop, provide evidence-grounded proprioception, and
+test coordinated movement under a constant permissive command or brief
+trigger with no periodic input. Separate rhythm generation, propagation,
+load/posture robustness, stopping and direction selection; retain numerical
+controls and old skill archives. Autonomous sensory-guided task selection
+is a further milestone. No learning objective, priority or model was changed
+by this literature review; H1.1 coverage-first records remain in force.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,
