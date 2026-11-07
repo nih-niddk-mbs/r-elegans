@@ -12,10 +12,10 @@ and backup status have not been independently verified by parsing stdout.
 No run identifier or missing setting is fabricated. Gate counts are derived
 using the published motor criteria, including the float32 lag-boundary epsilon.
 
-E019 instead records `evidence_type: locally_verified_artifacts`, with hashes
+E019 and E021 instead record `evidence_type: locally_verified_artifacts`, with hashes
 of inspected local checkpoints/manifests/summaries and external archive paths.
-It does not claim a completed remote steering ensemble. The evidence index
-lists the reported server transcripts; locally verified trial files remain in
+These local records do not establish server execution or outcomes. The evidence
+index lists the reported server transcripts; locally verified trial files remain in
 their separately checksummed scientific archive.
 
 E020 is truncated reported server stdout. Its aggregate supervisor exit code

@@ -136,6 +136,12 @@ calibration or runtime policy handoff. E021 in the notebook records the
 predeclared protocol and development results; the agent cannot launch the
 password-authenticated server command itself.
 
+The local head policy now passes both tuning and physical controls after
+3,000 staged updates. Two earlier below-gate fits are retained. Head excursion
+is 0.1595–0.1750 rad peak-to-peak with a quiet posterior trunk and negligible
+cycle drift. This is one source lineage; the four-seed server run remains
+unverified. All artifacts and replay inputs are preserved in OneDrive.
+
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) is the chronological experiment record,
 including hypotheses, methods, negative results, decisions, code/artifact
 lineage and explicit evidence gaps. Small [reported-result summaries](experiments/records)

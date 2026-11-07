@@ -617,6 +617,41 @@ updates again pass all physical tests; trajectory errors improve to
 unchanged criteria. The server stage is already software-tested; these local
 continuations assess fit convergence, not new biological hypotheses.
 
+**Final local result (artifact verified):** the third 1,000-update stage passes
+both tuning and all physical tests; its selected checkpoint is update 1,000
+(3,000 total staged updates from one source model). Longer-command trajectory
+errors are 0.230/0.249, head correlations 0.997/0.995, below/above the unchanged
+respective gates. Fits took 215.57/210.78/210.03 seconds; each continuation
+started a fresh optimizer and the previous selected actor, not the original
+forward actor. The two earlier below-gate attempts remain preserved.
+
+At 2.4/3.0/3.7-second pacing, the final head-angle peak-to-peak excursions are
+0.1595/0.1693/0.1750 rad; lateral head-center excursions relative to the trunk
+are 0.01885/0.02003/0.02071 body lengths. Posterior/anterior dynamic joint RMS
+ratios are 0.0558/0.0559/0.0561 (limit 0.25). Maximum phase-matched centroid
+drift across these conditions is 1.23e-6 body lengths/cycle, well below 1e-4.
+Rest suppression, periodicity, stable amplitudes and 20/10-ms controls pass.
+NMJ/muscle/sensory/noise fields and anatomical masks were verified unchanged.
+
+**Evidence/archive:** [E021 metadata](experiments/records/E021.json); OneDrive
+`results/motor_curriculum/head-sweep-20261106-local-seed0` contains the oracle,
+all three fits, command/source/environment snapshots, input copy, checkpoints,
+trajectories, plots, lineage mapping and checksums. The earliest oracle
+manifest retains unused steering fields from the shared entrypoint; startup
+source confirms they were ignored by the head target, and subsequent manifests
+remove them. Raw records are preserved unchanged. Dirty startup source
+snapshots identify the exact trial code. Upstream forward-training history
+remains in earlier archives; included replay inputs cover these head fits.
+
+**Validation/status:** 167 software tests passed. Local MOT-09 stationary scan
+is demonstrated in one driven full-network policy/parent lineage, not three
+independent seeds. Template fit is close to the 0.25 boundary in one held-out
+sequence; multi-seed reliability is not established. This is not biological
+calibration, endogenous rhythm or sensor-driven head selection. The four-seed
+480-minute mbslnx2 command was published with implementation `d7c668e`; its
+actual remote launch/outcome is not observed by the agent. All earlier skills
+remain unchanged.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,

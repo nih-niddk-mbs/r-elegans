@@ -93,6 +93,13 @@ recorded as a load control; an isolated head oscillation need not disappear
 under isotropic drag. Commands, targets, source, environment, input/checkpoint
 hashes and full physical trajectories remain external and reproducible.
 
+Local E021 outcome: three 1,000-update stages with fresh optimizers produced
+a policy passing both longer-command tuning (body errors 0.230/0.249) and all
+physical head tests. Earlier stages passed physical tests but missed the
+unchanged trajectory gate and remain archived. This establishes one driven,
+stationary head-scan policy, not multi-seed or biological validation; server
+replication is the next run.
+
 For the chronological protocol/outcome record and replication checklist, see
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). The historical stages below describe
 progression, not a claim that all current models pass every stage.

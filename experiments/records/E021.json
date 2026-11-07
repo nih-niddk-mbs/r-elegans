@@ -1,0 +1,342 @@
+{
+  "entry": "E021",
+  "evidence_type": "locally_verified_artifacts",
+  "archive": "results/motor_curriculum/head-sweep-20261106-local-seed0",
+  "initial_actor_sha256": "59055b430818fb8afa72d652fa010f18b05678672cb3bb182d92fc87b3047f7a",
+  "trials": {
+    "oracle": {
+      "status": "completed",
+      "error": null,
+      "passed": true,
+      "oracle_only": true,
+      "iterations": 0,
+      "manifest_sha256": "92c3fc62dce37b19d6b7e766bde8d9c3d9e46046190540d3c3a715618ad8ffe3",
+      "summary_sha256": "6e90ae4fe6eedb68872f72267b2a571af044437ee7d4c0207991a4a6958881dc",
+      "source_record_sha256": {
+        "run_records/20261107T002033893516Z-5523cf9d/source_record.json": "2ed177f9af2543fa1cc8ee3d3137414cefe5c2d36367e47559192f6660d00b7f"
+      },
+      "physical_all_passed": null,
+      "periods": []
+    },
+    "pilot": {
+      "status": "completed",
+      "error": null,
+      "passed": false,
+      "iterations": 1000,
+      "selected_iteration": 1000,
+      "elapsed_seconds": 215.56707941700006,
+      "manifest_sha256": "4c92e656f82715801df30b6b5dfc266db0f2287ab80f5fba2a9c90c3e5775be8",
+      "summary_sha256": "2648ab637fd0d35f33ad84b2e49a00cfcc666c834d73ebdb5807a34b5050a564",
+      "source_record_sha256": {
+        "run_records/20261107T002143679511Z-c17a9300/source_record.json": "b3bc15eed4b8662ff6392213606e60ee398a42e024e600dfaec3b1df574c1cbe"
+      },
+      "actor_best_sha256": "4d744205811f174c19c0be8d3a88d8d65ab9674379656a77d9bf0cf90fadb7f0",
+      "selection_key": [
+        2,
+        1.4408550262451172,
+        0.6654848891411707
+      ],
+      "imitation": [
+        {
+          "body_relative_rmse": 0.3523455262184143,
+          "head_correlation": 0.9969003200531006,
+          "muscle_rmse": 0.004773312713950872
+        },
+        {
+          "body_relative_rmse": 0.3602137565612793,
+          "head_correlation": 0.9933837056159973,
+          "muscle_rmse": 0.005178744904696941
+        }
+      ],
+      "physical_all_passed": true,
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.14011299893634088,
+          "head_lateral_p2p": 0.01751214451396831,
+          "posterior_anterior_ratio": 0.06611126887222063,
+          "maximum_cycle_displacement": 6.699019650113769e-07,
+          "timestep_differences": {
+            "head_angle_p2p": 0.0008047311938021995,
+            "head_lateral_p2p": 9.771542542813538e-05
+          },
+          "isotropic_head_angle_p2p": 0.14045319497225192
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.14965690486207017,
+          "head_lateral_p2p": 0.01868210141702692,
+          "posterior_anterior_ratio": 0.0645465427381917,
+          "maximum_cycle_displacement": 6.978839905968925e-07,
+          "timestep_differences": {
+            "head_angle_p2p": 0.0006231970409728005,
+            "head_lateral_p2p": 7.576102117149916e-05
+          },
+          "isotropic_head_angle_p2p": 0.1499197592025593
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.15641423276111002,
+          "head_lateral_p2p": 0.019509137473911222,
+          "posterior_anterior_ratio": 0.06338730491023722,
+          "maximum_cycle_displacement": 6.909062335580529e-07,
+          "timestep_differences": {
+            "head_angle_p2p": 0.00047758336705161497,
+            "head_lateral_p2p": 5.825813813186212e-05
+          },
+          "isotropic_head_angle_p2p": 0.15661284018747745
+        }
+      ]
+    },
+    "continued": {
+      "status": "completed",
+      "error": null,
+      "passed": false,
+      "iterations": 1000,
+      "selected_iteration": 1000,
+      "elapsed_seconds": 210.78204258299957,
+      "manifest_sha256": "7bd52687776b13ba0b592f7f4f136d04807f14d805a8c3e1c8786b8591b6a6b5",
+      "summary_sha256": "eb171e07767408486e6b6acbbdf1357e142e7d8acf2309d3851fd8883011c0eb",
+      "source_record_sha256": {
+        "run_records/20261107T002604951428Z-1bd304ff/source_record.json": "1cb1cfe4ba1feb9cc96f2d6f7614a97b30222fdabf06342e788e289986da741a"
+      },
+      "actor_best_sha256": "51b51a3059c98b3a210c1e8df1965d4c7a5e087c5fe81b34eeb3a1432a7ef031",
+      "selection_key": [
+        2,
+        1.0772957801818848,
+        0.4965217719230116
+      ],
+      "imitation": [
+        {
+          "body_relative_rmse": 0.25338315963745117,
+          "head_correlation": 0.9989362955093384,
+          "muscle_rmse": 0.0038142858538776636
+        },
+        {
+          "body_relative_rmse": 0.2693239450454712,
+          "head_correlation": 0.9951074123382568,
+          "muscle_rmse": 0.004289104603230953
+        }
+      ],
+      "physical_all_passed": true,
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.1525547019547309,
+          "head_lateral_p2p": 0.018371530221901446,
+          "posterior_anterior_ratio": 0.06289139999937612,
+          "maximum_cycle_displacement": 4.442290446604602e-07,
+          "timestep_differences": {
+            "head_angle_p2p": 0.0008362947644853791,
+            "head_lateral_p2p": 9.941567967891238e-05
+          },
+          "isotropic_head_angle_p2p": 0.1529178747510213
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.16217718013619634,
+          "head_lateral_p2p": 0.019516483574968133,
+          "posterior_anterior_ratio": 0.061941671363308866,
+          "maximum_cycle_displacement": 4.3735428789659636e-07,
+          "timestep_differences": {
+            "head_angle_p2p": 0.0006455361205635612,
+            "head_lateral_p2p": 7.795732242753262e-05
+          },
+          "isotropic_head_angle_p2p": 0.16246302413460467
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.1688261164211844,
+          "head_lateral_p2p": 0.020304592284591656,
+          "posterior_anterior_ratio": 0.06121279108389524,
+          "maximum_cycle_displacement": 4.2856612481045886e-07,
+          "timestep_differences": {
+            "head_angle_p2p": 0.0004782709067759905,
+            "head_lateral_p2p": 5.8194316261986345e-05
+          },
+          "isotropic_head_angle_p2p": 0.16903782753178334
+        }
+      ]
+    },
+    "refined": {
+      "status": "completed",
+      "error": null,
+      "passed": true,
+      "physical_passed": true,
+      "tuning_passed": true,
+      "iterations": 1000,
+      "selected_iteration": 1000,
+      "elapsed_seconds": 210.03348429199832,
+      "manifest_sha256": "9f8d735f8dd2a329fac157afea133b7c8badafd3fc2547aafe63bf740e0cbcfb",
+      "summary_sha256": "c0cdd030a040623fa03a15dc9c60e7bf939444ddb0bb85fc24f5b7296e5e5e11",
+      "source_record_sha256": {
+        "run_records/20261107T003033523557Z-52e99c25/source_record.json": "10fd874bc3103f60717d6dc96f4fe24b63bcf98cad6a18f06178417711350e6e"
+      },
+      "actor_best_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+      "selection_key": [
+        0,
+        0.9970218539237976,
+        0.4474914615064729
+      ],
+      "imitation": [
+        {
+          "body_relative_rmse": 0.22981393337249756,
+          "head_correlation": 0.9973804354667664,
+          "muscle_rmse": 0.003670611185953021
+        },
+        {
+          "body_relative_rmse": 0.2492554634809494,
+          "head_correlation": 0.9945492148399353,
+          "muscle_rmse": 0.00414478313177824
+        }
+      ],
+      "physical_all_passed": true,
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.15948361347938728,
+          "head_lateral_p2p": 0.01885369224546641,
+          "posterior_anterior_ratio": 0.05576034900419838,
+          "maximum_cycle_displacement": 6.860599910396559e-08,
+          "timestep_differences": {
+            "head_angle_p2p": 0.0008652847898325267,
+            "head_lateral_p2p": 0.00010277213104514446
+          },
+          "isotropic_head_angle_p2p": 0.1598550248216554
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.16933940415680168,
+          "head_lateral_p2p": 0.020032487123730864,
+          "posterior_anterior_ratio": 0.05590322312694236,
+          "maximum_cycle_displacement": 6.04561307682161e-07,
+          "timestep_differences": {
+            "head_angle_p2p": 0.0006349057389274382,
+            "head_lateral_p2p": 7.737019308723392e-05
+          },
+          "isotropic_head_angle_p2p": 0.1696294740395102
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "checks": {
+            "head_angle": true,
+            "head_excursion": true,
+            "localized": true,
+            "stationary": true,
+            "no_global_turn": true,
+            "periodic": true,
+            "stable": true
+          },
+          "above_numerical_controls": true,
+          "rest_quiet": true,
+          "head_angle_p2p": 0.17499361280196324,
+          "head_lateral_p2p": 0.020713187697918325,
+          "posterior_anterior_ratio": 0.05612352378589261,
+          "maximum_cycle_displacement": 1.2203430515000946e-06,
+          "timestep_differences": {
+            "head_angle_p2p": 0.00039354878792263737,
+            "head_lateral_p2p": 4.869774491954304e-05
+          },
+          "isotropic_head_angle_p2p": 0.17520719204775245
+        }
+      ]
+    }
+  }
+}

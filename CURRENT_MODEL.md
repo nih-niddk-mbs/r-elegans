@@ -77,8 +77,12 @@ Stationary head-sweep training (MOT-09) is implemented in
 head target and anterior-NMJ-weighted pacing. Relative head/trunk geometry
 and quiet-posterior/drift tests prevent global rotation or whole-body bends
 from counting as a scan. No locomotion progress floor applies at rest.
-Initial physics-only oracle checks pass; E021 records neural development and
-the prepared four-seed server run. The agent has not launched that remote run.
+Local E021 now passes tuning and physical tests after three 1,000-update stages
+with fresh optimizers. Head excursions span 0.1595–0.1750 rad peak-to-peak,
+posterior/anterior dynamic RMS ratio is about 0.056, and cycle centroid drift
+is <=1.23e-6 body lengths. All three pacing rates and controls pass; fixed
+NMJ/muscle fields and topology are unchanged. This is one parent lineage,
+with the server cohort prepared but not launched by the agent.
 
 | Component | Present | Fitted | Active in food demo |
 | --- | --- | --- | --- |
