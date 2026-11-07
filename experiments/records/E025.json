@@ -1,0 +1,194 @@
+{
+  "experiment": "E025",
+  "evidence": {
+    "channels": "digitized_physiology_with_transferred_kinetics_and_protocol_assumptions",
+    "synapses": "synthetic_software_control_only"
+  },
+  "channel_candidate": {
+    "experiment": "E025",
+    "kind": "voltage_clamp_candidate",
+    "neuron": "VD05",
+    "evidence": "whole_cell_fit_conditional_on_transferred_kinetics_and_protocol_assumptions",
+    "source_trace_sha256": "919954fef9dd18e0ee96b586dd52be11a21906da35c8a4f0086e88cca2760656",
+    "source_parameter_sha256": "eaf247448a041782defbb4697ace4f4b4ab7a00ee988765a92c8cb1b4a33c545",
+    "source_repository_commit": "b99ca5ab9c00aef739fceb1cf007bc50b06f2ccc",
+    "source_protocol_url": "https://github.com/Jessie940611/BAAIWorm/blob/b99ca5ab9c00aef739fceb1cf007bc50b06f2ccc/eworm/model_figure/single_neuron_features.py",
+    "prior_class": "AWCON",
+    "fixed_kinetics": "Existing Nicoletti-derived AWCON/RMD library; not VD-specific kinetics",
+    "optimizer": {
+      "optimizer_success": true,
+      "message": "`ftol` termination condition is satisfied.",
+      "evaluations": 18,
+      "data_scale_pA": 138.6138844608685,
+      "log_prior_weight": 0.001,
+      "sensitivity": {
+        "column_norms": [
+          1.3494447333213726,
+          16.912684827275537,
+          1.901647260137614,
+          31.13121675678252,
+          0.06489855811220255,
+          1.0968846953895355,
+          3.8879906645843354,
+          0.11542471036546874,
+          0.16152926811002052,
+          0.4360268902388803,
+          0.005955502920851824,
+          0.2870326086464276,
+          0.0031899240179643585,
+          0.34176648932633263,
+          0.4661612320636823,
+          0.32087200960670287,
+          0.8149282649045755
+        ],
+        "singular_values": [
+          3.501389838672004,
+          1.53149195282654,
+          1.1296932313121448,
+          0.7909576510451511,
+          0.6444421519858136,
+          0.21955681353417197,
+          0.15011640155000777,
+          0.0676381787130393,
+          0.0324423990933759,
+          0.022821647368994582,
+          0.020525114133060043,
+          0.015361184954238776,
+          0.009238120950372256,
+          0.005051060443493999,
+          0.0039078801188300516,
+          0.0018286101944484123,
+          3.8311859212640657e-10
+        ],
+        "rank": 16,
+        "parameters": 17,
+        "rank_tolerance": 0.0009984164826993267,
+        "practical_rank_relative_1e3": 15,
+        "condition_number": null,
+        "interpretation": "Local fixed-kinetics sensitivity, not parameter uncertainty"
+      }
+    },
+    "dt_ms": 2.0000000000000018,
+    "substeps": 8,
+    "refinement_substeps": 16,
+    "train_steps_mV": [
+      -10.0,
+      10.0,
+      20.0,
+      40.0
+    ],
+    "heldout_steps_mV": [
+      0.0,
+      30.0
+    ],
+    "initial_train_rmse_pA": 59.4296632440119,
+    "train_rmse_pA": 11.85959801805368,
+    "initial_heldout_rmse_pA": 56.99542711719874,
+    "heldout_rmse_pA": 8.449054076916324,
+    "numerical_rmse_pA": 0.0005155873368494213,
+    "train_current_rms_pA": 138.6138844608685,
+    "assumptions": [
+      "Holding -60 mV borrowed from upstream simulation configuration",
+      "1.21 s pulse; digitized response in A, converted to pA",
+      "Padded zero baselines treated as holding-current-subtracted",
+      "Exclude first 5 ms and pulse ending; capacitance/series resistance omitted",
+      "Cross-class kinetics and calcium parameters fixed; no expression constraints",
+      "No DA/VA/DB/VB channels inferred by this VD5 candidate"
+    ],
+    "gates": {
+      "optimizer_success": true,
+      "heldout_adequacy": true,
+      "numerical_convergence": true
+    },
+    "installed": false,
+    "passed": true
+  },
+  "synaptic_control": {
+    "experiment": "E025",
+    "kind": "conditional_synaptic_fit",
+    "metadata": {
+      "source": "Synthetic software control, not animal recordings",
+      "evidence": "synthetic",
+      "voltage_unit": "mV",
+      "current_unit": "pA",
+      "current_definition": "outward_intrinsic_and_capacitance_subtracted",
+      "intrinsic_subtraction_source": "Analytic fixture has synaptic current only",
+      "isolated_subcircuit": true,
+      "seed": 17,
+      "truth": [
+        {
+          "kind": "chemical",
+          "post": "AVAL",
+          "pre": "LUAL",
+          "conductance_nS": 0.3
+        },
+        {
+          "kind": "chemical",
+          "post": "LUAL",
+          "pre": "AVAL",
+          "conductance_nS": 0.3
+        },
+        {
+          "kind": "gap",
+          "post": "AVAL",
+          "pre": "LUAL",
+          "conductance_nS": 0.12
+        }
+      ]
+    },
+    "recordings_sha256": "73ad300d4925aa7b803dd01846fd1d0bc13a68b15fc9549440b02f4f1a7d8973",
+    "metadata_sha256": "3c6608847b1c292dc3da2074d1546f7923d7729edb96365b2dbc67ce9bb8a23e",
+    "neuron_ids": [
+      "AVAL",
+      "LUAL"
+    ],
+    "heldout_trial": 0,
+    "training_trials": [
+      1,
+      2
+    ],
+    "optimizer": {
+      "optimizer_success": true,
+      "message": "The unconstrained solution is optimal.",
+      "train_rmse_pA": 1.4924889799266752e-14,
+      "prior_weight": 0.0,
+      "current_scale_pA": 1.0,
+      "interpretation": "Effective conductances conditional on fixed intrinsic/release/reversal models"
+    },
+    "heldout_rmse_pA": 1.3949058233937559e-14,
+    "scope": "Paired-clamp effective conductances; known intrinsic subtraction/release/reversal required",
+    "limitations": "No unique-parameter claim; omitted neurons must be electrically isolated in recording",
+    "installed": false,
+    "sensitivity": {
+      "column_norms": [
+        311.12314593567066,
+        310.96022715976613,
+        441.08449123645624
+      ],
+      "singular_values": [
+        1.2760602110749435,
+        0.9999999999999999,
+        0.6096477160716426
+      ],
+      "rank": 3,
+      "parameters": 3,
+      "rank_tolerance": 9.066953133718012e-14,
+      "practical_rank_relative_1e3": 3,
+      "condition_number": 2.0931107874846653,
+      "interpretation": "Local fixed-kinetics sensitivity, not parameter uncertainty"
+    }
+  },
+  "artifacts": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E025",
+  "archive_manifest_sha256": "c79e7c396516deed199b5cb7dcb76f05fad8db9989f5cc34b44890b3b6593100",
+  "verified_files": 418,
+  "hashes": {
+    "channel_candidate": "be7a89a7c5a0683db15e6b7fd2a9d0fea8284cbacde41c864962197fb3aca617",
+    "channel_arrays": "97efa11179ba79e320b4388c690bc80631b6e5c52a1e99dc62ef7ba2615d3580",
+    "synaptic_candidate": "2709ed62c5232b3ad1ff067ea0761edb29e74666faafe4ca7306000d3e541656"
+  },
+  "validation": {
+    "full_suite_passed": 175,
+    "targeted_passed": 12
+  },
+  "model_installed": false
+}

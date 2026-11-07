@@ -837,6 +837,129 @@ The next mechanistic work is evidence-grounded descending control and embodied
 coordination/proprioception, followed by propulsion assays. No old skill has
 been overwritten or claimed to transfer, and H1.1 skill coverage remains useful.
 
+### E025 — 2026-11-07: conductance fitting and synaptic inference tools (local results)
+
+**Authorization/question:** fit ion channels and synapses after E024. First
+audit the available measurements, then implement physical-unit clamp fitting
+with explicit provenance, held-out sweeps and identifiability diagnostics.
+No behavior-only optimum will be described as a measured channel inventory.
+
+**Local inventory:** seven digitized trace files cover AWA (two files), AWC,
+AVA, AIY, RIM and VD05; no DA/VA/DB/VB recordings and no paired synaptic traces
+found under the configured raw/physiology or raw/functional directories.
+Existing AWCON/RMD parameter sets are published fits, not new recordings.
+Pinned upstream BAAIWorm commit
+`b99ca5ab9c00aef739fceb1cf007bc50b06f2ccc` source was read as text only:
+`eworm/model_figure/single_neuron_features.py` and `fig_single_neuron.ipynb`.
+The source converts voltage-clamp response A to nA (factor 1e9), uses holding
+-60 mV for VD05, steps -10..40 mV and duration 1210 ms. VD05 file headers
+agree with those levels. AWCL headers (0,10,30,..110 mV) disagree with upstream
+simulation levels (-10,10,..110); block automatic AWC fitting pending resolution.
+The holding voltage is an upstream simulation assumption, not independently
+verified original experimental metadata. Retain this limitation with results.
+
+**Planned first fit:** VD05 candidate using existing 17-current/35-gate library,
+AWCON prior (explicit cross-class transfer), fixed kinetics/reversals/calcium
+parameters and nonnegative maximal conductances only. Real unit conversions
+are explicit. Fit interior pulse samples excluding edges/capacitance, with
+baseline subtraction matching padded zero baselines. Hold out complete voltage
+steps (0 and 30 mV) before optimization. Report train/validation RMSE, numerical
+substep convergence and unregularized sensitivity rank; no unique-composition
+claim. Poor held-out prediction remains a failed candidate, not a reason to
+relax acceptance after fitting. Predefined provisional adequacy gate: held-out
+RMSE <=20% of the training current RMS; convergence <=1% of that scale.
+
+**Synaptic stage:** implement a constrained conductance fit for recordings of
+pre/post voltage and residual postsynaptic current with known reversal/release
+parameters, fixed anatomical topology and shared gap-junction pairs. Test with
+synthetic data for recovery, but do not claim a real synaptic fit without paired
+measurements. This assay is distinct from fitting effective synapses to behavior.
+Do not overwrite E024, old skill weights, or the bundled published presets.
+Save inputs, source/environment, candidates and diagnostics externally.
+
+**Implemented:** `brain/conductance_fitting.py` supplies fixed-kinetics voltage
+clamp prediction in mV/ms/pA/nS, positive maximal-conductance estimation,
+data-only sensitivity diagnostics, and sparse nonnegative synaptic conductance
+estimation. `scripts/fit_membrane_synapses.py` adds audited inputs, complete
+sweep/trial holdouts, candidates, diagnostics and source/environment capture.
+SciPy is declared in the optional `fit` dependencies. No candidate is installed
+in the running actor; E024 coefficients and all existing policies are unchanged.
+
+**Executed channel commands (Mac):**
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.fit_membrane_synapses channels --data-root /Users/carsonc/OneDrive/r-elegans --output-dir /tmp/r-elegans-E025-vd5-fit-v1 --max-evaluations 100
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.fit_membrane_synapses channels --data-root /Users/carsonc/OneDrive/r-elegans --output-dir /tmp/r-elegans-E025-vd5-fit-final --max-evaluations 100
+```
+
+The final run corrects sensitivity-rank tolerance to use the Jacobian's actual
+float32 precision; coefficient fitting is unchanged. The first run's apparent
+rank 17 and ~9.14e9 condition number were not evidence of identifiability.
+Both run records are retained. VD05 trace hash matches the original manifest;
+the AWCON prior catalog is copied with its hash. Existing 35 gates plus bulk
+calcium evolve under piecewise constant voltage; exponential frozen-target
+updates (eight substeps) are compared against sixteen. Sample interval 2 ms
+(fivefold decimation of 0.4 ms digitized samples); loss uses 5..1200 ms of the
+1210 ms pulse. Holding-current subtraction uses -25..-5 ms model baseline.
+Train levels -10,10,20,40 mV; validation levels 0,30 mV. Only 17 maximal
+conductances are optimized, all other fields fixed. Positive g bounded
+1e-6..100 nS, log-conductance prior weight 0.001; prior zeros receive a 0.01 nS
+floor, explicitly allowing unsupported channel expression in this exploratory
+candidate. No expression-based composition claim follows. Deterministic SciPy
+least-squares uses JAX forward sensitivities; 18 evaluations, optimizer success.
+
+**Measured-trace candidate outcome:** training RMSE 59.4297 -> 11.8596 pA;
+held-out RMSE 56.9954 -> 8.44905 pA, against training RMS current 138.614 pA.
+Refinement RMS discrepancy 0.000515587 pA. All three provisional gates pass.
+Data-only sensitivity has numerical rank 16/17 and practical rank 15/17 at
+relative threshold 1e-3. Baseline-subtracted NCA and leak currents have the same
+ohmic voltage dependence, so these recordings cannot separate their strengths.
+Other compensating contributions and transferred kinetics further limit the
+inference. Plots show residual low-voltage adaptation mismatch despite passing
+the aggregate criterion. This is a conditional VD05 current-response candidate,
+not a unique composition, a fitted motor oscillator, or a calibrated full worm.
+
+**Synaptic software control:** constructed an explicitly synthetic isolated
+AVAL/LUAL two-cell clamp fixture on real bundled topology, seed 17, three
+independent trials of 80 voltage samples, fixed sigmoid release (-35 mV,
+slope 6 mV), zero chemical reversal, chemical strengths 0.3 nS in each existing
+direction and a shared gap strength 0.12 nS. Current generated from analytic
+outward-positive chemical/electrical expressions; no intrinsic current present.
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.fit_membrane_synapses synapses --recordings /tmp/r-elegans-E025-synaptic-fixture/recordings.npz --metadata /tmp/r-elegans-E025-synaptic-fixture/metadata.json --heldout-trial 0 --output-dir /tmp/r-elegans-E025-synaptic-control
+```
+
+All three known conductances recover; train RMSE 1.49e-14 pA, held-out trial
+RMSE 1.39e-14 pA, sensitivity rank 3/3. This validates the inference code under
+its assumptions, **not biological synaptic values**. No real synaptic fit was
+run: paired pre/post clamp currents are absent locally. CLI requires units,
+subtraction provenance, known reversals/release, and explicit isolation for
+subsets. For large designs it reports skipped dense sensitivity diagnostics
+rather than claiming unique edges. A subsequent CLI guard rejects nonfinite
+held-out currents and returns nonzero on optimizer failure.
+
+**Verification:** targeted channel/synapse and single-compartment tests:
+12 passed. Full suite: `MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q`
+— **175 passed in 53.23 s**, before the final CLI guard-only edit; the targeted
+suite was repeated afterward with **12 passed in 8.05 s**. No models
+were trained with new dynamics or replaced.
+
+**Artifacts:** originals, both channel runs, the synthetic fixture/control,
+clamp-fit PNG/PDF with plotting source, upstream pinned protocol-source text,
+dataset audit and exact invocation/environment/source snapshots are copied to
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E025/`. Verified SHA-256
+for 418 copied files; manifest `SHA256SUMS.json` hash:
+`c79e7c396516deed199b5cb7dcb76f05fad8db9989f5cc34b44890b3b6593100`.
+Local copy verification does not prove cloud synchronization. The dirty source
+snapshots are authoritative for the runs; later documentation/CLI guards do not
+retroactively change them. Small summary/hashes: `experiments/records/E025.json`.
+
+**Remaining scientific choice:** direct motor-cell data are missing. Asked the
+user whether to infer their unknown channel/synaptic values from established
+motor behaviors with physiological priors. No such behavior-inference fit was
+executed in E025, and inferred parameters must retain that evidence label.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,

@@ -41,6 +41,29 @@ In the initial connected network some A rhythms are suppressed by coupling;
 coordinated muscle waves, proprioception and propulsion are still outstanding.
 This is recorded evidence, not a reason to inject a hidden periodic command.
 
+## Physiological fitting before behavioral inference (E025)
+
+Fit identifiable membrane constraints before synaptic strengths to reduce
+compensation between cell excitability and connectivity. This is a staged
+estimation strategy, not evidence that every conductance becomes identifiable.
+Preserve fixed channel kinetics/reversals, separate whole held-out voltage
+steps, and report data-only sensitivity rank alongside regularized optima.
+Cross-class priors remain assumptions; zero expression constraints must be
+supported by evidence rather than inferred from a small optimized conductance.
+The E025 VD05 candidate passes provisional current-prediction and numerical
+gates but cannot identify all 17 conductances. It is not a fitted DA/VA/DB/VB
+model and is not installed in the normalized actor.
+
+For synapses, require known pre/post voltage, outward intrinsic/capacitance-
+subtracted postsynaptic current, fixed release/reversal parameters and confirmed
+isolation of omitted cells. Hold out complete independent stimulation trials;
+respect chemical masks, share each electrical conductance between both ends,
+and do not interpret indirect network responses as direct edge conductance.
+Current synaptic recovery evidence is **synthetic software validation only**.
+Behavioral training may later infer effective missing parameters under priors;
+such values must be labeled behavior-inferred rather than electrophysiologically
+measured. Do not transfer physical nS into normalized actor units implicitly.
+
 ## Working hypothesis: motor curriculum before task RL
 
 [H1 in the laboratory notebook](LAB_NOTEBOOK.md#h1--build-the-motor-repertoire-before-task-rl)

@@ -50,6 +50,12 @@ These are reduced demonstration dynamics, not fitted cell-specific channel
 models or a validated autonomous gait; existing skill training keeps its prior
 membrane equations. See [the implementation and assay contract](CURRENT_MODEL.md#self-drive-and-proprioception-gap-reviewed-2026-11-07).
 
+Physical-unit [channel and synapse fitting tools](CURRENT_MODEL.md#conductance-fitting-branch-e025-2026-11-07)
+are also available separately. The first VD5 clamp candidate predicts held-out
+current traces, with non-unique conductances and transferred-kinetics assumptions.
+Motor-oscillator channels and biological synaptic strengths remain unfitted;
+this candidate does not alter the running worm.
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)

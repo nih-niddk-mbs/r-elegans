@@ -99,6 +99,66 @@ python -m scripts.assay_intrinsic_motor --output-dir /path/outside/repo/intrinsi
 The assay is a fixed-parameter cellular/full-network smoke experiment, not RL
 or a body-motion test. See E024 in the notebook for results and limitations.
 
+## Conductance fitting branch (E025, 2026-11-07)
+
+`scripts/fit_membrane_synapses.py` fits **physical-unit candidates**, separately
+from both the normalized full actor and E024's reduced oscillator coefficients.
+It never installs them into the actor or modifies published presets.
+
+- The first local VD05 voltage-clamp candidate fits 17 nonnegative maximal
+  current conductances using fixed transferred AWCON kinetics, reversal and
+  calcium parameters. Four voltage steps train; complete 0 and 30 mV sweeps
+  are held out. Training RMSE falls from 59.43 to 11.86 pA; held-out RMSE falls
+  from 57.00 to 8.45 pA. Doubling substeps changes predictions by 0.000516 pA RMS.
+- These are conditional whole-cell estimates, not a unique channel composition:
+  sensitivity rank is 16/17 at numerical precision, practical rank 15/17 at
+  relative cutoff 1e-3. In particular, holding-subtracted ohmic leak and NCA
+  contributions cannot be separated by this protocol. A good current fit does
+  not remove that degeneracy or validate transferred channel kinetics.
+- VD05 holding voltage (-60 mV) comes from upstream simulation configuration,
+  not independently recovered original experimental metadata. Baseline current
+  subtraction is assumed to match padded zero baselines; capacitive/series-
+  resistance effects are omitted and pulse edges excluded from fitting.
+- Local digitized recordings cover AWA, AWC, AVA, AIY, RIM and VD05, **not
+  DA/VA/DB/VB**. AWCL auto-fitting is blocked by disagreement between file
+  voltage labels and upstream simulation levels. No motor-oscillator channels
+  have been fitted to measurements by this branch.
+- A second command fits nonnegative chemical and shared electrical conductances
+  to paired voltage/current clamp recordings while intrinsic currents, release
+  functions and reversals are fixed. It preserves anatomical masks, holds out
+  entire trials and requires explicit units, subtraction provenance and isolation
+  for a subset. The CLI recovered known synthetic conductances; **no real paired
+  synaptic recordings are present locally and no biological synapses were fitted**.
+
+Install the fitting dependency with `python -m pip install -e '.[fit]'`. Example:
+
+```bash
+python -m scripts.fit_membrane_synapses channels \
+  --data-root /path/to/external/r-elegans \
+  --output-dir /path/to/external/fresh-vd5-fit
+```
+
+Synapse input is an external NPZ with `neuron_ids`, `voltage_mV` and
+`residual_current_pA` (both `[trial,time,neuron]`), `reversal_mV` (`[post,pre]`),
+and per-neuron `threshold_mV`/`slope_mV`. Residual currents must be outward
+positive, with intrinsic and capacitive currents already subtracted; fluorescence
+is not an interchangeable input. Provide a metadata JSON with `source`,
+`voltage_unit: "mV"`, `current_unit: "pA"`,
+`current_definition: "outward_intrinsic_and_capacitance_subtracted"`,
+`intrinsic_subtraction_source`, and `isolated_subcircuit: true` for subsets:
+
+```bash
+python -m scripts.fit_membrane_synapses synapses \
+  --recordings /external/paired_clamp.npz --metadata /external/provenance.json \
+  --heldout-trial 0 --output-dir /external/fresh-synaptic-fit
+```
+
+These inference tools do not make the 302 neurons fully biophysical. Measured
+cell fits, behavior-inferred effective parameters, and E024 demonstration
+coefficients must retain separate evidence labels and units. Physical conductance
+candidates cannot be copied into normalized actor weights without a documented
+mapping and independent validation. See E025 for exact inputs and artifacts.
+
 ## Status table
 
 Standalone steering development now uses `train_steering.py` (MOT-08).
