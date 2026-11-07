@@ -159,6 +159,89 @@ coefficients must retain separate evidence labels and units. Physical conductanc
 candidates cannot be copied into normalized actor weights without a documented
 mapping and independent validation. See E025 for exact inputs and artifacts.
 
+## All-cell channel and calcium branch (E026, 2026-11-07)
+
+`brain/conductance_network.py` now instantiates the existing 17-current library
+in **all 302 neurons**, with 35 channel gates, intracellular calcium, and a
+saturating low-pass fluorescence-indicator state in every cell. There is no
+hard spike threshold/reset and no requirement for a cell to spike. Graded
+responses, oscillation and regenerative activity depend on conductances and
+inputs. This is an additional inference branch; the preserved motor-skill actor
+and bundled demonstration have not been replaced or requalified under it.
+
+All neurons have a channel parameterization, **not an established measured
+composition**. RMD cells use the RMD library prior; others use a weak transferred
+AWCON prior (1% maximal conductance, 1e-5 nS floor). Leak is initialized at
+0.03 nS. AWCON identity is not assigned to both AWC cells as a known phenotype.
+The library is incomplete: it does not yet include the EXP-2, UNC-103 and KQT-1
+extensions in [Nicoletti et al. 2024](https://doi.org/10.1371/journal.pone.0298105),
+nor a complete receptor, mechanosensory, neuromodulatory or ion-homeostasis model.
+Effective chemical currents retain parent reversal priors, rather than newly
+identified receptor-specific chloride/cation conductances. Published evidence
+supports spiking in AWA/AVL/DVB and other distinct regenerative/graded regimes;
+no complete experimentally established 302-cell spike/nonspike map is assumed.
+
+**Starting-parameter contract:** the fitter requires a saved full-network actor;
+it copies its chemical/gap raw strengths and masks exactly. A migration maps
+normalized voltage to `100*v - 25 mV`, synaptic weights to `0.03*softplus(raw) nS`
+on the same edges, and passive tau to capacitance. Parent fits can have values
+outside plausible membrane ranges, so migration bounds initial/leak voltage to
+[-80,-35] mV, effective synapse reversal to [-85,0], release threshold to
+[-65,-20] mV, slope to [2,20] mV, and capacitance to [1,20] pF. These are disclosed
+initialization assumptions, not experimentally fitted unit conversions. A fixed
+bias balances initial intrinsic current only. There is no target-driven current
+or learned per-timestep input. The E024 reduced oscillator equations are not
+silently combined with the 17-current equations; their phenotypes must be
+retested in this branch.
+
+**Recording/fitting path:** `scripts/fit_calcium_network.py` loads a required
+preserved parent, an external processed HDF5 calcium recording and NeuroPAL
+labels, rejecting ambiguous/noncanonical/duplicate identities. Source label
+indices are one-based; observed traces are mapped by canonical neuron name,
+not by spatial rank. All 302 evolve; only recorded, confidently identified cells
+enter the loss. The tested baseline recording `2022-06-14-01` has 55 included
+labels at confidence >=4. Its HDF5 SHA-256 agrees with the source manifest.
+Reported GCaMP7f fluorescence is ratiometric, not voltage or absolute calcium.
+The Hill/low-pass indicator is an uncalibrated effective observation model,
+not a measured nuclear-calcium transport model.
+
+The first assay uses 16 frames (~9.67 s), training on the first 12 and holding
+out the last four. Only training frames set fluorescence normalization and
+the fixed observation scale/offset. All channel multipliers and existing
+chemical/electrical strengths are trainable under priors; masks, channel
+kinetics, current biases, release/reversal fields and indicator constants stay
+fixed. No behavior, target fluorescence, phase clock, or inferred latent current
+is fed to neurons. Missing animal inputs are a limitation. Checkpoint NPZs
+store the complete fixed membrane network, fitted parameters, unit config and
+canonical neuron ordering; preserve the separately copied NMJ/parent actor too.
+
+```bash
+python -m pip install -e '.[fit]'
+python -m scripts.fit_calcium_network \
+  --recording /external/2022-06-14-01-data.h5 \
+  --labels /external/neuropal_label.json.bz2 --uid 2022-06-14-01 \
+  --initial-actor /external/preserved-skill/actor_best.npz \
+  --output-dir /external/fresh-calcium-fit \
+  --frames 16 --iterations 50 --max-step-ms 1 --minutes 15
+```
+
+Short-window loss reduction is separate from successful held-out prediction,
+unique conductance inference and behavior. The initial 10-update test slightly
+reduced training error but worsened held-out error; it did not establish a good
+calcium fit. Numerical convergence must be tested in each parameter regime:
+frozen-conductance integration is first order, and fast active cells need finer
+steps than the older generic membrane model. E026 records complete results and
+artifacts; **no fit has been installed as the operating worm**.
+
+The finer 50-update assay (1 ms maximum integration step) reduces training MSE
+1.05023 -> 1.03604, but worsens held-out MSE 4.35387 -> 4.37773 and still loses
+to a constant training-mean predictor on training (MSE 1). Substep refinement
+changes standardized predictions by only 0.0001355 RMS; the poor predictive fit
+is not explained by that small numerical difference. Many predicted traces are
+nearly flat. All 180 software tests pass, but the candidate is **not a successful
+calcium fit** and has not been promoted. Better class/indicator priors and
+input/initial-state inference are needed before large fitting runs.
+
 ## Status table
 
 Standalone steering development now uses `train_steering.py` (MOT-08).

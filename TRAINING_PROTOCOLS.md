@@ -64,6 +64,34 @@ Behavioral training may later infer effective missing parameters under priors;
 such values must be labeled behavior-inferred rather than electrophysiologically
 measured. Do not transfer physical nS into normalized actor units implicitly.
 
+## Calcium-constrained full-network inference (E026)
+
+The user directs fitting calcium recordings from the current parameter settings,
+with channels in all neurons. This does not require every neuron to spike.
+Use the all-cell 17-current branch and the recorded normalized-to-physical
+migration, preserving the exact parent weights/identities/config externally.
+Published whole-cell class models are priors; most assigned channel profiles
+remain transferred and uncertain. The Nicoletti 2024 VA/VB/VD/interneuron models
+are additional available evidence; the current library has not yet ported their
+extra currents. Earlier local-data gaps do not establish absence from literature.
+
+Fit predicted intracellular calcium through an effective indicator model to
+identified fluorescence traces. Do not compare voltage directly to GCaMP or
+interpret fluorescence peaks alone as proven action potentials. Keep source
+reporter, compartment, normalization and label confidence explicit; do not infer
+unresolved left/right identities from desired activity. Only training samples
+may set normalization, observation readout or nuisance parameters. Reserve
+contiguous future frames and eventually entire animals/interventions.
+
+The first fit trains channel multipliers and existing chemical/gap strengths,
+with fixed masks/kinetics/calcium/release/reversal/indicator parameters and no
+target-derived current. Record both loss against the initial model and against
+a training-mean baseline; a small training improvement with poor validation is
+a failed predictive fit. Distinguish numerical integration error from statistical
+error by doubling substeps. Whole-network gradients do not make every cell or
+edge identifiable from partial head recordings. Requalify motor oscillation and
+body motion before promoting any calcium-fitted candidate into skill execution.
+
 ## Working hypothesis: motor curriculum before task RL
 
 [H1 in the laboratory notebook](LAB_NOTEBOOK.md#h1--build-the-motor-repertoire-before-task-rl)

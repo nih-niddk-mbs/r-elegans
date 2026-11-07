@@ -56,6 +56,13 @@ current traces, with non-unique conductances and transferred-kinetics assumption
 Motor-oscillator channels and biological synaptic strengths remain unfitted;
 this candidate does not alter the running worm.
 
+The new [all-cell calcium-fitting branch](CURRENT_MODEL.md#all-cell-channel-and-calcium-branch-e026-2026-11-07)
+gives every neuron channel gates and intracellular calcium and fits against
+identified GCaMP traces starting from a saved full-network actor. Most channel
+compositions are transferred priors, and no spiking rule is imposed. Initial
+short-window fits have not established predictive accuracy or preserved motor
+skills; use the existing operating model until this branch is qualified.
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)

@@ -29,6 +29,9 @@ data = [
 ]
 fit = [
   "scipy>=1.11",
+  "h5py>=3.10",
+  "optax>=0.2",
+  "flax>=0.10",
 ]
 env = [
   "gymnax>=1.0.0,<2",

@@ -960,6 +960,207 @@ user whether to infer their unknown channel/synaptic values from established
 motor behaviors with physiological priors. No such behavior-inference fit was
 executed in E025, and inferred parameters must retain that evidence label.
 
+### E026 — 2026-11-07: channels in all neurons and calcium-recording fitting
+
+**User direction:** fit calcium recordings from current parameters; give every
+neuron membrane channels, without forcing graded-potential cells to spike.
+Use a versioned conductance-network branch, preserve current fitted synaptic
+parameters and explicit migration assumptions, and do not overwrite old skills.
+Joint calcium fitting supersedes any implication that only paired clamp
+recordings can constrain the network. Chloride/mixed-cation receptor currents
+are relevant in addition to K/Ca/Na-permeable membrane currents. No classical
+voltage-gated sodium spike current should be invented for worm neurons.
+
+**Plan/data:** Atanas & Kim 2023 identified baseline calcium/behavior recording,
+processed HDF5/NeuroPAL labels from Zenodo record 19388374, DOI reference in
+WormWideWeb. Download processed archive (568,776,589 bytes), not image volumes,
+to external OneDrive and verify published MD5 plus local SHA-256. Audit label
+confidence, timestamps, reporter and trace normalization before fitting. Select
+canonical, uniquely labeled neurons only; exclude unresolved LR identities.
+Do not treat calcium fluorescence as membrane voltage or substitute behavior
+features as direct neural inputs without labeling that assumption.
+
+**Model plan:** vectorize the existing 17-current/35-gate model over all 302
+cells with intracellular calcium and a saturating, low-pass indicator. Existing
+AWCON/RMD presets are measured-model priors only for their classes; use explicitly
+transferred weak priors elsewhere, not invented cell-specific measurements.
+Preserve parent chemical/gap relative strengths and release fields through an
+explicit normalized-to-physical-unit mapping. Non-spiking cells have channels
+but no hard spike/reset mechanism or required oscillatory target. Unknown
+receptor polarity remains unresolved; parent reversal priors are assumptions.
+
+**Planned first assay:** initialize from a preserved current full-network actor
+checkpoint; fit bounded channel conductance multipliers and existing anatomical
+synaptic strengths against an identified short calcium window. Preserve initial
+model/config/parent hashes, optimization state and final candidate. Reserve a
+later contiguous interval for validation; determine scaling/observation gain
+using training data only. No teacher forcing from target fluorescence and no
+per-timestep free neural currents. Verify all 302 have active channel states,
+gradients, numerical convergence and checkpoint roundtrip. Report initial/final
+train/held-out error even if no generalization; improvement on one short window
+is not electrophysiological identifiability or behavioral fidelity. Exact
+methods/commands/results to follow; no server launch assumed.
+
+**Implementation:** `brain/conductance_network.py` now vectorizes all 17 current
+components/35 gates over all 302 cells, with bulk calcium and an effective
+Hill/low-pass indicator. No spike/reset rule. `data/calcium.py` loads processed
+HDF5 traces and one-based NeuroPAL label mappings, excluding noncanonical,
+ambiguous, low-confidence and duplicate labels. `scripts/fit_calcium_network.py`
+fits channel multipliers plus existing chemical/gap strengths. All cells and
+anatomical edges remain simulated, even when not observed. Channel coefficient
+and effective synaptic inference from calcium is conditional and non-unique.
+The preserved NMJ parent is copied with each run, but no body-motion assay is
+part of this fit and the new brain has not replaced the operating motor actor.
+
+**Data acquisition:** public website API returned HTTP 403; switched to the
+public Zenodo source repository rather than requiring credentials. Downloaded
+processed archive 568,776,589 bytes, SHA-256
+`c93e0cea3941b9e72bd7f09a36d7d26c8c5eca0e26fc2694dac739bbfa51c3c8`, and
+NeuroPAL labels 16,169 bytes, SHA-256
+`b371e3dae9a0f78c6f6b9ba63c7076a55aa8fccecb650f579f53918d10402684`.
+Both passed published Zenodo MD5 verification. Extracted only the selected
+baseline HDF5 using an exact basename and streamed contents, not arbitrary
+archive paths. Its SHA-256
+`aabca135ef82e4be6821bf515cd2e936ae2f78014bf2979ed8a10aeaa7c4ac11`
+matches the pinned paper manifest (WormWideWeb-data commit
+`0422546192ef58d0de4740a0aa91fd38de22da2e`). Sources and Zenodo record retained
+under external `raw/calcium/atanas_kim_2023`. H5py 3.16.0 installed in .venv;
+`fit` extra now declares HDF5 reader/optimizer dependencies.
+
+**Recording:** `2022-06-14-01`, 1600 frames x 109 extracted ROIs; 79 annotated
+labels, 55 retained at confidence >=4 with exact canonical identities and finite
+nonconstant training traces. Excluded 24 labels; this is head/pharyngeal coverage,
+not a simultaneous recording of all 302. Raw ratiometric fluorescence, not
+the full-session z-scored field, is standardized using training moments only.
+GCaMP7f is nuclear-localized in the source experiment; our effective Hill
+Kd=0.3 uM, exponent 2 and low-pass tau=0.5 s are uncertain demonstration
+observation priors, not calibrated GCaMP7f or nuclear transport kinetics.
+
+**Parent/migration:** preserved local head-sweep refined actor:
+`results/motor_curriculum/head-sweep-20261106-local-seed0/refined/actor_best.npz`
+in OneDrive, SHA-256
+`82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0`.
+Existing chemical/gap raw values and anatomical masks are copied exactly.
+Physical unit migration: 100*v-25 mV, 0.03*softplus(weight) nS, capacitance
+1000*tau*0.03 pF. Because learned normalized intrinsic fields can be far outside
+plausible physical ranges, bound initial/leak voltage [-80,-35] mV, effective
+synaptic reversal [-85,0], release threshold [-65,-20], slope [2,20], capacitance
+[1,20] pF. These bounds and g-unit are initialization hypotheses, not measured
+conversion factors. An exploratory unbounded migration reached -208.9 mV in a
+short smoke check; it was rejected before fitting. Fixed bias balances initial
+intrinsic currents only, not future or recurrent currents. No E024 clock scale
+or artificial periodic forcing is carried into the physical membrane equations.
+
+Each RMD cell starts with the RMD conductance library; all others start with
+AWCON conductances scaled to 1%, with 1e-5 nS floor and a 0.03 nS leak in every
+cell. Capacitance/leak reversal come from the parent mapping, so even RMD is
+not an unchanged published whole-cell model. AWCON fate is not assigned as a
+known left/right identity. These are transferable starting priors, not claims
+of true cell-specific expression or an exhaustive worm channel inventory.
+
+**Fitting method:** all 302*17 log-conductance multipliers, existing chemical
+edges and symmetric gap strengths may change. Multipliers bounded 0.1..10;
+synaptic raw fields within parent +/-2; absent edges remain absent. Adam LR .01,
+global gradient clipping 1; parameter-deviation prior weight .001. Kinetics,
+reversals/release, calcium handling, biases and observation parameters fixed.
+The neural trajectory receives no fluorescence/behavior teacher forcing,
+sinusoid, sensory replay or arbitrary learned input sequence. Actual animal
+inputs and unobserved initial/internal state remain a limitation. Full-network
+source/units/fixed fields are stored in versioned candidate checkpoints, with
+canonical cell IDs in the finalized format. The initial prototype checkpoint
+preceded the ID field; its exact source snapshot must be used to replay it.
+
+16 frames after the first reference timestamp (~9.67 s), first 12 train and
+last four held out. Nonuniform source intervals are integrated directly, with
+a common substep count chosen from the maximum interval. The fixed observation
+offset is the initial model's training mean; gain is 1/max(initial model training
+std,0.01), capped at 100 by construction. Observed training mean/std define
+target standardization; no held-out data calibrate the readout. Baseline is
+the observed training mean (zero in these standardized units).
+
+**First executed fit:**
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.fit_calcium_network --recording /Users/carsonc/OneDrive/r-elegans/raw/calcium/atanas_kim_2023/2022-06-14-01-data.h5 --labels /Users/carsonc/OneDrive/r-elegans/raw/calcium/atanas_kim_2023/neuropal_label.json.bz2 --uid 2022-06-14-01 --initial-actor /Users/carsonc/OneDrive/r-elegans/results/motor_curriculum/head-sweep-20261106-local-seed0/refined/actor_best.npz --output-dir /tmp/r-elegans-E026-calcium-v1 --frames 16 --iterations 10 --max-step-ms 2 --minutes 15
+```
+
+Locally completed, 22.55 s. Standardized training MSE 1.050135 -> 1.049237;
+held-out MSE 4.353773 -> 4.365976 (worse), training-mean held-out baseline
+4.387815. Training-mean training MSE is 1.0, so even the improved training fit
+does not beat that trivial baseline. Maximum log-channel/chemical/gap parameter
+changes ~0.101/0.101/0.100; channel and synapse optimization is active.
+Voltage range -80.25..-30.09 mV; finite trajectories. 321 substeps, maximum
+step ~1.999 ms; doubling substeps changes standardized predicted fluorescence
+by 0.01747 RMS. This is a failed predictive fit and an insufficiently resolved
+numerical candidate for mechanistic interpretation, not evidence of successful
+physiology or of network insufficiency.
+
+**Finer run/verification:** rerun from the SAME parent/priors (not a continuation),
+50 updates, max step 1 ms, output `/tmp/r-elegans-E026-calcium-fine`; exact command
+captured by its source/environment record. Held-out values are not used to
+select parameters. Outcomes and archival hashes follow below. Unit tests first
+found 0.657 mV coarse/fine discrepancy with 0.5/0.25 ms substeps in an active-cell
+test; retained 0.2 mV criterion and refined to 0.125/0.0625 ms (0.144 mV discrepancy).
+Targeted suite: five tests pass, covering all-cell states, exact old current
+equations, parent topology, differentiable channel/chemical/gap effects, numerical
+controls, passive graded responses without spikes, train-only normalization,
+identity exclusion and full checkpoint roundtrip. No broad spiking-cell
+classification is inferred from these simulation tests.
+
+**Additional literature correction prompted by user:** patch-clamp does exist
+for selected neurons, including VA5/VB6/VD5, AVA/AIY/RIM. The current local
+inventory was not evidence of absence in the literature. Nicoletti et al. 2024
+(doi:10.1371/journal.pone.0298105) supplies more class models and adds EXP-2,
+UNC-103 and KQT-1 currents; those equations/priors are NOT yet ported. The
+current all-cell library is intentionally labeled incomplete. Clear action
+potentials in AWA/AVL/DVB, RMD plateaus, graded responses and motor oscillations
+are different evidence categories. A complete 302-cell patch/phenotype atlas
+was not found in the sources reviewed. Failure to observe spikes is not proof
+of impossibility under all conditions. Literature and code gaps remain explicit.
+
+**Interpretation:** adding channels to every neuron is implemented. Fitting
+actual calcium is implemented and attempted, but neither the first small
+training improvement nor the existence of channels establishes accurate activity,
+unique compositions, preserved skill execution, or physiological spike phenotypes.
+No candidate replaces the original actor. Use improved class priors/observation
+models and multiple recordings/perturbations before large training or promotion.
+
+**Finer fit outcome (local verification):** completed 50 updates in 189.88 s,
+642 substeps per frame (maximum step 0.999512 ms), with the same parent and
+priors. Standardized training MSE 1.050225 -> 1.036041; held-out MSE
+4.353875 -> 4.377726 (worse). Training-mean baseline remains 1.0 train and
+4.387815 held out. Thus the model still does not beat the constant baseline
+on training or improve future-frame prediction relative to its initial state.
+Maximum log-channel/chemical/gap parameter changes 0.607/0.582/0.557; both
+membrane and connection parameters really learn. Voltage range -80.37..-17.46
+mV, finite all-cell traces. Doubling substeps changes standardized predicted
+fluorescence by only 0.00013550 RMS, so integration discrepancy is much smaller
+than the statistical error at this candidate. No claim that this proves
+spike-level fidelity, calibrated calcium handling or correct nuclear transport.
+Plots show the main failure clearly: many model traces remain almost flat while
+recorded activity varies. No candidate is promoted. Initial/final networks,
+fixed fields/unit configuration/IDs, copied parent/data, final optimizer state,
+source/environment, exact commands, complete logs and trajectory arrays retained.
+No RNG is consumed in these deterministic fits; the parent hash defines the
+starting weights. The CLI starts fresh optimizers and is not exact mid-run resume.
+
+**Software verification:** new targeted suite 5 passed; full repository suite
+**180 passed in 62.47 s**. The only later source change adds the already-used
+Flax serialization dependency explicitly to the `fit` extra. Software tests
+do not convert either calcium-fit failure into physiological validation.
+
+**Archive:** both complete run directories, copied source HDF5/labels/parent,
+initial/final network checkpoints, optimizer states, full stdout logs, numerical
+trajectories, example PNG/PDF with plotting source, exact source/environment
+snapshots and upstream metadata copied to
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E026/`.
+All 303 copied files verified by SHA-256. Manifest `SHA256SUMS.json` hash:
+`b549d5839623663a0ac23c7699dde8c85dee83ad20ebf0b95128d37d1ecd7f4e`.
+The 569 MB source archive remains separately under external `raw/calcium`;
+it is not duplicated into Git. Small summary/hashes: `experiments/records/E026.json`.
+Run source records retain the actual dirty pre-commit state. Verified local
+OneDrive copies do not establish completed cloud synchronization.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,
