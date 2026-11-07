@@ -22,6 +22,11 @@ E020 is truncated reported server stdout. Its aggregate supervisor exit code
 is available, but the visible condition's seed and pacing rate are explicitly
 null. Do not infer missing per-seed statistics from that excerpt.
 
+E022 transcribes the user's inline four-seed head-sweep summary. Its normalized
+external copy is not byte-identical raw stdout; no original-stdout checksum
+is asserted. Source revision, exact runtime and remote artifact hashes remain
+unverified even though all reported acceptance statuses pass.
+
 For full reconstruction, archive the remote run and recursive dependencies,
 then retain the archive on separate storage. See the notebook for the exact
 procedure, historical gaps and limitations on exact numerical replication.

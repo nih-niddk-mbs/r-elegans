@@ -142,6 +142,12 @@ is 0.1595–0.1750 rad peak-to-peak with a quiet posterior trunk and negligible
 cycle drift. This is one source lineage; the four-seed server run remains
 unverified. All artifacts and replay inputs are preserved in OneDrive.
 
+E022 subsequently reports that all four server head-sweep seeds pass both
+tuning and physical tests at every pacing rate. Stationary driven head
+scanning therefore joins the reported replicated repertoire. Complete remote
+artifacts/provenance remain to archive; this is not autonomous head selection
+or biological validation.
+
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) is the chronological experiment record,
 including hypotheses, methods, negative results, decisions, code/artifact
 lineage and explicit evidence gaps. Small [reported-result summaries](experiments/records)

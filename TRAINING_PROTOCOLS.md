@@ -100,6 +100,12 @@ unchanged trajectory gate and remain archived. This establishes one driven,
 stationary head-scan policy, not multi-seed or biological validation; server
 replication is the next run.
 
+Server E022 now reports four-seed success: physical and tuning gates pass for
+every seed and all 12 pacing conditions. Preserve the selected actors and
+their startup/source/environment records at the reported run path in the
+notebook. This completes the reported stationary head-scan cohort, pending
+independent archive inspection; no gate was relaxed or new fit launched here.
+
 For the chronological protocol/outcome record and replication checklist, see
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). The historical stages below describe
 progression, not a claim that all current models pass every stage.

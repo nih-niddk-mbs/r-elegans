@@ -564,7 +564,7 @@ coverage beyond the local pilot; no autonomy or skill-switching claim.
 **Next coverage target:** independent head sweeps (MOT-09), retaining all prior
 policies. This entry records results only and does not launch a new fit.
 
-### E021 — 2026-11-06: stationary head-sweep skill (planned)
+### E021 — 2026-11-06: stationary head-sweep protocol and local development
 
 **User request:** run the next independent skill after reported steering
 success. **Question:** can the full brain oscillate the head relative to a
@@ -651,6 +651,46 @@ calibration, endogenous rhythm or sensor-driven head selection. The four-seed
 480-minute mbslnx2 command was published with implementation `d7c668e`; its
 actual remote launch/outcome is not observed by the agent. All earlier skills
 remain unchanged.
+
+### E022 — 2026-11-07: four-seed server head-sweep success reported
+
+**Method/run:** E021 stationary head-sweep protocol; reported directory
+`/home/carsonc/r-elegans-results/head-sweep-20261107T003628901581Z`.
+The intended budget was 480 minutes; actual elapsed times and exact execution
+revision were not printed in this user-supplied summary and remain unverified.
+
+**Reported outcome:** all four seeds have passed=true, physical_passed=true,
+tuning_passed=true, status=completed and error=null. All 12 seed/pacing-rate
+conditions pass. The selected checkpoint is not necessarily the final update:
+
+| Seed | Updates executed | Selected update | Physical / tuning |
+| --- | ---: | ---: | --- |
+| 0 | 132,777 | 76,750 | Pass / pass |
+| 1 | 132,428 | 131,500 | Pass / pass |
+| 2 | 133,469 | 16,750 | Pass / pass |
+| 3 | 132,004 | 52,750 | Pass / pass |
+
+Total executed updates: 530,678. Across the three pacing periods (2.4/3.0/3.7 s),
+head-angle peak-to-peak excursion is 0.16349–0.18499 rad (about 9.4–10.6 degrees).
+Posterior/anterior dynamic joint RMS ratios are 0.03965–0.04958, below the
+0.25 limit. Maximum cycle centroid drift is 5.124e-6 body lengths, below the
+1e-4 limit. These are normalized-model measurements, not animal calibration.
+
+**Evidence:** [E022 metadata](experiments/records/E022.json), transcribed from
+the user's inline output. A normalized transcript copy is stored externally;
+its checksum is not presented as a hash of the original stdout bytes. Raw
+server manifests, command/environment snapshots, trajectories and checkpoint
+hashes still require archive retrieval. No missing times or source revisions
+are reconstructed from iteration counts or directory names.
+
+**Interpretation/decision:** stationary, externally paced head scanning now
+has reported four-seed replication with tuning and physical criteria met.
+The trunk remains quiet by the defined bending/drift measures. Preserve each
+selected actor and its lineage; do not overwrite prior locomotion/steering
+skills or collapse this into a shared-weight controller. This does not show
+autonomous rhythm, sensory selection, calibrated biological behavior or safe
+runtime skill handoff. Next proposed standalone coverage target: movement
+intensity/speed modulation (MOT-07); no new training is launched in this entry.
 
 ## Replication and recordkeeping procedure
 

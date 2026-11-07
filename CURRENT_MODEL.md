@@ -84,6 +84,15 @@ is <=1.23e-6 body lengths. All three pacing rates and controls pass; fixed
 NMJ/muscle fields and topology are unchanged. This is one parent lineage,
 with the server cohort prepared but not launched by the agent.
 
+E022 subsequently reports all four server head-sweep seeds passed tuning and
+physical tests at all three pacing rates (12/12 conditions). Head-angle
+peak-to-peak excursion spans 0.16349–0.18499 rad; posterior/anterior dynamic
+RMS ratios are 0.03965–0.04958; maximum cycle drift is 5.124e-6 body lengths.
+Selected checkpoints occur at updates 76,750/131,500/16,750/52,750 for seeds
+0–3. This is reported replicated driven head scanning; original remote files
+and execution provenance still require archive inspection. No autonomous
+rhythm, sensory selection or inter-policy transition is established.
+
 | Component | Present | Fitted | Active in food demo |
 | --- | --- | --- | --- |
 | 302 canonical neuron identifiers | Yes | Not applicable | Used for ordering |

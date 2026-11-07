@@ -1,0 +1,158 @@
+{
+  "entry": "E022",
+  "reported_date": "2026-11-07",
+  "evidence_type": "user_reported_inline_server_summary",
+  "run": "/home/carsonc/r-elegans-results/head-sweep-20261107T003628901581Z",
+  "method_entry": "E021",
+  "planned_minutes": 480,
+  "actual_elapsed_seconds": null,
+  "verification": "Transcribed from inline user stdout. Original byte-identical stdout, remote manifests, actual execution revision, checkpoint hashes and off-machine backup have not been independently verified.",
+  "workers": [
+    {
+      "seed": 0,
+      "passed": true,
+      "physical_passed": true,
+      "tuning_passed": true,
+      "status": "completed",
+      "error": null,
+      "iterations": 132777,
+      "selected_iteration": 76750,
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "head_angle_p2p": 0.16676891581654582,
+          "posterior_anterior_ratio": 0.03964502042022355,
+          "maximum_cycle_displacement": 1.0421058505016845e-06
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "head_angle_p2p": 0.17749085068166548,
+          "posterior_anterior_ratio": 0.040602477469440165,
+          "maximum_cycle_displacement": 2.982582145705237e-06
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "head_angle_p2p": 0.18499021780682742,
+          "posterior_anterior_ratio": 0.04171044252226858,
+          "maximum_cycle_displacement": 5.123941264173482e-06
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "passed": true,
+      "physical_passed": true,
+      "tuning_passed": true,
+      "status": "completed",
+      "error": null,
+      "iterations": 132428,
+      "selected_iteration": 131500,
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "head_angle_p2p": 0.16455808260875826,
+          "posterior_anterior_ratio": 0.045422991670707166,
+          "maximum_cycle_displacement": 6.527085361085483e-07
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "head_angle_p2p": 0.17481071168796716,
+          "posterior_anterior_ratio": 0.046033601485084806,
+          "maximum_cycle_displacement": 1.238197341990599e-06
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "head_angle_p2p": 0.18192521271886788,
+          "posterior_anterior_ratio": 0.046676286136283655,
+          "maximum_cycle_displacement": 3.021528300450882e-06
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "passed": true,
+      "physical_passed": true,
+      "tuning_passed": true,
+      "status": "completed",
+      "error": null,
+      "iterations": 133469,
+      "selected_iteration": 16750,
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "head_angle_p2p": 0.16348736352251833,
+          "posterior_anterior_ratio": 0.04661579353979914,
+          "maximum_cycle_displacement": 1.2129780770919751e-06
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "head_angle_p2p": 0.1734092273918709,
+          "posterior_anterior_ratio": 0.047396960718637554,
+          "maximum_cycle_displacement": 2.7087494913757837e-07
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "head_angle_p2p": 0.1800767258586048,
+          "posterior_anterior_ratio": 0.048375093593317126,
+          "maximum_cycle_displacement": 1.5600825236106175e-06
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "passed": true,
+      "physical_passed": true,
+      "tuning_passed": true,
+      "status": "completed",
+      "error": null,
+      "iterations": 132004,
+      "selected_iteration": 52750,
+      "periods": [
+        {
+          "period_seconds": 2.4,
+          "passed": true,
+          "head_angle_p2p": 0.16889625136799238,
+          "posterior_anterior_ratio": 0.046416343500334696,
+          "maximum_cycle_displacement": 1.622823560865072e-06
+        },
+        {
+          "period_seconds": 3.0,
+          "passed": true,
+          "head_angle_p2p": 0.17510333363521888,
+          "posterior_anterior_ratio": 0.04682892205510932,
+          "maximum_cycle_displacement": 1.5907232864265097e-06
+        },
+        {
+          "period_seconds": 3.7,
+          "passed": true,
+          "head_angle_p2p": 0.17711378887168996,
+          "posterior_anterior_ratio": 0.04958253076064856,
+          "maximum_cycle_displacement": 1.889986720016168e-06
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "workers_passed": 4,
+    "conditions_passed": 12,
+    "total_updates": 530678,
+    "head_angle_p2p_range_rad": [
+      0.16348736352251833,
+      0.18499021780682742
+    ],
+    "posterior_anterior_ratio_range": [
+      0.03964502042022355,
+      0.04958253076064856
+    ],
+    "maximum_cycle_displacement": 5.123941264173482e-06
+  }
+}
