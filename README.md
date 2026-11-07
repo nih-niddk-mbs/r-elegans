@@ -74,7 +74,10 @@ The channel brain now also drives the frozen anatomical muscle/body readout.
 Local tests show small unpaced bends; useful locomotion remains undemonstrated.
 A [bounded mbslnx2 diagnostic launcher](CURRENT_MODEL.md#launch-the-bounded-mbslnx2-diagnostic-yourself)
 runs neural/muscle/body controls under `nohup`, with external inputs/results and
-a 45-minute budget. The user launches it; no remote run is assumed.
+a 45-minute budget. Pull and run `sh scripts/launch_embodied_mbslnx2.sh` on
+mbslnx2: it rebuilds inputs from a passed head-sweep checkpoint already there,
+records that parent and needs no transfer. The user launches it; no remote run
+is assumed. A different parent can change results relative to the Mac test.
 
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly

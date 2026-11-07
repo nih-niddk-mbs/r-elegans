@@ -13,6 +13,25 @@ from r_elegans.model import load_builtin_model
 from r_elegans.rl.full_network_actor import init_full_network_actor
 from scripts.diagnose_channel_body import diagnostic_metrics
 from scripts.run_embodied_diagnostics import diagnostic_cases,verify_input_bundle
+from scripts.bootstrap_embodied_inputs import find_successful_parent
+
+
+def test_parent_discovery_requires_success_and_existing_checkpoint(tmp_path):
+    with pytest.raises(ValueError,match='No successful'):find_successful_parent(tmp_path)
+    def cohort(name, workers):
+        root=tmp_path/name;root.mkdir()
+        (root/'summary.json').write_text(json.dumps(dict(workers=workers)))
+        for worker in workers:
+            parent=root/f"seed-{worker['seed']}/head_sweep/actor_best.npz"
+            parent.parent.mkdir(parents=True);parent.write_bytes(b'checkpoint')
+        return root
+    def worker(seed,passed,code=0):
+        return dict(seed=seed,stages=dict(head_sweep=dict(passed=passed,exit_code=code)))
+    old=cohort('head-sweep-20261106',[worker(0,True)])
+    new=cohort('head-sweep-20261107',[worker(3,True),worker(0,False),worker(1,True,2)])
+    assert find_successful_parent(tmp_path)==new/'seed-3/head_sweep/actor_best.npz'
+    (new/'seed-3/head_sweep/actor_best.npz').unlink()
+    assert find_successful_parent(tmp_path)==old/'seed-0/head_sweep/actor_best.npz'
 
 
 def test_physical_release_readout_preserves_nmj_locality_and_resting_tone():

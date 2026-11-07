@@ -725,7 +725,22 @@
     "sha256": "fc13e63b7ccf9cd83326ee8610c727746120569fc5b28a0a3b63bd8f5c1adc99",
     "source_revision": "dd9aa10",
     "verified_source_files": 54,
-    "ready": true,
-    "remote_launched": false
+    "ready": false,
+    "remote_launched": false,
+    "status": "historical optional bundle; source hashes refer to dd9aa10, not current checkout"
+  },
+  "pull_and_run_workflow": {
+    "default": "reconstruct channel candidate from latest passed server head-sweep parent",
+    "launcher": "scripts/launch_embodied_mbslnx2.sh",
+    "exact_mac_candidate_assumed": false,
+    "parent_and_input_hashes_recorded": true,
+    "transfer_required": false,
+    "remote_launched": false,
+    "local_verification": {
+      "tests_passed": 191,
+      "suite_seconds": 68.81,
+      "same_parent_rebuild_matches_E027_sha256": true,
+      "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/pull-run-verification"
+    }
   }
 }

@@ -323,35 +323,38 @@ source/input hashes, trajectories, state snapshots and exact local commands.
 
 ### Launch the bounded mbslnx2 diagnostic yourself
 
-User requested push/self-launch. No remote job has been launched. A direct SSH
-check timed out. The prepared transfer bundle contains only the two preserved
-input NPZs, checksums/source hashes, and a launcher; calcium-image datasets are
-not needed. Copy from the Mac:
+User requested push/self-launch. No remote job has been launched. On mbslnx2:
 
 ```bash
-scp /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/transfer/r-elegans-E028.tar.gz carsonc@mbslnx2.niddk.nih.gov:~/
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_embodied_mbslnx2.sh
 ```
 
-In your mbslnx2 SSH shell:
+The repository launcher uses the dedicated r-elegans Python, starts `nohup`,
+and prints the PID and unique log path. You may then disconnect. No checkpoint
+transfer is required. It selects the newest `head-sweep-*` cohort containing a
+passed head-sweep stage and an existing `seed-N/head_sweep/actor_best.npz`, choosing
+the lowest successful seed. Failed/missing checkpoints are skipped; absence of
+any successful parent stops the launch rather than creating a random policy.
 
-```bash
-mkdir -p /home/carsonc/r-elegans-inputs
-tar -xzf /home/carsonc/r-elegans-E028.tar.gz -C /home/carsonc/r-elegans-inputs
-sh /home/carsonc/r-elegans-inputs/E028/launch.sh
-```
+The supervisor reconstructs the all-cell channel model from that full-network
+parent and applies the fixed E027 exploratory RMD profile. It preserves the
+parent, resulting model, their hashes and the selected parent path under the
+new external run directory. This is **not assumed identical to the Mac-tested
+candidate**: server-parent differences are part of the diagnostic being tested.
+Use supervisor `--parent-actor` to select an explicit existing parent, or
+`--inputs` for an exact previously transferred pair. The historical Mac bundle
+is optional and its recorded source hashes refer to its original revision.
 
-The launcher fast-forwards the Git checkout, verifies inputs and tested source
-hashes, uses `/home/carsonc/miniconda3/envs/r-elegans/bin/python` explicitly and
-starts `nohup`. It prints the supervisor PID and unique log path; you may then
-disconnect. Four workers use four disjoint physical CPU cores each, CPU JAX and
-highest matmul precision. A nine-case matrix covers three media, +/-1 mV initial
-perturbations, CCA1 removal, held voltage, body timestep and brain timestep
-refinement. All parameters are fixed. The queue has a **45-minute wall budget**,
-12-minute worker budgets and a 600-s simulation ceiling per case; it may finish
-sooner, and reports pending cases if the budget is reached. Cleanup may add up
-to 45 seconds. Detailed chunks and state snapshots stay under the external
-`/home/carsonc/r-elegans-results/embodied-*` run directory. The launcher checks
-dependencies instead of modifying the scRNA or other conda environments.
+Four workers use four disjoint physical CPU cores each, CPU JAX and highest
+matmul precision. Nine cases cover three media, +/-1 mV initial perturbations,
+CCA1 removal, held voltage, and body/brain timestep refinement. All parameters
+are fixed. The queue has a **45-minute wall budget**, plus up to two minutes for
+input reconstruction and 45 seconds for cleanup; each case has a 12-minute cap
+and 600-s simulation ceiling. It can finish sooner and reports pending cases.
+Chunks and state snapshots stay under `/home/carsonc/r-elegans-results/embodied-*`.
+The launcher does not modify conda environments.
 
 `progress.json`, per-case logs and `summary.json` distinguish finite execution,
 neural persistence, varying muscle output, dynamic shape and drift. Nonzero

@@ -1625,3 +1625,45 @@ remote files have not all been recovered; pasted stdout is not a checkpoint
 backup; package version lists are not immutable wheel images; some dirty-code
 experiments require archived overlays. The new records reduce future gaps,
 but do not retroactively make every past experiment exactly reproducible.
+
+## 2026-11-07 — E028 launch workflow correction: pull and run
+
+User requested restoration of the familiar Git pull/launch workflow. The earlier
+transfer bundle reproduced the exact Mac input, but mandatory transfer was
+unnecessary when a successful full-network head-sweep parent already exists on
+mbslnx2. Historical bundle hashes above remain evidence of that earlier method.
+
+Planned server method: after `git pull --ff-only`, run
+`sh scripts/launch_embodied_mbslnx2.sh`. It uses the dedicated r-elegans Python,
+selects the newest head-sweep cohort containing a passed stage and an existing
+actor checkpoint, preferring the lowest successful seed within that cohort,
+and reconstructs the all-cell channel candidate with the fixed E027 RMD profile.
+No download, random fallback or parameter fitting occurs. Preserve the selected
+parent path/hash, exact copied actor, resulting model/hash, source/environment
+and all diagnostic outputs externally. A different server parent may change
+the result; equivalence with the Mac candidate is not assumed. Explicit parent
+and exact-input overrides remain available. The nohup launcher prints PID and
+a unique log path. Queue budget is 45 minutes, input setup up to two additional
+minutes and cleanup up to 45 seconds. No remote job has been launched.
+
+Local verification: executed
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.bootstrap_embodied_inputs --parent-actor /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E026/r-elegans-E026-calcium-fine/parent_actor.npz --output-dir /tmp/r-elegans-E028-pull-run-check`.
+The preserved parent SHA256 is
+`82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0`;
+reconstructed network SHA256 is
+`870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a`,
+byte-identical to the existing E027 candidate when using that same parent.
+This validates reconstruction, not biological accuracy or a server outcome.
+Raw input copies, manifest, source/environment snapshots remain in the external
+`/tmp/r-elegans-E028-pull-run-check` directory (temporary local verification,
+not an independently backed-up server run). Shell syntax check passed; all five
+channel/body tests passed, including success-gated parent selection and fallback
+only to an older successful checkpoint if newer stages fail or files are absent.
+
+The reconstruction verification directory was also copied to
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/pull-run-verification/`
+for local retention. This confirms a local copy, not completed cloud sync.
+
+Final local software validation: full `.venv/bin/python -m pytest -q` suite
+passed **191 tests in 68.81 s**. `git diff --check` and shell syntax passed.
+The Linux queue remains unexecuted pending the user launch.

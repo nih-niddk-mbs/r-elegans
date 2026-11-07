@@ -20,10 +20,12 @@ if __package__:
     from .benchmark_cpu import physical_core_cpus
     from .benchmark_cpu_parallel import worker_cpu_groups
     from .experiment_records import capture_run_record
+    from .bootstrap_embodied_inputs import find_successful_parent
 else:
     from benchmark_cpu import physical_core_cpus
     from benchmark_cpu_parallel import worker_cpu_groups
     from experiment_records import capture_run_record
+    from bootstrap_embodied_inputs import find_successful_parent
 
 
 def diagnostic_cases():
@@ -50,7 +52,9 @@ def verify_input_bundle(root):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--inputs',type=Path,required=True)
+    source=parser.add_mutually_exclusive_group()
+    source.add_argument('--inputs',type=Path,help='Optional exact transferred input pair')
+    source.add_argument('--parent-actor',type=Path,help='Rebuild from this existing full-network actor; default selects latest passed head-sweep cohort')
     parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--minutes',type=float,default=45.)
     parser.add_argument('--case-minutes',type=float,default=12.)
@@ -63,8 +67,11 @@ def main():
         parser.error('Finite positive time budgets required')
     repo=Path(__file__).resolve().parents[1];base=args.output_dir.expanduser().resolve()
     if base==repo or repo in base.parents:parser.error('Keep results outside the repository')
-    inputs=args.inputs.expanduser().resolve()
-    verify_input_bundle(inputs)
+    inputs=args.inputs.expanduser().resolve() if args.inputs else None
+    if inputs:verify_input_bundle(inputs)
+    else:
+        try:parent=args.parent_actor.expanduser().resolve() if args.parent_actor else find_successful_parent(base)
+        except ValueError as e:parser.error(str(e))
     # Catch the original /usr/bin/python/no-JAX failure before launching jobs.
     check=subprocess.run([sys.executable,'-c','import jax, numpy, optax'],capture_output=True,text=True)
     if check.returncode:parser.error('Activate r-elegans or use its absolute Python path.\n'+check.stderr)
@@ -76,6 +83,16 @@ def main():
     run.mkdir(parents=True,exist_ok=False);capture_run_record(run,repo,args)
     print('Run: '+str(run),flush=True)
     print('Python: '+sys.executable,flush=True)
+    if inputs is None:
+        inputs=run/'inputs'
+        env=os.environ.copy();env.update(JAX_PLATFORMS='cpu',CUDA_VISIBLE_DEVICES='',
+            JAX_DEFAULT_MATMUL_PRECISION='highest',OMP_NUM_THREADS=str(len(groups[0])),OPENBLAS_NUM_THREADS='1')
+        print('Rebuilding channel candidate from: '+str(parent),flush=True)
+        result=subprocess.run([sys.executable,'-u','-m','scripts.bootstrap_embodied_inputs',
+            '--parent-actor',str(parent),'--output-dir',str(inputs)],cwd=repo,env=env,
+            preexec_fn=lambda:os.sched_setaffinity(0,groups[0]),timeout=min(120.,args.minutes*60.))
+        if result.returncode:return result.returncode
+        verify_input_bundle(inputs)
     pending=diagnostic_cases();planned=[c['name'] for c in pending];finished=[];active=[]
     start=time.monotonic();stopped=False;budget=False;last_status=start
     def stop(*_):
