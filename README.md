@@ -43,6 +43,13 @@ Whole-network optimization is the default; optional parameter subsets leave
 all 302 neurons in the simulation. This path is smoke-tested; full-network
 food-finding and biological behavioral fidelity remain unvalidated.
 
+An experimental opt-in intrinsic motor-neuron model now adds regenerative
+calcium and delayed potassium dynamics to DA/VA and DB/VB cells. Isolated-cell
+tests demonstrate autonomous A-type and steady-drive-dependent B-type rhythms.
+These are reduced demonstration dynamics, not fitted cell-specific channel
+models or a validated autonomous gait; existing skill training keeps its prior
+membrane equations. See [the implementation and assay contract](CURRENT_MODEL.md#self-drive-and-proprioception-gap-reviewed-2026-11-07).
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)

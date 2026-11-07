@@ -1,0 +1,157 @@
+{
+  "experiment": "E024",
+  "status": "completed",
+  "passed": true,
+  "scope": "reduced cellular dynamics; no biological fit or locomotion claim",
+  "config": {
+    "calcium_conductance": 4.4,
+    "potassium_conductance": 8.0,
+    "leak_conductance": 2.0,
+    "capacitance": 20.0,
+    "recovery_rate": 0.04,
+    "clock_scale": 50.0,
+    "a_bias": 90.0,
+    "applied_current_scale": 900.0,
+    "coupling_current_scale": 100.0
+  },
+  "seed": 0,
+  "dt": 0.02,
+  "steps": 1500,
+  "substeps": 4,
+  "comparison_substeps": 8,
+  "metrics_last_10_seconds": {
+    "A_autonomous": {
+      "voltage_p2p": 0.8273968696594238,
+      "upward_crossings": 5
+    },
+    "B_quiet": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    },
+    "B_tonic": {
+      "voltage_p2p": 0.8273968696594238,
+      "upward_crossings": 5
+    },
+    "B_withdrawn": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    }
+  },
+  "calcium_ablation": {
+    "A_autonomous": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    },
+    "B_quiet": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    },
+    "B_tonic": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    },
+    "B_withdrawn": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    }
+  },
+  "perturbed_initial": {
+    "A_autonomous": {
+      "voltage_p2p": 0.827425479888916,
+      "upward_crossings": 5
+    },
+    "B_quiet": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    },
+    "B_tonic": {
+      "voltage_p2p": 0.827425479888916,
+      "upward_crossings": 5
+    },
+    "B_withdrawn": {
+      "voltage_p2p": 0.0,
+      "upward_crossings": 0
+    }
+  },
+  "maximum_state_difference": 1.769140362739563e-05,
+  "gates": {
+    "finite": true,
+    "A_sustained": true,
+    "B_quiet": true,
+    "B_tonic_sustained": true,
+    "B_stops_after_withdrawal": true,
+    "calcium_ablation": true,
+    "initial_perturbation": true,
+    "substep_convergence": true,
+    "full_network_finite": true
+  },
+  "connected_network_last_10_seconds": {
+    "A": {
+      "cells": 21,
+      "cells_with_at_least_three_crossings": 19,
+      "minimum_voltage_p2p": 0.004643850028514862,
+      "maximum_voltage_p2p": 0.8112980723381042,
+      "minimum_crossings": 0,
+      "maximum_crossings": 6
+    },
+    "B": {
+      "cells": 18,
+      "cells_with_at_least_three_crossings": 0,
+      "minimum_voltage_p2p": 0.00046646595001220703,
+      "maximum_voltage_p2p": 0.01038166880607605,
+      "minimum_crossings": 0,
+      "maximum_crossings": 0
+    }
+  },
+  "A_neurons": [
+    "DA01",
+    "DA02",
+    "DA03",
+    "DA04",
+    "DA05",
+    "DA06",
+    "DA07",
+    "DA08",
+    "DA09",
+    "VA01",
+    "VA02",
+    "VA03",
+    "VA04",
+    "VA05",
+    "VA06",
+    "VA07",
+    "VA08",
+    "VA09",
+    "VA10",
+    "VA11",
+    "VA12"
+  ],
+  "B_neurons": [
+    "DB01",
+    "DB02",
+    "DB03",
+    "DB04",
+    "DB05",
+    "DB06",
+    "DB07",
+    "VB01",
+    "VB02",
+    "VB03",
+    "VB04",
+    "VB05",
+    "VB06",
+    "VB07",
+    "VB08",
+    "VB09",
+    "VB10",
+    "VB11"
+  ],
+  "network_input": "zero applied current; anatomical recurrent coupling enabled",
+  "cell_inputs": "A bias 90; B tonic current 90, B withdrawal at 15 seconds",
+  "evidence_type": "locally_executed_fixed_parameter_assay",
+  "artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E024",
+  "source_invocation_record": "20261107T141125496109Z-cd5cddd6",
+  "summary_sha256": "b5e89a2fe68a58ba6cd87fa3392abe261b1d125ede6b3a08242f2b35391ee87a",
+  "traces_sha256": "18fd027b746cace479f2974e6ea4c07369c2ac4b9405c96c752d38485e30b444",
+  "archive_manifest_sha256": "5975d7efd692f186a26e5a531e493f549d7e38534298767ccfc1548e8514a606"
+}

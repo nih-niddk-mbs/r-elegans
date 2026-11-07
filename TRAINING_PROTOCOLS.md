@@ -15,6 +15,32 @@ training infrastructure with smoke-test validation, not a completed P00–P13
 curriculum or evidence of real-animal behavioral agreement. Known NMJ signs
 and anatomical edge masks remain constraints; unknown NMJ signs can learn.
 
+## Intrinsic motor-cell qualification (E024, 2026-11-07)
+
+The opt-in reduced active-membrane model is an additional mechanistic branch;
+it does not replace the preserved driven-skill policies. Run
+`python -m scripts.assay_intrinsic_motor --output-dir /external/fresh/path`.
+It checks isolated autonomous DA/VA-like dynamics, DB/VB-like steady-drive
+dependence and withdrawal, calcium-current ablation, initial-state perturbation,
+substep convergence, and finite connected-network execution. The equation form
+is inspired by [Morris and Lecar (1981)](https://pubmed.ncbi.nlm.nih.gov/7260316/);
+its demonstration coefficients are not worm-specific channel measurements.
+Gao/Xu evidence motivates the functional distinction, not these numerical values.
+No optimizer or fitting is involved. The A regime has an explicit fixed bias;
+the B assay uses constant current as a permissive-input proxy. It does not
+establish the AVB-specific electrical-coupling mechanism.
+
+Require at least three final-window cycles and >0.2 normalized peak-to-peak
+voltage for A and driven B; <1e-4 peak-to-peak for quiet/withdrawn B and
+calcium-ablated A; maximum state discrepancy <0.002 when doubling substeps.
+Windows, inputs, initial states, fixed coefficients and all traces are recorded.
+Do not equate those gates with biological electrophysiology or locomotion.
+Future motor-skill fitting must qualify the new dynamics independently and
+preserve configuration with checkpoints; legacy NPZs do not encode this mode.
+In the initial connected network some A rhythms are suppressed by coupling;
+coordinated muscle waves, proprioception and propulsion are still outstanding.
+This is recorded evidence, not a reason to inject a hidden periodic command.
+
 ## Working hypothesis: motor curriculum before task RL
 
 [H1 in the laboratory notebook](LAB_NOTEBOOK.md#h1--build-the-motor-repertoire-before-task-rl)

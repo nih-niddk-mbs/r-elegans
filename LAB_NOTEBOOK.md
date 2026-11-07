@@ -745,6 +745,98 @@ controls and old skill archives. Autonomous sensory-guided task selection
 is a further milestone. No learning objective, priority or model was changed
 by this literature review; H1.1 coverage-first records remain in force.
 
+### E024 — 2026-11-07: intrinsic motor-neuron dynamics (local assay completed)
+
+**Question/authorization:** user requests intrinsic oscillation in the motor
+neurons. Implement an opt-in reduced calcium/potassium conductance model for
+DA/VA (autonomous regime) and DB/VB (steady-drive-dependent regime), within the
+full 302-node actor. This is a qualitative dynamical hypothesis, not a fitted
+UNC-2 model or measured channel inventory. Evidence: Gao 2018 and Xu 2018,
+linked in E023. No sinusoid, phase clock, or periodic forcing in the assay.
+
+**Plan:** membrane voltage plus a slow potassium activation state; instantaneous
+calcium activation provides regenerative inward current. Fixed Morris–Lecar
+type demonstration coefficients and an explicit normalized-voltage transform;
+no claim of worm-specific mV/ms calibration. B steady injected current is a
+permissive-drive proxy, not an implemented AVB gating mechanism. Preserve the
+existing default actor/checkpoints exactly; new dynamics require explicit opt-in.
+No parent fitted checkpoint: use bundled topology with initialization seed 0.
+No optimization: all parameters fixed in the experiment; existing anatomical
+chemical/gap masks and NMJs retained in full-network integration.
+
+**Planned acceptance:** isolated A cells sustain multiple cycles after transient
+with zero applied current; isolated B cells relax without drive, oscillate under
+constant drive, and relax after withdrawal. Removing the regenerative calcium
+conductance abolishes the sustained A rhythm. Check timestep convergence,
+finite differentiable full-network muscle outputs, canonical cell selection,
+and unchanged legacy behavior. These are cellular/software gates, not evidence
+of coordinated propulsion or biologically fitted membrane physiology. Exact
+assay commands, runtime/source records and external output paths follow below
+when run. No server training scheduled by this entry.
+
+**Implementation/result (local verification):** `brain/intrinsic_motor.py`
+implements the planned reduced active-membrane dynamics, opt-in through
+`make_full_network_actor_interface(intrinsic_motor=IntrinsicMotorConfig())`.
+The equation form follows the calcium/potassium mechanism of
+[Morris and Lecar (1981)](https://pubmed.ncbi.nlm.nih.gov/7260316/), originally a
+barnacle-muscle model; the illustrative numerical coefficients are NOT fitted
+C. elegans channel properties. All 302 neurons remain, including 21 DA/VA and
+18 DB/VB active-membrane cells. A bias is fixed at 90 model-current units;
+B tonic assay current is 90 (equivalent to 0.1 applied normalized actor input).
+State comprises voltage and slow potassium activation, without a phase clock.
+No calcium concentration, UNC-2-specific activation kinetics, neuromodulation,
+or body proprioception has been added. Existing AWC/RMD models are unchanged.
+
+**Commands actually run (Mac, no server or optimizer):**
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assay_intrinsic_motor --output-dir /tmp/r-elegans-E024-intrinsic-v1
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assay_intrinsic_motor --output-dir /tmp/r-elegans-E024-intrinsic-final
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q tests/test_intrinsic_motor.py tests/test_full_network.py tests/test_motor_curriculum.py
+```
+
+The second assay adds connected-cell summary diagnostics, with unchanged
+equations/coefficients. Both passed all nine assay gates. Each trajectory is
+30 normalized simulation seconds, dt=0.02, four RK4 substeps; comparison uses
+eight substeps, with a maximum state difference of 1.76914e-5 (<0.002 gate).
+In the final ten seconds A and tonic B each have five upward voltage crossings
+and 0.827397 normalized peak-to-peak voltage; quiet B, withdrawn B (withdrawal
+at 15 s) and calcium-ablated A have zero final-window voltage variation.
+A starting-voltage perturbation (-0.35 to -0.34) retains five final-window cycles.
+These are simulation-clock results, not measured animal frequencies or voltages.
+
+**Connected network finding/limitation:** with anatomical recurrence enabled,
+seed 0, and zero applied input, 19/21 A cells have at least three final-window
+upward crossings; two do not. A voltage peak-to-peak spans 0.004644–0.811298.
+B cells have no upward crossings and 0.000466–0.010382 peak-to-peak activity.
+Coupling can suppress intrinsic oscillators; the isolated-cell result does
+not promise every cell oscillates under arbitrary synaptic load. Full-network
+execution/muscle outputs are finite. No body motion was assessed or optimized.
+There is no fitted AVB-to-B enabling mechanism or coordinated autonomous gait.
+
+**Software:** targeted suite passed 20 tests, including canonical masks,
+calcium ablation, substep convergence, differentiable recurrent muscle output,
+frozen NMJs, legacy integration identity and NPZ roundtrip. Full suite:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q` — **171 passed
+in 50.35 s**. Active-membrane coefficients are fixed;
+selected generic leak/tau fields no longer affect selected cell voltage.
+Legacy trainers remain on their previous dynamics. Any future intrinsic-mode
+checkpoint must retain its config: the legacy NPZ format does not encode it.
+
+**Artifacts:** both invocations, exact runtime/source snapshots, summaries and
+raw trajectories copied to
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E024/`; 261 copied files
+were SHA-256 verified. Manifest `SHA256SUMS.json` hash:
+`5975d7efd692f186a26e5a531e493f549d7e38534298767ccfc1548e8514a606`.
+Small results and artifact hashes: `experiments/records/E024.json`.
+Run records honestly retain the pre-commit dirty-tree state/source snapshot.
+Local copy verification does not prove OneDrive cloud synchronization.
+
+**Decision:** reduced intrinsic excitability is now implemented and cell-assayed.
+The next mechanistic work is evidence-grounded descending control and embodied
+coordination/proprioception, followed by propulsion assays. No old skill has
+been overwritten or claimed to transfer, and H1.1 skill coverage remains useful.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,

@@ -72,7 +72,7 @@ def integrate_frozen_conductance(voltage, params, external, dt, substeps):
 
 def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
                                       train_group="all", train_neurons=None,
-                                      input_mode="chemical"):
+                                      input_mode="chemical", intrinsic_motor=None):
     """Keep all 302 nodes and all topology while choosing which fields learn.
 
     Groups: all, neural, nmj, sensory. Neuron selection restricts incoming
@@ -83,6 +83,12 @@ def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
     ``input_mode='current'`` accepts explicit [302] applied currents for motor
     system identification. These are experimental stimulation, not chemical
     senses or biological command pathways. Default chemical input stays [3].
+
+    ``intrinsic_motor=IntrinsicMotorConfig()`` opts into reduced active DA/VA
+    and DB/VB membranes. Carry is then [2, 302] (voltage, potassium recovery),
+    rather than [302]. Fixed coefficients live in the interface config, NOT
+    actor NPZ files: persist the config with any resulting experiment/checkpoint.
+    Existing trained weights are not validated under the changed dynamics.
     """
     if dt <= 0 or substeps < 1:
         raise ValueError("dt and substeps must be positive")
@@ -91,6 +97,14 @@ def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
     if input_mode not in ("chemical", "current"):
         raise ValueError("Unknown input_mode")
     ids = model.neuron_ids
+    if intrinsic_motor is not None:
+        from r_elegans.brain.intrinsic_motor import (
+            IntrinsicMotorConfig, motor_class_masks, initial_motor_state,
+            integrate_intrinsic_motor,
+        )
+        if not isinstance(intrinsic_motor, IntrinsicMotorConfig):
+            raise TypeError("intrinsic_motor must be an IntrinsicMotorConfig or None")
+        a_mask, b_mask = motor_class_masks(ids)
     names = ids if train_neurons is None else tuple(train_neurons)
     if not names or set(names) - set(ids):
         raise ValueError("Select nonempty canonical neuron names")
@@ -138,7 +152,15 @@ def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
             external = obs
         else:
             external = jnp.zeros((302,)).at[sensory_indices].set(actor.sensory_weights @ jnp.tanh(obs))
-        next_voltage = integrate_frozen_conductance(voltage, params, external, dt, substeps)
+        if intrinsic_motor is None:
+            next_carry = integrate_frozen_conductance(voltage, params, external, dt, substeps)
+            next_voltage = next_carry
+        else:
+            if voltage.shape != (2, 302):
+                raise ValueError("Intrinsic motor carry must have shape [2, 302]")
+            next_carry = integrate_intrinsic_motor(
+                voltage, params, external, a_mask, b_mask, dt, substeps, intrinsic_motor)
+            next_voltage = next_carry[0]
         # NMJ activation uses the SAME normalized voltage units as the circuit.
         # No silent substitution of the older mV teacher's thresholds.
         weights = nmj.synapse_weights * jax.nn.softplus(actor.raw_nmj)
@@ -153,7 +175,7 @@ def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
         # Gaussian in latent logit space; sigmoid maps samples into [0, 1].
         activation = jnp.clip(activation, 1e-5, 1 - 1e-5)
         mean = jnp.log(activation) - jnp.log1p(-activation)
-        return mean, action_std(actor.log_std), next_voltage
+        return mean, action_std(actor.log_std), next_carry
 
     def step(actor, carry, obs, key):
         mean, std, next_carry = distribution_step(actor, carry, obs)
@@ -164,8 +186,12 @@ def make_full_network_actor_interface(model, *, dt=0.02, substeps=4,
         mean, _, next_carry = distribution_step(actor, carry, obs)
         return jax.nn.sigmoid(mean), next_carry
 
+    def init_carry(actor):
+        voltage = project(actor).neural.leak_reversal
+        return voltage if intrinsic_motor is None else initial_motor_state(voltage)
+
     return ActorInterface(step, lambda a, v, o: distribution_step(a, v, o)[:2],
-                          distribution_step, lambda a: project(a).neural.leak_reversal,
+                          distribution_step, init_carry,
                           deterministic)
 
 

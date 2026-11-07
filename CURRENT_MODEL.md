@@ -60,7 +60,44 @@ dynamics; intrinsic motor-oscillator physiology is not calibrated or validated.
 Thus full topology and successful paced movement do not establish endogenous
 rhythm. E023 in [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) records the biological
 evidence and a proposed closed-loop, nonperiodically driven motor test.
-That loop has not been implemented by this documentation change.
+That body-feedback loop has not been implemented.
+
+**E024 implementation, 2026-11-07:** an opt-in reduced calcium/potassium
+membrane model now gives the 21 DA/VA cells autonomous oscillatory dynamics
+and the 18 DB/VB cells conditional excitability. This is a Morris–Lecar-type
+demonstration model, not fitted UNC-2 kinetics or a full channel inventory.
+Fixed coefficients, baseline A bias, voltage transform, and clock scaling are
+explicit in `brain/intrinsic_motor.py`. Isolated A cells sustain oscillations
+without periodic input; isolated B cells oscillate under constant current and
+settle after withdrawal. Calcium-current removal abolishes the A rhythm.
+In the initial connected network coupling suppresses some A rhythms; B cells
+remain below the oscillatory regime at zero applied input. No coordinated gait
+or AVB-specific enabling mechanism has been demonstrated with this model.
+
+Use `make_full_network_actor_interface(...,
+intrinsic_motor=IntrinsicMotorConfig(), input_mode="current")` to opt in.
+Carry is `[2, 302]`: normalized voltage and potassium recovery. All anatomical
+edges and NMJs remain in the execution path; the other 263 cells retain generic
+voltage dynamics. For the 39 selected cells, generic leak-reversal/time-constant
+fields are superseded by fixed active-membrane coefficients; generic release
+threshold/slope and chemical/electrical strengths remain active. No channel
+coefficients were fitted. Carry recovery is actual recurrent state, not an
+external phase clock. This model uses RK4 rather than the legacy exponential
+integrator and needs new convergence checks for each fitted regime.
+
+Legacy actor NPZ contents/default interfaces and all existing skill trainers
+remain unchanged. Old skills do not transfer automatically to changed membrane
+dynamics. Intrinsic mode/configuration is **not encoded by the legacy NPZ**:
+retain the config alongside any future intrinsic-mode checkpoint and reconstruct
+the matching interface explicitly. The E024 assay saves the complete config,
+source/environment records and trajectories externally. Run:
+
+```bash
+python -m scripts.assay_intrinsic_motor --output-dir /path/outside/repo/intrinsic-assay
+```
+
+The assay is a fixed-parameter cellular/full-network smoke experiment, not RL
+or a body-motion test. See E024 in the notebook for results and limitations.
 
 ## Status table
 
