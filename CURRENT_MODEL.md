@@ -296,6 +296,69 @@ Coordinated muscle waves, proprioceptive control, correct A/B motor physiology,
 animal-matched calcium activity and body propulsion remain separate requirements.
 The operating driven-skill model remains unchanged.
 
+## Unpaced channel-brain/body diagnostic (E028, 2026-11-07)
+
+The channel branch is now connected to the 95 muscles and overdamped body via
+`body/channel_bridge.py`. Each execution step advances the complete neural
+state, computes physical-unit transmitter release, applies the preserved parent
+NMJ multipliers/signs and muscle sigmoid, and advances the body. Anatomical
+projection uses head-at-end ordering. There is **no body-to-brain feedback**;
+sharing an execution loop does not implement proprioception. No oscillator,
+gait teacher, periodic input, optimization or readout retuning is inserted.
+
+The channel network's physical release thresholds/slopes are used explicitly.
+The parent's NMJ/muscle fields stay frozen; its old normalized neural voltage
+is not supplied to the new membrane equations. The nonzero resting muscle tone
+matches the parent full actor. SI liquid/agar mechanics are available alongside
+the normalized body, but this transferred neuromuscular readout is uncalibrated
+for the changed neural dynamics.
+
+Local 20 s liquid test: three RMD cells remain rhythmic, maximum late muscle
+peak-to-peak activation 0.05841, maximum joint variation 0.003065 rad. Late net
+displacement is only 4.85e-6 body lengths over ten seconds: **a small unpaced
+wiggle, not demonstrated useful locomotion**. Both RMD-CCA1 removal and held-
+voltage controls have zero late muscle/joint variation. Halving body timestep
+changes maximum joint variation to 0.003071 rad (~0.2% difference). E028 records
+source/input hashes, trajectories, state snapshots and exact local commands.
+
+### Launch the bounded mbslnx2 diagnostic yourself
+
+User requested push/self-launch. No remote job has been launched. A direct SSH
+check timed out. The prepared transfer bundle contains only the two preserved
+input NPZs, checksums/source hashes, and a launcher; calcium-image datasets are
+not needed. Copy from the Mac:
+
+```bash
+scp /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/transfer/r-elegans-E028.tar.gz carsonc@mbslnx2.niddk.nih.gov:~/
+```
+
+In your mbslnx2 SSH shell:
+
+```bash
+mkdir -p /home/carsonc/r-elegans-inputs
+tar -xzf /home/carsonc/r-elegans-E028.tar.gz -C /home/carsonc/r-elegans-inputs
+sh /home/carsonc/r-elegans-inputs/E028/launch.sh
+```
+
+The launcher fast-forwards the Git checkout, verifies inputs and tested source
+hashes, uses `/home/carsonc/miniconda3/envs/r-elegans/bin/python` explicitly and
+starts `nohup`. It prints the supervisor PID and unique log path; you may then
+disconnect. Four workers use four disjoint physical CPU cores each, CPU JAX and
+highest matmul precision. A nine-case matrix covers three media, +/-1 mV initial
+perturbations, CCA1 removal, held voltage, body timestep and brain timestep
+refinement. All parameters are fixed. The queue has a **45-minute wall budget**,
+12-minute worker budgets and a 600-s simulation ceiling per case; it may finish
+sooner, and reports pending cases if the budget is reached. Cleanup may add up
+to 45 seconds. Detailed chunks and state snapshots stay under the external
+`/home/carsonc/r-elegans-results/embodied-*` run directory. The launcher checks
+dependencies instead of modifying the scRNA or other conda environments.
+
+`progress.json`, per-case logs and `summary.json` distinguish finite execution,
+neural persistence, varying muscle output, dynamic shape and drift. Nonzero
+displacement alone never sets `locomotion_demonstrated=true`. Snapshots retain
+all gates/calcium/body state; the CLI does not yet expose exact checkpoint resume.
+The Linux queue itself remains unexecuted until the user launches it on mbslnx2.
+
 ## Status table
 
 Standalone steering development now uses `train_steering.py` (MOT-08).

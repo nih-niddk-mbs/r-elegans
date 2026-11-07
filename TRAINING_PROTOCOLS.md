@@ -119,6 +119,30 @@ is not promoted into motor execution; body feedback and gait qualification remai
 required. Do not trade away the recorded E026 calcium-fit failures or call a
 one-update integration check a successful recording fit.
 
+## Unpaced brain-to-body diagnostic before training (E028)
+
+Run the fixed channel candidate through physical release, preserved 956-edge
+NMJ/muscle transfer and the 95-muscle body, with no pacing or parameter fitting.
+Keep physical release fields explicit; do not feed mV into old normalized
+thresholds. Retain the parent's nonzero resting tone and signs/multipliers.
+The shared execution loop has no proprioceptive feedback yet.
+
+The server queue contrasts normalized/liquid/agar bodies, +/-1 mV initial-state
+perturbations, RMD CCA1 removal, held voltage, body timestep and brain integration
+refinement. It uses four disjoint four-core CPU workers, a 45-minute global budget
+and bounded cases. Save all time chunks and complete latest/final neural/body
+states, input hashes/source/environment and completion/omission status. This is
+not an RL run or a fit of channel/capacitance/synapse values.
+
+Late-window flags: maximum muscle activation p2p >1e-4 for dynamic output, maximum
+joint p2p >1e-4 rad for dynamic shape, centroid displacement >1e-5 body lengths
+for measurable drift. Neural persistence uses E027 gates. These are numerical
+diagnostic flags, not empirical animal thresholds. Report full amplitudes,
+path/net displacement, heading, saturation and joint limits alongside flags;
+neither a static bend, startup relaxation nor nonzero drift establishes gait.
+The local liquid candidate produces small periodic bends but negligible net
+displacement. Useful locomotion and body-feedback qualification remain pending.
+
 ## Working hypothesis: motor curriculum before task RL
 
 [H1 in the laboratory notebook](LAB_NOTEBOOK.md#h1--build-the-motor-repertoire-before-task-rl)

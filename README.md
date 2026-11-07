@@ -70,6 +70,12 @@ ablation removes the qualifying rhythms. This establishes a dynamical candidate,
 not physiological calibration or autonomous locomotion. Calcium fitting can start
 from its saved channel checkpoint and optionally check that activity persists.
 
+The channel brain now also drives the frozen anatomical muscle/body readout.
+Local tests show small unpaced bends; useful locomotion remains undemonstrated.
+A [bounded mbslnx2 diagnostic launcher](CURRENT_MODEL.md#launch-the-bounded-mbslnx2-diagnostic-yourself)
+runs neural/muscle/body controls under `nohup`, with external inputs/results and
+a 45-minute budget. The user launches it; no remote run is assumed.
+
 Raw publications, electrophysiology traces, fit histories, and generated
 trajectories remain external because they are needed for auditing or
 retraining—not inference. See [MODEL_ASSET_PROVENANCE.md](MODEL_ASSET_PROVENANCE.md)

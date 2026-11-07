@@ -1,0 +1,723 @@
+{
+  "experiment": "E028",
+  "evidence": "locally_executed_brain_muscle_body_diagnostics",
+  "runs": [
+    {
+      "run": "liquid-smoke",
+      "summary": {
+        "experiment": "E028",
+        "condition": "active",
+        "medium": "liquid",
+        "perturbation_mV": 0.0,
+        "status": "completed",
+        "stop_reason": "duration",
+        "finite": true,
+        "simulation_seconds": 20.0,
+        "requested_duration_seconds": 20.0,
+        "elapsed_seconds": 17.40376541700971,
+        "dt_s": 0.002,
+        "brain_substeps": 20,
+        "brain_step_ms": 0.1,
+        "network_sha256": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+        "parent_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+        "metrics": {
+          "observation_seconds": 20.0,
+          "late_seconds": 10.0,
+          "neural_voltage_p2p_max_mV": 21.189956665039062,
+          "rhythmic_rmd": 3,
+          "rmd": {
+            "RMDDL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": true,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.12130165100097656,
+                0.1123809814453125,
+                0.10619354248046875,
+                0.1014404296875,
+                0.09737968444824219
+              ],
+              "amplitude_retention": 0.8027894397534475,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -22.4238338470459,
+              "voltage_max_mV": 4.2491278648376465
+            },
+            "RMDDR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": true,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.1422557830810547,
+                0.14362716674804688,
+                0.1453990936279297,
+                0.1473712921142578,
+                0.14983367919921875
+              ],
+              "amplitude_retention": 1.0532695118190472,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -23.491445541381836,
+              "voltage_max_mV": 2.7226877212524414
+            },
+            "RMDL": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                21.18915295600891,
+                21.189301192760468,
+                21.18603366613388,
+                21.181008517742157,
+                21.173101365566254
+              ],
+              "amplitude_retention": 0.9992424619107719,
+              "median_period_s": 0.216,
+              "period_cv": 0.004582106511270065,
+              "voltage_min_mV": -22.15210723876953,
+              "voltage_max_mV": 5.490380764007568
+            },
+            "RMDR": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                20.286508202552795,
+                20.309680461883545,
+                20.328835606575012,
+                20.34518325328827,
+                20.353463768959045
+              ],
+              "amplitude_retention": 1.0033004973422595,
+              "median_period_s": 0.216,
+              "period_cv": 0.003696857670979671,
+              "voltage_min_mV": -21.998939514160156,
+              "voltage_max_mV": 5.332021236419678
+            },
+            "RMDVL": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                11.805851936340332,
+                11.706602096557617,
+                11.659486770629883,
+                11.641084671020508,
+                11.635117530822754
+              ],
+              "amplitude_retention": 0.9855381546000903,
+              "median_period_s": 0.216,
+              "period_cv": 0.003970248328025813,
+              "voltage_min_mV": -21.631572723388672,
+              "voltage_max_mV": 4.82249641418457
+            },
+            "RMDVR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.1529064178466797,
+                0.13849449157714844,
+                0.12665557861328125,
+                0.11880874633789062,
+                0.11181831359863281
+              ],
+              "amplitude_retention": 0.7312859405989995,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -22.320941925048828,
+              "voltage_max_mV": 4.154655456542969
+            }
+          },
+          "muscle_p2p_max": 0.05841106176376343,
+          "muscle_p2p_rms": 0.010902180336415768,
+          "joint_p2p_max_rad": 0.003064848482608795,
+          "joint_p2p_rms_rad": 0.0012592232087627053,
+          "late_displacement_body_lengths": 4.849900506087579e-06,
+          "late_path_body_lengths": 0.0005687579978257418,
+          "mean_late_speed_body_lengths_s": 5.688717721801779e-05,
+          "heading_change_rad": -0.000326305627822876,
+          "muscle_dynamic": true,
+          "shape_dynamic": true,
+          "measurable_displacement": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Dynamic shape/drift flags are not coordinated gait or physiological validation"
+        },
+        "parameters_trained": false,
+        "body_feedback": false,
+        "gates_are_diagnostics": "No successful locomotion claim from transient drift or nonzero displacement alone"
+      },
+      "summary_sha256": "e6bd9bf72df067716baf698391996e801c8d1e0cfade837cf58daeea4184ad3d"
+    },
+    {
+      "run": "cca-control",
+      "summary": {
+        "experiment": "E028",
+        "condition": "cca1_removed",
+        "medium": "liquid",
+        "perturbation_mV": 0.0,
+        "status": "completed",
+        "stop_reason": "duration",
+        "finite": true,
+        "simulation_seconds": 20.0,
+        "requested_duration_seconds": 20.0,
+        "elapsed_seconds": 17.189064500009408,
+        "dt_s": 0.002,
+        "brain_substeps": 20,
+        "brain_step_ms": 0.1,
+        "network_sha256": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+        "parent_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+        "metrics": {
+          "observation_seconds": 20.0,
+          "late_seconds": 10.0,
+          "neural_voltage_p2p_max_mV": 0.0,
+          "rhythmic_rmd": 0,
+          "rmd": {
+            "RMDDL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -47.71845626831055,
+              "voltage_max_mV": -36.86518096923828
+            },
+            "RMDDR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -47.48051071166992,
+              "voltage_max_mV": -37.09935760498047
+            },
+            "RMDL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -47.013893127441406,
+              "voltage_max_mV": -36.20085525512695
+            },
+            "RMDR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -45.94318389892578,
+              "voltage_max_mV": -36.011043548583984
+            },
+            "RMDVL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -47.16088104248047,
+              "voltage_max_mV": -36.323307037353516
+            },
+            "RMDVR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -47.32576370239258,
+              "voltage_max_mV": -36.504581451416016
+            }
+          },
+          "muscle_p2p_max": 0.0,
+          "muscle_p2p_rms": 0.0,
+          "joint_p2p_max_rad": 0.0,
+          "joint_p2p_rms_rad": 0.0,
+          "late_displacement_body_lengths": 0.0,
+          "late_path_body_lengths": 0.0,
+          "mean_late_speed_body_lengths_s": 0.0,
+          "heading_change_rad": 0.0,
+          "muscle_dynamic": false,
+          "shape_dynamic": false,
+          "measurable_displacement": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Dynamic shape/drift flags are not coordinated gait or physiological validation"
+        },
+        "parameters_trained": false,
+        "body_feedback": false,
+        "gates_are_diagnostics": "No successful locomotion claim from transient drift or nonzero displacement alone"
+      },
+      "summary_sha256": "485d950da3aaba8b58137000e8fb278ccde84bcf1be14f4095c89a48d149e81f"
+    },
+    {
+      "run": "held-voltage",
+      "summary": {
+        "experiment": "E028",
+        "condition": "held_voltage",
+        "medium": "liquid",
+        "perturbation_mV": 0.0,
+        "status": "completed",
+        "stop_reason": "duration",
+        "finite": true,
+        "simulation_seconds": 20.0,
+        "requested_duration_seconds": 20.0,
+        "elapsed_seconds": 1.3060620409960393,
+        "dt_s": 0.002,
+        "brain_substeps": 20,
+        "brain_step_ms": 0.1,
+        "network_sha256": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+        "parent_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+        "metrics": {
+          "observation_seconds": 20.0,
+          "late_seconds": 10.0,
+          "neural_voltage_p2p_max_mV": 0.0,
+          "rhythmic_rmd": 0,
+          "rmd": {
+            "RMDDL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -35.0,
+              "voltage_max_mV": -35.0
+            },
+            "RMDDR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -35.0,
+              "voltage_max_mV": -35.0
+            },
+            "RMDL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -35.0,
+              "voltage_max_mV": -35.0
+            },
+            "RMDR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -35.0,
+              "voltage_max_mV": -35.0
+            },
+            "RMDVL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -35.0,
+              "voltage_max_mV": -35.0
+            },
+            "RMDVR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "amplitude_retention": 0.0,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -35.0,
+              "voltage_max_mV": -35.0
+            }
+          },
+          "muscle_p2p_max": 0.0,
+          "muscle_p2p_rms": 0.0,
+          "joint_p2p_max_rad": 0.0,
+          "joint_p2p_rms_rad": 0.0,
+          "late_displacement_body_lengths": 0.0,
+          "late_path_body_lengths": 0.0,
+          "mean_late_speed_body_lengths_s": 0.0,
+          "heading_change_rad": 0.0,
+          "muscle_dynamic": false,
+          "shape_dynamic": false,
+          "measurable_displacement": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Dynamic shape/drift flags are not coordinated gait or physiological validation"
+        },
+        "parameters_trained": false,
+        "body_feedback": false,
+        "gates_are_diagnostics": "No successful locomotion claim from transient drift or nonzero displacement alone"
+      },
+      "summary_sha256": "368a33ea4c41e608e4c2c76767e7313db2696bee3b9056c4c3985aa82dc4981d"
+    },
+    {
+      "run": "body-refined",
+      "summary": {
+        "experiment": "E028",
+        "condition": "active",
+        "medium": "liquid",
+        "perturbation_mV": 0.0,
+        "status": "completed",
+        "stop_reason": "duration",
+        "finite": true,
+        "simulation_seconds": 20.0,
+        "requested_duration_seconds": 20.0,
+        "elapsed_seconds": 17.750766333003412,
+        "dt_s": 0.001,
+        "brain_substeps": 10,
+        "brain_step_ms": 0.1,
+        "network_sha256": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+        "parent_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+        "metrics": {
+          "observation_seconds": 20.0,
+          "late_seconds": 10.0,
+          "neural_voltage_p2p_max_mV": 21.190202713012695,
+          "rhythmic_rmd": 3,
+          "rmd": {
+            "RMDDL": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": true,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.12132072448730469,
+                0.1123809814453125,
+                0.10631752014160156,
+                0.1014556884765625,
+                0.09739112854003906
+              ],
+              "amplitude_retention": 0.8027575581303944,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -22.42740249633789,
+              "voltage_max_mV": 4.2491278648376465
+            },
+            "RMDDR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": true,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.1422557830810547,
+                0.14363479614257812,
+                0.14545249938964844,
+                0.1474285125732422,
+                0.1498432159423828
+              ],
+              "amplitude_retention": 1.0533365512248098,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -23.491445541381836,
+              "voltage_max_mV": 2.7226877212524414
+            },
+            "RMDL": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                21.18971824645996,
+                21.189319908618927,
+                21.186552464962006,
+                21.181347250938416,
+                21.173980057239532
+              ],
+              "amplitude_retention": 0.9992572723696759,
+              "median_period_s": 0.217,
+              "period_cv": 0.0014489893057101394,
+              "voltage_min_mV": -22.15210723876953,
+              "voltage_max_mV": 5.490380764007568
+            },
+            "RMDR": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                20.2924941778183,
+                20.31413173675537,
+                20.328835606575012,
+                20.34518325328827,
+                20.35704469680786
+              ],
+              "amplitude_retention": 1.0031810046820229,
+              "median_period_s": 0.216,
+              "period_cv": 0.0022406720991343795,
+              "voltage_min_mV": -21.999691009521484,
+              "voltage_max_mV": 5.344844341278076
+            },
+            "RMDVL": {
+              "passed": true,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              },
+              "late_peaks": 46,
+              "window_amplitudes_mV": [
+                11.80673885345459,
+                11.70745849609375,
+                11.660670280456543,
+                11.641355514526367,
+                11.635117530822754
+              ],
+              "amplitude_retention": 0.9854641214003289,
+              "median_period_s": 0.216,
+              "period_cv": 0.002304685794132396,
+              "voltage_min_mV": -21.631572723388672,
+              "voltage_max_mV": 4.82249641418457
+            },
+            "RMDVR": {
+              "passed": false,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": false,
+                "amplitude_retained": false,
+                "multiple_cycles": false
+              },
+              "late_peaks": 0,
+              "window_amplitudes_mV": [
+                0.15314292907714844,
+                0.13849449157714844,
+                0.12665939331054688,
+                0.11882781982421875,
+                0.11184310913085938
+              ],
+              "amplitude_retention": 0.7303184665778232,
+              "median_period_s": null,
+              "period_cv": null,
+              "voltage_min_mV": -22.32306671142578,
+              "voltage_max_mV": 4.154655456542969
+            }
+          },
+          "muscle_p2p_max": 0.05841308832168579,
+          "muscle_p2p_rms": 0.010902423411607742,
+          "joint_p2p_max_rad": 0.0030709803104400635,
+          "joint_p2p_rms_rad": 0.0012618526816368103,
+          "late_displacement_body_lengths": 4.981335223419592e-06,
+          "late_path_body_lengths": 0.0005707638338208199,
+          "mean_late_speed_body_lengths_s": 5.708209159124111e-05,
+          "heading_change_rad": -0.0003362298011779785,
+          "muscle_dynamic": true,
+          "shape_dynamic": true,
+          "measurable_displacement": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Dynamic shape/drift flags are not coordinated gait or physiological validation"
+        },
+        "parameters_trained": false,
+        "body_feedback": false,
+        "gates_are_diagnostics": "No successful locomotion claim from transient drift or nonzero displacement alone"
+      },
+      "summary_sha256": "c86ea6cf4e65a4826c872377fa1ac20429d7ef077d5fac67a3dec596fe401e25"
+    }
+  ],
+  "software_tests_passed": 187,
+  "remote_launched": false,
+  "remote_status": "User will launch; SSH connection attempt timed out",
+  "artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028",
+  "transfer_path": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/transfer/r-elegans-E028.tar.gz",
+  "parameters_trained": false,
+  "locomotion_demonstrated": false,
+  "local_verified_files": 667,
+  "local_manifest_sha256": "5f2132fa5c223ee519a0cb62cabd679d4e9fd3db22c3cd9485920705da4dd8b5"
+}

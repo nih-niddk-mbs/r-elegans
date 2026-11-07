@@ -1332,6 +1332,145 @@ retain actual dirty pre-commit source. Rebase `/tmp` parent paths to copied
 archive equivalents only in replay copies, verifying hashes. Local OneDrive
 verification is not evidence of completed cloud synchronization.
 
+### E028 — 2026-11-07: unpaced channel brain → muscles → body diagnostic (planned)
+
+**User authorization:** finish and locally verify the channel-brain/body bridge,
+then prepare a bounded 30–60 minute nohup diagnostic on mbslnx2. No training,
+RL, food task or periodic input. Preserve the E027 active candidate and the
+saved parent NMJ/muscle-transfer parameters exactly; all raw data external.
+
+**Plan:** use the channel network's physical voltage and physical release
+threshold/slope to compute transmitter release, then the parent's frozen
+956-edge NMJ gains/signs and muscle sigmoid (same nonzero resting tone as the
+full actor) to obtain 95 activations. Project anatomically (head at last segment)
+and integrate the overdamped body in the same execution loop. No body-to-neuron
+feedback is added; a common loop is not proprioception. State is checkpointable
+between chunks. Start from E027's original active checkpoint, not the one-update
+calcium-fit candidate; parent NMJ SHA-256 recorded below when run.
+
+**Diagnostic matrix:** normalized development body plus SI liquid/agar bodies;
+unperturbed and small initial-voltage perturbations; original versus RMD-CCA1
+ablation controls; frozen voltage/muscle output control for transient posture
+relaxation. Compare body timestep refinement while retaining brain integration
+accuracy. Distinguish sustained neural activity, dynamic muscle output, dynamic
+shape, gross drift/rotation and useful locomotion. Static bends or startup
+relaxation do not count as a gait. Predeclare late-window thresholds/flags,
+report raw metrics, and retain negative outcomes without retuning readout.
+
+**Operations:** select disjoint CPU cores before numerical imports, use the
+explicit r-elegans conda Python, write summaries/checkpoints/logs externally,
+enforce wall-clock budget and capture source/environment/input hashes. Prepare
+a small checksummed input bundle for transfer if SSH remains password-only.
+Do not claim remote launch until a remote process/run directory is evidenced.
+Local bridge checks and server readiness/commands/results follow below.
+
+**Implemented:** `body/channel_bridge.py` joins the complete neural state,
+physical release, frozen parent NMJs/muscle sigmoid and overdamped body in one
+scan. All 302 gates/calcium and the body's pose/shape/activation continue between
+chunks; held-voltage control freezes the brain. No feedback to neurons, inferred
+gait, tonic retuning or optimization. Physical threshold/slope come from the
+channel network; NMJ strengths/signs and muscle fields come from the preserved
+parent. This is a deliberate explicit unit contract, not an assertion that the
+transferred readout is physiologically calibrated.
+
+`scripts/diagnose_channel_body.py` records input/evaluated models, body constants,
+full initial/latest/final state, chunk traces, progress and late-window metrics.
+Latest state writes are atomic. Latest snapshots support audit/reconstruction;
+an exact checkpoint-resume CLI is not exposed. Metrics use the final half of
+up to the last 30 simulated seconds. Dynamic muscle/shape flags require max
+p2p >1e-4 activation/>1e-4 rad; measurable displacement >1e-5 BL is a drift flag,
+not a gait criterion. The script never claims locomotion from drift alone.
+Late muscle saturation and joint-limit fractions are also reported by final code.
+
+**Inputs:** original E027 active candidate, SHA-256
+`870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a`, plus
+the preserved E026 parent actor/NMJ state, SHA-256
+`82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0`.
+The input bundle uses exactly these, not the one-update fitted E027 candidate.
+All 956 anatomical NMJ edges and 95 muscles remain. Muscle transfer has the
+parent's nonzero resting tone rather than a new baseline-subtracted readout.
+
+**Local experiments actually run (Mac):** four 20 s SI-liquid cases: active,
+RMD-CCA1 removal, held voltage, body timestep refinement. Commands are captured
+in each run record, equivalent to:
+
+```bash
+MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.diagnose_channel_body --network /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E027/r-elegans-E027-connected-default/network_candidate.npz --parent-actor /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E026/r-elegans-E026-calcium-fine/parent_actor.npz --output-dir /tmp/r-elegans-E028-liquid-smoke --medium liquid --duration 20 --chunk-seconds 2 --minutes 5
+```
+
+Control output directories `/tmp/r-elegans-E028-cca-control` and
+`/tmp/r-elegans-E028-held-voltage` add `--condition cca1_removed` and
+`--condition held_voltage`. Refined body run `/tmp/r-elegans-E028-body-refined`
+adds `--dt .001`. All use max brain step .1 ms; chunk duration is 2 s.
+Active runtime ~17.40 s locally (not a server timing prediction).
+
+**Results:** all finite. Active: three rhythmic RMD cells, max muscle p2p
+0.0584111, RMS muscle p2p 0.0109022; max joint p2p 0.00306485 rad, RMS joint
+p2p 0.00125922 rad. Late displacement 4.8499e-6 BL over ten seconds; late path
+0.000568758 BL, average path speed 5.6887e-5 BL/s, heading change -0.0003263 rad.
+Thus direct brain→muscle→body influence is demonstrated as a small unpaced wiggle,
+**not useful net locomotion or a calibrated gait**. CCA1 removal and held voltage
+both give zero late neural/muscle/shape variation and displacement. Body dt
+.001 gives max muscle p2p 0.0584131, max joint p2p 0.00307098 rad (~0.20%
+difference), displacement 4.9813e-6 BL. Refinement supports the small body effect;
+it does not turn negligible drift into locomotion. No parameters were fitted.
+
+**Software verification:** targeted bridge/streaming/readout/checksum tests
+**4 passed in 5.57 s**; full repository suite **187 passed in 66.29 s**.
+Checks cover release units/resting tone, NMJ locality, chunk continuation,
+neural equivalence with no body feedback, held-voltage control, finite SI body
+state, drift-versus-gait distinction and bundle tamper detection. Final metadata
+fields/queue heartbeat were added around verification; numerical equations are
+unchanged. The Linux supervisor is not claimed executed on the Mac or server.
+
+**Server preparation:** `run_embodied_diagnostics.py` is stdlib-only until
+worker launch, verifies checksummed inputs/dependencies, assigns disjoint
+physical CPU groups and uses sys.executable. Four CPU workers x four cores;
+nine cases: active normalized/liquid/agar, liquid initial +/-1 mV perturbations,
+liquid CCA1/held-voltage controls, body dt refinement, brain integration
+refinement. 45-minute global budget, 12-minute case budgets, 600 simulated-second
+ceilings; may finish sooner. Workers save progress every chunk; supervisor emits
+30 s heartbeats, individual logs and a queue summary including pending cases.
+Graceful stop retains completed chunks; forced cleanup may add 45 s. A finite
+negative movement result is diagnostic evidence, not a process crash.
+
+`prepare_embodied_bundle.py` packages two NPZ inputs, their checksums, tested
+source hashes, and a launcher. The launcher fast-forwards Git (no reset), checks
+data/source, explicitly uses `/home/carsonc/miniconda3/envs/r-elegans/bin/python`,
+and nohups the supervisor with unique log/PID. It does not alter conda environments.
+No HDF5 imaging dataset is needed for this fixed-parameter server diagnostic.
+
+**Remote status:** SSH probe to `carsonc@mbslnx2.niddk.nih.gov` timed out before
+authentication; no remote command/job launched. User then explicitly directed
+"Just push and I'll launch myself." Honor that: publish code/bundle and launch
+instructions, do not retry or claim a remote run. Local outcomes and server
+plans stay separate until user supplies actual run evidence.
+
+**Parameter question during work:** user notes channels and connections can
+both fit and asks about leak/capacitance. Current calcium fitter jointly adjusts
+channel conductances (including leak) and chemical/electrical strengths; C,
+leak reversal and kinetic/calcium constants are currently fixed. Bundled AWCON
+whole-cell model priors: C=3.1 pF, gLeak=0.27 nS, ELeak=-90 mV; RMD: C=1.2 pF,
+gLeak=0.40 nS, ELeak=-80 mV. Active exploratory RMD profile: C=1.2 pF,
+gLeak=0.045 nS, ELeak=-80 mV. Both presets use EK=-80, ECa=60, ENa=30 mV,
+calcium equilibrium .05 uM, removal 50 ms. Most other cells have transferred
+priors with bounded parent-derived C, not measured individual values. Fitting
+capacitance/reversal would require explicit trainable fields and prior/identifiability
+controls; it was not silently added to this fixed-parameter diagnostic.
+
+Artifact/transfer paths and checksums follow after archival preparation.
+
+**Local archive:** all four complete run directories, original stdout, source/
+environment records, copied inputs/evaluated network/body parameters and all
+chunk/state files copied to
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/`.
+Verified 667 files against `LOCAL_SHA256SUMS.json`, manifest SHA-256
+`5f2132fa5c223ee519a0cb62cabd679d4e9fd3db22c3cd9485920705da4dd8b5`.
+This manifest covers the local evidence, before adding the separately checksummed
+transfer bundle. Final targeted recheck after diagnostic metadata additions:
+4 passed in 5.71 s. No remote process started. Local OneDrive verification does
+not establish completed cloud synchronization.
+
 ## Replication and recordkeeping procedure
 
 For every future experiment, add an entry with: question, predicted outcome,
