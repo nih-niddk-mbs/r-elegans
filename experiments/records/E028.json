@@ -719,5 +719,13 @@
   "parameters_trained": false,
   "locomotion_demonstrated": false,
   "local_verified_files": 667,
-  "local_manifest_sha256": "5f2132fa5c223ee519a0cb62cabd679d4e9fd3db22c3cd9485920705da4dd8b5"
+  "local_manifest_sha256": "5f2132fa5c223ee519a0cb62cabd679d4e9fd3db22c3cd9485920705da4dd8b5",
+  "transfer_bundle": {
+    "bytes": 104253,
+    "sha256": "fc13e63b7ccf9cd83326ee8610c727746120569fc5b28a0a3b63bd8f5c1adc99",
+    "source_revision": "dd9aa10",
+    "verified_source_files": 54,
+    "ready": true,
+    "remote_launched": false
+  }
 }

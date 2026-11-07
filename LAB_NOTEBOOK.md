@@ -1471,6 +1471,18 @@ transfer bundle. Final targeted recheck after diagnostic metadata additions:
 4 passed in 5.71 s. No remote process started. Local OneDrive verification does
 not establish completed cloud synchronization.
 
+**E028 transfer bundle finalized after E029 source commit:**
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/transfer/r-elegans-E028.tar.gz`,
+104,253 bytes, SHA-256
+`fc13e63b7ccf9cd83326ee8610c727746120569fc5b28a0a3b63bd8f5c1adc99`.
+Prepared from committed source `dd9aa10`, with exact builder invocation/environment
+records alongside. All 54 source and two input hashes were verified, launcher
+passed `sh -n`, and archive membership was checked: directory E028 plus
+network.npz, parent_actor.npz, inputs.json and launch.sh only. This bundle is
+separate from the local evidence manifest above. Copy/extract/launch commands
+are in the E028 section of CURRENT_MODEL.md. No remote job has been launched;
+user self-launches.
+
 ### E029 — 2026-11-07: freeze stereotypical properties, fit explicit unknowns (verified)
 
 **User direction:** "fix as many things as we can", "only fit what is truly
