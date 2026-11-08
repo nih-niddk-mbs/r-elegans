@@ -323,7 +323,8 @@ source/input hashes, trajectories, state snapshots and exact local commands.
 
 ### Launch the bounded mbslnx2 diagnostic yourself
 
-User requested push/self-launch. No remote job has been launched. On mbslnx2:
+User requested push/self-launch. First server results are now user-reported below.
+To launch a fresh diagnostic on mbslnx2:
 
 ```bash
 cd /home/carsonc/github/r-elegans
@@ -360,7 +361,22 @@ The launcher does not modify conda environments.
 neural persistence, varying muscle output, dynamic shape and drift. Nonzero
 displacement alone never sets `locomotion_demonstrated=true`. Snapshots retain
 all gates/calcium/body state; the CLI does not yet expose exact checkpoint resume.
-The Linux queue itself remains unexecuted until the user launches it on mbslnx2.
+User-reported server result, run `embodied-20261107T185913027018Z`:
+all nine cases exited 0 and remained finite; queue elapsed 1397.13 s (23.29 min).
+Eight reached 600 simulated seconds; brain-step refinement reached 374 s before
+its per-case budget. All final 15-s measurement windows had zero voltage,
+muscle and joint variation, zero rhythmic RMD cells and zero displacement.
+This candidate **did not sustain autonomous activity or movement**. It retained
+nonzero, constant muscle activation. Media changes, +/-1 mV initial perturbations
+and timestep refinements did not rescue late activity.
+
+Server parent SHA256 `beb069dd051763b6fdc3de977e4a2f77c9db73827cb4e8dfb2f88d899ea27078`
+and candidate `95fafcabfce62aa0a2c37dc9c49b475a23ed96264e8d8899640bb9ad30da4882`
+differ from the Mac-tested pair. These data do not establish whether the Mac
+candidate also eventually stops, or how quickly the server candidate settles.
+Inspect early chunks and compare both parents over matched durations before
+changing channel/synapse parameters. Full server trajectories/environment/source
+have not been independently retrieved. See `experiments/records/E028-server-20261107.json`.
 
 ## Conservative fitting policy (E029, 2026-11-07)
 

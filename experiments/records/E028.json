@@ -713,7 +713,7 @@
   ],
   "software_tests_passed": 187,
   "remote_launched": false,
-  "remote_status": "User will launch; SSH connection attempt timed out",
+  "remote_status": "User-reported completed server queue embodied-20261107T185913027018Z; agent did not launch or independently retrieve full remote artifacts",
   "artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028",
   "transfer_path": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/transfer/r-elegans-E028.tar.gz",
   "parameters_trained": false,
@@ -742,5 +742,6 @@
       "same_parent_rebuild_matches_E027_sha256": true,
       "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/pull-run-verification"
     }
-  }
+  },
+  "reported_server_result": "experiments/records/E028-server-20261107.json"
 }

@@ -152,6 +152,16 @@ neither a static bend, startup relaxation nor nonzero drift establishes gait.
 The local liquid candidate produces small periodic bends but negligible net
 displacement. Useful locomotion and body-feedback qualification remain pending.
 
+First server queue (user-reported `embodied-20261107T185913027018Z`): nine
+finite exit-0 cases, eight at 600 s and brain-refined at 374 s (case budget).
+All final measurement windows are stationary, including neural voltage and
+muscle output. This is a negative persistence result despite successful software
+execution. The server used a different parent from the 20-s Mac test. Next
+diagnostic priority is early-to-late chunk analysis and a matched-duration
+comparison of the two parents, without changing physiological parameters.
+No new fit or follow-up experiment has been launched.
+
+
 ## Fix stereotypical properties; fit explicit unknowns (E029)
 
 New calcium-fitting default supersedes the all-conductance E026/E027 experiments.

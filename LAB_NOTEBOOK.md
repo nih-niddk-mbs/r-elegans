@@ -1667,3 +1667,44 @@ for local retention. This confirms a local copy, not completed cloud sync.
 Final local software validation: full `.venv/bin/python -m pytest -q` suite
 passed **191 tests in 68.81 s**. `git diff --check` and shell syntax passed.
 The Linux queue remains unexecuted pending the user launch.
+
+## 2026-11-07 — E028 first server result: stationary late state
+
+Evidence: user-pasted summary stdout for
+`/home/carsonc/r-elegans-results/embodied-20261107T185913027018Z`.
+Attachment SHA256 `580080f8d449e6ade669e9a7b1385c4b640092e332a180ae38f59636654570b3`.
+Small extracted record: `experiments/records/E028-server-20261107.json`. This is
+user-reported execution, not independent retrieval of remote raw artifacts.
+Actual server source/environment snapshots remain on the server; their revision
+is not present in this summary, so no exact revision is inferred.
+
+All nine planned cases finished, exit 0, finite, none pending or interrupted.
+Queue took 1397.130883 s (23.29 min), below 45-minute budget. Eight cases reached
+600 simulated seconds. Brain-refined case stopped at its own time budget after
+374 simulated seconds / 724.189057 wall seconds. This is partial simulated
+duration, not an error or a complete 600-s refinement test.
+
+In every final measurement window (last 15 s of retained 30 s): zero maximum
+neural voltage p2p, zero rhythmic RMD cells, zero muscle p2p, zero joint p2p,
+zero net/path displacement and heading change. Active-liquid muscle activation
+remained nonzero and constant (0.135769 to 0.948988 across muscles). Thus the
+network/body settled rather than demonstrating persistent unpaced behavior.
+Same qualitative late result for normalized/liquid/agar, +/-1 mV initial
+perturbations, calcium/held-voltage controls and both timestep refinements.
+
+Parent `beb069dd051763b6fdc3de977e4a2f77c9db73827cb4e8dfb2f88d899ea27078`;
+network `95fafcabfce62aa0a2c37dc9c49b475a23ed96264e8d8899640bb9ad30da4882`.
+Parent selected from passed seed-0 server head-sweep cohort
+`head-sweep-20261107T003628901581Z`. This differs from the Mac-tested parent;
+that short 20-s outcome is not a matched comparison. It remains unknown whether
+the server ever oscillated transiently or the Mac candidate persists for 600 s.
+Do not attribute failure uniquely to synaptic suppression, channel kinetics or
+medium. No body-to-neuron feedback exists, so changing medium alone cannot
+rescue this neural fixed point. No parameters were trained in this diagnostic.
+
+Decision: do not extend this same fixed-state diagnostic merely to spend more
+time, or proceed directly to RL. Next proposed analysis is early/middle/late
+chunk inspection and matched-parent/matched-duration neural-only comparisons,
+keeping channel/connection parameters fixed initially to isolate the cause.
+These follow-ups are proposed, not launched. Existing driven skills remain
+separate checkpoints, unaffected by this negative autonomous-branch result.
