@@ -1781,3 +1781,102 @@ Decision: preserve this fixed parameter reference; next proposed work is spatial
 phase/traveling-wave analysis of saved neural/muscle/body trajectories before
 training coordinated propulsion. No new experiment, fitting or RL launched.
 Documentation and record JSON validation only; no simulation code changed.
+
+## 2026-11-08 — E030 planned: amplitude-only autonomous wiggle fitting
+
+User asks to train neuron parameters for wiggle amplitude, explicitly without
+external drive. Start from the exact bundled Mac reference; zero all injected
+compensation currents, not just periodic forcing. No sensory input, timing
+signal, gait teacher, NMJ retuning or body force injection. No propulsion or RL
+objective. First assay the zero-bias baseline locally.
+
+Fit uncertain non-LEAK RMD channel densities, bounded multiplicatively around
+the reference, leaving capacitance/leak/kinetics/reversals/calcium handling,
+recurrent strengths/topology and NMJ/muscle/body parameters fixed. This explicitly
+relaxes the earlier model-assumption freeze of the exploratory RMD densities
+for this behavioral fit; those densities were not established measured values.
+All 302 neurons remain in the simulation. Use bounded derivative-free search
+to avoid backpropagating through the full stiff channel network. Score late
+cyclic joint-angle variation rather than static curvature or displacement.
+Initial engineering target: 0.01 rad peak-to-peak at a joint, retaining persistent
+neural rhythm, finite bounded voltages and no joint-limit clipping. This is a
+small developmental target, not an animal-calibrated amplitude.
+
+Planned records: exact source/environment, parent/input hashes, allowed mask,
+all candidate parameters/metrics and RNG search state, selected/final network
+checkpoints, optimizer/search history and held-out longer validation traces.
+Server launch remains user-operated under nohup. No new server job is launched
+by the agent. Scientific success remains pending actual fitting and validation.
+
+E030 execution update (local): zero-bias baseline command
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.diagnose_channel_body --network /tmp/r-elegans-E030-zero-bias-input/network.npz --parent-actor r_elegans/assets/mac_rhythm_v1/parent_actor.npz --output-dir /tmp/r-elegans-E030-zero-bias-baseline --duration 20 --minutes 2`.
+Zero-bias input SHA256
+`ac3976ff6bc89b8b9c3ccd92068882ea2cce7201384b4eabc4cc87138ce3e98c`.
+Three rhythmic RMD cells, max voltage p2p 21.18092 mV, max joint p2p
+0.00294807553 rad; no clipping/saturation. All injected currents zero.
+Raw output and stdout at the corresponding /tmp paths.
+
+Short fitting verification launched locally with seed 0 (default):
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.train_autonomous_wiggle --output-dir /tmp/r-elegans-E030-fit-smoke --minutes 4 --iterations 8 --validation-seconds 20`
+(stdout `/tmp/r-elegans-E030-fit-smoke.log`). Initial short-window sustained
+amplitude 0.00230509043 rad; candidate 2 reached 0.0262243822 rad and retained
+three rhythmic cells. This is provisional until validation. The search source
+was snapshotted at invocation; subsequently added stop-at-target behavior is
+not part of that executing search. Planned additional independent local
+300-s liquid diagnostic of its selected model, plus held-voltage control,
+to establish persistence beyond the short-window fit without changing it.
+
+E030 short verification completed: passed=True, 8 evaluated proposals, selected
+iteration 2, 137.4422277 s wall. This pre-stop-at-target source is captured in
+its run record. All 78 fit values are existing non-LEAK conductances in six
+RMD neurons; selected density factors range 0.857854–1.224696. Independent
+20-s validation sustained amplitude 0.0279118828 rad; +1/-1 mV initial-state
+perturbation checks 0.0263734451 / 0.0261019589 rad; 0.05-ms brain timestep
+0.0263551883 rad. All four checks retain three qualified RMD rhythms.
+Strongest joint is anterior/head, not a whole-body traveling wave.
+Frozen parameter arrays compare exactly; all 302 injected currents remain zero.
+
+Independent longer diagnostic command:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.diagnose_channel_body --network /tmp/r-elegans-E030-fit-smoke/network_best.npz --parent-actor r_elegans/assets/mac_rhythm_v1/parent_actor.npz --output-dir /tmp/r-elegans-E030-fit-long --duration 300 --minutes 10`.
+A separate held-voltage control uses the same selected network, duration 20,
+`--condition held_voltage`, output `/tmp/r-elegans-E030-fit-held-control`; all
+late neural/muscle/joint variation and displacement are zero. Raw stdout stays
+at the corresponding `.log` paths.
+
+The selected model is bundled for pull-and-run reproducibility as
+`r_elegans/assets/autonomous_wiggle_v1/network.npz`, SHA256
+`482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6`.
+The corresponding parent readout remains byte-identical to the Mac reference.
+These compact fitted parameters serve the requested working wiggle; raw
+scientific data, search trajectories and other checkpoints stay external.
+The original Mac asset and its default diagnostic remain preserved.
+
+Software validation: full suite 194 passed in 66.50 s; subsequent added
+bundled-fit integrity test and all amplitude tests passed (3 tests in 1.33 s).
+Both launcher shell syntax checks, module CLI help and `git diff --check` pass.
+Final search behavior stops at target before independent validation; a worker
+that does not meet all validation gates retains its candidate but exits 2.
+These are software tests, not experimental biological validation.
+
+E030 independent 300-s validation completed locally: finite throughout, three
+rhythmic RMD cells, maximum voltage p2p 27.72645 mV, muscle p2p 0.2397614,
+maximum joint p2p 0.0295088887 rad, sustained five-window amplitude
+0.0282294517 rad. Every saved 2-s head-joint window after 12 s has p2p
+>=0.0268120915 rad. This inspection establishes persistent larger bends across
+the sampled post-warmup run, not only its final window. No joint clipping or
+muscle saturation. Late net displacement 2.6557840e-5 body lengths; the drift
+flag is not a useful propulsion claim. The corresponding held-voltage control
+has zero late neural/muscle/joint variation.
+
+Result: first autonomous amplitude milestone achieved locally with all injected
+currents zero, no external pacing, no gait teacher and no synapse/body retuning.
+This is mainly anterior/head bending, not a whole-body traveling gait or a
+biologically calibrated channel fit. Preserve this model as an independent
+skill/reference; coordinated body waves remain a later objective. Exact compact
+results: `experiments/records/E030.json`. Source/output provenance and all raw
+local files are archived under OneDrive evidence/E030; this is local retention,
+not a claim of completed cloud synchronization or independent remote backup.
+No mbslnx2 job has been launched by the agent.
+
+Verified local OneDrive archive: 875 files, `LOCAL_SHA256SUMS.json` SHA256
+`0bb644e6bf045b0c57c213f7dc71c89c109cf9d1acf6f4a08d4c20c24d60c669`.

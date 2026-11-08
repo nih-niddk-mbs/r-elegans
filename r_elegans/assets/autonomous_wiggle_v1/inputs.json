@@ -1,0 +1,41 @@
+{
+  "asset": "autonomous_wiggle_v1",
+  "experiment": "E030",
+  "sha256": {
+    "network.npz": "482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6",
+    "parent_actor.npz": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0"
+  },
+  "bytes": {
+    "network.npz": 52687,
+    "parent_actor.npz": 50664
+  },
+  "source_reference": "mac_rhythm_v1",
+  "initialization": "All 302 injected compensation currents zero; 78 existing non-LEAK RMD densities fit",
+  "seed": 0,
+  "selected_iteration": 2,
+  "method": "Bounded derivative-free amplitude search; no temporal input or gait teacher",
+  "training_target_joint_p2p_rad": 0.01,
+  "fixed": [
+    "leak",
+    "capacitance",
+    "kinetics",
+    "reversals",
+    "calcium handling",
+    "synaptic strengths",
+    "NMJ/muscle/body readout"
+  ],
+  "provenance": "experiments/records/E030.json; LAB_NOTEBOOK.md E030",
+  "limitations": [
+    "First amplitude milestone; strongest bends near head, no traveling-wave or locomotion target.",
+    "Exploratory model parameters, not a physiological fit."
+  ],
+  "license": "Project-generated parameters under repository MIT license",
+  "local_validation": {
+    "duration_seconds": 300,
+    "rhythmic_rmd": 3,
+    "joint_p2p_max_rad": 0.029508888721466064,
+    "sustained_joint_p2p_rad": 0.02822945173829794,
+    "injected_currents_zero": true,
+    "held_voltage_stops_motion": true
+  }
+}

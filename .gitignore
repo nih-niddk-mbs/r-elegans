@@ -28,4 +28,6 @@ htmlcov/
 # Explicitly bundled, project-generated Mac reference parameters (not raw data).
 !r_elegans/assets/mac_rhythm_v1/network.npz
 !r_elegans/assets/mac_rhythm_v1/parent_actor.npz
+!r_elegans/assets/autonomous_wiggle_v1/network.npz
+!r_elegans/assets/autonomous_wiggle_v1/parent_actor.npz
 

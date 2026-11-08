@@ -114,3 +114,22 @@ used a different parameter pair. The default diagnostic
 now uses this pinned pair on every host, without selecting local checkpoints or
 reconstructing parameters. The files contain model parameters only; raw data,
 trajectories, optimizer histories and other checkpoints remain external.
+
+## Intrinsic amplitude reference (`autonomous_wiggle_v1`, E030)
+
+Derived from `mac_rhythm_v1` by zeroing all 302 injected compensation currents
+and fitting only 78 existing non-LEAK RMD channel-density scales. No injected currents,
+NMJ gains, body stiffness or periodic inputs were fitted to create motion.
+Selected local seed 0, candidate 2. The density-scale factors span 0.858–1.225;
+all other neural parameters, kinetics, capacitance, leak and connections remain
+fixed. Short fitting and held-out validation increase repeated joint bends
+from ~0.0023 to ~0.026 rad, strongest in anterior joints. This is not a
+traveling gait, useful propulsion or physiological channel inference.
+
+`r_elegans/assets/autonomous_wiggle_v1/network.npz` SHA256:
+`482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6`.
+Matching `parent_actor.npz` is byte-identical to the Mac reference parent,
+SHA256 `82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0`.
+The compact parameter pair is bundled to reproduce the requested trained
+wiggle; raw search/assay histories remain external. See E030 notebook/record
+for exact commands, masks, numerical tests and longer validation results.

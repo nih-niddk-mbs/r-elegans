@@ -208,3 +208,15 @@ This catalog is a versioned hypothesis about a useful policy decomposition.
 It is not a claim that the animal uses our option boundaries, random direction
 context, parameterization or learning algorithm. Coverage and downstream RL
 benefit must be measured.
+
+### E030 — Intrinsic anterior wiggle amplitude (2026-11-08)
+
+Independent channel-model reference `autonomous_wiggle_v1`: all 302 injected
+compensation currents zero; fit 78 unknown non-LEAK RMD channel densities,
+keeping connections and physiology/muscle/body constants fixed. Local 300-s
+liquid assay retains three rhythmic RMD cells and ~0.03-rad peak-to-peak bends,
+mainly anterior. Initial-state perturbations and neural timestep refinement
+retain the short-window amplitude; held-voltage control stops motion. This is
+a self-generated amplitude primitive, not whole-body wave coordination, useful
+locomotion, or a consolidated autonomous behavior policy. Exact pair is bundled;
+raw records external. Original driven skills and Mac reference remain intact.

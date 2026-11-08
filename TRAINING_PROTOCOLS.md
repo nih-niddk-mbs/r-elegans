@@ -788,3 +788,61 @@ The first research question is whether one shared sensory/motor controller can
 match locomotion, touch escape, food slowing, search and both chemotaxis
 strategies across held-out conditions. That is a more informative next milestone
 than a high score on the existing single food-source task.
+
+## P00 — Autonomous amplitude before wave coordination (E030)
+
+User-directed first milestone: spontaneous wiggling amplitude, without external
+drive, a traveling-wave teacher, propulsion reward or RL. All 302 injected
+compensation currents are zero in this branch, including those retained by the
+earlier Mac reference. The 20-s zero-bias baseline retains three rhythmic RMD
+cells and small bends, so injected tonic current is not needed for that short
+model assay.
+
+`brain/autonomous_wiggle.py` fits 78 existing, non-LEAK channel-density values
+in the six RMD neurons. The other 296 neurons remain in the full network.
+Capacitance, leak, gating kinetics, ionic reversals, calcium handling, synaptic
+strengths, release settings and NMJ/muscle/body parameters remain fixed.
+RMD density freezing in the calcium-fitting policy was a model assumption;
+this explicitly scoped amplitude fit relaxes it without changing that policy.
+Densities are bounded to 0.25–4 times the starting value. No absent channel
+is introduced. Derivative-free search avoids differentiating the full stiff
+network and stops searching at the small engineering target (0.01 rad p2p).
+
+The objective measures repeated late joint-angle variation, using the weakest
+of five late amplitude windows at the strongest varying joint. Static postures,
+decaying transients, unbounded voltages, clipped joints and excessive muscle
+saturation cannot pass. At least one RMD neuron must retain a qualified rhythm.
+This milestone permits a local/head wiggle; it does not demand whole-body waves.
+
+Local seed-0 short verification selected candidate 2: sustained bend amplitude
+0.002305 -> 0.026224 rad in the 12-s fit window (~11.4x). Twenty-second held-out
+validation and +/-1 mV initial perturbations and finer brain timestep retain
+three rhythmic cells and amplitudes 0.0261–0.0279 rad. Strongest bends are near
+the head. All currents are zero; all frozen fields compare exactly. Learned
+density factors are only 0.858–1.225 of the prior in this candidate.
+Independent 300-s validation passed: three RMD rhythms, sustained joint
+amplitude 0.02823 rad and maximum joint p2p 0.02951 rad. Every 2-s head-joint
+window after the first 12 s exceeds 0.02681 rad. Holding voltage constant
+stops all late motion; no clipping or muscle saturation occurred.
+These are model dynamics, not animal-calibrated channel densities.
+
+The exact fitted pair is bundled in `r_elegans/assets/autonomous_wiggle_v1/`,
+with hashes/provenance. To run the long fixed-parameter diagnostic on mbslnx2:
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_embodied_mbslnx2.sh --inputs r_elegans/assets/autonomous_wiggle_v1
+```
+
+This is the same nine-case, 45-minute-cap diagnostic; it does not retrain.
+For four independent fresh amplitude searches instead:
+`sh scripts/launch_autonomous_wiggle_mbslnx2.sh` starts four four-core CPU workers,
+each with a 60-minute cap and a target of 0.01 rad. They may finish much sooner
+once the target is found and validated. Each worker validates its selection for
+300 s, +/-1 mV initial states and a refined brain timestep. Exit 2 means the
+full amplitude/validation criteria were not met (or execution failed); inspect
+summary/logs to distinguish these. Raw histories, all accepted candidates, RNG
+search metadata, source/environment and validation traces stay external.
+The CLI does not implement exact mid-search resume. The agent launched no
+remote job; the user launches the desired diagnostic or training run.

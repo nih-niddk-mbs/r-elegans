@@ -82,6 +82,14 @@ mbslnx2: it uses the bundled exact Mac-tested model and matching parent readout
 (about 104 KB), verifies their hashes and needs no transfer. The user launches it. Server
 results are user-reported; full remote artifacts have not been independently retrieved.
 
+An [autonomous amplitude fit](CURRENT_MODEL.md#autonomous-amplitude-fitting-e030-2026-11-08)
+now removes all injected compensation currents and fits uncertain RMD channel
+densities. A local short-window fit increases sustained bend amplitude ~11x
+while keeping physiology constants, connections and body mechanics fixed.
+Independent 300-s local validation retains ~0.03-rad bends with zero injected
+current. The fitted pair is bundled as `autonomous_wiggle_v1`; this first
+milestone is a larger head/anterior wiggle, not whole-body propulsion.
+
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly
 eligible unknown channel densities and existing synaptic strengths fit. Each run

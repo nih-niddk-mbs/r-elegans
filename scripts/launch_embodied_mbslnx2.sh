@@ -9,7 +9,7 @@ cd "$worm_repo"
 mkdir -p "$worm_results"
 worm_log="$worm_results/embodied-$(date -u +%Y%m%dT%H%M%SZ)-$$.log"
 nohup "$worm_python" -u -m scripts.run_embodied_diagnostics \
-    --output-dir "$worm_results" --minutes 45 \
+    --output-dir "$worm_results" --minutes 45 "$@" \
     > "$worm_log" 2>&1 < /dev/null &
 echo "Supervisor PID: $!"
 echo "Log: $worm_log"
