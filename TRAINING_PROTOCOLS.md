@@ -899,3 +899,25 @@ worker logs/summary to distinguish those outcomes.
 The three-hour cap covers each worker's search and validation; startup and
 supervisor termination grace can add about two minutes. You may disconnect
 after launch. The agent has prepared the run; no remote launch is assumed.
+
+E031 server outcome (user-reported `autonomous-movement-20261108T154427901428Z`):
+**0/4 seeds pass**, after 350/347/350/347 proposals (1,394 total). Each retains
+0.017–0.031-rad sustained bends. All four long-validation minimum forward speeds
+are negative (~-1.6e-6 to -3.2e-7 body lengths/s). Small positive speeds in some
+perturbation/body-refined cases reverse sign in other checks; maximum reported
+forward/path efficiency is only 0.00763, below the 0.02 criterion. Held voltage
+stops all late motion. Exit 2 here reports unmet movement criteria; no missing
+summary or execution exception is evidenced in this compact report.
+
+This limited search did not convert the anterior oscillator into reliable
+propulsion. It is not evidence that the full 302-neuron network is insufficient:
+only 78 RMD channel densities changed, with all other neuron parameters and
+connection strengths fixed. Neither an impossibility result for this subset nor the unique cause of
+failure is established. Preserve the original amplitude reference and the failed
+searches. Proposed next experiment: broaden unknown body-motor neuron densities
+and/or existing synaptic strengths to develop distributed coordination; keep
+known/fixed physiological properties and zero external drive. Do not merely
+repeat the same restricted three-hour search or weaken its motion criteria.
+No broader experiment has been launched. Full remote input/source/environment,
+search history and raw trajectories remain unretrieved. Numerical evidence:
+`experiments/records/E031-server-20261108.json`.

@@ -226,3 +226,9 @@ three rhythmic cells; perturbation/body refinement checks retain it and both
 controls stop it. E031 autonomous forward movement is the next planned stage,
 using the same limited unknown-density scope and a three-hour CPU budget.
 Amplitude qualification does not imply successful E031 motion.
+
+E031 server outcome: 0/4 seeds pass forward-motion validation after 1,394
+proposals. Sustained anterior wiggle retained, but drift is weak and changes
+sign across checks. No autonomous forward skill added. Full-network sufficiency
+remains untested because only the RMD density subset was trainable. Preserve
+`autonomous_wiggle_v1`; broader motor-circuit coordination is proposed next.

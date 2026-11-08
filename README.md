@@ -94,7 +94,9 @@ The first [autonomous forward-movement search](CURRENT_MODEL.md#first-autonomous
 starts from that preserved wiggle. Run `sh scripts/launch_autonomous_movement_mbslnx2.sh`
 after pulling on mbslnx2 for four independent searches, up to three hours including
 validation. It fits neuron densities with zero external drive and rewards repeated
-net forward progress after warmup; no useful locomotion result is claimed yet.
+net forward progress after warmup. The first four-seed server search retained
+wiggling but failed forward-motion validation in every seed; broader motor-circuit
+training is the proposed next stage.
 
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly

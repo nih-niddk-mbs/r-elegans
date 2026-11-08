@@ -1,6 +1,6 @@
 {
   "experiment": "E031",
-  "status": "prepared_for_user_launch",
+  "status": "user_reported_server_run_complete_no_seeds_passed",
   "parent": "autonomous_wiggle_v1",
   "parent_manifest": "r_elegans/assets/autonomous_wiggle_v1/inputs.json",
   "workers": 4,
@@ -309,5 +309,8 @@
   "local_pilot_scope": "Two proposals; all six validation cases and export completed. Criterion not met, expected exit 2. Not the three-hour run.",
   "raw_local_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E031",
   "local_archive_verified_files": 203,
-  "local_archive_manifest_sha256": "311a3f51a4b4fe9a8c09de57df7c56d61269c3b49a12f981ce97f20c3fc16527"
+  "local_archive_manifest_sha256": "311a3f51a4b4fe9a8c09de57df7c56d61269c3b49a12f981ce97f20c3fc16527",
+  "reported_server_result": "experiments/records/E031-server-20261108.json",
+  "server_execution_reported": true,
+  "remote_raw_artifacts_independently_retrieved": false
 }

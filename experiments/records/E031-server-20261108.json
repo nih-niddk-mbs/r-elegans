@@ -1,0 +1,185 @@
+{
+  "experiment": "E031",
+  "run": "autonomous-movement-20261108T154427901428Z",
+  "evidence": "user-reported compact worker results; full server source/environment/input hashes/history not independently retrieved",
+  "workers": [
+    {
+      "seed": 0,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 350,
+      "validation": [
+        {
+          "case": "long",
+          "minimum_forward_speed_body_lengths_s": -1.2554987428066955e-06,
+          "forward_efficiency": -0.001205554659706404,
+          "sustained_joint_p2p_rad": 0.019764984026551247
+        },
+        {
+          "case": "perturb-plus",
+          "minimum_forward_speed_body_lengths_s": 2.5083593171842654e-06,
+          "forward_efficiency": 0.005938496884237506,
+          "sustained_joint_p2p_rad": 0.0197433577850461
+        },
+        {
+          "case": "perturb-minus",
+          "minimum_forward_speed_body_lengths_s": 2.56826701367885e-06,
+          "forward_efficiency": 0.005926690131913112,
+          "sustained_joint_p2p_rad": 0.019747464917600155
+        },
+        {
+          "case": "brain-refined",
+          "minimum_forward_speed_body_lengths_s": -2.694803638265097e-06,
+          "forward_efficiency": -0.003308989162280802,
+          "sustained_joint_p2p_rad": 0.019734278321266174
+        },
+        {
+          "case": "body-refined",
+          "minimum_forward_speed_body_lengths_s": 2.773047675446827e-06,
+          "forward_efficiency": 0.006413087901609394,
+          "sustained_joint_p2p_rad": 0.019782486371695995
+        },
+        {
+          "case": "held-voltage",
+          "minimum_forward_speed_body_lengths_s": 0.0,
+          "forward_efficiency": 0.0,
+          "sustained_joint_p2p_rad": 0.0
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 347,
+      "validation": [
+        {
+          "case": "long",
+          "minimum_forward_speed_body_lengths_s": -1.6281228667411833e-06,
+          "forward_efficiency": -0.000268843211420632,
+          "sustained_joint_p2p_rad": 0.028853503987193108
+        },
+        {
+          "case": "perturb-plus",
+          "minimum_forward_speed_body_lengths_s": 1.1751821004794694e-06,
+          "forward_efficiency": 0.003514035905534872,
+          "sustained_joint_p2p_rad": 0.028715306892991066
+        },
+        {
+          "case": "perturb-minus",
+          "minimum_forward_speed_body_lengths_s": -8.464524828018856e-07,
+          "forward_efficiency": 0.0005634684587892721,
+          "sustained_joint_p2p_rad": 0.02879134565591812
+        },
+        {
+          "case": "brain-refined",
+          "minimum_forward_speed_body_lengths_s": -1.2648860232730834e-06,
+          "forward_efficiency": 0.00016341497503047185,
+          "sustained_joint_p2p_rad": 0.02870747819542885
+        },
+        {
+          "case": "body-refined",
+          "minimum_forward_speed_body_lengths_s": 1.229259620859602e-06,
+          "forward_efficiency": 0.003485981866273279,
+          "sustained_joint_p2p_rad": 0.028812255710363388
+        },
+        {
+          "case": "held-voltage",
+          "minimum_forward_speed_body_lengths_s": 0.0,
+          "forward_efficiency": 0.0,
+          "sustained_joint_p2p_rad": 0.0
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 350,
+      "validation": [
+        {
+          "case": "long",
+          "minimum_forward_speed_body_lengths_s": -9.21045087725918e-07,
+          "forward_efficiency": -0.0009973443794695327,
+          "sustained_joint_p2p_rad": 0.0171521482989192
+        },
+        {
+          "case": "perturb-plus",
+          "minimum_forward_speed_body_lengths_s": -2.9607407450965685e-07,
+          "forward_efficiency": -0.0003185901409778106,
+          "sustained_joint_p2p_rad": 0.017151696607470512
+        },
+        {
+          "case": "perturb-minus",
+          "minimum_forward_speed_body_lengths_s": -2.8735014508226494e-07,
+          "forward_efficiency": -0.00029604706346604814,
+          "sustained_joint_p2p_rad": 0.017151054926216602
+        },
+        {
+          "case": "brain-refined",
+          "minimum_forward_speed_body_lengths_s": -3.120933943594887e-06,
+          "forward_efficiency": -0.006051105823302332,
+          "sustained_joint_p2p_rad": 0.01714519038796425
+        },
+        {
+          "case": "body-refined",
+          "minimum_forward_speed_body_lengths_s": -9.816818827001155e-09,
+          "forward_efficiency": 0.00025174745228789624,
+          "sustained_joint_p2p_rad": 0.01718394085764885
+        },
+        {
+          "case": "held-voltage",
+          "minimum_forward_speed_body_lengths_s": 0.0,
+          "forward_efficiency": 0.0,
+          "sustained_joint_p2p_rad": 0.0
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 347,
+      "validation": [
+        {
+          "case": "long",
+          "minimum_forward_speed_body_lengths_s": -3.201275750707138e-07,
+          "forward_efficiency": -0.00025699280308166285,
+          "sustained_joint_p2p_rad": 0.03054460510611534
+        },
+        {
+          "case": "perturb-plus",
+          "minimum_forward_speed_body_lengths_s": 3.862714819625822e-06,
+          "forward_efficiency": 0.0070176475977567765,
+          "sustained_joint_p2p_rad": 0.03054441139101982
+        },
+        {
+          "case": "perturb-minus",
+          "minimum_forward_speed_body_lengths_s": 3.945771302305096e-06,
+          "forward_efficiency": 0.006995417935343758,
+          "sustained_joint_p2p_rad": 0.030544317327439785
+        },
+        {
+          "case": "brain-refined",
+          "minimum_forward_speed_body_lengths_s": -7.336052149037321e-07,
+          "forward_efficiency": 0.00020203450445665377,
+          "sustained_joint_p2p_rad": 0.030514542013406754
+        },
+        {
+          "case": "body-refined",
+          "minimum_forward_speed_body_lengths_s": 4.293335038740227e-06,
+          "forward_efficiency": 0.007629141104455187,
+          "sustained_joint_p2p_rad": 0.030571123585104942
+        },
+        {
+          "case": "held-voltage",
+          "minimum_forward_speed_body_lengths_s": 0.0,
+          "forward_efficiency": 0.0,
+          "sustained_joint_p2p_rad": 0.0
+        }
+      ]
+    }
+  ],
+  "total_iterations": 1394,
+  "interpretation": "0/4 pass. Autonomous bends preserved; no reliable forward motion. Negative long-validation minimum speeds and small timestep-sensitive drift. Not proof that no solution exists in this parameter subset."
+}
