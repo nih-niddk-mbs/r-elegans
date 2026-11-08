@@ -1,0 +1,31 @@
+{
+  "asset": "mac_rhythm_v1",
+  "experiment": "E027/E028",
+  "sha256": {
+    "network.npz": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+    "parent_actor.npz": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0"
+  },
+  "bytes": {
+    "network.npz": 53165,
+    "parent_actor.npz": 50664
+  },
+  "provenance": {
+    "network.npz": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E027/r-elegans-E027-connected-default/network_candidate.npz",
+    "parent_actor.npz": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E026/r-elegans-E026-calcium-fine/parent_actor.npz"
+  },
+  "profile": "E027 exploratory RMD profile; full 302-neuron channel model with frozen parent NMJ/muscle parameters",
+  "initialization": "Exact Mac-tested saved parameter pair, copied without reconstruction or fitting",
+  "validation": {
+    "local_duration_seconds": 20,
+    "rhythmic_rmd_cells": 3,
+    "useful_locomotion_demonstrated": false,
+    "long_duration_persistence_demonstrated": false
+  },
+  "limitations": [
+    "Channel composition and many physiological parameters are transferred/model assumptions, not neuron-specific measurements.",
+    "No periodic external drive; fixed compensation currents exist in non-RMD neurons.",
+    "No body-to-brain feedback.",
+    "The stationary 600-s server result used a different parameter pair."
+  ],
+  "license": "Project-generated parameters under repository MIT license; see MODEL_ASSET_PROVENANCE.md for scientific priors."
+}

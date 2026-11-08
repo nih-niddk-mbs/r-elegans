@@ -730,9 +730,9 @@
     "status": "historical optional bundle; source hashes refer to dd9aa10, not current checkout"
   },
   "pull_and_run_workflow": {
-    "default": "reconstruct channel candidate from latest passed server head-sweep parent",
+    "default": "exact bundled Mac-tested pair r_elegans/assets/mac_rhythm_v1",
     "launcher": "scripts/launch_embodied_mbslnx2.sh",
-    "exact_mac_candidate_assumed": false,
+    "exact_mac_candidate_assumed": true,
     "parent_and_input_hashes_recorded": true,
     "transfer_required": false,
     "remote_launched": false,
@@ -741,7 +741,9 @@
       "suite_seconds": 68.81,
       "same_parent_rebuild_matches_E027_sha256": true,
       "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/pull-run-verification"
-    }
+    },
+    "historical_default": "reconstruct channel candidate from latest passed server head-sweep parent",
+    "exact_candidate_basis": "SHA256-verified byte copies of preserved Mac inputs; numerical trajectories may differ across platforms"
   },
   "reported_server_result": "experiments/records/E028-server-20261107.json"
 }

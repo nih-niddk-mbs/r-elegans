@@ -1708,3 +1708,39 @@ chunk inspection and matched-parent/matched-duration neural-only comparisons,
 keeping channel/connection parameters fixed initially to isolate the cause.
 These follow-ups are proposed, not launched. Existing driven skills remain
 separate checkpoints, unaffected by this negative autonomous-branch result.
+
+## 2026-11-07 — Bundle the exact Mac reference at user request
+
+User instruction: "Then just copy those parameters into the repo?" This
+explicitly authorizes two small parameter-checkpoint assets as exceptions to
+the external-checkpoint rule; raw scientific data and other outputs remain
+external. Copied without fitting or numerical reconstruction:
+
+- E027 `network_candidate.npz` from OneDrive evidence into
+  `r_elegans/assets/mac_rhythm_v1/network.npz`, 53,165 bytes, SHA256
+  `870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a`.
+- E026 `parent_actor.npz` from OneDrive evidence into the same asset directory,
+  50,664 bytes, SHA256
+  `82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0`.
+
+Manifest retains source paths, sizes/hashes, exploratory status and the 20-s
+qualification limit. The diagnostic and nohup launcher default to this exact
+pair, verify checksums and copy both into each external run directory. No
+automatic discovery of a different server parent remains in the default path.
+Explicit parent reconstruction/other input overrides are still opt-in.
+The already-reported negative server result is preserved; changing the default
+is not a retroactive change to that experiment. No new server job is launched.
+
+Re-run command on mbslnx2: `git pull --ff-only` then
+`sh scripts/launch_embodied_mbslnx2.sh` from the repository. Same fixed nine-case
+diagnostic and timing caps; no parameter training or RL. Purpose is now to
+test the exact short-Mac candidate over longer durations. All physiology and
+connection parameters remain fixed. A longer persistence outcome is pending.
+
+Local verification: `MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q tests/test_channel_body.py`
+passed all six tests in 7.11 s. The new reference test validates pinned hashes,
+loads both complete checkpoints and confirms exact equality of all neural
+parameter/fixed arrays against reconstruction from this same parent and E027
+profile. It also checks default versus explicit input/parent selection. Shell
+syntax and `git diff --check` passed. No new physiological outcome is inferred
+from these software checks.

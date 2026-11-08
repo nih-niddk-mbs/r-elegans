@@ -86,3 +86,28 @@ conductances, and sensory-transduction parameters remain to be fit.
 See [CURRENT_MODEL.md](CURRENT_MODEL.md) for the exact active computation and
 [PRD.md](PRD.md) for the requirements that must be met before behavior can be
 called connectome-driven chemotaxis.
+
+## Mac rhythm reference (`mac_rhythm_v1`, 2026-11-07)
+
+At the user's explicit request, two compact project-generated parameter files
+are bundled as narrow exceptions to the general external-checkpoint policy:
+
+- `r_elegans/assets/mac_rhythm_v1/network.npz`: 53,165 bytes; SHA256
+  `870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a`.
+- `r_elegans/assets/mac_rhythm_v1/parent_actor.npz`: 50,664 bytes; SHA256
+  `82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0`.
+
+These are byte-for-byte copies of the preserved E027 candidate and E026 parent
+used in the E028 Mac body test. The network contains the 302-neuron channel
+model, recurrent parameters and fixed physiological fields; the parent supplies
+the matching anatomical NMJ/muscle readout. Source paths and verification limits
+are recorded in the accompanying `inputs.json`. The E027 exploratory RMD profile
+modifies leak/CCA1 to support rhythm, using the attributed physiology library
+above; it is not a measured neuron-specific channel composition.
+
+Three RMD neurons oscillated and small bends appeared in a 20-s local test.
+Long-duration persistence and useful locomotion remain unestablished. The first
+stationary server result used a different parameter pair. The default diagnostic
+now uses this pinned pair on every host, without selecting local checkpoints or
+reconstructing parameters. The files contain model parameters only; raw data,
+trajectories, optimizer histories and other checkpoints remain external.

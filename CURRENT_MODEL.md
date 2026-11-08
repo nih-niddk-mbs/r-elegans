@@ -333,26 +333,28 @@ sh scripts/launch_embodied_mbslnx2.sh
 ```
 
 The repository launcher uses the dedicated r-elegans Python, starts `nohup`,
-and prints the PID and unique log path. You may then disconnect. No checkpoint
-transfer is required. It selects the newest `head-sweep-*` cohort containing a
-passed head-sweep stage and an existing `seed-N/head_sweep/actor_best.npz`, choosing
-the lowest successful seed. Failed/missing checkpoints are skipped; absence of
-any successful parent stops the launch rather than creating a random policy.
+and prints the PID and unique log path. You may then disconnect. It now uses
+**the exact Mac-tested parameter pair**, bundled in
+`r_elegans/assets/mac_rhythm_v1/` (103,829 bytes plus a provenance manifest).
+No transfer, server checkpoint discovery or reconstruction is needed. SHA256
+checks validate both files before launch; the supervisor copies them into the
+new external run directory to preserve exactly what was tested.
 
-The supervisor reconstructs the all-cell channel model from that full-network
-parent and applies the fixed E027 exploratory RMD profile. It preserves the
-parent, resulting model, their hashes and the selected parent path under the
-new external run directory. This is **not assumed identical to the Mac-tested
-candidate**: server-parent differences are part of the diagnostic being tested.
-Use supervisor `--parent-actor` to select an explicit existing parent, or
-`--inputs` for an exact previously transferred pair. The historical Mac bundle
-is optional and its recorded source hashes refer to its original revision.
+`network.npz` includes all 302 cells' channel/fixed parameters, recurrent
+connections, release settings, configuration and canonical ordering.
+`parent_actor.npz` preserves the corresponding NMJ/muscle readout. This is the
+pair used in the 20-s Mac test, not a new fit or a claim of long-term persistence.
+Use supervisor `--parent-actor` only to explicitly reconstruct a different
+candidate, or `--inputs` for another exact pair. No automatic substitution occurs.
+The earlier server run below used different parameters; its negative result
+remains part of the record. Raw recordings, trajectories and training artifacts
+stay external; these two compact parameter assets are included at user request.
 
 Four workers use four disjoint physical CPU cores each, CPU JAX and highest
 matmul precision. Nine cases cover three media, +/-1 mV initial perturbations,
 CCA1 removal, held voltage, and body/brain timestep refinement. All parameters
-are fixed. The queue has a **45-minute wall budget**, plus up to two minutes for
-input reconstruction and 45 seconds for cleanup; each case has a 12-minute cap
+are fixed. The queue has a **45-minute wall budget**, plus startup and up to 45 seconds
+for cleanup (explicit parent reconstruction has a separate two-minute cap); each case has a 12-minute cap
 and 600-s simulation ceiling. It can finish sooner and reports pending cases.
 Chunks and state snapshots stay under `/home/carsonc/r-elegans-results/embodied-*`.
 The launcher does not modify conda environments.

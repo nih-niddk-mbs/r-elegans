@@ -134,14 +134,14 @@ and bounded cases. Save all time chunks and complete latest/final neural/body
 states, input hashes/source/environment and completion/omission status. This is
 not an RL run or a fit of channel/capacitance/synapse values.
 
-Default pull-and-run launch: `sh scripts/launch_embodied_mbslnx2.sh`. Select the
-newest head-sweep cohort with a successful stage and an existing checkpoint,
-then its lowest successful seed. Rebuild the fixed channel candidate using that
-parent and the E027 profile; retain source, parent and resulting model hashes.
-Reconstruction is capped at two additional minutes. This server candidate is
-not assumed identical to the locally tested Mac candidate. No successful parent
-means stop; never silently initialize a random actor. Explicit `--parent-actor`
-and exact transferred `--inputs` remain available on the supervisor.
+Default pull-and-run launch: `sh scripts/launch_embodied_mbslnx2.sh`. Use the
+pinned `r_elegans/assets/mac_rhythm_v1/` network and matching parent, verify both
+hashes, then copy them to the external run directory. These are the exact Mac
+20-s test inputs. A server-local head-sweep checkpoint is no longer selected
+automatically. Explicit `--parent-actor` reconstruction and exact `--inputs`
+overrides remain available. Keep the reference fixed when testing longer
+persistence or comparing hosts; a matching parameter hash does not promise
+bitwise identical numerical trajectories across JAX/platform versions.
 
 Late-window flags: maximum muscle activation p2p >1e-4 for dynamic output, maximum
 joint p2p >1e-4 rad for dynamic shape, centroid displacement >1e-5 body lengths

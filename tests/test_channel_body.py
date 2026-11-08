@@ -12,8 +12,26 @@ from r_elegans.body.channel_bridge import initial_channel_body_state,channel_bod
 from r_elegans.model import load_builtin_model
 from r_elegans.rl.full_network_actor import init_full_network_actor
 from scripts.diagnose_channel_body import diagnostic_metrics
-from scripts.run_embodied_diagnostics import diagnostic_cases,verify_input_bundle
+from scripts.run_embodied_diagnostics import diagnostic_cases,verify_input_bundle,select_input_bundle
 from scripts.bootstrap_embodied_inputs import find_successful_parent
+
+
+def test_default_bundle_is_exact_mac_reference_with_complete_readout(tmp_path):
+    from r_elegans.brain.conductance_network import load_network
+    from r_elegans.brain.rhythm_qualification import apply_rmd_rhythm_prior
+    from r_elegans.rl.full_network_actor import actor_from_arrays
+    root=select_input_bundle();manifest=verify_input_bundle(root)
+    assert manifest['sha256']==dict(
+        **{'network.npz':'870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a',
+           'parent_actor.npz':'82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0'})
+    params,fixed,config=load_network(root/'network.npz')
+    with np.load(root/'parent_actor.npz',allow_pickle=False) as data:parent=actor_from_arrays(data)
+    rebuilt,base=initialize_conductance_network(parent,load_builtin_model().neuron_ids,config)
+    rebuilt,base,_=apply_rmd_rhythm_prior(rebuilt,base,load_builtin_model().neuron_ids)
+    for actual,expected in zip(jax.tree_util.tree_leaves((params,fixed)),jax.tree_util.tree_leaves((rebuilt,base))):
+        np.testing.assert_array_equal(actual,expected)
+    assert select_input_bundle(parent_actor=tmp_path/'other.npz') is None
+    assert select_input_bundle(inputs=tmp_path)==tmp_path.resolve()
 
 
 def test_parent_discovery_requires_success_and_existing_checkpoint(tmp_path):
