@@ -1880,3 +1880,73 @@ No mbslnx2 job has been launched by the agent.
 
 Verified local OneDrive archive: 875 files, `LOCAL_SHA256SUMS.json` SHA256
 `0bb644e6bf045b0c57c213f7dc71c89c109cf9d1acf6f4a08d4c20c24d60c669`.
+
+## 2026-11-08 — E030 user-reported 600-s server amplitude validation
+
+Run `/home/carsonc/r-elegans-results/embodied-20261108T141954839072Z`,
+user-pasted compact metrics and completion log; queue exit 0. Active liquid
+bend p2p 0.0295088477 rad, muscle p2p 0.239748418, three rhythmic RMD cells
+at 600 s, matching local 300-s behavior. Agar 0.0235053953 rad; normalized
+0.00766909309 rad. Liquid +/-1 mV initial perturbations: 0.0295133293 /
+0.0294779725 rad. Body refinement at 600 s: 0.0295425355 rad (~0.114% above
+ordinary liquid). Brain refinement: 0.0294816662 rad at 370 s before its case
+budget; not a completed matched-duration 600-s comparison. All active cases
+retain three rhythmic cells. Both held-voltage and RMD calcium-removal controls
+reach 600 s with zero late rhythm, muscle and joint variation. Full remote
+source/environment/input hashes and raw trajectories not independently retrieved.
+Thus the zero-drive amplitude reference has user-reported longer server support;
+useful propulsion remains a separate goal.
+
+## E031 planned — first autonomous movement, three-hour server budget
+
+User authorizes movement training again, with a three-hour run. Preserve the
+working `autonomous_wiggle_v1` checkpoint and begin each independent search
+there, with all injected currents zero and the full 302-neuron circuit active.
+First small stage retains the same 78 unknown RMD density parameters; all
+connection weights, other cells, stereotypical physiology and body/NMJ fields
+stay fixed. If this restricted stage fails, broaden motor-circuit parameters
+in a later recorded experiment rather than silently changing this scope.
+
+Optimize repeated signed forward centroid progress in SI liquid after warmup,
+not path length, static posture or displacement during startup relaxation.
+Keep the >=0.01-rad sustained wiggle as a viability gate. Initial engineering
+target: >=1e-4 body lengths/s in each of three late blocks, >=5x positive
+baseline speed, >=2% forward/path efficiency, <0.35-rad heading variation.
+No timed stimulation, target waveform, sensory input, body forcing or RL.
+Use the existing bounded density search, four independent seeds on four
+disjoint four-core CPU workers, up to 180 wall minutes each. Reserve time for
+300-s validation, +/-1 mV initial states, neural and body timestep refinement,
+and a held-voltage control. No success claim until those checks pass.
+
+All parent/model hashes, candidate histories, selected checkpoints, search RNG,
+full source/environment and validation trajectories remain external; compact
+results and lab notes in Git. The user launches on mbslnx2 under nohup; agent
+will prepare/test/push and will not start a remote job.
+
+E031 local pilot started before server launch:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.train_autonomous_wiggle --objective movement --output-dir /tmp/r-elegans-E031-movement-smoke --minutes 6 --iterations 2 --validation-seconds 30`
+(stdout `/tmp/r-elegans-E031-movement-smoke.log`). This is a short pipeline
+verification, not the planned three-hour search. Baseline repeated-block
+minimum signed forward speed is -1.8236493e-5 body lengths/s; initial candidate
+1 improves it to -1.3028506e-5 while keeping >=0.0245-rad sustained wiggle, but
+still moves backward in at least one block and is not a movement success.
+The local pilot captures its exact pre-refinement-agreement source snapshot.
+A subsequent promotion guard also requires matched short-window speed agreement
+within 25% under body/neural timestep refinement (target speed tolerance floor);
+the synthetic metric tests cover rejecting timestep-dominated translation.
+This is a numerical tolerance choice, not a biological variability estimate.
+
+E031 local pilot completed in 210.027 s: status completed,
+passed=False, expected exit 2, two proposals and all six validation cases
+finished. Frozen fields unchanged and injected currents zero. The standardized
+`fitted_inputs/` checksum manifest verifies, including for this unpromoted
+candidate. No forward-motion skill is claimed. Compact pilot metrics recorded
+in `experiments/records/E031.json`; source snapshot/RNG/history/selected models
+and all validation traces retained externally. Full suite: 196 passed in
+66.08 s. Subsequently added timestep-agreement guard and movement/amplitude
+tests: 4 passed in 1.34 s; shell syntax, CLI help and diff whitespace checks pass.
+Server three-hour run remains prepared, not launched by the agent.
+
+E031 OneDrive local archive verified: 203 files; manifest SHA256
+`311a3f51a4b4fe9a8c09de57df7c56d61269c3b49a12f981ce97f20c3fc16527`.
+Local retention only; cloud synchronization has not been independently verified.

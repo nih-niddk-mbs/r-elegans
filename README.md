@@ -90,6 +90,12 @@ Independent 300-s local validation retains ~0.03-rad bends with zero injected
 current. The fitted pair is bundled as `autonomous_wiggle_v1`; this first
 milestone is a larger head/anterior wiggle, not whole-body propulsion.
 
+The first [autonomous forward-movement search](CURRENT_MODEL.md#first-autonomous-forward-movement-search-e031-2026-11-08)
+starts from that preserved wiggle. Run `sh scripts/launch_autonomous_movement_mbslnx2.sh`
+after pulling on mbslnx2 for four independent searches, up to three hours including
+validation. It fits neuron densities with zero external drive and rewards repeated
+net forward progress after warmup; no useful locomotion result is claimed yet.
+
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly
 eligible unknown channel densities and existing synaptic strengths fit. Each run

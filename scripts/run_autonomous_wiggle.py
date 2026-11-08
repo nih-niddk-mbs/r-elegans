@@ -1,4 +1,4 @@
-"""Disjoint CPU searches for autonomous amplitude, with bounded wall time."""
+"""Disjoint CPU searches for autonomous amplitude or motion, with bounded time."""
 import argparse
 from contextlib import ExitStack
 from datetime import datetime,timezone
@@ -24,19 +24,24 @@ def main():
     parser.add_argument('--workers',type=int,default=4)
     parser.add_argument('--cores-per-worker',type=int,default=4)
     parser.add_argument('--target-p2p-rad',type=float,default=.01)
+    parser.add_argument('--objective',choices=['amplitude','movement'],default='amplitude')
+    parser.add_argument('--target-speed',type=float,default=1e-4)
     args=parser.parse_args()
     if sys.platform!='linux' or not hasattr(os,'sched_getaffinity'):parser.error('Linux CPU affinity required')
-    if not all(math.isfinite(x) and x>0 for x in (args.minutes,args.target_p2p_rad)):parser.error('Positive finite settings required')
+    if not all(math.isfinite(x) and x>0 for x in (args.minutes,args.target_p2p_rad,args.target_speed)):parser.error('Positive finite settings required')
     repo=Path(__file__).resolve().parents[1];base=args.output_dir.expanduser().resolve()
     if base==repo or repo in base.parents:parser.error('Keep results external')
-    verify_input_bundle(select_input_bundle())
+    inputs=select_input_bundle()
+    if args.objective=='movement':inputs=inputs.parent/'autonomous_wiggle_v1'
+    verify_input_bundle(inputs)
     cpus,known=physical_core_cpus(sorted(os.sched_getaffinity(0)))
     if not known:parser.error('Physical topology required')
     try:groups=worker_cpu_groups(cpus,args.workers,args.cores_per_worker)
     except ValueError as e:parser.error(str(e))
     check=subprocess.run([sys.executable,'-c','import jax, numpy, scipy'],capture_output=True,text=True)
     if check.returncode:parser.error('Use the dedicated r-elegans Python.\n'+check.stderr)
-    run=base/('autonomous-wiggle-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
+    prefix='autonomous-movement-' if args.objective=='movement' else 'autonomous-wiggle-'
+    run=base/(prefix+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
     run.mkdir(parents=True,exist_ok=False);capture_run_record(run,repo,args)
     print('Run: '+str(run),flush=True)
     jobs=[];stopped=False;start=time.monotonic()
@@ -51,7 +56,8 @@ def main():
                     JAX_DEFAULT_MATMUL_PRECISION='highest',OMP_NUM_THREADS=str(len(selected)),
                     OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1',NUMEXPR_NUM_THREADS='1')
                 command=[sys.executable,'-u','-m','scripts.train_autonomous_wiggle','--output-dir',str(run/f'seed-{seed}'),
-                    '--seed',str(seed),'--minutes',str(args.minutes),'--target-p2p-rad',str(args.target_p2p_rad)]
+                    '--seed',str(seed),'--minutes',str(args.minutes),'--target-p2p-rad',str(args.target_p2p_rad),
+                    '--objective',args.objective,'--target-speed',str(args.target_speed),'--inputs',str(inputs)]
                 log=files.enter_context((run/f'seed-{seed}.log').open('w'))
                 process=subprocess.Popen(command,cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT,
                     preexec_fn=lambda selected=selected:os.sched_setaffinity(0,selected))
@@ -80,10 +86,11 @@ def main():
         path=run/f"seed-{job['seed']}/summary.json"
         result=json.loads(path.read_text()) if path.exists() else dict(status='missing_summary',passed=False)
         workers.append(dict(seed=job['seed'],cpus=job['cpus'],exit_code=job['process'].returncode,result=result))
-    summary=dict(experiment='E030',workers=workers,elapsed_seconds=time.monotonic()-start,interrupted=stopped)
+    summary=dict(experiment='E031' if args.objective=='movement' else 'E030',objective=args.objective,
+        workers=workers,elapsed_seconds=time.monotonic()-start,interrupted=stopped)
     (run/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     passed=not stopped and all(w['exit_code']==0 and w['result']['passed'] for w in workers)
-    print('AUTONOMOUS_WIGGLE_EXIT_CODE='+str(0 if passed else 2),flush=True)
+    print(('AUTONOMOUS_MOVEMENT_EXIT_CODE=' if args.objective=='movement' else 'AUTONOMOUS_WIGGLE_EXIT_CODE=')+str(0 if passed else 2),flush=True)
     return 0 if passed else 2
 
 

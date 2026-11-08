@@ -1,10 +1,11 @@
 import jax
 import jax.numpy as jnp
 import numpy as np
+from types import SimpleNamespace
 
 from r_elegans.brain.autonomous_wiggle import (
     autonomous_fit_reference,apply_density_offsets,density_proposal,
-    amplitude_metrics,frozen_fit_fields_unchanged,
+    amplitude_metrics,frozen_fit_fields_unchanged,movement_metrics,movement_achieved,movement_refinement_agrees,
 )
 from r_elegans.brain.conductance_network import load_network
 from r_elegans.brain.single_compartment import CHANNEL_INDEX
@@ -59,3 +60,23 @@ def test_bundled_amplitude_fit_has_no_injection_or_hidden_readout_change():
     for a,b in zip(jax.tree_util.tree_leaves(fixed),jax.tree_util.tree_leaves(expected)):
         np.testing.assert_array_equal(a,b)
     assert np.max(np.abs(np.asarray(fitted.log_channel_scale-initial.log_channel_scale)))<=np.log(4.)
+
+
+def test_forward_objective_rejects_wiggle_path_startup_and_reverse():
+    dt=.002;t=np.arange(0,30,dt);wave=np.sin(2*np.pi*t/.22)
+    v=-50+10*np.tile(wave[:,None],(1,3));m=np.full((len(t),95),.5)
+    q=np.zeros((len(t),11));q[:,-1]=.015*wave
+    def metric(x,y=None):
+        body=SimpleNamespace(position=np.stack((x,np.zeros_like(t) if y is None else y),axis=1),
+            heading=np.zeros_like(t),joint_angles=q)
+        return movement_metrics(v,m,body,dt,1.,('RMDL','RMDR','RMDVL'),.75)
+    forward=metric(.001*t)
+    assert movement_achieved(forward,1e-4,1e-6)
+    assert not movement_achieved(forward,1e-4,.001)  # Must improve positive baseline fivefold.
+    for x in (np.zeros_like(t),-.001*t,.01*np.sin(2*np.pi*t),np.minimum(t,5.)*.001):
+        assert not movement_achieved(metric(x),1e-4,0.)
+    zigzag=metric(.001*t,np.sin(2*np.pi*t))
+    assert zigzag['score']>0 and not movement_achieved(zigzag,1e-4,0.)
+    assert movement_refinement_agrees(forward,forward,1e-4)
+    doubled={**forward,'minimum_forward_speed_body_lengths_s':2*forward['minimum_forward_speed_body_lengths_s']}
+    assert not movement_refinement_agrees(forward,doubled,1e-4)

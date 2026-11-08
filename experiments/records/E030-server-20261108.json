@@ -1,0 +1,81 @@
+{
+  "experiment": "E030",
+  "run": "embodied-20261108T141954839072Z",
+  "evidence": "user-reported compact metrics and prior completion log; remote raw files/input hashes/source not independently retrieved",
+  "queue_exit_code": 0,
+  "cases": [
+    {
+      "case": "active-normalized",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 3,
+      "joint_p2p_max_rad": 0.007669093087315559,
+      "muscle_p2p_max": 0.23974841833114624,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "active-liquid",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 3,
+      "joint_p2p_max_rad": 0.02950884774327278,
+      "muscle_p2p_max": 0.23974841833114624,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "active-agar",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 3,
+      "joint_p2p_max_rad": 0.023505395278334618,
+      "muscle_p2p_max": 0.23974841833114624,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "liquid-perturb-plus",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 3,
+      "joint_p2p_max_rad": 0.02951332926750183,
+      "muscle_p2p_max": 0.2397562861442566,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "liquid-held-voltage",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 0,
+      "joint_p2p_max_rad": 0.0,
+      "muscle_p2p_max": 0.0,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "liquid-calcium-control",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 0,
+      "joint_p2p_max_rad": 0.0,
+      "muscle_p2p_max": 0.0,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "liquid-perturb-minus",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 3,
+      "joint_p2p_max_rad": 0.02947797253727913,
+      "muscle_p2p_max": 0.23976397514343262,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "liquid-body-refined",
+      "simulation_seconds": 600.0,
+      "rhythmic_rmd": 3,
+      "joint_p2p_max_rad": 0.029542535543441772,
+      "muscle_p2p_max": 0.23976528644561768,
+      "stop_reason": "duration"
+    },
+    {
+      "case": "liquid-brain-refined",
+      "simulation_seconds": 370.0,
+      "rhythmic_rmd": 3,
+      "joint_p2p_max_rad": 0.029481666162610054,
+      "muscle_p2p_max": 0.2399497628211975,
+      "stop_reason": "time_budget"
+    }
+  ],
+  "interpretation": "600-s autonomous amplitude milestone supported; useful forward movement untested in this compact report"
+}

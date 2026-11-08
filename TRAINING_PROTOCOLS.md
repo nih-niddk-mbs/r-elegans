@@ -846,3 +846,56 @@ summary/logs to distinguish these. Raw histories, all accepted candidates, RNG
 search metadata, source/environment and validation traces stay external.
 The CLI does not implement exact mid-search resume. The agent launched no
 remote job; the user launches the desired diagnostic or training run.
+
+## First autonomous forward movement search (E031, 2026-11-08)
+
+Start from the validated `autonomous_wiggle_v1` amplitude primitive; preserve it
+as an independent fallback. All 302 neurons evolve with zero injected currents.
+This first small movement stage fits the same 78 unknown non-LEAK RMD channel
+densities; it does not silently broaden into whole-network or body-parameter
+fitting. Connections, other neurons, capacitance, leak, channel kinetics,
+reversals, calcium handling and NMJ/body mechanics remain fixed. Fit density
+factors stay within 0.25–4 of this reference. No periodic stimulation, gait
+teacher, timed command or sensory input is supplied. No RL yet.
+
+Use 30-s trial simulations, scoring three separate blocks in the late half.
+Forward is the mean tail-to-head body axis at the beginning of that late window,
+held fixed for the measurement. Reward the minimum signed centroid speed across
+those blocks, retaining >=0.01-rad sustained wiggle and <0.35-rad axis turning.
+Distance traveled back and forth and startup posture relaxation do not satisfy
+the movement criterion. Initial numerical goal: >=1e-4 body lengths/s in each
+block, >=5x positive baseline speed and >=2% forward/path efficiency. These
+are small engineering milestones, not animal-speed calibration.
+
+Four independent seeds each receive a three-hour wall budget including reserved
+validation time. The search uses that budget rather than stopping at the
+amplitude target. After search, validate 300 simulated seconds, +/-1 mV initial
+states, a finer neural timestep, a finer body timestep, and held voltage. All
+active validation cases must pass the motion criterion; refined-timestep
+speeds must also agree within 25% of the matched short-window speed (with a
+target-speed tolerance floor). Held voltage must stop late motion. A candidate that improves short-horizon progress but fails these
+checks remains experimental and is not promoted. If this subset cannot produce
+progress, a later experiment can explicitly broaden the motor-circuit scope.
+
+On mbslnx2:
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_autonomous_movement_mbslnx2.sh
+```
+
+The launcher uses the dedicated r-elegans Python and `nohup`, prints a unique
+log path, and assigns four disjoint physical CPU cores to each worker. Results
+stay in `/home/carsonc/r-elegans-results/autonomous-movement-*`. Workers preserve
+all candidate parameters/metrics, every accepted checkpoint and trajectory,
+search RNG metadata, full source/environment and final validation traces.
+`fitted_inputs/` contains the selected exact pair and checksum manifest for
+further assays, including when the movement criterion is not met. Check
+`summary.json` and its `passed` field before treating it as a successful skill.
+Exit 2 means not all validation gates passed or an execution failure; inspect
+worker logs/summary to distinguish those outcomes.
+
+The three-hour cap covers each worker's search and validation; startup and
+supervisor termination grace can add about two minutes. You may disconnect
+after launch. The agent has prepared the run; no remote launch is assumed.

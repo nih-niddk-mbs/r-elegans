@@ -220,3 +220,9 @@ retain the short-window amplitude; held-voltage control stops motion. This is
 a self-generated amplitude primitive, not whole-body wave coordination, useful
 locomotion, or a consolidated autonomous behavior policy. Exact pair is bundled;
 raw records external. Original driven skills and Mac reference remain intact.
+
+E030 server update: user-reported 600-s liquid amplitude 0.02950885 rad and
+three rhythmic cells; perturbation/body refinement checks retain it and both
+controls stop it. E031 autonomous forward movement is the next planned stage,
+using the same limited unknown-density scope and a three-hour CPU budget.
+Amplitude qualification does not imply successful E031 motion.
