@@ -713,7 +713,7 @@
   ],
   "software_tests_passed": 187,
   "remote_launched": false,
-  "remote_status": "User-reported completed server queue embodied-20261107T185913027018Z; agent did not launch or independently retrieve full remote artifacts",
+  "remote_status": "Two user-reported server runs: first different-parent candidate stationary; later bundled-reference workflow rhythmic at 600 s. Full remote artifacts not independently retrieved.",
   "artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028",
   "transfer_path": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E028/transfer/r-elegans-E028.tar.gz",
   "parameters_trained": false,
@@ -745,5 +745,9 @@
     "historical_default": "reconstruct channel candidate from latest passed server head-sweep parent",
     "exact_candidate_basis": "SHA256-verified byte copies of preserved Mac inputs; numerical trajectories may differ across platforms"
   },
-  "reported_server_result": "experiments/records/E028-server-20261107.json"
+  "reported_server_result": "experiments/records/E028-server-20261107.json",
+  "reported_server_results": [
+    "experiments/records/E028-server-20261107.json",
+    "experiments/records/E028-server-20261108.json"
+  ]
 }

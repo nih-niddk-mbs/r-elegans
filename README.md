@@ -71,15 +71,16 @@ not physiological calibration or autonomous locomotion. Calcium fitting can star
 from its saved channel checkpoint and optionally check that activity persists.
 
 The channel brain now also drives the frozen anatomical muscle/body readout.
-A short local test showed small unpaced bends; the first longer server diagnostic
-with a different parent settled to constant neural/muscle activity and no late
-movement. Sustained autonomous locomotion remains undemonstrated.
+The bundled Mac reference now has user-reported server evidence of three rhythmic
+RMD cells and small unpaced body bends at 600 simulated seconds. Both controls
+stop the activity; useful autonomous locomotion remains undemonstrated. An
+earlier server candidate with different parameters settled to a stationary state.
 A [bounded mbslnx2 diagnostic launcher](CURRENT_MODEL.md#launch-the-bounded-mbslnx2-diagnostic-yourself)
 runs neural/muscle/body controls under `nohup`, with external results and
 a 45-minute budget. Pull and run `sh scripts/launch_embodied_mbslnx2.sh` on
 mbslnx2: it uses the bundled exact Mac-tested model and matching parent readout
-(about 104 KB), verifies their hashes and needs no transfer. The user launches it. The first server
-result is user-reported; full remote artifacts have not been independently retrieved.
+(about 104 KB), verifies their hashes and needs no transfer. The user launches it. Server
+results are user-reported; full remote artifacts have not been independently retrieved.
 
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly

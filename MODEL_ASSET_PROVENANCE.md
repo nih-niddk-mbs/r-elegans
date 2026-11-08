@@ -106,8 +106,11 @@ modifies leak/CCA1 to support rhythm, using the attributed physiology library
 above; it is not a measured neuron-specific channel composition.
 
 Three RMD neurons oscillated and small bends appeared in a 20-s local test.
-Long-duration persistence and useful locomotion remain unestablished. The first
-stationary server result used a different parameter pair. The default diagnostic
+A later user-reported server run (`embodied-20261108T035729978291Z`) retains
+three rhythmic cells and small bends in final windows at 600 s; compact output
+omits input hashes, so exact runtime identity is not independently verified.
+Useful locomotion remains unestablished. The first stationary server result
+used a different parameter pair. The default diagnostic
 now uses this pinned pair on every host, without selecting local checkpoints or
 reconstructing parameters. The files contain model parameters only; raw data,
 trajectories, optimizer histories and other checkpoints remain external.

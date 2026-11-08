@@ -156,10 +156,18 @@ First server queue (user-reported `embodied-20261107T185913027018Z`): nine
 finite exit-0 cases, eight at 600 s and brain-refined at 374 s (case budget).
 All final measurement windows are stationary, including neural voltage and
 muscle output. This is a negative persistence result despite successful software
-execution. The server used a different parent from the 20-s Mac test. Next
-diagnostic priority is early-to-late chunk analysis and a matched-duration
-comparison of the two parents, without changing physiological parameters.
-No new fit or follow-up experiment has been launched.
+execution. The server used a different parent from the 20-s Mac test.
+
+Second queue (user-reported `embodied-20261108T035729978291Z`, bundled-reference
+workflow): three rhythmic RMD cells persist in final windows at 600 s in all
+active cases, including +/-1 mV initial perturbations and body refinement.
+Controls have zero late neural/muscle/body variation. Brain-refined case retains
+three rhythmic cells at 368 s before its budget. Active liquid joint p2p is
+0.003352 rad and late net motion 2.64e-6 body lengths. This qualifies longer
+unpaced activity in the model, not useful locomotion or empirical physiology.
+Full trajectories/input hashes remain unretrieved; compact output omits hashes.
+Next priority: measure spatial phase and traveling-wave coordination in saved
+outputs, preserving the fixed rhythmic reference. No new fitting run launched.
 
 
 ## Fix stereotypical properties; fit explicit unknowns (E029)

@@ -1,0 +1,107 @@
+{
+  "experiment": "E028",
+  "run": "embodied-20261108T035729978291Z",
+  "evidence": "User-pasted compact metrics and preceding completion log; full remote records not independently retrieved",
+  "reported_date": "2026-11-08",
+  "reported_queue_exit_code": 0,
+  "raw_artifact_root": "/home/carsonc/r-elegans-results/embodied-20261108T035729978291Z",
+  "parameter_identity": "User launched bundled Mac reference workflow; input hashes absent from compact output, not independently verified for this run",
+  "cases": [
+    {
+      "case": "active-agar",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 3,
+      "neural_voltage_p2p_max_mV": 21.20078468322754,
+      "muscle_p2p_max": 0.058459699153900146,
+      "joint_p2p_max_rad": 0.0024358294904232025,
+      "late_displacement_body_lengths": 1.0098198799823876e-05
+    },
+    {
+      "case": "active-normalized",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 3,
+      "neural_voltage_p2p_max_mV": 21.20078468322754,
+      "muscle_p2p_max": 0.058459699153900146,
+      "joint_p2p_max_rad": 0.0007135644555091858,
+      "late_displacement_body_lengths": 7.285395327016886e-07
+    },
+    {
+      "case": "active-liquid",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 3,
+      "neural_voltage_p2p_max_mV": 21.20078468322754,
+      "muscle_p2p_max": 0.058459699153900146,
+      "joint_p2p_max_rad": 0.003351770341396332,
+      "late_displacement_body_lengths": 2.6387122034066124e-06
+    },
+    {
+      "case": "liquid-perturb-plus",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 3,
+      "neural_voltage_p2p_max_mV": 21.200895309448242,
+      "muscle_p2p_max": 0.058459699153900146,
+      "joint_p2p_max_rad": 0.0033452659845352173,
+      "late_displacement_body_lengths": 2.6340705971961142e-06
+    },
+    {
+      "case": "liquid-held-voltage",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 0,
+      "neural_voltage_p2p_max_mV": 0.0,
+      "muscle_p2p_max": 0.0,
+      "joint_p2p_max_rad": 0.0,
+      "late_displacement_body_lengths": 0.0
+    },
+    {
+      "case": "liquid-calcium-control",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 0,
+      "neural_voltage_p2p_max_mV": 0.0,
+      "muscle_p2p_max": 0.0,
+      "joint_p2p_max_rad": 0.0,
+      "late_displacement_body_lengths": 0.0
+    },
+    {
+      "case": "liquid-perturb-minus",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 3,
+      "neural_voltage_p2p_max_mV": 21.200862884521484,
+      "muscle_p2p_max": 0.05845910310745239,
+      "joint_p2p_max_rad": 0.003340877592563629,
+      "late_displacement_body_lengths": 2.6613347472448368e-06
+    },
+    {
+      "case": "liquid-body-refined",
+      "simulation_seconds": 600.0,
+      "stop_reason": "duration",
+      "rhythmic_rmd": 3,
+      "neural_voltage_p2p_max_mV": 21.20098304748535,
+      "muscle_p2p_max": 0.05845975875854492,
+      "joint_p2p_max_rad": 0.0033603161573410034,
+      "late_displacement_body_lengths": 2.7841640530823497e-06
+    },
+    {
+      "case": "liquid-brain-refined",
+      "simulation_seconds": 368.0,
+      "stop_reason": "time_budget",
+      "rhythmic_rmd": 3,
+      "neural_voltage_p2p_max_mV": 21.2509708404541,
+      "muscle_p2p_max": 0.05851089954376221,
+      "joint_p2p_max_rad": 0.00327928364276886,
+      "late_displacement_body_lengths": 5.810620677948464e-06
+    }
+  ],
+  "interpretation": "Three rhythmic RMD cells and small body bends remain in final windows at 600 s; controls stationary. Long-duration unpaced activity supported in this model, useful locomotion not demonstrated.",
+  "limitations": [
+    "End-window summaries do not establish uninterrupted activity across all chunks.",
+    "Refined neural case reached only 368 s; qualitative persistence, not full matched-duration convergence.",
+    "Engineered channel priors and fixed compensation currents remain; no biological validation or body feedback."
+  ]
+}

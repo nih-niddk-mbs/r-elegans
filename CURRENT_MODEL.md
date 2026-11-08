@@ -343,7 +343,8 @@ new external run directory to preserve exactly what was tested.
 `network.npz` includes all 302 cells' channel/fixed parameters, recurrent
 connections, release settings, configuration and canonical ordering.
 `parent_actor.npz` preserves the corresponding NMJ/muscle readout. This is the
-pair used in the 20-s Mac test, not a new fit or a claim of long-term persistence.
+pair used in the 20-s Mac test, with longer persistence now user-reported below;
+these parameters are not a new physiological fit.
 Use supervisor `--parent-actor` only to explicitly reconstruct a different
 candidate, or `--inputs` for another exact pair. No automatic substitution occurs.
 The earlier server run below used different parameters; its negative result
@@ -374,11 +375,32 @@ and timestep refinements did not rescue late activity.
 
 Server parent SHA256 `beb069dd051763b6fdc3de977e4a2f77c9db73827cb4e8dfb2f88d899ea27078`
 and candidate `95fafcabfce62aa0a2c37dc9c49b475a23ed96264e8d8899640bb9ad30da4882`
-differ from the Mac-tested pair. These data do not establish whether the Mac
-candidate also eventually stops, or how quickly the server candidate settles.
-Inspect early chunks and compare both parents over matched durations before
-changing channel/synapse parameters. Full server trajectories/environment/source
-have not been independently retrieved. See `experiments/records/E028-server-20261107.json`.
+differ from the Mac-tested pair. The later run below tests the Mac reference over longer durations.
+Full server trajectories/environment/source have not been independently retrieved.
+See `experiments/records/E028-server-20261107.json` for the earlier failure.
+
+**2026-11-08 update — Mac reference remains active at ten minutes.**
+User-reported run `embodied-20261108T035729978291Z` finished all nine cases with
+queue exit 0. Three rhythmic RMD cells remain in the final measurement windows
+of all six active 600-s cases (three media, +/-1 mV perturbations, refined body
+timestep), with maximum voltage p2p about 21.20 mV and muscle p2p 0.05846.
+Active liquid joint p2p is 0.003352 rad; late net displacement is only
+2.64e-6 body lengths. Agar displacement is 1.01e-5 body lengths, barely above
+the diagnostic drift threshold; neither value establishes useful propulsion.
+Both calcium-removal and held-voltage controls have zero rhythmic cells, muscle
+variation and body variation. Brain-step refinement retains three rhythmic
+cells at 368 s but ends at its case budget, not 600 s.
+
+This supports persistent **unpaced model activity driving small bends**, not a
+biologically validated oscillator or coordinated locomotion. Summaries measure
+final windows; full trajectories are needed to establish uninterrupted activity
+and spatial coordination. The default bundled input identity is expected from
+the launch workflow, but this compact output does not include input hashes or
+source/environment, so their identity has not been independently verified for
+this run. The earlier failure is therefore not evidence that mbslnx2 cannot
+reproduce rhythmic activity. Next task: inspect neural/muscle/body phase along
+the worm, then develop traveling bends while preserving this reference.
+See `experiments/records/E028-server-20261108.json`.
 
 ## Conservative fitting policy (E029, 2026-11-07)
 

@@ -1744,3 +1744,40 @@ parameter/fixed arrays against reconstruction from this same parent and E027
 profile. It also checks default versus explicit input/parent selection. Shell
 syntax and `git diff --check` passed. No new physiological outcome is inferred
 from these software checks.
+
+## 2026-11-08 — E028 Mac-reference workflow retains late rhythms at 600 s
+
+Evidence: user-pasted compact case metrics and preceding completion log for
+`/home/carsonc/r-elegans-results/embodied-20261108T035729978291Z`.
+Queue exit 0; all nine cases completed execution, approximate wall time 23 min
+(exact final elapsed time not provided). Extracted numerical evidence is in
+`experiments/records/E028-server-20261108.json`. Full raw trajectories, source,
+environment and input hashes have not been independently retrieved. The user
+ran the bundled-reference workflow, but compact output omits hashes; identity
+is expected from that workflow rather than independently verified for this run.
+
+Six active cases reach 600 simulated seconds with three rhythmic RMD cells
+in final windows: normalized, liquid, agar, liquid +/-1 mV initial perturbations
+and refined body dt. Maximum voltage p2p ~21.20 mV, muscle p2p ~0.05846.
+Liquid: joint p2p 0.00335177034 rad; late displacement 2.6387122e-6 body lengths.
+Agar late displacement 1.00981988e-5 barely exceeds the diagnostic drift flag,
+not a useful locomotion result. Refined body: joint p2p 0.00336031616 rad
+(~0.255% above ordinary liquid); neural refinement: three rhythmic cells at
+368 s, 21.25097 mV p2p, then case time budget. Different observation durations
+mean this is qualitative persistence evidence, not matched-duration convergence.
+Both calcium-removal and held-voltage controls reach 600 s with zero late
+voltage/muscle/joint variation and zero displacement.
+
+Interpretation: the Mac reference workflow produces longer-lived unpaced neural
+activity transmitted into small bends on mbslnx2. The earlier negative candidate
+is preserved; host performance alone cannot explain the earlier lack of rhythm.
+Parameter-specific differences are implicated, but individual weight/channel
+causality is untested. End-window summaries do not prove uninterrupted rhythms
+throughout all 600 s. Engineered E027 conductance profile, transferred priors,
+fixed compensation currents and lack of body-to-neuron feedback remain. This
+is not biological calibration, new learned skill, or useful autonomous gait.
+
+Decision: preserve this fixed parameter reference; next proposed work is spatial
+phase/traveling-wave analysis of saved neural/muscle/body trajectories before
+training coordinated propulsion. No new experiment, fitting or RL launched.
+Documentation and record JSON validation only; no simulation code changed.
