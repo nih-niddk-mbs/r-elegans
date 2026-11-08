@@ -1,0 +1,324 @@
+{
+  "experiment": "E032",
+  "status": "prepared_for_user_launch",
+  "parent": "autonomous_wiggle_v1",
+  "scope": "neurons-connections",
+  "eligible": {
+    "channel_densities": 4814,
+    "chemical_strengths": 3709,
+    "electrical_pairs": 1093,
+    "total": 9616
+  },
+  "fixed": [
+    "LEAK",
+    "capacitance",
+    "channel kinetics",
+    "reversals",
+    "calcium handling",
+    "anatomical masks",
+    "absent channels",
+    "release properties",
+    "NMJ/muscle/body"
+  ],
+  "external_drive": "All injected currents zero; no temporal/sensory/body forcing",
+  "method": "Bounded block/coherent stochastic proposals; independent edge parameters; effective conductance multipliers; electrical pairs symmetric",
+  "bounds": {
+    "minimum_factor": 0.25,
+    "maximum_factor": 4.0
+  },
+  "wall_minutes_per_worker": 180,
+  "workers": 4,
+  "cores_per_worker": 4,
+  "seeds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "objective_and_validation": "Same as E031; trainable scope broadened explicitly",
+  "launcher": "scripts/launch_autonomous_movement_mbslnx2.sh",
+  "remote_launched": false,
+  "software_tests": {
+    "full_suite": 198,
+    "full_suite_seconds": 70.0,
+    "focused_joint_and_autonomous_tests": 6,
+    "focused_seconds": 2.75
+  },
+  "limitations": [
+    "No new movement success claimed.",
+    "Not an empirical inference of channel/connection physiology.",
+    "Parameter eligibility differs from actual proposal/update coverage, retained in each worker."
+  ],
+  "local_pilot": {
+    "experiment": "E032",
+    "objective": "movement",
+    "fit_scope": "neurons-connections",
+    "total_trainable": 9616,
+    "parameters_proposed": 428,
+    "parameters_updated": 128,
+    "seed": 0,
+    "status": "completed",
+    "passed": false,
+    "baseline": {
+      "valid": true,
+      "score": -1.8236493154647784e-05,
+      "sustained_joint_p2p_rad": 0.029194368049502373,
+      "joint_p2p_max_rad": 0.029650026932358742,
+      "selected_joint": 10,
+      "joint_rhythm_passed": true,
+      "rhythmic_rmd": 3,
+      "muscle_p2p_max": 0.23972594738006592,
+      "voltage_min_mV": -79.9938735961914,
+      "voltage_max_mV": 7.7119622230529785,
+      "muscle_saturation_fraction": 0.0,
+      "joint_limits_reached": false,
+      "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+      "forward_speed_blocks_body_lengths_s": [
+        4.762343144858523e-06,
+        9.129093642759132e-06,
+        -1.8236493154647784e-05
+      ],
+      "minimum_forward_speed_body_lengths_s": -1.8236493154647784e-05,
+      "forward_progress_body_lengths": -2.3091412829053806e-05,
+      "path_body_lengths": 0.009215750731527805,
+      "forward_efficiency": -0.002505646420107292,
+      "maximum_axis_turn_rad": 0.004529086751102342
+    },
+    "best_training": {
+      "valid": true,
+      "score": -1.411497552987381e-05,
+      "sustained_joint_p2p_rad": 0.02837431989610195,
+      "joint_p2p_max_rad": 0.029656030237674713,
+      "selected_joint": 10,
+      "joint_rhythm_passed": true,
+      "rhythmic_rmd": 3,
+      "muscle_p2p_max": 0.23933923244476318,
+      "voltage_min_mV": -79.9938735961914,
+      "voltage_max_mV": 7.712183475494385,
+      "muscle_saturation_fraction": 0.0,
+      "joint_limits_reached": false,
+      "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+      "forward_speed_blocks_body_lengths_s": [
+        6.554542804608322e-06,
+        5.877293528909609e-06,
+        -1.411497552987381e-05
+      ],
+      "minimum_forward_speed_body_lengths_s": -1.411497552987381e-05,
+      "forward_progress_body_lengths": -1.0178669017645544e-05,
+      "path_body_lengths": 0.00917063932865858,
+      "forward_efficiency": -0.0011099192382189576,
+      "maximum_axis_turn_rad": 0.0046344478396512165
+    },
+    "validation": [
+      {
+        "case": "long",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": -1.411497552987381e-05,
+          "sustained_joint_p2p_rad": 0.02837431989610195,
+          "joint_p2p_max_rad": 0.029656030237674713,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23933923244476318,
+          "voltage_min_mV": -79.9938735961914,
+          "voltage_max_mV": 7.712183475494385,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+          "forward_speed_blocks_body_lengths_s": [
+            6.554542804608322e-06,
+            5.877293528909609e-06,
+            -1.411497552987381e-05
+          ],
+          "minimum_forward_speed_body_lengths_s": -1.411497552987381e-05,
+          "forward_progress_body_lengths": -1.0178669017645544e-05,
+          "path_body_lengths": 0.00917063932865858,
+          "forward_efficiency": -0.0011099192382189576,
+          "maximum_axis_turn_rad": 0.0046344478396512165
+        }
+      },
+      {
+        "case": "perturb-plus",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 1.0,
+        "metrics": {
+          "valid": true,
+          "score": -1.409158050406111e-05,
+          "sustained_joint_p2p_rad": 0.02838735841214657,
+          "joint_p2p_max_rad": 0.02964146062731743,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23931342363357544,
+          "voltage_min_mV": -80.96961212158203,
+          "voltage_max_mV": 7.711434364318848,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+          "forward_speed_blocks_body_lengths_s": [
+            6.395123462012231e-06,
+            5.9849482101787115e-06,
+            -1.409158050406111e-05
+          ],
+          "minimum_forward_speed_body_lengths_s": -1.409158050406111e-05,
+          "forward_progress_body_lengths": -1.0345939811936498e-05,
+          "path_body_lengths": 0.009166744537651539,
+          "forward_efficiency": -0.0011286383916821862,
+          "maximum_axis_turn_rad": 0.0045968935068362304
+        }
+      },
+      {
+        "case": "perturb-minus",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": -1.0,
+        "metrics": {
+          "valid": true,
+          "score": -1.4130959791597008e-05,
+          "sustained_joint_p2p_rad": 0.02834528125822544,
+          "joint_p2p_max_rad": 0.029652293771505356,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23931676149368286,
+          "voltage_min_mV": -80.97950744628906,
+          "voltage_max_mV": 7.7129926681518555,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+          "forward_speed_blocks_body_lengths_s": [
+            6.733098478644043e-06,
+            5.7518226251487305e-06,
+            -1.4130959791597008e-05
+          ],
+          "minimum_forward_speed_body_lengths_s": -1.4130959791597008e-05,
+          "forward_progress_body_lengths": -9.965249561499787e-06,
+          "path_body_lengths": 0.009174292907118797,
+          "forward_efficiency": -0.0010862144540607862,
+          "maximum_axis_turn_rad": 0.004672352208273986
+        }
+      },
+      {
+        "case": "brain-refined",
+        "seconds": 30.0,
+        "brain_step_ms": 0.05,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": -1.4474098485644006e-05,
+          "sustained_joint_p2p_rad": 0.028155071660876274,
+          "joint_p2p_max_rad": 0.02959888055920601,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23946624994277954,
+          "voltage_min_mV": -79.9938735961914,
+          "voltage_max_mV": 7.702533721923828,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+          "forward_speed_blocks_body_lengths_s": [
+            -1.4474098485644006e-05,
+            1.1500443213731443e-05,
+            3.836689112126312e-06
+          ],
+          "minimum_forward_speed_body_lengths_s": -1.4474098485644006e-05,
+          "forward_progress_body_lengths": 2.0089166721688296e-06,
+          "path_body_lengths": 0.00918535515666008,
+          "forward_efficiency": 0.00021870865501724367,
+          "maximum_axis_turn_rad": 0.004167639431581986
+        }
+      },
+      {
+        "case": "body-refined",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.001,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": -1.367963806692344e-05,
+          "sustained_joint_p2p_rad": 0.028410703875124454,
+          "joint_p2p_max_rad": 0.029689613729715347,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23933929204940796,
+          "voltage_min_mV": -79.9969253540039,
+          "voltage_max_mV": 7.712183475494385,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+          "forward_speed_blocks_body_lengths_s": [
+            7.402023584175441e-06,
+            5.8828685799228175e-06,
+            -1.367963806692344e-05
+          ],
+          "minimum_forward_speed_body_lengths_s": -1.367963806692344e-05,
+          "forward_progress_body_lengths": -2.854245460665992e-06,
+          "path_body_lengths": 0.009183179587125778,
+          "forward_efficiency": -0.0003108123317840216,
+          "maximum_axis_turn_rad": 0.004743607369605246
+        }
+      },
+      {
+        "case": "held-voltage",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": false,
+          "score": -1.0,
+          "sustained_joint_p2p_rad": 0.0,
+          "joint_p2p_max_rad": 0.0,
+          "selected_joint": 0,
+          "joint_rhythm_passed": false,
+          "rhythmic_rmd": 0,
+          "muscle_p2p_max": 0.0,
+          "voltage_min_mV": -80.0,
+          "voltage_max_mV": -35.0,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Repeated forward progress with autonomous wiggle; not animal-matched locomotion",
+          "forward_speed_blocks_body_lengths_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "minimum_forward_speed_body_lengths_s": 0.0,
+          "forward_progress_body_lengths": 0.0,
+          "path_body_lengths": 0.0,
+          "forward_efficiency": 0.0,
+          "maximum_axis_turn_rad": 0.0
+        }
+      }
+    ],
+    "iterations": 2,
+    "selected_iteration": 1,
+    "target_p2p_rad": 0.01,
+    "target_speed_body_lengths_s": 0.0001,
+    "elapsed_seconds": 216.54640329201357,
+    "frozen_fields_unchanged": true,
+    "injected_currents_zero": true,
+    "network_best_sha256": "01a882ec17d6f9b4dbc8b5f046ae0930a70ae8843e17cd715ee58315f213f71d",
+    "interpretation": "First autonomous motion criterion, not animal-matched behavior"
+  },
+  "local_pilot_changed_array_entries": {
+    "channel_scales": 58,
+    "chemical_weights": 58,
+    "raw_gap_entries": 24
+  },
+  "raw_artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E032",
+  "archive_verified_files": 210,
+  "archive_manifest_sha256": "d2c5aa3eb902859af71de9c191b35ac06abbf83f8ed6a2185a02e0ca1fa0c3ef"
+}

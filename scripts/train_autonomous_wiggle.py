@@ -17,6 +17,7 @@ from r_elegans.brain.autonomous_wiggle import (
     amplitude_metrics,frozen_fit_fields_unchanged,movement_metrics,movement_achieved,movement_refinement_agrees,
 )
 from r_elegans.brain.conductance_network import load_network,save_network
+from r_elegans.brain.joint_autonomous_fit import joint_fit_reference,apply_joint_offsets,joint_proposal,frozen_joint_fields_unchanged
 from r_elegans.brain.single_compartment import CHANNEL_NAMES
 from r_elegans.body import physical_muscle_body_params
 from r_elegans.body.channel_bridge import initial_channel_body_state,channel_body_chunk
@@ -32,6 +33,7 @@ def main():
     parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--inputs',type=Path)
     parser.add_argument('--objective',choices=['amplitude','movement'],default='amplitude')
+    parser.add_argument('--fit-scope',choices=['rmd','neurons-connections'],help='Default: full neuron/connection scope for movement, RMD for amplitude')
     parser.add_argument('--target-speed',type=float,default=1e-4,help='Movement target in body lengths/s')
     parser.add_argument('--seed',type=int,default=0)
     parser.add_argument('--minutes',type=float,default=60.)
@@ -41,6 +43,7 @@ def main():
     parser.add_argument('--target-p2p-rad',type=float,default=.01)
     parser.add_argument('--maximum-factor',type=float,default=4.)
     args=parser.parse_args()
+    if args.fit_scope is None:args.fit_scope='neurons-connections' if args.objective=='movement' else 'rmd'
     if args.fit_seconds is None:args.fit_seconds=30. if args.objective=='movement' else 12.
     if not all(math.isfinite(x) and x>0 for x in (args.minutes,args.fit_seconds,args.validation_seconds,args.target_p2p_rad,args.target_speed)):
         parser.error('Positive finite settings required')
@@ -57,12 +60,24 @@ def main():
     initial,fixed,config=load_network(out/'source_inputs/network.npz')
     model=load_builtin_model()
     with np.load(out/'source_inputs/parent_actor.npz',allow_pickle=False) as z:parent=actor_from_arrays(z)
-    fixed,mask=autonomous_fit_reference(initial,fixed,model.neuron_ids)
+    joint=args.fit_scope=='neurons-connections'
+    if joint:
+        fixed,spec=joint_fit_reference(fixed);mask=spec.channels;parameter_count=spec.size
+        def apply_parameters(offsets):return apply_joint_offsets(initial,jnp.asarray(offsets),spec)
+        def propose_parameters(best,rng,sigma):return joint_proposal(best,spec,rng,sigma,args.maximum_factor)
+        def frozen_unchanged(params):return frozen_joint_fields_unchanged(params,initial,spec)
+    else:
+        fixed,mask=autonomous_fit_reference(initial,fixed,model.neuron_ids);parameter_count=int(mask.sum())
+        def apply_parameters(offsets):return apply_density_offsets(initial,jnp.asarray(offsets),mask)
+        def propose_parameters(best,rng,sigma):return density_proposal(best,mask,rng,sigma,args.maximum_factor)
+        def frozen_unchanged(params):return frozen_fit_fields_unchanged(params,initial,mask)
     assert np.all(np.asarray(fixed.bias_pA)==0)
     save_network(out/'network_initial.npz',initial,fixed,config)
-    np.savez_compressed(out/'allowed_parameters.npz',channel_mask=mask)
+    np.savez_compressed(out/'allowed_parameters.npz',channel_mask=mask,
+        chemical_mask=spec.chemical if joint else np.zeros_like(fixed.chemical_mask,dtype=bool),
+        gap_mask=spec.gap if joint else np.zeros_like(fixed.gap_mask,dtype=bool))
     indices,channels=np.nonzero(mask)
-    experiment='E031' if args.objective=='movement' else 'E030'
+    experiment='E032' if joint else ('E031' if args.objective=='movement' else 'E030')
     policy=dict(experiment=experiment,objective=args.objective,parameters=[dict(neuron=model.neuron_ids[i],channel=CHANNEL_NAMES[c]) for i,c in zip(indices,channels)],
         maximum_density_factor=args.maximum_factor,
         fixed=['all nonselected densities','LEAK','capacitance','kinetics','reversals','calcium handling',
@@ -74,7 +89,18 @@ def main():
         target_joint_p2p_rad=args.target_p2p_rad,target_speed_body_lengths_s=args.target_speed,
         movement_gate='>=0.01-rad wiggle, 3 positive progress blocks, target speed and 5x positive baseline, 2% efficiency, <0.35-rad turn',
         source_manifest=manifest)
+    if joint:
+        policy.update(fit_scope=args.fit_scope,trainable_counts=spec.counts,total_trainable=spec.size,
+            vector_order='row-major eligible channel scales, row-major chemical edges, row-major upper-triangle electrical pairs',
+            fixed=['LEAK','capacitance','kinetics','reversals','calcium handling','anatomical masks',
+                   'absent channel terms','release parameters','NMJs','muscle/body parameters'],
+            scope='All 302 neurons: nonzero non-LEAK channel densities and all existing recurrent strengths eligible',
+            method='Bounded block/coherent stochastic proposals; independent electrical pairs, no weight tying',
+            physiological_status='Behavioral fit of unknown effective parameters, not inferred biological channel composition')
+    else:policy.update(fit_scope=args.fit_scope,total_trainable=parameter_count)
     write_json(out/'fit_policy.json',policy)
+    print(json.dumps(dict(experiment=experiment,fit_scope=args.fit_scope,total_trainable=parameter_count,
+        counts=spec.counts if joint else dict(channel_densities=parameter_count))),flush=True)
     body=physical_muscle_body_params(12,medium='liquid');dt=.002
     start=time.monotonic();stopped=False
     def stop(*_):
@@ -84,7 +110,8 @@ def main():
     # Reserve a substantial portion of the budget for independent validation.
     reserve=min(args.minutes*60.*.5,args.validation_seconds*1.6+args.fit_seconds*6+30.)
     search_deadline=start+args.minutes*60.-reserve
-    rng=np.random.default_rng(args.seed);best=np.zeros(int(mask.sum()))
+    rng=np.random.default_rng(args.seed);best=np.zeros(parameter_count)
+    proposed_parameters=np.zeros(parameter_count,dtype=bool);updated_parameters=proposed_parameters.copy()
     initial_state=initial_channel_body_state(fixed,config)
     kernels={}
     def kernel(seconds,step,body_dt,hold_voltage):
@@ -94,7 +121,7 @@ def main():
                 dt=body_dt,steps=round(seconds/body_dt),brain_substeps=math.ceil(body_dt*1000./step),hold_voltage=hold_voltage))
         return kernels[key]
     def evaluate(offsets,seconds,*,step=.1,perturbation=0.,body_dt=.002,hold_voltage=False):
-        params=apply_density_offsets(initial,jnp.asarray(offsets),mask)
+        params=apply_parameters(offsets)
         state=initial_state
         if perturbation:
             state=state._replace(brain=state.brain._replace(voltage_mV=state.brain.voltage_mV+
@@ -127,10 +154,12 @@ def main():
             # This first stage seeks a small amplitude milestone, not maximum bend.
             if args.objective=='amplitude' and best_metrics['valid'] and best_metrics['sustained_joint_p2p_rad']>=args.target_p2p_rad:break
             sigma=.12*2**((iteration//20)%3)
-            candidate=density_proposal(best,mask,rng,sigma,args.maximum_factor)
+            candidate=propose_parameters(best,rng,sigma)
+            changed=candidate!=best;proposed_parameters|=changed
             params,state,trace,metrics=evaluate(candidate,args.fit_seconds)
             accepted=metrics['score']>best_metrics['score']
             if accepted:
+                updated_parameters|=changed
                 best=candidate;best_metrics=metrics;selected_iteration=iteration
                 save_selected(iteration,best,params,state,trace,metrics)
             completed=iteration
@@ -155,8 +184,9 @@ def main():
         save_trace(out/f'validation-{name}.npz',trace);save_state(out/f'validation-state-{name}.npz',state)
         validation.append(dict(case=name,seconds=seconds,brain_step_ms=step,dt_s=body_dt,perturbation_mV=perturbation,metrics=metrics))
         print(json.dumps(dict(validation=name,metrics=metrics),allow_nan=False),flush=True)
-    best_params=apply_density_offsets(initial,jnp.asarray(best),mask)
-    frozen_ok=frozen_fit_fields_unchanged(best_params,initial,mask)
+    best_params=apply_parameters(best)
+    frozen_ok=frozen_unchanged(best_params)
+    np.savez_compressed(out/'parameter_coverage.npz',proposed=proposed_parameters,updated=updated_parameters)
     if args.objective=='movement':
         baseline_speed=baseline.get('minimum_forward_speed_body_lengths_s',0.)
         def qualified(v):
@@ -174,9 +204,19 @@ def main():
     fitted=out/'fitted_inputs';fitted.mkdir()
     shutil.copyfile(out/'network_best.npz',fitted/'network.npz')
     shutil.copyfile(out/'source_inputs/parent_actor.npz',fitted/'parent_actor.npz')
-    write_json(fitted/'inputs.json',dict(experiment=experiment,objective=args.objective,passed=bool(passed),
+    write_json(fitted/'inputs.json',dict(experiment=experiment,objective=args.objective,fit_scope=args.fit_scope,passed=bool(passed),
         sha256={n:hashlib.sha256((fitted/n).read_bytes()).hexdigest() for n in ('network.npz','parent_actor.npz')}))
-    summary=dict(experiment=experiment,objective=args.objective,seed=args.seed,status='completed' if not stopped else 'interrupted',passed=bool(passed),
+    coverage={};begin=0
+    for name,count in (spec.counts if joint else dict(channel_densities=parameter_count)).items():
+        end=begin+count
+        coverage[name]=dict(eligible=count,proposed=int(proposed_parameters[begin:end].sum()),
+            updated=int(updated_parameters[begin:end].sum()),different_from_initial=int(np.count_nonzero(best[begin:end])))
+        begin=end
+    summary=dict(experiment=experiment,objective=args.objective,fit_scope=args.fit_scope,total_trainable=parameter_count,
+        parameters_proposed=int(proposed_parameters.sum()),parameters_updated=int(updated_parameters.sum()),
+        parameters_different_from_initial=int(np.count_nonzero(best)),
+        parameter_coverage_by_kind=coverage,
+        seed=args.seed,status='completed' if not stopped else 'interrupted',passed=bool(passed),
         baseline=baseline,best_training=best_metrics,validation=validation,iterations=completed,selected_iteration=selected_iteration,
         target_p2p_rad=args.target_p2p_rad,target_speed_body_lengths_s=args.target_speed,elapsed_seconds=time.monotonic()-start,
         frozen_fields_unchanged=bool(frozen_ok),injected_currents_zero=bool(np.all(np.asarray(fixed.bias_pA)==0)),

@@ -232,3 +232,8 @@ proposals. Sustained anterior wiggle retained, but drift is weak and changes
 sign across checks. No autonomous forward skill added. Full-network sufficiency
 remains untested because only the RMD density subset was trainable. Preserve
 `autonomous_wiggle_v1`; broader motor-circuit coordination is proposed next.
+
+E032 planned: broaden forward-movement fitting to all eligible neuron densities
+and existing chemical/electrical strengths (9,616 independent unknowns),
+retaining the autonomous wiggle source, zero injected drive, fixed anatomy and
+physiological/body constants. No new forward-motion skill is yet validated.

@@ -1980,3 +1980,63 @@ training metrics, hashes or the source revision; those are not inferred. The
 reported run identifier and iterations are preserved exactly. A multi-part
 forward-motion criterion failed; no specific numerical artifact is established
 from these scalar summaries alone. This update changes records/docs only.
+
+## 2026-11-08 — E032 planned: fit neuron densities and recurrent connections
+
+User explicitly requests training neurons and connections after E031 failed.
+Broaden eligibility across all 302 cells: 4,814 existing non-LEAK channel-density
+scales, all 3,709 anatomical chemical strengths and 1,093 independent electrical
+pairs (9,616 unknown parameters total). Start from the preserved autonomous
+wiggle, not the failed E031 candidates. All injected currents remain zero.
+Fixed: leak, capacitance, channel kinetics/reversals/calcium handling, anatomical
+masks, synaptic reversal/release settings and NMJ/muscle/body fields. Maximal
+conductances/connection strengths remain unknown effective model parameters,
+not experimentally inferred physiological values. Preserve missing channels
+and absent anatomical edges. Keep electrical coupling symmetric.
+
+Use a flat vector of bounded log multipliers (0.25–4 of initial density or
+effective connection strength). Use stochastic blocks of individual parameters
+and coherent channel/connection-type proposals; all unknowns are eligible,
+without requiring every parameter to move on each proposal. Preserve exact
+zero-offset identity and byte-identical frozen/off-topology fields. Retain
+E031 scoring and promotion criteria so changing trainable scope is explicit.
+Four independent three-hour CPU workers; same 30-s search horizon and longer
+perturbation/timestep/held-voltage checks. No external drive, gait teacher,
+body-parameter tuning or RL. Prepare/test/push; user launches remotely.
+Before publishing, test masks, symmetry, effective-factor bounds, no-drive
+invariant, parameter counts and an end-to-end local trial/export. No E032
+movement success is assumed. Raw search records and source stay external.
+
+E032 local pipeline pilot command:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.train_autonomous_wiggle --objective movement --fit-scope neurons-connections --output-dir /tmp/r-elegans-E032-joint-smoke --minutes 6 --iterations 2 --validation-seconds 30`
+(stdout `/tmp/r-elegans-E032-joint-smoke.log`). The first accepted proposal
+changes 58 density scales, 58 directed chemical strengths and 12 electrical
+pairs (24 symmetric raw entries), with zero injected current and preserved
+wiggle. Minimum signed speed improves from -1.8236493e-5 to -1.4114976e-5
+body lengths/s but is still negative, so this is not a movement success.
+Policy explicitly reports all 9,616 eligible values; proposal and accepted
+coverage are tracked separately rather than claiming every value changed.
+Metadata coverage fields were expanded after the pilot started; its original
+source snapshot is preserved, so those late metadata additions are not
+retroactively attributed to its executable source. No optimization equation
+was changed after pilot launch.
+
+Full software suite: 198 passed in 70.00 s. Joint/density/movement targeted
+tests: 6 passed in 2.75 s. Tests verify exact zero-offset identity, all-cell
+eligibility, existing topology, multiplier bounds and symmetric electrical
+conductance, as well as frozen fields. Shell syntax, CLI help and diff
+whitespace checks pass. These validate software, not biological fidelity.
+
+E032 local pilot completed in 216.546 s, status
+completed, expected exit 2 because the forward-motion criterion is not met.
+Two proposals, selected iteration 1; all six validation cases and fitted-pair
+export completed. Both density and chemical/electrical strengths changed in
+the selected candidate, while frozen fields compare exactly and all injected
+currents stay zero. Exact saved parameter pair checksum verifies. Compact
+results are in `experiments/records/E032.json`; full source, histories, masks,
+coverage, selected models and validation traces remain external. No server
+run was started by the agent, and no new movement skill is claimed.
+
+E032 OneDrive archive verified locally: 210 files; checksum manifest SHA256
+`d2c5aa3eb902859af71de9c191b35ac06abbf83f8ed6a2185a02e0ca1fa0c3ef`.
+This confirms local retention, not completed cloud synchronization.

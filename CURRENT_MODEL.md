@@ -1358,3 +1358,51 @@ repeat the same restricted three-hour search or weaken its motion criteria.
 No broader experiment has been launched. Full remote input/source/environment,
 search history and raw trajectories remain unretrieved. Numerical evidence:
 `experiments/records/E031-server-20261108.json`.
+
+## Joint neuron-and-connection movement fitting (E032, 2026-11-08)
+
+User requests training both neurons and connections after the restricted E031
+search failed. Movement training now defaults to `--fit-scope neurons-connections`,
+starting from the preserved `autonomous_wiggle_v1` parameter pair.
+
+Eligible unknowns across the full 302-neuron network:
+
+- 4,814 nonzero, non-LEAK channel-density scales across all 302 neurons.
+- 3,709 strengths on existing directed chemical edges.
+- 1,093 independent undirected electrical pairs.
+
+Total: **9,616 independently eligible parameters**. LEAK, capacitance, gating
+kinetics, ionic reversals/calcium handling, anatomy, release/reversal settings,
+NMJ readout and body mechanics stay fixed. Missing channel terms and absent
+edges stay unchanged; gap-junction conductance stays symmetric. All injected
+currents remain zero; no sensory drive, timer, gait teacher or body forcing.
+These are behavior-fitted effective parameters, not inferred biological values.
+
+Bounded log multipliers act on existing densities/effective synaptic conductance
+(0.25–4 of the initial value); chemical strength remains nonnegative. Search
+uses cell-local blocks, coherent channel proposals, connection-only blocks and
+mixed blocks, rather than perturbing all 9,616 values simultaneously. Each
+parameter remains independent: shared proposal directions do not tie weights.
+Eligibility does not mean every parameter changes on every iteration. Each run
+saves the allowed masks, parameter-vector ordering, proposed/accepted coverage,
+candidate vectors, RNG and selected/final checkpoints so actual changes can be
+examined. Zero-offset application preserves the starting model exactly.
+
+The E031 movement objective/criteria and validation matrix remain unchanged.
+The prior restricted failure is retained; it did not test this broader scope.
+Use `--fit-scope rmd` only for an explicit reproduction of the old restricted
+experiment. The current movement launcher pins the broader scope:
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_autonomous_movement_mbslnx2.sh
+```
+
+Four independent four-core CPU searches, **up to three hours including
+validation**, under nohup. The launcher prints PID/log path; disconnect after
+launch. Records remain under `/home/carsonc/r-elegans-results/autonomous-movement-*`.
+Source, input hashes and scope are recorded per worker; `summary.json` reports
+trainable count and proposal/update coverage, alongside movement validation.
+Existing wiggle/model assets are not overwritten. No remote launch or movement
+success is claimed until actual server results are reported.
