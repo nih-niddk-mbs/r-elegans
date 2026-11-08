@@ -1399,7 +1399,7 @@ git pull --ff-only
 sh scripts/launch_autonomous_movement_mbslnx2.sh
 ```
 
-Four independent four-core CPU searches, **up to three hours including
+Four independent four-core CPU searches, **up to four hours including
 validation**, under nohup. The launcher prints PID/log path; disconnect after
 launch. Records remain under `/home/carsonc/r-elegans-results/autonomous-movement-*`.
 Source, input hashes and scope are recorded per worker; `summary.json` reports

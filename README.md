@@ -92,7 +92,7 @@ milestone is a larger head/anterior wiggle, not whole-body propulsion.
 
 The first [autonomous forward-movement search](CURRENT_MODEL.md#first-autonomous-forward-movement-search-e031-2026-11-08)
 starts from that preserved wiggle. Run `sh scripts/launch_autonomous_movement_mbslnx2.sh`
-after pulling on mbslnx2 for four independent searches, up to three hours including
+after pulling on mbslnx2 for four independent searches, up to four hours including
 validation. It fits neuron densities with zero external drive and rewards repeated
 net forward progress after warmup. The first four-seed server search retained
 wiggling but failed forward-motion validation in every seed; broader motor-circuit
@@ -101,7 +101,7 @@ training is the proposed next stage.
 Movement training now fits [neurons and existing recurrent connections](CURRENT_MODEL.md#joint-neuron-and-connection-movement-fitting-e032-2026-11-08):
 9,616 eligible parameters across all 302 neurons, while anatomy, physiological
 constants, muscle/body parameters and zero injected current remain fixed. The
-same three-hour movement launcher explicitly selects this broader E032 scope;
+same four-hour movement launcher explicitly selects this broader E032 scope;
 the earlier restricted E031 result is preserved.
 
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):

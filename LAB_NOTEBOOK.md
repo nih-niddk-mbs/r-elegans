@@ -2040,3 +2040,13 @@ run was started by the agent, and no new movement skill is claimed.
 E032 OneDrive archive verified locally: 210 files; checksum manifest SHA256
 `d2c5aa3eb902859af71de9c191b35ac06abbf83f8ed6a2185a02e0ca1fa0c3ef`.
 This confirms local retention, not completed cloud synchronization.
+
+## 2026-11-08 — E032 budget extended to four hours
+
+User explicitly requests four hours. Movement launcher now passes
+`--minutes 240`, replacing 180, for each of four concurrent joint neuron/
+connection searches. This includes reserved validation time, plus startup/
+termination grace. All masks, objective and acceptance criteria unchanged.
+Applies to new launches; an already-running process is not modified. No
+remote process was started or restarted by the agent. Shell syntax and diff
+whitespace checks passed; no simulation rerun needed for this budget change.

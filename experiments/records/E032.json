@@ -26,7 +26,7 @@
     "minimum_factor": 0.25,
     "maximum_factor": 4.0
   },
-  "wall_minutes_per_worker": 180,
+  "wall_minutes_per_worker": 240,
   "workers": 4,
   "cores_per_worker": 4,
   "seeds": [
@@ -320,5 +320,7 @@
   },
   "raw_artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E032",
   "archive_verified_files": 210,
-  "archive_manifest_sha256": "d2c5aa3eb902859af71de9c191b35ac06abbf83f8ed6a2185a02e0ca1fa0c3ef"
+  "archive_manifest_sha256": "d2c5aa3eb902859af71de9c191b35ac06abbf83f8ed6a2185a02e0ca1fa0c3ef",
+  "previous_wall_minutes_per_worker": 180,
+  "budget_change": "User requested four hours; applies to newly launched searches, including validation"
 }
