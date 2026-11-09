@@ -102,7 +102,10 @@ Movement training now fits [neurons and existing recurrent connections](CURRENT_
 9,616 eligible parameters across all 302 neurons, while anatomy, physiological
 constants, muscle/body parameters and zero injected current remain fixed. The
 same four-hour movement launcher explicitly selects this broader E032 scope;
-the earlier restricted E031 result is preserved.
+the earlier restricted E031 result is preserved. The first four-hour joint
+search also failed movement validation (0/4); a synthetic audit found short-window
+phase sensitivity in its selection score. Scoring/trajectory analysis is the
+next priority before another long run.
 
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly

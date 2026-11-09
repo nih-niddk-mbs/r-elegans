@@ -1,0 +1,42 @@
+{
+  "experiment": "E033",
+  "status": "locally_executed_diagnostic_only",
+  "script_sha256": "2b7d5b8b0ea91afb7b2b3e437e1dcf2642692c8910f37500d4d4450f337cf945",
+  "results": [
+    {
+      "duration": 30.0,
+      "period": 0.21691973969631237,
+      "centroid_amplitude_body_lengths": 0.003,
+      "true_net_translation_per_complete_cycle": 0.0,
+      "score": 0.00011155016266344677,
+      "speeds": [
+        0.00015212104815336055,
+        0.0001386201588964397,
+        0.00011155016266344677
+      ],
+      "efficiency": 0.0027955554716986783,
+      "valid_wiggle": true,
+      "passed": false
+    },
+    {
+      "duration": 300.0,
+      "period": 0.21691973969631237,
+      "centroid_amplitude_body_lengths": 0.003,
+      "true_net_translation_per_complete_cycle": 0.0,
+      "score": -9.904648777980506e-05,
+      "speeds": [
+        -9.904648777979405e-05,
+        9.90464877797688e-05,
+        -9.904648777980506e-05
+      ],
+      "efficiency": -0.0005968760362533543,
+      "valid_wiggle": true,
+      "passed": false
+    }
+  ],
+  "interpretation": "Short-window training objective can favor phase alignment of zero-cycle-translation periodic motion; validation rejects it. Actual E032 exploitation remains unproven without saved trajectories.",
+  "raw_artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E033",
+  "training_or_model_changed": false,
+  "archive_verified_local_files": 178,
+  "archive_manifest_sha256": "2da4b717c8796ccd82fdbdb5bac0d3c543e774b00d3838753b701a92363fed11"
+}

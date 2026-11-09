@@ -237,3 +237,10 @@ E032 planned: broaden forward-movement fitting to all eligible neuron densities
 and existing chemical/electrical strengths (9,616 independent unknowns),
 retaining the autonomous wiggle source, zero injected drive, fixed anatomy and
 physiological/body constants. No new forward-motion skill is yet validated.
+
+E032 joint-search result: 0/4 movement passes after 1,886 proposals, with
+thousands of accepted parameter updates and persistent bends. No forward
+skill added. E033 synthetic audit identifies phase-sensitive short-window
+selection as a possible search failure route; actual trajectories remain
+unretrieved. Preserve the autonomous amplitude reference and audit scoring
+before repeating compute.

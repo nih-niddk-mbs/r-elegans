@@ -2050,3 +2050,71 @@ termination grace. All masks, objective and acceptance criteria unchanged.
 Applies to new launches; an already-running process is not modified. No
 remote process was started or restarted by the agent. Shell syntax and diff
 whitespace checks passed; no simulation rerun needed for this budget change.
+
+## 2026-11-08 — E032 user-reported joint search fails movement validation
+
+Run `autonomous-movement-20261108T205220165775Z`; reported scope
+neurons-connections. All four seeds exit 2, passed=False. Iterations
+473/470/473/470 (1,886 total). Reported parameters_updated
+5744/5122/5656/2030 are cumulative accepted-update coverage, not necessarily
+final nonzero offsets or per-kind coverage. Per-kind breakdown is absent.
+All long-validation minimum speeds and efficiencies are negative; active
+sustained bends remain roughly 0.025–0.031 rad. Positive short-condition speeds
+peak at 6.91e-6 body lengths/s, still about 14.5x below the 1e-4 target; maximum
+reported forward/path efficiency 0.01039 remains below 0.02. Held-voltage
+controls have zero speed, efficiency and bend variation in every seed.
+
+Full raw server histories, waveforms, input/source/environment hashes, baseline
+and selected training metrics have not been retrieved. No exact elapsed time
+or revision is inferred from the compact output. This is evidence of a failed
+search, not full-network insufficiency or a unique failure mechanism.
+
+E033 planned diagnostic audit, not a new training run: inspect whether the
+fixed-endpoint, short-block score can reward phase alignment of bounded cyclic
+centroid motion. Use synthetic periodic traces at 30/300 s, test current scoring
+and promotion separately. This does not model actual hydrodynamics or establish
+that E032 exploited this route. Record exact script/source and numerical outputs
+externally. No model parameters or acceptance thresholds will change in audit.
+
+E033 executed locally:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl PYTHONPATH=/Users/carsonc/github/r-elegans .venv/bin/python /tmp/r-elegans-E033-phase-audit.py`
+stdout `/tmp/r-elegans-E033-phase-audit.log`. Script copied into the raw
+assay directory and source/environment/invocation captured. Period
+5/23.05 = 0.2169197397 s, centroid amplitude 0.003 body lengths.
+Zero complete-cycle translation by construction. At 30 s the current search
+score is +0.00011155016, although efficiency 0.00279556 fails promotion.
+At 300 s the score is -0.00009904649 and efficiency -0.000596876. Thus
+selection score and promotion are misaligned for this synthetic trace.
+It does not establish that an actual hydrodynamic solution exploited this
+loophole; the chosen centroid trace is an input to a metric, not a forward
+body simulation. Propose robust cycle/phase-averaged progress and inspect real
+selected trajectories before further compute. Preserve objective versions
+and negative runs; do not retrospectively relabel them or weaken thresholds.
+
+E032 four-hour joint-search outcome (user-reported run
+`autonomous-movement-20261108T205220165775Z`): **0/4 movement passes**,
+1,886 proposals total. Cumulative accepted parameter updates per seed:
+5,744 / 5,122 / 5,656 / 2,030. All long-validation minimum forward speeds
+are negative (~-1.65e-6 to -1.14e-6 body lengths/s); bends persist at
+0.026–0.031 rad. Best short-condition speed is only 6.91e-6, below the
+1e-4 target, and maximum efficiency 0.01039 is below 0.02. Held voltage
+stops motion. This broader search failed; topology sufficiency is not disproved.
+Full raw histories/input/source/environment hashes remain unretrieved.
+
+E033 local scoring audit demonstrates a training-objective vulnerability. A
+bounded periodic centroid trace with exactly zero complete-cycle translation
+gets minimum block speed +1.1155e-4 body lengths/s at 30 s, but -9.9046e-5
+at 300 s. The efficiency/long validation gates correctly reject the trace.
+Nevertheless, the search score itself rewards its short-window endpoint phase.
+This is a synthetic metric example, not a worm hydrodynamics simulation or
+proof of E032's failure mechanism. Next priority is phase-robust/cycle-averaged
+progress scoring and spatial neural/muscle/body trajectory analysis before
+repeating the long search. No code, parameters or thresholds changed in this
+audit, and no new server run launched. Exact records: E032-server-20261108.json
+and E033.json under `experiments/records/`.
+
+E033 archive verified locally: 178 files, checksum manifest SHA256
+`2da4b717c8796ccd82fdbdb5bac0d3c543e774b00d3838753b701a92363fed11`.
+Local retention does not establish completed cloud synchronization. JSON
+record consistency and diff whitespace checks passed. No simulation code
+changed and no full test-suite rerun was needed for these records.

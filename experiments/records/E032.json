@@ -1,6 +1,6 @@
 {
   "experiment": "E032",
-  "status": "prepared_for_user_launch",
+  "status": "user_reported_joint_search_complete_no_seeds_passed",
   "parent": "autonomous_wiggle_v1",
   "scope": "neurons-connections",
   "eligible": {
@@ -322,5 +322,8 @@
   "archive_verified_files": 210,
   "archive_manifest_sha256": "d2c5aa3eb902859af71de9c191b35ac06abbf83f8ed6a2185a02e0ca1fa0c3ef",
   "previous_wall_minutes_per_worker": 180,
-  "budget_change": "User requested four hours; applies to newly launched searches, including validation"
+  "budget_change": "User requested four hours; applies to newly launched searches, including validation",
+  "server_execution_reported": true,
+  "reported_server_result": "experiments/records/E032-server-20261108.json",
+  "remote_raw_artifacts_independently_retrieved": false
 }

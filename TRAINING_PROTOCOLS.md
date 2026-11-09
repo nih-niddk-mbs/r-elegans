@@ -969,3 +969,25 @@ Source, input hashes and scope are recorded per worker; `summary.json` reports
 trainable count and proposal/update coverage, alongside movement validation.
 Existing wiggle/model assets are not overwritten. No remote launch or movement
 success is claimed until actual server results are reported.
+
+E032 four-hour joint-search outcome (user-reported run
+`autonomous-movement-20261108T205220165775Z`): **0/4 movement passes**,
+1,886 proposals total. Cumulative accepted parameter updates per seed:
+5,744 / 5,122 / 5,656 / 2,030. All long-validation minimum forward speeds
+are negative (~-1.65e-6 to -1.14e-6 body lengths/s); bends persist at
+0.026–0.031 rad. Best short-condition speed is only 6.91e-6, below the
+1e-4 target, and maximum efficiency 0.01039 is below 0.02. Held voltage
+stops motion. This broader search failed; topology sufficiency is not disproved.
+Full raw histories/input/source/environment hashes remain unretrieved.
+
+E033 local scoring audit demonstrates a training-objective vulnerability. A
+bounded periodic centroid trace with exactly zero complete-cycle translation
+gets minimum block speed +1.1155e-4 body lengths/s at 30 s, but -9.9046e-5
+at 300 s. The efficiency/long validation gates correctly reject the trace.
+Nevertheless, the search score itself rewards its short-window endpoint phase.
+This is a synthetic metric example, not a worm hydrodynamics simulation or
+proof of E032's failure mechanism. Next priority is phase-robust/cycle-averaged
+progress scoring and spatial neural/muscle/body trajectory analysis before
+repeating the long search. No code, parameters or thresholds changed in this
+audit, and no new server run launched. Exact records: E032-server-20261108.json
+and E033.json under `experiments/records/`.
