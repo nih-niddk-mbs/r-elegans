@@ -119,7 +119,9 @@ first recruits coherent middle/posterior bending, then spatial phase progression
 Run `sh scripts/launch_autonomous_wave_mbslnx2.sh` after pulling on mbslnx2
 (four workers, four-hour cap including validation). Neurons and connections
 remain trainable with zero external drive. Complete-cycle position averaging
-replaces endpoint-based progress for the later, gated movement stage.
+replaces endpoint-based progress for the later, gated movement stage. The first
+E035 server cohort improves regional recruitment but still fails posterior
+amplitude and wave qualification; seed 2/3 are retained as continuation candidates.
 
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly

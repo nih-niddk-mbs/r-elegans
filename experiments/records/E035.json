@@ -1,6 +1,6 @@
 {
   "experiment": "E035",
-  "status": "prepared_for_user_launch_after_local_pipeline_verification",
+  "status": "user_reported_body_wave_run_complete_recruitment_incomplete",
   "source": "autonomous_wiggle_v1",
   "objective": "coherent regional spread then intrinsic phase progression; not propulsion",
   "trainable": {
@@ -1006,5 +1006,8 @@
   "remote_launched": false,
   "locomotion_demonstrated": false,
   "archive_verified_local_files": 405,
-  "archive_manifest_sha256": "bbe831c3ec46f89b471f5c41b7edc2a810a306f75eddc841d979f56136392187"
+  "archive_manifest_sha256": "bbe831c3ec46f89b471f5c41b7edc2a810a306f75eddc841d979f56136392187",
+  "reported_server_result": "experiments/records/E035-server-20261109.json",
+  "server_execution_reported": true,
+  "remote_raw_artifacts_independently_retrieved": false
 }

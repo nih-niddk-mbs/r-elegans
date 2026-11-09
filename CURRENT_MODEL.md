@@ -1577,3 +1577,33 @@ Local two-proposal pilot completed all six short validation cases with frozen
 fields unchanged and zero injected current. Its posterior recruitment is still
 far below target, so it correctly returns `passed=false`. This is pipeline
 validation, not a learned body wave. See E035 notebook and experiment record.
+
+E035 server result, user-reported 2026-11-09:
+`autonomous-wave-20261109T032054849657Z`, 471/466/471/466 proposals
+(1,874 total), all exit 2/passed=False and remain in spread stage.
+No full body-wave checkpoint is qualified and E036 must not start.
+
+Seed 2 has strongest coverage 0.38437. Long regional harmonic joint p2p
+[posterior,middle,anterior] = [7.96799e-5,0.00258090,0.02159237] rad.
+Middle is 86.0% of the 0.003 target; posterior is 2.66% (37.65x too small).
+These amplitudes are similar across perturbations/refinement, but phase span
+remains below target (0.253 rad long,0.072–0.106 rad in short checks).
+The logarithmic coverage score 0.384 does not mean 38.4% amplitude completion.
+
+Seed 3 retains a larger second shape mode (0.004287 =0.429%, versus 2% target)
+and stable ~1.06 rad total phase span, but posterior p2p 5.53e-5 rad remains
+~54x below target; middle 0.001848rad is 61.6% of target. Preserve it as a
+separate phase-diverse continuation candidate, not a validated traveling wave.
+Phase span alone does not certify direction, smoothness, drive phase or power/
+locking gates; those detailed fields are absent. Seeds 0/1 also lack posterior
+amplitude. Held-voltage cases remain unqualified with feature values omitted;
+full null-control amplitudes are not shown by this compact command.
+
+Decision: preserve all candidates, prioritize posterior recruitment from
+seed 2 while retaining seed 3 separately; do not restart blindly from the
+original head-only reference or advance to propulsion. Before choosing
+continuation bounds, inspect original search state and bound saturation;
+a continuation must record its parent, RNG mode and any change of reference
+bounds. No new search is launched by this records update. Exact server
+artifacts/input/source/environment remain unretrieved. Numeric record:
+`experiments/records/E035-server-20261109.json`.

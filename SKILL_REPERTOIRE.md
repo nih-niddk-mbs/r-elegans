@@ -257,3 +257,10 @@ followed by phase-coordinated body wave, with no external drive or waveform
 teacher. All neuron/connection unknowns eligible; original wiggle preserved.
 Only a validated wave checkpoint may start E036 complete-cycle movement
 optimization. No new skill claimed from the short software/pipeline pilot.
+
+E035 server result (2026-11-09): 0/4 full wave passes. Seed 2 middle amplitude
+is near its target, posterior amplitude remains ~38x too small. Seed 3 offers
+more shape/phase diversity but also lacks posterior amplitude. Preserve both
+as unqualified recruitment candidates; no new body-wave or propulsion skill
+added, and E036 remains gated. Do not confuse log coverage with physical
+amplitude completion.

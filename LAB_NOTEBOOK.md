@@ -2305,3 +2305,45 @@ Local preservation is verified; cloud synchronization is not. Pilot fitted-pair
 hashes/identity and no-drive/frozen-field flags verify. No body-wave skill
 is yet qualified. Final progress-log additions report regional amplitudes
 and cycle-mean speed explicitly; numerical objectives unchanged after pilot.
+
+## 2026-11-09 — E035 recruitment improves, posterior target unmet
+
+E035 server result, user-reported 2026-11-09:
+`autonomous-wave-20261109T032054849657Z`, 471/466/471/466 proposals
+(1,874 total), all exit 2/passed=False and remain in spread stage.
+No full body-wave checkpoint is qualified and E036 must not start.
+
+Seed 2 has strongest coverage 0.38437. Long regional harmonic joint p2p
+[posterior,middle,anterior] = [7.96799e-5,0.00258090,0.02159237] rad.
+Middle is 86.0% of the 0.003 target; posterior is 2.66% (37.65x too small).
+These amplitudes are similar across perturbations/refinement, but phase span
+remains below target (0.253 rad long,0.072–0.106 rad in short checks).
+The logarithmic coverage score 0.384 does not mean 38.4% amplitude completion.
+
+Seed 3 retains a larger second shape mode (0.004287 =0.429%, versus 2% target)
+and stable ~1.06 rad total phase span, but posterior p2p 5.53e-5 rad remains
+~54x below target; middle 0.001848rad is 61.6% of target. Preserve it as a
+separate phase-diverse continuation candidate, not a validated traveling wave.
+Phase span alone does not certify direction, smoothness, drive phase or power/
+locking gates; those detailed fields are absent. Seeds 0/1 also lack posterior
+amplitude. Held-voltage cases remain unqualified with feature values omitted;
+full null-control amplitudes are not shown by this compact command.
+
+Decision: preserve all candidates, prioritize posterior recruitment from
+seed 2 while retaining seed 3 separately; do not restart blindly from the
+original head-only reference or advance to propulsion. Before choosing
+continuation bounds, inspect original search state and bound saturation;
+a continuation must record its parent, RNG mode and any change of reference
+bounds. No new search is launched by this records update. Exact server
+artifacts/input/source/environment remain unretrieved. Numeric record:
+`experiments/records/E035-server-20261109.json`.
+
+Raw console SHA256 `f955597abb23bb08e33e1ae0eae5093146203e284e9cac4c00ca4d5e02c28ddf`.
+No exact elapsed time or baseline-to-final gain is inferred from this compact
+validation-only output. No thresholds lowered and no source/model changes.
+
+User-reported console preserved locally under OneDrive evidence/E035/
+server-report-20261109/console.txt with SHA256.json. This retains the report,
+not a copy of full remote traces/checkpoints or proof of cloud synchronization.
+Extraction verified4 workers x6 cases and1874 proposals. Records/docs only;
+JSON consistency and diff whitespace checks passed, no code/physics change.

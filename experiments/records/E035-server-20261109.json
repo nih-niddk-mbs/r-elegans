@@ -1,0 +1,343 @@
+{
+  "experiment": "E035",
+  "run": "autonomous-wave-20261109T032054849657Z",
+  "evidence": "user-pasted compact worker validation output; raw server trajectories, parameter/source/environment hashes not independently retrieved",
+  "stdout_sha256": "f955597abb23bb08e33e1ae0eae5093146203e284e9cac4c00ca4d5e02c28ddf",
+  "workers": [
+    {
+      "seed": 0,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 471,
+      "validation": [
+        {
+          "case": "long",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.1856475300612146,
+          "bends_tail_middle_head": [
+            1.8849596808995316e-05,
+            0.0009585488913338293,
+            0.019786991423639568
+          ],
+          "phase_span": 1.6480714887789811,
+          "second_shape_mode": 0.0013666994914503102
+        },
+        {
+          "case": "perturb-plus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.18631011071869755,
+          "bends_tail_middle_head": [
+            1.895889579900541e-05,
+            0.000973476610488038,
+            0.01982291776493068
+          ],
+          "phase_span": 1.6222606181236845,
+          "second_shape_mode": 0.001358144588692663
+        },
+        {
+          "case": "perturb-minus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.1863475729717672,
+          "bends_tail_middle_head": [
+            1.896508790785613e-05,
+            0.000974258928088904,
+            0.019826658810394235
+          ],
+          "phase_span": 1.6202779595607582,
+          "second_shape_mode": 0.0013584786233146635
+        },
+        {
+          "case": "brain-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.1856783569292483,
+          "bends_tail_middle_head": [
+            1.885467283243054e-05,
+            0.0009792829137620091,
+            0.019811800621646575
+          ],
+          "phase_span": 1.6004913933640244,
+          "second_shape_mode": 0.0013497804354656352
+        },
+        {
+          "case": "body-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.18507515967500038,
+          "bends_tail_middle_head": [
+            1.8755511019984892e-05,
+            0.0009751999199131837,
+            0.019849383941317158
+          ],
+          "phase_span": 1.6063641622571527,
+          "second_shape_mode": 0.001357966599230174
+        },
+        {
+          "case": "held-voltage",
+          "stage": "spread",
+          "wave": false,
+          "coverage": null,
+          "bends_tail_middle_head": null,
+          "phase_span": null,
+          "second_shape_mode": null
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 466,
+      "validation": [
+        {
+          "case": "long",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.2844683901454968,
+          "bends_tail_middle_head": [
+            4.0707689328933556e-05,
+            0.001566529241650831,
+            0.023037797049691583
+          ],
+          "phase_span": 1.3132328266648132,
+          "second_shape_mode": 0.0021324092484888454
+        },
+        {
+          "case": "perturb-plus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.28460411229490346,
+          "bends_tail_middle_head": [
+            4.0746981771066156e-05,
+            0.0015637790206386826,
+            0.023022700041752362
+          ],
+          "phase_span": 1.318299832701196,
+          "second_shape_mode": 0.0021409913725218264
+        },
+        {
+          "case": "perturb-minus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.2846097943367665,
+          "bends_tail_middle_head": [
+            4.074862742287504e-05,
+            0.001563774948322565,
+            0.023023248500427466
+          ],
+          "phase_span": 1.3183506163784444,
+          "second_shape_mode": 0.0021414947756245497
+        },
+        {
+          "case": "brain-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.2842723779203486,
+          "bends_tail_middle_head": [
+            4.065099620985773e-05,
+            0.0015660105250214613,
+            0.02300984527601982
+          ],
+          "phase_span": 1.310924402278407,
+          "second_shape_mode": 0.002130135853746012
+        },
+        {
+          "case": "body-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.2849473717023134,
+          "bends_tail_middle_head": [
+            4.084649352803861e-05,
+            0.0015656842257932525,
+            0.023049939487486175
+          ],
+          "phase_span": 1.3173256783649845,
+          "second_shape_mode": 0.002142506663108057
+        },
+        {
+          "case": "held-voltage",
+          "stage": "spread",
+          "wave": false,
+          "coverage": null,
+          "bends_tail_middle_head": null,
+          "phase_span": null,
+          "second_shape_mode": null
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 471,
+      "validation": [
+        {
+          "case": "long",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3843735288692135,
+          "bends_tail_middle_head": [
+            7.967994855395079e-05,
+            0.0025808996852560695,
+            0.021592373918892842
+          ],
+          "phase_span": 0.2529803879863055,
+          "second_shape_mode": 0.00168552621927981
+        },
+        {
+          "case": "perturb-plus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.38146698229149556,
+          "bends_tail_middle_head": [
+            7.820460947712992e-05,
+            0.002566694800348262,
+            0.0215960881334949
+          ],
+          "phase_span": 0.07197667486265809,
+          "second_shape_mode": 0.0013795863321791036
+        },
+        {
+          "case": "perturb-minus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3824431029775873,
+          "bends_tail_middle_head": [
+            7.869735344119819e-05,
+            0.0025760859849422247,
+            0.02160545434727645
+          ],
+          "phase_span": 0.09638085295857822,
+          "second_shape_mode": 0.0013730645057729567
+        },
+        {
+          "case": "brain-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3820247437821694,
+          "bends_tail_middle_head": [
+            7.848583030273164e-05,
+            0.0025692886028352894,
+            0.021607210118463158
+          ],
+          "phase_span": 0.1058898435372031,
+          "second_shape_mode": 0.0013910155436234661
+        },
+        {
+          "case": "body-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3821972881344315,
+          "bends_tail_middle_head": [
+            7.857300783900505e-05,
+            0.002574650282868743,
+            0.02162213547398138
+          ],
+          "phase_span": 0.08559566635900746,
+          "second_shape_mode": 0.0013789834198445253
+        },
+        {
+          "case": "held-voltage",
+          "stage": "spread",
+          "wave": false,
+          "coverage": null,
+          "bends_tail_middle_head": null,
+          "phase_span": null,
+          "second_shape_mode": null
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "exit_code": 2,
+      "passed": false,
+      "iterations": 466,
+      "validation": [
+        {
+          "case": "long",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3288055920042287,
+          "bends_tail_middle_head": [
+            5.530802102684739e-05,
+            0.0018483214979450587,
+            0.02129305172259269
+          ],
+          "phase_span": 1.0627995389853486,
+          "second_shape_mode": 0.004286985529653162
+        },
+        {
+          "case": "perturb-plus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3287482024061451,
+          "bends_tail_middle_head": [
+            5.5286634274000305e-05,
+            0.0018502623750920263,
+            0.021302740248909928
+          ],
+          "phase_span": 1.0607022802066215,
+          "second_shape_mode": 0.004252828011190335
+        },
+        {
+          "case": "perturb-minus",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3287525101617875,
+          "bends_tail_middle_head": [
+            5.528823935495622e-05,
+            0.0018503322165174384,
+            0.02130381626228753
+          ],
+          "phase_span": 1.0607255098982806,
+          "second_shape_mode": 0.004254360997887704
+        },
+        {
+          "case": "brain-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.3285827848585196,
+          "bends_tail_middle_head": [
+            5.522502910712468e-05,
+            0.0018425640255880188,
+            0.021247990894798046
+          ],
+          "phase_span": 1.0674069237467219,
+          "second_shape_mode": 0.004334109286768755
+        },
+        {
+          "case": "body-refined",
+          "stage": "spread",
+          "wave": false,
+          "coverage": 0.32935397134748245,
+          "bends_tail_middle_head": [
+            5.551273319076893e-05,
+            0.0018526114477727348,
+            0.0213289064049218
+          ],
+          "phase_span": 1.0605522915727494,
+          "second_shape_mode": 0.004255193910289553
+        },
+        {
+          "case": "held-voltage",
+          "stage": "spread",
+          "wave": false,
+          "coverage": null,
+          "bends_tail_middle_head": null,
+          "phase_span": null,
+          "second_shape_mode": null
+        }
+      ]
+    }
+  ],
+  "total_iterations": 1874,
+  "interpretation": "0/4 full wave passes. Regional middle/posterior recruitment present, posterior amplitude still far below target. Keep seed2 for strongest coverage and seed3 as a separate phase-diverse candidate; neither is qualified for E036.",
+  "limitations": [
+    "Coverage is a logarithmic composite, not fractional completion of amplitude target.",
+    "Joint phase span alone does not establish monotonic/coherent drive or shape propagation.",
+    "Drive amplitudes, power/locking gates, per-kind updates, bounds saturation, baseline metrics and exact timings are omitted from this output."
+  ]
+}
