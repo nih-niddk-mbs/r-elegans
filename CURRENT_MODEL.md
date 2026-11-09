@@ -1858,3 +1858,33 @@ shortfall16x bend and6.25x muscle. Seed5002 offers a smaller stable gain;5000/50
 improve muscle activity without improving bend. Prefer independent continuation
 from5003,with5002 backup;preserve original anchors/bounds and zero input. No new
 run launched or skill qualified. Exact record:`experiments/records/E041-server-20261109.json`.
+
+## Three-hour posterior motor continuation (E042 plan, 2026-11-09)
+
+User selected180-minute continuation of unchanged E041 objective. Three workers
+(seeds6000–6002) fork reviewed E041 seed5003;one(seed6003) forks5002 from
+`autonomous-posterior-motor-20261109T222806260061Z`. Fresh RNG,learned parameters
+and original anchor/bounds retained;full copied parent lineage.9616 uncertain
+channel/recurrent parameters eligible;zero external drive and fixed fields.
+No phase/control/propulsion or retention constraint added;independent parents
+preserved. Budget includes setup/search/validation with termination grace;
+qualification can stop a worker earlier.
+
+Fit20s unchanged,long validation extended to300s,other perturbation/refinement/
+held-voltage cases20s. Same physical muscle AND bend thresholds,25% refinement
+agreement. Source/environment and exact parent checksums recorded at launch.
+Preflight requires completed posterior-motor parents and verified hashes.
+Worker/supervisor algorithm label remains E041;E042 records this continuation.
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/continue_posterior_motor_mbslnx2.sh
+```
+
+Runs under nohup,prints PID/exact log. Logs:`autonomous-posterior-motor-continue-*.log`;
+cohort folders retain`autonomous-posterior-motor-*`. Shell syntax and command
+construction verified with a stub interpreter (no real preflight or training).
+Training code unchanged;prior218-test suite applies to that implementation.
+No server launch or new qualification claimed. Plan record:
+`experiments/records/E042-continuation-plan.json`.

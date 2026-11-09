@@ -330,3 +330,8 @@ shortfall16x bend and6.25x muscle. Seed5002 offers a smaller stable gain;5000/50
 improve muscle activity without improving bend. Prefer independent continuation
 from5003,with5002 backup;preserve original anchors/bounds and zero input. No new
 run launched or skill qualified. Exact record:`experiments/records/E041-server-20261109.json`.
+
+E042 planned180-minute continuation:3 independent forks of E041 seed5003 plus
+1 of5002;no new skill yet. Preserve original anchors/bounds;extend long
+validation to300s. Same muscle AND bend amplitude qualification;phase/control/
+propulsion deferred. No server execution claimed.

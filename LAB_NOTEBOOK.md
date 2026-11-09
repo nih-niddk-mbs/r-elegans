@@ -2905,3 +2905,46 @@ Exact pasted stdout and parsed compact summary copied to external OneDrive
 7967054f7e7c76936a4b6f785793c7a5b4cc415285b62c04c9231ed17c01a0ee.
 Local copy completed;cloud sync and independent server-artifact backup remain
 unverified. No implementation changes in this results-recording update.
+
+## 2026-11-09 — E042 planned three-hour E041 continuation
+
+User selected3hours instead of proposed2. Operational continuation of unchanged
+E041 posterior-motor objective,not a new fitting algorithm. Three independent
+fresh-RNG workers from E041 seed5003 and one from5002,using cohort
+`autonomous-posterior-motor-20261109T222806260061Z`. Seeds6000/6001/6002 map
+to5003;6003 maps to5002. Four disjoint physical four-core CPU groups on mbslnx2.
+Preserve original anchor,bounds16x,all9616 eligible unknowns,full parent copies,
+RNG/history/checkpoints/source/env. No re-centering or exact optimizer resume.
+
+Budget180min perworker incl setup/search/validation,plus supervisor termination
+grace. Fit20simulated seconds unchanged;long validation extended60→300s for
+stronger persistence check. Perturbation and finer brain/body/held-voltage
+checks remain20s. Both tail bending>=0.003rad AND net-muscle excursion>=0.003
+required in all active tests;25% refinement agreement;held-voltage quiet.
+Zero external drive,fixed leak/C/kinetics/reversals/Ca/release/NMJs/body. No
+phase,heading,forward motion or RL added. No head/middle retention constraint;
+preserve independent parent skill checkpoints.
+
+Command planned: `sh scripts/continue_posterior_motor_mbslnx2.sh` after pull.
+Default parents pinned,three repeated paths explicitly implement3:1 allocation.
+Preflight validates completed posterior-motor parents and saved checksums/bounds
+before nohup;exact source/parent metadata captured by existing worker/supervisor.
+Actual hashes/environment/run timestamps cannot be recorded until server launch.
+Launcher creates matching `autonomous-posterior-motor-continue-*.log`;cohort
+folder still uses E041's `autonomous-posterior-motor-*` prefix. Worker/supervisor
+experiment labels remain E041 to preserve algorithm identity;E042 labels this
+planned continuation in notebook. No server launch claimed;user launches.
+
+E042 preparation verified locally:launcher `sh -n` passed;supervisor CLI help
+recognizes every flag. Executed actual shell with a temporary interpreter/
+preflight shim;captured argv verifies3:1 allocation,180min,20s fit,300s long
+validation,seeds6000+. No actual scientific preflight,simulation,training or
+remote launch occurred. Source training implementation unchanged;no redundant
+simulation/full-suite rerun for this launcher-only change. Existing218-test
+verification remains documented under E041.
+
+Plan,exact launcher and stub command-construction evidence archived at
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E042`;separate manifest SHA256
+23a47c094878faf331792c0baf5ae6ef4a2f2bc497de0c646d462cdee774a817.
+Archive is preparation evidence,not server experiment output or a checkpoint
+backup. Local copy completed;cloud synchronization not independently verified.

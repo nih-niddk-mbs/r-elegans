@@ -1067,3 +1067,8 @@ shortfall16x bend and6.25x muscle. Seed5002 offers a smaller stable gain;5000/50
 improve muscle activity without improving bend. Prefer independent continuation
 from5003,with5002 backup;preserve original anchors/bounds and zero input. No new
 run launched or skill qualified. Exact record:`experiments/records/E041-server-20261109.json`.
+
+Three-hour continuation(E042) prepared:
+`sh scripts/continue_posterior_motor_mbslnx2.sh` starts3 forks from E041 seed5003
+and1 from5002,with original bounds,zero drive and300s long validation.
+See [current model](CURRENT_MODEL.md#three-hour-posterior-motor-continuation-e042-plan-2026-11-09).

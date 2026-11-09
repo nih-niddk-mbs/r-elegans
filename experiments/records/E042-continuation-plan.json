@@ -1,0 +1,46 @@
+{
+  "experiment": "E042",
+  "status": "prepared_for_user_launch_not_executed",
+  "algorithm_experiment": "E041 unchanged",
+  "minutes": 180,
+  "workers": 4,
+  "cores_per_worker": 4,
+  "seed_parent_map": {
+    "6000": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T222806260061Z/seed-5003",
+    "6001": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T222806260061Z/seed-5003",
+    "6002": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T222806260061Z/seed-5003",
+    "6003": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T222806260061Z/seed-5002"
+  },
+  "fit_seconds": 20,
+  "long_validation_seconds": 300,
+  "other_validation_seconds": 20,
+  "continuation": "Fresh RNG searches from learned parameters at original anchors/bounds;full parents copied;not exact optimizer resume",
+  "maximum_factor": "Inherited original factor16",
+  "eligible_unknown_parameters": 9616,
+  "fixed": [
+    "LEAK",
+    "capacitance",
+    "kinetics",
+    "reversals",
+    "calcium handling",
+    "release parameters",
+    "NMJs",
+    "muscle/body mechanics",
+    "anatomical masks"
+  ],
+  "injected_currents": "all zero",
+  "qualification": "Posterior median bend>=0.003rad AND net-muscle excursion>=0.003 in all five active checks;25% refinement agreement;held voltage quiet",
+  "command": "sh scripts/continue_posterior_motor_mbslnx2.sh",
+  "launcher_sha256": "18832b77369f910ffd9196bc27510f3440efa74a5cbd92c20cdf2cc5abd8daa3",
+  "verification": [
+    "sh -n passed",
+    "Existing supervisor --help confirms all flags",
+    "Actual shell launch with interpreter/preflight shim verifies3:1 parents,180min,20s fits,300s longvalidation,seeds6000+;no training or actual parent validation"
+  ],
+  "limitations": [
+    "Actual server source/environment and parent hashes captured at launch,not available now",
+    "Supervisor termination grace may extend budget slightly;early qualification may finish sooner",
+    "Long validation extended to300s;other perturbation/refinement windows stay20s",
+    "Original parent checkpoints stay unqualified;no new skill claimed"
+  ]
+}
