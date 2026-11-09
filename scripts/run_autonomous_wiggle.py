@@ -30,6 +30,7 @@ def main():
     parser.add_argument('--cores-per-worker',type=int,default=4)
     parser.add_argument('--target-p2p-rad',type=float,default=.01)
     parser.add_argument('--objective',choices=['amplitude','movement','body-wave','cycle-movement','body-amplitude'],default='amplitude')
+    parser.add_argument('--posterior-motor-focus',action='store_true')
     parser.add_argument('--tail-focus',action='store_true')
     parser.add_argument('--fit-seconds',type=float)
     parser.add_argument('--validation-seconds',type=float)
@@ -38,7 +39,8 @@ def main():
     args=parser.parse_args()
     if args.seed_start<0:parser.error('Nonnegative seed-start required')
     if args.fit_scope is None:args.fit_scope='rmd' if args.objective=='amplitude' else 'neurons-connections'
-    if args.tail_focus and (args.objective!='body-amplitude' or args.fit_scope!='neurons-connections'):
+    if args.tail_focus and args.posterior_motor_focus:parser.error('Choose one posterior curriculum')
+    if (args.tail_focus or args.posterior_motor_focus) and (args.objective!='body-amplitude' or args.fit_scope!='neurons-connections'):
         parser.error('Tail focus requires joint body-amplitude objective')
     for seconds in (args.fit_seconds,args.validation_seconds):
         if seconds is not None and (not math.isfinite(seconds) or seconds<4):parser.error('Finite durations >=4 s required')
@@ -68,6 +70,7 @@ def main():
         'body-wave':'autonomous-wave-','cycle-movement':'autonomous-cycle-movement-',
         'body-amplitude':'autonomous-body-amplitude-'}[args.objective]
     if args.tail_focus:prefix='autonomous-tail-amplitude-'
+    if args.posterior_motor_focus:prefix='autonomous-posterior-motor-'
     run=base/(prefix+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
     run.mkdir(parents=True,exist_ok=False);capture_run_record(run,repo,args)
     print('Run: '+str(run),flush=True)
@@ -89,6 +92,7 @@ def main():
                     '--seed',str(seed),'--minutes',str(args.minutes),'--target-p2p-rad',str(args.target_p2p_rad),
                     '--objective',args.objective,'--fit-scope',args.fit_scope,'--target-speed',str(args.target_speed)]
                 if args.tail_focus:command.append('--tail-focus')
+                if args.posterior_motor_focus:command.append('--posterior-motor-focus')
                 for option,value in (('--fit-seconds',args.fit_seconds),('--validation-seconds',args.validation_seconds)):
                     if value is not None:command.extend([option,str(value)])
                 parent=parents[slot%len(parents)] if parents else None
@@ -125,7 +129,8 @@ def main():
     experiment={'body-wave':'E035','cycle-movement':'E036','body-amplitude':'E037'}.get(args.objective,
         'E032' if args.fit_scope=='neurons-connections' else ('E031' if args.objective=='movement' else 'E030'))
     if args.tail_focus:experiment='E039'
-    summary=dict(experiment=experiment,tail_focus=args.tail_focus,
+    if args.posterior_motor_focus:experiment='E041'
+    summary=dict(experiment=experiment,tail_focus=args.tail_focus,posterior_motor_focus=args.posterior_motor_focus,
         objective=args.objective,fit_scope=args.fit_scope,
         workers=workers,elapsed_seconds=time.monotonic()-start,interrupted=stopped)
     (run/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
@@ -133,6 +138,7 @@ def main():
     label={'body-wave':'AUTONOMOUS_WAVE','cycle-movement':'AUTONOMOUS_CYCLE_MOVEMENT',
         'movement':'AUTONOMOUS_MOVEMENT','amplitude':'AUTONOMOUS_WIGGLE','body-amplitude':'AUTONOMOUS_BODY_AMPLITUDE'}[args.objective]
     if args.tail_focus:label='AUTONOMOUS_TAIL_AMPLITUDE'
+    if args.posterior_motor_focus:label='AUTONOMOUS_POSTERIOR_MOTOR'
     print(label+'_EXIT_CODE='+str(0 if passed else 2),flush=True)
     return 0 if passed else 2
 

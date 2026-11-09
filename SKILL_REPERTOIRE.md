@@ -316,3 +316,8 @@ Finite screen does not exclude other densities/recurrent loops. No candidate
 promoted or body skill qualified. Next proposed search targets posterior motor/
 muscle recruitment from the existing autonomous rhythm;external drive remains
 zero. See `experiments/records/E040-server-20261109.json`.
+
+E041 planned independent posterior motor/muscle/bend primitive:net-muscle and
+physical tail median sustained excursions must both reach0.003,with perturbation,
+refinement and held-voltage checks. No phase/propulsion gate.30-minute server
+trial prepared from E039 parents;no new qualification claimed.

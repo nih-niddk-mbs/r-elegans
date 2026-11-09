@@ -1053,3 +1053,8 @@ Finite screen does not exclude other densities/recurrent loops. No candidate
 promoted or body skill qualified. Next proposed search targets posterior motor/
 muscle recruitment from the existing autonomous rhythm;external drive remains
 zero. See `experiments/records/E040-server-20261109.json`.
+
+Option1,E041: `sh scripts/launch_posterior_motor_mbslnx2.sh` prepares a30-minute
+background server cohort targeting26 strongly posterior motor neurons,net muscle
+activation and bending. Zero external drive,original bounds preserved. See
+[current model](CURRENT_MODEL.md#targeted-posterior-motor-recruitment-e041-2026-11-09).

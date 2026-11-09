@@ -1356,3 +1356,59 @@ Finite screen does not exclude other densities/recurrent loops. No candidate
 promoted or body skill qualified. Next proposed search targets posterior motor/
 muscle recruitment from the existing autonomous rhythm;external drive remains
 zero. See `experiments/records/E040-server-20261109.json`.
+
+## Targeted posterior motor recruitment (E041, 2026-11-09)
+
+Option1 trial prepared for user launch:30-minute nohup cohort on mbslnx2,
+four four-core workers,seeds5000–5003 from reviewed E039 seeds2000/2001.
+Preserve full parent histories,original anchors and16x bounds;fresh RNG/new-score
+baseline. All9616 uncertain non-LEAK densities and existing recurrent strengths
+remain eligible. External currents zero;leak,C,kinetics,reversals,Ca handling,
+release,NMJs and muscle/body mechanics fixed. No teacher or pacing signal.
+
+Select motor classes DA/DB/DD/VA/VB/VD/AS with>=50% of their normalized
+NMJ/joint contribution in posterior four joints;retain95% of eligible tail
+contribution. Current frozen readout selects26 cells:VD13,VA12,DA09,DD06,VB11,
+DD05,DA08,DD04,DB07,VD12,DA07,DB06,VA09,VB10,VA11,VD09,VB07,VB08,VA08,VD10,
+VA10,DB05,VD08,VD11,VB09,AS08. Exact names,weights and fractions saved in policy.
+This excludes SMD/SIA/AVK cells that dominated the earlier broad auxiliary.
+Selection is an anatomical modeling rule,not measured cell-specific physiology.
+
+Score60% tail bend coverage,35% actual posterior projected dorsal-minus-ventral
+muscle excursion,5% contribution-weighted sustained motor release. Both physical
+median excursions must reach0.003 to qualify. Neural activity alone,passive
+bending and common-mode muscle activation cannot pass. Phase/control/propulsion
+remain deferred;body-wide qualification reported separately. Release reward
+is a bounded heuristic.20s fits,60s long validation,initial-voltage perturbations,
+finer brain/body timesteps and held-voltage control. Both tail bend and net-muscle
+amplitudes require25% refinement agreement. Any pass is provisional for these
+short windows;no long-duration/locomotion claim.
+
+Proposals:10% original global,45% one/two-hop existing chemical paths from the
+current network's own release-rhythmic sources,25% incoming-chemical blocks,
+20% motor density/gap blocks. At most16 internally active sources,recomputed
+after each accepted rollout,saved in search state. Use2x historical proposal
+sigma within unchanged original bounds. Paths can include relevant interneurons;
+no new topology edges. No requirement that every motor cell oscillate alone.
+The local baseline offers such short paths to12/26 targets;others can still
+change via incoming/density/gap/global proposals. This is not a complete search
+of all recurrent circuits.
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_posterior_motor_mbslnx2.sh
+```
+
+Launcher prints exact PID/log path;prefix`autonomous-posterior-motor-*`.
+Budget includes setup/search/validation with supervisor termination grace.
+Prior skill checkpoints preserved independently;no head/middle retention gate.
+Actual server launch/results remain pending until user reports them.
+
+Local E041 six-proposal trial completed all six validations,one accepted
+nominal-score change;remains unqualified. Tiny amplitude gains are timestep-
+sensitive (fine-step net-muscle and motor-release scores0),so no successful
+recruitment claim. Qualification gates reject this result. Target units are
+0.003rad bending and0.003 dimensionless net-muscle activation.218 tests pass;
+server trial remains user-launched. Raw artifacts external,compact record
+`experiments/records/E041-posterior-motor.json`.

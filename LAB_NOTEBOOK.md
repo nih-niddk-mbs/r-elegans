@@ -2774,3 +2774,87 @@ Clearly labeled server-summary transcription archived under external OneDrive
  ae2e353b30a9734bd6281c8086819a897e93a0dddcc5d335d358f69b955f2f13.
 This is a transcription of user console messages,not independently retrieved
 raw stdout or server artifact backup. Cloud synchronization not verified.
+
+## 2026-11-09 — E041 planned option1 posterior motor recruitment trial
+
+User selected option1. Replace the broad71-cell neural auxiliary with a
+reproducible strong-posterior motor target: canonical DA/DB/DD/VA/VB/VD/AS
+classes, >=50% of normalized NMJ-to-joint contribution in posterior four joints,
+retaining cells accounting for95% of eligible posterior contribution. Weight
+by the frozen parent effective NMJ readout (unsigned anatomical magnitude).
+Audit exact selected names/contributions before fitting; no biological cell-
+specific physiology claim. An initial anatomy probe failed on a read-only
+NumPy view; corrected to nonmutating division. It found appropriate strongly
+posterior projections (VD13,VA12,DA09,DD06,VB11,etc), distinct from E040 rhythmic
+SMD/SIA/AVK population. No fit occurred in this metadata check.
+
+Score60% tail bend coverage,35% actual projected dorsal-minus-ventral muscle
+excursion,5% contribution-weighted sustained release from selected motor cells.
+Both physical targets are median per-joint sustained p2p>=0.003 in posterior
+four joints; release auxiliary is heuristic,never qualifies a skill. Common-mode
+muscle fluctuations or passive tail bending alone cannot qualify. No prescribed
+frequency,phase,control or propulsion. All runtime currents zero. Frozen leak,
+C,kinetics,reversals,Ca,release,NMJs/body; original16x bounds and anchors retained.
+All9616 uncertain existing density/recurrent strengths remain eligible.
+
+Proposals:10% original full-space;45% existing one/two-hop chemical paths from
+current internally rhythmic transmitter-release sources into a weighted posterior
+motor target;25% coordinated existing incoming-chemical blocks;20% motor density
+and neighboring symmetric gap blocks. Paths use existing anatomy only, no
+new edges or forcing. Current best trace supplies driver identities; record them
+in search state and source policy. Joint density/connection changes allowed,
+independent values remain untied. This tests recruitment of an existing rhythm,
+not a requirement for isolated motor-cell pacemakers. No driven teacher.
+
+Planned server trial30min incl validation,4workers x4cores, seeds5000–5003
+round-robin from reviewed E039 seeds2000/2001. Fit20s,long60s plus perturbation,
+finer brain/body steps and held-voltage. Refined tail bend AND net-muscle drive
+must agree within25%;no head/middle retention constraint,parent skills preserved
+independently. Short pass provisional,not long-duration or locomotion evidence.
+
+Before server launch: meaningful synthetic tests for target specificity,
+common-mode/passive rejection and anatomical path/bound preservation;local
+6-proposal fit12s/validation20s/budget6min using cached local E039 smoke parent.
+Command planned:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl JAX_PLATFORMS=cpu .venv/bin/python -m scripts.train_autonomous_wiggle --objective body-amplitude --posterior-motor-focus --fit-scope neurons-connections --warm-start-worker /tmp/r-elegans-E039-tail-pilot --output-dir /tmp/r-elegans-E041-motor-pilot --seed 5000 --minutes 6 --iterations 6 --fit-seconds 12 --validation-seconds 20`
+Server stays user-launched after push;actual server parents unavailable locally.
+
+E041 LOCAL trial executed as planned,133.960614s,exit2/unqualified. Six proposals,
+one nominal-score acceptance at iteration3,six parameters changed:VA10 EGL36,
+EGL19,SLO1_UNC2,KCNL densities plus existing AVER→AVAR→VA10 chemical path.
+This is a joint intervention,not attribution of benefit to an individual term.
+Baseline internally rhythmic release sources RMDDR,RMDDL,RMDVR,AVER;initial
+one/two-hop paths reach12/26 targets. All prior unknowns remain globally eligible.
+Policy selects26 posterior motors (full names/weights in compact record),none
+of the E040 SMD/SIA/AVK rhythmic population. Frozen fields unchanged,all injected
+currents zero,original anchor/bounds and parent reconstruction verified.
+
+Nominal training posterior bend median2.86847e-6→3.39746e-6rad,net-muscle
+median4.35114e-6→7.51019e-6 (dimensionless). These tiny gains are NOT robust
+actuation evidence:brain-refined validation bend2.90573e-6rad,median net-muscle
+and motor-release excursion scores both0. Long20s validation bend5.11855e-6,
+net muscle7.36117e-6. All five active validations fail qualification;held-voltage
+scored excursions0. All six cases completed. Nominal objective can still favor
+numerically sensitive small amplitudes;independent refinement gates reject
+such candidates. Search remains nominal timestep,not a proven numerically
+robust optimizer. No skill pass,realistic animal behavior or model sufficiency
+claim. Server trial is exploratory;do not automatically extend if it stalls.
+
+Targets use0.003rad bend and0.003 dimensionless net-muscle excursion. Both
+required;release auxiliary alone cannot qualify. Software verification12
+focused tests passed3.05s,full suite218 passed71.91s;added drive-only rejection
+assertion then4 focused tests passed1.11s. Shell syntax passed. Tests exercise
+nonmotor/anterior exclusion,head-only reward invariance,common-mode/passive/
+neural-only/drive-only rejection,refinement,driver identity and existing directed
+path/bound preservation. They validate software,not the biology.
+
+Best local checkpoint SHA256
+4cc72b2702f4c3b04f988e21df1b54d4d9d87c1814644e0df82506e0a1eeabd5.
+Raw local artifacts,complete copied lineage,selected/final checkpoints,RNG and
+history,all validations,source/environment,stdout and new implementation archived
+at `/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E041` (934 files),manifest
+SHA256391c05f8f95385d43bd872c64a9a4cb939177b8552747e8dd0c0ab19559ff620.
+Copy completed locally;cloud synchronization not independently verified.
+Compact record `experiments/records/E041-posterior-motor.json` preserves exact
+invocation,hashes,policy and summary. Decision:push30-minute nohup launcher from
+reviewed actual E039 parents for user launch;no server execution claimed.
