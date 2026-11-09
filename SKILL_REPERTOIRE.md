@@ -244,3 +244,10 @@ skill added. E033 synthetic audit identifies phase-sensitive short-window
 selection as a possible search failure route; actual trajectories remain
 unretrieved. Preserve the autonomous amplitude reference and audit scoring
 before repeating compute.
+
+E034 actual E032 cohort analysis received: ~99% anterior variance and
+~99.9% one shape pattern across all four long cases, only small phase offsets
+and negligible/negative cycle-matched drift. No forward skill added. Next
+proposed primitive is autonomous body-wide bend coverage and phase progression
+before forward-speed optimization; no external drive or teacher is needed
+for the proposed behavioral objective. Implementation/results remain pending.

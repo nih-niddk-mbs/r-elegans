@@ -1,8 +1,8 @@
 {
   "experiment": "E034",
-  "status": "local_analysis_complete_remote_cohort_pending",
+  "status": "local_analysis_and_user_reported_four_hour_analysis_complete",
   "remote_cohort": "/home/carsonc/r-elegans-results/autonomous-movement-20261108T205220165775Z",
-  "remote_access": "Noninteractive SSH failed authentication; no remote trajectories retrieved",
+  "remote_access": "Server-side analyzer executed by user; output received, raw files not independently retrieved",
   "local_pilot": {
     "source_run": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke",
     "cases": [
@@ -1340,5 +1340,6 @@
   },
   "raw_artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E034",
   "archive_verified_local_files": 572,
-  "archive_manifest_sha256": "245a97032280bfabeeff38debb01e7e80bfc0e85c6378105e422bf2236f95c6b"
+  "archive_manifest_sha256": "245a97032280bfabeeff38debb01e7e80bfc0e85c6378105e422bf2236f95c6b",
+  "server_analysis_report": "experiments/records/E034-server-20261108.json"
 }

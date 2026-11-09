@@ -1468,3 +1468,35 @@ assays), not inferred from displacement. The command prints compact per-case
 findings and saves `summary.json`. Numeric analysis does not need matplotlib.
 Use actual cohort findings to separate localized bending, phase progression,
 cycle drift and endpoint effects before more training.
+
+E034 actual-cohort update (user-reported server analysis): the four-hour E032
+selections have now been analyzed on mbslnx2, with all 24 worker/case results
+reported. Analysis directory `trajectory-analysis-20261109T020051Z`; original
+training cohort `autonomous-movement-20261108T205220165775Z`. Full raw files
+and detailed hash-bearing reports have not been independently retrieved.
+
+All four long cases concentrate 98.95–99.09% of dynamic joint variance in
+the three anterior joints. One shape pattern explains 99.88–99.99%. Four
+joints exceed the meaningful-amplitude threshold. Dominant frequencies
+3.41–3.81 Hz (periods ~262–293 ms), with maximum active lag only 1.08–2.98 ms
+in long cases and <=5.15 ms in other active cases. The learned movement
+remains nearly synchronous anterior bending, not a body-spanning wave.
+
+Long equal-phase drift (BL/s), seeds0..3:
+-5.002e-7 / -2.854e-8 / -3.911e-7 / -4.470e-7. Small positive short endpoint
+scores reverse or shrink after matching phase in seeds0,2,3; seed1 retains
+small short-case positive phase drift but loses it in the long case. Body
+refinement changes the tiny residual substantially, sometimes flipping sign.
+Seed1 positive-cycle fractions of1 in short cases do not qualify it: speeds
+remain ~5e-7–9e-7 and long drift is slightly negative. Held-voltage controls
+have no cycles or motion. No robust autonomous forward skill is established.
+
+The local diagnosis is supported by actual candidate summaries. The missing
+primitive is distributed, phase-progressing bending. Proposed next curriculum:
+first reward self-generated bend coverage into middle/posterior joints and
+nontrivial spatial phase coordination, then cycle-averaged forward progress.
+Neuron/connection eligibility remains broad; zero injected drive and fixed
+physiological/body properties remain required. A single cause for optimization
+failure or full-network insufficiency is not established. Preserve original
+wiggle and failed candidates; no new long search launched in this analysis.
+See `experiments/records/E034-server-20261108.json`.

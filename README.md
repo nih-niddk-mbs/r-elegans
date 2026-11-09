@@ -110,7 +110,9 @@ next priority before another long run.
 A [read-only trajectory analyzer](CURRENT_MODEL.md#trajectory-analysis-e034-2026-11-08)
 measures spatial bend amplitude, phase, shape variance and translation at
 matching wiggle phases. The saved local pilot is mostly synchronous anterior
-bending; the actual four-hour traces still need the supplied server analysis.
+bending. User-reported server analysis now confirms that all four-hour
+candidates remain anterior-dominated and nearly in phase, with no robust
+cycle-matched forward progress.
 
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly
