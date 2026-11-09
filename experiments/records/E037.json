@@ -1,0 +1,647 @@
+{
+  "experiment": "E037",
+  "status": "prepared_for_user_launch_after_local_warm_start_verification",
+  "objective": "Independent sustained body joint amplitude; phase/control/propulsion deferred",
+  "trainable": {
+    "channel_densities": 4814,
+    "chemical_strengths": 3709,
+    "electrical_pairs": 1093,
+    "total": 9616
+  },
+  "target_regional_median_joint_p2p_rad": 0.003,
+  "diagnostics_not_targets": [
+    "muscle drive",
+    "phase",
+    "frequency",
+    "PCA",
+    "heading",
+    "speed",
+    "direction"
+  ],
+  "fork_sources": [
+    "/home/carsonc/r-elegans-results/autonomous-wave-20261109T032054849657Z/seed-2",
+    "/home/carsonc/r-elegans-results/autonomous-wave-20261109T032054849657Z/seed-3"
+  ],
+  "workers": 4,
+  "fork_seeds": [
+    1000,
+    1001,
+    1002,
+    1003
+  ],
+  "wall_minutes": 240,
+  "fit_seconds": 30,
+  "validation_seconds": 300,
+  "warm_start_mode": "Learned offsets at original source anchor/bounds; fresh RNG/proposals and new-score baseline, full parent copied",
+  "source_original_bound_factors": [
+    0.0625,
+    16.0
+  ],
+  "local_pilot": {
+    "experiment": "E037",
+    "objective": "body-amplitude",
+    "fit_scope": "neurons-connections",
+    "total_trainable": 9616,
+    "parameters_proposed": 407,
+    "parameters_updated": 407,
+    "parameters_different_from_initial": 407,
+    "parameters_different_from_anchor": 530,
+    "parameter_coverage_by_kind": {
+      "channel_densities": {
+        "eligible": 4814,
+        "proposed": 128,
+        "updated": 128,
+        "different_from_initial": 128,
+        "different_from_anchor": 185
+      },
+      "chemical_strengths": {
+        "eligible": 3709,
+        "proposed": 218,
+        "updated": 218,
+        "different_from_initial": 218,
+        "different_from_anchor": 273
+      },
+      "electrical_pairs": {
+        "eligible": 1093,
+        "proposed": 61,
+        "updated": 61,
+        "different_from_initial": 61,
+        "different_from_anchor": 72
+      }
+    },
+    "seed": 1000,
+    "status": "completed",
+    "passed": false,
+    "baseline": {
+      "valid": true,
+      "score": 0.05737636692099127,
+      "body_amplitude_qualified": false,
+      "curriculum_stage": "body-amplitude",
+      "body_coverage_score": 0.05737636692099127,
+      "region_order": [
+        "posterior",
+        "middle",
+        "anterior"
+      ],
+      "regional_joint_median_p2p_rad": [
+        3.874301910400391e-06,
+        0.00016483687795698643,
+        0.02043433114886284
+      ],
+      "regional_drive_median_p2p": [
+        2.2202730178833008e-06,
+        0.00018886616453528404,
+        0.024769198149442673
+      ],
+      "joint_sustained_p2p_rad": [
+        5.364418029785156e-07,
+        2.428889274597168e-06,
+        5.319714546203613e-06,
+        2.9277056455612183e-05,
+        0.00013875961303710938,
+        0.00016316398978233337,
+        0.00016650976613163948,
+        0.0037961751222610474,
+        0.01195322722196579,
+        0.02043433114886284,
+        0.02837431989610195
+      ],
+      "drive_sustained_p2p": [
+        0.0,
+        1.2218952178955078e-06,
+        3.2186508178710938e-06,
+        3.018602728843689e-05,
+        0.00015941262245178223,
+        0.00018741190433502197,
+        0.0001903204247355461,
+        0.004599142819643021,
+        0.014500804245471954,
+        0.024769198149442673,
+        0.03438005317002535
+      ],
+      "repetitive_joint_count": 11,
+      "repetitive_drive_count": 10,
+      "sustained_joint_p2p_rad": 0.02837431989610195,
+      "joint_p2p_max_rad": 0.029656030237674713,
+      "sustained_neural_rhythms": 18,
+      "neural_rhythm_threshold_mV": 0.05,
+      "voltage_min_mV": -79.9938735961914,
+      "voltage_max_mV": 7.712183475494385,
+      "muscle_saturation_fraction": 0.0,
+      "joint_limits_reached": false,
+      "wave_qualified": false,
+      "locomotion_demonstrated": false,
+      "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+    },
+    "best_training": {
+      "valid": true,
+      "score": 0.05812750796055159,
+      "body_amplitude_qualified": false,
+      "curriculum_stage": "body-amplitude",
+      "body_coverage_score": 0.05812750796055159,
+      "region_order": [
+        "posterior",
+        "middle",
+        "anterior"
+      ],
+      "regional_joint_median_p2p_rad": [
+        3.933906555175781e-06,
+        0.00015848252223804593,
+        0.020272817462682724
+      ],
+      "regional_drive_median_p2p": [
+        2.3171305656433105e-06,
+        0.0001893055159598589,
+        0.024540085345506668
+      ],
+      "joint_sustained_p2p_rad": [
+        5.364418029785156e-07,
+        2.5331974029541016e-06,
+        5.334615707397461e-06,
+        2.9131770133972168e-05,
+        0.00013462454080581665,
+        0.00015693902969360352,
+        0.00016002601478248835,
+        0.0037687793374061584,
+        0.011895373463630676,
+        0.020272817462682724,
+        0.028170120902359486
+      ],
+      "drive_sustained_p2p": [
+        0.0,
+        1.2516975402832031e-06,
+        3.382563591003418e-06,
+        3.026425838470459e-05,
+        0.00015996769070625305,
+        0.00018777325749397278,
+        0.000190837774425745,
+        0.004568550735712051,
+        0.014395289123058319,
+        0.024540085345506668,
+        0.03409795556217432
+      ],
+      "repetitive_joint_count": 11,
+      "repetitive_drive_count": 10,
+      "sustained_joint_p2p_rad": 0.028170120902359486,
+      "joint_p2p_max_rad": 0.029628615826368332,
+      "sustained_neural_rhythms": 18,
+      "neural_rhythm_threshold_mV": 0.05,
+      "voltage_min_mV": -79.9938735961914,
+      "voltage_max_mV": 7.712143898010254,
+      "muscle_saturation_fraction": 0.0,
+      "joint_limits_reached": false,
+      "wave_qualified": false,
+      "locomotion_demonstrated": false,
+      "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+    },
+    "validation": [
+      {
+        "case": "long",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.05812750796055159,
+          "body_amplitude_qualified": false,
+          "curriculum_stage": "body-amplitude",
+          "body_coverage_score": 0.05812750796055159,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "regional_joint_median_p2p_rad": [
+            3.933906555175781e-06,
+            0.00015848252223804593,
+            0.020272817462682724
+          ],
+          "regional_drive_median_p2p": [
+            2.3171305656433105e-06,
+            0.0001893055159598589,
+            0.024540085345506668
+          ],
+          "joint_sustained_p2p_rad": [
+            5.364418029785156e-07,
+            2.5331974029541016e-06,
+            5.334615707397461e-06,
+            2.9131770133972168e-05,
+            0.00013462454080581665,
+            0.00015693902969360352,
+            0.00016002601478248835,
+            0.0037687793374061584,
+            0.011895373463630676,
+            0.020272817462682724,
+            0.028170120902359486
+          ],
+          "drive_sustained_p2p": [
+            0.0,
+            1.2516975402832031e-06,
+            3.382563591003418e-06,
+            3.026425838470459e-05,
+            0.00015996769070625305,
+            0.00018777325749397278,
+            0.000190837774425745,
+            0.004568550735712051,
+            0.014395289123058319,
+            0.024540085345506668,
+            0.03409795556217432
+          ],
+          "repetitive_joint_count": 11,
+          "repetitive_drive_count": 10,
+          "sustained_joint_p2p_rad": 0.028170120902359486,
+          "joint_p2p_max_rad": 0.029628615826368332,
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "voltage_min_mV": -79.9938735961914,
+          "voltage_max_mV": 7.712143898010254,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "wave_qualified": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+        }
+      },
+      {
+        "case": "perturb-plus",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 1.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.05737636692099127,
+          "body_amplitude_qualified": false,
+          "curriculum_stage": "body-amplitude",
+          "body_coverage_score": 0.05737636692099127,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "regional_joint_median_p2p_rad": [
+            3.874301910400391e-06,
+            0.00015816319501027465,
+            0.020285166800022125
+          ],
+          "regional_drive_median_p2p": [
+            2.3245811462402344e-06,
+            0.0001888542901724577,
+            0.024561293423175812
+          ],
+          "joint_sustained_p2p_rad": [
+            5.364418029785156e-07,
+            2.5033950805664062e-06,
+            5.245208740234375e-06,
+            2.911314368247986e-05,
+            0.0001349225640296936,
+            0.00015656650066375732,
+            0.00015975988935679197,
+            0.0037569887936115265,
+            0.011881723999977112,
+            0.020285166800022125,
+            0.028185993432998657
+          ],
+          "drive_sustained_p2p": [
+            0.0,
+            1.3113021850585938e-06,
+            3.337860107421875e-06,
+            3.0178576707839966e-05,
+            0.00015950947999954224,
+            0.0001873224973678589,
+            0.0001903860829770565,
+            0.004555363208055496,
+            0.014381498098373413,
+            0.024561293423175812,
+            0.034124662168323994
+          ],
+          "repetitive_joint_count": 11,
+          "repetitive_drive_count": 10,
+          "sustained_joint_p2p_rad": 0.028185993432998657,
+          "joint_p2p_max_rad": 0.029622051864862442,
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "voltage_min_mV": -80.96961212158203,
+          "voltage_max_mV": 7.711389064788818,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "wave_qualified": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+        }
+      },
+      {
+        "case": "perturb-minus",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": -1.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.05794002436226533,
+          "body_amplitude_qualified": false,
+          "curriculum_stage": "body-amplitude",
+          "body_coverage_score": 0.05794002436226533,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "regional_joint_median_p2p_rad": [
+            3.919005393981934e-06,
+            0.00015848525799810886,
+            0.02026275545358658
+          ],
+          "regional_drive_median_p2p": [
+            2.3096799850463867e-06,
+            0.00018975511193275452,
+            0.024530716240406036
+          ],
+          "joint_sustained_p2p_rad": [
+            5.364418029785156e-07,
+            2.518296241760254e-06,
+            5.319714546203613e-06,
+            2.9049813747406006e-05,
+            0.00013427063822746277,
+            0.0001569446176290512,
+            0.00016002589836716652,
+            0.003780469298362732,
+            0.011903472244739532,
+            0.02026275545358658,
+            0.028150317259132862
+          ],
+          "drive_sustained_p2p": [
+            0.0,
+            1.2516975402832031e-06,
+            3.3676624298095703e-06,
+            3.036484122276306e-05,
+            0.00016038864850997925,
+            0.00018818676471710205,
+            0.00019132345914840698,
+            0.0045803748071193695,
+            0.014404408633708954,
+            0.024530716240406036,
+            0.03407572489231825
+          ],
+          "repetitive_joint_count": 11,
+          "repetitive_drive_count": 10,
+          "sustained_joint_p2p_rad": 0.028150317259132862,
+          "joint_p2p_max_rad": 0.02964828535914421,
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "voltage_min_mV": -80.97950744628906,
+          "voltage_max_mV": 7.712960720062256,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "wave_qualified": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+        }
+      },
+      {
+        "case": "brain-refined",
+        "seconds": 30.0,
+        "brain_step_ms": 0.05,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.047704878931143,
+          "body_amplitude_qualified": false,
+          "curriculum_stage": "body-amplitude",
+          "body_coverage_score": 0.047704878931143,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "regional_joint_median_p2p_rad": [
+            3.129243850708008e-06,
+            0.00016308529302477837,
+            0.02033049613237381
+          ],
+          "regional_drive_median_p2p": [
+            0.0,
+            0.00018822308629751205,
+            0.02459687367081642
+          ],
+          "joint_sustained_p2p_rad": [
+            5.513429641723633e-07,
+            2.086162567138672e-06,
+            4.172325134277344e-06,
+            3.135204315185547e-05,
+            0.00013742595911026,
+            0.00016259215772151947,
+            0.00016357842832803726,
+            0.0038154609501361847,
+            0.012068219482898712,
+            0.02033049613237381,
+            0.028106743469834328
+          ],
+          "drive_sustained_p2p": [
+            0.0,
+            0.0,
+            0.0,
+            3.2745301723480225e-05,
+            0.0001598745584487915,
+            0.00018810108304023743,
+            0.00018834508955478668,
+            0.004618532955646515,
+            0.014600977301597595,
+            0.02459687367081642,
+            0.03402490634471178
+          ],
+          "repetitive_joint_count": 11,
+          "repetitive_drive_count": 8,
+          "sustained_joint_p2p_rad": 0.028106743469834328,
+          "joint_p2p_max_rad": 0.029642079025506973,
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "voltage_min_mV": -79.9938735961914,
+          "voltage_max_mV": 7.702492713928223,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "wave_qualified": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+        }
+      },
+      {
+        "case": "body-refined",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.001,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.05718807745155536,
+          "body_amplitude_qualified": false,
+          "curriculum_stage": "body-amplitude",
+          "body_coverage_score": 0.05718807745155536,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "regional_joint_median_p2p_rad": [
+            3.859400749206543e-06,
+            0.00015884224558249116,
+            0.020294159650802612
+          ],
+          "regional_drive_median_p2p": [
+            2.2277235984802246e-06,
+            0.00018930481746792793,
+            0.0245404951274395
+          ],
+          "joint_sustained_p2p_rad": [
+            5.066394805908203e-07,
+            2.3990869522094727e-06,
+            5.319714546203613e-06,
+            2.9243528842926025e-05,
+            0.00013476237654685974,
+            0.00015730038285255432,
+            0.000160384108312428,
+            0.0037734396755695343,
+            0.011908352375030518,
+            0.020294159650802612,
+            0.028200296685099602
+          ],
+          "drive_sustained_p2p": [
+            0.0,
+            1.0132789611816406e-06,
+            3.4421682357788086e-06,
+            3.0267983675003052e-05,
+            0.00015993788838386536,
+            0.0001877620816230774,
+            0.00019084755331277847,
+            0.004568912088871002,
+            0.014394551515579224,
+            0.0245404951274395,
+            0.03409689012914896
+          ],
+          "repetitive_joint_count": 11,
+          "repetitive_drive_count": 10,
+          "sustained_joint_p2p_rad": 0.028200296685099602,
+          "joint_p2p_max_rad": 0.02966257929801941,
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "voltage_min_mV": -79.9969253540039,
+          "voltage_max_mV": 7.712143898010254,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "wave_qualified": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+        }
+      },
+      {
+        "case": "held-voltage",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": false,
+          "score": -1.0,
+          "body_amplitude_qualified": false,
+          "curriculum_stage": "body-amplitude",
+          "body_coverage_score": 0.0,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "regional_joint_median_p2p_rad": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "regional_drive_median_p2p": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_sustained_p2p_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "drive_sustained_p2p": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "repetitive_joint_count": 0,
+          "repetitive_drive_count": 0,
+          "sustained_joint_p2p_rad": 0.0,
+          "joint_p2p_max_rad": 0.0,
+          "sustained_neural_rhythms": 0,
+          "neural_rhythm_threshold_mV": 0.05,
+          "voltage_min_mV": -80.0,
+          "voltage_max_mV": -35.0,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "wave_qualified": false,
+          "locomotion_demonstrated": false,
+          "interpretation": "Body-wide sustained amplitude only; relative phase, direction and propulsion unassessed"
+        }
+      }
+    ],
+    "iterations": 1,
+    "selected_iteration": 1,
+    "target_p2p_rad": 0.01,
+    "target_speed_body_lengths_s": 0.0001,
+    "elapsed_seconds": 192.68723545901594,
+    "frozen_fields_unchanged": true,
+    "injected_currents_zero": true,
+    "locomotion_demonstrated": false,
+    "network_best_sha256": "1ce277c4e5be0d28ef0324de8c55fea0e225167f16cf49d1a67e85e0da294815",
+    "interpretation": "Independent body-wide amplitude only; phase, control and propulsion unassessed"
+  },
+  "local_parent_record": {
+    "parent_path": "/private/tmp/r-elegans-E035-wave-pilot",
+    "essential_sha256": {
+      "summary.json": "a94cede13581408a18e1d22a5655915a23c15b7567c6bc8545b46a903f94823f",
+      "fit_policy.json": "e4df9502e1d32a4701de031da8fa3b90df9e02181230479a6afa1a11a6b7aabc",
+      "search_state.json": "6d4bb2c526edcfa929144c7057fd696e9a04a4385325c902bfdaec2549797e19",
+      "best.json": "d83c4e995528c45a9f6223a65bdfe84120578d597d7f1afdd7b281754a1b7185",
+      "network_best.npz": "01a882ec17d6f9b4dbc8b5f046ae0930a70ae8843e17cd715ee58315f213f71d",
+      "allowed_parameters.npz": "85a726e144fbbf7fd00c104adc2ff6a3470a602f5527640f0d33bdce546e0a2c"
+    },
+    "original_anchor_sha256": "482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6",
+    "maximum_factor": 16.0,
+    "incoming_parameters_changed": 128,
+    "incoming_parameters_at_bound": 0,
+    "mode": "Learned parameters/original bounds retained; fresh RNG and re-evaluated amplitude objective",
+    "fork_seed": 1000
+  },
+  "software_validation": {
+    "full_suite_tests": 209,
+    "seconds": 69.71,
+    "subsequent_targeted_tests": 4,
+    "subsequent_targeted_seconds": 1.65
+  },
+  "local_pilot_scope": "Local E035 two-proposal parent, not actual remote seeds2/3. One new proposal; all six30-s validations complete, no amplitude qualification.",
+  "raw_artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E037",
+  "remote_launched": false,
+  "locomotion_demonstrated": false,
+  "archive_verified_local_files": 448,
+  "archive_manifest_sha256": "e973d8097743caa6ba06e63d1117b33589f270eb24a6f60b235b2f76066ed2d7"
+}

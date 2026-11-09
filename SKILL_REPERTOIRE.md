@@ -264,3 +264,9 @@ more shape/phase diversity but also lacks posterior amplitude. Preserve both
 as unqualified recruitment candidates; no new body-wave or propulsion skill
 added, and E036 remains gated. Do not confuse log coverage with physical
 amplitude completion.
+
+E037 current curriculum: distributed amplitude first, control later. Independent
+per-joint regional medians allow standing, opposing and asynchronous sustained
+bends. Continue learned E035 seeds2/3 using original anchors/bounds and fresh
+RNG forks. No phase, heading or propulsion criteria. A future amplitude pass
+is not automatically a wave/control skill; none is yet claimed.

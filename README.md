@@ -123,6 +123,12 @@ replaces endpoint-based progress for the later, gated movement stage. The first
 E035 server cohort improves regional recruitment but still fails posterior
 amplitude and wave qualification; seed 2/3 are retained as continuation candidates.
 
+The current [body-amplitude-only stage](CURRENT_MODEL.md#body-amplitude-only-learned-parameter-forks-e037-2026-11-09)
+defers phase coordination and propulsion. It continues learned seeds 2 and 3
+with four fresh random forks while preserving the original parameter bounds.
+Pull and run `sh scripts/launch_body_amplitude_mbslnx2.sh` on mbslnx2 (four-hour
+cap including validation). Legacy movement/wave launchers delegate to this stage.
+
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly
 eligible unknown channel densities and existing synaptic strengths fit. Each run

@@ -2347,3 +2347,91 @@ server-report-20261109/console.txt with SHA256.json. This retains the report,
 not a copy of full remote traces/checkpoints or proof of cloud synchronization.
 Extraction verified4 workers x6 cases and1874 proposals. Records/docs only;
 JSON consistency and diff whitespace checks passed, no code/physics change.
+
+## 2026-11-09 — E037 planned amplitude-only parameter forks
+
+User corrects the next stage: build autonomous amplitude first, leave control
+for later. Remove phase progression/locking, common-frequency power, PCA,
+heading/straightness and translation from this new objective and qualification.
+Allow standing, opposing and asynchronous sustained bends. Preserve physical
+finite-voltage/no clipping/no excessive saturation checks, zero injected
+currents, full 302-neuron forward model and all9,616 unknown densities/edges.
+
+Measure each joint/filtered antagonist drive independently. Require repeated
+late excursions, not a static bend or one settling transient. Use minimum
+p2p across5 late windows and repeated peaks/troughs; regional medians across
+posterior/middle/anterior joints prevent one hinge dominating a region. Target
+0.003rad regional median bend and0.003 regional median filtered drive, plus
+a viable sustained max bend>=0.01rad. No waveform, frequency, phase, direction
+or velocity target. Scores are not comparable with E035 coherent-mean scores.
+
+Continue from E035 seeds2 and3 in cohort autonomous-wave-20261109T032054849657Z,
+with four independent fresh-RNG parameter-search forks. Preserve the original
+anchor/16x bounds: load source_inputs and saved absolute offsets rather than
+re-centering around selected values. Verify reconstruction equals parent best,
+match allowed masks, preserve the full completed parent worker inside the new
+record, and re-evaluate baseline under the new objective. This is parameter
+warm start, not exact optimizer/RNG or physical-state resume. Use seeds1000..1003
+with parents2/3 round-robin. Retain all originals, no in-place overwrite.
+
+Four-hour cap including validation; 300s, +/-1mV initial states, neural/body
+refinement and held-voltage checks. Qualification is amplitude only; no wave or
+locomotion claim. Before server launch, test phase-insensitive grading and
+original-anchor restoration/bounds, and run a local warm-start pipeline trial.
+Raw histories/checkpoints/provenance remain external; prepare/test/push and
+leave remote launch to user. No parent hashes or successes are invented.
+
+E037 pre-pilot clarification: remove the inherited >=0.01-rad maximum-head
+amplitude requirement too. A balanced body-wide0.004-rad wiggle should meet
+the0.003 regional goal even if no hinge retains the previous large head bend.
+Optimization viability uses repeated joint excursion>1e-5rad and sustained
+neural variation>=0.05mV; qualification still requires every regional median
+joint/drive amplitude>=0.003. The original stronger head checkpoint remains
+unchanged separately. This avoids treating preservation of one head skill as
+a control target while learning distributed amplitude.
+
+E037 final pre-pilot simplification: only physical joint-bend amplitudes enter
+the amplitude objective and promotion. Filtered muscle-drive amplitudes remain
+diagnostics, not targets or refinement gates. Passive transmission of neurally
+generated bending is acceptable here; controlled muscle recruitment is deferred.
+All runtime forces still originate from the unchanged neuron->NMJ->muscle->body
+loop, with no artificial body forcing. This aligns the new stage strictly with
+the user's amplitude-first instruction. No E037 fitting trial has run yet.
+
+E037 local warm-start pipeline executed:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.train_autonomous_wiggle --objective body-amplitude --warm-start-worker /tmp/r-elegans-E035-wave-pilot --output-dir /tmp/r-elegans-E037-amplitude-fork --seed 1000 --minutes 6 --iterations 1 --validation-seconds 30`
+stdout `/tmp/r-elegans-E037-amplitude-fork.log`. Completed192.687235 s, one
+accepted proposal, expected exit2/no qualification. Full parent worker copied;
+old offsets/masks exactly reproduce incoming best parameters at original
+source anchor hash482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6.
+Original factor16 bounds preserved; parent had128 nonzero offsets and0 at
+bounds. This local parent is not the actual four-hour server seed2/3.
+
+New amplitude baseline score0.0573764 ->0.0581275. Regional posterior/middle/
+anterior median sustained p2p changes [3.87430e-6,1.64837e-4,0.0204343] to
+[3.93391e-6,1.58483e-4,0.0202728] rad. Tiny posterior increase, far below0.003
+target; do not call a body-amplitude success. All six short validation cases
+complete; zero injected currents/frozen-field checks and fitted-pair checksum
+verify. No wave or movement claim. The pilot's RMD-count log default0 was
+not an RMD measurement: this objective doesn't compute that count. Final
+logger uses null for unmeasured RMD and reports sustained total neural rhythms.
+This logging correction does not change scoring or dynamics.
+
+Full suite209 passed in69.71s. Targeted amplitude/warm-start tests verify
+phase/frequency-independent amplitude, ramps/transients rejection, full parent
+copy/checksum/mutation protection, original-anchor reconstruction and bounds.
+New per-region medians must not be directly compared to previous coherent
+regional-mean amplitude scores. No exact RNG/physical-state resume claim.
+Source, histories, all checkpoints and validation traces retained externally.
+Both recent standard launchers delegate to the amplitude-only stage; no
+remote process started by agent.
+
+E037 local archive verified:448 files, manifest SHA256
+`e973d8097743caa6ba06e63d1117b33589f270eb24a6f60b235b2f76066ed2d7`.
+Incoming parent parameters/fixed fields/configuration compare exactly to
+network_initial in the new run; fitted-pair hashes and all six validations
+verify. No physical/RNG exact-resume or amplitude-success claim. Targeted
+amplitude/warm-start tests after final guards:4 passed in1.65s. Offset arrays
+are cast explicitly to their original anchor dtype; default float32 dynamics
+unchanged. All three shell launchers, CLI help and diff whitespace checks pass.
+This verifies local preservation, not completed cloud synchronization.

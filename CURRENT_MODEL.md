@@ -1607,3 +1607,72 @@ a continuation must record its parent, RNG mode and any change of reference
 bounds. No new search is launched by this records update. Exact server
 artifacts/input/source/environment remain unretrieved. Numeric record:
 `experiments/records/E035-server-20261109.json`.
+
+## Body amplitude only, learned-parameter forks (E037, 2026-11-09)
+
+User directs amplitude first, control later. The current stage rewards only
+independent sustained joint-bend amplitudes throughout the body. Standing,
+opposing-phase and asynchronous body bends are allowed. There is no phase
+progression/locking, shared-frequency, PCA, heading, direction, speed or
+efficiency goal. Muscle-drive amplitudes are diagnostics only. Forward
+simulation still receives zero injected current, no teacher and no body force.
+
+For each joint, measure the minimum p2p excursion across five late windows.
+Require repeated peaks/troughs and persistence rather than a static bend, ramp
+or fading transient. Summarize by the median joint amplitude in each contiguous
+posterior/middle/anterior third; this prevents one hinge dominating a region
+and prevents opposite phases from canceling a regional mean. The engineering
+qualification target is >=0.003 rad for each regional median. A small repeated
+excursion (>1e-5 rad) and sustained neuronal variation (>=0.05 mV) establish
+optimization viability, with finite bounded voltages/no clipping or excessive
+saturation. The old >=0.01-rad head requirement is removed. These thresholds
+are not animal calibration. Scores differ from E035 coherent-mean coverage.
+
+Continue from the learned E035 seed 2 and seed 3 candidates, not the original
+head-only checkpoint. Four fresh random search streams (1000–1003) use those
+parents round-robin. A warm-start worker copies the entire completed parent,
+including selections/history/source/environment, and verifies saved offsets
+reconstruct the parent best model exactly. It retains the original source
+anchor and 0.0625–16 bounds, instead of widening another16x around the learned
+model. Masks must match; checksums/state/selection records must agree. Parent
+files remain untouched. Parent metrics are re-evaluated under amplitude-only
+fitness; RNG and proposal schedule start fresh. This is not exact optimizer,
+RNG or physical-state resume.
+
+`network_anchor.npz` preserves the original bounds anchor; `network_initial.npz`
+is the actual learned starting model. Each output includes `warm_start_source/`,
+`warm_start.json`, the complete incoming parent, new histories/checkpoints and
+proposal/update coverage. Counters distinguish changes from original anchor
+from changes made during this new fork. A copy on the same disk is not an
+independent backup. Source/environment records stay enabled.
+
+On mbslnx2:
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_body_amplitude_mbslnx2.sh
+```
+
+The default parents are pinned to the reviewed cohort
+`autonomous-wave-20261109T032054849657Z/seed-2` and `/seed-3`; they are not
+silently chosen from an unreviewed latest run. Optional first/second shell
+arguments select two other completed worker directories. The launcher audits
+parent bounds and prints source paths before starting nohup. Four disjoint
+four-core workers have a four-hour cap including setup and validation. New
+run/log prefix: `autonomous-body-amplitude-*`. Legacy movement/wave launchers
+now delegate here; explicit old objectives/source remain for historical replay.
+
+All 9,616 unknown density/chemical/electrical parameters remain eligible. Leak,
+capacitance, kinetics/reversals/calcium, anatomy, release settings, NMJs and
+body mechanics stay fixed. Keep the original numerical bounds. Validate 300s,
++/-1mV initial conditions, finer neural/body timesteps and held voltage. Only
+amplitude qualification/robustness matters here, without frequency or phase
+agreement. A passed E037 checkpoint is an amplitude primitive, **not a wave
+or locomotion claim**; no later control stage launches automatically.
+
+The local one-proposal warm-start pilot verifies exact incoming parameters,
+original bounds and complete parent copying, zero drive/frozen fields, all six
+short validation cases and standardized export. It remains unqualified; this
+is pipeline verification using a local parent, not the four-hour server seeds.
+Software suite:209 passed. Server run remains user-launched.
