@@ -1675,4 +1675,15 @@ The local one-proposal warm-start pilot verifies exact incoming parameters,
 original bounds and complete parent copying, zero drive/frozen fields, all six
 short validation cases and standardized export. It remains unqualified; this
 is pipeline verification using a local parent, not the four-hour server seeds.
-Software suite:209 passed. Server run remains user-launched.
+Software suite:209 passed. Server results are now reported below.
+
+E037 server report (2026-11-09): four-hour amplitude forks1000–1003 all
+completed unqualified (exit2),1,862 proposals total. Head amplitude exceeds
+0.003rad in4/4 seeds, middle3/4, posterior0/4. Best posterior median is
+2.8316e-5rad (seed1001), about106x below target. All active numerical and
+perturbation checks retain this deficit; held-voltage scored excursions zero.
+Preserve these independent candidates. Next: read-only posterior
+voltage→release→muscle→net-drive→joint audit before another training run.
+Local initial-voltage readout has posterior connections and nonzero sensitivity;
+this does not establish activity in the learned server checkpoints. See
+`experiments/records/E037-server-20261109.json`.

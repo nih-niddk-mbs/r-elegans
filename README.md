@@ -1007,3 +1007,8 @@ pytest
 - Gap-junction masks and strengths must be symmetric.
 - Body coordinates use a center-of-geometry frame internally and world-space
   position plus heading externally.
+
+Latest reported amplitude cohort (E037,2026-11-09): head reaches target in
+4/4 seeds, middle3/4, tail0/4; no distributed-amplitude qualification. Next is
+a read-only posterior activity audit, with control/propulsion still deferred.
+See [current model](CURRENT_MODEL.md) and [lab notebook](LAB_NOTEBOOK.md).

@@ -270,3 +270,9 @@ per-joint regional medians allow standing, opposing and asynchronous sustained
 bends. Continue learned E035 seeds2/3 using original anchors/bounds and fresh
 RNG forks. No phase, heading or propulsion criteria. A future amplitude pass
 is not automatically a wave/control skill; none is yet claimed.
+
+E037 server cohort (2026-11-09):0/4 distributed-amplitude qualifications.
+Anterior reaches target4/4 and middle3/4; posterior0/4. Best tail remains
+~106x below target. Preserve candidates, especially1001; no new body-wide
+amplitude, autonomous wave or locomotion skill added. Audit posterior activity
+before more training; phase/control remain deferred.

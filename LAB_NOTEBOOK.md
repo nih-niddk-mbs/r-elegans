@@ -2435,3 +2435,67 @@ amplitude/warm-start tests after final guards:4 passed in1.65s. Offset arrays
 are cast explicitly to their original anchor dtype; default float32 dynamics
 unchanged. All three shell launchers, CLI help and diff whitespace checks pass.
 This verifies local preservation, not completed cloud synchronization.
+
+## 2026-11-09 — E037 reported server amplitude results; E038 readout audit planned
+
+User-reported cohort `autonomous-body-amplitude-20261109T152102003705Z`
+completed with seeds1000–1003 all exit2 / passedFalse. Long validation regional
+median sustained joint excursions [posterior,middle,anterior] rad:
+1000 [1.05425715e-5,0.005640725,0.037973873] (467 proposals);
+1001 [2.83159316e-5,0.046748955,0.013630696] (463);
+1002 [4.93228436e-6,0.002148852,0.022814460] (469);
+1003 [2.61440873e-5,0.032198064,0.007909603] (463).
+Head exceeds0.003 in4/4, middle3/4, posterior0/4; best tail is105.95x below
+target. Coverage0.0703–0.2354 is a nonlinear score, not fraction of skills
+completed. All five active validations remain unqualified; held-voltage scored
+excursions are zero. Perturbation/refinement preserve the posterior deficit.
+No actual server baseline, source/checkpoint hashes or raw trajectories were
+provided; no exact gain or causal explanation can be inferred. These medians
+must not be directly compared with E035 harmonic regional amplitudes.
+
+E038 planned LOCAL static diagnostic: inspect the shared bundled anatomical
+NMJ→muscle→joint readout for missing posterior projections or zero sensitivity.
+Use `autonomous_wiggle_v1` network/parent, bundled topology, JAX autodiff of the
+frozen readout at initial membrane voltages. Report anatomical inputs and
+Jacobian norms by joint; this is not the learned server state or an embodied
+simulation. Fixed all parameters; no fitting, seeds or external runtime drive.
+Command: `MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python /tmp/e038_readout.py`.
+Accept the audit only as a structural/sensitivity check; a nonzero Jacobian
+cannot demonstrate sustained tail activity. Do not launch more training until
+actual posterior neural/muscle/drive traces and search coverage are inspected.
+
+E038 trace-analysis plan extension: add a read-only server utility computing
+late-window sustained amplitudes along voltage→release→individual muscles→
+projected dorsal/ventral→difference→filtered drive→joint angle. Reconstruct
+saved muscles from checkpoint/frozen readout as an alignment check; report
+per-joint input-neuron counts, largest posterior voltage/release excursions,
+D/V peak-to-peak cancellation diagnostics and parameter coverage/bounds if
+available. Use saved long validation, no simulation or fitting. Smoke-check on
+the existing local E037 pilot. Outputs outside source run/repo, input hashes
+and environment recorded; diagnostic output is not qualification.
+
+E038 executed locally: static audit JAX0.6.2 CPU; parent/network hashes in
+`experiments/records/E038-posterior-audit.json`. Each posterior joint has16–58
+anatomical presynaptic neurons and nonzero initial-voltage net-drive Jacobian
+L1 norms0.00978–0.01519 per mV. No structural disconnection found. This is
+not an actual server-state sensitivity measurement or proof of tail movement.
+
+Read-only trace utility smoke command:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.analyze_posterior_activity --run /tmp/r-elegans-E037-amplitude-fork --output-dir /tmp/r-elegans-E038-posterior-audit-final`
+Exit0. Sampled saved muscles reconstruct within1e-5 (exact measured error
+in compact record). At the LOCAL one-proposal pilot, posterior regional median
+of each joint's maximum input sustained voltage amplitude0.00170135mV,
+release0.0000173151; corresponding middle0.25523mV and anterior27.8411mV.
+Posterior joint median amplitude3.93391e-6rad; no posterior joint had an input
+above the0.05mV rhythm threshold. Zero of9,616 offsets at original16x bounds.
+This suggests weak neural recruitment in that pilot, not a demonstrated cause
+of the four server outcomes. No new simulation or fit ran. Server audit pending.
+
+Preserved script/static output/full local trace-analysis output and environment
+at `/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E038` (199 files;
+manifest SHA256 c62423ba3e8d061969e1a86c460089e6e4ec873c3b71e8310d54a1a1f77217c1).
+Local copy verified; cloud sync not independently checked. E037 raw server
+artifacts remain on mbslnx2, not retrieved. Decision: audit saved server long
+validations along voltage→release→muscle→net drive→joint before deciding
+whether to target posterior excitability, recurrent recruitment or NMJ transfer.
+Amplitude-first criterion and zero external drive remain unchanged.

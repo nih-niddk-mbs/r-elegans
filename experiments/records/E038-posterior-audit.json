@@ -1,0 +1,203 @@
+{
+  "experiment": "E038",
+  "status": "local_static_audit_and_local_trace_smoke_check_completed_server_analysis_pending",
+  "static_readout": {
+    "kind": "static initial-voltage readout audit, not server learned state",
+    "jax": "0.6.2",
+    "devices": [
+      "TFRT_CPU_0"
+    ],
+    "input_sha256": {
+      "network.npz": "482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6",
+      "parent_actor.npz": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0"
+    },
+    "script_sha256": "9a2875b5fb5822503338abdd5c926fda17bc6b2abe1126f3821097999241fbd4",
+    "joints": [
+      {
+        "joint": 0,
+        "region": "posterior",
+        "muscles": 11,
+        "anatomical_input_neurons": 16,
+        "drive_jacobian_l1_per_mV": 0.013428247533738613,
+        "muscle_jacobian_l1_per_mV": 0.013428505510091782,
+        "strongest_neurons": [
+          "DA09",
+          "DB07",
+          "VA12",
+          "PDA",
+          "PDB"
+        ]
+      },
+      {
+        "joint": 1,
+        "region": "posterior",
+        "muscles": 16,
+        "anatomical_input_neurons": 29,
+        "drive_jacobian_l1_per_mV": 0.014676903374493122,
+        "muscle_jacobian_l1_per_mV": 0.014678191393613815,
+        "strongest_neurons": [
+          "DA09",
+          "DB07",
+          "DA08",
+          "VA12",
+          "PDA"
+        ]
+      },
+      {
+        "joint": 2,
+        "region": "posterior",
+        "muscles": 16,
+        "anatomical_input_neurons": 33,
+        "drive_jacobian_l1_per_mV": 0.015192646533250809,
+        "muscle_jacobian_l1_per_mV": 0.015192646533250809,
+        "strongest_neurons": [
+          "DA09",
+          "DA08",
+          "DB07",
+          "DD05",
+          "VA09"
+        ]
+      },
+      {
+        "joint": 3,
+        "region": "posterior",
+        "muscles": 20,
+        "anatomical_input_neurons": 58,
+        "drive_jacobian_l1_per_mV": 0.009782950393855572,
+        "muscle_jacobian_l1_per_mV": 0.009782949462532997,
+        "strongest_neurons": [
+          "DA08",
+          "VA09",
+          "DA06",
+          "VD09",
+          "DB04"
+        ]
+      },
+      {
+        "joint": 4,
+        "region": "middle",
+        "muscles": 20,
+        "anatomical_input_neurons": 60,
+        "drive_jacobian_l1_per_mV": 0.010685145854949951,
+        "muscle_jacobian_l1_per_mV": 0.010685160756111145,
+        "strongest_neurons": [
+          "DA06",
+          "DB04",
+          "VD07",
+          "SMBDR",
+          "VC03"
+        ]
+      },
+      {
+        "joint": 5,
+        "region": "middle",
+        "muscles": 16,
+        "anatomical_input_neurons": 61,
+        "drive_jacobian_l1_per_mV": 0.010682536289095879,
+        "muscle_jacobian_l1_per_mV": 0.01068259309977293,
+        "strongest_neurons": [
+          "DA06",
+          "VB03",
+          "VB04",
+          "DB04",
+          "VD04"
+        ]
+      },
+      {
+        "joint": 6,
+        "region": "middle",
+        "muscles": 20,
+        "anatomical_input_neurons": 71,
+        "drive_jacobian_l1_per_mV": 0.007646255660802126,
+        "muscle_jacobian_l1_per_mV": 0.007646256126463413,
+        "strongest_neurons": [
+          "DA03",
+          "VB03",
+          "SIBVL",
+          "SMDDL",
+          "SMBDR"
+        ]
+      },
+      {
+        "joint": 7,
+        "region": "middle",
+        "muscles": 20,
+        "anatomical_input_neurons": 79,
+        "drive_jacobian_l1_per_mV": 0.010236719623208046,
+        "muscle_jacobian_l1_per_mV": 0.010236745700240135,
+        "strongest_neurons": [
+          "RMDVL",
+          "RIVL",
+          "RMDVR",
+          "SMBDR",
+          "VA02"
+        ]
+      },
+      {
+        "joint": 8,
+        "region": "anterior",
+        "muscles": 16,
+        "anatomical_input_neurons": 74,
+        "drive_jacobian_l1_per_mV": 0.02342951111495495,
+        "muscle_jacobian_l1_per_mV": 0.02400144934654236,
+        "strongest_neurons": [
+          "RMDVL",
+          "RMDVR",
+          "RMDDL",
+          "RIVL",
+          "RMDDR"
+        ]
+      },
+      {
+        "joint": 9,
+        "region": "anterior",
+        "muscles": 20,
+        "anatomical_input_neurons": 60,
+        "drive_jacobian_l1_per_mV": 0.026698751375079155,
+        "muscle_jacobian_l1_per_mV": 0.02897883765399456,
+        "strongest_neurons": [
+          "RMDVL",
+          "RMDDL",
+          "RMDVR",
+          "RMDDR",
+          "SABD"
+        ]
+      },
+      {
+        "joint": 10,
+        "region": "anterior",
+        "muscles": 12,
+        "anatomical_input_neurons": 42,
+        "drive_jacobian_l1_per_mV": 0.026880931109189987,
+        "muscle_jacobian_l1_per_mV": 0.02837776392698288,
+        "strongest_neurons": [
+          "RMDVR",
+          "RMDDL",
+          "RMDVL",
+          "RMDDR",
+          "RMEV"
+        ]
+      }
+    ]
+  },
+  "local_trace": {
+    "source": "/private/tmp/r-elegans-E037-amplitude-fork",
+    "input_sha256": {
+      "summary.json": "45e28c3f2d155eacec695b6778891a13765bbedc5568012e41224a403de6e53b",
+      "network_best.npz": "1ce277c4e5be0d28ef0324de8c55fea0e225167f16cf49d1a67e85e0da294815",
+      "source_inputs/parent_actor.npz": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+      "validation-long.npz": "dfeec86be302086720fa409c7d916ccb38df5fab2247a8744b2a32f67bfb316b"
+    },
+    "sample_muscle_reconstruction_max_error": 1.1920928955078125e-07
+  },
+  "limitations": [
+    "Local pilot is not E037 four-hour server cohort",
+    "Nonzero initial-voltage readout Jacobian does not establish sustained posterior activity",
+    "No new fit or simulation executed"
+  ],
+  "archive": {
+    "location": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E038",
+    "files": 199,
+    "manifest_sha256": "c62423ba3e8d061969e1a86c460089e6e4ec873c3b71e8310d54a1a1f77217c1"
+  }
+}

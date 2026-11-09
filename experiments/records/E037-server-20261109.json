@@ -1,0 +1,101 @@
+{
+  "experiment": "E037",
+  "evidence": "User-reported server console; no independently retrieved checkpoints or source hashes",
+  "run": "/home/carsonc/r-elegans-results/autonomous-body-amplitude-20261109T152102003705Z",
+  "target_regional_median_joint_p2p_rad": 0.003,
+  "region_order": [
+    "posterior",
+    "middle",
+    "anterior"
+  ],
+  "workers": [
+    {
+      "seed": 1000,
+      "iterations": 467,
+      "exit_code": 2,
+      "passed": false,
+      "long": {
+        "regional_joint_median_p2p_rad": [
+          1.0542571544647217e-05,
+          0.005640724673867226,
+          0.03797387331724167
+        ],
+        "body_coverage_score": 0.12614340133433588
+      },
+      "all_five_active_cases_qualified": false,
+      "held_voltage_regional_excursions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 1001,
+      "iterations": 463,
+      "exit_code": 2,
+      "passed": false,
+      "long": {
+        "regional_joint_median_p2p_rad": [
+          2.831593155860901e-05,
+          0.04674895480275154,
+          0.013630695641040802
+        ],
+        "body_coverage_score": 0.23536967431429698
+      },
+      "all_five_active_cases_qualified": false,
+      "held_voltage_regional_excursions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 1002,
+      "iterations": 469,
+      "exit_code": 2,
+      "passed": false,
+      "long": {
+        "regional_joint_median_p2p_rad": [
+          4.932284355163574e-06,
+          0.0021488519851118326,
+          0.02281446009874344
+        ],
+        "body_coverage_score": 0.07025280616955593
+      },
+      "all_five_active_cases_qualified": false,
+      "held_voltage_regional_excursions": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 1003,
+      "iterations": 463,
+      "exit_code": 2,
+      "passed": false,
+      "long": {
+        "regional_joint_median_p2p_rad": [
+          2.6144087314605713e-05,
+          0.032198064029216766,
+          0.007909603416919708
+        ],
+        "body_coverage_score": 0.22514516504228899
+      },
+      "all_five_active_cases_qualified": false,
+      "held_voltage_regional_excursions": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "total_iterations": 1862,
+  "interpretation": "Head 4/4 and middle 3/4 exceed amplitude target. Posterior 0/4; best tail about106x below target. No new amplitude primitive qualified.",
+  "limitations": [
+    "No actual server baseline or per-kind search coverage provided",
+    "E035 harmonic regional amplitudes are different metrics",
+    "Active perturbation/refinement checks also unqualified; held scored excursions zero",
+    "No new training recommended until posterior activity path examined"
+  ]
+}
