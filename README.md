@@ -1027,3 +1027,12 @@ starts a20-minute nohup cohort on mbslnx2, from learned E037 parents1001/1003.
 Targets autonomous tail amplitude with a weak neural-recruitment auxiliary
 score; no external drive. Qualification is separate from body-wide amplitude
 and locomotion. See [protocol](TRAINING_PROTOCOLS.md#short-autonomous-tail-amplitude-trial-e039-2026-11-09).
+
+E039 server result reported (2026-11-09):0/4 short tail qualifications,151
+proposals total. Best fitting tail amplitude gain2.63% (seed2000); others~0.3%.
+Best long-validation tail median2.905e-5rad remains103x below0.003rad target;
+all active checks unqualified, held-voltage excursions zero. Existing head and
+middle amplitude remain above target in these checks. No new skill qualified.
+Next proposed diagnostic: posterior-cell autonomous oscillation feasibility
+within current bounds before extending unchanged fitting. No new run launched.
+Exact parsed results: `experiments/records/E039-server-20261109.json`.

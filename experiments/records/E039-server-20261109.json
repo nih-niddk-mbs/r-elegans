@@ -1,0 +1,338 @@
+{
+  "experiment": "E039",
+  "evidence": "User-pasted server summary stdout, not independently retrieved trajectories",
+  "run": "/home/carsonc/r-elegans-results/autonomous-tail-amplitude-20261109T200140261630Z",
+  "attachment_sha256": "25d7a2c601f1bc3ed612cae504577fa4536eeb1612c6290a79860ff927686042",
+  "workers": [
+    {
+      "seed": 2000,
+      "exit_code": 2,
+      "status": "completed",
+      "passed": false,
+      "iterations": 37,
+      "validation": [
+        {
+          "case": "long",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.9049813747406006e-05,
+            0.04675275459885597,
+            0.013632901012897491
+          ]
+        },
+        {
+          "case": "perturb-plus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.9046088457107544e-05,
+            0.04671179875731468,
+            0.013620339334011078
+          ]
+        },
+        {
+          "case": "perturb-minus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.9046088457107544e-05,
+            0.04671105369925499,
+            0.013620845973491669
+          ]
+        },
+        {
+          "case": "brain-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.9042363166809082e-05,
+            0.0466509647667408,
+            0.013602100312709808
+          ]
+        },
+        {
+          "case": "body-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.911314368247986e-05,
+            0.04672885313630104,
+            0.013625748455524445
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "baseline": {
+        "bends_tail_middle_head": [
+          2.830103039741516e-05,
+          0.04670903459191322,
+          0.013618182390928268
+        ],
+        "recruitment": 0.066671943183526
+      },
+      "best": {
+        "bends_tail_middle_head": [
+          2.9046088457107544e-05,
+          0.046710845082998276,
+          0.013620566576719284
+        ],
+        "recruitment": 0.0679044918843331
+      },
+      "fit_tail_gain_percent": 2.6326181387389846
+    },
+    {
+      "seed": 2001,
+      "exit_code": 2,
+      "status": "completed",
+      "passed": false,
+      "iterations": 38,
+      "validation": [
+        {
+          "case": "long",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.6151537895202637e-05,
+            0.03219589963555336,
+            0.007916323840618134
+          ]
+        },
+        {
+          "case": "perturb-plus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.588331699371338e-05,
+            0.03219247981905937,
+            0.007839202880859375
+          ]
+        },
+        {
+          "case": "perturb-minus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.5272369384765625e-05,
+            0.032190077006816864,
+            0.007034406065940857
+          ]
+        },
+        {
+          "case": "brain-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.4631619453430176e-05,
+            0.03199950233101845,
+            0.007759779691696167
+          ]
+        },
+        {
+          "case": "body-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.613663673400879e-05,
+            0.032189346849918365,
+            0.008021384477615356
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "baseline": {
+        "bends_tail_middle_head": [
+          2.60770320892334e-05,
+          0.03217298164963722,
+          0.007958941161632538
+        ],
+        "recruitment": 0.09046979524016731
+      },
+      "best": {
+        "bends_tail_middle_head": [
+          2.6151537895202637e-05,
+          0.032152850180864334,
+          0.008006349205970764
+        ],
+        "recruitment": 0.09049947212992551
+      },
+      "fit_tail_gain_percent": 0.28571428571428914
+    },
+    {
+      "seed": 2002,
+      "exit_code": 2,
+      "status": "completed",
+      "passed": false,
+      "iterations": 38,
+      "validation": [
+        {
+          "case": "long",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.8390437364578247e-05,
+            0.046757396310567856,
+            0.013633478432893753
+          ]
+        },
+        {
+          "case": "perturb-plus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.837926149368286e-05,
+            0.04671652615070343,
+            0.013621579855680466
+          ]
+        },
+        {
+          "case": "perturb-minus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.83755362033844e-05,
+            0.04671721160411835,
+            0.013620823621749878
+          ]
+        },
+        {
+          "case": "brain-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.8390437364578247e-05,
+            0.04665635898709297,
+            0.01360367238521576
+          ]
+        },
+        {
+          "case": "body-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.8450042009353638e-05,
+            0.0467342883348465,
+            0.0136265829205513
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "baseline": {
+        "bends_tail_middle_head": [
+          2.830103039741516e-05,
+          0.04670903459191322,
+          0.013618182390928268
+        ],
+        "recruitment": 0.066671943183526
+      },
+      "best": {
+        "bends_tail_middle_head": [
+          2.8386712074279785e-05,
+          0.04671778902411461,
+          0.0136212557554245
+        ],
+        "recruitment": 0.06675015792387579
+      },
+      "fit_tail_gain_percent": 0.3027510859549887
+    },
+    {
+      "seed": 2003,
+      "exit_code": 2,
+      "status": "completed",
+      "passed": false,
+      "iterations": 38,
+      "validation": [
+        {
+          "case": "long",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.612173557281494e-05,
+            0.03220207616686821,
+            0.007888294756412506
+          ]
+        },
+        {
+          "case": "perturb-plus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.6129186153411865e-05,
+            0.03218531981110573,
+            0.007591210305690765
+          ]
+        },
+        {
+          "case": "perturb-minus",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.603977918624878e-05,
+            0.03213419392704964,
+            0.00811033695936203
+          ]
+        },
+        {
+          "case": "brain-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.516806125640869e-05,
+            0.03205469995737076,
+            0.007661290466785431
+          ]
+        },
+        {
+          "case": "body-refined",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            2.6144087314605713e-05,
+            0.0322253443300724,
+            0.007937602698802948
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "tail_pass": false,
+          "bends_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "baseline": {
+        "bends_tail_middle_head": [
+          2.60770320892334e-05,
+          0.03217298164963722,
+          0.007958941161632538
+        ],
+        "recruitment": 0.09046979524016731
+      },
+      "best": {
+        "bends_tail_middle_head": [
+          2.6151537895202637e-05,
+          0.03219034522771835,
+          0.007920689880847931
+        ],
+        "recruitment": 0.0904519639531777
+      },
+      "fit_tail_gain_percent": 0.28571428571428914
+    }
+  ],
+  "total_proposals": 151,
+  "target_posterior_joint_median_p2p_rad": 0.003,
+  "interpretation": "0/4 passes; best fit tail gain2.63%, others~0.3%. Tail deficit persists across active validation. Held-voltage scored excursions zero.",
+  "decision": "Do not simply extend unchanged search. Proposed next diagnostic: posterior-cell autonomous excitability/oscillation feasibility within existing bounds, followed by informed initialization if viable.",
+  "limitations": [
+    "Only37\u201338 proposals per worker",
+    "No selected offsets, per-cell bounds or full neural traces provided",
+    "Tiny improvements do not prove useful tail actuation or causal mechanism",
+    "No new experiment launched;any feasibility test still requires planned protocol"
+  ]
+}

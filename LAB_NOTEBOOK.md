@@ -2595,3 +2595,47 @@ Copy verified locally; cloud synchronization not independently verified. Compact
 record `experiments/records/E039-tail-amplitude.json` contains exact invocation,
 parent hashes, summary and limitations. Decision: push prepared20-minute server
 launcher for user execution; no server launch or tail qualification claimed.
+
+## 2026-11-09 — E039 short server trial reported, tail remains below target
+
+User reported completed cohort
+`/home/carsonc/r-elegans-results/autonomous-tail-amplitude-20261109T200140261630Z`.
+All four workers completed with exit2/passedFalse: seeds2000–2003 ran37,38,38,38
+proposals (151 total). This is a criterion failure, not a reported worker crash.
+Parsed before/after and all six validations, plus exact attachment hash, are in
+`experiments/records/E039-server-20261109.json`. No independently retrieved raw
+traces, checkpoint hashes or source/environment records in this excerpt.
+
+Fit posterior median sustained joint p2p rad, baseline→best:
+2000 2.83010304e-5→2.90460885e-5 (+2.6326%);
+2001 2.60770321e-5→2.61515379e-5 (+0.2857%);
+2002 2.83010304e-5→2.83867121e-5 (+0.3028%);
+2003 2.60770321e-5→2.61515379e-5 (+0.2857%).
+Neural recruitment score baseline→best:
+2000 0.06667194→0.06790449;
+2001 0.09046980→0.09049947;
+2002 0.06667194→0.06675016;
+2003 0.09046980→0.09045196 (slightly down; mixed score permits this).
+This auxiliary score is neither firing rate nor a biological measurement.
+
+Best long-validation tail amplitude2.90498137e-5rad (seed2000),103.27x below
+0.003 target. All five active checks unqualified in every seed; posterior
+amplitude deficit persists under perturbation/refinement. Held-voltage scored
+excursions zero. Head/middle amplitudes remain above0.003rad in all active
+checks, but no retention/control claim follows. Small nonzero tail excursions
+are not proof of active posterior-muscle recruitment (mechanical coupling is
+possible); neural/muscle diagnostics were not rerun here.
+
+Interpretation: sparse posterior proposals provide tiny positive fitting gains,
+not a demonstrated tail primitive or evidence a longer identical run will
+solve recruitment. Only37–38 proposals per worker; no convergence or structural
+impossibility claim. Proposed next diagnostic: determine whether posterior-cell
+models can sustain autonomous oscillations within existing conductance bounds,
+then consider informed initialization rather than another blind extension.
+Isolated-cell feasibility would not by itself establish network/body behavior.
+No new simulation, training or parameter-bound change has been performed.
+
+Exact server stdout and parsed summary archived under external OneDrive
+`notebook/evidence/E039/server-report-20261109`; its separate manifest SHA256
+45fac83c955cc3b5e3dc03720c52d40e012ba65652756f5cf2d580a3a60275f6.
+Local copy completed; cloud synchronization not independently verified.

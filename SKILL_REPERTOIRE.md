@@ -290,3 +290,12 @@ E039 planned: independent short-assay tail amplitude primitive. Original parents
 retained. Tail median sustained joint p2p>=0.003rad, with perturbation, timestep
 and held-voltage checks. No phase/control or propulsion requirement.20-minute
 server trial prepared; no new qualification until actual results are reported.
+
+E039 server result reported (2026-11-09):0/4 short tail qualifications,151
+proposals total. Best fitting tail amplitude gain2.63% (seed2000); others~0.3%.
+Best long-validation tail median2.905e-5rad remains103x below0.003rad target;
+all active checks unqualified, held-voltage excursions zero. Existing head and
+middle amplitude remain above target in these checks. No new skill qualified.
+Next proposed diagnostic: posterior-cell autonomous oscillation feasibility
+within current bounds before extending unchanged fitting. No new run launched.
+Exact parsed results: `experiments/records/E039-server-20261109.json`.
