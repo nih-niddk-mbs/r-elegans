@@ -276,3 +276,12 @@ Anterior reaches target4/4 and middle3/4; posterior0/4. Best tail remains
 ~106x below target. Preserve candidates, especially1001; no new body-wide
 amplitude, autonomous wave or locomotion skill added. Audit posterior activity
 before more training; phase/control remain deferred.
+
+E038 server audit reported (2026-11-09): posterior neural voltage/release
+oscillations are weak, and posterior median individual-muscle sustained
+excursion is zero in all four workers. Deficit exists before the body-mechanics
+stage. Working hypothesis: insufficient posterior neural recruitment; channel,
+recurrent and NMJ causes remain unresolved. Next proposed curriculum targets
+posterior recruitment/amplitude with zero external drive, preserving independent
+head/middle candidates. No new training or skill qualification. Full parsed
+reports: `experiments/records/E038-server-20261109.json`.

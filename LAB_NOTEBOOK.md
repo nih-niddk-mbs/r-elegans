@@ -2499,3 +2499,45 @@ artifacts remain on mbslnx2, not retrieved. Decision: audit saved server long
 validations along voltage→release→muscle→net drive→joint before deciding
 whether to target posterior excitability, recurrent recruitment or NMJ transfer.
 Amplitude-first criterion and zero external drive remain unchanged.
+
+## 2026-11-09 — E038 user-reported server posterior audit
+
+User pasted all four worker reports from the read-only utility after pulling
+5b87117. Exact parsed reports and attachment SHA256 are committed in
+`experiments/records/E038-server-20261109.json`. Server output directory's
+expanded timestamp, full report/input hashes and final exit status were not
+provided. A CUDA plugin discovery traceback preceded four CPU result lines;
+this did not prevent these analyses from returning. No training occurred.
+
+For seeds1000/1001/1002/1003, posterior regional medians of each joint's
+maximum input sustained voltage excursion are0.01110/0.23174/0.000816/0.11172mV;
+release excursions3.44e-5/0.005066/1.01e-7/0.002521. Corresponding anterior
+voltage32.6–34.2mV and release0.652–0.672. Posterior median rhythmic input
+counts per joint0/1/0/1 versus anterior21/23/11/31 (inputs can repeat across
+joints; these are not unique regional neuron counts). Posterior median of
+per-joint median individual-muscle sustained excursions is0 in all seeds;
+net-drive medians6.23e-6/5.96e-8/2.98e-8/1.47e-5, filtered-drive medians
+4.34e-6/0/0/1.05e-5. Head/middle activity is substantially stronger.
+
+Interpretation: the posterior deficit already exists in presynaptic neural
+activity/release and muscle activation, rather than only appearing in body
+mechanics. This supports weak posterior neural recruitment as the next working
+hypothesis. It does not prove which channels/connections cause it, rule out
+NMJ attenuation/cancellation or mean every tail muscle is static. Small tail
+angles despite zero median filtered-drive score can include mechanical
+coupling and different channels contributing to medians. No causal experiment
+was performed. Bounds hit22/18/16/11 of9616; not global saturation, but
+individual influential parameters could be bound-limited.
+
+Decision: keep amplitude first, no external drive, no phase/control objective.
+Next proposed change is a posterior-focused recruitment/amplitude curriculum
+using learned candidates, retaining fixed stereotypical parameters and original
+bounds until per-parameter evidence justifies changing them. Preserve existing
+head/middle candidates independently. No new training was launched or new
+qualification claimed. Raw trajectories/full server report remain on mbslnx2.
+
+Exact pasted stdout and compact parsed report archived locally under OneDrive
+`notebook/evidence/E038/server-report-20261109`; manifest SHA256
+56624ce317b23106b8f54ccdfe310da78ddb868d9dbefa65797c672f08d65134.
+Cloud synchronization not verified. Earlier E038 manifest covers the earlier
+local-audit files only; this server-report subdirectory has its own manifest.

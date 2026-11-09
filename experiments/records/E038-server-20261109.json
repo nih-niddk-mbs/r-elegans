@@ -1,0 +1,184 @@
+{
+  "experiment": "E038",
+  "evidence": "User-pasted server stdout, not independently retrieved trajectories",
+  "reported_analysis_revision": "5b87117",
+  "source_attachment_sha256": "f1eb4d073ab9544587b5db28f7cf35000837147351d5dfde8f46ef16e6fd009a",
+  "source_run": "/home/carsonc/r-elegans-results/autonomous-body-amplitude-20261109T152102003705Z",
+  "output_directory": "posterior-audit timestamp not shown in pasted output",
+  "workers": [
+    {
+      "worker": "seed-1000",
+      "search_bounds": {
+        "maximum_factor": 16.0,
+        "parameters_at_bound": 22,
+        "total_parameters": 9616
+      },
+      "regions": [
+        {
+          "region": "posterior",
+          "rhythmic_input_neurons": 0.0,
+          "maximum_input_sustained_voltage_mV": 0.011096954345703125,
+          "maximum_input_sustained_release": 3.442540764808655e-05,
+          "median_individual_muscle_sustained_p2p": 0.0,
+          "net_sustained_p2p": 6.22868537902832e-06,
+          "filtered_sustained_p2p": 4.336237907409668e-06,
+          "joint_sustained_p2p_rad": 1.0542571544647217e-05
+        },
+        {
+          "region": "middle",
+          "rhythmic_input_neurons": 7.5,
+          "maximum_input_sustained_voltage_mV": 2.4577808380126953,
+          "maximum_input_sustained_release": 0.05431380867958069,
+          "median_individual_muscle_sustained_p2p": 0.0010216161608695984,
+          "net_sustained_p2p": 0.013007029891014099,
+          "filtered_sustained_p2p": 0.006780827417969704,
+          "joint_sustained_p2p_rad": 0.005640724673867226
+        },
+        {
+          "region": "anterior",
+          "rhythmic_input_neurons": 21.0,
+          "maximum_input_sustained_voltage_mV": 34.23783826828003,
+          "maximum_input_sustained_release": 0.6519300043582916,
+          "median_individual_muscle_sustained_p2p": 0.015029817819595337,
+          "net_sustained_p2p": 0.08604305982589722,
+          "filtered_sustained_p2p": 0.04563461244106293,
+          "joint_sustained_p2p_rad": 0.03797387331724167
+        }
+      ]
+    },
+    {
+      "worker": "seed-1001",
+      "search_bounds": {
+        "maximum_factor": 16.0,
+        "parameters_at_bound": 18,
+        "total_parameters": 9616
+      },
+      "regions": [
+        {
+          "region": "posterior",
+          "rhythmic_input_neurons": 1.0,
+          "maximum_input_sustained_voltage_mV": 0.2317352294921875,
+          "maximum_input_sustained_release": 0.0050656795501708984,
+          "median_individual_muscle_sustained_p2p": 0.0,
+          "net_sustained_p2p": 5.960464477539063e-08,
+          "filtered_sustained_p2p": 0.0,
+          "joint_sustained_p2p_rad": 2.831593155860901e-05
+        },
+        {
+          "region": "middle",
+          "rhythmic_input_neurons": 10.0,
+          "maximum_input_sustained_voltage_mV": 7.610906600952148,
+          "maximum_input_sustained_release": 0.21140235662460327,
+          "median_individual_muscle_sustained_p2p": 0.027975261211395264,
+          "net_sustained_p2p": 0.09211429953575134,
+          "filtered_sustained_p2p": 0.05625690519809723,
+          "joint_sustained_p2p_rad": 0.04674895480275154
+        },
+        {
+          "region": "anterior",
+          "rhythmic_input_neurons": 23.0,
+          "maximum_input_sustained_voltage_mV": 34.05938243865967,
+          "maximum_input_sustained_release": 0.6715717017650604,
+          "median_individual_muscle_sustained_p2p": 0.007934033870697021,
+          "net_sustained_p2p": 0.02691042423248291,
+          "filtered_sustained_p2p": 0.016406364738941193,
+          "joint_sustained_p2p_rad": 0.013630695641040802
+        }
+      ]
+    },
+    {
+      "worker": "seed-1002",
+      "search_bounds": {
+        "maximum_factor": 16.0,
+        "parameters_at_bound": 16,
+        "total_parameters": 9616
+      },
+      "regions": [
+        {
+          "region": "posterior",
+          "rhythmic_input_neurons": 0.0,
+          "maximum_input_sustained_voltage_mV": 0.00081634521484375,
+          "maximum_input_sustained_release": 1.0116491466760635e-07,
+          "median_individual_muscle_sustained_p2p": 0.0,
+          "net_sustained_p2p": 2.9802322387695312e-08,
+          "filtered_sustained_p2p": 0.0,
+          "joint_sustained_p2p_rad": 4.932284355163574e-06
+        },
+        {
+          "region": "middle",
+          "rhythmic_input_neurons": 3.0,
+          "maximum_input_sustained_voltage_mV": 1.1591224670410156,
+          "maximum_input_sustained_release": 0.022840827703475952,
+          "median_individual_muscle_sustained_p2p": 0.0002693086862564087,
+          "net_sustained_p2p": 0.006226181983947754,
+          "filtered_sustained_p2p": 0.002598828992631752,
+          "joint_sustained_p2p_rad": 0.0021488519851118326
+        },
+        {
+          "region": "anterior",
+          "rhythmic_input_neurons": 11.0,
+          "maximum_input_sustained_voltage_mV": 29.75400161743164,
+          "maximum_input_sustained_release": 0.5606859922409058,
+          "median_individual_muscle_sustained_p2p": 0.008710935711860657,
+          "net_sustained_p2p": 0.07070201635360718,
+          "filtered_sustained_p2p": 0.027532674372196198,
+          "joint_sustained_p2p_rad": 0.02281446009874344
+        }
+      ]
+    },
+    {
+      "worker": "seed-1003",
+      "search_bounds": {
+        "maximum_factor": 16.0,
+        "parameters_at_bound": 11,
+        "total_parameters": 9616
+      },
+      "regions": [
+        {
+          "region": "posterior",
+          "rhythmic_input_neurons": 1.0,
+          "maximum_input_sustained_voltage_mV": 0.111724853515625,
+          "maximum_input_sustained_release": 0.0025206804275512695,
+          "median_individual_muscle_sustained_p2p": 0.0,
+          "net_sustained_p2p": 1.4692544937133789e-05,
+          "filtered_sustained_p2p": 1.0520219802856445e-05,
+          "joint_sustained_p2p_rad": 2.6144087314605713e-05
+        },
+        {
+          "region": "middle",
+          "rhythmic_input_neurons": 14.5,
+          "maximum_input_sustained_voltage_mV": 17.702699661254883,
+          "maximum_input_sustained_release": 0.4284691959619522,
+          "median_individual_muscle_sustained_p2p": 0.019925609230995178,
+          "net_sustained_p2p": 0.08319279551506042,
+          "filtered_sustained_p2p": 0.03896810859441757,
+          "joint_sustained_p2p_rad": 0.032198064029216766
+        },
+        {
+          "region": "anterior",
+          "rhythmic_input_neurons": 31.0,
+          "maximum_input_sustained_voltage_mV": 32.62850904464722,
+          "maximum_input_sustained_release": 0.6654554307460785,
+          "median_individual_muscle_sustained_p2p": 0.02548469603061676,
+          "net_sustained_p2p": 0.025347352027893066,
+          "filtered_sustained_p2p": 0.009640201926231384,
+          "joint_sustained_p2p_rad": 0.007909603416919708
+        }
+      ]
+    }
+  ],
+  "interpretation": [
+    "Posterior voltage/release oscillations are weak relative to middle/anterior; deficit exists upstream of body mechanics",
+    "Posterior median individual-muscle sustained amplitude is zero in all workers; this does not mean all muscles are static",
+    "Nonzero posterior angles with zero median filtered-drive excursion can reflect mechanical coupling, per-channel scoring and different median channels; causality unproven",
+    "11\u201322 of 9616 offsets at bounds; no global bound saturation, but identity of saturated parameters remains unknown"
+  ],
+  "next_step": "Prepare posterior-focused autonomous recruitment/amplitude curriculum, preserve existing candidates, keep all external currents zero. No new training launched.",
+  "limitations": [
+    "Regional maxima are medians of per-joint input maxima, not the largest voltage of every posterior neuron",
+    "Input neurons can be counted for multiple joints; counts are not unique regional neuron counts",
+    "Summary cannot separate causal effects of channel density, recurrent coupling or NMJ cancellation",
+    "Full report, input hashes and muscle reconstruction error not pasted",
+    "CUDA plugin initialization emitted a traceback, but all four CPU analysis results printed; final shell exit status not provided"
+  ]
+}

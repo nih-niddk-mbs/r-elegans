@@ -1687,3 +1687,12 @@ voltage→release→muscle→net-drive→joint audit before another training run
 Local initial-voltage readout has posterior connections and nonzero sensitivity;
 this does not establish activity in the learned server checkpoints. See
 `experiments/records/E037-server-20261109.json`.
+
+E038 server audit reported (2026-11-09): posterior neural voltage/release
+oscillations are weak, and posterior median individual-muscle sustained
+excursion is zero in all four workers. Deficit exists before the body-mechanics
+stage. Working hypothesis: insufficient posterior neural recruitment; channel,
+recurrent and NMJ causes remain unresolved. Next proposed curriculum targets
+posterior recruitment/amplitude with zero external drive, preserving independent
+head/middle candidates. No new training or skill qualification. Full parsed
+reports: `experiments/records/E038-server-20261109.json`.

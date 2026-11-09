@@ -1012,3 +1012,12 @@ Latest reported amplitude cohort (E037,2026-11-09): head reaches target in
 4/4 seeds, middle3/4, tail0/4; no distributed-amplitude qualification. Next is
 a read-only posterior activity audit, with control/propulsion still deferred.
 See [current model](CURRENT_MODEL.md) and [lab notebook](LAB_NOTEBOOK.md).
+
+E038 server audit reported (2026-11-09): posterior neural voltage/release
+oscillations are weak, and posterior median individual-muscle sustained
+excursion is zero in all four workers. Deficit exists before the body-mechanics
+stage. Working hypothesis: insufficient posterior neural recruitment; channel,
+recurrent and NMJ causes remain unresolved. Next proposed curriculum targets
+posterior recruitment/amplitude with zero external drive, preserving independent
+head/middle candidates. No new training or skill qualification. Full parsed
+reports: `experiments/records/E038-server-20261109.json`.
