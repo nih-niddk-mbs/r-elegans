@@ -1840,7 +1840,7 @@ sh scripts/launch_posterior_motor_mbslnx2.sh
 Launcher prints exact PID/log path;prefix`autonomous-posterior-motor-*`.
 Budget includes setup/search/validation with supervisor termination grace.
 Prior skill checkpoints preserved independently;no head/middle retention gate.
-Actual server launch/results remain pending until user reports them.
+Actual server results are now reported below.
 
 Local E041 six-proposal trial completed all six validations,one accepted
 nominal-score change;remains unqualified. Tiny amplitude gains are timestep-
@@ -1849,3 +1849,12 @@ recruitment claim. Qualification gates reject this result. Target units are
 0.003rad bending and0.003 dimensionless net-muscle activation.218 tests pass;
 server trial remains user-launched. Raw artifacts external,compact record
 `experiments/records/E041-posterior-motor.json`.
+
+E041 server result reported (2026-11-09):0/4 qualifications after295 proposals,
+but seed5003 shows strong subthreshold gains:tail bend7.17x to0.0001874rad,
+net-muscle excursion32.68x to0.0004799. Gains persist under perturbations and
+finer brain/body steps (brain-refined bend+0.008%,muscle+1.54%). Remaining
+shortfall16x bend and6.25x muscle. Seed5002 offers a smaller stable gain;5000/5001
+improve muscle activity without improving bend. Prefer independent continuation
+from5003,with5002 backup;preserve original anchors/bounds and zero input. No new
+run launched or skill qualified. Exact record:`experiments/records/E041-server-20261109.json`.

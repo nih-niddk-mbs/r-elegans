@@ -2858,3 +2858,50 @@ Copy completed locally;cloud synchronization not independently verified.
 Compact record `experiments/records/E041-posterior-motor.json` preserves exact
 invocation,hashes,policy and summary. Decision:push30-minute nohup launcher from
 reviewed actual E039 parents for user launch;no server execution claimed.
+
+## 2026-11-09 — E041 server option1 trial: robust subthreshold recruitment gain
+
+User reported cohort
+`/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T222806260061Z`.
+Seeds5000–5003 all completed exit2/passedFalse,77/71/77/70 proposals (295 total).
+All six validation rows provided per worker. Exact parsed fields and attachment
+SHA256 in `experiments/records/E041-server-20261109.json`;raw server histories,
+checkpoints,source/environment hashes and parameter changes not retrieved.
+
+Strongest candidate5003:fit tail median bend2.61515379e-5→1.87389553e-4rad
+(7.1655x);net-muscle median1.46850944e-5→4.79921699e-4 (32.6809x).
+Motor release auxiliary0.0103797→0.0866077 (heuristic,not a physical release
+amplitude/firing rate). Long validation1.87478960e-4rad /4.80100513e-4 muscle.
+Perturb±1mV retain gains. Brain-refined1.87404454e-4rad /4.87297773e-4 muscle:
++0.00795% bend,+1.5369% muscle relative to nominal training. Body-refined
+1.87397003e-4rad /4.79951501e-4 muscle. Held-voltage scored excursions0.
+The dominant gain persists across all provided checks,unlike the tiny local
+pilot's coarse-step-only changes. Still16.01x below0.003rad bend and6.251x
+below0.003 activation,so this is recruitment progress,not a skill qualification.
+
+Seed5002 gives smaller stable gain:fit bend2.90460885e-5→5.29140234e-5rad
+(1.8217x),net muscle0→5.64455986e-5;brain-refined5.26886433e-5rad /
+5.58793545e-5. Preserve as alternate independent candidate. Seeds5000/5001
+improve net muscle/release while bending falls slightly;composite score tradeoff
+must not be called a bending improvement. Every active validation remains below
+qualification in every worker;held-voltage scored excursions0 for all.
+
+Interpretation:targeted motor/path proposal and physical muscle score produced
+substantially better,short-window numerically consistent posterior recruitment
+in one seed. Joint training design does not isolate which parameter/proposal
+caused it. No proof of natural biomechanics,long-duration stability,phase control
+or locomotion. Numerical consistency of below-target amplitudes is not an
+acceptance pass;qualification still requires both physical thresholds.
+
+Decision:preserve all parent/new independent candidates;prefer fresh-RNG
+continuations of5003,with5002 as alternate,retaining original source anchors,
+16x bounds,zero drive and fixed fields. No new training launched or continuation
+budget selected here. Inspect future outcomes rather than blindly extending
+all workers. Successful checkpoint remains on server,not bundled or promoted
+as qualified in Git.
+
+Exact pasted stdout and parsed compact summary copied to external OneDrive
+`notebook/evidence/E041/server-report-20261109`;its separate manifest SHA256
+7967054f7e7c76936a4b6f785793c7a5b4cc415285b62c04c9231ed17c01a0ee.
+Local copy completed;cloud sync and independent server-artifact backup remain
+unverified. No implementation changes in this results-recording update.

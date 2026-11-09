@@ -321,3 +321,12 @@ E041 planned independent posterior motor/muscle/bend primitive:net-muscle and
 physical tail median sustained excursions must both reach0.003,with perturbation,
 refinement and held-voltage checks. No phase/propulsion gate.30-minute server
 trial prepared from E039 parents;no new qualification claimed.
+
+E041 server result reported (2026-11-09):0/4 qualifications after295 proposals,
+but seed5003 shows strong subthreshold gains:tail bend7.17x to0.0001874rad,
+net-muscle excursion32.68x to0.0004799. Gains persist under perturbations and
+finer brain/body steps (brain-refined bend+0.008%,muscle+1.54%). Remaining
+shortfall16x bend and6.25x muscle. Seed5002 offers a smaller stable gain;5000/5001
+improve muscle activity without improving bend. Prefer independent continuation
+from5003,with5002 backup;preserve original anchors/bounds and zero input. No new
+run launched or skill qualified. Exact record:`experiments/records/E041-server-20261109.json`.
