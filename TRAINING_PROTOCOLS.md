@@ -1259,3 +1259,40 @@ recurrent and NMJ causes remain unresolved. Next proposed curriculum targets
 posterior recruitment/amplitude with zero external drive, preserving independent
 head/middle candidates. No new training or skill qualification. Full parsed
 reports: `experiments/records/E038-server-20261109.json`.
+
+## Short autonomous tail-amplitude trial (E039, 2026-11-09)
+
+Prepared for user launch on mbslnx2:20-minute cohort, four independent four-core
+workers, seeds2000–2003. Fork reviewed E037 workers1001/1003 round-robin, retain
+original anchors and16x bounds, copy full lineage, start fresh RNG. Zero external
+drive; fixed leak/capacitance/kinetics/release/NMJs/body. All9616 unknown neuron
+and recurrent-connection parameters remain eligible.90% sparse proposals focus
+on anatomically tail-projecting cells and their existing inputs;10% use the
+original full-space proposal. Parent head/middle candidates remain preserved.
+
+Score:95% posterior four-joint median sustained-amplitude coverage,5% capped
+posterior neural recruitment. The latter is a search heuristic, not an observed
+biological target. Qualification requires sustained posterior median bend
+>=0.003rad and validity, not neural reward alone. Body-wide metrics are retained
+separately. No phase, control, heading or propulsion requirement.20s fit,60s
+long validation, voltage perturbations, finer brain/body steps and held-voltage
+control; tail-only refinement tolerance25%. A pass is provisional for these
+short windows, not long-duration stability, full-body or locomotion evidence.
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_tail_amplitude_mbslnx2.sh
+```
+
+The launcher prints the nohup PID and exact log path. Run/log prefix is
+`autonomous-tail-amplitude-*`; setup/search/validation share the20-minute cap
+with supervisor termination grace. Read `summary.json`, all validation cases,
+`tail_amplitude_qualified`, `posterior_recruitment_score` and regional bend
+amplitudes before extending training. No server run has yet been evidenced.
+
+Local E039 pipeline verified:two proposals, no accepted changes; all six short
+validation cases completed, zero drive and frozen fields preserved. Exit2 is
+expected unqualified status. Full software suite212 passed; server trial remains
+user-launched. Local raw artifacts archived externally; compact record in
+`experiments/records/E039-tail-amplitude.json`.

@@ -1,0 +1,700 @@
+{
+  "experiment": "E039",
+  "status": "prepared_for_user_server_launch_after_local_verification",
+  "question": "Can sparse posterior-focused parameter changes recruit autonomous tail bends in a short trial?",
+  "server": {
+    "minutes": 20,
+    "workers": 4,
+    "cores_per_worker": 4,
+    "seeds": [
+      2000,
+      2001,
+      2002,
+      2003
+    ],
+    "parents": [
+      "/home/carsonc/r-elegans-results/autonomous-body-amplitude-20261109T152102003705Z/seed-1001",
+      "/home/carsonc/r-elegans-results/autonomous-body-amplitude-20261109T152102003705Z/seed-1003"
+    ],
+    "fit_seconds": 20,
+    "validation_seconds": 60,
+    "command": "sh scripts/launch_tail_amplitude_mbslnx2.sh",
+    "log_prefix": "autonomous-tail-amplitude-"
+  },
+  "parameter_scope": {
+    "eligible": 9616,
+    "channel_densities": 4814,
+    "chemical_strengths": 3709,
+    "electrical_pairs": 1093,
+    "original_anchor_bounds_preserved": true,
+    "external_drive": "zero",
+    "fixed": [
+      "LEAK",
+      "capacitance",
+      "kinetics",
+      "reversals",
+      "calcium handling",
+      "release settings",
+      "NMJ transfer",
+      "muscle/body mechanics",
+      "anatomical masks"
+    ]
+  },
+  "score": {
+    "posterior_joint_amplitude_weight": 0.95,
+    "posterior_neural_recruitment_weight": 0.05,
+    "recruitment_is_heuristic": true,
+    "qualification": "Valid repeated posterior joint median excursion >=0.003rad;5 active validations and held-voltage control;25% refinement agreement for posterior amplitude"
+  },
+  "proposal": {
+    "sparse_tail_probability": 0.9,
+    "original_full_space_probability": 0.1,
+    "maximum_sparse_parameters": 8
+  },
+  "local_pilot": {
+    "command": "MPLCONFIGDIR=/tmp/r-elegans-mpl JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.train_autonomous_wiggle --objective body-amplitude --tail-focus --fit-scope neurons-connections --warm-start-worker /tmp/r-elegans-E037-amplitude-fork --output-dir /tmp/r-elegans-E039-tail-pilot --seed 2000 --minutes 6 --iterations 2 --fit-seconds 12 --validation-seconds 20",
+    "parent_is_local_smoke_only": true,
+    "summary": {
+      "experiment": "E039",
+      "objective": "body-amplitude",
+      "fit_scope": "neurons-connections",
+      "total_trainable": 9616,
+      "tail_focus": true,
+      "warm_start_parent": "/private/tmp/r-elegans-E037-amplitude-fork",
+      "parameter_bounds_anchor_sha256": "482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6",
+      "maximum_factor": 16.0,
+      "parameters_proposed": 434,
+      "parameters_updated": 0,
+      "parameters_different_from_initial": 0,
+      "parameters_different_from_anchor": 530,
+      "parameter_coverage_by_kind": {
+        "channel_densities": {
+          "eligible": 4814,
+          "proposed": 128,
+          "updated": 0,
+          "different_from_initial": 0,
+          "different_from_anchor": 185
+        },
+        "chemical_strengths": {
+          "eligible": 3709,
+          "proposed": 216,
+          "updated": 0,
+          "different_from_initial": 0,
+          "different_from_anchor": 273
+        },
+        "electrical_pairs": {
+          "eligible": 1093,
+          "proposed": 90,
+          "updated": 0,
+          "different_from_initial": 0,
+          "different_from_anchor": 72
+        }
+      },
+      "seed": 2000,
+      "status": "completed",
+      "passed": false,
+      "baseline": {
+        "valid": true,
+        "score": 0.04291569727682125,
+        "body_amplitude_qualified": false,
+        "curriculum_stage": "tail-amplitude",
+        "body_coverage_score": 0.044189669207102454,
+        "region_order": [
+          "posterior",
+          "middle",
+          "anterior"
+        ],
+        "regional_joint_median_p2p_rad": [
+          2.868473529815674e-06,
+          0.0001580951502546668,
+          0.01940888911485672
+        ],
+        "regional_drive_median_p2p": [
+          2.2202730178833008e-06,
+          0.00019319809507578611,
+          0.023618478327989578
+        ],
+        "joint_sustained_p2p_rad": [
+          4.917383193969727e-07,
+          1.8924474716186523e-06,
+          3.844499588012695e-06,
+          2.6263296604156494e-05,
+          0.00013322755694389343,
+          0.00015667080879211426,
+          0.00015951949171721935,
+          0.0033361725509166718,
+          0.0111464262008667,
+          0.01940888911485672,
+          0.027104642242193222
+        ],
+        "drive_sustained_p2p": [
+          0.0,
+          1.1920928955078125e-06,
+          3.248453140258789e-06,
+          3.106147050857544e-05,
+          0.00016244500875473022,
+          0.00019159168004989624,
+          0.000194804510101676,
+          0.004039112478494644,
+          0.01352538913488388,
+          0.023618478327989578,
+          0.033003827556967735
+        ],
+        "repetitive_joint_count": 11,
+        "repetitive_drive_count": 10,
+        "sustained_joint_p2p_rad": 0.027104642242193222,
+        "joint_p2p_max_rad": 0.029552020132541656,
+        "sustained_neural_rhythms": 17,
+        "neural_rhythm_threshold_mV": 0.05,
+        "voltage_min_mV": -79.9938735961914,
+        "voltage_max_mV": 7.712143898010254,
+        "muscle_saturation_fraction": 0.0,
+        "joint_limits_reached": false,
+        "wave_qualified": false,
+        "locomotion_demonstrated": false,
+        "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+        "posterior_recruitment_score": 0.018710230601478427,
+        "tail_coverage_score": 0.044189669207102454,
+        "tail_amplitude_qualified": false
+      },
+      "best_training": {
+        "valid": true,
+        "score": 0.04291569727682125,
+        "body_amplitude_qualified": false,
+        "curriculum_stage": "tail-amplitude",
+        "body_coverage_score": 0.044189669207102454,
+        "region_order": [
+          "posterior",
+          "middle",
+          "anterior"
+        ],
+        "regional_joint_median_p2p_rad": [
+          2.868473529815674e-06,
+          0.0001580951502546668,
+          0.01940888911485672
+        ],
+        "regional_drive_median_p2p": [
+          2.2202730178833008e-06,
+          0.00019319809507578611,
+          0.023618478327989578
+        ],
+        "joint_sustained_p2p_rad": [
+          4.917383193969727e-07,
+          1.8924474716186523e-06,
+          3.844499588012695e-06,
+          2.6263296604156494e-05,
+          0.00013322755694389343,
+          0.00015667080879211426,
+          0.00015951949171721935,
+          0.0033361725509166718,
+          0.0111464262008667,
+          0.01940888911485672,
+          0.027104642242193222
+        ],
+        "drive_sustained_p2p": [
+          0.0,
+          1.1920928955078125e-06,
+          3.248453140258789e-06,
+          3.106147050857544e-05,
+          0.00016244500875473022,
+          0.00019159168004989624,
+          0.000194804510101676,
+          0.004039112478494644,
+          0.01352538913488388,
+          0.023618478327989578,
+          0.033003827556967735
+        ],
+        "repetitive_joint_count": 11,
+        "repetitive_drive_count": 10,
+        "sustained_joint_p2p_rad": 0.027104642242193222,
+        "joint_p2p_max_rad": 0.029552020132541656,
+        "sustained_neural_rhythms": 17,
+        "neural_rhythm_threshold_mV": 0.05,
+        "voltage_min_mV": -79.9938735961914,
+        "voltage_max_mV": 7.712143898010254,
+        "muscle_saturation_fraction": 0.0,
+        "joint_limits_reached": false,
+        "wave_qualified": false,
+        "locomotion_demonstrated": false,
+        "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+        "posterior_recruitment_score": 0.018710230601478427,
+        "tail_coverage_score": 0.044189669207102454,
+        "tail_amplitude_qualified": false
+      },
+      "validation": [
+        {
+          "case": "long",
+          "seconds": 20.0,
+          "brain_step_ms": 0.1,
+          "dt_s": 0.002,
+          "perturbation_mV": 0.0,
+          "metrics": {
+            "valid": true,
+            "score": 0.0544776497719917,
+            "body_amplitude_qualified": false,
+            "curriculum_stage": "tail-amplitude",
+            "body_coverage_score": 0.05633826195397881,
+            "region_order": [
+              "posterior",
+              "middle",
+              "anterior"
+            ],
+            "regional_joint_median_p2p_rad": [
+              3.7923455238342285e-06,
+              0.00015104212798178196,
+              0.0203484408557415
+            ],
+            "regional_drive_median_p2p": [
+              2.212822437286377e-06,
+              0.0001814375864341855,
+              0.02463042363524437
+            ],
+            "joint_sustained_p2p_rad": [
+              5.364418029785156e-07,
+              2.3692846298217773e-06,
+              5.21540641784668e-06,
+              2.5626271963119507e-05,
+              0.00012569129467010498,
+              0.00014983490109443665,
+              0.00015224935486912727,
+              0.003769904375076294,
+              0.012020349502563477,
+              0.0203484408557415,
+              0.028110849671065807
+            ],
+            "drive_sustained_p2p": [
+              0.0,
+              1.2069940567016602e-06,
+              3.2186508178710938e-06,
+              2.85319983959198e-05,
+              0.00015097111463546753,
+              0.00018010661005973816,
+              0.00018276856280863285,
+              0.004563681781291962,
+              0.014577984809875488,
+              0.02463042363524437,
+              0.03402634244412184
+            ],
+            "repetitive_joint_count": 11,
+            "repetitive_drive_count": 10,
+            "sustained_joint_p2p_rad": 0.028110849671065807,
+            "joint_p2p_max_rad": 0.02946273237466812,
+            "sustained_neural_rhythms": 18,
+            "neural_rhythm_threshold_mV": 0.05,
+            "voltage_min_mV": -79.9938735961914,
+            "voltage_max_mV": 7.712143898010254,
+            "muscle_saturation_fraction": 0.0,
+            "joint_limits_reached": false,
+            "wave_qualified": false,
+            "locomotion_demonstrated": false,
+            "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+            "posterior_recruitment_score": 0.01912601831423669,
+            "tail_coverage_score": 0.05633826195397881,
+            "tail_amplitude_qualified": false
+          }
+        },
+        {
+          "case": "perturb-plus",
+          "seconds": 12.0,
+          "brain_step_ms": 0.1,
+          "dt_s": 0.002,
+          "perturbation_mV": 1.0,
+          "metrics": {
+            "valid": true,
+            "score": 0.04339987039176285,
+            "body_amplitude_qualified": false,
+            "curriculum_stage": "tail-amplitude",
+            "body_coverage_score": 0.04469618030159533,
+            "region_order": [
+              "posterior",
+              "middle",
+              "anterior"
+            ],
+            "regional_joint_median_p2p_rad": [
+              2.905726432800293e-06,
+              0.00015735597116872668,
+              0.019586335867643356
+            ],
+            "regional_drive_median_p2p": [
+              2.2277235984802246e-06,
+              0.0001934742322191596,
+              0.023832272738218307
+            ],
+            "joint_sustained_p2p_rad": [
+              4.917383193969727e-07,
+              1.862645149230957e-06,
+              3.948807716369629e-06,
+              2.6423484086990356e-05,
+              0.00013256072998046875,
+              0.00015597231686115265,
+              0.00015873962547630072,
+              0.0033683888614177704,
+              0.011301606893539429,
+              0.019586335867643356,
+              0.027303848415613174
+            ],
+            "drive_sustained_p2p": [
+              0.0,
+              1.1920928955078125e-06,
+              3.2633543014526367e-06,
+              3.104656934738159e-05,
+              0.000162612646818161,
+              0.00019188225269317627,
+              0.00019506621174514294,
+              0.004078112542629242,
+              0.013714760541915894,
+              0.023832272738218307,
+              0.03324010409414768
+            ],
+            "repetitive_joint_count": 11,
+            "repetitive_drive_count": 10,
+            "sustained_joint_p2p_rad": 0.027303848415613174,
+            "joint_p2p_max_rad": 0.029541168361902237,
+            "sustained_neural_rhythms": 17,
+            "neural_rhythm_threshold_mV": 0.05,
+            "voltage_min_mV": -80.96961212158203,
+            "voltage_max_mV": 7.711389064788818,
+            "muscle_saturation_fraction": 0.0,
+            "joint_limits_reached": false,
+            "wave_qualified": false,
+            "locomotion_demonstrated": false,
+            "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+            "posterior_recruitment_score": 0.0187699821049458,
+            "tail_coverage_score": 0.04469618030159533,
+            "tail_amplitude_qualified": false
+          }
+        },
+        {
+          "case": "perturb-minus",
+          "seconds": 12.0,
+          "brain_step_ms": 0.1,
+          "dt_s": 0.002,
+          "perturbation_mV": -1.0,
+          "metrics": {
+            "valid": true,
+            "score": 0.04185197874514058,
+            "body_amplitude_qualified": false,
+            "curriculum_stage": "tail-amplitude",
+            "body_coverage_score": 0.04307016391554259,
+            "region_order": [
+              "posterior",
+              "middle",
+              "anterior"
+            ],
+            "regional_joint_median_p2p_rad": [
+              2.7865171432495117e-06,
+              0.00015863269800320268,
+              0.01924319937825203
+            ],
+            "regional_drive_median_p2p": [
+              2.212822437286377e-06,
+              0.00019320764113217592,
+              0.023417916148900986
+            ],
+            "joint_sustained_p2p_rad": [
+              5.513429641723633e-07,
+              1.8924474716186523e-06,
+              3.680586814880371e-06,
+              2.5931745767593384e-05,
+              0.0001337490975856781,
+              0.00015719421207904816,
+              0.0001600711839273572,
+              0.0033079273998737335,
+              0.010999463498592377,
+              0.01924319937825203,
+              0.02691569272428751
+            ],
+            "drive_sustained_p2p": [
+              0.0,
+              1.1920928955078125e-06,
+              3.2335519790649414e-06,
+              3.104656934738159e-05,
+              0.00016250461339950562,
+              0.00019158795475959778,
+              0.00019482732750475407,
+              0.004004135727882385,
+              0.013344958424568176,
+              0.023417916148900986,
+              0.03278067894279957
+            ],
+            "repetitive_joint_count": 11,
+            "repetitive_drive_count": 10,
+            "sustained_joint_p2p_rad": 0.02691569272428751,
+            "joint_p2p_max_rad": 0.029572200030088425,
+            "sustained_neural_rhythms": 17,
+            "neural_rhythm_threshold_mV": 0.05,
+            "voltage_min_mV": -80.97950744628906,
+            "voltage_max_mV": 7.712960720062256,
+            "muscle_saturation_fraction": 0.0,
+            "joint_limits_reached": false,
+            "wave_qualified": false,
+            "locomotion_demonstrated": false,
+            "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+            "posterior_recruitment_score": 0.01870646050750243,
+            "tail_coverage_score": 0.04307016391554259,
+            "tail_amplitude_qualified": false
+          }
+        },
+        {
+          "case": "brain-refined",
+          "seconds": 12.0,
+          "brain_step_ms": 0.05,
+          "dt_s": 0.002,
+          "perturbation_mV": 0.0,
+          "metrics": {
+            "valid": true,
+            "score": 0.04325515294604834,
+            "body_amplitude_qualified": false,
+            "curriculum_stage": "tail-amplitude",
+            "body_coverage_score": 0.04459499514930364,
+            "region_order": [
+              "posterior",
+              "middle",
+              "anterior"
+            ],
+            "regional_joint_median_p2p_rad": [
+              2.898275852203369e-06,
+              0.00015988328959792852,
+              0.019292138516902924
+            ],
+            "regional_drive_median_p2p": [
+              0.0,
+              0.00019291357602924109,
+              0.02334599569439888
+            ],
+            "joint_sustained_p2p_rad": [
+              5.066394805908203e-07,
+              1.9073486328125e-06,
+              3.889203071594238e-06,
+              2.8517097234725952e-05,
+              0.00013653188943862915,
+              0.00015946850180625916,
+              0.0001602980773895979,
+              0.0032790936529636383,
+              0.010963298380374908,
+              0.019292138516902924,
+              0.02704280335456133
+            ],
+            "drive_sustained_p2p": [
+              0.0,
+              0.0,
+              0.0,
+              3.366917371749878e-05,
+              0.00016439706087112427,
+              0.0001924559473991394,
+              0.00019337120465934277,
+              0.00396743044257164,
+              0.01327507197856903,
+              0.02334599569439888,
+              0.032713595777750015
+            ],
+            "repetitive_joint_count": 11,
+            "repetitive_drive_count": 8,
+            "sustained_joint_p2p_rad": 0.02704280335456133,
+            "joint_p2p_max_rad": 0.029547065496444702,
+            "sustained_neural_rhythms": 17,
+            "neural_rhythm_threshold_mV": 0.05,
+            "voltage_min_mV": -79.9938735961914,
+            "voltage_max_mV": 7.702492713928223,
+            "muscle_saturation_fraction": 0.0,
+            "joint_limits_reached": false,
+            "wave_qualified": false,
+            "locomotion_demonstrated": false,
+            "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+            "posterior_recruitment_score": 0.017798151084197758,
+            "tail_coverage_score": 0.04459499514930364,
+            "tail_amplitude_qualified": false
+          }
+        },
+        {
+          "case": "body-refined",
+          "seconds": 12.0,
+          "brain_step_ms": 0.1,
+          "dt_s": 0.001,
+          "perturbation_mV": 0.0,
+          "metrics": {
+            "valid": true,
+            "score": 0.04349296269805045,
+            "body_amplitude_qualified": false,
+            "curriculum_stage": "tail-amplitude",
+            "body_coverage_score": 0.044797307055731136,
+            "region_order": [
+              "posterior",
+              "middle",
+              "anterior"
+            ],
+            "regional_joint_median_p2p_rad": [
+              2.913177013397217e-06,
+              0.00015827163588255644,
+              0.019408512860536575
+            ],
+            "regional_drive_median_p2p": [
+              2.1085143089294434e-06,
+              0.00019320729188621044,
+              0.02361016348004341
+            ],
+            "joint_sustained_p2p_rad": [
+              4.6193599700927734e-07,
+              1.9222497940063477e-06,
+              3.904104232788086e-06,
+              2.6348978281021118e-05,
+              0.00013339146971702576,
+              0.00015685707330703735,
+              0.00015968619845807552,
+              0.003339625895023346,
+              0.01115177571773529,
+              0.019408512860536575,
+              0.02709995023906231
+            ],
+            "drive_sustained_p2p": [
+              0.0,
+              8.940696716308594e-07,
+              3.3229589462280273e-06,
+              3.1035393476486206e-05,
+              0.0001624561846256256,
+              0.0001916065812110901,
+              0.0001948080025613308,
+              0.0040388889610767365,
+              0.013525888323783875,
+              0.02361016348004341,
+              0.03298778086900711
+            ],
+            "repetitive_joint_count": 11,
+            "repetitive_drive_count": 10,
+            "sustained_joint_p2p_rad": 0.02709995023906231,
+            "joint_p2p_max_rad": 0.029587674885988235,
+            "sustained_neural_rhythms": 17,
+            "neural_rhythm_threshold_mV": 0.05,
+            "voltage_min_mV": -79.9969253540039,
+            "voltage_max_mV": 7.712143898010254,
+            "muscle_saturation_fraction": 0.0,
+            "joint_limits_reached": false,
+            "wave_qualified": false,
+            "locomotion_demonstrated": false,
+            "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+            "posterior_recruitment_score": 0.018710419902117362,
+            "tail_coverage_score": 0.044797307055731136,
+            "tail_amplitude_qualified": false
+          }
+        },
+        {
+          "case": "held-voltage",
+          "seconds": 12.0,
+          "brain_step_ms": 0.1,
+          "dt_s": 0.002,
+          "perturbation_mV": 0.0,
+          "metrics": {
+            "valid": false,
+            "score": -1.0,
+            "body_amplitude_qualified": false,
+            "curriculum_stage": "tail-amplitude",
+            "body_coverage_score": 0.0,
+            "region_order": [
+              "posterior",
+              "middle",
+              "anterior"
+            ],
+            "regional_joint_median_p2p_rad": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "regional_drive_median_p2p": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "joint_sustained_p2p_rad": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "drive_sustained_p2p": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "repetitive_joint_count": 0,
+            "repetitive_drive_count": 0,
+            "sustained_joint_p2p_rad": 0.0,
+            "joint_p2p_max_rad": 0.0,
+            "sustained_neural_rhythms": 0,
+            "neural_rhythm_threshold_mV": 0.05,
+            "voltage_min_mV": -80.0,
+            "voltage_max_mV": -35.0,
+            "muscle_saturation_fraction": 0.0,
+            "joint_limits_reached": false,
+            "wave_qualified": false,
+            "locomotion_demonstrated": false,
+            "interpretation": "Short-assay tail amplitude only; body-wide qualification reported separately, no locomotion claim",
+            "posterior_recruitment_score": 0.0,
+            "tail_coverage_score": 0.0,
+            "tail_amplitude_qualified": false
+          }
+        }
+      ],
+      "iterations": 2,
+      "selected_iteration": 0,
+      "target_p2p_rad": 0.003,
+      "target_speed_body_lengths_s": null,
+      "elapsed_seconds": 95.81459962498047,
+      "frozen_fields_unchanged": true,
+      "injected_currents_zero": true,
+      "locomotion_demonstrated": false,
+      "network_best_sha256": "1ce277c4e5be0d28ef0324de8c55fea0e225167f16cf49d1a67e85e0da294815",
+      "interpretation": "Short-assay tail amplitude only; no body-wide or long-duration qualification"
+    },
+    "focus_cell_count": 71,
+    "parent_and_anchor": {
+      "parent_path": "/private/tmp/r-elegans-E037-amplitude-fork",
+      "essential_sha256": {
+        "summary.json": "45e28c3f2d155eacec695b6778891a13765bbedc5568012e41224a403de6e53b",
+        "fit_policy.json": "8bf517c0aefa3da793e0763a9904d16fb392d76c24e84d2e872b7e1e35e60ea5",
+        "search_state.json": "7d981bca2c01274f9b0f030c375e3b1a5a873317c728b72f5500c22a2729f0fe",
+        "best.json": "3ee9b74ec2e68b163cef268461a64743a05deef6970ab84a786206582aecc4a5",
+        "network_best.npz": "1ce277c4e5be0d28ef0324de8c55fea0e225167f16cf49d1a67e85e0da294815",
+        "allowed_parameters.npz": "85a726e144fbbf7fd00c104adc2ff6a3470a602f5527640f0d33bdce546e0a2c"
+      },
+      "original_anchor_sha256": "482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6",
+      "maximum_factor": 16.0,
+      "incoming_parameters_changed": 530,
+      "incoming_parameters_at_bound": 0,
+      "mode": "Learned parameters/original bounds retained; fresh RNG and re-evaluated amplitude objective",
+      "fork_seed": 2000
+    },
+    "exit_code": 2,
+    "interpretation": "Two proposals rejected;no improvement or qualification. All six validation cases completed, pipeline verification only."
+  },
+  "limitations": [
+    "Short validation is provisional;not long-duration stability or locomotion",
+    "No head/middle retention constraint;parent skills preserved independently",
+    "Original bounds retained;posterior excitation may still be limited",
+    "No server checkpoint independently retrieved"
+  ],
+  "verification": {
+    "targeted_tests": "10 passed in2.81s",
+    "full_suite": "212 passed in68.75s",
+    "shell_syntax": "sh -n passed"
+  },
+  "archive": {
+    "location": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E039",
+    "files": 685,
+    "manifest_sha256": "7aa6100c42a70f5eeb3a35bd221faabbb4dd01c86709fd5d6292b287b2174680"
+  }
+}

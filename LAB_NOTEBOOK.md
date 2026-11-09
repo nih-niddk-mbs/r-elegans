@@ -2541,3 +2541,57 @@ Exact pasted stdout and compact parsed report archived locally under OneDrive
 56624ce317b23106b8f54ccdfe310da78ddb868d9dbefa65797c672f08d65134.
 Cloud synchronization not verified. Earlier E038 manifest covers the earlier
 local-audit files only; this server-report subdirectory has its own manifest.
+
+## 2026-11-09 — E039 planned short autonomous tail recruitment trial
+
+User authorized a short run to get the tail moving. Plan:20-minute mbslnx2
+cohort, four independent four-core workers, fresh RNG seeds2000–2003 forked
+round-robin from reviewed E037 seed1001/seed1003. Preserve original anchors,
+16x bounds, entire lineage and all existing fixed fields; all302 neurons and
+9616 unknown parameters remain eligible. All injected currents stay zero.
+No phase, heading, speed or control objective; no NMJ/body changes.
+
+Tail-only scoring:95% logarithmic sustained joint-amplitude coverage in the
+posterior four joints (same median definition, target0.003rad) plus5% capped
+posterior motor-neuron sustained voltage recruitment, to provide a weak search
+signal before measurable tail motion. Recruitment is a fitting heuristic, not
+an electrophysiological target or a qualification gate. Keep body-wide metrics
+separate. Tail qualification requires validity and posterior median>=0.003rad;
+no other region has to improve. Proposals:90% sparse tail-projecting neurons'
+channel densities or existing incoming chemical/electrical edges,10% original
+full-space proposals. Independent neurons/edges remain untied. No bounds change.
+Fit20 simulated seconds; long validation60s plus initial-voltage perturbations,
+finer brain/body steps and held-voltage control. Same25% amplitude refinement
+tolerance, tail only. Passing this short assay is a provisional tail primitive,
+not long-duration qualification, body-wide motion or locomotion.
+
+Before remote launch: targeted synthetic criterion/proposal tests and a local
+2-proposal smoke run using `/tmp/r-elegans-E037-amplitude-fork`, fit12s,
+validation20s, budget6minutes; record outcome separately. Actual E037 server
+parents are unavailable locally; never substitute local parents for claimed
+server results. Server launch remains user-run after push via nohup script.
+
+E039 LOCAL pilot executed with the planned command above (stdout
+`/tmp/r-elegans-E039-tail-pilot.log`). Completed95.8146s, two proposals both
+rejected, selected iteration0; exit2, unqualified. This is not improvement
+evidence. All six validations completed. All external currents zero and frozen
+fields unchanged; original-anchor parameter reconstruction passed. Anatomical
+focus71 distinct presynaptic cells across the four posterior joint projections.
+Baseline posterior joint median2.86847e-6rad; no accepted parameter changes.
+Learned incoming parameters preserved. Best checkpoint SHA256
+1ce277c4e5be0d28ef0324de8c55fea0e225167f16cf49d1a67e85e0da294815.
+Long validation20s is deliberately only a smoke check; actual server uses60s.
+
+Verification:10 targeted tests passed2.81s; full suite212 passed68.75s;
+launcher shell syntax passed. Synthetic tests reject head-only and neural-only
+motion claims, allow independent tail qualification, check refinement and
+bounded sparse proposals. Software tests do not establish biological validity.
+
+External archive `/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E039`:
+685 files including recursive parent, all selected/final checkpoints, RNG/state,
+full history, traces, source/environment records, stdout and implementation.
+Manifest SHA2567aa6100c42a70f5eeb3a35bd221faabbb4dd01c86709fd5d6292b287b2174680.
+Copy verified locally; cloud synchronization not independently verified. Compact
+record `experiments/records/E039-tail-amplitude.json` contains exact invocation,
+parent hashes, summary and limitations. Decision: push prepared20-minute server
+launcher for user execution; no server launch or tail qualification claimed.

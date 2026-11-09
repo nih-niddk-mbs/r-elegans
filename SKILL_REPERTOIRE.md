@@ -285,3 +285,8 @@ recurrent and NMJ causes remain unresolved. Next proposed curriculum targets
 posterior recruitment/amplitude with zero external drive, preserving independent
 head/middle candidates. No new training or skill qualification. Full parsed
 reports: `experiments/records/E038-server-20261109.json`.
+
+E039 planned: independent short-assay tail amplitude primitive. Original parents
+retained. Tail median sustained joint p2p>=0.003rad, with perturbation, timestep
+and held-voltage checks. No phase/control or propulsion requirement.20-minute
+server trial prepared; no new qualification until actual results are reported.

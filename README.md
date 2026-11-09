@@ -1021,3 +1021,9 @@ recurrent and NMJ causes remain unresolved. Next proposed curriculum targets
 posterior recruitment/amplitude with zero external drive, preserving independent
 head/middle candidates. No new training or skill qualification. Full parsed
 reports: `experiments/records/E038-server-20261109.json`.
+
+E039 short tail trial is prepared: `sh scripts/launch_tail_amplitude_mbslnx2.sh`
+starts a20-minute nohup cohort on mbslnx2, from learned E037 parents1001/1003.
+Targets autonomous tail amplitude with a weak neural-recruitment auxiliary
+score; no external drive. Qualification is separate from body-wide amplitude
+and locomotion. See [protocol](TRAINING_PROTOCOLS.md#short-autonomous-tail-amplitude-trial-e039-2026-11-09).

@@ -19,6 +19,8 @@ from r_elegans.brain.autonomous_wiggle import (
 from r_elegans.brain.conductance_network import load_network,save_network
 from r_elegans.brain.joint_autonomous_fit import joint_fit_reference,apply_joint_offsets,joint_proposal,frozen_joint_fields_unchanged
 from r_elegans.brain.autonomous_curriculum import body_wave_metrics,wave_refinement_agrees,cycle_movement_metrics,cycle_movement_achieved
+from r_elegans.brain.tail_amplitude import tail_focus_cells,tail_amplitude_metrics,tail_refinement_agrees,tail_proposal
+from r_elegans.body.neuromuscular import build_muscle_projection
 from r_elegans.brain.body_amplitude import body_amplitude_metrics,amplitude_refinement_agrees
 from r_elegans.brain.single_compartment import CHANNEL_NAMES
 from r_elegans.body import physical_muscle_body_params
@@ -40,6 +42,7 @@ def main():
     source.add_argument('--warm-start-worker',type=Path,help='Fork learned offsets using the original anchor/bounds; fresh RNG')
     parser.add_argument('--objective',choices=['amplitude','movement','body-wave','cycle-movement','body-amplitude'],default='amplitude',
         help='movement retains the historical endpoint score; body-wave is the current curriculum')
+    parser.add_argument('--tail-focus',action='store_true',help='Posterior amplitude plus weak neural recruitment; joint body-amplitude only')
     parser.add_argument('--fit-scope',choices=['rmd','neurons-connections'],help='Default: full neuron/connection scope for movement, RMD for amplitude')
     parser.add_argument('--target-speed',type=float,default=1e-4,help='Movement target in body lengths/s')
     parser.add_argument('--seed',type=int,default=0)
@@ -60,6 +63,8 @@ def main():
             parser.error('Warm start must preserve the parent original-anchor bounds')
         args.maximum_factor=warm['maximum_factor']
     if args.fit_scope is None:args.fit_scope='rmd' if args.objective=='amplitude' else 'neurons-connections'
+    if args.tail_focus and (args.objective!='body-amplitude' or args.fit_scope!='neurons-connections'):
+        parser.error('Tail focus requires joint body-amplitude objective')
     if args.maximum_factor is None:args.maximum_factor=16. if args.objective in ('body-wave','cycle-movement','body-amplitude') else 4.
     if args.fit_seconds is None:args.fit_seconds=12. if args.objective=='amplitude' else (60. if args.objective=='cycle-movement' else 30.)
     if not all(math.isfinite(x) and x>0 for x in (args.minutes,args.fit_seconds,args.validation_seconds,args.target_p2p_rad,args.target_speed)):
@@ -90,10 +95,12 @@ def main():
     if curriculum and joint:
         posterior=np.asarray(muscle_longitudinal_positions())>=.35
         focus_cells=np.flatnonzero(np.asarray(model.neuromuscular_params.synapse_weights)[posterior].sum(axis=0)>0)
+    if args.tail_focus:
+        focus_cells=tail_focus_cells(model.neuromuscular_params.synapse_weights,build_muscle_projection(11,head_at_end=True))
     if joint:
         fixed,spec=joint_fit_reference(fixed);mask=spec.channels;parameter_count=spec.size
         def apply_parameters(offsets):return apply_joint_offsets(initial,jnp.asarray(offsets,dtype=initial.log_channel_scale.dtype),spec)
-        def propose_parameters(best,rng,sigma):return joint_proposal(best,spec,rng,sigma,args.maximum_factor,focus_cells=focus_cells)
+        def propose_parameters(best,rng,sigma):return (tail_proposal if args.tail_focus else joint_proposal)(best,spec,rng,sigma,args.maximum_factor,focus_cells=focus_cells)
         def frozen_unchanged(params):return frozen_joint_fields_unchanged(params,initial,spec)
     else:
         fixed,mask=autonomous_fit_reference(initial,fixed,model.neuron_ids);parameter_count=int(mask.sum())
@@ -127,6 +134,7 @@ def main():
         gap_mask=spec.gap if joint else np.zeros_like(fixed.gap_mask,dtype=bool))
     indices,channels=np.nonzero(mask)
     experiment=({'body-wave':'E035','cycle-movement':'E036','body-amplitude':'E037'}[args.objective]) if curriculum else ('E032' if joint else ('E031' if args.objective=='movement' else 'E030'))
+    if args.tail_focus:experiment='E039'
     policy=dict(experiment=experiment,objective=args.objective,parameters=[dict(neuron=model.neuron_ids[i],channel=CHANNEL_NAMES[c]) for i,c in zip(indices,channels)],
         maximum_density_factor=args.maximum_factor,
         fixed=['all nonselected densities','LEAK','capacitance','kinetics','reversals','calcium handling',
@@ -163,6 +171,13 @@ def main():
             movement_gate='No wave or movement qualification in this stage',warm_start=warm is not None,
             target_speed_body_lengths_s=None,
             parameter_bounds_anchor='Original source_inputs, not the selected parent')
+    if args.tail_focus:
+        policy.update(score_version='tail-amplitude-recruitment-v1',tail_focus=True,
+            amplitude_gate='Posterior four-joint median sustained excursion >=0.003 rad; validity and six short validation cases',
+            score_weights=dict(tail_joint_amplitude=.95,posterior_neural_recruitment=.05),
+            recruitment_normalization='mean clipped log1p(sustained_voltage_p2p/0.05)/log1p(5/0.05), heuristic only',
+            focus_rationale='90% sparse posterior-projecting cell/edge proposals;10% original full-space; no drive',
+            qualification_scope='Short tail primitive only; no body-wide or long-duration claim')
     write_json(out/'fit_policy.json',policy)
     print(json.dumps(dict(experiment=experiment,fit_scope=args.fit_scope,total_trainable=parameter_count,
         counts=spec.counts if joint else dict(channel_densities=parameter_count))),flush=True)
@@ -197,6 +212,8 @@ def main():
         else:
             if curriculum:
                 function={'body-wave':body_wave_metrics,'cycle-movement':cycle_movement_metrics,'body-amplitude':body_amplitude_metrics}[args.objective]
+                if args.tail_focus:
+                    function=lambda *values:tail_amplitude_metrics(*values,focus_cells=focus_cells)
                 metrics=function(trace[0],trace[2],trace[3],body_dt,float(body.mechanics.segment_length)*12.,model.neuron_ids,float(body.max_joint_angle))
             elif args.objective=='movement':
                 metrics=movement_metrics(trace[0],trace[2],trace[3],body_dt,float(body.mechanics.segment_length)*12.,model.neuron_ids,float(body.max_joint_angle))
@@ -224,7 +241,7 @@ def main():
             # This first stage seeks a small amplitude milestone, not maximum bend.
             if args.objective=='amplitude' and best_metrics['valid'] and best_metrics['sustained_joint_p2p_rad']>=args.target_p2p_rad:break
             if args.objective=='body-wave' and best_metrics.get('wave_qualified'):break
-            if args.objective=='body-amplitude' and best_metrics.get('body_amplitude_qualified'):break
+            if args.objective=='body-amplitude' and best_metrics.get('tail_amplitude_qualified' if args.tail_focus else 'body_amplitude_qualified'):break
             sigma=.12*2**((iteration//20)%3)
             candidate=propose_parameters(best,rng,sigma)
             changed=candidate!=best;proposed_parameters|=changed
@@ -246,6 +263,8 @@ def main():
                 curriculum_stage=best_metrics.get('curriculum_stage'),body_coverage=best_metrics.get('body_coverage_score'),
                 wave_qualified=best_metrics.get('wave_qualified'),
                 body_amplitude_qualified=best_metrics.get('body_amplitude_qualified'),
+                tail_amplitude_qualified=best_metrics.get('tail_amplitude_qualified'),
+                tail_coverage=best_metrics.get('tail_coverage_score'),posterior_recruitment=best_metrics.get('posterior_recruitment_score'),
                 regional_amplitudes_posterior_middle_anterior=best_metrics.get('regional_joint_median_p2p_rad'),
                 regional_bends_posterior_middle_anterior=best_metrics.get('joint_harmonic_p2p_rad'),
                 cycle_mean_speed=best_metrics.get('cycle_progress',{}).get('mean_cycle_speed_body_lengths_s'),
@@ -274,8 +293,8 @@ def main():
             if v['case']=='held-voltage':return (m.get('sustained_neural_rhythms',0)==0 and m.get('joint_p2p_max_rad',1.)<1e-5
                 and abs(p.get('mean_cycle_speed_body_lengths_s',0.))<args.target_speed*.01)
             if args.objective=='body-amplitude':
-                achieved=bool(m.get('body_amplitude_qualified'))
-                if v['case'] in ('body-refined','brain-refined'):achieved=achieved and amplitude_refinement_agrees(best_metrics,m)
+                achieved=bool(m.get('tail_amplitude_qualified' if args.tail_focus else 'body_amplitude_qualified'))
+                if v['case'] in ('body-refined','brain-refined'):achieved=achieved and (tail_refinement_agrees if args.tail_focus else amplitude_refinement_agrees)(best_metrics,m)
                 return achieved
             achieved=bool(m.get('wave_qualified')) if args.objective=='body-wave' else cycle_movement_achieved(m,args.target_speed,baseline_speed)
             if v['case'] in ('body-refined','brain-refined'):
@@ -299,7 +318,7 @@ def main():
     fitted=out/'fitted_inputs';fitted.mkdir()
     shutil.copyfile(out/'network_best.npz',fitted/'network.npz')
     shutil.copyfile(out/'source_inputs/parent_actor.npz',fitted/'parent_actor.npz')
-    write_json(fitted/'inputs.json',dict(experiment=experiment,objective=args.objective,fit_scope=args.fit_scope,passed=bool(passed),
+    write_json(fitted/'inputs.json',dict(experiment=experiment,objective=args.objective,fit_scope=args.fit_scope,passed=bool(passed),tail_focus=args.tail_focus,
         locomotion_demonstrated=bool(passed and args.objective=='cycle-movement'),
         sha256={n:hashlib.sha256((fitted/n).read_bytes()).hexdigest() for n in ('network.npz','parent_actor.npz')}))
     coverage={};begin=0
@@ -310,6 +329,7 @@ def main():
             different_from_anchor=int(np.count_nonzero(best[begin:end])))
         begin=end
     summary=dict(experiment=experiment,objective=args.objective,fit_scope=args.fit_scope,total_trainable=parameter_count,
+        tail_focus=args.tail_focus,
         warm_start_parent=warm['parent_path'] if warm else None,
         parameter_bounds_anchor_sha256=manifest['sha256']['network.npz'],maximum_factor=args.maximum_factor,
         parameters_proposed=int(proposed_parameters.sum()),parameters_updated=int(updated_parameters.sum()),
@@ -322,7 +342,8 @@ def main():
         frozen_fields_unchanged=bool(frozen_ok),injected_currents_zero=bool(np.all(np.asarray(fixed.bias_pA)==0)),
         locomotion_demonstrated=bool(passed and args.objective=='cycle-movement'),
         network_best_sha256=hashlib.sha256((out/'network_best.npz').read_bytes()).hexdigest(),
-        interpretation=('Independent body-wide amplitude only; phase, control and propulsion unassessed' if args.objective=='body-amplitude' else
+        interpretation=('Short-assay tail amplitude only; no body-wide or long-duration qualification' if args.tail_focus else
+            'Independent body-wide amplitude only; phase, control and propulsion unassessed' if args.objective=='body-amplitude' else
             'Intrinsic body-wave qualification; no locomotion claim' if args.objective=='body-wave' else
             'Cycle-averaged autonomous movement criterion, not animal-matched behavior' if args.objective=='cycle-movement' else
             'First autonomous motion criterion, not animal-matched behavior' if args.objective=='movement' else
