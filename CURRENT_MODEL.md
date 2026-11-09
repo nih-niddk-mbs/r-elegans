@@ -1500,3 +1500,80 @@ physiological/body properties remain required. A single cause for optimization
 failure or full-network insufficiency is not established. Preserve original
 wiggle and failed candidates; no new long search launched in this analysis.
 See `experiments/records/E034-server-20261108.json`.
+
+## Autonomous body-wave curriculum (E035, 2026-11-08)
+
+The next run develops self-generated body-wide bending before propulsion. It
+starts from preserved `autonomous_wiggle_v1`, with all 9,616 unknown neuron
+density/chemical/electrical parameters eligible. Injected currents remain zero;
+leak, capacitance, kinetics/reversals/calcium, anatomy, release properties, NMJs
+and body mechanics stay fixed. No clock, sensory drive, waveform teacher or
+body force enters the forward model. Observed spontaneous oscillation supplies
+only a frequency/phase reference for the score.
+
+First substage: spread coherent motion into posterior and middle regions. A
+continuous log-amplitude coverage score uses both joint bending and filtered
+antagonistic muscle drive, including common-frequency power and phase locking.
+Once coverage reaches target, reward ordered phase progression across anterior,
+middle and posterior regions. Either propagation direction is allowed. Static
+posture, a stronger head-only wiggle, synchronous whole-body bending and
+opposing standing-wave lobes cannot qualify as a traveling primitive.
+
+Engineering qualification (not animal-calibrated): harmonic p2p >=0.003 rad
+for regional joints and >=0.003 for regional drive; common-frequency power
+fraction>=0.5, phase locking>=0.8; phase span>=pi/3 in both shape and drive,
+consistent-sign spatial increments between0.1 and0.8pi; second shape-mode
+variance>=2%. A sustained >=0.01-rad bend must remain. A sustained neuronal
+rhythm >=0.05 mV can support it, including graded activity in non-RMD neurons.
+Voltages must remain bounded, muscles unsaturated, joints unclipped, and the
+late mean body axis must remain well-defined with <0.35-rad turning.
+
+All unknown parameters remain independent. Anatomy only focuses some proposal
+blocks on the 103 neurons projecting to middle/posterior muscles and their
+existing inputs; global proposals still reach every eligible parameter. New
+curriculum bounds are 0.0625–16 times the source density/effective connection
+strength, wider than the historical 0.25–4 neighborhood because most non-RMD
+channel priors were initially weak transferred estimates. These are search
+limits, not measured physiological ranges. All fixed physiological fields
+remain anchored. Exact masks, bounds, proposals and accepted coverage are saved.
+
+Run on mbslnx2:
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_autonomous_wave_mbslnx2.sh
+```
+
+Four disjoint four-core CPU workers, up to four hours including validation,
+under nohup. Log/run prefix is `autonomous-wave-*`. The old movement launcher
+now delegates to this current curriculum, preventing another endpoint-score
+run by mistake; historical `--objective movement` remains available only for
+explicit replay from recorded source. The new run does not change earlier
+checkpoints or an already-running job.
+
+After a short-window wave target or search budget, validate 300 simulated
+seconds, +/-1 mV initial states, half neural/body timesteps and held voltage.
+All active cases must qualify; refined amplitudes must agree within25%, phase
+increments within0.2 rad and frequency within5%. Held voltage must stop motion.
+If any check fails, preserve the candidate but do not promote it. `passed` in
+an E035 summary means body-wave qualification, **not forward locomotion**.
+
+Complete-cycle translation is now also measured by integrating centroid
+position over full reference cycles, using rising and falling phase origins,
+and regressing cycle-mean positions in three late blocks. It no longer rewards
+instantaneous endpoint phase. Both shape closure residuals and phase-origin
+agreement are reported. Synthetic bounded oscillation has zero progress under
+this metric; known translation is recovered.
+
+A later `--objective cycle-movement` (E036) requires explicit `--inputs` from
+a passed body-wave `fitted_inputs/` pair. It retains the wave qualification and
+requires >=1e-4 BL/s in all cycle-mean blocks, >=5x positive baseline, >=2%
+forward/path efficiency, phase-origin agreement and numerical refinement. It
+is implemented but has not been launched; no body-wave parent is yet qualified.
+No automatic propulsion/food/RL stage starts from this wave run.
+
+Local two-proposal pilot completed all six short validation cases with frozen
+fields unchanged and zero injected current. Its posterior recruitment is still
+far below target, so it correctly returns `passed=false`. This is pipeline
+validation, not a learned body wave. See E035 notebook and experiment record.

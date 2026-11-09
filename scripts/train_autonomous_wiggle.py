@@ -18,9 +18,11 @@ from r_elegans.brain.autonomous_wiggle import (
 )
 from r_elegans.brain.conductance_network import load_network,save_network
 from r_elegans.brain.joint_autonomous_fit import joint_fit_reference,apply_joint_offsets,joint_proposal,frozen_joint_fields_unchanged
+from r_elegans.brain.autonomous_curriculum import body_wave_metrics,wave_refinement_agrees,cycle_movement_metrics,cycle_movement_achieved
 from r_elegans.brain.single_compartment import CHANNEL_NAMES
 from r_elegans.body import physical_muscle_body_params
 from r_elegans.body.channel_bridge import initial_channel_body_state,channel_body_chunk
+from r_elegans.body.neuromuscular import muscle_longitudinal_positions
 from r_elegans.model import load_builtin_model
 from r_elegans.rl.full_network_actor import actor_from_arrays
 from scripts.experiment_records import capture_run_record
@@ -32,7 +34,8 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--inputs',type=Path)
-    parser.add_argument('--objective',choices=['amplitude','movement'],default='amplitude')
+    parser.add_argument('--objective',choices=['amplitude','movement','body-wave','cycle-movement'],default='amplitude',
+        help='movement retains the historical endpoint score; body-wave is the current curriculum')
     parser.add_argument('--fit-scope',choices=['rmd','neurons-connections'],help='Default: full neuron/connection scope for movement, RMD for amplitude')
     parser.add_argument('--target-speed',type=float,default=1e-4,help='Movement target in body lengths/s')
     parser.add_argument('--seed',type=int,default=0)
@@ -41,10 +44,11 @@ def main():
     parser.add_argument('--fit-seconds',type=float,help='Default 12 s for amplitude, 30 s for movement')
     parser.add_argument('--validation-seconds',type=float,default=300.)
     parser.add_argument('--target-p2p-rad',type=float,default=.01)
-    parser.add_argument('--maximum-factor',type=float,default=4.)
+    parser.add_argument('--maximum-factor',type=float,help='Default 16 for wave curriculum, 4 for historical objectives')
     args=parser.parse_args()
-    if args.fit_scope is None:args.fit_scope='neurons-connections' if args.objective=='movement' else 'rmd'
-    if args.fit_seconds is None:args.fit_seconds=30. if args.objective=='movement' else 12.
+    if args.fit_scope is None:args.fit_scope='rmd' if args.objective=='amplitude' else 'neurons-connections'
+    if args.maximum_factor is None:args.maximum_factor=16. if args.objective in ('body-wave','cycle-movement') else 4.
+    if args.fit_seconds is None:args.fit_seconds=12. if args.objective=='amplitude' else (60. if args.objective=='cycle-movement' else 30.)
     if not all(math.isfinite(x) and x>0 for x in (args.minutes,args.fit_seconds,args.validation_seconds,args.target_p2p_rad,args.target_speed)):
         parser.error('Positive finite settings required')
     if args.fit_seconds<4 or args.validation_seconds<args.fit_seconds or args.iterations<0:
@@ -54,17 +58,24 @@ def main():
     if out==repo or repo in out.parents:parser.error('Keep results external')
     out.mkdir(parents=True,exist_ok=False);capture_run_record(out,repo,args)
     inputs=select_input_bundle(args.inputs)
-    if args.objective=='movement' and args.inputs is None:inputs=inputs.parent/'autonomous_wiggle_v1'
+    if args.objective!='amplitude' and args.inputs is None:inputs=inputs.parent/'autonomous_wiggle_v1'
     manifest=verify_input_bundle(inputs)
+    if args.objective=='cycle-movement' and not (args.inputs is not None and manifest.get('objective')=='body-wave' and manifest.get('passed') is True):
+        parser.error('cycle-movement requires --inputs from a passed body-wave fitted_inputs checkpoint')
     shutil.copytree(inputs,out/'source_inputs')
     initial,fixed,config=load_network(out/'source_inputs/network.npz')
     model=load_builtin_model()
     with np.load(out/'source_inputs/parent_actor.npz',allow_pickle=False) as z:parent=actor_from_arrays(z)
     joint=args.fit_scope=='neurons-connections'
+    curriculum=args.objective in ('body-wave','cycle-movement')
+    focus_cells=None
+    if curriculum and joint:
+        posterior=np.asarray(muscle_longitudinal_positions())>=.35
+        focus_cells=np.flatnonzero(np.asarray(model.neuromuscular_params.synapse_weights)[posterior].sum(axis=0)>0)
     if joint:
         fixed,spec=joint_fit_reference(fixed);mask=spec.channels;parameter_count=spec.size
         def apply_parameters(offsets):return apply_joint_offsets(initial,jnp.asarray(offsets),spec)
-        def propose_parameters(best,rng,sigma):return joint_proposal(best,spec,rng,sigma,args.maximum_factor)
+        def propose_parameters(best,rng,sigma):return joint_proposal(best,spec,rng,sigma,args.maximum_factor,focus_cells=focus_cells)
         def frozen_unchanged(params):return frozen_joint_fields_unchanged(params,initial,spec)
     else:
         fixed,mask=autonomous_fit_reference(initial,fixed,model.neuron_ids);parameter_count=int(mask.sum())
@@ -77,7 +88,7 @@ def main():
         chemical_mask=spec.chemical if joint else np.zeros_like(fixed.chemical_mask,dtype=bool),
         gap_mask=spec.gap if joint else np.zeros_like(fixed.gap_mask,dtype=bool))
     indices,channels=np.nonzero(mask)
-    experiment='E032' if joint else ('E031' if args.objective=='movement' else 'E030')
+    experiment=('E035' if args.objective=='body-wave' else 'E036') if curriculum else ('E032' if joint else ('E031' if args.objective=='movement' else 'E030'))
     policy=dict(experiment=experiment,objective=args.objective,parameters=[dict(neuron=model.neuron_ids[i],channel=CHANNEL_NAMES[c]) for i,c in zip(indices,channels)],
         maximum_density_factor=args.maximum_factor,
         fixed=['all nonselected densities','LEAK','capacitance','kinetics','reversals','calcium handling',
@@ -98,6 +109,14 @@ def main():
             method='Bounded block/coherent stochastic proposals; independent electrical pairs, no weight tying',
             physiological_status='Behavioral fit of unknown effective parameters, not inferred biological channel composition')
     else:policy.update(fit_scope=args.fit_scope,total_trainable=parameter_count)
+    if curriculum:
+        policy.update(score_version='intrinsic-wave-v1' if args.objective=='body-wave' else 'complete-cycle-mean-v1',
+            wave_gate=dict(region_joint_and_drive_p2p=.003,minimum_common_power=.5,minimum_phase_locking=.8,
+                minimum_phase_span_rad=float(np.pi/3),minimum_second_shape_mode=.02,maximum_phase_increment_rad=float(.8*np.pi)),
+            movement_gate='Wave qualification is not propulsion; cycle-movement requires a passed wave source and complete-cycle progress',
+            oscillator_identity='Any sustained >=0.05-mV neuronal rhythm; graded dynamics allowed, RMD identity not required',
+            focus_cells=[] if focus_cells is None else [model.neuron_ids[i] for i in focus_cells],
+            focus_rationale='Some proposals target neurons projecting to middle/posterior muscles and their existing inputs; anatomy prior only, not drive')
     write_json(out/'fit_policy.json',policy)
     print(json.dumps(dict(experiment=experiment,fit_scope=args.fit_scope,total_trainable=parameter_count,
         counts=spec.counts if joint else dict(channel_densities=parameter_count))),flush=True)
@@ -130,7 +149,10 @@ def main():
         if not all(np.isfinite(x).all() for x in jax.tree_util.tree_leaves((final,trace))):
             metrics=dict(valid=False,score=-1.,reason='nonfinite')
         else:
-            if args.objective=='movement':
+            if curriculum:
+                function=body_wave_metrics if args.objective=='body-wave' else cycle_movement_metrics
+                metrics=function(trace[0],trace[2],trace[3],body_dt,float(body.mechanics.segment_length)*12.,model.neuron_ids,float(body.max_joint_angle))
+            elif args.objective=='movement':
                 metrics=movement_metrics(trace[0],trace[2],trace[3],body_dt,float(body.mechanics.segment_length)*12.,model.neuron_ids,float(body.max_joint_angle))
             else:metrics=amplitude_metrics(trace[0],trace[2],trace[3].joint_angles,body_dt,model.neuron_ids,float(body.max_joint_angle))
         return params,final,trace,metrics
@@ -153,6 +175,7 @@ def main():
             if stopped or time.monotonic()>=search_deadline:break
             # This first stage seeks a small amplitude milestone, not maximum bend.
             if args.objective=='amplitude' and best_metrics['valid'] and best_metrics['sustained_joint_p2p_rad']>=args.target_p2p_rad:break
+            if args.objective=='body-wave' and best_metrics.get('wave_qualified'):break
             sigma=.12*2**((iteration//20)%3)
             candidate=propose_parameters(best,rng,sigma)
             changed=candidate!=best;proposed_parameters|=changed
@@ -171,12 +194,16 @@ def main():
             print(json.dumps(dict(iteration=iteration,accepted=accepted,best_amplitude=best_metrics.get('sustained_joint_p2p_rad',0.),
                 rhythmic_rmd=best_metrics.get('rhythmic_rmd',0),
                 best_forward_speed=best_metrics.get('minimum_forward_speed_body_lengths_s'),
+                curriculum_stage=best_metrics.get('curriculum_stage'),body_coverage=best_metrics.get('body_coverage_score'),
+                wave_qualified=best_metrics.get('wave_qualified'),
+                regional_bends_posterior_middle_anterior=best_metrics.get('joint_harmonic_p2p_rad'),
+                cycle_mean_speed=best_metrics.get('cycle_progress',{}).get('mean_cycle_speed_body_lengths_s'),
                 elapsed_minutes=(time.monotonic()-start)/60.)),flush=True)
     finally:history.close()
     validation=[]
     cases=[('long',args.validation_seconds,.1,0.,dt,False),('perturb-plus',args.fit_seconds,.1,1.,dt,False),
            ('perturb-minus',args.fit_seconds,.1,-1.,dt,False),('brain-refined',args.fit_seconds,.05,0.,dt,False)]
-    if args.objective=='movement':cases.extend([
+    if args.objective!='amplitude':cases.extend([
         ('body-refined',args.fit_seconds,.1,0.,.001,False),('held-voltage',args.fit_seconds,.1,0.,dt,True)])
     for name,seconds,step,perturbation,body_dt,hold_voltage in cases:
         if stopped or time.monotonic()>=start+args.minutes*60.:break
@@ -187,7 +214,18 @@ def main():
     best_params=apply_parameters(best)
     frozen_ok=frozen_unchanged(best_params)
     np.savez_compressed(out/'parameter_coverage.npz',proposed=proposed_parameters,updated=updated_parameters)
-    if args.objective=='movement':
+    if curriculum:
+        baseline_speed=baseline.get('minimum_forward_speed_body_lengths_s',0.)
+        def qualified(v):
+            m=v['metrics'];p=m.get('cycle_progress',{})
+            if v['case']=='held-voltage':return (m.get('sustained_neural_rhythms',0)==0 and m.get('joint_p2p_max_rad',1.)<1e-5
+                and abs(p.get('mean_cycle_speed_body_lengths_s',0.))<args.target_speed*.01)
+            achieved=bool(m.get('wave_qualified')) if args.objective=='body-wave' else cycle_movement_achieved(m,args.target_speed,baseline_speed)
+            if v['case'] in ('body-refined','brain-refined'):
+                achieved=achieved and wave_refinement_agrees(best_metrics,m)
+                if args.objective=='cycle-movement':achieved=achieved and movement_refinement_agrees(best_metrics,m,args.target_speed)
+            return achieved
+    elif args.objective=='movement':
         baseline_speed=baseline.get('minimum_forward_speed_body_lengths_s',0.)
         def qualified(v):
             m=v['metrics']
@@ -205,6 +243,7 @@ def main():
     shutil.copyfile(out/'network_best.npz',fitted/'network.npz')
     shutil.copyfile(out/'source_inputs/parent_actor.npz',fitted/'parent_actor.npz')
     write_json(fitted/'inputs.json',dict(experiment=experiment,objective=args.objective,fit_scope=args.fit_scope,passed=bool(passed),
+        locomotion_demonstrated=bool(passed and args.objective=='cycle-movement'),
         sha256={n:hashlib.sha256((fitted/n).read_bytes()).hexdigest() for n in ('network.npz','parent_actor.npz')}))
     coverage={};begin=0
     for name,count in (spec.counts if joint else dict(channel_densities=parameter_count)).items():
@@ -220,8 +259,12 @@ def main():
         baseline=baseline,best_training=best_metrics,validation=validation,iterations=completed,selected_iteration=selected_iteration,
         target_p2p_rad=args.target_p2p_rad,target_speed_body_lengths_s=args.target_speed,elapsed_seconds=time.monotonic()-start,
         frozen_fields_unchanged=bool(frozen_ok),injected_currents_zero=bool(np.all(np.asarray(fixed.bias_pA)==0)),
+        locomotion_demonstrated=bool(passed and args.objective=='cycle-movement'),
         network_best_sha256=hashlib.sha256((out/'network_best.npz').read_bytes()).hexdigest(),
-        interpretation='First autonomous motion criterion, not animal-matched behavior' if args.objective=='movement' else 'Autonomous bend amplitude only; no useful locomotion or biological validity claim')
+        interpretation=('Intrinsic body-wave qualification; no locomotion claim' if args.objective=='body-wave' else
+            'Cycle-averaged autonomous movement criterion, not animal-matched behavior' if args.objective=='cycle-movement' else
+            'First autonomous motion criterion, not animal-matched behavior' if args.objective=='movement' else
+            'Autonomous bend amplitude only; no useful locomotion or biological validity claim'))
     write_json(out/'summary.json',summary)
     print(json.dumps(summary,allow_nan=False),flush=True)
     return 0 if passed else 2

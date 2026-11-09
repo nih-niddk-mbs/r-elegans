@@ -1,0 +1,9 @@
+{
+  "experiment": "E036",
+  "status": "implemented_future_stage_not_launched",
+  "required_source": "passed body-wave fitted_inputs pair",
+  "objective": "complete-cycle-mean forward translation from rising/falling phases",
+  "preserved": "wave viability, unknown-parameter scope, zero injected current and fixed physiology/body",
+  "remote_launched": false,
+  "simulation_executed": false
+}

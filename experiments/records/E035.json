@@ -1,0 +1,1010 @@
+{
+  "experiment": "E035",
+  "status": "prepared_for_user_launch_after_local_pipeline_verification",
+  "source": "autonomous_wiggle_v1",
+  "objective": "coherent regional spread then intrinsic phase progression; not propulsion",
+  "trainable": {
+    "channel_densities": 4814,
+    "chemical_strengths": 3709,
+    "electrical_pairs": 1093,
+    "total": 9616
+  },
+  "parameter_bounds_relative_to_source": [
+    0.0625,
+    16.0
+  ],
+  "injected_currents_zero": true,
+  "fixed": [
+    "LEAK",
+    "capacitance",
+    "kinetics/reversals/calcium",
+    "anatomy",
+    "release settings",
+    "NMJ/muscle/body"
+  ],
+  "regions": "contiguous posterior/middle/anterior thirds",
+  "engineering_targets": {
+    "joint_and_drive_harmonic_p2p": 0.003,
+    "common_power": 0.5,
+    "phase_locking": 0.8,
+    "phase_span_rad": 1.0471975511965976,
+    "second_shape_variance_fraction": 0.02
+  },
+  "search": {
+    "workers": 4,
+    "cores_per_worker": 4,
+    "minutes_cap": 240,
+    "fit_seconds": 30,
+    "validation_seconds": 300,
+    "focus_anatomical_cells": 103
+  },
+  "local_pilot": {
+    "experiment": "E035",
+    "objective": "body-wave",
+    "fit_scope": "neurons-connections",
+    "total_trainable": 9616,
+    "parameters_proposed": 428,
+    "parameters_updated": 128,
+    "parameters_different_from_initial": 128,
+    "parameter_coverage_by_kind": {
+      "channel_densities": {
+        "eligible": 4814,
+        "proposed": 358,
+        "updated": 58,
+        "different_from_initial": 58
+      },
+      "chemical_strengths": {
+        "eligible": 3709,
+        "proposed": 58,
+        "updated": 58,
+        "different_from_initial": 58
+      },
+      "electrical_pairs": {
+        "eligible": 1093,
+        "proposed": 12,
+        "updated": 12,
+        "different_from_initial": 12
+      }
+    },
+    "seed": 0,
+    "status": "completed",
+    "passed": false,
+    "baseline": {
+      "valid": true,
+      "score": 2.0923829353827597e-05,
+      "sustained_joint_p2p_rad": 0.029194368049502373,
+      "joint_p2p_max_rad": 0.029650026932358742,
+      "selected_joint": 10,
+      "joint_rhythm_passed": true,
+      "rhythmic_rmd": 3,
+      "muscle_p2p_max": 0.23972594738006592,
+      "voltage_min_mV": -79.9938735961914,
+      "voltage_max_mV": 7.7119622230529785,
+      "muscle_saturation_fraction": 0.0,
+      "joint_limits_reached": false,
+      "interpretation": "Intrinsic body-wave primitive; translation is diagnostic, not a wave qualification claim",
+      "wave_qualified": false,
+      "curriculum_stage": "spread",
+      "sustained_neural_rhythms": 18,
+      "neural_rhythm_threshold_mV": 0.05,
+      "cycle_progress": {
+        "cycle_progress_valid": true,
+        "phase_origins": [
+          {
+            "direction": "rising",
+            "cycles": 55,
+            "block_speeds_body_lengths_s": [
+              -9.385502032534317e-08,
+              -6.84457075428838e-08,
+              -9.09699464767875e-08
+            ],
+            "regression_speed_body_lengths_s": -4.172533446845104e-07,
+            "median_shape_closure_rms_rad": 3.131131595105641e-05
+          },
+          {
+            "direction": "falling",
+            "cycles": 55,
+            "block_speeds_body_lengths_s": [
+              -2.610585632058129e-07,
+              -2.9224425860483384e-07,
+              -3.1692953703350426e-07
+            ],
+            "regression_speed_body_lengths_s": -4.37883234864396e-07,
+            "median_shape_closure_rms_rad": 3.390366544042776e-05
+          }
+        ],
+        "minimum_forward_speed_body_lengths_s": -3.1692953703350426e-07,
+        "mean_cycle_speed_body_lengths_s": -4.2756828977445323e-07,
+        "forward_efficiency": -0.0006958380006785992,
+        "maximum_axis_turn_rad": 0.004529053343110052,
+        "geometry_valid": true,
+        "phase_origin_speed_spread_body_lengths_s": 2.062989017988557e-08,
+        "median_shape_closure_rms_rad": 3.239341494176381e-05
+      },
+      "locomotion_demonstrated": false,
+      "body_coverage_score": 2.0923829353827597e-05,
+      "frequency_hz": 3.729155037536763,
+      "region_order": [
+        "posterior",
+        "middle",
+        "anterior"
+      ],
+      "joint_harmonic_p2p_rad": [
+        3.0463925000474386e-06,
+        0.0008699752060079528,
+        0.019614819909058702
+      ],
+      "drive_harmonic_p2p": [
+        5.613783649465333e-07,
+        0.001056297417147422,
+        0.023785912122939578
+      ],
+      "common_frequency_power_fraction": [
+        0.2273041742803539,
+        0.92546974729863,
+        0.9705074012166118,
+        0.0064958285692945416,
+        0.924023656599867,
+        0.9689785850069432
+      ],
+      "phase_locking": [
+        0.8325959052960601,
+        0.9987162798762989,
+        1.0,
+        0.13462988670562162,
+        0.998721121129769,
+        1.0
+      ],
+      "joint_phase": {
+        "phases_head_to_tail_rad": [
+          0.8189325569544772,
+          0.775550012185076,
+          -0.8969008413427543
+        ],
+        "increments_rad": [
+          -0.04338254476940118,
+          -1.6724508535278302
+        ],
+        "span_rad": 1.7158333982972314,
+        "monotonic": false,
+        "smooth": true,
+        "quality": 0.43382544769401177,
+        "qualified": false
+      },
+      "drive_phase": {
+        "phases_head_to_tail_rad": [
+          0.9414907497706431,
+          0.9072193461481605,
+          -0.6472779769258243
+        ],
+        "increments_rad": [
+          -0.0342714036224826,
+          -1.554497323073985
+        ],
+        "span_rad": 1.5887687266964674,
+        "monotonic": false,
+        "smooth": true,
+        "quality": 0.342714036224826,
+        "qualified": false
+      },
+      "second_shape_mode_fraction": 0.0007166454086169718
+    },
+    "best_training": {
+      "valid": true,
+      "score": 0.00013657370274772104,
+      "sustained_joint_p2p_rad": 0.02837431989610195,
+      "joint_p2p_max_rad": 0.029656030237674713,
+      "selected_joint": 10,
+      "joint_rhythm_passed": true,
+      "rhythmic_rmd": 3,
+      "muscle_p2p_max": 0.23933923244476318,
+      "voltage_min_mV": -79.9938735961914,
+      "voltage_max_mV": 7.712183475494385,
+      "muscle_saturation_fraction": 0.0,
+      "joint_limits_reached": false,
+      "interpretation": "Intrinsic body-wave primitive; translation is diagnostic, not a wave qualification claim",
+      "wave_qualified": false,
+      "curriculum_stage": "spread",
+      "sustained_neural_rhythms": 18,
+      "neural_rhythm_threshold_mV": 0.05,
+      "cycle_progress": {
+        "cycle_progress_valid": true,
+        "phase_origins": [
+          {
+            "direction": "rising",
+            "cycles": 55,
+            "block_speeds_body_lengths_s": [
+              -1.820977993053909e-07,
+              -4.849447676016346e-07,
+              -6.202167492792979e-07
+            ],
+            "regression_speed_body_lengths_s": -4.467914509973846e-07,
+            "median_shape_closure_rms_rad": 3.178424655857396e-05
+          },
+          {
+            "direction": "falling",
+            "cycles": 55,
+            "block_speeds_body_lengths_s": [
+              -2.9981603392118677e-07,
+              -5.175505767861799e-07,
+              -4.3299436496459076e-07
+            ],
+            "regression_speed_body_lengths_s": -4.3738094258904243e-07,
+            "median_shape_closure_rms_rad": 3.3676754370659216e-05
+          }
+        ],
+        "minimum_forward_speed_body_lengths_s": -6.202167492792979e-07,
+        "mean_cycle_speed_body_lengths_s": -4.420861967932135e-07,
+        "forward_efficiency": -0.0007230040452670179,
+        "maximum_axis_turn_rad": 0.004634448683804006,
+        "geometry_valid": true,
+        "phase_origin_speed_spread_body_lengths_s": 9.410508408342162e-09,
+        "median_shape_closure_rms_rad": 3.3150586811160705e-05
+      },
+      "locomotion_demonstrated": false,
+      "body_coverage_score": 0.00013657370274772104,
+      "frequency_hz": 3.730561547240314,
+      "region_order": [
+        "posterior",
+        "middle",
+        "anterior"
+      ],
+      "joint_harmonic_p2p_rad": [
+        3.4028497536600934e-06,
+        0.0008674374490879504,
+        0.019539949687594708
+      ],
+      "drive_harmonic_p2p": [
+        1.0074819489107602e-06,
+        0.0010528577851284726,
+        0.023693572719303488
+      ],
+      "common_frequency_power_fraction": [
+        0.27179473459761583,
+        0.9311310806315967,
+        0.9766694547891803,
+        0.021475917658624017,
+        0.9297514467659179,
+        0.9751295745599856
+      ],
+      "phase_locking": [
+        0.9326633143429297,
+        0.999147681399491,
+        1.0,
+        0.1512394356061863,
+        0.9991333886387767,
+        1.0
+      ],
+      "joint_phase": {
+        "phases_head_to_tail_rad": [
+          0.7215059013600129,
+          0.6661050588791304,
+          -1.0180692601609616
+        ],
+        "increments_rad": [
+          -0.055400842480882506,
+          -1.684174319040092
+        ],
+        "span_rad": 1.7395751615209745,
+        "monotonic": false,
+        "smooth": true,
+        "quality": 0.5540084248088251,
+        "qualified": false
+      },
+      "drive_phase": {
+        "phases_head_to_tail_rad": [
+          0.84413212604134,
+          0.7979598272808496,
+          -0.8573762999534207
+        ],
+        "increments_rad": [
+          -0.04617229876049045,
+          -1.6553361272342704
+        ],
+        "span_rad": 1.7015084259947608,
+        "monotonic": false,
+        "smooth": true,
+        "quality": 0.4617229876049045,
+        "qualified": false
+      },
+      "second_shape_mode_fraction": 0.0005535376527280774
+    },
+    "validation": [
+      {
+        "case": "long",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.00013657370274772104,
+          "sustained_joint_p2p_rad": 0.02837431989610195,
+          "joint_p2p_max_rad": 0.029656030237674713,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23933923244476318,
+          "voltage_min_mV": -79.9938735961914,
+          "voltage_max_mV": 7.712183475494385,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Intrinsic body-wave primitive; translation is diagnostic, not a wave qualification claim",
+          "wave_qualified": false,
+          "curriculum_stage": "spread",
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "cycle_progress": {
+            "cycle_progress_valid": true,
+            "phase_origins": [
+              {
+                "direction": "rising",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -1.820977993053909e-07,
+                  -4.849447676016346e-07,
+                  -6.202167492792979e-07
+                ],
+                "regression_speed_body_lengths_s": -4.467914509973846e-07,
+                "median_shape_closure_rms_rad": 3.178424655857396e-05
+              },
+              {
+                "direction": "falling",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -2.9981603392118677e-07,
+                  -5.175505767861799e-07,
+                  -4.3299436496459076e-07
+                ],
+                "regression_speed_body_lengths_s": -4.3738094258904243e-07,
+                "median_shape_closure_rms_rad": 3.3676754370659216e-05
+              }
+            ],
+            "minimum_forward_speed_body_lengths_s": -6.202167492792979e-07,
+            "mean_cycle_speed_body_lengths_s": -4.420861967932135e-07,
+            "forward_efficiency": -0.0007230040452670179,
+            "maximum_axis_turn_rad": 0.004634448683804006,
+            "geometry_valid": true,
+            "phase_origin_speed_spread_body_lengths_s": 9.410508408342162e-09,
+            "median_shape_closure_rms_rad": 3.3150586811160705e-05
+          },
+          "locomotion_demonstrated": false,
+          "body_coverage_score": 0.00013657370274772104,
+          "frequency_hz": 3.730561547240314,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "joint_harmonic_p2p_rad": [
+            3.4028497536600934e-06,
+            0.0008674374490879504,
+            0.019539949687594708
+          ],
+          "drive_harmonic_p2p": [
+            1.0074819489107602e-06,
+            0.0010528577851284726,
+            0.023693572719303488
+          ],
+          "common_frequency_power_fraction": [
+            0.27179473459761583,
+            0.9311310806315967,
+            0.9766694547891803,
+            0.021475917658624017,
+            0.9297514467659179,
+            0.9751295745599856
+          ],
+          "phase_locking": [
+            0.9326633143429297,
+            0.999147681399491,
+            1.0,
+            0.1512394356061863,
+            0.9991333886387767,
+            1.0
+          ],
+          "joint_phase": {
+            "phases_head_to_tail_rad": [
+              0.7215059013600129,
+              0.6661050588791304,
+              -1.0180692601609616
+            ],
+            "increments_rad": [
+              -0.055400842480882506,
+              -1.684174319040092
+            ],
+            "span_rad": 1.7395751615209745,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.5540084248088251,
+            "qualified": false
+          },
+          "drive_phase": {
+            "phases_head_to_tail_rad": [
+              0.84413212604134,
+              0.7979598272808496,
+              -0.8573762999534207
+            ],
+            "increments_rad": [
+              -0.04617229876049045,
+              -1.6553361272342704
+            ],
+            "span_rad": 1.7015084259947608,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.4617229876049045,
+            "qualified": false
+          },
+          "second_shape_mode_fraction": 0.0005535376527280774
+        }
+      },
+      {
+        "case": "perturb-plus",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 1.0,
+        "metrics": {
+          "valid": true,
+          "score": 8.804998466885035e-05,
+          "sustained_joint_p2p_rad": 0.02838735841214657,
+          "joint_p2p_max_rad": 0.02964146062731743,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23931342363357544,
+          "voltage_min_mV": -80.96961212158203,
+          "voltage_max_mV": 7.711434364318848,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Intrinsic body-wave primitive; translation is diagnostic, not a wave qualification claim",
+          "wave_qualified": false,
+          "curriculum_stage": "spread",
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "cycle_progress": {
+            "cycle_progress_valid": true,
+            "phase_origins": [
+              {
+                "direction": "rising",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -1.8952894031021533e-07,
+                  -4.903969716896638e-07,
+                  -6.136920081949655e-07
+                ],
+                "regression_speed_body_lengths_s": -4.4673825047444305e-07,
+                "median_shape_closure_rms_rad": 3.149507465679707e-05
+              },
+              {
+                "direction": "falling",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -3.007691259910413e-07,
+                  -5.205949220248412e-07,
+                  -4.2331800723515533e-07
+                ],
+                "regression_speed_body_lengths_s": -4.3698884118576145e-07,
+                "median_shape_closure_rms_rad": 3.4270797902676875e-05
+              }
+            ],
+            "minimum_forward_speed_body_lengths_s": -6.136920081949655e-07,
+            "mean_cycle_speed_body_lengths_s": -4.4186354583010225e-07,
+            "forward_efficiency": -0.0007229469009003711,
+            "maximum_axis_turn_rad": 0.004596897825489603,
+            "geometry_valid": true,
+            "phase_origin_speed_spread_body_lengths_s": 9.749409288681605e-09,
+            "median_shape_closure_rms_rad": 3.305280784180052e-05
+          },
+          "locomotion_demonstrated": false,
+          "body_coverage_score": 8.804998466885035e-05,
+          "frequency_hz": 3.7306525325870172,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "joint_harmonic_p2p_rad": [
+            3.4112487452827215e-06,
+            0.0008668206871885123,
+            0.019533711034268292
+          ],
+          "drive_harmonic_p2p": [
+            1.018352661195324e-06,
+            0.001052110280165761,
+            0.023686089467711266
+          ],
+          "common_frequency_power_fraction": [
+            0.2724926965452849,
+            0.9308972220275095,
+            0.9765434562361273,
+            0.021916407026353574,
+            0.9295136784113527,
+            0.9750022078091503
+          ],
+          "phase_locking": [
+            0.9346703134862654,
+            0.9991180481329437,
+            1.0,
+            0.09457285108178282,
+            0.9991035702662129,
+            1.0
+          ],
+          "joint_phase": {
+            "phases_head_to_tail_rad": [
+              0.735038330806542,
+              0.6794144443885162,
+              -1.0085027120621521
+            ],
+            "increments_rad": [
+              -0.05562388641802585,
+              -1.6879171564506683
+            ],
+            "span_rad": 1.7435410428686942,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.5562388641802585,
+            "qualified": false
+          },
+          "drive_phase": {
+            "phases_head_to_tail_rad": [
+              0.8576639912868288,
+              0.8112758080345202,
+              -0.862164903445128
+            ],
+            "increments_rad": [
+              -0.046388183252308646,
+              -1.6734407114796481
+            ],
+            "span_rad": 1.7198288947319567,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.46388183252308646,
+            "qualified": false
+          },
+          "second_shape_mode_fraction": 0.0005562964923009114
+        }
+      },
+      {
+        "case": "perturb-minus",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": -1.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.0001808249942541472,
+          "sustained_joint_p2p_rad": 0.02834528125822544,
+          "joint_p2p_max_rad": 0.029652293771505356,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23931676149368286,
+          "voltage_min_mV": -80.97950744628906,
+          "voltage_max_mV": 7.7129926681518555,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Intrinsic body-wave primitive; translation is diagnostic, not a wave qualification claim",
+          "wave_qualified": false,
+          "curriculum_stage": "spread",
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "cycle_progress": {
+            "cycle_progress_valid": true,
+            "phase_origins": [
+              {
+                "direction": "rising",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -1.7505912371828053e-07,
+                  -4.794966274305425e-07,
+                  -6.25549158307427e-07
+                ],
+                "regression_speed_body_lengths_s": -4.4698542079365967e-07,
+                "median_shape_closure_rms_rad": 3.284760878922134e-05
+              },
+              {
+                "direction": "falling",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -2.986583043012074e-07,
+                  -5.143678511557428e-07,
+                  -4.425891466280791e-07
+                ],
+                "regression_speed_body_lengths_s": -4.3799866419607384e-07,
+                "median_shape_closure_rms_rad": 3.4957871999021314e-05
+              }
+            ],
+            "minimum_forward_speed_body_lengths_s": -6.25549158307427e-07,
+            "mean_cycle_speed_body_lengths_s": -4.4249204249486675e-07,
+            "forward_efficiency": -0.0007233795595734281,
+            "maximum_axis_turn_rad": 0.00467232562339364,
+            "geometry_valid": true,
+            "phase_origin_speed_spread_body_lengths_s": 8.986756597585835e-09,
+            "median_shape_closure_rms_rad": 3.3610926116075164e-05
+          },
+          "locomotion_demonstrated": false,
+          "body_coverage_score": 0.0001808249942541472,
+          "frequency_hz": 3.7304840862527398,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "joint_harmonic_p2p_rad": [
+            3.3948895835498437e-06,
+            0.0008679917856527624,
+            0.01954556563561581
+          ],
+          "drive_harmonic_p2p": [
+            9.970031540930785e-07,
+            0.0010535293246706032,
+            0.023700298667287845
+          ],
+          "common_frequency_power_fraction": [
+            0.271251421969762,
+            0.9313343880952327,
+            0.9767719328250618,
+            0.02107675562635048,
+            0.9299570466201258,
+            0.975235173343081
+          ],
+          "phase_locking": [
+            0.930689604033973,
+            0.9991740000421799,
+            1.0,
+            0.2060796116903391,
+            0.9991599713179958,
+            1.0
+          ],
+          "joint_phase": {
+            "phases_head_to_tail_rad": [
+              0.7069740294772642,
+              0.6517840356400453,
+              -1.0291138505253095
+            ],
+            "increments_rad": [
+              -0.0551899938372189,
+              -1.6808978861653547
+            ],
+            "span_rad": 1.7360878800025736,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.551899938372189,
+            "qualified": false
+          },
+          "drive_phase": {
+            "phases_head_to_tail_rad": [
+              0.8296009781562934,
+              0.7836335661622955,
+              -0.8548034405882151
+            ],
+            "increments_rad": [
+              -0.0459674119939979,
+              -1.6384370067505105
+            ],
+            "span_rad": 1.6844044187445084,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.459674119939979,
+            "qualified": false
+          },
+          "second_shape_mode_fraction": 0.0005509009780682632
+        }
+      },
+      {
+        "case": "brain-refined",
+        "seconds": 30.0,
+        "brain_step_ms": 0.05,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.00029499150538719513,
+          "sustained_joint_p2p_rad": 0.028155071660876274,
+          "joint_p2p_max_rad": 0.02959888055920601,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23946624994277954,
+          "voltage_min_mV": -79.9938735961914,
+          "voltage_max_mV": 7.702533721923828,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Intrinsic body-wave primitive; translation is diagnostic, not a wave qualification claim",
+          "wave_qualified": false,
+          "curriculum_stage": "spread",
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "cycle_progress": {
+            "cycle_progress_valid": true,
+            "phase_origins": [
+              {
+                "direction": "rising",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -1.5627830042561912e-07,
+                  -4.6869632247164516e-07,
+                  -6.275876842935539e-07
+                ],
+                "regression_speed_body_lengths_s": -4.452678980757382e-07,
+                "median_shape_closure_rms_rad": 3.295706281466038e-05
+              },
+              {
+                "direction": "falling",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  -3.283757680186218e-07,
+                  -5.14676908191642e-07,
+                  -4.005105596791182e-07
+                ],
+                "regression_speed_body_lengths_s": -4.386532868768843e-07,
+                "median_shape_closure_rms_rad": 3.1574125350254326e-05
+              }
+            ],
+            "minimum_forward_speed_body_lengths_s": -6.275876842935539e-07,
+            "mean_cycle_speed_body_lengths_s": -4.4196059247631124e-07,
+            "forward_efficiency": -0.000721640611374197,
+            "maximum_axis_turn_rad": 0.004167662125862316,
+            "geometry_valid": true,
+            "phase_origin_speed_spread_body_lengths_s": 6.61461119885393e-09,
+            "median_shape_closure_rms_rad": 3.244728627580289e-05
+          },
+          "locomotion_demonstrated": false,
+          "body_coverage_score": 0.00029499150538719513,
+          "frequency_hz": 3.742680797402468,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "joint_harmonic_p2p_rad": [
+            3.6296540177216514e-06,
+            0.0008671183546374124,
+            0.019532619399195962
+          ],
+          "drive_harmonic_p2p": [
+            1.1737947206505914e-06,
+            0.0010522892129481765,
+            0.02368244135378151
+          ],
+          "common_frequency_power_fraction": [
+            0.22979130057347782,
+            0.9312735138767504,
+            0.976887766571003,
+            0.020645152693309635,
+            0.9298905351442521,
+            0.9753317418180828
+          ],
+          "phase_locking": [
+            0.9400844364452701,
+            0.9991127203685185,
+            1.0,
+            0.2938994244407287,
+            0.9990984991787242,
+            1.0
+          ],
+          "joint_phase": {
+            "phases_head_to_tail_rad": [
+              1.9043548051928683,
+              1.8485822724557062,
+              0.11718744207233278
+            ],
+            "increments_rad": [
+              -0.055772532737162095,
+              -1.7313948303833735
+            ],
+            "span_rad": 1.7871673631205356,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.557725327371621,
+            "qualified": false
+          },
+          "drive_phase": {
+            "phases_head_to_tail_rad": [
+              2.02720705755695,
+              1.9805269342841116,
+              0.15808057993114705
+            ],
+            "increments_rad": [
+              -0.046680123272838436,
+              -1.8224463543529645
+            ],
+            "span_rad": 1.869126477625803,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.46680123272838436,
+            "qualified": false
+          },
+          "second_shape_mode_fraction": 0.0005481739989309116
+        }
+      },
+      {
+        "case": "body-refined",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.001,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": true,
+          "score": 0.00040333013587128463,
+          "sustained_joint_p2p_rad": 0.028410703875124454,
+          "joint_p2p_max_rad": 0.029689613729715347,
+          "selected_joint": 10,
+          "joint_rhythm_passed": true,
+          "rhythmic_rmd": 3,
+          "muscle_p2p_max": 0.23933929204940796,
+          "voltage_min_mV": -79.9969253540039,
+          "voltage_max_mV": 7.712183475494385,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Intrinsic body-wave primitive; translation is diagnostic, not a wave qualification claim",
+          "wave_qualified": false,
+          "curriculum_stage": "spread",
+          "sustained_neural_rhythms": 18,
+          "neural_rhythm_threshold_mV": 0.05,
+          "cycle_progress": {
+            "cycle_progress_valid": true,
+            "phase_origins": [
+              {
+                "direction": "rising",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  2.0366459803706888e-07,
+                  -9.186070113205706e-08,
+                  -2.1880196250479487e-07
+                ],
+                "regression_speed_body_lengths_s": -5.3299096385900995e-08,
+                "median_shape_closure_rms_rad": 3.179316968314879e-05
+              },
+              {
+                "direction": "falling",
+                "cycles": 55,
+                "block_speeds_body_lengths_s": [
+                  8.583997413773471e-08,
+                  -1.2441142111677962e-07,
+                  -3.1510793665636845e-08
+                ],
+                "regression_speed_body_lengths_s": -4.379486807169248e-08,
+                "median_shape_closure_rms_rad": 3.3676854183530576e-05
+              }
+            ],
+            "minimum_forward_speed_body_lengths_s": -2.1880196250479487e-07,
+            "mean_cycle_speed_body_lengths_s": -4.8546982228796733e-08,
+            "forward_efficiency": -7.929238413690715e-05,
+            "maximum_axis_turn_rad": 0.0047435970448114,
+            "geometry_valid": true,
+            "phase_origin_speed_spread_body_lengths_s": 9.504228314208516e-09,
+            "median_shape_closure_rms_rad": 3.319459930908327e-05
+          },
+          "locomotion_demonstrated": false,
+          "body_coverage_score": 0.00040333013587128463,
+          "frequency_hz": 3.7305617886712756,
+          "region_order": [
+            "posterior",
+            "middle",
+            "anterior"
+          ],
+          "joint_harmonic_p2p_rad": [
+            3.3928849361961933e-06,
+            0.0008687094424451975,
+            0.019566367696531844
+          ],
+          "drive_harmonic_p2p": [
+            1.0042761598030676e-06,
+            0.0010527899028977721,
+            0.023691841605368767
+          ],
+          "common_frequency_power_fraction": [
+            0.2698527497360622,
+            0.9309998306785499,
+            0.9764921901336574,
+            0.02142791691841528,
+            0.9297608599553032,
+            0.9751412435162577
+          ],
+          "phase_locking": [
+            0.8972241536736986,
+            0.9991509097491267,
+            1.0,
+            0.44900406467686876,
+            0.9991360585605098,
+            1.0
+          ],
+          "joint_phase": {
+            "phases_head_to_tail_rad": [
+              0.6861796084953147,
+              0.6307573921310994,
+              -1.0543174104079918
+            ],
+            "increments_rad": [
+              -0.05542221636421529,
+              -1.6850748025390911
+            ],
+            "span_rad": 1.7404970189033064,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.5542221636421529,
+            "qualified": false
+          },
+          "drive_phase": {
+            "phases_head_to_tail_rad": [
+              0.8090181149072115,
+              0.7628477766808046,
+              -0.8854927061017694
+            ],
+            "increments_rad": [
+              -0.046170338226406926,
+              -1.648340482782574
+            ],
+            "span_rad": 1.694510821008981,
+            "monotonic": false,
+            "smooth": true,
+            "quality": 0.46170338226406926,
+            "qualified": false
+          },
+          "second_shape_mode_fraction": 0.0005537598434853571
+        }
+      },
+      {
+        "case": "held-voltage",
+        "seconds": 30.0,
+        "brain_step_ms": 0.1,
+        "dt_s": 0.002,
+        "perturbation_mV": 0.0,
+        "metrics": {
+          "valid": false,
+          "score": -1.0,
+          "sustained_joint_p2p_rad": 0.0,
+          "joint_p2p_max_rad": 0.0,
+          "selected_joint": 0,
+          "joint_rhythm_passed": false,
+          "rhythmic_rmd": 0,
+          "muscle_p2p_max": 0.0,
+          "voltage_min_mV": -80.0,
+          "voltage_max_mV": -35.0,
+          "muscle_saturation_fraction": 0.0,
+          "joint_limits_reached": false,
+          "interpretation": "Amplitude only; no propulsion, spatial phase or biological fidelity criterion",
+          "wave_qualified": false,
+          "curriculum_stage": "spread",
+          "sustained_neural_rhythms": 0,
+          "neural_rhythm_threshold_mV": 0.05,
+          "cycle_progress": {
+            "cycle_progress_valid": false,
+            "phase_origins": [],
+            "minimum_forward_speed_body_lengths_s": 0.0,
+            "mean_cycle_speed_body_lengths_s": 0.0,
+            "forward_efficiency": 0.0,
+            "maximum_axis_turn_rad": 0.0,
+            "geometry_valid": true,
+            "phase_origin_speed_spread_body_lengths_s": 0.0
+          },
+          "locomotion_demonstrated": false
+        }
+      }
+    ],
+    "iterations": 2,
+    "selected_iteration": 1,
+    "target_p2p_rad": 0.01,
+    "target_speed_body_lengths_s": 0.0001,
+    "elapsed_seconds": 215.49455741699785,
+    "frozen_fields_unchanged": true,
+    "injected_currents_zero": true,
+    "locomotion_demonstrated": false,
+    "network_best_sha256": "01a882ec17d6f9b4dbc8b5f046ae0930a70ae8843e17cd715ee58315f213f71d",
+    "interpretation": "Intrinsic body-wave qualification; no locomotion claim"
+  },
+  "local_pilot_scope": "Two proposals, selected1, no wave qualification; six30-s validation cases completed",
+  "guard_check": "Unqualified cycle-movement source rejected before creating network_initial; no E036 simulation ran",
+  "source_and_raw_artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E035",
+  "software_validation": {
+    "full_suite_tests": 205,
+    "full_suite_seconds": 69.6,
+    "subsequent_targeted_tests": 6,
+    "subsequent_targeted_seconds": 2.27
+  },
+  "remote_launched": false,
+  "locomotion_demonstrated": false,
+  "archive_verified_local_files": 405,
+  "archive_manifest_sha256": "bbe831c3ec46f89b471f5c41b7edc2a810a306f75eddc841d979f56136392187"
+}

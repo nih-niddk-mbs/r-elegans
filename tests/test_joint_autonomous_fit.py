@@ -45,3 +45,17 @@ def test_block_search_exposes_all_cells_and_all_parameter_types():
     assert covered.mean()>.9
     n,m,_=spec.counts.values()
     assert covered[:n].any() and covered[n:n+m].any() and covered[n+m:].any()
+
+
+def test_anatomy_focus_remains_a_proposal_prior_without_freezing_other_parameters():
+    _,fixed,_=load_network(select_input_bundle().parent/'autonomous_wiggle_v1/network.npz')
+    _,spec=joint_fit_reference(fixed);rng=np.random.default_rng(19);covered=np.zeros(spec.size,dtype=bool)
+    for _ in range(128):
+        proposal=joint_proposal(np.zeros(spec.size),spec,rng,.3,16.,focus_cells=np.arange(20))
+        assert np.max(np.abs(proposal))<=np.log(16.)
+        covered|=proposal!=0
+    n,m,_=spec.counts.values()
+    # All neuron rows remain reachable, and edges outside the focused cell set too.
+    assert set(np.nonzero(spec.channels)[0][covered[:n]])==set(range(302))
+    postsyn=np.nonzero(spec.chemical)[0]
+    assert covered[n:n+m][postsyn>=20].any()

@@ -251,3 +251,9 @@ and negligible/negative cycle-matched drift. No forward skill added. Next
 proposed primitive is autonomous body-wide bend coverage and phase progression
 before forward-speed optimization; no external drive or teacher is needed
 for the proposed behavioral objective. Implementation/results remain pending.
+
+E035 implemented, not yet qualified: autonomous regional bend recruitment
+followed by phase-coordinated body wave, with no external drive or waveform
+teacher. All neuron/connection unknowns eligible; original wiggle preserved.
+Only a validated wave checkpoint may start E036 complete-cycle movement
+optimization. No new skill claimed from the short software/pipeline pilot.

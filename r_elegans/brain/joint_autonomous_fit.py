@@ -58,7 +58,7 @@ def apply_joint_offsets(initial, offsets, spec):
     return initial._replace(log_channel_scale=channels,raw_chemical=chemical,raw_gap=gap)
 
 
-def joint_proposal(best,spec,rng,sigma,maximum_factor=4.):
+def joint_proposal(best,spec,rng,sigma,maximum_factor=4.,focus_cells=None):
     if not np.isfinite(maximum_factor) or maximum_factor<=1:raise ValueError('Factor must exceed one')
     if sigma<=0 or not np.isfinite(sigma):raise ValueError('Positive finite sigma required')
     a,b,c=spec.counts.values();noise=np.zeros(spec.size)
@@ -66,7 +66,9 @@ def joint_proposal(best,spec,rng,sigma,maximum_factor=4.):
     mode=int(rng.integers(4))
     if mode==0:
         # Densities and incoming/outgoing edges of a few cells, individually free.
-        cells=rng.choice(spec.channels.shape[0],size=8,replace=False)
+        pool=np.arange(spec.channels.shape[0])
+        if focus_cells is not None and len(focus_cells) and rng.random()<.5:pool=np.asarray(focus_cells)
+        cells=rng.choice(pool,size=min(8,len(pool)),replace=False)
         selected=np.concatenate((np.isin(ci[0],cells),np.isin(ei[0],cells)|np.isin(ei[1],cells),
             np.isin(gi[0],cells)|np.isin(gi[1],cells)))
         noise[selected]=rng.normal(size=int(selected.sum()))
@@ -76,7 +78,11 @@ def joint_proposal(best,spec,rng,sigma,maximum_factor=4.):
         noise[np.flatnonzero(selected)]=rng.normal()  # Coherent direction; values remain free.
     elif mode==2:
         kind=int(rng.integers(2));start,end=(a,a+b) if kind==0 else (a+b,a+b+c)
-        selected=rng.choice(np.arange(start,end),size=min(128,end-start),replace=False)
+        pool=np.arange(start,end)
+        if focus_cells is not None and len(focus_cells) and rng.random()<.5:
+            relevant=np.isin(ei[0],focus_cells) if kind==0 else (np.isin(gi[0],focus_cells)|np.isin(gi[1],focus_cells))
+            if relevant.any():pool=pool[relevant]
+        selected=rng.choice(pool,size=min(128,len(pool)),replace=False)
         noise[selected]=rng.normal(size=len(selected))
     else:
         selected=rng.choice(spec.size,size=min(128,spec.size),replace=False)

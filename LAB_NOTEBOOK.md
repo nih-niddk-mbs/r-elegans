@@ -2219,3 +2219,89 @@ server-analysis-report/console.txt with SHA256.json. This preserves the
 reported analysis, not the full remote trajectories or a verified cloud copy.
 JSON extraction contains 24 unique worker/case records; whitespace checks
 passed. No code changes or simulation rerun for this records-only update.
+
+## 2026-11-08 — E035 planned intrinsic body-wave curriculum
+
+User authorizes the proposed next curriculum after actual four-hour trajectory
+analysis found ~99% anterior bending and tiny endpoint-phase-dependent progress.
+Implement a body-wave objective before further propulsion optimization. Start
+from autonomous_wiggle_v1, keep all 9,616 eligible unknown neuron/connection
+parameters, zero all injected currents, and freeze anatomy, leak/C/kinetics/
+reversals/calcium/release, NMJs and body mechanics. No time-varying teacher,
+sensory current, forced oscillator or body actuation is inserted.
+
+Stage1 spreads coherent spontaneous oscillations into posterior/middle regions.
+Stage2 rewards ordered spatial phase progression in both filtered antagonistic
+activation and joint bending. Regions are equal contiguous body thirds
+(tail-to-head ordering). Engineering targets: harmonic joint and drive p2p
+>=0.003 per region, common-frequency power fraction>=0.5 and phase-locking>=0.8;
+phase span>=pi/3, consistent direction in both spatial increments, no increment
+>0.8pi or <0.1 rad, shape PCA second component>=0.02. Either propagation
+direction allowed for this first primitive. Preserve >=0.01-rad sustained bend
+somewhere, bounded voltages/no clipping/saturation. These are not animal fits.
+A rhythm in any neuron (>=0.05-mV engineering threshold, including graded
+activity) may support the wave; no RMD-only identity requirement is imposed.
+
+Use the observed spontaneous frequency, not a prescribed clock. Before spatial
+phase is optimized, continuous log amplitude coverage supplies a small-stage
+reward; phase score becomes available after coverage reaches its target.
+Use anatomy only to focus some parameter proposals on cells projecting to
+middle/posterior muscles and their existing inputs; all unknowns remain eligible.
+This proposal prior is not runtime neural drive or a muscle teacher.
+
+Also implement cycle-averaged translation diagnostics: integrate centroid
+position over complete rising/falling-reference cycles, then regress averaged
+position over three late blocks. Require agreement across phase origins and
+report whole-shape closure, rather than rewarding endpoint displacement.
+A future cycle-movement fit must start from a validated body-wave checkpoint.
+Wave qualification does not imply propulsion. Preserve separate checkpoints.
+
+Four independent four-core CPU searches, four-hour cap including validation.
+Validate 300s, +/-1mV initial states, finer neural/body timesteps and held voltage.
+Require qualified active cases plus numerical agreement; held voltage must stop
+the motion. Test synthetic head-only, standing, traveling, drifting and static
+cases, then run a short local end-to-end trial before push. Agent does not
+launch remote jobs; user retains pull-and-nohup workflow. No success inferred.
+
+E035 pre-pilot scope clarification: body-wave/cycle-movement objectives use
+0.0625–16x density/effective-connection bounds by default (explicit CLI
+override retained), versus 0.25–4x for historical amplitude/endpoint objectives.
+Most non-RMD priors were initialized at1% transferred channel densities. The
+wider unknown-parameter neighborhood is a recruitment hypothesis, not an
+empirical physiological bound. LEAK, capacitance, kinetic equations/reversals
+and body/NMJ constants remain fixed. Viability/voltage/saturation/clipping
+checks still apply. All changes precede the new fitting pilot.
+Geometry guard is retained: late mean body-axis norm>.5 and turn<.35 rad.
+Search can stop at a short-window wave target and spend the remainder on
+independent validation; failed long checks are not promoted.
+
+E035 local pilot executed:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.train_autonomous_wiggle --objective body-wave --output-dir /tmp/r-elegans-E035-wave-pilot --minutes 6 --iterations 2 --validation-seconds 30`
+stdout `/tmp/r-elegans-E035-wave-pilot.log`. Completed215.494557 s, two
+proposals, selected1, expected exit2 because no wave qualified. All six short
+validation cases completed, frozen fields unchanged, all injected currents zero.
+Coverage score2.09238e-5 ->1.36574e-4; absolute regional posterior joint p2p
+3.04639e-6 ->3.40285e-6 rad, drive5.61378e-7 ->1.00748e-6. These are tiny
+recruitment changes, far below0.003 targets; do not call this a learned wave.
+103 anatomically focused cells; all9616 values remain eligible. Six validations
+remain in spread stage, and the held-voltage control has no sustained rhythms.
+All accepted checkpoints, histories/masks/coverage/RNG, source/environment and
+full trajectories retained externally. Original model assets remain untouched.
+
+Full suite205 passed in69.60s. Subsequent targeted wave/cycle/joint tests6
+passed in2.27s include observed slow-frequency recognition, graded non-RMD
+rhythm, standing/in-phase/head-only/drifting shape rejection, known cycle-mean
+translation recovery at several phase origins, numerical refinement agreement
+and anatomy-focused proposals without freezing remaining cells.
+E036 precondition verified: a source without passed body-wave metadata is
+rejected before network_initial creation; no E036 simulation was run.
+Both launcher shell checks, CLI help and diff checks are required before push.
+The old movement launcher now delegates to E035; explicit legacy objective
+remains reproducible from recorded old source. No server job started by agent.
+
+E035 OneDrive local archive verified:405 files, manifest SHA256
+`bbe831c3ec46f89b471f5c41b7edc2a810a306f75eddc841d979f56136392187`.
+Local preservation is verified; cloud synchronization is not. Pilot fitted-pair
+hashes/identity and no-drive/frozen-field flags verify. No body-wave skill
+is yet qualified. Final progress-log additions report regional amplitudes
+and cycle-mean speed explicitly; numerical objectives unchanged after pilot.

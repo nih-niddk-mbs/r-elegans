@@ -114,6 +114,13 @@ bending. User-reported server analysis now confirms that all four-hour
 candidates remain anterior-dominated and nearly in phase, with no robust
 cycle-matched forward progress.
 
+The current [intrinsic body-wave curriculum](CURRENT_MODEL.md#autonomous-body-wave-curriculum-e035-2026-11-08)
+first recruits coherent middle/posterior bending, then spatial phase progression.
+Run `sh scripts/launch_autonomous_wave_mbslnx2.sh` after pulling on mbslnx2
+(four workers, four-hour cap including validation). Neurons and connections
+remain trainable with zero external drive. Complete-cycle position averaging
+replaces endpoint-based progress for the later, gated movement stage.
+
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly
 eligible unknown channel densities and existing synaptic strengths fit. Each run

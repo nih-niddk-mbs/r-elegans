@@ -20,33 +20,38 @@ from scripts.run_embodied_diagnostics import select_input_bundle,verify_input_bu
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-dir',type=Path,required=True)
+    parser.add_argument('--inputs',type=Path)
     parser.add_argument('--minutes',type=float,default=60.)
     parser.add_argument('--workers',type=int,default=4)
     parser.add_argument('--cores-per-worker',type=int,default=4)
     parser.add_argument('--target-p2p-rad',type=float,default=.01)
-    parser.add_argument('--objective',choices=['amplitude','movement'],default='amplitude')
+    parser.add_argument('--objective',choices=['amplitude','movement','body-wave','cycle-movement'],default='amplitude')
     parser.add_argument('--fit-scope',choices=['rmd','neurons-connections'])
     parser.add_argument('--target-speed',type=float,default=1e-4)
     args=parser.parse_args()
-    if args.fit_scope is None:args.fit_scope='neurons-connections' if args.objective=='movement' else 'rmd'
+    if args.fit_scope is None:args.fit_scope='rmd' if args.objective=='amplitude' else 'neurons-connections'
     if sys.platform!='linux' or not hasattr(os,'sched_getaffinity'):parser.error('Linux CPU affinity required')
     if not all(math.isfinite(x) and x>0 for x in (args.minutes,args.target_p2p_rad,args.target_speed)):parser.error('Positive finite settings required')
     repo=Path(__file__).resolve().parents[1];base=args.output_dir.expanduser().resolve()
     if base==repo or repo in base.parents:parser.error('Keep results external')
-    inputs=select_input_bundle()
-    if args.objective=='movement':inputs=inputs.parent/'autonomous_wiggle_v1'
-    verify_input_bundle(inputs)
+    inputs=select_input_bundle(args.inputs)
+    if args.objective!='amplitude' and args.inputs is None:inputs=inputs.parent/'autonomous_wiggle_v1'
+    manifest=verify_input_bundle(inputs)
+    if args.objective=='cycle-movement' and not (args.inputs is not None and manifest.get('objective')=='body-wave' and manifest.get('passed') is True):
+        parser.error('cycle-movement requires --inputs from a passed body-wave fitted_inputs checkpoint')
     cpus,known=physical_core_cpus(sorted(os.sched_getaffinity(0)))
     if not known:parser.error('Physical topology required')
     try:groups=worker_cpu_groups(cpus,args.workers,args.cores_per_worker)
     except ValueError as e:parser.error(str(e))
     check=subprocess.run([sys.executable,'-c','import jax, numpy, scipy'],capture_output=True,text=True)
     if check.returncode:parser.error('Use the dedicated r-elegans Python.\n'+check.stderr)
-    prefix='autonomous-movement-' if args.objective=='movement' else 'autonomous-wiggle-'
+    prefix={'amplitude':'autonomous-wiggle-','movement':'autonomous-movement-',
+        'body-wave':'autonomous-wave-','cycle-movement':'autonomous-cycle-movement-'}[args.objective]
     run=base/(prefix+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
     run.mkdir(parents=True,exist_ok=False);capture_run_record(run,repo,args)
     print('Run: '+str(run),flush=True)
     print('Fit scope: '+args.fit_scope,flush=True)
+    print('Objective: '+args.objective,flush=True)
     jobs=[];stopped=False;start=time.monotonic()
     def stop(*_):
         nonlocal stopped
@@ -89,12 +94,16 @@ def main():
         path=run/f"seed-{job['seed']}/summary.json"
         result=json.loads(path.read_text()) if path.exists() else dict(status='missing_summary',passed=False)
         workers.append(dict(seed=job['seed'],cpus=job['cpus'],exit_code=job['process'].returncode,result=result))
-    summary=dict(experiment='E032' if args.fit_scope=='neurons-connections' else ('E031' if args.objective=='movement' else 'E030'),
+    experiment={'body-wave':'E035','cycle-movement':'E036'}.get(args.objective,
+        'E032' if args.fit_scope=='neurons-connections' else ('E031' if args.objective=='movement' else 'E030'))
+    summary=dict(experiment=experiment,
         objective=args.objective,fit_scope=args.fit_scope,
         workers=workers,elapsed_seconds=time.monotonic()-start,interrupted=stopped)
     (run/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     passed=not stopped and all(w['exit_code']==0 and w['result']['passed'] for w in workers)
-    print(('AUTONOMOUS_MOVEMENT_EXIT_CODE=' if args.objective=='movement' else 'AUTONOMOUS_WIGGLE_EXIT_CODE=')+str(0 if passed else 2),flush=True)
+    label={'body-wave':'AUTONOMOUS_WAVE','cycle-movement':'AUTONOMOUS_CYCLE_MOVEMENT',
+        'movement':'AUTONOMOUS_MOVEMENT','amplitude':'AUTONOMOUS_WIGGLE'}[args.objective]
+    print(label+'_EXIT_CODE='+str(0 if passed else 2),flush=True)
     return 0 if passed else 2
 
 
