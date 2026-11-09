@@ -991,3 +991,43 @@ progress scoring and spatial neural/muscle/body trajectory analysis before
 repeating the long search. No code, parameters or thresholds changed in this
 audit, and no new server run launched. Exact records: E032-server-20261108.json
 and E033.json under `experiments/records/`.
+
+## Trajectory analysis (E034, 2026-11-08)
+
+The four-hour E032 cohort remains on mbslnx2; noninteractive SSH failed
+authentication, so its actual trajectories have not been analyzed locally.
+Preserved local E032 two-proposal pilot and E030 300-s reference traces were
+analyzed without changing any model or objective.
+
+Local E032 pilot: 99.04% of dynamic joint variance is in the three anterior
+joints; one shape component explains 99.94%. Four joints exceed 10% of maximum
+amplitude (with a 1e-4-rad floor); others bend weakly. Coherent offsets span
+only ~1.57 ms in a 268-ms cycle, consistent with mostly synchronous anterior
+bending rather than a distributed traveling wave. Spectral phase is descriptive,
+not neural causality. Equal-reference-joint-phase centroid regression is
+-4.05e-7 body lengths/s, changing to -1.13e-8 under body timestep refinement:
+negligible, nonrobust progress. Median whole-shape closure residual between
+phase samples is 3.47e-5 rad; one joint does not define a full gait phase.
+The original E030 300-s reference is similar: 99.05% anterior variance,
+99.93% first-component variance, -4.62e-7 body lengths/s phase drift. These
+findings cannot be substituted for the four-hour candidates.
+
+The read-only analyzer supports a cohort, a worker, or a chunked diagnostic.
+It writes input hashes, numerical reports and phase samples; `--plots` adds
+optional matplotlib figures. It never modifies inputs or trains anything.
+Analyze the actual server cohort with:
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+/home/carsonc/miniconda3/envs/r-elegans/bin/python -u -m scripts.analyze_autonomous_trajectories \
+  --run /home/carsonc/r-elegans-results/autonomous-movement-20261108T205220165775Z \
+  --output-dir "/home/carsonc/r-elegans-results/trajectory-analysis-$(date -u +%Y%m%dT%H%M%SZ)" \
+  --body-length 0.001
+```
+
+Body length is explicit in the input's position units (0.001 m for these liquid
+assays), not inferred from displacement. The command prints compact per-case
+findings and saves `summary.json`. Numeric analysis does not need matplotlib.
+Use actual cohort findings to separate localized bending, phase progression,
+cycle drift and endpoint effects before more training.

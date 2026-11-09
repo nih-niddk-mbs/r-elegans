@@ -107,6 +107,11 @@ search also failed movement validation (0/4); a synthetic audit found short-wind
 phase sensitivity in its selection score. Scoring/trajectory analysis is the
 next priority before another long run.
 
+A [read-only trajectory analyzer](CURRENT_MODEL.md#trajectory-analysis-e034-2026-11-08)
+measures spatial bend amplitude, phase, shape variance and translation at
+matching wiggle phases. The saved local pilot is mostly synchronous anterior
+bending; the actual four-hour traces still need the supplied server analysis.
+
 Calcium fitting now uses a [conservative parameter policy](CURRENT_MODEL.md#conservative-fitting-policy-e029-2026-11-07):
 shared physiological properties and reference leak stay fixed; only explicitly
 eligible unknown channel densities and existing synaptic strengths fit. Each run

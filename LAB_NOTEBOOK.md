@@ -2118,3 +2118,59 @@ E033 archive verified locally: 178 files, checksum manifest SHA256
 Local retention does not establish completed cloud synchronization. JSON
 record consistency and diff whitespace checks passed. No simulation code
 changed and no full test-suite rerun was needed for these records.
+
+## 2026-11-08 — E034 planned trajectory analysis
+
+User requests analysis of trajectories after E032 joint training failed. The
+four-hour cohort `autonomous-movement-20261108T205220165775Z` is not locally
+available. Noninteractive read-only SSH fails authentication; no password or
+key requested/read, no server files retrieved. Analyze preserved local E032
+pilot validations and E030 300-s reference where available, clearly separated
+from the four-hour candidates. Prepare identical read-only analysis for user
+execution on the server. Do not infer remote waveforms from scalar summaries.
+
+Measures: late neural and joint/motor activation variation along tail-to-head
+body; dominant frequency and coherent phase offsets of joints with meaningful
+amplitude; centroid displacement between repeated upward crossings of the
+strongest-joint waveform; full-shape closure and heading changes at crossings;
+cycle-sampled drift regression versus fixed-endpoint short-block scores. Plot
+waveform/spatial amplitude/phase and raw centroid versus equal-phase samples.
+A single joint's phase is not proof that the entire body shape closes: report
+that residual explicitly. Timing from per-case recorded metadata; SI body
+length supplied explicitly (0.001 m for these recorded liquid worker assays).
+This is analysis, not training or biological validation. No model, objective
+or acceptance threshold changes. Exact analysis source/environment, input
+hashes, numerical outputs and figures remain external; compact findings in Git.
+
+E034 local execution: `MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.analyze_autonomous_trajectories --run /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E032/joint-smoke --output-dir /tmp/r-elegans-E034-local-pilot --body-length .001 --plots`.
+Same CLI for `.../E030/fit-long`, destination
+`/tmp/r-elegans-E034-local-reference`. Both completed: all six pilot cases,
+all 150 chunks of the 300-s reference. Exact source/environment/commands and
+input hashes are in those outputs, stdout at corresponding `.log` paths.
+
+Local pilot late window: anterior3 variance 99.044388%, PCA1 99.939185%,
+four significant joints, ~3.733 Hz. Joint10/9/8/7 lags relative to joint10
+~0/0.160/1.340/1.569 ms versus mean cycle period 268.056 ms. Most shape
+variation is one anterior pattern rather than a body-spanning wave. Three
+neurons exceed 2-mV p2p (RMDs): descriptive voltage variation, not a biological
+spike classification. Across 55 phase-matched cycles, median full-shape
+closure RMS 3.4657e-5 rad. Forward phase-position regression -4.04816e-7 BL/s
+versus raw minimum endpoint-block speed -1.41150e-5. Body refinement gives
+-1.12755e-8; neural refinement -4.08388e-7. No robust propulsion is demonstrated.
+Original 300-s E030 reference: anterior variance 99.054%, PCA1 99.931%, phase
+drift -4.62370e-7 BL/s. These are local findings, not four-hour server data.
+
+Targeted tests: 9 passed in 2.17 s, checking bounded oscillation versus known
+translation recovery, standing versus phase-shifted shape, and static controls.
+Cohort CLI verified with a one-worker layout fixture linking the same local
+pilot (not a new seed/server run), long and held-voltage cases. A generated
+plot was visually inspected. All input files unmodified; no model/fitness
+change and no new training. Compact evidence `experiments/records/E034.json`;
+raw reports/phase samples/figures archived externally. Actual server trajectory
+analysis still requires user execution of the provided read-only command.
+
+E034 OneDrive local archive verified: 572 files, checksum manifest SHA256
+`245a97032280bfabeeff38debb01e7e80bfc0e85c6378105e422bf2236f95c6b`.
+This confirms a local preserved copy; cloud synchronization is not verified.
+Server run remains pending user-side read-only analysis because the agent
+cannot authenticate to obtain the raw files. No four-hour findings invented.

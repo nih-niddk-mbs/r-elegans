@@ -1,0 +1,1344 @@
+{
+  "experiment": "E034",
+  "status": "local_analysis_complete_remote_cohort_pending",
+  "remote_cohort": "/home/carsonc/r-elegans-results/autonomous-movement-20261108T205220165775Z",
+  "remote_access": "Noninteractive SSH failed authentication; no remote trajectories retrieved",
+  "local_pilot": {
+    "source_run": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke",
+    "cases": [
+      {
+        "case": "long",
+        "status": "analyzed",
+        "trajectory": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke/validation-long.npz",
+        "trajectory_sha256": "99c6b50db4010f048b1607911a701ff3ebb6965a83b209b823c03034c87c07ce",
+        "metrics": {
+          "samples": 15000,
+          "dt_s": 0.002,
+          "recording_seconds": 30.0,
+          "late_seconds": 15.0,
+          "body_length": 0.001,
+          "strongest_joint": 10,
+          "joint_indexing": "0 tail -> last anterior; matches head_at_end=True projection",
+          "joint_p2p_rad": [
+            5.960464477539062e-07,
+            3.039836883544922e-06,
+            6.660819053649902e-06,
+            3.253668546676636e-05,
+            0.0001492910087108612,
+            0.000173129141330719,
+            0.00017732148990035057,
+            0.0038912631571292877,
+            0.013180464506149292,
+            0.02168821170926094,
+            0.02965602930635214
+          ],
+          "activation_p2p": [
+            8.940696716308594e-08,
+            1.862645149230957e-06,
+            4.127621650695801e-06,
+            3.365427255630493e-05,
+            0.00017585977911949158,
+            0.00020339526236057281,
+            0.00020763021893799305,
+            0.004709571599960327,
+            0.01595660299062729,
+            0.026255212724208832,
+            0.03589747101068497
+          ],
+          "anterior_three_joint_variance_fraction": 0.9904438807888702,
+          "shape_pca_variance_ratios": [
+            0.9993918545779219,
+            0.0005535376527280774,
+            3.790408998428895e-05,
+            1.5448923662224046e-05,
+            1.2357568120000065e-06,
+            1.683918091296174e-08,
+            1.945640680633998e-09,
+            1.7192080732412575e-10,
+            3.064921250749078e-11,
+            9.70083102474425e-12,
+            1.7992135506536934e-12
+          ],
+          "active_joint_threshold_rad": 0.002965602930635214,
+          "raw_forward_block_speeds_body_lengths_s": [
+            6.554542735470714e-06,
+            5.877293467412286e-06,
+            -1.4114975382409583e-05
+          ],
+          "raw_net_forward_body_lengths": -1.0178668905798233e-05,
+          "raw_net_speed_body_lengths_s": -6.786684161753722e-07,
+          "neural_p2p_over_2mV": 3,
+          "top_neurons": [
+            {
+              "neuron": "RMDVR",
+              "p2p_mV": 27.94052219390869
+            },
+            {
+              "neuron": "RMDDL",
+              "p2p_mV": 27.66119384765625
+            },
+            {
+              "neuron": "RMDDR",
+              "p2p_mV": 25.356242179870605
+            },
+            {
+              "neuron": "SAAVR",
+              "p2p_mV": 1.7496757507324219
+            },
+            {
+              "neuron": "AVER",
+              "p2p_mV": 1.5455894470214844
+            },
+            {
+              "neuron": "RMDVL",
+              "p2p_mV": 1.24791918694973
+            },
+            {
+              "neuron": "SMDVR",
+              "p2p_mV": 0.2592658996582031
+            },
+            {
+              "neuron": "SABVR",
+              "p2p_mV": 0.2010040283203125
+            },
+            {
+              "neuron": "SMBVL",
+              "p2p_mV": 0.180908203125
+            },
+            {
+              "neuron": "SABVL",
+              "p2p_mV": 0.1668701171875
+            },
+            {
+              "neuron": "AVAR",
+              "p2p_mV": 0.16403961181640625
+            },
+            {
+              "neuron": "DA01",
+              "p2p_mV": 0.0964508056640625
+            },
+            {
+              "neuron": "AVEL",
+              "p2p_mV": 0.09625244140625
+            },
+            {
+              "neuron": "OLQVL",
+              "p2p_mV": 0.08215713500976562
+            },
+            {
+              "neuron": "RMDR",
+              "p2p_mV": 0.07120823860168457
+            }
+          ],
+          "cycles": 55,
+          "dominant_frequency_hz": 3.7333333333333334,
+          "equal_phase_regression_speed_body_lengths_s": -4.048160810396466e-07,
+          "median_cycle_speed_body_lengths_s": 6.599088825850338e-08,
+          "positive_cycle_fraction": 0.5272727272727272,
+          "median_shape_closure_rms_rad": 3.46570442901709e-05,
+          "spectral_phase": [
+            {
+              "joint": 10,
+              "p2p_rad": 0.02965602930635214,
+              "coherence": 1.0000000000000004,
+              "phase_relative_to_reference_rad": 3.0644048762206866e-17,
+              "lag_modulo_period_s": -1.3063799563002588e-18
+            },
+            {
+              "joint": 9,
+              "p2p_rad": 0.02168821170926094,
+              "coherence": 0.9998159843959523,
+              "phase_relative_to_reference_rad": -0.003745427135091988,
+              "lag_modulo_period_s": 0.00015967051139475157
+            },
+            {
+              "joint": 8,
+              "p2p_rad": 0.013180464506149292,
+              "coherence": 0.9973169169021664,
+              "phase_relative_to_reference_rad": -0.03144263601300583,
+              "lag_modulo_period_s": 0.0013404243603506575
+            },
+            {
+              "joint": 7,
+              "p2p_rad": 0.0038912631571292877,
+              "coherence": 0.9969956175947499,
+              "phase_relative_to_reference_rad": -0.036797303884956584,
+              "lag_modulo_period_s": 0.0015686980729675297
+            }
+          ],
+          "phase_interpretation": "Single-frequency phase modulo a period; tiny-amplitude joints excluded",
+          "cycle_speed_percentiles_body_lengths_s": [
+            -5.611019883348513e-06,
+            6.599088825850338e-08,
+            5.898776540591366e-06
+          ],
+          "maximum_shape_closure_rms_rad": 0.0001249314618919035,
+          "median_cycle_heading_change_rad": -4.394665612750259e-06,
+          "mean_cycle_period_s": 0.26805615919666326
+        }
+      },
+      {
+        "case": "perturb-plus",
+        "status": "analyzed",
+        "trajectory": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke/validation-perturb-plus.npz",
+        "trajectory_sha256": "0a5826c04a0e9dfff1e08608629c2b7dbb4305dbd6c3f5e74237a3d356febf4f",
+        "metrics": {
+          "samples": 15000,
+          "dt_s": 0.002,
+          "recording_seconds": 30.0,
+          "late_seconds": 15.0,
+          "body_length": 0.001,
+          "strongest_joint": 10,
+          "joint_indexing": "0 tail -> last anterior; matches head_at_end=True projection",
+          "joint_p2p_rad": [
+            6.556510925292969e-07,
+            3.0100345611572266e-06,
+            6.660819053649902e-06,
+            3.261864185333252e-05,
+            0.00014920905232429504,
+            0.0001731235533952713,
+            0.00017734558787196875,
+            0.0038857609033584595,
+            0.01317662000656128,
+            0.02167748659849167,
+            0.02964146062731743
+          ],
+          "activation_p2p": [
+            1.4901161193847656e-07,
+            1.817941665649414e-06,
+            4.0978193283081055e-06,
+            3.36281955242157e-05,
+            0.0001757703721523285,
+            0.0002032984048128128,
+            0.0002075362717732787,
+            0.004704851657152176,
+            0.015954315662384033,
+            0.026241954416036606,
+            0.03587951883673668
+          ],
+          "anterior_three_joint_variance_fraction": 0.9904447020853206,
+          "shape_pca_variance_ratios": [
+            0.9993890575964248,
+            0.0005562964923009114,
+            3.7899327155834335e-05,
+            1.5487522755919257e-05,
+            1.2400337307093943e-06,
+            1.6850405798434957e-08,
+            1.9537731158491335e-09,
+            1.7868825682968506e-10,
+            3.3807456239435735e-11,
+            8.020822740569128e-12,
+            2.9360825641747374e-12
+          ],
+          "active_joint_threshold_rad": 0.002964146062731743,
+          "raw_forward_block_speeds_body_lengths_s": [
+            6.395123404022963e-06,
+            5.984948154515063e-06,
+            -1.4091580368613264e-05
+          ],
+          "raw_net_forward_body_lengths": -1.0345939672813036e-05,
+          "raw_net_speed_body_lengths_s": -6.898212876925613e-07,
+          "neural_p2p_over_2mV": 3,
+          "top_neurons": [
+            {
+              "neuron": "RMDVR",
+              "p2p_mV": 27.939061641693115
+            },
+            {
+              "neuron": "RMDDL",
+              "p2p_mV": 27.66962194442749
+            },
+            {
+              "neuron": "RMDDR",
+              "p2p_mV": 25.355395317077637
+            },
+            {
+              "neuron": "SAAVR",
+              "p2p_mV": 1.7495994567871094
+            },
+            {
+              "neuron": "AVER",
+              "p2p_mV": 1.5455513000488281
+            },
+            {
+              "neuron": "RMDVL",
+              "p2p_mV": 1.2476359829306602
+            },
+            {
+              "neuron": "SMDVR",
+              "p2p_mV": 0.25930023193359375
+            },
+            {
+              "neuron": "SABVR",
+              "p2p_mV": 0.2009735107421875
+            },
+            {
+              "neuron": "SMBVL",
+              "p2p_mV": 0.180908203125
+            },
+            {
+              "neuron": "SABVL",
+              "p2p_mV": 0.1668853759765625
+            },
+            {
+              "neuron": "AVAR",
+              "p2p_mV": 0.16405105590820312
+            },
+            {
+              "neuron": "DA01",
+              "p2p_mV": 0.09644317626953125
+            },
+            {
+              "neuron": "AVEL",
+              "p2p_mV": 0.09627151489257812
+            },
+            {
+              "neuron": "OLQVL",
+              "p2p_mV": 0.0821533203125
+            },
+            {
+              "neuron": "RMDR",
+              "p2p_mV": 0.07119417190551758
+            }
+          ],
+          "cycles": 55,
+          "dominant_frequency_hz": 3.7333333333333334,
+          "equal_phase_regression_speed_body_lengths_s": -4.071869020155753e-07,
+          "median_cycle_speed_body_lengths_s": 3.0803549022979925e-09,
+          "positive_cycle_fraction": 0.509090909090909,
+          "median_shape_closure_rms_rad": 3.407864333833346e-05,
+          "spectral_phase": [
+            {
+              "joint": 10,
+              "p2p_rad": 0.02964146062731743,
+              "coherence": 0.9999999999999996,
+              "phase_relative_to_reference_rad": -2.3381969936437126e-17,
+              "lag_modulo_period_s": 9.967918110562655e-19
+            },
+            {
+              "joint": 9,
+              "p2p_rad": 0.02167748659849167,
+              "coherence": 0.9998159833677857,
+              "phase_relative_to_reference_rad": -0.003763731686324095,
+              "lag_modulo_period_s": 0.00016045084884376998
+            },
+            {
+              "joint": 8,
+              "p2p_rad": 0.01317662000656128,
+              "coherence": 0.9973166103570271,
+              "phase_relative_to_reference_rad": -0.0315199621823972,
+              "lag_modulo_period_s": 0.0013437208359102105
+            },
+            {
+              "joint": 7,
+              "p2p_rad": 0.0038857609033584595,
+              "coherence": 0.9969978686699658,
+              "phase_relative_to_reference_rad": -0.03693991736878962,
+              "lag_modulo_period_s": 0.001574777798209561
+            }
+          ],
+          "phase_interpretation": "Single-frequency phase modulo a period; tiny-amplitude joints excluded",
+          "cycle_speed_percentiles_body_lengths_s": [
+            -5.504901145786393e-06,
+            3.0803549022979925e-09,
+            5.75540847082018e-06
+          ],
+          "maximum_shape_closure_rms_rad": 0.000120477357103468,
+          "median_cycle_heading_change_rad": -5.615115310053653e-06,
+          "mean_cycle_period_s": 0.26804962168549934
+        }
+      },
+      {
+        "case": "perturb-minus",
+        "status": "analyzed",
+        "trajectory": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke/validation-perturb-minus.npz",
+        "trajectory_sha256": "df9eeddc3c7f0aae6a5e4c7183a8d372daa460c42f2b4b6cc28f144367a0d1ed",
+        "metrics": {
+          "samples": 15000,
+          "dt_s": 0.002,
+          "recording_seconds": 30.0,
+          "late_seconds": 15.0,
+          "body_length": 0.001,
+          "strongest_joint": 10,
+          "joint_indexing": "0 tail -> last anterior; matches head_at_end=True projection",
+          "joint_p2p_rad": [
+            6.109476089477539e-07,
+            3.0249357223510742e-06,
+            6.67572021484375e-06,
+            3.258511424064636e-05,
+            0.00014915689826011658,
+            0.00017287395894527435,
+            0.00017704791389405727,
+            0.0038942769169807434,
+            0.013174682855606079,
+            0.02168390527367592,
+            0.02965229470282793
+          ],
+          "activation_p2p": [
+            8.940696716308594e-08,
+            1.8030405044555664e-06,
+            4.06801700592041e-06,
+            3.3661723136901855e-05,
+            0.00017586350440979004,
+            0.00020333938300609589,
+            0.00020758307073265314,
+            0.004713032394647598,
+            0.01594892144203186,
+            0.02625102549791336,
+            0.035894147120416164
+          ],
+          "anterior_three_joint_variance_fraction": 0.9904432502780559,
+          "shape_pca_variance_ratios": [
+            0.9993945343177197,
+            0.0005509009780682632,
+            3.7897273778005495e-05,
+            1.541558878812674e-05,
+            1.2328532554406564e-06,
+            1.6837898728504837e-08,
+            1.9403739097587733e-09,
+            1.6799108287177947e-10,
+            2.8981937619353484e-11,
+            8.369434730028786e-12,
+            4.7751566240385125e-12
+          ],
+          "active_joint_threshold_rad": 0.0029652294702827934,
+          "raw_forward_block_speeds_body_lengths_s": [
+            6.733098413069062e-06,
+            5.751822569232072e-06,
+            -1.413095964878198e-05
+          ],
+          "raw_net_forward_body_lengths": -9.965249437550402e-06,
+          "raw_net_speed_body_lengths_s": -6.644385543106015e-07,
+          "neural_p2p_over_2mV": 3,
+          "top_neurons": [
+            {
+              "neuron": "RMDVR",
+              "p2p_mV": 27.939969062805176
+            },
+            {
+              "neuron": "RMDDL",
+              "p2p_mV": 27.669992446899414
+            },
+            {
+              "neuron": "RMDDR",
+              "p2p_mV": 25.35602331161499
+            },
+            {
+              "neuron": "SAAVR",
+              "p2p_mV": 1.7498054504394531
+            },
+            {
+              "neuron": "AVER",
+              "p2p_mV": 1.5458106994628906
+            },
+            {
+              "neuron": "RMDVL",
+              "p2p_mV": 1.2475420832633972
+            },
+            {
+              "neuron": "SMDVR",
+              "p2p_mV": 0.25936126708984375
+            },
+            {
+              "neuron": "SABVR",
+              "p2p_mV": 0.201019287109375
+            },
+            {
+              "neuron": "SMBVL",
+              "p2p_mV": 0.18087005615234375
+            },
+            {
+              "neuron": "SABVL",
+              "p2p_mV": 0.16690826416015625
+            },
+            {
+              "neuron": "AVAR",
+              "p2p_mV": 0.1640625
+            },
+            {
+              "neuron": "DA01",
+              "p2p_mV": 0.0964813232421875
+            },
+            {
+              "neuron": "AVEL",
+              "p2p_mV": 0.096282958984375
+            },
+            {
+              "neuron": "OLQVL",
+              "p2p_mV": 0.08218765258789062
+            },
+            {
+              "neuron": "RMDR",
+              "p2p_mV": 0.07122516632080078
+            }
+          ],
+          "cycles": 55,
+          "dominant_frequency_hz": 3.7333333333333334,
+          "equal_phase_regression_speed_body_lengths_s": -4.0308833416045815e-07,
+          "median_cycle_speed_body_lengths_s": 1.1727722333201929e-07,
+          "positive_cycle_fraction": 0.5272727272727272,
+          "median_shape_closure_rms_rad": 3.497123366000293e-05,
+          "spectral_phase": [
+            {
+              "joint": 10,
+              "p2p_rad": 0.02965229470282793,
+              "coherence": 1.0,
+              "phase_relative_to_reference_rad": -3.108873231699814e-17,
+              "lag_modulo_period_s": 1.325337166797591e-18
+            },
+            {
+              "joint": 9,
+              "p2p_rad": 0.02168390527367592,
+              "coherence": 0.9998160136275489,
+              "phase_relative_to_reference_rad": -0.0037247728126982888,
+              "lag_modulo_period_s": 0.00015879000134872367
+            },
+            {
+              "joint": 8,
+              "p2p_rad": 0.013174682855606079,
+              "coherence": 0.9973177062843626,
+              "phase_relative_to_reference_rad": -0.03135889910429415,
+              "lag_modulo_period_s": 0.0013368545899201134
+            },
+            {
+              "joint": 7,
+              "p2p_rad": 0.0038942769169807434,
+              "coherence": 0.9969922817402288,
+              "phase_relative_to_reference_rad": -0.03667388512233721,
+              "lag_modulo_period_s": 0.0015634366338225765
+            }
+          ],
+          "phase_interpretation": "Single-frequency phase modulo a period; tiny-amplitude joints excluded",
+          "cycle_speed_percentiles_body_lengths_s": [
+            -5.726278862191636e-06,
+            1.1727722333201929e-07,
+            5.717789966763825e-06
+          ],
+          "maximum_shape_closure_rms_rad": 0.0001265923488499472,
+          "median_cycle_heading_change_rad": -2.9694837780924743e-06,
+          "mean_cycle_period_s": 0.26806172520212973
+        }
+      },
+      {
+        "case": "brain-refined",
+        "status": "analyzed",
+        "trajectory": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke/validation-brain-refined.npz",
+        "trajectory_sha256": "873df0a37e8e65be0d9ca36edb6a4345ddcdf487370be0481e0ba6662b92a4a9",
+        "metrics": {
+          "samples": 15000,
+          "dt_s": 0.002,
+          "recording_seconds": 30.0,
+          "late_seconds": 15.0,
+          "body_length": 0.001,
+          "strongest_joint": 10,
+          "joint_indexing": "0 tail -> last anterior; matches head_at_end=True projection",
+          "joint_p2p_rad": [
+            6.258487701416016e-07,
+            2.2649765014648438e-06,
+            4.425644874572754e-06,
+            3.52226197719574e-05,
+            0.00015203282237052917,
+            0.00017551332712173462,
+            0.00017793010920286179,
+            0.00388919934630394,
+            0.013175278902053833,
+            0.021652773022651672,
+            0.029598881490528584
+          ],
+          "activation_p2p": [
+            1.4901161193847656e-07,
+            2.086162567138672e-07,
+            2.682209014892578e-07,
+            3.618374466896057e-05,
+            0.00017906725406646729,
+            0.00020596012473106384,
+            0.00020820554345846176,
+            0.00470656156539917,
+            0.015944935381412506,
+            0.02620326355099678,
+            0.03582030162215233
+          ],
+          "anterior_three_joint_variance_fraction": 0.9904500725252787,
+          "shape_pca_variance_ratios": [
+            0.9993971268254777,
+            0.0005481739989309116,
+            3.750629344919522e-05,
+            1.58398395839893e-05,
+            1.3339951025934352e-06,
+            1.5515010427135528e-08,
+            2.0909644361096822e-09,
+            1.4262061997336549e-09,
+            1.3219959258455015e-11,
+            1.7104236401784797e-12,
+            3.4400089489102655e-13
+          ],
+          "active_joint_threshold_rad": 0.0029598881490528585,
+          "raw_forward_block_speeds_body_lengths_s": [
+            -1.447409833269445e-05,
+            1.1500443092766959e-05,
+            3.836689072753755e-06
+          ],
+          "raw_net_forward_body_lengths": 2.008916652869783e-06,
+          "raw_net_speed_body_lengths_s": 1.339456362761557e-07,
+          "neural_p2p_over_2mV": 3,
+          "top_neurons": [
+            {
+              "neuron": "RMDVR",
+              "p2p_mV": 27.96342945098877
+            },
+            {
+              "neuron": "RMDDL",
+              "p2p_mV": 27.704960823059082
+            },
+            {
+              "neuron": "RMDDR",
+              "p2p_mV": 25.403672218322754
+            },
+            {
+              "neuron": "SAAVR",
+              "p2p_mV": 1.7499618530273438
+            },
+            {
+              "neuron": "AVER",
+              "p2p_mV": 1.5453720092773438
+            },
+            {
+              "neuron": "RMDVL",
+              "p2p_mV": 1.250340685248375
+            },
+            {
+              "neuron": "SMDVR",
+              "p2p_mV": 0.2600364685058594
+            },
+            {
+              "neuron": "SABVR",
+              "p2p_mV": 0.20084381103515625
+            },
+            {
+              "neuron": "SMBVL",
+              "p2p_mV": 0.18070220947265625
+            },
+            {
+              "neuron": "SABVL",
+              "p2p_mV": 0.16668701171875
+            },
+            {
+              "neuron": "AVAR",
+              "p2p_mV": 0.16384124755859375
+            },
+            {
+              "neuron": "DA01",
+              "p2p_mV": 0.09626007080078125
+            },
+            {
+              "neuron": "AVEL",
+              "p2p_mV": 0.09613418579101562
+            },
+            {
+              "neuron": "OLQVL",
+              "p2p_mV": 0.0821685791015625
+            },
+            {
+              "neuron": "RMDR",
+              "p2p_mV": 0.0712895393371582
+            }
+          ],
+          "cycles": 55,
+          "dominant_frequency_hz": 3.7333333333333334,
+          "equal_phase_regression_speed_body_lengths_s": -4.083883210727287e-07,
+          "median_cycle_speed_body_lengths_s": 1.648777991317379e-07,
+          "positive_cycle_fraction": 0.5272727272727272,
+          "median_shape_closure_rms_rad": 3.46698580230841e-05,
+          "spectral_phase": [
+            {
+              "joint": 10,
+              "p2p_rad": 0.029598881490528584,
+              "coherence": 1.0,
+              "phase_relative_to_reference_rad": 1.3868646454098242e-17,
+              "lag_modulo_period_s": -5.912313313831129e-19
+            },
+            {
+              "joint": 9,
+              "p2p_rad": 0.021652773022651672,
+              "coherence": 0.9998037493813965,
+              "phase_relative_to_reference_rad": -0.0038592750695565043,
+              "lag_modulo_period_s": 0.0001645239385905096
+            },
+            {
+              "joint": 8,
+              "p2p_rad": 0.013175278902053833,
+              "coherence": 0.9971494966884916,
+              "phase_relative_to_reference_rad": -0.03193116934212826,
+              "lag_modulo_period_s": 0.00136125092129574
+            },
+            {
+              "joint": 7,
+              "p2p_rad": 0.00388919934630394,
+              "coherence": 0.9969100277427602,
+              "phase_relative_to_reference_rad": -0.04024231282486954,
+              "lag_modulo_period_s": 0.0017155615198736684
+            }
+          ],
+          "phase_interpretation": "Single-frequency phase modulo a period; tiny-amplitude joints excluded",
+          "cycle_speed_percentiles_body_lengths_s": [
+            -5.440222593385935e-06,
+            1.648777991317379e-07,
+            5.169277155234717e-06
+          ],
+          "maximum_shape_closure_rms_rad": 0.00011750809735451859,
+          "median_cycle_heading_change_rad": -6.95140918682835e-06,
+          "mean_cycle_period_s": 0.2671881611421497
+        }
+      },
+      {
+        "case": "body-refined",
+        "status": "analyzed",
+        "trajectory": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke/validation-body-refined.npz",
+        "trajectory_sha256": "64c2829ad2d93255110bbb0a605d9fd6c18b8f69242bf564417b7c9ed3f364de",
+        "metrics": {
+          "samples": 30000,
+          "dt_s": 0.001,
+          "recording_seconds": 30.0,
+          "late_seconds": 15.0,
+          "body_length": 0.001,
+          "strongest_joint": 10,
+          "joint_indexing": "0 tail -> last anterior; matches head_at_end=True projection",
+          "joint_p2p_rad": [
+            5.662441253662109e-07,
+            2.950429916381836e-06,
+            6.645917892456055e-06,
+            3.261864185333252e-05,
+            0.0001496337354183197,
+            0.00017351843416690826,
+            0.0001777356956154108,
+            0.0038956068456172943,
+            0.013196609914302826,
+            0.021713152527809143,
+            0.029689613729715347
+          ],
+          "activation_p2p": [
+            8.940696716308594e-08,
+            1.6987323760986328e-06,
+            4.023313522338867e-06,
+            3.365054726600647e-05,
+            0.00017586350440979004,
+            0.00020338967442512512,
+            0.00020761543419212103,
+            0.004709895700216293,
+            0.015957102179527283,
+            0.026252184063196182,
+            0.03589325677603483
+          ],
+          "anterior_three_joint_variance_fraction": 0.9904435576596357,
+          "shape_pca_variance_ratios": [
+            0.9993915502630658,
+            0.0005537598434853571,
+            3.7928172334566126e-05,
+            1.5505299530015057e-05,
+            1.2372427683176237e-06,
+            1.6945668971935087e-08,
+            1.941741840515024e-09,
+            2.1192457793673117e-10,
+            6.480157566763406e-11,
+            9.62014826449357e-12,
+            5.05858175657007e-12
+          ],
+          "active_joint_threshold_rad": 0.0029689613729715347,
+          "raw_forward_block_speeds_body_lengths_s": [
+            7.402023501660331e-06,
+            5.882868517076121e-06,
+            -1.367963792021913e-05
+          ],
+          "raw_net_forward_body_lengths": -2.8542454313523148e-06,
+          "raw_net_speed_body_lengths_s": -1.9029571513783015e-07,
+          "neural_p2p_over_2mV": 3,
+          "top_neurons": [
+            {
+              "neuron": "RMDVR",
+              "p2p_mV": 27.941140174865723
+            },
+            {
+              "neuron": "RMDDL",
+              "p2p_mV": 27.66953992843628
+            },
+            {
+              "neuron": "RMDDR",
+              "p2p_mV": 25.35653018951416
+            },
+            {
+              "neuron": "SAAVR",
+              "p2p_mV": 1.7498321533203125
+            },
+            {
+              "neuron": "AVER",
+              "p2p_mV": 1.5457763671875
+            },
+            {
+              "neuron": "RMDVL",
+              "p2p_mV": 1.24791918694973
+            },
+            {
+              "neuron": "SMDVR",
+              "p2p_mV": 0.2592926025390625
+            },
+            {
+              "neuron": "SABVR",
+              "p2p_mV": 0.2010040283203125
+            },
+            {
+              "neuron": "SMBVL",
+              "p2p_mV": 0.180908203125
+            },
+            {
+              "neuron": "SABVL",
+              "p2p_mV": 0.1668701171875
+            },
+            {
+              "neuron": "AVAR",
+              "p2p_mV": 0.16405105590820312
+            },
+            {
+              "neuron": "DA01",
+              "p2p_mV": 0.0964508056640625
+            },
+            {
+              "neuron": "AVEL",
+              "p2p_mV": 0.09626007080078125
+            },
+            {
+              "neuron": "OLQVL",
+              "p2p_mV": 0.08217239379882812
+            },
+            {
+              "neuron": "RMDR",
+              "p2p_mV": 0.07122063636779785
+            }
+          ],
+          "cycles": 55,
+          "dominant_frequency_hz": 3.7333333333333334,
+          "equal_phase_regression_speed_body_lengths_s": -1.1275465936348149e-08,
+          "median_cycle_speed_body_lengths_s": 4.7521450949514193e-07,
+          "positive_cycle_fraction": 0.5818181818181818,
+          "median_shape_closure_rms_rad": 3.4518891235730016e-05,
+          "spectral_phase": [
+            {
+              "joint": 10,
+              "p2p_rad": 0.029689613729715347,
+              "coherence": 1.0,
+              "phase_relative_to_reference_rad": 2.887576941482259e-17,
+              "lag_modulo_period_s": -1.2309968137368164e-18
+            },
+            {
+              "joint": 9,
+              "p2p_rad": 0.021713152527809143,
+              "coherence": 0.9998150377253263,
+              "phase_relative_to_reference_rad": -0.0037469234152231515,
+              "lag_modulo_period_s": 0.0001597342989963029
+            },
+            {
+              "joint": 8,
+              "p2p_rad": 0.013196609914302826,
+              "coherence": 0.9973033378633954,
+              "phase_relative_to_reference_rad": -0.03144784421696705,
+              "lag_modulo_period_s": 0.0013406463901912984
+            },
+            {
+              "joint": 7,
+              "p2p_rad": 0.0038956068456172943,
+              "coherence": 0.9969812340331679,
+              "phase_relative_to_reference_rad": -0.03680495197376362,
+              "lag_modulo_period_s": 0.0015690241170225776
+            }
+          ],
+          "phase_interpretation": "Single-frequency phase modulo a period; tiny-amplitude joints excluded",
+          "cycle_speed_percentiles_body_lengths_s": [
+            -5.283079392170511e-06,
+            4.7521450949514193e-07,
+            6.371844616315229e-06
+          ],
+          "maximum_shape_closure_rms_rad": 0.0001254862624267665,
+          "median_cycle_heading_change_rad": -4.517367670930916e-06,
+          "mean_cycle_period_s": 0.26805614184885884
+        }
+      },
+      {
+        "case": "held-voltage",
+        "status": "analyzed",
+        "trajectory": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E032/joint-smoke/validation-held-voltage.npz",
+        "trajectory_sha256": "7816203f59a01781d0d6b83e04a95e43256d2e1d6ebf6852b4c0d15d13b7d4d1",
+        "metrics": {
+          "samples": 15000,
+          "dt_s": 0.002,
+          "recording_seconds": 30.0,
+          "late_seconds": 15.0,
+          "body_length": 0.001,
+          "strongest_joint": 0,
+          "joint_indexing": "0 tail -> last anterior; matches head_at_end=True projection",
+          "joint_p2p_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "activation_p2p": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "anterior_three_joint_variance_fraction": null,
+          "shape_pca_variance_ratios": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "active_joint_threshold_rad": 0.0001,
+          "raw_forward_block_speeds_body_lengths_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "raw_net_forward_body_lengths": 0.0,
+          "raw_net_speed_body_lengths_s": 0.0,
+          "neural_p2p_over_2mV": 0,
+          "top_neurons": [
+            {
+              "neuron": "CANR",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "OLQDR",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "OLQVR",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "IL1DL",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "IL1DR",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "IL1L",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "IL1R",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "IL1VL",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "IL1VR",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "AINL",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "AINR",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "AIML",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "AIMR",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "RIH",
+              "p2p_mV": 0.0
+            },
+            {
+              "neuron": "URBL",
+              "p2p_mV": 0.0
+            }
+          ],
+          "cycles": 0,
+          "dominant_frequency_hz": null,
+          "equal_phase_regression_speed_body_lengths_s": null,
+          "median_cycle_speed_body_lengths_s": null,
+          "positive_cycle_fraction": null,
+          "median_shape_closure_rms_rad": null,
+          "spectral_phase": [],
+          "phase_interpretation": "Single-frequency phase modulo a period; tiny-amplitude joints excluded"
+        }
+      }
+    ]
+  },
+  "local_reference": {
+    "source_run": "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long",
+    "cases": [
+      {
+        "case": "diagnostic",
+        "status": "analyzed",
+        "trajectory_files": {
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00000.npz": "d86d3d2117d2c50725c8669e2d58c958f08574de40399ada0d59d982554b0527",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00001.npz": "7af290b82af128ffbdd71afe2777b739eaa1c3e328cb51eae5cd66c229b1491c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00002.npz": "20935b883bada347519becdb1977aad33e077e9293c40ebfa097630d2b7ad2a9",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00003.npz": "e2d998373c551a3522e74f82cab79ed018b00df03a621a2fb9b101999db4c536",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00004.npz": "a9e1b0b7059252d515ed7473c5a98f1e939432b0c5942ff3d2e9a2d9773eeadd",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00005.npz": "1eac1e74bbab03320c70729671005f86cd1acadefa49e879e91d426abf510160",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00006.npz": "e33c88b4819aad4426b509570d727b10284fbec0ea95e2acd357a8b1903ff473",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00007.npz": "f4d377c5279073fc1db53822fb7b48082ccea31811521da97845b294f97bb2ce",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00008.npz": "e265c7851f1aa8691a1adffe94e9c501de1db7a7115501df265914c61e09bd14",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00009.npz": "845a8dee6803615737f7089840b2df1811bb479e9d602d69c6c2fd254754af36",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00010.npz": "4808f0831a79cba809e7aded475517afff324947eadfd6465ad7b6b421d8c011",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00011.npz": "258c4ddd8b70d9cebacea986c07c525178ef03f00cd811ec4a9b887f58f79c67",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00012.npz": "c0f29eb5f97ffd7479f1740aa056b7c371f43c2f04a2ccd016c71f9760d32a42",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00013.npz": "49d141646a0acc1a60a6f8cf8129df5c7fb8fb33f530b78880c67a66ec624715",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00014.npz": "7363b1c8c22266732dfff074a27721678512ee0eab22e67bafa48d271c74fd88",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00015.npz": "547777fa5f2bb0912492854397f0f05882c12423fd9ef77c4b4adbcbe60a5030",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00016.npz": "221369cda8c2832707fe5783b0438faeb363d266d5441f4dea4296b038e858c2",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00017.npz": "fcc7ebf0befa6bc4433697ca44a1997842d5713f327b0298b880d5146833e33c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00018.npz": "ea66b8574789ea1a9b92bcacb8c9920b27d3a68e29adf5749abc6ad2a9475f88",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00019.npz": "f6d38e1890a7365092fe18986c47961efcba6f704d78cda809f490ba2e935881",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00020.npz": "e59a5da2de73252a847cf14cb61d7287e87e2e8053f2d6b4b11d3eb3b30794d9",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00021.npz": "219b9b3b1ec91d67ff99476e1188a8e78c0d9dd82a71590974df07295e59fe2a",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00022.npz": "27d33b41cfd66492e35b5ea2076545377e5d03aab0f37990ee79ac0b3f446ac6",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00023.npz": "c77bca488b3a5d10142f320be8ce35c7654838a13a0252af10509ce88ca7c279",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00024.npz": "4f4b0ce45e15e0fb5f0a4521b6482fabe351c24930b152f886e0ddd756eba6f1",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00025.npz": "e23ed44d9966f16b469723575a5f60de5c220bbf3953b6f8d260c596a4bc3453",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00026.npz": "89883c0b0af7a2fd83641f6cb7f30f0c164a871d1c2df91c62cc939fd6f2dfb1",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00027.npz": "fae2be8886d7732b6e312e28ca67614ac498827f87b1634618344d1c7eff36f3",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00028.npz": "a2425fe8779e8534bbe2a36c9400116d8342bb8a4173b31338bac1fa91974857",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00029.npz": "213f7fb2f8d5a7601411eaaaad47465c2266e5ee7e6d3400e9437534ac6275a5",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00030.npz": "5093d04dbc07fb172a13ad777bbf347bb378b78efbd93bb3370dbb3d974f7d4e",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00031.npz": "3910de7829227ad7a5e732c52e6e5a712df85d13cbf16286c54123100aaf5723",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00032.npz": "c6736b44cb0c24997d1bac4d720ddd74a6a2639d87669ce57ce5be21c95ac8f8",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00033.npz": "f890dd3143f1062a31750e84be11450907fe4ef155a7593529ad221665b91909",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00034.npz": "5b65d145575ba05e41f5b1bfcf7ef1b93d44c93aa3d14fdfed25e10e20790527",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00035.npz": "f761e25d1c12422ac50f474eff5969e0dd091e14c02d31525d5ec18c74d7356c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00036.npz": "6c2a4185c33469a0291a258713e7f828fd030cc5dc40f0e0709d91b3dbb08992",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00037.npz": "0f8dc9c465348721c69303ede3bbeb6280bf9819431543532f367656549ca2c9",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00038.npz": "f7ea4d6d2e17d46edb003e8c3d5cb1216a61b3c400df924b493ef224d4ded407",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00039.npz": "516080bd83b1a0a235b94cf172164e21c4ddfcee6bffe546884135fa34a290b5",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00040.npz": "31a9e5c9f0b7db3b3b40a92801dc3d07744e3347b7fcf37832ee4e1c0cdcc47b",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00041.npz": "ef4605f5357674beca576078abe7d26ab49768518ec9ab1983eb1d9821a942a3",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00042.npz": "d00139a8ae5c49b61dcd3546f1bc5ad822d64c22f19bf35558d05786a67a1519",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00043.npz": "75a21aa0029e7567b9d924e19c878238409e0f57161eb7eda94e7a82122c699b",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00044.npz": "17d6464f51f82ec6097d2102422359f98b9a6f1edfb050101d40af9dfaa302a3",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00045.npz": "c8d6f529ac26eb0989c7c3050fa4662d6f1ab01315a9eb7a9116e956d0447e05",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00046.npz": "5ae0b00c3a5a07056c68e959e277d261980c5c0a2d8556caa6017c25008cb471",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00047.npz": "7319e5615ded1e9d7a71a91078b321e817c6eb022bccfc6ca2797686d1383060",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00048.npz": "b5eed7e2e6491001c9f6fe87f20bf729bd863860513cee0f6a641da32596d1ba",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00049.npz": "fafc253bf8cdf6e3632b53e6b7a5c772de7435f24fe618a25503abf9a2adb20c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00050.npz": "57b6164394679d9286c462ea5885c67f0106b42f1116319fbedc836cee523de0",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00051.npz": "774ea28aa6fe19f135ea07b6bd4abda5358038af927bb877ecbdd8bbc0fd67fe",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00052.npz": "7f60dfe89ece97a843f82342b9eb0c3c4945ce79d98b1326d844e91e635b84b7",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00053.npz": "707f0dcbec4e5265e770b5b91b56b81ed5bf5069e3998391678fb89fb2493856",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00054.npz": "69217574cc0f910d0dfd335d5e31bf79ed0d83af686f75ab92709aa09560b9c1",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00055.npz": "bb702b9c42f382ae924fcb8b925b99988183b93fdb7481f43e67c24856fb6063",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00056.npz": "0d9d5f51533d18a965c641fc052505dc72d9202b3c8484612272284f22cbea89",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00057.npz": "b2ee42452cd8feaa932b7c1cde9c28ff8023dc32287d2bdf69781e90637e90cd",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00058.npz": "72cbd0bf33852ff092d537bac0a6c988fe791cd381b9d3216997b928d1dd1a67",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00059.npz": "1474c4bb5779ac081931c40a146683952178d0df258ba1bdb1b5cb7c11dc20ec",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00060.npz": "259b5e236b90dd5e0e58a2d168a1de186cdf73b8686bba23bd2f1a47f14c8098",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00061.npz": "a021255e070b32267eaebab5d80283237f7c354abfdc4b50dbc4a007504e2ac6",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00062.npz": "247acc5e9bace445242e91f2150552d28f64a5f7791f765b62fdd38454070990",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00063.npz": "3807adb6e0a71451808bc0dc9a27c7a980374bd45486df1a08f64ed16ca87919",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00064.npz": "cadee1493042c81341460cbd514610df16096e6a250e38d533c563af68b81129",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00065.npz": "158f477e8f5459817c03fdbca76227a141346899a20b4bebd5f7a33819d4dba7",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00066.npz": "dcf9bd13fcd769281d85554bfe97ab79144b98eb3f11837268eb5d07d905cb98",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00067.npz": "48b4686295fdae7300e1c2adf9b0aaa8555f2e482a7cff32858c44f6902b9538",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00068.npz": "199ee5a4000efd9232e6bd62705bc3a5598817f9bb8d1697fe359ac57f27f5b4",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00069.npz": "7edda87cf0430545e8d7b5321fb768706d827b3546e98265fb96589ead921f55",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00070.npz": "4505869496c51117f012992721d5a5fdf589121ae567cc28749764c00c4cfddf",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00071.npz": "3eb3fed01011433812fd29aa4e94def52f18ec84d1908f1bdab7e20f2d43cf4c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00072.npz": "3fad94c26a19b29e4a75fef461ac06c186b6020b3c9ad6197ce3b13c780bf869",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00073.npz": "29303496c509c87aa208512dc536723c0fa9ded0972c96c2b7296c2475fecd6b",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00074.npz": "3ad87c866817746504bb6251e46a5d37b4053dc8c71a9b07cde118510628c3bc",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00075.npz": "433e0f69efe821fd602f3ae93c6dc0c678fd600f63fe76b3cb90394ba8325d3a",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00076.npz": "e4cb62df2f926378b76a80e8b03827a2ce12ab5c3766677980acd1a4cf0b4e13",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00077.npz": "9ffc63eae1d191c438803d8d2af1344c0592f538193109cb77cd33cb7f9962b0",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00078.npz": "f597f315c47c2f4c0f4e28d5677f1eb32ec401935601db2fcd994778f9980313",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00079.npz": "0bb0b81d47b8cfd29b545f82dece5c5319330e5a56b4e3d69958460de19ba272",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00080.npz": "919491eb4db9bb57d8974355e5bfb5d9fc73b304f4900c5efe430319f8494dd6",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00081.npz": "26bd264afc02d5d569d69944387350185e05c0b99959a2e536fc290005f50afd",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00082.npz": "7057b40318bfd95b7dd410ddabdfc80bec4cfd091bc42d358351d5f70828f0d7",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00083.npz": "8df83972d8e9ddfb90dfb130b0551d0d3cc0c125f35855279af48ea448486b18",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00084.npz": "3c62c1b86d24cc6dd85594f31905212db37801d6901a9ab9d1627150ea713cde",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00085.npz": "2b3878a64c87c3bc618b510602b3e5ff97327abc3d4be8d4a64032f4d308d532",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00086.npz": "d7cf83413fdeb36d02588e600e4feadcd022d2409157f75a4c0bcd0c2d532701",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00087.npz": "9631c45e69ef41e7f9e8eece1cd9c9c044c0c69d9f16fbe08563f90913026575",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00088.npz": "c4b62611edf34826ff5cb7369dda570fc7177e9e5e5528001617d7211f397aaa",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00089.npz": "b884acb2ec285d9dbcd7a11e0815574bc8b0a77ab52f407031e2b29ee26d625a",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00090.npz": "3d79f03ed42c5bfe75c8837e315b4150ab575525e8838a93b5bde2d26beffa98",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00091.npz": "99819c2a67d34e4e7d6a93ded6320ba1a880c9a5c27140326f67dd274e96d092",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00092.npz": "d452fc41950e9436b455f11c9c369a9d80e16994f3a66fe47b7022f2e2bd7fb4",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00093.npz": "4d3f0b58113f122d622c4cac54c9d503e96e7d48298cebc4e4e072eacac7a909",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00094.npz": "4711938fdf7d759c72803871042649b9ccc79f31a0712db60f7f5dc26f06f426",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00095.npz": "238ef1e00840c5c7c7c160ec8d0d6eaa8499b655cd83a342ef0e051e6f576c38",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00096.npz": "4b40858cc46811ed75263a6d340c479b2d57f32c800ccc4f8f62aa016c0f1e02",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00097.npz": "d4843b83745d276a69d152acca62d703251c7c66f1ede512bddb002ca1d6c0f3",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00098.npz": "e1ba5aecff8fd465a9832e1b2477222bca0a9cfd1d34fbec36ec5768c3928753",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00099.npz": "b67f405e40b903cdcad57f2381eda925201b3a57e64a2fed6e49d39635a41744",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00100.npz": "438366e7827cfaffa133e59c95ec041a24852a4c7f1d5f1fce0b0487e7ea8b96",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00101.npz": "efba6d0d9aa6938e068da0e8ecedbabe4452cf8f35e2631e020c4fd0efb41129",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00102.npz": "3cf1a9c5cf72e8ae384e6a8ea249ea2ba8285cd2bcecd9616ef370992f1bd34e",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00103.npz": "d5ed6533784e12cb6182c0ba9a68704ca09b4aa13e30e27f4c9da97914cb53fa",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00104.npz": "65c87d2869802b4090828518dc15de7b034a33b4c7951381cab6e497ecae1d1a",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00105.npz": "b6bf298895e33c074a797e4dba6ee9fc3a842c85632e82ed2b930e20f9b314a8",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00106.npz": "0eea7c5af947135915fbd04ee3498be73070be7b3ada5c65b3e6544e08c74743",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00107.npz": "77e21136424945e19ae29a8eedac5d606358ce1982ec328d9cfb2a25f896ce26",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00108.npz": "51a15d39f753a2965c68a9874e720cb23b6e0b4f181579b440cea9e67b5caeaa",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00109.npz": "d7b351a92f434113b07d5b8f272015052136861e6fd41845076bcb04a9b42ea7",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00110.npz": "8f24ce73a88fa4602e7bbd7e64af7ec56108727fab7c1ed9f728ffd3d36f8a16",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00111.npz": "bcc95be5fda84eb158c9214b016d7b7ec53ca285dcdb8dfa8646a698bd1ff398",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00112.npz": "a0c63555734719bd2f8a4cdfbf64ecc889985e15a12d9330a5686498848d679e",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00113.npz": "dc813352d565dc6a5d3463cfc098548346a8498892c69484d136e34c44e4536f",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00114.npz": "ab826dd704289fc1ae49a789122333f6236a6e483f1cd3119647f05ca09994a8",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00115.npz": "9e57e55db881e011a60fd95c8018dc3da92b9d17e5902fd33f87e28349130fcb",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00116.npz": "98b9ffa900049ffb8a647c6b770c592ee774cfdddc0615ada01da9662903930e",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00117.npz": "577739529942bee057dbb3983db82d28811b4d4e1d5fa86bd09adf2622cea584",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00118.npz": "1520e451fea6cb6ed8137c9f0cf0a35eec0f3485789c6ad4160a41a9609c2c8c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00119.npz": "3fab672b3b63eb13e6d9242ecf896b5d0541434e1faa35a0464618a7d78f831c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00120.npz": "8dbda924528a0f02a970bbe65f4d38eadff200093602a5af4328859cb6bc7e74",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00121.npz": "5e093bf49724f78ef78beac8b38d9dab6f595be736a38bc055581d5b7d879dbb",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00122.npz": "32e0b9f142da95218b50f5e645562b76d6177cf33dfe7273922096f48936ad77",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00123.npz": "8ae45774570d8ea3b0daf47b9dd278038665d96f681830ab68a03b00701c2252",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00124.npz": "3141d837c736fb11e98c9e0ade257f7f6c453000b18a4b15e97feebccf710a62",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00125.npz": "a68bd31fba440d07c86bdaaf6c322740c96aae7a97c1970e0a8942d2ef482f00",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00126.npz": "8be7a36f3a3e76152d388d11dbd8c1a51fec9cbf8ebc8ca45c1cfda245003195",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00127.npz": "df2313d8884298d2466da9ff52210701aa46ae0ecfa40bb6f3e96faf48650605",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00128.npz": "61483f801444c547a417f89284dcaae9c842e589dc3b047005aeafdd2c492eee",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00129.npz": "f9f7be345a4730ba55c31d94c531150e5b2626e8697333df674ce5bc5d0b2f25",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00130.npz": "590971f52e912741ed74ece590a8fcca4b60a886de9009eb8c99bc6292b0deff",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00131.npz": "0974e716d9b7676c6128e8cb10ea67c02d16e482fa90d233836d2d802b4edeb0",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00132.npz": "52b2eb2d127bd5542c6c86705decf10d41270cbe6f510cea31bb1a03f8020570",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00133.npz": "103d4f5d01693e05370036e25b6dc6ae5988b8c4065508d59bdbfcbc9f28bee2",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00134.npz": "d5c91340b5c31a31229b82572c9395dad4bb74d08aa50031fcc480a47775fa78",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00135.npz": "17add601f7a5015b92ecfbb2b1370a18808c899c6d763e5935820a14e082fcc1",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00136.npz": "3753fcaea85d010a4d27b608274c9859b874a37302473b7f96a91a801e89c955",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00137.npz": "163cc6db9ba6e9257f538145a6f6fb31e4d70639a5d28450684c1e384f7a67a6",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00138.npz": "864b0eec7bb300b42323708291708795c8abb991b1c56cf5d7b1b322c5245181",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00139.npz": "8aec28a35e049a3b7832e699e82243bfd9f7f7500cf250ec9745db8ab7eb5ad7",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00140.npz": "be00b1f1143c924642749bbedcf2a14087ef6218778b6f031e6fbed69c9b48d8",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00141.npz": "e735154086afaa7b025f00a65678ee272a3f85c0d8c1249d71145d2f90c5c35c",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00142.npz": "5470802eddcc235ec327b0c6a305d98bb414ec31afe6b99678b405bd71363076",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00143.npz": "84a55f856fe1bc3d961934a3a2df3d13af4dadde96374c51ff6dbfbdbfa4602a",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00144.npz": "e63973edc24d7f46b9506cc4b231e257d9d89d30b7cb7f1d6e9dfe4a14357011",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00145.npz": "cb7305dbc59b3a417afad6bb126f32145a32a07b75d711249906d83a48f9e5fd",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00146.npz": "e8a4705234e82ccf8b909da69555a827eea4acb74c67c76f80f4e0053153e896",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00147.npz": "ea19503ab4827cba373f5886552c53069cce5eb99c006ad53d09658a86e34d86",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00148.npz": "327e75f88ef5c743019498d239e948acfb2f36e33b9f2a076481a8cfaa0cc510",
+          "/Users/carsonc/Library/CloudStorage/OneDrive-NationalInstitutesofHealth/r-elegans/notebook/evidence/E030/fit-long/chunk-00149.npz": "60817fc357edf64c2530c40401f91421b441994b81ac9819b77f6fdbe0c21dc9"
+        },
+        "metrics": {
+          "samples": 150000,
+          "dt_s": 0.002,
+          "recording_seconds": 300.0,
+          "late_seconds": 150.0,
+          "body_length": 0.001,
+          "strongest_joint": 10,
+          "joint_indexing": "0 tail -> last anterior; matches head_at_end=True projection",
+          "joint_p2p_rad": [
+            5.811452865600586e-07,
+            3.084540367126465e-06,
+            6.67572021484375e-06,
+            3.254041075706482e-05,
+            0.00014771148562431335,
+            0.00017115846276283264,
+            0.00017540378030389547,
+            0.0038947872817516327,
+            0.01321883499622345,
+            0.021731127053499222,
+            0.029715092852711678
+          ],
+          "activation_p2p": [
+            0.0,
+            1.564621925354004e-06,
+            3.919005393981934e-06,
+            3.309175372123718e-05,
+            0.00017274171113967896,
+            0.0001996215432882309,
+            0.00020380609203130007,
+            0.004713691771030426,
+            0.015996277332305908,
+            0.026301521807909012,
+            0.03596284054219723
+          ],
+          "anterior_three_joint_variance_fraction": 0.9905403487344254,
+          "shape_pca_variance_ratios": [
+            0.999314554474927,
+            0.0006449848132155795,
+            2.408442192360915e-05,
+            1.4735230982334303e-05,
+            1.623928257237503e-06,
+            1.621488818302804e-08,
+            8.197299106822023e-10,
+            7.22245059300175e-11,
+            1.7592380789531896e-11,
+            4.940897667262819e-12,
+            1.3182378279281689e-12
+          ],
+          "active_joint_threshold_rad": 0.002971509285271168,
+          "raw_forward_block_speeds_body_lengths_s": [
+            -1.7173112777512274e-06,
+            9.242694599469582e-07,
+            -1.8449638658872768e-06
+          ],
+          "raw_net_forward_body_lengths": -0.00013055956487479086,
+          "raw_net_speed_body_lengths_s": -8.704087046146673e-07,
+          "neural_p2p_over_2mV": 3,
+          "top_neurons": [
+            {
+              "neuron": "RMDVR",
+              "p2p_mV": 27.807621955871582
+            },
+            {
+              "neuron": "RMDDL",
+              "p2p_mV": 27.524424076080322
+            },
+            {
+              "neuron": "RMDDR",
+              "p2p_mV": 25.35738480091095
+            },
+            {
+              "neuron": "SAAVR",
+              "p2p_mV": 1.73870849609375
+            },
+            {
+              "neuron": "AVER",
+              "p2p_mV": 1.5300445556640625
+            },
+            {
+              "neuron": "RMDVL",
+              "p2p_mV": 1.223614625632763
+            },
+            {
+              "neuron": "SMDVR",
+              "p2p_mV": 0.2594337463378906
+            },
+            {
+              "neuron": "SABVR",
+              "p2p_mV": 0.199188232421875
+            },
+            {
+              "neuron": "SMBVL",
+              "p2p_mV": 0.17916107177734375
+            },
+            {
+              "neuron": "SABVL",
+              "p2p_mV": 0.16535186767578125
+            },
+            {
+              "neuron": "AVAR",
+              "p2p_mV": 0.1622161865234375
+            },
+            {
+              "neuron": "DA01",
+              "p2p_mV": 0.09542083740234375
+            },
+            {
+              "neuron": "AVEL",
+              "p2p_mV": 0.09497451782226562
+            },
+            {
+              "neuron": "OLQVL",
+              "p2p_mV": 0.08087539672851562
+            },
+            {
+              "neuron": "SIBVR",
+              "p2p_mV": 0.066497802734375
+            }
+          ],
+          "cycles": 559,
+          "dominant_frequency_hz": 3.726666666666667,
+          "equal_phase_regression_speed_body_lengths_s": -4.623704940170505e-07,
+          "median_cycle_speed_body_lengths_s": -1.0564892143682287e-06,
+          "positive_cycle_fraction": 0.4007155635062612,
+          "median_shape_closure_rms_rad": 2.9897865960937135e-05,
+          "spectral_phase": [
+            {
+              "joint": 10,
+              "p2p_rad": 0.029715092852711678,
+              "coherence": 0.9999999999999996,
+              "phase_relative_to_reference_rad": 1.0093625105697354e-17,
+              "lag_modulo_period_s": -4.310689613474566e-19
+            },
+            {
+              "joint": 9,
+              "p2p_rad": 0.021731127053499222,
+              "coherence": 0.9997096220528665,
+              "phase_relative_to_reference_rad": -0.002935674233546542,
+              "lag_modulo_period_s": 0.00012537398897400089
+            },
+            {
+              "joint": 8,
+              "p2p_rad": 0.01321883499622345,
+              "coherence": 0.9958593263091443,
+              "phase_relative_to_reference_rad": -0.0284704509317974,
+              "lag_modulo_period_s": 0.0012158889976343864
+            },
+            {
+              "joint": 7,
+              "p2p_rad": 0.0038947872817516327,
+              "coherence": 0.9971122279103846,
+              "phase_relative_to_reference_rad": -0.03472587230835975,
+              "lag_modulo_period_s": 0.001483039596883744
+            }
+          ],
+          "phase_interpretation": "Single-frequency phase modulo a period; tiny-amplitude joints excluded",
+          "cycle_speed_percentiles_body_lengths_s": [
+            -4.552628973060979e-06,
+            -1.0564892143682287e-06,
+            4.767973338175429e-06
+          ],
+          "maximum_shape_closure_rms_rad": 9.268578104176082e-05,
+          "median_cycle_heading_change_rad": -1.8542532694121316e-05,
+          "mean_cycle_period_s": 0.2681082057858283
+        }
+      }
+    ]
+  },
+  "method": "Late-half spatial variance/PCA, meaningful-joint spectral phase, interpolated equal-reference-joint-phase centroid regression with full-shape closure residuals",
+  "body_length_m": 0.001,
+  "body_length_basis": "Explicit CLI matching known SI-liquid setup; remote mechanics not independently retrieved",
+  "limitations": [
+    "Local E032 pilot has two proposals, not four-hour selected parameters.",
+    "Same-joint phase is not exact full-state closure; residuals reported.",
+    "Spectral phase/coherence are not neural causality.",
+    "No model, objective or thresholds changed."
+  ],
+  "software_validation": {
+    "targeted_tests": 9,
+    "seconds": 2.17,
+    "cohort_fixture": "One-worker layout reusing local E032 pilot; not a new seed/run",
+    "diagnostic_cli": "E030 300-s source, 150 chunks analyzed"
+  },
+  "raw_artifact_root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E034",
+  "archive_verified_local_files": 572,
+  "archive_manifest_sha256": "245a97032280bfabeeff38debb01e7e80bfc0e85c6378105e422bf2236f95c6b"
+}
