@@ -2732,3 +2732,45 @@ archived at `/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E040`:
 Local archive copy completed;cloud sync not independently verified. Compact
 record `experiments/records/E040-posterior-excitability.json` includes hashes,
 case counts,connected comparisons and explicit limitations.
+
+## 2026-11-09 — E040 actual server-parent diagnostic completed (user report)
+
+Run `posterior-excitability-20261109T214558Z-615489`, pinned E039 seed2000
+confirmed by user-pasted process command. Exit0: diagnostic completed, not an
+oscillator/behavior pass. User summary reports0 isolated-screen rhythmic cell
+trials; selected inward_high_outward_low; robust isolated rhythm list empty.
+Alternate-initial-state screen4047 cell trials,0 rhythms,145.291797s.
+No full source/checkpoint/profile hashes pasted; raw artifacts remain on server.
+Compact transcription `experiments/records/E040-server-20261109.json`.
+
+Current full network:7 rhythmic selected tail-projecting cells (AVKR,SMDDL,
+SMDDR,SMDVL,SMDVR,SIADL,SIAVR),maximum sustained p2p7.61054039mV.
+Selected-cell-only subcircuit:0 rhythms,0 excursion. Full network with bounded
+strong-inward/weak-outward density intervention:6 selected rhythms (same except
+SIADL),maximum3.43791199mV. Maximum excursion fell~54.8%;this compares maxima,
+not necessarily amplitudes of the same neuron. Actual server numbers supersede
+local smoke values3→0→1 for interpretation of the trained E039 parent; keep
+both records as distinct initializations.
+
+The population is defined by any direct NMJ contribution to the posterior four
+joint projections, not by posterior motor-cell identity. No reported rhythmic
+cell is in the DA/DB/DD/VA/VB/VD/AS classes. Thus a seven-cell selected rhythm
+count does not establish recruitment of those motor classes. A neural reward
+averaged over this broad population can improve without useful tail drive.
+Subcircuit graph ablation can remove necessary interneurons, so do not infer
+absence of a complete posterior functional oscillator. Isolated quiescence
+also does not imply that each motor neuron must become a pacemaker.
+
+Decision: no diagnostic candidate promoted, no new training launched. Next
+proposed curriculum should recruit effective posterior motor/muscle activity
+from the existing internally generated rhythm using targeted recurrent and
+channel-density blocks, retaining zero external input/fixed stereotypical fields.
+Avoid another unchanged hill-climb extension or indiscriminate inward gain.
+Keep amplitude first;phase,control and propulsion still deferred. No biological
+impossibility or model-sufficiency claim follows from this finite screen.
+
+Clearly labeled server-summary transcription archived under external OneDrive
+`notebook/evidence/E040/server-report-20261109`;separate manifest SHA256
+ ae2e353b30a9734bd6281c8086819a897e93a0dddcc5d335d358f69b955f2f13.
+This is a transcription of user console messages,not independently retrieved
+raw stdout or server artifact backup. Cloud synchronization not verified.

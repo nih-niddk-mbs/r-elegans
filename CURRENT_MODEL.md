@@ -1782,3 +1782,14 @@ and runs main plus alternate-basin screens sequentially under nohup. Completion
 code0 means diagnostic finished, not oscillator or behavior success. Results
 include full per-cell metrics and source/checkpoint hashes. No server launch
 is claimed here. Confirm the actual trained parent before changing the model.
+
+E040 actual server-parent results reported (2026-11-09):diagnostic exit0,
+0 isolated-screen rhythms and0/4047 alternate-basin cell trials. Current
+full-network selected rhythms7 (maximum7.61054mV),NMJ-defined isolated
+subcircuit0,strong-inward candidate6 (maximum3.43791mV). These selected cells
+have tail projections;none of the reported rhythmic cells is DA/DB/DD/VA/VB/VD/AS.
+This supports connection-dependent activity but not posterior motor recruitment.
+Finite screen does not exclude other densities/recurrent loops. No candidate
+promoted or body skill qualified. Next proposed search targets posterior motor/
+muscle recruitment from the existing autonomous rhythm;external drive remains
+zero. See `experiments/records/E040-server-20261109.json`.

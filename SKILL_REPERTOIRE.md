@@ -305,3 +305,14 @@ than oscillate across the finite tested bounds/basins;weak connected rhythms
 vanish under the direct-NMJ subcircuit ablation. These are model diagnostics,
 not evidence against biological oscillators or all possible model parameters.
 Working model unchanged;actual server-parent confirmation prepared.
+
+E040 actual server-parent results reported (2026-11-09):diagnostic exit0,
+0 isolated-screen rhythms and0/4047 alternate-basin cell trials. Current
+full-network selected rhythms7 (maximum7.61054mV),NMJ-defined isolated
+subcircuit0,strong-inward candidate6 (maximum3.43791mV). These selected cells
+have tail projections;none of the reported rhythmic cells is DA/DB/DD/VA/VB/VD/AS.
+This supports connection-dependent activity but not posterior motor recruitment.
+Finite screen does not exclude other densities/recurrent loops. No candidate
+promoted or body skill qualified. Next proposed search targets posterior motor/
+muscle recruitment from the existing autonomous rhythm;external drive remains
+zero. See `experiments/records/E040-server-20261109.json`.

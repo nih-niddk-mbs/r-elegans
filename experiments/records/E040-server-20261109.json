@@ -1,0 +1,66 @@
+{
+  "experiment": "E040",
+  "evidence": "User-reported server console across completion and summary messages; raw files not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/posterior-excitability-20261109T214558Z-615489",
+  "source_parent": "/home/carsonc/r-elegans-results/autonomous-tail-amplitude-20261109T200140261630Z/seed-2000",
+  "source_parent_evidence": "User-pasted ps command line",
+  "diagnostic_exit_code": 0,
+  "isolated_screen_rhythmic_cell_trials": 0,
+  "selected_profile": "inward_high_outward_low",
+  "robust_isolated_rhythmic_neurons": [],
+  "alternate_initial_states": {
+    "total_cell_trials": 4047,
+    "rhythmic_cell_trials": 0,
+    "elapsed_seconds": 145.29179711197503
+  },
+  "connected": [
+    {
+      "case": "current-full",
+      "rhythmic_count": 7,
+      "neurons": [
+        "AVKR",
+        "SMDDL",
+        "SMDDR",
+        "SMDVL",
+        "SMDVR",
+        "SIADL",
+        "SIAVR"
+      ],
+      "maximum_p2p_mV": 7.610540390014648
+    },
+    {
+      "case": "current-posterior-subcircuit",
+      "rhythmic_count": 0,
+      "neurons": [],
+      "maximum_p2p_mV": 0.0
+    },
+    {
+      "case": "candidate-full",
+      "rhythmic_count": 6,
+      "neurons": [
+        "AVKR",
+        "SMDDL",
+        "SMDDR",
+        "SMDVL",
+        "SMDVR",
+        "SIAVR"
+      ],
+      "maximum_p2p_mV": 3.4379119873046875
+    }
+  ],
+  "interpretation": [
+    "Tested isolated regimes do not sustain qualifying rhythms; actual trained parent agrees qualitatively with local audit",
+    "Current selected-cell rhythms depend on connections to neurons outside the NMJ-defined subcircuit",
+    "Strong inward/weak outward profile reduces maximum selected-cell oscillation amplitude, rather than solving recruitment",
+    "Selected population is all neurons with tail NMJ projections; listed rhythms do not include DA/DB/DD/VA/VB/VD/AS-class cells"
+  ],
+  "decision": "No candidate promotion or longer unchanged run. Next proposed training should target effective posterior motor/muscle recruitment from the existing autonomous network rhythm, with targeted recurrent/density blocks rather than indiscriminate inward gain.",
+  "limitations": [
+    "Finite profiles and initial states do not prove impossibility within the original bounds",
+    "Subcircuit omits neurons without direct tail NMJ projections and may exclude necessary oscillator-loop interneurons",
+    "Recurrent weights were held at the learned parent; other recurrent parameter combinations remain untested",
+    "No body simulation or new skill qualification",
+    "Full source/environment records, exact profile count and parent/output hashes remain on server; not pasted in summary",
+    "Counts and amplitudes differ from cached local smoke parent; use server values for actual E039 interpretation"
+  ]
+}
