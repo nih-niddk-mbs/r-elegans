@@ -299,3 +299,9 @@ middle amplitude remain above target in these checks. No new skill qualified.
 Next proposed diagnostic: posterior-cell autonomous oscillation feasibility
 within current bounds before extending unchanged fitting. No new run launched.
 Exact parsed results: `experiments/records/E039-server-20261109.json`.
+
+E040 local diagnostic: no new skill. Isolated channel profiles settle rather
+than oscillate across the finite tested bounds/basins;weak connected rhythms
+vanish under the direct-NMJ subcircuit ablation. These are model diagnostics,
+not evidence against biological oscillators or all possible model parameters.
+Working model unchanged;actual server-parent confirmation prepared.

@@ -2639,3 +2639,96 @@ Exact server stdout and parsed summary archived under external OneDrive
 `notebook/evidence/E039/server-report-20261109`; its separate manifest SHA256
 45fac83c955cc3b5e3dc03720c52d40e012ba65652756f5cf2d580a3a60275f6.
 Local copy completed; cloud synchronization not independently verified.
+
+## 2026-11-09 — E040 planned posterior excitability/oscillation feasibility audit
+
+User authorized the proposed diagnostic. Question: do posterior channel models
+support autonomous rhythms within the current original-anchor density bounds,
+and does anatomical coupling suppress or enable the same configurations?
+Diagnostic interventions are explicitly separate from the working model;
+no learned checkpoint is overwritten, no current is injected, no leak/C/kinetic,
+release/NMJ/body field is fitted or changed.
+
+Local parent `/tmp/r-elegans-E039-tail-pilot` (local smoke lineage, not actual
+E039 server seeds). Target cells: all71 anatomical inputs to posterior four
+joint projections; include their original identities. All density candidates
+bounded to original source log-scales +/-log16; missing terms and LEAK fixed.
+Probe current, original anchor, all active terms high/low, inward-high with
+outward-low, inward-high with outward unchanged, individual calcium/NCA high,
+and fixed-seed log-uniform combinations. This finite screen is not a proof of
+impossibility. Isolated simulations use the existing gate/Ca equations and
+exponential voltage integrator, checked against the network with zero edges.
+12s screen, sample2ms, integration0.1ms, no drive; selected candidate gets
+30s confirmation, +/-1mV initial voltage, half integration step and full302-cell
+anatomical-network comparison. Baseline full network and isolated posterior
+subcircuit comparison retain current parameters. Isolated/subcircuit graph
+ablations remove edges only for diagnostics; they do not alter the saved model.
+
+Candidate criterion: existing repeated late-window excursion detector >=0.05mV,
+finite voltage in(-120,80)mV; screen count, magnitude, release excursion and
+resting voltage reported separately. Select by number of qualifying cells,
+then median excursion; verify every screen candidate remains within bounds.
+Do not require every real motor neuron to oscillate intrinsically; network
+oscillations can be emergent. No biological validity or body movement claim.
+
+Build reusable script with optional completed worker parent and pinned server
+parent from E039 seed2000; retain all source/checkpoint/input hashes and exact
+profile arrays/seed/RNG state externally. Run local audit now, then push for
+user to repeat against the actual server parent. Planned command:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl JAX_PLATFORMS=cpu .venv/bin/python -m scripts.assay_posterior_excitability --worker /tmp/r-elegans-E039-tail-pilot --output-dir /tmp/r-elegans-E040-excitability --random-profiles 8 --seed 4000`
+
+E040 adaptive diagnostic extension planned before execution: initial19 isolated
+profiles produced no repeated late-window excursion. Test all19 again from
+uniform initial voltages-65,-50,-35mV to check alternative attraction basins;
+these are initial-state changes only, not sustained external input. Use same
+71-cell identities,12s screening,0.1ms integration and saved exact profile
+arrays. Preserve all traces and outputs externally; finite negative findings
+remain insufficient to prove absence of oscillations. Command:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl JAX_PLATFORMS=cpu .venv/bin/python -m scripts.assay_posterior_basins --audit-dir /tmp/r-elegans-E040-excitability --output-dir /tmp/r-elegans-E040-basins`
+
+E040 LOCAL main assay completed118.3476s, exit0;19 profiles x71 cells=1349
+screened cases, no isolated rhythms. Selected-profile30s confirmations at
+nativeinitial,+1,-1mV and half-step also0 rhythms. Implementation selection
+ranks count then maximum excursion (planned text said median);all screened
+excursions were zero so this did not affect selection. Predeclared
+inward-high/outward-low probe chosen explicitly as an unsuccessful diagnostic,
+not a fitted regime. All screen/confirmation voltages finite and in bounds.
+
+Alternate initial-basin assay completed107.7144s, exit0;19 profiles x3 initial
+voltages x71 cells=4047 cases,0 rhythms, all valid. Together5396 primary
+isolated trials, plus284 selected-profile confirmation cell trials. No currents
+injected.12s screens/30s confirmations do not rule out slower rhythms, other
+initial states or untested conductance combinations. This is not an exhaustive
+parameter feasibility result.
+
+Current connected network has3 qualifying tail-projecting neurons (SMDVR,
+SMBVL,SIBVR), largest sustained excursion0.255234mV;total network18 rhythms.
+All39 selected DA/DB/DD/VA/VB/VD/AS-class cells remain below0.05mV, maximum
+0.00345612mV. The selected-cell-only subcircuit has0 rhythms. Strong-inward
+candidate in fullnetwork has1 selected rhythm, max0.0569344mV, with depolarized
+plateaus;not an improvement. Isolated strong-profile late mean voltages range
+-42.85 to47.65mV;excitation alone is possible without sustained cycles.
+NMJ-defined selection includes non-VNC neurons and can exclude necessary
+interneurons;do not equate this graph intervention with the complete posterior
+functional circuit. No body simulation or locomotion qualification performed.
+No candidate promoted or production model changed.
+
+Interpretation: isolated oscillator assumption is unsupported in this finite
+bounded local screen;weak selected rhythms depend on the rest of the network.
+This does not show that every posterior neuron should be an intrinsic oscillator,
+that the channel library is insufficient,or that full-network oscillator loops
+cannot work. It argues against indiscriminate inward-density gain as a fix.
+Actual server parent differs from local smoke lineage;confirmation launcher
+pins reviewed E039 seed2000 and saves all diagnostics via nohup on four cores.
+No server launch is claimed;standing workflow is push and user launches.
+
+Verification:5 targeted tests passed3.25s,including zero-edge integration
+agreement and profile bounds/frozen leak;full suite214 passed71.26s. Both CLI
+assays executed successfully;launcher shell syntax passed. Raw local outputs,
+all profiles,parent lineage,RNG/state,source/environment records and stdout
+archived at `/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E040`:
+1190 files,manifest SHA256
+8280865b8af2950b997b4dd13a680c960f0262de8c0cd801a53e4d9f2739b1bc.
+Local archive copy completed;cloud sync not independently verified. Compact
+record `experiments/records/E040-posterior-excitability.json` includes hashes,
+case counts,connected comparisons and explicit limitations.

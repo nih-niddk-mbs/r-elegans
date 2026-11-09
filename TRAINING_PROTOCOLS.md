@@ -1305,3 +1305,43 @@ middle amplitude remain above target in these checks. No new skill qualified.
 Next proposed diagnostic: posterior-cell autonomous oscillation feasibility
 within current bounds before extending unchanged fitting. No new run launched.
 Exact parsed results: `experiments/records/E039-server-20261109.json`.
+
+## Posterior excitability diagnostic (E040, 2026-11-09)
+
+Executed locally on the cached E039 smoke lineage (not actual server seed2000):
+19 original-bounded channel-density profiles,71 tail-projecting cells; repeat
+from initial voltages-65,-50,-35mV. Across5,396 primary isolated cell trials,
+no sustained late excursion>=0.05mV qualified. All traces finite/bounded.
+Selected strong-inward/weak-outward profile also failed30s confirmation,
++/-1mV initial conditions and finer integration. It can depolarize cells into
+plateaus; it did not generate oscillations. This finite screen is not a proof
+that no oscillator exists within bounds, or that real motor cells must each
+oscillate independently. Recurrent strengths were retained, not searched.
+
+Current full302-cell network:3 of71 tail-projecting cells rhythmic; a diagnostic
+subcircuit retaining only their mutual edges:0. Full network with strong-inward
+profile:1. Current rhythmic tail-projecting cells were SMDVR/SMBVL/SIBVR;
+the39 tail-projecting cells in DA/DB/DD/VA/VB/VD/AS classes all remained below
+0.05mV (maximum0.003456mV). Direct-NMJ-defined subcircuit is not a complete
+functional posterior circuit; it may omit necessary interneurons. No body was
+simulated or motion qualified. Candidate not promoted; working model unchanged.
+
+All biases remain zero; no pacing/current introduced. Leak/C/kinetics/release,
+NMJs/body fixed. Only diagnostic graph ablations and bounded unknown densities
+changed. Exact profiles, traces and lineage are external. Software214 tests
+pass; isolation integrator matches a zero-edge version of the existing network.
+See `experiments/records/E040-posterior-excitability.json`.
+
+Repeat on reviewed E039 server seed2000 using the background diagnostic:
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_posterior_excitability_mbslnx2.sh
+```
+
+It pins that parent, uses four physical CPU cores, prints exact run/log paths,
+and runs main plus alternate-basin screens sequentially under nohup. Completion
+code0 means diagnostic finished, not oscillator or behavior success. Results
+include full per-cell metrics and source/checkpoint hashes. No server launch
+is claimed here. Confirm the actual trained parent before changing the model.

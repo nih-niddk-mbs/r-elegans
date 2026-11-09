@@ -1036,3 +1036,9 @@ middle amplitude remain above target in these checks. No new skill qualified.
 Next proposed diagnostic: posterior-cell autonomous oscillation feasibility
 within current bounds before extending unchanged fitting. No new run launched.
 Exact parsed results: `experiments/records/E039-server-20261109.json`.
+
+E040 local excitability audit found no isolated rhythms in5,396 bounded
+cell/profile/initial-state trials;full-network coupling supports only weak
+tail-projecting activity. No candidate promoted. Actual server-parent repeat:
+`sh scripts/launch_posterior_excitability_mbslnx2.sh` (nohup diagnostic, no training).
+See [current model](CURRENT_MODEL.md#posterior-excitability-diagnostic-e040-2026-11-09).

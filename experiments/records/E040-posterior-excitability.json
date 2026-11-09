@@ -1,0 +1,101 @@
+{
+  "experiment": "E040",
+  "evidence": "Executed local diagnostic on cached local E039 smoke lineage, not server E039 seed2000",
+  "status": "local_diagnostics_completed_server_confirmation_prepared",
+  "source_parent": "/private/tmp/r-elegans-E039-tail-pilot",
+  "parent_essential_sha256": {
+    "summary.json": "49c25f385154929e33ad00ac341f2911d2d4d3c8f2765f02d3ae99812c7d8455",
+    "fit_policy.json": "ef54d823cd53641ed851f8c492fe8693a2ddae19056d8227e357571c17e044f6",
+    "search_state.json": "7a151dbbe394c2ddbddfae652b5b0318feb05edc313cc57dc9413f7ce0445459",
+    "best.json": "7f4a243667e796decbf2aa68f26c9944ad920cc740544093e3d4e29df7814145",
+    "network_best.npz": "1ce277c4e5be0d28ef0324de8c55fea0e225167f16cf49d1a67e85e0da294815",
+    "allowed_parameters.npz": "85a726e144fbbf7fd00c104adc2ff6a3470a602f5527640f0d33bdce546e0a2c"
+  },
+  "original_anchor_sha256": "482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6",
+  "profiles_sha256": "6e48c06325d11fc4221e1f0d89847157af5e3c055422372eaabb3f47c3a29772",
+  "screen": {
+    "profiles": 19,
+    "cells": 71,
+    "total_cell_trials": 1349,
+    "rhythmic_cell_trials": 0,
+    "all_valid": true
+  },
+  "selected_profile": "inward_high_outward_low",
+  "selection_reason": "All screened sustained excursions zero; predefined strong-inward probe selected as a diagnostic, not a successful regime",
+  "robust_isolated_rhythmic_neurons": [],
+  "elapsed_seconds": 118.34760800001095,
+  "injected_current_pA": 0.0,
+  "connected": [
+    {
+      "case": "current-full",
+      "posterior_rhythmic_count": 3,
+      "posterior_rhythmic_neurons": [
+        "SMDVR",
+        "SMBVL",
+        "SIBVR"
+      ],
+      "maximum_posterior_sustained_p2p_mV": 0.2552337646484375,
+      "total_rhythmic_count": 18,
+      "locomotor_class_tail_projecting_cells": 39,
+      "maximum_locomotor_class_sustained_p2p_mV": 0.00345611572265625
+    },
+    {
+      "case": "current-posterior-subcircuit",
+      "posterior_rhythmic_count": 0,
+      "posterior_rhythmic_neurons": [],
+      "maximum_posterior_sustained_p2p_mV": 0.0,
+      "total_rhythmic_count": 0,
+      "locomotor_class_tail_projecting_cells": 39,
+      "maximum_locomotor_class_sustained_p2p_mV": 0.0
+    },
+    {
+      "case": "candidate-full",
+      "posterior_rhythmic_count": 1,
+      "posterior_rhythmic_neurons": [
+        "SMDVR"
+      ],
+      "maximum_posterior_sustained_p2p_mV": 0.056934356689453125,
+      "total_rhythmic_count": 18,
+      "locomotor_class_tail_projecting_cells": 39,
+      "maximum_locomotor_class_sustained_p2p_mV": 0.00298309326171875
+    }
+  ],
+  "verification": {
+    "targeted_tests": "5 passed in3.25s",
+    "full_suite": "214 passed in71.26s",
+    "shell_syntax": "passed"
+  },
+  "limitations": [
+    "Independent-cell oscillation is not necessary for emergent network rhythms.",
+    "Negative finite screen does not establish impossibility within bounds.",
+    "No body simulated;network candidate is not promoted to fitted inputs.",
+    "Subcircuit removes all connections to outside neurons;that is a diagnostic graph intervention.",
+    "Connected comparisons at0.1ms only;isolated selected regime has timestep and initial-voltage checks.",
+    "Confirmation amplitude/period agreement is reported for inspection, not certified by shared rhythm labels.",
+    "Initial-profile screen negative does not rule out an emergent oscillator under other recurrent connection settings.",
+    "No body/NMJ mechanics assay was performed;candidate not promoted.",
+    "12s screens and30s selected confirmation do not rule out very slow rhythms or other basins.",
+    "Cached local smoke parent differs from actual E039 server parent.",
+    "Posterior subcircuit here is defined by direct NMJ projections;it can omit interneurons needed for a complete recurrent oscillator."
+  ],
+  "alternate_initial_states": {
+    "initial_voltages_mV": [
+      -65,
+      -50,
+      -35
+    ],
+    "total_cell_trials": 4047,
+    "rhythmic_cell_trials": 0,
+    "elapsed_seconds": 107.714405332983,
+    "all_valid": true,
+    "source_summary_sha256": "5b2943f656ea5c2e24f08527fa3148102dc4b5faef0b17313f72e6414899cbf1"
+  },
+  "primary_isolated_cell_trials": 5396,
+  "interpretation": "No isolated sustained rhythms in finite bounded screen;current weak tail-projecting rhythms require connections outside selected subcircuit. Strong inward profile produces plateaus and fails to improve connected recruitment.",
+  "decision": "Do not promote diagnostic candidate or extend amplitude-only hill climb unchanged. Confirm on actual E039 server seed2000;then explore targeted recurrent oscillator recruitment or different density combinations rather than global inward gain.",
+  "archive": {
+    "location": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E040",
+    "files": 1190,
+    "manifest_sha256": "8280865b8af2950b997b4dd13a680c960f0262de8c0cd801a53e4d9f2739b1bc"
+  }
+}
