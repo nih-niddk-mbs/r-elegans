@@ -366,3 +366,8 @@ posterior amplitude primitive,seed7001. All five active checks pass;held voltage
 quiet. Preserve independent winner;whole-body amplitude,phase/heading/propulsion
 remain unassessed. Source path and missing raw verification recorded in
 `experiments/records/E043-server-20261110.json`. No new run launched.
+
+E044 next assessment(read-only):inspect MOT-16 winner7001 head/middle retention,
+full-body amplitude/refinement consistency and saved motion preview. Tail pass
+remains preserved;no new whole-body,coordination or locomotion skill is claimed
+until actual server evidence. No training launched.

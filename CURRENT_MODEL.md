@@ -1966,3 +1966,53 @@ Actual checkpoint/source hashes and raw artifacts have not been independently
 retrieved or backed up;no new inference asset bundled in Git. Existing demo/
 `autonomous_wiggle_v1` assets are unchanged. Parsed evidence:
 `experiments/records/E043-server-20261110.json`. No new training launched.
+
+## Read-only winner full-body assessment (E044, 2026-11-10)
+
+Prepared for E043 winner7001 from
+`autonomous-posterior-motor-20261110T140125786528Z`. This reads saved trajectories;
+no simulation,training,pacing or parameter/checkpoint edits. It verifies qualified
+parent metadata/checksums,records the actual winner hash,copies compact selected
+parameters/matching readout/reference metadata externally,and checks source hashes
+again after all six saved validation cases. This parameter reference on the same
+server is not an independent backup of raw traces or full recursive history.
+
+Report sustained per-joint and filtered muscle-drive amplitudes,regional medians
+[tail,middle,head],and each case's recorded body-wide qualification. Reapply the
+existing E037 full-body25% refinement tolerance across all three regions against
+best-training values plus quiet held-voltage control;passing all per-case regional
+targets alone does not establish this separate refinement check. Thresholds and
+training acceptance criteria unchanged. Additional descriptive outputs:shape
+PCA,spectral phase,equal-reference-joint-phase translation and shape-closure error.
+None automatically qualifies locomotion or biological behavior.
+
+Outputs external:report.json,artifact_manifest.json,parameter_reference/,six
+scientific trajectory.png figures,cycle samples,and motion.html. The HTML is
+standalone,default true-scale12-rod geometry,equal axes,tail/head labels,pause/
+scrub/speed controls. Right centered view can explicitly amplify deviations from
+late mean posture10/20x;left world view stays true scale. Preview capped600 frames
+of final5s,with subsampling noted;all metrics use full arrays. Stroke width is
+schematic,not physical anatomy. Position origin is preview-start center.
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/assess_winner_mbslnx2.sh
+```
+
+Launcher pins7001,uses four CPU cores under nohup,prints results/log/HTML/PNG
+paths. It checks the dedicated environment has matplotlib. The analysis imports
+no JAX/GPU backend;unchanged sustained detector was moved to a pure NumPy/SciPy
+module and re-exported at its old path. Source dynamics/qualification math intact.
+Completion code0 means analysis completed,not a new behavioral pass. Expected
+runtime is a few minutes depending on artifact I/O. User launches on server.
+
+Local pipeline tested using an explicitly allowed UNQUALIFIED cached E041 pilot,
+not7001;default rejects such a source. Actual winner head/middle/whole-body
+results remain pending until server report. Do not interpret local demo plots
+as the trained winner. Compact record:`experiments/records/E044-full-body-assessment.json`.
+
+E044 local verification complete:223 tests pass,all six pilot cases processed,
+source hashes unchanged,preview controls executed with a JavaScript DOM/canvas
+shim and local scientific PNG inspected. Actual7001 server assessment pending.
+Local unqualified pilot results are pipeline evidence only.

@@ -1,0 +1,95 @@
+{
+  "experiment": "E044",
+  "status": "local_pipeline_verified_actual_server_assessment_pending",
+  "server_parent": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z/seed-7001",
+  "server_command": "sh scripts/assess_winner_mbslnx2.sh",
+  "scope": "Read-only saved all-six-validation whole-body amplitudes,existingE037 refinement/control recheck,shape/translation diagnostics and previews;no new training/simulation",
+  "local_pipeline": {
+    "source_worker": "/private/tmp/r-elegans-E041-motor-pilot",
+    "source_passed": false,
+    "explicit_unqualified_override": true,
+    "checkpoint_sha256": "4cc72b2702f4c3b04f988e21df1b54d4d9d87c1814644e0df82506e0a1eeabd5",
+    "cases": 6,
+    "minimum_active_bends_tail_middle_head": [
+      2.905726432800293e-06,
+      0.0001538309152238071,
+      0.019284408539533615
+    ],
+    "full_body_checks": {
+      "existing_E037_criteria_reapplied": true,
+      "all_active_amplitude_checks_pass": false,
+      "reference_bends_tail_middle_head": [
+        3.3974647521972656e-06,
+        0.0001577812945470214,
+        0.019452184438705444
+      ],
+      "regional_refinement": {
+        "brain-refined": {
+          "relative_error_with_target_floor": [
+            0.00016391277313232422,
+            0.0007594935595989227,
+            0.006096724870424249
+          ],
+          "within_25_percent": true
+        },
+        "body-refined": {
+          "relative_error_with_target_floor": [
+            2.483526865641276e-06,
+            4.912726581096649e-05,
+            1.4746279724286701e-05
+          ],
+          "within_25_percent": true
+        }
+      },
+      "held_voltage_control_pass": true,
+      "full_body_amplitude_assay_pass": false
+    },
+    "source_essential_sha256": {
+      "summary.json": "93401ef2b06743ee6109fa6a7a9d0b2cad14c862ebae0664fd1e8d9dae1d6f4a",
+      "fit_policy.json": "19bbc7af6f86353c4f4ee2e0b78ec6799dbfebcf6f3e0bce5c0f2ccc6123ab54",
+      "search_state.json": "71c7e251ec122425dce70781c5194ba1a4d24f5b65a102a77683b3665d742119",
+      "best.json": "50c6419725401eb91d1071c5844e17de1c6ede99e63c673981b34573a4d9ccac",
+      "network_best.npz": "4cc72b2702f4c3b04f988e21df1b54d4d9d87c1814644e0df82506e0a1eeabd5",
+      "allowed_parameters.npz": "85a726e144fbbf7fd00c104adc2ff6a3470a602f5527640f0d33bdce546e0a2c"
+    },
+    "command": "MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.assess_full_body --worker /tmp/r-elegans-E041-motor-pilot --allow-unqualified --output-dir /tmp/r-elegans-E044-body-assessment-reviewed"
+  },
+  "verification": {
+    "targeted_tests": "16 passed in2.10s before added full-body gate test",
+    "final_full_suite": "223 passed in71.15s",
+    "javascript": {
+      "html_sha256": "b2b87475dd35deec7e97b62564f6c38eecb2ec7e7f011b118f29effbca655066",
+      "javascript_runtime": "macOS JavaScriptCore via osascript with DOM/canvas shim;not a browser screenshot",
+      "controls": {
+        "frames": 278,
+        "defaultTrueScale": true,
+        "amplificationLabel": "Centered shape is visually amplified 20\u00d7;world view remains true scale.",
+        "time": "15.128 s"
+      },
+      "default_unqualified_parent_rejected": true,
+      "assessment_imports_jax": false
+    },
+    "scientific_png": "Local pilot figure visually inspected;not winner",
+    "shell_syntax": "passed"
+  },
+  "detector_relocation": {
+    "changed_math": false,
+    "function_text_sha256": "49f361f6eeb373b4863c71b1f6cdb5939d719c90d4099acb162963229966116e",
+    "purpose": "Pure analysis imports without GPU/JAX initialization"
+  },
+  "limitations": [
+    "No parameters,simulation or acceptance criteria changed.",
+    "Tail-only qualification does not establish head/middle retention;reported separately.",
+    "Single-reference-joint equal phase does not prove whole-shape cycle closure.",
+    "Translation and spectral phase are descriptive,not locomotion qualification.",
+    "Preview is subsampled;metrics use all samples. Visual gain never alters world geometry.",
+    "Parameter-reference copy on same server is not an independent raw-lineage backup.",
+    "Actual7001 source files not available locally;all local outputs concern unqualified pilot.",
+    "Source raw local pilot remains archived in external E041/motor-pilot;new reference copy not full lineage."
+  ],
+  "archive": {
+    "location": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044",
+    "files": 264,
+    "manifest_sha256": "9f561d5b9dde708787063740ade5dea152bc57ad4d09d8260252516b915adeb9"
+  }
+}

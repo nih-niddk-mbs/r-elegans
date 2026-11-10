@@ -3130,3 +3130,89 @@ or independent server verification. Local archive copy completed;cloud sync
 unverified. Winner remains server-only;no checkpoint hash fabricated. Docs
 register MOT-16 autonomous posterior amplitude evidence,explicitly scoped to
 these assays. Results-only update,no training/implementation changes.
+
+## 2026-11-10 — E044 planned read-only full-body assessment of E043 winner
+
+User authorized proceeding after tail qualification. Parent pinned to
+`autonomous-posterior-motor-20261110T140125786528Z/seed-7001` on mbslnx2.
+No training,simulation,external drive,parameter changes or checkpoint overwrite.
+Question:are head,middle and tail amplitudes all sufficient in this same
+checkpoint,and what shape/translation does its saved motion actually show?
+
+Read all six saved validation trajectories,verify completed qualified worker
+and parent hashes via read_warm_start. Recompute sustained per-joint and filtered
+muscle-drive amplitudes using unchanged E037 detector,regional medians [tail,
+middle,head],compare with recorded values. Report recorded body-wide amplitude
+qualification separately from tail pass. Reuse existing shape PCA,spectral lag,
+same-reference-joint-phase translation analysis;no automatic locomotion claim.
+Verify quiet control remains distinct from active qualification. Explicit SI
+body length0.001m matches current twelve-rod liquid assay.
+
+Create external JSON hashes/report,scientific PNG figures and self-contained
+HTML motion preview of final5s. Render exact12-segment geometry with equal axis
+scale,tail/head labels;true-scale world view plus centered shape view. Optional
+oscillatory-deviation gain explicitly labeled visual-only,default1x;do not
+silently exaggerate movement. Preview subsampling labeled;full metrics use all
+samples. Compact parameter-reference copy outside Git verifies selected model
+and matching frozen parent;it is not an independent raw-lineage backup.
+
+Source remains untouched;output manifest and source/environment captured.
+Criterion is measurement/reporting integrity,not inventing new behavioral
+acceptance. Rendered motion/position alone does not prove propulsion,closed
+shape cycles or animal fidelity. Do not assume head/middle retention.
+
+Local verification on cached UNQUALIFIED E041 pilot via explicit override:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m scripts.assess_full_body --worker /tmp/r-elegans-E041-motor-pilot --allow-unqualified --output-dir /tmp/r-elegans-E044-body-assessment`
+Test region handling,static-vs-repeated excursions and geometry against existing
+mechanics. Actual7001 files unavailable locally;server assessment stays
+user-launched after push. Preserve statuses as pending until real output arrives.
+
+E044 scope clarification before final assessment execution:tail training only
+requires tail refinement agreement. To assess full-body readiness,also reapply
+existing E037 regional25% refinement tolerance to head/middle/tail against the
+recorded best-training amplitudes,plus the quiet held-voltage control. Report
+this separately from each case's stored body_amplitude_qualified flag;all cases
+above target alone do not certify the missing regional refinement comparison.
+No training acceptance criterion changed. Pure analysis import initially pulled
+JAX via brain package initialization;move the detector unchanged to a top-level
+NumPy/SciPy module and re-export from original location. Function text SHA256
+49f361f6eeb373b4863c71b1f6cdb5939d719c90d4099acb162963229966116e
+is byte-identical. This avoids GPU-plugin initialization in read-only assessment.
+
+E044 LOCAL assessment executed on explicit unqualified E041 pilot override,
+all six cases completed;reference copies and source-checksum stability verified.
+Default qualified-parent guard rejects the pilot before creating output. Local
+minimum active region medians [2.90573e-6,0.000153831,0.0192844]rad;full-body
+assay recheckfalse,expected. These measurements are NOT7001 results. Actual
+winner head/middle retention and motion remain server-assessment pending.
+
+Final local command/output:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -u -m scripts.assess_full_body --worker /tmp/r-elegans-E041-motor-pilot --allow-unqualified --output-dir /tmp/r-elegans-E044-body-assessment-reviewed`
+stdout`/tmp/r-elegans-E044-body-assessment-reviewed.log`,exit0. Original pilot
+raw inputs already archived under external E041/motor-pilot;new outputs hash
+references instead of duplicating all raw traces. Parameter-reference copies
+include winner/readout/original anchor and metadata,not an independent full
+raw-lineage backup. No scientific model/qualification math changed.
+
+Verification:final suite223 passed71.15s. Tests cover region ordering/repeated
+amplitudes,static/ramp rejection,rod lengths/centering/world transformation against
+existing mechanics,true-scale defaults/frame cap,HTML labeling,self-contained
+preview,import without JAX,and full-body regional refinement/quiet-control gates.
+Pure-analysis import no longer initializes JAX. Detector function moved intact,
+old import path re-exported. Scientific PNG visually inspected for the LOCAL
+pilot. Actual preview JavaScript executed via macOS JavaScriptCore with mocked
+DOM/canvas:finite coordinates,playback/scrub and20x visual gain labeling verified;
+278 frames in local5s preview. This is not a browser screenshot or actual7001
+preview. Output HTML hash matches the version exercised by the control check.
+Launcher POSIX shell syntax passes;server parent preflight remains pending.
+
+Raw local reports/PNGs/HTML,parameter references,source/environment,logs and
+preview verification archived externally at
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044` (264 files),manifest
+SHA2569f561d5b9dde708787063740ade5dea152bc57ad4d09d8260252516b915adeb9.
+Local copy completed;cloud sync unverified. Compact record
+`experiments/records/E044-full-body-assessment.json`. No actual server artifact
+backup or winner assessment claimed. Decision:push read-only nohup launcher
+pinned to7001;user runs and returns compact regional/shape reports,then select
+next training stage from the measured body-wide result. Preserve qualified tail
+primitive regardless of later coverage work.

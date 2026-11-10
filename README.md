@@ -1098,3 +1098,8 @@ superseding the8-hour preparation and intervening4-hour request. Same launcher,
 6002x3+6003x1 parents,seeds7000–7003,20s fit/300s long validation,original bounds
 and zero drive. Eight-hour source preserved in commit`30ff375`. No E043 server
 launch confirmed;editing launcher does not change an existing process.
+
+Read-only full-body assessment of winner7001(E044) is prepared:
+`sh scripts/assess_winner_mbslnx2.sh`. It prints region amplitudes and exports
+scientific PNGs plus a standalone interactive motion.html preview. No training
+or checkpoint changes;actual server assessment results remain pending.
