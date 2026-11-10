@@ -1,0 +1,141 @@
+{
+  "experiment": "E044",
+  "status": "completed_user_reported_full_body_amplitude_pass",
+  "evidence": "Direct user console JSON manually transcribed;no independently retrieved original arrays/figures",
+  "transcription_sha256": "da0596e5147551306e0f95e42c4ce0cc40336daff2f8bb1de2e1bbbfb28816c8",
+  "assessment_exit_code": 0,
+  "source_worker": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z/seed-7001",
+  "cases": [
+    {
+      "case": "long",
+      "bends_tail_middle_head": [
+        0.0030376985669136047,
+        0.03338550962507725,
+        0.011059947311878204
+      ],
+      "filtered_drive_tail_middle_head": [
+        0.0036701951175928116,
+        0.0402614064514637,
+        0.01334451138973236
+      ],
+      "all_three_amplitude_targets_met": true,
+      "recorded_full_body_amplitude_qualified": true,
+      "strongest_joint": 7,
+      "shape_pc1_fraction": 0.9989816895553053,
+      "equal_phase_speed_BL_s": -9.98796994328498e-06
+    },
+    {
+      "case": "perturb-plus",
+      "bends_tail_middle_head": [
+        0.0030373018234968185,
+        0.03337425459176302,
+        0.011056117713451385
+      ],
+      "filtered_drive_tail_middle_head": [
+        0.00366978719830513,
+        0.04024546593427658,
+        0.01333896815776825
+      ],
+      "all_three_amplitude_targets_met": true,
+      "recorded_full_body_amplitude_qualified": true,
+      "strongest_joint": 7,
+      "shape_pc1_fraction": 0.9989719573904038,
+      "equal_phase_speed_BL_s": -9.99413699194781e-06
+    },
+    {
+      "case": "perturb-minus",
+      "bends_tail_middle_head": [
+        0.0030372291803359985,
+        0.03337460197508335,
+        0.01105625182390213
+      ],
+      "filtered_drive_tail_middle_head": [
+        0.0036698076874017715,
+        0.04024632181972265,
+        0.01333935558795929
+      ],
+      "all_three_amplitude_targets_met": true,
+      "recorded_full_body_amplitude_qualified": true,
+      "strongest_joint": 7,
+      "shape_pc1_fraction": 0.9989719427071242,
+      "equal_phase_speed_BL_s": -9.993866867430037e-06
+    },
+    {
+      "case": "brain-refined",
+      "bends_tail_middle_head": [
+        0.003032604232430458,
+        0.033316426910459995,
+        0.011035449802875519
+      ],
+      "filtered_drive_tail_middle_head": [
+        0.003664221614599228,
+        0.04018107149749994,
+        0.013315513730049133
+      ],
+      "all_three_amplitude_targets_met": true,
+      "recorded_full_body_amplitude_qualified": true,
+      "strongest_joint": 7,
+      "shape_pc1_fraction": 0.9989985194238631,
+      "equal_phase_speed_BL_s": -9.91727023684367e-06
+    },
+    {
+      "case": "body-refined",
+      "bends_tail_middle_head": [
+        0.0030393190681934357,
+        0.03339471202343702,
+        0.011063292622566223
+      ],
+      "filtered_drive_tail_middle_head": [
+        0.0036697741597890854,
+        0.040247151628136635,
+        0.01333954930305481
+      ],
+      "all_three_amplitude_targets_met": true,
+      "recorded_full_body_amplitude_qualified": true,
+      "strongest_joint": 7,
+      "shape_pc1_fraction": 0.9989717996368623,
+      "equal_phase_speed_BL_s": -8.905461319293323e-06
+    },
+    {
+      "case": "held-voltage",
+      "bends_tail_middle_head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "filtered_drive_tail_middle_head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "all_three_amplitude_targets_met": false,
+      "recorded_full_body_amplitude_qualified": false,
+      "strongest_joint": 0,
+      "shape_pc1_fraction": 0.0,
+      "equal_phase_speed_BL_s": null
+    }
+  ],
+  "summary": {
+    "checkpoint_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+    "full_body_amplitude_assay_pass": true,
+    "all_active_full_body_amplitude_qualified": true,
+    "minimum_active_bends_tail_middle_head": [
+      0.003032604232430458,
+      0.033316426910459995,
+      0.011035449802875519
+    ],
+    "report": "/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519/report.json",
+    "motion_preview": "/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519/motion.html",
+    "figure": "/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519/long/trajectory.png"
+  },
+  "qualified_skill": "MOT-17 autonomous distributed bend-amplitude prerequisite",
+  "interpretation": "All3 regions meet amplitude target in5 active cases;existingE037 regional refinement and quiet-control recheck reports pass. Dominant single shape mode(~99.9%) and tiny negative same-phase drift do not establish traveling-wave coordination or useful propulsion.",
+  "decision": "Preserve qualified7001;inspect/export saved preview and full report. Next proposed curriculum:gradual spatial phase progression with amplitude retention,zero external drive. No training launched.",
+  "limitations": [
+    "Regional medians do not require every joint or muscle to meet0.003",
+    "PCA dominance alone does not prove standing-wave topology or rule out weak phase progression",
+    "Single-reference-joint equal-phase position lacks whole-shape closure proof",
+    "Preview/PNG not independently viewed;actual checkpoint/report files remain on server",
+    "Full-body amplitude evidence is an existing-criteria recheck,not natural behavior or locomotion qualification"
+  ]
+}

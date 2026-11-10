@@ -1574,3 +1574,27 @@ E044 local verification complete:223 tests pass,all six pilot cases processed,
 source hashes unchanged,preview controls executed with a JavaScript DOM/canvas
 shim and local scientific PNG inspected. Actual7001 server assessment pending.
 Local unqualified pilot results are pipeline evidence only.
+
+## Qualified autonomous distributed amplitude (E044, 2026-11-10)
+
+Server assessment of winner7001 reports full_body_amplitude_assay_passTrue.
+All five active cases exceed the0.003rad regional bend target and pass stored
+full-body checks;existing E037 regional refinement and quiet-control recheck
+also passes. Minimum[tail,middle,head]medians:[0.00303260,0.03331643,0.01103545]rad.
+Held-voltage excursions zero. Register MOT-17 on the same preserved7001
+checkpoint;head/middle amplitude retained within tested conditions. These are
+regional medians,not a guarantee for every joint or muscle.
+
+PC1 explains~99.9% of shape variance;near-single-mode dynamics suggest phase
+coordination is the next issue,but PCA alone does not establish propagation.
+Reported same-reference-phase drift~−1e-5BL/s does not qualify useful propulsion;
+full-shape closure is not in pasted output. No coordinated traveling-wave,
+locomotion,command control or animal-fidelity claim. No new training/model edits.
+
+Actual motion.html,long/trajectory.png and full report remain at
+`/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519`.
+Only user-console results have been received;actual figures/reference files
+not independently downloaded/viewed. Next inspect/export that bundle before
+fitting gradual phase progression with amplitude retention. Source checkpoint
+hash remains417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14.
+Exact parsed report:`experiments/records/E044-server-20261110.json`.

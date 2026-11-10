@@ -67,6 +67,7 @@ categories. No numeric biological parameter ranges are assumed without data.
 | MOT-14 | Swimming execution profile; viscosity, amplitude, frequency | Reference-matched liquid waveform, propulsion and turning | Extension/calibration: SI liquid factory exists; active gait remains uncalibrated; MOV-08 |
 | MOT-15 | Load/gait adaptation; medium/load context | Appropriate waveform and propulsion across tested mechanical loads | Candidate after medium-specific skill calibration; MOV-09 |
 | MOT-16 | Autonomous posterior oscillatory bending;fixed fitted parameters | Tail median sustained bend>=0.003rad AND net-muscle excursion>=0.003,perturbation/refinement and quiet held-voltage checks | Autonomous amplitude evidence,user-reported E043 seed7001 passes all checks;server-only checkpoint,independent artifact retrieval pending;synthetic precursor to MOV-01/08,not locomotion |
+| MOT-17 | Autonomous distributed oscillatory bending;fixed fitted parameters | Tail/middle/head regional median sustained bends>=0.003rad,all active checks,regional refinement and quiet held-voltage control | Autonomous amplitude evidence,user-reported E044 recheck passes on same7001 checkpoint;no spatial phase/propulsion criterion;synthetic prerequisite to MOV-01/08 |
 
 MOT-01/02 are useful identification tasks, not additional claims of natural
 behavior categories. MOT-13/14 are medium-conditioned variants of the movement
@@ -376,3 +377,9 @@ E044 server launch reported(2026-11-10):preflight validates MOT-16 winner7001
 SHA256`417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14`.
 Actual source files remain server-only;full-body assessment completion/results
 pending. See`experiments/records/E044-server-launch-20261110.json`.
+
+E044 completed by server report(2026-11-10):MOT-17 distributed amplitude
+qualifies on preserved7001;minimum regional medians[0.00303260,0.03331643,
+0.01103545]rad. Near-single-mode shape(~99.9% PC1) and tiny reported drift do
+not qualify a traveling wave or locomotion. Inspect actual preview/full report
+before proposing phase coordination;no new training launched.

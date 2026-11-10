@@ -3238,3 +3238,57 @@ Reported launch metadata archived externally at
 2d9b32657becf5d6ebdbd8cd482735c18d8e0d5016e87c2adbae0289fcb38c18.
 Local copy completed;cloud sync unverified. This archives metadata only,not
 actual assessment outputs or winner checkpoint bytes.
+
+## 2026-11-10 — E044 server full-body amplitude recheck passes
+
+User reports exact E044 assessment log completed with
+FULL_BODY_ASSESSMENT_EXIT_CODE=0 and full_body_amplitude_assay_passTrue.
+Checkpoint SHA256 matches registered7001:
+417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14.
+Input/output references unchanged from launch. Parsed direct-console JSON
+transcription in`experiments/records/E044-server-20261110.json`;not independently
+downloaded/recomputed from original raw artifacts.
+
+All five active cases pass stored full-body amplitude checks and all three
+regional targets. Reapplied E037 regional refinement/quiet-control aggregate
+reports pass. Minimum active sustained median bends[tail,middle,head]rad:
+[0.00303260423,0.03331642691,0.01103544980]. Long validation:
+[0.00303769857,0.03338550963,0.01105994731]. Long filtered-drive medians:
+[0.00367019512,0.04026140645,0.01334451139]. Held-voltage all excursions0;
+active qualificationFalse in that control is expected. Regional medians do not
+require every single joint/muscle to exceed the threshold.
+
+Register MOT-17 autonomous distributed bend-amplitude prerequisite on the SAME
+7001 checkpoint,alongside MOT-16. Head/middle activity survived tail training
+within the reported assay windows and existing regional refinement limits.
+This is amplitude evidence,not command-conditioned control,animal fidelity or
+propulsion. No new fitting/simulation or parameter change.
+
+Shape PC1 explains99.898% of long-window bend variance;other active checks
+~99.897–99.900%. This indicates near-one-dimensional shape variation and
+suggests limited independent phase structure. It does not alone prove a standing
+wave or exclude small traveling components. Strongest joint7 in all active
+cases. Equal-reference-joint-phase speed is about-1e-5body-lengths/s,negative
+and tiny;body-refined-8.90546e-6 vs long-9.98797e-6. Full-shape closure and
+phase profiles are not pasted,so no coordinated wave or useful forward/backward
+locomotion qualification follows. Avoid interpreting any centroid drift as a
+trained behavior.
+
+Preview/PNG/full report exist on server;actual images and parameter-reference
+bytes not independently fetched/viewed. Existing local E044 images are only
+unqualified pipeline tests,not7001. Next:preserve/download assessment bundle
+(includes compact parameter reference with hashes) to external Mac OneDrive,
+inspect actual preview and phase/shape evidence,then propose gradual spatial
+phase coordination while retaining amplitude and zero drive. No phase fitting
+or new training launched in this results-recording turn. Complete server raw
+lineage remains separately retained;compact reference is not that full backup.
+
+Reported console JSON transcription and parsed compact summary archived externally
+at`notebook/evidence/E044/server-report-20261110`;manifest SHA256
+ ae69f9400011913c1bf3563f73cfc81c698b4f7fe2942c86eb7b558256207612.
+This is reported evidence only,not actual preview/report/checkpoint-byte download.
+Local copy completed;cloud sync unverified. To complete visual inspection and
+retain an independent compact parameter reference,user can SCP the assessment
+folder from a Mac Terminal to external OneDrive E044 directory. Agent cannot
+supply the user's interactive SSH password;standing workflow is user-run transfer,
+never password sharing. No additional login setup or training requested here.

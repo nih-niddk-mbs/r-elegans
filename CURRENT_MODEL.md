@@ -7,10 +7,10 @@ and demonstrated behavior are distinguished.
 
 ## Executive summary
 
-**Latest autonomous milestone,2026-11-10:**E043 seed7001 passes posterior
-motor/muscle/bend amplitude validation with zero external drive. This is a
-server-only,user-reported checkpoint;coordinated locomotion remains undemonstrated.
-See [qualified tail primitive](#qualified-autonomous-tail-amplitude-primitive-e043-2026-11-10).
+**Latest autonomous milestone,2026-11-10:**winner7001 now passes both tail
+motor/muscle/bend and distributed head/middle/tail amplitude checks (E043/E044),
+with zero external drive. Server-reported checkpoint;coordinated locomotion
+remains undemonstrated. See [distributed amplitude evidence](#qualified-autonomous-distributed-amplitude-e044-2026-11-10).
 
 **Training strategy update, 2026-11-06:** prioritize coverage of independent
 [motor skills](SKILL_REPERTOIRE.md), preserving separate full-network policies
@@ -2022,3 +2022,27 @@ SHA256`417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14`.
 Output`full-body-assessment-20261110T174954Z-687519`,PID687526,CPUs0–3.
 Completion and full-body results not yet reported. No model changes. Exact
 paths:`experiments/records/E044-server-launch-20261110.json`.
+
+## Qualified autonomous distributed amplitude (E044, 2026-11-10)
+
+Server assessment of winner7001 reports full_body_amplitude_assay_passTrue.
+All five active cases exceed the0.003rad regional bend target and pass stored
+full-body checks;existing E037 regional refinement and quiet-control recheck
+also passes. Minimum[tail,middle,head]medians:[0.00303260,0.03331643,0.01103545]rad.
+Held-voltage excursions zero. Register MOT-17 on the same preserved7001
+checkpoint;head/middle amplitude retained within tested conditions. These are
+regional medians,not a guarantee for every joint or muscle.
+
+PC1 explains~99.9% of shape variance;near-single-mode dynamics suggest phase
+coordination is the next issue,but PCA alone does not establish propagation.
+Reported same-reference-phase drift~−1e-5BL/s does not qualify useful propulsion;
+full-shape closure is not in pasted output. No coordinated traveling-wave,
+locomotion,command control or animal-fidelity claim. No new training/model edits.
+
+Actual motion.html,long/trajectory.png and full report remain at
+`/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519`.
+Only user-console results have been received;actual figures/reference files
+not independently downloaded/viewed. Next inspect/export that bundle before
+fitting gradual phase progression with amplitude retention. Source checkpoint
+hash remains417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14.
+Exact parsed report:`experiments/records/E044-server-20261110.json`.

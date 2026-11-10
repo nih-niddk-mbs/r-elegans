@@ -3,10 +3,11 @@
 `r-elegans` is an experimental JAX-native foundation for a differentiable,
 connectome-constrained *C. elegans* simulator.
 
-**Latest autonomous milestone (2026-11-10):**server seed7001 passed the
-posterior muscle-and-bending amplitude assay with zero external drive. This
-checkpoint remains on mbslnx2;the bundled demo is unchanged. Coordinated
-locomotion remains undemonstrated. See [evidence and scope](CURRENT_MODEL.md#qualified-autonomous-tail-amplitude-primitive-e043-2026-11-10).
+**Latest autonomous milestone (2026-11-10):**server winner7001 passes both
+tail motor/muscle/bend and full-body regional amplitude checks with zero external
+drive. Tail,middle and head all meet the defined target. The checkpoint remains
+on mbslnx2;bundled demo unchanged. Coordinated locomotion remains undemonstrated.
+See [evidence and scope](CURRENT_MODEL.md#qualified-autonomous-distributed-amplitude-e044-2026-11-10).
 
 ## Run the bundled model
 
