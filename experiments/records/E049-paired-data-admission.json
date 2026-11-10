@@ -1,0 +1,73 @@
+{
+  "experiment": "E049",
+  "status": "locally_executed_data_preparation_not_model_fit",
+  "source_record": "https://zenodo.org/records/19388374",
+  "source_doi": "10.5281/zenodo.19388374",
+  "source_version": "v4",
+  "metadata_revision": "0422546192ef58d0de4740a0aa91fd38de22da2e",
+  "upstream_revisions": {
+    "AtanasKim-Cell2023": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+    "ANTSUNDataJLD2.jl": "7ccbcd92caaf74e2d04b5a7f5966a8a70dec4876",
+    "WormWideWebData.jl": "da73782cb00510a54f47f09199eedb49da1ca9f7"
+  },
+  "archive_checksums": {
+    "processed_h5.tar.bz2": {
+      "md5": "4689839382dd8855e3d6f64aadf89403",
+      "sha256": "c93e0cea3941b9e72bd7f09a36d7d26c8c5eca0e26fc2694dac739bbfa51c3c8"
+    },
+    "neuropal_label.json.bz2": {
+      "md5": "1b8b0edf02badd6d8d028e2f6c30d24d",
+      "sha256": "b371e3dae9a0f78c6f6b9ba63c7076a55aa8fccecb650f579f53918d10402684"
+    }
+  },
+  "manifest_sha256": "36456db8732bebc18f328d91bd7b07035e0a31218c5afdfd0cc92aca1dc72780",
+  "split_sha256": "85e11be2d695a37974496e4b8b16031f0399cd544f98d717b5461bab7cbbe85b",
+  "metadata_sha256": "2376e4d5a6a45e35393689ea573f64da0cd5d8e0423ab5a75c1649b0949ecbba",
+  "inventory": {
+    "recordings_verified": 68,
+    "baseline_identified_prepared": 21,
+    "quarantined": 47,
+    "folds": {
+      "train": 17,
+      "validation": 2,
+      "test": 2
+    },
+    "frames": 33630,
+    "unique_canonical_neurons": 130,
+    "neuron_recording_observations": 1285,
+    "named_neurons_per_recording": [
+      25,
+      86
+    ]
+  },
+  "protocol": {
+    "source": "https://doi.org/10.1016/j.cell.2023.07.035",
+    "evidence": "Published experimental model, transgenic animals, mounting and recording, neural trace extraction methods",
+    "age_sex": "One-day-old adult hermaphrodites",
+    "strain": "NeuroPAL/GCaMP cohort SWF702 per paper; UID metadata specifies neuropal, not independent per-UID genotype confirmation",
+    "reporter": "Nuclear GCaMP7f with reference fluorescence; SWF702 flvIs17 and otIs670",
+    "medium": "2% NGM agar pad with OP50 in M9 mounting buffer, coverslip with 80 micrometer bead spacers",
+    "mounting_buffer": "1 mL OP50 culture pelleted and resuspended in 40 uL M9; 9.5 uL applied",
+    "settling_time_minutes": 5,
+    "recording_temperature_C": null,
+    "not_equivalent_to": [
+      "Unconfined water",
+      "Previously implemented 1.7% wet-agar mechanical calibration"
+    ],
+    "preprocessing": "Publisher background correction, ROI interpolation, activity/reference division and bleaching correction; no original missing-ROI mask in released HDF5"
+  },
+  "limitations": [
+    "Published cohort/mounting protocol recorded; exact per-UID genotype and recording temperature missing; coverslip/2% agar contact mechanics not calibrated",
+    "Verify reuse license separately; downloaded publisher metadata does not specify it",
+    "Publisher uses within-record interpolation and full-record bleach estimation; finite masks do not identify these imputed samples; no added cross-fold normalization",
+    "No full-body arclength/orientation conversion to model joints; source angles retained only",
+    "No calibrated calcium indicator likelihood or training-only normalization fitted",
+    "Nonidentity ROI index spaces quarantined until verified",
+    "Date-group folds do not establish animal-level independence; not a prospectively unseen dataset"
+  ],
+  "external_artifacts": "processed/calcium/paired_E049_v1 under external R_ELEGANS_DATA_DIR",
+  "raw_extraction": "raw/calcium/atanas_kim_2023/processed_h5_E049",
+  "prior_exposure": "2022-06-14 date forced train; not claimed prospectively unseen",
+  "fit_parameters_changed": false,
+  "tests": "3 data-admission regression tests passed; full-suite result recorded in notebook"
+}

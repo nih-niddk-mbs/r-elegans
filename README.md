@@ -10,6 +10,11 @@ then test held-out animals and experiments. The initial
 and missing capabilities; this is not yet an achieved biological model or a
 completed joint-data trainer. Training remains incremental.
 
+Paired neural/behavior data preparation now includes 21 identified baseline
+recordings with frozen date-group holdouts. Data remain external; joint fitting
+is pending observation and experimental-condition mappings. See
+[E049](experiments/records/E049-paired-data-admission.json).
+
 **Latest autonomous milestone (2026-11-10):**server winner7001 passes both
 tail motor/muscle/bend and full-body regional amplitude checks with zero external
 drive. Tail,middle and head all meet the defined target. Selected parameters and the assessment are now hash-verified in external Mac

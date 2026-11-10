@@ -1,0 +1,16 @@
+{
+  "source": "https://doi.org/10.1016/j.cell.2023.07.035",
+  "evidence": "Published experimental model, transgenic animals, mounting and recording, neural trace extraction methods",
+  "age_sex": "One-day-old adult hermaphrodites",
+  "strain": "NeuroPAL/GCaMP cohort SWF702 per paper; UID metadata specifies neuropal, not independent per-UID genotype confirmation",
+  "reporter": "Nuclear GCaMP7f with reference fluorescence; SWF702 flvIs17 and otIs670",
+  "medium": "2% NGM agar pad with OP50 in M9 mounting buffer, coverslip with 80 micrometer bead spacers",
+  "mounting_buffer": "1 mL OP50 culture pelleted and resuspended in 40 uL M9; 9.5 uL applied",
+  "settling_time_minutes": 5,
+  "recording_temperature_C": null,
+  "not_equivalent_to": [
+    "Unconfined water",
+    "Previously implemented 1.7% wet-agar mechanical calibration"
+  ],
+  "preprocessing": "Publisher background correction, ROI interpolation, activity/reference division and bleaching correction; no original missing-ROI mask in released HDF5"
+}

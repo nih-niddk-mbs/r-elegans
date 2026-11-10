@@ -100,7 +100,7 @@
     {
       "id": "paired_calcium_and_behavior",
       "use": "joint neural observation and motor/behavior prediction",
-      "local_source_status": "One extracted paired candidate inspected;archive present but not fully inventoried",
+      "local_source_status": "E049 verified all 68 HDF5 hashes; 21 identified baseline recordings prepared externally",
       "candidate": {
         "relative_path": "raw/calcium/atanas_kim_2023/2022-06-14-01-data.h5",
         "sha256": "aabca135ef82e4be6821bf515cd2e936ae2f78014bf2979ed8a10aeaa7c4ac11",
@@ -159,17 +159,30 @@
       },
       "existing_tools": [
         "r_elegans/data/calcium.py",
-        "scripts/fit_calcium_network.py"
+        "scripts/fit_calcium_network.py",
+        "r_elegans/data/paired_recordings.py",
+        "scripts/prepare_paired_recordings.py"
       ],
       "joint_loss_implemented": false,
       "conditions_units_alignment_admitted": false,
-      "splits_frozen": false,
+      "splits_frozen": true,
       "limitations": [
         "109 trace channels are not109 verified neuron identities",
         "55 unique confidence>=4 canonical labels are metadata candidates,not final quality-passed traces",
         "Body-angle arrays do not map automatically onto the11 simulated joints",
-        "Recorded pumping is unsupported by the95 body-wall-muscle model"
-      ]
+        "Recorded pumping is unsupported by the95 body-wall-muscle model",
+        "Paper cohort uses 2% agar, food-containing M9 and bead-spaced coverslip; current mechanics are not calibrated to that mounting",
+        "No absolute calcium/voltage calibration; publisher preprocessing includes interpolation and bleach estimation",
+        "Temperature and per-UID genotype not independently specified; see E049 record for remaining admission items"
+      ],
+      "split_scope": "Date groups, not verified animal independence; 17 train/2 validation/2 test; previously fitted date forced train",
+      "preparation_record": "experiments/records/E049-paired-data-admission.json",
+      "prepared_unique_named_neurons": 130,
+      "prepared_named_neurons_per_recording": [
+        25,
+        86
+      ],
+      "prepared_frames": 33630
     },
     {
       "id": "sensory_transduction",
@@ -233,14 +246,14 @@
     }
   ],
   "next_work": [
-    "Admit paired neural/behavior recordings with verified units,identities,conditions and spatial/time alignment",
-    "Inventory remaining archive recordings and freeze animal/trial holdouts before fitting",
+    "Verify source body-angle arclength/orientation mapping and build an explicit calcium observation model",
+    "Calibrate or bound the mounted 2% agar/coverslip experimental medium before joint embodied fitting",
     "Build shared-model losses and per-family reports using observation models and conservative fit constraints",
     "Train incrementally with retained prior constraints,then test held-out perturbations without per-test refitting"
   ],
   "not_performed": [
     "No new model optimization",
-    "No new dataset downloaded",
+    "No additional recording archives downloaded; publisher metadata and methods fetched",
     "No complete literature/data census",
     "No independent mutant phenotype replication"
   ]

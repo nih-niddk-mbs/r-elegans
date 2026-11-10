@@ -1,5 +1,19 @@
 # Current model: exact scope and computation path
 
+Paired-data preparation (E049, 2026-11-10): all 68 released HDF5 files now
+match the publisher metadata hashes. The 21 identified baseline recordings are
+prepared outside Git, with fixed date-group splits (17 train / 2 validation /
+2 test), source timestamps, segment boundaries, confidence-filtered identities
+and finite-value masks. Their union covers 130 named neurons; coverage is
+25–86 per recording. Previously fitted June 14 recordings remain training data.
+These are author-processed fluorescence ratios, not measured voltage. The paper
+uses food-containing buffer on 2% NGM agar under a bead-spaced coverslip; our
+water and 1.7% wet-agar models are not calibrated to that mounting. Joint fitting
+still requires a spatial observation mapping, calcium likelihood and explicit
+condition handling. No model parameters changed. See the
+[E049 admission record](experiments/records/E049-paired-data-admission.json).
+
+
 This document describes what the repository executes today. It distinguishes
 anatomical data, implemented equations, fitted surrogate controllers, and the
 full recurrent training path so anatomical availability, trainable models,

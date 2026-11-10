@@ -3970,3 +3970,103 @@ copied into Git. Local archive verified;cloud synchronization unverified.
 Structured JSON and whitespace checks pass;no runtime code changed or software
 test rerun. No joint trainer,optimization run or comprehensive data census is
 claimed by this documented objective and source-readiness audit.
+
+## 2026-11-10 — Planned E049 paired neural/behavior data admission
+
+User authorizes preparing the paired recordings for joint fitting. Scope:verify
+source archive/labels against publisher checksums,inventory unscrumbled original
+HDF5 members,inspect authoritative extraction/processing code and cohort CSV,
+resolve units/timing/DV/segment conventions,produce an external processed dataset
+and an immutable group split with explicit prior-exposure exclusions. Preserve
+all raw data. No model fitting,weight change or behavior qualification in this
+preparation stage. Reference model remains adult hermaphrodite,11-joint planar
+body with E048 input mechanisms;do not force62 source angles into11 joints until
+their meaning and ordering are established.
+
+Local source header review already shows no HDF5 unit attributes. Publisher
+Zenodo metadata points to the Atanas/Kim Cell2023 analysis/source repositories
+and WormWideWeb metadata CSV. It explicitly requires per-dataset
+head-angle DV correction,so file names or array shapes alone cannot establish
+orientation. Metadata label keys use Julia one-based ROI numbering. Need to
+inspect actual upstream writer for array and index conventions,including
+potential ROI skipping and signal variants before admitting neural labels.
+
+Planned admission criteria:publisher checksum agreement,member path safety,
+strict finite/monotonic seconds timebase,clear resampling lineage,physical unit
+and DV evidence,unique high-confidence canonical identities,per-signal missing
+masks and documented exclusions. Preserve unidentifiable channels as excluded,
+not guessed. Fix animal/trial groups independently of model residuals;the
+previously explored2022-06-14-01 must not become a blind test animal. Prior
+metadata-only inspection of other files is different from fitting them;track
+actual exposure and avoid claiming a never-viewed or prospective test set.
+Use published shared provenance/group IDs to avoid same-animal leakage. If a
+metadata field cannot be established,mark the affected target ineligible rather
+than inventing a conversion. Raw/derived files stay under external OneDrive;
+commit only code,small schemas/manifests and notebook summaries. Capture exact
+commands/source/environment and all original checksums. Freeze rules before
+looking at model/data residuals. Numeric acceptance derives from source schema,
+not arbitrary thresholds selected to improve model fit.
+
+E049 local outcome (2026-11-10): verified the original (not scrambled) archive
+and label file against publisher MD5, then all 68 HDF5 files against the pinned
+publisher CSV SHA256 values. Safe streaming extraction rejected the archive's
+checksum CSV on the first attempt; the explicit allowlist was corrected to
+include that regular file, then extraction completed (68 HDF5 plus checksum CSV).
+No source files were changed. Publisher metadata revision:
+0422546192ef58d0de4740a0aa91fd38de22da2e.
+
+Prepared 21 identified baseline recordings, 33,630 frames, 130 distinct canonical
+neurons across the cohort, 25–86 confidence>=4 identities per recording. All
+21 ROI skip maps are identity maps. The importer rejects duplicate identities,
+low confidence, noncanonical labels and unverified nonidentity index spaces.
+It preserves NaNs with explicit masks, author-aligned confocal behavior arrays,
+absolute timestamps and source split/gap boundaries. One recording has two
+segments; segments remain in the same date fold. No normalization, interpolation,
+parameter fitting, target-driving current or body-joint conversion was added.
+
+Frozen metadata-only split: 17 train, 2 validation, 2 test recordings, grouped
+by date. June 14, previously fitted, is forced to train. Date groups are not
+verified independent animal IDs; these are retrospective held-out assignments,
+not claimed prospectively unseen data. Forty-seven other recordings remain in
+the inventory with explicit quarantine reasons (heat, unlabeled or GFP).
+
+The published methods establish one-day adult hermaphrodites and NeuroPAL/GCaMP
+SWF702 cohort, with food-containing M9 on 2% NGM agar, bead-spaced coverslip and
+five-minute settling. Exact per-UID genotype and recording temperature remain
+unverified. This preparation identifies a real condition mismatch with both
+unconfined water and the implemented 1.7% wet-agar calibration. Published source
+processing includes ROI interpolation and full-record bleaching correction;
+finite masks cannot recover the missing original ROI masks. Original source
+angles are radians, signed velocity mm/s; publisher orientation correction
+applies to head angle and angular velocity only. No source-angle-to-11-joint
+mapping is asserted. No absolute calcium or voltage calibration is asserted.
+
+Reproduction command (external artifacts, immutable output directory):
+```
+.venv/bin/python -m scripts.prepare_paired_recordings \
+  --recordings /tmp/r-elegans-E049-extracted \
+  --metadata /tmp/r-elegans-E049-sources/atanas_kim_2023.csv \
+  --labels /Users/carsonc/OneDrive/r-elegans/raw/calcium/atanas_kim_2023/neuropal_label.json.bz2 \
+  --output-dir /tmp/r-elegans-E049-reproducible
+```
+The earlier preparation invocation's manifest was augmented while inspecting
+methods; a subsequent clean invocation now reproduces that manifest and split
+byte-for-byte. Source/environment snapshots, extraction script, pinned publisher
+source excerpts, original methods PDF, metadata and stdout are preserved
+externally. Artifact hashes and upstream revisions are in
+experiments/records/E049-paired-data-admission.json.
+
+Verification: three targeted admission tests passed; full suite **239 passed
+in 76.07 seconds**. The subsequent CLI provenance/protocol addition was executed
+against the full real archive and reproduced manifest and split hashes. These
+are software/integrity checks, not evidence of physiological model agreement.
+Next: implement verified spatial and calcium observation mappings, represent
+mounted medium conditions, then stage joint fitting with shared unknowns. This
+is prepared data with explicit remaining admission conditions, not a joint fit.
+
+E049 archive completion: copied and SHA256-verified 346 extracted, processed,
+source and run-record files into external OneDrive storage. Prepared manifest
+SHA256 36456db8732bebc18f328d91bd7b07035e0a31218c5afdfd0cc92aca1dc72780;
+split SHA256 85e11be2d695a37974496e4b8b16031f0399cd544f98d717b5461bab7cbbe85b.
+Local copied-file integrity is verified; cloud synchronization is not independently
+verified. No server launch is needed for this preparation step.
