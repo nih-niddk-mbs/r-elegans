@@ -3216,3 +3216,25 @@ backup or winner assessment claimed. Decision:push read-only nohup launcher
 pinned to7001;user runs and returns compact regional/shape reports,then select
 next training stage from the measured body-wide result. Preserve qualified tail
 primitive regardless of later coverage work.
+
+## 2026-11-10 — E044 server assessment launch reported; winner hash now supplied
+
+User launch stdout identifies correct qualified E043 seed7001 and preflight
+SHA256417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14.
+This is remote preflight verification reported by user,not independent local
+retrieval/recomputation. E043 compact record updated with this provenance;
+historical missing-hash statements describe earlier evidence availability.
+
+Assessment output `/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519`,
+log samepath`.log`,PID687526,CPUs0,1,2,3. Expected motion.html and
+long/trajectory.png paths printed. No actual report contents or completion
+status provided;do not infer regional amplitudes,body-wide qualification,
+visual motion or raw-data backup. Reference record
+`experiments/records/E044-server-launch-20261110.json`. No new training or model
+change. Wait for same exact log rather than selecting an older analysis run.
+
+Reported launch metadata archived externally at
+`notebook/evidence/E044/server-launch-20261110`;manifest SHA256
+2d9b32657becf5d6ebdbd8cd482735c18d8e0d5016e87c2adbae0289fcb38c18.
+Local copy completed;cloud sync unverified. This archives metadata only,not
+actual assessment outputs or winner checkpoint bytes.

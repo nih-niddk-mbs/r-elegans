@@ -2016,3 +2016,9 @@ E044 local verification complete:223 tests pass,all six pilot cases processed,
 source hashes unchanged,preview controls executed with a JavaScript DOM/canvas
 shim and local scientific PNG inspected. Actual7001 server assessment pending.
 Local unqualified pilot results are pipeline evidence only.
+
+E044 server launch reported(2026-11-10):qualified winner7001 preflight verified
+SHA256`417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14`.
+Output`full-body-assessment-20261110T174954Z-687519`,PID687526,CPUs0–3.
+Completion and full-body results not yet reported. No model changes. Exact
+paths:`experiments/records/E044-server-launch-20261110.json`.

@@ -1,0 +1,24 @@
+{
+  "experiment": "E044",
+  "status": "server_launch_reported_completion_pending",
+  "evidence": "Direct user-pasted launch stdout;no independently retrieved process state or report",
+  "source_worker": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z/seed-7001",
+  "checkpoint_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "checkpoint_hash_evidence": "Server preflight read_warm_start checksum verification reported in stdout",
+  "pid": 687526,
+  "cpus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "results": "/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519",
+  "log": "/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519.log",
+  "preview": "/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519/motion.html",
+  "figure": "/home/carsonc/r-elegans-results/full-body-assessment-20261110T174954Z-687519/long/trajectory.png",
+  "limitations": [
+    "Launch output does not establish completion or full-body results",
+    "Hash reported by server preflight,not independently recomputed locally",
+    "No winner artifact or lineage backup on another machine verified"
+  ]
+}

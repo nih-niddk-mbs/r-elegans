@@ -232,7 +232,7 @@
   ],
   "qualified_scope": "Autonomous posterior motor/muscle/bend amplitude primitive under configured assays only",
   "qualified_checkpoint": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z/seed-7001/network_best.npz",
-  "checkpoint_sha256": null,
+  "checkpoint_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
   "minimum_active_tail_bend_rad": 0.003032604232430458,
   "minimum_active_net_muscle": 0.006467459723353386,
   "decision": "Register first user-reported qualified tail amplitude primitive;preserve7001 and independent backups,then inspect full-body amplitudes/trajectories before adding coordination or locomotion training. No new run launched.",
@@ -243,5 +243,6 @@
     "Bend exceeds target by only about1.1% at worst tested condition;no broad robustness claim",
     "No head/middle retention,phase,forward motion,swimming or biological fidelity claim",
     "Long validation duration300s per configured launcher,not directly printed here"
-  ]
+  ],
+  "checkpoint_sha256_evidence": "User-reported E044 server preflight verified selected checkpoint against source summary;not independently fetched by agent"
 }
