@@ -3364,3 +3364,29 @@ spatial phase progression,with regional amplitude floors and zero external
 input retained,keeping7001 immutable as baseline. Do not jump directly to RL
 or claim locomotion from current drift. No phase-training implementation or
 launch was authorized/executed by the user's copy confirmation alone.
+
+## 2026-11-10 — Literature check: is2.56Hz biologically plausible?
+
+User asks whether winner7001's2.56Hz motion is in the C.elegans ballpark.
+Checked primary sources online,not new simulation or parameter fitting:
+
+- Pierce-Shimomura etal.(2008),PNAS,Genetic analysis of crawling and swimming
+  locomotory patterns,doi10.1073/pnas.0810359105,
+  https://pmc.ncbi.nlm.nih.gov/articles/PMC2634943/ :neck-curvature spectral
+  peaks~0.8Hz crawling and~2.1Hz swimming in their comparison. Spatial propagation,
+  amplitude and muscle activity also distinguish their measured gaits.
+- Magnes,Susman,Eells(2012),JVisExp,Quantitative Locomotion Study of Freely
+  Swimming Micro-organisms Using Laser Diffraction,doi10.3791/4412,
+  https://pmc.ncbi.nlm.nih.gov/articles/PMC3499068/ :reported representative
+  free-swim frequencies~2.5Hz(video)and~2.7Hz(diffraction acquisition);cites
+  mean2.37Hz in5mm cuvette. Geometry/confinement matters;these are experimental
+  examples,not a universal allowed frequency interval.
+
+Inference:2.56Hz is plausible for a liquid/swimming-timescale oscillation.
+It is faster than the cited crawling comparison. This contextual plausibility
+is not a physiological calibration,validation of waveform/propulsion or proof
+of correct neuron-specific channel parameters. Assay uses liquid body model;
+existing near-synchronous/phase-reversal pattern remains the immediate mismatch.
+Recommendation:retain emergent rhythm for next proposed phase-coordination
+trial rather than changing frequency solely to hit a single literature number.
+No frequency target,parameter change,new training or asset promotion introduced.
