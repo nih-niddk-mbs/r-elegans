@@ -1738,3 +1738,35 @@ Primary sources:
 [Vidal-Gadea et al.2011](https://pubmed.ncbi.nlm.nih.gov/21969584/),
 [Ghosh and Emmons2008](https://pubmed.ncbi.nlm.nih.gov/19011210/),
 [Steuer Costa et al.2019](https://pmc.ncbi.nlm.nih.gov/articles/PMC6736843/).
+
+## Identify sensory, premotor and motor roles before action control (E047)
+
+Use the source-linked overlapping groups in `r_elegans/neuron_roles.py` for
+analysis; these labels do not automatically select or freeze training parameters.
+The registry is a curated subset, with unreviewed cells explicitly retained.
+The audit can be reproduced without initializing JAX:
+
+```sh
+python -m scripts.audit_neuron_roles --output-dir /tmp/r-elegans-neuron-role-audit
+```
+
+Use a fresh external output directory. Reports retain all302 canonical IDs,
+group indices, source links, direct anatomical NMJ-edge counts, current sensory
+input paths and exact source/environment records. Biological roles do not prove
+causal function in the fitted simulator; do not select motor neurons solely by
+whether they have any anatomical NMJ edge.
+
+Priority candidates for subsequent mechanistic tests are AVB/PVC for forward
+control, AVA/AVD/AVE for reverse control, RIS for stopping, and B-type motor
+neurons/DVA/SMDD for proprioceptive feedback. Motor and proprioceptive roles
+can overlap. Perturbation experiments must separate genuine neural regulation
+from imposed body movements, output clamps or repeated pacing.
+
+Sensory milestones are separate from connectome completeness:confirm a specified
+chemical stimulus drives the appropriate sensory response; confirm actual body
+bending drives a documented proprioceptive response; then test downstream neural,
+muscle and behavioral changes and negative controls. Use true physical samples
+and local receptive fields rather than synthetic gait phase or food-source
+coordinates. Record transduction units, dynamics, signs and parameter evidence
+before fitting. The current autonomous branch has no such environmental or body
+feedback inputs. Older chemical-input actors do not qualify this branch.

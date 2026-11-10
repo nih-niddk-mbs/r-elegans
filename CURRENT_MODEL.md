@@ -2194,3 +2194,75 @@ muscle output, freezing voltage or resetting the network to simulate stopping.
 Separate checkpoints are acceptable intermediate skills under H1.1; eventual
 one-animal adaptation must use one parameter set without manual swaps. No new
 start/stop circuit or training has been implemented by this requirements update.
+
+## Neuron roles and sensory-input status (E047, 2026-11-10)
+
+The full model contains the canonical sensory, interneuron and motor-neuron
+identities. A new source-linked registry, `r_elegans/neuron_roles.py`, annotates
+a selected locomotion/sensory subset without changing simulation parameters.
+It records overlapping functional roles and canonical indices. This is not a
+complete cell-type atlas:113 neurons are annotated,189 remain unreviewed.
+Counts below refer only to the curated subset and are not totals for the worm.
+
+| Selected function | Neurons/classes | Curated count |
+| --- | --- | --- |
+| Odor sensing | AWA, AWC, AWB bilateral pairs | 6 |
+| Soluble chemical sensing | ASE bilateral pair | 2 |
+| Touch receptors | ALML/R, PLML/R, AVM, PVM | 6 |
+| Forward-associated premotor control | AVBL/R, PVCL/R | 4 |
+| Reverse-associated premotor control | AVAL/R, AVDL/R, AVEL/R | 6 |
+| Selected sensory integration | AIYL/R, AIBL/R, AIZL/R, RIAL/R | 8 |
+| Stop/state-control candidate | RIS | 1 |
+| A-type body motor | DA01–09, VA01–12 | 21 |
+| B-type body motor | DB01–07, VB01–11 | 18 |
+| D-type body motor | DD01–06, VD01–13 | 19 |
+| AS body motor | AS01–11 | 11 |
+| Selected head motor | RMD and SMD classes | 10 |
+| Proprioceptive roles, overlapping other rows | B-type motor neurons, DVA, SMDDL/R | 21 |
+
+Motor versus control is not an exclusive division. B-type motor neurons also
+transduce body-bending feedback; DVA is stretch-sensitive; SMDD contributes
+proprioceptive steering. Premotor AVB can recruit B-type oscillations in the
+cited experiments. The registry lists biological evidence, not measured causal
+roles in the fitted worm. Existing direct NMJ edges are reported separately;
+a few NMJs from a known interneuron do not justify relabeling it as exclusively
+motor or removing its recurrent connections. No neuron is excluded or frozen.
+
+Important implementation distinction:
+
+| Branch | Chemical input into neurons | Physical body-to-brain feedback |
+| --- | --- | --- |
+| Current autonomous conductance-network/body | None; sensory cells evolve within the recurrent network | None |
+| Older normalized full-network actor, chemical-input mode | Engineered concentration/adaptation/derivative features to AWCL/R and ASEL/R | None |
+| Older 14-cell steering subcircuit | Engineered chemical features plus sin/cos of synthetic gait phase | None; phase input is not measured bending |
+
+The full normalized actor also supports an explicit applied-current mode for
+experiments. It does not establish receptor-level sensing. The older bundled
+food-finding demo uses its documented external sensory controller/motor teacher;
+that demonstration is not evidence that the autonomous channel brain senses
+food. AWC and ASE currently share generic features in the older implementations;
+odor-selective and soluble-cue transduction have not been independently fitted.
+Transferred AWCON ion-channel priors are not an olfactory receptor mechanism.
+
+A future embodied sensory loop must sample specified chemicals at the sensory
+location, transduce them into identified neurons, and feed actual body bending
+back into the appropriate motor/proprioceptive cells. Concentration history,
+curvature, strain and contact are candidate physical observations; source
+coordinates, desired heading and an analytic gait clock are not physiological
+sensory inputs. Sensory adaptation, gains, spatial receptive fields and channel
+transduction require documented priors or fits, rather than arbitrary signs.
+
+Next causal assays should distinguish sensory responses, AVB/RIS-dependent
+state changes, motor rhythms, muscle activation and actual movement. An AVB
+perturbation can test recruitment of B-type dynamics; a RIS perturbation tests
+stopping only if its relevant mechanisms are represented. These are mechanistic
+probes, not normal sensory behavior or a license to clamp outputs. No sensory
+loop or neuromodulation was implemented during this read-only annotation audit.
+
+Primary evidence: [odor detection](https://pubmed.ncbi.nlm.nih.gov/8348618/),
+[soluble-cue sensing](https://pubmed.ncbi.nlm.nih.gov/1660283/),
+[premotor/touch circuit](https://pmc.ncbi.nlm.nih.gov/articles/PMC6565008/),
+[AVB recruitment of B-type dynamics](https://pmc.ncbi.nlm.nih.gov/articles/PMC5948959/),
+[B-type proprioception](https://doi.org/10.1016/j.neuron.2012.08.039),
+[DVA stretch sensing](https://doi.org/10.1038/nature04538),
+[SMDD proprioception](https://doi.org/10.1371/journal.pbio.2004929).

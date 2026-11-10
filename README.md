@@ -16,6 +16,11 @@ The E046 wet-agar model is an experimental reference environment; the liquid
 amplitude milestone remains specific to its original medium. See
 [wet-surface mechanics and launch instructions](PHYSICS.md#wet-surface-reference-assessment-e046).
 
+The [neuron-role and sensory-pathway audit](CURRENT_MODEL.md#neuron-roles-and-sensory-input-status-e047-2026-11-10)
+separates biological sensory/premotor/motor identities from implemented function.
+Sensory cells are present in the autonomous brain; environmental transduction and
+physical proprioceptive feedback are still missing from that branch.
+
 ## Run the bundled model
 
 The repository ships a compact runtime checkpoint, so cloning and installing

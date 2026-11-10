@@ -3602,3 +3602,70 @@ sensory cues and internal state may regulate action selection without pacing
 each bend. Require documented cues, fixed/trainable mechanisms, transition
 metrics and numerical/biological criteria before an actual experiment. No new
 training run or scientific simulation executed in this documentation update.
+
+## 2026-11-10 — Planned E047 neuron-role and sensory-pathway audit
+
+User requests identification of control versus motor neurons and asks whether
+sensory neurons, olfaction and proprioception are present. Plan:annotate a
+literature-supported locomotion/sensory subset against all302 canonical IDs,
+allow overlapping motor/proprioceptive roles and explicitly mark unreviewed
+neurons. Do not pretend to have a complete binary classification. Count existing
+NMJ contacts separately from functional roles; an NMJ edge does not prove that
+a cell controls the current behavior. Verify source-backed group names,indices
+and memberships using the bundled runtime topology. No integration,weights,
+channel parameters,input currents or training masks changed; no checkpoint
+needed beyond existing bundle provenance. No stochastic trial/seed/optimizer.
+
+Code audit already identifies two distinct branches:the autonomous conductance
+network has sensory cells anatomically but no environmental/proprioceptive
+inputs; older full-network normalized actors inject three engineered chemical
+features into AWCL/AWCR/ASEL/ASER. The14-cell subcircuit additionally uses
+sin/cos of a gait phase as an engineered proxy,not physical proprioception.
+Chemosensory cell presence or transferred AWCON channel priors do not establish
+an identified sensory-receptor model in the current autonomous worm.
+
+Primary sources checked online:Bargmann et al.1993 odor-selective AWA/AWC,
+Bargmann/Horvitz1991 ASE,Chalfie et al.1985 touch/premotor circuit,
+Xu et al.2018 AVB-B descending coupling,Wen et al.2012 B-type proprioception,
+Li et al.2006 DVA stretch/TRP-4,Yeon et al.2018 SMDD sensory-motor steering,
+Steuer Costa et al.2019 RIS stopping. Their reported functions are biological
+annotations,not validated roles of the fitted simulator. Prefer cited anatomical
+body motor classes over assigning every muscle-projecting cell a single role.
+Acceptance:all annotated members exist uniquely in canonical order;B-type and
+SMDD overlap retained;unreviewed status explicit;input-pathway audit distinguishes
+active code from intended future sensory feedback. Record exact audit command,
+source/environment and outputs externally,small counts/summary in Git.
+
+E047 annotation audit executed locally:
+`.venv/bin/python -m scripts.audit_neuron_roles --output-dir /tmp/r-elegans-E047-neuron-role-audit`.
+All302 canonical IDs retained;113 annotated,189 unreviewed. Curated counts:
+14 sensory (8 chemical,6 touch),20 interneurons (10 premotor,1 RIS state control
+among them),79 selected motor neurons,21 overlapping proprioceptive annotations.
+These are subset annotation counts,not total sensory/motor counts for the animal.
+All groups map to existing unique IDs. Two targeted invariant tests pass0.02s;
+no integration or fitted-network causal perturbation was performed. The full227
+suite passed during E046;not rerun for this metadata-only addition.
+
+Audit directly confirms AWC/ASE nodes have no anatomical NMJs in this bundle,
+while AVBR has2 and DVA1;do not define exclusive neuron types from any NMJ edge.
+Controls and motor neurons remain in the same recurrent model,with all other
+neurons retained. Annotations alone do not change dynamics,trainable subsets,
+input currents or the preserved checkpoint. Core source paths and old/new branch
+input differences documented in CURRENT_MODEL.md and the detailed audit report.
+
+Decision:use explicit overlapping identities and test actual fitted-network
+causality later. World-to-sensory transduction and body-to-neuron feedback remain
+missing in the autonomous branch. No claim of new olfaction,proprioception,
+AVB recruitment or RIS stopping in the simulated worm. Future assays should
+separate local sensory encoding,descending state regulation,motor rhythms and
+mechanics. Exact source-backed role records and scientific evidence remain
+external;compact summary is committed under E047.
+
+E047 external archive:
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E047`.
+240 archived files checksum-verified;archive manifest SHA256
+06d96e55c294dc0e5948206014171eae8c19ad94bfb84a76b5f2193b8dcd5425,
+report SHA2561b90190cd732f5f6b5eff943eb95e2ba6f13ded5ee8df940b78b8166ec180143.
+Local copy verified;cloud sync unverified. Compact record:
+experiments/records/E047-neuron-role-audit.json. This is an informational audit,
+not a new fit or a behavioral qualification. No server run launched.

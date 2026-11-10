@@ -1,0 +1,98 @@
+{
+  "experiment": "E047",
+  "status": "completed",
+  "neurons": 302,
+  "curated_neurons": 113,
+  "unreviewed_neurons": 189,
+  "role_counts": {
+    "chemosensory": 8,
+    "sensory": 14,
+    "mechanosensory": 6,
+    "interneuron": 20,
+    "proprioceptive": 21,
+    "state_control": 1,
+    "premotor": 10,
+    "motor": 79
+  },
+  "branches": {
+    "autonomous_channel_body": {
+      "sensory_cells_present": true,
+      "environmental_input": false,
+      "body_to_brain_proprioception": false,
+      "neuromodulatory_state_mechanisms": false,
+      "code": [
+        "r_elegans/body/channel_bridge.py",
+        "r_elegans/brain/conductance_network.py"
+      ]
+    },
+    "normalized_full_network_actor": {
+      "chemical_input_targets": [
+        "AWCL",
+        "AWCR",
+        "ASEL",
+        "ASER"
+      ],
+      "inputs": [
+        "adapted log concentration",
+        "recent derivative",
+        "relative concentration"
+      ],
+      "biological_receptor_fit": false,
+      "physical_proprioception": false,
+      "code": [
+        "r_elegans/rl/full_network_actor.py",
+        "r_elegans/envs/full_network_petri_dish.py"
+      ]
+    },
+    "legacy_14_cell_subcircuit": {
+      "chemical_input_targets": [
+        "AWCL",
+        "AWCR",
+        "ASEL",
+        "ASER"
+      ],
+      "engineered_phase_inputs": true,
+      "physical_proprioception": false,
+      "code": [
+        "r_elegans/brain/sensory.py",
+        "r_elegans/brain/circuit.py"
+      ]
+    }
+  },
+  "limitations": [
+    "Curated functional subset, not a complete sensory/motor/interneuron atlas.",
+    "Roles overlap; counts cannot be summed into a partition of 302.",
+    "Biological roles and anatomical NMJs do not prove fitted-network causal function.",
+    "No dynamics, parameters, trainable masks or sensory currents changed."
+  ],
+  "date": "2026-11-10",
+  "scope": "Source-linked biological functional annotations and static code/topology audit; no simulation",
+  "parameters_changed": false,
+  "tests": "2 targeted tests passed in 0.02s",
+  "groups": {
+    "olfactory_attractant": 4,
+    "olfactory_awb": 2,
+    "soluble_chemical": 2,
+    "touch_receptors": 6,
+    "forward_premotor": 4,
+    "reverse_premotor": 6,
+    "sensory_integration": 8,
+    "stop_candidate": 1,
+    "body_a_motor": 21,
+    "body_b_motor": 18,
+    "body_d_motor": 19,
+    "body_as_motor": 11,
+    "selected_head_motor": 10,
+    "b_motor_proprioception": 18,
+    "dva_proprioception": 1,
+    "smdd_proprioception": 2
+  },
+  "archive": {
+    "path": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E047",
+    "verified_files": 240,
+    "manifest_sha256": "06d96e55c294dc0e5948206014171eae8c19ad94bfb84a76b5f2193b8dcd5425",
+    "report_sha256": "1b90190cd732f5f6b5eff943eb95e2ba6f13ded5ee8df940b78b8166ec180143",
+    "local_checksums_verified": true,
+    "cloud_sync_verified": false
+  }
+}
