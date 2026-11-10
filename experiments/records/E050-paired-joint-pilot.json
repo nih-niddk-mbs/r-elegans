@@ -1,0 +1,179 @@
+{
+  "experiment": "E050",
+  "date": "2026-11-10",
+  "status": "locally_executed_exploratory_joint_statistics",
+  "parent_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "readout_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+  "data_manifest_sha256": "36456db8732bebc18f328d91bd7b07035e0a31218c5afdfd0cc92aca1dc72780",
+  "split_sha256": "85e11be2d695a37974496e4b8b16031f0399cd544f98d717b5461bab7cbbe85b",
+  "data_fold": "train",
+  "uids": [
+    "2022-06-14-01",
+    "2022-06-14-07"
+  ],
+  "frames_per_window": 8,
+  "source_spatial_checks_max_rad": {
+    "2022-06-14-01": 0.0011780305161545046,
+    "2022-06-14-07": 0.0013361911688263284
+  },
+  "seed": 50,
+  "trainable_degrees": {
+    "channel_densities": 4814,
+    "chemical_strengths": 3709,
+    "electrical_pairs": 1093
+  },
+  "total_trainable_degrees": 9616,
+  "settings": {
+    "prepared_data": "/Users/carsonc/OneDrive/r-elegans/processed/calcium/paired_E049_v1",
+    "reference": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044/full-body-assessment-20261110T174954Z-687519/parameter_reference",
+    "output_dir": "/tmp/r-elegans-E050-shared-pilot",
+    "uids": [
+      "2022-06-14-01",
+      "2022-06-14-07"
+    ],
+    "frames": 8,
+    "start_frame": 0,
+    "iterations": 8,
+    "minutes": 4.0,
+    "seed": 50,
+    "media": [
+      "wet-agar"
+    ],
+    "dt": 0.002,
+    "brain_step_ms": 0.1,
+    "burn_in": 2.0,
+    "maximum_factor": 2.0,
+    "sigma": 0.03,
+    "basal_brightness": 0.1,
+    "sampling": "boxcar",
+    "refine": true
+  },
+  "fixed": [
+    "LEAK",
+    "capacitance",
+    "channel kinetics",
+    "reversal potentials",
+    "calcium and indicator kinetics",
+    "initial voltages and standard flat body",
+    "NMJ and muscle parameters",
+    "mechanics",
+    "sensory gains",
+    "anatomy"
+  ],
+  "conditions": {
+    "mechanics": "1.7% wet-agar empirical law and/or liquid RFT; neither calibrated to mounted 2% agar",
+    "initial_state": "Same parent voltage, equilibrated gates, flat body; fixed burn-in, no per-animal state inference",
+    "external_drive": "None; chemical transduction disabled; intrinsic recurrent dynamics and actual-body proprioception active",
+    "calcium": "Transferred nuclear-reporter kinetics and fixed basal brightness are assumptions",
+    "missingness": "Source imputed samples not identifiable from finite mask"
+  },
+  "observation": {
+    "source_step_m": 1.7699115044247787e-05,
+    "source_Julia_points": [
+      1,
+      9,
+      17,
+      25,
+      33,
+      41,
+      49
+    ],
+    "spatial": "Unsigned chord bends, approximate nominal arclength; no chirality or joint inversion",
+    "calcium": "Relative brightness = fixed basal + Hill/lag indicator; compare CV and lag-1 correlation",
+    "scales": "0.1 CV, 0.1 rad, 0.5 correlation are optimization weights, not calibrated errors",
+    "sample_alignment": "Midpoint exposure bins inferred from source timestamps, or point-sample sensitivity; source targets untouched; true exposure/ROI times unavailable"
+  },
+  "first_pilot": {
+    "iterations": 2,
+    "baseline": 35.53716776040047,
+    "selected": 35.53716776040047,
+    "changed_offset_coordinates": 0,
+    "elapsed_seconds": 63.30846379196737
+  },
+  "shared_pilot": {
+    "iterations": 8,
+    "baseline": 47.484167631320275,
+    "selected": 47.38850166772256,
+    "relative_training_loss_improvement": 0.0020146918092888155,
+    "changed_offset_coordinates": 940,
+    "elapsed_seconds": 157.57393929100363,
+    "refined_baseline": 47.499282348059594,
+    "refined_selected": 47.412596230531484,
+    "checkpoint_sha256": "9328de15ac3a05e9c5133cfa0f58655478df445698bdecbdda18fa7f70a40fcd",
+    "family_metrics": [
+      {
+        "medium": "wet-agar",
+        "uid": "2022-06-14-01",
+        "metrics": {
+          "total": 39.840362614853355,
+          "calcium_cv": 1.3708955190537377,
+          "calcium_lag1": 1.769914338363647,
+          "bend_mean": 62.46044147732141,
+          "bend_std": 14.079473894967915,
+          "neural_observables": 55,
+          "shape_observables": 5,
+          "predicted_bend_std_rad": [
+            0.009831907140850417,
+            0.01108723977628411,
+            0.0036335216988393803,
+            0.005242699116705039,
+            0.00607707764798179
+          ],
+          "measured_bend_std_rad": [
+            0.44906302015283356,
+            0.3860704911211683,
+            0.40803956787304135,
+            0.3391987931862826,
+            0.31489152415754934
+          ]
+        }
+      },
+      {
+        "medium": "wet-agar",
+        "uid": "2022-06-14-07",
+        "metrics": {
+          "total": 54.93664028469399,
+          "calcium_cv": 1.9248335626725863,
+          "calcium_lag1": 1.6994297561537133,
+          "bend_mean": 84.80003328636958,
+          "bend_std": 21.448983964192106,
+          "neural_observables": 66,
+          "shape_observables": 5,
+          "predicted_bend_std_rad": [
+            0.009819940095062193,
+            0.011064158540388943,
+            0.0036139038371480942,
+            0.004554326292161569,
+            0.0076946435955289275
+          ],
+          "measured_bend_std_rad": [
+            0.36556818292420296,
+            0.3707448088413335,
+            0.41596456665216386,
+            0.5527568047128952,
+            0.5958809994913928
+          ]
+        }
+      }
+    ]
+  },
+  "evidence_sha256": {
+    "summary.json": "5e52a339125456b097a13ca3b6adc96de0549ac253ffeb51300f4ff505a2681a",
+    "configuration.json": "3f4627c811560dc75829504a220076ad4efabbe47a52ee893dffe9ee9d1f192f",
+    "refined-parent.json": "f973ce89c865b5294e7018e969261bd5f9d0121a0e657ade523003c866730de5",
+    "network_best.npz": "9328de15ac3a05e9c5133cfa0f58655478df445698bdecbdda18fa7f70a40fcd",
+    "comparison.png": "c260194ea19d8385aa8fbaaef698f46681e1b6c3f4fc9281fb06b83533563d83"
+  },
+  "verification": {
+    "full_suite": "244 passed in 81.40s",
+    "targeted_after_final_helper_import_change": "5 passed",
+    "shell_syntax": "passed",
+    "cached_fetch_cli": "executed with pinned existing artifacts, all prepared hashes verified",
+    "fresh_remote_fetch": "not executed locally; pinned URLs and checksums, safe extraction regression tests",
+    "mbslnx2_launcher": "prepared and syntax checked; not launched from Mac"
+  },
+  "interpretation": "About 0.2% local training-objective improvement; most recorded neural/bend fluctuation amplitude remains unexplained. No biological or held-out qualification.",
+  "external_artifacts": "notebook/evidence/E050 under external OneDrive data root",
+  "bundled_model_changed": false,
+  "server_run_started": false
+}

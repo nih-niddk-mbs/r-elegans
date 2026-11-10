@@ -161,9 +161,12 @@
         "r_elegans/data/calcium.py",
         "scripts/fit_calcium_network.py",
         "r_elegans/data/paired_recordings.py",
-        "scripts/prepare_paired_recordings.py"
+        "scripts/prepare_paired_recordings.py",
+        "r_elegans/data/paired_observations.py",
+        "r_elegans/brain/paired_fitting.py",
+        "scripts/fit_paired_recordings.py"
       ],
-      "joint_loss_implemented": false,
+      "joint_loss_implemented": true,
       "conditions_units_alignment_admitted": false,
       "splits_frozen": true,
       "limitations": [
@@ -173,7 +176,9 @@
         "Recorded pumping is unsupported by the95 body-wall-muscle model",
         "Paper cohort uses 2% agar, food-containing M9 and bead-spaced coverslip; current mechanics are not calibrated to that mounting",
         "No absolute calcium/voltage calibration; publisher preprocessing includes interpolation and bleach estimation",
-        "Temperature and per-UID genotype not independently specified; see E049 record for remaining admission items"
+        "Temperature and per-UID genotype not independently specified; see E049 record for remaining admission items",
+        "Nominal source arclength and midpoint exposure averaging are approximate; no chirality inference",
+        "Fixed relative reporter basal brightness and existing Hill/lag constants are transferred hypotheses; noise and additive optics not modeled"
       ],
       "split_scope": "Date groups, not verified animal independence; 17 train/2 validation/2 test; previously fitted date forced train",
       "preparation_record": "experiments/records/E049-paired-data-admission.json",
@@ -182,7 +187,8 @@
         25,
         86
       ],
-      "prepared_frames": 33630
+      "prepared_frames": 33630,
+      "joint_loss_scope": "E050 exploratory calcium CV/lag correlation and five unsigned chord-bend mean/std statistics; not a calibrated likelihood or exact trajectories"
     },
     {
       "id": "sensory_transduction",
@@ -246,9 +252,9 @@
     }
   ],
   "next_work": [
-    "Verify source body-angle arclength/orientation mapping and build an explicit calcium observation model",
+    "Qualify and expand paired-statistics fitting across training windows; retain frozen date holdouts",
     "Calibrate or bound the mounted 2% agar/coverslip experimental medium before joint embodied fitting",
-    "Build shared-model losses and per-family reports using observation models and conservative fit constraints",
+    "Add calibrated observation/initial-state models and other data-family losses with separate reports",
     "Train incrementally with retained prior constraints,then test held-out perturbations without per-test refitting"
   ],
   "not_performed": [

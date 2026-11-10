@@ -11,8 +11,8 @@ and missing capabilities; this is not yet an achieved biological model or a
 completed joint-data trainer. Training remains incremental.
 
 Paired neural/behavior data preparation now includes 21 identified baseline
-recordings with frozen date-group holdouts. Data remain external; joint fitting
-is pending observation and experimental-condition mappings. See
+recordings with frozen date-group holdouts. Data remain external. An initial joint-statistics fitter is now implemented;
+exact trajectory fitting and matched experimental mechanics remain pending. See
 [E049](experiments/records/E049-paired-data-admission.json).
 
 **Latest autonomous milestone (2026-11-10):**server winner7001 passes both
@@ -1138,3 +1138,26 @@ E045 physics audit:current liquid dynamics are a dimensioned local-RFT
 approximation for unbounded Newtonian water. Basic physics tests pass;real
 Petri-dish boundary effects and quantitative waveform→speed/force calibration
 remain unvalidated. See [physics scope](PHYSICS.md#medium-physics-audit-status-e045-2026-11-10).
+
+## Paired neural and movement fitting pilot
+
+On mbslnx2, launch a short detached run with the dedicated conda interpreter:
+
+```sh
+git pull --ff-only
+sh scripts/launch_paired_fit_mbslnx2.sh 20
+```
+
+The launcher prints the log and result paths. The fitting budget is 20 minutes,
+plus first-run data download/preparation and final timestep refinement. It fetches
+the pinned ~569 MB source archive/labels, verifies hashes and frozen E049 splits,
+and stores data in `/home/carsonc/r-elegans-data` (override with
+`R_ELEGANS_DATA_DIR`). It uses the preserved server winner7001, two training
+recordings, four physical CPU cores and no external neural drive.
+
+This E050 pilot fits calcium fluctuation and coarse bend statistics with one
+shared set of unknown channel densities and synaptic strengths. It is an
+incremental objective, with assumed reporter brightness and a wet-agar mechanical
+proxy. Mounted-medium physics, observation noise, animal initial states and
+exact trajectory agreement remain unresolved. It does not promote a new bundled
+model or use held-out targets. See [current scope](CURRENT_MODEL.md).

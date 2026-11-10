@@ -4070,3 +4070,139 @@ SHA256 36456db8732bebc18f328d91bd7b07035e0a31218c5afdfd0cc92aca1dc72780;
 split SHA256 85e11be2d695a37974496e4b8b16031f0399cd544f98d717b5461bab7cbbe85b.
 Local copied-file integrity is verified; cloud synchronization is not independently
 verified. No server launch is needed for this preparation step.
+
+## 2026-11-10 — Planned E050 paired observation and joint-fit pilot
+
+Question: can the existing full channel network, without target-driving current,
+be evaluated and incrementally fitted against neural and movement observations
+from the same training recording? First implement publisher-defined spatial
+observables and an explicit calcium observation likelihood, preserving E049 folds.
+Verify source spatial scale and head/tail orientation before mapping. Preserve
+raw angle observations; never treat 62 tangents as 11 joint angles.
+
+Parent: preserved winner7001 if locally available and hash verified; no random
+fallback. Fit only unknown non-leak channel densities and existing chemical/gap
+strengths, with symmetric electrical pairs and bounded multiplicative changes.
+Fix leak, capacitance, reversal potentials, channel kinetics, reporter kinetics,
+NMJ/body parameters and anatomical masks. Any transferred indicator or mechanical
+parameters remain exploratory assumptions, not measurements. Zero tonic bias,
+no injected target current or target body forcing.
+
+Stage the pilot using short training-only windows and a coarse observation
+objective before seeking long-record trajectory agreement. Keep animal initial
+conditions and indicator calibration explicit. Existing mounted-medium mechanics
+are not calibrated to these recordings: compare available mechanical hypotheses
+as exploratory proxies, not biological fits or certified bounds. Do not use test
+records for initialization, scaling, selection or debugging targets.
+
+Acceptance: synthetic geometry/observation tests, missing-data masks, no fold
+leakage, frozen-field checks, finite locally executed baseline and candidate
+losses, saved lineage/RNG/source records. Success is an executable constrained
+joint-data fitting path, not demonstrated biological fidelity. Exact invocation,
+seed, numerical settings, data hashes and result will follow execution. No long
+server run launched from this Mac.
+
+E050 method refinement during implementation: use a joint *summary-statistic
+objective*, not a calibrated observation likelihood. Available source metadata
+cannot identify optical offsets/noise, precise per-neuron exposure times,
+per-animal initial states or mounted-medium drag. Relative brightness is fixed
+basal brightness 0.1 plus the existing Hill/lag reporter state. Constant optical
+gain cancels in coefficient of variation and lag-1 correlation; additive offsets,
+reference-channel fluctuation and observation noise remain unmodeled. Fixed
+weights 0.1 CV, 0.5 correlation and 0.1 rad are optimization scales, not measured
+uncertainty. This is the next incremental fitting stage, not exact trajectory
+prediction or an all-data biological validation.
+
+Source geometry: publication repository f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3,
+ANTSUN_NeuroPAL notebook uses seven binned pixels per nominal segment; unit.jl
+specifies 791 unbinned pixels/mm and segmentation downsamples by two. Source
+medial axes start at the nose. Nominal interval = 17.699 micrometers; Julia
+points [1,9,17,25,33,41,49] define five unsigned chord bends. Source endpoint
+quantization and temporal averaging prevent exact reconstruction. Synthetic
+constant-curvature comparison with 12 rods has <0.011 rad discretization
+error for a 1mm curvature radius; this is a software example, not a global
+biological error bound. Head-angle reconstruction from source points [1,5,8]
+on the eight-frame June14-01 training window agrees within 0.0011781 rad.
+Chirality, locomotion direction and exact pointwise joint angles are not fit.
+
+Publisher nir_vec_to_confocal averages within volume-associated NIR ranges.
+The released target lacks those exact ranges, so midpoint-defined exposure bins
+are an explicit sampling hypothesis, with point sampling as a sensitivity option.
+Model fine-step tangent angles are unwrapped and averaged before source-space
+chords are reconstructed; target observations are not resampled. The source's
+low-rate paired imaging cannot alone establish high-frequency gait identity.
+
+Local pilot 1 command:
+```
+JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.fit_paired_recordings \
+ --prepared-data /Users/carsonc/OneDrive/r-elegans/processed/calcium/paired_E049_v1 \
+ --reference /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044/full-body-assessment-20261110T174954Z-687519/parameter_reference \
+ --output-dir /tmp/r-elegans-E050-pilot --frames 8 --iterations 2 --minutes 4 \
+ --media liquid wet-agar --refine
+```
+Seed50, default 2s burn-in, 2ms body step, <=0.1ms neural substep, boxed sample
+bins, maximum unknown conductance factor1.2. Completed in63.31s. Baseline shared
+objective35.53717; neither proposal improved it and no parameter was changed.
+Refined objective35.54648. Existing parent SHA417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14
+was retained exactly. Both proxies finite. Water and 1.7% wet agar are hypotheses,
+not matched2% coverslip conditions or certified bounds. On this window, measured
+coarse-bend standard deviations are0.315–0.449rad versus wet-proxy0.00338–0.01088rad;
+these are coarse unsigned chord statistics, not the earlier11-joint p2p metric.
+
+Local pilot2 planned/executing: same parent and settings, two shared training
+windows (June14-01 and June14-07), eight proposals, wet-agar proxy, maximum factor2.
+No held-out targets are loaded. Exact invocation/source/environment captured in
+its external run records; local result to follow. No server experiment started.
+
+E050 local pilot2 outcome: completed eight bounded proposals on the same
+full302-neuron network shared by June14-01 and June14-07 training windows.
+Command matches pilot1 except `--uids 2022-06-14-01 2022-06-14-07`,
+`--output-dir /tmp/r-elegans-E050-shared-pilot`, `--iterations 8`,
+`--media wet-agar`, `--maximum-factor 2`; seed50 and all numerical settings
+unchanged. Fresh greedy search from parent, not continuation of pilot1.
+Elapsed157.57s. Shared objective47.48417 ->47.38850 (0.2015% decrease), with940
+nonzero offset coordinates among9616 eligible independent unknowns (4814
+channel densities,3709 chemical strengths,1093 electrical pairs). All frozen
+fields unchanged. Selected checkpoint SHA256
+9328de15ac3a05e9c5133cfa0f58655478df445698bdecbdda18fa7f70a40fcd.
+Both data families contribute, but their amplitude discrepancy remains large;
+this tiny short-window decrease is not a qualified skill or biological fit.
+No held-out recording was used. Source head-chord checks agree within0.0013362rad
+across the two selected windows; that check does not calibrate source arclength
+or mounted mechanics.
+
+Read-only numerical check: pilot2 already evaluated its selected network at
+half body timestep and half maximum neural substep. A separate source-recorded
+invocation `.venv/bin/python /tmp/r-elegans-E050-refinement-check.py` then evaluated
+the original parent at the same refined settings without changing any parameters.
+Refined parent objective47.49928 vs selected47.41260, preserving the improvement
+in this check. This is not a certified integration error bound or biological
+acceptance. The source helper, exact environment/invocation and predictions are
+archived alongside the pilot. Current `--refine` now records both parent and
+selected objectives automatically for subsequent runs.
+
+Verification: full suite **244 passed in81.40s**, then all five new observation,
+split-integrity and safe-extraction tests passed after a package-import cleanup.
+Server launcher shell syntax passed. Cached pinned-data fetch CLI executed
+successfully against existing artifacts through an external staging root;
+fresh server HTTP download and launch have not been executed locally. New data
+fetch uses pinned URLs/checksums, refuses changed cached sources, keeps extracted
+HDF5 outside Git and recreates the frozen E049 split before fitting. Unsafe
+archive links and path traversal are rejected in tests.
+
+Decision: preserve this candidate independently, leave bundled models unchanged,
+and offer a short20-minute detached server pilot on two16-frame training windows.
+It reports separate neural/movement losses and supports the existing CPU strategy.
+A20-minute fitting budget excludes first download/preparation and final refinement.
+No long server run was launched. This is an incremental statistics-fitting tool;
+next scientific requirements are broader training windows, optical/initial-state
+models, independently calibrated mounted-medium mechanics and later held-out tests.
+
+E050 archive completion:819 local run/source/evidence files copied externally
+and copied pilot files SHA256-verified under OneDrive/r-elegans/notebook/evidence/E050.
+Both pilot outputs, full stdout, RNG/search state, selected predictions, comparison
+figure, refinement helper and pinned parent parameter-reference lineage preserved.
+Local copy integrity is verified; cloud synchronization is not independently
+verified. Future fit runs also copy recursive server warm-start history or the
+verified compact reference into their external inputs, preserving lineage before
+fitting. The independent selected candidate is not a bundled model promotion.

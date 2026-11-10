@@ -1,5 +1,29 @@
 # Current model: exact scope and computation path
 
+E050 local pilot result: one shared candidate fitted two eight-frame training
+windows, reducing the exploratory objective by about 0.2% (47.484 to 47.389).
+The reduction persisted with both brain and body timesteps halved. This leaves
+large neural and bend-amplitude discrepancies and provides no held-out biological
+qualification. The selected candidate is archived separately; winner7001 and
+bundled model assets remain unchanged. See the
+[E050 record](experiments/records/E050-paired-joint-pilot.json).
+
+E050 adds an executable **joint neural/movement statistics pilot**:
+`python -m scripts.fit_paired_recordings`. It shares unknown non-leak channel
+densities and existing chemical/electrical strengths across selected training
+recordings; stereotypical fields, anatomy, NMJs and mechanics remain fixed.
+No target-driven current or periodic input is supplied; actual-body
+proprioception remains active. The first objective compares reporter fluctuation
+CV/lag correlation with five unsigned coarse chord-bend means/amplitudes.
+It does not fit exact phases, chirality, speed or pointwise neural trajectories.
+Optical gain cancels in the neural statistics under the stated emission model;
+additive offsets/noise and transferred reporter kinetics remain assumptions.
+Publisher nominal spatial spacing and approximate imaging-volume averaging are
+explicit. The 1.7% wet-agar proxy remains mechanically unmatched to the mounted
+2% recording condition. No held-out evaluation or biological qualification is
+claimed. The checkpoint remains separate from the established winner and demos.
+
+
 Paired-data preparation (E049, 2026-11-10): all 68 released HDF5 files now
 match the publisher metadata hashes. The 21 identified baseline recordings are
 prepared outside Git, with fixed date-group splits (17 train / 2 validation /
