@@ -3787,3 +3787,62 @@ checksums verified;OneDrive cloud synchronization not independently verified.
 Compact record:experiments/records/E048-embodied-sensory-connections.json.
 These evaluation inputs do not replace the separately preserved historical
 training lineage. No optimizer/resume state exists for these deterministic tests.
+
+## 2026-11-10 — E048 server results reported by user
+
+User pasted completed diagnostic summary from mbslnx2:
+/home/carsonc/r-elegans-results/embodied-senses-20261110T220423Z-694360.
+Evidence is user-reported stdout,not an independently copied/hashed server
+archive. Full server summary/configuration/source/environment,case durations,
+checkpoint hashes and complete raw traces have not been inspected locally.
+Do not invent these from the launcher defaults. Prior local comparison uses
+its explicit20s source/configuration records. Compare reported numeric summaries
+descriptively;exact cross-platform protocol identity remains unverified.
+
+Planned read-only reconciliation:store all6 reported block comparisons and2
+reported timestep comparisons in a separate server evidence record;calculate
+numeric differences from local20s aggregates and timestep/chemical-effect scale
+ratios. No simulation,parameter change,threshold change or new training.
+Scientific caution:coarse/fine maximum trajectory differences are not error
+bars or a rigorous error bound. A chemical-effect maximum smaller than this
+sensitivity requires matched active/blocked refinements before robust motor
+or behavior claims. Software routing evidence from the existing locality and
+zero-gain tests is separate. Preserve the source run path and unknown metadata.
+
+E048 server reconciliation executed locally:
+`python3 /tmp/r-elegans-E048-reconcile-server.py`. It reads the local E048 compact
+record and explicitly transcribed user-reported metrics,not remote files.
+All6 matching block-effect voltage/muscle/joint maxima differ from local20s
+aggregates by at most1.13088% relative. Reported neural half-timestep maxima
+(0.0345781mV water,0.00999451mV wet) differ materially from local maxima
+(0.0925666/0.0198468mV);do not claim identical numerical trajectories.
+No source of these cross-host differences has been established from stdout.
+
+Server chemical-block neural effects3.30557/3.43927mV, muscle effects
+0.000104904/0.000109017, joint effects2.22623e-5/9.42171e-6rad in water/wet.
+Proprioception-block muscle effects0.0318671/0.0103724 and joints
+0.0166096/0.00316322rad are substantially larger at these experimental gains.
+This is a model/parameter-dependent response,not a biological modality ranking.
+
+Reported half-step joint sensitivity0.00101866/0.000152679rad is45.757/16.205
+ times the chemical-induced joint effect. This is not an error estimate or proof
+that the chemical effect is numerical noise. It identifies an unresolved need:
+refine active AND blocked runs to assess the stability of their difference.
+Connections/locality are tested,but the small chemical motor effect is not
+numerically qualified as a useful behavior. Existing local summaries that said
+nonzero body effects must be read with this qualification,not as locomotion.
+
+Decision:record successful reported execution and qualitative software routing
+agreement;retain experimental status. Propose matched chemical/block refinement
+and causal AVB recruitment/release tests before long behavioral fitting. No
+parameters,weights,acceptance thresholds or simulations changed. No new server
+job launched. Compact record:experiments/records/E048-server-20261110.json.
+
+Reported-results reconciliation archived at
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E048/server-report-20261110`:
+248 files verified;manifest SHA256
+babc2e62b6c0aab704ee546a6868ab36d56bf95b6eb99708174f15966b6c597d.
+This preserves transcribed summary metrics,local reference record,analysis code
+and source/environment. It is not a copy of server raw trajectories/configuration.
+Local archive verified;cloud sync unverified. Documentation/record-only change:
+whitespace and structured JSON checks performed;no software test rerun needed.

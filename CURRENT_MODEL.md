@@ -2371,3 +2371,32 @@ uses those conductances and the pre-update voltage. Brain/body samples are at
 the interval end. Use the saved states and this convention when comparing
 stimulus timing or fitting recordings; do not silently align all fields as
 simultaneous endpoint measurements.
+
+### E048 server report and motor-effect qualification (2026-11-10)
+
+The user reports `status=completed` for mbslnx2 run
+`/home/carsonc/r-elegans-results/embodied-senses-20261110T220423Z-694360`.
+Six reported block comparisons closely match local aggregate effects (largest
+relative difference across their reported voltage/muscle/joint maxima: 1.13%).
+This is descriptive agreement of summaries; server configuration, source,
+versions, hashes and full trajectories have not been independently inspected.
+
+Chemical-block effects: about 3.31mV / 3.44mV maximum neural differences in
+water / wet agar, but only 0.000105 / 0.000109 muscle activation differences and
+0.0000223 / 0.00000942rad joint differences. Proprioceptive-block effects are
+larger: 0.0319 / 0.0104 muscle differences and 0.0166 / 0.00316rad joint differences.
+This establishes neither biological importance rankings nor chemical navigation.
+
+Crucial numerical limitation: reported coarse/fine joint differences are
+0.001019rad in water and 0.000153rad in wet agar, about 46 / 16 times the
+reported chemical-induced joint difference. These sensitivities are not formal
+error bars, but they prevent treating the tiny chemical body effect as robust
+behavioral evidence without a matched refinement of both active and blocked
+runs. Reported coarse/fine neural maxima also differ from the local maxima;
+there is no bitwise cross-platform agreement or formal convergence claim.
+
+Decision: retain the wiring as experimental infrastructure. Next work should
+check the chemical-to-motor contrast under matched timestep refinements and
+probe premotor recruitment/release as a separate start/stop assay. No new
+training or behavior qualification follows from this server report. See
+`experiments/records/E048-server-20261110.json` and the lab notebook.

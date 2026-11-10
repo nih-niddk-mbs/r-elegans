@@ -22,6 +22,9 @@ neurons in the autonomous channel brain. Water and wet-agar reference diagnostic
 include input-block controls. Transduction is experimental and unfitted; learned
 food finding, regulated start/stop and biological sensing remain unvalidated.
 The historical no-input model and its checkpoints remain reproducible.
+The server sensory diagnostic reports completion with similar pathway effects;
+its small chemical-to-body effect still needs matched numerical refinement
+before it can count as reliable behavioral control.
 
 ## Run the bundled model
 

@@ -1,0 +1,145 @@
+{
+  "experiment": "E048",
+  "date": "2026-11-10",
+  "status": "completed_user_reported",
+  "evidence": "User-pasted server aggregate summary; raw artifacts and server metadata not independently verified",
+  "server_run": "/home/carsonc/r-elegans-results/embodied-senses-20261110T220423Z-694360",
+  "reported_status": "completed",
+  "paired_comparisons": [
+    {
+      "medium": "liquid",
+      "compared_to": "chemical-blocked",
+      "max_voltage_difference_mV": 3.305572509765625,
+      "max_muscle_difference": 0.0001049041748046875,
+      "max_joint_difference_rad": 2.22623348236084e-05
+    },
+    {
+      "medium": "liquid",
+      "compared_to": "proprioceptive-blocked",
+      "max_voltage_difference_mV": 7.2333984375,
+      "max_muscle_difference": 0.03186708688735962,
+      "max_joint_difference_rad": 0.016609590500593185
+    },
+    {
+      "medium": "liquid",
+      "compared_to": "all-blocked",
+      "max_voltage_difference_mV": 7.2333984375,
+      "max_muscle_difference": 0.031807899475097656,
+      "max_joint_difference_rad": 0.016609590500593185
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "chemical-blocked",
+      "max_voltage_difference_mV": 3.43927001953125,
+      "max_muscle_difference": 0.00010901689529418945,
+      "max_joint_difference_rad": 9.42171112246204e-06
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "proprioceptive-blocked",
+      "max_voltage_difference_mV": 4.081214904785156,
+      "max_muscle_difference": 0.010372400283813477,
+      "max_joint_difference_rad": 0.003163223340845678
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "all-blocked",
+      "max_voltage_difference_mV": 4.081199645996094,
+      "max_muscle_difference": 0.01028662919998169,
+      "max_joint_difference_rad": 0.003163197130723251
+    }
+  ],
+  "timestep_comparisons": [
+    {
+      "medium": "liquid",
+      "max_joint_difference_rad": 0.0010186582803726196,
+      "max_voltage_difference_mV": 0.034578144550323486
+    },
+    {
+      "medium": "wet-agar",
+      "max_joint_difference_rad": 0.00015267910158903684,
+      "max_voltage_difference_mV": 0.0099945068359375
+    }
+  ],
+  "descriptive_local_comparison": [
+    {
+      "medium": "liquid",
+      "compared_to": "chemical-blocked",
+      "relative_difference_from_local_20s_aggregate": {
+        "max_voltage_difference_mV": 2.3080456162135587e-06,
+        "max_muscle_difference": 0.009753298909925417,
+        "max_joint_difference_rad": 0.00333555703802535
+      }
+    },
+    {
+      "medium": "liquid",
+      "compared_to": "proprioceptive-blocked",
+      "relative_difference_from_local_20s_aggregate": {
+        "max_voltage_difference_mV": 0.0,
+        "max_muscle_difference": 0.0018911461503134486,
+        "max_joint_difference_rad": 0.0004976660136481541
+      }
+    },
+    {
+      "medium": "liquid",
+      "compared_to": "all-blocked",
+      "relative_difference_from_local_20s_aggregate": {
+        "max_voltage_difference_mV": 0.0,
+        "max_muscle_difference": 0.002816006577533612,
+        "max_joint_difference_rad": 0.0004976660136481541
+      }
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "chemical-blocked",
+      "relative_difference_from_local_20s_aggregate": {
+        "max_voltage_difference_mV": 0.0,
+        "max_muscle_difference": 0.00605060506050605,
+        "max_joint_difference_rad": 0.0003094317799201431
+      }
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "proprioceptive-blocked",
+      "relative_difference_from_local_20s_aggregate": {
+        "max_voltage_difference_mV": 0.0,
+        "max_muscle_difference": 0.006020311411174703,
+        "max_joint_difference_rad": 2.702175489715354e-05
+      }
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "all-blocked",
+      "relative_difference_from_local_20s_aggregate": {
+        "max_voltage_difference_mV": 0.0,
+        "max_muscle_difference": 0.011308756552376042,
+        "max_joint_difference_rad": 6.190289827312968e-05
+      }
+    }
+  ],
+  "coarse_fine_joint_sensitivity_over_chemical_joint_effect": {
+    "liquid": 45.7570281124498,
+    "wet-agar": 16.205028959658808
+  },
+  "metadata_not_shown": [
+    "server git revision/dirty source",
+    "server package versions",
+    "recording durations/configuration",
+    "input checksums",
+    "case finite/residual fields",
+    "full aggregate/control neuron data",
+    "artifact manifest"
+  ],
+  "raw_server_artifacts_copied": false,
+  "parameters_changed": false,
+  "training_launched": false,
+  "conclusions": [
+    "Reported pathway-block effects qualitatively agree with local results.",
+    "Chemical input affects neuronal voltage; motor effects are much smaller at current settings.",
+    "Proprioception has the larger reported muscle/body effect; not a calibrated biological importance ranking.",
+    "Chemical body effects are below reported coarse/fine trajectory sensitivity; motor robustness remains unqualified.",
+    "These ratios are descriptive scales, not error bars, confidence bounds or a formal convergence test.",
+    "No regulated start-stop,food finding,swimming or crawling qualification follows from this report."
+  ],
+  "recommended_next": "Matched active/blocked timestep refinements and causal premotor start-stop probes before long behavioral fitting"
+}

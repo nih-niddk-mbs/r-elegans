@@ -1826,3 +1826,18 @@ proprioceptive-response and control-neuron perturbation assays. Then build
 motor amplitude and propagation in each medium while monitoring the alternate
 medium. Regulated start/pause/restart needs its own mechanism and continuous-state
 qualification; the new inputs do not establish that behavior automatically.
+
+E048 server follow-up (2026-11-10): user-reported completed run agrees closely
+with local block-effect aggregates. The reported chemical-induced joint effect
+is smaller than coarse/fine trajectory sensitivity in both media. Before claiming
+reliable chemical control of movement, compare the active-minus-blocked effect
+at both timesteps, with matched initial states, stimuli and records. Refining only
+the active trajectory does not establish convergence of the causal contrast.
+These maximum differences are descriptive, not error bounds or biological scores.
+
+Keep the stronger proprioceptive response as routing evidence. Probe whether
+candidate premotor neurons can recruit, suppress and restart motor activity
+in continuous state; do not infer that from altered AVB/RIS voltage alone.
+A direct circuit probe is distinct from natural sensory behavior, and a
+physiological RIS claim requires its relevant inhibitory/peptide mechanisms.
+No automatic long training extension is justified by a completed wiring test.
