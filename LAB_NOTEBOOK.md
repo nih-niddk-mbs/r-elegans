@@ -2998,3 +2998,50 @@ Exact user-pasted stdout and parsed report copied to external OneDrive
 0e03a972ba411e9d485b8ced94b3c76b35175c89abd166beaeb68aab6f3f8d41.
 Copy completed locally;cloud sync and independent raw-server checkpoint backup
 not verified. Results-only update;no implementation or acceptance criteria changed.
+
+## 2026-11-09 — E043 planned eight-hour posterior motor continuation
+
+User authorized another8hours. Keep E041 algorithm/objective unchanged. Pin
+reviewed E042 cohort`autonomous-posterior-motor-20261109T232143970960Z`:
+three fresh-RNG workers7000–7002 from6002,one7003 from6003 to retain the
+alternate lineage. Four disjoint four-core physical CPU groups on mbslnx2.
+Full302-neuron simulation,all9616 uncertain existing density/recurrent strengths
+eligible,original anchor16x bounds retained. Fixed leak/C/kinetics/reversals/Ca/
+release/NMJ/body fields and anatomical topology;all external currents zero.
+No RL,phase,heading or propulsion objective;no consolidation/retention gate.
+
+Budget480min perworker incl setup/search/validation;existing supervisor grace
+can extend slightly and qualification may stop a worker earlier. Fit20s,long
+validation300s,other perturbation/refinement/held controls20s unchanged. Both
+tail bending>=0.003rad and net-muscle excursion>=0.003 required in active
+checks;25% refinement agreement,held-voltage quiet. Parent6002 has reached
+muscle threshold but remains below bend threshold;no full pass presumed.
+
+Update the same `scripts/continue_posterior_motor_mbslnx2.sh` to latest reviewed
+parents,seed range and480min. Exact E042 three-hour version remains in commit
+cb99867 and its external preparation archive;historical replay must use that
+source instead of current launcher. No optimizer-state resume,re-centering or
+parent overwrite. Preserve full lineage/checkpoints/RNG/history/source/env via
+existing warm-start and recording machinery. Preflight validates parent hashes,
+bounds and completed posterior-motor flags before nohup. Actual server hashes,
+source/environment and start timestamp will be captured at launch,not invented
+here. Worker/supervisor algorithm labels remain E041;E043 is this planned cohort.
+
+Command planned after pull:`sh scripts/continue_posterior_motor_mbslnx2.sh`.
+Verify shell syntax and actual generated command via stub interpreter before
+push. No new scientific simulation needed for this launcher-only change. Server
+launch remains user-run;do not claim an eight-hour run has started locally.
+
+E043 launcher verification completed:POSIX shell syntax passes;executed actual
+shell with interpreter/preflight shim and captured argv. Confirmed480minutes,
+reviewed6002 repeated3x +6003 once,seeds7000+,four4-core workers,fit20s,long
+validation300s and posterior-motor objective. No real parent validation,simulation
+or training occurred in this check. Implementation unchanged;no redundant
+scientific trial or full-suite run for this launcher-only configuration change.
+
+Exact launcher,plan and stub verification archived externally under
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E043`;manifest SHA256
+11d9125d23d083ea5abe5dc60c5c8ccead4aaeaa5f71c2723861ce3411d0e7c7.
+Preparation evidence only,not server output/checkpoint backup. Local copy
+completed;cloud sync not independently verified. Ready for user pull/launch;
+no server execution claimed. Earlier E042 source remains preserved atcb99867.

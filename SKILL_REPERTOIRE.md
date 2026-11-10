@@ -345,3 +345,8 @@ workers improve,held-voltage scored excursions0. Prefer future continuation from
 6002,preserve6003 alternate lineage/other backups. Same objective,original bounds,
 zero drive;no full skill qualified and no new run launched. Exact record:
 `experiments/records/E042-server-20261109.json`.
+
+E043 planned8-hour continuation:three independent forks of6002 plus one6003,
+original anchors/bounds retained,no new skill yet. Muscle component already
+reached in6002;physical bend target still required. Same muscle AND bend
+qualification and numerical controls;phase/control/propulsion deferred.

@@ -1082,3 +1082,8 @@ workers improve,held-voltage scored excursions0. Prefer future continuation from
 6002,preserve6003 alternate lineage/other backups. Same objective,original bounds,
 zero drive;no full skill qualified and no new run launched. Exact record:
 `experiments/records/E042-server-20261109.json`.
+
+Current continuation launcher now uses an8-hour budget(E043):
+`sh scripts/continue_posterior_motor_mbslnx2.sh`,three forks from reviewed6002
+and one from6003. Same objective/original bounds/zero drive,300s long validation.
+The previous3-hour version is preserved in commit`cb99867`.

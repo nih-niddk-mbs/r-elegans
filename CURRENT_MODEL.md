@@ -1898,3 +1898,38 @@ workers improve,held-voltage scored excursions0. Prefer future continuation from
 6002,preserve6003 alternate lineage/other backups. Same objective,original bounds,
 zero drive;no full skill qualified and no new run launched. Exact record:
 `experiments/records/E042-server-20261109.json`.
+
+## Eight-hour posterior motor continuation (E043 plan, 2026-11-09)
+
+User requested another8hours. Current continuation launcher now pins E042
+cohort`autonomous-posterior-motor-20261109T232143970960Z`:seeds7000–7002 fork
+6002,seed7003 forks6003. Four independent four-core searches,fresh RNG,learned
+parameters and original anchor16x bounds retained;full parent copies and histories.
+Same E041 objective,all9616 uncertain existing channel/recurrent parameters
+eligible,zero external drive,fixed leak/C/kinetics/release/NMJs/body/anatomy.
+No phase,heading,RL or propulsion objective and no parent overwrite.
+
+Budget480minutes perworker incl setup/search/validation;supervisor grace can
+extend slightly,qualification may end a worker sooner. Fits20s,long validation
+300s,other perturbation/refinement/held-voltage checks20s,all unchanged from E042.
+Both tail bend>=0.003rad and net-muscle activation excursion>=0.003 required in
+active checks;25% refinement agreement,held-voltage quiet. Parent6002 meets the
+muscle-amplitude component but remains below bend target;no full pass assumed.
+
+```bash
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/continue_posterior_motor_mbslnx2.sh
+```
+
+Nohup launcher prints PID/exact log;log prefix remains
+`autonomous-posterior-motor-continue-*`,cohort folders`autonomous-posterior-motor-*`.
+Same script path now means E043 eight-hour plan;historical E042 three-hour
+launcher is preserved in commit`cb99867` and external records. Preflight checks
+completed posterior-motor parents and hashes before launch. Algorithm label
+remains E041;E043 identifies this operational continuation.
+
+Shell syntax and actual generated argv verified with an interpreter/preflight
+shim;no simulation or real parent validation performed locally. Training code
+unchanged,no redundant full-suite run. No server launch or new qualification
+claimed. Plan:`experiments/records/E043-continuation-plan.json`.

@@ -1,0 +1,46 @@
+{
+  "experiment": "E043",
+  "status": "prepared_for_user_launch_not_executed",
+  "algorithm_experiment": "E041 unchanged",
+  "minutes": 480,
+  "workers": 4,
+  "cores_per_worker": 4,
+  "seed_parent_map": {
+    "7000": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T232143970960Z/seed-6002",
+    "7001": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T232143970960Z/seed-6002",
+    "7002": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T232143970960Z/seed-6002",
+    "7003": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T232143970960Z/seed-6003"
+  },
+  "fit_seconds": 20,
+  "long_validation_seconds": 300,
+  "other_validation_seconds": 20,
+  "continuation": "Fresh RNG at learned parameters,original anchors/bounds retained;full parent copies;not exact optimizer resume",
+  "maximum_factor": "Inherited original16x",
+  "eligible_unknown_parameters": 9616,
+  "fixed": [
+    "LEAK",
+    "capacitance",
+    "kinetics",
+    "reversals",
+    "calcium handling",
+    "release parameters",
+    "NMJs",
+    "muscle/body mechanics",
+    "anatomical masks"
+  ],
+  "injected_currents": "all zero",
+  "qualification": "Posterior median bend>=0.003rad AND net-muscle excursion>=0.003 in five active checks;25% refinement agreement;held voltage quiet",
+  "command": "sh scripts/continue_posterior_motor_mbslnx2.sh",
+  "launcher_sha256": "74c85f3785bc4b5a0409006e14c61af4dc1c1a1150240d0abfe78b02b5344c1e",
+  "historical_three_hour_launcher_revision": "cb99867",
+  "verification": [
+    "sh -n passed",
+    "Actual shell executed with interpreter/preflight shim;verified480min,6002x3+6003x1,seeds7000+,20s fits,300s longvalidation,four four-core workers;no training or real parent validation"
+  ],
+  "limitations": [
+    "Actual server parent/source/environment hashes recorded at launch,not independently available locally",
+    "480min includes setup/search/validation;termination grace can extend slightly",
+    "Nominal qualification may stop workers earlier;full validation still required",
+    "Parents remain unqualified;no new skill claimed"
+  ]
+}
