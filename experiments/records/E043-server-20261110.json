@@ -244,5 +244,6 @@
     "No head/middle retention,phase,forward motion,swimming or biological fidelity claim",
     "Long validation duration300s per configured launcher,not directly printed here"
   ],
-  "checkpoint_sha256_evidence": "User-reported E044 server preflight verified selected checkpoint against source summary;not independently fetched by agent"
+  "checkpoint_sha256_evidence": "User-reported E044 server preflight,subsequently independently hashed copied parameter_reference/network.npz on Mac;matches exact bytes",
+  "local_artifact_review": "experiments/records/E044-local-artifact-review-20261110.json"
 }

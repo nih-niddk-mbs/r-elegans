@@ -1598,3 +1598,20 @@ not independently downloaded/viewed. Next inspect/export that bundle before
 fitting gradual phase progression with amplitude retention. Source checkpoint
 hash remains417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14.
 Exact parsed report:`experiments/records/E044-server-20261110.json`.
+
+E044 local artifact verification(2026-11-10):user copied the actual server bundle
+to external Mac OneDrive. All256 artifact hashes match;selected network.npz
+independently matches417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14.
+Fixed fields equal original anchor,all bias currents zero,frozen parameter
+entries unchanged,and frozen readout hash82f418ac...8247dcb0 matches parent.
+Selected parameters/reference and assessment are now locally preserved;raw300s
+neural/body arrays and full recursive server history are not included.
+
+Actual plot/preview frames inspected:~2.56Hz (~0.3905s period),middle/head mostly
+synchronous;posterior joint2 is nearly opposite phase with an abrupt transition.
+Low-amplitude end joints omitted from spectral display. PC1~99.9%,PC2~0.1%,
+shape cycle nearly retraces one mode. Stable tiny negative same-phase drift
+is not useful locomotion qualification. Next proposed step:small smooth spatial
+phase progression while retaining existing regional amplitudes/zero drive.
+Winner7001 unchanged;no new training. Exact verification:
+`experiments/records/E044-local-artifact-review-20261110.json`.

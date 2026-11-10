@@ -3292,3 +3292,75 @@ retain an independent compact parameter reference,user can SCP the assessment
 folder from a Mac Terminal to external OneDrive E044 directory. Agent cannot
 supply the user's interactive SSH password;standing workflow is user-run transfer,
 never password sharing. No additional login setup or training requested here.
+
+## 2026-11-10 — E044 copied server bundle: independent local artifact inspection
+
+User reports SCP completed. Local copied bundle found at
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044/full-body-assessment-20261110T174954Z-687519`.
+Read-only verification checks all256 manifest entries,then independently hashes
+parameter_reference/network.npz against known417254ad...6a417f14. All match.
+This establishes matching copied selected parameters/reference/report artifacts,
+not an independent recomputation from raw300s voltage/body arrays (not included).
+
+Inspect actual long/trajectory.png and full report,not cached pilot. Fixed fields
+match original anchor exactly after same zero-bias reference operation;frozen
+parameter entries unchanged;all external bias currents0;302x17 channel-scale
+shape and9616 eligible unknowns. Frozen parent readout hash82f418ac...8247dcb0
+matches previously preserved parent. Copied worker metadata reports9488 parameters
+differ from original anchor,3779 from incoming parent;counts are differences,
+not evidence of physiological identification or necessity of those changes.
+
+Actual full-body recheck passes. Long300s analysis dominant frequency2.56Hz,
+383 late-window reference cycles;PC1 fraction0.9989816896,PC2~0.00099765.
+Middle/head active-joint lags near0 (roughly-4.19 to+2.49ms versusjoint7);
+posterior joint3 lag-12.10ms,posterior joint2 lag-180.69ms (~opposed),not a smooth
+phase ramp. Low-amplitude joints0/1/10 excluded by the existing spectral display
+threshold;do not extrapolate phase through them. Coherence near1 at reference
+frequency means shared rhythm,not useful propagating coordination.
+Same-phase regression speed-9.98797e-6BL/s,positive-cycle fraction0;median
+shape closure RMS4.41812e-8rad. Thus same-reference samples nearly close shape
+here,but observed drift remains tiny and numerical convergence of propulsion
+has not been qualified. No natural swimming/backward-run claim.
+
+Planned supplemental visualization only:extract true1x/explicit20x centered
+rod frames already in copied HTML,choose four samples separated by roughly a
+quarter of stored reference-cycle period,render phase snapshots outside Git.
+No new integration,parameters or amplitude/locomotion gate. Exact frame times
+and input hashes recorded;frames are subsampled and rounded to8decimals in
+body-length coordinates. Do not use this preview to requalify the300s assay.
+Preserve script/results with independent artifact-review record.
+
+Copied actual parameter-reference/model passes local load/shape/finite validation:
+302neurons,17 channel terms,all bias currents0;fixed fields and frozen parameter
+entries equal original anchor. Independent selected-file SHA256 exactly matches
+server-reported417254ad...6a417f14. Parent readout independently hashes to
+82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0.
+Worker metadata differences from original anchor:4745 channel terms,3652
+chemical edges,1091 electrical pairs (9488 total);3779 from incoming parent.
+These counts are copied metadata,not proof all changes are necessary or measured.
+
+Supplemental true1x/explicit20x shape snapshots produced without new integration
+at295.092,295.182,295.290,295.380s using preview frames. Stored reference period
+0.390515s. Actual plot and snapshots visually inspected:oscillations around a
+persistent curved mean posture,with largely common middle/head bending and
+posterior phase reversal.20x panel explicitly illustrative;no amplified motion
+used in measurements or acceptance. Source preview278 frames covering
+295.002–299.988s,full numerical report uses300s source. No browser animation
+screenshot claimed;inspected saved plot and numerical preview frame geometry.
+
+Independent review script,figure,source/environment and full/compact review
+archived at external OneDrive
+`notebook/evidence/E044/local-artifact-review-20261110` (232 files),manifest
+SHA25668c38eaa9c36c12a7da32e9a5c53a3d8de75c1bf7ec0ac1bfff6f519ecf6195f.
+Copied actual server bundle is preserved separately at its original named folder
+under E044. Compact reference is now on Mac,not Git;raw full neural/body arrays
+and complete historical lineage remain on server. Cloud sync not independently
+verified. Source implementation unchanged;no new training or redundant software
+test suite. Verification record
+`experiments/records/E044-local-artifact-review-20261110.json`.
+
+Decision:inspection supports the next proposed baby step of a small smooth
+spatial phase progression,with regional amplitude floors and zero external
+input retained,keeping7001 immutable as baseline. Do not jump directly to RL
+or claim locomotion from current drift. No phase-training implementation or
+launch was authorized/executed by the user's copy confirmation alone.

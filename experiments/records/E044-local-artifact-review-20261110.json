@@ -1,0 +1,152 @@
+{
+  "experiment": "E044",
+  "status": "copied_parameter_and_assessment_artifacts_independently_verified",
+  "source_bundle": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044/full-body-assessment-20261110T174954Z-687519",
+  "manifest_entries_verified": 256,
+  "artifact_manifest_sha256": "be7d89f5463fa67c6741e920f6637cc276a20e9befbc6ee90c4911978c08ba32",
+  "checkpoint_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "source_report_sha256": "210c0f6b829ffcddb1fc239d8d00fad3f9b1d32eb8fb1a6c04f8ea286a47804c",
+  "preview_sha256": "707d64e8b18a08fd8a11f7126e24f5da5b65b4916e2defa6b7c213b3f2ea39d0",
+  "model_checks": {
+    "neurons": 302,
+    "channel_terms": 17,
+    "eligible_unknowns": {
+      "channel_densities": 4814,
+      "chemical_strengths": 3709,
+      "electrical_pairs": 1093
+    },
+    "external_bias_zero": true,
+    "fixed_fields_equal_original_anchor": true,
+    "frozen_parameter_entries_equal_anchor": true,
+    "parent_readout_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0"
+  },
+  "full_body_amplitude_checks": {
+    "existing_E037_criteria_reapplied": true,
+    "all_active_amplitude_checks_pass": true,
+    "reference_bends_tail_middle_head": [
+      0.0030373912304639816,
+      0.03337330278009176,
+      0.01105578988790512
+    ],
+    "regional_refinement": {
+      "brain-refined": {
+        "relative_error_with_target_floor": [
+          0.0015760228664360482,
+          0.0017042325719615482,
+          0.0018397676905793786
+        ],
+        "within_25_percent": true
+      },
+      "body-refined": {
+        "relative_error_with_target_floor": [
+          0.0006347018158604318,
+          0.000641508078667956,
+          0.000678624932019573
+        ],
+        "within_25_percent": true
+      }
+    },
+    "held_voltage_control_pass": true,
+    "full_body_amplitude_assay_pass": true
+  },
+  "shape": {
+    "dominant_frequency_hz": 2.56,
+    "reference_cycle_period_s": 0.39051501271847355,
+    "shape_pca_variance_ratios": [
+      0.9989816895553053,
+      0.0009976538153186202,
+      1.5578353171330084e-05,
+      3.793433791615765e-06,
+      9.720824391317023e-07,
+      3.106273954587302e-07,
+      1.7555512950298441e-09,
+      3.327162835929249e-10,
+      3.992739472599234e-11,
+      3.571821745492024e-12,
+      8.118939744535527e-13
+    ],
+    "spectral_phase": [
+      {
+        "joint": 9,
+        "p2p_rad": 0.011060059070587158,
+        "coherence": 0.9999999999985351,
+        "phase_relative_to_reference_rad": 0.06737461059036995,
+        "lag_modulo_period_s": -0.004188672779042554
+      },
+      {
+        "joint": 8,
+        "p2p_rad": 0.02305452525615692,
+        "coherence": 0.9999999999994093,
+        "phase_relative_to_reference_rad": -0.039973642306188883,
+        "lag_modulo_period_s": 0.002485157330631747
+      },
+      {
+        "joint": 7,
+        "p2p_rad": 0.033701568841934204,
+        "coherence": 1.0000000000000004,
+        "phase_relative_to_reference_rad": 0.0,
+        "lag_modulo_period_s": -0.0
+      },
+      {
+        "joint": 6,
+        "p2p_rad": 0.033666469156742096,
+        "coherence": 0.9999999999997677,
+        "phase_relative_to_reference_rad": 0.007825244575077673,
+        "lag_modulo_period_s": -0.00048649466993228507
+      },
+      {
+        "joint": 5,
+        "p2p_rad": 0.033104876056313515,
+        "coherence": 0.999999999999805,
+        "phase_relative_to_reference_rad": 0.014515540863774257,
+        "lag_modulo_period_s": -0.0009024297187976848
+      },
+      {
+        "joint": 4,
+        "p2p_rad": 0.029518933966755867,
+        "coherence": 0.9999999999998003,
+        "phase_relative_to_reference_rad": 0.008306291888024462,
+        "lag_modulo_period_s": -0.0005164013331028144
+      },
+      {
+        "joint": 3,
+        "p2p_rad": 0.00354178249835968,
+        "coherence": 0.9999999999840873,
+        "phase_relative_to_reference_rad": 0.19458924881496548,
+        "lag_modulo_period_s": -0.012097594070875193
+      },
+      {
+        "joint": 2,
+        "p2p_rad": 0.00404299795627594,
+        "coherence": 0.9999999999748743,
+        "phase_relative_to_reference_rad": 2.906461861395571,
+        "lag_modulo_period_s": -0.180694442245772
+      }
+    ],
+    "equal_phase_speed_BL_s": -9.98796994328498e-06,
+    "positive_cycle_fraction": 0.0,
+    "median_shape_closure_rms_rad": 4.4181166223386474e-08
+  },
+  "preview_snapshots": {
+    "frame_indices": [
+      5,
+      10,
+      16,
+      21
+    ],
+    "times_s": [
+      295.092,
+      295.182,
+      295.29,
+      295.38
+    ],
+    "true_scale_and_explicit_20x": true
+  },
+  "interpretation": "Amplitude milestone intact;middle/head share nearly synchronous rhythm,posterior phase has abrupt near-opposition rather than smooth progression. Mostly one-dimensional shape cycle and tiny backward drift;no useful locomotion qualification.",
+  "decision": "Preserve7001 unchanged. Proposed next experiment:gradual spatial phase progression with retained regional amplitude floors and zero external drive. No training started.",
+  "limitations": [
+    "Original300s voltage/body arrays not included;no independent full raw recomputation.",
+    "All copied artifacts match saved manifest;this is artifact integrity,not biological validation.",
+    "Snapshots use rounded/subsampled preview;20x view explicitly illustrative."
+  ]
+}
