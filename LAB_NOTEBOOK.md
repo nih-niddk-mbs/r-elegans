@@ -3390,3 +3390,67 @@ existing near-synchronous/phase-reversal pattern remains the immediate mismatch.
 Recommendation:retain emergent rhythm for next proposed phase-coordination
 trial rather than changing frequency solely to hit a single literature number.
 No frequency target,parameter change,new training or asset promotion introduced.
+
+## 2026-11-10 — E045 planned read-only medium-physics status audit
+
+User asks whether medium physics is correct. Scope:inspect current calibration,
+force balance,tests and primary-source assumptions;calculate drag numbers and
+Reynolds-scale estimates from copied7001 preview. No new integration,training,
+external drive or parameter changes. Do not equate software tests and literature
+constants with experimental validation of the complete body/medium model.
+
+Implementation reviewed:physical_muscle_body_params(12,medium='liquid') in trainer;
+L1mm,radius40um,viscosity0.001Pa s,density1000kg/m3,wavelength1.5mm parameter
+in Lighthill drag closure. Coupled Schur-complement torque-driven overdamped
+body,force/torque-free rigid motion,finite rod rotational drag,implicit passive
+elasticity. Current tests check SI conversion,SPD/precision,residual force/torque,
+load response and Re calculations. Existing223-test suite previously passed;
+new audit question justifies targeted physics-test confirmation if run.
+
+Read-only numerical plan:report local/whole-body drag ratio,material relaxation
+upper-bound timescale,and approximate node speeds/Re from saved true-scale HTML
+frames;velocity finite differences are subsampled estimates,not full raw maxima.
+Use both radius and length scales,avoid judging inertial relevance from tiny
+centroid drift alone. Primary sources checked online:Boyle etal2012 RFT formula,
+Fang-Yen etal2010 passive bending and chamber wall correction,Sznitman etal2010
+swimming,with empirical limitations distinguished. Finite planar local RFT omits
+nonlocal flow,walls/free surface,body taper,self-contact and fluid rheology beyond
+Newtonian viscosity. No benchmark/gait fit or wall correction is being silently
+added. Acceptance:document actual approximation/validation scope,not certify
+physical completeness. Planned command:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python /tmp/r-elegans-medium-audit.py`.
+
+E045 read-only audit executed successfully;no neural/body integration or model
+changes. Lighthill per-length drag0.003290414/0.005215252kg/(m s),ratio1.584983;
+whole-body3.290414e-6/5.215252e-6kg/s. These match cited convention and correct
+length conversion. Passive relaxation upper-bound ratioav/b0.005263s,muscle
+time constant0.1s;active preferred-curvature moment scale9.5e-10Nm is a closure.
+Preview278 true-world frames yield sampled maximum node speed1.94225e-4m/s,
+Re(radius)0.007769,Re(length)0.194225;radius-based unsteady parameter0.025736.
+These approximated node speeds are not exact peak fluid velocities and cannot
+certify hydrodynamic error. Tiny centroid drift must not be substituted for
+lateral body speed when assessing viscous dominance.
+
+Targeted existing tests:`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q tests/test_physical_calibration.py`,8 passed2.06s. Covers formula anisotropy,
+SI parameters,SPD/precision,force/torque residual,load response and Re. Does
+not measure accuracy against real swimmer thrust,speed,confinement or rheology.
+No coefficient/unit mismatch identified by this limited audit;no exhaustive
+physical correctness claim. No complete RFT-versus-Stokes or spatial-resolution
+benchmark performed. Qualified7001 retained unchanged in its original model.
+
+Sources:Boyle2012doi10.3389/fncom.2012.00010 verifies the formula;Fang-Yen2010
+doi10.1073/pnas.1003016107 documents150um chamber transverse drag~9.7x bulk.
+Author-hosted PDF provides primary methods;some PMC pages triggered CAPTCHA.
+Paper OCR occasionally corrupts superscripts/units;SI beam conversion here
+checked dimensionally and against existing primary coefficient convention.
+No new PDF/raw dataset stored in Git. Geometry-specific wall factors must not
+be applied by globally rescaling water viscosity without a matching geometry.
+
+Plan/source/environment/numeric output/script archived externally at
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E045` (232 files),manifest
+SHA2562e1b67e3b2b56beaad1fe9186b113be92e029d21b53909a6014eddda6db04c69.
+Local copy completed;cloud sync unverified. Compact record
+`experiments/records/E045-medium-physics-audit.json`. Decision:classify current
+medium as unbounded Newtonian RFT approximation;propose prescribed-wave and
+matched-geometry propulsion/force/convergence benchmarks before further
+quantitative locomotion claims. No additional training or physics changes.

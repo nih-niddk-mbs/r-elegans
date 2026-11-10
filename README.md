@@ -1104,3 +1104,8 @@ Read-only full-body assessment of winner7001(E044) is prepared:
 `sh scripts/assess_winner_mbslnx2.sh`. It prints region amplitudes and exports
 scientific PNGs plus a standalone interactive motion.html preview. No training
 or checkpoint changes;actual server assessment results remain pending.
+
+E045 physics audit:current liquid dynamics are a dimensioned local-RFT
+approximation for unbounded Newtonian water. Basic physics tests pass;real
+Petri-dish boundary effects and quantitative waveform→speed/force calibration
+remain unvalidated. See [physics scope](PHYSICS.md#medium-physics-audit-status-e045-2026-11-10).

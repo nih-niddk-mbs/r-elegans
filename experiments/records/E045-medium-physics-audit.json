@@ -1,0 +1,83 @@
+{
+  "experiment": "E045",
+  "mode": "read_only_medium_code_and_scale_audit",
+  "scope": "Current unbounded Newtonian liquid model,not a calibrated Petri-dish environment",
+  "geometry": {
+    "length_m": 0.001,
+    "radius_m": 4e-05,
+    "segments": 12
+  },
+  "medium": {
+    "viscosity_Pa_s": 0.001,
+    "density_kg_m3": 1000.0,
+    "drag_model": "Lighthill local resistive-force theory",
+    "wavelength_parameter_m": 0.0015,
+    "parallel_drag_per_length_kg_m_s": 0.0032904139557552465,
+    "perpendicular_drag_per_length_kg_m_s": 0.005215251687357911,
+    "ratio": 1.5849834572443204,
+    "whole_body_parallel_kg_s": 3.2904139557552465e-06,
+    "whole_body_perpendicular_kg_s": 5.215251687357911e-06
+  },
+  "body": {
+    "bending_modulus_N_m2": 9.5e-14,
+    "internal_viscosity_upper_bound_N_m2_s": 5e-16,
+    "internal_relaxation_upper_bound_s": 0.005263157894736843,
+    "muscle_tau_s": 0.1,
+    "joint_stiffness_N_m_per_rad": 1.1399999833017205e-09,
+    "joint_damping_N_m_s": 5.999999976025183e-12,
+    "maximum_muscle_moment_N_m": 9.4999996758105e-10
+  },
+  "preview_velocity": {
+    "source": "Rounded/subsampled true-world preview vertices,not complete raw trajectory or fluid velocity",
+    "frames": 278,
+    "input_sha256": "707d64e8b18a08fd8a11f7126e24f5da5b65b4916e2defa6b7c213b3f2ea39d0",
+    "node_speed_percentiles_m_s": {
+      "p50": 3.993400893272865e-05,
+      "p95": 0.00012087786845466764,
+      "maximum": 0.0001942250476930058
+    },
+    "maximum_node_speed_Re_radius": 0.0077690019077202325,
+    "maximum_node_speed_Re_length": 0.1942250476930058,
+    "radius_unsteady_parameter_rho_omega_a2_over_mu": 0.025735927018207587
+  },
+  "findings": [
+    "Leading-order local RFT Newtonian model,dimensioned force/torque balance;not full CFD.",
+    "No explicit walls/free surfaces,nonlocal interactions,body taper,self-contact or non-Newtonian rheology.",
+    "Fixed drag wavelength parameter does not follow learned spatial waveform.",
+    "Muscle moment/preferred-curvature scale is modeling closure,not directly calibrated muscle force.",
+    "No end-to-end benchmark against observed thrust/speed/waveform or spatial-resolution convergence established.",
+    "Current channel-body branch has no body-to-brain feedback;medium changes do not directly adapt neural rhythm."
+  ],
+  "limitations": [
+    "Velocity estimates use preview sampling,not peak fluid velocity or inertial-error bounds.",
+    "Low local Re supports an overdamped approximation,not proof of quantitative hydrodynamic accuracy.",
+    "No dynamics or fitted checkpoint changed."
+  ],
+  "verification": {
+    "existing_physics_tests": "8 passed in2.06s",
+    "source_checked": "Current training code explicitly selects12-segment physical liquid factory",
+    "coefficient_formula": "Matches Boyle2012 whole-worm Lighthill formula and division by length for local coefficients",
+    "experimental_propulsion_benchmark": "not performed"
+  },
+  "sources": [
+    {
+      "title": "Boyle etal2012 integrated neuromechanical model",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3296079/",
+      "doi": "10.3389/fncom.2012.00010",
+      "use": "Lighthill coefficient convention,1mm length/40um radius/1.5mm reference wavelength and whole-worm vs per-length units"
+    },
+    {
+      "title": "Fang-Yen etal2010 biomechanical gait adaptation",
+      "url": "https://www.wenlab.org/wordpress/3.8/wp-content/uploads/2013/12/proc_natl_acad_sci_usa_2010_fang-yen.pdf",
+      "doi": "10.1073/pnas.1003016107",
+      "use": "Passive material calibration and geometry-specific9.7x transverse-drag correction for150um chamber"
+    },
+    {
+      "title": "Sznitman etal2010 material properties at low Reynolds number",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2820645/",
+      "doi": "10.1016/j.bpj.2009.11.010",
+      "use": "Experimental swimming and reduced hydrodynamic modeling context"
+    }
+  ],
+  "decision": "Retain qualified neural checkpoint;classify current physics as a bulk-Newtonian reduced approximation. Proposed next validation:kinematically prescribed/experimental waveform benchmark independent of neural fitting,spatial/time convergence and geometry-specific boundary calibration. No physics/model changed."
+}

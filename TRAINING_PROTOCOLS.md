@@ -1615,3 +1615,49 @@ is not useful locomotion qualification. Next proposed step:small smooth spatial
 phase progression while retaining existing regional amplitudes/zero drive.
 Winner7001 unchanged;no new training. Exact verification:
 `experiments/records/E044-local-artifact-review-20261110.json`.
+
+## Medium-physics audit status (E045, 2026-11-10)
+
+Current trained winner uses the12-rod SI liquid factory:1mm length,40um
+constant radius,water-like viscosity0.001Pa s,Lighthill local RFT. Code/source
+comparison finds the expected per-length coefficients0.00329041 parallel and
+0.00521525 perpendicular kg/(m s),ratio1.58498. Whole-body coefficients are
+those values times0.001m. Coupled torque-driven mechanics impose zero net
+force/torque and include external drag in shape dynamics.8 targeted existing
+physics tests pass (units,SPD/precision,residual balance,load response,Re).
+These are consistency checks,not quantitative experimental calibration.
+
+Status:physically dimensioned leading-order UNBOUNDED NEWTONIAN approximation.
+No explicit Petri-dish bottom/wall/free-surface flow,nonlocal hydrodynamic
+interactions,body taper or self-contact. Agar mode is a different effective
+surface-drag closure,not resolved gel/adhesion/lubrication. Current liquid
+winner does not establish physical crawling or a real Petri-dish environment.
+Water retains ordinary viscosity;microscale viscous dominance is a scale effect.
+
+Fixed drag wavelength1.5mm is a reference parameter and is not measured from
+the learned standing-like shape. Passive viscosity uses a reported upper bound;
+active muscle moment scale is a preferred-curvature modeling closure. Neither
+is a measured complete actuator/medium calibration. No matched observed
+waveform→predicted force/speed benchmark or12→24→48 spatial convergence has
+been established. Any such refinement must keep physical curvature and muscle
+interpolation consistent,not just increase the segment count. Current neural
+branch lacks body-to-brain feedback,so changing drag does not adapt its neural
+rhythm through proprioception. That is separate from the force solver.
+
+For scale only,finite differences of copied true-world preview nodes estimate
+maximum sampled speed0.194mm/s,Re~0.00777(radius)or0.194(length);these are not
+full-resolution fluid velocities or a hydrodynamic-error bound. They support
+a viscous-dominated local approximation without certifying all inertial/flow
+effects. No new integration or trained parameter changes.
+
+Primary-source context:Boyle etal(2012) uses the same Lighthill convention
+(https://pmc.ncbi.nlm.nih.gov/articles/PMC3296079/). Fang-Yen etal(2010) measured
+~9.7x transverse drag in a150um glass chamber compared with bulk fluid
+(https://www.wenlab.org/wordpress/3.8/wp-content/uploads/2013/12/proc_natl_acad_sci_usa_2010_fang-yen.pdf).
+That factor is geometry-specific;do not blindly multiply bulk drag or viscosity.
+
+Recommendation:before quantitative locomotion claims or further medium-specific
+training,benchmark body/medium response to a prescribed measured waveform,
+check resolution/time convergence and choose bulk versus wall/surface geometry.
+Keep7001 as an amplitude primitive under its existing model. Audit record:
+`experiments/records/E045-medium-physics-audit.json`.
