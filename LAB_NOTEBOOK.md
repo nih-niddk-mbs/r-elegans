@@ -3045,3 +3045,28 @@ Exact launcher,plan and stub verification archived externally under
 Preparation evidence only,not server output/checkpoint backup. Local copy
 completed;cloud sync not independently verified. Ready for user pull/launch;
 no server execution claimed. Earlier E042 source remains preserved atcb99867.
+
+## 2026-11-10 — E043 plan amended to three hours before confirmed launch
+
+Latest user steering:4hours,immediately corrected to3. Four-hour request was
+superseded before edits/execution. Update current E043 launcher budget480→180min;
+keep reviewed6002x3 +6003x1 allocation,seeds7000–7003,all training settings,
+original anchors/bounds and zero drive unchanged. Exact eight-hour version
+preserved in commit30ff375 and external E043 preparation archive. Previous
+user-pasted output was E042's completed6000–6003 cohort,not evidence E043 ran.
+No E043 launch or completion confirmed;configuration edits do not alter any
+already-running process. Guard against duplicate starts when launching.
+
+Fit20s,long validation300s,all other controls20s unchanged. Budget includes
+setup/search/validation with existing termination grace and early qualification.
+Command remains`sh scripts/continue_posterior_motor_mbslnx2.sh` after pull.
+Verify shell syntax and actual generated argv with a shim;no new training or
+parent validation planned locally for this duration-only amendment.
+
+Three-hour amendment verified:shell syntax and actual argv with stub interpreter
+confirm180min,6002x3+6003x1,seeds7000+,20s fits/300s longvalidation. No real
+parent preflight,simulation or training launched. External archive
+`notebook/evidence/E043/three-hour-amendment-20261110` manifest SHA256
+590d5193971785cb502a90956457ca781945e92fcf20afeef87eba1c7f6be8fd.
+Local copy completed;cloud sync unverified. Duration-only configuration update;
+no redundant training-code test suite rerun.

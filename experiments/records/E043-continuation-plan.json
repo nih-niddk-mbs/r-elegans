@@ -2,7 +2,7 @@
   "experiment": "E043",
   "status": "prepared_for_user_launch_not_executed",
   "algorithm_experiment": "E041 unchanged",
-  "minutes": 480,
+  "minutes": 180,
   "workers": 4,
   "cores_per_worker": 4,
   "seed_parent_map": {
@@ -31,16 +31,19 @@
   "injected_currents": "all zero",
   "qualification": "Posterior median bend>=0.003rad AND net-muscle excursion>=0.003 in five active checks;25% refinement agreement;held voltage quiet",
   "command": "sh scripts/continue_posterior_motor_mbslnx2.sh",
-  "launcher_sha256": "74c85f3785bc4b5a0409006e14c61af4dc1c1a1150240d0abfe78b02b5344c1e",
+  "launcher_sha256": "c0ab6eada98283eeddb85295b51748abe24daff310e93c3eda9a7f2afe7197c2",
   "historical_three_hour_launcher_revision": "cb99867",
   "verification": [
     "sh -n passed",
-    "Actual shell executed with interpreter/preflight shim;verified480min,6002x3+6003x1,seeds7000+,20s fits,300s longvalidation,four four-core workers;no training or real parent validation"
+    "Actual launcher shell with interpreter/preflight shim verifies180min,6002x3+6003x1,seeds7000+,unchanged20s fits/300s validation;no training or real parent validation"
   ],
   "limitations": [
     "Actual server parent/source/environment hashes recorded at launch,not independently available locally",
-    "480min includes setup/search/validation;termination grace can extend slightly",
+    "180min includes setup/search/validation;termination grace can extend slightly",
     "Nominal qualification may stop workers earlier;full validation still required",
     "Parents remain unqualified;no new skill claimed"
-  ]
+  ],
+  "previous_planned_minutes": 480,
+  "amended_on": "2026-11-10",
+  "amendment": "User corrected budget to3hours;intervening4hour request superseded before any edits or execution"
 }

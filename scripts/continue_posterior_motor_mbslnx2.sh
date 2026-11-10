@@ -1,5 +1,5 @@
 #!/bin/sh
-# E043: eight-hour continuation of E041; three best-parent forks, one alternate.
+# E043: three-hour continuation of E041; three best-parent forks, one alternate.
 set -eu
 worm_repo=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 worm_python=/home/carsonc/miniconda3/envs/r-elegans/bin/python
@@ -24,10 +24,10 @@ nohup "$worm_python" -u -m scripts.run_autonomous_wiggle \
     --objective body-amplitude --posterior-motor-focus --fit-scope neurons-connections \
     --warm-start-workers "$worm_parent_best" "$worm_parent_best" "$worm_parent_best" "$worm_parent_alternate" \
     --workers 4 --cores-per-worker 4 --seed-start 7000 \
-    --output-dir "$worm_results" --minutes 480 --fit-seconds 20 --validation-seconds 300 \
+    --output-dir "$worm_results" --minutes 180 --fit-seconds 20 --validation-seconds 300 \
     > "$worm_log" 2>&1 < /dev/null &
-echo "Eight-hour posterior motor continuation; zero external drive; original bounds retained"
+echo "Three-hour posterior motor continuation; zero external drive; original bounds retained"
 echo "Seeds7000/7001/7002 from $worm_parent_best;seed7003 from $worm_parent_alternate"
-echo "Budget:480 minutes including setup and validation;long validation300 simulated seconds"
+echo "Budget:180 minutes including setup and validation;long validation300 simulated seconds"
 echo "Supervisor PID: $!"
 echo "Log: $worm_log"

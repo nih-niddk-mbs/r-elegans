@@ -1087,3 +1087,9 @@ Current continuation launcher now uses an8-hour budget(E043):
 `sh scripts/continue_posterior_motor_mbslnx2.sh`,three forks from reviewed6002
 and one from6003. Same objective/original bounds/zero drive,300s long validation.
 The previous3-hour version is preserved in commit`cb99867`.
+
+E043 duration amended (2026-11-10):latest user instruction is3hours/180min,
+superseding the8-hour preparation and intervening4-hour request. Same launcher,
+6002x3+6003x1 parents,seeds7000–7003,20s fit/300s long validation,original bounds
+and zero drive. Eight-hour source preserved in commit`30ff375`. No E043 server
+launch confirmed;editing launcher does not change an existing process.

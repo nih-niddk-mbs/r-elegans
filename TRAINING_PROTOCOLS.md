@@ -1496,3 +1496,9 @@ Shell syntax and actual generated argv verified with an interpreter/preflight
 shim;no simulation or real parent validation performed locally. Training code
 unchanged,no redundant full-suite run. No server launch or new qualification
 claimed. Plan:`experiments/records/E043-continuation-plan.json`.
+
+E043 duration amended (2026-11-10):latest user instruction is3hours/180min,
+superseding the8-hour preparation and intervening4-hour request. Same launcher,
+6002x3+6003x1 parents,seeds7000–7003,20s fit/300s long validation,original bounds
+and zero drive. Eight-hour source preserved in commit`30ff375`. No E043 server
+launch confirmed;editing launcher does not change an existing process.

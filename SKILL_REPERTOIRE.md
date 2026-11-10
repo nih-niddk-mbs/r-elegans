@@ -350,3 +350,9 @@ E043 planned8-hour continuation:three independent forks of6002 plus one6003,
 original anchors/bounds retained,no new skill yet. Muscle component already
 reached in6002;physical bend target still required. Same muscle AND bend
 qualification and numerical controls;phase/control/propulsion deferred.
+
+E043 duration amended (2026-11-10):latest user instruction is3hours/180min,
+superseding the8-hour preparation and intervening4-hour request. Same launcher,
+6002x3+6003x1 parents,seeds7000–7003,20s fit/300s long validation,original bounds
+and zero drive. Eight-hour source preserved in commit`30ff375`. No E043 server
+launch confirmed;editing launcher does not change an existing process.
