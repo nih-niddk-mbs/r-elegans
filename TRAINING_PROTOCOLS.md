@@ -1502,3 +1502,25 @@ superseding the8-hour preparation and intervening4-hour request. Same launcher,
 6002x3+6003x1 parents,seeds7000–7003,20s fit/300s long validation,original bounds
 and zero drive. Eight-hour source preserved in commit`30ff375`. No E043 server
 launch confirmed;editing launcher does not change an existing process.
+
+## Qualified autonomous tail-amplitude primitive (E043, 2026-11-10)
+
+User-reported server seed7001 passed all predeclared posterior amplitude checks,
+exit0/passedTrue. Tail median bend0.00303739rad and net-muscle excursion0.00646743
+exceed0.003 targets. Long validation,initial-voltage perturbations and finer
+brain/body steps all qualify;held-voltage scored excursions0. Minimum active
+bend0.00303260rad (1.09% margin);brain refinement changes bend-0.158%,muscle
++0.036%. One of four candidates qualifies;cohort failure does not invalidate it.
+
+Register this as an autonomous posterior amplitude primitive only. No phase,
+propulsion,swimming,whole-body amplitude or natural-animal claim. Same all302-
+neuron zero-drive dynamics,frozen readout/body and original bounds. Head/middle
+retention was not required and is not shown in the pasted summary. Preserve
+winner before future skill work;next inspect full-body amplitudes/trajectories.
+
+Winner remains on mbslnx2 at
+`/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z/seed-7001`.
+Actual checkpoint/source hashes and raw artifacts have not been independently
+retrieved or backed up;no new inference asset bundled in Git. Existing demo/
+`autonomous_wiggle_v1` assets are unchanged. Parsed evidence:
+`experiments/records/E043-server-20261110.json`. No new training launched.

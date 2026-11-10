@@ -1,0 +1,247 @@
+{
+  "experiment": "E043",
+  "algorithm_experiment": "E041 unchanged",
+  "evidence": "Direct user-pasted server console;manual transcription,not independently retrieved raw artifacts",
+  "run": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z",
+  "transcription_sha256": "494dadbc6a4d3afbcfa772639ad0babc8b57f096889ad39abf8ff3387170709d",
+  "workers": [
+    {
+      "seed": 7000,
+      "exit_code": 2,
+      "status": "completed",
+      "passed": false,
+      "iterations": 501,
+      "validation": [
+        {
+          "case": "long",
+          "qualified": false,
+          "tail_bend_rad": 0.002753026783466339,
+          "net_muscle": 0.006925016641616821
+        },
+        {
+          "case": "perturb-plus",
+          "qualified": false,
+          "tail_bend_rad": 0.002711668610572815,
+          "net_muscle": 0.006821006536483765
+        },
+        {
+          "case": "perturb-minus",
+          "qualified": false,
+          "tail_bend_rad": 0.0026694461703300476,
+          "net_muscle": 0.006776869297027588
+        },
+        {
+          "case": "brain-refined",
+          "qualified": false,
+          "tail_bend_rad": 0.0026872754096984863,
+          "net_muscle": 0.006812982261180878
+        },
+        {
+          "case": "body-refined",
+          "qualified": false,
+          "tail_bend_rad": 0.002722710371017456,
+          "net_muscle": 0.006813347339630127
+        },
+        {
+          "case": "held-voltage",
+          "qualified": false,
+          "tail_bend_rad": 0.0,
+          "net_muscle": 0.0
+        }
+      ],
+      "baseline": {
+        "qualified": false,
+        "tail_bend_rad": 0.0013638809323310852,
+        "net_muscle": 0.00352342426776886
+      },
+      "best": {
+        "qualified": false,
+        "tail_bend_rad": 0.0027201175689697266,
+        "net_muscle": 0.00681285560131073
+      }
+    },
+    {
+      "seed": 7001,
+      "exit_code": 0,
+      "status": "completed",
+      "passed": true,
+      "iterations": 382,
+      "validation": [
+        {
+          "case": "long",
+          "qualified": true,
+          "tail_bend_rad": 0.0030376985669136047,
+          "net_muscle": 0.006467815488576889
+        },
+        {
+          "case": "perturb-plus",
+          "qualified": true,
+          "tail_bend_rad": 0.0030373018234968185,
+          "net_muscle": 0.006467459723353386
+        },
+        {
+          "case": "perturb-minus",
+          "qualified": true,
+          "tail_bend_rad": 0.0030372291803359985,
+          "net_muscle": 0.006467506289482117
+        },
+        {
+          "case": "brain-refined",
+          "qualified": true,
+          "tail_bend_rad": 0.003032604232430458,
+          "net_muscle": 0.006469741463661194
+        },
+        {
+          "case": "body-refined",
+          "qualified": true,
+          "tail_bend_rad": 0.0030393190681934357,
+          "net_muscle": 0.006467517465353012
+        },
+        {
+          "case": "held-voltage",
+          "qualified": false,
+          "tail_bend_rad": 0.0,
+          "net_muscle": 0.0
+        }
+      ],
+      "baseline": {
+        "qualified": false,
+        "tail_bend_rad": 0.0013638809323310852,
+        "net_muscle": 0.00352342426776886
+      },
+      "best": {
+        "qualified": true,
+        "tail_bend_rad": 0.0030373912304639816,
+        "net_muscle": 0.006467433646321297
+      }
+    },
+    {
+      "seed": 7002,
+      "exit_code": 2,
+      "status": "completed",
+      "passed": false,
+      "iterations": 501,
+      "validation": [
+        {
+          "case": "long",
+          "qualified": false,
+          "tail_bend_rad": 0.0025629140436649323,
+          "net_muscle": 0.006683308631181717
+        },
+        {
+          "case": "perturb-plus",
+          "qualified": false,
+          "tail_bend_rad": 0.0024923086166381836,
+          "net_muscle": 0.006525717675685883
+        },
+        {
+          "case": "perturb-minus",
+          "qualified": false,
+          "tail_bend_rad": 0.0024928301572799683,
+          "net_muscle": 0.006586082279682159
+        },
+        {
+          "case": "brain-refined",
+          "qualified": false,
+          "tail_bend_rad": 0.0024830251932144165,
+          "net_muscle": 0.006522122770547867
+        },
+        {
+          "case": "body-refined",
+          "qualified": false,
+          "tail_bend_rad": 0.002560671418905258,
+          "net_muscle": 0.006662309169769287
+        },
+        {
+          "case": "held-voltage",
+          "qualified": false,
+          "tail_bend_rad": 0.0,
+          "net_muscle": 0.0
+        }
+      ],
+      "baseline": {
+        "qualified": false,
+        "tail_bend_rad": 0.0013638809323310852,
+        "net_muscle": 0.00352342426776886
+      },
+      "best": {
+        "qualified": false,
+        "tail_bend_rad": 0.0025580115616321564,
+        "net_muscle": 0.006661839783191681
+      }
+    },
+    {
+      "seed": 7003,
+      "exit_code": 2,
+      "status": "completed",
+      "passed": false,
+      "iterations": 493,
+      "validation": [
+        {
+          "case": "long",
+          "qualified": false,
+          "tail_bend_rad": 0.0014039278030395508,
+          "net_muscle": 0.0022628456354141235
+        },
+        {
+          "case": "perturb-plus",
+          "qualified": false,
+          "tail_bend_rad": 0.00140361487865448,
+          "net_muscle": 0.0022625774145126343
+        },
+        {
+          "case": "perturb-minus",
+          "qualified": false,
+          "tail_bend_rad": 0.0014036297798156738,
+          "net_muscle": 0.002262622117996216
+        },
+        {
+          "case": "brain-refined",
+          "qualified": false,
+          "tail_bend_rad": 0.0014250576496124268,
+          "net_muscle": 0.002307876944541931
+        },
+        {
+          "case": "body-refined",
+          "qualified": false,
+          "tail_bend_rad": 0.0014043673872947693,
+          "net_muscle": 0.002262696623802185
+        },
+        {
+          "case": "held-voltage",
+          "qualified": false,
+          "tail_bend_rad": 0.0,
+          "net_muscle": 0.0
+        }
+      ],
+      "baseline": {
+        "qualified": false,
+        "tail_bend_rad": 0.000608585774898529,
+        "net_muscle": 0.0010296553373336792
+      },
+      "best": {
+        "qualified": false,
+        "tail_bend_rad": 0.00140361487865448,
+        "net_muscle": 0.002262607216835022
+      }
+    }
+  ],
+  "total_proposals": 1877,
+  "qualified_workers": [
+    7001
+  ],
+  "qualified_scope": "Autonomous posterior motor/muscle/bend amplitude primitive under configured assays only",
+  "qualified_checkpoint": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z/seed-7001/network_best.npz",
+  "checkpoint_sha256": null,
+  "minimum_active_tail_bend_rad": 0.003032604232430458,
+  "minimum_active_net_muscle": 0.006467459723353386,
+  "decision": "Register first user-reported qualified tail amplitude primitive;preserve7001 and independent backups,then inspect full-body amplitudes/trajectories before adding coordination or locomotion training. No new run launched.",
+  "limitations": [
+    "Winner checkpoint/source/environment hashes and physical artifacts remain server-only;not independently retrieved or backed up by agent",
+    "Combined cohort can return2 because other seeds fail even though7001 passes",
+    "Held-voltage qualifiedFalse is expected for a negative control;zero excursions satisfy control gate",
+    "Bend exceeds target by only about1.1% at worst tested condition;no broad robustness claim",
+    "No head/middle retention,phase,forward motion,swimming or biological fidelity claim",
+    "Long validation duration300s per configured launcher,not directly printed here"
+  ]
+}

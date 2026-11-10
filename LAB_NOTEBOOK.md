@@ -3070,3 +3070,63 @@ parent preflight,simulation or training launched. External archive
 590d5193971785cb502a90956457ca781945e92fcf20afeef87eba1c7f6be8fd.
 Local copy completed;cloud sync unverified. Duration-only configuration update;
 no redundant training-code test suite rerun.
+
+## 2026-11-10 — E043 first reported qualified autonomous posterior amplitude primitive
+
+User console reports cohort
+`/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z`.
+All workers completed:7000/7001/7002/7003 ran501/382/501/493 proposals (1877).
+7001 exits0,passedTrue. Others exit2/False. This is the first reported pass of
+the predeclared E041 posterior motor/muscle/bend assay,1/4 cohort candidates.
+An overall cohort exit2 can coexist with this individual success.
+
+Winner7001 from6002:fit tail median0.00136388093→0.00303739123rad;
+net-muscle0.00352342427→0.00646743365. Long validation0.00303769857rad /
+0.00646781549. Perturb±1mV both qualify. Brain-refined0.00303260423rad /
+0.00646974146,relative changes-0.15760% bend,+0.03568% muscle versus fit;
+body-refined0.00303931907rad /0.00646751747. All FIVE active validations
+qualifiedTrue;held-voltage excursions0 and qualifiedFalse as expected for the
+negative control. Parent/source helper's control gate is quietness,not an active
+amplitude pass. Reported worker passedTrue confirms combined control/validation.
+
+Worst active bend0.00303260423 is1.0868% above0.003rad threshold;minimum active
+net-muscle0.00646745972 is above0.003. Accept under predeclared criteria without
+post-hoc goal changes. Limited amplitude margin does not imply broad robustness.
+Long300s /other20s settings are from launcher;durations/source/environment hashes
+not directly printed in excerpt. No further independent raw verification done.
+
+Winner path(server only):
+`.../autonomous-posterior-motor-20261110T140125786528Z/seed-7001/network_best.npz`.
+SHA256 not supplied yet,do not invent it or claim an independent checkpoint
+backup/asset promotion. Complete source,history,parents,allowed masks,RNG and
+validation traces should remain in that immutable worker directory;no overwrites
+made by agent. Other candidates7000/7002 are near bend target but do not pass;
+7003 improves from alternate lineage yet still fails both physical thresholds.
+Preserve independent candidates as H1.1 requires.
+
+Scientific scope:small autonomous posterior amplitude through the channel brain,
+anatomical readout and liquid body under existing zero-drive protocol. This is
+not a coordinated traveling wave,forward/backward motion,swimming,natural-animal
+fidelity,whole-body amplitude qualification or a reusable command-conditioned
+skill selector. Current head/middle amplitudes are absent in this console;
+retention was never a gate. Full302-cell network remains simulated;no new
+runtime drive or change to physical parameters was introduced in this run.
+
+Decision:register qualified posterior amplitude evidence in SKILL_REPERTOIRE;
+preserve7001 rather than replacing it in future experiments. Next inspect full-
+body regional amplitudes and trajectories,then choose amplitude completion or
+coordination based on evidence. No new simulation,RL or training launched here.
+Exact values transcribed from direct user message (no attachment bytes for hash)
+in `/tmp/r-elegans-E043-server-transcription.txt`;compact parsed record
+`experiments/records/E043-server-20261110.json` labels transcription and missing
+checkpoint/source hashes explicitly. This is a user-reported server result,
+not an independently downloaded/recomputed assay.
+
+Manual user-console transcription and parsed summary archived at external
+OneDrive`notebook/evidence/E043/server-report-20261110`;separate manifest SHA256
+40ec9029c8fb4f60269e132290e9cbdff95088b6c1b8bce5dcc12892f1c0e73a.
+This preserves reported evidence only,not the actual winner genotype/trajectories
+or independent server verification. Local archive copy completed;cloud sync
+unverified. Winner remains server-only;no checkpoint hash fabricated. Docs
+register MOT-16 autonomous posterior amplitude evidence,explicitly scoped to
+these assays. Results-only update,no training/implementation changes.

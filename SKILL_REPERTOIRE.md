@@ -26,6 +26,9 @@ Status labels:
 - **Driven evidence:** a full recurrent brain has produced the effect with
   external pacing/current inputs in normalized mechanics; evidence may be
   user-reported. This is not autonomous movement or calibrated crawling.
+- **Autonomous amplitude evidence:**zero-drive recurrent channel network passes
+  the specified muscle/bend assay;does not establish coordination or locomotion.
+  Server reports remain labeled until raw artifact verification.
 - **Candidate:** train/test separately; not demonstrated through the recurrent
   brain. A legacy analytic-gait demo does not change this status.
 - **Composition:** later selection/sequencing/feedback over motor skills,
@@ -63,6 +66,7 @@ categories. No numeric biological parameter ranges are assumed without data.
 | MOT-13 | Crawling execution profile; load, amplitude, frequency | Reference-matched waveform, slip and speed on specified substrate | Extension/calibration: SI factories exist; current normalized driven runs are not calibrated crawling; MOV-01 |
 | MOT-14 | Swimming execution profile; viscosity, amplitude, frequency | Reference-matched liquid waveform, propulsion and turning | Extension/calibration: SI liquid factory exists; active gait remains uncalibrated; MOV-08 |
 | MOT-15 | Load/gait adaptation; medium/load context | Appropriate waveform and propulsion across tested mechanical loads | Candidate after medium-specific skill calibration; MOV-09 |
+| MOT-16 | Autonomous posterior oscillatory bending;fixed fitted parameters | Tail median sustained bend>=0.003rad AND net-muscle excursion>=0.003,perturbation/refinement and quiet held-voltage checks | Autonomous amplitude evidence,user-reported E043 seed7001 passes all checks;server-only checkpoint,hash verification pending;synthetic precursor to MOV-01/08,not locomotion |
 
 MOT-01/02 are useful identification tasks, not additional claims of natural
 behavior categories. MOT-13/14 are medium-conditioned variants of the movement
@@ -356,3 +360,9 @@ superseding the8-hour preparation and intervening4-hour request. Same launcher,
 6002x3+6003x1 parents,seeds7000–7003,20s fit/300s long validation,original bounds
 and zero drive. Eight-hour source preserved in commit`30ff375`. No E043 server
 launch confirmed;editing launcher does not change an existing process.
+
+E043 result(2026-11-10):MOT-16 is the first reported qualified autonomous
+posterior amplitude primitive,seed7001. All five active checks pass;held voltage
+quiet. Preserve independent winner;whole-body amplitude,phase/heading/propulsion
+remain unassessed. Source path and missing raw verification recorded in
+`experiments/records/E043-server-20261110.json`. No new run launched.
