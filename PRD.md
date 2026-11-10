@@ -2,14 +2,25 @@
 
 **Status:** Living specification
 
-**Last updated:** 2026-09-01
+**Last updated:** 2026-11-10
 
 **Target stack:** JAX, Diffrax, and a vectorized JAX environment interface
 
-**Long-term objective:** A differentiable, anatomically constrained model in
-which environmental stimuli enter identified sensory neurons, recurrent
-302-neuron dynamics generate motor-neuron activity, anatomical neuromuscular
-connections activate the body, and behavior changes the sensed environment.
+**Long-term objective:** One anatomically and biophysically constrained embodied
+worm model that explains compatible neural, physiological, mechanical, sensory,
+behavioral and perturbation data together, and predicts held-out observations.
+Environmental stimuli enter identified sensory neurons, recurrent dynamics
+generate motor activity, anatomical NMJs activate muscles, and movement changes
+sensory/proprioceptive input. Swimming in water and crawling on a moist substrate,
+with action initiation, stopping and restarting, are required capabilities.
+
+**2026-11-10 clarification:** Matching all existing evidence is the research
+objective, not an achieved claim or a requirement to train everything in one
+shot. Maintain an explicit, nonexhaustive data/coverage ledger in
+[`experiments/data_targets_v1.json`](experiments/data_targets_v1.json). Unknown,
+conflicting and unsupported observations remain visible. Fit within measurement
+uncertainty and declared experimental conditions; do not demand identical
+trajectories from different animals or silently exclude difficult evidence.
 
 ## 1. Scope and scientific claim
 
@@ -33,6 +44,13 @@ completeness. It does not by itself create a functioning or biologically
 calibrated brain.
 
 ## 2. Current implementation baseline
+
+The list below includes historical software baselines. The dated implementation
+and qualification record is in [CURRENT_MODEL.md](CURRENT_MODEL.md). Latest:
+the E048 opt-in full-channel branch connects actual chemical/body observations
+to neurons and shows software pathway effects in water and a wet-agar reference.
+The earlier liquid amplitude checkpoint is preserved. Neither milestone is a
+joint fit to the biological data families or a validated swimming/crawling animal.
 
 The repository currently provides:
 
@@ -222,28 +240,40 @@ benchmark. It is not an acceptable final sensory-neural implementation.
 
 ### 4.8 Learning strategy
 
-Training proceeds in inexpensive stages:
+Training remains incremental under the user's coverage-first H1.1 strategy.
+Independent skill checkpoints are useful during discovery; the final biological
+claim requires one shared model explaining the declared reference animal across
+assays and media. A different fitted network for every experiment is not that
+result. Historical driven teachers remain reproducible pretraining baselines,
+with synthetic outputs distinguished from animal measurements.
 
-1. Fit body motion primitives and the continuous action interface.
-2. Fit neural motor outputs to the muscle/body motion library.
-3. Fit a compact engineered sensory controller as a closed-loop behavioral
-   teacher, by differentiating through the simulator or, as an alternative
-   body-direct-only fitting method, by model-free reinforcement learning
-   against a Gymnax-compatible wrapper of the same environment (see
-   `r_elegans.rl`).
-4. Fit the recurrent network by supervised trajectory matching to sensory and
-   motor teachers while preserving connectome masks. (Done for a
-   hand-selected 14-neuron chemotaxis subcircuit, not the full 302-neuron
-   network; see `CURRENT_MODEL.md`'s "Connectome-subcircuit chemotaxis".)
-5. Fine-tune the recurrent closed loop through differentiable behavior loss.
-   (For the same 14-neuron subcircuit, fine-tuned through RL rather than a
-   differentiable loss, since the Gymnax environment treats the simulator as
-   a black box; see the same section.)
-6. Use RL only for tasks with delayed reward, partial observability, competing
-   objectives, or exploration that supervised/differentiable objectives do not
-   cover.
+1. Inventory source data, conditions, units, identities, uncertainty, dependencies
+   and missing capabilities; freeze training/validation/test groups before fitting.
+2. Preserve anatomy and documented stereotypical parameters; fit only supported
+   unknowns with explicit priors and bounds. Mechanism changes are versioned.
+3. Build viable motor/sensory primitives in baby steps, preserving selected
+   parents and measuring retention as new data families enter the curriculum.
+4. Fit shared neuronal, synaptic, sensory and body hypotheses against compatible
+   recordings together, including paired neural/behavior observations where
+   available. Use explicit measurement models for fluorescence and digitized data.
+5. Balance objectives by data family and uncertainty. Report each family's
+   residuals and failures, not only one weighted total. Numerical integrity and
+   physical constraints remain independent requirements.
+6. Test held-out animals, trials, conditions and mechanistic perturbations.
+   Mutants change documented mechanisms, not arbitrary weights refitted to their
+   outcomes; rescue should restore the intervention. Preserve contradictory data
+   and expand/revise mechanisms when needed rather than only training longer.
+7. Introduce RL for later sensory-guided task selection/exploration once viable
+   motor primitives exist. RL does not replace electrophysiological fitting or
+   biological validation.
 
-RL is not required merely to demonstrate locomotion or gradient following.
+Condition differences must be explicit, including genotype, age, temperature,
+feeding history, medium and initial state. The environment supplies physical
+stimuli, not a hidden experiment-label policy switch. Observation calibration
+and any nuisance parameters use training data only. Unmeasured arbitrary
+neuron-by-time currents cannot be used to force a match while claiming autonomous
+prediction. Broader developmental, organ and 3D data require explicit extensions
+of the adult planar model and remain listed as unsupported until then.
 
 ## 5. Current quantitative baseline
 
@@ -324,11 +354,25 @@ This gate is **not yet satisfied**. It requires comparison with experimental
 neural traces, locomotor statistics, sensory ablations, and behavior across
 multiple stimulus geometries, with uncertainty and provenance reported.
 
+For the unified objective, admission and validation must additionally establish:
+
+- shared parameters across compatible data families and both media;
+- appropriate observation models, units, cohort matching and time/space alignment;
+- per-family tolerances defined from evidence/variability before evaluation;
+- grouped held-out prediction with no animal/trial or source-data leakage;
+- mechanistically mapped loss-of-function and rescue predictions without
+  independent per-test retraining;
+- coverage and failure reports for data the model cannot yet explain.
+
+An anatomy prior, a published fitted curve and a simulation-generated teacher
+are different evidence types and cannot be counted as independent validation
+measurements. Reused experiments must not be double-counted under multiple sources.
+
 ## 8. Explicit nonclaims
 
 Until Gates E and F are passed, documentation and results must not claim that:
 
-- the recurrent 302-neuron brain has been trained;
+- the recurrent 302-neuron brain is biologically validated or behaviorally complete;
 - the connectome itself finds food;
 - all neuron-to-neuron weights or signs are known;
 - all 302 neurons have calibrated ion-channel compositions;

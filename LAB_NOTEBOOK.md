@@ -3903,3 +3903,70 @@ Use these as held-out checks of causal mechanism,not amplitude-only training
 rewards. Current DVA/SMDD proxies cannot be called gene-faithful knockouts;
 SMDD feedback is disabled by default and a zero-gain SMDD deletion would be
 uninformative. No new motor skill or start/stop capability is established.
+
+## 2026-11-10 — Unified model fitting objective clarified by user
+
+User says the model should behave similarly to the biological perturbations,
+then clarifies the overall goal:train a worm matching all existing data.
+Interpretation:one shared biological model consistent with compatible datasets
+and experimental variability,with held-out predictive validation. Preserve H1.1
+incremental training and selected skill parents;final scientific claim cannot
+be a different policy/parameter set independently fitted to each assay.
+Record conditions,genotypes and unsupported developmental/organ/3D extensions
+rather than forcing incompatible experiments into one unexplained target.
+
+Read-only local inventory performed,not a fitting experiment or new acquisition.
+Core22 and physiology10 manifest artifacts all exist and match recorded SHA256.
+Existing digitized electrophysiology and transferred priors must be distinguished
+from raw direct measurements. A single extracted calcium HDF5 has1600x109 raw
+channels and1600-element behavioral streams plus30/62-column angle arrays.
+There are55 unique canonical label candidates at confidence>=4;no claim all109
+channels are identified or all55 pass later signal-quality checks. Existing
+label metadata covers40 UIDs,but remaining archived recordings were not admitted
+or counted as ready cohorts. Original archive568776589bytes was observed but
+not rehashed/extracted in this audit. The raw/functional directory is empty.
+
+Exact inventory command:
+`.venv/bin/python /tmp/r-elegans-joint-data-inventory.py`.
+Source/output at /tmp/r-elegans-joint-data-inventory.py and
+/tmp/r-elegans-joint-data-inventory/inventory.json. It checks existing manifests,
+small extracted HDF5/label hashes and array shapes,not model residuals.
+No data split or target-score inspection/tuning performed. Units and shared
+array lengths do not prove synchronization,physical calibration or spatial
+correspondence to11 model joints. No model training,tests or parameters changed.
+
+Created experiments/data_targets_v1.json:nonexhaustive readiness ledger for
+anatomy/transmitters,electrophysiology,paired calcium/behavior,sensory response,
+mechanics/media,genetic/circuit perturbations and action-state repertoire.
+Updated PRD objective/learning/validation gates and corrected its stale prohibition
+on truthfully reporting full-network training attempts (biological validation
+remains absent). This is a requirements/data audit,not an implemented joint
+trainer. All source arrays,checkpoints and raw archives remain outside Git.
+
+Decision:admit datasets with identity,condition,units,alignment,observation model,
+uncertainty and source-dependency checks;freeze grouped animal/trial holdouts
+before fitting. Balance family losses without allowing large datasets to hide
+failed modalities;report each family and missing capabilities. Keep documented
+stereotypical parameters fixed and fit unknowns conservatively. Mutations map to
+mechanistic interventions with no independent mutant refits;reserve held-out
+interventions where feasible. Preserve discrepant evidence and use failures to
+revise model mechanisms. Do not claim matching every raw observation exactly or
+exhaustive data coverage. Immediate next preparation is paired neural/behavior
+data admission and additional-animal inventory,not a blind longer motor-only run.
+
+Parameter identifiability remains part of the original research question:even
+joint data fits may admit multiple weight/channel configurations. Keep
+admissible candidate ensembles and report their uncertainty/robustness,while
+requiring each candidate to explain the assays with shared parameters. Do not
+choose a different ensemble member after seeing each held-out experiment.
+
+Inventory/requirements archive:
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/unified-data-objective-20261110`,
+249 files verified;manifest SHA256
+f9eae55423e9273d467b297bb677b97cb2daee50e38063559cffbc8fbbebe3c3.
+Includes inventory source/output,initial data-target ledger and source/environment
+snapshot. Original raw data remains in its established external location,not
+copied into Git. Local archive verified;cloud synchronization unverified.
+Structured JSON and whitespace checks pass;no runtime code changed or software
+test rerun. No joint trainer,optimization run or comprehensive data census is
+claimed by this documented objective and source-readiness audit.

@@ -2419,3 +2419,47 @@ It remains an exploratory feedback proxy. Likewise, default SMDD feedback is
 zero and has no independent TRP-1/TRP-2 states. A gain deletion is a functional
 pathway lesion, not a faithful genetic knockout or whole-neuron ablation.
 No parameters or mechanisms were changed by this literature review.
+
+## Unified data-constrained model objective (2026-11-10)
+
+User clarification:the model should reproduce the effects of biological
+perturbations and ultimately match all existing compatible evidence together.
+The target is one embodied reference worm model across neural activity,
+electrophysiology,sensory responses,mechanics,normal behavior and interventions.
+The target is not yet achieved. Both water swimming and moist-substrate crawling
+remain required. Incremental skills and independent parent checkpoints remain
+useful under H1.1;eventual cross-data validation must use shared parameters,
+with explicit experimental conditions and mechanistically defined interventions.
+
+`experiments/data_targets_v1.json` now records seven data families,their local
+source readiness,missing model capabilities and admission/validation requirements.
+It is an initial nonexhaustive inventory,not a joint optimizer or a claim that
+all literature has been collected. Known parameters remain fixed by documented
+evidence;unknowns require bounds/priors. Measurement and individual variability
+set tolerances;contradictory observations remain part of the evidence ledger.
+
+Local read-only source audit reverified all22 artifacts in the core manifest
+and all10 in the physiology manifest. The extracted Atanas/Kim candidate
+2022-06-14-01 has1600 frames x109 raw fluorescence channels,with paired behavior
+arrays including velocity,angular velocity,head angle,reversals and body-angle
+representations. At confidence>=4,55 canonical identities are unique and within
+trace bounds;this is metadata eligibility,not a final usable-trace count or
+proof of whole-brain coverage. Trace quality,conditions,physical units,time
+alignment and body-angle mapping remain admission work. Recorded pumping lies
+outside the95 body-wall-muscle model. A larger archive exists but was not fully
+inventoried or rehashed in this audit;the functional raw-data directory is empty.
+
+This paired recording is a concrete candidate for joint neural/body fitting.
+The existing calcium fitter fits selected neural traces;it does not jointly fit
+these paired behavior arrays or all data families. No training/validation/test
+split has been frozen for the new objective. Prefer holdouts by animal/trial;
+a temporal split from a single recording does not establish between-animal
+prediction. Observation normalization/calibration must use training data only.
+
+Next:admit paired recordings and additional animals with units/identity/condition
+checks,freeze grouped splits,and build shared-model losses and per-family reports.
+Use knockout/rescue and untrained conditions as causal validation targets where
+the mechanism exists. Do not refit a different network for every experiment or
+hide missing biology behind unconstrained time-varying currents. Failure across
+compatible data may identify missing mechanisms rather than insufficient run
+length. No new model optimization or dataset acquisition occurred in this update.

@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "updated_date": "2026-11-10",
+  "status": "initial_nonexhaustive_inventory_not_joint_trainer",
+  "objective": "One biologically constrained embodied model consistent with all admitted compatible data families and predictive under held-out interventions",
+  "coverage_is_exhaustive": false,
+  "initial_reference_domain": {
+    "target": "Adult hermaphrodite,reference strain and conditions specified per dataset",
+    "required_media": [
+      "water",
+      "moist compliant substrate"
+    ],
+    "separate_extensions": [
+      "male anatomy",
+      "larval/dauer development",
+      "3D mechanics/contact",
+      "pharynx/gut/reproduction",
+      "unimplemented sensory and physiological states"
+    ]
+  },
+  "shared_model_policy": {
+    "shared_parameters_across_assays": true,
+    "same_parameters_across_media": true,
+    "conditions_explicit": [
+      "strain/genotype",
+      "age/stage",
+      "temperature",
+      "medium geometry/materials",
+      "feeding/history",
+      "stimuli",
+      "initial state",
+      "measurement process"
+    ],
+    "independent_primitive_checkpoints_allowed_during_discovery": true,
+    "final_cross_data_claim_requires_one_shared_model": true,
+    "per_mutant_unconstrained_refitting_allowed": false,
+    "known_parameters_fixed_by_documented_evidence": true,
+    "unknowns_fit_only_with_bounds_and_provenance": true,
+    "parameter_uncertainty_and_admissible_ensembles_reported": true,
+    "each_ensemble_candidate_must_share_parameters_across_assays": true
+  },
+  "admission_requirements": [
+    "source/version/license/hash",
+    "cohort and experimental protocol",
+    "units and calibration",
+    "neuron identities/confidence",
+    "timestamps and signal alignment",
+    "spatial/body conventions",
+    "uncertainty and observation model",
+    "deterministic intervention mapping",
+    "frozen train-validation-test grouping",
+    "explicit exclusions and reasons"
+  ],
+  "evaluation_policy": {
+    "holdout_preference": [
+      "animals",
+      "trials",
+      "stimulus conditions",
+      "interventions"
+    ],
+    "single_recording_temporal_holdout_limit": "Does not establish between-animal generalization; account for temporal correlation",
+    "observation_calibration_fit_on_training_only": true,
+    "family_balanced_uncertainty_scaled_losses": true,
+    "unmeasured_latent_currents_cannot_silently_drive_target_traces": true,
+    "each_family_reports_separate_metrics_and_failures": true,
+    "scalar_total_loss_is_not_completion": true,
+    "measurement_variability_sets_tolerances_before_evaluation": true,
+    "unsupported_or_conflicting_data_remain_in_coverage_ledger": true,
+    "eligibility_not_based_on_current_model_fit": true,
+    "source_dependence_and_reused_measurements_tracked": true,
+    "conflicting_studies_retained_with_conditions_and_uncertainty": true,
+    "assay_specific_selection_of_best_ensemble_member_allowed": false
+  },
+  "families": [
+    {
+      "id": "anatomy_and_transmitters",
+      "use": "structural constraints and evidence-weighted priors",
+      "local_source_status": "22 core manifest artifacts checksum-verified in this audit",
+      "manifest": "manifests/core_data_manifest.json",
+      "runtime_topology_present": true,
+      "limitations": [
+        "Synapse counts are not physiological strengths",
+        "Transmitter evidence is not a complete receptor/polarity model"
+      ]
+    },
+    {
+      "id": "single_cell_electrophysiology",
+      "use": "channel/kinetic and cell-response constraints",
+      "local_source_status": "10 physiology manifest artifacts checksum-verified;includes derived traces/parameters",
+      "manifest": "manifests/physiology_manifest.json",
+      "existing_tools": [
+        "r_elegans/brain/conductance_fitting.py",
+        "r_elegans/data/physiology.py"
+      ],
+      "limitations": [
+        "Digitized/model-derived sources must be distinguished from raw direct recordings",
+        "No calibrated physiology for all302 cells"
+      ]
+    },
+    {
+      "id": "paired_calcium_and_behavior",
+      "use": "joint neural observation and motor/behavior prediction",
+      "local_source_status": "One extracted paired candidate inspected;archive present but not fully inventoried",
+      "candidate": {
+        "relative_path": "raw/calcium/atanas_kim_2023/2022-06-14-01-data.h5",
+        "sha256": "aabca135ef82e4be6821bf515cd2e936ae2f78014bf2979ed8a10aeaa7c4ac11",
+        "labels_relative_path": "raw/calcium/atanas_kim_2023/neuropal_label.json.bz2",
+        "labels_sha256": "b371e3dae9a0f78c6f6b9ba63c7076a55aa8fccecb650f579f53918d10402684",
+        "recording_uid": "2022-06-14-01",
+        "raw_trace_shape": [
+          1600,
+          109
+        ],
+        "unique_canonical_labels_at_confidence_4": 55,
+        "label_count_limit": "Metadata eligibility only; not a final trace-quality or generalization count",
+        "behavior_arrays": {
+          "angular_velocity": [
+            1600
+          ],
+          "body_angle": [
+            1600,
+            30
+          ],
+          "body_angle_absolute": [
+            1600,
+            62
+          ],
+          "body_angle_all": [
+            1600,
+            62
+          ],
+          "head_angle": [
+            1600
+          ],
+          "pumping": [
+            1600
+          ],
+          "reversal_events": [
+            2,
+            39
+          ],
+          "reversal_vec": [
+            1600
+          ],
+          "velocity": [
+            1600
+          ],
+          "worm_curvature": [
+            1600
+          ],
+          "zeroed_x_confocal": [
+            1600
+          ],
+          "zeroed_y_confocal": [
+            1600
+          ]
+        },
+        "readiness": "Candidate paired recording; units,alignment,spatial convention,conditions and frozen splits still require admission checks"
+      },
+      "existing_tools": [
+        "r_elegans/data/calcium.py",
+        "scripts/fit_calcium_network.py"
+      ],
+      "joint_loss_implemented": false,
+      "conditions_units_alignment_admitted": false,
+      "splits_frozen": false,
+      "limitations": [
+        "109 trace channels are not109 verified neuron identities",
+        "55 unique confidence>=4 canonical labels are metadata candidates,not final quality-passed traces",
+        "Body-angle arrays do not map automatically onto the11 simulated joints",
+        "Recorded pumping is unsupported by the95 body-wall-muscle model"
+      ]
+    },
+    {
+      "id": "sensory_transduction",
+      "use": "identified odor/salt/mechanical response dynamics and dose-response",
+      "local_source_status": "Primary literature identified;quantitative benchmark extraction/admission pending",
+      "implementation_status": "E048 effective conductance proxies exist,unfitted",
+      "quantitative_joint_fit_ready": false
+    },
+    {
+      "id": "body_and_medium",
+      "use": "passive material/load response,force curves,waveform,speed and slip",
+      "local_source_status": "Published calibrations and E045/E046 audits available;matched biological gait datasets not admitted",
+      "implementation_status": "Liquid JAX body and nonlinear wet reference;wet low-speed uncertainty remains",
+      "limitations": [
+        "E044-E048 synthetic trajectories are model outputs,not animal training targets",
+        "Published fitted drag curves are not independent raw force measurements"
+      ]
+    },
+    {
+      "id": "genetic_and_circuit_perturbations",
+      "use": "held-out causal predictions and cell-directed rescue",
+      "local_source_status": "Primary qualitative targets recorded;matched quantitative cohorts not admitted",
+      "candidate_targets": [
+        "trp-4 and DVA rescue",
+        "trp-1/trp-2 single and double mutants",
+        "B motor silencing",
+        "vab-7 developmental changes",
+        "unc-7/unc-9 and AVB pathway tests"
+      ],
+      "gene_faithful_model_ready": false,
+      "limitations": [
+        "Gain deletion is not a gene knockout",
+        "SMDD feedback defaults off",
+        "Current DVA proxy lacks channel-specific opposing/directional transduction"
+      ]
+    },
+    {
+      "id": "action_states_and_behavior_repertoire",
+      "use": "start-stop-restart,directional transitions,search and sensory-guided tasks",
+      "local_source_status": "Behavior catalog and selected paired-recording observables;complete admitted benchmark set absent",
+      "catalog": "BEHAVIOR_CATALOG.md",
+      "protocols": "TRAINING_PROTOCOLS.md",
+      "physiological_state_control_validated": false,
+      "full_behavior_coverage_claimed": false
+    }
+  ],
+  "verified_local_source_manifests": [
+    {
+      "manifest": "manifests/core_data_manifest.json",
+      "sha256": "d22b48df58595c5f9991f77463331c0006af5e74f5ed8f6f2356e4ff5c2b1180",
+      "checked_artifacts": 22,
+      "verified_artifacts": 22,
+      "issues": []
+    },
+    {
+      "manifest": "manifests/physiology_manifest.json",
+      "sha256": "d1b1df91788545742d240798d7fa0261bab8c1cd6062c4ba2052f1659cd66f86",
+      "checked_artifacts": 10,
+      "verified_artifacts": 10,
+      "issues": []
+    }
+  ],
+  "next_work": [
+    "Admit paired neural/behavior recordings with verified units,identities,conditions and spatial/time alignment",
+    "Inventory remaining archive recordings and freeze animal/trial holdouts before fitting",
+    "Build shared-model losses and per-family reports using observation models and conservative fit constraints",
+    "Train incrementally with retained prior constraints,then test held-out perturbations without per-test refitting"
+  ],
+  "not_performed": [
+    "No new model optimization",
+    "No new dataset downloaded",
+    "No complete literature/data census",
+    "No independent mutant phenotype replication"
+  ]
+}

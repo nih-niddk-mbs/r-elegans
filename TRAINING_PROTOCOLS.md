@@ -1875,3 +1875,63 @@ loss. Specify matched conditions and acceptance criteria before experiments.
 Do not refit every mutant independently and then call the result a prediction.
 The current exploratory DVA/SMDD inputs require further mechanism work before
 these specific genotypes can be reproduced; the table is a validation backlog.
+
+## Unified data-fitting objective (2026-11-10 clarification)
+
+The user defines the overall target as one worm model matching all existing
+compatible evidence, including the effects of biological perturbations. This
+requires a joint, evidence-constrained system-identification curriculum in
+addition to motor-skill coverage. The ultimate claim uses shared parameters;
+interim standalone skill checkpoints remain useful and must be preserved.
+Both swimming and moist-surface crawling remain required. This does not turn
+the next run into a one-shot optimization of every task.
+
+The initial machine-readable ledger is `experiments/data_targets_v1.json`.
+It lists seven data families, their current source readiness and missing
+capabilities. It is explicitly nonexhaustive and is not a new optimizer.
+Admission requires provenance/units/conditions, neuron-identity confidence,
+measurement models, spatial/time alignment, uncertainty and frozen splits.
+Data cannot be excluded merely because the current model fits it poorly;
+conflicting studies and unsupported targets stay visible with reasons.
+Track source dependencies so digitized copies, inherited priors and the same
+experiment republished elsewhere do not become independent validation samples.
+
+For each fitting stage:
+
+1. Specify the shared model, fixed/unknown parameters, reference cohort and
+   explicit environmental/intervention variables. Keep stereotypical parameters
+   fixed where supported; version any change in that decision.
+2. Admit compatible observations and freeze grouped holdouts before training.
+   Prefer animals/trials; account for temporal correlation. Calibrate fluorescence
+   observations and nuisance parameters on training data only.
+3. Fit a small set of families jointly, then expand with rehearsal/retention.
+   Balance family contributions by sampling and measurement uncertainty;
+   do not let many correlated calcium samples overwhelm a failed perturbation.
+4. Report every family's fit and held-out metrics alongside physical/numerical
+   checks. A smaller weighted total is insufficient if one critical family fails.
+5. Apply specified mechanistic lesions and rescues without independent mutant
+   refits. Held-out interventions/conditions test whether the fitted mechanisms
+   explain the animal rather than only reproduce its normal trajectories.
+
+The existing extracted calcium recording also contains body-angle, velocity,
+reversal and head-motion observations, making paired neural/motor fitting a
+concrete first candidate. Its raw109 channels include55 unique high-confidence
+canonical label candidates; final trace quality/conditions/units and mapping
+of30/62 recorded angle variables to11 simulated joints remain to establish.
+A larger archive needs inventory before freezing between-animal splits.
+Existing `fit_calcium_network.py` does not jointly optimize these behavior
+arrays, and the motor-only optimizer does not consume all biological datasets.
+No combined trainer or new fit was produced by this requirements update.
+
+The final model should match distributions/uncertainty for the declared cohorts,
+not every noisy sample exactly. If shared parameters cannot explain compatible
+observations, record the failure and test missing mechanisms. Longer training
+or unconstrained latent per-neuron drive is not an automatic remedy. The current
+planar adult model cannot explain pharyngeal, developmental or3D data without
+explicit model extensions; those gaps remain in the coverage ledger.
+
+Matching many data families may still leave nonunique weights. Retain admissible
+parameter ensembles to study the user's original question of weight specificity,
+but each candidate must use shared parameters across assays. Selecting a
+different best-fitting ensemble member for each experiment is not cross-data
+validation of one candidate. Report uncertainty and failed predictions.

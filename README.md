@@ -3,6 +3,13 @@
 `r-elegans` is an experimental JAX-native foundation for a differentiable,
 connectome-constrained *C. elegans* simulator.
 
+**Research objective:** fit one shared embodied model against compatible
+physiology, neural activity, movement, sensory responses and perturbation data,
+then test held-out animals and experiments. The initial
+[data-target ledger](experiments/data_targets_v1.json) tracks available sources
+and missing capabilities; this is not yet an achieved biological model or a
+completed joint-data trainer. Training remains incremental.
+
 **Latest autonomous milestone (2026-11-10):**server winner7001 passes both
 tail motor/muscle/bend and full-body regional amplitude checks with zero external
 drive. Tail,middle and head all meet the defined target. Selected parameters and the assessment are now hash-verified in external Mac

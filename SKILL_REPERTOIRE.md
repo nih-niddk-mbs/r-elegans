@@ -15,6 +15,13 @@ require explicit extensions.
 
 ## Meaning of coverage and skill status
 
+User clarification (2026-11-10): the ultimate objective is one shared model
+consistent with compatible neural, physiological and behavioral data, including
+perturbations. H1.1 permits independent checkpoints during discovery; successful
+separate policies do not establish that final cross-data model. Retain every
+qualified parent while joint fitting and later consolidation develop. See
+`experiments/data_targets_v1.json` for the initial data-readiness ledger.
+
 User clarification after E046 (2026-11-10):both swimming in water and crawling
 on a moist substrate are required. Initiation, pause and restart are required
 alongside sustained movement. The experimental wet-agar reference is assessed
