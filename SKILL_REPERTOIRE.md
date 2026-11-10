@@ -415,3 +415,14 @@ is not useful locomotion qualification. Next proposed step:small smooth spatial
 phase progression while retaining existing regional amplitudes/zero drive.
 Winner7001 unchanged;no new training. Exact verification:
 `experiments/records/E044-local-artifact-review-20261110.json`.
+
+### E048 — Sensory connections as infrastructure (2026-11-10)
+
+The opt-in channel-brain branch now receives local chemical and actual bending
+signals at identified neurons. Paired block controls and continuous-memory
+checks distinguish the connection from mere anatomical cell presence. This is
+infrastructure, not a new behavioral skill or retrospective promotion of the
+older normalized chemotaxis demo. Input gains, kinetics and receptive fields
+remain experimental. MOT-16/17 retain their original no-input liquid qualification;
+MOT-05/06 physiological stop/restart and MOT-15 environment adaptation still
+require new evidence in this branch. No new skill checkpoint is registered.

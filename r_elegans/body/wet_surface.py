@@ -230,3 +230,31 @@ def replay_surface_commands(commands, body, law, dt, *, substeps=1, quadrature_o
     if not all(np.isfinite(value).all() for value in trace.values()):
         raise RuntimeError("Nonfinite surface trajectory")
     return trace
+
+
+def surface_body_step(state, signed_command, body, law, dt, *, initial_velocity=None):
+    """One reference body step for genuinely interleaved neural feedback.
+
+    Unlike replay_surface_commands, this takes a fresh endogenous command each
+    step, so the resulting shape can feed back before the next neural update.
+    Returns a NumPy-valued MuscleBodyState and the solver's warm-start velocity.
+    """
+    from .actuation import MuscleBodyState
+    command = np.asarray(signed_command, dtype=float)
+    q = np.asarray(state.joint_angles, dtype=float)
+    if (command.shape != q.shape or not np.isfinite(command).all()
+            or np.max(np.abs(command)) > 1+1e-6 or not np.isfinite(dt) or dt <= 0):
+        raise ValueError('Bounded finite command and positive body timestep required')
+    drive = np.asarray(state.muscle_activation, dtype=float)
+    drive = drive+(-np.expm1(-dt/float(body.activation_time_constant)))*(command-drive)
+    velocity, info = solve_surface_velocity(q, float(body.muscle_moment_scale)*drive,
+        body, law, dt, initial_velocity=initial_velocity)
+    length = float(body.mechanics.segment_length)*(len(q)+1)
+    next_q = q+dt*velocity[3:]/length
+    if np.max(np.abs(next_q)) >= float(body.max_joint_angle):
+        raise RuntimeError('Reference body reached joint limit; constrained solver required')
+    heading = float(state.heading)
+    c, s = np.cos(heading), np.sin(heading)
+    position = np.asarray(state.position)+dt*np.array(((c, -s), (s, c))) @ velocity[:2]
+    return MuscleBodyState(position, np.asarray(heading+dt*velocity[2]/length),
+        next_q, drive, np.asarray(float(state.time)+dt)), velocity, info

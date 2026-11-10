@@ -2266,3 +2266,108 @@ Primary evidence: [odor detection](https://pubmed.ncbi.nlm.nih.gov/8348618/),
 [B-type proprioception](https://doi.org/10.1016/j.neuron.2012.08.039),
 [DVA stretch sensing](https://doi.org/10.1038/nature04538),
 [SMDD proprioception](https://doi.org/10.1371/journal.pbio.2004929).
+
+## Embodied sensory connections (E048, 2026-11-10)
+
+The missing world/body inputs are now implemented in a separate opt-in branch.
+`body/closed_loop.py` connects the full 302-neuron conductance network, existing
+recurrent chemical/electrical edges, anatomical NMJs, 95 muscles and the actual
+body. Existing control-to-motor edges are retained. The old `channel_body_chunk`
+entry point remains the historical no-input model; original checkpoints are not
+rewritten. This supersedes E047's missing-input status only for the new branch.
+
+The causal interval is:
+
+```text
+head position -> local chemicals -> adaptive sensory conductances -> neurons
+body curvature -> proprioceptive conductances ---------------------> neurons
+neurons -> existing recurrent connections/NMJs -> 95 muscles -> body
+                                                               |
+                                               next interval <-+
+```
+
+Only sampled concentrations and local/body-bending measures reach neurons.
+No desired gait, phase clock, desired direction, source bearing or distance is
+supplied. The world uses meters, concentrations use micromolar, conductances
+use nS and currents use pA. Sensory channels contribute `g*(E-V)` inside the
+membrane solve, not forced voltage or direct muscle commands. The injected
+conductances are held during each body interval while neuronal gates evolve.
+Intrinsic bias remains zero in pinned winner7001. Physiological-input proxies
+are distinct from the removed artificial periodic pacing/bias currents.
+
+`body/embodied_sensory.py` currently provides:
+
+| Pathway | Observation and routing | Status |
+| --- | --- | --- |
+| AWA pair | Diacetyl test channel, adapting positive response to increases | Effective input closure; unfitted |
+| AWC pair | Benzaldehyde test channel, inhibitory input on increase and excitatory rebound on decrease | Functional sign proxy, not literal TAX-2/4/cGMP kinetics |
+| ASEL / ASER | Separate salt channel; increase / decrease respectively | Adaptive ON/OFF proxy, unfitted |
+| DB / VB | Actual anterior-weighted dorsal / ventral curvature respectively | Experimental receptive fields derived from anatomical NMJ output territories |
+| DVA | Global normalized bending magnitude | Explicit stretch-related proxy, not resolved neurite strain/TRP-4 kinetics |
+| SMDDL / SMDDR | Optional anterior dorsal-bend input | Available; default gain zero pending qualification |
+
+All sensors preserve their receptor/adaptation/bending memory across streamed
+chunks. Initial chemical memory is equilibrated to the local concentration, so
+initialization does not fabricate an odor-on pulse. Paired sensory cells share
+one head endpoint; there is no resolved left/right head geometry or fixed
+AWC ON/OFF subtype assignment. The model is not an exhaustive sensory system:
+AWB, touch, contact/pressure, water detection, gases and temperature transduction
+are not added by this implementation. Monoamine and neuropeptide state control,
+including physiological RIS-mediated stopping, remains separate work.
+
+The new sensory channels are effective conductances. They do not add direct
+calcium influx; voltage-dependent calcium entry remains through the existing
+channel library. Receptor biochemistry and calcium responses need comparison
+with recordings before physiological claims. Numerical defaults are exposed
+in `EmbodiedSensoryConfig`, not calibrated constants:
+
+- Chemical and B-type maximum gains: 0.005 nS; DVA: 0.002 nS; SMDD: 0 nS.
+- Receptor, adaptation and bend-filter times: 0.1, 2 and 0.02 seconds.
+- Concentration normalization: 1, 1 and 50,000 micromolar for the three channels;
+  these are normalization choices, not measured dissociation constants.
+- Curvature normalization: 2,000 per meter; anterior offset 0.1 body lengths,
+  receptive width 0.15 body lengths. Actual receptor locations remain unknown.
+- Effective excitatory/inhibitory reversals: 0 / -80 mV, exploratory choices.
+
+The test world is a prescribed Gaussian concentration field with scheduled
+bath exposure/washout. It is not a calibrated bacterial odor plume, finite-dish
+chemical transport or a nutrient-consumption model. Its coordinates and stimulus
+schedule are world parameters; the brain receives local samples, not the schedule
+or source location. Food finding and immersion-triggered swimming are not claimed.
+
+`diagnose_embodied_senses.py` evaluates the fixed, hash-pinned 7001 winner in
+water and the nonlinear wet-agar reference. The wet body is integrated between
+every neural/sensory update, using `surface_body_step`; command replay after a
+neural recording would be invalid with proprioception. The native JAX liquid
+path supports the same signals; the wet path is a slower NumPy reference, not a
+fast differentiable wet-surface trainer. E046 low-speed drag uncertainty remains.
+
+Primary evidence for signs and routing:
+[AWA responses](https://pmc.ncbi.nlm.nih.gov/articles/PMC5045890/),
+[AWC odor removal](https://doi.org/10.1038/nature06292),
+[ASE asymmetry](https://doi.org/10.1038/nature06927),
+[B-type proprioception](https://doi.org/10.1016/j.neuron.2012.08.039),
+[DVA stretch sensing](https://doi.org/10.1038/nature04538),
+[SMDD feedback](https://doi.org/10.1371/journal.pbio.2004929).
+These sources support functional hypotheses, not the numerical defaults above.
+
+E048 local evidence: 236 tests pass. Both the initial 5s and subsequent 20s
+fixed-winner diagnostics complete all ten cases with finite states. Compared
+with chemical-blocked controls, maximum neural differences are 3.31mV in water
+and 3.44mV on wet agar, with smaller but nonzero muscle/body differences.
+Blocking proprioception changes muscles by up to 0.0319 / 0.0104 activation
+units and joints by 0.0166 / 0.00316rad in water / wet agar respectively.
+These are causal routing effects, not behavioral success scores.
+Half-timestep endpoint differences are recorded, including stimulus discretization;
+no numerical or biological accuracy threshold is inferred after the fact.
+No-input liquid qualification stays with its original entry point and checkpoint.
+The new model has not been fitted or qualified for food finding, start/stop,
+swimming or crawling. Full evidence: E048 in the lab notebook and external archive.
+
+Trace timing is causal: sensory geometry/concentration are sampled from the
+interval-start body, receptor/filter state advances over that interval, and the
+resulting conductances are held during its neural substeps. Logged input current
+uses those conductances and the pre-update voltage. Brain/body samples are at
+the interval end. Use the saved states and this convention when comparing
+stimulus timing or fitting recordings; do not silently align all fields as
+simultaneous endpoint measurements.

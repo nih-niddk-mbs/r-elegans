@@ -1770,3 +1770,59 @@ and local receptive fields rather than synthetic gait phase or food-source
 coordinates. Record transduction units, dynamics, signs and parameter evidence
 before fitting. The current autonomous branch has no such environmental or body
 feedback inputs. Older chemical-input actors do not qualify this branch.
+
+## Sensory-connected diagnostic before further fitting (E048)
+
+The opt-in embodied branch now provides the connections requested after E047.
+Keep all 302 recurrent neurons; world/body inputs enter identified sensory and
+proprioceptive cells through effective membrane conductances. No control neuron
+or muscle is assigned an artificial gait. Separate legacy no-input code remains
+available for reproducing previous qualifications.
+
+On mbslnx2:
+
+```sh
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/launch_embodied_senses_mbslnx2.sh
+```
+
+The launcher uses the absolute dedicated environment's Python, verifies pinned
+winner7001/readout hashes, selects four physical CPU cores and detaches with
+nohup. It prints PID, results and log paths. Default: 20 simulated seconds for
+each of ten cases: water and measured wet-agar closure, each with closed-loop,
+chemical-blocked, proprioception-blocked and both-blocked controls, plus half
+body timestep for each medium. No optimizer, training seed or fitting is used.
+The source, configuration, maps, inputs, all neural/body/sensory chunk traces
+and complete initial/latest/final states remain outside Git. EXIT_CODE=0 means
+finite diagnostic completion, not successful swimming, crawling or sensing fidelity.
+
+The script also accepts an external E044 parameter-reference folder on a Mac:
+
+```sh
+python -m scripts.diagnose_embodied_senses \
+  --reference /path/to/parameter_reference \
+  --output-dir /tmp/r-elegans-sensory-check --duration 20 --refine
+```
+
+Use a fresh external output directory. Concentration inputs are micromolar and
+world geometry is SI; do not attach the normalized legacy dish to this body.
+The prescribed exposure/washout schedule is an experimental stimulus, not a
+motor phase clock or an immersion sensor. Actual body shape feeds back in both
+media. Wet runs must interleave brain and body; old open-loop command replay is
+not a substitute for that computation.
+
+Acceptance at this stage is software routing/causality: correct intended input
+signs and targets; zero-gain recovery of the historical model; continuous sensory
+memory; finite neural/body states; membrane-conductance unit consistency; and
+observable paired changes downstream of inputs. Numerical differences and
+coarse/fine stimulus-event discretization are reported explicitly. Changes in
+AVB/AVA/RIS voltage alone do not establish their control role. No movement or
+biological response threshold is lowered to declare a skill.
+
+Before training, preserve this reference as a comparison, fit or constrain
+unknown transduction parameters using recordings, and separate sensory-response,
+proprioceptive-response and control-neuron perturbation assays. Then build
+motor amplitude and propagation in each medium while monitoring the alternate
+medium. Regulated start/pause/restart needs its own mechanism and continuous-state
+qualification; the new inputs do not establish that behavior automatically.

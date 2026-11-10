@@ -63,6 +63,17 @@ class ConductanceNetworkState(NamedTuple):
     indicator: jax.Array
 
 
+class MembraneConductanceInput(NamedTuple):
+    """Additional physical membrane channels, held during one body interval.
+
+    ``conductance_nS`` is nonnegative; ``weighted_reversal_pA`` is sum(g*E).
+    Net inward current is sum(g*E)-sum(g)*V, not a prescribed voltage/current.
+    Input producers must validate units, shapes, bounds and reversal potentials.
+    """
+    conductance_nS: jax.Array
+    weighted_reversal_pA: jax.Array
+
+
 def indicator_equilibrium(calcium, config):
     fraction = jnp.maximum(calcium, 0.) / config.indicator_kd_uM
     power = fraction**config.indicator_hill
@@ -126,13 +137,20 @@ def channel_open_fractions(x):
         x[:,33],jnp.ones(x.shape[0]),x[:,34],jnp.ones(x.shape[0])),axis=1)
 
 
-def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkConfig()):
+def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkConfig(),*,membrane_input=None):
     """Frozen-conductance exponential voltage/gate/Ca update; first order.
 
     All neurons evolve simultaneously, including unobserved ones. No calcium
     target or behavior is injected. Check convergence by doubling substeps.
+    Optional membrane_input adds physical conductances during the interval;
+    omitting it retains the historical no-input calculation unchanged.
     """
     h = dt_s*1000./substeps
+    if membrane_input is not None:
+        expected = state.voltage_mV.shape
+        if (membrane_input.conductance_nS.shape != expected or
+                membrane_input.weighted_reversal_pA.shape != expected):
+            raise ValueError('Membrane conductance input must have one value per neuron')
     g = fixed.cells.conductances_nS*jnp.exp(params.log_channel_scale)
     chemical,gap = network_synapses(params,fixed,config)
     gap_total = gap.sum(axis=1)
@@ -147,6 +165,9 @@ def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkCo
         total = conductance.sum(axis=1)+chemical@release+gap_total
         drive = ((conductance*reversals).sum(axis=1)+chemical@(release*fixed.synapse_reversal_mV)
                  +gap@s.voltage_mV+fixed.bias_pA)
+        if membrane_input is not None:
+            total = total+membrane_input.conductance_nS
+            drive = drive+membrane_input.weighted_reversal_pA
         voltage = s.voltage_mV+(drive/jnp.maximum(total,1e-12)-s.voltage_mV)*(-jnp.expm1(-h*total/cells.capacitance_pF))
         target,tau = jax.vmap(_gate_targets_and_taus)(s.voltage_mV,s.calcium_uM,s.gates)
         gates = s.gates+(target-s.gates)*(-jnp.expm1(-h/tau))

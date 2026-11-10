@@ -3669,3 +3669,121 @@ report SHA2561b90190cd732f5f6b5eff943eb95e2ba6f13ded5ee8df940b78b8166ec180143.
 Local copy verified;cloud sync unverified. Compact record:
 experiments/records/E047-neuron-role-audit.json. This is an informational audit,
 not a new fit or a behavioral qualification. No server run launched.
+
+## 2026-11-10 — Planned E048 embodied sensory connections
+
+User authorizes connecting the missing environmental and proprioceptive inputs.
+Implement a separate explicit closed-loop entry point around the existing302
+channel brain, anatomical NMJs,95 muscles and SI body; preserve the old no-input
+entry point and immutable7001 checkpoint. Existing recurrent control-to-motor
+edges are retained, not replaced by a synthetic controller or new graph edges.
+No training, optimizer or random proposals; deterministic wiring/causality tests.
+
+Plan:sample independent odor and salt test fields at the true head endpoint in
+SI coordinates. Use adaptive bounded transduction into AWA/AWC/ASE (distinct
+cue channels and ASE left/right response signs). Feed actual body curvature into
+DB/VB via anterior receptive fields,plus DVA bending-magnitude and optional
+SMDD head-bend proxies. Bending feedback must depend on physical shape,not gait
+phase or a desired wave. Receptive-field locations derived from anatomical NMJ
+output distributions are explicit approximations,not measured stretch-sensor
+positions. Unknown gains/kinetics/normalization are declared experimental.
+
+Apply inputs as nonnegative membrane conductances with stated reversals in the
+voltage solve,not forced voltage, periodic current or direct muscle control.
+Detailed receptor cascades,water sensing,contact sensing,serotonin/dopamine and
+RIS peptide regulation remain separate work. Biological response directions
+are supported by primary experiments; numerical transduction constants are not
+physiological fits. Preserve all sensory memory across streamed chunks and
+capture per-neuron conductances/currents and sampled cues.
+
+Proposed diagnostics:zero gains versus historical no-input execution;known odor
+on/off and salt up/down;positive/negative imposed shape (mechanistic probe,not
+normal behavior);controlled uniform field/translated source;paired closed-loop
+versus sensory/proprioceptive blocks. Validate that feedback affects neurons,
+can propagate through existing connectivity and reaches muscles/body,without
+claiming food-finding or start/stop skill. Compare streaming with uninterrupted
+execution;finite states and input locality;check body timestep and save exact
+initial/final state and source/environment. Targeted/full tests appropriate to
+new integration. Use liquid JAX body and genuinely interleaved wet-agar reference
+body (not replay after neural recording,which is invalid once feedback exists).
+Pinned7001 exact hash/readout,all trainable and passive parameters fixed. New
+external diagnostic archives and launchable mbslnx2 commands will be recorded
+when executed. Any default transduction parameters are exploratory,not promoted
+into the old calibrated/no-input asset. Acceptance is correct physical-signal
+routing and numerical consistency,not biological behavior qualification.
+
+E048 initial local diagnostic executed:5 simulated seconds in10 cases (both
+media,four sensory-block conditions plus half-body-timestep controls),exit0.
+Command:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.diagnose_embodied_senses --reference /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044/full-body-assessment-20261110T174954Z-687519/parameter_reference --output-dir /tmp/r-elegans-E048-local --duration 5 --refine`.
+Recorded native checkpoint hash/readout,full302 recurrent dynamics and actual
+interleaved wet-surface reference;all cases finite. This is an initial software
+causality diagnostic,not a trained behavior or biological validation.
+
+Initial6 sensory tests passed7.74s; expanded integration tests (including
+legacy channel-body,conductance network and wet reference)22 passed17.25s.
+Tests include chemical response signs/locality,pose-dependent inputs,membrane
+conductance analytic solution,zero-gain legacy equivalence,nonzero-memory
+chunk equivalence and downstream neural/muscle response. Single-step wet body
+agrees with the existing reference replay in a numerical fixture. JSON config
+round-trip normalization was then added for reproducible parameter restoration;
+future diagnostics also explicitly summarize coarse/fine timestep differences.
+
+Next planned local verification:20s diagnostic with the finalized code to check
+finite dynamics after the stimulus pulses end,using the same unknown gains and
+immutable checkpoint (no tuning). Same command with --duration20 and output
+/tmp/r-elegans-E048-local-20s. Run full test suite because membrane integration
+now has a new optional conductance input. Preserve each run's source snapshot;
+older and final diagnostic code versions are distinguishable. No behavior
+acceptance threshold will be inferred from these software results.
+
+E048 finalized local20s diagnostic completed in194.966s,exit0;10 cases finite.
+Exact command is the planned invocation above with --duration20 and
+/tmp/r-elegans-E048-local-20s. Network SHA256 remains
+417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14;
+frozen readout82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0.
+No original channels,connections,NMJs,mechanics or intrinsic bias changed.
+
+Maximum paired differences (over complete records,not behavior scores):
+water closed versus chemical block:3.30556mV neural,1.03891e-4 muscle activation,
+2.23368e-5rad joints;versus proprioceptive block:7.23340mV,0.0319275 muscle,
+0.0166179rad joints. Wet closed versus chemical block:3.43927mV,1.08361e-4
+muscle,9.42463e-6rad joints;versus proprioceptive block:4.08121mV,0.0104352
+muscle,0.00316331rad joints. These support active causal connections through
+this fitted network. They do not establish correct receptor physiology,
+control-neuron necessity/sufficiency,food finding or functional locomotion.
+Maximum input currents~0.24955pA water/~0.14051pA wet;all-blocked currents0.
+Wet Newton residuals<1e-8. AVBR/RIS voltage changes are recorded,but are not
+interpreted as proof of their biological control roles.
+
+Half-body-timestep versus coarse endpoint-aligned trajectories:max water
+voltage difference0.0925666mV/joint0.00101866rad;wet0.0198468mV/0.000152679rad.
+This comparison includes differing discretization of bath onsets/washout and
+body/sensory updates;it is descriptive,not a convergence or biological pass.
+Brain maximum substep stays0.1ms. Source schedules/head samples and all memory
+are retained;no hidden phase signal or field-coordinate input reaches neurons.
+Wet dynamics were genuinely interleaved;using an open-loop replay here would
+have been incorrect. No low-speed uncertainty from E046 has been removed.
+
+Short-window sustained regional bends water~.003017/.032738/.011060rad;wet
+0/.000543/0rad. These do not requalify the prior300s skill or establish wet
+crawling. No gains were tuned to these outcomes. The old no-input endpoint is
+unchanged;zero-gain equivalence and continuity are verified in tests.
+Full suite after implementation/JSON round-trip fix:
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q`,
+236 passed73.48s. Shell syntax/whitespace checks pass. Server launcher prepared
+with pinned references,absolute dedicated Python,four physical CPUs and nohup;
+this agent has not launched it on mbslnx2. Primary sources and unresolved
+transduction assumptions are documented in CURRENT_MODEL.md.
+
+E048 archived externally at
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E048`:903 files verified,
+archive manifest SHA25611c93740fc4ecc8e57d05f1567b1c44936b5fb9bf5d2467ccd85ce54a958c239.
+Final20s summary SHA256e0997258a835711e7cd207a48b0b9ff284d0de7f3f9ed7b3ec3e353dea67957d;
+configuration SHA2560e4f2316379db89e0d9bd7b2ea05e86d23db2961419694bc4697ee88ca003285.
+Both runs,logs,states,all chunk/full trajectories,HTML previews,immutable inputs,
+source/environment snapshots and full test log are retained. Local copies and
+checksums verified;OneDrive cloud synchronization not independently verified.
+Compact record:experiments/records/E048-embodied-sensory-connections.json.
+These evaluation inputs do not replace the separately preserved historical
+training lineage. No optimizer/resume state exists for these deterministic tests.

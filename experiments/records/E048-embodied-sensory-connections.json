@@ -1,0 +1,294 @@
+{
+  "experiment": "E048",
+  "status": "completed",
+  "network_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "readout_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+  "parameters_trained": false,
+  "teacher_or_pacing": false,
+  "biological_sensing_validated": false,
+  "interpretation": "Connections and causal effects tested;not food finding,regulated start-stop or validated locomotion",
+  "limitations": [
+    "Transduction constants,adaptive proxy,receptive fields and DVA bending proxy are exploratory.",
+    "No exact receptor cascades,contact/water sensor or monoamine/neuropeptide mechanism.",
+    "Gaussian test plumes are prescribed;not dish-scale chemical transport or nutrient uptake.",
+    "Wet mechanics retains E046 low-speed-law uncertainties;no spatial convergence claimed.",
+    "Modulated control-neuron voltage does not establish its causal control role."
+  ],
+  "paired_comparisons": [
+    {
+      "medium": "liquid",
+      "compared_to": "chemical-blocked",
+      "max_voltage_difference_mV": 3.3055648803710938,
+      "max_muscle_difference": 0.00010389089584350586,
+      "max_joint_difference_rad": 2.2336840629577637e-05,
+      "maximum_control_voltage_difference_mV": {
+        "AVBL": 0.005481719970703125,
+        "AVBR": 0.006183624267578125,
+        "AVAL": 0.002475738525390625,
+        "AVAR": 0.002857208251953125,
+        "RIS": 0.0011444091796875
+      }
+    },
+    {
+      "medium": "liquid",
+      "compared_to": "proprioceptive-blocked",
+      "max_voltage_difference_mV": 7.2333984375,
+      "max_muscle_difference": 0.03192746639251709,
+      "max_joint_difference_rad": 0.01661786064505577,
+      "maximum_control_voltage_difference_mV": {
+        "AVBL": 0.4624977111816406,
+        "AVBR": 0.28476715087890625,
+        "AVAL": 0.14331436157226562,
+        "AVAR": 0.21109390258789062,
+        "RIS": 0.01615142822265625
+      }
+    },
+    {
+      "medium": "liquid",
+      "compared_to": "all-blocked",
+      "max_voltage_difference_mV": 7.2333984375,
+      "max_muscle_difference": 0.03189772367477417,
+      "max_joint_difference_rad": 0.01661786064505577,
+      "maximum_control_voltage_difference_mV": {
+        "AVBL": 0.4624137878417969,
+        "AVBR": 0.2847328186035156,
+        "AVAL": 0.14304351806640625,
+        "AVAR": 0.21069717407226562,
+        "RIS": 0.016082763671875
+      }
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "chemical-blocked",
+      "max_voltage_difference_mV": 3.43927001953125,
+      "max_muscle_difference": 0.00010836124420166016,
+      "max_joint_difference_rad": 9.42462740169403e-06,
+      "maximum_control_voltage_difference_mV": {
+        "AVBL": 0.0057830810546875,
+        "AVBR": 0.006488800048828125,
+        "AVAL": 0.00258636474609375,
+        "AVAR": 0.002979278564453125,
+        "RIS": 0.00124359130859375
+      }
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "proprioceptive-blocked",
+      "max_voltage_difference_mV": 4.081214904785156,
+      "max_muscle_difference": 0.010435223579406738,
+      "max_joint_difference_rad": 0.003163308819001249,
+      "maximum_control_voltage_difference_mV": {
+        "AVBL": 0.2887153625488281,
+        "AVBR": 0.13634872436523438,
+        "AVAL": 0.08022308349609375,
+        "AVAR": 0.11649322509765625,
+        "RIS": 0.007781982421875
+      }
+    },
+    {
+      "medium": "wet-agar",
+      "compared_to": "all-blocked",
+      "max_voltage_difference_mV": 4.081199645996094,
+      "max_muscle_difference": 0.01040428876876831,
+      "max_joint_difference_rad": 0.0031633929539154754,
+      "maximum_control_voltage_difference_mV": {
+        "AVBL": 0.28862762451171875,
+        "AVBR": 0.13631439208984375,
+        "AVAL": 0.07995223999023438,
+        "AVAR": 0.11609649658203125,
+        "RIS": 0.00771331787109375
+      }
+    }
+  ],
+  "timestep_comparisons": [
+    {
+      "medium": "liquid",
+      "max_joint_difference_rad": 0.001018662005662918,
+      "max_voltage_difference_mV": 0.0925666093826294,
+      "interpretation": "Descriptive convergence check including stimulus-event sampling,not a biological pass"
+    },
+    {
+      "medium": "wet-agar",
+      "max_joint_difference_rad": 0.00015267885080916168,
+      "max_voltage_difference_mV": 0.019846796989440918,
+      "interpretation": "Descriptive convergence check including stimulus-event sampling,not a biological pass"
+    }
+  ],
+  "date": "2026-11-10",
+  "local_runs_simulated_seconds": [
+    5,
+    20
+  ],
+  "cases_per_run": 10,
+  "elapsed_final_run_seconds": 194.96553891600342,
+  "tests": {
+    "initial_sensory": "6 passed in7.74s",
+    "integration": "22 passed in17.25s",
+    "full_suite": "236 passed in73.48s",
+    "shell_syntax": "passed"
+  },
+  "sensory_config": {
+    "chemical_gain_nS": 0.005,
+    "b_bend_gain_nS": 0.005,
+    "dva_gain_nS": 0.002,
+    "smdd_gain_nS": 0.0,
+    "receptor_time_constant_s": 0.1,
+    "adaptation_time_constant_s": 2.0,
+    "bend_time_constant_s": 0.02,
+    "chemical_reference_um": [
+      1.0,
+      1.0,
+      50000.0
+    ],
+    "curvature_reference_per_m": 2000.0,
+    "anterior_offset_body_lengths": 0.1,
+    "receptive_width_body_lengths": 0.15,
+    "excitatory_reversal_mV": 0.0,
+    "inhibitory_reversal_mV": -80.0
+  },
+  "cases": [
+    {
+      "case": "liquid-closed-loop",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": true,
+      "chemical_input": true,
+      "maximum_input_current_pA": 0.24955080449581146,
+      "maximum_chemical_conductance_nS": 0.0015429327031597495,
+      "maximum_proprioceptive_conductance_nS": 0.0037090517580509186,
+      "maximum_wet_force_residual": null
+    },
+    {
+      "case": "liquid-chemical-blocked",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": true,
+      "chemical_input": false,
+      "maximum_input_current_pA": 0.24955080449581146,
+      "maximum_chemical_conductance_nS": 0.0,
+      "maximum_proprioceptive_conductance_nS": 0.0037090517580509186,
+      "maximum_wet_force_residual": null
+    },
+    {
+      "case": "liquid-proprioceptive-blocked",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": false,
+      "chemical_input": true,
+      "maximum_input_current_pA": 0.1155834048986435,
+      "maximum_chemical_conductance_nS": 0.0015471498481929302,
+      "maximum_proprioceptive_conductance_nS": 0.0,
+      "maximum_wet_force_residual": null
+    },
+    {
+      "case": "liquid-all-blocked",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": false,
+      "chemical_input": false,
+      "maximum_input_current_pA": 0.0,
+      "maximum_chemical_conductance_nS": 0.0,
+      "maximum_proprioceptive_conductance_nS": 0.0,
+      "maximum_wet_force_residual": null
+    },
+    {
+      "case": "wet-agar-closed-loop",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": true,
+      "chemical_input": true,
+      "maximum_input_current_pA": 0.14051489531993866,
+      "maximum_chemical_conductance_nS": 0.0016115293838083744,
+      "maximum_proprioceptive_conductance_nS": 0.0022681362461298704,
+      "maximum_wet_force_residual": 9.990425956670477e-09
+    },
+    {
+      "case": "wet-agar-chemical-blocked",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": true,
+      "chemical_input": false,
+      "maximum_input_current_pA": 0.14051440358161926,
+      "maximum_chemical_conductance_nS": 0.0,
+      "maximum_proprioceptive_conductance_nS": 0.002268123673275113,
+      "maximum_wet_force_residual": 9.978614267199833e-09
+    },
+    {
+      "case": "wet-agar-proprioceptive-blocked",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": false,
+      "chemical_input": true,
+      "maximum_input_current_pA": 0.12021751701831818,
+      "maximum_chemical_conductance_nS": 0.0016115359030663967,
+      "maximum_proprioceptive_conductance_nS": 0.0,
+      "maximum_wet_force_residual": 9.950256335666758e-09
+    },
+    {
+      "case": "wet-agar-all-blocked",
+      "dt_s": 0.002,
+      "brain_substeps": 20,
+      "simulated_seconds": 20.0,
+      "body_feedback": false,
+      "chemical_input": false,
+      "maximum_input_current_pA": 0.0,
+      "maximum_chemical_conductance_nS": 0.0,
+      "maximum_proprioceptive_conductance_nS": 0.0,
+      "maximum_wet_force_residual": 9.999480226256359e-09
+    },
+    {
+      "case": "liquid-closed-loop-refined",
+      "dt_s": 0.001,
+      "brain_substeps": 10,
+      "simulated_seconds": 20.0,
+      "body_feedback": true,
+      "chemical_input": true,
+      "maximum_input_current_pA": 0.2495635747909546,
+      "maximum_chemical_conductance_nS": 0.0015424728626385331,
+      "maximum_proprioceptive_conductance_nS": 0.0037094398867338896,
+      "maximum_wet_force_residual": null
+    },
+    {
+      "case": "wet-agar-closed-loop-refined",
+      "dt_s": 0.001,
+      "brain_substeps": 10,
+      "simulated_seconds": 20.0,
+      "body_feedback": true,
+      "chemical_input": true,
+      "maximum_input_current_pA": 0.1405203640460968,
+      "maximum_chemical_conductance_nS": 0.001611125422641635,
+      "maximum_proprioceptive_conductance_nS": 0.00226818909868598,
+      "maximum_wet_force_residual": 9.999066084066346e-09
+    }
+  ],
+  "parent_unchanged": true,
+  "new_recurrent_or_nmj_edges_added": false,
+  "method": "Actual head sampling and body-curvature feedback as membrane conductances; independent interleaved neural/body dynamics in each medium",
+  "legacy_entrypoint_preserved": true,
+  "server_launched_by_agent": false,
+  "archive": {
+    "path": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E048",
+    "verified_files": 903,
+    "manifest_sha256": "11c93740fc4ecc8e57d05f1567b1c44936b5fb9bf5d2467ccd85ce54a958c239",
+    "final_summary_sha256": "e0997258a835711e7cd207a48b0b9ff284d0de7f3f9ed7b3ec3e353dea67957d",
+    "config_sha256": "0e4f2316379db89e0d9bd7b2ea05e86d23db2961419694bc4697ee88ca003285",
+    "full_test_log_sha256": "6392f29ac309de8b6d2b49315f10b41cda3aae38fb9f680e33d2a31a9c0a90f3",
+    "local_copy_verified": true,
+    "cloud_sync_verified": false
+  },
+  "sources": [
+    "https://doi.org/10.1038/nature06292",
+    "https://doi.org/10.1038/nature06927",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5045890/",
+    "https://doi.org/10.1016/j.neuron.2012.08.039",
+    "https://doi.org/10.1038/nature04538",
+    "https://doi.org/10.1371/journal.pbio.2004929"
+  ]
+}

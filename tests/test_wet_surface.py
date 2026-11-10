@@ -9,6 +9,7 @@ from r_elegans.body.mechanics import generalized_resistance_matrix
 from r_elegans.body.wet_surface import (
     drag_terms, linear_drag, quadrature_kinematics, replay_surface_commands,
     solve_surface_velocity, wet_agar_drag,
+    surface_body_step,
 )
 
 
@@ -81,3 +82,19 @@ def test_nonlinear_passive_relaxation_and_zero_command_quiet_control():
         wet_agar_drag(2.0)
     with pytest.raises(ValueError):
         wet_agar_drag(regularization_speed_m_s=0)
+
+
+def test_single_surface_steps_match_existing_reference_replay():
+    from r_elegans.body import initialize_muscle_body
+    body = physical_muscle_body_params(12, medium='agar')
+    law = wet_agar_drag()
+    # Synthetic commands are a numerical equivalence fixture, not a neural gait.
+    commands = .05*np.sin(np.arange(40)[:, None]*.1+np.arange(11)[None, :]*.3)
+    expected = replay_surface_commands(commands, body, law, .002)
+    state = initialize_muscle_body(12)
+    velocity = None
+    for command in commands:
+        state, velocity, _ = surface_body_step(state, command, body, law, .002, initial_velocity=velocity)
+    np.testing.assert_allclose(state.joint_angles, expected['joint_angles'][-1], atol=1e-12)
+    np.testing.assert_allclose(state.position, expected['position'][-1], atol=1e-15)
+    np.testing.assert_allclose(state.muscle_activation, expected['muscle_activation'][-1], atol=1e-9)

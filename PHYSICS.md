@@ -193,3 +193,21 @@ capillary/adhesion forces separately, groove memory, full contact, self-contact
 or natural substrate microstructure. Towing-fit reproduction checks units and
 the effective law; independent gait/force validation and appropriate low-speed
 data are still needed before quantitative biological crawling claims.
+
+## Sensory feedback and the wet reference (E048)
+
+The new opt-in embodied sensory branch computes actual body curvature and head
+position before each neural interval, then updates muscles and body. This is
+implemented for the JAX liquid body and for the NumPy nonlinear wet reference.
+`surface_body_step` matches the existing reference mechanics and adds no new
+force scale. The wet body remains a slow reference with the E046 uncertainty
+in its low-speed empirical force closure.
+
+E046 command replay is still valid for its historical one-way/no-input assay.
+It is not valid for E048: with body-to-neuron feedback, each medium requires its
+own interleaved neural/body trajectory. The new diagnostic performs that
+integration rather than reusing a liquid neural recording for wet crawling.
+Chemical test fields are prescribed local-concentration fixtures, separate from
+fluid mechanics and unvalidated as natural microbial plumes. No contact/water
+sensor, chemical fluid transport or proprioceptive molecular mechanism is
+claimed by adding this causal connection.
