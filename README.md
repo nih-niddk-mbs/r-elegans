@@ -9,9 +9,10 @@ drive. Tail,middle and head all meet the defined target. Selected parameters and
 OneDrive;bundled demo unchanged. Coordinated locomotion remains undemonstrated.
 See [evidence and scope](CURRENT_MODEL.md#qualified-autonomous-distributed-amplitude-e044-2026-11-10).
 
-**Primary environment target:** wet-surface crawling on a compliant substrate.
-The E046 assessment uses published wet-agar towing-force fits and the unchanged
-autonomous winner. This is an experimental reference environment; the liquid
+**Required locomotion capabilities:** swimming in water and crawling on a moist,
+compliant substrate, with initiation, stopping and restarting. Both environments
+need separate validation; eventual adaptation must occur in the running animal.
+The E046 wet-agar model is an experimental reference environment; the liquid
 amplitude milestone remains specific to its original medium. See
 [wet-surface mechanics and launch instructions](PHYSICS.md#wet-surface-reference-assessment-e046).
 

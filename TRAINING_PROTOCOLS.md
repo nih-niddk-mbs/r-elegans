@@ -1701,3 +1701,40 @@ Separate settling from repeated oscillatory excursion. Keep stereotypical
 passive parameters fixed; fit only documented neuronal/synaptic unknowns when
 training resumes. First aim for autonomous surface amplitude,then propagation,
 then useful displacement; sensory tasks/RL remain later. No new fit launched.
+
+## Dual-environment and start/stop requirements (2026-11-10 clarification)
+
+Required coverage includes both water swimming and moist-substrate crawling.
+The previous E046 priority wording is historical; neither medium is dropped.
+Retain liquid winner7001 as an amplitude primitive and the wet-agar assessment
+as an experimental reference, with their documented limitations.
+
+Add initiation and stopping as independent motor-control milestones. For each
+medium, the proposed continuous-state assay is: establish a defined baseline;
+present a specified sensory/circuit test cue; retain autonomous movement after
+the onset cue; induce a pause through neural activity; then restart without
+resetting the brain or body. No periodic external gait, voltage clamp, muscle
+zeroing or manual checkpoint swap counts as normal initiation/stopping. Direct
+circuit perturbations are mechanistic probes and must be labeled separately
+from ordinary sensory behavior. A resting animal may retain muscle tone.
+
+Report onset/stop latencies, bend/rate decay, residual movement, quiet-state
+stability, restart success and the retained post-restart movement metrics.
+Set numerical tolerances and biological comparison conditions before running
+an experiment; this requirements entry does not invent validated thresholds.
+Unstimulated controls and matched mechanical-settling controls distinguish an
+active neural stop from a body that barely moves under load. Brief pauses,
+long swimming quiescence and sleep require separate assays and evidence.
+
+Learn reliable standalone motor skills in baby steps under H1.1. Later evaluate
+both media and transitions with one parameter set in continuous state, supplied
+with physical sensory feedback and documented neuromodulatory/internal-state
+mechanisms. The ultimate test must not hand the animal an unexplained oracle
+mode flag. Define mechanisms/parameters and experiment records before fitting.
+No new optimization, control implementation or physiological validation is
+claimed by this requirements clarification.
+
+Primary sources:
+[Vidal-Gadea et al.2011](https://pubmed.ncbi.nlm.nih.gov/21969584/),
+[Ghosh and Emmons2008](https://pubmed.ncbi.nlm.nih.gov/19011210/),
+[Steuer Costa et al.2019](https://pmc.ncbi.nlm.nih.gov/articles/PMC6736843/).

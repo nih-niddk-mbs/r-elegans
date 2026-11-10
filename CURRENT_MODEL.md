@@ -2155,3 +2155,42 @@ Next:retain7001; use this reference to verify a future fast wet-surface trainer,
 address low-speed force uncertainty/settling, then build autonomous surface
 amplitude before phase/propulsion. No surface-training run or trained checkpoint
 has been produced by this assessment.
+
+## Required environments and action initiation (user clarification, 2026-11-10)
+
+Both water swimming and moist-substrate crawling are required capabilities.
+This supersedes wording that made wet-surface crawling the sole primary target;
+the E046 historical measurements and liquid-only qualifications are unchanged.
+Each medium needs its own physics validation, autonomous amplitude, propagated
+wave and sustained useful displacement checks before a locomotion claim.
+
+The user also identifies action initiation, stopping, rest and restarting as
+necessary. In the current conductance-network assay, integration begins from
+fixed.initial_voltage_mV with initialized gates/calcium; the fitted recurrent
+and channel dynamics generate sustained oscillations. There is no immersion
+sensor event or biological swim-on command. Altering the medium changes body
+loading, not the neural rhythm through sensory/proprioceptive feedback. This
+branch has no explicit serotonin/dopamine/FLP-11 signaling state or qualified
+neural stop/restart mechanism. Presence of a neuron such as RIS in the anatomical
+network does not establish its measured neuromodulatory function in this model.
+
+Biological context:swim initiation and maintenance depend on sensory context
+and neuromodulation; serotonin promotes crawl-to-swim transition in tested
+assays (Vidal-Gadea et al.2011,doi10.1073/pnas.1108673108). Extended swimming
+can alternate with quiescence even in a uniform liquid environment
+(Ghosh and Emmons2008,doi10.1242/jeb.023606). RIS activation can suppress motor
+oscillations while retaining muscle tone; GABA and FLP-11 contribute differently
+to induction and maintenance of stopping (Steuer Costa et al.2019,
+doi10.1038/s41467-019-12098-5). These findings do not establish one universal
+water sensor or one circuit explaining all resting states.
+
+Next requirement:build a controllable autonomous motor primitive with reproducible
+start, sustained movement, pause and restart in continuous neural/body state.
+A physiological sensory cue can initiate a bout; a periodic gait teacher is
+not required. Subsequent internal/sensory regulation should govern bout duration,
+rest and environment adaptation. Measure transition latency, residual shape
+velocity, restart reliability and retained movement, without suppressing the
+muscle output, freezing voltage or resetting the network to simulate stopping.
+Separate checkpoints are acceptable intermediate skills under H1.1; eventual
+one-animal adaptation must use one parameter set without manual swaps. No new
+start/stop circuit or training has been implemented by this requirements update.

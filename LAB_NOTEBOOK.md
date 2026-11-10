@@ -3567,3 +3567,38 @@ Local archive copy and all1096 checksums verified;OneDrive cloud synchronization
 not independently verified. Original server raw historical lineage remains
 separate;this diagnostic archive is not an optimizer resume or new lineage
 backup. Compact committed record:experiments/records/E046-wet-surface-assessment.json.
+
+## 2026-11-10 — User clarifies both environments and action-state control
+
+User requires swimming in water AND movement on moist substrate, then asks what
+triggers swimming and whether the animal rests and starts/stops actions. This
+supersedes the sole-primary-environment wording from E046, without altering its
+experimental results. Both media remain required. Separate intermediate skills
+remain permitted under H1.1; eventual one-animal adaptation needs continuous
+state with one parameter set, no manual checkpoint swaps.
+
+Read-only code confirmation:conductance_network.initial_network_state uses
+fixed.initial_voltage_mV and initialized channels/calcium; channel_body_chunk
+advances the same unpaced network regardless of the chosen body load. There is
+no immersion stimulus, body feedback or explicit serotonin/dopamine/FLP-11
+state in that branch. Persistent rhythm is the outcome of the selected dynamics
+from initialization, not a demonstrated decision to start swimming. Historical
+driven MOT-05/06 stop/restart is not transferred evidence for this branch.
+
+Primary literature checked online:Vidal-Gadea et al.2011,PMID21969584,
+doi10.1073/pnas.1108673108,serotonin-dependent swim initiation and dopamine-linked
+return to crawling; Ghosh and Emmons2008,PMID19011210,doi10.1242/jeb.023606,
+prolonged swimming alternates with quiescence even after command-interneuron
+ablation; Steuer Costa et al.2019,PMID31506439,doi10.1038/s41467-019-12098-5,
+RIS activation stops locomotion with muscle tone retained, GABA/FLP-11 roles.
+Do not generalize these findings into a single water-on sensor, a universal
+pause mechanism or identification of all immobility as sleep.
+
+Requirements recorded:separate movement generation from onset, maintenance,
+stopping, rest and restart. Future cue-to-bout/pause/restart assays must preserve
+continuous brain/body state and use genuine neural control, with no output
+zeroing, frozen-voltage trick or reset. Maintain autonomous motor dynamics;
+sensory cues and internal state may regulate action selection without pacing
+each bend. Require documented cues, fixed/trainable mechanisms, transition
+metrics and numerical/biological criteria before an actual experiment. No new
+training run or scientific simulation executed in this documentation update.

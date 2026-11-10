@@ -15,11 +15,20 @@ require explicit extensions.
 
 ## Meaning of coverage and skill status
 
-E046 environment update (2026-11-10):wet-surface crawling is the primary
-natural-behavior target. The experimental wet-agar reference is assessed
+User clarification after E046 (2026-11-10):both swimming in water and crawling
+on a moist substrate are required. Initiation, pause and restart are required
+alongside sustained movement. The experimental wet-agar reference is assessed
 separately; MOT-16/17 retain their original liquid amplitude qualification.
 No transfer to crawling or new skill is inferred from changing drag laws.
 See [the substrate assessment](PHYSICS.md#wet-surface-reference-assessment-e046).
+
+Coverage-first H1.1 still allows independent skill checkpoints during learning.
+A later claim of one animal that starts, stops and adapts between media requires
+continuous-state tests with one parameter set, sensory/internal state input and
+no checkpoint swaps, state resets, voltage clamps or muscle-output overrides.
+MOT-05/06 driven stop/restart evidence does not establish these capabilities in
+the current autonomous conductance-network branch. Brief pauses, prolonged
+quiescence and sleep remain different biological targets.
 
 The goal is to map a useful, physically admissible repertoire under the model's
 constraints. Coverage means documented effects over tested initial states,
