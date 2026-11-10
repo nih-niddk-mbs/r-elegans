@@ -2400,3 +2400,22 @@ check the chemical-to-motor contrast under matched timestep refinements and
 probe premotor recruitment/release as a separate start/stop assay. No new
 training or behavior qualification follows from this server report. See
 `experiments/records/E048-server-20261110.json` and the lab notebook.
+
+### Proprioceptive genetics qualifies the current proxies (2026-11-10)
+
+Knockout/loss-of-function and neuron-manipulation studies motivate using
+proprioception as a mechanism-level validation target. trp-4 mutants show
+exaggerated bending; trp-1 trp-2 double mutants can move in biased circles;
+B-type perturbations can disrupt propagation. Successful motion or larger
+amplitude alone is therefore insufficient evidence of a normal motor pattern.
+See the source-linked perturbation backlog in TRAINING_PROTOCOLS.md.
+
+A newer mechanistic constraint from [Das et al.2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8448456/)
+is particularly relevant: DVA shows directional/compression-versus-stretch
+mechanotransduction, opposing TRP-4/TWK-16 effects and residual curvature-related
+activity in trp-4 mutants. Our E048 global positive bending-magnitude input into
+DVA represents none of that channel specificity or spatial compartmentalization.
+It remains an exploratory feedback proxy. Likewise, default SMDD feedback is
+zero and has no independent TRP-1/TRP-2 states. A gain deletion is a functional
+pathway lesion, not a faithful genetic knockout or whole-neuron ablation.
+No parameters or mechanisms were changed by this literature review.

@@ -3846,3 +3846,60 @@ This preserves transcribed summary metrics,local reference record,analysis code
 and source/environment. It is not a copy of server raw trajectories/configuration.
 Local archive verified;cloud sync unverified. Documentation/record-only change:
 whitespace and structured JSON checks performed;no software test rerun needed.
+
+## 2026-11-10 — Proprioception hypothesis and genetic validation literature
+
+User emphasizes that proprioception may be important for motor patterns and
+movement, and asks about C. elegans knockout studies. Literature review only;
+no new simulation,fit or genetic perturbation implemented. Existing E048
+feedback-block results remain software/model evidence,not biological validation.
+The biological literature supports testing amplitude,coordination,steering and
+propagation separately,not treating proprioception as a uniform excitatory gain.
+
+Primary sources checked online:
+
+- Li et al.2006,Nature,doi10.1038/nature04538,PMID16572173,PMC2865900:
+  trp-4 loss alters/exaggerates body bending;DVA-specific rescue and DVA ablation
+  distinguish channel function from whole-cell function. DVA can modulate motor
+  output positively and negatively. A whole-cell feedback deletion is not a
+  faithful molecular trp-4 knockout.
+- Wen et al.2012,Neuron,doi10.1016/j.neuron.2012.08.039,PMID23177960,
+  PMC3508473:genetic/optogenetic/microfluidic experiments identify B-type motor
+  neurons as proprioceptive transducers for anterior-to-posterior coupling.
+  vab-7 mutations alter DB axon orientation and impair dorsal wave propagation;
+  this is a developmental/morphological perturbation,not a pure receptor loss.
+  Cholinergic/B-type suppression also affects motor output,so it does not isolate
+  sensory transduction alone. unc-8 loss did not abolish the tested coupling,
+  an important negative result;do not label the B feedback proxy as UNC-8.
+- Yeon et al.2018,PLOS Biology,doi10.1371/journal.pbio.2004929,
+  PMID29883446:trp-1(sy690) trp-2(sy691) double mutants exhibit ventral circling
+  and misregulated SMDD activity. Either single mutant lacks the circling
+  phenotype,consistent with redundancy. Cell-directed rescue supports SMD/SMDD
+  involvement. SMDD/SMDV ablations cause opposite steering biases;ablations and
+  channel lesions are distinct interventions. Activity is misregulated rather
+  than universally abolished by the double mutation.
+- Xu et al.2018,PNAS,doi10.1073/pnas.1717022115,PMID29686107,
+  PMC5948959:unc-7/unc-9 null mutations and AVB ablation impair descending
+  facilitation of B-type oscillations/propagation. Key locomotion assays use
+  A-type motor silencing and1Pa s liquid;do not generalize those quantitative
+  phenotypes to an unmodified worm in water. A selected AVB-B edge deletion
+  models a pathway lesion,not the entire pleiotropic unc-7/unc-9 genotype.
+- Das et al.2021,Science Advances,doi10.1126/sciadv.abg4617,PMID34533987,
+  PMC8448456:DVA-specific cytoskeletal/channel experiments distinguish stretch
+  from compression,implicate UNC-70 spectrin,TRP-4 and TWK-16,and find residual
+  curvature-dependent Ca signal in trp-4(sy695). This qualifies the older simple
+  claim that TRP-4 loss abolishes all DVA proprioception. Directional/local
+  opposing mechanotransduction is not represented by our global positive RMS
+  curvature-to-DVA proxy. This source is a future mechanism/validation target,
+  not an implemented extension or an exhaustive statement of current knowledge.
+
+Inference/decision:proprioception may supply coordination and negative as well
+as positive feedback;loss can preserve movement yet produce excessive bends,
+circling or poor propagation. Proposed validation should compare intact and
+selective-feedback lesions with unchanged neural/muscle/mechanical parameters,
+and test restoration,without retraining each lesion to hide its effect. Match
+strain,medium,intervention and observables before interpreting a gene phenotype.
+Use these as held-out checks of causal mechanism,not amplitude-only training
+rewards. Current DVA/SMDD proxies cannot be called gene-faithful knockouts;
+SMDD feedback is disabled by default and a zero-gain SMDD deletion would be
+uninformative. No new motor skill or start/stop capability is established.

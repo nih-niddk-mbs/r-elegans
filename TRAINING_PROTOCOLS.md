@@ -1841,3 +1841,37 @@ in continuous state; do not infer that from altered AVB/RIS voltage alone.
 A direct circuit probe is distinct from natural sensory behavior, and a
 physiological RIS claim requires its relevant inhibitory/peptide mechanisms.
 No automatic long training extension is justified by a completed wiring test.
+
+## Literature-guided proprioceptive perturbations (2026-11-10; not executed)
+
+The user's hypothesis that proprioception helps generate/coordinate motor
+patterns has direct experimental support. Define separate tests of bend
+amplitude,head-to-tail propagation,phase relation,steering and displacement.
+Feedback loss need not reduce amplitude; it can produce over-bending or
+uncoordinated movement. Proposed targets are:
+
+| Biological intervention | Reported finding | Simulation mapping and limitation |
+| --- | --- | --- |
+| trp-4 loss, with DVA-directed rescue | Exaggerated/altered bends; DVA involvement | Requires channel-specific mechanotransduction; not equivalent to deleting DVA |
+| trp-1 / trp-2 single and double mutants | Double loss causes ventral circling; singles lack that phenotype | Requires redundant SMDD mechanisms; current optional gain is not a two-channel model |
+| vab-7 mutation | Abnormal DB projection orientation and dorsal propagation defects | Developmental wiring/receptive-field hypothesis; not a simple sensory-gain deletion |
+| B-type/cholinergic silencing | Disrupts bend-following/propagation in controlled assays | Removes motor activity too; distinguish from a selective feedback lesion |
+| unc-7 / unc-9 loss or AVB ablation | Impairs descending coordination of B-type motor dynamics | Match the study's silenced A-type background/medium; targeted edge lesion is not a whole-gene knockout |
+
+Primary studies: [Li2006](https://pubmed.ncbi.nlm.nih.gov/16572173/),
+[Wen2012](https://pmc.ncbi.nlm.nih.gov/articles/PMC3508473/),
+[Yeon2018](https://doi.org/10.1371/journal.pbio.2004929),
+[Xu2018](https://pmc.ncbi.nlm.nih.gov/articles/PMC5948959/).
+Later [Das2021](https://pmc.ncbi.nlm.nih.gov/articles/PMC8448456/) finds residual
+DVA responses after trp-4 loss and opposing mechanical channel effects. Include
+that constraint rather than modeling all proprioception as a single positive
+signal. Wen2012's negative unc-8 result also cautions against assigning an
+untested gene identity to our B-type feedback conductance.
+
+Freeze the trained normal-animal parameters for initial perturbation tests;
+restore the intervention to check recovery. Separate a developmental gene
+mutation, an acute neuron silencing, a pathway lesion and a molecular channel
+loss. Specify matched conditions and acceptance criteria before experiments.
+Do not refit every mutant independently and then call the result a prediction.
+The current exploratory DVA/SMDD inputs require further mechanism work before
+these specific genotypes can be reproduced; the table is a validation backlog.
