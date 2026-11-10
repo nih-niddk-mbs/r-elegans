@@ -15,6 +15,12 @@ require explicit extensions.
 
 ## Meaning of coverage and skill status
 
+E046 environment update (2026-11-10):wet-surface crawling is the primary
+natural-behavior target. The experimental wet-agar reference is assessed
+separately; MOT-16/17 retain their original liquid amplitude qualification.
+No transfer to crawling or new skill is inferred from changing drag laws.
+See [the substrate assessment](PHYSICS.md#wet-surface-reference-assessment-e046).
+
 The goal is to map a useful, physically admissible repertoire under the model's
 constraints. Coverage means documented effects over tested initial states,
 parameters and media. It does not establish the complete mathematical action

@@ -1661,3 +1661,43 @@ training,benchmark body/medium response to a prescribed measured waveform,
 check resolution/time convergence and choose bulk versus wall/surface geometry.
 Keep7001 as an amplitude primitive under its existing model. Audit record:
 `experiments/records/E045-medium-physics-audit.json`.
+
+## Primary substrate target and transfer baseline (E046, 2026-11-10)
+
+User-directed target:moist compliant surface, starting with a specified1.7%
+wet NGM agar proxy. Natural rotting vegetation has heterogeneous properties;
+this choice provides a reproducible laboratory condition, not a universal
+natural-substrate calibration. Preserve the successful liquid amplitude
+checkpoint and qualify each medium separately.
+
+Run the fixed-winner preflight with:
+
+```sh
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/assess_wet_surface_mbslnx2.sh
+```
+
+It uses pinned7001 and its frozen readout, no training or external drive,60
+simulated seconds in8 comparisons:liquid,legacy agar,measured wet-agar closure,
+half body step,refined rod quadrature,two low-speed smoothings,held-voltage.
+The generated muscle-output replay is valid for the current one-way model;
+a later proprioceptive model must be integrated together with its environment.
+Nohup/PID/log/results paths are printed;absolute dedicated Python avoids the
+previous wrong-environment failure. EXIT_CODE0 means diagnostic completion,
+not crawling success. Details and units:[PHYSICS.md](PHYSICS.md#wet-surface-reference-assessment-e046).
+
+Local20s and60s comparisons completed. The60s wet case retains small periodic
+components but fails sustained regional amplitude criteria amid slow posture
+relaxation. Half-step/quadrature changes are small; low-speed smoothing changes
+raw regional excursions substantially. The held-voltage control also relaxes
+slowly. Do not reward that transient drift, read drift FFT as gait frequency,
+or relax the existing amplitude thresholds to declare transfer.
+
+Before long surface fitting:verify a fast implementation against this float64
+reference, expose the unmeasured near-zero drag assumption and require success
+across its stated sensitivity cases or acquire matching low-speed force data.
+Separate settling from repeated oscillatory excursion. Keep stereotypical
+passive parameters fixed; fit only documented neuronal/synaptic unknowns when
+training resumes. First aim for autonomous surface amplitude,then propagation,
+then useful displacement; sensory tasks/RL remain later. No new fit launched.

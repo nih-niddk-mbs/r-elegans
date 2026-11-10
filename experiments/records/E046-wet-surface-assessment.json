@@ -1,0 +1,380 @@
+{
+  "experiment": "E046",
+  "date": "2026-11-10",
+  "status": "local_assessment_completed_server_launcher_prepared",
+  "question": "Unchanged autonomous winner under a measured wet-surface drag closure",
+  "parent_network_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "frozen_readout_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+  "primary_environment_target": "Wet compliant surface; 1.7% NGM agar as controlled laboratory proxy",
+  "primary_source": {
+    "doi": "10.1016/j.bpj.2014.09.006",
+    "paper_sha256": "94811389f685052b1e697676473a25f21aa727dff04b59e8e43771a303beb423",
+    "reference_length_m": 0.001,
+    "published_force_units": "microN",
+    "published_speed_units": "micrometers/s",
+    "tangential_a": 0.32,
+    "tangential_gamma": 0.58,
+    "normal_a": 6.8,
+    "normal_gamma": 0.31,
+    "data_kind": "Published power-law fit coefficients, not raw force observations"
+  },
+  "method": "Recorded endogenous output of unchanged one-way channel network; independent float64 body replay",
+  "parameters_trained": false,
+  "external_drive": false,
+  "body_to_brain_feedback": false,
+  "local_recording_seconds": [
+    20,
+    60
+  ],
+  "source_neural_dt_s": 0.002,
+  "solver": "Independent NumPy float64, overdamped, implicit passive elasticity, Gauss rods, damped Newton",
+  "cases": [
+    {
+      "case": "liquid-reference",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.003037601649082969,
+          0.03338529150689848,
+          0.011059875221587356
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0036701116509818763,
+          0.04026098994842331,
+          0.013344411319833605
+        ],
+        "repeated_joint_count": 11,
+        "all_three_regional_amplitude_targets_met": true
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.0030377041021528196,
+        0.03338558577707286,
+        0.011060012615264528
+      ],
+      "maximum_relative_force_residual": 6.102610160385201e-16,
+      "maximum_newton_iterations": 1,
+      "late_fraction_velocity_components_below_regularization": 0.006154166666666666
+    },
+    {
+      "case": "legacy-agar",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.004149915505682056,
+          0.0037551565712605796,
+          0.002470426918096194
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0036701116509818763,
+          0.04026098994842331,
+          0.013344411319833605
+        ],
+        "repeated_joint_count": 11,
+        "all_three_regional_amplitude_targets_met": false
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.004149984685030972,
+        0.003755337947197103,
+        0.002470474370487169
+      ],
+      "maximum_relative_force_residual": 3.460455031354153e-13,
+      "maximum_newton_iterations": 1,
+      "late_fraction_velocity_components_below_regularization": 0.015461111111111111
+    },
+    {
+      "case": "wet-agar",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0036701116509818763,
+          0.04026098994842331,
+          0.013344411319833605
+        ],
+        "repeated_joint_count": 0,
+        "all_three_regional_amplitude_targets_met": false
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.014732338759595294,
+        0.012350870372739445,
+        0.012349393680865212
+      ],
+      "maximum_relative_force_residual": 9.999464354715501e-09,
+      "maximum_newton_iterations": 4,
+      "late_fraction_velocity_components_below_regularization": 0.6218638888888888
+    },
+    {
+      "case": "wet-body-refined",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0036701116509818346,
+          0.04026098994842323,
+          0.013344411319833716
+        ],
+        "repeated_joint_count": 0,
+        "all_three_regional_amplitude_targets_met": false
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.014732355521282818,
+        0.01235056799678437,
+        0.012349391744419985
+      ],
+      "maximum_relative_force_residual": 9.999205576636763e-09,
+      "maximum_newton_iterations": 4,
+      "late_fraction_velocity_components_below_regularization": 0.6218149305555556
+    },
+    {
+      "case": "wet-quadrature-refined",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0036701116509818763,
+          0.04026098994842331,
+          0.013344411319833605
+        ],
+        "repeated_joint_count": 0,
+        "all_three_regional_amplitude_targets_met": false
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.014734353111375324,
+        0.012351982136224507,
+        0.012353121773011316
+      ],
+      "maximum_relative_force_residual": 9.980075079635174e-09,
+      "maximum_newton_iterations": 4,
+      "late_fraction_velocity_components_below_regularization": 0.6199038194444445
+    },
+    {
+      "case": "wet-floor-low",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0036701116509818763,
+          0.04026098994842331,
+          0.013344411319833605
+        ],
+        "repeated_joint_count": 1,
+        "all_three_regional_amplitude_targets_met": false
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.011420261007848544,
+        0.009789818431718254,
+        0.010444395099845072
+      ],
+      "maximum_relative_force_residual": 9.993091391001398e-09,
+      "maximum_newton_iterations": 5,
+      "late_fraction_velocity_components_below_regularization": 0.0521625
+    },
+    {
+      "case": "wet-floor-high",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0036701116509818763,
+          0.04026098994842331,
+          0.013344411319833605
+        ],
+        "repeated_joint_count": 1,
+        "all_three_regional_amplitude_targets_met": false
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.007568122485437784,
+        0.018258977067092248,
+        0.014317634646345945
+      ],
+      "maximum_relative_force_residual": 9.996731217279696e-09,
+      "maximum_newton_iterations": 4,
+      "late_fraction_velocity_components_below_regularization": 1.0
+    },
+    {
+      "case": "wet-held-voltage",
+      "regions": {
+        "region_order": [
+          "tail",
+          "middle",
+          "head"
+        ],
+        "regional_joint_median_p2p_rad": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "regional_filtered_drive_median_p2p": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeated_joint_count": 0,
+        "all_three_regional_amplitude_targets_met": false
+      },
+      "raw_late_regional_median_p2p_rad": [
+        0.010940435409335817,
+        0.008438061836807495,
+        0.008934242247982588
+      ],
+      "maximum_relative_force_residual": 9.98422277721989e-09,
+      "maximum_newton_iterations": 4,
+      "late_fraction_velocity_components_below_regularization": 0.9738479166666668
+    }
+  ],
+  "liquid_replay_max_joint_error_rad": 1.0035567094002218e-07,
+  "sensitivity": {
+    "wet-body-refined": {
+      "relative_amplitude_change_with_003rad_floor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "absolute_amplitude_change_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_amplitude_relative_change": [
+        1.1377479025964192e-06,
+        2.4482157609102273e-05,
+        1.568048826066577e-07
+      ]
+    },
+    "wet-quadrature-refined": {
+      "relative_amplitude_change_with_003rad_floor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "absolute_amplitude_change_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_amplitude_relative_change": [
+        0.00013672993900702452,
+        9.001499096900164e-05,
+        0.00030188463032652355
+      ]
+    },
+    "wet-floor-low": {
+      "relative_amplitude_change_with_003rad_floor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "absolute_amplitude_change_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_amplitude_relative_change": [
+        0.22481683361981927,
+        0.20735801313840083,
+        0.15425847051680303
+      ]
+    },
+    "wet-floor-high": {
+      "relative_amplitude_change_with_003rad_floor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "absolute_amplitude_change_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_amplitude_relative_change": [
+        0.4862918502665707,
+        0.4783554936656965,
+        0.15937956278213297
+      ]
+    }
+  },
+  "verification": {
+    "targeted_new_tests": "4 passed in 1.63s",
+    "full_suite": "227 passed in 69.47s",
+    "test_log_sha256": "97600da80cb3d77e87fc80934fb91a81fe7110f37f466f63869193861f1b14fc",
+    "shell_syntax": "passed",
+    "archive_entries_verified": 1096
+  },
+  "artifacts": {
+    "root": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E046",
+    "archive_manifest_sha256": "873ec5d0b2870f8c35fc7236c7e7ce1b4f57d7f59332ab63d9f3e0b25e4fe9b3",
+    "local_60s_summary_sha256": "4f7d5d368e08ba1684a811825350921b414d2812f200bfce98097f0f1aba2b38",
+    "local_copy_verified": true,
+    "cloud_sync_verified": false
+  },
+  "interpretation": [
+    "Liquid amplitude qualification retained in original environment.",
+    "Wet-surface sustained regional amplitude not established at 60s; raw excursions include slow settling.",
+    "Near-zero drag smoothing materially affects predictions; not a measured low-speed calibration.",
+    "FFT phase on drifting records is not evidence of periodic gait or frequency.",
+    "No surface training or biological crawling qualification performed."
+  ],
+  "next": "Resolve low-speed/settling assumptions and verify fast wet-surface trainer against reference before autonomous surface-amplitude fitting",
+  "mbslnx2": {
+    "launcher": "sh scripts/assess_wet_surface_mbslnx2.sh",
+    "default_simulation_seconds": 60,
+    "detached": true,
+    "physical_cpu_cores": 4,
+    "agent_launched": false
+  },
+  "limitations": [
+    "Near-zero force law extrapolated and regularized; sensitivity is explicit.",
+    "No dynamic groove memory, resolved capillarity/contact, self-contact, taper or natural plant geometry.",
+    "No spatial convergence or refined neural integration in this assessment.",
+    "Frequency cannot adapt to substrate without body-to-brain feedback in this branch.",
+    "A short fixed-winner comparison is not robust motor-skill qualification or RL."
+  ]
+}

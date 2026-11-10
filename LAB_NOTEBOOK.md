@@ -3454,3 +3454,116 @@ Local copy completed;cloud sync unverified. Compact record
 medium as unbounded Newtonian RFT approximation;propose prescribed-wave and
 matched-geometry propulsion/force/convergence benchmarks before further
 quantitative locomotion claims. No additional training or physics changes.
+
+## 2026-11-10 — E046 planned wet-surface reference and fixed-winner assessment
+
+User approves making a moist compliant substrate the primary natural-behavior
+ target. Question: how does unchanged E043/E044 seed7001 respond to a measured
+wet-agar force law, and is that reference implementation numerically reliable?
+Preserve liquid winner SHA256
+417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14.
+No channel, synapse, NMJ, muscle or passive-body fitting; no external drive,
+proprioception or sensory currents added. This is an assessment, not training.
+
+Method planned: independent float64 overdamped reference solver with local
+quadrature forces, force/torque balance and implicit passive elasticity.
+Use Rabets et al. 2014 (doi:10.1016/j.bpj.2014.09.006) published power-law
+fits for standard 1.7% NGM agar. Whole-1mm-worm force in microNewtons equals
+a*(speed in micrometers/second)^gamma: tangential a=.32,gamma=.58; normal
+a=6.8,gamma=.31. These are published fitted curves, not new raw measurements
+or a complete lubrication/contact solver. Other measured concentrations remain
+available for sensitivity, not interpolated into a fictitious natural substrate.
+
+Regularize the unmeasured near-zero-speed divergence smoothly with a stated
+speed scale; test .01/.1/1 micrometer/s. Reject unconverged force balances;
+do not hide Newton failures with zero motion. Validate straight towing force,
+positive dissipation, linear-law reduction against the existing solver and
+passive relaxation. Compare unchanged liquid/legacy-agar/new wet-surface body
+responses to exactly the same generated autonomous motor output. Since this
+branch has no body-to-brain feedback, recording then replaying endogenous
+muscle commands preserves the one-way model; explicitly label the replay.
+Start all bodies straight/relaxed, keep muscle kinetics and projection fixed.
+Use half body timestep with piecewise-held identical muscle commands; record
+that this checks body integration, not refined neural integration or spatial
+convergence. Retain traces, states, source, environment, exact commands and
+input hashes outside Git. No optimizer/RNG exists for this deterministic assay.
+
+Planned default local assay:20 simulated seconds with existing dt=.002s;
+server launch may extend to60s under nohup using the absolute dedicated Python.
+Acceptance for implementation:relative nonlinear residual <=1e-8; linear-law
+ equivalence within floating-point/regularization tolerances; finite traces,
+document timestep and low-speed sensitivity without calling either a biological
+pass. Existing regional .003rad amplitudes remain descriptive; no thresholds
+relaxed. Independent held-voltage control included. Primary training-environment
+target becomes wet-surface crawling; promotion to training awaits assessment.
+Status planned until execution is recorded below.
+
+E046 first local20s assessment executed (not a server report):
+`MPLCONFIGDIR=/tmp/r-elegans-mpl JAX_PLATFORMS=cpu OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 .venv/bin/python -u -m scripts.assess_wet_surface --reference /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044/full-body-assessment-20261110T174954Z-687519/parameter_reference --output-dir /tmp/r-elegans-E046-local --duration 20`.
+Exit0; all8 cases completed. Liquid-reference sustained regional bends reproduce
+~.003037/.033373/.011056rad. Wet1.7% assay yields sustained0/.000457/0rad;
+held-voltage sustained amplitudes0. These zeros mean the repeated/sustained
+criterion was not met, not that every sample was constant. Low-speed smoothing
+matters:middle sustained amplitude .000415/.000457/.000848rad at smoothing
+.01/.1/1um/s. No .003rad regional threshold was changed and no training occurred.
+Four new tests passed1.63s: published towing units/whole length, positive/odd
+resistance and analytic derivatives, linear mechanics reduction against JAX,
+passive energy decrease/zero-command control. These are software/closure tests.
+
+Decision:20s may retain slow substrate/posture transients. Extend unchanged
+assessment locally to60s before interpreting loss of sustained regional motion.
+Same command with --duration60 and --output-dir /tmp/r-elegans-E046-local-60s;
+final runner also records raw amplitudes (not only sustained detector outputs),
+force curves, per-case progress and direct low-speed sensitivity. This is a
+longer diagnostic, not optimization or a new checkpoint. Exact initial/final
+neural states, all command samples, body states/trajectories and captured source
+remain external. Completion/results pending at this entry.
+
+E046 local60s comparison completed,exit0; replay/plot stage121.898s after the
+neural-generation stage. All8 cases saved with exact source/environment,
+commands, neural states and per-case body trajectories. No seed/optimizer:
+this is deterministic evaluation of pinned7001. Standalone Linux launcher uses
+absolute dedicated Python,disjoint four-physical-core allocation and nohup;
+it is prepared but has not been executed on mbslnx2 by this agent.
+
+Liquid float64 reference versus original JAX maximum joint error1.00356e-7rad;
+regional sustained .00303760/.03338529/.01105988rad. Legacy constant agar
+.00414992/.00375516/.00247043rad does not meet all-region. Measured nonlinear
+wet-agar and refinements/smoothing cases have sustained regional detector
+outputs0/0/0 at60s. Raw default late-half excursions .01473234/.01235087/
+.01234939rad are mostly slow postural relaxation,not repeated cyclic amplitude.
+Held-voltage also relaxes,raw .01094044/.00843806/.00893424rad,with sustained0.
+Inspected actual wet-agar trajectory.png:small oscillations ride on a slow
+posture trend; PC1drift dominates. No zero-movement or gait-frequency claim
+from detector0 or low-frequency FFT bins. Equal-phase propulsion undefined
+without sufficient crossings; raw drift cannot establish locomotion.
+
+Nonlinear residual max9.99946e-9. Half-step raw regional amplitude relative
+changes [1.14e-6,2.45e-5,1.57e-7]; 4-to8-point quadrature
+[1.37e-4,9.00e-5,3.02e-4]. Low-speed sensitivity much larger:0.01um/s versus
+0.1 gives raw changes22.48/20.74/15.43%;1um/s gives48.63/47.84/15.94%.
+Default62.19% late local velocity components below0.1um/s. These are signs of
+unmeasured near-zero extrapolation and incomplete settling,not robust physical
+identification. Maximum point speed default3.72611e-5m/s includes startup;
+whole-worm constant-speed towing fits are not new independent measurements.
+Reference solver passes its implementation checks; no biological crawling pass.
+
+`MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q`:
+227 passed69.47s. Shell syntax and git diff whitespace checks passed. Current
+winner,original priors/bounds,and previous liquid environments unchanged.
+Decision:preserve liquid skill;new wet-surface model is experimental reference,
+not promoted to training. Before a long fit,address low-speed uncertainty and
+settling,verify a fast implementation against this reference,then aim for
+surface amplitude first. No longer training run started or promised.
+
+E046 evidence archived to
+`/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E046`:
+1096 files verified against archive_manifest.json, SHA256
+873ec5d0b2870f8c35fc7236c7e7ce1b4f57d7f59332ab63d9f3e0b25e4fe9b3.
+Includes both local runs,stdout,all source/environment snapshots,pinned inputs,
+all body/neural traces,scientific figures/HTML,tests,and primary Rabets2014 PDF
+SHA25694811389f685052b1e697676473a25f21aa727dff04b59e8e43771a303beb423.
+Local archive copy and all1096 checksums verified;OneDrive cloud synchronization
+not independently verified. Original server raw historical lineage remains
+separate;this diagnostic archive is not an optimizer resume or new lineage
+backup. Compact committed record:experiments/records/E046-wet-surface-assessment.json.

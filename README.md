@@ -9,6 +9,12 @@ drive. Tail,middle and head all meet the defined target. Selected parameters and
 OneDrive;bundled demo unchanged. Coordinated locomotion remains undemonstrated.
 See [evidence and scope](CURRENT_MODEL.md#qualified-autonomous-distributed-amplitude-e044-2026-11-10).
 
+**Primary environment target:** wet-surface crawling on a compliant substrate.
+The E046 assessment uses published wet-agar towing-force fits and the unchanged
+autonomous winner. This is an experimental reference environment; the liquid
+amplitude milestone remains specific to its original medium. See
+[wet-surface mechanics and launch instructions](PHYSICS.md#wet-surface-reference-assessment-e046).
+
 ## Run the bundled model
 
 The repository ships a compact runtime checkpoint, so cloning and installing

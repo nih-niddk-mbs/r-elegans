@@ -2109,3 +2109,49 @@ training,benchmark body/medium response to a prescribed measured waveform,
 check resolution/time convergence and choose bulk versus wall/surface geometry.
 Keep7001 as an amplitude primitive under its existing model. Audit record:
 `experiments/records/E045-medium-physics-audit.json`.
+
+## Wet-surface environment assessment (E046, 2026-11-10)
+
+The user selects moist compliant substrate locomotion as the primary
+natural-behavior target. Standard 1.7% wet NGM agar is the first controlled
+proxy. This does not identify the material properties of wild decaying fruit.
+The original liquid winner7001 is preserved with the same SHA256 and retains
+its liquid-only E043/E044 amplitude qualification.
+
+An independent NumPy float64 reference body now implements published nonlinear
+wet-agar towing-force fits (Rabets2014,doi10.1016/j.bpj.2014.09.006). It is
+available through `scripts/assess_wet_surface.py`, with a nohup mbslnx2 launcher
+`scripts/assess_wet_surface_mbslnx2.sh`. This is a reference assessment, not yet
+an environment replacement in the JAX trainer. The constant-drag agar and
+liquid factories remain available for comparison/reproducibility.
+
+Local execution:20s initial comparison, then60s comparison of8 cases, both exit0.
+The pinned zero-current full network generates endogenous muscle commands once;
+identical commands are replayed into each body because this branch has no body
+to brain feedback. No driven teacher, fitted force multiplier or new policy.
+The liquid replay differs from the original JAX joints by at most1.01e-7rad,
+and recovers regional sustained amplitudes~.003038/.033385/.011060rad.
+
+At60s, the nonlinear wet-agar case does not pass repeated/sustained amplitude
+checks in any region. Raw late-half regional excursions~.01473/.01235/.01235rad
+are dominated by slow posture changes, not established cyclic bending. The
+held-voltage control also has slow relaxation; neither its raw motion nor raw
+centroid drift should count as a skill. The plotted FFT/phase on such drifting
+records is descriptive and must not be interpreted as an oscillation frequency
+or traveling gait. Small oscillatory components are visible, so a zero
+qualification value does not mean mathematically constant trajectories.
+
+Maximum dimensionless nonlinear force residual<1e-8. Half body timestep changes
+raw regional excursions by<.0025%; four-to-eight-point rod quadrature changes
+by<.031%. These are numerical checks, not12-to24-rod spatial convergence.
+Low-speed regularization matters much more:0.01/0.1/1um/s smoothing changes raw
+regional excursions by~15–49%;62% of late default velocity components lie below
+0.1um/s. These speeds probe an unmeasured extrapolation of the published fit.
+Do not infer natural-substrate accuracy or channel insufficiency from this
+single effective-law comparison. All227 tests pass, including4 new reference
+physics tests. Exact records and raw trajectories remain external; see E046.
+
+Next:retain7001; use this reference to verify a future fast wet-surface trainer,
+address low-speed force uncertainty/settling, then build autonomous surface
+amplitude before phase/propulsion. No surface-training run or trained checkpoint
+has been produced by this assessment.

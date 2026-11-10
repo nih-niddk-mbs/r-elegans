@@ -128,3 +128,68 @@ training,benchmark body/medium response to a prescribed measured waveform,
 check resolution/time convergence and choose bulk versus wall/surface geometry.
 Keep7001 as an amplitude primitive under its existing model. Audit record:
 `experiments/records/E045-medium-physics-audit.json`.
+
+## Wet-surface reference assessment (E046)
+
+The primary natural-behavior target is now movement on a moist, compliant
+surface. Standard **1.7% wet NGM agar** is the first reproducible laboratory
+proxy; it is not a claim to reproduce the material properties of decaying fruit.
+`body/wet_surface.py` implements an independent float64 reference solver using
+the measured force-speed fits of [Rabets et al. (2014)](https://doi.org/10.1016/j.bpj.2014.09.006).
+For a 1mm contact length, with speed in micrometers/s and force in microNewtons:
+
+```text
+F_t = 0.32 |v_t|^0.58
+F_n = 6.8  |v_n|^0.31
+```
+
+These are published fitted curves, not raw observations. Convert each to force
+per length before quadrature; do not assign whole-worm force to every rod. The
+physical force opposes velocity. Other supported, separately measured agar
+concentrations are 1.0%, 3.0%, 4.0% and 6.0%; no concentration interpolation is
+implied. The previous constant-drag `medium="agar"` is retained as a legacy
+comparison and is not silently changed into this nonlinear law.
+
+At zero velocity the power-law slope diverges. The reference uses smooth odd
+resistance `a*r*(r*r+eps*eps)^((gamma-1)/2)`, where `r=v/(1um/s)` and `eps` is
+the regularization speed in the same units. Default smoothing is **0.1um/s**;
+0.01 and 1um/s are sensitivity cases, not measured parameters. Very weak
+motion depends on this unmeasured extrapolation. This model is dissipative
+with a positive Hessian; Newton solves enforce free rigid force/torque and
+joint moment balance, with backward-Euler passive elasticity. Failed solves
+raise errors. Finite rods use four-point Gauss quadrature, with eight-point
+comparison. Quadrature refinement is not body-segment spatial convergence.
+
+The assay generates the pinned seed7001's endogenous 95-muscle output once,
+then replays the identical commands into each body model, starting straight
+and relaxed. This preserves the current **one-way** brain-to-body dynamics
+because there is no body-to-brain feedback. No sinusoidal teacher, external
+current or parameter fitting is introduced. Holding commands across their
+recorded intervals makes the half-timestep replay a body/muscle integration
+check; it does not refine the neural integration. A held-voltage control uses
+the actual static NMJ output, not artificially zero muscle activations.
+
+Run on mbslnx2 after pulling:
+
+```sh
+cd /home/carsonc/github/r-elegans
+git pull --ff-only
+sh scripts/assess_wet_surface_mbslnx2.sh
+```
+
+The launcher pins the successful external checkpoint and frozen readout by
+SHA256, uses the absolute dedicated environment's Python and four physical
+CPU cores, and detaches with nohup. Defaults:60 simulated seconds per case,
+20-minute neural-generation budget; body replays follow. The log path and PID
+are printed. `WET_SURFACE_RUN_EXIT_CODE=0` means the assessment completed, not
+that crawling was learned. `summary.json`, `force_reference.png`, per-case
+`trajectory.png` and true-geometry `motion.html` remain outside Git under
+`/home/carsonc/r-elegans-results/wet-surface-*`. Commands, all recorded neural
+states, motor outputs, body trajectories, input hashes, source and environment
+are retained. No optimizer or random seed is used in this deterministic assay.
+
+This reference is not yet the JAX training environment. It does not resolve
+capillary/adhesion forces separately, groove memory, full contact, self-contact
+or natural substrate microstructure. Towing-fit reproduction checks units and
+the effective law; independent gait/force validation and appropriate low-speed
+data are still needed before quantitative biological crawling claims.
