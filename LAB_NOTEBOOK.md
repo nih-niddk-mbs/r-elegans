@@ -2948,3 +2948,53 @@ Plan,exact launcher and stub command-construction evidence archived at
 23a47c094878faf331792c0baf5ae6ef4a2f2bc497de0c646d462cdee774a817.
 Archive is preparation evidence,not server experiment output or a checkpoint
 backup. Local copy completed;cloud synchronization not independently verified.
+
+## 2026-11-09 — E042 three-hour server continuation: muscle threshold reached
+
+User reported cohort
+`/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261109T232143970960Z`.
+Seeds6000–6003 all completed exit2/passedFalse,503/502/504/499 proposals
+(2008 total). All six validation rows provided. Parsed results and exact
+attachment SHA256 in `experiments/records/E042-server-20261109.json`.
+No independent retrieval of source/environment records,selected genotypes,
+bound saturation,full history or raw trajectories. Runtime/duration settings
+remain from the planned launcher;not directly printed in this excerpt.
+
+Best6002 from5003:fit median tail bend1.87389553e-4→0.00136388093rad
+(7.2783x),net-muscle median4.79921699e-4→0.00352342427 (7.3417x).
+Long validation bend0.00139633566rad,net muscle0.00361156464. Perturb±1mV:
+bend0.00135914609/0.00136641040,net muscle0.00351200998/0.00353859365.
+Brain-refined bend0.00133876503(-1.8415% vs fit),net muscle0.00347095728
+(-1.4891%);body-refined0.00136598572rad/0.00352346152. Held-voltage scored
+excursions0. Motor release score rises0.0866077→0.2086125,with refined0.189943;
+this is a normalized heuristic,not an absolute transmitter amplitude.
+
+The NET-MUSCLE AMPLITUDE COMPONENT reaches>=0.003 in all five active tests.
+Full posterior-motor qualification remains FALSE:tail bend is45.46% of target
+at fit,44.63% in brain-refined case. Needs2.20x nominal or2.24x using minimum
+active validation to reach0.003rad. Do not lower the bend threshold or label
+muscle-component completion a full skill pass. Numerical/perturbation consistency
+supports this subthreshold improvement within tested windows,not general
+stability,biological fidelity,phase control or locomotion.
+
+Other workers improve both physical metrics:6000 fit tail0.000670701/net muscle
+0.00171800;6001 fit tail0.000676252/net muscle0.00171223;6003 fit tail0.000608586/
+net muscle0.00102966 (its parent5002 was0.0000529140/0.0000564456).
+All remain unqualified;held-voltage scored excursions0.6003 preserves progress
+from the alternate lineage;retain all independent checkpoints rather than
+consolidating. Similar outcomes6000/6001 do not demonstrate a plateau without
+learning curves and bound occupancy.
+
+Decision:prefer a subsequent unchanged-objective continuation from6002,retain
+6003 as alternative lineage and6001 as a sibling backup. Keep original anchors,
+16x bounds,zero drive,fixed fields and long/refined/held controls. Already-capped
+muscle coverage term leaves bend reward to encourage further physical amplitude;
+no new phase/control/propulsion requirement. No new training launched or new
+budget selected in this results-recording turn. Preserve actual successful
+subthreshold genotypes on server;do not promote a qualified asset in Git.
+
+Exact user-pasted stdout and parsed report copied to external OneDrive
+`notebook/evidence/E042/server-report-20261109`;its separate manifest SHA256
+0e03a972ba411e9d485b8ced94b3c76b35175c89abd166beaeb68aab6f3f8d41.
+Copy completed locally;cloud sync and independent raw-server checkpoint backup
+not verified. Results-only update;no implementation or acceptance criteria changed.

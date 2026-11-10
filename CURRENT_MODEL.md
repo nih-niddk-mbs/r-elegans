@@ -1888,3 +1888,13 @@ construction verified with a stub interpreter (no real preflight or training).
 Training code unchanged;prior218-test suite applies to that implementation.
 No server launch or new qualification claimed. Plan record:
 `experiments/records/E042-continuation-plan.json`.
+
+E042 server continuation reported (2026-11-09):2008 proposals,0/4 full passes,
+but best6002 increases tail bending7.28x to0.00136388rad and net-muscle activity
+7.34x to0.00352342. Net-muscle amplitude exceeds0.003 in all five active checks;
+tail bending remains~2.2x below0.003rad target. Long validation0.00139634rad/
+0.00361156 muscle;brain refinement changes bend-1.84%,muscle-1.49%. All four
+workers improve,held-voltage scored excursions0. Prefer future continuation from
+6002,preserve6003 alternate lineage/other backups. Same objective,original bounds,
+zero drive;no full skill qualified and no new run launched. Exact record:
+`experiments/records/E042-server-20261109.json`.
