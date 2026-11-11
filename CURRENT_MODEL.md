@@ -1,8 +1,19 @@
 # Current model: exact scope and computation path
 
+E055 server result partially reported (2026-11-11):23.58minutes, time-budget
+stop; checkpoint437b227e... from confirmed E053 parent98ea6655.... An unlabeled
+validation case shows1.274e-5rad cue-specific bend (42.5% of the3e-5 target),
+19.5% residual and6.025mV AWA recruitment with recovery. Chemical and held-voltage
+blocks give zero differential response; engineering refinement gate passes
+(2.750e-6rad versus7.5e-6 tolerance). No promotion: run ID, baseline/best,
+iterations, full active-case results and final exit code were not supplied.
+The labeled proprioception block is descriptive; compare it with the missing
+active case before interpreting feedback's contribution. See the
+[partial server record](experiments/records/E055-server-partial-20261111.json).
+
 E055 now defines a sensory–motor curriculum: reversible cue response ->
 alternation -> proprioceptive propagation -> translation -> sensory regulation.
-The first-stage trainer is implemented; server execution is pending. It trains
+The first-stage trainer is implemented; partial server results are recorded below. It trains
 unknown channel/synapse strengths and three bounded exploratory sensory gains
 through the existing full302-neuron network, with fixed sensory routing/kinetics,
 NMJ and mechanics. A single diacetyl exposure/washout is sampled through actual

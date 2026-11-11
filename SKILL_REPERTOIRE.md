@@ -436,7 +436,10 @@ require new evidence in this branch. No new skill checkpoint is registered.
 
 ## Sensory–motor foundation curriculum (E055, 2026-11-11)
 
-Status: first-stage software implemented; server training/qualification pending.
+Status: first server result partially reported; first-rung qualification is not
+established. The shown case reaches42.5% of the bend target, with adequate
+recovery and passing chemical/voltage controls and engineering refinement.
+Complete baseline/best/active rows are still needed before another run.
 See [stage definitions](experiments/sensorimotor_curriculum_v1.json). Keep the
 full302-neuron network during this curriculum. Sensory transduction gains and
 unknown neural/connection strengths can adapt; anatomy, response signs, receptor

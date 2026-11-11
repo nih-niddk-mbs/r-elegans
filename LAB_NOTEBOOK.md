@@ -4637,3 +4637,37 @@ was SHA256-compared against its /tmp source; archive manifest covers3460 files.
 This verifies local copies, not OneDrive cloud synchronization or retrieval of
 the actual E053 server checkpoint. The earlier report helper briefly used system
 python without NumPy and failed before mutation; rerun with .venv succeeded.
+
+## 2026-11-11 — E055 partial server result reported
+
+Evidence: user-pasted summary tail; run ID, iteration count, baseline/best, full
+active/dose rows, source capsule and final exit-code digits are absent. Do not
+reconstruct these as facts. Exact artifacts remain on server, not independently
+retrieved. Partial transcription: experiments/records/E055-server-partial-20261111.json.
+Reported elapsed1414.7473s=23.5791minutes, stop_reason time_budget. Candidate SHA
+437b227e2fdcb5ff376c9b5324ede09a49d1dbc2676c6886846bd10abc2e624d; parent SHA
+98ea66551777dd8b228bf0ee59d97043ce32ec1b8d7f2e04f139887ecd26d6e2 confirms
+the E053 parent for THIS run. Original anchor417254ad... unchanged as reported;
+frozen_fields_unchanged=True.3949 neural/connection coordinates changed versus
+parent; that does not measure bound occupancy. Sensory multipliers chemical
+1.42231, B .99205, DVA .83114, all within original .5–2 exploratory gain bounds.
+
+An unlabeled validation row shows joint4 peak1.274003e-5rad, residual2.4871e-6rad
+(19.52%), AWA depolarization6.02456mV with residual .0026474mV (.04394%),
+pre-cue difference0. Peak is42.47% of the3e-5rad first-rung target, requiring
+2.355fold more amplitude in that case. Its label is missing: do not silently
+assign active/refined or use it as the baseline for a proprioceptive comparison.
+Chemical-blocked and held-voltage rows have exactly zero cue-specific bend and
+AWA recruitment; blocked_controls_passed=True. Refined cue-effect difference
+2.75044e-6rad passes the7.5e-6 engineering tolerance; this is not a voltage-error
+bound or biological pass. Proprioception-blocked row shows1.53880e-5rad peak
+and12.55% residual; full active row is needed for paired interpretation.
+
+Interpretation: sensory recruitment and recovery operate in the reported case,
+but its motor amplitude remains below the deliberately small first target.
+Cannot quantify optimization improvement without matching baseline/best. No
+autonomous oscillation or biological qualification; no next stage launched.
+Decision: retain this candidate, remain at contract_relax, and obtain the compact
+complete summary before choosing further training or an objective change. No
+new run or code experiment executed in this reporting turn. Metadata/JSON and
+arithmetic checked locally; software tests not repeated for record-only edits.

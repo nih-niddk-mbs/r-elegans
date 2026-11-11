@@ -1250,3 +1250,14 @@ transmission before increasing amplitude. The planned ladder is .00003, .0001,
 .0003, .001, .003rad, with review at every step. This first target is far below a
 biologically realistic bend. Only the first rung is currently selected; changing
 a target is a new objective/configuration, not exact continuation.
+
+E055 server result partially reported (2026-11-11):23.58minutes, time-budget
+stop; checkpoint437b227e... from confirmed E053 parent98ea6655.... An unlabeled
+validation case shows1.274e-5rad cue-specific bend (42.5% of the3e-5 target),
+19.5% residual and6.025mV AWA recruitment with recovery. Chemical and held-voltage
+blocks give zero differential response; engineering refinement gate passes
+(2.750e-6rad versus7.5e-6 tolerance). No promotion: run ID, baseline/best,
+iterations, full active-case results and final exit code were not supplied.
+The labeled proprioception block is descriptive; compare it with the missing
+active case before interpreting feedback's contribution. See the
+[partial server record](experiments/records/E055-server-partial-20261111.json).

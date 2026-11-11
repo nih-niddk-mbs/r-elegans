@@ -1,0 +1,68 @@
+{
+  "experiment": "E055",
+  "evidence": "User-pasted truncated server summary tail, reported2026-11-11; no independent server artifact retrieval",
+  "run": null,
+  "source_revision": null,
+  "iterations": null,
+  "overall_passed": null,
+  "exit_code": null,
+  "missing": "Prefix omits run ID, baseline, best, iterations, active/dose rows and the first shown case label; final exit marker is truncated.",
+  "elapsed_seconds": 1414.7473249729956,
+  "stop_reason": "time_budget",
+  "checkpoint_sha256": "437b227e2fdcb5ff376c9b5324ede09a49d1dbc2676c6886846bd10abc2e624d",
+  "parent_checkpoint_sha256": "98ea66551777dd8b228bf0ee59d97043ce32ec1b8d7f2e04f139887ecd26d6e2",
+  "original_anchor_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "frozen_fields_unchanged": true,
+  "neuron_connection_parameters_changed_from_parent": 3949,
+  "sensory_gain_multipliers": [
+    1.4223109213065035,
+    0.9920482472654161,
+    0.8311373894044188
+  ],
+  "unlabeled_validation_case": {
+    "selected_joint": 4,
+    "cue_specific_peak_rad": 1.274003166362725e-05,
+    "cue_specific_recovery_residual_rad": 2.4871002496651418e-06,
+    "recovery_ratio": 0.19521931462429604,
+    "awa_depolarization_mV": 6.024557113647461,
+    "awa_recovery_residual_mV": 0.00264739990234375,
+    "awa_recovery_ratio": 0.0004394347754371157,
+    "maximum_absolute_joint_rad": 0.2659448927722887,
+    "pre_cue_difference_rad": 0.0
+  },
+  "chemical_blocked": {
+    "cue_specific_peak_rad": 0.0,
+    "awa_depolarization_mV": 0.0
+  },
+  "held_voltage": {
+    "cue_specific_peak_rad": 0.0,
+    "awa_depolarization_mV": 0.0
+  },
+  "proprioceptive_blocked": {
+    "passed": false,
+    "selected_joint": 4,
+    "cue_specific_peak_rad": 1.5388013901537767e-05,
+    "recovery_ratio": 0.12546710923768045,
+    "awa_depolarization_mV": 6.026201248168945,
+    "awa_recovery_ratio": 9.305372903323822e-05
+  },
+  "blocked_controls_passed": true,
+  "refinement_comparison": {
+    "maximum_cue_effect_difference_rad": 2.7504367488689896e-06,
+    "allowed_difference_rad": 7.5e-06,
+    "passed": true
+  },
+  "arithmetic": {
+    "shown_case_target_fraction": 0.4246677221209083,
+    "shown_case_required_amplitude_factor": 2.3547822165662198,
+    "elapsed_minutes": 23.57912208288326
+  },
+  "interpretation": "The shown cue response has sufficient AWA recruitment and recovery but is below the first-rung bend target. Chemical/voltage blocks remove the differential response; engineering refinement gate passes. Not qualified for promotion; full active/baseline/best rows needed before selecting continuation.",
+  "limitations": [
+    "Cannot quantify training improvement without matching baseline/best.",
+    "Unlabeled case cannot be treated as active or compared causally to proprioceptive block.",
+    "No bound occupancy can be inferred from changed-coordinate count.",
+    "No autonomous motion, navigation or biological-fidelity qualification."
+  ],
+  "decision": "Remain on contract_relax first rung, preserve candidate and prior parents; obtain complete compact summary before further training. No new run launched."
+}

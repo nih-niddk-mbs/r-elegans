@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "stage1_implemented_pending_server_execution",
+  "status": "stage1_partial_server_result_no_promotion",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -26,7 +26,7 @@
   "stages": [
     {
       "id": "contract_relax",
-      "status": "implemented_pending_server_execution",
+      "status": "partial_server_result_below_amplitude_target_in_shown_case",
       "motor_goal": "One cue-specific reversible bend, no preferred side",
       "sensory_goal": "AWA recruitment by finite diacetyl exposure and recovery after washout; actual-body B/DVA feedback active and gain trainable",
       "protocol": "8s; one exposure2..3s, recovery6..8s; matched sham",
@@ -84,5 +84,6 @@
       "sensory_goal": "Environmental cues and internal state select motor programs; navigation only after viable skills",
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
-  ]
+  ],
+  "server_evidence": "experiments/records/E055-server-partial-20261111.json"
 }
