@@ -1,0 +1,147 @@
+{
+  "experiment": "E058",
+  "evidence": "User-pasted compact server report; metrics rounded as displayed, full artifacts not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/sensorimotor-20261111T193810Z-773573",
+  "passed": true,
+  "exit_code": 0,
+  "iterations": 99,
+  "initial_iteration": 99,
+  "last_iteration": 198,
+  "selected_iteration": 167,
+  "elapsed_minutes_rounded": 63.77,
+  "elapsed_seconds": null,
+  "training_cues": "nominal-low-dose",
+  "stop_reason": "time_budget",
+  "baseline": {
+    "total": 0.0207356124,
+    "nominal_bend_rad": 3.38929054e-05,
+    "nominal_recovery_ratio": 0.0583,
+    "awa_depolarization_mV": 8.2238,
+    "training_cases": [
+      {
+        "case": "active",
+        "response_loss": 0.0,
+        "bend_rad": 3.38929054e-05,
+        "recovery_ratio": 0.0583
+      },
+      {
+        "case": "dose-low",
+        "response_loss": 0.020414629,
+        "bend_rad": 2.93875611e-05,
+        "recovery_ratio": 0.0667
+      }
+    ]
+  },
+  "best": {
+    "total": 0.000273266239,
+    "nominal_bend_rad": 3.49248654e-05,
+    "nominal_recovery_ratio": 0.0522,
+    "awa_depolarization_mV": 7.856,
+    "training_cases": [
+      {
+        "case": "active",
+        "response_loss": 0.0,
+        "bend_rad": 3.49248654e-05,
+        "recovery_ratio": 0.0522
+      },
+      {
+        "case": "dose-low",
+        "response_loss": 0.0,
+        "bend_rad": 3.03782455e-05,
+        "recovery_ratio": 0.0587
+      }
+    ]
+  },
+  "validation": [
+    {
+      "case": "active",
+      "passed": true,
+      "cue_specific_peak_rad": 3.49248654e-05,
+      "recovery_ratio": 0.0522,
+      "awa_depolarization_mV": 7.856,
+      "awa_recovery_ratio": 2.864905850210583e-05
+    },
+    {
+      "case": "dose-low",
+      "passed": true,
+      "cue_specific_peak_rad": 3.03782455e-05,
+      "recovery_ratio": 0.0587,
+      "awa_depolarization_mV": 7.05534,
+      "awa_recovery_ratio": 6.434122693853628e-05
+    },
+    {
+      "case": "dose-high",
+      "passed": true,
+      "cue_specific_peak_rad": 3.87192152e-05,
+      "recovery_ratio": 0.047,
+      "awa_depolarization_mV": 8.50052,
+      "awa_recovery_ratio": 4.487606241273008e-06
+    },
+    {
+      "case": "onset-shift",
+      "passed": true,
+      "cue_specific_peak_rad": 3.26107411e-05,
+      "recovery_ratio": 0.0709,
+      "awa_depolarization_mV": 7.85605,
+      "awa_recovery_ratio": 3.1562330504215515e-05
+    },
+    {
+      "case": "refined",
+      "passed": true,
+      "cue_specific_peak_rad": 3.23884526e-05,
+      "recovery_ratio": 0.1082,
+      "awa_depolarization_mV": 7.85422,
+      "awa_recovery_ratio": 0.0002991834380596788
+    },
+    {
+      "case": "chemical-blocked",
+      "passed": false,
+      "cue_specific_peak_rad": 0.0,
+      "recovery_ratio": 0.0,
+      "awa_depolarization_mV": 0.0,
+      "awa_recovery_ratio": 0.0
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "passed": true,
+      "cue_specific_peak_rad": 3.44981828e-05,
+      "recovery_ratio": 0.0683,
+      "awa_depolarization_mV": 7.85602,
+      "awa_recovery_ratio": 3.156246077453793e-05
+    },
+    {
+      "case": "held-voltage",
+      "passed": false,
+      "cue_specific_peak_rad": 0.0,
+      "recovery_ratio": 0.0,
+      "awa_depolarization_mV": 0.0,
+      "awa_recovery_ratio": 0.0
+    }
+  ],
+  "blocked_controls_passed": true,
+  "refinement_comparison": {
+    "maximum_cue_effect_difference_rad": 6.142203568398896e-06,
+    "allowed_difference_rad": 7.5e-06,
+    "passed": true
+  },
+  "sensory_gain_multipliers": [
+    1.9011496203729545,
+    0.7885036541489113,
+    0.6036207203625306
+  ],
+  "neuron_connection_parameters_changed_this_run": 3152,
+  "neuron_connection_parameters_changed_from_parent": 8974,
+  "checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf",
+  "resume_checkpoint_sha256": "1d864fdbcb3d0fec0f21fec6801fb8e74d9b18fe86ba54b2938193322def5245",
+  "sensory_parameters_sha256": null,
+  "source_revision": null,
+  "frozen_fields_unchanged": null,
+  "missing": "Exact elapsed seconds, complete sensory hash, source revision and frozen-fields field absent from displayed prefix; do not reconstruct.",
+  "arithmetic": {
+    "low_dose_target_fraction": 1.0126081833333334,
+    "low_dose_margin_rad": 3.7824550000000034e-07,
+    "low_dose_increase_percent": 3.3711011152946613
+  },
+  "interpretation": "Current first-rung engineering protocol PASSES, including all required active variants, recovery and causal controls. Blocked motor-goal flags false are expected; separate control criterion passes. No autonomous oscillation, realistic-amplitude locomotion or biological calibration.",
+  "decision": "Preserve winner and sensory state; plan E059 pinned read-only low-dose coarse/half/quarter integration assay before promotion. This does not retrospectively change E058 gates. No new training."
+}

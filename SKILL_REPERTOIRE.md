@@ -479,3 +479,11 @@ E057 server update:nominal/high-dose/onset/nominal-refined gates pass, low-dose
 continuation planned with RNG after99 and selected model98. Do not promote to
 alternation or infer autonomous/biological skill. Low-dose fine-timestep behavior
 is not separately established by the nominal refinement case.
+
+E058: **first-rung engineering pass**, user-reported; preserve selected model
+6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf and its
+sensory gains under sensorimotor-20261111T193810Z-773573. All original required
+active variants/recovery/control gates pass. Capability is a tiny reversible
+sensory-evoked bend; no autonomous rhythm, propagation, propulsion or biological
+reflex fit. No shared-skill consolidation claim. Further promotion pending E059
+read-only low-dose timestep/margin assay; original E058 pass remains recorded.

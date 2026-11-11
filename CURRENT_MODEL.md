@@ -1,12 +1,21 @@
 # Current model: exact scope and computation path
 
+E058 first-rung engineering PASS (user-reported):99additional proposals,
+global99 ->198, selected167. All required active variants and recovery/control
+criteria pass. Low-dose bend3.03782455e-5rad is101.26% of target, nominal116.42%.
+Preserve winner6cd7b0fa... with its sensory parameters independently. This is a
+tiny sensory-evoked reversible response, not autonomous wiggling or a biological
+reflex fit. E059 is a read-only low-dose timestep/margin assay before promotion:
+current refinement tested nominal cue only. No retraining or threshold change.
+See [E058 report](experiments/records/E058-server-summary.json).
+
 E057 server result:99 proposals, selected98,63.80minutes, qualification false.
 Nominal, high-dose, shifted-onset and nominal-refined responses now pass the
 current gates. Low dose reaches2.93875611e-5rad (97.96% of target), still below
 3e-5; controls and engineering refinement pass. Retain candidate1d864fdb... and
-same robust objective. Plan E05860min completed-search continuation with saved
+same robust objective. E058 subsequently executed completed-search continuation with saved
 neural/sensory parameters and final RNG after99 (not selected98). No target or
-bound changes, stage promotion or new server launch. Near-threshold low-dose
+bound changes were made; its pass is recorded above. Near-threshold low-dose
 performance needs numerical care: current refinement is nominal-only, not a
 separate fine-step low-dose qualification. See
 [E057 server report](experiments/records/E057-server-summary.json).

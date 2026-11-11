@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "stage1_E057_low_dose_only_failure_E058_continuation_planned",
+  "status": "E058_stage1_original_engineering_gates_pass_E059_resolution_pending",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -26,7 +26,7 @@
   "stages": [
     {
       "id": "contract_relax",
-      "status": "continuation_refined_and_shifted_onset_below_target",
+      "status": "original_engineering_protocol_pass_user_reported",
       "motor_goal": "One cue-specific reversible bend, no preferred side",
       "sensory_goal": "AWA recruitment by finite diacetyl exposure and recovery after washout; actual-body B/DVA feedback active and gain trainable",
       "protocol": "8s; one exposure2..3s, recovery6..8s; matched sham",
@@ -65,7 +65,8 @@
         "low_dose_is_unseen": false,
         "initialization": "inherit selected neural/sensory parameters; fresh seed5700/global0",
         "bounds_and_targets_changed": false
-      }
+      },
+      "selected_checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf"
     },
     {
       "id": "alternate",
@@ -96,6 +97,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E057-server-summary.json",
-  "continuation": "E05860min same robust objective; restore E057 selected98 parameters, sensory gains and final post-proposal99 RNG, unchanged bounds and3e-5 target; user launch pending"
+  "server_evidence": "experiments/records/E058-server-summary.json",
+  "continuation": "No new fitting: E059 read-only low-dose resolution assay on preserved winner before promotion; original gates not retrospectively revised"
 }

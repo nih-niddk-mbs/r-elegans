@@ -1365,3 +1365,29 @@ tail -n 28 -F "$(ls -1t /home/carsonc/r-elegans-results/sensorimotor-*.log | hea
 This continues the current objective. Repeating the robust-stage launch command
 would instead warm-start another fresh search. Keep the selected E057 model and
 its sensory parameters independently even if the continuation does not improve.
+
+E058 first-rung engineering PASS (user-reported):99additional proposals,
+global99 ->198, selected167. All required active variants and recovery/control
+criteria pass. Low-dose bend3.03782455e-5rad is101.26% of target, nominal116.42%.
+Preserve winner6cd7b0fa... with its sensory parameters independently. This is a
+tiny sensory-evoked reversible response, not autonomous wiggling or a biological
+reflex fit. E059 is a read-only low-dose timestep/margin assay before promotion:
+current refinement tested nominal cue only. No retraining or threshold change.
+See [E058 report](experiments/records/E058-server-summary.json).
+
+Run the pinned winner's read-only low-dose resolution assay on mbslnx2:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/assess_sensorimotor_resolution_mbslnx2.sh &&
+tail -n 20 -F "$(ls -1t /home/carsonc/r-elegans-results/cue-resolution-*.log | head -n 1)"
+```
+
+It pins E058's reported path and SHA, preserves recursive dependencies, and runs
+8second cue/sham pairs at original, half and quarter body/neural timesteps. No
+weights/gains change. Results report each response gate, successive cue-effect
+differences and whether the fine-grid threshold margin exceeds the last grid
+difference. This is descriptive numerical evidence, not a rigorous error bound
+or retrospective revision of the original stage pass. Assay exit0 means complete;
+read its summary to assess all-grid response and margin confidence.

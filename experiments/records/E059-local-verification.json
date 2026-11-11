@@ -1,0 +1,195 @@
+{
+  "experiment": "E059",
+  "evidence": "Local read-only resolution software verification on older unqualified E057 smoke; not E058 winner",
+  "invocation": "JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.assess_sensorimotor_resolution --run /tmp/r-elegans-E057-robust-smoke --output-dir /tmp/r-elegans-E059-resolution-smoke",
+  "run": "/tmp/r-elegans-E059-resolution-smoke",
+  "source_stage_pass": false,
+  "checkpoint_sha256": "b5a484bd8cd5b140ae66c8ff86d4f966ac6b8123938e0da6b069b6d26d7c7c52",
+  "sensory_parameters_sha256": "b428fb55c047993dd84c0d4dd3c97c5a847dbdb9fccef78db393bb48b01b2674",
+  "cases": [
+    {
+      "case": "coarse",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.1,
+      "metrics": {
+        "total": 0.6807329419387871,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.0594694042298514e-05,
+        "cue_specific_recovery_residual_rad": 3.0077214409618414e-06,
+        "recovery_ratio": 0.2838894100154041,
+        "peak_by_joint_rad": [
+          6.198047103583848e-06,
+          1.0594694042298514e-05,
+          3.090156328249688e-06,
+          3.5262016478600916e-06,
+          4.332556028552315e-06,
+          1.7035822857738858e-06,
+          1.8777589949441065e-06,
+          4.306045342282808e-06,
+          2.8014584482899396e-06,
+          6.40697296620113e-06,
+          6.010894385316545e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.140149545802993e-06,
+          3.0077214409618414e-06,
+          2.630534849556998e-06,
+          1.3985923557895304e-06,
+          9.528400041064478e-07,
+          1.6295179025467565e-06,
+          7.554990505663495e-07,
+          3.548138683556745e-07,
+          1.0549767595208204e-06,
+          1.1570989525769293e-06,
+          4.853114760339228e-07
+        ],
+        "awa_depolarization_mV": 4.221057891845703,
+        "maximum_absolute_joint_rad": 0.15285059039982657,
+        "awa_recovery_residual_mV": 0.00095367431640625,
+        "awa_recovery_ratio": 0.0002259325365445878,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      },
+      "target_margin_rad": -1.9405305957701487e-05
+    },
+    {
+      "case": "half",
+      "dt_s": 0.001,
+      "brain_step_ms": 0.05,
+      "metrics": {
+        "total": 0.7410766960565389,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.0095242572144558e-05,
+        "cue_specific_recovery_residual_rad": 3.307047835160448e-06,
+        "recovery_ratio": 0.3275847817946908,
+        "peak_by_joint_rad": [
+          5.759498303753441e-06,
+          1.0095242572144558e-05,
+          3.1127066902232603e-06,
+          3.789739560838487e-06,
+          4.613514055507029e-06,
+          1.6266926076875798e-06,
+          1.8950003535175841e-06,
+          4.392700534289196e-06,
+          2.7669840396704615e-06,
+          6.469603915794375e-06,
+          6.035391097655718e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.3904140479803484e-06,
+          3.307047835160448e-06,
+          2.677224676034262e-06,
+          1.3273407324103544e-06,
+          1.0216089315340238e-06,
+          1.5207008612731776e-06,
+          6.797022698845634e-07,
+          3.2547387516720927e-07,
+          9.412480773268728e-07,
+          1.0795675376013003e-06,
+          7.039962385685383e-07
+        ],
+        "awa_depolarization_mV": 4.21989631652832,
+        "maximum_absolute_joint_rad": 0.15280408761497807,
+        "awa_recovery_residual_mV": 0.003017425537109375,
+        "awa_recovery_ratio": 0.000715047316516011,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      },
+      "target_margin_rad": -1.9904757427855443e-05
+    },
+    {
+      "case": "quarter",
+      "dt_s": 0.0005,
+      "brain_step_ms": 0.025,
+      "metrics": {
+        "total": 0.7693284638775232,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.0434670846964922e-05,
+        "cue_specific_recovery_residual_rad": 3.831098014689394e-06,
+        "recovery_ratio": 0.3671508254430206,
+        "peak_by_joint_rad": [
+          5.704774019371639e-06,
+          1.0434670846964922e-05,
+          3.177064809328084e-06,
+          4.051941135852985e-06,
+          4.61940532163474e-06,
+          1.670074828971635e-06,
+          1.8472113901130127e-06,
+          4.236170910353054e-06,
+          2.837246539905136e-06,
+          5.941146432736355e-06,
+          5.741090624351852e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.695916958643906e-06,
+          3.831098014689394e-06,
+          2.7752170063538584e-06,
+          1.3878711289656669e-06,
+          1.0071163193542398e-06,
+          1.5803884712631278e-06,
+          7.915838404794207e-07,
+          2.289336575311829e-07,
+          1.0002263363395603e-06,
+          1.241012347587278e-06,
+          7.530323295826258e-07
+        ],
+        "awa_depolarization_mV": 4.219081878662109,
+        "maximum_absolute_joint_rad": 0.15272577020345807,
+        "awa_recovery_residual_mV": 0.00714111328125,
+        "awa_recovery_ratio": 0.0016925751826163849,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      },
+      "target_margin_rad": -1.956532915303508e-05
+    }
+  ],
+  "comparisons": [
+    {
+      "pair": "coarse->half",
+      "maximum_cue_effect_difference_rad": 9.090794868549246e-07,
+      "per_joint_difference_rad": [
+        8.815653438909443e-07,
+        9.090794868549246e-07,
+        3.9635931748174813e-07,
+        3.396939721594938e-07,
+        4.3141856768957876e-07,
+        2.6001513879492233e-07,
+        1.741065889446225e-07,
+        2.897030814043994e-07,
+        1.503564417276726e-07,
+        2.435127113946389e-07,
+        3.3160608175347717e-07
+      ]
+    },
+    {
+      "pair": "half->quarter",
+      "maximum_cue_effect_difference_rad": 1.070884581929124e-06,
+      "per_joint_difference_rad": [
+        8.956164459783533e-07,
+        6.29667223750463e-07,
+        3.1914618266529193e-07,
+        1.070884581929124e-06,
+        7.89289252782488e-07,
+        4.4127000255189675e-07,
+        1.572650040020107e-07,
+        4.1704860904122343e-07,
+        1.8014127946275327e-07,
+        6.352420494487587e-07,
+        7.907463434320139e-07
+      ]
+    }
+  ],
+  "all_grids_response_pass": false,
+  "fine_margin_exceeds_last_successive_difference": false,
+  "checks": "Original checkpoint and sensory file hashes unchanged; preserved coarse/half/quarter active/sham dense traces and actual-pose previews; no fitting or RNG draws",
+  "full_suite": {
+    "passed": 258,
+    "elapsed_seconds": 96.78,
+    "stdout_sha256": "4ce2abc46e9a236651e882122aaf138f450e1a03aba892a6d7ba387031ba414c"
+  },
+  "server_assay_launched": false,
+  "external_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E059"
+}

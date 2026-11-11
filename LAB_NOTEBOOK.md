@@ -4904,3 +4904,63 @@ E057 compact server transcription copied and SHA256-compared under external
 notebook/evidence/E057/server-summary-20261111, with manifest. This archives
 reported summary data, not original server stdout, checkpoints or source
 capsules; those remain on mbslnx2. Cloud synchronization unverified.
+
+## 2026-11-11 — E058 first-rung engineering pass; planned E059 resolution assay
+
+User reports sensorimotor-20261111T193810Z-773573, passed=True, exit0,99
+additional proposals global99 ->198, selected167; elapsed63.77min (rounded
+display). Same robust nominal/.8dose objective. Nominal3.49248654e-5rad, low
+dose3.03782455e-5rad now pass, as do high dose, onset shift and nominal refined
+case. Recovery/control and current refinement gates pass. This is a valid PASS
+of the originally stated first-rung engineering protocol, not autonomous
+oscillation, realistic-amplitude locomotion, or biological calibration. Preserve
+selected checkpoint6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf
+and learned sensory gains[1.901149620,.788503654,.603620720] independently.
+
+E059 question: does the near-threshold .8dose response persist under matched
+body/neural timestep refinement? Current low-dose margin3.782455e-7rad is much
+smaller than nominal full-trajectory coarse/fine difference6.142204e-6rad, which
+is not a low-dose error estimate or rigorous numerical error bound. Do not
+retroactively revoke E058's defined pass, but assess numerical confidence before
+promoting to alternation. No additional fitting or changed target/bounds.
+
+Method: read-only8s cue/sham .8dose at original dt=.002s,brain=.1ms; half
+(.001,.05) and quarter(.0005,.025) timesteps, all fixed initial/protocol/medium
+settings and learned parameters. Verify full selected network/offsets/gains,
+original anchor/readout/anatomy and source SHA; copy recursive inputs outside
+Git. Record raw active/sham dense trajectories, original response gates,
+successive cue-effect differences and margin-versus-difference diagnostic.
+Report all-grid engineering pass separately from numerical margin support;
+three grids cannot certify the ODE solution. No periodic input beyond the
+original finite ligand exposure, no direct muscle/voltage target. No source
+mutations, no optimizer or RNG draws needed. Preserve exact source/env/commands
+and hash records externally. Server launcher pins the reported E058 root and
+SHA; no latest-checkpoint substitution. Local software smoke may use the older
+unqualified E057 model and is labeled separately. Planned command:
+sh scripts/assess_sensorimotor_resolution_mbslnx2.sh
+Diagnostic exit0 means completion, not biological or automatic promotion. No
+server assay launched in this turn. All neuronal/NMJ/body/sensory parameters
+fixed; no training seed because no stochastic simulation/proposal is used.
+
+E059 local verification:258 tests passed in96.78s, including new comparison test
+that cancels distinct sham postures, aligns nested timestamps, isolates an
+injected per-joint response difference and rejects incomplete fine-grid coverage.
+Python compilation and launcher shell syntax passed. Full three-grid assay
+completed on older UNQUALIFIED local E057 candidate (not server E058); all
+three response gates and margin-confidence check are false, as expected for
+that model. Source neural/sensory file hashes unchanged. Successive cue-effect
+differences9.091e-7 then1.071e-6rad are non-monotonic; do not report certified
+convergence from a binary tolerance pass. Exact invocation/results in
+experiments/records/E059-local-verification.json, full traces/source capsules
+external. The server launcher pins E058 path+6cd7b0fa... SHA and requires its
+reported original-stage pass before nohup launch. New output prefix cue-resolution
+is deliberately outside sensorimotor-* so diagnostics cannot be mistaken for
+training candidates by existing latest-run/resume/report helpers. No model,
+training objective, threshold or previous pass changed. Actual E058 numerical
+assay remains pending user launch.
+
+E059 local evidence archived and all copied run files SHA256-compared under
+OneDrive/r-elegans/notebook/evidence/E059 (3779manifest entries): recursive old
+local parent, fixed-grid active/sham traces, actual-pose previews, source/env
+capsules, summaries and test stdout. Compact user-reported E058 pass record also
+archived; actual server E058 checkpoint not retrieved and cloud sync unverified.
