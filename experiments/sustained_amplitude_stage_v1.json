@@ -1,19 +1,40 @@
 {
   "stage": "sustained_dynamic_amplitude_v1",
-  "status": "proposed_pending_E054_actual_checkpoint_diagnostic",
+  "status": "proposed_after_E054_no_sustained_repeats",
   "trainer_implemented": false,
   "question": "Can sustained distributed fluctuations be increased without a prescribed waveform, frequency, phase or external neural drive?",
   "parent": "Preserve E053 candidate and original winner7001 independently; verify actual latest checkpoint and lineage",
-  "fixed": ["anatomy", "stereotypical membrane/channel constants", "leak", "NMJ/muscle/body readout", "reporter/transduction assumptions"],
-  "eligible": ["unknown non-leak channel densities", "existing chemical strengths", "symmetric existing electrical pair strengths"],
+  "fixed": [
+    "anatomy",
+    "stereotypical membrane/channel constants",
+    "leak",
+    "NMJ/muscle/body readout",
+    "reporter/transduction assumptions"
+  ],
+  "eligible": [
+    "unknown non-leak channel densities",
+    "existing chemical strengths",
+    "symmetric existing electrical pair strengths"
+  ],
   "bound_policy": "Retain original anchor and factor2 bounds; do not widen based only on nonzero coordinate count",
   "proposed_primary_progress_measure": "Worst-region persistent fluctuation deficit with multiple post-settling windows and repeated excursions",
   "mean_bend_policy": "Report separately; mean unsigned bending alone must not establish stage progress",
-  "transient_guards": ["Exclude settling interval", "Repeated peaks and troughs", "Persistent amplitude across late windows", "Separate linear drift from oscillation"],
+  "transient_guards": [
+    "Exclude settling interval",
+    "Repeated peaks and troughs",
+    "Persistent amplitude across late windows",
+    "Separate linear drift from oscillation"
+  ],
   "calcium_policy": "Report separately and preserve previous candidates; improvement in body score is not a claim of neural fidelity",
   "targets": "Define source-observation-matched fluctuation targets after E054; do not convert std to peak-to-peak with an assumed sinusoid",
-  "validation": ["Matched timestep refinements", "Held-voltage diagnostic control", "No joint-limit violation", "Independent longer autonomous assessment"],
+  "validation": [
+    "Matched timestep refinements",
+    "Held-voltage diagnostic control",
+    "No joint-limit violation",
+    "Independent longer autonomous assessment"
+  ],
   "uncertainty": "Numerical reporting floors, reporter assumptions and 1.7% wet-agar proxy remain explicit; none are calibrated to the mounted2% experiment",
   "restart_semantics": "A revised objective is a new curriculum stage, not an exact continuation of the E050/E052/E053 selection process",
-  "training_launched": false
+  "training_launched": false,
+  "diagnostic_evidence": "experiments/records/E054-server-summary.json"
 }

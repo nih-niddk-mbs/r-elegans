@@ -1204,5 +1204,9 @@ It prints the selected checkpoint, log, bound report and motion-preview paths.
 The detached job runs40 simulated seconds each for active, refined and held-voltage
 controls. It records dense neural/muscle/body signals and separates repeated
 late fluctuations from posture and drift. No training or bound widening occurs.
-The next sustained-amplitude curriculum remains a proposal until these actual
-checkpoint diagnostics are available.
+The E054 server diagnostic completed: no sustained repeats passed the late-window
+criteria in active or refined cases, and no fitted coordinate was near its bound.
+This supports a new sustained-amplitude objective while retaining current bounds;
+it does not establish absence of slower rhythms or zero variance. See the
+[E054 result and limitations](experiments/records/E054-server-summary.json).
+The next curriculum remains a specification; its trainer has not been implemented.

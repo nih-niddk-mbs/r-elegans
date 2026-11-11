@@ -1,14 +1,18 @@
 # Current model: exact scope and computation path
 
-E054 read-only diagnostic is implemented and locally smoke-tested on an older
-checkpoint; actual E053 assessment is pending a server launch. It reports original
-bound occupancy and dense late-window dynamics from voltage through NMJs, filtered
-drive and body, with active/refined/held-voltage cases and actual-pose previews.
-It changes no weights and uses no periodic input. Numerical reporting floors and
-pointwise refinement differences are explicit; no biological pass is inferred.
-The [sustained-amplitude stage specification](experiments/sustained_amplitude_stage_v1.json)
-is a proposal pending that diagnostic, not an implemented trainer or new fit.
-
+E054 server diagnostic completed (user-reported, 2026-11-11): active and
+refined40-second simulations both report no sustained repeated voltage, muscle
+or joint excursions under the detector criteria; held-voltage control also
+reports none. None of9616 fitted coordinates is within1% of its original
+log-coordinate bound. This does not justify widening the factor2 bounds.
+Zero qualified excursions is not zero variance or proof against slower rhythms:
+the late20-second detector requires three peaks/troughs, persistence across five
+subwindows, and explicit numerical reporting floors. Full traces and timestep
+difference metrics have not been retrieved. The pasted diagnostic does not
+include its checkpoint hash; latest E053 identity remains expected, unverified.
+See [E054 report](experiments/records/E054-server-summary.json).
+The next sustained-amplitude stage remains a specification, with no trainer or
+new training run launched. Preserve prior checkpoints and fixed mechanics/readout.
 
 E053 eight-hour continuation (user-reported, 2026-11-11): 865 additional
 proposals (global369 to1234) reduced the paired training objective11.1%, from
@@ -18,10 +22,9 @@ the nominal neural-error component was essentially unchanged. Approximately93%
 of the scalar loss decrease came from mean unsigned bend error and7% from
 bend-fluctuation error. Mean bend includes posture and dynamic excursions;
 this does not establish a static-posture explanation. Full traces and parameter
-bounds have not been inspected. No held-out or long-autonomy qualification, new
+bound summary is now recorded in E054; full trajectories remain unavailable locally. No held-out or long-autonomy qualification, new
 bundled model, or new run is claimed. See the
-[E053 record](experiments/records/E053-server-summary.json). Next: inspect traces
-and bounds and make sustained dynamic amplitude explicit in the curriculum.
+[E053 record](experiments/records/E053-server-summary.json). Next: inspect remaining trajectory statistics and make sustained dynamic amplitude explicit in the curriculum.
 
 
 E052 server continuation (user-reported): 335 additional proposals (global

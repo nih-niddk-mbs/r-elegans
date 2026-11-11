@@ -4488,3 +4488,38 @@ OneDrive/r-elegans/notebook/evidence/E054, including default-path comparison and
 full test output. The preliminary smoke without numerical reporting floors is
 also preserved; its tiny-amplitude repeat counts are not biological rhythms.
 Local archives do not constitute retrieval of E053 or verified cloud sync.
+
+## 2026-11-11 — E054 server result reported
+
+Evidence: user-pasted stdout, not independent server artifact retrieval. Run:
+`/home/carsonc/r-elegans-results/paired-diagnostic-20261111T145342Z-766260`.
+PAIRED_DIAGNOSTIC_EXIT_CODE=0; active, refined and held-voltage each completed40
+simulated seconds. The pasted report omits checkpoint hash/source capsule and
+wall duration; expected latest E053 identity is not independently established.
+Exact invocation/environment and dense trajectories remain in server artifacts;
+no backup or cloud synchronization is asserted. Small transcription:
+experiments/records/E054-server-summary.json.
+
+All three cases report zero repeated joints, muscles and voltage neurons, and
+zero qualified sustained excursions throughout the printed signal chain. This
+is not evidence of zero variance: the detector examines the late20seconds,
+requires at least three peaks and three troughs, amplitude persistence across
+five subwindows, and explicit numerical reporting floors. Slower oscillations,
+transients or drift require full traces/late std/slopes to distinguish. Active
+and refined PC1 fractions .9983135 and .9983145 describe nearly one-dimensional
+shape variation, not periodicity. Held-control PC1 .9999720 is not an oscillator.
+No muscle samples were reported within .01 of activation extremes.
+
+All9616 offsets nonzero, none near lower/upper log bounds. Channel factors span
+.5323–1.5319, chemical .6542–1.4740, electrical .6633–1.7650, inside .5–2.
+Thus near-bound clipping is not supported as the explanation for failed rhythm
+criteria. Agreement of the binary active/refined outcome does not establish
+pointwise voltage convergence; full/late difference metrics were not supplied.
+
+Decision: retain bounds and all prior independent checkpoints. Prepare a new
+sustained-oscillation amplitude stage, with fixed body/NMJ/readout and no external
+periodic drive. Separate dynamic amplitude from mean posture; establish repeated
+activity before propulsion/control. Current evidence does not determine which
+mechanism causes the failure, nor prove that all rhythms have disappeared. No
+new fit, simulation or server launch in this reporting turn. Documentation and
+JSON consistency checked locally; no software implementation changed.

@@ -1,0 +1,102 @@
+{
+  "experiment": "E054",
+  "evidence": "User-pasted server stdout on 2026-11-11; full server artifacts not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/paired-diagnostic-20261111T145342Z-766260",
+  "exit_code": 0,
+  "duration_per_case_seconds": 40.0,
+  "checkpoint_sha256": null,
+  "checkpoint_note": "Expected latest E053; pasted diagnostic stdout does not include checkpoint hash, so identity is not independently established here.",
+  "bounds": {
+    "maximum_factor": 2.0,
+    "near_bound_definition": "Within 1% of log-coordinate bound",
+    "categories": {
+      "channel_densities": {
+        "count": 4814,
+        "nonzero": 4814,
+        "near_lower": 0,
+        "near_upper": 0,
+        "factor_percentiles": [
+          0.5322520431244814,
+          0.6628272070519012,
+          0.8424205667467641,
+          1.0965106569839922,
+          1.5318553834081021
+        ]
+      },
+      "chemical_strengths": {
+        "count": 3709,
+        "nonzero": 3709,
+        "near_lower": 0,
+        "near_upper": 0,
+        "factor_percentiles": [
+          0.6542157446407759,
+          0.8414418073464695,
+          0.9987096666711608,
+          1.1883917709968883,
+          1.4739568721679064
+        ]
+      },
+      "electrical_pairs": {
+        "count": 1093,
+        "nonzero": 1093,
+        "near_lower": 0,
+        "near_upper": 0,
+        "factor_percentiles": [
+          0.6633148485418174,
+          0.8045420490270162,
+          1.0110783324950587,
+          1.2388781553444743,
+          1.764958560881484
+        ]
+      }
+    }
+  },
+  "cases": [
+    {
+      "case": "active",
+      "repeated_joints": 0,
+      "repeated_muscles": 0,
+      "repeated_voltage_neurons": [],
+      "maximum_sustained_voltage_p2p_mV": 0.0,
+      "maximum_sustained_nmj_activation_p2p": 0.0,
+      "maximum_sustained_command_p2p": 0.0,
+      "maximum_sustained_filtered_drive_p2p": 0.0,
+      "maximum_sustained_joint_p2p_rad": 0.0,
+      "nmj_near_extremes_fraction": 0.0,
+      "late_shape_pc1_fraction": 0.9983135079501013
+    },
+    {
+      "case": "refined",
+      "repeated_joints": 0,
+      "repeated_muscles": 0,
+      "repeated_voltage_neurons": [],
+      "maximum_sustained_voltage_p2p_mV": 0.0,
+      "maximum_sustained_nmj_activation_p2p": 0.0,
+      "maximum_sustained_command_p2p": 0.0,
+      "maximum_sustained_filtered_drive_p2p": 0.0,
+      "maximum_sustained_joint_p2p_rad": 0.0,
+      "nmj_near_extremes_fraction": 0.0,
+      "late_shape_pc1_fraction": 0.9983144902306722
+    },
+    {
+      "case": "held-voltage",
+      "repeated_joints": 0,
+      "repeated_muscles": 0,
+      "repeated_voltage_neurons": [],
+      "maximum_sustained_voltage_p2p_mV": 0.0,
+      "maximum_sustained_nmj_activation_p2p": 0.0,
+      "maximum_sustained_command_p2p": 0.0,
+      "maximum_sustained_filtered_drive_p2p": 0.0,
+      "maximum_sustained_joint_p2p_rad": 0.0,
+      "nmj_near_extremes_fraction": 0.0,
+      "late_shape_pc1_fraction": 0.9999720033477372
+    }
+  ],
+  "limitations": [
+    "Zero reported sustained excursions does not mean zero variance or absence of slower oscillations.",
+    "Detector requires at least three peaks and three troughs over late half and persistent amplitude across five subwindows, plus numerical reporting floors.",
+    "Full late means, slopes, raw amplitudes and pointwise timestep differences were not pasted.",
+    "PC1 describes shape variation and does not establish periodicity."
+  ],
+  "decision": "Prepare a separate sustained-oscillation amplitude curriculum; retain factor2 bounds, fixed mechanics/readout, and prior checkpoints. No new training launched."
+}
