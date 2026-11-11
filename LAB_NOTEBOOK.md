@@ -4290,3 +4290,43 @@ proposal; full exact arguments/source/environment in external run records. The
 server continuation will instead restore the user's completed34-proposal,
 16-frame search after verifying its own saved configuration. No remote launch
 or server checkpoint verification is claimed yet.
+
+## 2026-11-10 — E052 server continuation result (user-reported)
+
+Server run /home/carsonc/r-elegans-results/paired-fit-20261111T003225Z-698419
+reports completed, stop_reason=time_budget,335 additional proposals from global
+34 to369. Elapsed10941.68s includes setup/refinement. Starting objective
+47.51395069275865 matches the previously selected E050 server objective exactly,
+consistent with the intended continuation rather than a fresh anchor restart.
+Selected objective44.9933180382051:5.305% reduction. Refined start47.56417529122987
+vs selected45.002973328269036:5.385% reduction, preserving the gain. This paired
+refinement is a descriptive numerical check, not a certified error bound.
+
+All ten sampled coarse chord-bend standard deviations increased by23.3–49.5%,
+but measured/model amplitude ratios remain14.77–50.90. This is unsigned coarse
+chord fluctuation, not joint p2p amplitude, coordinated propagation, speed or a
+new qualified autonomous skill. Both normalized calcium CV and lag1 errors
+worsen on both training windows at the nominal timestep; their equally weighted
+neural component increases about1.61%. The falling scalar objective therefore
+trades some neural agreement for better body statistics. We cannot report joint
+physiological fidelity or infer a successful calcium fit.
+
+9474 of9616 offset coordinates now differ from the original winner7001 anchor;
+this is neither the count of newly changed coordinates in this continuation nor
+evidence that bounds were reached. Frozen fields reported unchanged. Reported
+checkpoint SHA256
+ffa4ea6addd9309382204160855bdf3b21fbd17b1ff0b5a669062b66cab8c41d.
+The summary was pasted by the user; no complete checkpoint, numerical source/
+environment record, history or raw predictions were independently copied back.
+No exact server revision or unreported exit code is invented. Compact manually
+transcribed evidence and locally computed comparisons are in
+experiments/records/E052-server-summary.json.
+
+Decision: retain candidate and original skill checkpoints. Before another long
+fit, inspect bound occupancy and activity/calcium-to-muscle-to-body transfer to
+locate the remaining amplitude bottleneck. The fixed reporter/NMJ/mechanics and
+mounted2% agar mismatch remain hypotheses/limitations. Do not infer which link
+is limiting from these aggregate statistics alone. Hardware tuning remains
+shelved; no new run, held-out evaluation or model promotion was launched.
+Verification in this turn is JSON/arithmetic and continuation-baseline consistency;
+no simulation was rerun and no tests are needed for metadata-only updates.

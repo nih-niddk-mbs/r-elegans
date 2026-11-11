@@ -1,5 +1,18 @@
 # WormGym: training and validation protocols
 
+E052 server continuation (user-reported): 335 additional proposals (global
+34 to 369) reduced the training objective by 5.3%, from 47.514 to 44.993.
+The matched finer-timestep comparison preserved the gain. Coarse bend
+fluctuations increased 23–49% but remain about 15–51 times below the recordings.
+The nominal calcium-error component worsened about 1.6%, so the aggregate loss
+improvement is a tradeoff, not improved agreement in every data family. Frozen
+fields were reported unchanged; no held-out, long-autonomy or locomotion
+qualification is demonstrated. The full checkpoint/source/history have not been
+independently retrieved. See the [E052 report](experiments/records/E052-server-summary.json).
+Next: inspect parameter-bound occupancy and neural-to-muscle-to-body transfer
+before another long fit. Existing bundled models and qualified skills remain.
+
+
 E050 adds an executable **joint neural/movement statistics pilot**:
 `python -m scripts.fit_paired_recordings`. It shares unknown non-leak channel
 densities and existing chemical/electrical strengths across selected training

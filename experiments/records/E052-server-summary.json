@@ -1,0 +1,103 @@
+{
+  "experiment": "E052",
+  "evidence": "User-reported server summary, manually transcribed from chat; no independent artifact retrieval",
+  "run_directory": "/home/carsonc/r-elegans-results/paired-fit-20261111T003225Z-698419",
+  "status": "completed",
+  "server_revision": null,
+  "iterations": 335,
+  "initial_iteration": 34,
+  "last_iteration": 369,
+  "elapsed_seconds": 10941.680494762026,
+  "changed_offset_coordinates_from_original_anchor": 9474,
+  "total_eligible_offset_coordinates": 9616,
+  "frozen_fields_unchanged_reported": true,
+  "stop_reason": "time_budget",
+  "checkpoint_sha256_reported": "ffa4ea6addd9309382204160855bdf3b21fbd17b1ff0b5a669062b66cab8c41d",
+  "checkpoint_independently_verified": false,
+  "baseline_loss": 47.51395069275865,
+  "best_loss": 44.9933180382051,
+  "refined_baseline_loss": 47.56417529122987,
+  "refined_best_loss": 45.002973328269036,
+  "training_loss_reduction_fraction": 0.05305036979250177,
+  "refined_loss_reduction_fraction": 0.053847290471849774,
+  "bend_std_growth_fraction_range": [
+    0.2331350238351364,
+    0.4945915787578168
+  ],
+  "measured_to_model_bend_std_ratio_range": [
+    14.76622551783262,
+    50.90291401659216
+  ],
+  "baseline_neural_objective_component": 1.983606569517282,
+  "best_neural_objective_component": 2.015490449109742,
+  "neural_objective_component_increase_fraction": 0.016073691266418333,
+  "training_rows": [
+    {
+      "uid": "2022-06-14-01",
+      "baseline_bends": [
+        0.014008073889417183,
+        0.019196805984833146,
+        0.009070863142139717,
+        0.0074499836245416435,
+        0.013233047421013376
+      ],
+      "best_bends": [
+        0.017671470880828474,
+        0.027672222371566656,
+        0.011198194162237971,
+        0.011067700007902012,
+        0.01750509970032025
+      ],
+      "measured_bends": [
+        0.5487044846813304,
+        0.40861427611816625,
+        0.39788191209852847,
+        0.3149532132644992,
+        0.31620950958358834
+      ],
+      "baseline_calcium_cv": 2.3682591060410556,
+      "best_calcium_cv": 2.3685418059831385,
+      "baseline_calcium_lag1": 1.6345805229300132,
+      "best_calcium_lag1": 1.6664175902992497
+    },
+    {
+      "uid": "2022-06-14-07",
+      "baseline_bends": [
+        0.014036939380661737,
+        0.019225597192521444,
+        0.00906806635140893,
+        0.007349090064224447,
+        0.01688046988714512
+      ],
+      "best_bends": [
+        0.017709297414107844,
+        0.02773082793739989,
+        0.011182150216383248,
+        0.010875295192302254,
+        0.02522940813880201
+      ],
+      "measured_bends": [
+        0.4200109074237135,
+        0.4331832336358618,
+        0.4005216475595573,
+        0.5535842160788198,
+        0.5009447064743766
+      ],
+      "baseline_calcium_cv": 2.4236265467739653,
+      "best_calcium_cv": 2.4237928673085354,
+      "baseline_calcium_lag1": 1.5079601023240936,
+      "best_calcium_lag1": 1.6032095328480445
+    }
+  ],
+  "interpretation": "Continuation starts at the previously selected loss; body statistics improve while both normalized calcium-error components worsen on both recordings. Refinement preserves the overall gain. Large amplitude gap remains.",
+  "limitations": [
+    "Two short training windows only; no held-out or long-autonomy validation",
+    "Unsigned coarse chord-bend standard deviation is not single-joint peak-to-peak or locomotion",
+    "Nonzero offsets are not evidence that parameters reached their bounds",
+    "Original bounds, fixed NMJ/body/reporter assumptions and mounted-medium mismatch remain",
+    "No complete server source/environment/history, raw predictions or checkpoint retrieved"
+  ],
+  "next_step": "Retain candidate; inspect parameter bounds and neural-to-muscle-to-body amplitude transfer before another long fit",
+  "new_run_started": false,
+  "bundled_model_changed": false
+}

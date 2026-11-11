@@ -1177,3 +1177,9 @@ best offsets, PCG64 state, original anchor/bounds and proposal numbering. It is 
 continuation of a completed random search, not an in-flight process restoration.
 The 180-minute budget excludes setup and final timestep refinement. The job runs
 under nohup using the dedicated conda interpreter. No held-out target is fitted.
+
+Latest paired-data result: the E052 server continuation reduced the training
+objective by 5.3%, with a gain retained on timestep refinement. Bend fluctuations
+increased but remain far too small; nominal calcium error worsened slightly.
+This is an exploratory tradeoff on two short training windows. See the
+[E052 evidence](experiments/records/E052-server-summary.json).
