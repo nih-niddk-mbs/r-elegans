@@ -8,7 +8,10 @@ export OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_TH
 if [ "${1:-}" = --worker-process ]; then
     trap 'worm_status=$?; echo "SENSORIMOTOR_EXIT_CODE=$worm_status"' 0
     if [ "${5:-fresh}" = resume ]; then
-        "$worm_python" -u -m scripts.train_sensorimotor --resume-run "$2" --output-dir "$3" --minutes "$4"
+        worm_cues=$("$worm_python" -c 'import json,sys; from pathlib import Path; print(json.loads((Path(sys.argv[1])/"configuration.json").read_text())["arguments"].get("training_cues","nominal"))' "$2")
+        "$worm_python" -u -m scripts.train_sensorimotor --resume-run "$2" --training-cues "$worm_cues" --output-dir "$3" --minutes "$4"
+    elif [ "${5:-fresh}" = robust ]; then
+        "$worm_python" -u -m scripts.train_sensorimotor --warm-start-run "$2" --training-cues nominal-low-dose --seed 5700 --output-dir "$3" --minutes "$4"
     else
         "$worm_python" -u -m scripts.train_sensorimotor --parent-run "$2" --output-dir "$3" --minutes "$4"
     fi
@@ -18,7 +21,8 @@ worm_minutes=${1:-20}
 "$worm_python" -c 'import math,sys; n=float(sys.argv[1]); assert math.isfinite(n) and n>0, "Minutes must be positive"; import jax,numpy,scipy' "$worm_minutes"
 worm_mode=fresh
 if [ -n "${2:-}" ]; then
-    worm_mode=resume
+    worm_mode=${3:-resume}
+    case "$worm_mode" in resume|robust) ;; *) echo "Unknown saved-search mode: $worm_mode" >&2; exit 1 ;; esac
     worm_run=$2
 else
     worm_run=$("$worm_python" -c 'from scripts.paired_resume import latest_completed; print(latest_completed("/home/carsonc/r-elegans-results"))')

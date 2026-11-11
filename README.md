@@ -1309,3 +1309,34 @@ git pull --ff-only &&
 
 Future training logs print this compact report after the full JSON. It includes
 baseline/best, every validation case, global proposal counts and sensory gains.
+
+E056 full compact report:148 proposals (global48 ->196), selected195. Active
+bend grew102.1% to2.890e-5rad (96.3% target), low dose2.503e-5rad (83.4% target);
+high dose passes. Controls/recovery and engineering refinement pass. Remain on
+first rung. E057 prepares worst-case selection over nominal and.8dose, since
+nominal amplitude alone would stop earning reward at target. Keep the target,
+original parameter bounds and learned neural/sensory parameters; use fresh
+seed5700/global0 for the changed objective. Low dose becomes a training condition;
+high dose, timing shift and refinement stay outside selection. No new server
+training launched. See [E056 complete compact record](experiments/records/E056-server-summary.json).
+
+Launch the robust first-rung objective on mbslnx2:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_robust_sensorimotor_mbslnx2.sh 60 &&
+tail -n 28 -F "$(ls -1t /home/carsonc/r-elegans-results/sensorimotor-*.log | head -n 1)"
+```
+
+This starts a new60minute background search plus validation, inheriting selected
+neural parameters and sensory gains from the latest completed sensory–motor run.
+It preserves original bounds and uses fresh seed5700 for the revised objective.
+Each candidate shares one sham across nominal and .8dose cue trials; selection
+uses the larger response loss plus the original parameter prior. Dose-low is now
+a training condition, not an unseen validation cue. No waveform or motor current
+is supplied. The original numerical/recovery/control gates still apply.
+
+`continue_sensorimotor_mbslnx2.sh` automatically retains the selected search's
+training-cue mode and RNG for later continuations. A direct `--resume-run` with
+a changed cue mode is rejected; use `--warm-start-run` for a new objective.

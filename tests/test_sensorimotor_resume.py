@@ -58,3 +58,12 @@ def test_inconsistent_saved_effective_sensory_gain_rejected(saved):
     path=root/'sensory_parameters.json';data=json.loads(path.read_text())
     data['chemical_gain_nS']=.5;path.write_text(json.dumps(data))
     with pytest.raises(ValueError,match='effective sensory gain'):read_completed(root,cfg,2)
+
+
+def test_changed_training_cues_require_fresh_stage_not_rng_resume(saved):
+    root,cfg,*_=saved
+    changed=json.loads(json.dumps(cfg));changed['arguments']['training_cues']='nominal-low-dose'
+    with pytest.raises(ValueError,match='fresh-stage warm start'):read_completed(root,changed,2)
+    # Older nominal configurations remain compatible with the explicit new default.
+    changed['arguments']['training_cues']='nominal'
+    assert read_completed(root,changed,2)[2]==3

@@ -48,3 +48,12 @@ def test_only_environmental_diacetyl_changes_and_washout_is_finite():
     delta=np.asarray(sample_chemical_world(head,2.5,world)-sample_chemical_world(head,2.5,sham))
     np.testing.assert_array_equal(delta,[1.,0.,0.])
     with pytest.raises(ValueError):cue_world(onset_shift=8.)
+
+
+def test_worst_case_selection_keeps_weak_cue_visible_after_nominal_success():
+    from r_elegans.sensorimotor_curriculum import training_objective
+    assert training_objective([dict(total=0.)])==0.
+    assert training_objective([dict(total=0.),dict(total=.2)],'nominal-low-dose')==.2
+    assert training_objective([dict(total=.05),dict(total=.1)],'nominal-low-dose')==.1
+    with pytest.raises(ValueError):training_objective([dict(total=.2)],'nominal-low-dose')
+    with pytest.raises(ValueError):training_objective([dict(total=float('nan'))])

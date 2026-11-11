@@ -1,0 +1,643 @@
+{
+  "experiment": "E057",
+  "evidence": "Local robust-selection software smoke on older local E056, not actual server180c2b93...",
+  "run": "/tmp/r-elegans-E057-robust-smoke",
+  "invocation": "JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.train_sensorimotor --warm-start-run /tmp/r-elegans-E056-resume-smoke --training-cues nominal-low-dose --seed 5700 --output-dir /tmp/r-elegans-E057-robust-smoke --iterations 1 --minutes 5",
+  "full_suite": {
+    "passed": 257,
+    "elapsed_seconds": 92.08,
+    "stdout_sha256": "9eb4b325d22c711e994bc35dedcc29f16f3bbaebdb1ded26ec6dd88ae4fd023b"
+  },
+  "targeted_tests": {
+    "passed": 9,
+    "elapsed_seconds": 0.93,
+    "stdout_sha256": "ce1cd66cb576df8bbe980ab708e3014d5d3913274a3a593e12761d078b8c08e9"
+  },
+  "passed": false,
+  "iterations": 1,
+  "initial_iteration": 0,
+  "last_iteration": 1,
+  "elapsed_seconds": 214.2505032499903,
+  "warm_start_checkpoint_sha256": "5cc9e54742031960e3d5ebb02589b8353750d0ca8f771e61713e05a5bbaf4c26",
+  "checkpoint_sha256": "b5a484bd8cd5b140ae66c8ff86d4f966ac6b8123938e0da6b069b6d26d7c7c52",
+  "sensory_parameters_sha256": "b428fb55c047993dd84c0d4dd3c97c5a847dbdb9fccef78db393bb48b01b2674",
+  "baseline": {
+    "total": 0.698940465621342,
+    "prior": 1.2565357898559114e-06,
+    "metrics": {
+      "total": 0.6510633917507342,
+      "passed": false,
+      "selected_joint": 1,
+      "cue_specific_peak_rad": 1.1340415560223693e-05,
+      "cue_specific_recovery_residual_rad": 3.1648519176197265e-06,
+      "recovery_ratio": 0.2790772437581907,
+      "peak_by_joint_rad": [
+        6.668130624915003e-06,
+        1.1340415560223693e-05,
+        3.3516967701784084e-06,
+        3.84093423387924e-06,
+        4.685293258033241e-06,
+        1.791300406821933e-06,
+        2.084728593306634e-06,
+        4.637763557000657e-06,
+        3.0352556535245823e-06,
+        6.919886584397239e-06,
+        6.417928149829444e-06
+      ],
+      "recovery_residual_by_joint_rad": [
+        1.1422080440637306e-06,
+        3.1648519176197265e-06,
+        2.9048402513318083e-06,
+        1.5375661446500634e-06,
+        1.0589714829201125e-06,
+        1.7679334652180578e-06,
+        8.39318342941292e-07,
+        4.294881313995913e-07,
+        1.1311813702119533e-06,
+        1.2957054054130168e-06,
+        5.270102811233413e-07
+      ],
+      "awa_depolarization_mV": 4.503116607666016,
+      "maximum_absolute_joint_rad": 0.15279629228399666,
+      "awa_recovery_residual_mV": 0.0008697509765625,
+      "awa_recovery_ratio": 0.00019314422706306414,
+      "pre_cue_difference_rad": 0.0,
+      "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+    },
+    "training_cases": [
+      {
+        "case": "active",
+        "metrics": {
+          "total": 0.6510633917507342,
+          "passed": false,
+          "selected_joint": 1,
+          "cue_specific_peak_rad": 1.1340415560223693e-05,
+          "cue_specific_recovery_residual_rad": 3.1648519176197265e-06,
+          "recovery_ratio": 0.2790772437581907,
+          "peak_by_joint_rad": [
+            6.668130624915003e-06,
+            1.1340415560223693e-05,
+            3.3516967701784084e-06,
+            3.84093423387924e-06,
+            4.685293258033241e-06,
+            1.791300406821933e-06,
+            2.084728593306634e-06,
+            4.637763557000657e-06,
+            3.0352556535245823e-06,
+            6.919886584397239e-06,
+            6.417928149829444e-06
+          ],
+          "recovery_residual_by_joint_rad": [
+            1.1422080440637306e-06,
+            3.1648519176197265e-06,
+            2.9048402513318083e-06,
+            1.5375661446500634e-06,
+            1.0589714829201125e-06,
+            1.7679334652180578e-06,
+            8.39318342941292e-07,
+            4.294881313995913e-07,
+            1.1311813702119533e-06,
+            1.2957054054130168e-06,
+            5.270102811233413e-07
+          ],
+          "awa_depolarization_mV": 4.503116607666016,
+          "maximum_absolute_joint_rad": 0.15279629228399666,
+          "awa_recovery_residual_mV": 0.0008697509765625,
+          "awa_recovery_ratio": 0.00019314422706306414,
+          "pre_cue_difference_rad": 0.0,
+          "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+        }
+      },
+      {
+        "case": "dose-low",
+        "metrics": {
+          "total": 0.6989392090855522,
+          "passed": false,
+          "selected_joint": 1,
+          "cue_specific_peak_rad": 1.0018348112150743e-05,
+          "cue_specific_recovery_residual_rad": 2.8340318516117957e-06,
+          "recovery_ratio": 0.28288414615724355,
+          "peak_by_joint_rad": [
+            5.876403425336685e-06,
+            1.0018348112150743e-05,
+            2.9553023098254083e-06,
+            3.438511715893322e-06,
+            4.21150888031685e-06,
+            1.558536717339437e-06,
+            1.8422587797738144e-06,
+            4.115816695661467e-06,
+            2.6539592899443853e-06,
+            6.056097139793548e-06,
+            5.717410616550012e-06
+          ],
+          "recovery_residual_by_joint_rad": [
+            1.0378448868642032e-06,
+            2.8340318516117957e-06,
+            2.5603211481727006e-06,
+            1.3722131712573657e-06,
+            9.265749677661583e-07,
+            1.5545519797648122e-06,
+            7.374710027166498e-07,
+            3.590590934854365e-07,
+            9.807198306094334e-07,
+            1.12566521345836e-06,
+            4.6680699419821003e-07
+          ],
+          "awa_depolarization_mV": 4.027626037597656,
+          "maximum_absolute_joint_rad": 0.15279622499380544,
+          "awa_recovery_residual_mV": 0.001003265380859375,
+          "awa_recovery_ratio": 0.00024909596161459645,
+          "pre_cue_difference_rad": 0.0,
+          "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+        }
+      }
+    ]
+  },
+  "best": {
+    "total": 0.6807368933150028,
+    "prior": 3.95137621569248e-06,
+    "metrics": {
+      "total": 0.6286346094454212,
+      "passed": false,
+      "selected_joint": 1,
+      "cue_specific_peak_rad": 1.1992251759795902e-05,
+      "cue_specific_recovery_residual_rad": 3.3383590905544658e-06,
+      "recovery_ratio": 0.2783763347719513,
+      "peak_by_joint_rad": [
+        7.04255058006642e-06,
+        1.1992251759795902e-05,
+        3.466286525435902e-06,
+        3.920291381154586e-06,
+        4.833805608547848e-06,
+        1.9092921446119127e-06,
+        2.12971176822771e-06,
+        4.859652308588508e-06,
+        3.1889446097665974e-06,
+        7.325674074021293e-06,
+        6.738165728562007e-06
+      ],
+      "recovery_residual_by_joint_rad": [
+        1.279899463246803e-06,
+        3.3383590905544658e-06,
+        2.9595304118675003e-06,
+        1.462970472650084e-06,
+        9.136905555484631e-07,
+        1.795438090635565e-06,
+        8.416625464600924e-07,
+        3.7465369392974956e-07,
+        1.160526274177065e-06,
+        1.3228390274427904e-06,
+        5.117248496333549e-07
+      ],
+      "awa_depolarization_mV": 4.718048095703125,
+      "maximum_absolute_joint_rad": 0.15285063148854033,
+      "awa_recovery_residual_mV": 0.000812530517578125,
+      "awa_recovery_ratio": 0.00017221751476381136,
+      "pre_cue_difference_rad": 0.0,
+      "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+    },
+    "training_cases": [
+      {
+        "case": "active",
+        "metrics": {
+          "total": 0.6286346094454212,
+          "passed": false,
+          "selected_joint": 1,
+          "cue_specific_peak_rad": 1.1992251759795902e-05,
+          "cue_specific_recovery_residual_rad": 3.3383590905544658e-06,
+          "recovery_ratio": 0.2783763347719513,
+          "peak_by_joint_rad": [
+            7.04255058006642e-06,
+            1.1992251759795902e-05,
+            3.466286525435902e-06,
+            3.920291381154586e-06,
+            4.833805608547848e-06,
+            1.9092921446119127e-06,
+            2.12971176822771e-06,
+            4.859652308588508e-06,
+            3.1889446097665974e-06,
+            7.325674074021293e-06,
+            6.738165728562007e-06
+          ],
+          "recovery_residual_by_joint_rad": [
+            1.279899463246803e-06,
+            3.3383590905544658e-06,
+            2.9595304118675003e-06,
+            1.462970472650084e-06,
+            9.136905555484631e-07,
+            1.795438090635565e-06,
+            8.416625464600924e-07,
+            3.7465369392974956e-07,
+            1.160526274177065e-06,
+            1.3228390274427904e-06,
+            5.117248496333549e-07
+          ],
+          "awa_depolarization_mV": 4.718048095703125,
+          "maximum_absolute_joint_rad": 0.15285063148854033,
+          "awa_recovery_residual_mV": 0.000812530517578125,
+          "awa_recovery_ratio": 0.00017221751476381136,
+          "pre_cue_difference_rad": 0.0,
+          "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+        }
+      },
+      {
+        "case": "dose-low",
+        "metrics": {
+          "total": 0.6807329419387871,
+          "passed": false,
+          "selected_joint": 1,
+          "cue_specific_peak_rad": 1.0594694042298514e-05,
+          "cue_specific_recovery_residual_rad": 3.0077214409618414e-06,
+          "recovery_ratio": 0.2838894100154041,
+          "peak_by_joint_rad": [
+            6.198047103583848e-06,
+            1.0594694042298514e-05,
+            3.090156328249688e-06,
+            3.5262016478600916e-06,
+            4.332556028552315e-06,
+            1.7035822857738858e-06,
+            1.8777589949441065e-06,
+            4.306045342282808e-06,
+            2.8014584482899396e-06,
+            6.40697296620113e-06,
+            6.010894385316545e-06
+          ],
+          "recovery_residual_by_joint_rad": [
+            1.140149545802993e-06,
+            3.0077214409618414e-06,
+            2.630534849556998e-06,
+            1.3985923557895304e-06,
+            9.528400041064478e-07,
+            1.6295179025467565e-06,
+            7.554990505663495e-07,
+            3.548138683556745e-07,
+            1.0549767595208204e-06,
+            1.1570989525769293e-06,
+            4.853114760339228e-07
+          ],
+          "awa_depolarization_mV": 4.221057891845703,
+          "maximum_absolute_joint_rad": 0.15285059039982657,
+          "awa_recovery_residual_mV": 0.00095367431640625,
+          "awa_recovery_ratio": 0.0002259325365445878,
+          "pre_cue_difference_rad": 0.0,
+          "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+        }
+      }
+    ]
+  },
+  "validation": [
+    {
+      "case": "active",
+      "metrics": {
+        "total": 0.6286346094454212,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.1992251759795902e-05,
+        "cue_specific_recovery_residual_rad": 3.3383590905544658e-06,
+        "recovery_ratio": 0.2783763347719513,
+        "peak_by_joint_rad": [
+          7.04255058006642e-06,
+          1.1992251759795902e-05,
+          3.466286525435902e-06,
+          3.920291381154586e-06,
+          4.833805608547848e-06,
+          1.9092921446119127e-06,
+          2.12971176822771e-06,
+          4.859652308588508e-06,
+          3.1889446097665974e-06,
+          7.325674074021293e-06,
+          6.738165728562007e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.279899463246803e-06,
+          3.3383590905544658e-06,
+          2.9595304118675003e-06,
+          1.462970472650084e-06,
+          9.136905555484631e-07,
+          1.795438090635565e-06,
+          8.416625464600924e-07,
+          3.7465369392974956e-07,
+          1.160526274177065e-06,
+          1.3228390274427904e-06,
+          5.117248496333549e-07
+        ],
+        "awa_depolarization_mV": 4.718048095703125,
+        "maximum_absolute_joint_rad": 0.15285063148854033,
+        "awa_recovery_residual_mV": 0.000812530517578125,
+        "awa_recovery_ratio": 0.00017221751476381136,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "dose-low",
+      "metrics": {
+        "total": 0.6807329419387871,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.0594694042298514e-05,
+        "cue_specific_recovery_residual_rad": 3.0077214409618414e-06,
+        "recovery_ratio": 0.2838894100154041,
+        "peak_by_joint_rad": [
+          6.198047103583848e-06,
+          1.0594694042298514e-05,
+          3.090156328249688e-06,
+          3.5262016478600916e-06,
+          4.332556028552315e-06,
+          1.7035822857738858e-06,
+          1.8777589949441065e-06,
+          4.306045342282808e-06,
+          2.8014584482899396e-06,
+          6.40697296620113e-06,
+          6.010894385316545e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.140149545802993e-06,
+          3.0077214409618414e-06,
+          2.630534849556998e-06,
+          1.3985923557895304e-06,
+          9.528400041064478e-07,
+          1.6295179025467565e-06,
+          7.554990505663495e-07,
+          3.548138683556745e-07,
+          1.0549767595208204e-06,
+          1.1570989525769293e-06,
+          4.853114760339228e-07
+        ],
+        "awa_depolarization_mV": 4.221057891845703,
+        "maximum_absolute_joint_rad": 0.15285059039982657,
+        "awa_recovery_residual_mV": 0.00095367431640625,
+        "awa_recovery_ratio": 0.0002259325365445878,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "dose-high",
+      "metrics": {
+        "total": 0.5888881004281876,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.3138530759376765e-05,
+        "cue_specific_recovery_residual_rad": 3.6372593689437682e-06,
+        "recovery_ratio": 0.2768391257407464,
+        "peak_by_joint_rad": [
+          7.741615666079227e-06,
+          1.3138530759376765e-05,
+          3.797090559028854e-06,
+          4.247268670707835e-06,
+          5.238962997540508e-06,
+          2.094415085591994e-06,
+          2.345130503570575e-06,
+          5.3207827958728915e-06,
+          3.5069872058868246e-06,
+          8.09112470503276e-06,
+          7.364266014033005e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.391977233672348e-06,
+          3.6372593689437682e-06,
+          3.2269957993200094e-06,
+          1.6708297237741192e-06,
+          1.0844788834660224e-06,
+          2.006042188109486e-06,
+          9.231812060916944e-07,
+          4.4652356191027254e-07,
+          1.3147309437244736e-06,
+          1.4589734928169285e-06,
+          5.899448704757559e-07
+        ],
+        "awa_depolarization_mV": 5.120262145996094,
+        "maximum_absolute_joint_rad": 0.15285069150595834,
+        "awa_recovery_residual_mV": 0.000698089599609375,
+        "awa_recovery_ratio": 0.00013633864433196298,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "onset-shift",
+      "metrics": {
+        "total": 0.7070925489307032,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.1498122629488572e-05,
+        "cue_specific_recovery_residual_rad": 3.913538999311683e-06,
+        "recovery_ratio": 0.3403633032469888,
+        "peak_by_joint_rad": [
+          6.777653752565449e-06,
+          1.1498122629488572e-05,
+          3.3053442904523722e-06,
+          4.258312704702449e-06,
+          4.943535286329459e-06,
+          1.8391275928460182e-06,
+          2.0824984797475354e-06,
+          4.783351686316745e-06,
+          2.9162651247749416e-06,
+          7.20349757449279e-06,
+          6.594230374426524e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.6233382408858965e-06,
+          3.913538999311683e-06,
+          3.0488479163641447e-06,
+          1.5117434606455246e-06,
+          1.250737070516983e-06,
+          1.836329536271386e-06,
+          8.827095284262565e-07,
+          4.5161651267278113e-07,
+          1.349181426260615e-06,
+          1.6036373481492783e-06,
+          6.609998028372921e-07
+        ],
+        "awa_depolarization_mV": 4.717660903930664,
+        "maximum_absolute_joint_rad": 0.15285068497665702,
+        "awa_recovery_residual_mV": 0.00084686279296875,
+        "awa_recovery_ratio": 0.00017950904276802944,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "refined",
+      "metrics": {
+        "total": 0.6929483594639015,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.1471739644275392e-05,
+        "cue_specific_recovery_residual_rad": 3.7322121156924126e-06,
+        "recovery_ratio": 0.32533968093974786,
+        "peak_by_joint_rad": [
+          6.501917005158342e-06,
+          1.1471739644275392e-05,
+          3.5497966206429754e-06,
+          4.235184642837481e-06,
+          5.142989657487551e-06,
+          1.848233673534122e-06,
+          2.140321317047056e-06,
+          4.941037750465574e-06,
+          3.1592506050531766e-06,
+          7.410367214279179e-06,
+          6.797735160712914e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.5446610760472268e-06,
+          3.7322121156924126e-06,
+          3.0550580465207866e-06,
+          1.6342577488730583e-06,
+          1.2229400123062173e-06,
+          1.7293480097137215e-06,
+          7.738603220869278e-07,
+          4.0128677013598346e-07,
+          1.1175993303441656e-06,
+          1.2716786964711568e-06,
+          7.988990370147442e-07
+        ],
+        "awa_depolarization_mV": 4.716817855834961,
+        "maximum_absolute_joint_rad": 0.15280420123052174,
+        "awa_recovery_residual_mV": 0.0028839111328125,
+        "awa_recovery_ratio": 0.0006114103238574169,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "chemical-blocked",
+      "metrics": {
+        "total": 1.25,
+        "passed": false,
+        "selected_joint": 0,
+        "cue_specific_peak_rad": 0.0,
+        "cue_specific_recovery_residual_rad": 0.0,
+        "recovery_ratio": 0.0,
+        "peak_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "recovery_residual_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "awa_depolarization_mV": 0.0,
+        "maximum_absolute_joint_rad": 0.15284994312476483,
+        "awa_recovery_residual_mV": 0.0,
+        "awa_recovery_ratio": 0.0,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "metrics": {
+        "total": 0.6233138592065361,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.2152481898813905e-05,
+        "cue_specific_recovery_residual_rad": 3.3832095105434945e-06,
+        "recovery_ratio": 0.27839658916699966,
+        "peak_by_joint_rad": [
+          7.234491539220844e-06,
+          1.2152481898813905e-05,
+          3.448988315869761e-06,
+          3.7463100860668508e-06,
+          4.5371572042693376e-06,
+          1.930816874145397e-06,
+          2.1775175992125306e-06,
+          4.748850878023153e-06,
+          3.2229798420518874e-06,
+          7.359615958275889e-06,
+          6.668423169001181e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.1900589166891073e-06,
+          3.3832095105434945e-06,
+          3.0057877538972044e-06,
+          1.6815850969332646e-06,
+          1.2582614827075234e-06,
+          1.870447609186865e-06,
+          8.473397115175973e-07,
+          5.007609591885231e-07,
+          1.282930228205248e-06,
+          1.3901289036208353e-06,
+          6.02679785827176e-07
+        ],
+        "awa_depolarization_mV": 4.7180633544921875,
+        "maximum_absolute_joint_rad": 0.15056517907700315,
+        "awa_recovery_residual_mV": 0.00083160400390625,
+        "awa_recovery_ratio": 0.00017625960938283264,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "held-voltage",
+      "metrics": {
+        "total": 1.25,
+        "passed": false,
+        "selected_joint": 0,
+        "cue_specific_peak_rad": 0.0,
+        "cue_specific_recovery_residual_rad": 0.0,
+        "recovery_ratio": 0.0,
+        "peak_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "recovery_residual_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "awa_depolarization_mV": 0.0,
+        "maximum_absolute_joint_rad": 0.0996549880807792,
+        "awa_recovery_residual_mV": 0.0,
+        "awa_recovery_ratio": 0.0,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    }
+  ],
+  "refinement_comparison": {
+    "maximum_cue_effect_difference_rad": 1.0340562598964986e-06,
+    "allowed_difference_rad": 7.5e-06,
+    "passed": true,
+    "scope": "Engineering convergence of cue-minus-sham body response, not biological or voltage error bound"
+  },
+  "checks": "Inherited neural/sensory offsets equal parent; nominal metrics unchanged; low-dose training equals previous validation; seed5700 fresh RNG; exact worst-case plus prior; original bounds and parent hash retained; selected low-dose traces stored; new robust state passes completed-search validator",
+  "server_launched": false,
+  "external_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E057"
+}

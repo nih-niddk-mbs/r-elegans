@@ -7,11 +7,15 @@ from pathlib import Path
 def format_summary(root,summary,configuration):
     target=configuration['protocol']['bend_target_rad']
     lines=[f'Run: {root}',f"Passed: {summary['passed']}; stop: {summary.get('stop_reason')}",
+        f"Training cues: {configuration['arguments'].get('training_cues','nominal')}",
         f"Proposals this run: {summary['iterations']}; global: {summary.get('initial_iteration',0)} -> {summary.get('last_iteration',summary['iterations'])}; selected: {summary['selected_iteration']}",
         f"Elapsed minutes: {summary['elapsed_seconds']/60:.2f}; bend target: {target:.9g} rad"]
     for label in ('baseline','best'):
         r=summary[label];m=r['metrics']
         lines.append(f"{label}: loss={r['total']:.9g}; bend={m['cue_specific_peak_rad']:.9g}; recovery={m['recovery_ratio']:.4f}; AWA={m['awa_depolarization_mV']:.6g} mV")
+        for case in r.get('training_cases',[]):
+            c=case['metrics']
+            lines.append(f"  {label}/{case['case']}: response_loss={c['total']:.9g}; bend={c['cue_specific_peak_rad']:.9g}; recovery={c['recovery_ratio']:.4f}")
     for row in summary['validation']:
         m=row['metrics']
         lines.append(f"{row['case']}: passed={m['passed']}; bend={m['cue_specific_peak_rad']:.9g} ({100*m['cue_specific_peak_rad']/target:.1f}% target); recovery={m['recovery_ratio']:.4f}; AWA={m['awa_depolarization_mV']:.6g} mV; AWA_recovery={m.get('awa_recovery_ratio')}")
@@ -20,6 +24,8 @@ def format_summary(root,summary,configuration):
         f"Changed neural coordinates this run: {summary.get('neuron_connection_parameters_changed_this_run','not recorded')}; versus original paired parent: {summary['neuron_connection_parameters_changed_from_parent']}",
         f"Checkpoint: {summary['checkpoint_sha256']}",
         f"Resume checkpoint: {summary.get('resume_checkpoint_sha256','not recorded')}"])
+    if summary.get('warm_start_checkpoint_sha256'):
+        lines.append(f"Warm-start checkpoint (fresh search): {summary['warm_start_checkpoint_sha256']}")
     return '\n'.join(lines)
 
 

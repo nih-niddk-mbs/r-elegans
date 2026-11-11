@@ -4787,3 +4787,75 @@ verification copied and SHA256-compared under external notebook/evidence/E056/
 server-tail-20261111, with manifest. This preserves the reported evidence; it does
 not retrieve the original server checkpoint, source capsule or missing stdout.
 Cloud synchronization is unverified.
+
+## 2026-11-11 — E056 compact complete report and planned E057 robust cue selection
+
+User reports run sensorimotor-20261111T163646Z-769197:148additional proposals,
+global48 ->196, best195, passed=False. Baseline .523381147, best .0369130066
+(printed rounded). Active bend1.4301107e-5 ->2.88992698e-5rad (96.3% target),
+recovery .1066 ->.0632. Low dose2.50309199e-5rad=83.4% target; high dose passes
+at3.21280778e-5rad. Shifted onset/refined remain below target. Full compact
+record will reconcile previous partial output; exact floats in compact text
+are rounded and must not be represented as full precision checkpoint data.
+
+Decision: select next candidates for the worse of nominal and .8dose response
+losses. Existing single-cue objective caps amplitude reward at its target, so
+nominal success alone could stall robustness; active has not quite reached this
+cap yet. This is a proactive curriculum change, not proof of an observed plateau.
+E057 planned60min search, seed5700 fresh PCG64 and proposal numbering; WARM START
+from selected E056 neural and sensory offsets. Original anchor417254ad...,
+selected source180c2b93..., original neural factor2 and sensory .5–2 bounds,
+channel/receptor/reporting constants, NMJ/body/physics and .00003rad target
+unchanged. Chemical gain already at2x; no bound widening. Train nominal and
+.8dose using same-state cue/sham pairs with one shared sham per candidate.
+Low dose becomes a training condition, no longer an unseen robustness check.
+High dose, onset shift and timestep refinement stay outside selection; all
+existing validation gates and blocked controls still required. Minimize maximum
+response loss plus unchanged prior, not mean amplitude or stronger odor alone.
+Save both training traces and original best/final model lineage externally.
+
+New objective means warm start with fresh optimizer/RNG, explicitly distinct
+from E056 same-objective continuation. Preserve E056 RNG and checkpoint rather
+than overwrite. Planned server command:
+sh scripts/launch_robust_sensorimotor_mbslnx2.sh 60
+No server launch; user launches after push. Local one-proposal smoke will use
+older local E056 candidate, not the actual180c2b93... server network.
+
+E056 complete compact arithmetic (rounded display values): active amplitude
++102.077%, objective-92.947%, active96.331% of target, weakest low-dose83.436%;
+low-dose requires19.852% more amplitude. The nominal cue has not yet reached
+the cap; revised selection anticipates the mismatch between a nominal-only
+objective and multi-condition qualification rather than claiming a demonstrated
+plateau. Reconcile exact tail metadata/hashes with the complete compact record
+in experiments/records/E056-server-summary.json. No source revision invented.
+
+E057 warm-start software audit on older local E056 smoke: initial selected
+neural/sensory offsets equal parent, initial PCG64 equals fresh seed5700, and
+new initial global count0 (parent global2). Nominal response metrics exactly
+equal old selected nominal metrics; new low-dose training metrics exactly equal
+old low-dose validation metrics. Revised baseline is precisely max of these two
+response losses plus the unchanged prior, deliberately different from the old
+scalar objective. One proposed update accepted in software smoke; no qualified
+skill or actual E056 server model validation inferred. Nominal-only runs retain
+their previous objective; mismatched cue-mode resumes are rejected.
+
+E057 verification complete:257 tests passed in92.08s; targeted9 passed in0.93s.
+New tests ensure a failed low-dose case remains visible after nominal success
+and reject a cue-selection change under same-objective resume (legacy nominal
+default stays compatible). Shell syntax/Python compilation passed. One-proposal
+local warm-start smoke completed full8-case validation, still unqualified on the
+older local model. New robust selected state also passes the completed-search
+validator for future same-objective continuation. Baseline/best totals exactly
+equal worst training-case loss plus original prior. Saved nominal and low-dose
+selected traces, original parent hashes, neural/sensory offsets and fresh RNG
+checked. This is not a new E056 server-model result. Full provenance and exact
+invocation in experiments/records/E057-local-verification.json and external
+source/env capsules; no server run launched. The proposed60min server run
+retains original thresholds, independent validation and causal controls.
+
+E057 local evidence copied and all copied run files SHA256-compared under
+OneDrive/r-elegans/notebook/evidence/E057;3473manifest entries include recursive
+parents, all selected/final networks and neural/sensory state, RNG/history,
+training/validation trajectories, previews, source/environment capsules, stdout,
+test results and compact E056 server transcription. Local integrity verified;
+cloud synchronization and original server checkpoint retrieval unverified.

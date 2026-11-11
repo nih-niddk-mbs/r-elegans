@@ -7,6 +7,15 @@ from dataclasses import dataclass
 import numpy as np
 
 
+def training_objective(metrics,selection='nominal'):
+    """Worst-case cue loss prevents nominal success hiding weak-dose failure."""
+    values=np.asarray([m['total'] for m in metrics],dtype=float)
+    expected={'nominal':1,'nominal-low-dose':2}
+    if selection not in expected or values.shape!=(expected[selection],) or not np.isfinite(values).all():
+        raise ValueError('Finite losses matching cue selection required')
+    return float(values.max())
+
+
 @dataclass(frozen=True)
 class ResponseProtocol:
     duration_s: float = 8.

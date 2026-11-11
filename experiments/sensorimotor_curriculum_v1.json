@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "stage1_continuation_partial_server_report_still_unqualified",
+  "status": "stage1_E056_below_target_E057_robust_objective_prepared",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -54,7 +54,18 @@
         0.001,
         0.003
       ],
-      "ladder_policy": "Only first target is active. Each promotion requires reviewed validation and a new objective/configuration; not an automatic or demonstrated progression."
+      "ladder_policy": "Only first target is active. Each promotion requires reviewed validation and a new objective/configuration; not an automatic or demonstrated progression.",
+      "training_selection": {
+        "experiment": "E057",
+        "training_dose_um": [
+          1.0,
+          0.8
+        ],
+        "aggregation": "maximum of nominal and low-dose response losses plus unchanged prior",
+        "low_dose_is_unseen": false,
+        "initialization": "inherit selected neural/sensory parameters; fresh seed5700/global0",
+        "bounds_and_targets_changed": false
+      }
     },
     {
       "id": "alternate",
@@ -85,6 +96,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E056-server-partial-20261111.json",
-  "continuation": "E056 completed with exit2; partial server report shows refined93.4% and onset94.4% of target. No further run launched."
+  "server_evidence": "experiments/records/E056-server-summary.json",
+  "continuation": "E057 revised selection: worst nominal/.8dose response, warm start neural/sensory state from E056, fresh seed5700, unchanged original bounds/target; server launch pending"
 }

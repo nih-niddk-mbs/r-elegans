@@ -51,10 +51,12 @@ def main():
     source_group=p.add_mutually_exclusive_group(required=True)
     source_group.add_argument('--parent-run',type=Path)
     source_group.add_argument('--resume-run',type=Path)
+    source_group.add_argument('--warm-start-run',type=Path)
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--minutes',type=float,default=20.)
     p.add_argument('--iterations',type=int,default=100000)
     p.add_argument('--seed',type=int,default=5500)
+    p.add_argument('--training-cues',choices=['nominal','nominal-low-dose'],default='nominal')
     p.add_argument('--sigma',type=float,default=.03)
     p.add_argument('--bend-target-rad',type=float,default=.00003)
     p.add_argument('--dt',type=float,default=.002)
@@ -71,20 +73,22 @@ def main():
     from r_elegans.brain.joint_autonomous_fit import apply_joint_offsets,joint_proposal,frozen_joint_fields_unchanged
     from r_elegans.brain.conductance_network import save_network,load_network
     from r_elegans.body.embodied_sensory import EmbodiedSensoryConfig
-    from r_elegans.sensorimotor_curriculum import ResponseProtocol,cue_world,response_metrics
+    from r_elegans.sensorimotor_curriculum import ResponseProtocol,cue_world,response_metrics,training_objective
     from r_elegans.data.paths import get_data_root
     from r_elegans.full_body_assessment import write_motion_preview
     from r_elegans.paired_diagnostics import signal_chain
     resume=args.resume_run.resolve() if args.resume_run else None
-    source=resume/'parent_run' if resume else args.parent_run.resolve()
+    warm=args.warm_start_run.resolve() if args.warm_start_run else None
+    saved=resume or warm
+    source=saved/'parent_run' if saved else args.parent_run.resolve()
     initial,fixed,config,spec,start_offsets,actor,cfg,parent_summary,parent_iteration=verified_parent(source)
     factor=cfg['arguments']['maximum_factor']
     if factor!=2.:raise ValueError('E055 requires unchanged original factor2 neural bounds')
     out=get_data_root(args.output_dir,must_exist=False)
     if out==source or source in out.parents or out in source.parents:
         p.error('Output must be separate from parent lineage')
-    if resume and (out==resume or resume in out.parents or out in resume.parents):
-        p.error('Continuation output must be separate from resume parent')
+    if saved and (out==saved or saved in out.parents or out in saved.parents):
+        p.error('Output must be separate from saved search parent')
     if any(path.is_symlink() for path in source.rglob('*')):raise ValueError('No symlinks in parent archive')
     out.mkdir(parents=True,exist_ok=False)
     capture_run_record(out,Path(__file__).resolve().parents[1],args)
@@ -108,23 +112,37 @@ def main():
     settings=json.loads(json.dumps(settings,default=str))
     rng=np.random.default_rng(args.seed)
     offsets=start_offsets.copy();sensory_offsets=np.zeros(3)
-    initial_iteration=0;resume_summary=None
-    if resume:
+    initial_iteration=0;resume_summary=None;warm_summary=None
+    if saved:
         from scripts.sensorimotor_resume import read_completed
         import jax
-        offsets,sensory_offsets,initial_iteration,rng,resume_summary=read_completed(resume,settings,spec.size)
+        check_settings=json.loads(json.dumps(settings))
+        if warm:
+            parent_cfg=json.loads((warm/'configuration.json').read_text())
+            check_settings['arguments']['training_cues']=parent_cfg['arguments'].get('training_cues','nominal')
+        offsets,sensory_offsets,saved_iteration,saved_rng,saved_summary=read_completed(saved,check_settings,spec.size)
         expected=apply_joint_offsets(initial,offsets,spec)
-        actual,actual_fixed,actual_config=load_network(resume/'network_best.npz')
+        actual,actual_fixed,actual_config=load_network(saved/'network_best.npz')
         if actual_config!=config or any(not np.array_equal(np.asarray(a),np.asarray(b)) for a,b in zip(
                 jax.tree_util.tree_leaves((expected,fixed)),jax.tree_util.tree_leaves((actual,actual_fixed)))):
             raise ValueError('Resume network, fixed fields and original-anchor offsets disagree')
-        if any(path.is_symlink() for path in resume.rglob('*')):raise ValueError('Resume archive contains symlinks')
-        shutil.copytree(resume,out/'resume_parent')
-        if file_sha256(out/'resume_parent/network_best.npz')!=resume_summary['checkpoint_sha256']:
+        if any(path.is_symlink() for path in saved.rglob('*')):raise ValueError('Saved archive contains symlinks')
+        destination=out/('resume_parent' if resume else 'warm_start_parent')
+        shutil.copytree(saved,destination)
+        if file_sha256(destination/'network_best.npz')!=saved_summary['checkpoint_sha256']:
             raise ValueError('Copied resume checkpoint mismatch')
-        settings['resume']=dict(parent=str(resume),checkpoint_sha256=resume_summary['checkpoint_sha256'],
-            initial_iteration=initial_iteration,rng_sha256=file_sha256(resume/'rng_state.json'))
-        settings['optimizer']='Completed greedy search continuation: same objective, original bounds and saved PCG64; not interrupted simulation resume'
+        if resume:
+            initial_iteration=saved_iteration;rng=saved_rng;resume_summary=saved_summary
+            settings['resume']=dict(parent=str(resume),checkpoint_sha256=resume_summary['checkpoint_sha256'],
+                initial_iteration=initial_iteration,rng_sha256=file_sha256(resume/'rng_state.json'))
+            settings['optimizer']='Completed greedy search continuation: same objective, original bounds and saved PCG64; not interrupted simulation resume'
+        else:
+            warm_summary=saved_summary
+            settings['warm_start']=dict(parent=str(warm),checkpoint_sha256=warm_summary['checkpoint_sha256'],
+                parent_global_iteration=saved_iteration,seed=args.seed,old_training_cues=parent_cfg['arguments'].get('training_cues','nominal'))
+            settings['optimizer']='Fresh greedy search and PCG64 for revised cue-selection objective; inherited neural AND sensory parameters, original bounds'
+    settings['training_selection']=dict(cues=args.training_cues,aggregation='maximum response loss plus original prior',
+        low_dose_is_training=args.training_cues=='nominal-low-dose')
     run_start_offsets=offsets.copy()
     write_json(out/'configuration.json',settings)
     write_json(out/'initial_rng_state.json',rng.bit_generator.state)
@@ -135,13 +153,22 @@ def main():
             burn_in=0.,sampling='point',record_dense=True,hold_voltage=held,
             sensory_config=sc,chemical_world=cue_world(protocol,dose=dose,onset_shift=shift,sham=sham))
     active_run=factory();sham_run=factory(sham=True)
-    def evaluate(x,s,run=active_run,reference=sham_run,shift=0.):
+    low_run=factory(dose=.8) if args.training_cues=='nominal-low-dose' else None
+    def evaluate(x,s,run=active_run,reference=sham_run,shift=0.,training=True):
         params=apply_joint_offsets(initial,x,spec)
         if not frozen_joint_fields_unchanged(params,initial,spec):raise RuntimeError('Frozen fields changed')
         sham=reference(params,times,np.exp(s));active=run(params,times,np.exp(s))
         metrics=response_metrics(active,sham,model.neuron_ids,protocol,onset_shift=shift)
         prior=.001*float(np.mean(x*x))+.001*float(np.mean(s*s))
-        return dict(total=metrics['total']+prior,prior=prior,metrics=metrics),dict(active=active,sham=sham)
+        result=dict(total=metrics['total']+prior,prior=prior,metrics=metrics)
+        traces=dict(active=active,sham=sham)
+        if training and low_run is not None:
+            low=low_run(params,times,np.exp(s))
+            low_metrics=response_metrics(low,sham,model.neuron_ids,protocol)
+            result['total']=training_objective([metrics,low_metrics],args.training_cues)+prior
+            result['training_cases']=[dict(case='active',metrics=metrics),dict(case='dose-low',metrics=low_metrics)]
+            traces['dose-low']=low
+        return result,traces
     started=time.monotonic()
     baseline,traces=evaluate(offsets,sensory_offsets)
     if resume_summary and not math.isclose(baseline['total'],resume_summary['best']['total'],rel_tol=1e-10,abs_tol=1e-12):
@@ -208,7 +235,7 @@ def main():
             a=run(params,times,gains);b=reference(params,times,gains)
             metrics=response_metrics(a,b,model.neuron_ids,protocol)
             result=dict(metrics=metrics);traces=dict(active=a,sham=b)
-        else:result,traces=evaluate(offsets,s,run,reference,shift)
+        else:result,traces=evaluate(offsets,s,run,reference,shift,training=False)
         for label,trace in traces.items():np.savez_compressed(destination/(label+'-trajectory.npz'),**trace)
         write_json(destination/'metrics.json',result)
         a=traces['active']
@@ -245,6 +272,8 @@ def main():
         neuron_connection_parameters_changed_from_parent=int(np.count_nonzero(offsets-start_offsets)),
         neuron_connection_parameters_changed_this_run=int(np.count_nonzero(offsets-run_start_offsets)),
         resume_checkpoint_sha256=resume_summary['checkpoint_sha256'] if resume_summary else None,
+        warm_start_checkpoint_sha256=warm_summary['checkpoint_sha256'] if warm_summary else None,
+        training_cues=args.training_cues,
         sensory_parameters_sha256=file_sha256(out/'sensory_parameters.json'),
         sensory_gain_multipliers=np.exp(sensory_offsets).tolist(),biological_fidelity_qualified=False,
         autonomous_oscillation_qualified=False,next_stage_launched=False)

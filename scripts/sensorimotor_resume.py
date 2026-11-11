@@ -23,6 +23,8 @@ def read_completed(root,settings,size):
     for key in MATCH_ARGUMENTS:
         if cfg['arguments'][key]!=settings['arguments'][key]:
             raise ValueError('Resume objective/numerics mismatch: '+key)
+    if cfg['arguments'].get('training_cues','nominal')!=settings['arguments'].get('training_cues','nominal'):
+        raise ValueError('Resume objective/numerics mismatch: training_cues; use a fresh-stage warm start')
     with np.load(root/'search_state.npz',allow_pickle=False) as z:
         x=z['offsets'].copy();s=z['sensory_offsets'].copy();iteration=int(z['iteration'])
     if (x.shape!=(size,) or s.shape!=(3,) or not np.isfinite(x).all() or not np.isfinite(s).all()

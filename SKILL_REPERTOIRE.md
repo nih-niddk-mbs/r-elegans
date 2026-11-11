@@ -467,3 +467,9 @@ E056 continuation tail:refined response reaches93.4% of the first-rung target
 and shifted-onset94.4%, with controls/recovery passing. Still unqualified; do not
 promote. Chemical gain has reached2x bound. Active/dose results and full summary
 are needed before another fit. Evidence: E056-server-partial-20261111.json.
+
+E056 full report supersedes missing-field status:148additional proposals,
+active96.3%, low-dose83.4%, high-dose107.1% of target. First rung unqualified.
+E057 plans robust nominal/.8dose training from this checkpoint, with fresh RNG
+and unchanged bounds/target. Dose-low ceases to be an unseen cue; all original
+validation gates remain. No promotion to alternation or new biological claim.
