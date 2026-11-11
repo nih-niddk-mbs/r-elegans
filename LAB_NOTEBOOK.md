@@ -4330,3 +4330,38 @@ is limiting from these aggregate statistics alone. Hardware tuning remains
 shelved; no new run, held-out evaluation or model promotion was launched.
 Verification in this turn is JSON/arithmetic and continuation-baseline consistency;
 no simulation was rerun and no tests are needed for metadata-only updates.
+
+## 2026-11-10 — Planned E053 eight-hour paired-fit continuation
+
+User authorizes eight additional fitting hours after the reported E052 result.
+Question: does continued bounded neuron/connection search further reduce the
+same paired-statistics objective, and how do body and calcium components trade
+against each other? This is continued exploration, not a new biological claim.
+
+Expected parent: latest completed server paired fit, currently reported as
+/home/carsonc/r-elegans-results/paired-fit-20261111T003225Z-698419,
+checkpoint SHA256 ffa4ea6addd9309382204160855bdf3b21fbd17b1ff0b5a669062b66cab8c41d,
+last global proposal369, selected nominal objective44.9933180382051. The wrapper
+must discover and verify actual saved artifacts; the parent is user-reported,
+not independently retrieved. If a newer completed run exists, the launcher
+prints that actual parent and its new run record documents the lineage.
+
+Method/settings: `sh scripts/continue_paired_fit_mbslnx2.sh 480`, from the updated
+server checkout, using the absolute r-elegans conda interpreter under nohup.
+Continue saved PCG64 RNG and best offsets; no seed reset or replay of earlier
+proposals. Preserve original winner7001 anchor and factor2 bounds. Same two
+16-frame training windows, frozen E049 folds, same objective weights, reporter
+and sampling assumptions, wet-agar proxy, body timestep0.002s and maximum brain
+substep0.1ms. All stereotypical fields, anatomy, NMJ/muscle/body and sensory gains
+stay fixed; only existing unknown non-leak channel densities and chemical/gap
+strengths remain eligible. No external neural drive or held-out data fitting.
+
+Budget480 additional fitting minutes; setup and final paired timestep refinement
+are extra. Retain recursive parent lineage, selected checkpoint, search/RNG
+state, history, exact source/environment and predictions outside Git. Completion
+means a finite preserved search and unchanged frozen fields, not successful
+animal behavior. Compare each family and both refined parent/selected objectives;
+calcium agreement need not improve merely because total loss falls. Parameter
+bounds and amplitude-transfer diagnostics remain outstanding. No hardware-tuning
+run or bundled-model promotion. Status planned: user will launch on mbslnx2;
+no remote execution or result is claimed in this entry.
