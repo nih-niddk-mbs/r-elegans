@@ -1,0 +1,283 @@
+{
+  "experiment": "E053",
+  "evidence": "User-pasted server stdout; no independent server artifact retrieval",
+  "source_attachment_sha256": "13f11bec8e20c26bfaa143688b8a3caddd80220fb6a01d81fee538348e3425f7",
+  "reported": {
+    "Run": "/home/carsonc/r-elegans-results/paired-fit-20261111T040502Z-706911",
+    "status": "completed",
+    "iterations": 865,
+    "initial_iteration": 369,
+    "last_iteration": 1234,
+    "elapsed_seconds": 28945.093300258042,
+    "parameters_changed": 9616,
+    "frozen_fields_unchanged": true,
+    "stop_reason": "time_budget",
+    "checkpoint_sha256": "98ea66551777dd8b228bf0ee59d97043ce32ec1b8d7f2e04f139887ecd26d6e2"
+  },
+  "sections": {
+    "baseline": {
+      "total": 44.9933180382051,
+      "rows": [
+        {
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 46.37154906458654,
+            "calcium_cv": 2.3685418059831385,
+            "calcium_lag1": 1.6664175902992497,
+            "bend_mean": 73.54397998435687,
+            "bend_std": 15.164158748533817,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.017671470880828474,
+              0.027672222371566656,
+              0.011198194162237971,
+              0.011067700007902012,
+              0.01750509970032025
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 43.6150780494392,
+            "calcium_cv": 2.4237928673085354,
+            "calcium_lag1": 1.6032095328480445,
+            "bend_mean": 63.22992368322703,
+            "bend_std": 19.97323001549479,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.017709297414107844,
+              0.02773082793739989,
+              0.011182150216383248,
+              0.010875295192302254,
+              0.02522940813880201
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    },
+    "best": {
+      "total": 40.01228735191045,
+      "rows": [
+        {
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 41.38336676779186,
+            "calcium_cv": 2.3690033203787095,
+            "calcium_lag1": 1.658200525183875,
+            "bend_mean": 64.2071473416714,
+            "bend_std": 14.532382348349746,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.02415432602282084,
+              0.03774551736775163,
+              0.025241104719468426,
+              0.016826684522626544,
+              0.022641776704189192
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 38.641145246338354,
+            "calcium_cv": 2.4211031983109934,
+            "calcium_lag1": 1.6157001272778677,
+            "bend_mean": 54.048782193286854,
+            "bend_std": 19.196704973800998,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.024218191409167877,
+              0.03784362148584966,
+              0.02530449123327057,
+              0.016370446762206455,
+              0.034572090039825795
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    },
+    "refined_baseline": {
+      "total": 45.002973328269036,
+      "rows": [
+        {
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 46.37252139031591,
+            "calcium_cv": 2.36860561149981,
+            "calcium_lag1": 1.6681987989285993,
+            "bend_mean": 73.54406625131263,
+            "bend_std": 15.164172118890795,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.017672317349535525,
+              0.027670314144812982,
+              0.011202900256345011,
+              0.01107208666938772,
+              0.0174943547294711
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 43.63341630383769,
+            "calcium_cv": 2.423855209044283,
+            "calcium_lag1": 1.6401941024209707,
+            "bend_mean": 63.22939470383418,
+            "bend_std": 19.973388592375954,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.017709377124596127,
+              0.02772766278845274,
+              0.011185783652193455,
+              0.010878936874867351,
+              0.0252165767550435
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    },
+    "refined": {
+      "total": 40.01460331530774,
+      "rows": [
+        {
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 41.38669340077133,
+            "calcium_cv": 2.3690528317094484,
+            "calcium_lag1": 1.6649307748007591,
+            "bend_mean": 64.20696445579546,
+            "bend_std": 14.532438739236994,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.024156495100949634,
+              0.037745194432766166,
+              0.025241361218076852,
+              0.016828353815853795,
+              0.02263148612628399
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 38.642450540153455,
+            "calcium_cv": 2.421148586241062,
+            "calcium_lag1": 1.6187908764240828,
+            "bend_mean": 54.04796026507656,
+            "bend_std": 19.197001352565202,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.02421917446214273,
+              0.037841427131161606,
+              0.02530352514477214,
+              0.016370896347712802,
+              0.034557488068743425
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "analysis": {
+    "loss_reduction_fraction": 0.11070600932487613,
+    "refined_loss_reduction_fraction": 0.11084534296376825,
+    "bend_std_growth_fraction_range": [
+      0.29343888876993773,
+      1.2629360850649571
+    ],
+    "measured_to_model_std_ratio_range": [
+      10.82550471191239,
+      33.81607259227947
+    ],
+    "weighted_loss_reduction_by_component": {
+      "calcium_cv": 0.0005570386504927249,
+      "calcium_lag1": -0.0010683823286121163,
+      "bend_mean": 4.62949353315641,
+      "bend_std": 0.3520753604694655
+    },
+    "mean_posture_share_of_loss_reduction": 0.9294248168144197,
+    "fluctuation_share_of_loss_reduction": 0.07068323458399962,
+    "inferred_prior_loss_reduction": -2.6863653104669538e-05,
+    "baseline_neural_component": 2.015490449109742,
+    "best_neural_component": 2.0160017927878613,
+    "neural_relative_change": 0.0002537068227463912
+  },
+  "source_revision": null,
+  "checkpoint_independently_verified": false,
+  "limitations": [
+    "Two short training windows, not an eight-hour simulated trajectory",
+    "Unsigned coarse chord-bend standard deviations are not joint p2p, wave propagation or speed",
+    "All 9616 offsets nonzero does not imply they reached bounds or were all newly changed",
+    "Mean unsigned bend error includes posture and dynamic excursions; decomposition is not proof of static posture alone",
+    "Reporter and mounted-medium assumptions remain; no held-out biological or long-autonomy validation"
+  ],
+  "decision": "Retain candidate; make sustained dynamic amplitude explicit in the next curriculum stage and inspect bounds/activity transfer before repeating an unchanged long fit",
+  "new_experiment_started": false,
+  "bundled_model_changed": false
+}

@@ -1,5 +1,19 @@
 # Current model: exact scope and computation path
 
+E053 eight-hour continuation (user-reported, 2026-11-11): 865 additional
+proposals (global369 to1234) reduced the paired training objective11.1%, from
+44.993 to40.012. Matched refinement retained the gain. Sampled coarse bend
+fluctuations increased29–126% but remain about11–34 times below the recordings;
+the nominal neural-error component was essentially unchanged. Approximately93%
+of the scalar loss decrease came from mean unsigned bend error and7% from
+bend-fluctuation error. Mean bend includes posture and dynamic excursions;
+this does not establish a static-posture explanation. Full traces and parameter
+bounds have not been inspected. No held-out or long-autonomy qualification, new
+bundled model, or new run is claimed. See the
+[E053 record](experiments/records/E053-server-summary.json). Next: inspect traces
+and bounds and make sustained dynamic amplitude explicit in the curriculum.
+
+
 E052 server continuation (user-reported): 335 additional proposals (global
 34 to 369) reduced the training objective by 5.3%, from 47.514 to 44.993.
 The matched finer-timestep comparison preserved the gain. Coarse bend

@@ -1183,3 +1183,9 @@ objective by 5.3%, with a gain retained on timestep refinement. Bend fluctuation
 increased but remain far too small; nominal calcium error worsened slightly.
 This is an exploratory tradeoff on two short training windows. See the
 [E052 evidence](experiments/records/E052-server-summary.json).
+
+E053 eight-hour continuation: training loss decreased11.1%, with the gain
+retained on timestep refinement. Coarse bend fluctuations grew29–126% but remain
+roughly11–34 times too small; calcium agreement was essentially unchanged.
+Most scalar improvement came from mean-bend error. See the
+[E053 analysis](experiments/records/E053-server-summary.json).

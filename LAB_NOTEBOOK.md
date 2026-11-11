@@ -4365,3 +4365,57 @@ calcium agreement need not improve merely because total loss falls. Parameter
 bounds and amplitude-transfer diagnostics remain outstanding. No hardware-tuning
 run or bundled-model promotion. Status planned: user will launch on mbslnx2;
 no remote execution or result is claimed in this entry.
+
+## 2026-11-11 — E053 eight-hour continuation result (user-reported)
+
+Run /home/carsonc/r-elegans-results/paired-fit-20261111T040502Z-706911 reports
+completed, time_budget,865 additional proposals, global369 ->1234, elapsed
+28945.09s including setup/refinement. Starting objective44.9933180382051 matches
+E052 selected loss exactly. Best40.01228735191045:11.071% reduction. Matched
+refined parent45.002973328269036 ->selected40.01460331530774:11.085% reduction.
+The finer-timestep check preserves the gain; it does not certify all temporal
+statistics, long-autonomous behavior or biological fidelity.
+
+All ten sampled unsigned coarse chord-bend standard deviations increased by
+29.3–126.3%. Measured/model fluctuation-amplitude ratios remain10.83–33.82.
+Nominal equal-weight neural objective component2.01549045 ->2.01600179 (+0.0254%):
+essentially unchanged overall, with mixed per-neuron-summary changes. This is
+not evidence of a meaningful calcium fit improvement. These are two short
+training windows; eight hours is optimization wall time, not simulated trajectory
+length or an eight-hour survival/behavior test.
+
+Exact objective decomposition from the reported metrics and existing code:
+for two recordings, each reported calcium_cv, calcium_lag1, bend_mean and
+bend_std contributes one quarter of its summed per-recording error. Of the
+4.98103 total loss decrease, mean-bend error contributes4.62949 (~92.94%),
+bend-fluctuation error0.352075 (~7.07%), calcium CV0.000557, calcium lag1-0.001068;
+the prior contributes about-0.0000269. Thus the scalar objective predominantly
+improves average unsigned bending. Mean unsigned bending includes both posture
+and dynamic excursions: this decomposition alone does not prove a static
+posture or isolate a specific physiological bottleneck. Actual sampled bend
+fluctuations increased substantially but remain too small.
+
+All9616 eligible offsets reported nonzero relative to the original anchor;
+this is not a new-coordinate count or evidence of bound saturation. Frozen
+fields reported unchanged. Reported checkpoint SHA256
+98ea66551777dd8b228bf0ee59d97043ce32ec1b8d7f2e04f139887ecd26d6e2.
+Exact source revision, full server trajectories, RNG/history and checkpoint
+have not been independently retrieved. Source attachment SHA256 and all parsed
+summary sections are preserved in experiments/records/E053-server-summary.json.
+No unreported exit code or raw-data backup is asserted.
+
+Decision: retain E053 alongside previous skill checkpoints. Before another
+unchanged long continuation, inspect actual trajectories and parameter-bound
+occupancy, and make sustained dynamic amplitude explicit in the next curriculum
+objective while tracking neural metrics separately. A long-autonomy/perturbation
+assessment remains necessary for a qualified skill; future changes must retain
+physical/numerical criteria and explicit reporter/mounted-medium assumptions.
+No revised objective, new simulation or server launch was executed in this turn.
+Verification: parsed the pasted output, checked369+865=1234 and matched E052/E053
+boundary losses, recomputed all percentages and component weights. Metadata-only
+updates do not require a new simulation/test suite.
+
+E053 evidence preservation completed: pasted server stdout, parsing/arithmetic
+script, compact analysis and file hashes copied to external OneDrive directory
+notebook/evidence/E053. This preserves the supplied report, not the full server
+checkpoint or trajectories. Cloud synchronization is not independently verified.
