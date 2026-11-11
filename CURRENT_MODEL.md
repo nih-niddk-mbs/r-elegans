@@ -2501,3 +2501,11 @@ the mechanism exists. Do not refit a different network for every experiment or
 hide missing biology behind unconstrained time-varying currents. Failure across
 compatible data may identify missing mechanisms rather than insufficient run
 length. No new model optimization or dataset acquisition occurred in this update.
+
+Server E050 update (user-reported, 2026-11-10): 34 proposals reduced the training
+objective from47.930 to47.514 (~0.87%); the reduction persisted on refinement.
+Bend fluctuation remains much smaller than recorded. The reported checkpoint
+is c435ee69645f27163af21ef5590b05a30151a38df7389a6f2fe70ef4db1ee481;
+full artifacts have not been independently retrieved. A completed-search
+continuation wrapper now preserves offsets/RNG and original bounds for longer
+runs. No new biological qualification or bundled checkpoint promotion.

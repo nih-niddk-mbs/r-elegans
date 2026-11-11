@@ -4206,3 +4206,87 @@ Local copy integrity is verified; cloud synchronization is not independently
 verified. Future fit runs also copy recursive server warm-start history or the
 verified compact reference into their external inputs, preserving lineage before
 fitting. The independent selected candidate is not a bundled model promotion.
+
+## 2026-11-10 — Planned E051 mbslnx2 paired-workload capacity study
+
+Question: which CPU/SMT, two-A100 or mixed process layout maximizes completed
+E050 candidate evaluations per second on mbslnx2? The previous PPO benchmark
+cannot establish performance for this sequential NumPy wet-surface reference.
+The server has 128 logical processors and two A100 80GB devices (user-reported);
+physical topology, available memory and per-backend timings must be measured.
+
+Method: run the same paired training windows, fixed parent and candidate on all
+workers. Pin affinity before importing numerical libraries. Warm up every worker,
+then synchronize measurements with a shared gate; exclude compilation from steady
+throughput and separately report warm-up and end-to-end wall time. Probe CPU
+worker counts, physical-core vs SMT layouts, both GPUs and a mixed CPU/GPU case.
+Reserve the first four physical cores for the existing pilot and a separate CPU
+allocation for GPU host work. Cap CPU process count using available memory and
+observed single-worker peak RSS. Compare numerical outputs to the CPU reference
+before recommending a GPU layout. Failure/timeout is recorded, not a speedup.
+
+Fixed: winner7001, E049 frozen train folds, same 16-frame windows, identical
+bounded deterministic candidate, E050 reporter/spatial/temporal assumptions,
+physical equations and timestep. No fitting or held-out target selection during
+capacity measurement. An optional subsequent independent-seed fitting ensemble
+uses the selected measured layout, preserving each worker separately. Separate
+seeds increase search throughput; they do not accelerate one sequential rollout
+or constitute a shared-gradient optimizer. No scientific checkpoint promotion.
+
+Local verification: process orchestration, gating, affinity planning, throughput
+arithmetic, memory caps and failure handling with synthetic subprocesses; run
+real local worker if feasible. Only the user can launch the hardware measurement
+on password-authenticated mbslnx2; no remote timings or GPU utilization invented.
+
+E051 shelved at user's explicit request to leave processor tuning aside and
+launch a three-hour fit instead. No hardware-capacity run or new GPU performance
+was measured on mbslnx2. Uncommitted capacity-tool work is preserved separately
+in /tmp/r-elegans-E051-shelved; it is not a deployed launcher. Local synthetic
+orchestration tests passed; one local unpinned CPU workload check took22.96s
+per evaluation after24.24s warm-up, not a server scaling result. No capacity
+benchmark or ensemble has been launched remotely.
+
+## 2026-11-10 — Planned E052 three-hour paired-fit continuation
+
+Resume the completed server E050 search from its best saved offsets and saved
+PCG64 RNG state, preserving original winner7001 anchor/bounds and all fixed
+fields. Do not repeat the first34 proposals. Verify completed summary, checkpoint
+hash, offsets, RNG, frozen data split and unchanged numerical/objective settings.
+Copy recursive parent results into the new external run. Three-hour additional
+fitting budget, same two16-frame training windows, no held-out targets, no drive;
+setup and final refinement take additional time. Preserve independent winner and
+bundled model. Local resume validation and short integration check before push;
+user launches the nohup server job. No claim of in-flight process continuation
+or biological qualification.
+
+E050 server result received from user stdout (2026-11-10): completed34 proposals,
+1356.11s including refinement; fit budget20min. Objective47.93021 ->47.51395
+(~0.87% decrease); refined parent47.94112 ->selected47.56418, same improvement
+direction.2439 offset coordinates changed, frozen fields reported unchanged.
+Reported checkpoint SHA256
+c435ee69645f27163af21ef5590b05a30151a38df7389a6f2fe70ef4db1ee481.
+PAIRED_FIT_EXIT_CODE=0. Model coarse-bend fluctuation remains about20–75 times
+smaller than measured. These are training statistics, not biological validation.
+No exact server run directory, source capsule or complete checkpoint was copied
+back; do not invent a run identifier or claim independent checkpoint verification.
+Compact user-reported evidence: experiments/records/E050-server-20261110.json.
+
+E052 continuation implementation restores original-anchor offsets and PCG64 RNG
+from a completed run, checks matching objective/data/integration settings and
+saved network consistency, copies the parent recursively and continues global
+proposal numbering. No mid-candidate process state is claimed. Baseline and
+refined-baseline now refer to this continuation's starting candidate. Default
+three-hour wrapper discovers the latest completed paired-fit directory and
+verifies its checkpoint hash before launching under nohup. The source run is
+never modified. E051 capacity work remains shelved.
+
+E052 local verification: six focused observation/resume tests passed. A real
+one-proposal continuation from the eight-proposal local E050 pilot restored its
+starting objective exactly (47.38850166772256), used the saved RNG and advanced
+global proposal8 ->9. Frozen fields remained unchanged. Command used
+`python -m scripts.fit_paired_recordings --resume-run /tmp/r-elegans-E050-shared-pilot`
+with matching two eight-frame wet-proxy windows, factor2 bounds and one additional
+proposal; full exact arguments/source/environment in external run records. The
+server continuation will instead restore the user's completed34-proposal,
+16-frame search after verifying its own saved configuration. No remote launch
+or server checkpoint verification is claimed yet.

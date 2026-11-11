@@ -1,0 +1,263 @@
+{
+  "experiment": "E050",
+  "evidence": "User-reported server stdout, not independently retrieved artifacts",
+  "source_attachment_sha256": "83fd74c8604c8c99c2431accc2725d0e3c368a495f3a960784097cc2dad86e0c",
+  "server_run_directory": null,
+  "server_revision": null,
+  "result": {
+    "experiment": "E050",
+    "status": "completed",
+    "iterations": 34,
+    "baseline": {
+      "total": 47.930207104546035,
+      "prior": 0.0,
+      "rows": [
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 49.26047097166017,
+            "calcium_cv": 2.368407151279913,
+            "calcium_lag1": 1.7035113396160642,
+            "bend_mean": 78.83347380925241,
+            "bend_std": 15.615549643171946,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.013274101569190707,
+              0.016713322169230382,
+              0.007445101519394837,
+              0.00798075198771582,
+              0.009888706738978788
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 46.5999432374319,
+            "calcium_cv": 2.4236143815805544,
+            "calcium_lag1": 1.6474791347214506,
+            "bend_mean": 68.54439504881756,
+            "bend_std": 20.584397909744247,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.013305832440708825,
+              0.016743359003782217,
+              0.007444549291106023,
+              0.007943969596002118,
+              0.012932591336111802
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    },
+    "best": {
+      "total": 47.51395069275865,
+      "prior": 3.883477799521697e-07,
+      "rows": [
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 48.865129017662746,
+            "calcium_cv": 2.3682591060410556,
+            "calcium_lag1": 1.6345805229300132,
+            "bend_mean": 78.22595395809599,
+            "bend_std": 15.501464448258437,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.014008073889417183,
+              0.019196805984833146,
+              0.009070863142139717,
+              0.0074499836245416435,
+              0.013233047421013376
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 46.162771591159,
+            "calcium_cv": 2.4236265467739653,
+            "calcium_lag1": 1.5079601023240936,
+            "bend_mean": 67.9519026977395,
+            "bend_std": 20.442053835480436,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.014036939380661737,
+              0.019225597192521444,
+              0.00906806635140893,
+              0.007349090064224447,
+              0.01688046988714512
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    },
+    "refined": {
+      "total": 47.56417529122987,
+      "prior": 3.883477799521697e-07,
+      "rows": [
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 48.91063717248721,
+            "calcium_cv": 2.3683297159980397,
+            "calcium_lag1": 1.7219665185328306,
+            "bend_mean": 78.22894276912012,
+            "bend_std": 15.50203534132344,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.014005310504784645,
+              0.01918345069726516,
+              0.00905906700056356,
+              0.007449235978462125,
+              0.013223880392564983
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 46.217712633276975,
+            "calcium_cv": 2.4236681787710075,
+            "calcium_lag1": 1.6143839381770004,
+            "bend_mean": 67.9544163001162,
+            "bend_std": 20.442956849489743,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.014033617065490184,
+              0.019211265455536263,
+              0.009056161385401745,
+              0.00734679142820881,
+              0.016861097172956765
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    },
+    "refined_baseline": {
+      "total": 47.94112135246604,
+      "prior": 0.0,
+      "rows": [
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-01",
+          "metrics": {
+            "total": 49.26519402148216,
+            "calcium_cv": 2.3684457831024104,
+            "calcium_lag1": 1.710433173998579,
+            "bend_mean": 78.8359839280882,
+            "bend_std": 15.615525157775139,
+            "neural_observables": 55,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.013276325921216303,
+              0.016713729288861553,
+              0.007444306095610071,
+              0.00798741334434835,
+              0.00988063469828662
+            ],
+            "measured_bend_std_rad": [
+              0.5487044846813304,
+              0.40861427611816625,
+              0.39788191209852847,
+              0.3149532132644992,
+              0.31620950958358834
+            ]
+          }
+        },
+        {
+          "medium": "wet-agar",
+          "uid": "2022-06-14-07",
+          "metrics": {
+            "total": 46.61704868344992,
+            "calcium_cv": 2.423632772093923,
+            "calcium_lag1": 1.6792945419680452,
+            "bend_mean": 68.54677554053815,
+            "bend_std": 20.584394512299728,
+            "neural_observables": 66,
+            "shape_observables": 5,
+            "predicted_bend_std_rad": [
+              0.013307409308255835,
+              0.01674293658096004,
+              0.007443750279786419,
+              0.007949780026631645,
+              0.01292595879291092
+            ],
+            "measured_bend_std_rad": [
+              0.4200109074237135,
+              0.4331832336358618,
+              0.4005216475595573,
+              0.5535842160788198,
+              0.5009447064743766
+            ]
+          }
+        }
+      ]
+    },
+    "elapsed_seconds": 1356.1056814210024,
+    "parameters_changed": 2439,
+    "frozen_fields_unchanged": true,
+    "checkpoint_sha256": "c435ee69645f27163af21ef5590b05a30151a38df7389a6f2fe70ef4db1ee481",
+    "biological_fidelity_qualified": false,
+    "heldout_evaluation_performed": false,
+    "stop_reason": "time_budget"
+  },
+  "training_loss_reduction_fraction": 0.00868463620195592,
+  "refined_reduction_fraction": 0.007862687617689157,
+  "reported_exit_code": 0,
+  "checkpoint_independently_verified": false
+}

@@ -1161,3 +1161,19 @@ incremental objective, with assumed reporter brightness and a wet-agar mechanica
 proxy. Mounted-medium physics, observation noise, animal initial states and
 exact trajectory agreement remain unresolved. It does not promote a new bundled
 model or use held-out targets. See [current scope](CURRENT_MODEL.md).
+
+### Continue a completed paired search
+
+On mbslnx2, continue the latest completed paired fit for three additional hours:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/continue_paired_fit_mbslnx2.sh 180
+```
+
+The wrapper prints the selected parent and new log path. It preserves the saved
+best offsets, PCG64 state, original anchor/bounds and proposal numbering. It is a
+continuation of a completed random search, not an in-flight process restoration.
+The 180-minute budget excludes setup and final timestep refinement. The job runs
+under nohup using the dedicated conda interpreter. No held-out target is fitted.

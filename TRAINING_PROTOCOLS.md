@@ -1965,3 +1965,19 @@ parameter ensembles to study the user's original question of weight specificity,
 but each candidate must use shared parameters across assays. Selecting a
 different best-fitting ensemble member for each experiment is not cross-data
 validation of one candidate. Report uncertainty and failed predictions.
+
+### Continue a completed paired search
+
+On mbslnx2, continue the latest completed paired fit for three additional hours:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/continue_paired_fit_mbslnx2.sh 180
+```
+
+The wrapper prints the selected parent and new log path. It preserves the saved
+best offsets, PCG64 state, original anchor/bounds and proposal numbering. It is a
+continuation of a completed random search, not an in-flight process restoration.
+The 180-minute budget excludes setup and final timestep refinement. The job runs
+under nohup using the dedicated conda interpreter. No held-out target is fitted.

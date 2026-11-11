@@ -29,6 +29,7 @@ def main():
     p.add_argument('--prepared-data',type=Path,required=True)
     p.add_argument('--reference',type=Path,required=True)
     p.add_argument('--output-dir',type=Path,required=True)
+    p.add_argument('--resume-run',type=Path)
     p.add_argument('--uids',nargs='+',default=['2022-06-14-01'])
     p.add_argument('--frames',type=int,default=8)
     p.add_argument('--start-frame',type=int,default=0)
@@ -68,6 +69,8 @@ def main():
     out=get_data_root(args.output_dir,must_exist=False)
     if out==source or source in out.parents or out==args.prepared_data.resolve() or args.prepared_data.resolve() in out.parents:
         p.error('Do not write into parent or prepared data')
+    if args.resume_run and (out==args.resume_run.resolve() or args.resume_run.resolve() in out.parents):
+        p.error('Continuation output must be outside its parent')
     out.mkdir(parents=True,exist_ok=False)
     capture_run_record(out,Path(__file__).resolve().parents[1],args)
     inputs=out/'inputs';inputs.mkdir()
@@ -109,6 +112,27 @@ def main():
             calcium='Transferred nuclear-reporter kinetics and fixed basal brightness are assumptions',
             missingness='Source imputed samples not identifiable from finite mask'),
         optimizer='Bounded seeded greedy proposals, fresh RNG; no optimizer continuation',arguments=vars(args))
+    rng=np.random.default_rng(args.seed)
+    best=np.zeros(spec.size)
+    initial_iteration=0
+    if args.resume_run:
+        from scripts.paired_resume import read_resume
+        best,initial_iteration,rng,resume_summary=read_resume(args.resume_run,settings,spec.size)
+        expected_params=apply_joint_offsets(initial,best,spec)
+        saved_params,saved_fixed,saved_config=load_network(args.resume_run/'network_best.npz')
+        import jax
+        if saved_config!=config or any(not np.array_equal(np.asarray(a),np.asarray(b)) for a,b in
+                zip(jax.tree_util.tree_leaves((expected_params,fixed)),jax.tree_util.tree_leaves((saved_params,saved_fixed)))):
+            raise ValueError('Resume offsets/checkpoint/fixed fields disagree')
+        if any(path.is_symlink() for path in args.resume_run.rglob('*')):
+            raise ValueError('Resume archive must not contain symlinks')
+        shutil.copytree(args.resume_run,out/'resume_parent')
+        if file_sha256(out/'resume_parent/network_best.npz')!=resume_summary['checkpoint_sha256']:
+            raise ValueError('Copied resume checkpoint mismatch')
+        settings['resume']=dict(parent=str(args.resume_run.resolve()),initial_iteration=initial_iteration,
+            checkpoint_sha256=resume_summary['checkpoint_sha256'],rng_sha256=file_sha256(args.resume_run/'rng_state.json'))
+        settings['optimizer']='Continued completed greedy search offsets and PCG64 RNG; original anchor/bounds unchanged'
+    start_offsets=best.copy()
     write_json(out/'configuration.json',json.loads(json.dumps(settings,default=str)))
     rollouts={m:make_rollout(fixed,config,parent,model,medium=m,dt=args.dt,
         brain_step_ms=args.brain_step_ms,burn_in=args.burn_in,sampling=args.sampling) for m in args.media}
@@ -126,8 +150,6 @@ def main():
                 traces[medium+'-'+w['uid']]=trace
         prior=.001*float(np.mean(offsets**2))
         return dict(total=float(np.mean([r['metrics']['total'] for r in rows]))+prior,prior=prior,rows=rows),traces
-    rng=np.random.default_rng(args.seed)
-    best=np.zeros(spec.size)
     baseline,traces=evaluate(best,rollouts)
     best_result=baseline
     def save_best(iteration,traces):
@@ -136,7 +158,7 @@ def main():
         write_json(out/'rng_state.json',rng.bit_generator.state)
         write_json(out/'best.json',dict(iteration=iteration,result=best_result))
         for name,trace in traces.items():np.savez_compressed(out/(name+'-prediction.npz'),**trace)
-    save_best(0,traces)
+    save_best(initial_iteration,traces)
     print(json.dumps(dict(baseline=baseline,elapsed_seconds=time.monotonic()-started)),flush=True)
     completed=0
     with (out/'history.jsonl').open('w') as history:
@@ -150,23 +172,23 @@ def main():
             except (ValueError,RuntimeError,FloatingPointError) as exc:
                 result=None;accepted=False;error=str(exc)
             if accepted:
-                best=proposal;best_result=result;save_best(i,traces)
+                best=proposal;best_result=result;save_best(initial_iteration+i,traces)
             completed=i
-            row=dict(iteration=i,accepted=accepted,result=result,error=error,
+            row=dict(iteration=initial_iteration+i,run_iteration=i,accepted=accepted,result=result,error=error,
                      elapsed_seconds=time.monotonic()-started)
             history.write(json.dumps(row,allow_nan=False)+'\n');history.flush()
             # Preserve RNG even after rejected proposals; exact search replay needs it.
             write_json(out/'rng_state.json',rng.bit_generator.state)
-            np.savez_compressed(out/'search_state.npz',offsets=best,iteration=i)
+            np.savez_compressed(out/'search_state.npz',offsets=best,iteration=initial_iteration+i)
             print(json.dumps(row,allow_nan=False),flush=True)
     refined=None
     refined_baseline=None
     if args.refine:
         functions={m:make_rollout(fixed,config,parent,model,medium=m,dt=args.dt/2,
             brain_step_ms=args.brain_step_ms/2,burn_in=args.burn_in,sampling=args.sampling) for m in args.media}
-        refined_baseline,_=evaluate(np.zeros(spec.size),functions)
+        refined_baseline,_=evaluate(start_offsets,functions)
         refined,_=evaluate(best,functions)
-    summary=dict(experiment='E050',status='completed',iterations=completed,baseline=baseline,best=best_result,
+    summary=dict(experiment='E050',status='completed',iterations=completed,initial_iteration=initial_iteration,last_iteration=initial_iteration+completed,baseline=baseline,best=best_result,
         refined=refined,refined_baseline=refined_baseline,elapsed_seconds=time.monotonic()-started,parameters_changed=int(np.count_nonzero(best)),
         frozen_fields_unchanged=True,checkpoint_sha256=file_sha256(out/'network_best.npz'),
         biological_fidelity_qualified=False,heldout_evaluation_performed=False,
