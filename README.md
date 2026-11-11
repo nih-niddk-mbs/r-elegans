@@ -1287,3 +1287,25 @@ This budgets60minutes including baseline/search, plus validation. It re-evaluate
 the parent best objective and aborts on configuration/checkpoint/state mismatch.
 The original launch command without a resume parent still starts from the latest
 paired fit; use the continuation command to retain sensory–motor learning.
+
+E056 continuation server tail reported (2026-11-11):exit2 after63.87minutes;
+refined bend2.803e-5rad (93.4% of target), shifted onset2.832e-5rad (94.4%).
+Both remain unqualified despite adequate recovery; chemical/voltage controls
+and engineering refinement pass. Chemical sensory multiplier is now exactly2,
+its upper bound; neural bound occupancy is unknown. Refined amplitude increased
+120.0% versus E055's matched refined case. Candidate180c2b93... resumes confirmed
+E055437b227e.... Run ID, proposal counts, active/dose results and baseline/best
+are missing from this paste. Retain target/bounds and request the compact report
+before choosing another fit. No new training launched. See the
+[E056 partial record](experiments/records/E056-server-partial-20261111.json).
+
+Get a compact report of the latest sensory–motor run without starting training:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_sensorimotor
+```
+
+Future training logs print this compact report after the full JSON. It includes
+baseline/best, every validation case, global proposal counts and sensory gains.

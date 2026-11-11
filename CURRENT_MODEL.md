@@ -1,5 +1,16 @@
 # Current model: exact scope and computation path
 
+E056 continuation server tail reported (2026-11-11):exit2 after63.87minutes;
+refined bend2.803e-5rad (93.4% of target), shifted onset2.832e-5rad (94.4%).
+Both remain unqualified despite adequate recovery; chemical/voltage controls
+and engineering refinement pass. Chemical sensory multiplier is now exactly2,
+its upper bound; neural bound occupancy is unknown. Refined amplitude increased
+120.0% versus E055's matched refined case. Candidate180c2b93... resumes confirmed
+E055437b227e.... Run ID, proposal counts, active/dose results and baseline/best
+are missing from this paste. Retain target/bounds and request the compact report
+before choosing another fit. No new training launched. See the
+[E056 partial record](experiments/records/E056-server-partial-20261111.json).
+
 E055 complete compact server summary reported:48 proposals, best selected at48;
 qualification failed. Active cue-specific bend grew51.1% (9.462e-6 ->1.430e-5rad)
 and objective fell23.6%. Active recovery residual fraction improved14.0% ->10.7%,
@@ -7,8 +18,8 @@ though absolute residual increased. Lowest active validation amplitude is
 1.233e-5rad (41.1% of target); all active variants remain below3e-5rad. The
 previously unlabeled row is confirmed refined. Proprioception block increases
 this cue response7.6%, so its benefit is not established in this assay. Retain
-feedback and first-rung target. A60min continuation is planned with both neural
-and sensory offsets and PCG64 restored; server launch pending. See the
+feedback and first-rung target. E056 subsequently ran with neural/sensory offsets and PCG64 restored; its
+partial result is recorded above. See the
 [complete compact report](experiments/records/E055-server-summary.json).
 
 E055 server result partially reported (2026-11-11):23.58minutes, time-budget

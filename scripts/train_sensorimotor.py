@@ -251,6 +251,8 @@ def main():
     if file_sha256(source/'network_best.npz')!=parent_summary['checkpoint_sha256']:raise ValueError('Parent changed')
     write_json(out/'summary.json',summary)
     print(json.dumps(summary,allow_nan=False),flush=True)
+    from scripts.report_sensorimotor import format_summary
+    print(format_summary(out,summary,settings),flush=True)
     return 0 if passed else 2
 
 

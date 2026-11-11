@@ -462,3 +462,8 @@ all active validation cases remain below the3e-5rad engineering target. Retain
 contract_relax status unqualified and preserve checkpoint437b227e.... E056 plans
 60minutes of completed-search continuation, including saved sensory gains/RNG;
 no promotion to alternation. See experiments/records/E055-server-summary.json.
+
+E056 continuation tail:refined response reaches93.4% of the first-rung target
+and shifted-onset94.4%, with controls/recovery passing. Still unqualified; do not
+promote. Chemical gain has reached2x bound. Active/dose results and full summary
+are needed before another fit. Evidence: E056-server-partial-20261111.json.

@@ -4740,3 +4740,50 @@ capsules, recursive lineage, selected/final checkpoints, search/RNG states,
 trajectories, previews, stdout/tests and compact E055 full server transcription.
 Local copy integrity is verified; OneDrive cloud synchronization and the original
 server artifacts are not independently verified.
+
+## 2026-11-11 — E056 continuation server tail reported
+
+Evidence: user attachment193a9636-bdf2-46fa-9925-b956e6ab4515, truncated stdout,
+not independently retrieved server artifacts. Complete onset-shift/refined/blocked
+rows and terminal metadata parsed with JSONDecoder; prefix lacks run ID,
+proposal counts, baseline/best and active/dose rows. Preserve missing values as
+unknown. Compact transcription and source SHA: experiments/records/E056-server-
+partial-20261111.json. SENSORIMOTOR_EXIT_CODE=2 explicitly supplied; failed skill
+qualification, not evidence of a crash. Elapsed3832.163929s=63.8694minutes; stop
+time_budget. Candidate180c2b9379ae3fff4b66458a511e044211241d257abdbe9276cbc59424182abf;
+resume437b227e... matches E055, original paired parent98ea6655... and
+anchor417254ad... retained as reported. Frozen fields unchanged=True;7848
+coordinates changed versus original paired parent,6574 this continuation.
+These counts are not bound occupancy or proof of the cause of improvement.
+
+Refined bend2.803115366e-5rad=93.44% of3e-5 target, recovery10.85%; shifted
+onset2.831803042e-5rad=94.39%, recovery8.26%. AWA responses8.22055/8.22237mV
+with small recovery residuals. Refined amplitude+120.02% versus matched E055
+refined case; shifted-onset+96.39% versus E055 shifted case. Neither qualifies.
+Chemical/held controls exactly zero differential bend and AWA recruitment;
+blocked_controls_passed=True. Engineering refinement difference3.68683e-6rad
+<7.5e-6; not a certified voltage or biology error bound. Proprioception-blocked
+peak2.97083e-5rad remains below target; missing active row prevents paired
+interpretation. Sensory multipliers[2.0,.866362744,.768239748]: chemical gain is
+AT its original upper bound. This is not NMJ activation saturation; unknown
+neural bounds must be inspected before declaring overall parameter constraints.
+
+Decision: retain candidate, first-rung threshold and bounds. Obtain full compact
+active/dose/baseline/best/count data before choosing further training. Existing
+objective scores active case only and clips amplitude benefit at target: if
+active has passed while validation remains below target, investigate robust
+selection rather than simply prolonging a capped objective. That condition is
+not established by the paste. No new experiment or server launch this turn.
+
+Reporting fix only: add standard-library read-only scripts.report_sensorimotor
+and print its compact baseline/best/validation/count/gain report after final JSON
+in future logs, preventing required evidence from being lost in tail truncation.
+Verified report against completed local E056 smoke and Python compilation. No
+numerical model/objective changes; full simulation tests not repeated for a
+reporting-only edit. Earlier255-test result remains the numerical-code evidence.
+
+Exact pasted E056 server-tail attachment, parsed summary and local compact-report
+verification copied and SHA256-compared under external notebook/evidence/E056/
+server-tail-20261111, with manifest. This preserves the reported evidence; it does
+not retrieve the original server checkpoint, source capsule or missing stdout.
+Cloud synchronization is unverified.

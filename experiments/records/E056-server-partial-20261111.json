@@ -1,0 +1,268 @@
+{
+  "experiment": "E056",
+  "evidence": "User-pasted truncated server stdout attachment; no independent server artifact retrieval",
+  "source_attachment_sha256": "06f5d3e5b95ab98497b2d86b33e9e0b4c0686cd44c2bb27d04927abb0e852621",
+  "run": null,
+  "iterations": null,
+  "selected_iteration": null,
+  "baseline": null,
+  "best": null,
+  "source_revision": null,
+  "overall_passed": null,
+  "exit_code": 2,
+  "missing": "Run identifier, iteration counts, baseline/best and active/dose validation rows omitted from pasted prefix",
+  "validation": [
+    {
+      "case": "onset-shift",
+      "metrics": {
+        "total": 0.05606565258064933,
+        "passed": false,
+        "selected_joint": 4,
+        "cue_specific_peak_rad": 2.831803042258052e-05,
+        "cue_specific_recovery_residual_rad": 2.3387365630928025e-06,
+        "recovery_ratio": 0.08258824954252175,
+        "peak_by_joint_rad": [
+          3.2775997476086616e-06,
+          1.1126266726502188e-05,
+          2.4978049462803797e-05,
+          1.58316364197858e-05,
+          2.831803042258052e-05,
+          7.461425830152663e-06,
+          6.4901699223969544e-06,
+          7.34529209904522e-06,
+          6.4616048089660705e-06,
+          1.9031546417386247e-05,
+          1.714387031931386e-05
+        ],
+        "recovery_residual_by_joint_rad": [
+          2.1712253680528093e-06,
+          6.339487965134616e-06,
+          8.313491587863542e-06,
+          5.979662205543579e-06,
+          2.3387365630928025e-06,
+          5.090297577718672e-06,
+          6.443460141430241e-06,
+          6.5925204805333815e-06,
+          5.139412051713421e-06,
+          5.433722413641928e-06,
+          3.6443387509410563e-06
+        ],
+        "awa_depolarization_mV": 8.222373962402344,
+        "maximum_absolute_joint_rad": 0.2612525540000103,
+        "awa_recovery_residual_mV": 7.62939453125e-06,
+        "awa_recovery_ratio": 9.278822109206169e-07,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "refined",
+      "metrics": {
+        "total": 0.06562821135602714,
+        "passed": false,
+        "selected_joint": 4,
+        "cue_specific_peak_rad": 2.8031153659319186e-05,
+        "cue_specific_recovery_residual_rad": 3.041820286417418e-06,
+        "recovery_ratio": 0.10851570090145542,
+        "peak_by_joint_rad": [
+          4.71187957790109e-06,
+          9.343514644960527e-06,
+          2.408915883958529e-05,
+          1.5516325784559193e-05,
+          2.8031153659319186e-05,
+          7.774026212489099e-06,
+          7.1045995065008305e-06,
+          6.809242579508545e-06,
+          5.525975964398855e-06,
+          1.9095222574656845e-05,
+          2.11695448045085e-05
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.5200518619085113e-06,
+          4.983542186975942e-06,
+          7.725212385484292e-06,
+          6.361463862791794e-06,
+          3.041820286417418e-06,
+          4.924286982638942e-06,
+          6.728534611890463e-06,
+          6.7314499944959305e-06,
+          4.307922077756432e-06,
+          6.002491339321403e-06,
+          4.55176990547812e-06
+        ],
+        "awa_depolarization_mV": 8.22054672241211,
+        "maximum_absolute_joint_rad": 0.2612476165017019,
+        "awa_recovery_residual_mV": 0.002105712890625,
+        "awa_recovery_ratio": 0.0002561524143989212,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "chemical-blocked",
+      "metrics": {
+        "total": 1.25,
+        "passed": false,
+        "selected_joint": 0,
+        "cue_specific_peak_rad": 0.0,
+        "cue_specific_recovery_residual_rad": 0.0,
+        "recovery_ratio": 0.0,
+        "peak_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "recovery_residual_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "awa_depolarization_mV": 0.0,
+        "maximum_absolute_joint_rad": 0.2612525540000103,
+        "awa_recovery_residual_mV": 0.0,
+        "awa_recovery_ratio": 0.0,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "metrics": {
+        "total": 0.009722520370198828,
+        "passed": false,
+        "selected_joint": 4,
+        "cue_specific_peak_rad": 2.9708324388894036e-05,
+        "cue_specific_recovery_residual_rad": 2.316010502864674e-06,
+        "recovery_ratio": 0.07795830126758936,
+        "peak_by_joint_rad": [
+          4.602716785373495e-06,
+          1.1621130080879949e-05,
+          2.4826824203877385e-05,
+          1.6135620041060617e-05,
+          2.9708324388894036e-05,
+          7.046529251481318e-06,
+          6.385744577345337e-06,
+          7.797541220155857e-06,
+          6.898979347094714e-06,
+          1.9227443302974323e-05,
+          1.894190312570765e-05
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.6269118608414068e-06,
+          5.877624364047929e-06,
+          7.268478335348272e-06,
+          5.70480347454605e-06,
+          2.316010502864674e-06,
+          4.340688398598788e-06,
+          5.901629342688203e-06,
+          7.333936651865436e-06,
+          5.905399917516263e-06,
+          5.65198196365857e-06,
+          4.927441973862079e-06
+        ],
+        "awa_depolarization_mV": 8.222347259521484,
+        "maximum_absolute_joint_rad": 0.25840790581984957,
+        "awa_recovery_residual_mV": 2.288818359375e-05,
+        "awa_recovery_ratio": 2.7836556729278817e-06,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    },
+    {
+      "case": "held-voltage",
+      "metrics": {
+        "total": 1.25,
+        "passed": false,
+        "selected_joint": 0,
+        "cue_specific_peak_rad": 0.0,
+        "cue_specific_recovery_residual_rad": 0.0,
+        "recovery_ratio": 0.0,
+        "peak_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "recovery_residual_by_joint_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "awa_depolarization_mV": 0.0,
+        "maximum_absolute_joint_rad": 0.09965500236027186,
+        "awa_recovery_residual_mV": 0.0,
+        "awa_recovery_ratio": 0.0,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      }
+    }
+  ],
+  "reported_tail": {
+    "blocked_controls_passed": true,
+    "elapsed_seconds": 3832.1639294509077,
+    "refinement_comparison": {
+      "maximum_cue_effect_difference_rad": 3.6868298101677688e-06,
+      "allowed_difference_rad": 7.5e-06,
+      "passed": true,
+      "scope": "Engineering convergence of cue-minus-sham body response, not biological or voltage error bound"
+    },
+    "stop_reason": "time_budget",
+    "checkpoint_sha256": "180c2b9379ae3fff4b66458a511e044211241d257abdbe9276cbc59424182abf",
+    "parent_checkpoint_sha256": "98ea66551777dd8b228bf0ee59d97043ce32ec1b8d7f2e04f139887ecd26d6e2",
+    "original_anchor_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+    "frozen_fields_unchanged": true,
+    "neuron_connection_parameters_changed_from_parent": 7848,
+    "neuron_connection_parameters_changed_this_run": 6574,
+    "resume_checkpoint_sha256": "437b227e2fdcb5ff376c9b5324ede09a49d1dbc2676c6886846bd10abc2e624d",
+    "sensory_parameters_sha256": "f9bcfe586a4f911bd46c48917563f6edfc4eee3a00eebb8c1237fcf7a725007b",
+    "sensory_gain_multipliers": [
+      2.0,
+      0.8663627439863483,
+      0.7682397484823863
+    ],
+    "biological_fidelity_qualified": false,
+    "autonomous_oscillation_qualified": false,
+    "next_stage_launched": false
+  },
+  "arithmetic": {
+    "elapsed_minutes": 63.86939882418179,
+    "refined_target_fraction": 0.9343717886439729,
+    "onset_shift_target_fraction": 0.9439343474193507,
+    "refined_increase_percent": 120.02420715599978,
+    "onset_shift_increase_percent": 96.39362676061805
+  },
+  "interpretation": "Named onset and refined cases remain below the unchanged first-rung bend target, with adequate recovery. Chemical/held controls and engineering refinement pass. Chemical transduction multiplier has reached its original2x upper bound; this is not evidence of NMJ saturation or all neural parameters at bounds.",
+  "decision": "Keep first-rung target and original bounds; obtain missing active/dose/baseline/best and iteration data before another run. Do not promote to alternation or widen bounds from this report alone.",
+  "selection_note": "Current training objective scores the standard active cue and caps amplitude reward at target. If active reaches target while robustness variants fail, examine worst-case validation selection before an unchanged continuation; current paste does not establish this condition."
+}
