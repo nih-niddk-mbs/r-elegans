@@ -487,3 +487,8 @@ active variants/recovery/control gates pass. Capability is a tiny reversible
 sensory-evoked bend; no autonomous rhythm, propagation, propulsion or biological
 reflex fit. No shared-skill consolidation claim. Further promotion pending E059
 read-only low-dose timestep/margin assay; original E058 pass remains recorded.
+
+E059 outcome:the original first-rung engineering pass is preserved, but low-dose
+half/quarter refinement fails. Do not promote to alternation. E060 read-only
+step-family isolation planned before further training; no certified converged
+amplitude or biological validation established. See E059-server-summary.json.

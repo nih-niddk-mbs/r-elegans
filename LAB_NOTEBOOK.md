@@ -4964,3 +4964,60 @@ OneDrive/r-elegans/notebook/evidence/E059 (3779manifest entries): recursive old
 local parent, fixed-grid active/sham traces, actual-pose previews, source/env
 capsules, summaries and test stdout. Compact user-reported E058 pass record also
 archived; actual server E058 checkpoint not retrieved and cloud sync unverified.
+
+## 2026-11-11 — E059 server resolution result; planned E060 split-step assay
+
+User reports cue-resolution-20261111T213856Z-776777, exit0 (assay completed).
+Same pinned E058 winner as launch plan; no checkpoint hash is printed in this
+stdout, so identity remains enforced by launcher rather than independently
+retrieved artifacts. Low-dose coarse3.0378245549425587e-5rad passes; half
+2.7961579055602037e-5 and quarter2.5373644852610955e-5 fail the unchanged
+3e-5 target. Recovery .05865/.11925/.16174 remains below.25. All-grid pass=False
+and fine-margin support=False. No successive full-trajectory comparison values
+were pasted; leave them unknown. Preserve the original E058 engineering pass
+as reported but do not promote: numerical sensitivity is materially larger than
+its narrow amplitude margin. No evidence yet that quarter resolution has
+converged, nor a basis to label the entire signal a numerical artifact.
+
+Plan E060 read-only five-case .8dose cue/sham assay on same6cd7b0fa... winner:
+coarse(.002s,.1ms), brain-half(.002,.05), brain-quarter(.002,.025),
+body-half(.001,.1), body-quarter(.0005,.1). Brain branch varies neural substeps
+at fixed body/coupling step; body branch varies mechanics, transduction sampling
+and coupling hold intervals at fixed neural step. Thus this isolates two step
+families, not pure mechanics versus all other causes. Compare within each
+branch against its own nested predecessor. Keep all parameters, gains,
+thresholds, field, initial states and readout fixed. No training, new RNG or
+changed solver equations. Preserve recursive selected-parent dependencies, full
+source/env/commands and dense traces external. Use separate cue-split-* output
+prefix. Exit0 means diagnostic completion; do not assign a biological pass.
+Question: which step family changes sensory recruitment/body response most,
+and does either branch show stabilizing differences? No automatic cause
+classification or promotion; use results to choose integration/precision work
+or a stable training grid. Local full assay uses older E057 smoke, explicitly
+not actual E058. Planned server command:
+sh scripts/assess_sensorimotor_steps_mbslnx2.sh
+No new server assay or training launched in this turn.
+
+E060 local verification:259 tests passed in91.82s; targeted2 in0.01s. Added
+plan test fixes one step family per branch, correct within-branch reference
+comparisons, and original matched-grid defaults. Full five-case assay completed
+on older unqualified local E057 model, not actual E058. Coarse response metrics
+exactly match its earlier E059 coarse result; source checkpoint/sensory hashes
+unchanged. On this older model, brain-step peak ratios .9550/.9837 versus
+coarse are non-monotonic; body/coupling ratios .99665/1.00078. Body-branch
+full-trajectory differences shrink3.285e-7 ->1.328e-7rad, brain differences
+8.614e-7 ->1.044e-6 do not. This supports the assay's discriminating value,
+not attribution of the actual E058 sensitivity. Script inspection confirms
+advance_network uses a frozen-conductance first-order exponential update;
+truncation bias, float precision and nonlinear trajectory sensitivity remain
+untested mechanisms until actual-source diagnosis. No neuronal/physical model
+changes, additional fitting or actual server assay. See E060-local-verification
+record for exact command, all metrics, hashes and external artifacts. Python
+compilation/shell syntax passed. Only module docstring changed after numerical
+smoke; numerical implementation unchanged.
+
+E060 evidence archived and copied run files SHA256-compared under external
+notebook/evidence/E060 (3790manifest entries), including recursive older local
+parent, all five cue/sham traces/previews, source/env capsules, tests/stdout and
+compact E059 server transcription. This verifies local copied evidence, not
+retrieval of actual E058/E059 server artifacts or cloud synchronization.

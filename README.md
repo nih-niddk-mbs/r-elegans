@@ -1391,3 +1391,30 @@ differences and whether the fine-grid threshold margin exceeds the last grid
 difference. This is descriptive numerical evidence, not a rigorous error bound
 or retrospective revision of the original stage pass. Assay exit0 means complete;
 read its summary to assess all-grid response and margin confidence.
+
+E059 server numerical assessment:original low-dose coarse gate passes, but
+half/quarter fail at2.796e-5/2.537e-5rad versus3e-5 target. Quarter amplitude is
+16.47% below coarse; successive peak changes have not shrunk. Recovery remains
+acceptable. Retain E058's original protocol pass, but do not promote or continue
+fitting until this sensitivity is understood. E060 prepares a fixed-parameter
+split brain-step versus body/sensory/coupling-step assay; no model changes or
+server launch. Full comparison arrays and actual convergence remain unknown.
+See [E059 server record](experiments/records/E059-server-summary.json).
+
+Run the pinned winner's independent step-family diagnostic:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/assess_sensorimotor_steps_mbslnx2.sh &&
+tail -n 20 -F "$(ls -1t /home/carsonc/r-elegans-results/cue-split-*.log | head -n 1)"
+```
+
+This is a five-case read-only8-second low-dose cue/sham assay, under nohup.
+The brain branch refines neural steps at fixed body step; the body branch
+refines mechanics/sensory sampling/coupling at fixed neural step. This does not
+isolate mechanics alone. All weights, gains, original thresholds and numerical
+equations stay fixed; no new fitting or automatic skill promotion occurs.
+The source remains pinned to E0586cd7b0fa..., and full traces/source records
+remain outside Git. Diagnostic exit0 means completion; inspect its case ratios
+and within-branch differences before selecting a numerical fix or training grid.

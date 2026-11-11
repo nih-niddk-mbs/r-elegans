@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E058_stage1_original_engineering_gates_pass_E059_resolution_pending",
+  "status": "E058_original_protocol_pass_E059_resolution_failed_E060_diagnostic_pending",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -26,7 +26,7 @@
   "stages": [
     {
       "id": "contract_relax",
-      "status": "original_engineering_protocol_pass_user_reported",
+      "status": "original_engineering_pass_retained_numerical_promotion_not_supported",
       "motor_goal": "One cue-specific reversible bend, no preferred side",
       "sensory_goal": "AWA recruitment by finite diacetyl exposure and recovery after washout; actual-body B/DVA feedback active and gain trainable",
       "protocol": "8s; one exposure2..3s, recovery6..8s; matched sham",
@@ -97,6 +97,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E058-server-summary.json",
-  "continuation": "No new fitting: E059 read-only low-dose resolution assay on preserved winner before promotion; original gates not retrospectively revised"
+  "server_evidence": "experiments/records/E059-server-summary.json",
+  "continuation": "No fitting: E060 fixed-parameter step-family isolation before promotion or choice of training grid; server launch pending"
 }

@@ -18,3 +18,16 @@ def test_resolution_compares_cue_effect_not_sham_posture_and_aligns_time_grids()
     assert result['per_joint_difference_rad'][3]==pytest.approx(.00002)
     fine['active']['dense_time_s']+=.01
     with pytest.raises(ValueError,match='cover'):cue_effect_difference(coarse,fine)
+
+
+def test_split_cases_vary_one_step_family_and_compare_within_branch():
+    from scripts.assess_sensorimotor_resolution import integration_cases
+    cases=integration_cases('split',.002,.1)
+    lookup={name:(body,brain,reference) for name,body,brain,reference in cases}
+    assert lookup['brain-half']==(.002,.05,'coarse')
+    assert lookup['brain-quarter']==(.002,.025,'brain-half')
+    assert lookup['body-half']==(.001,.1,'coarse')
+    assert lookup['body-quarter']==(.0005,.1,'body-half')
+    assert integration_cases('matched',.002,.1)==[
+        ('coarse',.002,.1,None),('half',.001,.05,'coarse'),('quarter',.0005,.025,'half')]
+    with pytest.raises(ValueError):integration_cases('unknown',.002,.1)

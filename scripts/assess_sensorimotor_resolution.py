@@ -1,4 +1,4 @@
-"""E059 read-only low-dose cue response on three matched integration grids."""
+"""E059 matched-grid and E060 split-step read-only low-dose cue assays."""
 import argparse
 from dataclasses import asdict
 import json
@@ -8,6 +8,18 @@ import shutil
 
 from scripts.experiment_records import capture_run_record,file_sha256
 from scripts.fit_paired_recordings import write_json
+
+
+def integration_cases(mode,dt,brain_dt):
+    """Return label, body step, neural step and within-branch reference."""
+    if mode=='matched':
+        return [('coarse',dt,brain_dt,None),('half',dt/2,brain_dt/2,'coarse'),
+                ('quarter',dt/4,brain_dt/4,'half')]
+    if mode=='split':
+        return [('coarse',dt,brain_dt,None),('brain-half',dt,brain_dt/2,'coarse'),
+                ('brain-quarter',dt,brain_dt/4,'brain-half'),
+                ('body-half',dt/2,brain_dt,'coarse'),('body-quarter',dt/4,brain_dt,'body-half')]
+    raise ValueError('Unknown step-assay mode')
 
 
 def cue_effect_difference(coarse,fine):
@@ -28,6 +40,7 @@ def main():
     p.add_argument('--run',type=Path,required=True)
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--expected-sha256')
+    p.add_argument('--mode',choices=['matched','split'],default='matched')
     args=p.parse_args()
     os.environ.setdefault('JAX_PLATFORMS','cpu');os.environ.setdefault('JAX_DEFAULT_MATMUL_PRECISION','highest')
     import numpy as np
@@ -64,19 +77,23 @@ def main():
     model=load_builtin_model();gains=np.exp(sensory_offsets)
     times=np.linspace(0,protocol.duration_s,81)
     dt=cfg['arguments']['dt'];brain_dt=cfg['arguments']['brain_step_ms']
-    write_json(out/'configuration.json',dict(experiment='E059',parent_checkpoint_sha256=sha,
+    cases=integration_cases(args.mode,dt,brain_dt)
+    experiment='E059' if args.mode=='matched' else 'E060'
+    write_json(out/'configuration.json',dict(experiment=experiment,mode=args.mode,parent_checkpoint_sha256=sha,
         sensory_parameters_sha256=sensory_sha,source_run=str(source),source_stage_pass=source_summary['passed'],
         protocol=asdict(protocol),dose_um=.8,gain_multipliers=gains.tolist(),base_sensory_config=asdict(sc),
-        body_steps_s=[dt,dt/2,dt/4],brain_steps_ms=[brain_dt,brain_dt/2,brain_dt/4],
+        integration_cases=[dict(case=n,dt_s=d,brain_step_ms=b,reference=r) for n,d,b,r in cases],
+        body_steps_s=[d for n,d,b,r in cases],brain_steps_ms=[b for n,d,b,r in cases],
         fixed='All model and transduction parameters; no optimization or RNG draws',
+        coupling_scope='Body step also changes sensory updates and co-simulation input hold; neural step varies internal frozen-conductance updates',
         scope='Engineering sensitivity and margin diagnostics, not certified numerical error or biological qualification'))
-    rows=[];comparisons=[];previous=None
-    for label,factor in [('coarse',1),('half',2),('quarter',4)]:
+    rows=[];comparisons=[];recordings={}
+    for label,body_step,neural_step,reference in cases:
         destination=out/label;destination.mkdir();traces={}
-        print(f'Starting low-dose {label}: dt={dt/factor}, brain_step_ms={brain_dt/factor}',flush=True)
+        print(f'Starting low-dose {label}: dt={body_step}, brain_step_ms={neural_step}',flush=True)
         for name,sham in [('active',False),('sham',True)]:
-            run=make_rollout(fixed,config,actor,model,medium='wet-agar',dt=dt/factor,
-                brain_step_ms=brain_dt/factor,burn_in=0.,sampling='point',record_dense=True,
+            run=make_rollout(fixed,config,actor,model,medium='wet-agar',dt=body_step,
+                brain_step_ms=neural_step,burn_in=0.,sampling='point',record_dense=True,
                 sensory_config=sc,chemical_world=cue_world(protocol,dose=.8,sham=sham))
             traces[name]=run(params,times,gains)
             np.savez_compressed(destination/(name+'-trajectory.npz'),**traces[name])
@@ -84,27 +101,38 @@ def main():
         write_json(destination/'metrics.json',metrics)
         trace=traces['active']
         write_motion_preview(destination/'motion.html',trace['dense_joints'],trace['dense_position'],trace['dense_heading'],
-            dt=dt/factor,body_length=.001,seconds=protocol.duration_s,title='E059 low-dose '+label+'; fixed checkpoint')
-        row=dict(case=label,dt_s=dt/factor,brain_step_ms=brain_dt/factor,metrics=metrics,
+            dt=body_step,body_length=.001,seconds=protocol.duration_s,title=experiment+' low-dose '+label+'; fixed checkpoint')
+        row=dict(case=label,dt_s=body_step,brain_step_ms=neural_step,metrics=metrics,
             target_margin_rad=metrics['cue_specific_peak_rad']-protocol.bend_target_rad)
         rows.append(row)
-        if previous is not None:comparisons.append(dict(pair=rows[-2]['case']+'->'+label,**cue_effect_difference(previous,traces)))
-        previous=traces
+        if reference is not None:comparisons.append(dict(pair=reference+'->'+label,**cue_effect_difference(recordings[reference],traces)))
+        recordings[label]=traces
         print(json.dumps(dict(case=label,passed=metrics['passed'],bend_rad=metrics['cue_specific_peak_rad'],
-            recovery=metrics['recovery_ratio'],target_margin_rad=row['target_margin_rad'])),flush=True)
+            recovery=metrics['recovery_ratio'],awa_mV=metrics['awa_depolarization_mV'],target_margin_rad=row['target_margin_rad'])),flush=True)
     margin=min(r['target_margin_rad'] for r in rows[1:]);last_error=comparisons[-1]['maximum_cue_effect_difference_rad']
-    result=dict(experiment='E059',status='completed',source_run=str(source),checkpoint_sha256=sha,
+    result=dict(experiment=experiment,mode=args.mode,status='completed',source_run=str(source),checkpoint_sha256=sha,
         sensory_parameters_sha256=sensory_sha,source_stage_pass=source_summary['passed'],global_iteration=iteration,
         cases=rows,comparisons=comparisons,all_grids_response_pass=all(r['metrics']['passed'] for r in rows),
         all_successive_differences_within_existing_tolerance=all(c['maximum_cue_effect_difference_rad']<=.25*protocol.bend_target_rad for c in comparisons),
-        minimum_fine_grid_threshold_margin_rad=margin,fine_margin_exceeds_last_successive_difference=bool(margin>last_error),
         margin_scope='Conservative descriptive confidence check, not a new retrospective stage gate or rigorous error bound',
         parameters_changed=False,promotion_automatic=False)
+    if args.mode=='matched':
+        result.update(minimum_fine_grid_threshold_margin_rad=margin,
+            fine_margin_exceeds_last_successive_difference=bool(margin>last_error))
+    else:
+        bycase={r['case']:r['metrics'] for r in rows}
+        result['branch_peak_ratios_to_coarse']={branch:[bycase[branch+'-'+step]['cue_specific_peak_rad']/max(bycase['coarse']['cue_specific_peak_rad'],1e-30)
+            for step in ('half','quarter')] for branch in ('brain','body')}
+        result['interpretation']='Brain-only step versus body/sensory/coupling step; not a causal attribution to mechanics alone or certified convergence'
     if file_sha256(source/'network_best.npz')!=sha or file_sha256(source/'sensory_parameters.json')!=sensory_sha:
         raise ValueError('Source model changed')
     write_json(out/'summary.json',result)
     print('All-grid low-dose response pass:',result['all_grids_response_pass'],flush=True)
-    print('Fine margin exceeds last grid difference:',result['fine_margin_exceeds_last_successive_difference'],flush=True)
+    print('Successive cue-effect differences:',json.dumps(comparisons),flush=True)
+    if args.mode=='matched':
+        print('Fine margin exceeds last grid difference:',result['fine_margin_exceeds_last_successive_difference'],flush=True)
+    else:
+        print('Brain/body peak ratios to coarse:',json.dumps(result['branch_peak_ratios_to_coarse']),flush=True)
     print('Report:',out/'summary.json',flush=True)
 
 

@@ -1,12 +1,21 @@
 # WormGym: training and validation protocols
 
+E059 server numerical assessment:original low-dose coarse gate passes, but
+half/quarter fail at2.796e-5/2.537e-5rad versus3e-5 target. Quarter amplitude is
+16.47% below coarse; successive peak changes have not shrunk. Recovery remains
+acceptable. Retain E058's original protocol pass, but do not promote or continue
+fitting until this sensitivity is understood. E060 prepares a fixed-parameter
+split brain-step versus body/sensory/coupling-step assay; no model changes or
+server launch. Full comparison arrays and actual convergence remain unknown.
+See [E059 server record](experiments/records/E059-server-summary.json).
+
 E058 first-rung engineering PASS (user-reported):99additional proposals,
 global99 ->198, selected167. All required active variants and recovery/control
 criteria pass. Low-dose bend3.03782455e-5rad is101.26% of target, nominal116.42%.
 Preserve winner6cd7b0fa... with its sensory parameters independently. This is a
 tiny sensory-evoked reversible response, not autonomous wiggling or a biological
-reflex fit. E059 is a read-only low-dose timestep/margin assay before promotion:
-current refinement tested nominal cue only. No retraining or threshold change.
+reflex fit. E059 subsequently assessed low-dose timestep sensitivity; its result is above.
+The original training refinement tested nominal cue only. No retraining or threshold change.
 See [E058 report](experiments/records/E058-server-summary.json).
 
 E057 server result:99 proposals, selected98,63.80minutes, qualification false.
