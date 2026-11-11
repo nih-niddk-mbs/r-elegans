@@ -1,0 +1,88 @@
+{
+  "experiment": "E055",
+  "status": "stage1_implemented_pending_server_execution",
+  "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
+  "shared_rules": {
+    "network": "Full302-neuron existing anatomical topology throughout",
+    "input": "Environmental fields through sensory transduction, actual-body proprioception; no target phase, motor current or prescribed muscle waveform",
+    "trainable": [
+      "non-leak channel densities",
+      "existing chemical strengths",
+      "symmetric electrical pair strengths",
+      "three exploratory chemical/B/DVA transduction gain multipliers"
+    ],
+    "fixed": [
+      "sensory routing/signs",
+      "receptor kinetics",
+      "leak/capacitance/reversals",
+      "reporter",
+      "NMJ and mechanics"
+    ],
+    "bounds": "Original winner7001 factor2 for neurons/connections; .5..2 times original nonzero defaults for sensory gains",
+    "provenance": "New objective, fresh RNG; preserve all prior checkpoints, source/environment/invocation and recursive lineage outside Git",
+    "biological_scope": "Engineering gates are not experimental diacetyl reflex targets or calibrated wet-substrate behavior",
+    "progression": "Review each validated standalone skill before implementing/promoting the next stage; no automatic promotion"
+  },
+  "stages": [
+    {
+      "id": "contract_relax",
+      "status": "implemented_pending_server_execution",
+      "motor_goal": "One cue-specific reversible bend, no preferred side",
+      "sensory_goal": "AWA recruitment by finite diacetyl exposure and recovery after washout; actual-body B/DVA feedback active and gain trainable",
+      "protocol": "8s; one exposure2..3s, recovery6..8s; matched sham",
+      "engineering_gates": {
+        "minimum_cue_specific_bend_rad": 3e-05,
+        "minimum_AWA_depolarization_mV": 0.1,
+        "maximum_recovery_residual_fraction": 0.25,
+        "maximum_absolute_joint_rad": 0.5,
+        "maximum_AWA_recovery_residual_fraction": 0.25,
+        "maximum_refinement_difference_rad": 7.5e-06
+      },
+      "validation": [
+        "dose.8 and1.2",
+        "onset+.5s",
+        "half timesteps",
+        "chemical-blocked",
+        "held-voltage",
+        "proprioceptive-blocked descriptive diagnostic"
+      ],
+      "unforced_scope": "Matched sham records spontaneous activity; cue response does not establish autonomous oscillation",
+      "amplitude_ladder_rad": [
+        3e-05,
+        0.0001,
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "ladder_policy": "Only first target is active. Each promotion requires reviewed validation and a new objective/configuration; not an automatic or demonstrated progression."
+    },
+    {
+      "id": "alternate",
+      "status": "planned_not_implemented",
+      "motor_goal": "Several opposing bends after a single initiating event, without a periodic teacher",
+      "sensory_goal": "Local actual-body feedback participates in alternation; stimulus can initiate an event but does not pace cycles",
+      "validation": "Post-cue persistence and separate no-cue autonomy assay; feedback block, perturbation and timestep tests"
+    },
+    {
+      "id": "propagate",
+      "status": "planned_not_implemented",
+      "motor_goal": "Recruit adjacent regions with consistent lag and distributed amplitude",
+      "sensory_goal": "Train proprioceptive recruitment from actual curvature; test altered feedback and physical load",
+      "validation": "Distributed persistent motion, phase-lag evidence, feedback interventions; no implied propulsion"
+    },
+    {
+      "id": "translate",
+      "status": "planned_not_implemented",
+      "motor_goal": "Waves produce useful displacement in water and on a wet substrate",
+      "sensory_goal": "Closed-loop adjustment to physical load with actual-body feedback",
+      "validation": "Equal-phase displacement, numerical convergence, energy/force constraints and medium-specific evidence"
+    },
+    {
+      "id": "regulate",
+      "status": "planned_not_implemented",
+      "motor_goal": "Start, stop, reverse and turn within continuous trajectories",
+      "sensory_goal": "Environmental cues and internal state select motor programs; navigation only after viable skills",
+      "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
+    }
+  ]
+}

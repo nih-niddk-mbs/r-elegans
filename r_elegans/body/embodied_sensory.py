@@ -166,7 +166,8 @@ def initial_embodied_sensory_state(body, body_params, world, config=EmbodiedSens
 
 
 def transduce_sensory_signals(state, body, body_params, world, maps, dt,
-                             config=EmbodiedSensoryConfig(), *, neuron_count=302):
+                             config=EmbodiedSensoryConfig(), *, neuron_count=302,
+                             gain_multipliers=None):
     """Body/world -> conductances, with memory held across chunks.
 
     Conductance is an effective bounded transduction closure. AWC odor-on
@@ -174,6 +175,7 @@ def transduce_sensory_signals(state, body, body_params, world, maps, dt,
     claim to implement TAX-2/4 closing. DVA's magnitude proxy is not a resolved
     strain measurement of its neurite. No physical sensory signs are fitted here.
     """
+    gains = jnp.ones(3) if gain_multipliers is None else gain_multipliers
     head = sensory_head_position(body, body_params)
     concentration = sample_chemical_world(head, body.time, world)
     occupancy = concentration/(concentration+jnp.array(config.chemical_reference_um))
@@ -185,16 +187,16 @@ def transduce_sensory_signals(state, body, body_params, world, maps, dt,
     curvature = state.curvature_per_m+(-jnp.expm1(-dt/config.bend_time_constant_s))*(actual_curvature-state.curvature_per_m)
     signed_chemo = jnp.array([response[0], response[0], -response[1], -response[1], response[2], -response[2]])
     chemical_excitatory = jnp.zeros(neuron_count).at[maps.chemical_indices].set(
-        config.chemical_gain_nS*jnp.maximum(signed_chemo, 0.))
+        config.chemical_gain_nS*gains[0]*jnp.maximum(signed_chemo, 0.))
     # Only AWC is modeled with a signed inhibitory response. AWA/ASE are ON/OFF
     # rectified excitatory proxies, not artificial mirror-image hyperpolarization.
     chemical_inhibitory = jnp.zeros(neuron_count).at[maps.chemical_indices[2:4]].set(
-        config.chemical_gain_nS*jnp.maximum(response[1], 0.))
+        config.chemical_gain_nS*gains[0]*jnp.maximum(response[1], 0.))
     local_bend = maps.b_receptive_weights @ curvature/config.curvature_reference_per_m
     b_activation = jnp.maximum(jnp.tanh(maps.b_dorsal_sign*local_bend), 0.)
-    proprio = jnp.zeros(neuron_count).at[maps.b_indices].set(config.b_bend_gain_nS*b_activation)
+    proprio = jnp.zeros(neuron_count).at[maps.b_indices].set(config.b_bend_gain_nS*gains[1]*b_activation)
     magnitude = (jnp.sqrt(jnp.mean((curvature/config.curvature_reference_per_m)**2)+1e-12)-1e-6)
-    proprio = proprio.at[maps.dva_index].set(config.dva_gain_nS*jnp.tanh(jnp.maximum(magnitude, 0.)))
+    proprio = proprio.at[maps.dva_index].set(config.dva_gain_nS*gains[2]*jnp.tanh(jnp.maximum(magnitude, 0.)))
     head_bend = maps.head_weights @ curvature/config.curvature_reference_per_m
     proprio = proprio.at[maps.smdd_indices].set(config.smdd_gain_nS*jnp.maximum(jnp.tanh(head_bend), 0.))
     excitatory = chemical_excitatory+proprio

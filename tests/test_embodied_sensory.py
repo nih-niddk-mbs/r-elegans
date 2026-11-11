@@ -156,3 +156,19 @@ def test_invalid_configuration_and_world_rejected():
         EmbodiedSensoryConfig(curvature_reference_per_m=0.)
     with pytest.raises(ValueError):
         validate_chemical_world(default_chemical_world()._replace(width_m=jnp.zeros(3)))
+
+
+def test_trainable_gain_multipliers_preserve_routing_and_block_selectively(setup):
+    _, _, _, _, _, bp, world, maps, state = setup
+    body=state.brain_body.body._replace(joint_angles=jnp.full(11,.02))
+    memory=initial_embodied_sensory_state(body,bp,world)
+    body=body._replace(time=jnp.array(1.5))
+    def run(gains):
+        return transduce_sensory_signals(memory,body,bp,world,maps,.002,
+            gain_multipliers=jnp.asarray(gains))[2]
+    normal=run([1.,1.,1.]);scaled=run([2.,.5,1.5]);blocked=run([0.,1.,1.])
+    np.testing.assert_allclose(scaled.chemical_excitatory_nS,2*normal.chemical_excitatory_nS)
+    np.testing.assert_array_equal(blocked.chemical_excitatory_nS,0.)
+    np.testing.assert_array_equal(blocked.proprioceptive_nS,normal.proprioceptive_nS)
+    np.testing.assert_allclose(scaled.proprioceptive_nS[maps.b_indices],.5*normal.proprioceptive_nS[maps.b_indices])
+    np.testing.assert_allclose(scaled.proprioceptive_nS[maps.dva_index],1.5*normal.proprioceptive_nS[maps.dva_index])

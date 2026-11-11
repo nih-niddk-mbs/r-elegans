@@ -1210,3 +1210,43 @@ This supports a new sustained-amplitude objective while retaining current bounds
 it does not establish absence of slower rhythms or zero variance. See the
 [E054 result and limitations](experiments/records/E054-server-summary.json).
 The next curriculum remains a specification; its trainer has not been implemented.
+
+### Sensory–motor foundation curriculum (E055)
+
+Train sensory responses alongside motor skills, beginning with one reversible
+bend following a finite odor exposure. The full302-neuron model and anatomical
+readout remain intact. Unknown neural/synaptic parameters and three effective
+sensory gains are eligible within original bounds; kinetics and body parameters
+remain fixed. Later alternation, propagation, movement and regulation stages
+are [planned separately](experiments/sensorimotor_curriculum_v1.json).
+
+On mbslnx2, launch the first-stage search in the background:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_sensorimotor_mbslnx2.sh 20 &&
+tail -n 40 -F "$(ls -1t /home/carsonc/r-elegans-results/sensorimotor-*.log | head -n 1)"
+```
+
+The script uses the dedicated conda interpreter and latest completed paired fit,
+verifies its original anchor, and preserves the parent recursively outside Git.
+Budget:20minutes search including baseline, plus compilation/validation overhead.
+Exit0 means the stated engineering cue-response gates passed; exit2 means the
+search completed without qualification. This is a new objective with fresh RNG,
+not an exact continuation of paired fitting. Selected/final models, sensory gains,
+search state, source/environment records and trajectories remain external.
+
+Each8-second trial contains one exposure at2–3seconds and recovery at6–8seconds.
+Selection compares cue and sham trajectories, rewarding bend amplitude with
+recovery; it does not prescribe a bending side or waveform. Validation includes
+dose/onset variations, half timesteps, chemical/voltage controls and a descriptive
+proprioception block. Unforced activity is recorded separately. A successful
+evoked response does not establish autonomous wiggling, navigation or biological
+fidelity; empirical sensory kinetics and substrate calibration remain unresolved.
+
+The initial cue-specific target is only .00003rad, to establish reliable signal
+transmission before increasing amplitude. The planned ladder is .00003, .0001,
+.0003, .001, .003rad, with review at every step. This first target is far below a
+biologically realistic bend. Only the first rung is currently selected; changing
+a target is a new objective/configuration, not exact continuation.

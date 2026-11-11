@@ -433,3 +433,23 @@ older normalized chemotaxis demo. Input gains, kinetics and receptive fields
 remain experimental. MOT-16/17 retain their original no-input liquid qualification;
 MOT-05/06 physiological stop/restart and MOT-15 environment adaptation still
 require new evidence in this branch. No new skill checkpoint is registered.
+
+## Sensory–motor foundation curriculum (E055, 2026-11-11)
+
+Status: first-stage software implemented; server training/qualification pending.
+See [stage definitions](experiments/sensorimotor_curriculum_v1.json). Keep the
+full302-neuron network during this curriculum. Sensory transduction gains and
+unknown neural/connection strengths can adapt; anatomy, response signs, receptor
+kinetics, muscle readout and mechanics remain fixed.
+
+1. Reversible sensory-evoked bend: finite chemical cue, matched sham, recovery.
+2. Alternating bends: actual-body feedback, no periodic cue pacing.
+3. Propagation: adjacent-region recruitment and distributed persistent motion.
+4. Translation: useful displacement in water and on a wet substrate.
+5. Regulation: continuous-state initiation, stopping, reversing and turning.
+
+Stages2–5 are plans, not implemented trainers or qualified skills. Preserve each
+qualified independent checkpoint and its sensory configuration before promotion.
+A sensory-evoked bend does not count as spontaneous oscillation or a validated
+biological diacetyl reflex. Stage-specific numerical/physical criteria remain
+required; shared-weight consolidation remains deferred under H1.1.

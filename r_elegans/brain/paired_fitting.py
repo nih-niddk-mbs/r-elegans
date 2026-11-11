@@ -52,12 +52,14 @@ def training_windows(root, uids, frames=8, start=0):
 
 
 def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
-                 brain_step_ms=.1,burn_in=2.,sampling="boxcar",record_dense=False,hold_voltage=False):
+                 brain_step_ms=.1,burn_in=2.,sampling="boxcar",record_dense=False,hold_voltage=False,
+                 sensory_config=None,chemical_world=None):
     """Endogenous brain -> frozen NMJ -> body -> proprioception, no pacing.
 
     Media are explicitly mismatched mechanical hypotheses, not source-condition
-    calibration or certified error bounds. Fixed chemical gains are zero because
-    recording-specific food/stimulus transduction is not yet modeled.
+    calibration or certified error bounds. Default chemical gains are zero because
+    recording-specific food/stimulus transduction is not yet modeled. Explicit
+    sensory fixtures are for separate controlled-response experiments.
     """
     import jax
     from r_elegans.body import physical_muscle_body_params, build_muscle_projection
@@ -65,7 +67,8 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
     from r_elegans.body.channel_bridge import channel_muscle_activations
     from r_elegans.body.actuation import muscle_body_step
     from r_elegans.body.neuromuscular import project_muscles_to_joints
-    from r_elegans.body.embodied_sensory import (EmbodiedSensoryConfig,default_chemical_world,build_sensory_maps)
+    from r_elegans.body.embodied_sensory import (EmbodiedSensoryConfig,default_chemical_world,
+        build_sensory_maps,validate_chemical_world)
     from r_elegans.body.wet_surface import wet_agar_drag,surface_body_step
     if medium not in ('liquid','wet-agar'):
         raise ValueError('Unknown mechanical hypothesis')
@@ -77,30 +80,35 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
         raise ValueError('Zero-bias network required')
     if sampling not in ('point','boxcar'):raise ValueError('Unknown sample kernel')
     body = physical_muscle_body_params(12,medium='liquid' if medium=='liquid' else 'agar')
-    sc = EmbodiedSensoryConfig(chemical_gain_nS=0.)
-    world = default_chemical_world()
+    sc = sensory_config if sensory_config is not None else EmbodiedSensoryConfig(chemical_gain_nS=0.)
+    world = chemical_world if chemical_world is not None else default_chemical_world()
+    validate_chemical_world(world)
     maps = build_sensory_maps(model,sc)
     projection = build_muscle_projection(11,head_at_end=True)
     signed = np.asarray(projection.dorsal_weights)-np.asarray(projection.ventral_weights)
     substeps = math.ceil(dt*1000/brain_step_ms)
-    def neural(state,params):
+    def neural(state,params,gains):
         if hold_voltage:
             brain=state.brain_body.brain
             return brain,state.sensory,channel_muscle_activations(brain.voltage_mV,fixed,parent,model),None,None
-        return embodied_neural_step(state,params,fixed,config,parent,model,body,world,maps,dt,substeps,sc)
+        return embodied_neural_step(state,params,fixed,config,parent,model,body,world,maps,dt,substeps,sc,
+            gain_multipliers=gains)
     fast_neural = jax.jit(neural)
-    def liquid_step(state,params):
-        brain,sensory,muscles,_,_ = neural(state,params)
+    def liquid_step(state,params,gains):
+        brain,sensory,muscles,_,_ = neural(state,params,gains)
         dorsal,ventral = project_muscles_to_joints(muscles,projection)
         newbody = muscle_body_step(state.brain_body.body,body,dorsal,ventral,dt)
         state = state._replace(brain_body=state.brain_body._replace(brain=brain,body=newbody),sensory=sensory)
         extra=(brain.voltage_mV,brain.calcium_uM,muscles,newbody.muscle_activation,newbody.position,newbody.heading) if record_dense else ()
         return state,(brain.indicator,newbody.joint_angles)+extra
     @jax.jit
-    def liquid_chunk(state,params):
-        return jax.lax.scan(lambda s,_:liquid_step(s,params),state,None,length=100)
+    def liquid_chunk(state,params,gains):
+        return jax.lax.scan(lambda s,_:liquid_step(s,params,gains),state,None,length=100)
     law = wet_agar_drag()
-    def run(params,times):
+    def run(params,times,gain_multipliers=None):
+        gains=np.ones(3,dtype=np.float32) if gain_multipliers is None else np.asarray(gain_multipliers,dtype=np.float32)
+        if gains.shape!=(3,) or not np.isfinite(gains).all() or np.any(gains<0):
+            raise ValueError('Three finite nonnegative sensory gain multipliers required')
         times = np.asarray(times,dtype=float)
         if times.ndim!=1 or not len(times) or times[0]!=0 or np.any(np.diff(times)<=0):
             raise ValueError('Increasing relative observation times starting at zero required')
@@ -120,7 +128,7 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
         steps = math.ceil((edges[-1] if sampling=='boxcar' else requested[-1])/dt)
         if medium=='liquid':
             for _ in range(math.ceil(steps/100)):
-                state,trace = liquid_chunk(state,params)
+                state,trace = liquid_chunk(state,params,gains)
                 indicators.extend(np.asarray(trace[0])); angles.extend(np.asarray(trace[1]))
                 if record_dense:
                     for buffer,value in zip(extra_buffers,trace[2:]):buffer.extend(np.asarray(value))
@@ -129,7 +137,7 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
                 lambda x:np.asarray(x,dtype=float),state.brain_body.body)))
             velocity = None
             for _ in range(steps):
-                brain,memory,muscles,_,_ = fast_neural(state,params)
+                brain,memory,muscles,_,_ = fast_neural(state,params,gains)
                 nextbody,velocity,_ = surface_body_step(state.brain_body.body,
                     signed.astype(float)@np.asarray(muscles,dtype=float),body,law,dt,initial_velocity=velocity)
                 state = state._replace(brain_body=state.brain_body._replace(brain=brain,body=nextbody),sensory=memory)

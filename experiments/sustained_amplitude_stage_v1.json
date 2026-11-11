@@ -36,5 +36,6 @@
   "uncertainty": "Numerical reporting floors, reporter assumptions and 1.7% wet-agar proxy remain explicit; none are calibrated to the mounted2% experiment",
   "restart_semantics": "A revised objective is a new curriculum stage, not an exact continuation of the E050/E052/E053 selection process",
   "training_launched": false,
-  "diagnostic_evidence": "experiments/records/E054-server-summary.json"
+  "diagnostic_evidence": "experiments/records/E054-server-summary.json",
+  "curriculum_relation": "E055 first establishes reversible sensory-motor responses, then alternation and propagation; sustained unforced amplitude remains a separate later qualification."
 }

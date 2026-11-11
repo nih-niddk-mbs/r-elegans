@@ -1,5 +1,18 @@
 # WormGym: training and validation protocols
 
+E055 now defines a sensory–motor curriculum: reversible cue response ->
+alternation -> proprioceptive propagation -> translation -> sensory regulation.
+The first-stage trainer is implemented; server execution is pending. It trains
+unknown channel/synapse strengths and three bounded exploratory sensory gains
+through the existing full302-neuron network, with fixed sensory routing/kinetics,
+NMJ and mechanics. A single diacetyl exposure/washout is sampled through actual
+head position; matched sham, dose/timing changes, timestep refinement and causal
+blocks separate sensory-evoked movement from spontaneous motion. The initial
+.00003rad reversible-bend and .1mV AWA thresholds are engineering gates, not measured
+animal reflex targets. No periodic teacher or direct muscle commands are supplied.
+Later stages are planned, not implemented or demonstrated; advancement requires
+review. See [curriculum specification](experiments/sensorimotor_curriculum_v1.json).
+
 E054 server diagnostic completed (user-reported, 2026-11-11): active and
 refined40-second simulations both report no sustained repeated voltage, muscle
 or joint excursions under the detector criteria; held-voltage control also

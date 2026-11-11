@@ -4523,3 +4523,117 @@ activity before propulsion/control. Current evidence does not determine which
 mechanism causes the failure, nor prove that all rhythms have disappeared. No
 new fit, simulation or server launch in this reporting turn. Documentation and
 JSON consistency checked locally; no software implementation changed.
+
+## 2026-11-11 — Planned E055 sensory–motor foundation curriculum
+
+User authorizes proceeding through reversible contraction, alternation,
+propagation, translation and regulation, with sensory learning alongside motor
+learning. This is a functional curriculum inspired by evolutionary simplicity,
+not a reconstruction of nematode ancestry. Implement the first stage now; later
+stages remain gated plans, not successful skills or automatic promotions.
+
+Question: can a finite environmental chemical exposure elicit a reversible body
+bend through existing AWA routing and recurrent/NMJ anatomy, with actual-body
+proprioception active, while the same network is evaluated without a cue?
+Use a nonperiodic diacetyl field onset/washout, never target-angle or motor current
+injection. Cue minus matched sham separates evoked response from spontaneous
+activity. No preferred left/right bend, waveform or gait frequency is specified.
+This generic chemical response is an engineering prerequisite, not evidence that
+real worms execute a particular reflex to diacetyl. Existing effective chemical
+and proprioceptive closures remain uncalibrated biological hypotheses.
+
+Parent: verify latest completed paired fit and its original winner7001 anchor,
+checkpoint/search offsets, fixed fields, runtime anatomy and readout hashes on
+execution. Preserve recursive lineage outside Git and retain all earlier skills.
+Fresh stage/seed5500: bounded greedy channel and chemical/electrical search,
+original factor2 limits. Also expose exploratory chemical, B and DVA transduction
+gains within factor2 of their original nonzero defaults. Keep receptor kinetics,
+response signs/routing, leak/capacitance/reversals, reporter, NMJ and mechanics
+fixed. No sensory signal, target or reward may directly enter a motor command.
+New objective and added sensory gains mean fresh optimizer/RNG, not E053 resume.
+
+First-stage assay: 8 simulated seconds, cue2–3s, recovery6–8s; matched sham,
+small cue-dose and onset perturbations, half integration timesteps, chemical
+block and held-voltage control. Score cue-specific reversible bend and AWA
+recruitment; penalize residual bend and joint-limit approaches. Initial operational
+target .003rad cue-specific bend and .1mV AWA depolarization, residual <=25% of
+response amplitude; these are engineering gates, not measured biological values.
+Require all active validation variants and causal loss of response in blocked
+controls before reporting a stage pass. Record unforced dynamics separately;
+evoked response is not spontaneous oscillation, locomotion or a fitted calcium
+recording. Keep the wet-agar proxy mismatch explicit.
+
+Planned server command: `sh scripts/launch_sensorimotor_mbslnx2.sh 20` after pull.
+Default20min search plus baseline/validation/compilation overhead, not a hard
+wall-clock20min guarantee. Detailed configuration, invocation/environment/source,
+parent hashes, PCG64 state, proposal history, selected/final networks, sensory
+parameters and best/validation trajectories external. No server launch yet.
+
+E055 pre-final-verification refinement: require AWA recruitment to recover as
+well as the selected body joint (each residual <=25% of its response). Report a
+proprioception-blocked intervention descriptively, without requiring the initial
+reflex to depend on feedback. Require refined cue-minus-sham joint trajectories
+to agree within .00075rad (25% of the .003rad engineering target); this does not
+certify voltage convergence. Source calcium-data agreement is not optimized in
+this exploratory stage; preserve paired-fit parents for later joint constraints.
+The sensory–motor curriculum precedes the proposed sustained-amplitude stage,
+rather than treating an evoked bend as spontaneous wiggling.
+
+E055 planned target correction after preliminary local software smoke: the older
+local parent produced AWA recruitment4.30mV but only6.54e-6rad selected
+cue-specific bend (strongest raw joint1.08e-5rad). One proposal increased the
+selected response to6.92e-6rad; chemical and held-voltage controls were exactly
+zero. This is not E053 server evidence or a qualified skill. A .003rad first
+target would demand hundreds-fold growth, contrary to the user's baby-step
+strategy. Therefore set the initial engineering target to .00003rad and plan
+a reviewed amplitude ladder [.00003,.0001,.0003,.001,.003]rad. Nothing is promoted
+automatically. Refinement tolerance scales with target (.0000075rad initially).
+The earlier .003/.00075rad plan is superseded for the first rung, not silently
+removed from history. Re-run final software smoke with the new target before
+publishing; the preceding local smoke(s) retain their original source/settings.
+
+E055 local verification outcome (not server execution): full suite251 passed in
+92.87s; after lowering the first-rung target, three targeted protocol tests passed
+in0.50s. Existing two local paired-recording indicator/joint/bend arrays remained
+bit-for-bit identical with the default disabled chemical input. Shell syntax and
+Python compilation checks passed. Tests cover stimulus locality/washout, selective
+gain scaling/blocking, rejection of static/pre-cue differences, non-recovering
+body or sensory responses, and matched-sham spontaneous movement.
+
+A final8-second-per-case, one-proposal smoke on the OLDER local E052 candidate
+(parent SHA9328de15ac3a05e9c5133cfa0f58655478df445698bdecbdda18fa7f70a40fcd)
+completed in189.89s with the new .00003rad first-rung target. It did NOT qualify:
+selected cue response1.134e-5rad, recovery ratio .2791 (target<=.25), AWA response
+4.503mV. Both neural and sensory gains were updated;128 neural/connection offset
+coordinates changed plus all three exploratory gains. Chemical-block and held
+controls gave exactly zero differential bend/voltage response. Refined body cue
+effect differed by9.806e-7rad, below7.5e-6rad tolerance. Proprioception-blocked
+case is descriptive, not a required causal prerequisite for this first reflex.
+No realistic motion, spontaneous oscillation, calcium-data fit or E053 server
+performance is established by this smoke.
+
+Final local command:
+```
+JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.train_sensorimotor \
+ --parent-run /tmp/r-elegans-E052-resume-smoke \
+ --output-dir /tmp/r-elegans-E055-first-rung --iterations 1 --minutes 5
+```
+Selected/final saved network arrays agree; original parent checksum unchanged;
+neural offsets and sensory multipliers remain within factor2 bounds. Preserve
+all preliminary and final runs with their source snapshots, RNG/state/history,
+selected/final checkpoints and actual-pose previews externally. Compact evidence:
+experiments/records/E055-local-verification.json. Server run remains pending;
+launcher defaults to20minutes including baseline/search, plus subsequent
+validation overhead. It uses the dedicated conda environment and nohup, verifies
+the actual latest paired parent, and prints its hash in stdout. No server launch
+was performed. Review the first rung before raising its target or implementing
+subsequent stages; no automatic stage progression or shared-skill claim.
+
+E055 evidence preservation completed: all three local verification runs and full
+stdout, source/environment capsules, recursive parents, selected/final networks,
+RNG/search states, trajectories, previews, test stdout and the legacy-comparison
+helper copied to OneDrive/r-elegans/notebook/evidence/E055. Every copied run file
+was SHA256-compared against its /tmp source; archive manifest covers3460 files.
+This verifies local copies, not OneDrive cloud synchronization or retrieval of
+the actual E053 server checkpoint. The earlier report helper briefly used system
+python without NumPy and failed before mutation; rerun with .venv succeeded.
