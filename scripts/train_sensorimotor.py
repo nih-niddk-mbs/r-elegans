@@ -48,7 +48,9 @@ def verified_parent(source):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--parent-run',type=Path,required=True)
+    source_group=p.add_mutually_exclusive_group(required=True)
+    source_group.add_argument('--parent-run',type=Path)
+    source_group.add_argument('--resume-run',type=Path)
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--minutes',type=float,default=20.)
     p.add_argument('--iterations',type=int,default=100000)
@@ -67,19 +69,22 @@ def main():
     from r_elegans.model import load_builtin_model
     from r_elegans.brain.paired_fitting import make_rollout
     from r_elegans.brain.joint_autonomous_fit import apply_joint_offsets,joint_proposal,frozen_joint_fields_unchanged
-    from r_elegans.brain.conductance_network import save_network
+    from r_elegans.brain.conductance_network import save_network,load_network
     from r_elegans.body.embodied_sensory import EmbodiedSensoryConfig
     from r_elegans.sensorimotor_curriculum import ResponseProtocol,cue_world,response_metrics
     from r_elegans.data.paths import get_data_root
     from r_elegans.full_body_assessment import write_motion_preview
     from r_elegans.paired_diagnostics import signal_chain
-    source=args.parent_run.resolve()
+    resume=args.resume_run.resolve() if args.resume_run else None
+    source=resume/'parent_run' if resume else args.parent_run.resolve()
     initial,fixed,config,spec,start_offsets,actor,cfg,parent_summary,parent_iteration=verified_parent(source)
     factor=cfg['arguments']['maximum_factor']
     if factor!=2.:raise ValueError('E055 requires unchanged original factor2 neural bounds')
     out=get_data_root(args.output_dir,must_exist=False)
     if out==source or source in out.parents or out in source.parents:
         p.error('Output must be separate from parent lineage')
+    if resume and (out==resume or resume in out.parents or out in resume.parents):
+        p.error('Continuation output must be separate from resume parent')
     if any(path.is_symlink() for path in source.rglob('*')):raise ValueError('No symlinks in parent archive')
     out.mkdir(parents=True,exist_ok=False)
     capture_run_record(out,Path(__file__).resolve().parents[1],args)
@@ -100,10 +105,29 @@ def main():
         medium='wet-agar1.7% proxy; not calibrated mounted2% agar or a diacetyl reflex',
         stage_transition='No automatic advancement; review validation before next stage',
         arguments=vars(args))
-    write_json(out/'configuration.json',json.loads(json.dumps(settings,default=str)))
+    settings=json.loads(json.dumps(settings,default=str))
     rng=np.random.default_rng(args.seed)
-    write_json(out/'initial_rng_state.json',rng.bit_generator.state)
     offsets=start_offsets.copy();sensory_offsets=np.zeros(3)
+    initial_iteration=0;resume_summary=None
+    if resume:
+        from scripts.sensorimotor_resume import read_completed
+        import jax
+        offsets,sensory_offsets,initial_iteration,rng,resume_summary=read_completed(resume,settings,spec.size)
+        expected=apply_joint_offsets(initial,offsets,spec)
+        actual,actual_fixed,actual_config=load_network(resume/'network_best.npz')
+        if actual_config!=config or any(not np.array_equal(np.asarray(a),np.asarray(b)) for a,b in zip(
+                jax.tree_util.tree_leaves((expected,fixed)),jax.tree_util.tree_leaves((actual,actual_fixed)))):
+            raise ValueError('Resume network, fixed fields and original-anchor offsets disagree')
+        if any(path.is_symlink() for path in resume.rglob('*')):raise ValueError('Resume archive contains symlinks')
+        shutil.copytree(resume,out/'resume_parent')
+        if file_sha256(out/'resume_parent/network_best.npz')!=resume_summary['checkpoint_sha256']:
+            raise ValueError('Copied resume checkpoint mismatch')
+        settings['resume']=dict(parent=str(resume),checkpoint_sha256=resume_summary['checkpoint_sha256'],
+            initial_iteration=initial_iteration,rng_sha256=file_sha256(resume/'rng_state.json'))
+        settings['optimizer']='Completed greedy search continuation: same objective, original bounds and saved PCG64; not interrupted simulation resume'
+    run_start_offsets=offsets.copy()
+    write_json(out/'configuration.json',settings)
+    write_json(out/'initial_rng_state.json',rng.bit_generator.state)
     times=np.linspace(0,protocol.duration_s,81)
     def factory(*,dose=1.,shift=0.,dt=None,held=False,sham=False):
         return make_rollout(fixed,config,actor,model,medium='wet-agar',dt=args.dt if dt is None else dt,
@@ -120,6 +144,8 @@ def main():
         return dict(total=metrics['total']+prior,prior=prior,metrics=metrics),dict(active=active,sham=sham)
     started=time.monotonic()
     baseline,traces=evaluate(offsets,sensory_offsets)
+    if resume_summary and not math.isclose(baseline['total'],resume_summary['best']['total'],rel_tol=1e-10,abs_tol=1e-12):
+        raise ValueError('Re-evaluated resume baseline disagrees with saved best objective')
     best=baseline
     def save_selected(iteration,traces):
         destination=out/'selected'/f'iteration-{iteration:06d}';destination.mkdir(parents=True)
@@ -132,12 +158,13 @@ def main():
         shutil.copy2(destination/'search_state.npz',out/'best_state.npz')
         write_json(out/'best.json',dict(iteration=iteration,result=best,
             sensory_gain_multipliers=np.exp(sensory_offsets).tolist()))
-    save_selected(0,traces)
+    save_selected(initial_iteration,traces)
     print(json.dumps(dict(baseline=baseline,parent_checkpoint_sha256=parent_summary['checkpoint_sha256'])),flush=True)
-    completed=0;selected_iteration=0
+    completed=0;selected_iteration=initial_iteration
     with (out/'history.jsonl').open('w') as history:
-        for iteration in range(1,args.iterations+1):
+        for run_iteration in range(1,args.iterations+1):
             if time.monotonic()-started>=args.minutes*60:break
+            iteration=initial_iteration+run_iteration
             candidate=joint_proposal(offsets,spec,rng,args.sigma,factor)
             candidate_s=np.clip(sensory_offsets+rng.normal(0,args.sigma,3),-np.log(2),np.log(2))
             error=None;accepted=False;result=None
@@ -148,8 +175,8 @@ def main():
             if accepted:
                 offsets=candidate;sensory_offsets=candidate_s;best=result;selected_iteration=iteration
                 save_selected(iteration,traces)
-            completed=iteration
-            row=dict(iteration=iteration,accepted=accepted,result=result,error=error,
+            completed=run_iteration
+            row=dict(iteration=iteration,run_iteration=run_iteration,accepted=accepted,result=result,error=error,
                 elapsed_seconds=time.monotonic()-started)
             history.write(json.dumps(row,allow_nan=False)+'\n');history.flush()
             write_json(out/'rng_state.json',rng.bit_generator.state)
@@ -157,7 +184,7 @@ def main():
             print(json.dumps(row,allow_nan=False),flush=True)
     if completed==0:
         write_json(out/'rng_state.json',rng.bit_generator.state)
-        np.savez_compressed(out/'search_state.npz',offsets=offsets,sensory_offsets=sensory_offsets,iteration=0)
+        np.savez_compressed(out/'search_state.npz',offsets=offsets,sensory_offsets=sensory_offsets,iteration=initial_iteration)
     save_network(out/'network_final.npz',apply_joint_offsets(initial,offsets,spec),fixed,config)
     # This greedy optimizer's final state IS its best state; retain both explicitly.
     write_json(out/'sensory_parameters.json',dict(base=asdict(sc),gain_multipliers=np.exp(sensory_offsets).tolist(),
@@ -209,12 +236,16 @@ def main():
         and controls and refinement['passed'])
     summary=dict(experiment='E055',stage='contract_relax',status='completed',passed=passed,
         baseline=baseline,best=best,iterations=completed,selected_iteration=selected_iteration,
+        initial_iteration=initial_iteration,last_iteration=initial_iteration+completed,
         validation=validation,blocked_controls_passed=bool(controls),elapsed_seconds=time.monotonic()-started,
         refinement_comparison=refinement,
         stop_reason='time_budget' if completed<args.iterations else 'iterations',
         checkpoint_sha256=file_sha256(out/'network_best.npz'),parent_checkpoint_sha256=parent_summary['checkpoint_sha256'],
         original_anchor_sha256=cfg['network_sha256'],frozen_fields_unchanged=True,
         neuron_connection_parameters_changed_from_parent=int(np.count_nonzero(offsets-start_offsets)),
+        neuron_connection_parameters_changed_this_run=int(np.count_nonzero(offsets-run_start_offsets)),
+        resume_checkpoint_sha256=resume_summary['checkpoint_sha256'] if resume_summary else None,
+        sensory_parameters_sha256=file_sha256(out/'sensory_parameters.json'),
         sensory_gain_multipliers=np.exp(sensory_offsets).tolist(),biological_fidelity_qualified=False,
         autonomous_oscillation_qualified=False,next_stage_launched=False)
     if file_sha256(source/'network_best.npz')!=parent_summary['checkpoint_sha256']:raise ValueError('Parent changed')

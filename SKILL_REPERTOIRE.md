@@ -436,10 +436,10 @@ require new evidence in this branch. No new skill checkpoint is registered.
 
 ## Sensory–motor foundation curriculum (E055, 2026-11-11)
 
-Status: first server result partially reported; first-rung qualification is not
-established. The shown case reaches42.5% of the bend target, with adequate
-recovery and passing chemical/voltage controls and engineering refinement.
-Complete baseline/best/active rows are still needed before another run.
+Status: complete compact server result reported; first-rung qualification failed
+on amplitude. Active response reaches47.7% of target, weakest active validation
+41.1%, with adequate reported recovery and passing chemical/voltage controls
+and engineering refinement. E056 continuation on the same rung is planned.
 See [stage definitions](experiments/sensorimotor_curriculum_v1.json). Keep the
 full302-neuron network during this curriculum. Sensory transduction gains and
 unknown neural/connection strengths can adapt; anatomy, response signs, receptor
@@ -456,3 +456,9 @@ qualified independent checkpoint and its sensory configuration before promotion.
 A sensory-evoked bend does not count as spontaneous oscillation or a validated
 biological diacetyl reflex. Stage-specific numerical/physical criteria remain
 required; shared-weight consolidation remains deferred under H1.1.
+
+E055 complete server update:48proposals increased active cue-specific bend51.1%;
+all active validation cases remain below the3e-5rad engineering target. Retain
+contract_relax status unqualified and preserve checkpoint437b227e.... E056 plans
+60minutes of completed-search continuation, including saved sensory gains/RNG;
+no promotion to alternation. See experiments/records/E055-server-summary.json.

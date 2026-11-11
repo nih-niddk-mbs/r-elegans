@@ -1,0 +1,29 @@
+{
+  "experiment": "E056",
+  "evidence": "Local continuation software verification on older E052-derived E055 smoke, not server E055",
+  "run": "/tmp/r-elegans-E056-resume-smoke",
+  "invocation": "JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.train_sensorimotor --resume-run /tmp/r-elegans-E055-first-rung --output-dir /tmp/r-elegans-E056-resume-smoke --iterations 1 --minutes 5",
+  "full_suite": {
+    "passed": 255,
+    "elapsed_seconds": 91.08,
+    "stdout_sha256": "cc288044f7a09abde41cf491ee7cd784254230fd4722f3afde4c7453d08b9842"
+  },
+  "targeted_tests": {
+    "passed": 7,
+    "stdout_sha256": "1874b47a6432969fc829a7aa42f0385f4307a8d7af57a127368403918405344e"
+  },
+  "baseline": 0.6510646482865241,
+  "parent_best": 0.6510646482865241,
+  "initial_iteration": 1,
+  "additional_iterations": 1,
+  "last_iteration": 2,
+  "passed": false,
+  "elapsed_seconds": 193.28308162494795,
+  "checkpoint_sha256": "5cc9e54742031960e3d5ebb02589b8353750d0ca8f771e61713e05a5bbaf4c26",
+  "resume_checkpoint_sha256": "5cc9e54742031960e3d5ebb02589b8353750d0ca8f771e61713e05a5bbaf4c26",
+  "sensory_parameters_sha256": "80b8b21ed0913350b7284bf0223ba3bf08a89144fa9ae09040961c6b40a1cad9",
+  "verification": "Restored original-anchor neural offsets and three sensory offsets; selected/final consistency; identical baseline; initial RNG equals parent final RNG; next proposal reproduces saved final RNG including rejected proposal; original parent checksum unchanged",
+  "server_plan": "60min same first-rung objective, launch by user after push",
+  "server_launched": false,
+  "external_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E056"
+}

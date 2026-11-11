@@ -1,12 +1,24 @@
 # WormGym: training and validation protocols
 
+E055 complete compact server summary reported:48 proposals, best selected at48;
+qualification failed. Active cue-specific bend grew51.1% (9.462e-6 ->1.430e-5rad)
+and objective fell23.6%. Active recovery residual fraction improved14.0% ->10.7%,
+though absolute residual increased. Lowest active validation amplitude is
+1.233e-5rad (41.1% of target); all active variants remain below3e-5rad. The
+previously unlabeled row is confirmed refined. Proprioception block increases
+this cue response7.6%, so its benefit is not established in this assay. Retain
+feedback and first-rung target. A60min continuation is planned with both neural
+and sensory offsets and PCG64 restored; server launch pending. See the
+[complete compact report](experiments/records/E055-server-summary.json).
+
 E055 server result partially reported (2026-11-11):23.58minutes, time-budget
 stop; checkpoint437b227e... from confirmed E053 parent98ea6655.... An unlabeled
 validation case shows1.274e-5rad cue-specific bend (42.5% of the3e-5 target),
 19.5% residual and6.025mV AWA recruitment with recovery. Chemical and held-voltage
 blocks give zero differential response; engineering refinement gate passes
-(2.750e-6rad versus7.5e-6 tolerance). No promotion: run ID, baseline/best,
-iterations, full active-case results and final exit code were not supplied.
+(2.750e-6rad versus7.5e-6 tolerance). At that reporting point run ID, baseline/best, iterations and active rows were
+missing; the complete compact report above now supplies them. Exit digits remain
+unreported.
 The labeled proprioception block is descriptive; compare it with the missing
 active case before interpreting feedback's contribution. See the
 [partial server record](experiments/records/E055-server-partial-20261111.json).

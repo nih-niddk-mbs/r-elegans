@@ -1,0 +1,124 @@
+{
+  "experiment": "E055",
+  "evidence": "User-reported complete compact baseline/best/validation stdout; full server artifacts not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/sensorimotor-20261111T154821Z-767568",
+  "passed": false,
+  "iterations": 48,
+  "selected_iteration": 48,
+  "baseline": {
+    "total": 0.6846163465093841,
+    "prior": 3.1344845348954814e-05,
+    "selected_joint": 4,
+    "cue_specific_peak_rad": 9.462449950078944e-06,
+    "cue_specific_recovery_residual_rad": 1.3219229748062666e-06,
+    "recovery_ratio": 0.1397019780057318,
+    "awa_depolarization_mV": 4.336614608764648,
+    "maximum_absolute_joint_rad": 0.2634735364741999,
+    "awa_recovery_residual_mV": 0.001010894775390625,
+    "awa_recovery_ratio": 0.00023310689710529615,
+    "pre_cue_difference_rad": 0.0
+  },
+  "best": {
+    "total": 0.5233811465979002,
+    "prior": 8.471393071487882e-05,
+    "selected_joint": 4,
+    "cue_specific_peak_rad": 1.4301107019984438e-05,
+    "cue_specific_recovery_residual_rad": 1.5251128735599417e-06,
+    "recovery_ratio": 0.10664299424014809,
+    "awa_depolarization_mV": 6.026187896728516,
+    "maximum_absolute_joint_rad": 0.265941794476554,
+    "awa_recovery_residual_mV": 0.0005340576171875,
+    "awa_recovery_ratio": 8.862279542883621e-05,
+    "pre_cue_difference_rad": 0.0
+  },
+  "validation": [
+    {
+      "case": "active",
+      "passed": false,
+      "cue_specific_peak_rad": 1.4301107019984438e-05,
+      "recovery_ratio": 0.10664299424014809,
+      "awa_depolarization_mV": 6.026187896728516
+    },
+    {
+      "case": "dose-low",
+      "passed": false,
+      "cue_specific_peak_rad": 1.2328623337623523e-05,
+      "recovery_ratio": 0.11873369943667118,
+      "awa_depolarization_mV": 5.400857925415039
+    },
+    {
+      "case": "dose-high",
+      "passed": false,
+      "cue_specific_peak_rad": 1.592868055204366e-05,
+      "recovery_ratio": 0.09928724032343082,
+      "awa_depolarization_mV": 6.530658721923828
+    },
+    {
+      "case": "onset-shift",
+      "passed": false,
+      "cue_specific_peak_rad": 1.441901699646142e-05,
+      "recovery_ratio": 0.1288149656633973,
+      "awa_depolarization_mV": 6.026227951049805
+    },
+    {
+      "case": "refined",
+      "passed": false,
+      "cue_specific_peak_rad": 1.274003166362725e-05,
+      "recovery_ratio": 0.19521931462429604,
+      "awa_depolarization_mV": 6.024557113647461
+    },
+    {
+      "case": "chemical-blocked",
+      "passed": false,
+      "cue_specific_peak_rad": 0.0,
+      "recovery_ratio": 0.0,
+      "awa_depolarization_mV": 0.0
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "passed": false,
+      "cue_specific_peak_rad": 1.5388013901537767e-05,
+      "recovery_ratio": 0.12546710923768045,
+      "awa_depolarization_mV": 6.026201248168945
+    },
+    {
+      "case": "held-voltage",
+      "passed": false,
+      "cue_specific_peak_rad": 0.0,
+      "recovery_ratio": 0.0,
+      "awa_depolarization_mV": 0.0
+    }
+  ],
+  "checkpoint_sha256": "437b227e2fdcb5ff376c9b5324ede09a49d1dbc2676c6886846bd10abc2e624d",
+  "parent_checkpoint_sha256": "98ea66551777dd8b228bf0ee59d97043ce32ec1b8d7f2e04f139887ecd26d6e2",
+  "original_anchor_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "elapsed_seconds": 1414.7473249729956,
+  "stop_reason": "time_budget",
+  "frozen_fields_unchanged": true,
+  "neuron_connection_parameters_changed_from_parent": 3949,
+  "sensory_gain_multipliers": [
+    1.4223109213065035,
+    0.9920482472654161,
+    0.8311373894044188
+  ],
+  "blocked_controls_passed": true,
+  "refinement_comparison": {
+    "maximum_cue_effect_difference_rad": 2.7504367488689896e-06,
+    "allowed_difference_rad": 7.5e-06,
+    "passed": true
+  },
+  "exit_code": null,
+  "source_revision": null,
+  "arithmetic": {
+    "active_bend_increase_percent": 51.135351789788075,
+    "objective_decrease_percent": 23.551175886109775,
+    "active_target_fraction": 0.4767035673328146,
+    "worst_active_validation_target_fraction": 0.4109541112541174,
+    "required_factor_worst_active_validation": 2.4333617126940976,
+    "proprioceptive_block_peak_change_percent": 7.600159064850565,
+    "refined_peak_change_percent": -10.91576585068369
+  },
+  "correction": "Earlier unlabeled validation row is confirmed refined. Run ID, overall failed qualification and 48/48 iteration selection now supplied; earlier partial evidence preserved.",
+  "interpretation": "Measurable evoked-response learning, insufficient bend amplitude; active recovery ratio improved, although absolute residual increased. Sensory gain and neural changes are confounded; cannot attribute progress to synapses alone. Proprioceptive feedback benefit not demonstrated for this isolated cue response. No autonomous movement or biological qualification.",
+  "decision": "Plan E056 60min completed-search continuation, same first-rung objective/bounds, restore both neural and sensory offsets and saved post-search PCG64. No new server launch."
+}

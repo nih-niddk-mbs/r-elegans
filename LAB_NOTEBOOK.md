@@ -4671,3 +4671,72 @@ Decision: retain this candidate, remain at contract_relax, and obtain the compac
 complete summary before choosing further training or an objective change. No
 new run or code experiment executed in this reporting turn. Metadata/JSON and
 arithmetic checked locally; software tests not repeated for record-only edits.
+
+## 2026-11-11 — E055 complete server summary and planned E056 continuation
+
+User reports full compact summary for
+/home/carsonc/r-elegans-results/sensorimotor-20261111T154821Z-767568.
+Passed=False,48 proposals, selected_iteration48. Baseline selected joint4 bend
+9.46244995e-6rad ->1.430110702e-5rad; recovery ratio .139702 ->.106643;
+AWA4.33661 ->6.02619mV. Scalar objective .68461635 ->.52338115. Exact percentages
+and all reported validation rows will be recorded in a compact E055 full record.
+The previously unlabeled row is now explicitly identified as refined. Preserve
+E055 partial record as historical evidence and link the correction. Parent and
+selected hashes match the earlier partial tail. No server artifact retrieval.
+
+Decision: remain on the .00003rad contract_relax rung; learning is measurable but
+all active validation cases remain below target. Proprioceptive block increases
+peak slightly in this particular assay, so feedback benefit has not been shown;
+do not remove proprioception based on one engineering reflex. No promotion or
+claim of autonomous oscillation. Plan E056:60additional minutes of the SAME
+objective from selected E055 parameters AND learned sensory gains, original
+winner7001 bounds and all fixed parameters unchanged. Restore saved post-search
+PCG64 state and global proposal numbering; verify baseline against parent best.
+This is continuation of a completed greedy search, not an interrupted simulation
+or exact bitwise replay across machines. Preserve full recursive lineage, selected
+and final checkpoints, RNG/state, source/env/commands externally. Validation and
+acceptance criteria unchanged. Seed inherited5500, not a fresh random restart.
+Planned command: sh scripts/continue_sensorimotor_mbslnx2.sh 60. User launches;
+no server launch authorized through SSH or performed here. Test continuation
+locally on the older local smoke candidate, explicitly separate from E055 server.
+
+E055 complete-summary arithmetic: active amplitude+51.135%, objective-23.551%;
+active target fraction .47670, minimum active validation fraction .41095
+(dose-low), requiring2.433fold more amplitude in that case. Relative recovery
+residual improved13.970% ->10.664%, while absolute residual increased1.322e-6
+->1.525e-6rad; do not conflate these. Refined peak is10.916% below active.
+Proprioception-blocked peak is7.600% above active; its recovery ratio12.547% is
+worse than active10.664%. Both remain amplitude-unqualified. This does not imply
+feedback should be removed from later rhythmic/propagating skills. Sensory gain
+and neural changes are confounded; training gain cannot be attributed to network
+weights alone without further interventions. Full compact transcript recorded
+in experiments/records/E055-server-summary.json; partial record remains dated.
+
+E056 implementation: verified completed E055 restoration checks selected/final
+network, neural and sensory offset agreement, effective transduction gain values,
+original bounds, objective/numerics and PCG64 state. It restores the final search
+RNG even when the final proposal was rejected. Re-evaluated starting loss must
+match prior selected loss or abort. Recursive original paired parent and prior
+E055 search retained separately. New summary distinguishes additional proposals
+from global iteration and newly changed coordinates from total change versus
+the original paired parent. This is not mid-simulation state resume.
+
+E056 local verification complete:255 tests passed in91.08s; targeted continuation
++protocol suite7 passed in0.61s. Shell syntax and Python compilation passed.
+One additional proposal on the older local E055 smoke restored global1 ->2;
+starting objective exactly equals its prior best. The proposal was rejected,
+which verifies that the saved post-proposal RNG advances even without a new
+selected model. Independently reconstructed its next joint proposal and sensory
+noise, matching saved final PCG64 state exactly. Saved baseline offsets/gains
+match the parent's selected values; parent checksum unchanged. Full8-case
+validation completed, still amplitude-unqualified, as expected for this software
+smoke. This is not the reported server checkpoint437b227e.... Numerical objective
+and body/sensory equations were not changed. See E056-local-verification.json
+for exact invocation, wall duration, source captures and hashes. No server launch.
+
+E056 evidence archived and copied run files SHA256-verified under
+OneDrive/r-elegans/notebook/evidence/E056 (2308manifest entries), including source
+capsules, recursive lineage, selected/final checkpoints, search/RNG states,
+trajectories, previews, stdout/tests and compact E055 full server transcription.
+Local copy integrity is verified; OneDrive cloud synchronization and the original
+server artifacts are not independently verified.

@@ -1261,3 +1261,29 @@ iterations, full active-case results and final exit code were not supplied.
 The labeled proprioception block is descriptive; compare it with the missing
 active case before interpreting feedback's contribution. See the
 [partial server record](experiments/records/E055-server-partial-20261111.json).
+
+E055 complete compact server summary reported:48 proposals, best selected at48;
+qualification failed. Active cue-specific bend grew51.1% (9.462e-6 ->1.430e-5rad)
+and objective fell23.6%. Active recovery residual fraction improved14.0% ->10.7%,
+though absolute residual increased. Lowest active validation amplitude is
+1.233e-5rad (41.1% of target); all active variants remain below3e-5rad. The
+previously unlabeled row is confirmed refined. Proprioception block increases
+this cue response7.6%, so its benefit is not established in this assay. Retain
+feedback and first-rung target. A60min continuation is planned with both neural
+and sensory offsets and PCG64 restored; server launch pending. See the
+[complete compact report](experiments/records/E055-server-summary.json).
+
+Continue the latest completed sensory–motor search, preserving its neural and
+sensory parameters, original bounds, post-search RNG and global iteration count:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/continue_sensorimotor_mbslnx2.sh 60 &&
+tail -n 40 -F "$(ls -1t /home/carsonc/r-elegans-results/sensorimotor-*.log | head -n 1)"
+```
+
+This budgets60minutes including baseline/search, plus validation. It re-evaluates
+the parent best objective and aborts on configuration/checkpoint/state mismatch.
+The original launch command without a resume parent still starts from the latest
+paired fit; use the continuation command to retain sensory–motor learning.
