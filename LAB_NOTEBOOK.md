@@ -4859,3 +4859,48 @@ parents, all selected/final networks and neural/sensory state, RNG/history,
 training/validation trajectories, previews, source/environment capsules, stdout,
 test results and compact E056 server transcription. Local integrity verified;
 cloud synchronization and original server checkpoint retrieval unverified.
+
+## 2026-11-11 — E057 robust server result and planned E058 continuation
+
+User-pasted compact stdout and full-precision terminal metadata; server artifacts
+not independently retrieved. Run sensorimotor-20261111T181101Z-771391,99
+proposals global0 ->99, selected98, elapsed3828.107879s (63.80min), time_budget,
+exit2 and passed=False. State hashes and rounded baseline/best/validation metrics
+in experiments/records/E057-server-summary.json. Candidate1d864fdb..., sensory
+filedebccda0..., warm parent180c2b93..., original paired parent98ea6655... and
+anchor417254ad... as reported. Frozen fields unchanged=True.3936coordinates
+changed this run,8608 versus original paired parent; counts are not bound usage.
+
+Robust objective .165858002 ->.0207356124. Active3.38929e-5rad now passes,
+low-dose2.93875611e-5rad remains below3e-5 with recovery6.67%; high-dose,
+shifted-onset and nominal-refined cases pass current gates. Chemical and held
+controls give exactly zero cue effect, correctly passing the separate control
+criterion even though their ordinary motor-goal passed flags are false.
+Nominal refinement difference3.86318e-6rad passes7.5e-6 tolerance. Sensory
+multipliers[2.,.862942136,.546141090]; chemical stays at its upper bound,
+DVA remains above its .5 lower bound. Proprioception-blocked cue passes too;
+this is not evidence of feedback dependence or successful propagating motion.
+
+Low-dose response improved17.405% from2.50309199e-5, reaching97.9585% of target;
+it needs2.084% growth (shortfall6.124389e-7rad), not permission to round the gate
+down. This gap is smaller than the maximum nominal refinement difference, but
+that difference is neither a certified error bound nor a direct low-dose error
+estimate. Fine-step low-dose response is not separately measured by current
+validation. Keep numerical verification explicit before promoting a near-edge
+result; no biological/autonomous claim.
+
+Plan E058:60additional minutes, same worst-of-nominal/.8dose objective, original
+3e-5rad target, neural and sensory factor2 bounds, all fixed fields unchanged.
+Parent selected checkpoint1d864fdb... plus learned sensory gains; restore final
+PCG64 after global99 rather than selected98. Preserve lineage and all
+selected/final checkpoints/RNG/source/env/commands externally. This is completed
+search continuation, not a fresh seed or mid-simulation resume. Seed5700 history
+continues. Existing software already supports this mode; no numerical code or
+acceptance criteria changed and no new tests/simulation needed for this metadata
+update. Command: sh scripts/continue_sensorimotor_mbslnx2.sh 60. User launches;
+no server launch performed, no promotion to next motor skill.
+
+E057 compact server transcription copied and SHA256-compared under external
+notebook/evidence/E057/server-summary-20261111, with manifest. This archives
+reported summary data, not original server stdout, checkpoints or source
+capsules; those remain on mbslnx2. Cloud synchronization unverified.

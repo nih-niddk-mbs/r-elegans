@@ -473,3 +473,9 @@ active96.3%, low-dose83.4%, high-dose107.1% of target. First rung unqualified.
 E057 plans robust nominal/.8dose training from this checkpoint, with fresh RNG
 and unchanged bounds/target. Dose-low ceases to be an unseen cue; all original
 validation gates remain. No promotion to alternation or new biological claim.
+
+E057 server update:nominal/high-dose/onset/nominal-refined gates pass, low-dose
+97.96% of target remains unqualified. Retain1d864fdb...; E058 same-objective
+continuation planned with RNG after99 and selected model98. Do not promote to
+alternation or infer autonomous/biological skill. Low-dose fine-timestep behavior
+is not separately established by the nominal refinement case.

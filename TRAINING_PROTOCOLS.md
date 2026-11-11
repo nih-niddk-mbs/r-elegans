@@ -1,14 +1,24 @@
 # WormGym: training and validation protocols
 
+E057 server result:99 proposals, selected98,63.80minutes, qualification false.
+Nominal, high-dose, shifted-onset and nominal-refined responses now pass the
+current gates. Low dose reaches2.93875611e-5rad (97.96% of target), still below
+3e-5; controls and engineering refinement pass. Retain candidate1d864fdb... and
+same robust objective. Plan E05860min completed-search continuation with saved
+neural/sensory parameters and final RNG after99 (not selected98). No target or
+bound changes, stage promotion or new server launch. Near-threshold low-dose
+performance needs numerical care: current refinement is nominal-only, not a
+separate fine-step low-dose qualification. See
+[E057 server report](experiments/records/E057-server-summary.json).
+
 E056 full compact report:148 proposals (global48 ->196), selected195. Active
 bend grew102.1% to2.890e-5rad (96.3% target), low dose2.503e-5rad (83.4% target);
 high dose passes. Controls/recovery and engineering refinement pass. Remain on
-first rung. E057 prepares worst-case selection over nominal and.8dose, since
+first rung. E057 subsequently executed worst-case selection over nominal and.8dose, since
 nominal amplitude alone would stop earning reward at target. Keep the target,
 original parameter bounds and learned neural/sensory parameters; use fresh
 seed5700/global0 for the changed objective. Low dose becomes a training condition;
-high dose, timing shift and refinement stay outside selection. No new server
-training launched. See [E056 complete compact record](experiments/records/E056-server-summary.json).
+high dose, timing shift and refinement stay outside selection. That result is reported above. See [E056 complete compact record](experiments/records/E056-server-summary.json).
 
 E056 continuation server tail reported (2026-11-11):exit2 after63.87minutes;
 refined bend2.803e-5rad (93.4% of target), shifted onset2.832e-5rad (94.4%).

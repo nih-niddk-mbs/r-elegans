@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "stage1_E056_below_target_E057_robust_objective_prepared",
+  "status": "stage1_E057_low_dose_only_failure_E058_continuation_planned",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -96,6 +96,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E056-server-summary.json",
-  "continuation": "E057 revised selection: worst nominal/.8dose response, warm start neural/sensory state from E056, fresh seed5700, unchanged original bounds/target; server launch pending"
+  "server_evidence": "experiments/records/E057-server-summary.json",
+  "continuation": "E05860min same robust objective; restore E057 selected98 parameters, sensory gains and final post-proposal99 RNG, unchanged bounds and3e-5 target; user launch pending"
 }

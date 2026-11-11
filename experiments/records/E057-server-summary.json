@@ -1,0 +1,153 @@
+{
+  "experiment": "E057",
+  "evidence": "User-pasted compact report plus full-precision terminal metadata; rounded display values retained as reported, server artifacts not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/sensorimotor-20261111T181101Z-771391",
+  "passed": false,
+  "exit_code": 2,
+  "iterations": 99,
+  "initial_iteration": 0,
+  "last_iteration": 99,
+  "selected_iteration": 98,
+  "training_cues": "nominal-low-dose",
+  "baseline": {
+    "total": 0.165858002,
+    "nominal_bend_rad": 2.88992698e-05,
+    "nominal_recovery_ratio": 0.0632,
+    "awa_depolarization_mV": 8.22233,
+    "training_cases": [
+      {
+        "case": "active",
+        "response_loss": 0.0366910072,
+        "bend_rad": 2.88992698e-05,
+        "recovery_ratio": 0.0632
+      },
+      {
+        "case": "dose-low",
+        "response_loss": 0.165636003,
+        "bend_rad": 2.50309199e-05,
+        "recovery_ratio": 0.071
+      }
+    ]
+  },
+  "best": {
+    "total": 0.0207356124,
+    "nominal_bend_rad": 3.38929054e-05,
+    "nominal_recovery_ratio": 0.0583,
+    "awa_depolarization_mV": 8.2238,
+    "training_cases": [
+      {
+        "case": "active",
+        "response_loss": 0.0,
+        "bend_rad": 3.38929054e-05,
+        "recovery_ratio": 0.0583
+      },
+      {
+        "case": "dose-low",
+        "response_loss": 0.020414629,
+        "bend_rad": 2.93875611e-05,
+        "recovery_ratio": 0.0667
+      }
+    ]
+  },
+  "validation": [
+    {
+      "case": "active",
+      "passed": true,
+      "cue_specific_peak_rad": 3.38929054e-05,
+      "recovery_ratio": 0.0583,
+      "awa_depolarization_mV": 8.2238,
+      "awa_recovery_ratio": 0.0
+    },
+    {
+      "case": "dose-low",
+      "passed": false,
+      "cue_specific_peak_rad": 2.93875611e-05,
+      "recovery_ratio": 0.0667,
+      "awa_depolarization_mV": 7.38858,
+      "awa_recovery_ratio": 3.407554341456564e-05
+    },
+    {
+      "case": "dose-high",
+      "passed": true,
+      "cue_specific_peak_rad": 3.77271445e-05,
+      "recovery_ratio": 0.0523,
+      "awa_depolarization_mV": 8.89576,
+      "awa_recovery_ratio": 2.3156392054012715e-05
+    },
+    {
+      "case": "onset-shift",
+      "passed": true,
+      "cue_specific_peak_rad": 3.30489101e-05,
+      "recovery_ratio": 0.0761,
+      "awa_depolarization_mV": 8.22385,
+      "awa_recovery_ratio": 1.855432148701754e-06
+    },
+    {
+      "case": "refined",
+      "passed": true,
+      "cue_specific_peak_rad": 3.30909416e-05,
+      "recovery_ratio": 0.1048,
+      "awa_depolarization_mV": 8.22198,
+      "awa_recovery_ratio": 0.00025610772856106894
+    },
+    {
+      "case": "chemical-blocked",
+      "passed": false,
+      "cue_specific_peak_rad": 0.0,
+      "recovery_ratio": 0.0,
+      "awa_depolarization_mV": 0.0,
+      "awa_recovery_ratio": 0.0
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "passed": true,
+      "cue_specific_peak_rad": 3.45190189e-05,
+      "recovery_ratio": 0.0707,
+      "awa_depolarization_mV": 8.22381,
+      "awa_recovery_ratio": 2.319300406225466e-06
+    },
+    {
+      "case": "held-voltage",
+      "passed": false,
+      "cue_specific_peak_rad": 0.0,
+      "recovery_ratio": 0.0,
+      "awa_depolarization_mV": 0.0,
+      "awa_recovery_ratio": 0.0
+    }
+  ],
+  "blocked_controls_passed": true,
+  "elapsed_seconds": 3828.1078789109597,
+  "stop_reason": "time_budget",
+  "refinement_comparison": {
+    "maximum_cue_effect_difference_rad": 3.8631779939457545e-06,
+    "allowed_difference_rad": 7.5e-06,
+    "passed": true
+  },
+  "checkpoint_sha256": "1d864fdbcb3d0fec0f21fec6801fb8e74d9b18fe86ba54b2938193322def5245",
+  "parent_checkpoint_sha256": "98ea66551777dd8b228bf0ee59d97043ce32ec1b8d7f2e04f139887ecd26d6e2",
+  "original_anchor_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "warm_start_checkpoint_sha256": "180c2b9379ae3fff4b66458a511e044211241d257abdbe9276cbc59424182abf",
+  "resume_checkpoint_sha256": null,
+  "sensory_parameters_sha256": "debccda0d4641a01eea959ad6c5f2701cf350029181ca230e4d1bd323ad42001",
+  "frozen_fields_unchanged": true,
+  "neuron_connection_parameters_changed_from_parent": 8608,
+  "neuron_connection_parameters_changed_this_run": 3936,
+  "sensory_gain_multipliers": [
+    2.0,
+    0.8629421362303077,
+    0.546141090239211
+  ],
+  "source_revision": null,
+  "biological_fidelity_qualified": false,
+  "autonomous_oscillation_qualified": false,
+  "next_stage_launched": false,
+  "arithmetic": {
+    "low_dose_target_fraction": 0.97958537,
+    "required_low_dose_amplitude_gain_percent": 2.0840072366536067,
+    "low_dose_increase_percent": 17.405038318228172,
+    "objective_decrease_percent": 87.49797287441096,
+    "low_dose_target_shortfall_rad": 6.124388999999995e-07
+  },
+  "interpretation": "All required active variants except low dose pass current engineering gates. Low dose remains2.04% below target; do not round to a pass. Existing refinement compares nominal cue, not an independent fine-step low-dose qualification; maximum nominal refinement difference exceeds the remaining low-dose amplitude gap, though it is not a low-dose error estimate.",
+  "decision": "Plan E05860min same-objective continuation from this selected state and final PCG64 after proposal99. Keep original bounds/thresholds/fixed fields. No promotion or new server launch."
+}

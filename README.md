@@ -1340,3 +1340,28 @@ is supplied. The original numerical/recovery/control gates still apply.
 `continue_sensorimotor_mbslnx2.sh` automatically retains the selected search's
 training-cue mode and RNG for later continuations. A direct `--resume-run` with
 a changed cue mode is rejected; use `--warm-start-run` for a new objective.
+
+E057 server result:99 proposals, selected98,63.80minutes, qualification false.
+Nominal, high-dose, shifted-onset and nominal-refined responses now pass the
+current gates. Low dose reaches2.93875611e-5rad (97.96% of target), still below
+3e-5; controls and engineering refinement pass. Retain candidate1d864fdb... and
+same robust objective. Plan E05860min completed-search continuation with saved
+neural/sensory parameters and final RNG after99 (not selected98). No target or
+bound changes, stage promotion or new server launch. Near-threshold low-dose
+performance needs numerical care: current refinement is nominal-only, not a
+separate fine-step low-dose qualification. See
+[E057 server report](experiments/records/E057-server-summary.json).
+
+Continue this robust search with saved parameters and RNG; the continuation
+launcher reads the original cue mode automatically:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/continue_sensorimotor_mbslnx2.sh 60 &&
+tail -n 28 -F "$(ls -1t /home/carsonc/r-elegans-results/sensorimotor-*.log | head -n 1)"
+```
+
+This continues the current objective. Repeating the robust-stage launch command
+would instead warm-start another fresh search. Keep the selected E057 model and
+its sensory parameters independently even if the continuation does not improve.
