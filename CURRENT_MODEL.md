@@ -1,5 +1,15 @@
 # Current model: exact scope and computation path
 
+E054 read-only diagnostic is implemented and locally smoke-tested on an older
+checkpoint; actual E053 assessment is pending a server launch. It reports original
+bound occupancy and dense late-window dynamics from voltage through NMJs, filtered
+drive and body, with active/refined/held-voltage cases and actual-pose previews.
+It changes no weights and uses no periodic input. Numerical reporting floors and
+pointwise refinement differences are explicit; no biological pass is inferred.
+The [sustained-amplitude stage specification](experiments/sustained_amplitude_stage_v1.json)
+is a proposal pending that diagnostic, not an implemented trainer or new fit.
+
+
 E053 eight-hour continuation (user-reported, 2026-11-11): 865 additional
 proposals (global369 to1234) reduced the paired training objective11.1%, from
 44.993 to40.012. Matched refinement retained the gain. Sampled coarse bend

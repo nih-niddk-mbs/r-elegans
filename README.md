@@ -1189,3 +1189,20 @@ retained on timestep refinement. Coarse bend fluctuations grew29–126% but rema
 roughly11–34 times too small; calcium agreement was essentially unchanged.
 Most scalar improvement came from mean-bend error. See the
 [E053 analysis](experiments/records/E053-server-summary.json).
+
+### Inspect sustained motion and parameter bounds
+
+After the E053 fit, run the read-only diagnostic on mbslnx2:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_paired_diagnostic_mbslnx2.sh 40
+```
+
+It prints the selected checkpoint, log, bound report and motion-preview paths.
+The detached job runs40 simulated seconds each for active, refined and held-voltage
+controls. It records dense neural/muscle/body signals and separates repeated
+late fluctuations from posture and drift. No training or bound widening occurs.
+The next sustained-amplitude curriculum remains a proposal until these actual
+checkpoint diagnostics are available.

@@ -4419,3 +4419,72 @@ E053 evidence preservation completed: pasted server stdout, parsing/arithmetic
 script, compact analysis and file hashes copied to external OneDrive directory
 notebook/evidence/E053. This preserves the supplied report, not the full server
 checkpoint or trajectories. Cloud synchronization is not independently verified.
+
+## 2026-11-11 — Planned E054 sustained-motion and bound diagnostic
+
+User authorizes inspecting trajectories/bounds and preparing a sustained-amplitude
+curriculum after E053. First deliver a read-only diagnostic on the actual latest
+completed server paired checkpoint (expected E05398ea6655...); do not silently
+replace it with an older local model. Full E053 artifacts are not yet on this Mac.
+
+Question: do oscillations persist after settling, where along the neural -> NMJ
+-> filtered muscle -> body chain is dynamic range lost, and how many unknowns
+approach original factor2 bounds? Preserve the original anchor, fixed fields,
+zero tonic bias, and proprioceptive feedback. No fitting, external gait teacher,
+periodic input, parameter widening or biological promotion. Constant-voltage
+control is a diagnostic intervention only. Test selected network over40 simulated
+seconds, matched half timesteps, and held-voltage control; record dense voltage,
+calcium/indicator, NMJ activation, signed/filtered muscle commands and actual pose.
+Use late-window repeated-peak/trough sustained excursions, alongside std, linear
+trend and mean posture. No selected oscillation frequency or phase target.
+
+Acceptance: source/checkpoint/offset/hash consistency; exact input preservation;
+finite trajectories; no frozen-field changes; separate read-only reports for
+active, refined and held controls. Numeric diagnostics are descriptive, not a
+measurement of true biological channel densities or certified integration bounds.
+Keep original source/prepared data external, record full source/env/invocation,
+and archive the parent recursively. Locally verify software and an older local
+checkpoint smoke run, labeling it separately from E053. The user launches the
+actual server diagnostic. Define the next amplitude objective after this evidence;
+no further unchanged eight-hour fitting run in this step.
+
+E054 local software outcome:247 tests passed in78.52s. Two new tests cover bound
+occupancy (nonzero is not near-bound) and sustained excursion rejection of ramps,
+static offsets and decays. Both existing paired training recordings reproduce
+their saved indicator, joint and bend prediction arrays exactly with the default
+rollout path. Dense recording/held controls are opt-in and not used by fitting.
+
+A two-simulated-second smoke diagnostic on the older local E052 smoke candidate
+completed active, refined and held-voltage cases. Its checkpoint is not E053.
+The duration is intentionally too short for a sustained-motion qualification;
+zero reported repeated joints cannot be extrapolated to40s or the server model.
+That older local model had no offsets near original factor2 bounds. Full-trace
+refinement differences included max joint0.0001543rad, filtered drive0.001711,
+and max instantaneous voltage7.026mV; aggregate objective convergence must not
+be mistaken for pointwise voltage agreement. This observation is descriptive,
+not a certified timestep error or an E053 measurement. Reports include both full
+and late-window differences for future runs. Numerical reporting floors are
+explicit per-unit engineering thresholds, not biological acceptance criteria.
+
+Actual local diagnostic command:
+```
+JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.diagnose_paired_motion \
+ --run /tmp/r-elegans-E052-resume-smoke \
+ --output-dir /tmp/r-elegans-E054-local-final --duration 2
+```
+Source/environment captured automatically; trajectory hashes and exact invocation
+stay external. Local default-path comparison command and stdout preserved too.
+
+Prepared server command `sh scripts/launch_paired_diagnostic_mbslnx2.sh 40` selects
+and verifies the latest completed paired search, preserves it recursively, and
+runs three read-only cases under nohup. The expected latest source remains E053;
+only the actual server report will establish its bound occupancy and sustained
+signal-chain behavior. A proposed curriculum specification is saved in
+experiments/sustained_amplitude_stage_v1.json; its trainer is not implemented or
+launched. Revised selection is a new stage, not an exact E050 continuation.
+
+E054 evidence copied and local-final files SHA256-verified under external
+OneDrive/r-elegans/notebook/evidence/E054, including default-path comparison and
+full test output. The preliminary smoke without numerical reporting floors is
+also preserved; its tiny-amplitude repeat counts are not biological rhythms.
+Local archives do not constitute retrieval of E053 or verified cloud sync.

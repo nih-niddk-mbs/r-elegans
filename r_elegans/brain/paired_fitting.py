@@ -52,7 +52,7 @@ def training_windows(root, uids, frames=8, start=0):
 
 
 def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
-                 brain_step_ms=.1,burn_in=2.,sampling="boxcar"):
+                 brain_step_ms=.1,burn_in=2.,sampling="boxcar",record_dense=False,hold_voltage=False):
     """Endogenous brain -> frozen NMJ -> body -> proprioception, no pacing.
 
     Media are explicitly mismatched mechanical hypotheses, not source-condition
@@ -62,6 +62,7 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
     import jax
     from r_elegans.body import physical_muscle_body_params, build_muscle_projection
     from r_elegans.body.closed_loop import initial_embodied_state, embodied_neural_step
+    from r_elegans.body.channel_bridge import channel_muscle_activations
     from r_elegans.body.actuation import muscle_body_step
     from r_elegans.body.neuromuscular import project_muscles_to_joints
     from r_elegans.body.embodied_sensory import (EmbodiedSensoryConfig,default_chemical_world,build_sensory_maps)
@@ -83,6 +84,9 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
     signed = np.asarray(projection.dorsal_weights)-np.asarray(projection.ventral_weights)
     substeps = math.ceil(dt*1000/brain_step_ms)
     def neural(state,params):
+        if hold_voltage:
+            brain=state.brain_body.brain
+            return brain,state.sensory,channel_muscle_activations(brain.voltage_mV,fixed,parent,model),None,None
         return embodied_neural_step(state,params,fixed,config,parent,model,body,world,maps,dt,substeps,sc)
     fast_neural = jax.jit(neural)
     def liquid_step(state,params):
@@ -90,7 +94,8 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
         dorsal,ventral = project_muscles_to_joints(muscles,projection)
         newbody = muscle_body_step(state.brain_body.body,body,dorsal,ventral,dt)
         state = state._replace(brain_body=state.brain_body._replace(brain=brain,body=newbody),sensory=sensory)
-        return state,(brain.indicator,newbody.joint_angles)
+        extra=(brain.voltage_mV,brain.calcium_uM,muscles,newbody.muscle_activation,newbody.position,newbody.heading) if record_dense else ()
+        return state,(brain.indicator,newbody.joint_angles)+extra
     @jax.jit
     def liquid_chunk(state,params):
         return jax.lax.scan(lambda s,_:liquid_step(s,params),state,None,length=100)
@@ -102,6 +107,12 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
         state = initial_embodied_state(fixed,config,body,world,sc)
         indicators = [np.asarray(state.brain_body.brain.indicator)]
         angles = [np.asarray(state.brain_body.body.joint_angles)]
+        extra_buffers=None
+        if record_dense:
+            initial_muscles=channel_muscle_activations(state.brain_body.brain.voltage_mV,fixed,parent,model)
+            extra_buffers=[[np.asarray(v)] for v in (state.brain_body.brain.voltage_mV,
+                state.brain_body.brain.calcium_uM,initial_muscles,state.brain_body.body.muscle_activation,
+                state.brain_body.body.position,state.brain_body.body.heading)]
         requested = burn_in+times
         mid = (requested[1:]+requested[:-1])/2
         edges = np.r_[requested[0]-(requested[1]-requested[0])/2,mid,requested[-1]+(requested[-1]-requested[-2])/2]
@@ -111,6 +122,8 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
             for _ in range(math.ceil(steps/100)):
                 state,trace = liquid_chunk(state,params)
                 indicators.extend(np.asarray(trace[0])); angles.extend(np.asarray(trace[1]))
+                if record_dense:
+                    for buffer,value in zip(extra_buffers,trace[2:]):buffer.extend(np.asarray(value))
         else:
             state = state._replace(brain_body=state.brain_body._replace(body=jax.tree_util.tree_map(
                 lambda x:np.asarray(x,dtype=float),state.brain_body.body)))
@@ -121,6 +134,9 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
                     signed.astype(float)@np.asarray(muscles,dtype=float),body,law,dt,initial_velocity=velocity)
                 state = state._replace(brain_body=state.brain_body._replace(brain=brain,body=nextbody),sensory=memory)
                 indicators.append(np.asarray(brain.indicator));angles.append(np.asarray(nextbody.joint_angles))
+                if record_dense:
+                    for buffer,value in zip(extra_buffers,(brain.voltage_mV,brain.calcium_uM,muscles,
+                        nextbody.muscle_activation,nextbody.position,nextbody.heading)):buffer.append(np.asarray(value))
         sample_time = np.arange(len(indicators))*dt
         def sample(values):
             values=np.asarray(values)
@@ -135,5 +151,15 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
         q=np.column_stack([np.interp(requested,sample_time,dense_q[:,j]) for j in range(11)])
         if not np.isfinite(indicator).all() or not np.isfinite(q).all():
             raise ValueError('Nonfinite rollout')
-        return dict(indicator=indicator,joints=q,bends=bends)
+        result=dict(indicator=indicator,joints=q,bends=bends)
+        if record_dense:
+            result['dense_time_s']=sample_time
+            result['dense_indicator']=np.asarray(indicators)
+            result['dense_joints']=dense_q
+            for key,buffer in zip(('dense_voltage_mV','dense_calcium_uM','dense_muscles',
+                    'dense_filtered_drive','dense_position','dense_heading'),extra_buffers):
+                result[key]=np.asarray(buffer)
+            result['dense_command']=result['dense_muscles'].astype(float)@signed.astype(float).T
+            if any(not np.isfinite(v).all() for v in result.values()):raise ValueError('Nonfinite diagnostic trace')
+        return result
     return run
