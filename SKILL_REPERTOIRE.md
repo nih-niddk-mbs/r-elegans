@@ -598,3 +598,24 @@ precision/feedback results remain unreported in this excerpt. Request the
 complete compact table from the saved summary; do not launch another run.
 Evidence is user-reported partial stdout; no artifacts independently retrieved.
 See [partial result](experiments/records/E065-server-partial-summary.json).
+
+## E065 full family comparison — 2026-11-12
+
+E065 full server table (2026-11-12):60s comparisons isolate the suppressing
+parameter family in this setup. Old channel scales + old connections yield
+54 repeating voltage/92 muscle/11 joint channels; old scales + fitted connections
+37/90/11. Fitted channel scales yield0/0/0 with either connection family. Cue
+and sham agree in these counts; current-model early reference checks pass.
+Old/old repeats with half neural step, initial voltage +/-1mV and both tested
+precisions; feedback blocking changes54 to53 voltage channels, retaining
+muscle/joint repetition. Fixed kinetics, leak, capacitance and topology were
+unchanged. This implicates fitted non-leak density scales for these parents,
+not a specific channel, universal absence of oscillators or biological cause.
+See [full compact evidence](experiments/records/E065-server-summary.json).
+
+Preserve old/old as tested reference and old-channel/new-connection as a separate
+candidate. The hybrid still needs its own refinement/perturbation checks and
+amplitude/coordination assessment; old/old controls cannot substitute. More
+repeating neurons is not automatically better fidelity. Proposed next fitting
+stage freezes recovered channel scales initially, retaining an explicit rhythm
+guard before later channel adaptation. No new simulation or fitting launched.

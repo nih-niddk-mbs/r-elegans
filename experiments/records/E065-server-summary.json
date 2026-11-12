@@ -1,0 +1,150 @@
+{
+  "experiment": "E065",
+  "record_date": "2026-11-12 America/New_York",
+  "evidence": "User-pasted complete compact15-case table plus previously supplied footer; summary, trajectories and source capsule not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/rhythm-comparison-20261112T185742Z-865067",
+  "execution_valid": true,
+  "common_float64_initial_state_from_previous_footer": true,
+  "duration_simulated_s": 60.0,
+  "exit_code_from_previous_footer": 0,
+  "source_revision": null,
+  "server_environment": null,
+  "exact_invocation": null,
+  "elapsed_seconds": null,
+  "expected_old_sha256_from_plan": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "expected_new_sha256_from_plan": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
+  "old_new_candidate_path": "/home/carsonc/r-elegans-results/rhythm-comparison-20261112T185742Z-865067/old-new-sham/evaluated_network.npz",
+  "old_new_candidate_sha256": null,
+  "cases": [
+    {
+      "case": "new-new-cue",
+      "exit_code": 0,
+      "repeating_voltage_channels": 0,
+      "repeating_muscle_channels": 0,
+      "repeating_joint_channels": 0,
+      "early_reference_match": true
+    },
+    {
+      "case": "new-new-sham",
+      "exit_code": 0,
+      "repeating_voltage_channels": 0,
+      "repeating_muscle_channels": 0,
+      "repeating_joint_channels": 0,
+      "early_reference_match": true
+    },
+    {
+      "case": "new-new-sham-neural-half",
+      "exit_code": 0,
+      "repeating_voltage_channels": 0,
+      "repeating_muscle_channels": 0,
+      "repeating_joint_channels": 0,
+      "early_reference_match": null
+    },
+    {
+      "case": "new-old-cue",
+      "exit_code": 0,
+      "repeating_voltage_channels": 0,
+      "repeating_muscle_channels": 0,
+      "repeating_joint_channels": 0,
+      "early_reference_match": null
+    },
+    {
+      "case": "new-old-sham",
+      "exit_code": 0,
+      "repeating_voltage_channels": 0,
+      "repeating_muscle_channels": 0,
+      "repeating_joint_channels": 0,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-new-cue",
+      "exit_code": 0,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-new-sham",
+      "exit_code": 0,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-cue",
+      "exit_code": 0,
+      "repeating_voltage_channels": 54,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham",
+      "exit_code": 0,
+      "repeating_voltage_channels": 54,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-feedback-off",
+      "exit_code": 0,
+      "repeating_voltage_channels": 53,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-float32",
+      "exit_code": 0,
+      "repeating_voltage_channels": 54,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-float32-feedback-off",
+      "exit_code": 0,
+      "repeating_voltage_channels": 53,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-neural-half",
+      "exit_code": 0,
+      "repeating_voltage_channels": 54,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-voltage-minus",
+      "exit_code": 0,
+      "repeating_voltage_channels": 54,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-voltage-plus",
+      "exit_code": 0,
+      "repeating_voltage_channels": 54,
+      "repeating_muscle_channels": 92,
+      "repeating_joint_channels": 11,
+      "early_reference_match": null
+    }
+  ],
+  "interpretation": "For the tested parents, initialization, current sensory/body coupling and finite-window detector, replacing old non-leak channel-density scales with fitted scales suppresses detected repetitions with either connection family; old scales retain repetitions with either family. Chemical+gap strengths alter detected population coverage, but fitted strengths are compatible with repetition when old channel scales are restored.",
+  "limitations": [
+    "No single responsible channel/cell identified; fixed kinetics, leak, capacitance and topology were held unchanged.",
+    "Does not date suppression within paired/sensory/alternation training lineage.",
+    "Counts do not compare waveform quality, functional neural recruitment, amplitudes, phase coordination or biological fidelity.",
+    "Old-old refinement/perturbation controls do not validate old-new hybrid robustness.",
+    "Finite60s trials and count agreement do not establish asymptotic limit cycles or certified numerical convergence."
+  ],
+  "decision": "Retain old-old as tested oscillatory reference; retain old-new as independent candidate preserving fitted connections. Validate candidate amplitude/persistence/phase and its own refinement/initial-state controls before choosing a new fitting parent. Initially freeze recovered channel scales while fitting motor coordination, then allow bounded channel adaptation with explicit rhythm-retention criteria if needed.",
+  "new_experiment_or_training_launched": false
+}

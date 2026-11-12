@@ -5547,3 +5547,43 @@ before attributing suppression to channels or synapses. No new training,
 restoration or simulation launched; next action is read existing summary.
 Original actual server files not retrieved or independently backed up here.
 Records/docs only this turn; JSON/diff checks, no numerical test rerun needed.
+
+## 2026-11-12 — E065 complete family table: density scales suppress rhythms
+
+User supplied all15 compact rows and duration60.0s, execution_validTrue.
+Full compact transcription E065-server-summary.json supersedes incomplete
+family information in the earlier partial entry, which is preserved. Every
+case exit0; new/new cue and sham reference_matchTrue. Metadata/source/trajectories
+not independently retrieved. Expected source hashes remain plan-derived;
+actual hybrid hash was not printed and remains unknown.
+
+Primary matrix (repeating voltage/muscle/joint counts): old-channel/old-synapse
+54/92/11; old-channel/new-synapse37/90/11; new-channel/old-synapse0/0/0;
+new-channel/new-synapse0/0/0. Cue and sham each give the same counts. Channels
+here means fitted conductance-density log scales; kinetics, leak, capacitance,
+release properties and anatomical topology are fixed and compatibility-checked.
+Within this controlled setup, density-scale replacement is sufficient to
+suppress detected late repetition with either synaptic-strength family; new
+chemical+electrical strengths still permit repetition with old channel scales.
+This does not identify individual responsible channels, date changes within
+the training lineage or establish biological causality. Count changes54->37
+must not be interpreted as reduced/increased fidelity without waveform/data
+and recruitment evidence.
+
+Old/old controls:64 half-neural-step and +/-1mV initial shifts each54/92/11;
+float32 feedback-on54/92/11, feedback-off53/92/11;64 feedback-off53/92/11.
+New/new half-neural-step0/0/0. Supports old reference repetitions across tested
+settings, not a certified integration bound or asymptotic limit-cycle proof.
+Old-new hybrid lacks its own refinement/perturbation controls in this suite.
+
+Decision: retain validated old/old reference and independent old-channel/new-
+connection candidate at known case output path. Candidate checkpoint hash must
+be read and verified before promotion; do not overwrite original source model
+or call this a greedy-search continuation (hybrid has no matching optimizer
+state). Next proposed work validates its numerical/initial-state sensitivity,
+amplitude/persistence and regional phase relations. Then create an explicitly
+initialized independent fitting stage with recovered channel scales held fixed
+while optimizing coordination, preserving neural repetition. Broader channel
+training can return later with bounds/retention guards. No new comparison,
+objective implementation, restore or fitting this turn. E062 remains separate.
+Records/docs only; JSON/count/diff checks, no numerical test rerun needed.

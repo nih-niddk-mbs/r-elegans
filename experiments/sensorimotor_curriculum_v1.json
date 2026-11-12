@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E062_recovery_pass_E064_no_detected_neural_rhythm_in_current_parent_or_best",
+  "status": "E065_old_channel_scales_restore_detected_rhythm_with_fitted_connections",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -131,7 +131,7 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E064-server-summary.json",
-  "continuation": "E065 execution reported complete; old/old perturbation/neural-half controls retain repetitions. Read full primary hybrid and feedback/precision table before choosing a restoration or fit. No new run.",
-  "next_diagnostic": "experiments/records/E065-server-partial-summary.json"
+  "server_evidence": "experiments/records/E065-server-summary.json",
+  "continuation": "No new run: preserve old-old reference and old-new candidate; validate candidate robustness/coordination before frozen-channel motor fitting. Later density adaptation requires rhythm-retention criteria.",
+  "next_diagnostic": "Candidate old-new own neural-step, perturbation, amplitude and phase/persistence assessment; not yet implemented/launched"
 }
