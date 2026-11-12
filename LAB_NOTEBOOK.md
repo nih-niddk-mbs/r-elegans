@@ -5524,3 +5524,26 @@ full source/env/argv/stdout/tests/audit; earlier archived training dependencies
 remain intact. No actual server3fabef... retrieval/evaluation or cloud-sync
 confirmation. Archive receipt added after source capture, without numerical
 source changes. Server launch remains for user after push.
+
+## 2026-11-12 — E065 partial server controls reported
+
+User reports rhythm-comparison-20261112T185742Z-865067 footer execution_validTrue,
+common_float64_initial_stateTrue, exit0. Three complete rows supplied:
+old-old-sham-neural-half, old-old-sham-voltage-minus, old-old-sham-voltage-plus.
+Each has54 repeating voltage,3 calcium,92 muscle,11 command,11 filtered-drive
+and11 joint channels, including17 numbered body motor names,8 RMD/SMD/SMB
+and8 AVA/AVB/AVD/AVE/PVC names, none AWA. Exact names retained in compact record
+E065-server-partial-summary.json. Beginning fragment has no case identifier;
+not assigned. Requested60s default is known from launcher, actual duration,
+source/env/argv and individual primary hybrid rows not supplied in excerpt.
+Footer validity is recorded as reported, not substituted for missing rows.
+
+Interpretation: old parent retains finite-window repetitions through smaller
+neural step and +/-1mV initial shifts under the planned64 controls. This is
+stronger support for the old circuit as an oscillatory starting point; not
+proof of limit-cycle convergence, certified numerical robustness or biological
+fidelity. Full four-way primary and precision/feedback tables must be read
+before attributing suppression to channels or synapses. No new training,
+restoration or simulation launched; next action is read existing summary.
+Original actual server files not retrieved or independently backed up here.
+Records/docs only this turn; JSON/diff checks, no numerical test rerun needed.

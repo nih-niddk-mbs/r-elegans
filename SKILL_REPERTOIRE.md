@@ -584,3 +584,17 @@ No fitting or periodic drive. Local15-case12s software smoke and279-test suite
 passed; this used an older local fitted model, not actual server3fabef... .
 Server comparison remains unexecuted here. E062 recovery skill remains separate.
 See [E065 method and verification](experiments/records/E065-rhythm-comparison.json).
+
+## E065 partial server controls — 2026-11-12
+
+E065 server footer reports successful execution and common float64 initial
+states for rhythm-comparison-20261112T185742Z-865067. Three complete control
+rows were supplied: old/old neural-half and initial-voltage +/-1mV each retain
+54 repeating voltage channels,3 calcium,92 muscles and11 command/drive/joint
+channels under the diagnostic floors. This supports the earlier oscillatory
+parent as a starting point under tested controls; it does not identify the
+parameter family suppressing current-model rhythms. Primary hybrid rows and
+precision/feedback results remain unreported in this excerpt. Request the
+complete compact table from the saved summary; do not launch another run.
+Evidence is user-reported partial stdout; no artifacts independently retrieved.
+See [partial result](experiments/records/E065-server-partial-summary.json).

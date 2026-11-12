@@ -1,0 +1,188 @@
+{
+  "experiment": "E065",
+  "evidence": "Partial user-pasted server stdout, three complete control rows plus cohort footer; no independent artifact retrieval",
+  "record_date": "2026-11-12 America/New_York",
+  "run": "/home/carsonc/r-elegans-results/rhythm-comparison-20261112T185742Z-865067",
+  "exit_code": 0,
+  "execution_valid": true,
+  "common_float64_initial_state": true,
+  "requested_duration_s_from_launcher": 60,
+  "reported_duration_s": null,
+  "source_revision": null,
+  "server_environment": null,
+  "exact_invocation": null,
+  "elapsed_seconds": null,
+  "expected_old_sha256_from_plan": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "expected_new_sha256_from_plan": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
+  "cases": [
+    {
+      "case": "old-old-sham-neural-half",
+      "exit_code": 0,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "repeating_motor_neurons": {
+        "numbered_body_motor_names": [
+          "DA01",
+          "DA02",
+          "DA03",
+          "DA04",
+          "DA05",
+          "DA06",
+          "DA07",
+          "DA08",
+          "DA09",
+          "DB03",
+          "AS01",
+          "AS11",
+          "VA08",
+          "VD05",
+          "VD08",
+          "VD12",
+          "VD13"
+        ],
+        "RMD_SMD_SMB_names": [
+          "RMDL",
+          "RMDR",
+          "RMDVL",
+          "RMDVR",
+          "SMDDL",
+          "SMDDR",
+          "SMDVL",
+          "SMDVR"
+        ],
+        "AVA_AVB_AVD_AVE_PVC_names": [
+          "AVDR",
+          "AVEL",
+          "AVER",
+          "AVBL",
+          "AVAL",
+          "AVAR",
+          "PVCL",
+          "PVCR"
+        ],
+        "AWA_names": []
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-voltage-minus",
+      "exit_code": 0,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "repeating_motor_neurons": {
+        "numbered_body_motor_names": [
+          "DA01",
+          "DA02",
+          "DA03",
+          "DA04",
+          "DA05",
+          "DA06",
+          "DA07",
+          "DA08",
+          "DA09",
+          "DB03",
+          "AS01",
+          "AS11",
+          "VA08",
+          "VD05",
+          "VD08",
+          "VD12",
+          "VD13"
+        ],
+        "RMD_SMD_SMB_names": [
+          "RMDL",
+          "RMDR",
+          "RMDVL",
+          "RMDVR",
+          "SMDDL",
+          "SMDDR",
+          "SMDVL",
+          "SMDVR"
+        ],
+        "AVA_AVB_AVD_AVE_PVC_names": [
+          "AVDR",
+          "AVEL",
+          "AVER",
+          "AVBL",
+          "AVAL",
+          "AVAR",
+          "PVCL",
+          "PVCR"
+        ],
+        "AWA_names": []
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-voltage-plus",
+      "exit_code": 0,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "repeating_motor_neurons": {
+        "numbered_body_motor_names": [
+          "DA01",
+          "DA02",
+          "DA03",
+          "DA04",
+          "DA05",
+          "DA06",
+          "DA07",
+          "DA08",
+          "DA09",
+          "DB03",
+          "AS01",
+          "AS11",
+          "VA08",
+          "VD05",
+          "VD08",
+          "VD12",
+          "VD13"
+        ],
+        "RMD_SMD_SMB_names": [
+          "RMDL",
+          "RMDR",
+          "RMDVL",
+          "RMDVR",
+          "SMDDL",
+          "SMDDR",
+          "SMDVL",
+          "SMDVR"
+        ],
+        "AVA_AVB_AVD_AVE_PVC_names": [
+          "AVDR",
+          "AVEL",
+          "AVER",
+          "AVBL",
+          "AVAL",
+          "AVAR",
+          "PVCL",
+          "PVCR"
+        ],
+        "AWA_names": []
+      },
+      "early_reference_match": null
+    }
+  ],
+  "unassigned_initial_fragment": "Excerpt begins in a truncated preceding row; its counts/case identifier are unavailable and not attributed.",
+  "missing": "Full primary four-way cue/sham family table, feedback/float32 controls and current-reference reproduction details are not pasted. Cohort footer reports execution_valid, but individual results are not reconstructed from that flag.",
+  "interpretation": "Old/old controls retain detected neural, muscle and joint repetitions under half neural step and +/-1mV initial-voltage shifts. This supports an oscillatory starting point under tested conditions, not a unique family diagnosis or certified numerical/biological robustness.",
+  "decision": "Read complete saved cohort table before choosing channel vs connection restoration or training. No new simulation or optimization launched."
+}

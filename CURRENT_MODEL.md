@@ -1,6 +1,18 @@
 # Current model: exact scope and computation path
 
-E065 controlled rhythm comparison is ready for the user to launch on mbslnx2
+E065 server footer reports successful execution and common float64 initial
+states for rhythm-comparison-20261112T185742Z-865067. Three complete control
+rows were supplied: old/old neural-half and initial-voltage +/-1mV each retain
+54 repeating voltage channels,3 calcium,92 muscles and11 command/drive/joint
+channels under the diagnostic floors. This supports the earlier oscillatory
+parent as a starting point under tested controls; it does not identify the
+parameter family suppressing current-model rhythms. Primary hybrid rows and
+precision/feedback results remain unreported in this excerpt. Request the
+complete compact table from the saved summary; do not launch another run.
+Evidence is user-reported partial stdout; no artifacts independently retrieved.
+See [partial result](experiments/records/E065-server-partial-summary.json).
+
+Historical E065 preparation (partial server result now reported above)
 (2026-11-12). Four full-network combinations separate old/new channel scales
 from old/new chemical+electrical strengths. Fixed fields, leak, anatomy and
 muscle readout must match exactly. All primary cases share the current E063
@@ -9,7 +21,7 @@ simulations include cue/sham, initial-state, precision, feedback and neural-step
 controls, with four concurrent workers on disjoint four-physical-core groups.
 No fitting or periodic drive. Local15-case12s software smoke and279-test suite
 passed; this used an older local fitted model, not actual server3fabef... .
-Server comparison remains unexecuted here. E062 recovery skill remains separate.
+Server execution is now reported complete; family-table interpretation awaits full output. E062 remains separate.
 See [E065 method and verification](experiments/records/E065-rhythm-comparison.json).
 
 E064 server diagnosis (2026-11-12): no detected qualifying repeated signal

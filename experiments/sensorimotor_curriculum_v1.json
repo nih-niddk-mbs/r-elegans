@@ -132,6 +132,6 @@
     }
   ],
   "server_evidence": "experiments/records/E064-server-summary.json",
-  "continuation": "E065 controlled comparison prepared, no server simulation launched here: old/current2x2 channel/synapse families,15 independent60s cases on4 workers; preserve E062",
-  "next_diagnostic": "experiments/records/E065-rhythm-comparison.json"
+  "continuation": "E065 execution reported complete; old/old perturbation/neural-half controls retain repetitions. Read full primary hybrid and feedback/precision table before choosing a restoration or fit. No new run.",
+  "next_diagnostic": "experiments/records/E065-server-partial-summary.json"
 }
