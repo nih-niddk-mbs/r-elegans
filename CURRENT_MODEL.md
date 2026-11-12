@@ -1,12 +1,29 @@
 # Current model: exact scope and computation path
 
-E064 read-only signal-chain diagnostic is implemented and locally verified
+E064 server diagnosis (2026-11-12): no detected qualifying repeated signal
+at any of the six measured stages in all26 saved traces. Both baseline and best
+have zero reported voltage-reversing channels across302 neurons in4–12s, under
+the explicit reporting floors. Their nonzero voltage/body ranges are drift,
+not demonstrated rhythms. The absence is already visible upstream of muscles;
+this does not prove a unique causal defect or exclude downstream limitations.
+Held voltage has no repeated pattern; residual passive body relaxation remains.
+Input hashes were reported unchanged and the diagnostic exited0. Evidence is
+user-pasted stdout, not independently retrieved trajectories. See
+[server diagnosis](experiments/records/E064-server-summary.json).
+
+Decision: first recheck the earlier preserved oscillatory checkpoint with the
+same float64 precision, initialization and sensory/body coupling. Its old
+rhythm must not be assumed to survive that comparison. If confirmed, build
+from that independent parent and prioritize neural repetitions before body
+alternation. Preserve E062's separate sensory-response skill. No new fitting
+objective, comparison simulation or training run has been launched.
+
+Historical E064 readiness (server result above): the diagnostic was implemented and locally verified
 (2026-11-12). It reads saved E063 baseline/best and all validation active/sham
 signals, counts raw extrema across every channel, and writes per-channel tables
 and raw-signal figures externally. Inputs are hash-checked before and after;
 no simulation, fitting or JAX/GPU initialization. The local fixture is an older
-checkpoint, not the eight-hour server model. Actual server analysis remains
-pending the user launch. No next training objective or job has been started.
+checkpoint, not the eight-hour server model. Server analysis subsequently completed; see the dated result above. No next training objective or job has been started.
 See [diagnostic record](experiments/records/E064-signal-chain-diagnostic.json).
 
 E063 eight-hour server outcome (2026-11-12): no qualifying alternation after

@@ -5376,3 +5376,52 @@ archive. Manifest04d96b241d2273ad94b858bf73cde144b0291c820b2b787ac2ca6c71247e363
 dependency record c68ca4d400a7b522f2a49c4544729663b5bf6025c7cf0fb78ede3f72c640512b.
 No actual server artifact retrieval or cloud-sync confirmation. Archive receipt
 added after final reviewed-source capture; numerical diagnostic source unchanged.
+
+## 2026-11-12 — E064 server diagnosis: neural rhythm absent in current lineage
+
+User-pasted stdout from alternation-signals-20261112T171621Z-862622,
+exit0, input hashes reported unchanged. Complete26 trace count rows and four
+named-group rollups transcribed to E064-server-summary.json. Raw transcription
+hash recorded there; actual summary/source/trajectories not independently
+retrieved. Exact argv/revision/env/runtime not supplied. Expected checkpoint
+from pinned launcher3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b;
+actual verification SHA was not printed, so it is not independently transcribed.
+
+Every trace has zero qualifying repetitions at all six measured stages.
+Both baseline and best have zero reported raw voltage-reversing channels across
+302 neurons over4–12s at.1mV reporting floor/.01mV prominence. Baseline has one
+calcium and one muscle reversing channel but no repetitions; best has neither.
+Baseline/best maximum raw voltage ranges4.339994864919701/5.393828777474768mV,
+joint ranges .05142383248289345/.04885415558907638rad: nonzero drift, not
+constant silence and not oscillation amplitude. Onset-shift has one command
+and one filtered-drive reversal, no repeated pattern. Held-voltage joint traces
+have two reversing channels but zero repeats, consistent with passive relaxation
+rather than driven oscillation. Other held signals flat apart from command
+roundoff9.71445e-17. Proprioceptive blocking changes drift magnitudes but does
+not restore a neural or motor pattern.
+
+Interpretation: earliest observed absence of a repeated pattern is already
+neural in current E062 baseline and E063 fitted model. The hypothesis that a
+working oscillator merely needs more body amplitude is unsupported for this
+lineage. Counts are finite-window/floor-dependent, not proof of no smaller or
+slower rhythm. Summary alone cannot identify responsible neurons/channels,
+prove convergence to an equilibrium, or exclude downstream constraints. The
+older local fixture used to test E064 was separately oscillatory and was never
+evidence that this actual server parent oscillated.
+
+Decision correction: before a new first-body-reversal objective, recheck the
+independently preserved earlier oscillatory parent under identical float64,
+initial voltages/states and sensory/body coupling. Do not assume earlier
+float32/autonomy results survive this controlled comparison. If reproducible,
+use that independent parent for neural-rhythm-first fitting, then motor
+alternation. Preserve E062 sensory-response checkpoint and E063 negative run.
+No new objective, numerical code, comparison simulation or training executed
+this turn. Record proposed comparison as planned before eventual execution.
+
+E064 server transcription archived under notebook/evidence/E064-server-20261112T171621Z-862622:
+three copied files SHA256-compared (pasted stdout, parsed compact record and
+transcription script). Raw stdout SHAe0687c8d1bbded4d9bb20c7582a387eb8128129e022027991196de01b53a12c3;
+manifest ed08c9ec185e54a0deb1290da88028dca87d06f1cf694512932d455f8fde0e22.
+This preserves user-reported text only; no actual server trajectories/model
+retrieved, and no cloud-sync assertion. No software tests repeated because
+this turn changes only records/documentation; JSON/count/diff checks pass.

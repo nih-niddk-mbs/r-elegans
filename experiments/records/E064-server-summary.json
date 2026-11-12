@@ -1,0 +1,1252 @@
+{
+  "experiment": "E064",
+  "evidence": "User-pasted server stdout; actual summary/trajectories/source capsule not independently retrieved",
+  "record_date": "2026-11-12 America/New_York",
+  "run": "/home/carsonc/r-elegans-results/alternation-signals-20261112T171621Z-862622",
+  "exit_code": 0,
+  "reported_input_hashes_unchanged": true,
+  "source_run": "/home/carsonc/r-elegans-results/alternation64-20261112T042107Z-791518",
+  "expected_source_checkpoint_sha256_from_launcher": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
+  "reported_verified_checkpoint_sha256": null,
+  "source_revision": null,
+  "server_environment": null,
+  "exact_invocation": null,
+  "elapsed_seconds": null,
+  "transcription_sha256": "e0687c8d1bbded4d9bb20c7582a387eb8128129e022027991196de01b53a12c3",
+  "raw_transcription_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E064-server-20261112T171621Z-862622/server-stdout.txt",
+  "observation": "Saved samples4..12s; late-window engineering reporting criteria, not proof of exact absence of smaller/slower rhythms",
+  "reporting_floors": {
+    "dense_voltage_mV": 0.1,
+    "dense_calcium_uM": 0.001,
+    "dense_muscles": 0.0001,
+    "dense_command": 0.0001,
+    "dense_filtered_drive": 0.0001,
+    "dense_joints": 1e-05
+  },
+  "peak_prominence": "0.1 times field floor (minimum1e-10); raw-reversal reporting also requires full raw range >=floor",
+  "traces": [
+    {
+      "phase": "baseline",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 4.339994864919701
+        },
+        "dense_calcium_uM": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.09208150783230273
+        },
+        "dense_muscles": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.0057309578862086985
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0034869054080382544
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0035559189673266822
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.05142383248289345
+        }
+      }
+    },
+    {
+      "phase": "baseline",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 4.340002395201804
+        },
+        "dense_calcium_uM": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.09208142787566098
+        },
+        "dense_muscles": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.00572828405444703
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0034868237249916223
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.003554853095417976
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.05142032833403398
+        }
+      }
+    },
+    {
+      "phase": "baseline",
+      "label": "dose-low",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 4.339995807206257
+        },
+        "dense_calcium_uM": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.09208149774027063
+        },
+        "dense_muscles": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.005730618818998057
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0034868982797104098
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0035557864287233676
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.05142336855728509
+        }
+      }
+    },
+    {
+      "phase": "best",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393828777474768
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362551657230943
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013840724098776791
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.00848316971186222
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008624029315876691
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04885415558907638
+        }
+      }
+    },
+    {
+      "phase": "best",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393838478495153
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362543948431833
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013836835352115218
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482553544115173
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622385148428613
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884996799399881
+        }
+      }
+    },
+    {
+      "phase": "best",
+      "label": "dose-low",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393829985864301
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362550685999537
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013840229550634353
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008483093411814413
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008623823285030807
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.048853608628490724
+        }
+      }
+    },
+    {
+      "phase": "validation/active",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393828777474768
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362551657230943
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013840724098776791
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.00848316971186222
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008624029315876691
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04885415558907638
+        }
+      }
+    },
+    {
+      "phase": "validation/active",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393838478495153
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362543948431833
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013836835352115218
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482553544115173
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622385148428613
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884996799399881
+        }
+      }
+    },
+    {
+      "phase": "validation/dose-low",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393829985864301
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362550685999537
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013840229550634353
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008483093411814413
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008623823285030807
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.048853608628490724
+        }
+      }
+    },
+    {
+      "phase": "validation/dose-low",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393838478495153
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362543948431833
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013836835352115218
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482553544115173
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622385148428613
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884996799399881
+        }
+      }
+    },
+    {
+      "phase": "validation/dose-high",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393827760543436
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.083625524737172
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013841142115307514
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008483233793209866
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008624202844934037
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.048854620979958366
+        }
+      }
+    },
+    {
+      "phase": "validation/dose-high",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393838478495153
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362543948431833
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013836835352115218
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482553544115173
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622385148428613
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884996799399881
+        }
+      }
+    },
+    {
+      "phase": "validation/onset-shift",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393820569212522
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362541022854142
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013889269650013913
+        },
+        "dense_command": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008498618861752183
+        },
+        "dense_filtered_drive": {
+          "reversing": 1,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008656397981704506
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04885310685672696
+        }
+      }
+    },
+    {
+      "phase": "validation/onset-shift",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393838478495153
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362543948431833
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013836835352115218
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482553544115173
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622385148428613
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884996799399881
+        }
+      }
+    },
+    {
+      "phase": "validation/refined",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393545034041658
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362013626938447
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013841203828183657
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008483479369198993
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008625070100644838
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04885662225587825
+        }
+      }
+    },
+    {
+      "phase": "validation/refined",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393554734877021
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362005911848813
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.01383730869309363
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482861792042856
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008623416895246538
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.048852440050699414
+        }
+      }
+    },
+    {
+      "phase": "validation/chemical-blocked",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393838478495153
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362543948431833
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013836835352115218
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482553544115173
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622385148428613
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884996799399881
+        }
+      }
+    },
+    {
+      "phase": "validation/chemical-blocked",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393838478495153
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362543948431833
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013836835352115218
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482553544115173
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622385148428613
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884996799399881
+        }
+      }
+    },
+    {
+      "phase": "validation/proprioceptive-blocked",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393752414451306
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.0836249770949018
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.0012495129812923889
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0004692357680393111
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0004986340811764522
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04824284031617543
+        }
+      }
+    },
+    {
+      "phase": "validation/proprioceptive-blocked",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393762131663962
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362489986187338
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.0012463163444030867
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0004678226010869646
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0004952621286150594
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04823852978020804
+        }
+      }
+    },
+    {
+      "phase": "validation/held-voltage",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 9.71445146547012e-17
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_joints": {
+          "reversing": 2,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.013308569837218454
+        }
+      }
+    },
+    {
+      "phase": "validation/held-voltage",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 9.71445146547012e-17
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.0
+        },
+        "dense_joints": {
+          "reversing": 2,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.013308569837218454
+        }
+      }
+    },
+    {
+      "phase": "validation/refined-low-dose",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393546242377637
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362012654956974
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.013840708487502629
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008483402895960307
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008624862935038419
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.048856076021231584
+        }
+      }
+    },
+    {
+      "phase": "validation/refined-low-dose",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393554734877021
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08362005911848813
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.01383730869309363
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008482861792042856
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008623416895246538
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.048852440050699414
+        }
+      }
+    },
+    {
+      "phase": "validation/neural-quarter-low-dose",
+      "label": "active",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393399513951776
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08361743250451914
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.01384005197781868
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.00848302394793829
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008623749803774838
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04885348092978371
+        }
+      }
+    },
+    {
+      "phase": "validation/neural-quarter-low-dose",
+      "label": "sham",
+      "counts": {
+        "dense_voltage_mV": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 5.393408005615019
+        },
+        "dense_calcium_uM": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 302,
+          "maximum_raw_p2p": 0.08361736515985418
+        },
+        "dense_muscles": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 95,
+          "maximum_raw_p2p": 0.01383666078865986
+        },
+        "dense_command": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.00848248395007939
+        },
+        "dense_filtered_drive": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.008622312365307555
+        },
+        "dense_joints": {
+          "reversing": 0,
+          "repeating": 0,
+          "channels": 11,
+          "maximum_raw_p2p": 0.04884984002762023
+        }
+      }
+    }
+  ],
+  "rollups": [
+    {
+      "phase": "baseline",
+      "repeating_by_stage": {
+        "dense_voltage_mV": 0,
+        "dense_calcium_uM": 0,
+        "dense_muscles": 0,
+        "dense_command": 0,
+        "dense_filtered_drive": 0,
+        "dense_joints": 0
+      },
+      "repeating_neurons": [],
+      "voltage_groups": {
+        "numbered_body_motor_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 1.4835470543631644
+        },
+        "RMD_SMD_SMB_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 4.339994864919701
+        },
+        "AVA_AVB_AVD_AVE_PVC_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.1746316031267412
+        },
+        "AWA_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.003238384854114429
+        }
+      }
+    },
+    {
+      "phase": "best",
+      "repeating_by_stage": {
+        "dense_voltage_mV": 0,
+        "dense_calcium_uM": 0,
+        "dense_muscles": 0,
+        "dense_command": 0,
+        "dense_filtered_drive": 0,
+        "dense_joints": 0
+      },
+      "repeating_neurons": [],
+      "voltage_groups": {
+        "numbered_body_motor_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 3.2545094117591375
+        },
+        "RMD_SMD_SMB_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 5.393828777474768
+        },
+        "AVA_AVB_AVD_AVE_PVC_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.19248760527573694
+        },
+        "AWA_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.0031599977926362044
+        }
+      }
+    },
+    {
+      "phase": "validation/active",
+      "repeating_by_stage": {
+        "dense_voltage_mV": 0,
+        "dense_calcium_uM": 0,
+        "dense_muscles": 0,
+        "dense_command": 0,
+        "dense_filtered_drive": 0,
+        "dense_joints": 0
+      },
+      "repeating_neurons": [],
+      "voltage_groups": {
+        "numbered_body_motor_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 3.2545094117591375
+        },
+        "RMD_SMD_SMB_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 5.393828777474768
+        },
+        "AVA_AVB_AVD_AVE_PVC_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.19248760527573694
+        },
+        "AWA_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.0031599977926362044
+        }
+      }
+    },
+    {
+      "phase": "validation/held-voltage",
+      "repeating_by_stage": {
+        "dense_voltage_mV": 0,
+        "dense_calcium_uM": 0,
+        "dense_muscles": 0,
+        "dense_command": 0,
+        "dense_filtered_drive": 0,
+        "dense_joints": 0
+      },
+      "repeating_neurons": [],
+      "voltage_groups": {
+        "numbered_body_motor_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.0
+        },
+        "RMD_SMD_SMB_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.0
+        },
+        "AVA_AVB_AVD_AVE_PVC_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.0
+        },
+        "AWA_names": {
+          "repeating_neurons": [],
+          "maximum_raw_p2p": 0.0
+        }
+      }
+    }
+  ],
+  "interpretation": "No detected qualifying repeated signals at any recorded stage in all26 traces. No reported voltage reversing channels in baseline or best across302 neurons. Thus a neural rhythm is not demonstrated upstream; body-only amplitude fitting would not address the earliest observed absence. Drift remains nonzero and is not silence.",
+  "limitations": [
+    "Finite observation and explicit detection floors; does not prove no intrinsic or longer-timescale oscillations.",
+    "Summary evidence does not identify cells/channel kinetics/equilibria responsible or exclude additional downstream limitations.",
+    "Earlier local diagnostic fixture was an older oscillatory model; its local results never established server model rhythms.",
+    "The baseline is the current E062 sensory-fit parent; no earlier oscillatory ancestor was analyzed here."
+  ],
+  "decision": "Recheck independently preserved earlier oscillatory parent under identical float64, initialization and sensory/body coupling before new training. If rhythms survive, use that separate checkpoint for neural-rhythm-first search. If not, investigate precision/integration/profile/initial-state differences before fitting.",
+  "next_run_launched": false
+}

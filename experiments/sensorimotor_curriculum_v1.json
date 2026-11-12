@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E062_recovery_pass_E063_8h_no_alternation",
+  "status": "E062_recovery_pass_E064_no_detected_neural_rhythm_in_current_parent_or_best",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -106,7 +106,8 @@
       "command": "sh scripts/launch_alternation64_mbslnx2.sh 60",
       "server_evidence": "experiments/records/E063-server-summary.json",
       "negative_checkpoint_sha256": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
-      "actual_requested_minutes": 480
+      "actual_requested_minutes": 480,
+      "diagnosis": "No detected qualifying neural or downstream repetitions in baseline or fitted saved traces; E064 server diagnostic"
     },
     {
       "id": "propagate",
@@ -130,6 +131,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E063-server-summary.json",
-  "continuation": "No new run launched; inspect signal chain and objective plateau before short parallel screens; E062 recovery skill retained independently"
+  "server_evidence": "experiments/records/E064-server-summary.json",
+  "continuation": "No new run. Recheck earlier oscillatory parent under matching float64/initialization/coupling before neural-rhythm-first training; preserve E062 independently"
 }
