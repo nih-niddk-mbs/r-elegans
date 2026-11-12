@@ -1,0 +1,63 @@
+{
+  "experiment": "E064",
+  "status": "local_read_only_verification_passed_server_pending",
+  "record_date": "2026-11-12 America/New_York",
+  "actual_server_source": "/home/carsonc/r-elegans-results/alternation64-20261112T042107Z-791518",
+  "actual_server_checkpoint_sha256": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
+  "server_analysis_executed": false,
+  "local_source": "/tmp/r-elegans-E063-alternation-smoke",
+  "local_source_scope": "Older local fixture only, not the actual E063 server checkpoint",
+  "local_analysis": "/tmp/r-elegans-E064-signal-audit-final",
+  "local_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MPLCONFIGDIR=/tmp/r-elegans-E064-matplotlib .venv/bin/python -u -m scripts.analyze_alternation_signals --run /tmp/r-elegans-E063-alternation-smoke --expected-sha256 064473f94ece552b70d13c879a41597e158b11e4d6447555093ec31095879348 --output-dir /tmp/r-elegans-E064-signal-audit-final",
+  "local_input_checkpoint_sha256": "064473f94ece552b70d13c879a41597e158b11e4d6447555093ec31095879348",
+  "traces_analyzed": 26,
+  "unique_input_files": 27,
+  "input_hashes_before_after_equal": true,
+  "jax_imported": false,
+  "tests": {
+    "broad_suite": "273 passed in95.78s before additional no-JAX subprocess test and final path-guard/report changes",
+    "final_targeted": "6 passed in1.31s",
+    "coverage": "Curved monotonic drift, isolated neural rhythms, raw extrema, invalid time grids, missing/unsafe source inventory, checksum rejection before output and no JAX import"
+  },
+  "verification": "Final raw-signals.png visually inspected; no simulations or fitting. Two preliminary analyses retained. First incidentally imported JAX via package data path helper; removed that dependency, then final full saved-file analysis confirms JAX not imported.",
+  "source_record": "Each external analysis has source/env/argv. Final analysis ran after final diagnostic-code edits; preliminary source snapshots were taken during implementation.",
+  "scope": "All-channel descriptive engineering floors and raw reversals. No per-edge NMJ recordings; cannot establish causal mechanisms, physiological oscillation or a limit cycle.",
+  "next_command": "sh scripts/launch_alternation_diagnostic_mbslnx2.sh",
+  "artifact_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E064",
+  "input_dependency_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E063/r-elegans-E063-alternation-smoke",
+  "local_reference_counts": [
+    {
+      "phase": "baseline",
+      "repeating_channels": {
+        "dense_voltage_mV": 51,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 9
+      }
+    },
+    {
+      "phase": "best",
+      "repeating_channels": {
+        "dense_voltage_mV": 51,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 9
+      }
+    },
+    {
+      "phase": "validation/held-voltage",
+      "repeating_channels": {
+        "dense_voltage_mV": 0,
+        "dense_calcium_uM": 0,
+        "dense_muscles": 0,
+        "dense_command": 0,
+        "dense_filtered_drive": 0,
+        "dense_joints": 0
+      }
+    }
+  ]
+}

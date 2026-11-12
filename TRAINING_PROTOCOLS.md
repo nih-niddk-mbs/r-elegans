@@ -1,5 +1,14 @@
 # WormGym: training and validation protocols
 
+E064 read-only signal-chain diagnostic is implemented and locally verified
+(2026-11-12). It reads saved E063 baseline/best and all validation active/sham
+signals, counts raw extrema across every channel, and writes per-channel tables
+and raw-signal figures externally. Inputs are hash-checked before and after;
+no simulation, fitting or JAX/GPU initialization. The local fixture is an older
+checkpoint, not the eight-hour server model. Actual server analysis remains
+pending the user launch. No next training objective or job has been started.
+See [diagnostic record](experiments/records/E064-signal-chain-diagnostic.json).
+
 E063 eight-hour server outcome (2026-11-12): no qualifying alternation after
 252 proposals; selected251,496.43min including validation. Reported joint has
 zero peaks/troughs in every case, and unforced pattern fails. Loss falls only
@@ -2190,3 +2199,26 @@ only this short-window prerequisite; slow oscillatory ringdown can still pass.
 It does not establish long autonomy, propagation, navigation
 or a biologically calibrated gait. Local smoke uses an older local parent;
 actual E062 winner results await the user's server launch.
+
+## E064: inspect saved alternation signals before revising training
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_alternation_diagnostic_mbslnx2.sh &&
+tail -n 8 -F "$(ls -1t /home/carsonc/r-elegans-results/alternation-signals-*.log | head -n 1)"
+```
+
+This detached read-only job pins E063 checkpoint3fabef... and analyzes already
+saved files. It writes summary.json, per-channel channels.json tables and
+baseline/best/active raw-signals.png figures in a new external directory.
+Named motor groups are explicit ID filters, not inferred cell functions.
+Voltage and calcium,95-muscle activation, signed command, filtered drive and
+11 raw joint signals are compared. Muscle activation is the first available
+readout after synapses: individual NMJ activity was not recorded. Reported
+floors, raw turning counts and window ranges are descriptive engineering
+criteria. They do not establish a limit cycle or biological fidelity.
+No trajectory integration, model optimization or CUDA/JAX initialization occurs.
+The final log prints compact baseline/best/active/held-voltage counts. Review
+the actual server report before selecting a one-reversal objective or parallel
+seed screens. Current training objective remains unchanged.

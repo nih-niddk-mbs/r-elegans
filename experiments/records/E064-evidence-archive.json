@@ -1,0 +1,9 @@
+{
+  "experiment": "E064",
+  "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E064",
+  "sha256_compared_files": 1378,
+  "input_dependency_files_verified": 27,
+  "manifest_sha256": "04d96b241d2273ad94b858bf73cde144b0291c820b2b787ac2ca6c71247e3632",
+  "dependency_record_sha256": "c68ca4d400a7b522f2a49c4544729663b5bf6025c7cf0fb78ede3f72c640512b",
+  "scope": "Local analyses, full stdout/tests, source/env/argv, figures and tables. All27 unique source input files verified against earlier E063 local archive; no actual server checkpoint retrieval or cloud sync verification."
+}

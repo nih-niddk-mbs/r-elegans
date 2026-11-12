@@ -539,3 +539,14 @@ trajectory diagnosis. Preserve E062's independent recovery skill and E063's
 negative result. Inspect saved signal-chain traces before another long fit;
 consider a smaller one-reversal objective and parallel short seed screens after
 that review. No new run launched. See [server record](experiments/records/E063-server-summary.json).
+
+## E064 diagnostic readiness — 2026-11-12
+
+E064 read-only signal-chain diagnostic is implemented and locally verified
+(2026-11-12). It reads saved E063 baseline/best and all validation active/sham
+signals, counts raw extrema across every channel, and writes per-channel tables
+and raw-signal figures externally. Inputs are hash-checked before and after;
+no simulation, fitting or JAX/GPU initialization. The local fixture is an older
+checkpoint, not the eight-hour server model. Actual server analysis remains
+pending the user launch. No next training objective or job has been started.
+See [diagnostic record](experiments/records/E064-signal-chain-diagnostic.json).

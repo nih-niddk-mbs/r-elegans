@@ -10,6 +10,15 @@ then test held-out animals and experiments. The initial
 and missing capabilities; this is not yet an achieved biological model or a
 completed joint-data trainer. Training remains incremental.
 
+E064 read-only signal-chain diagnostic is implemented and locally verified
+(2026-11-12). It reads saved E063 baseline/best and all validation active/sham
+signals, counts raw extrema across every channel, and writes per-channel tables
+and raw-signal figures externally. Inputs are hash-checked before and after;
+no simulation, fitting or JAX/GPU initialization. The local fixture is an older
+checkpoint, not the eight-hour server model. Actual server analysis remains
+pending the user launch. No next training objective or job has been started.
+See [diagnostic record](experiments/records/E064-signal-chain-diagnostic.json).
+
 E063 eight-hour server outcome (2026-11-12): no qualifying alternation after
 252 proposals; selected251,496.43min including validation. Reported joint has
 zero peaks/troughs in every case, and unforced pattern fails. Loss falls only

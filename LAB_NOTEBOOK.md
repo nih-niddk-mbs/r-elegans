@@ -5311,3 +5311,68 @@ smaller first-reversal objective with dense progress toward reversal, followed
 by short independent seed screens on separate physical core groups. Proposed
 analysis/training has NOT executed; no new job or numerical changes this turn.
 Earlier CPU/GPU PPO benchmarks do not establish scaling of this host-loop fitter.
+
+## 2026-11-12 — Planned E064 read-only E063 signal-chain diagnostic
+
+Question: where do post-cue raw reversals fail along voltage/calcium -> recorded
+muscle activation -> signed body command -> filtered drive -> joints? Analyze
+existing saved traces, not a new simulation. Pinned E063 source
+/home/carsonc/r-elegans-results/alternation64-20261112T042107Z-791518,
+checkpoint3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b.
+Compare baseline selected0, best selected251 and all saved validation active/sham
+conditions, including low-dose refinements and held-voltage. No training, model,
+objective, RNG or integration changes; no experiment seeds consumed. Preserve
+E062 recovery checkpoint and existing E063 files. The read-only analysis will
+hash inputs before/after and save its own source/env/argv outside Git.
+
+Method: per-channel raw extrema with explicit engineering prominence floors,
+raw/detrended ranges, raw net drift, positive/negative variation and minimum
+window range/ratio over4–12s. Retain every channel's counts, with descriptive
+named motor-neuron groups, rather than only the selected joint. No per-edge
+NMJ trace was saved: muscle activation is the first available downstream
+readout; do not claim direct synaptic localization. Analyze raw activation
+near extrema descriptively, not as a biological saturation criterion. Plot raw
+voltage, calcium, muscle activation, command, filtered drive and joint signals
+with cue and observation intervals. No prescribed frequency/phase.
+
+Software acceptance: synthetic curved monotonic drift must have zero raw
+reversals despite nonzero detrended range; a rhythm confined to neural channels
+must be distinguished from downstream flat motion; held-voltage residual body
+relaxation must not become an oscillation claim. Reject inconsistent times,
+nonfinite arrays, mismatched neuron/channel counts, changed checkpoint hash,
+missing required traces or output inside source/repo. Full existing local smoke
+will exercise saved-file analysis, explicitly NOT the actual server checkpoint.
+Scientific output is descriptive; counts/floors cannot prove causal mechanism,
+whole-state convergence, autonomous limit cycles or biological fidelity.
+
+Planned command: sh scripts/launch_alternation_diagnostic_mbslnx2.sh
+Runtime expected to be much shorter than training (file I/O/statistics only),
+not yet measured. No server analysis or new training executed at this entry.
+
+E064 local outcome: final saved-file analysis /tmp/r-elegans-E064-signal-audit-final
+completed26 trace analyses over27 unique inputs from older local E063 fixture;
+all before/after hashes equal, JAX not imported. Baseline/best local fixture
+already has51 voltage,4 calcium,92 muscle,11 command,11 drive and9 joint
+channels passing these finite-window reporting gates; held-voltage has zero
+at every stage. This verifies detector behavior on a previously oscillatory
+LOCAL source; it says nothing new about actual server3fabef... dynamics.
+Figures visually inspected: raw oscillations and body drift remain separate
+visible signals. Every channel's counts retained, not only selected joint.
+Broad suite273 passed in95.78s before extra subprocess guard test/final path-
+report changes; final targeted6 passed in1.31s. Tests include curved monotonic
+range with zero extrema, neural rhythm without muscle/joint rhythm, invalid
+sampling, source inventory/path checks and wrong hash rejection before output.
+
+Two preliminary full saved-file analyses retained. An indirect data-path import
+loaded JAX in the first; replaced it with explicit external-output path checks.
+Final complete run confirms no JAX imported. No simulation or training ran.
+Each run has source/env/invocation; final diagnostic code frozen before final
+run. Exact local command and evidence paths in E064-signal-chain-diagnostic.json.
+No new fitting objective implemented; await actual server signal-chain evidence.
+
+E064 local evidence archived in OneDrive notebook/evidence/E064:1378 copied
+files SHA256-compared;27 source inputs verified against earlier E063 local
+archive. Manifest04d96b241d2273ad94b858bf73cde144b0291c820b2b787ac2ca6c71247e3632;
+dependency record c68ca4d400a7b522f2a49c4544729663b5bf6025c7cf0fb78ede3f72c640512b.
+No actual server artifact retrieval or cloud-sync confirmation. Archive receipt
+added after final reviewed-source capture; numerical diagnostic source unchanged.
