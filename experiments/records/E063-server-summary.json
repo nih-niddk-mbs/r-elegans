@@ -1,0 +1,197 @@
+{
+  "experiment": "E063",
+  "evidence": "User-pasted compact server report; trajectories, source capsule and checkpoints not independently retrieved",
+  "record_date": "2026-11-12 America/New_York",
+  "run": "/home/carsonc/r-elegans-results/alternation64-20261112T042107Z-791518",
+  "passed": false,
+  "stop_reason": "time_budget",
+  "stage": "alternation",
+  "training_cues": "nominal-low-dose",
+  "precision": "float64",
+  "training_margin": 1.02,
+  "target_p2p_rad": 1e-05,
+  "requested_search_minutes": 480,
+  "requested_command_from_conversation": "sh scripts/launch_alternation64_mbslnx2.sh 480",
+  "actual_invocation": null,
+  "elapsed_minutes_rounded": 496.43,
+  "elapsed_seconds": null,
+  "iterations": 252,
+  "initial_iteration": 0,
+  "last_iteration": 252,
+  "selected_iteration": 251,
+  "seed_from_plan": 6300,
+  "reported_seed": null,
+  "source_revision": null,
+  "server_environment": null,
+  "baseline": {
+    "total": 1.63606397,
+    "active_pattern_loss": 1.63561669,
+    "low_pattern_loss": 1.63576641,
+    "active_p2p_rad": 0.000573984646,
+    "low_p2p_rad": 0.000573975072,
+    "peaks": 0,
+    "troughs": 0,
+    "window_ratio": 0.3644,
+    "AWA_mV": 8.22961
+  },
+  "best": {
+    "total": 1.58909052,
+    "active_pattern_loss": 1.58855376,
+    "low_pattern_loss": 1.58876481,
+    "active_p2p_rad": 0.000552317988,
+    "low_p2p_rad": 0.000552307612,
+    "peaks": 0,
+    "troughs": 0,
+    "window_ratio": 0.4114,
+    "AWA_mV": 8.03945
+  },
+  "validation": [
+    {
+      "case": "active",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.000552317988,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4114,
+      "AWA_mV": 8.03945
+    },
+    {
+      "case": "dose-low",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.000552307612,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4112,
+      "AWA_mV": 7.22136
+    },
+    {
+      "case": "dose-high",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.000552326863,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4116,
+      "AWA_mV": 8.69763
+    },
+    {
+      "case": "onset-shift",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.000552294484,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4152,
+      "AWA_mV": 8.03945
+    },
+    {
+      "case": "refined",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.000552744476,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4116,
+      "AWA_mV": 8.03763
+    },
+    {
+      "case": "chemical-blocked",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.00055224042,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4098,
+      "AWA_mV": 0
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.0005131678,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.392,
+      "AWA_mV": 8.03944
+    },
+    {
+      "case": "held-voltage",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 4.4703829e-05,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.5664,
+      "AWA_mV": 0
+    },
+    {
+      "case": "refined-low-dose",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.000552734091,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4114,
+      "AWA_mV": 7.21971
+    },
+    {
+      "case": "neural-quarter-low-dose",
+      "passed": false,
+      "pattern_pass": false,
+      "p2p_rad": 0.000552306668,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.4112,
+      "AWA_mV": 7.22137
+    }
+  ],
+  "unforced_pattern_pass": false,
+  "pattern_refinement_checks": [
+    {
+      "case": "refined",
+      "joint": 4,
+      "amplitude_difference_rad": 4.264875752993478e-07,
+      "allowed_difference_rad": 0.00013807949709241865,
+      "turning_counts_consistent": true,
+      "passed": false
+    },
+    {
+      "case": "refined-low-dose",
+      "joint": 4,
+      "amplitude_difference_rad": 4.264791242730107e-07,
+      "allowed_difference_rad": 0.00013807690306690614,
+      "turning_counts_consistent": true,
+      "passed": false
+    },
+    {
+      "case": "neural-quarter-low-dose",
+      "joint": 4,
+      "amplitude_difference_rad": 9.447640894437448e-10,
+      "allowed_difference_rad": 0.00013807690306690614,
+      "turning_counts_consistent": true,
+      "passed": false
+    }
+  ],
+  "blocked_controls_passed": true,
+  "refinement": {
+    "maximum_cue_effect_difference_rad": 7.563261752996375e-08,
+    "allowed_difference_rad": 7.5e-06,
+    "passed": true
+  },
+  "sensory_gain_multipliers": [
+    1.9577737586748993,
+    1.7875085509771405,
+    0.7334825204615432
+  ],
+  "neural_coordinates_changed_this_run": 8837,
+  "neural_coordinates_changed_from_original_paired_parent": 9506,
+  "checkpoint_sha256": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
+  "resume_checkpoint_sha256": null,
+  "warm_start_checkpoint_sha256": "16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b",
+  "interpretation": "No qualifying alternation. Selected-joint raw extrema remain zero. Detrended range can reward curved monotonic drift. Small loss improvement consistent with window ratio change on a flat discrete turning-count penalty. All-joint and neural oscillation status cannot be inferred from selected-joint summary alone.",
+  "numerical_interpretation": "Reported amplitude errors are within tolerance; pattern refinements fail because fine joint is unqualified. Cue-effect convergence passes. This does not establish whole-state or long-time convergence.",
+  "decision": "Keep E062 independent recovery skill and E063 negative result. Inspect saved active/sham voltage-to-muscle-to-joint traces before revising objective or launching parallel short screens. Do not blindly extend this search.",
+  "next_run_launched": false
+}

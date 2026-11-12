@@ -10,6 +10,21 @@ then test held-out animals and experiments. The initial
 and missing capabilities; this is not yet an achieved biological model or a
 completed joint-data trainer. Training remains incremental.
 
+E063 eight-hour server outcome (2026-11-12): no qualifying alternation after
+252 proposals; selected251,496.43min including validation. Reported joint has
+zero peaks/troughs in every case, and unforced pattern fails. Loss falls only
+1.63606 ->1.58909 (about2.9%). Detrended range .0005523rad exceeds1e-5 target
+without actual reversals; it must not be interpreted as oscillation amplitude.
+Numerical amplitude differences are inside tolerance and cue-effect convergence
+passes; pattern refinement fails because the finer pattern remains unqualified.
+The working explanation is a search plateau: raw turning-count penalties supply
+no gradual reward before reversals appear, while residual curved drift improves
+the window-ratio term. This is an inference from code and compact stdout, not a
+trajectory diagnosis. Preserve E062's independent recovery skill and E063's
+negative result. Inspect saved signal-chain traces before another long fit;
+consider a smaller one-reversal objective and parallel short seed screens after
+that review. No new run launched. See [server record](experiments/records/E063-server-summary.json).
+
 E062 server result (reported 2026-11-11; UTC run name20261112): the float64
 bend-and-recover skill passes the full engineering gate. Low-dose amplitudes
 are3.06561e-5rad (coarse),3.06503e-5rad (matched refinement) and3.06565e-5rad
@@ -20,12 +35,12 @@ reversible bend, with numerical checks; locomotion and long autonomous rhythms
 remain unproved. Evidence is user-reported stdout, not independent retrieval.
 See [E062 record](experiments/records/E062-server-summary.json).
 
-E063 is the next independent skill: repeated post-cue bends after one finite
+Historical E063 plan (outcome reported 2026-11-12): repeated post-cue bends after one finite
 odor exposure, without periodic pacing. A60min float64 pilot uses the E062
 parameters with fresh seed6300 and preserves the recovery skill separately.
 Full302-neuron topology, fixed NMJ/body/kinetics, unknown channel densities and
 connection strengths plus three sensory gains remain the fitting scope.
-Implementation and local verification do not establish a server skill pass.
+The subsequent eight-hour server run failed; see the E063 outcome above.
 
 Paired neural/behavior data preparation now includes 21 identified baseline
 recordings with frozen date-group holdouts. Data remain external. An initial joint-statistics fitter is now implemented;

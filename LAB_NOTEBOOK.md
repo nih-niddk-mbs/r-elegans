@@ -5268,3 +5268,46 @@ full stdout/tests/audit and final reviewed source. This is local archive-copy
 verification, not actual server retrieval or confirmation of cloud sync.
 See E063-evidence-archive.json. Archive confirmation was added after source
 capture; it does not change the numerical source or the archived manifest.
+
+## 2026-11-12 — E063 eight-hour server negative outcome
+
+User had extended the planned60min pilot to480min before launching; this
+amendment was given in conversation but not entered in the notebook at that
+time. This paragraph reconstructs that instruction, not a prospective record.
+Requested command: sh scripts/launch_alternation64_mbslnx2.sh 480. Actual argv,
+source/environment capsule and seed were not supplied; planned seed6300 is not
+independently confirmed. User subsequently reported alternation64-20261112T042107Z-791518:
+252 proposals global0->252, selected251,496.43min rounded, time_budget, passedFalse.
+Compact transcription: experiments/records/E063-server-summary.json. No actual
+server trajectories/checkpoints independently retrieved or copied to OneDrive.
+SHA3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b,
+warm parent16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b.
+Neural coordinates changed8837 this run,9506 versus original paired parent.
+
+Loss1.63606397 ->1.58909052 (~2.87% improvement), but selected joint has zero
+raw peaks and troughs in all10 validation conditions. Unforced pattern fails.
+Nominal detrended p2p .000552317988rad (~55.23 times target) is not evidence of
+wiggling: removing a linear trend leaves range even for curved monotonic drift.
+Window ratio .3644 ->.4114 stays below.5. Inspection of the loss shows the zero-
+extrema penalty is flat before the first raw reversal; the small improvement
+is consistent with window-ratio reward rather than alternation. This is a
+code/stdout-supported hypothesis; without traces we cannot identify cell-level
+mechanism, all-joint extrema, saturation, or where rhythms disappear.
+
+Numerical checks: nominal/low matched amplitude errors4.2649e-7rad are below
+~1.3808e-4 allowance; neural-quarter low9.4476e-10rad also below allowance;
+turn-count consistencyTrue. Pattern checksFalse because fine qualificationFalse,
+not because error tolerances are exceeded. Cue-effect trajectory difference
+7.563261752996375e-8rad <7.5e-6 passes. Blocked controls pass, AWA recruitment
+persists (~8.04mV nominal), but this does not demonstrate a motor rhythm.
+Whole-state/long-time convergence and biological fidelity remain unestablished.
+
+Decision: no blind eight-hour continuation. Preserve E062 successful recovery
+skill independently; preserve E063 selected/final/RNG/lineage externally on the
+server, without claiming backup verification. Next proposed read-only analysis:
+compare saved active/sham voltage, NMJ, muscle drive and raw joint traces across
+parent/best and resolutions, including per-joint raw extrema. Then consider a
+smaller first-reversal objective with dense progress toward reversal, followed
+by short independent seed screens on separate physical core groups. Proposed
+analysis/training has NOT executed; no new job or numerical changes this turn.
+Earlier CPU/GPU PPO benchmarks do not establish scaling of this host-loop fitter.

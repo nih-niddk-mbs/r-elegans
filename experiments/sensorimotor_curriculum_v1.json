@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E062_float64_contract_relax_pass_E063_alternation_prepared",
+  "status": "E062_recovery_pass_E063_8h_no_alternation",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -82,7 +82,7 @@
     },
     {
       "id": "alternate",
-      "status": "implemented_local_verification_server_pending",
+      "status": "user_reported_8h_failure_no_qualifying_alternation",
       "motor_goal": "Several opposing bends after a single initiating event, without a periodic teacher",
       "sensory_goal": "Local actual-body feedback participates in alternation; stimulus can initiate an event but does not pace cycles",
       "validation": "Post-cue persistence and separate no-cue autonomy assay; feedback block, perturbation and timestep tests",
@@ -103,7 +103,10 @@
         "refinement_turn_count_tolerance": 1
       },
       "scope": "Short-window pattern prerequisite; no long autonomy, biological frequency, propagation or propulsion claim",
-      "command": "sh scripts/launch_alternation64_mbslnx2.sh 60"
+      "command": "sh scripts/launch_alternation64_mbslnx2.sh 60",
+      "server_evidence": "experiments/records/E063-server-summary.json",
+      "negative_checkpoint_sha256": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
+      "actual_requested_minutes": 480
     },
     {
       "id": "propagate",
@@ -127,6 +130,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E062-server-summary.json",
-  "continuation": "E063 fresh seed6300 from pinned E062 full-network parameters; new objective, independent checkpoint, no server job launched"
+  "server_evidence": "experiments/records/E063-server-summary.json",
+  "continuation": "No new run launched; inspect signal chain and objective plateau before short parallel screens; E062 recovery skill retained independently"
 }
