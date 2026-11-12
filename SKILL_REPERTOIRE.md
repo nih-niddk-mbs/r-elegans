@@ -668,3 +668,18 @@ repetitions and long-run validation, keep actual proprioception and no periodic
 drive. A possible next small rung is tail1e-4,middle/head3e-4rad; this is a
 proposal, not an implemented objective or training result. E062 and old/old
 references remain separate. No new simulation or fitting launched this turn.
+
+## E067 connections-only amplitude stage — 2026-11-12
+
+E067 is ready for a user-launched four-hour connections-only amplitude search.
+Four independent seeds6700..6703 use the pinned restored hybrid f024bd14... .
+All channel scales, NMJ/body, sensory gains and topology remain fixed. Targets
+are tail1e-4,middle/head3e-4rad direct cyclic excursion, scored over30–45/45–60s
+with a retained motor-cycle guard. Original-anchor connection factor2 bounds
+apply, with declared inherited numerical slack only. Each240min baseline/search
+budget is followed by60s perturbation/refinement and300s validation. No periodic
+drive. Per user request for a command within3min, no Mac worm simulations or
+end-to-end fit validation were performed; compilation/shell and quick synthetic
+scoring checks only. Server parent-hash/state/reference checks precede proposals.
+This is a new objective/seeded stage, not an optimizer continuation or biological
+qualification. All selected/final weights, references, RNG and traces external.

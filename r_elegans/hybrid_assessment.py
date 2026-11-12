@@ -11,9 +11,9 @@ def peak_frequency(times, signal, prominence):
     return float(1 / np.median(np.diff(np.asarray(times)[peaks]))) if len(peaks) >= 3 else None
 
 
-def cycle_excursions(q, prominence=1e-6):
+def cycle_excursions(q, prominence=1e-6, *, late_only=True):
     """Smaller median up/down raw extremum excursion, excluding posture drift."""
-    q = np.asarray(q, dtype=float); late = q[len(q)//2:]
+    q = np.asarray(q, dtype=float); late = q[len(q)//2:] if late_only else q
     if q.ndim != 2 or q.shape[1] != 11 or len(late) < 40 or not np.isfinite(q).all():
         raise ValueError('Finite eleven-joint trace required')
     values = []

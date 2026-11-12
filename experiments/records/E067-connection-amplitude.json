@@ -1,0 +1,50 @@
+{
+  "experiment": "E067",
+  "status": "prepared_server_pending",
+  "record_date": "2026-11-12 America/New_York",
+  "parent_run": "/home/carsonc/r-elegans-results/hybrid-validation-20261112T202746Z-868392",
+  "parent_sha256": "f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e",
+  "search_minutes": 240,
+  "seeds": [
+    6700,
+    6701,
+    6702,
+    6703
+  ],
+  "workers": 4,
+  "cores_per_worker": 4,
+  "targets_rad": [
+    0.0001,
+    0.0003,
+    0.0003
+  ],
+  "trainable": [
+    "existing chemical strengths",
+    "symmetric electrical pair strengths"
+  ],
+  "fixed": [
+    "all channel scales/kinetics",
+    "leak/capacitance/reversals",
+    "topology/release",
+    "NMJ/muscles/mechanics",
+    "sensory maps/gains"
+  ],
+  "scoring_windows_s": [
+    [
+      30,
+      45
+    ],
+    [
+      45,
+      60
+    ]
+  ],
+  "bounds": "Original E043 effective strength factor2; inherited log-roundoff slack<=2e-6 recorded per coordinate",
+  "optimizer": "Fresh seeded sparse/coherent greedy proposals sigma.025, no prior optimizer resume",
+  "acceptance": "All targets/neural guard in ordinary,perturbation,numerical and300s validation; held-voltage control; cycle refinement20%, motor frequency10%",
+  "validation_adds_time": true,
+  "command": "sh scripts/launch_connection_amplitude_mbslnx2.sh 240",
+  "local_verification": "Compilation/shell and quick synthetic scorer/bounds checks only; no Mac worm rollout/end-to-end training per user3min constraint",
+  "scientific_qualification": false,
+  "server_run_executed": false
+}

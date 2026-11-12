@@ -1,5 +1,18 @@
 # WormGym: training and validation protocols
 
+E067 is ready for a user-launched four-hour connections-only amplitude search.
+Four independent seeds6700..6703 use the pinned restored hybrid f024bd14... .
+All channel scales, NMJ/body, sensory gains and topology remain fixed. Targets
+are tail1e-4,middle/head3e-4rad direct cyclic excursion, scored over30–45/45–60s
+with a retained motor-cycle guard. Original-anchor connection factor2 bounds
+apply, with declared inherited numerical slack only. Each240min baseline/search
+budget is followed by60s perturbation/refinement and300s validation. No periodic
+drive. Per user request for a command within3min, no Mac worm simulations or
+end-to-end fit validation were performed; compilation/shell and quick synthetic
+scoring checks only. Server parent-hash/state/reference checks precede proposals.
+This is a new objective/seeded stage, not an optimizer continuation or biological
+qualification. All selected/final weights, references, RNG and traces external.
+
 E066 full compact result (2026-11-12): the300s unpaced case retains37
 repeating voltage and90 muscle channels in its late half. Eight joint signals
 repeat under the two-window detector, but no joint passes the stricter five-
@@ -2395,3 +2408,15 @@ regional coverage and eligible joint IDs. It also computes descriptive relative
 cyclic-amplitude differences for numerical refinements and the long run versus
 baseline. Undefined ratios are reported when baseline is tiny. These comparisons
 add no acceptance gate and do not retrospectively change E066 qualification.
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_connection_amplitude_mbslnx2.sh 240 &&
+tail -n 12 -F "$(ls -1t /home/carsonc/r-elegans-results/connection-amplitude-*.log | head -n 1)"
+```
+
+The nohup launcher uses the dedicated conda Python and four disjoint physical
+CPU groups. Search runs four hours per seed; validation adds wall time. A failed
+scientific target is recorded separately from execution completion. No next
+behavior or RL stage starts automatically.

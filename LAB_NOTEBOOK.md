@@ -5793,3 +5793,68 @@ OneDrive notebook/evidence/E066-server-20261112T202746Z-868392:2 copied files
 SHA256-compared, manifest66542904f93664fa9579782faf50e4bb73fca0a1318602d5bf1fe0207a8bf8f8.
 This preserves user-reported compact evidence only, not independently retrieved
 server trajectories/checkpoint or confirmed cloud synchronization.
+
+## 2026-11-12 — Planned E067 four-hour connections-only cyclic-amplitude run
+
+User authorizes a4h run. Parent is the independent restored-channel hybrid
+f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e in
+/home/carsonc/r-elegans-results/hybrid-validation-20261112T202746Z-868392/inputs/candidate.npz.
+E066 failed regional gate is retained; neural/muscle repetition at300s supports
+an amplitude-building attempt, not a coordinated locomotion claim.
+
+Question: can existing chemical+electrical strengths increase genuine cyclic
+bends while fixed old channel scales retain the oscillator? Full302 neurons
+and95 muscles active. Train only3709 existing chemical strengths and1093
+symmetric electrical pairs; no channels, gains, topology, release/kinetic/leak/
+capacitance/reversal, NMJ, muscle, medium or injected-bias parameters change.
+Use actual-body proprioception and sham world, no cue pacing or target waveform.
+Fresh independent seeds6700..6703, four concurrent disjoint4-physical-core workers.
+240min per-worker baseline/search budget, full validation follows (wall time can
+exceed4h). This is a fresh optimization stage, not an E066 optimizer resume.
+
+Primary objective: tail1e-4,middle/head3e-4rad direct cyclic excursion, measured
+in actual30–45s and45–60s windows from a60s standard-initial-state rollout.
+Use smaller median upward/downward opposite-extremum excursions, region medians;
+score worst/mean log target deficits over both windows, plus small change prior.
+These windows are not claimed fully settled;300s validation tests later behavior.
+No state reconstructed from incomplete raw traces and no hidden warm restart.
+Keep selected common motor neuron from baseline/300s source (normally RMDR)
+repeating in both windows, with >=3 peaks/troughs, >=.1mV and >=half baseline
+excursion and broad .5..2x baseline frequency guard; max absolute joint<.5rad.
+No requirement that all cells oscillate. Reject lost-rhythm candidates outright.
+
+Use sparse/coherent seeded connection proposals, all existing edges eligible,
+with optional anatomical motor/premotor focus, initial log step.025. Original
+E043 anchor417254ad... supplies effective-strength factor2 bounds, not a fresh
+factor2 around the hybrid. Preserve exact operational hybrid at zero delta;
+derive and save its global effective-strength coordinates. Abort inherited
+bound excess >2e-6 log units; any smaller representational excess is recorded
+and preserved as per-coordinate inherited slack, not silently clipped. Frozen
+fields checked and all selected/final models/RNG/coordinates/reference saved.
+
+Acceptance: both training windows meet all three small amplitude targets with
+motor guard intact, plus60s initial +/-1mV, neural-half, body-half and300s no-
+drive validation. Long score windows150–225 and225–300s use same targets/guard.
+Numerical validation compares direct cycle amplitudes (20%) and reference motor
+frequency (10%) to60s baseline, with meaningful nonzero fields. Held voltage
+must have zero repeated voltage/joint signals and no qualifying cycle amplitude.
+No automatic promotion to locomotion/biology or downstream RL. Original E062,
+old/old and restored hybrid checkpoints remain untouched and independent.
+
+Every source/preparation/worker has exact source/env/argv; preserve immutable
+input hashes, references/origins/bounds, selected/final models and post-rejection
+RNG, stdout and validation trajectories outside Git. Local end-to-end smoke
+uses older archived LOCAL E066 fixture, short explicit software-only durations,
+never actual server parent or a4h claim. Record actual outcomes after execution.
+Planned server command: sh scripts/launch_connection_amplitude_mbslnx2.sh 240
+
+E067 implementation prepared. User then explicitly requested command within3min
+and waived Mac validation. No worm simulation or end-to-end fit validation run
+locally. Quick compilation/shell and synthetic scoring/bounds checks performed;
+monotonic drift and flat motor voltage cannot pass the target/guard. Server
+preflight pins source f024..., compares initial state and full baseline trajectory
+before any proposal; all channel/inactive fields checked during decoding and
+final saved fixed fields checked. Per-worker source/env/argv/RNG/state/checkpoints
+are enabled. Four-hour search followed by full validation; source untouched.
+This is prepared/unexecuted evidence, not a successful fit or reproducibility
+claim for a server run that has not launched. See E067-connection-amplitude.json.
