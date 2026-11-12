@@ -1,0 +1,258 @@
+{
+  "experiment": "E066",
+  "record_date": "2026-11-12 America/New_York",
+  "evidence": "User-pasted complete compact report; manually transcribed at printed precision, no independent server artifact retrieval",
+  "run": "/home/carsonc/r-elegans-results/hybrid-validation-20261112T202746Z-868392",
+  "candidate_sha256_reported": "f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e",
+  "execution_valid": true,
+  "ordinary_simulated_seconds": 60.0,
+  "long_simulated_seconds": 300.0,
+  "reporter_revision_from_user_git_pull": "3187012",
+  "simulation_source_revision": null,
+  "server_environment": null,
+  "exact_simulation_invocation": null,
+  "elapsed_seconds": null,
+  "rounding": "Cycles printed with about6 significant digits; percentages printed by reporter from full precision. Earlier partial report retains more digits for perturbation rows.",
+  "cases": [
+    {
+      "case": "hybrid-body-half",
+      "simulation_seconds": 60,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "cyclic_excursions_tail_middle_head_rad": [
+        4.31797e-05,
+        0.000266639,
+        0.000289325
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        1
+      ],
+      "eligible_joints": [
+        10
+      ],
+      "coherent_joints": 1,
+      "selected_joint_frequency_hz": 2.6455026455026447,
+      "eligible_shape_pc1_fraction": 1.0,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-cue",
+      "simulation_seconds": 60,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "cyclic_excursions_tail_middle_head_rad": [
+        4.28395e-05,
+        0.000266038,
+        0.000288512
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        1
+      ],
+      "eligible_joints": [
+        10
+      ],
+      "coherent_joints": 1,
+      "selected_joint_frequency_hz": 2.6455026455026447,
+      "eligible_shape_pc1_fraction": 1.0,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-held-voltage",
+      "simulation_seconds": 60,
+      "repeating_voltage_channels": 0,
+      "repeating_muscle_channels": 0,
+      "repeating_joint_channels": 0,
+      "cyclic_excursions_tail_middle_head_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        0
+      ],
+      "eligible_joints": [],
+      "coherent_joints": 0,
+      "selected_joint_frequency_hz": null,
+      "eligible_shape_pc1_fraction": null,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-long",
+      "simulation_seconds": 300,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 8,
+      "cyclic_excursions_tail_middle_head_rad": [
+        8.78392e-05,
+        0.000199279,
+        0.000181941
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        0
+      ],
+      "eligible_joints": [],
+      "coherent_joints": 0,
+      "selected_joint_frequency_hz": null,
+      "eligible_shape_pc1_fraction": null,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-neural-half",
+      "simulation_seconds": 60,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "cyclic_excursions_tail_middle_head_rad": [
+        4.24501e-05,
+        0.000263985,
+        0.00028597
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        1
+      ],
+      "eligible_joints": [
+        10
+      ],
+      "coherent_joints": 1,
+      "selected_joint_frequency_hz": 2.6595744680850726,
+      "eligible_shape_pc1_fraction": 1.0,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-sham",
+      "simulation_seconds": 60,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "cyclic_excursions_tail_middle_head_rad": [
+        4.28399e-05,
+        0.000266032,
+        0.000288509
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        1
+      ],
+      "eligible_joints": [
+        10
+      ],
+      "coherent_joints": 1,
+      "selected_joint_frequency_hz": 2.6455026455026447,
+      "eligible_shape_pc1_fraction": 1.0,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-voltage-minus",
+      "simulation_seconds": 60,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "cyclic_excursions_tail_middle_head_rad": [
+        4.2835e-05,
+        0.000266075,
+        0.000288501
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        1
+      ],
+      "eligible_joints": [
+        10
+      ],
+      "coherent_joints": 1,
+      "selected_joint_frequency_hz": 2.6455026455026447,
+      "eligible_shape_pc1_fraction": 1.0,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-voltage-plus",
+      "simulation_seconds": 60,
+      "repeating_voltage_channels": 37,
+      "repeating_muscle_channels": 90,
+      "repeating_joint_channels": 11,
+      "cyclic_excursions_tail_middle_head_rad": [
+        4.28448e-05,
+        0.000265986,
+        0.00028852
+      ],
+      "persistent_joint_coverage": [
+        0,
+        0,
+        1
+      ],
+      "eligible_joints": [
+        10
+      ],
+      "coherent_joints": 1,
+      "selected_joint_frequency_hz": 2.6455026455026447,
+      "eligible_shape_pc1_fraction": 1.0,
+      "phase_span_rad": null
+    }
+  ],
+  "refinement_absolute_relative_cycle_difference_percent": {
+    "neural_half": [
+      0.91,
+      0.769,
+      0.88
+    ],
+    "body_half": [
+      0.793,
+      0.228,
+      0.283
+    ],
+    "long_vs_baseline": [
+      105.0,
+      25.1,
+      36.9
+    ]
+  },
+  "long_change_directions_tail_middle_head": [
+    "increase",
+    "decrease",
+    "decrease"
+  ],
+  "original_screening": {
+    "reference_motor_neuron": "RMDR",
+    "all_active_retain_rhythm": false,
+    "neural_half": {
+      "same_motor_amplitude_consistent": true,
+      "same_motor_frequency_consistent": true,
+      "regional_bends_consistent": true,
+      "passed": true
+    },
+    "body_half": {
+      "same_motor_amplitude_consistent": true,
+      "same_motor_frequency_consistent": true,
+      "regional_bends_consistent": true,
+      "passed": true
+    },
+    "held_voltage_control_passed": true,
+    "rhythm_validation_pass": false,
+    "baseline_historical_regional_amplitude_pass": false,
+    "duration_protocol_met": true,
+    "planned_duration_rhythm_validation_pass": false
+  },
+  "interpretation": "Unpaced neural/muscle repetition is detected in late150..300s, with weak nonzero body cycles. Half-step cycle amplitudes differ <1% in tested controls; body amplitudes vary substantially between late windows30..60s and150..300s. Original regional qualification still fails. One eligible joint makes reported PC1=1 trivial; no multi-joint propagation evidence.",
+  "decision": "Preserve candidate as separate neural-rhythm scaffold, not qualified whole-body locomotion model. Proceed incrementally toward stronger raw cyclic bends with channel-density scales fixed, actual feedback active, no pacing; score settled/multiple windows and retain long validation.",
+  "proposed_next_targets_rad": {
+    "tail": 0.0001,
+    "middle": 0.0003,
+    "head": 0.0003
+  },
+  "proposed_target_scope": "Small engineering rung proposal only, not an implemented or executed objective; choose final scoring/burn-in protocol before a new run",
+  "training_or_new_simulation_launched": false
+}

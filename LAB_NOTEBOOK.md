@@ -5744,3 +5744,52 @@ environment/invocation, initial/final reporter stdout and final standalone
 reporter source. Final formatting adds coherent/eligible counts and phase span;
 no numerical model or acceptance changes. No actual server trajectories or
 complete summary retrieved; no cloud-sync assertion.
+
+## 2026-11-12 — E066 full compact report: persistent neural basis, weak body
+
+User reports full8-case table for hybrid-validation-20261112T202746Z-868392,
+candidate f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e,
+ordinary60s/long300s, execution_validTrue. Manual compact transcription in
+E066-server-summary.json at printed precision. Reporter git pull3187012 is
+evidenced; simulation revision, runtime, exact simulation argv and environment
+remain unreported. No independent summary/model/trajectory retrieval. Earlier
+partial entries remain historical; their missing-table status is superseded.
+
+In the300s case, late150–300s has37 repeating voltage,90 muscle,8 joint channels
+by E064 two-window reporting, but no joint passes stricter five-window eligibility
+and region coverage0/0/0. Cyclic excursions tail8.78392e-5,middle.000199279,
+head.000181941rad remain nonzero. At60s sham they are4.28399e-5,.000266032,
+.000288509rad; late windows30–60 versus150–300 differ +105%/-25.1%/-36.9%.
+Hence a finite-time endogenous neural/muscle rhythm is demonstrated, but body
+amplitude stationarity, usable gait and locomotion are not. Long-case frequency
+is not estimated by eligibility-based reporter (None); do not assign2.65Hz to
+it from the short run.
+
+True cycle-amplitude refinement errors are small: neural-half .910/.769/.880%,
+body-half .793/.228/.283% (T/M/H). This adds meaningful nonzero-amplitude
+sensitivity evidence; it is not a certified convergence bound. Selected joint
+frequency at60s2.6455026455026447Hz, neural-half2.6595744680850726Hz. All active
+60s cases retain37/90/11 count signals, but regional coverage0/0/1, eligible
+joint[10], coherence count1. PC1=1 is therefore a one-column PCA, not a global
+standing-wave inference. No phase-span/travelling-wave evidence from that set.
+Held-voltage signals/cyclic bends all0. Original screening remains failed and
+is not retrospectively relabelled. Nonzero cycles and failed window gate are
+compatible measurements with different definitions.
+
+Decision: candidate is a useful independent neural-rhythm scaffold, not a
+qualified coordinated/body-amplitude/biological policy. Next proposed stage
+holds restored channel-density scales fixed while building direct raw cyclic
+body amplitude through eligible unknown connections, with actual feedback and
+no periodic pacing. Use settled/multiple-window scoring and retain neural-cycle
+and long validation guards, because body amplitude is still evolving. Proposed
+small first rung tail1e-4,middle/head3e-4rad (not a jump to .003 everywhere).
+No new experiment, objective implementation or fitting has run; final trainable
+mask, settling protocol, bounds, seeds, command and acceptance must be entered
+before actual next execution. Preserve E062 and old/old independent skills.
+Records/docs only; no numerical test rerun. JSON/count/diff checks performed.
+
+Complete compact server transcription and transcription script archived under
+OneDrive notebook/evidence/E066-server-20261112T202746Z-868392:2 copied files
+SHA256-compared, manifest66542904f93664fa9579782faf50e4bb73fca0a1318602d5bf1fe0207a8bf8f8.
+This preserves user-reported compact evidence only, not independently retrieved
+server trajectories/checkpoint or confirmed cloud synchronization.

@@ -646,3 +646,25 @@ eligible joints alone does not establish whole-body synchrony or propagation.
 The long-run/baseline/refinement rows remain unreported in this excerpt.
 Read the complete existing compact report before fitting; no new run launched.
 See [partial server evidence](experiments/records/E066-server-partial-summary.json).
+
+## E066 complete compact result — 2026-11-12
+
+E066 full compact result (2026-11-12): the300s unpaced case retains37
+repeating voltage and90 muscle channels in its late half. Eight joint signals
+repeat under the two-window detector, but no joint passes the stricter five-
+window eligibility screen there. Direct cyclic excursions remain nonzero:
+tail/middle/head8.78e-5/1.99e-4/1.82e-4rad versus4.28e-5/2.66e-4/2.89e-4rad
+at60s. Thus body amplitude changes over time; this is no settled gait claim.
+Nonzero cyclic amplitudes differ less than1% under either half-step refinement.
+The held-voltage control has no repeated signals or cyclic bends. Original
+regional/rhythm qualification remains failed. PC1=1 in60s cases is computed
+from only joint10, not evidence of whole-body synchrony or wave propagation.
+See [complete compact evidence](experiments/records/E066-server-summary.json).
+
+Decision: retain the hybrid as a separate neural-rhythm scaffold and build body
+amplitude incrementally with channel-density scales initially fixed. Score raw
+cyclic excursions over appropriately settled/multiple windows, preserve neural
+repetitions and long-run validation, keep actual proprioception and no periodic
+drive. A possible next small rung is tail1e-4,middle/head3e-4rad; this is a
+proposal, not an implemented objective or training result. E062 and old/old
+references remain separate. No new simulation or fitting launched this turn.

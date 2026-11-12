@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E066_failed_screen_small_nonzero_cycles_reported_in_perturbation_controls",
+  "status": "E066_neural_muscle_repetitions_persist300s_body_cycles_weak_nonstationary",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -131,7 +131,7 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E066-server-partial-summary.json",
-  "continuation": "Check long persistence and nonzero cyclic-amplitude refinement before fitting; preserve original failed screen and independent channel-restored candidate",
-  "next_diagnostic": "Read complete E066 summary using scripts.report_hybrid_validation; no simulation"
+  "server_evidence": "experiments/records/E066-server-summary.json",
+  "continuation": "Keep original failed regional screen. Preserve hybrid as neural scaffold, not locomotion-qualified model. Proposed first targets tail1e-4/middle3e-4/head3e-4rad; implementation/protocol pending.",
+  "next_diagnostic": "Next proposal: frozen-channel raw-cycle body-amplitude curriculum with settled/multiple windows; no new run yet"
 }

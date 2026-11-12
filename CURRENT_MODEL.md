@@ -1,6 +1,26 @@
 # Current model: exact scope and computation path
 
-E066 server excerpt (2026-11-12) reports execution valid but rhythm/regional
+E066 full compact result (2026-11-12): the300s unpaced case retains37
+repeating voltage and90 muscle channels in its late half. Eight joint signals
+repeat under the two-window detector, but no joint passes the stricter five-
+window eligibility screen there. Direct cyclic excursions remain nonzero:
+tail/middle/head8.78e-5/1.99e-4/1.82e-4rad versus4.28e-5/2.66e-4/2.89e-4rad
+at60s. Thus body amplitude changes over time; this is no settled gait claim.
+Nonzero cyclic amplitudes differ less than1% under either half-step refinement.
+The held-voltage control has no repeated signals or cyclic bends. Original
+regional/rhythm qualification remains failed. PC1=1 in60s cases is computed
+from only joint10, not evidence of whole-body synchrony or wave propagation.
+See [complete compact evidence](experiments/records/E066-server-summary.json).
+
+Decision: retain the hybrid as a separate neural-rhythm scaffold and build body
+amplitude incrementally with channel-density scales initially fixed. Score raw
+cyclic excursions over appropriately settled/multiple windows, preserve neural
+repetitions and long-run validation, keep actual proprioception and no periodic
+drive. A possible next small rung is tail1e-4,middle/head3e-4rad; this is a
+proposal, not an implemented objective or training result. E062 and old/old
+references remain separate. No new simulation or fitting launched this turn.
+
+Historical partial E066 report (full result now above): execution valid but rhythm/regional
 validation failed. Candidate hash f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e.
 Both initial-voltage perturbation rows retain37 repeating voltage,90 muscle and
 11 joint channels. Direct tail/middle/head cyclic excursions are about
@@ -9,8 +29,8 @@ Zero historical window-gated medians do not mean zero physical motion. Neural
 refinement checks pass; gated regional comparisons can compare zeros with
 zeros and do not establish convergence of nonzero cycle amplitudes. PC1=1 over
 eligible joints alone does not establish whole-body synchrony or propagation.
-The long-run/baseline/refinement rows remain unreported in this excerpt.
-Read the complete existing compact report before fitting; no new run launched.
+At that earlier entry the long/baseline/refinement rows were missing; the full
+compact report subsequently supplied is recorded above.
 See [partial server evidence](experiments/records/E066-server-partial-summary.json).
 
 Historical E066 preparation (server execution now reported above).
@@ -20,8 +40,8 @@ neural/body timestep, held-voltage and300s unpaced persistence controls, plus
 regional amplitudes and raw-supported phase/PCA descriptions. Four workers
 run concurrently. No fitting or automatic model promotion. Local8-case12s
 software smoke and282 tests passed; the older local fixture fails the stricter
-tail persistence gate, retained as a negative result. Server execution is now reported complete, with failed screening; full cycle
-tables and long-run interpretation await the complete report. See [method and local checks](experiments/records/E066-hybrid-validation.json).
+tail persistence gate, retained as a negative result. Server execution and full cycle table now reported; original screening remains
+failed and the proposed next rung is documented above. See [method and local checks](experiments/records/E066-hybrid-validation.json).
 
 E065 full server table (2026-11-12):60s comparisons isolate the suppressing
 parameter family in this setup. Old channel scales + old connections yield
