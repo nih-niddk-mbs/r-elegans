@@ -631,3 +631,18 @@ run concurrently. No fitting or automatic model promotion. Local8-case12s
 software smoke and282 tests passed; the older local fixture fails the stricter
 tail persistence gate, retained as a negative result. Actual server60/300s
 candidate validation remains pending. See [method and local checks](experiments/records/E066-hybrid-validation.json).
+
+## E066 partial server amplitude result — 2026-11-12
+
+E066 server excerpt (2026-11-12) reports execution valid but rhythm/regional
+validation failed. Candidate hash f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e.
+Both initial-voltage perturbation rows retain37 repeating voltage,90 muscle and
+11 joint channels. Direct tail/middle/head cyclic excursions are about
+4.28e-5/2.66e-4/2.89e-4rad, well below the .003rad engineering comparison.
+Zero historical window-gated medians do not mean zero physical motion. Neural
+refinement checks pass; gated regional comparisons can compare zeros with
+zeros and do not establish convergence of nonzero cycle amplitudes. PC1=1 over
+eligible joints alone does not establish whole-body synchrony or propagation.
+The long-run/baseline/refinement rows remain unreported in this excerpt.
+Read the complete existing compact report before fitting; no new run launched.
+See [partial server evidence](experiments/records/E066-server-partial-summary.json).

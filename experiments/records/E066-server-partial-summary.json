@@ -1,0 +1,101 @@
+{
+  "experiment": "E066",
+  "record_date": "2026-11-12 America/New_York",
+  "evidence": "User-pasted partial server output:two complete perturbation rows, unassigned preceding fragment and cohort footer; no independent artifact retrieval",
+  "run": "/home/carsonc/r-elegans-results/hybrid-validation-20261112T202746Z-868392",
+  "candidate_sha256_reported": "f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e",
+  "exit_code": 0,
+  "execution_valid": true,
+  "common_float64_initial_state": true,
+  "requested_ordinary_simulation_seconds": 60,
+  "requested_long_simulation_seconds": 300,
+  "actual_durations_not_printed": true,
+  "source_revision": null,
+  "server_environment": null,
+  "exact_invocation": null,
+  "elapsed_seconds": null,
+  "cases": [
+    {
+      "case": "hybrid-voltage-minus",
+      "exit_code": 0,
+      "late_repetitions": {
+        "dense_voltage_mV": 37,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 90,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "gated_bends_tail_middle_head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cycle_excursions_tail_middle_head": [
+        4.28350330141658e-05,
+        0.00026607517518461785,
+        0.0002885010805986771
+      ],
+      "rhythm_retained": false,
+      "frequency_hz": 2.6455026455026447,
+      "shape_pc1": 1.0,
+      "phase_span_rad": null
+    },
+    {
+      "case": "hybrid-voltage-plus",
+      "exit_code": 0,
+      "late_repetitions": {
+        "dense_voltage_mV": 37,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 90,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "gated_bends_tail_middle_head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cycle_excursions_tail_middle_head": [
+        4.284482334493411e-05,
+        0.00026598550350510897,
+        0.00028852034649495817
+      ],
+      "rhythm_retained": false,
+      "frequency_hz": 2.6455026455026447,
+      "shape_pc1": 1.0,
+      "phase_span_rad": null
+    }
+  ],
+  "screening": {
+    "reference_motor_neuron": "RMDR",
+    "all_active_retain_rhythm": false,
+    "refinement": [
+      {
+        "case": "hybrid-neural-half",
+        "same_motor_amplitude_consistent": true,
+        "same_motor_frequency_consistent": true,
+        "regional_bends_consistent": true,
+        "passed": true
+      },
+      {
+        "case": "hybrid-body-half",
+        "same_motor_amplitude_consistent": true,
+        "same_motor_frequency_consistent": true,
+        "regional_bends_consistent": true,
+        "passed": true
+      }
+    ],
+    "held_voltage_control_passed": true,
+    "rhythm_validation_pass": false,
+    "baseline_historical_regional_amplitude_pass": false,
+    "duration_protocol_met": true,
+    "planned_duration_rhythm_validation_pass": false
+  },
+  "missing": "Baseline/cue/long/numerical-refinement/held-voltage case rows not supplied; fragment not assigned.",
+  "interpretation": "Nonzero small raw cyclic bends reach body in perturbation controls; strict window-gated zero medians do not imply no motion. Need all-case direct-cycle comparisons before interpreting persistence and amplitude convergence. PC1 pertains only eligible joints; null phase span is not evidence for absence or presence of a travelling wave.",
+  "method_audit": "Original regional refinement can compare zeros with zeros; retains original pass labels but does not establish convergence of the nonzero cyclic excursion. Historical peak prominence scales with total late raw range and can reject small cycles on posture drift. Add descriptive cycle comparisons without changing original acceptance criteria.",
+  "next_step": "Read complete existing summary via scripts.report_hybrid_validation; no new simulation or training. Consider frozen-channel direct-cycle-amplitude fitting only after long-run and nonzero refinement evidence.",
+  "new_training_or_simulation_executed": false
+}

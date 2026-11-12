@@ -5686,3 +5686,61 @@ Manifest08003d5eedfd0040ed05d45ea40f99995e935b1b14c21becd0711eb49b73eaca.
 Includes every local model/state/trajectory, reanalysis and final source capsules,
 not actual server hybrid retrieval or cloud-sync confirmation. Archive receipt
 added after source capture; numerical source unchanged. User launches after push.
+
+## 2026-11-12 — E066 partial server result and planned read-only report audit
+
+User supplies two complete rows (hybrid-voltage-minus/plus), a preceding
+unassigned fragment, and footer for hybrid-validation-20261112T202746Z-868392.
+Footer execution_validTrue, common initialTrue, candidate
+f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e,
+rhythm_validation_passFalse, historical amplitudeFalse, duration_protocol_metTrue,
+planned-duration rhythm validationFalse, both refinement screensTrue, heldTrue,
+exit0. Each complete perturbation row has37 voltage,4 calcium,90 muscle and11
+command/drive/joint repeating channels, gated regional medians all0; direct
+cyclic excursions tail~4.28e-5,middle~2.66e-4,head~2.89e-4rad. Selected-joint
+frequency2.6455026455026447Hz, eligible-shape PC1=1 and phase span null. Do not
+infer300s persistence, global standing-wave shape or zero physical motion from
+this truncated excerpt. Actual long/baseline/refinement rows are not supplied.
+
+Read-only method audit: sustained_excursions masks amplitudes to0 for failed
+raw-extrema/prominence/persistence checks; regional medians can be0 even when
+some joints qualify. Its peak prominence depends on total raw late range,
+which can hide small cycles on drifting posture. Current regional numerical
+check can compare0 with0, so it does not independently establish convergence
+of the NONZERO direct cyclic excursion amplitudes. Preserve original failed
+screen and its criteria; do not retrospectively relabel it as passed.
+PC1=1 over only one eligible joint is trivial, not evidence of whole-body
+synchronization; null phase span may mean too few coherent eligible joints.
+
+Plan: add standard-library read-only compact reporter of all8 saved case rows,
+per-region coverage, eligible joint IDs, direct cyclic excursions and timings.
+Compute descriptive nonzero cycle-amplitude relative differences for neural/
+body refinements and long run versus baseline. No new pass threshold or model
+change. Reads existing summary only; no simulation, optimizer or RNG. Local
+verification uses saved prior E066 reanalysis outputs under a new temporary
+summary (explicit older local fixture), not actual server candidate. Original
+raw inputs/results remain unchanged. Await full actual table before choosing
+body-amplitude fitting; freeze recovered channel scales if subsequent evidence
+supports that next stage. Command will be python -m scripts.report_hybrid_validation
+with explicit actual run path. No new experiment or fitting executed here.
+
+E066 partial evidence transcribed to E066-server-partial-summary.json. Original
+screen remains failed. Read-only reporter implemented: standard library only,
+prints all8 case rows including duration/coverage/eligible joints and descriptive
+cycle-relative errors, no pass criterion added. Verified on new temporary copy
+of prior LOCAL E066 summary with saved reanalysis fields restored; original
+summary/traces unchanged. Fixture clearly older12s source, not f024... server
+candidate. CLI output /tmp/r-elegans-E066-compact-report.log; fixture/source/env/
+argv under /tmp/r-elegans-E066-compact-report-fixture. Zero-baseline guard checked
+(undefined relative error, no division by zero); fresh import confirms no JAX.
+No integration/physics/objective change or new simulation; no broad numerical
+tests repeated for this reporting-only addition. Source and JSON/diff checks.
+Actual full table still awaited before promoting candidate or amplitude fitting.
+
+Report audit evidence archived in OneDrive notebook/evidence/E066-report-audit:
+345 copied files SHA256-compared, manifest82b8fd16a54ab6bba0a87f9bccb2c29ee78174291fa007b4a03c037017dde4d4.
+Contains structured partial server transcription, older local fixture/source/
+environment/invocation, initial/final reporter stdout and final standalone
+reporter source. Final formatting adds coherent/eligible counts and phase span;
+no numerical model or acceptance changes. No actual server trajectories or
+complete summary retrieved; no cloud-sync assertion.

@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E065_old_channel_scales_restore_detected_rhythm_with_fitted_connections",
+  "status": "E066_failed_screen_small_nonzero_cycles_reported_in_perturbation_controls",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -131,7 +131,7 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E065-server-summary.json",
-  "continuation": "E066 prepared for user launch; independent hybrid numerical/initial-state/300s persistence and amplitude/phase checks. No fitting; preserve E062/old-old and all source candidates.",
-  "next_diagnostic": "experiments/records/E066-hybrid-validation.json"
+  "server_evidence": "experiments/records/E066-server-partial-summary.json",
+  "continuation": "Check long persistence and nonzero cyclic-amplitude refinement before fitting; preserve original failed screen and independent channel-restored candidate",
+  "next_diagnostic": "Read complete E066 summary using scripts.report_hybrid_validation; no simulation"
 }

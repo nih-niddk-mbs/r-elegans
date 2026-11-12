@@ -10,15 +10,28 @@ then test held-out animals and experiments. The initial
 and missing capabilities; this is not yet an achieved biological model or a
 completed joint-data trainer. Training remains incremental.
 
-E066 independent hybrid validation is ready for user launch (2026-11-12).
+E066 server excerpt (2026-11-12) reports execution valid but rhythm/regional
+validation failed. Candidate hash f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e.
+Both initial-voltage perturbation rows retain37 repeating voltage,90 muscle and
+11 joint channels. Direct tail/middle/head cyclic excursions are about
+4.28e-5/2.66e-4/2.89e-4rad, well below the .003rad engineering comparison.
+Zero historical window-gated medians do not mean zero physical motion. Neural
+refinement checks pass; gated regional comparisons can compare zeros with
+zeros and do not establish convergence of nonzero cycle amplitudes. PC1=1 over
+eligible joints alone does not establish whole-body synchrony or propagation.
+The long-run/baseline/refinement rows remain unreported in this excerpt.
+Read the complete existing compact report before fitting; no new run launched.
+See [partial server evidence](experiments/records/E066-server-partial-summary.json).
+
+Historical E066 preparation (server execution now reported above).
 The old-channel/new-connection candidate is pinned by its saved hash and exact
 family reconstruction. Eight simulations test its own initial-voltage,
 neural/body timestep, held-voltage and300s unpaced persistence controls, plus
 regional amplitudes and raw-supported phase/PCA descriptions. Four workers
 run concurrently. No fitting or automatic model promotion. Local8-case12s
 software smoke and282 tests passed; the older local fixture fails the stricter
-tail persistence gate, retained as a negative result. Actual server60/300s
-candidate validation remains pending. See [method and local checks](experiments/records/E066-hybrid-validation.json).
+tail persistence gate, retained as a negative result. Server execution is now reported complete, with failed screening; full cycle
+tables and long-run interpretation await the complete report. See [method and local checks](experiments/records/E066-hybrid-validation.json).
 
 E065 full server table (2026-11-12):60s comparisons isolate the suppressing
 parameter family in this setup. Old channel scales + old connections yield
