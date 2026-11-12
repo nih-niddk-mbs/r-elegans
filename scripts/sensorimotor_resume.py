@@ -25,7 +25,7 @@ def read_completed(root,settings,size):
             raise ValueError('Resume objective/numerics mismatch: '+key)
     if cfg['arguments'].get('training_cues','nominal')!=settings['arguments'].get('training_cues','nominal'):
         raise ValueError('Resume objective/numerics mismatch: training_cues; use a fresh-stage warm start')
-    for key,default in (('precision','float32'),('training_margin',1.)):
+    for key,default in (('precision','float32'),('training_margin',1.),('alternation_p2p_rad',1e-5)):
         if cfg['arguments'].get(key,default)!=settings['arguments'].get(key,default):
             raise ValueError('Resume objective/numerics mismatch: '+key)
     if cfg['arguments'].get('precision','float32')=='float64':

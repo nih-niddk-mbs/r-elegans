@@ -1,7 +1,8 @@
-"""E055 stage1: finite ligand cue -> sensory neurons -> reversible body bend.
+"""Finite ligand cue -> sensory neurons -> independent motor prerequisites.
 
 Fresh bounded search from a verified paired fit, with the original anchor.
-Later curriculum stages are specified separately and are not run by this script.
+Stages: reversible bend (E055+) or short post-cue alternation (E063).
+Propagation and locomotion are not run by this script.
 """
 import argparse
 from dataclasses import asdict,replace
@@ -60,11 +61,15 @@ def main():
     p.add_argument('--precision',choices=['float32','float64'],default='float32')
     p.add_argument('--training-margin',type=float,default=1.)
     p.add_argument('--precision-reference-assay',type=Path)
+    p.add_argument('--stage',choices=['contract_relax','alternation'],default='contract_relax')
+    p.add_argument('--alternation-p2p-rad',type=float,default=1e-5)
     p.add_argument('--sigma',type=float,default=.03)
     p.add_argument('--bend-target-rad',type=float,default=.00003)
     p.add_argument('--dt',type=float,default=.002)
     p.add_argument('--brain-step-ms',type=float,default=.1)
     args=p.parse_args()
+    if not math.isfinite(args.alternation_p2p_rad) or args.alternation_p2p_rad<=0:p.error('Positive alternation target required')
+    if args.stage=='alternation' and args.precision!='float64':p.error('Alternation requires verified float64 path')
     if args.iterations<1 or not all(math.isfinite(v) and v>0 for v in
             (args.minutes,args.sigma,args.dt,args.brain_step_ms,args.bend_target_rad,args.training_margin)) or args.training_margin<1 or args.dt>.002 or args.brain_step_ms>.1:
         p.error('Positive settings; dt<=.002s and neural substep<=.1ms required')
@@ -104,8 +109,9 @@ def main():
     if file_sha256(out/'parent_run/network_best.npz')!=parent_summary['checkpoint_sha256']:
         raise ValueError('Copied parent checksum mismatch')
     model=load_builtin_model();protocol=ResponseProtocol(bend_target_rad=args.bend_target_rad);sc=EmbodiedSensoryConfig()
+    if args.stage=='alternation':protocol=replace(protocol,duration_s=12.,recovery_s=10.)
     training_protocol=replace(protocol,bend_target_rad=protocol.bend_target_rad*args.training_margin)
-    settings=dict(experiment='E055',stage='contract_relax',status='planned_before_execution',
+    settings=dict(experiment='E055',stage=args.stage,status='planned_before_execution',
         parent_run=str(source),parent_checkpoint_sha256=parent_summary['checkpoint_sha256'],
         parent_global_iteration=parent_iteration,original_anchor_sha256=cfg['network_sha256'],
         readout_sha256=cfg['readout_sha256'],maximum_factor=factor,protocol=asdict(protocol),
@@ -130,6 +136,9 @@ def main():
             check_settings['arguments']['training_cues']=parent_cfg['arguments'].get('training_cues','nominal')
             check_settings['arguments']['precision']=parent_cfg['arguments'].get('precision','float32')
             check_settings['arguments']['training_margin']=parent_cfg['arguments'].get('training_margin',1.)
+            check_settings['stage']=parent_cfg['stage']
+            check_settings['protocol']=parent_cfg['protocol']
+            check_settings['arguments']['alternation_p2p_rad']=parent_cfg['arguments'].get('alternation_p2p_rad',1e-5)
         offsets,sensory_offsets,saved_iteration,saved_rng,saved_summary=read_completed(saved,check_settings,spec.size)
         from scripts.sensorimotor_parameters import load_saved_parameters
         actual,parameter_base,parameter_origin=load_saved_parameters(saved,initial,fixed,config,spec,offsets)
@@ -151,6 +160,10 @@ def main():
     settings['training_selection']=dict(cues=args.training_cues,aggregation='maximum response loss plus original prior',
         low_dose_is_training=args.training_cues=='nominal-low-dose',training_bend_target_rad=training_protocol.bend_target_rad,
         validation_bend_target_rad=protocol.bend_target_rad)
+    if args.stage=='alternation':
+        settings['training_selection'].update(training_alternation_p2p_rad=args.alternation_p2p_rad*args.training_margin,
+            validation_alternation_p2p_rad=args.alternation_p2p_rad,
+            legacy_bend_fields='Descriptive cue response only; not alternation acceptance criteria')
     templates=None;initial_state=None;worlds={}
     if args.precision=='float64':
         from r_elegans.body import physical_muscle_body_params,build_muscle_projection
@@ -197,20 +210,25 @@ def main():
             rollout_templates=templates,initial_state=initial_state,exact_step_clock=args.precision=='float64')
     active_run=factory();sham_run=factory(sham=True)
     low_run=factory(dose=.8) if args.training_cues=='nominal-low-dose' else None
+    def assess(a,b,*,training=False,shift=0.):
+        if args.stage=='alternation':
+            from r_elegans.alternation import alternation_metrics
+            return alternation_metrics(a,b,model.neuron_ids,protocol,
+                target_rad=args.alternation_p2p_rad*(args.training_margin if training else 1.),onset_shift=shift)
+        return response_metrics(a,b,model.neuron_ids,training_protocol if training else protocol,onset_shift=shift)
     def evaluate(x,s,run=active_run,reference=sham_run,shift=0.,training=True):
         params=decode(x)
         if not frozen_joint_fields_unchanged(params,parameter_base if parameter_base is not None else initial,spec):raise RuntimeError('Frozen fields changed')
         sham=reference(params,times,np.exp(s));active=run(params,times,np.exp(s))
         if args.precision=='float64' and any(trace['dense_voltage_mV'].dtype!=np.float64 for trace in (sham,active)):
             raise RuntimeError('Float64 training received non-float64 neural trajectory')
-        metric_protocol=training_protocol if training else protocol
-        metrics=response_metrics(active,sham,model.neuron_ids,metric_protocol,onset_shift=shift)
+        metrics=assess(active,sham,training=training,shift=shift)
         prior=.001*float(np.mean(x*x))+.001*float(np.mean(s*s))
         result=dict(total=metrics['total']+prior,prior=prior,metrics=metrics)
         traces=dict(active=active,sham=sham)
         if training and low_run is not None:
             low=low_run(params,times,np.exp(s))
-            low_metrics=response_metrics(low,sham,model.neuron_ids,training_protocol)
+            low_metrics=assess(low,sham,training=True)
             result['total']=training_objective([metrics,low_metrics],args.training_cues)+prior
             result['training_cases']=[dict(case='active',metrics=metrics),dict(case='dose-low',metrics=low_metrics)]
             traces['dose-low']=low
@@ -275,6 +293,7 @@ def main():
         b_bend_gain_nS=float(sc.b_bend_gain_nS*np.exp(sensory_offsets[1])),
         dva_gain_nS=float(sc.dva_gain_nS*np.exp(sensory_offsets[2]))))
     validation=[];coarse_difference=None;refinement=None;low_source=None;low_refinements=[]
+    coarse_pattern=None;low_pattern=None;pattern_checks=[];unforced=None
     validation_cases=[('active',active_run,sham_run,0.),
             ('dose-low',factory(dose=.8),sham_run,0.),('dose-high',factory(dose=1.2),sham_run,0.),
             ('onset-shift',factory(shift=.5),sham_run,.5),
@@ -293,12 +312,19 @@ def main():
             if name=='chemical-blocked':gains[0]=0.
             else:gains[1:]=0.
             a=run(params,times,gains);b=reference(params,times,gains)
-            metrics=response_metrics(a,b,model.neuron_ids,protocol)
+            metrics=assess(a,b)
             result=dict(metrics=metrics);traces=dict(active=a,sham=b)
         else:result,traces=evaluate(offsets,s,run,reference,shift,training=False)
         for label,trace in traces.items():np.savez_compressed(destination/(label+'-trajectory.npz'),**trace)
         write_json(destination/'metrics.json',result)
         a=traces['active']
+        if args.stage=='alternation':
+            from r_elegans.alternation import pattern_resolution_check
+            if name=='active':coarse_pattern=result['metrics']
+            if name=='dose-low':low_pattern=result['metrics']
+            if name in ('refined','refined-low-dose','neural-quarter-low-dose'):
+                check=pattern_resolution_check(coarse_pattern if name=='refined' else low_pattern,result['metrics'],args.alternation_p2p_rad)
+                pattern_checks.append(dict(case=name,**check))
         if name=='dose-low':low_source=traces
         if name in ('refined-low-dose','neural-quarter-low-dose'):
             from scripts.assess_sensorimotor_resolution import cue_effect_difference
@@ -306,6 +332,10 @@ def main():
             check.update(case=name,passed=check['maximum_cue_effect_difference_rad']<=.25*protocol.bend_target_rad)
             low_refinements.append(check)
         if name=='active':
+            if args.stage=='alternation':
+                from r_elegans.alternation import alternation_statistics
+                unforced=alternation_statistics(traces['sham'],args.alternation_p2p_rad)
+                write_json(destination/'unforced_pattern.json',unforced)
             write_json(destination/'spontaneous_sham_signal_chain.json',signal_chain(traces['sham'],args.dt))
             coarse_difference=a['dense_joints']-traces['sham']['dense_joints']
             coarse_time=a['dense_time_s']
@@ -319,22 +349,25 @@ def main():
                 scope='Engineering convergence of cue-minus-sham body response, not biological or voltage error bound')
         write_motion_preview(destination/'motion.html',a['dense_joints'],a['dense_position'],a['dense_heading'],
             dt=args.dt/2 if name in ('refined','refined-low-dose') else args.dt,body_length=.001,seconds=protocol.duration_s,
-            title='E055 '+name+'; sensory-evoked response, not autonomous skill')
+            title=('E063 post-cue alternation; ' if args.stage=='alternation' else 'E055 sensory-evoked response; ')+name+'; no biological qualification')
         validation.append(dict(case=name,metrics=result['metrics']))
         print(json.dumps(dict(validation=validation[-1])),flush=True)
     rows={r['case']:r['metrics'] for r in validation}
     controls=all(rows[n]['cue_specific_peak_rad']<.1*protocol.bend_target_rad
         and rows[n]['awa_depolarization_mV']<.1*protocol.sensory_target_mV for n in ('chemical-blocked','held-voltage'))
+    if args.stage=='alternation':controls=controls and not rows['held-voltage']['pattern_pass']
     required=['active','dose-low','dose-high','onset-shift','refined']
     if args.precision=='float64':required+=['refined-low-dose','neural-quarter-low-dose']
     passed=bool(all(rows[n]['passed'] for n in required)
-        and controls and refinement['passed'] and all(r['passed'] for r in low_refinements))
-    summary=dict(experiment='E055',stage='contract_relax',status='completed',passed=passed,
+        and controls and refinement['passed'] and all(r['passed'] for r in low_refinements)
+        and all(r['passed'] for r in pattern_checks))
+    summary=dict(experiment='E055',stage=args.stage,status='completed',passed=passed,
         baseline=baseline,best=best,iterations=completed,selected_iteration=selected_iteration,
         initial_iteration=initial_iteration,last_iteration=initial_iteration+completed,
         validation=validation,blocked_controls_passed=bool(controls),elapsed_seconds=time.monotonic()-started,
         refinement_comparison=refinement,
         low_dose_refinement_comparisons=low_refinements,
+        pattern_refinement_comparisons=pattern_checks,unforced_pattern=unforced,
         stop_reason='time_budget' if completed<args.iterations else 'iterations',
         checkpoint_sha256=file_sha256(out/'network_best.npz'),parent_checkpoint_sha256=parent_summary['checkpoint_sha256'],
         original_anchor_sha256=cfg['network_sha256'],frozen_fields_unchanged=True,

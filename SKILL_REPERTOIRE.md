@@ -499,7 +499,26 @@ deferred. E061 read-only float64 neural sweep against E060 reference planned;
 no new learned skill or numerical fix yet. Original E058 pass retained.
 
 E061:float64 neural-step amplitude nearly invariant (0.00116% range) but only
-95.22% of target. No numerical skill promotion yet. E062 plans float64 robust
+95.22% of target. No numerical skill promotion yet. At that entry E062 planned float64 robust
 fitting with original validation threshold,2% training-only margin and explicit
 low-dose refinement checks, preserving all previous checkpoints independently.
 No autonomous rhythm or biological reflex match claimed.
+
+## E062 sensory skill qualification and E063 alternation pilot — 2026-11-11
+
+E062 server result (reported 2026-11-11; UTC run name20261112): the float64
+bend-and-recover skill passes the full engineering gate. Low-dose amplitudes
+are3.06561e-5rad (coarse),3.06503e-5rad (matched refinement) and3.06565e-5rad
+(neural quarter), all above3e-5rad. Chemical-blocked and held-voltage controls
+remove the cue response. Preserve checkpoint `16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b`
+from `sensorimotor64-20261112T020300Z-784477`. This is a small sensory-evoked
+reversible bend, with numerical checks; locomotion and long autonomous rhythms
+remain unproved. Evidence is user-reported stdout, not independent retrieval.
+See [E062 record](experiments/records/E062-server-summary.json).
+
+E063 is the next independent skill: repeated post-cue bends after one finite
+odor exposure, without periodic pacing. A60min float64 pilot uses the E062
+parameters with fresh seed6300 and preserves the recovery skill separately.
+Full302-neuron topology, fixed NMJ/body/kinetics, unknown channel densities and
+connection strengths plus three sensory gains remain the fitting scope.
+Implementation and local verification do not establish a server skill pass.

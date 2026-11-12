@@ -5174,3 +5174,97 @@ compact E061 server transcription. Precision baseline reference summary/config
 also copied. This verifies local evidence, not retrieval of actual E058/E061
 server artifacts or cloud synchronization. All actual-server source paths
 remain pinned and unmodified by these tools.
+
+## 2026-11-11 — E062 float64 first-rung pass; planned E063 alternation pilot
+
+User reports sensorimotor64-20261112T020300Z-784477 (UTC-named; client date
+2026-11-11 America/New_York), passed=True,45 proposals global0 ->45, selected41,
+73.24min rounded. Nominal/low/high/onset and nominal/low-dose refined and
+low-dose neural-quarter cases pass, as do separate blocked controls. Low-dose
+3.06561362e-5rad, refined3.06503171e-5 and neural-quarter3.06564917e-5 are all
+above unchanged3e-5 target. Preserve16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b
+and sensory gains[2.,.8414655104,.5875771484] independently. This is a small,
+numerically checked sensory-evoked bend/recovery primitive, not locomotion or
+long autonomous rhythm. High-dose selected-joint recovery .2245 passes .25;
+don't infer monotonic joint recruitment from selected peak values alone.
+
+E063 planned exploratory60min next skill: at least two peaks and two troughs in
+one joint after a SINGLE finite2–3s odor exposure, observation4–12s. No periodic
+stimulus, injected neuronal/muscle pattern, desired frequency or phase. Use
+12s trials, float64/canonical clock, full302-neuron topology and frozen NMJ/body/
+channel constants. Eligible unknown densities/connections/sensory gains and
+original coordinate bounds unchanged; fresh seed6300/global0 from E062 stored
+parameters, preserving operational reference/origin. New objective/protocol,
+not exact optimizer continuation. H1.1 permits recovery-skill interference:
+retain E062; don't require the same trial to both stop and sustain alternation.
+
+Engineering initial target1e-5rad minimum detrended peak-to-peak across two late
+windows (2% training-only margin), window-amplitude ratio>=.5, each window at
+least one raw turning point, total>=2 raw peaks and>=2 troughs at prominence
+.1target. Detrended range supplies dense partial progress; raw extrema and
+persistence gates reject static/ramping/single-bend motion and fast decay. Slow
+oscillatory ringdown can still qualify: this stage does not establish a limit
+cycle. These finite-window criteria can miss slow rhythms, and are not a
+biological gait/frequency fit.
+Keep actual-body proprioception and AWA recruitment during cue. Score worse
+nominal/.8dose case. Require original dose/timing/refined variants and low-dose
+refinements to meet NEW alternation gates; held-voltage must not have qualifying
+pattern. Chemical block must remove chemical cue recruitment, but spontaneous
+patterns may remain: initiation/stop gating is deferred. Analyze sham pattern
+separately; short unforced repetitions do not establish long autonomy. Do not
+require cue-specific phase shifts or penalize useful spontaneous oscillations.
+
+Record actual post-cue joint dynamics (not cue-minus-sham amplitude) for this
+skill, with matched sham for sensory causality/descriptive unforced behavior.
+Save all selected/final/RNG/reference/source/env/commands and traces external.
+No server training launched. Local numerical smoke will use older local E062,
+explicitly not the actual16146cc... winner. Planned command:
+sh scripts/launch_alternation64_mbslnx2.sh 60
+
+E062 detailed transcription: experiments/records/E062-server-summary.json.
+Actual source revision, full environment, seed confirmation, exact seconds,
+sensory-file hash and low-dose full-trajectory comparison details were not
+supplied. Do not infer retrieval, backup or exact reproduction from stdout.
+Changed neural coordinates2991 this run,9130 versus original paired parent;
+gains[2.,.8414655104152531,.5875771484181291]. Nominal refinement maximum
+cue-effect difference6.974503366508067e-8rad. High-dose recovery .2245 is close
+to .25 limit; chemical gain reaches its existing2x bound. Keep both constraints.
+
+E063 prospective numerical gate: for nominal and low-dose refinements, the
+same coarse-selected joint must qualify, minimum-window amplitude difference
+<=25% of max(target,coarse amplitude), peak and trough counts each differ<=1.
+Also retain the original cue-minus-sham trajectory checks. A joint switch
+cannot conceal loss of a coarse qualifying pattern. These are exploratory
+finite-window consistency gates, not a phase-error or biological bound.
+
+E063 local verification outcome: full suite267 passed in92.37s before adding
+one resume guard test; final targeted10 passed in.57s. Initial extra test had
+an unsaved fixture stage and was corrected; no numerical fix was needed.
+One-proposal end-to-end run /tmp/r-elegans-E063-alternation-smoke completed in
+652.764164082997s with all10 validation cases, blocked controls and three pattern
+refinement checks passing. Selected iteration0, global1: the older LOCAL E062
+fixture already has this short-window pattern; the proposal was not accepted.
+It is NOT the actual server16146... model or a newly learned alternation skill.
+Nominal joint1 has21 peaks/21 troughs and .00053071578rad minimum-window range,
+window ratio .6225; sham also qualifies, consistent with spontaneous transient
+activity. No long persistence conclusion. Refined and neural-quarter amplitude
+differences stay inside the prospectively declared25% bounds, counts within1.
+Held-voltage detrended range .000044703829rad alone exceeds target but has zero
+raw extrema and correctly fails the pattern gate. Chemical block removes AWA
+recruitment but leaves spontaneous pattern; this is expected for this protocol.
+Saved network/reference/origin, final/selected state, post-rejection RNG,
+float64 trajectories and unchanged local parent verified by /tmp/audit_E063.py.
+Reporter/title/explicit-target metadata/docstring edits after run start do not
+change numerical execution; original run-start source capsule is authoritative,
+final reviewed source archived separately. Local record E063-local-verification.
+Actual E062 winner alternation remains server-pending. Decision: launch one
+independent60min pilot, then review finite-window/refinement evidence before
+longer persistence, distributed waves or propulsion. No server job launched.
+
+E063 evidence archived to /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E063:
+6167 copied files SHA256-compared, manifest a8bb34480835a2947d4878ee1d1b63d93714d01e4c0f61cb80b25cabf9000a60.
+Includes recursive local parents, selected/final/RNG/source/env/invocations,
+full stdout/tests/audit and final reviewed source. This is local archive-copy
+verification, not actual server retrieval or confirmation of cloud sync.
+See E063-evidence-archive.json. Archive confirmation was added after source
+capture; it does not change the numerical source or the archived manifest.

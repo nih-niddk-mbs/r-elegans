@@ -1,13 +1,31 @@
 # WormGym: training and validation protocols
 
-E061 server precision result:float64 peaks remain2.85671–2.85674e-5rad as
+E062 server result (reported 2026-11-11; UTC run name20261112): the float64
+bend-and-recover skill passes the full engineering gate. Low-dose amplitudes
+are3.06561e-5rad (coarse),3.06503e-5rad (matched refinement) and3.06565e-5rad
+(neural quarter), all above3e-5rad. Chemical-blocked and held-voltage controls
+remove the cue response. Preserve checkpoint `16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b`
+from `sensorimotor64-20261112T020300Z-784477`. This is a small sensory-evoked
+reversible bend, with numerical checks; locomotion and long autonomous rhythms
+remain unproved. Evidence is user-reported stdout, not independent retrieval.
+See [E062 record](experiments/records/E062-server-summary.json).
+
+E063 is the next independent skill: repeated post-cue bends after one finite
+odor exposure, without periodic pacing. A60min float64 pilot uses the E062
+parameters with fresh seed6300 and preserves the recovery skill separately.
+Full302-neuron topology, fixed NMJ/body/kinetics, unknown channel densities and
+connection strengths plus three sensory gains remain the fitting scope.
+Implementation and local verification do not establish a server skill pass.
+
+Historical E061 finding and E062 plan (superseded by the E062 result above):
+float64 peaks remain2.85671–2.85674e-5rad as
 neural step shrinks. Peak variation0.00116%; full-trajectory differences halve
 6.10e-9 ->3.05e-9rad. Float32 arithmetic strongly contributes to the prior
 sensitivity in this test. Better-resolved amplitude is95.22% of target, still
 unqualified. E062 prepares float64 fitting, preserving stored E058 parameters,
 original coordinate bounds and3e-5 acceptance threshold. Optimize a declared
 2% training-only margin; add low-dose numerical checks. Fresh seed6200 because
-precision/objective changed; not an exact float32 continuation. No server job
+precision/objective changed; not an exact float32 continuation. At that planning entry no server job had been
 launched. See [E061 report](experiments/records/E061-server-summary.json).
 
 E060 server result localizes the tested sensitivity to neural stepping:
@@ -2122,3 +2140,38 @@ best offsets, PCG64 state, original anchor/bounds and proposal numbering. It is 
 continuation of a completed random search, not an in-flight process restoration.
 The 180-minute budget excludes setup and final timestep refinement. The job runs
 under nohup using the dedicated conda interpreter. No held-out target is fitted.
+
+## Post-cue alternation pilot (E063)
+
+The E062 recovery checkpoint remains independent. Launch the next60min search
+in the dedicated conda environment; the launcher pins its parent SHA, selects
+four physical CPU cores and detaches with nohup. Validation adds wall time.
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_alternation64_mbslnx2.sh 60 &&
+tail -n 28 -F "$(ls -1t /home/carsonc/r-elegans-results/alternation64-*.log | head -n 1)"
+```
+
+Read the final report with the dedicated interpreter:
+
+```sh
+/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_sensorimotor
+```
+
+This is a fresh seed6300 search from E062, not an exact optimizer continuation.
+Both nominal and low doses train unknown full-network channel densities and
+existing synapse strengths plus sensory gains, within original bounds. No
+periodic input or prescribed motor waveform is supplied. One exposure2–3s is
+followed by observation4–12s. At least one joint must show two raw peaks and two
+troughs, a turning point in both late windows, >=1e-5rad detrended peak-to-peak
+in each window and minimum/maximum window amplitude>=.5. Training adds2% margin.
+Matched refinements must preserve the same joint's qualification, amplitudes
+within25% and peak/trough counts within1, alongside cue-effect checks. Chemical
+block removes cue recruitment; held voltage must remove qualifying motion.
+Sham spontaneous repetitions are described separately. Success would establish
+only this short-window prerequisite; slow oscillatory ringdown can still pass.
+It does not establish long autonomy, propagation, navigation
+or a biologically calibrated gait. Local smoke uses an older local parent;
+actual E062 winner results await the user's server launch.

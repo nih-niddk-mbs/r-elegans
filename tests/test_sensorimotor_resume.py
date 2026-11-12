@@ -76,6 +76,16 @@ def test_precision_or_margin_change_requires_warm_start(saved):
         with pytest.raises(ValueError,match=key):read_completed(root,changed,2)
 
 
+def test_alternation_stage_and_target_cannot_change_during_resume(saved):
+    root,cfg,*_=saved
+    changed=json.loads(json.dumps(cfg));changed['stage']='alternation'
+    with pytest.raises(ValueError,match='stage'):read_completed(root,changed,2)
+    cfg['stage']='alternation'
+    (root/'configuration.json').write_text(json.dumps(cfg))
+    changed=json.loads(json.dumps(cfg));changed['arguments']['alternation_p2p_rad']=2e-5
+    with pytest.raises(ValueError,match='alternation_p2p_rad'):read_completed(root,changed,2)
+
+
 def test_operational_reference_hash_is_required_for_float64_resume(saved):
     root,cfg,*_=saved
     cfg['arguments'].update(precision='float64',training_margin=1.02)

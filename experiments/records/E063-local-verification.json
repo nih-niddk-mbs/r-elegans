@@ -1,0 +1,223 @@
+{
+  "experiment": "E063",
+  "evidence": "Local software/end-to-end smoke from older local E062 fixture; not actual server winner",
+  "run": "/tmp/r-elegans-E063-alternation-smoke",
+  "command": "JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.train_sensorimotor --warm-start-run /tmp/r-elegans-E062-train64-smoke --stage alternation --precision float64 --training-margin 1.02 --training-cues nominal-low-dose --seed 6300 --output-dir /tmp/r-elegans-E063-alternation-smoke --iterations 1 --minutes 5",
+  "stdout": "/tmp/r-elegans-E063-alternation-smoke.log",
+  "elapsed_seconds": 652.764164082997,
+  "iterations": 1,
+  "selected_iteration": 0,
+  "passed": true,
+  "checkpoint_sha256": "064473f94ece552b70d13c879a41597e158b11e4d6447555093ec31095879348",
+  "warm_start_checkpoint_sha256": "064473f94ece552b70d13c879a41597e158b11e4d6447555093ec31095879348",
+  "source": "8c89310 plus dirty source, invocation and environment preserved by run_records; revision alone is insufficient",
+  "source_timing": "Reporter, preview titles, explicit target metadata and docstring were edited after numerical run started; these do not change numerical objective. Run-start source capsule is authoritative for execution; final reviewed source archived separately.",
+  "tests": {
+    "full_suite_before_additional_resume_test": "267 passed in92.37s",
+    "targeted_final": "10 passed in0.57s",
+    "new_test_fixture_correction": "Initial extra resume test forgot to save changed stage into fixture config; corrected fixture and passed"
+  },
+  "audit": {
+    "parameter_and_reference_audit": "passed",
+    "precision": "float64",
+    "parent_unchanged": true,
+    "global_iteration": 1,
+    "selected_iteration": 0,
+    "passed": true,
+    "elapsed_seconds": 652.764164082997,
+    "blocked_controls": true,
+    "pattern_checks": [
+      {
+        "case": "refined",
+        "joint": 1,
+        "amplitude_difference_rad": 3.878933081537825e-05,
+        "allowed_difference_rad": 0.00013267894501395016,
+        "turning_counts_consistent": true,
+        "passed": true
+      },
+      {
+        "case": "refined-low-dose",
+        "joint": 1,
+        "amplitude_difference_rad": 3.879208190798859e-05,
+        "allowed_difference_rad": 0.00013268316844949389,
+        "turning_counts_consistent": true,
+        "passed": true
+      },
+      {
+        "case": "neural-quarter-low-dose",
+        "joint": 1,
+        "amplitude_difference_rad": 6.243999650036483e-05,
+        "allowed_difference_rad": 0.00013268316844949389,
+        "turning_counts_consistent": true,
+        "passed": true
+      }
+    ]
+  },
+  "unforced_pattern": {
+    "total": 0.0,
+    "pattern_pass": true,
+    "alternating_joint": 1,
+    "alternating_p2p_rad": 0.0005308611359939903,
+    "peaks": 21,
+    "troughs": 21,
+    "window_amplitude_ratio": 0.6213756744602199,
+    "postcue_begin_s": 4.0,
+    "minimum_window_p2p_by_joint_rad": [
+      0.0001741788548352418,
+      0.0005308611359939903,
+      0.0005351560542499717,
+      0.0017099089564456397,
+      0.0017008814815466617,
+      0.0006999358153837121,
+      0.0004915135764699964,
+      0.0012860656863052406,
+      0.0010392387625475354,
+      0.0007773803296513876,
+      0.0006128427686035176
+    ],
+    "peaks_by_joint": [
+      21,
+      21,
+      22,
+      21,
+      22,
+      21,
+      21,
+      21,
+      21,
+      21,
+      21
+    ],
+    "troughs_by_joint": [
+      21,
+      21,
+      21,
+      22,
+      21,
+      22,
+      22,
+      21,
+      22,
+      21,
+      22
+    ],
+    "qualified_by_joint": [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true
+    ],
+    "scope": "Short post-cue absolute-joint alternation; finite-window engineering criteria, not long autonomy or a biological gait"
+  },
+  "validation": [
+    {
+      "case": "active",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0005307157800558006,
+      "peaks": 21,
+      "troughs": 21,
+      "window_ratio": 0.6224995614225675
+    },
+    {
+      "case": "dose-low",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0005307326737979755,
+      "peaks": 21,
+      "troughs": 21,
+      "window_ratio": 0.622368004475507
+    },
+    {
+      "case": "dose-high",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0005307017987867912,
+      "peaks": 21,
+      "troughs": 21,
+      "window_ratio": 0.6226086020636827
+    },
+    {
+      "case": "onset-shift",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0005306897249506871,
+      "peaks": 21,
+      "troughs": 21,
+      "window_ratio": 0.6232242374720275
+    },
+    {
+      "case": "refined",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0004919264492404224,
+      "peaks": 22,
+      "troughs": 21,
+      "window_ratio": 0.5715325629117006
+    },
+    {
+      "case": "chemical-blocked",
+      "passed": false,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0005308611359939903,
+      "peaks": 21,
+      "troughs": 21,
+      "window_ratio": 0.6213756744602199
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0005002450136530573,
+      "peaks": 21,
+      "troughs": 21,
+      "window_ratio": 0.6045583089436208
+    },
+    {
+      "case": "held-voltage",
+      "passed": false,
+      "pattern_pass": false,
+      "joint": 7,
+      "p2p_rad": 4.4703828999115755e-05,
+      "peaks": 0,
+      "troughs": 0,
+      "window_ratio": 0.5664139006823965
+    },
+    {
+      "case": "refined-low-dose",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.000491940591889987,
+      "peaks": 22,
+      "troughs": 21,
+      "window_ratio": 0.5714065722535362
+    },
+    {
+      "case": "neural-quarter-low-dose",
+      "passed": true,
+      "pattern_pass": true,
+      "joint": 1,
+      "p2p_rad": 0.0004682926772976107,
+      "peaks": 22,
+      "troughs": 21,
+      "window_ratio": 0.5416096933224841
+    }
+  ],
+  "interpretation": "Older local parent already passes this short-window pattern gate without an accepted proposal; no new learned skill or server winner result. Slow ringdown remains possible. Held-voltage range alone is nonzero but raw turning-count gate correctly rejects it.",
+  "artifact_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E063"
+}

@@ -1,0 +1,52 @@
+{
+  "experiment": "E063",
+  "status": "implemented_local_software_verification_passed_server_pending",
+  "client_date": "2026-11-11 America/New_York",
+  "question": "Can the full network sustain repeated post-cue joint bends without periodic pacing?",
+  "parent_run": "/home/carsonc/r-elegans-results/sensorimotor64-20261112T020300Z-784477",
+  "parent_checkpoint_sha256": "16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b",
+  "mode": "fresh search for new task, not exact optimizer resume",
+  "seed": 6300,
+  "minutes": 60,
+  "command": "sh scripts/launch_alternation64_mbslnx2.sh 60",
+  "precision": "float64",
+  "stage": "alternation",
+  "fixed": [
+    "anatomical topology",
+    "NMJ",
+    "muscle/body mechanics",
+    "leak/capacitance/reversal potentials",
+    "channel/reporter/receptor kinetics",
+    "sensory signs/maps"
+  ],
+  "trainable": [
+    "unknown non-leak densities",
+    "existing chemical strengths",
+    "symmetric electrical pair strengths",
+    "chemical/B/DVA gain multipliers"
+  ],
+  "protocol": {
+    "duration_s": 12,
+    "cue_on_s": 2,
+    "cue_off_s": 3,
+    "observation_begin_s": 4,
+    "target_minimum_window_p2p_rad": 1e-05,
+    "training_margin": 1.02,
+    "minimum_raw_peaks": 2,
+    "minimum_raw_troughs": 2,
+    "minimum_turning_points_each_window": 1,
+    "minimum_window_amplitude_ratio": 0.5,
+    "minimum_AWA_mV": 0.1,
+    "maximum_joint_rad": 0.5
+  },
+  "numerical_checks": "Same coarse joint qualifies at fine resolutions; amplitude difference<=25% max(target,coarse amp), peak/trough counts differ<=1; retain matched cue-effect checks",
+  "controls": "Chemical block removes cue recruitment/differential response; held voltage has no qualifying pattern; actual-body proprioception active and blocking descriptive; sham short patterns reported independently",
+  "claims_not_demonstrated": [
+    "long autonomous rhythm",
+    "propagation",
+    "locomotion",
+    "biological fidelity"
+  ],
+  "artifacts": "External selected/final parameters, RNG, recursive lineage, source/env/invocation and dense active/sham traces",
+  "limitation": "Slow oscillatory ringdown can qualify in this short window; this does not demonstrate a stable limit cycle"
+}

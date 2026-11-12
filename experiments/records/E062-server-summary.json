@@ -1,0 +1,145 @@
+{
+  "experiment": "E062",
+  "evidence": "User-reported server compact summary; full files not independently retrieved",
+  "client_record_date": "2026-11-11 America/New_York",
+  "run": "/home/carsonc/r-elegans-results/sensorimotor64-20261112T020300Z-784477",
+  "passed": true,
+  "stop_reason": "time_budget",
+  "precision": "float64",
+  "training_cues": "nominal-low-dose",
+  "training_margin": 1.02,
+  "validation_target_rad": 3e-05,
+  "iterations": 45,
+  "initial_iteration": 0,
+  "last_iteration": 45,
+  "selected_iteration": 41,
+  "elapsed_minutes_rounded": 73.24,
+  "elapsed_seconds": null,
+  "source_revision": null,
+  "server_environment": null,
+  "seed_from_plan": 6200,
+  "seed_independently_reported": null,
+  "checkpoint_sha256": "16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b",
+  "resume_checkpoint_sha256": null,
+  "warm_start_checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf",
+  "sensory_gain_multipliers": [
+    2.0,
+    0.8414655104152531,
+    0.5875771484181291
+  ],
+  "neural_coordinates_changed_this_run": 2991,
+  "neural_coordinates_changed_from_original_paired_parent": 9130,
+  "blocked_controls_passed": true,
+  "baseline": {
+    "total": 0.0667075869,
+    "active_bend_rad": 3.28759796e-05,
+    "low_bend_rad": 2.85671098e-05,
+    "active_response_loss": 0.0,
+    "low_response_loss": 0.0664343206,
+    "active_recovery_ratio": 0.0109,
+    "active_AWA_mV": 7.85624,
+    "low_recovery_ratio": 0.0107
+  },
+  "best": {
+    "total": 0.000297562823,
+    "active_response_loss": 0.0,
+    "low_response_loss": 0.0,
+    "active_bend_rad": 3.53352879e-05,
+    "active_recovery_ratio": 0.0122,
+    "active_AWA_mV": 8.22961,
+    "low_bend_rad": 3.06561362e-05,
+    "low_recovery_ratio": 0.012
+  },
+  "refinement": {
+    "maximum_cue_effect_difference_rad": 6.974503366508067e-08,
+    "allowed_difference_rad": 7.5e-06,
+    "passed": true
+  },
+  "low_dose_full_trajectory_comparison_details": null,
+  "interpretation": "Numerically checked small reversible cue-response engineering primitive; no locomotion, long autonomous oscillation or biological qualification",
+  "next_decision": "Preserve winner independently; E063 fresh post-cue alternation pilot",
+  "validation": [
+    {
+      "case": "active",
+      "passed": true,
+      "cue_specific_peak_rad": 3.53352879e-05,
+      "recovery_ratio": 0.0122,
+      "awa_depolarization_mV": 8.22961,
+      "awa_recovery_ratio": 3.284013038566418e-05
+    },
+    {
+      "case": "dose-low",
+      "passed": true,
+      "cue_specific_peak_rad": 3.06561362e-05,
+      "recovery_ratio": 0.012,
+      "awa_depolarization_mV": 7.39322,
+      "awa_recovery_ratio": 3.206002684460495e-05
+    },
+    {
+      "case": "dose-high",
+      "passed": true,
+      "cue_specific_peak_rad": 3.12705936e-05,
+      "recovery_ratio": 0.2245,
+      "awa_depolarization_mV": 8.90241,
+      "awa_recovery_ratio": 3.349300149112579e-05
+    },
+    {
+      "case": "onset-shift",
+      "passed": true,
+      "cue_specific_peak_rad": 3.4652135e-05,
+      "recovery_ratio": 0.0082,
+      "awa_depolarization_mV": 8.22962,
+      "awa_recovery_ratio": 5.2902483163462604e-05
+    },
+    {
+      "case": "refined",
+      "passed": true,
+      "cue_specific_peak_rad": 3.53283078e-05,
+      "recovery_ratio": 0.0122,
+      "awa_depolarization_mV": 8.22775,
+      "awa_recovery_ratio": 3.28523266990907e-05
+    },
+    {
+      "case": "chemical-blocked",
+      "passed": false,
+      "cue_specific_peak_rad": 0,
+      "recovery_ratio": 0,
+      "awa_depolarization_mV": 0,
+      "awa_recovery_ratio": 0
+    },
+    {
+      "case": "proprioceptive-blocked",
+      "passed": true,
+      "cue_specific_peak_rad": 3.51506274e-05,
+      "recovery_ratio": 0.0134,
+      "awa_depolarization_mV": 8.22961,
+      "awa_recovery_ratio": 3.284052991583264e-05
+    },
+    {
+      "case": "held-voltage",
+      "passed": false,
+      "cue_specific_peak_rad": 0,
+      "recovery_ratio": 0,
+      "awa_depolarization_mV": 0,
+      "awa_recovery_ratio": 0
+    },
+    {
+      "case": "refined-low-dose",
+      "passed": true,
+      "cue_specific_peak_rad": 3.06503171e-05,
+      "recovery_ratio": 0.0121,
+      "awa_depolarization_mV": 7.39152,
+      "awa_recovery_ratio": 3.207217117434031e-05
+    },
+    {
+      "case": "neural-quarter-low-dose",
+      "passed": true,
+      "cue_specific_peak_rad": 3.06564917e-05,
+      "recovery_ratio": 0.012,
+      "awa_depolarization_mV": 7.39323,
+      "awa_recovery_ratio": 3.205760893777624e-05
+    }
+  ],
+  "reported_frozen_fields_unchanged": null,
+  "rounding": "Values transcribed at the precision printed by compact report; full exact fields remain unavailable"
+}

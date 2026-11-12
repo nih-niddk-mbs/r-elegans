@@ -1,13 +1,31 @@
 # Current model: exact scope and computation path
 
-E061 server precision result:float64 peaks remain2.85671–2.85674e-5rad as
+E062 server result (reported 2026-11-11; UTC run name20261112): the float64
+bend-and-recover skill passes the full engineering gate. Low-dose amplitudes
+are3.06561e-5rad (coarse),3.06503e-5rad (matched refinement) and3.06565e-5rad
+(neural quarter), all above3e-5rad. Chemical-blocked and held-voltage controls
+remove the cue response. Preserve checkpoint `16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b`
+from `sensorimotor64-20261112T020300Z-784477`. This is a small sensory-evoked
+reversible bend, with numerical checks; locomotion and long autonomous rhythms
+remain unproved. Evidence is user-reported stdout, not independent retrieval.
+See [E062 record](experiments/records/E062-server-summary.json).
+
+E063 is the next independent skill: repeated post-cue bends after one finite
+odor exposure, without periodic pacing. A60min float64 pilot uses the E062
+parameters with fresh seed6300 and preserves the recovery skill separately.
+Full302-neuron topology, fixed NMJ/body/kinetics, unknown channel densities and
+connection strengths plus three sensory gains remain the fitting scope.
+Implementation and local verification do not establish a server skill pass.
+
+Historical E061 finding and E062 plan (superseded by the E062 result above):
+float64 peaks remain2.85671–2.85674e-5rad as
 neural step shrinks. Peak variation0.00116%; full-trajectory differences halve
 6.10e-9 ->3.05e-9rad. Float32 arithmetic strongly contributes to the prior
 sensitivity in this test. Better-resolved amplitude is95.22% of target, still
 unqualified. E062 prepares float64 fitting, preserving stored E058 parameters,
 original coordinate bounds and3e-5 acceptance threshold. Optimize a declared
 2% training-only margin; add low-dose numerical checks. Fresh seed6200 because
-precision/objective changed; not an exact float32 continuation. No server job
+precision/objective changed; not an exact float32 continuation. At that planning entry no server job had been
 launched. See [E061 report](experiments/records/E061-server-summary.json).
 
 E060 server result localizes the tested sensitivity to neural stepping:

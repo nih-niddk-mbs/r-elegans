@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E061_precision_stabilized_below_target_E062_float64_fit_prepared",
+  "status": "E062_float64_contract_relax_pass_E063_alternation_prepared",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -26,7 +26,7 @@
   "stages": [
     {
       "id": "contract_relax",
-      "status": "original_engineering_pass_retained_numerical_promotion_not_supported",
+      "status": "user_reported_float64_engineering_pass_including_low_dose_refinements",
       "motor_goal": "One cue-specific reversible bend, no preferred side",
       "sensory_goal": "AWA recruitment by finite diacetyl exposure and recovery after washout; actual-body B/DVA feedback active and gain trainable",
       "protocol": "8s; one exposure2..3s, recovery6..8s; matched sham",
@@ -66,7 +66,7 @@
         "initialization": "inherit selected neural/sensory parameters; fresh seed5700/global0",
         "bounds_and_targets_changed": false
       },
-      "selected_checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf",
+      "selected_checkpoint_sha256": "16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b",
       "float64_training": {
         "validation_bend_target_rad": 3e-05,
         "training_bend_target_rad": 3.06e-05,
@@ -75,15 +75,35 @@
         "additional_validation": [
           "refined-low-dose",
           "neural-quarter-low-dose"
-        ]
-      }
+        ],
+        "status": "completed_pass_user_reported"
+      },
+      "legacy_float32_selected_checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf"
     },
     {
       "id": "alternate",
-      "status": "planned_not_implemented",
+      "status": "implemented_local_verification_server_pending",
       "motor_goal": "Several opposing bends after a single initiating event, without a periodic teacher",
       "sensory_goal": "Local actual-body feedback participates in alternation; stimulus can initiate an event but does not pace cycles",
-      "validation": "Post-cue persistence and separate no-cue autonomy assay; feedback block, perturbation and timestep tests"
+      "validation": "Post-cue persistence and separate no-cue autonomy assay; feedback block, perturbation and timestep tests",
+      "stage_argument": "alternation",
+      "parent_checkpoint_sha256": "16146cc539d47277cb2230e1cfced9a00282d9dd8e4e3b18112fde46515a042b",
+      "seed": 6300,
+      "minutes": 60,
+      "protocol": "12s; one odor exposure2..3s; actual post-cue joint pattern4..12s; matched sham separately",
+      "engineering_gates": {
+        "minimum_window_detrended_p2p_rad": 1e-05,
+        "training_margin": 1.02,
+        "minimum_raw_peaks": 2,
+        "minimum_raw_troughs": 2,
+        "minimum_turning_points_per_window": 1,
+        "minimum_window_amplitude_ratio": 0.5,
+        "peak_prominence_target_fraction": 0.1,
+        "same_joint_refinement_relative_amplitude_tolerance": 0.25,
+        "refinement_turn_count_tolerance": 1
+      },
+      "scope": "Short-window pattern prerequisite; no long autonomy, biological frequency, propagation or propulsion claim",
+      "command": "sh scripts/launch_alternation64_mbslnx2.sh 60"
     },
     {
       "id": "propagate",
@@ -107,6 +127,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E061-server-summary.json",
-  "continuation": "E062 fresh seed6200 float64 robust cue search from pinned E058 operational weights, original coordinate bounds and3e-5 validation target; training margin1.02; no server job launched"
+  "server_evidence": "experiments/records/E062-server-summary.json",
+  "continuation": "E063 fresh seed6300 from pinned E062 full-network parameters; new objective, independent checkpoint, no server job launched"
 }

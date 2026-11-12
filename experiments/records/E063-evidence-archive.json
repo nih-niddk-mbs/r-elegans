@@ -1,0 +1,7 @@
+{
+  "experiment": "E063",
+  "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E063",
+  "sha256_compared_files": 6167,
+  "manifest_sha256": "a8bb34480835a2947d4878ee1d1b63d93714d01e4c0f61cb80b25cabf9000a60",
+  "scope": "Completed local smoke and recursive lineage, full stdout, source/env/invocation, synthetic and resume tests, parameter/reference audit, compact E062 server transcription. Actual E062 server checkpoint not retrieved; cloud synchronization not verified."
+}
