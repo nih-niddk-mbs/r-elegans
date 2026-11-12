@@ -1,0 +1,82 @@
+{
+  "experiment": "E066",
+  "status": "implemented_local_verification_passed_server_pending",
+  "record_date": "2026-11-12 America/New_York",
+  "source_comparison_run": "/home/carsonc/r-elegans-results/rhythm-comparison-20261112T185742Z-865067",
+  "server_candidate_path": "old-new-sham/evaluated_network.npz",
+  "server_candidate_sha256": null,
+  "server_candidate_identity": "Read saved config hash and verify exact pinned old417254ad.../new3fabef... family reconstruction before snapshot; no guessed hybrid hash",
+  "server_simulation_executed": false,
+  "server_command": "sh scripts/launch_hybrid_validation_mbslnx2.sh",
+  "server_protocol": {
+    "cases": 8,
+    "ordinary_simulated_seconds": 60,
+    "long_simulated_seconds": 300,
+    "workers": 4,
+    "physical_cores_per_worker": 4,
+    "controls": [
+      "sham",
+      "single finite cue",
+      "initial voltage +/-1mV",
+      "neural half-step",
+      "body-only half-step",
+      "300s unpaced",
+      "held voltage"
+    ],
+    "fixed": "All candidate parameters, kinetics/leak/capacitance/topology/NMJ/mechanics/gains; only named diagnostic condition varies",
+    "rhythm_gate": "Repeated named motor cell plus persistent raw joint in each region; same baseline-selected motor across active cases; refinement amplitude20%/frequency10% and regional bends20%; negative held-voltage guard",
+    "amplitude_scope": "Historical .003rad region-median sustained-window gate separate from direct cyclic excursion metrics; no locomotion claim",
+    "coordination_scope": "Raw-supported frequency, phase/coherence and detrended shape PCA; phase span does not establish travelling wave",
+    "no_fitting": true,
+    "no_rng": true
+  },
+  "local_source": "/tmp/r-elegans-E065-local-cohort",
+  "local_scope": "Actual archived old model plus older LOCAL fitted source; not the actual server hybrid",
+  "local_candidate_sha256": "9e87f27b78b267ef7a8d1a0beebc39ac996375e6bb8d8c912f70427e7e362e15",
+  "local_duration_s": 12,
+  "local_long_duration_s": 12,
+  "local_execution_valid": true,
+  "local_initial_fingerprints_consistent": true,
+  "local_worker_queue_elapsed_seconds": 78.08647320899945,
+  "local_all8_cases_completed": true,
+  "local_reanalysis": "/tmp/r-elegans-E066-reanalysis",
+  "local_rhythm_screen": {
+    "reference_motor_neuron": "RMDR",
+    "all_active_retain_rhythm": false,
+    "refinement": [
+      {
+        "case": "hybrid-neural-half",
+        "same_motor_amplitude_consistent": true,
+        "same_motor_frequency_consistent": true,
+        "regional_bends_consistent": true,
+        "passed": true
+      },
+      {
+        "case": "hybrid-body-half",
+        "same_motor_amplitude_consistent": true,
+        "same_motor_frequency_consistent": true,
+        "regional_bends_consistent": true,
+        "passed": true
+      }
+    ],
+    "held_voltage_control_passed": true,
+    "rhythm_validation_pass": false,
+    "baseline_historical_regional_amplitude_pass": false,
+    "scope": "Prospective engineering screening; no certified error, biological fidelity, locomotion or automatic fitting promotion",
+    "duration_protocol_met": false,
+    "planned_duration_rhythm_validation_pass": false
+  },
+  "local_negative_interpretation": "Older short local fixture has no tail joint passing stricter five-window persistence; retain negative finding. Neural/body refinement and held controls pass. No inference about server60/300s candidate.",
+  "release_preparation": "/tmp/r-elegans-E066-release-inputs",
+  "release_worker": "/tmp/r-elegans-E066-release-worker",
+  "release_verification": "Candidate hash/family/fixed/initial-state provenance verified; all6 first12s fields reproduce exactly, matching final descriptive reanalysis. Source manifests/config/initial states frozen.",
+  "tests": {
+    "full_suite": "282 passed in93.62s before descriptive cycle-excursion additions",
+    "final_targeted": "15 passed in1.22s after cycle addition",
+    "synthetic": "Standing vs travelling phase/PCA, monotonic drift rejected, cyclic excursion on posture drift stays small, same motor/refinement failures tested"
+  },
+  "source_timing": "Initial8-case smoke preserved. Final cycle method reanalyzed all saved traces read-only; final-source prep and standalone worker reproduce metrics. Final supervisor candidate/duration labels are metadata-only, no integration change.",
+  "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E066",
+  "no_training_or_server_model_promotion": true,
+  "local_command": "MPLCONFIGDIR=/tmp/r-elegans-E066-matplotlib .venv/bin/python -u -m scripts.run_rhythm_comparison --protocol hybrid --comparison-run /tmp/r-elegans-E065-local-cohort --expected-new 064473f94ece552b70d13c879a41597e158b11e4d6447555093ec31095879348 --output-dir /tmp/r-elegans-E066-local-cohort --duration 12 --long-duration 12 --workers 4 --cores-per-worker 1 --no-affinity --allow-short-reference"
+}

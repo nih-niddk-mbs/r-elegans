@@ -1,5 +1,15 @@
 # WormGym: training and validation protocols
 
+E066 independent hybrid validation is ready for user launch (2026-11-12).
+The old-channel/new-connection candidate is pinned by its saved hash and exact
+family reconstruction. Eight simulations test its own initial-voltage,
+neural/body timestep, held-voltage and300s unpaced persistence controls, plus
+regional amplitudes and raw-supported phase/PCA descriptions. Four workers
+run concurrently. No fitting or automatic model promotion. Local8-case12s
+software smoke and282 tests passed; the older local fixture fails the stricter
+tail persistence gate, retained as a negative result. Actual server60/300s
+candidate validation remains pending. See [method and local checks](experiments/records/E066-hybrid-validation.json).
+
 E065 full server table (2026-11-12):60s comparisons isolate the suppressing
 parameter family in this setup. Old channel scales + old connections yield
 54 repeating voltage/92 muscle/11 joint channels; old scales + fitted connections
@@ -2309,3 +2319,31 @@ perturbations leave gates/calcium/body/memory unchanged at t0, with no ongoing
 injection. Neural repetitions are reported separately from muscle/body motion.
 Do not infer a stable limit cycle from short finite-window counts. Review the
 actual server results before launching any new optimization.
+
+## E066: independent old-channel/new-connection validation
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_hybrid_validation_mbslnx2.sh &&
+tail -n 12 -F "$(ls -1t /home/carsonc/r-elegans-results/hybrid-validation-*.log | head -n 1)"
+```
+
+This detached suite runs seven60s and one300s simulations, four at a time.
+Original E065 models and traces are read-only. Candidate hash is read from its
+saved case config, verified against exact old/new family reconstruction, and
+printed in the final footer. The forward capsule includes its original initial
+state, config and input manifest. All case models, states, trajectories and
+source/env/argv stay external. No optimization or pacing occurs.
+
+Read execution_valid separately from hybrid_screening. A0 exit means completed
+valid executions, not a successful rhythm, amplitude, locomotion or biological
+test. planned_duration_rhythm_validation_pass requires the full60/300s protocol
+and the declared screening gates. Short local software tests cannot pass that
+full-duration field. Historical regional .003rad sustained-window qualification
+and direct peak-to-trough cycle excursion are separate reports; slow posture
+drift can inflate a range even when tiny oscillations remain. Spectral phases
+use raw-supported joints and are descriptive modulo-period relations; PC1 near1
+can indicate nearly single-mode motion rather than a useful travelling wave.
+No automated training stage follows. Review persistence, amplitude and phase
+before creating a separate fitting parent with channel scales initially frozen.

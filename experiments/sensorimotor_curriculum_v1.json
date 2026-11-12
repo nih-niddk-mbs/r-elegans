@@ -132,6 +132,6 @@
     }
   ],
   "server_evidence": "experiments/records/E065-server-summary.json",
-  "continuation": "No new run: preserve old-old reference and old-new candidate; validate candidate robustness/coordination before frozen-channel motor fitting. Later density adaptation requires rhythm-retention criteria.",
-  "next_diagnostic": "Candidate old-new own neural-step, perturbation, amplitude and phase/persistence assessment; not yet implemented/launched"
+  "continuation": "E066 prepared for user launch; independent hybrid numerical/initial-state/300s persistence and amplitude/phase checks. No fitting; preserve E062/old-old and all source candidates.",
+  "next_diagnostic": "experiments/records/E066-hybrid-validation.json"
 }

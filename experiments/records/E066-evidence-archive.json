@@ -1,0 +1,8 @@
+{
+  "experiment": "E066",
+  "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E066",
+  "sha256_compared_files": 5179,
+  "original_source_inputs_reverified": 17,
+  "manifest_sha256": "08003d5eedfd0040ed05d45ea40f99995e935b1b14c21becd0711eb49b73eaca",
+  "scope": "Local8-case12s software suite, saved-trace reanalysis, final preparations/workers, frozen candidate/config/manifest/state, all trajectories/source/env/argv/tests. Not the actual server hybrid or60/300s scientific validation; cloud sync not verified."
+}

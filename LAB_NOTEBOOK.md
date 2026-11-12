@@ -5587,3 +5587,102 @@ while optimizing coordination, preserving neural repetition. Broader channel
 training can return later with bounds/retention guards. No new comparison,
 objective implementation, restore or fitting this turn. E062 remains separate.
 Records/docs only; JSON/count/diff checks, no numerical test rerun needed.
+
+## 2026-11-12 — Planned E066 independent old-channel/new-connection validation
+
+Question: does the E065 old-new candidate retain raw motor repetitions under
+its own numerical/initial-state controls and longer observation, and what are
+its regional amplitudes and phase relations? No fitting or automatic promotion.
+Source /home/carsonc/r-elegans-results/rhythm-comparison-20261112T185742Z-865067,
+old-new-sham/evaluated_network.npz. Read its actual hash from saved case config
+and verify bytes, source execution validity and exact reconstruction from the
+pinned old417254ad... channel scales/new3fabef... chemical+gap strengths. Hash
+unknown in supplied stdout; never invent it. Preserve source run and original
+training lineage externally. Freeze candidate, old/new forward inputs, reference
+trace, source config and evaluated hybrid under a new external result directory.
+
+Plan8 float64 cases on4 disjoint4-core workers: sham60s, one cue2–3s60s,
+initial voltage +/-1mV60s, neural half-step (.002s/.05ms)60s, body-only half-step
+(.001s/.1ms)60s, sham300s, held-voltage60s negative control. All other initial
+state values, frozen kinetics/leak/capacitance/topology/NMJ/body, actual-body
+proprioception and E063 sensory gains identical to E065. No periodic drive,
+parameter optimization or RNG draws. Initial perturbation changes voltage only.
+Body-only refinement also refines sensory/body co-simulation, explicitly not
+pure mechanics error isolation. Shared baseline initial-state fingerprints
+must match source; unperturbed baseline and long-prefix must reproduce saved
+first12s exactly within declared E065 per-field tolerance.
+
+Engineering rhythm gate: baseline has at least one repeated named body/head
+motor voltage channel and a repeated joint in each tail/middle/head region;
+each active validation retains that, including the same strongest baseline
+repeating motor cell. Baseline/fine same-cell minimum-window voltage amplitude
+relative difference <=20%, median raw-peak frequency difference <=10%; regional
+sustained bend amplitude difference <=20% of max(baseline,1e-5rad). Held voltage
+must have no qualifying repeated voltage or joint channels. Initial perturbations
+and300s run test repetition retention, not phase locking or exact trajectories.
+Thresholds are prospective engineering screening gates, not certified error or
+biological criteria. All cases validly executed and reproduction/initial-state
+checks must pass before interpretation. Keep amplitude qualification separate:
+existing historical E037/E044 .003rad median sustained bend in all3 regions is
+reported, not assumed from11 repeating joints. No automatic locomotion claim.
+
+Coordination method: raw-supported sustained joint extrema select eligible
+joints; use strongest sustained-amplitude joint's median raw peak interval for
+frequency, then detrended Fourier phase/coherence and shape PCA. Reject
+monotonic drift before spectral interpretation. Report phase modulo period,
+PCA and unphased net displacement descriptively; do not label a travelling wave
+or useful propulsion from count/phase span alone. Synthetic standing vs travelling
+waves and curved drift must be distinguished. Source fields/weights immutable;
+all case models, initial states, raw traces, figures, source/env/argv preserved.
+
+Planned server command: sh scripts/launch_hybrid_validation_mbslnx2.sh
+Local smoke uses prior E065 LOCAL cohort and shorter12s cases/long case12s,
+explicit local-short-source flag, not actual server candidate or300s validation.
+No server simulation or fitting launched at this plan entry.
+
+E066 method clarification before server execution: add descriptive raw
+turn-to-turn excursion amplitudes alongside the historical sustained-window
+ranges. Per joint, median upward/downward opposite-extremum excursions are
+computed; their smaller value reports cyclic amplitude, avoiding drift inflation.
+Report regional medians and a separately labelled .003rad comparison. This does
+not replace the predeclared rhythm/numerical gates. Add tests with a small sine
+on slow monotonic posture drift and static curved drift. Initial local cohort
+uses original descriptive fields; preserve it, then verify final source and
+reanalyze its saved traces externally without changing original outputs.
+
+E066 local software outcome:8-case12s smoke /tmp/r-elegans-E066-local-cohort
+completed execution_validTrue, common initial-state fingerprintsTrue; queue
+elapsed78.08647320899945s excluding preparation. This is the older LOCAL fitted
+fixture, not the actual server candidate. RMDR amplitude/frequency and regional
+bend refinement comparisons pass; held-voltage negative control passes. Regional
+persistent-tail coverage fails (0 tail qualifying joints; middle2/head1), so
+rhythm_validation_passFalse. Historical .003rad regional amplitude checkFalse.
+These negative findings were retained, not relaxed;12s startup windows cannot
+establish actual server60/300s qualification. No parameter optimization ran.
+
+Full282 tests passed in93.62s before descriptive cycle-excursion additions;
+final targeted15 passed in1.22s. Added direct raw opposite-extremum excursion
+measure rejects drift inflation and synthetic standing/travelling phase/PCA
+tests distinguish shapes. Reanalyzed all8 saved traces to separate external
+/tmp/r-elegans-E066-reanalysis without altering original outputs, hashes equal.
+Final-source preparation /tmp/r-elegans-E066-release-inputs freezes candidate,
+initial state and original manifest/config; final standalone12s worker reproduces
+all6 reference fields exactly and matches final reanalysis metrics. Local
+candidateSHA9e87f27b78b267ef7a8d1a0beebc39ac996375e6bb8d8c912f70427e7e362e15;
+not the unreported actual server candidate hash. Final metadata-only supervisor
+footer exposes candidate hash and prevents short smoke being labelled full-
+duration validation. No numerical integration or existing E065 defaults changed;
+plot previews decimated with explicit stride labels, statistics full-rate.
+
+Source/env/argv per process preserved; full final reviewed source also recorded
+separately. Actual server candidate numerical/initial-state validation,300s
+persistence, amplitude/coordination and any next fitting parent remain pending
+user launch. Original source models, E062 separate recovery skill and old/old
+reference unchanged. No automatic promotion or new optimization follows.
+
+E066 local evidence archived under OneDrive notebook/evidence/E066:5179 copied
+files SHA256-compared;17 original source input files reverified unchanged.
+Manifest08003d5eedfd0040ed05d45ea40f99995e935b1b14c21becd0711eb49b73eaca.
+Includes every local model/state/trajectory, reanalysis and final source capsules,
+not actual server hybrid retrieval or cloud-sync confirmation. Archive receipt
+added after source capture; numerical source unchanged. User launches after push.

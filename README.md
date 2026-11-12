@@ -10,6 +10,16 @@ then test held-out animals and experiments. The initial
 and missing capabilities; this is not yet an achieved biological model or a
 completed joint-data trainer. Training remains incremental.
 
+E066 independent hybrid validation is ready for user launch (2026-11-12).
+The old-channel/new-connection candidate is pinned by its saved hash and exact
+family reconstruction. Eight simulations test its own initial-voltage,
+neural/body timestep, held-voltage and300s unpaced persistence controls, plus
+regional amplitudes and raw-supported phase/PCA descriptions. Four workers
+run concurrently. No fitting or automatic model promotion. Local8-case12s
+software smoke and282 tests passed; the older local fixture fails the stricter
+tail persistence gate, retained as a negative result. Actual server60/300s
+candidate validation remains pending. See [method and local checks](experiments/records/E066-hybrid-validation.json).
+
 E065 full server table (2026-11-12):60s comparisons isolate the suppressing
 parameter family in this setup. Old channel scales + old connections yield
 54 repeating voltage/92 muscle/11 joint channels; old scales + fitted connections

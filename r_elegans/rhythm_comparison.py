@@ -50,6 +50,20 @@ def comparison_cases():
     return cases
 
 
+def hybrid_validation_cases():
+    base = next(c for c in comparison_cases() if c['name'] == 'old-new-sham')
+    changes = [
+        ('hybrid-sham', {}), ('hybrid-cue', dict(cue=True)),
+        ('hybrid-voltage-plus', dict(perturbation_mV=1.)),
+        ('hybrid-voltage-minus', dict(perturbation_mV=-1.)),
+        ('hybrid-neural-half', dict(brain_factor=.5)),
+        ('hybrid-body-half', dict(body_factor=.5)),
+        ('hybrid-long', dict(long=True)),
+        ('hybrid-held-voltage', dict(held_voltage=True)),
+    ]
+    return [dict(base, name=name, **change) for name, change in changes]
+
+
 def array_fingerprint(leaves):
     digest = hashlib.sha256()
     for value in leaves:
