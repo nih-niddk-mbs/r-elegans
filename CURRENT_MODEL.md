@@ -1,12 +1,20 @@
 # Current model: exact scope and computation path
 
+E060 server result localizes the tested sensitivity to neural stepping:
+brain-half/quarter bend ratios .9207/.8352, body/sensory/coupling .99981/.99985.
+Body-branch trajectory differences shrink; neural differences grow. Keep the
+original E058 gate pass, but defer promotion and fitting. E061 prepares a fixed-
+parameter float64 neural-step sweep against saved E060 float32 traces, with
+legacy input/initial-state values promoted rather than regenerated. This tests
+precision sensitivity; it is not a solver fix or a biological qualification.
+See [E060 record](experiments/records/E060-server-summary.json).
+
 E059 server numerical assessment:original low-dose coarse gate passes, but
 half/quarter fail at2.796e-5/2.537e-5rad versus3e-5 target. Quarter amplitude is
 16.47% below coarse; successive peak changes have not shrunk. Recovery remains
 acceptable. Retain E058's original protocol pass, but do not promote or continue
-fitting until this sensitivity is understood. E060 prepares a fixed-parameter
-split brain-step versus body/sensory/coupling-step assay; no model changes or
-server launch. Full comparison arrays and actual convergence remain unknown.
+fitting until this sensitivity is understood. E060 subsequently ran the split-step assay; its result is recorded above.
+No model parameters were changed. Full comparison arrays and actual convergence remain unknown.
 See [E059 server record](experiments/records/E059-server-summary.json).
 
 E058 first-rung engineering PASS (user-reported):99additional proposals,

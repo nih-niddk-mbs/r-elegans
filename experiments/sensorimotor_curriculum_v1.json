@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E058_original_protocol_pass_E059_resolution_failed_E060_diagnostic_pending",
+  "status": "E060_neural_step_sensitivity_E061_precision_pending",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -97,6 +97,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E059-server-summary.json",
-  "continuation": "No fitting: E060 fixed-parameter step-family isolation before promotion or choice of training grid; server launch pending"
+  "server_evidence": "experiments/records/E060-server-summary.json",
+  "continuation": "No fitting: E061 fixed-parameter float64 arithmetic versus existing E060 float32 traces, legacy numeric inputs and starting states preserved; server launch pending"
 }

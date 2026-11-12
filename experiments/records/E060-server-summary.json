@@ -1,0 +1,86 @@
+{
+  "experiment": "E060",
+  "evidence": "User-pasted server stdout; full arrays/source/summary not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/cue-split-20261111T224206Z-778307",
+  "exit_code": 0,
+  "mode": "split",
+  "coarse_case": null,
+  "source_checkpoint_sha256": null,
+  "expected_source_checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf",
+  "source_revision": null,
+  "elapsed_seconds": null,
+  "cases": [
+    {
+      "case": "brain-half",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.05,
+      "passed": false,
+      "bend_rad": 2.7969667818539268e-05,
+      "recovery": 0.11940972377290143,
+      "awa_mV": 7.055261611938477,
+      "target_margin_rad": -2.030332181460733e-06
+    },
+    {
+      "case": "brain-quarter",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.025,
+      "passed": false,
+      "bend_rad": 2.5370502730812095e-05,
+      "recovery": 0.16169901757704375,
+      "awa_mV": 7.054904937744141,
+      "target_margin_rad": -4.629497269187906e-06
+    },
+    {
+      "case": "body-half",
+      "dt_s": 0.001,
+      "brain_step_ms": 0.1,
+      "passed": true,
+      "bend_rad": 3.0372496972283503e-05,
+      "recovery": 0.058537242676464436,
+      "awa_mV": 7.053686141967773,
+      "target_margin_rad": 3.724969722835018e-07
+    },
+    {
+      "case": "body-quarter",
+      "dt_s": 0.0005,
+      "brain_step_ms": 0.1,
+      "passed": true,
+      "bend_rad": 3.0373586201601355e-05,
+      "recovery": 0.05852956971518972,
+      "awa_mV": 7.052877426147461,
+      "target_margin_rad": 3.7358620160135393e-07
+    }
+  ],
+  "comparisons": [
+    {
+      "pair": "coarse->brain-half",
+      "maximum_cue_effect_difference_rad": 5.543298916499406e-06
+    },
+    {
+      "pair": "brain-half->brain-quarter",
+      "maximum_cue_effect_difference_rad": 6.928308433337693e-06
+    },
+    {
+      "pair": "coarse->body-half",
+      "maximum_cue_effect_difference_rad": 6.499112004121343e-08
+    },
+    {
+      "pair": "body-half->body-quarter",
+      "maximum_cue_effect_difference_rad": 2.902370677126953e-08
+    }
+  ],
+  "all_grids_response_pass": false,
+  "branch_peak_ratios_to_coarse": {
+    "brain": [
+      0.9207137315758559,
+      0.835153652620726
+    ],
+    "body": [
+      0.9998107666509993,
+      0.9998466222212652
+    ]
+  },
+  "interpretation": "For this checkpoint and protocol, neural-step variation dominates the measured amplitude sensitivity. Body/sensory/coupling peak variation below.02%, with shrinking trajectory differences. Neural differences increase. This does not certify the medium or identify a precision/solver defect.",
+  "decision": "Plan E061 fixed-parameter float64 neural-step sweep versus existing E060 float32 trace reference, before fitting or promotion. Keep original E058 protocol pass recorded.",
+  "limitations": "Coarse row, actual checksum and runtime metadata not in supplied excerpt. Per-joint arrays remain in server artifacts; compact record retains pair maxima."
+}

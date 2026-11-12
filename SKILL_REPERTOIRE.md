@@ -492,3 +492,8 @@ E059 outcome:the original first-rung engineering pass is preserved, but low-dose
 half/quarter refinement fails. Do not promote to alternation. E060 read-only
 step-family isolation planned before further training; no certified converged
 amplitude or biological validation established. See E059-server-summary.json.
+
+E060 server step isolation:brain-only refinement changes peak7.93–16.48%,
+body/sensory/coupling under.02% for tested steps. First rung remains promotion-
+deferred. E061 read-only float64 neural sweep against E060 reference planned;
+no new learned skill or numerical fix yet. Original E058 pass retained.

@@ -5021,3 +5021,74 @@ notebook/evidence/E060 (3790manifest entries), including recursive older local
 parent, all five cue/sham traces/previews, source/env capsules, tests/stdout and
 compact E059 server transcription. This verifies local copied evidence, not
 retrieval of actual E058/E059 server artifacts or cloud synchronization.
+
+## 2026-11-11 — E060 server split result; planned E061 precision test
+
+User reports cue-split-20261111T224206Z-778307, exit0. Brain-half/quarter fail
+at2.796966782e-5/2.537050273e-5rad, ratios .920714/.835154 to coarse. Body-half/
+quarter pass at3.037249697e-5/3.037358620e-5, ratios .999811/.999847. Body/coupling
+full-trace differences shrink6.499e-8 ->2.902e-8rad; neural differences increase
+5.543e-6 ->6.928e-6. This localizes the observed sensitivity to neural stepping
+in these tested conditions, not a proof of a particular integration or float
+precision bug. Preserve E058 original pass but defer promotion and fitting.
+No source hash/coarse row/runtime metadata pasted; do not invent missing fields.
+
+Plan E061: fixed selected E058 model, low dose .8, body/coupling .002s, neural
+steps .1/.05/.025ms, evaluate JAX float64 arithmetic versus existing E060 float32
+reference. Verify checkpoint and original-anchor offsets under legacy float32
+first; then promote stored parameter/readout/model/template values and original
+initial states to64, preserving their numeric values. Build body/mapping/field
+and initial-state templates in legacy precision before promotion so changed
+parameter generation/initialization does not masquerade as accumulation error.
+Derived currents/kinetics are reevaluated in64 with the same equations. Host
+wet mechanics already uses NumPy float64 in both modes. Record actual neural,
+calcium and muscle dtypes; no fitting, parameter changes, RNG draws or promotion.
+Use fixed initial states, original thresholds and all original cue timings.
+Copy recursive checkpoint and existing E060 reference assay dependencies outside
+Git; verify source/ref SHA and configs/grids. Keep float32 reference distinct
+from new float64 results, including complete cue/sham traces and comparisons.
+If64 changes the step sensitivity, precision is implicated; residual64 variation
+still requires integration convergence investigation. Do not declare a solver
+fix from this single assay. Source/env/command/hash records external. Planned:
+sh scripts/assess_sensorimotor_precision_mbslnx2.sh
+Server launcher pins E0586cd7b0fa... and E060 reference path. No actual server
+launch. Local software smoke uses older E057/E060 local model, labeled separately.
+
+E061 control amendment before final verification: changing JAX precision can
+change comparisons at ligand on/off boundaries because wet-body time was
+accumulated in float64 but passed through a float32 transducer previously. A
+float64 comparison can distinguish tiny clock drift that float32 rounded away.
+Use integer-step timestamps in the float64 assay to preserve the original
+float32 cue bins at2/3s, with a fixture test proving that equivalence. Keep this
+an opt-in diagnostic timing control; historical/default rollouts unchanged.
+The preliminary float64 smoke is retained separately; re-run the final assay
+with controlled event timing rather than silently attribute all differences
+to neural accumulation. No actual server precision assay has run yet.
+
+E061 final local outcome:261 tests passed in90.47s; four targeted tests passed
+in0.17s. Pure promotion test preserves stored float32 values exactly in64 and
+keeps indices/names; event-bin fixture matches legacy float32 at2/3s for the
+tested body steps. Older two local paired-recording prediction arrays remain
+bit-for-bit unchanged under default float32 rollout. Full controlled-clock
+float64 three-grid assay completed on older UNQUALIFIED E057 smoke model, not
+actual E058. Reloaded voltage/calcium/indicator/muscle arrays are float64; their
+initial neural and pose values equal widened reference values exactly. Source
+network/sensory hashes unchanged. Within64 peak ratios1.000460/1.000649;
+trajectory differences1.123e-7 ->5.755e-8rad roughly halve, unlike older32
+brain-step variation. This supports investigating precision on actual E058,
+not declaring it fixed or qualified. Old model still fails motor gate.
+
+Exact command/source/env, full case/precision comparisons and test hashes are
+in E061-local-verification.json and external run capsules. Preliminary float64
+run without canonical event clock remains distinct; final results supersede it
+for the planned experiment. No solver equations, fitted parameters, thresholds
+or default training precision changed. Additional output/reference path guards
+and precision metadata do not alter numerical simulation. Server assay remains
+pending the user's pinned launcher command; no new training.
+
+E061 preliminary and final controlled-clock runs archived and copied files
+SHA256-compared under notebook/evidence/E061 (15140manifest entries), including
+recursive source/reference dependencies, all raw traces, source/env capsules,
+legacy default-path proof, tests/stdout and compact E060 server transcription.
+Original server E058/E060 files were not retrieved by this Mac; cloud sync is
+not independently verified. Local copied evidence is self-contained and hashed.

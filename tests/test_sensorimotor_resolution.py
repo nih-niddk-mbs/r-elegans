@@ -31,3 +31,28 @@ def test_split_cases_vary_one_step_family_and_compare_within_branch():
     assert integration_cases('matched',.002,.1)==[
         ('coarse',.002,.1,None),('half',.001,.05,'coarse'),('quarter',.0005,.025,'half')]
     with pytest.raises(ValueError):integration_cases('unknown',.002,.1)
+
+
+def test_neural_precision_plan_and_value_preserving_promotion():
+    import jax
+    import jax.numpy as jnp
+    from scripts.assess_sensorimotor_resolution import integration_cases,promote_floating_values
+    assert integration_cases('neural',.002,.1)==[
+        ('coarse',.002,.1,None),('brain-half',.002,.05,'coarse'),('brain-quarter',.002,.025,'brain-half')]
+    values=dict(weights=np.array([.1,-.3,1.],dtype=np.float32),indices=np.array([1,2],dtype=np.int32),name='model')
+    with jax.experimental.enable_x64(True):
+        widened=promote_floating_values(values)
+        assert widened['weights'].dtype==jnp.float64
+        np.testing.assert_array_equal(np.asarray(widened['weights']),values['weights'].astype(np.float64))
+        np.testing.assert_array_equal(widened['indices'],values['indices'])
+        assert widened['name']=='model'
+
+
+def test_exact_step_clock_matches_legacy_float32_cue_bins():
+    for dt in (.002,.001,.0005):
+        legacy=[];time=0.
+        for i in range(round(8/dt)):
+            legacy.append(np.float32(time));time+=dt
+        legacy=np.asarray(legacy)
+        exact=np.arange(len(legacy))*dt
+        np.testing.assert_array_equal((legacy>=2)&(legacy<3),(exact>=2)&(exact<3))

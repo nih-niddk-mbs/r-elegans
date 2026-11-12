@@ -1418,3 +1418,36 @@ equations stay fixed; no new fitting or automatic skill promotion occurs.
 The source remains pinned to E0586cd7b0fa..., and full traces/source records
 remain outside Git. Diagnostic exit0 means completion; inspect its case ratios
 and within-branch differences before selecting a numerical fix or training grid.
+
+E060 server result localizes the tested sensitivity to neural stepping:
+brain-half/quarter bend ratios .9207/.8352, body/sensory/coupling .99981/.99985.
+Body-branch trajectory differences shrink; neural differences grow. Keep the
+original E058 gate pass, but defer promotion and fitting. E061 prepares a fixed-
+parameter float64 neural-step sweep against saved E060 float32 traces, with
+legacy input/initial-state values promoted rather than regenerated. This tests
+precision sensitivity; it is not a solver fix or a biological qualification.
+See [E060 record](experiments/records/E060-server-summary.json).
+
+Run the pinned E058 winner's float64 neural-step comparison:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/assess_sensorimotor_precision_mbslnx2.sh &&
+tail -n 20 -F "$(ls -1t /home/carsonc/r-elegans-results/cue-precision-*.log | head -n 1)"
+```
+
+Read-only, under nohup:fixed body step.002s and neural steps.1/.05/.025ms.
+The existing E060 trace files provide the float32 reference and are preserved
+recursively. Stored parameter values, legacy templates and starting states are
+widened exactly; derived functions run in64, with trace dtypes verified. Host
+wet mechanics is already float64 in both modes. No weights, gains or thresholds
+are fit. Source verification occurs under legacy float32 before promotion, so
+parameter-coordinate reconstruction cannot silently change the source model.
+A precision-sensitive result still requires a convergence decision before
+training or skill promotion.
+
+The float64 assay uses an integer-step clock to retain the original float32
+ligand on/off bins; a fixture verifies that equivalence. This prevents clock
+rounding from confounding the precision comparison. Historical/default clock
+behavior is unchanged.

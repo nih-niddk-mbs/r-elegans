@@ -1,0 +1,262 @@
+{
+  "experiment": "E061",
+  "evidence": "Local controlled-clock float64 software verification on older unqualified E057 model; not actual E058 server winner",
+  "run": "/tmp/r-elegans-E061-precision-final",
+  "invocation": "JAX_PLATFORMS=cpu .venv/bin/python -u -m scripts.assess_sensorimotor_resolution --run /tmp/r-elegans-E057-robust-smoke --output-dir /tmp/r-elegans-E061-precision-final --mode neural --precision float64 --reference-assay /tmp/r-elegans-E060-split-smoke",
+  "checkpoint_sha256": "b5a484bd8cd5b140ae66c8ff86d4f966ac6b8123938e0da6b069b6d26d7c7c52",
+  "sensory_parameters_sha256": "b428fb55c047993dd84c0d4dd3c97c5a847dbdb9fccef78db393bb48b01b2674",
+  "cases": [
+    {
+      "case": "coarse",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.1,
+      "metrics": {
+        "total": 0.6850171161624306,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.030689472175661e-05,
+        "cue_specific_recovery_residual_rad": 2.871297551082508e-06,
+        "recovery_ratio": 0.2785802735543175,
+        "peak_by_joint_rad": [
+          5.791004012017931e-06,
+          1.030689472175661e-05,
+          2.9976547315339885e-06,
+          3.563821576981624e-06,
+          4.2499725773428865e-06,
+          1.631173112588702e-06,
+          1.9066078122444152e-06,
+          4.236196862669739e-06,
+          2.816950283632269e-06,
+          6.4026736051395194e-06,
+          5.8953552274434995e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.0963181452106063e-06,
+          2.871297551082508e-06,
+          2.540935056753041e-06,
+          1.3293127862989778e-06,
+          9.34316711290184e-07,
+          1.5594046047368026e-06,
+          7.122507880465145e-07,
+          3.7069589772439904e-07,
+          1.037426336933378e-06,
+          1.158261349727685e-06,
+          4.307221774663139e-07
+        ],
+        "awa_depolarization_mV": 4.220707475701516,
+        "maximum_absolute_joint_rad": 0.15285772451786223,
+        "awa_recovery_residual_mV": 0.00013572447004861488,
+        "awa_recovery_ratio": 3.2156805661130625e-05,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      },
+      "target_margin_rad": -1.969310527824339e-05
+    },
+    {
+      "case": "brain-half",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.05,
+      "metrics": {
+        "total": 0.6860206815382497,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.0311634980553208e-05,
+        "cue_specific_recovery_residual_rad": 2.884595820790148e-06,
+        "recovery_ratio": 0.27974184755669,
+        "peak_by_joint_rad": [
+          5.7977546164822424e-06,
+          1.0311634980553208e-05,
+          2.996224145779963e-06,
+          3.575617669988526e-06,
+          4.257819837129306e-06,
+          1.6308666516764991e-06,
+          1.9081116608248017e-06,
+          4.2464828909523356e-06,
+          2.810780312084704e-06,
+          6.4206362097585234e-06,
+          5.8808061681944745e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.09657591926271e-06,
+          2.884595820790148e-06,
+          2.5165659534483187e-06,
+          1.3317467064420446e-06,
+          9.454084757068437e-07,
+          1.5571682197255965e-06,
+          7.059579262488902e-07,
+          3.547819804293473e-07,
+          1.0438859682770918e-06,
+          1.1424109533225701e-06,
+          4.3465592561992006e-07
+        ],
+        "awa_depolarization_mV": 4.2207085566829505,
+        "maximum_absolute_joint_rad": 0.15284181975088135,
+        "awa_recovery_residual_mV": 0.00013571058291717009,
+        "awa_recovery_ratio": 3.215350718833448e-05,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      },
+      "target_margin_rad": -1.9688365019446793e-05
+    },
+    {
+      "case": "brain-quarter",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.025,
+      "metrics": {
+        "total": 0.6862653669231202,
+        "passed": false,
+        "selected_joint": 1,
+        "cue_specific_peak_rad": 1.031358473160826e-05,
+        "cue_specific_recovery_residual_rad": 2.888335128625741e-06,
+        "recovery_ratio": 0.2800515246433957,
+        "peak_by_joint_rad": [
+          5.801092986507106e-06,
+          1.031358473160826e-05,
+          2.9953561599439793e-06,
+          3.5810918076733395e-06,
+          4.261618190198879e-06,
+          1.6307041995240745e-06,
+          1.908478593482671e-06,
+          4.253809900031658e-06,
+          2.806734808305511e-06,
+          6.429791858011957e-06,
+          5.873001112412235e-06
+        ],
+        "recovery_residual_by_joint_rad": [
+          1.0979098913066476e-06,
+          2.888335128625741e-06,
+          2.5062734059465297e-06,
+          1.3329763164630524e-06,
+          9.512029762390184e-07,
+          1.5547798504003674e-06,
+          6.995988326499725e-07,
+          3.56709398203342e-07,
+          1.0472238650555132e-06,
+          1.129124052839936e-06,
+          4.3667129830116114e-07
+        ],
+        "awa_depolarization_mV": 4.220709145377217,
+        "maximum_absolute_joint_rad": 0.15283378808544004,
+        "awa_recovery_residual_mV": 0.00013570213585012425,
+        "awa_recovery_ratio": 3.215150136529869e-05,
+        "pre_cue_difference_rad": 0.0,
+        "scope": "Engineering reversible cue-response gate; not autonomous rhythm, navigation or biological validation"
+      },
+      "target_margin_rad": -1.968641526839174e-05
+    }
+  ],
+  "comparisons": [
+    {
+      "pair": "coarse->brain-half",
+      "maximum_cue_effect_difference_rad": 1.1225164860129144e-07,
+      "per_joint_difference_rad": [
+        1.2181154501744729e-08,
+        2.9984979749153595e-08,
+        2.651965380628951e-08,
+        1.0048673834434779e-07,
+        1.1225164860129144e-07,
+        6.010445346982252e-08,
+        2.4142554124265136e-08,
+        6.739641197212043e-08,
+        5.9449993899951536e-08,
+        4.031386061781328e-08,
+        3.899229950726779e-08
+      ]
+    },
+    {
+      "pair": "brain-half->brain-quarter",
+      "maximum_cue_effect_difference_rad": 5.754603029511918e-08,
+      "per_joint_difference_rad": [
+        6.182947681621087e-09,
+        1.5205212033908566e-08,
+        1.3762395799366e-08,
+        5.1357837387369654e-08,
+        5.754603029511918e-08,
+        3.1062241282603376e-08,
+        1.2486759225563415e-08,
+        3.4590959457903026e-08,
+        3.178831992078912e-08,
+        2.1392870530601016e-08,
+        2.0074393994318207e-08
+      ]
+    }
+  ],
+  "precision_comparisons": [
+    {
+      "case": "coarse",
+      "float32_peak_rad": 1.0594694042298514e-05,
+      "float64_peak_rad": 1.030689472175661e-05,
+      "maximum_cue_effect_difference_rad": 4.62207251000768e-07,
+      "per_joint_difference_rad": [
+        4.62207251000768e-07,
+        3.9385334238417613e-07,
+        1.4248962454735392e-07,
+        1.3595828508589786e-07,
+        1.2249778089112873e-07,
+        1.0608884087187631e-07,
+        7.304871180342787e-08,
+        7.737346893049724e-08,
+        4.308146421549974e-08,
+        6.107295208446217e-08,
+        1.2468600331383417e-07
+      ]
+    },
+    {
+      "case": "brain-half",
+      "float32_peak_rad": 1.0117949617444166e-05,
+      "float64_peak_rad": 1.0311634980553208e-05,
+      "maximum_cue_effect_difference_rad": 5.705164211888825e-07,
+      "per_joint_difference_rad": [
+        3.935918095054891e-07,
+        5.705164211888825e-07,
+        3.3928705977376294e-07,
+        2.7017588001554405e-07,
+        4.4682165932508067e-07,
+        3.1571380382927616e-07,
+        1.0033674168949402e-07,
+        2.589218426069656e-07,
+        1.7852686465258394e-07,
+        2.0542605504159095e-07,
+        3.882572367150394e-07
+      ]
+    },
+    {
+      "case": "brain-quarter",
+      "float32_peak_rad": 1.0422081592215138e-05,
+      "float64_peak_rad": 1.031358473160826e-05,
+      "maximum_cue_effect_difference_rad": 1.1728823836321123e-06,
+      "per_joint_difference_rad": [
+        6.617337697245596e-07,
+        1.1728823836321123e-06,
+        4.540898812382954e-07,
+        9.792086526124594e-07,
+        8.502949302297003e-07,
+        2.2634865527379477e-07,
+        1.9109871704503512e-07,
+        1.9732279720255375e-07,
+        2.5909382524169633e-07,
+        5.743051736256666e-07,
+        5.79450723806052e-07
+      ]
+    }
+  ],
+  "neural_peak_ratios_to_coarse": [
+    1.0004599114403092,
+    1.0006490810309268
+  ],
+  "full_suite": {
+    "passed": 261,
+    "elapsed_seconds": 90.47,
+    "stdout_sha256": "8396293ee2cc1b3314be5454179fcdec2fbae286701f4b7ce9bab8f63bb8e10e"
+  },
+  "targeted_tests": {
+    "passed": 4,
+    "elapsed_seconds": 0.17,
+    "stdout_sha256": "d07a1be384f84d9d95b6d48bfc797264bdf209a84dca560c1775e944c8887ef5"
+  },
+  "verification": "Reloaded recorded neural/calcium/indicator/muscle arrays are float64; original initial voltage/calcium/indicator/body pose values exactly equal float32 reference after widening; source hashes unchanged; legacy paired predictions bitwise unchanged; cue bins match legacy float32 comparisons",
+  "preliminary": "Earlier uncontrolled-clock smoke retained separately under /tmp/r-elegans-E061-precision-smoke; final reference is controlled-clock run",
+  "interpretation": "On older model float64 peak variation across tested neural steps under.065% and within64 trajectory differences roughly halve. Strong precision sensitivity evidence locally, not proof for actual E058 or a certified solver fix. Old model remains unqualified.",
+  "server_assay_launched": false,
+  "external_archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E061"
+}
