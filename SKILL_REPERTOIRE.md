@@ -570,3 +570,17 @@ rhythm must not be assumed to survive that comparison. If confirmed, build
 from that independent parent and prioritize neural repetitions before body
 alternation. Preserve E062's separate sensory-response skill. No new fitting
 objective, comparison simulation or training run has been launched.
+
+## E065 controlled rhythm comparison readiness — 2026-11-12
+
+E065 controlled rhythm comparison is ready for the user to launch on mbslnx2
+(2026-11-12). Four full-network combinations separate old/new channel scales
+from old/new chemical+electrical strengths. Fixed fields, leak, anatomy and
+muscle readout must match exactly. All primary cases share the current E063
+sensory gains, initialization and wet-substrate proxy.15 independent60s
+simulations include cue/sham, initial-state, precision, feedback and neural-step
+controls, with four concurrent workers on disjoint four-physical-core groups.
+No fitting or periodic drive. Local15-case12s software smoke and279-test suite
+passed; this used an older local fitted model, not actual server3fabef... .
+Server comparison remains unexecuted here. E062 recovery skill remains separate.
+See [E065 method and verification](experiments/records/E065-rhythm-comparison.json).

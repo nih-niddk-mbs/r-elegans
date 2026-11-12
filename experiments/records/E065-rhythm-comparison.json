@@ -1,0 +1,249 @@
+{
+  "experiment": "E065",
+  "status": "implemented_local_verification_passed_server_pending",
+  "record_date": "2026-11-12 America/New_York",
+  "question": "Does preserved E043 rhythm survive matched current setup, and which fitted parameter family suppresses it?",
+  "server_old_reference": "/home/carsonc/r-elegans-results/autonomous-posterior-motor-20261110T140125786528Z/seed-7001",
+  "server_old_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "server_new_run": "/home/carsonc/r-elegans-results/alternation64-20261112T042107Z-791518",
+  "server_new_sha256": "3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b",
+  "server_simulation_executed": false,
+  "server_command": "sh scripts/launch_rhythm_comparison_mbslnx2.sh",
+  "server_plan": {
+    "cases": 15,
+    "duration_simulated_s": 60,
+    "workers": 4,
+    "physical_cores_per_worker": 4,
+    "precision": "float64 primary; explicit old-only float32 controls",
+    "method": "Full302-neuron four-way channel-scale vs chemical+electrical-strength substitutions; same E063 feedback gains, fixed body/NMJ/topology/kinetics/init; no fitting, pacing or RNG draws",
+    "analysis": "Raw4..12s and late-half per-channel repetitions; thresholds are descriptive engineering floors, not biological qualification",
+    "controls": "Cue/sham for4 hybrids, old t0 voltage +/-1mV, old/new neural half-step, old2x2 precision/proprioception",
+    "migration_gate": "Current new/new must reproduce all6 saved first12s fields within per-field5e-10*(1+maxabs_reference)",
+    "fixed_gate": "Exact fixed tree/config/leak/readout compatibility or abort"
+  },
+  "local_source_scope": "Actual archived E043 old checkpoint plus OLDER LOCAL E063 fixture; current server3fabef... was not evaluated locally",
+  "local_old_sha256": "417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14",
+  "local_new_sha256": "064473f94ece552b70d13c879a41597e158b11e4d6447555093ec31095879348",
+  "local_cohort": "/tmp/r-elegans-E065-local-cohort",
+  "local_duration_simulated_s": 12,
+  "local_workers": 4,
+  "local_cpu_affinity": false,
+  "local_worker_queue_elapsed_seconds": 131.7626327920002,
+  "local_execution_valid": true,
+  "local_cases_completed": 15,
+  "common_initial_state": true,
+  "source_hashes_unchanged": true,
+  "initial_value_audit": "All unperturbed cases share exact values including32/64; perturbations change only one302-element voltage leaf by +/-1mV",
+  "family_audit": "Every evaluated network has exact requested channel/chemical/gap arrays",
+  "current_local_reference_errors": "All6 early fields exactly equal for nominal and sham",
+  "source_record": "Per-supervisor/preparation/worker source/env/argv capsules outside Git; no source revision alone reproduces dirty code",
+  "verification_timing": "Startup precision guard moved before imports and supervisor env hardened during local cohort. Shared initial arrays audited. Additional final-source worker with inherited JAX_ENABLE_X64=true reproduced saved fields exactly.",
+  "tests": {
+    "full_suite": "279 passed in102.74s before startup guard hardening",
+    "final_targeted": "11 passed in1.34s after hardening",
+    "extra_final_worker": "/tmp/r-elegans-E065-final-worker",
+    "audit": "/tmp/r-elegans-E065-audit.log",
+    "figure": "Final standalone worker PNG visually inspected; no ligand cue correctly unshaded and late analysis start marked"
+  },
+  "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E065",
+  "interpretation": "Local software validation only. No60s result for actual server pair and no new learned skill. Preserve E062 separately; hybrids test current E063 versus old parent and do not date suppression during lineage.",
+  "local_case_outcomes": [
+    {
+      "case": "old-old-cue",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-new-sham",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-new-cue",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "new-old-sham",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 51,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "new-old-cue",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 51,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "new-new-sham",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 51,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": true
+    },
+    {
+      "case": "new-new-cue",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 51,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": true
+    },
+    {
+      "case": "old-old-sham-voltage-plus",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-voltage-minus",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-neural-half",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 55,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "new-new-sham-neural-half",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 53,
+        "dense_calcium_uM": 4,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-float32",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-feedback-off",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    },
+    {
+      "case": "old-old-sham-float32-feedback-off",
+      "execution_valid": true,
+      "late_repetitions": {
+        "dense_voltage_mV": 54,
+        "dense_calcium_uM": 3,
+        "dense_muscles": 92,
+        "dense_command": 11,
+        "dense_filtered_drive": 11,
+        "dense_joints": 11
+      },
+      "early_reference_match": null
+    }
+  ],
+  "local_command": "MPLCONFIGDIR=/tmp/r-elegans-E065-matplotlib .venv/bin/python -u -m scripts.run_rhythm_comparison --old-reference /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E044/full-body-assessment-20261110T174954Z-687519/parameter_reference --new-run /Users/carsonc/OneDrive/r-elegans/notebook/evidence/E063/r-elegans-E063-alternation-smoke --expected-new 064473f94ece552b70d13c879a41597e158b11e4d6447555093ec31095879348 --output-dir /tmp/r-elegans-E065-local-cohort --duration 12 --workers 4 --cores-per-worker 1 --no-affinity",
+  "final_startup_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MPLCONFIGDIR=/tmp/r-elegans-E065-matplotlib JAX_PLATFORMS=cpu JAX_ENABLE_X64=true .venv/bin/python -u -m scripts.compare_rhythm_worker --inputs /tmp/r-elegans-E065-local-cohort/inputs --case new-new-sham --duration 12 --output-dir /tmp/r-elegans-E065-final-worker"
+}

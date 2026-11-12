@@ -10,6 +10,18 @@ then test held-out animals and experiments. The initial
 and missing capabilities; this is not yet an achieved biological model or a
 completed joint-data trainer. Training remains incremental.
 
+E065 controlled rhythm comparison is ready for the user to launch on mbslnx2
+(2026-11-12). Four full-network combinations separate old/new channel scales
+from old/new chemical+electrical strengths. Fixed fields, leak, anatomy and
+muscle readout must match exactly. All primary cases share the current E063
+sensory gains, initialization and wet-substrate proxy.15 independent60s
+simulations include cue/sham, initial-state, precision, feedback and neural-step
+controls, with four concurrent workers on disjoint four-physical-core groups.
+No fitting or periodic drive. Local15-case12s software smoke and279-test suite
+passed; this used an older local fitted model, not actual server3fabef... .
+Server comparison remains unexecuted here. E062 recovery skill remains separate.
+See [E065 method and verification](experiments/records/E065-rhythm-comparison.json).
+
 E064 server diagnosis (2026-11-12): no detected qualifying repeated signal
 at any of the six measured stages in all26 saved traces. Both baseline and best
 have zero reported voltage-reversing channels across302 neurons in4–12s, under

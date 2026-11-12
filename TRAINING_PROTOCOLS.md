@@ -1,5 +1,17 @@
 # WormGym: training and validation protocols
 
+E065 controlled rhythm comparison is ready for the user to launch on mbslnx2
+(2026-11-12). Four full-network combinations separate old/new channel scales
+from old/new chemical+electrical strengths. Fixed fields, leak, anatomy and
+muscle readout must match exactly. All primary cases share the current E063
+sensory gains, initialization and wet-substrate proxy.15 independent60s
+simulations include cue/sham, initial-state, precision, feedback and neural-step
+controls, with four concurrent workers on disjoint four-physical-core groups.
+No fitting or periodic drive. Local15-case12s software smoke and279-test suite
+passed; this used an older local fitted model, not actual server3fabef... .
+Server comparison remains unexecuted here. E062 recovery skill remains separate.
+See [E065 method and verification](experiments/records/E065-rhythm-comparison.json).
+
 E064 server diagnosis (2026-11-12): no detected qualifying repeated signal
 at any of the six measured stages in all26 saved traces. Both baseline and best
 have zero reported voltage-reversing channels across302 neurons in4–12s, under
@@ -2239,3 +2251,31 @@ No trajectory integration, model optimization or CUDA/JAX initialization occurs.
 The final log prints compact baseline/best/active/held-voltage counts. Review
 the actual server report before selecting a one-reversal objective or parallel
 seed screens. Current training objective remains unchanged.
+
+## E065: old/current rhythm and parameter-family comparison
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_rhythm_comparison_mbslnx2.sh &&
+tail -n 20 -F "$(ls -1t /home/carsonc/r-elegans-results/rhythm-comparison-*.log | head -n 1)"
+```
+
+The detached queue runs15 simulations of60 simulated seconds each, four at a
+time. Original checkpoints are read-only; outputs, evaluated hybrid models,
+initial states, source/env/argv, raw trajectories and per-channel tables stay
+external. Forward input snapshots are self-contained; original optimizer/RNG
+and recursive training lineage remain intact in the original source run. This
+is not an optimizer continuation. The supervisor aborts if fixed fields or leak
+scaling differ. Common64 initial-state fingerprints and current-model first12s
+reference parity must pass for execution_valid. That field means comparisons
+were validly executed, not that any rhythm, movement or biological gate passed.
+
+The old model is E043/44 seed7001; the new model is E063 fitted3fabef..., not
+E062's independent sensory-response skill. Primary cases use identical current
+E063 gains and coupling. Precision controls include numerical representation
+and arithmetic effects; they are not exact historical replays. Initial voltage
+perturbations leave gates/calcium/body/memory unchanged at t0, with no ongoing
+injection. Neural repetitions are reported separately from muscle/body motion.
+Do not infer a stable limit cycle from short finite-window counts. Review the
+actual server results before launching any new optimization.

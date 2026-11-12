@@ -102,7 +102,7 @@ def summarize_trace(trace, neuron_ids, begin_s=4.):
     return result
 
 
-def plot_raw_chain(trace, statistics, neuron_ids, destination, title):
+def plot_raw_chain(trace, statistics, neuron_ids, destination, title, *, begin_s=4., show_cue=True):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -121,11 +121,12 @@ def plot_raw_chain(trace, statistics, neuron_ids, destination, title):
         for j in selected:
             label = neuron_ids[j] if field in ('dense_voltage_mV', 'dense_calcium_uM') else str(j)
             ax.plot(t, trace[field][:, j], label=label, linewidth=.8)
-        ax.axvspan(2., 3., color='orange', alpha=.15)
-        ax.axvline(4., color='black', linestyle=':', linewidth=.8)
+        if show_cue:
+            ax.axvspan(2., 3., color='orange', alpha=.15)
+        ax.axvline(begin_s, color='black', linestyle=':', linewidth=.8)
         ax.set_ylabel(field.removeprefix('dense_') + '\n' + units)
         ax.legend(loc='upper right', ncol=3, fontsize=8)
-    axes[-1].set_xlabel('Saved simulation time (s); shading=cue schedule, dotted=analysis start')
+    axes[-1].set_xlabel('Saved simulation time (s); '+('shading=cue schedule' if show_cue else 'no ligand cue')+', dotted=analysis start')
     fig.suptitle(title + '\nRaw signals; example channels, complete channel counts in JSON')
     fig.tight_layout()
     fig.savefig(destination, dpi=130)

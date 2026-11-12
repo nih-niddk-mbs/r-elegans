@@ -132,5 +132,6 @@
     }
   ],
   "server_evidence": "experiments/records/E064-server-summary.json",
-  "continuation": "No new run. Recheck earlier oscillatory parent under matching float64/initialization/coupling before neural-rhythm-first training; preserve E062 independently"
+  "continuation": "E065 controlled comparison prepared, no server simulation launched here: old/current2x2 channel/synapse families,15 independent60s cases on4 workers; preserve E062",
+  "next_diagnostic": "experiments/records/E065-rhythm-comparison.json"
 }

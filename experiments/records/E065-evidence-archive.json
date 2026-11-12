@@ -1,0 +1,8 @@
+{
+  "experiment": "E065",
+  "archive": "/Users/carsonc/OneDrive/r-elegans/notebook/evidence/E065",
+  "sha256_compared_files": 6716,
+  "original_input_files_reverified": 10,
+  "manifest_sha256": "69293290c5dacf90fb8cd187074b460f0a37230046519e6a03e681e2d8cee8d5",
+  "scope": "Local15-case12s cohort, extra final worker, all evaluated models/states/trajectories, preparation/source/env/argv/stdout/tests/audit and frozen forward inputs. Original dependencies remain verified in earlier E043/E063 archives. No actual server3fabef... comparison or cloud-sync verification."
+}

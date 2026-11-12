@@ -5425,3 +5425,102 @@ manifest ed08c9ec185e54a0deb1290da88028dca87d06f1cf694512932d455f8fde0e22.
 This preserves user-reported text only; no actual server trajectories/model
 retrieved, and no cloud-sync assertion. No software tests repeated because
 this turn changes only records/documentation; JSON/count/diff checks pass.
+
+## 2026-11-12 — Planned E065 rhythm recovery and channel/connection comparison
+
+Question: does the independently preserved E043/44 seed7001 oscillatory parent
+retain neural repetition in today's closed-loop float64 setup, and do channel
+scales or chemical/electrical connection strengths explain the current E063
+model's missing rhythm? No optimization. Primary2x2: old/old, old/new, new/old,
+new/new channel scales vs chemical+gap strengths. Old checkpoint SHA417254ad65b18dd9b6f4ed5f4cf9502d6ad84f58e916d648471bccf16a417f14;
+new E063 SHA3fabef504731bc5cc904713752e6b3023c015e650b2e5318cc34f32cf7691a3b.
+The new model here is the E063 fitted model, not E062; family contrasts do not
+date when suppression arose. E062 sensory skill remains separate and intact.
+
+Precondition: exact canonical neuron order, topology, all fixed cell/channel/
+release/initial-voltage/bias fields and network config agree after exact dtype
+promotion. Abort instead of averaging/replacing incompatible fixed fields.
+Initial local compatibility attempt could not read the former /tmp E063
+fixture (temporary files no longer present); no compatibility result obtained.
+Use its previously archived copy for local verification. Actual server
+compatibility remains unverified until execution. Frozen readout SHA82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0.
+
+Plan: each of four hybrids gets60s nominal single2–3s ligand exposure and60s
+sham, same E063 sensory gains/maps, wet-substrate body and zero injected bias.
+No periodic pacing. All floating legacy template/initial values built once at
+float32 then widened; actual stored fitted64 parameters preserved. Same body/
+brain steps .002s/.1ms, canonical event clock. Keep actual-body proprioception
+active for primary comparisons. Raw4–12s and late-half neural/muscle/command/
+drive/joint statistics use E064 explicit floors and raw peak/trough gates;
+require >=2 peaks/troughs and stable two-window amplitude to report repetitions.
+Neural repetitions and motor repetitions are separate results, not movement or
+biological qualification. Do not require every cell or isolated neurons to cycle.
+
+Additional controls: old/old sham with initial voltage +/-1mV (only voltage
+shifted at t0; gates/calcium/body/sensory memory held as initialized); old/old
+and new/new sham with half neural step; old/old sham with proprioception blocked;
+old/old float32 sham with feedback active and blocked.15 independent simulations
+in total. Float32 contrasts are current matched pipeline diagnostics, not exact
+historical replay. No RNG draws/seeds or trainable parameters.4 concurrent
+workers on disjoint4-physical-core groups on mbslnx2, each sequential trajectory;
+this does not establish a parallel speedup benchmark. Source input/model hashes
+checked before/after; save hybrid checkpoints, initial state, raw traces, all
+source/env/argv and compact tables outside Git. Forward inputs self-contained;
+original training lineage stays in source run, not an optimizer-resume capsule.
+
+Local software smoke will use actual archived old parent and OLDER LOCAL E063
+fixture (not current server3fabef...),12s per case, explicit no-affinity mode.
+These cannot establish server rhythm recovery or60s persistence. Tests must
+verify family mixing identity, fixed-field mismatch rejection, source hashes,
+control inventory/initialization and no fitting. Plan recorded before execution.
+Planned server command: sh scripts/launch_rhythm_comparison_mbslnx2.sh
+No server simulations or fitting launched at this entry.
+
+E065 prospective clarification before simulation: old/old float32 sham with
+proprioception blocked completes the2x2 precision/feedback contrast (15 total
+simulations, including the controls already listed above). These are matched current-pipeline comparisons, not historical
+replays. Current new/new nominal/sham must also reproduce its saved first12s
+traces within per-field roundoff tolerances before interpretation. Check initial
+state fingerprints across unperturbed64 cases. Fixed leak scale equality is
+required in addition to fixed-tree equality. Preserve self-contained forward
+inputs and operational-reference/origin files; original training lineage stays
+intact in its external source, without claiming an exact optimizer continuation.
+
+E065 local outcome: archived old E043/44 model and older archived LOCAL E063
+fixture have compatible fixed config/tree/leak/readout; frozen input copies
+hash-verified.15-case12s local cohort /tmp/r-elegans-E065-local-cohort completed
+successfully, queue elapsed131.7626327920002s (excludes preparation; no CPU
+scaling claim because explicit no-affinity mode). All unperturbed64 state
+fingerprints match. Post-run audit verifies every evaluated channel/chemical/
+gap family exactly matches requested parent, input/source hashes unchanged,
+all initial numeric values identical across32/64, and perturbation changes only
+one302-value voltage leaf by exactly +/-1mV. Current local-model nominal/sham
+first12s match saved fields EXACTLY in all6 signal stages. Local fixture was
+already oscillatory; these are software controls, not actual server recovery.
+
+Full279 tests pass in102.74s before startup-guard hardening. During local cohort,
+worker x64 reset was moved before model imports and child environment explicitly
+set false for legacy-template construction; no observed initial-value changes.
+Final targeted11 passed in1.34s. Additional final-source new/new-sham12s worker
+with inherited JAX_ENABLE_X64=true again gives exact reference parity, proving
+legacy-template construction survives that external setting. Per-process source
+capsules retain dirty snapshots; final-source extra worker is authoritative for
+that startup correction. Figure visually inspected: no ligand cue is unshaded,
+late-half analysis marker at6s for this12s smoke. Numerical integration functions
+and default E064 plotting behavior otherwise unchanged.
+
+No actual server3fabef... comparison,60s persistence or new training executed
+here. Plan remains15 independent60s cases with4 workers/4 physical cores each.
+Preparation verifies actual server compatibility before launching simulations.
+Command and full local method/evidence in E065-rhythm-comparison.json. Original
+models unchanged; no optimization, RNG draws or periodic pacing. The graphical
+preview is an older local model and must not be confused with E063 server data.
+
+E065 local evidence archived in OneDrive notebook/evidence/E065:6716 files
+SHA256-compared;10 original frozen source-input files reverified unchanged.
+Manifest69293290c5dacf90fb8cd187074b460f0a37230046519e6a03e681e2d8cee8d5.
+Contains all local cases/evaluated models/initial states/raw trajectories and
+full source/env/argv/stdout/tests/audit; earlier archived training dependencies
+remain intact. No actual server3fabef... retrieval/evaluation or cloud-sync
+confirmation. Archive receipt added after source capture, without numerical
+source changes. Server launch remains for user after push.
