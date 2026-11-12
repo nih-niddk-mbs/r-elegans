@@ -5092,3 +5092,85 @@ recursive source/reference dependencies, all raw traces, source/env capsules,
 legacy default-path proof, tests/stdout and compact E060 server transcription.
 Original server E058/E060 files were not retrieved by this Mac; cloud sync is
 not independently verified. Local copied evidence is self-contained and hashed.
+
+## 2026-11-11 — E061 server precision result; planned E062 float64 fitting
+
+User reports cue-precision-20261112T004158Z-781583 (UTC-named artifact; recorded
+on client date2026-11-11 America/New_York). Float64 low-dose peaks are
+2.8567109789101597e-5,2.8567330569093108e-5,2.8567440622559448e-5rad at
+.1/.05/.025ms. Ratios1.000007728/1.000011581; successive full-trajectory
+cue-effect differences6.09990e-9 ->3.04921e-9rad approximately halve.
+All-grid motor pass=False; quarter recovery .0107233. This strongly implicates
+float32 arithmetic in prior neural-step sensitivity for this tested model;
+remaining float64 step variation is small but not a rigorous global error bound.
+Original float32 protocol pass retained, not a numerically robust promotion.
+
+Plan E062:60min fresh seed6200, same nominal/.8dose worst-case response task,
+float64 arithmetic/canonical event clock, legacy rounded templates and starting
+states preserved exactly as E061. Warm start E0586cd7b0fa... actual stored
+parameters, not a newly reconstructed64 version of old32 coordinate transforms.
+Keep original coordinate box and prior .001mean offsets², fixed physiology,
+NMJ/body/transduction assumptions. Validation bend threshold3e-5 unchanged;
+optimize a declared2% training-only margin3.06e-5 to avoid razor-edge selection.
+Add independent low-dose half-step and neural-quarter checks to original
+validation, preserving original pass history rather than silently redefining it.
+Low dose is training; high dose/timing/refinements remain outside selection.
+
+Float64 parameterization: retain immutable promoted operational source network
+S and original-coordinate origin x0; decode candidate as apply(S,x-x0), with x
+still in original +/-log2 box. This exactly preserves the stored source at
+baseline; do not recompute S using64 transforms of the old anchor. The tiny
+legacy32 encoding residual relative to the original anchor is fixed and logged,
+not a new physical bound relaxation. Sensory coordinates migrate to log of the
+old operational float32-rounded gains, then optimize in64 within .5–2; record
+this representation migration. Preserve operational reference network/origin
+hashes and recursive parent/RNG records. New precision and margin mean a NEW
+search, not exact E058 RNG continuation. Support later exact completed64-search
+continuations with reference and dtype verification; never silently downcast.
+
+Compare initial64 low-dose amplitude with E061 reference before claiming model
+migration fidelity. All source/env/commands, references, selected/final networks,
+RNG/state/history and raw traces external. Server launcher pins source6cd7b0fa...
+and original E061 reference. Local one-proposal test uses older local model,
+not actual E058. Planned command sh scripts/launch_sensorimotor64_mbslnx2.sh 60.
+No actual server job launched; no claim of autonomous movement or biological fit.
+
+E062 local verification:265 tests passed in91.26s; targeted9 in1.65s. Tests
+verify operational-parent zero delta preserves all stored legacy values exactly
+in64, proposal coordinate bounds/frozen fields/electrical symmetry, reference
+hash protection, migration baseline mismatches, and rejection of precision or
+margin changes under exact continuation. Full one-proposal older-model smoke
+completed all10 validation conditions in438.08s; no qualified skill expected
+or demonstrated. Proposal rejected; selected0, final1 RNG preserved. Baseline
+low-dose1.030689472175661e-5rad exactly equals older E061 float64 coarse peak.
+All saved validation voltages float64; operational reference/actual selected
+parameters reconstructed exactly via new loader, including64 dtype despite
+legacy32 verification context. Encoding residual6.18324e-7 raw units on this
+older model is recorded, not silently rounded or an intentional bound change.
+The reference low-dose helper was executed against the completed baseline;
+optional CLI reference-copy branch added after smoke is tested at helper level.
+Actual server launch will check pinned E061 before proposals. Exact source/env/
+invocation and selected/final/RNG/reference files external; compact evidence
+E062-local-verification.json. No actual E058/E062 server fit launched.
+
+Only numerical precision, explicit operational encoding and declared training
+margin change in this new stage; fixed biological assumptions and original
+validation target remain. Independent low-dose half-step and neural-quarter
+validation are added prospectively, not used to rewrite E058's old pass. Source
+float64 cannot be silently downgraded; completed64 continuations preserve
+reference/origin hashes, coordinates and PCG64. Prefix sensorimotor64-* keeps
+legacy32 selection separate, while compact reports recognize both families.
+
+E062 supplemental verification after the broad suite:targeted9 tests passed
+in1.63s with explicit NONZERO updated64 network serialization/restoration,
+proving the operational decoder and64 dtype survive beyond the zero-delta
+baseline. No numerical implementation changed in this supplement.
+
+E062 local run and supplemental checks archived and copied run files SHA256-
+compared under notebook/evidence/E062 (4660manifest entries), including complete
+operational references/origins, recursive parent, selected/final networks,
+search/RNG history, all10 validation traces/previews, source/env capsules and
+compact E061 server transcription. Precision baseline reference summary/config
+also copied. This verifies local evidence, not retrieval of actual E058/E061
+server artifacts or cloud synchronization. All actual-server source paths
+remain pinned and unmodified by these tools.

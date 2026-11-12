@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E060_neural_step_sensitivity_E061_precision_pending",
+  "status": "E061_precision_stabilized_below_target_E062_float64_fit_prepared",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -66,7 +66,17 @@
         "initialization": "inherit selected neural/sensory parameters; fresh seed5700/global0",
         "bounds_and_targets_changed": false
       },
-      "selected_checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf"
+      "selected_checkpoint_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf",
+      "float64_training": {
+        "validation_bend_target_rad": 3e-05,
+        "training_bend_target_rad": 3.06e-05,
+        "parameterization": "operational-parent-v1",
+        "seed": 6200,
+        "additional_validation": [
+          "refined-low-dose",
+          "neural-quarter-low-dose"
+        ]
+      }
     },
     {
       "id": "alternate",
@@ -97,6 +107,6 @@
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
     }
   ],
-  "server_evidence": "experiments/records/E060-server-summary.json",
-  "continuation": "No fitting: E061 fixed-parameter float64 arithmetic versus existing E060 float32 traces, legacy numeric inputs and starting states preserved; server launch pending"
+  "server_evidence": "experiments/records/E061-server-summary.json",
+  "continuation": "E062 fresh seed6200 float64 robust cue search from pinned E058 operational weights, original coordinate bounds and3e-5 validation target; training margin1.02; no server job launched"
 }

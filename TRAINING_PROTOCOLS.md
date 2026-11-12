@@ -1,10 +1,19 @@
 # WormGym: training and validation protocols
 
+E061 server precision result:float64 peaks remain2.85671–2.85674e-5rad as
+neural step shrinks. Peak variation0.00116%; full-trajectory differences halve
+6.10e-9 ->3.05e-9rad. Float32 arithmetic strongly contributes to the prior
+sensitivity in this test. Better-resolved amplitude is95.22% of target, still
+unqualified. E062 prepares float64 fitting, preserving stored E058 parameters,
+original coordinate bounds and3e-5 acceptance threshold. Optimize a declared
+2% training-only margin; add low-dose numerical checks. Fresh seed6200 because
+precision/objective changed; not an exact float32 continuation. No server job
+launched. See [E061 report](experiments/records/E061-server-summary.json).
+
 E060 server result localizes the tested sensitivity to neural stepping:
 brain-half/quarter bend ratios .9207/.8352, body/sensory/coupling .99981/.99985.
 Body-branch trajectory differences shrink; neural differences grow. Keep the
-original E058 gate pass, but defer promotion and fitting. E061 prepares a fixed-
-parameter float64 neural-step sweep against saved E060 float32 traces, with
+original E058 gate pass, but defer promotion and fitting. E061 subsequently completed its fixed-parameter float64 comparison, with
 legacy input/initial-state values promoted rather than regenerated. This tests
 precision sensitivity; it is not a solver fix or a biological qualification.
 See [E060 record](experiments/records/E060-server-summary.json).

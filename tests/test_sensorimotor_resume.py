@@ -67,3 +67,24 @@ def test_changed_training_cues_require_fresh_stage_not_rng_resume(saved):
     # Older nominal configurations remain compatible with the explicit new default.
     changed['arguments']['training_cues']='nominal'
     assert read_completed(root,changed,2)[2]==3
+
+
+def test_precision_or_margin_change_requires_warm_start(saved):
+    root,cfg,*_=saved
+    for key,value in [('precision','float64'),('training_margin',1.02)]:
+        changed=json.loads(json.dumps(cfg));changed['arguments'][key]=value
+        with pytest.raises(ValueError,match=key):read_completed(root,changed,2)
+
+
+def test_operational_reference_hash_is_required_for_float64_resume(saved):
+    root,cfg,*_=saved
+    cfg['arguments'].update(precision='float64',training_margin=1.02)
+    cfg['parameterization']='operational-parent-v1'
+    (root/'parameter_reference.npz').write_bytes(b'parameter reference fixture')
+    np.savez(root/'parameter_origin.npz',offsets=np.zeros(2))
+    cfg['parameter_reference_sha256']=file_sha256(root/'parameter_reference.npz')
+    cfg['parameter_origin_sha256']=file_sha256(root/'parameter_origin.npz')
+    (root/'configuration.json').write_text(json.dumps(cfg))
+    assert read_completed(root,cfg,2)[2]==3
+    (root/'parameter_reference.npz').write_bytes(b'changed')
+    with pytest.raises(ValueError,match='reference checksum'):read_completed(root,cfg,2)

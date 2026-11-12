@@ -1451,3 +1451,43 @@ The float64 assay uses an integer-step clock to retain the original float32
 ligand on/off bins; a fixture verifies that equivalence. This prevents clock
 rounding from confounding the precision comparison. Historical/default clock
 behavior is unchanged.
+
+E061 server precision result:float64 peaks remain2.85671–2.85674e-5rad as
+neural step shrinks. Peak variation0.00116%; full-trajectory differences halve
+6.10e-9 ->3.05e-9rad. Float32 arithmetic strongly contributes to the prior
+sensitivity in this test. Better-resolved amplitude is95.22% of target, still
+unqualified. E062 prepares float64 fitting, preserving stored E058 parameters,
+original coordinate bounds and3e-5 acceptance threshold. Optimize a declared
+2% training-only margin; add low-dose numerical checks. Fresh seed6200 because
+precision/objective changed; not an exact float32 continuation. No server job
+launched. See [E061 report](experiments/records/E061-server-summary.json).
+
+Start the new float64 fitting stage on mbslnx2:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_sensorimotor64_mbslnx2.sh 60 &&
+tail -n 28 -F "$(ls -1t /home/carsonc/r-elegans-results/sensorimotor64-*.log | head -n 1)"
+```
+
+The pinned E058 checkpoint is promoted without regenerating its stored weights.
+An immutable operational reference/origin preserves that exact starting model
+while retaining the original coordinate box and prior; inherited float32
+encoding residual is logged. Sensory coordinates migrate to their old
+operational gain values. Legacy-rounded body/mapping templates and initial
+states are promoted, and event bins use the verified canonical clock. A baseline
+low-dose check against the pinned E061 float64 reference aborts on migration
+mismatch before fitting. No muscle/body parameters are trained.
+
+Validation threshold remains3e-5rad. Selection uses3.06e-5rad (2% training
+margin), with the worse nominal/.8dose loss and unchanged prior. New validation
+includes low-dose half-step and neural-quarter replay in addition to original
+gates/controls. Losses differ from the old float32 objective. This is a fresh
+seed6200 search, not old optimizer continuation. Budget60minutes plus validation.
+Full source/RNG/selected/final references and traces stay outside Git.
+
+Later continuation uses `sh scripts/continue_sensorimotor64_mbslnx2.sh 60`; it
+restores float64 reference, coordinates and RNG, rejecting precision/margin
+changes and checksum mismatch. The compact reporter finds both training families.
+Original float32 scripts and historical passes remain separate.

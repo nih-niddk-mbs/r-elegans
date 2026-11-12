@@ -77,11 +77,10 @@ def main():
     offsets,sensory_offsets,iteration,_,source_summary=read_completed(source,cfg,spec.size)
     sha=source_summary['checkpoint_sha256']
     if args.expected_sha256 and sha!=args.expected_sha256:raise ValueError('Expected pinned selected checkpoint')
-    params,saved_fixed,saved_config=load_network(source/'network_best.npz')
-    expected=apply_joint_offsets(initial,offsets,spec)
-    if saved_config!=config or any(not np.array_equal(np.asarray(a),np.asarray(b)) for a,b in zip(
-            jax.tree_util.tree_leaves((expected,fixed)),jax.tree_util.tree_leaves((params,saved_fixed)))):
-        raise ValueError('Selected checkpoint/offset/fixed fields mismatch')
+    if cfg['arguments'].get('precision','float32')=='float64' and args.precision!='float64':
+        p.error('Explicit float64 required for a float64 checkpoint')
+    from scripts.sensorimotor_parameters import load_saved_parameters
+    params,_,_=load_saved_parameters(source,initial,fixed,config,spec,offsets)
     out=get_data_root(args.output_dir,must_exist=False)
     if out==source or source in out.parents or out in source.parents:p.error('Separate output required')
     if args.reference_assay:
@@ -107,7 +106,8 @@ def main():
             worlds[name]=cue_world(protocol,dose=.8,sham=sham)
             states[name]=initial_embodied_state(fixed,config,body,worlds[name],sc)
         # Match the original input quantization, then widen these values.
-        gains=gains.astype(np.float32).astype(np.float64)
+        if cfg['arguments'].get('precision','float32')=='float32':
+            gains=gains.astype(np.float32).astype(np.float64)
         jax.config.update('jax_enable_x64',True)
         params,fixed,actor,model,templates,states,worlds=promote_floating_values(
             (params,fixed,actor,model,templates,states,worlds))

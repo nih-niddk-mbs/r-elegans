@@ -25,6 +25,17 @@ def read_completed(root,settings,size):
             raise ValueError('Resume objective/numerics mismatch: '+key)
     if cfg['arguments'].get('training_cues','nominal')!=settings['arguments'].get('training_cues','nominal'):
         raise ValueError('Resume objective/numerics mismatch: training_cues; use a fresh-stage warm start')
+    for key,default in (('precision','float32'),('training_margin',1.)):
+        if cfg['arguments'].get(key,default)!=settings['arguments'].get(key,default):
+            raise ValueError('Resume objective/numerics mismatch: '+key)
+    if cfg['arguments'].get('precision','float32')=='float64':
+        if cfg.get('parameterization')!='operational-parent-v1':raise ValueError('Unknown float64 parameterization')
+        for name,key in (('parameter_reference.npz','parameter_reference_sha256'),('parameter_origin.npz','parameter_origin_sha256')):
+            if file_sha256(root/name)!=cfg[key]:raise ValueError('Operational reference checksum mismatch')
+        with np.load(root/'parameter_origin.npz') as z:
+            origin=z['offsets']
+            if origin.shape!=(size,) or not np.isfinite(origin).all() or np.max(np.abs(origin),initial=0)>np.log(cfg['maximum_factor'])+1e-10:
+                raise ValueError('Operational reference coordinate origin invalid')
     with np.load(root/'search_state.npz',allow_pickle=False) as z:
         x=z['offsets'].copy();s=z['sensory_offsets'].copy();iteration=int(z['iteration'])
     if (x.shape!=(size,) or s.shape!=(3,) or not np.isfinite(x).all() or not np.isfinite(s).all()
@@ -53,8 +64,8 @@ def read_completed(root,settings,size):
     return x,s,iteration,rng,summary
 
 
-def latest_completed(base):
-    roots=sorted(p for p in Path(base).glob('sensorimotor-*') if p.is_dir() and (p/'summary.json').exists())
+def latest_completed(base,pattern='sensorimotor-*'):
+    roots=sorted(p for p in Path(base).glob(pattern) if p.is_dir() and (p/'summary.json').exists())
     if not roots:raise ValueError('No completed sensory-motor search found')
     root=roots[-1];cfg=json.loads((root/'configuration.json').read_text())
     size=sum(cfg['trainable'].values())-cfg['trainable']['sensory_gains']

@@ -7,7 +7,7 @@ from pathlib import Path
 def format_summary(root,summary,configuration):
     target=configuration['protocol']['bend_target_rad']
     lines=[f'Run: {root}',f"Passed: {summary['passed']}; stop: {summary.get('stop_reason')}",
-        f"Training cues: {configuration['arguments'].get('training_cues','nominal')}",
+        f"Training cues: {configuration['arguments'].get('training_cues','nominal')}; precision: {configuration['arguments'].get('precision','float32')}; training margin: {configuration['arguments'].get('training_margin',1.)}",
         f"Proposals this run: {summary['iterations']}; global: {summary.get('initial_iteration',0)} -> {summary.get('last_iteration',summary['iterations'])}; selected: {summary['selected_iteration']}",
         f"Elapsed minutes: {summary['elapsed_seconds']/60:.2f}; bend target: {target:.9g} rad"]
     for label in ('baseline','best'):
@@ -36,7 +36,8 @@ def main():
     args=p.parse_args()
     root=args.run
     if root is None:
-        roots=sorted(path for path in args.base.glob('sensorimotor-*') if path.is_dir())
+        roots=sorted((path for pattern in ('sensorimotor-*','sensorimotor64-*') for path in args.base.glob(pattern) if path.is_dir()),
+            key=lambda path:path.name.rsplit('-',2)[-2:])
         if not roots:p.error('No sensory-motor run directory found')
         root=roots[-1]
     if not (root/'summary.json').exists():

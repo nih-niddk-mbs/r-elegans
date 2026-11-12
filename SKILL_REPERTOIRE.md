@@ -497,3 +497,9 @@ E060 server step isolation:brain-only refinement changes peak7.93–16.48%,
 body/sensory/coupling under.02% for tested steps. First rung remains promotion-
 deferred. E061 read-only float64 neural sweep against E060 reference planned;
 no new learned skill or numerical fix yet. Original E058 pass retained.
+
+E061:float64 neural-step amplitude nearly invariant (0.00116% range) but only
+95.22% of target. No numerical skill promotion yet. E062 plans float64 robust
+fitting with original validation threshold,2% training-only margin and explicit
+low-dose refinement checks, preserving all previous checkpoints independently.
+No autonomous rhythm or biological reflex match claimed.

@@ -1,0 +1,65 @@
+{
+  "experiment": "E061",
+  "evidence": "User-pasted server precision output; full artifacts not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/cue-precision-20261112T004158Z-781583",
+  "client_record_date": "2026-11-11 America/New_York",
+  "exit_code": 0,
+  "precision": "float64",
+  "mode": "neural",
+  "expected_source_sha256": "6cd7b0fa95c545c354f83334fe32aaf0551b8dd4e3d4e7f98babc944849669bf",
+  "source_checkpoint_sha256": null,
+  "source_revision": null,
+  "elapsed_seconds": null,
+  "cases": [
+    {
+      "case": "coarse",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.1,
+      "bend_rad": 2.8567109789101597e-05
+    },
+    {
+      "case": "brain-half",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.05,
+      "bend_rad": 2.8567330569093108e-05
+    },
+    {
+      "case": "brain-quarter",
+      "dt_s": 0.002,
+      "brain_step_ms": 0.025,
+      "bend_rad": 2.8567440622559448e-05
+    }
+  ],
+  "quarter_details": {
+    "passed": false,
+    "recovery": 0.010723339800126262,
+    "awa_mV": 7.055488955711194,
+    "target_margin_rad": -1.4325593774405528e-06
+  },
+  "float32_peaks_rad": [
+    3.0378245549425587e-05,
+    2.7969667818539268e-05,
+    2.5370502730812095e-05
+  ],
+  "cross_precision_maximum_cue_effect_difference_rad": [
+    3.529304019173063e-06,
+    4.491079750701399e-06,
+    9.712620965093843e-06
+  ],
+  "successive_float64_maximum_cue_effect_difference_rad": [
+    6.099904859002692e-09,
+    3.049207122907127e-09
+  ],
+  "neural_peak_ratios_to_coarse": [
+    1.0000077284679179,
+    1.0000115809215666
+  ],
+  "all_grids_response_pass": false,
+  "arithmetic": {
+    "peak_variation_percent": 0.0011580921566611835,
+    "quarter_target_fraction": 0.9522480207519816,
+    "required_quarter_gain_percent": 5.014657757997654
+  },
+  "interpretation": "Float64 strongly reduces observed neural-step sensitivity and yields approximately halving within64 trajectory differences. Better-resolved response remains below target; original float32 pass is retained historically but no numerical promotion. Not a proof of global ODE accuracy or biological fidelity.",
+  "decision": "Plan E062 float64 robust-cue fitting from actual stored E058 operational parameters; unchanged acceptance/bounds,2% training-only margin, fresh seed6200. Low-dose numerical validation expanded explicitly; no server training launched."
+}
