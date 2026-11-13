@@ -49,6 +49,19 @@ def timing_score(trace, reference_index, *, target_hz, window_seconds, baseline)
     return result
 
 
+def tail_score(trace,reference_index,*,target_hz,window_seconds,baseline):
+    result=timing_score(trace,reference_index,target_hz=target_hz,window_seconds=window_seconds,baseline=baseline)
+    values=np.asarray(result['window_cycle_excursions_rad'])
+    floors=np.maximum(.003,.8*np.asarray(baseline['window_cycle_excursions_rad'])[:,1:])
+    retain=bool(np.all(values[:,1:]>=floors))
+    deficit=np.maximum(0.,np.log(.00315/np.maximum(values[:,0],1e-7)))
+    result.update(data_loss=float(deficit.mean()+deficit.max()),middle_head_preserved=retain,
+                  tail_training_target_rad=.00315)
+    result['safety_passed']=bool(result['safety_passed'] and retain and result['timing_target_passed'])
+    result['target_passed']=bool(result['target_passed'] and retain)
+    return result
+
+
 def propose_timing(best,spec,rng,sigma,lower,upper,focus_cells):
     count=int(spec.channels.sum());mode=int(rng.integers(4))
     if mode==0:

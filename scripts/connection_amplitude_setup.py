@@ -54,7 +54,7 @@ def setup(inputs):
         if not frozen_joint_fields_unchanged(candidate,base,spec):
             raise ValueError('Frozen channels or inactive connections changed')
         return candidate
-    def factory(dt=.002,brain_step=.1,perturbation=0.,held=False,*,medium='wet-agar'):
+    def factory(dt=.002,brain_step=.1,perturbation=0.,held=False,*,medium='wet-agar',wall_deadline=None):
         if medium not in ('wet-agar','liquid'):raise ValueError('Unknown medium')
         selected_templates=templates
         if medium=='liquid':
@@ -67,7 +67,7 @@ def setup(inputs):
         return make_rollout(fixed,config,actor,model,medium=medium,dt=dt,brain_step_ms=brain_step,
                             burn_in=0.,sampling='point',record_dense=True,hold_voltage=held,
                             sensory_config=sc,chemical_world=world,rollout_templates=selected_templates,
-                            initial_state=initial,exact_step_clock=True)
+                            initial_state=initial,exact_step_clock=True,wall_deadline=wall_deadline)
     return dict(manifest=manifest,anchor=anchor,base=base,fixed=fixed,config=config,model=model,
                 state=state,spec=spec,origin=origin,lower=lower,upper=upper,slack=slack,
                 fingerprint=fingerprint,gains=gains,decode=decode,factory=factory,liquid_body=liquid_body)

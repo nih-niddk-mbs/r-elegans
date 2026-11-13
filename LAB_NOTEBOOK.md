@@ -6348,3 +6348,74 @@ plus compact parsed summary); manifest05d23abd8222aaab873d3bea6866bbfab7e126c187
 Folder intentionally has no invented run ID. Actual server checkpoints, model
 hashes, run capsules and trajectories were not retrieved or backed up by this
 step. No OneDrive cloud-sync claim.
+
+### E071 planned — focused tail continuation, FOUR HOURS TOTAL
+
+User explicitly requires setup+search+validation+cleanup to finish within4h,
+superseding earlier search-only budgets. Plan: discover the completed E070
+seed6802 matching reported tail .00274597939 and1.87969925Hz; verify its exact
+checkpoint/selected-coordinate hash, full neural/safety/timing/control/refinement
+flags, original input capsule and fixed fields before fitting. No arbitrary run
+ID/hash invented. Copy parent selected checkpoint, coordinates, selected RNG,
+trajectory, summary/config and full inherited input capsule outside Git. Fresh
+optimizer/RNG seeds6900..6903 from that selected model, NOT exact mid-run resume.
+All original E070 states remain preserved. Record actual selected source path/hash.
+
+Objective: tail .00315rad training margin, .003rad validation threshold; hard
+1.62–1.98Hz body-frequency guard; middle/head retain>=max(.003rad,80% parent).
+Keep neural rhythmic amplitude and .5rad posture safety guards. Unknown nonleak
+densities and existing neural chemical/gap strengths remain trainable within
+original-anchor factor2 bounds. No changes to leak, capacitance, kinetics,
+release/topology, NMJ/muscle, water mechanics, sensory gains or physical clock.
+Posterior-NMJ-projecting neurons receive proposal emphasis; all eligible neural
+coordinates remain possible. Four workers with disjoint four-core groups.
+
+Total monotonic deadline starts in the nohup watchdog before preparation. Reserve
+validation using actual E070 total-minus-search duration:>=45min, otherwise
+2x measured parent validation+10min; retain additional evaluation/finalization
+margin. Search stops before that reserve, including a conservative look-ahead
+from measured slowest evaluation. Cooperative deadline checks stop rollouts
+between chunks; a process-group watchdog provides a hard ceiling and cleans
+up all descendants. Preparation/baseline/source copying/validation count INSIDE
+240min. If a required step cannot finish, record incomplete/unqualified with
+saved best/final states; never silently skip validation or run overtime.
+
+Validation remains full ordinary, voltage±, half-neural, half-body,300s long,
+held-voltage. Report numerical refinement and body timing/amplitude gates.
+No propulsion/biological promotion. Exact source/env/argv, selected/final states,
+RNG/coordinates and timeout receipts remain external. Planned command:
+`sh scripts/launch_swim_continuation_mbslnx2.sh` (240min TOTAL, no extra phase).
+Tests planned: deadline scheduling, real subprocess descendant cleanup under
+short timeout, tail/timing/coverage guards, static source-coordinate identity.
+No long Mac training or forward validation. Server run not launched by agent.
+
+E071 local verification:9 focused/regression tests passed in6.30s, including real
+short subprocess tests that verify the descendant started and cannot outlive
+both timeout and early leader exit. Search scheduling preserves validation time;
+tail scoring rejects improved amplitude outside the swim-frequency band or
+with lost middle/head activity. Existing density/gap fit tests also pass.
+No long Mac simulation or training. Static continuation fixture exactly rebuilds
+its selected-parent parameters from copied coordinates, and an expired deadline
+raises BEFORE any neural rollout. Fixture is the earlier local software model,
+not the unknown-hash server6802. Exact verification script/capsule under
+/tmp/r-elegans-E071-static-check, parent fixtureSHA
+ d13901b0c7817deb969d17aab52cde00304072225bf91688f560447fe9c08aa9.
+This model is never chosen by the production launcher. Actual server source path
+and checkpoint hash will be printed and recorded only when auto-discovery runs.
+
+Watchdog stops coordinator work before4h, with remaining margins for process-
+group cleanup and receipt writing. Worker validation has cooperative cutoff and
+saves an incomplete summary/missing-case list if it cannot finish. Full source
+and coordinate copies, baseline/source reproduction, per-selection model/RNG,
+final model and timeout receipt stay external. Four-hour budget is job wall
+clock; physical neural/body times are untouched. Existing E067/E070 search-only
+launchers retain their defaults; the new E071 entry point enforces TOTAL budget.
+Source compilation/shell syntax/diff checks passed. Server run still pending.
+
+E071 preparation archive: OneDrive notebook/evidence/
+E071-total-budget-preparation-20261113,1141 files including staged dirty-source
+snapshot, environment, static reconstruction/deadline script and input capsule;
+manifest78514353b68be9606494a4d944937e77e094dca6139b6e574ca08fd325f1643d.
+This is local software/preparation evidence only. Actual E0706802 checkpoint
+and new E071 run identity are resolved on the server at launch; neither has
+been invented or retrieved here. No OneDrive cloud-sync status claimed.

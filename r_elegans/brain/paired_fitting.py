@@ -54,7 +54,7 @@ def training_windows(root, uids, frames=8, start=0):
 def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
                  brain_step_ms=.1,burn_in=2.,sampling="boxcar",record_dense=False,hold_voltage=False,
                  sensory_config=None,chemical_world=None,rollout_templates=None,initial_state=None,
-                 exact_step_clock=False):
+                 exact_step_clock=False,wall_deadline=None):
     """Endogenous brain -> frozen NMJ -> body -> proprioception, no pacing.
 
     Media are explicitly mismatched mechanical hypotheses, not source-condition
@@ -109,6 +109,8 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
         return jax.lax.scan(lambda s,_:liquid_step(s,params,gains),state,None,length=100)
     law = wet_agar_drag()
     def run(params,times,gain_multipliers=None):
+        from r_elegans.wall_budget import check_deadline
+        check_deadline(wall_deadline)
         input_dtype=np.asarray(fixed.initial_voltage_mV).dtype
         gains=np.ones(3,dtype=input_dtype) if gain_multipliers is None else np.asarray(gain_multipliers,dtype=input_dtype)
         if gains.shape!=(3,) or not np.isfinite(gains).all() or np.any(gains<0):
@@ -132,6 +134,7 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
         steps = math.ceil((edges[-1] if sampling=='boxcar' else requested[-1])/dt)
         if medium=='liquid':
             for _ in range(math.ceil(steps/100)):
+                check_deadline(wall_deadline)
                 state,trace = liquid_chunk(state,params,gains)
                 indicators.extend(np.asarray(trace[0])); angles.extend(np.asarray(trace[1]))
                 if record_dense:
@@ -141,6 +144,7 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
                 lambda x:np.asarray(x,dtype=float),state.brain_body.body)))
             velocity = None
             for step_index in range(steps):
+                if step_index%100==0:check_deadline(wall_deadline)
                 if exact_step_clock:
                     state=state._replace(brain_body=state.brain_body._replace(
                         body=state.brain_body.body._replace(time=np.asarray(step_index*dt))))

@@ -1,5 +1,8 @@
 # r-elegans skill repertoire and action-space plan
 
+E071 is a prepared tail-amplitude continuation of the verified E0706802 parent,
+with a four-hour TOTAL deadline. No new run or skill qualification yet.
+
 E070 reported water-model rhythms meet the1.8Hz±10% timing rung in seeds6800,
 6802 and6803, but every seed misses the .003rad tail-amplitude rung. No new full
 skill qualification. Preserve all independent checkpoints;6802 is the proposed

@@ -24,6 +24,9 @@ def main():
     p.add_argument('--long-seconds',type=float,default=300.)
     p.add_argument('--software-smoke',action='store_true')
     p.add_argument('--neural-timing',action='store_true',help='E070: fit unknown densities and neural connections for slower autonomous rhythms')
+    p.add_argument('--tail-continuation',action='store_true')
+    p.add_argument('--finish-by',type=float)
+    p.add_argument('--validation-reserve-seconds',type=float,default=0.)
     a=p.parse_args()
     if (not all(math.isfinite(x) and x>0 for x in (a.minutes,a.sigma,a.train_seconds,a.window_seconds,a.long_seconds))
         or a.iterations<1 or a.seed<0 or a.train_seconds<12 or a.long_seconds<a.train_seconds
@@ -45,12 +48,17 @@ def main():
     if a.neural_timing:
         from scripts.neural_timing_setup import setup
     d=setup(root);base=d['base'];spec=d['spec'];origin=d['origin']
+    if a.tail_continuation and (not a.neural_timing or not d.get('continuation')):
+        raise ValueError('Tail stage requires verified E070 selected parent')
+    from r_elegans.wall_budget import check_deadline,can_search,WallDeadline
+    check_deadline(a.finish_by)
+    validation_deadline=a.finish_by-90 if a.finish_by is not None else None
     if d['manifest'].get('protocol')!='connection-amplitude':raise ValueError('Verified connection-amplitude inputs required')
     if d['manifest'].get('software_smoke') and not a.software_smoke:
         raise ValueError('Short local source requires explicit software-smoke mode')
     out.mkdir(parents=True,exist_ok=False)
     os.environ['JAX_ENABLE_X64']='true';capture_run_record(out,repo,a)
-    shutil.copy2(root/'candidate.npz',out/'parameter_reference.npz')
+    shutil.copy2(root/('continuation_parent.npz' if a.tail_continuation else 'candidate.npz'),out/'parameter_reference.npz')
     np.savez_compressed(out/'coordinate_reference.npz',origin=origin,lower=d['lower'],upper=d['upper'],
                         channel_mask=spec.channels,chemical_mask=spec.chemical,gap_mask=spec.gap)
     rng=np.random.default_rng(a.seed);x=origin.copy();iteration=0;selected=0;accepted_count=0
@@ -59,8 +67,8 @@ def main():
     if a.neural_timing:
         from r_elegans.neural_timing import SWIM_TARGET_HZ,TIMING_SOURCE
         target_hz=SWIM_TARGET_HZ
-    settings=dict(experiment='E070' if a.neural_timing else 'E067',arguments=vars(a),status='planned_before_execution',
-        parent_sha256=d['manifest']['candidate_sha256'],input_manifest_sha256=file_sha256(root/'manifest.json'),
+    settings=dict(experiment='E071' if a.tail_continuation else ('E070' if a.neural_timing else 'E067'),arguments=vars(a),status='planned_before_execution',
+        parent_sha256=d['manifest'].get('continuation_parent_sha256',d['manifest']['candidate_sha256']),input_manifest_sha256=file_sha256(root/'manifest.json'),
         reference_sha256=file_sha256(out/'parameter_reference.npz'),origin_sha256=file_sha256(out/'coordinate_reference.npz'),
         initial_state_sha256=d['fingerprint'],targets_rad=([.003]*3 if a.neural_timing else TARGETS.tolist()),trainable=spec.counts,
         training_medium='liquid' if a.neural_timing else 'wet-agar',
@@ -81,15 +89,26 @@ def main():
     ids=d['model'].neuron_ids;ref=ids.index(settings['reference_motor_neuron'])
     focus=[i for i,n in enumerate(ids) if re.fullmatch(r'(DA|DB|DD|VA|VB|VD|AS)\d+',n)
            or n.startswith(('RMD','SMD','SMB','AVA','AVB','AVD','AVE','PVC'))]
-    run=d['factory']();times=np.linspace(0,a.train_seconds,121)
+    if a.tail_continuation:
+        positions=np.asarray(list(range(24))*2+list(range(23))+list(range(24)))/23.
+        nmj=np.asarray(d['model'].neuromuscular_params.synapse_weights)
+        focus=np.flatnonzero(np.any(nmj[positions>=2/3]>0,axis=0)).tolist()
+        if not focus:raise ValueError('No anatomical posterior NMJ projection found')
+        settings['posterior_proposal_neurons']=[ids[i] for i in focus]
+        settings['initialization']='Fresh optimizer/RNG from selected E070 parent; exact original-anchor coordinates, not mid-run optimizer resume'
+        settings['time_budget']='Absolute total-job deadline; validation and cleanup reserved inside budget'
+    run=d['factory'](wall_deadline=validation_deadline);times=np.linspace(0,a.train_seconds,121)
     started=time.monotonic()
     baseline_trace=run(d['decode'](x),times,d['gains'])
+    slowest_evaluation=time.monotonic()-started
     baseline=amplitude_score(baseline_trace,ref,window_seconds=a.window_seconds)
     if not baseline['neural_guard'] or not baseline['safety_passed']:
         raise ValueError('Parent does not meet neural/safety guard in training windows')
     # Verify every available source reference timestamp before any proposal.
-    reference_trace=d['source_factory']()(d['decode'](x),times,d['gains']) if a.neural_timing else baseline_trace
-    with np.load(root/'reference-training-sham.npz',allow_pickle=False) as z:
+    reference_trace=(d['source_factory'](wall_deadline=validation_deadline)(d['decode'](x),times,d['gains'])
+                     if a.neural_timing and not a.tail_continuation else baseline_trace)
+    reference_file='parent_training_trace.npz' if a.tail_continuation else 'reference-training-sham.npz'
+    with np.load(root/reference_file,allow_pickle=False) as z:
         use=reference_trace['dense_time_s']<=z['dense_time_s'][-1]+1e-12
         if not np.array_equal(reference_trace['dense_time_s'][use],z['dense_time_s']):
             raise ValueError('Training/reference grids differ')
@@ -102,10 +121,11 @@ def main():
     profiles=baseline['reference_motor_profiles']
     score=amplitude_score
     if a.neural_timing:
-        from r_elegans.neural_timing import timing_score,propose_timing
+        from r_elegans.neural_timing import timing_score,tail_score,propose_timing
+        timing_objective=tail_score if a.tail_continuation else timing_score
         baseline_original=baseline
         def score(trace,reference_index,*,window_seconds,baseline_profiles=None):
-            return timing_score(trace,reference_index,target_hz=target_hz,window_seconds=window_seconds,baseline=baseline_original)
+            return timing_objective(trace,reference_index,target_hz=target_hz,window_seconds=window_seconds,baseline=baseline_original)
         baseline=score(baseline_trace,ref,window_seconds=a.window_seconds)
         settings['objective']='Regional cyclic-amplitude log deficits plus mean absolute log measured body-rhythm frequency error and .001 parameter prior; preserve half baseline body/neural amplitude'
         settings['timing_reference']=dict(url=TIMING_SOURCE,table=1,observable='Body undulation frequency',
@@ -114,7 +134,12 @@ def main():
             engineering_tolerance_fraction=.10,sem_is_not_population_tolerance=True)
         settings['amplitude_scope']='Existing .003rad small whole-body engineering rung; not measured swimming amplitude or propulsion'
         settings['physical_clock']='Unchanged SI seconds for body and ms for channel kinetics; no clock, capacitance, kinetic or playback rescaling'
+        if a.tail_continuation:
+            settings['objective']='Tail deficit to .00315rad training margin, hard1.8Hz±10% band, retain>=80% parent middle/head and .003rad, plus small parent-coordinate prior'
+            if not baseline['safety_passed'] or not baseline['neural_guard']:raise ValueError('Continuation parent does not meet timing/preservation guards')
         write_json(out/'configuration.json',settings)
+    search_deadline=(a.finish_by-a.validation_reserve_seconds-60) if a.finish_by is not None else None
+    if a.tail_continuation:run=d['factory'](wall_deadline=search_deadline)
     def evaluate(coords):
         trace=run(d['decode'](coords),times,d['gains'])
         metrics=score(trace,ref,window_seconds=a.window_seconds,baseline_profiles=profiles)
@@ -140,13 +165,17 @@ def main():
     with (out/'history.jsonl').open('w') as log:
         for number in range(1,a.iterations+1):
             if time.monotonic()-started>=a.minutes*60:break
+            if a.finish_by is not None and not can_search(a.finish_by-time.monotonic(),a.validation_reserve_seconds,slowest_evaluation):break
             proposal_function=propose_timing if a.neural_timing else propose_connections
             candidate,proposal=proposal_function(x,spec,rng,a.sigma,d['lower'],d['upper'],focus)
             error=None;result=None;accepted=False
+            evaluation_started=time.monotonic();deadline_stop=False
             try:
                 result,trace=evaluate(candidate)
                 accepted=(result['metrics']['neural_guard'] and result['metrics']['safety_passed'] and result['loss']<best['loss'])
+            except WallDeadline as e:error=str(e);deadline_stop=True
             except (ValueError,RuntimeError,FloatingPointError) as e:error=str(e)
+            slowest_evaluation=max(slowest_evaluation,time.monotonic()-evaluation_started)
             if accepted:
                 x=candidate;best=result;selected=number;accepted_count+=1;save_selected(number,trace)
             iteration=number
@@ -161,6 +190,7 @@ def main():
                 body_frequencies_hz=[[r['median_hz'] for r in w] for w in best['metrics'].get('body_frequency_profiles',[])]))
             print(json.dumps(row,allow_nan=False),flush=True)
             if result is not None:del trace
+            if deadline_stop:break
     if iteration==0:
         np.savez_compressed(out/'optimizer_state.npz',offsets=x,iteration=0)
         write_json(out/'rng_state.json',rng.bit_generator.state)
@@ -175,11 +205,19 @@ def main():
            ('long',a.long_seconds,.002,.1,0.,False),('held-voltage',a.train_seconds,.002,.1,0.,True)]
     for name,duration,dt,brain_step,perturb,held in cases:
         path=out/'validation'/name;path.mkdir(parents=True)
-        trace=d['factory'](dt,brain_step,perturb,held)(params,np.linspace(0,duration,121),d['gains'])
+        try:
+            trace=d['factory'](dt,brain_step,perturb,held,wall_deadline=validation_deadline)(params,np.linspace(0,duration,121),d['gains'])
+        except WallDeadline:
+            write_json(out/'summary.json',dict(experiment=settings['experiment'],status='incomplete_deadline',passed=False,
+                seed=a.seed,iterations=iteration,best=best,validation=validation,validation_complete=False,
+                stop_reason='total_wall_deadline',total_elapsed_seconds=time.monotonic()-started,
+                missing_validation=[c[0] for c in cases if c[0] not in [v['case'] for v in validation]],
+                checkpoint_sha256=file_sha256(out/'network_best.npz'),parent_sha256=settings['parent_sha256']))
+            return 124
         window=duration/4 if name=='long' else a.window_seconds
         # Long validation has longer windows; preserve the same baseline amplitude floors.
         if a.neural_timing:
-            metrics=timing_score(trace,ref,target_hz=target_hz,window_seconds=window,baseline=baseline_original)
+            metrics=timing_objective(trace,ref,target_hz=target_hz,window_seconds=window,baseline=baseline_original)
         else:
             metrics=score(trace,ref,window_seconds=window,baseline_profiles=profiles)
         np.savez_compressed(path/'trajectory.npz',**trace)
@@ -214,18 +252,21 @@ def main():
     if (saved_config!=d['config'] or any(not np.array_equal(np.asarray(x),np.asarray(y)) for x,y in zip(
             jax.tree_util.tree_leaves((params,d['fixed'])),jax.tree_util.tree_leaves((saved,saved_fixed))))):
         raise ValueError('Final checkpoint does not match parameters/fixed fields')
-    summary=dict(experiment=settings['experiment'],status='completed',seed=a.seed,passed=passed,requested_search_minutes=a.minutes,
+    summary=dict(experiment=settings['experiment'],status='completed',seed=a.seed,passed=passed,
+        requested_search_minutes=None if a.tail_continuation else a.minutes,
+        requested_total_job_minutes=a.minutes if a.tail_continuation else None,
         search_elapsed_seconds=search_elapsed,total_elapsed_seconds=time.monotonic()-started,
-        stop_reason='search_time_budget' if iteration<a.iterations else 'iterations',iterations=iteration,
+        stop_reason=('total_budget_validation_reserve' if a.tail_continuation else 'search_time_budget') if iteration<a.iterations else 'iterations',iterations=iteration,
         selected_iteration=selected,accepted_proposals=accepted_count,baseline=baseline,best=best,
         validation=validation,refinement=refinement,held_voltage_control_passed=negative,
+        validation_complete=True,finish_by_monotonic=a.finish_by,validation_reserve_seconds=a.validation_reserve_seconds,
         channel_scales_unchanged=frozen,all_fixed_fields_unchanged=True,
         connection_coordinates_changed=int(np.count_nonzero((x-origin)[int(spec.channels.sum()):])),parent_sha256=settings['parent_sha256'],
         timing_target_hz=target_hz,trainable_parameters=spec.counts,
         channel_coordinates_changed=int(np.count_nonzero((x-origin)[:int(spec.channels.sum())])),
         checkpoint_sha256=file_sha256(out/'network_best.npz'),source_inputs_unchanged=True,
         software_smoke=a.software_smoke,biological_fidelity_qualified=False,locomotion_qualified=False,
-        scope='E070 autonomous neural timing/amplitude rung' if a.neural_timing else 'Small raw cyclic-amplitude rung with frozen channels; no phase/propulsion/biological qualification')
+        scope='E071 tail continuation inside total deadline' if a.tail_continuation else ('E070 autonomous neural timing/amplitude rung' if a.neural_timing else 'Small raw cyclic-amplitude rung with frozen channels; no phase/propulsion/biological qualification'))
     write_json(out/'summary.json',summary)
     print(json.dumps(summary,allow_nan=False),flush=True)
     return 0

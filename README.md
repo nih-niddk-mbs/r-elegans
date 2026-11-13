@@ -1,5 +1,18 @@
 # r-elegans
 
+E071 continuation is prepared; server execution pending. It selects the verified
+E070 seed6802 checkpoint and fits posterior cyclic amplitude while enforcing
+the1.8Hz±10% body-frequency band and retaining middle/head activity. All original
+fixed physiology, muscle/body/water parameters and clocks remain unchanged.
+
+User budget is FOUR HOURS TOTAL, including preparation, baseline, search,
+validation and cleanup. Search reserves at least45min for validation, or more
+from measured parent validation cost, and stops before that reserve. Cooperative
+rollout deadlines plus a process-group watchdog enforce the total ceiling.
+Incomplete checks remain explicitly unqualified; nothing runs as an extra
+validation phase beyond the limit. All checkpoints/RNG/lineage remain external.
+Command: `sh scripts/launch_swim_continuation_mbslnx2.sh`.
+
 E070 server results received: four workers completed (781 reported proposals),
 all unqualified on the full engineering rung. Seeds6800/6802/6803 have body
 rhythms within1.8Hz±10%;6801 remains fast at2.212Hz. Every active validation

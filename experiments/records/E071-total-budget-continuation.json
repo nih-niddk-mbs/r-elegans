@@ -1,0 +1,64 @@
+{
+  "experiment": "E071",
+  "status": "prepared_server_execution_pending",
+  "command": "sh scripts/launch_swim_continuation_mbslnx2.sh",
+  "total_job_minutes": 240,
+  "budget_includes": [
+    "preparation",
+    "baseline",
+    "search",
+    "all seven validation cases",
+    "cleanup",
+    "reporting"
+  ],
+  "source_selection": "Discover completed E070 seed6802 with matching reported tail amplitude; verify checkpoint/selected coordinates, full guards, fixed fields and numerical controls",
+  "actual_server_run": null,
+  "actual_parent_sha256": null,
+  "optimizer": "Fresh optimizer/RNG from selected parent; not exact mid-run resume",
+  "seeds": [
+    6900,
+    6901,
+    6902,
+    6903
+  ],
+  "neural_trainable_counts": {
+    "nonleak_densities": 4814,
+    "chemical_strengths": 3709,
+    "gap_pairs": 1093
+  },
+  "bounds": "Original-anchor factor2, preserve inherited roundoff slack",
+  "targets": {
+    "body_frequency_hz": 1.8,
+    "hard_frequency_band": [
+      1.62,
+      1.98
+    ],
+    "tail_training_margin_rad": 0.00315,
+    "tail_validation_rad": 0.003,
+    "middle_head_preservation": ">=max(.003rad,80% of parent)"
+  },
+  "fixed": "Leak, capacitance, kinetics, release, topology, NMJ/muscles, water mechanics, sensory maps/gains and physical clock",
+  "validation_reserve": "max(45min,2*measured parent validation +10min), additional measured evaluation look-ahead and cleanup margins",
+  "watchdog": "Private process group; terminate and kill all descendants before total deadline; receipt records completion/incomplete checks",
+  "validation_cases": [
+    "ordinary",
+    "voltage-plus",
+    "voltage-minus",
+    "neural-half",
+    "body-half",
+    "long300s",
+    "held-voltage"
+  ],
+  "unqualified_on_incomplete": true,
+  "biological_fidelity": false,
+  "locomotion_qualification": false,
+  "verification": {
+    "tests_passed": 9,
+    "tests": "Real timeout descendant cleanup including exited parent; reserve policy; hard tail/timing/coverage gates; existing neural parameter tests",
+    "static_fixture": "/tmp/r-elegans-E071-static-check",
+    "exact_selected_parameter_reconstruction": true,
+    "expired_deadline_stops_before_neural_rollout": true,
+    "no_forward_neural_simulation": true,
+    "note": "Static fixture uses a local software candidate, not actual server6802"
+  }
+}
