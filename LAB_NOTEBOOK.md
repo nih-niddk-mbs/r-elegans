@@ -5858,3 +5858,51 @@ final saved fixed fields checked. Per-worker source/env/argv/RNG/state/checkpoin
 are enabled. Four-hour search followed by full validation; source untouched.
 This is prepared/unexecuted evidence, not a successful fit or reproducibility
 claim for a server run that has not launched. See E067-connection-amplitude.json.
+
+## 2026-11-12 — E067 completed four-search outcome: small gains, rhythm preserved
+
+User supplied all four per-seed summaries from connection-amplitude-20261112T221938Z-871781.
+All passedFalse, channels frozenTrue. Seeds6700/6701/6702/6703 made63/62/62/62
+proposals and accepted32/29/35/30:249 total,126 accepted. Entire compact cycle
+vectors transcribed to E067-server-summary.json. Actual checkpoint hashes,
+window-level losses, search/total runtimes, numerical-criterion flags, source
+revision/environment and cohort exit footer not printed; keep unknown. Earlier
+status snapshots showed all searches finished and all four on long validation;
+subsequent DONE/summary results establish completion, not missing exact timing.
+
+Compared to identical baseline3.8513936356829315e-5/.00024450367971642906/
+.0002664478765474626rad, ordinary gains(T/M/H):6700 +7.267/+3.107/+3.776%;
+6701 +3.901/-.017/-2.066%;6702 +14.360/+3.481/-3.277%;6703 +14.182/+4.136/+.116%.
+6703 ordinary4.39761e-5/.000254617/.000266758rad (~44/85/89% targets). Strongest
+ordinary tail is6702;6700 has largest reported long head bend. Do not declare
+winner from min-window vectors alone: objective uses full two-window deficits
+and prior. All candidates remain independent; none qualified. Long target
+misses persist. Never compare E067 min-window long numbers directly to E066
+single whole-late-window median as an exact gain; estimator definitions differ.
+
+All six active cases per seed retain neural guard; held voltage has zero cycles
+and fails neural guard as intended. Direct half-step amplitude changes computed
+from provided vectors are<1% for every region/seed, unlike earlier vacuous
+window-gated0 comparisons. Perturbations barely change cycles. Fixed channels
+therefore avoided the earlier loss of neural rhythm; body progress remains
+small and regional tradeoffs visible. This is neither useful propulsion nor
+biological validation. Few62–63 proposals per chain cannot establish a hard
+limit of the connectome, parameters, body or original bounds.
+
+Code inspection: channel_bridge computes signed, fan-in-normalized NMJ drive,
+then frozen muscle sigmoid; local dorsal and ventral activations are projected
+and subtracted for net joint command. These NMJ multipliers, unknown signs,
+thresholds/slopes and mechanics were fixed in E067. Possible compression or
+antagonist cancellation is a hypothesis, not a measured result from the pasted
+amplitudes. Next proposed read-only work compares saved E065 old/old and old/new
+traces under E067's SAME windows and quantifies D/V oscillatory components/net
+command. Avoid another blind long run before that. Faster evaluations from
+settled states would require all gates/calcium/body/sensory/solver continuation
+state, not reconstruction from partial dense recordings. No new simulation,
+optimizer or parameter changes this turn. Records/JSON/diff checks only.
+
+E067 full compact transcription and method archived under OneDrive
+notebook/evidence/E067-server-20261112T221938Z-871781:2 copied files SHA256-
+compared, manifest a3304280cd4166a50ab925b0e696a6c24cc3bb21aa1ae85c7ce5bdd13da11613.
+This preserves user-reported evidence only; no actual server weights/trajectories
+retrieved or cloud sync verified. All original run artifacts remain external.

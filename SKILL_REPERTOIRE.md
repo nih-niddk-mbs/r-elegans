@@ -683,3 +683,23 @@ end-to-end fit validation were performed; compilation/shell and quick synthetic
 scoring checks only. Server parent-hash/state/reference checks precede proposals.
 This is a new objective/seeded stage, not an optimizer continuation or biological
 qualification. All selected/final weights, references, RNG and traces external.
+
+## E067 completed amplitude search — 2026-11-12
+
+E067 server result (2026-11-12): all four connections-only searches finished
+without meeting the small amplitude rung. Channels stayed fixed; every active
+validation retained the motor guard, and held-voltage cyclic bends were0.
+Across249 proposals,126 were accepted. Each seed made only62–63 proposals.
+Ordinary tail gains were3.9–14.4%; middle/head changes were smaller or mixed.
+Seed6703 reaches roughly44%/85%/89% of short-window T/M/H targets, but is not
+declared a full-objective winner without complete losses. Long windows still
+miss targets. Numerical cycle changes under half-step tests are below1%.
+See [full compact evidence](experiments/records/E067-server-summary.json).
+
+Decision: preserve all trained candidates and the original hybrid. Do not infer
+a connectome limit from this small costly search. Before another long run,
+compare already saved old/old vs old/new amplitudes with identical scoring and
+inspect dorsal/ventral cancellation and the fixed NMJ transfer. NMJ weights,
+polarities and muscle transfer were held fixed here, so brain-weight fitting
+could not explore that interface. These are hypotheses to test, not diagnosed
+causes. No new model changes or experiment have been launched.

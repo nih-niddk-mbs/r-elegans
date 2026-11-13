@@ -1,0 +1,470 @@
+{
+  "experiment": "E067",
+  "record_date": "2026-11-12 America/New_York",
+  "evidence": "User-pasted per-seed compact results; no independently retrieved checkpoint, full history or summary",
+  "run": "/home/carsonc/r-elegans-results/connection-amplitude-20261112T221938Z-871781",
+  "parent_sha256_from_plan": "f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e",
+  "requested_search_minutes": 240,
+  "source_revision": null,
+  "server_environment": null,
+  "exact_invocation": null,
+  "cohort_execution_valid": null,
+  "total_proposals": 249,
+  "total_accepted": 126,
+  "targets_rad": [
+    0.0001,
+    0.0003,
+    0.0003
+  ],
+  "workers": [
+    {
+      "seed": 6700,
+      "passed": false,
+      "iterations": 63,
+      "accepted_proposals": 32,
+      "channel_scales_unchanged": true,
+      "baseline": [
+        3.8513936356829315e-05,
+        0.00024450367971642906,
+        0.0002664478765474626
+      ],
+      "best": [
+        4.1312751745237186e-05,
+        0.00025210022859958707,
+        0.0002765078456474501
+      ],
+      "gain_percent": [
+        7.267019819727105,
+        3.106926199216442,
+        3.7755861410272873
+      ],
+      "validation": [
+        {
+          "case": "ordinary",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.1312751745237186e-05,
+            0.00025210022859958707,
+            0.0002765078456474501
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-plus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.131589703856853e-05,
+            0.00025206699096023966,
+            0.0002765253990634764
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-minus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.130987487704907e-05,
+            0.00025213199972641716,
+            0.0002764940281883843
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "neural-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.1013809366712006e-05,
+            0.0002502621539189516,
+            0.0002743081046991114
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "body-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.169551149089956e-05,
+            0.0002526168456022035,
+            0.0002772334814599986
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "long",
+          "cycle_minimum_tail_middle_head_rad": [
+            8.851821788924408e-05,
+            0.00020224700284723202,
+            0.0001876968125075762
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "held-voltage",
+          "cycle_minimum_tail_middle_head_rad": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "neural_guard": false,
+          "target_passed": false
+        }
+      ],
+      "computed_cycle_refinement_errors_percent": {
+        "neural-half": [
+          0.7236080045421867,
+          0.7291047258647709,
+          0.7955437731569592
+        ],
+        "body-half": [
+          0.926492982173488,
+          0.20492524163353565,
+          0.2624286521958785
+        ]
+      },
+      "checkpoint_sha256": null,
+      "exact_best_loss": null,
+      "search_elapsed_seconds": null,
+      "total_elapsed_seconds": null,
+      "connection_coordinates_changed": null
+    },
+    {
+      "seed": 6701,
+      "passed": false,
+      "iterations": 62,
+      "accepted_proposals": 29,
+      "channel_scales_unchanged": true,
+      "baseline": [
+        3.8513936356829315e-05,
+        0.00024450367971642906,
+        0.0002664478765474626
+      ],
+      "best": [
+        4.001652454425908e-05,
+        0.00024446174503347205,
+        0.00026094195365729267
+      ],
+      "gain_percent": [
+        3.9014142140870067,
+        -0.017150941452348523,
+        -2.066416501986701
+      ],
+      "validation": [
+        {
+          "case": "ordinary",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.001652454425908e-05,
+            0.00024446174503347205,
+            0.00026094195365729267
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-plus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.001693744351553e-05,
+            0.0002444288751832363,
+            0.0002609566958432716
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-minus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.001697148903194e-05,
+            0.00024449226629540133,
+            0.000260929804654704
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "neural-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            3.972271350416445e-05,
+            0.00024291131269001034,
+            0.00025930284665279246
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "body-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.039229249548637e-05,
+            0.00024495688763842734,
+            0.0002616226249965714
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "long",
+          "cycle_minimum_tail_middle_head_rad": [
+            8.585292578636855e-05,
+            0.0001957774043362271,
+            0.0001806475239515548
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "held-voltage",
+          "cycle_minimum_tail_middle_head_rad": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "neural_guard": false,
+          "target_passed": false
+        }
+      ],
+      "computed_cycle_refinement_errors_percent": {
+        "neural-half": [
+          0.7342242821953837,
+          0.634222889658842,
+          0.6281500469843659
+        ],
+        "body-half": [
+          0.9390319511922707,
+          0.20254400331123357,
+          0.26085162992712796
+        ]
+      },
+      "checkpoint_sha256": null,
+      "exact_best_loss": null,
+      "search_elapsed_seconds": null,
+      "total_elapsed_seconds": null,
+      "connection_coordinates_changed": null
+    },
+    {
+      "seed": 6702,
+      "passed": false,
+      "iterations": 62,
+      "accepted_proposals": 35,
+      "channel_scales_unchanged": true,
+      "baseline": [
+        3.8513936356829315e-05,
+        0.00024450367971642906,
+        0.0002664478765474626
+      ],
+      "best": [
+        4.4044516115282484e-05,
+        0.00025301431767259935,
+        0.00025771513005468094
+      ],
+      "gain_percent": [
+        14.35994416985238,
+        3.480781134271993,
+        -3.2774689766484566
+      ],
+      "validation": [
+        {
+          "case": "ordinary",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.4044516115282484e-05,
+            0.00025301431767259935,
+            0.00025771513005468094
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-plus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.4044431723941346e-05,
+            0.00025298303601966124,
+            0.0002577274026642068
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-minus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.404403277448454e-05,
+            0.00025304387587661396,
+            0.0002577128671305273
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "neural-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.37171247815657e-05,
+            0.0002512093068908518,
+            0.00025563555009189276
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "body-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.443424061421897e-05,
+            0.0002535218009311422,
+            0.00025840365177799696
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "long",
+          "cycle_minimum_tail_middle_head_rad": [
+            8.870295418000884e-05,
+            0.00020244937089960828,
+            0.0001811238118853281
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "held-voltage",
+          "cycle_minimum_tail_middle_head_rad": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "neural_guard": false,
+          "target_passed": false
+        }
+      ],
+      "computed_cycle_refinement_errors_percent": {
+        "neural-half": [
+          0.7433191747637125,
+          0.7134026241484293,
+          0.8069297143504683
+        ],
+        "body-half": [
+          0.8848422762016916,
+          0.20057491734499777,
+          0.26716387321532586
+        ]
+      },
+      "checkpoint_sha256": null,
+      "exact_best_loss": null,
+      "search_elapsed_seconds": null,
+      "total_elapsed_seconds": null,
+      "connection_coordinates_changed": null
+    },
+    {
+      "seed": 6703,
+      "passed": false,
+      "iterations": 62,
+      "accepted_proposals": 30,
+      "channel_scales_unchanged": true,
+      "baseline": [
+        3.8513936356829315e-05,
+        0.00024450367971642906,
+        0.0002664478765474626
+      ],
+      "best": [
+        4.397613919086829e-05,
+        0.0002546165684972346,
+        0.00026675775927476053
+      ],
+      "gain_percent": [
+        14.182406034615603,
+        4.1360885826071225,
+        0.11630144376202356
+      ],
+      "validation": [
+        {
+          "case": "ordinary",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.397613919086829e-05,
+            0.0002546165684972346,
+            0.00026675775927476053
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-plus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.397821581104966e-05,
+            0.0002545840532147837,
+            0.0002667684680018184
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "voltage-minus",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.3974301880980726e-05,
+            0.00025464766307698415,
+            0.0002667505417580096
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "neural-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.3741249050044395e-05,
+            0.0002531289822204977,
+            0.0002650736583197297
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "body-half",
+          "cycle_minimum_tail_middle_head_rad": [
+            4.437763205514256e-05,
+            0.00025513684309238366,
+            0.00026744022260258293
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "long",
+          "cycle_minimum_tail_middle_head_rad": [
+            8.945134995198833e-05,
+            0.000204177154744363,
+            0.00018354261962269525
+          ],
+          "neural_guard": true,
+          "target_passed": false
+        },
+        {
+          "case": "held-voltage",
+          "cycle_minimum_tail_middle_head_rad": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "neural_guard": false,
+          "target_passed": false
+        }
+      ],
+      "computed_cycle_refinement_errors_percent": {
+        "neural-half": [
+          0.5341308835784986,
+          0.5842456700743126,
+          0.6313222001899543
+        ],
+        "body-half": [
+          0.912978882779325,
+          0.2043365041873635,
+          0.25583635493033885
+        ]
+      },
+      "checkpoint_sha256": null,
+      "exact_best_loss": null,
+      "search_elapsed_seconds": null,
+      "total_elapsed_seconds": null,
+      "connection_coordinates_changed": null
+    }
+  ],
+  "interpretation": "No seed qualifies. Restored neural rhythm survives all reported active validations with channels frozen; negative held controls zero. Ordinary tail gains3.9..14.36%, middle/head gains small or mixed. Only62..63 proposals per worker; not evidence of an architectural/physical limit.",
+  "candidate_note": "6703 is a balanced short-window candidate, not a declared objective winner: full losses/window matrices/checkpoint hashes were not printed. Preserve all selected/final models independently.",
+  "window_scope": "E067 minima over30..45/45..60s and150..225/225..300s differ from E066 whole-late-half medians; do not directly label cross-experiment changes as long-window gains.",
+  "next_proposal": "Read existing old-old vs old-new traces under identical E067 scoring, and decompose projected dorsal/ventral muscle oscillations vs net drive. Investigate fixed NMJ transfer and cancellation before another long search. Consider shorter trials from fully saved settled states only with exact gates/body/sensory/solver state preservation and long validation; never reconstruct those from incomplete raw traces.",
+  "new_run_launched": false
+}
