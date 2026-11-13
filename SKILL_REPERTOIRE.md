@@ -1,8 +1,10 @@
 # r-elegans skill repertoire and action-space plan
 
-E068 is a read-only output-path audit, prepared but not yet run on the server.
-It adds no trained skill and promotes no E067 candidate. Preserve the independent
-old/old, hybrid and four connection-only checkpoints for comparison.
+E068 read-only server audit completed (user-reported stdout). It adds no trained
+skill or E067 promotion. Hybrid ordinary regional cycles exceed old/old under
+the same estimator; final-head-joint cancellation is strong, while weak tail
+bends remain unexplained. Preserve all independent checkpoints. NMJ/filter
+detail remains to be read from the completed audit report.
 
 Strategy update: 2026-11-06, user-directed, recorded as H1.1 / E018 in
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). **Priority: cover useful behaviors with

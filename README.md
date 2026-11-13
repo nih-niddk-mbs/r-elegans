@@ -1,13 +1,17 @@
 # r-elegans
 
-E068 output-path audit is prepared (2026-11-12), with server execution pending.
-It reads saved E065 old/old and old/new, E066 hybrid, and all four E067 selected
-candidates; no new simulation or fitting. It compares identical ordinary scoring
-windows, reconstructs the fixed NMJ/muscle readout, separates dorsal/ventral
-signals, and measures attenuation through net command/filter/joints. Signal
-ratios are descriptive, not causal or biological validation. Launch:
-`sh scripts/launch_output_audit_mbslnx2.sh`. Detailed plans and local software
-checks are in LAB_NOTEBOOK.md; outputs and input hashes stay outside Git.
+E068 server audit completed successfully (user-reported stdout; run
+`output-path-audit-20261113T041119Z-939399`). Under identical ordinary scoring,
+the hybrid has larger T/M/H cycles than old/old by55.4%/23.4%/115.2%.
+Old/new and hybrid printed amplitudes match exactly. Most tail-joint oscillatory
+signal survives dorsal/ventral subtraction at the observed motor frequency;
+the strongest cancellation is the final head joint (only8–9% survives in the
+hybrid/candidates). Cancellation alone therefore does not explain weak tail
+bends. This ratio concerns one frequency, not broadband energy or causal gain.
+NMJ/muscle/filter details were computed but not included in pasted stdout;
+remaining attenuation is unresolved. No new model qualification or training.
+Use `python -m scripts.report_output_audit` to print that existing detail.
+Evidence: [E068 server summary](experiments/records/E068-server-summary.json).
 
 `r-elegans` is an experimental JAX-native foundation for a differentiable,
 connectome-constrained *C. elegans* simulator.

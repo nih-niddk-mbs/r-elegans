@@ -5967,3 +5967,52 @@ archive manifest SHA256 c2feb1370d07ea2dd87ce56a5f798d5b0a82478717df6b9c1ac0f1de
 This includes both successful analysis invocation/source/environment capsules;
 referenced input trajectories stay in the existing E065/E066 external archives.
 No server files retrieved and no cloud sync status inferred.
+
+### E068 server outcome — user-reported stdout received 2026-11-12 local context
+
+Reported run output-path-audit-20261113T041119Z-939399, summary.json and adjacent
+.log under /home/carsonc/r-elegans-results. Run identifier contains a UTC date;
+no independent execution timestamp, source revision, environment or backup status
+was supplied. OUTPUT_AUDIT_EXIT_CODE=0;12 case lines and final summary path.
+This is user-reported server stdout, not retrieved server JSON/trajectories.
+Compact vectors and attachment SHA256: experiments/records/E068-server-summary.json.
+All underlying checkpoints, trajectories, input hashes and original source/
+environment capsules remain on server; no new simulation/training occurred.
+
+Same-estimator30–45/45–60s minimum regional cycles(T/M/H) old/old:
+2.47807595e-5/.000198156681/.000123828498rad; old/new and hybrid both
+3.85139364e-5/.000244503680/.000266447877rad. Thus hybrid ordinary improvements
+are55.419/23.389/115.175% approximately. Prefer hybrid to old/old on THIS measured
+regional amplitude comparison, not a general fitness ranking. All four E067
+ordinary/long vectors match their previous user-reported values. No full-rung
+pass inferred. Different long windows describe drift, not same-window gains.
+
+Last-window Fourier net/(|dorsal|+|ventral|) magnitude ratio at observed RMDR
+frequency is ~.95–.98 at joints0–2 and4–7 for hybrid/candidates; joint3~.79–.81.
+Final head joint10 is .08566 for hybrid ordinary and .08208–.08844 for E067
+ordinary; old/old .16708. Strong cancellation is localized at that final head
+joint, not a demonstrated general tail bottleneck. These are single-frequency
+amplitude coefficient ratios, not percentages of broadband energy, and do not
+establish causal effects of changing one synapse. No imposed carrier was used.
+
+Maximum printed anatomical projection residual4.827194938e-8, below protocol
+1e-7. All12 cases reach audit completion, but actual NMJ activation residuals,
+input hash lists and fixed-readout identity were not printed in this transcript.
+Per-muscle NMJ p2p, activation p2p/extreme fractions/static derivatives and
+D/V/net/filter/joint cycles ARE in generated summary but absent from pasted
+stdout. Cannot yet identify weak neural/NMJ drive, sigmoid compression, filtering
+or mechanics as the remaining cause. Added read-only stdlib reporter to expose
+already computed detail; no new experiment, acceptance criteria or optimizer.
+Local verification: reporter reads the previously verified E068 local smoke
+JSON; synthetic inputs/source simulations were not rerun. This validates report
+format only, not the actual server values. No model parameters were changed.
+
+Decision: retain all independent models and inspect full stage amplitudes before
+another long fit. Neither blindly training longer nor fitting muscle gains is
+justified by these few printed fields alone.
+
+E068 server transcription archived to OneDrive notebook/evidence/
+E068-server-20261113T041119Z-939399:2 files SHA256-compared; archive manifest
+8e8636ccccaabbb16d6ad16d43dc1d7e65688fb50aec57b43f526ce4b16a1b47.
+Original pasted stdout is preserved verbatim; no actual server artifacts
+retrieved and no OneDrive cloud synchronization claimed.
