@@ -1,0 +1,58 @@
+{
+  "experiment": "E068",
+  "date": "2026-11-12",
+  "status": "prepared_server_execution_pending",
+  "question": "Localize output attenuation and compare old/old vs hybrid vs connection-trained candidates using saved signals",
+  "method": "Read-only existing traces; no neural/body simulation or optimizer",
+  "command": "sh scripts/launch_output_audit_mbslnx2.sh",
+  "sources": [
+    "rhythm-comparison-20261112T185742Z-865067",
+    "hybrid-validation-20261112T202746Z-868392",
+    "connection-amplitude-20261112T221938Z-871781"
+  ],
+  "fit_seeds": [
+    6700,
+    6701,
+    6702,
+    6703
+  ],
+  "new_random_seeds": null,
+  "trainable_parameters": [],
+  "fixed_parameters": "All model, sensory, NMJ, neuron, connection and mechanical parameters",
+  "ordinary_windows_s": [
+    [
+      30,
+      45
+    ],
+    [
+      45,
+      60
+    ]
+  ],
+  "long_windows_s": [
+    [
+      150,
+      225
+    ],
+    [
+      225,
+      300
+    ]
+  ],
+  "integrity": "Declared checkpoint hashes; identical pinned actor; all consumed files hashed before/after; source/environment/argv capsule",
+  "acceptance": "Execution integrity only; no changed physical/biological or skill gate",
+  "local_verification": {
+    "software_tests_passed": 2,
+    "no_worm_simulation": true,
+    "saved_short_trace_cases": 4,
+    "precision": "float64",
+    "maximum_projection_error": 4.827194938217261e-08,
+    "maximum_reconstructed_muscle_error": 3.3306690738754696e-16,
+    "result_location": "/tmp/r-elegans-E068-output-audit-transfer-smoke",
+    "limitations": "Twelve-second local E065/E066 smoke sources use a different new-network checkpoint from the server; no server conclusions"
+  },
+  "failures": [
+    "Initial saved-file smoke attempt found candidate hash absent from cohort summary; corrected reader to use source input manifest before final successful analysis"
+  ],
+  "server_results": null
+}

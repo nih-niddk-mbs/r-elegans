@@ -1,5 +1,14 @@
 # Current model: exact scope and computation path
 
+E068 output-path audit is prepared (2026-11-12), with server execution pending.
+It reads saved E065 old/old and old/new, E066 hybrid, and all four E067 selected
+candidates; no new simulation or fitting. It compares identical ordinary scoring
+windows, reconstructs the fixed NMJ/muscle readout, separates dorsal/ventral
+signals, and measures attenuation through net command/filter/joints. Signal
+ratios are descriptive, not causal or biological validation. Launch:
+`sh scripts/launch_output_audit_mbslnx2.sh`. Detailed plans and local software
+checks are in LAB_NOTEBOOK.md; outputs and input hashes stay outside Git.
+
 E067 server result (2026-11-12): all four connections-only searches finished
 without meeting the small amplitude rung. Channels stayed fixed; every active
 validation retained the motor guard, and held-voltage cyclic bends were0.

@@ -5906,3 +5906,64 @@ notebook/evidence/E067-server-20261112T221938Z-871781:2 copied files SHA256-
 compared, manifest a3304280cd4166a50ab925b0e696a6c24cc3bb21aa1ae85c7ce5bdd13da11613.
 This preserves user-reported evidence only; no actual server weights/trajectories
 retrieved or cloud sync verified. All original run artifacts remain external.
+
+### E068 — planned read-only saved output-path audit (2026-11-12)
+
+Question: are E067's modest body cycles associated with weak muscle activation,
+antagonist cancellation, or attenuation after the net command? Is old/old better
+than old/new under the same estimator? These are hypotheses, not findings.
+Method: analyze existing E065 old-old/old-new sham, E066 hybrid sham/long and
+E067 seeds6700–6703 ordinary/long trajectories. No simulation, optimizer, RNG
+or parameter changes; all neuron/channel/connection/readout/body parameters fixed.
+Parent inputs: E065 rhythm-comparison-20261112T185742Z-865067; E066 hybrid-
+validation-20261112T202746Z-868392 (candidate f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e);
+E067 connection-amplitude-20261112T221938Z-871781. Check each declared evaluated/
+selected model hash and identical actor hashes; hash every consumed input before/
+after. Source/environment/argv capsule enabled. All results remain external.
+No fresh random seeds. Server command: `sh scripts/launch_output_audit_mbslnx2.sh`.
+
+Ordinary cycles use exactly E067 windows30–45 and45–60s and the existing raw
+extremum estimator. Long uses150–225/225–300s, descriptive drift comparison only.
+Reconstruct dorsal/ventral projection and require agreement with recorded net
+command within1e-7 absolute (legacy32 interpolation/reduction differences).
+Report each stage's raw cycle amplitudes, D/V phase and net/(|D|+|V|) Fourier
+coefficient ratio at an observed RMDR frequency, muscle near-extreme fraction,
+and frozen sigmoid local derivative. Undefined carrier ratios remain null.
+These are descriptive; no new skill or biological acceptance gate. Static
+sigmoid derivative and signal attenuation do not establish closed-loop causality.
+Per-edge NMJ currents were not recorded: no causal synapse inference planned.
+Execution criteria: complete saved inputs, verified hashes/projection, finite
+signals, unchanged sources, no simulator imports. Software checks planned:
+synthetic cancellation/anti-phase/static/wrong-map examples and analysis of
+existing local12s E065/E066 smoke traces, explicitly not actual server evidence.
+
+E068 local software verification, 2026-11-12:2 focused tests passed (synthetic
+same-phase cancellation, opposite-phase survival, static nonmotion and wrong-
+projection rejection). Shell syntax and diff checks passed. No worm simulation
+run on the Mac. Existing local12s E065/E066 traces were analyzed:4 cases, source
+hashes unchanged, JAX absent, maximum reconstructed-command error4.82719494e-8,
+maximum fixed NMJ activation reconstruction error3.33066907e-16. Input/output
+capsules are /tmp/r-elegans-E068-output-audit-transfer-smoke (plus earlier saved-
+projection smoke /tmp/r-elegans-E068-output-audit-smoke). These local short sources
+have a different newer checkpoint from the actual server and establish software
+execution only, not server physiology or candidate ranking.
+
+Initial attempt exposed a reader mistake: E066 cohort summary does not contain
+candidate_sha256; corrected to read the verified candidate hash from its input
+manifest. Final saved-file checks succeeded after correction. Fixed NMJ drive
+is now algebraically reconstructed from recorded voltages, physical release
+thresholds/slopes, packaged contact/sign map and frozen actor, with activation
+agreement required within1e-7 absolute. This never evolves neuronal dynamics.
+Raw per-muscle drive p2p and per-neuron voltage p2p supplement the D/V analysis.
+Per-edge currents remain unavailable; static readout reconstruction does not
+identify which parameter adjustment would improve closed-loop motion.
+
+Decision: E068 prepared for user launch, actual server execution/results pending.
+No model/optimizer changes; no E067 promotion, extra training or biological claim.
+
+E068 local verification outputs archived to OneDrive notebook/evidence/
+E068-local-output-audit:718 files copied and individually SHA256-compared;
+archive manifest SHA256 c2feb1370d07ea2dd87ce56a5f798d5b0a82478717df6b9c1ac0f1de8c959941.
+This includes both successful analysis invocation/source/environment capsules;
+referenced input trajectories stay in the existing E065/E066 external archives.
+No server files retrieved and no cloud sync status inferred.
