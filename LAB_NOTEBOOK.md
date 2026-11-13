@@ -6288,3 +6288,63 @@ Earlier unexecuted draft/static records remain at E070-preparation-20261113,
 These preserve preparation evidence, not server training results or cloud-sync
 verification. Final target is1.8Hz in water; prior crawling/multi-rate plans were
 superseded before launch. No actual server run has been started by the agent.
+
+### E070 swimming search outcome — user-reported server stdout
+
+Attachment SHA256 and exact parsed28 validation rows are in
+experiments/records/E070-server-summary.json. No run identifier, source revision,
+environment, elapsed timings, baseline-vs-best comparison, checkpoint hashes,
+complete guards or parameter-bound occupancy were supplied. Run path stays
+unknown; do not fabricate it from other experiment timestamps. All four workers
+exit0 and report passedFalse:6800 iter198,6801 iter193,6802 iter197,6803 iter193,
+total781. Cohort execution-valid/footer was not printed. No server files retrieved.
+E070 planned ordinary/long durations are60/300s; actual duration not in this
+excerpt, so refer to the printed ordinary/long case names rather than independently
+verified simulated times. No direct parameter-update counts printed.
+
+Ordinary body frequency Hz / regional T/M/H cyclic excursions(rad):
+6800:1.86567 / .00216351,.04400890,.01570984;
+6801:2.21239 / .00196843,.03722991,.01249750;
+6802:1.87970 / .00274598,.03894839,.01335845;
+6803:1.74216 / .00212667,.04113992,.01392926.
+Seeds6800/6802/6803 are within target1.62–1.98Hz in all printed active cases.
+6801 exceeds the band. Every active case in every seed misses tail .003rad;
+all middle/head regional amplitudes exceed that engineering threshold. Failure
+is therefore expected without relaxing criteria. Full neural/safety/coverage
+flags were not printed, so tail failure is demonstrated but not proved the
+ONLY failed gate. No weights or criteria modified to turn a failure into a pass.
+
+6802's ordinary tail is91.5326% of target; to reach .003rad requires9.25064%
+increase from current amplitude, not merely8.4674% (the deficit as target fraction).
+Its frequency is4.4277% above1.8Hz. Strongest reported tail with acceptable timing
+makes it a useful next parent candidate, not a proved best total-objective model.
+No baseline comparison available: cannot attribute the full water/wet difference
+to training or quantify improvement over its untrained water parent.
+
+Numerical descriptions computed directly from printed rows: across all seeds,
+half-step cycle differences<.23245% and frequency differences<.75758% relative
+to ordinary, small compared with protocol tolerances. Long vs ordinary regional
+amplitude differences<1.87e-6 relative. Voltage± perturbation results remain
+close to ordinary. Held-voltage body frequencies allNone and excursions all0.
+The held control's passedFalse is expected for an inactive negative control;
+it is not by itself a failure of control specificity. Reported checks support
+persistent cyclic body dynamics at the intended physical timescale under the
+implemented unforced water/proprioception protocol. Same regional frequencies
+do NOT establish phase progression, wavelength, useful propulsion or swimming
+biological fidelity; no trajectory/displacement report was supplied.
+
+Decision: preserve all four full-network checkpoints and source/RNG/optimizer
+lineage externally. Favor6802 for a proposed focused tail-amplitude continuation
+with a hard swim-timescale guard and retained middle/head activity. Before any
+launch, retrieve full source summary/hash/guard/bound details from the server;
+no new experiment/optimizer or automatic next stage launched this turn. Current
+model/readme/protocol/repertoire statuses updated; earlier failed stages retained.
+Local work only parses supplied stdout, derives comparisons, validates JSON
+and checks diffs. No simulation or new tests needed for recordkeeping.
+
+E070 reported results archived externally at OneDrive notebook/evidence/
+E070-server-user-report:2 files copied and SHA256-compared (verbatim attachment
+plus compact parsed summary); manifest05d23abd8222aaab873d3bea6866bbfab7e126c1879b6bec2838802932c2bdd2.
+Folder intentionally has no invented run ID. Actual server checkpoints, model
+hashes, run capsules and trajectories were not retrieved or backed up by this
+step. No OneDrive cloud-sync claim.

@@ -1,0 +1,713 @@
+{
+  "experiment": "E070",
+  "evidence_type": "user_reported_server_stdout",
+  "attachment_sha256": "6ce4b950fe69399421f00cb2d0edad5d4fc1007f573451a4971c56eb4373dcaa",
+  "run": null,
+  "run_identifier_not_supplied": true,
+  "source_revision": null,
+  "server_environment": null,
+  "checkpoint_hashes": null,
+  "cohort_execution_valid_not_printed": true,
+  "workers": [
+    {
+      "seed": 6800,
+      "exit_code": 0,
+      "passed": false,
+      "iterations": 198,
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ],
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021635088340097725,
+            0.04400889571149764,
+            0.015709835028990954
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ],
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.002163509312086767,
+            0.044008851924245446,
+            0.01570984658134468
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ],
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021635097868518555,
+            0.0440089126166794,
+            0.015709841773972194
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.8726591760299662,
+              1.8726591760299662,
+              1.8726591760299662
+            ],
+            [
+              1.8726591760299662,
+              1.8726591760299662,
+              1.8726591760299662
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021587249556473675,
+            0.04393948796693149,
+            0.015686445083816142
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.8621973929236533,
+              1.8621973929236533,
+              1.8621973929236533
+            ],
+            [
+              1.8621973929236533,
+              1.8621973929236533,
+              1.8621973929236533
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.002165063585528773,
+            0.04400721266875324,
+            0.01571396426217396
+          ]
+        },
+        {
+          "case": "long",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ],
+            [
+              1.86567164179104,
+              1.86567164179104,
+              1.86567164179104
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021635099334129243,
+            0.04400892092671811,
+            0.01570985000761041
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "derived": {
+        "ordinary_frequency_hz": 1.86567164179104,
+        "ordinary_frequency_error_percent": 3.648424543946671,
+        "ordinary_tail_target_fraction": 0.7211696113365909,
+        "additional_tail_gain_needed_percent": 38.663635333529186,
+        "all_active_frequency_in_target_band": true,
+        "all_active_tail_below_target": true,
+        "all_active_middle_head_above_target": true,
+        "maximum_halfstep_cycle_relative_difference": 0.0022111665490815806,
+        "maximum_halfstep_frequency_relative_difference": 0.0037453183520644983,
+        "long_cycle_relative_difference": [
+          5.081574591087049e-07,
+          5.729573547904006e-07,
+          9.534549171415703e-07
+        ],
+        "held_cycles_zero": true
+      }
+    },
+    {
+      "seed": 6801,
+      "exit_code": 0,
+      "passed": false,
+      "iterations": 193,
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ],
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.00196843433783038,
+            0.037229907136802756,
+            0.012497503907954843
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ],
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0019684355718428553,
+            0.03722989365238377,
+            0.012497508366649299
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ],
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0019684314772069056,
+            0.03722995025994782,
+            0.012497492835558233
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              2.2222222222222303,
+              2.2222222222222343,
+              2.2222222222222343
+            ],
+            [
+              2.222222222222243,
+              2.222222222222226,
+              2.222222222222243
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.001964554131397442,
+            0.037175318716321966,
+            0.012478783138438337
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              2.217294900221727,
+              2.217294900221727,
+              2.217294900221727
+            ],
+            [
+              2.217294900221727,
+              2.217294900221727,
+              2.217294900221727
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0019699294656443933,
+            0.03723811925461211,
+            0.012503247971549655
+          ]
+        },
+        {
+          "case": "long",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ],
+            [
+              2.212389380530982,
+              2.212389380530982,
+              2.212389380530982
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0019684342304855107,
+            0.03722995416667864,
+            0.012497509270972998
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "derived": {
+        "ordinary_frequency_hz": 2.212389380530982,
+        "ordinary_frequency_error_percent": 22.91052114061012,
+        "ordinary_tail_target_fraction": 0.6561447792767933,
+        "additional_tail_gain_needed_percent": 52.40538850316023,
+        "all_active_frequency_in_target_band": false,
+        "all_active_tail_below_target": true,
+        "all_active_middle_head_above_target": true,
+        "maximum_halfstep_cycle_relative_difference": 0.0019712145629479047,
+        "maximum_halfstep_frequency_relative_difference": 0.004444444444449943,
+        "long_cycle_relative_difference": [
+          5.453312159906867e-08,
+          1.2632283961856736e-06,
+          4.2912714363351954e-07
+        ],
+        "held_cycles_zero": true
+      }
+    },
+    {
+      "seed": 6802,
+      "exit_code": 0,
+      "passed": false,
+      "iterations": 197,
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.8796992481203008,
+              1.8796992481203008,
+              1.8796992481203008
+            ],
+            [
+              1.879699248120288,
+              1.8796992481203008,
+              1.879699248120288
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0027459793917179176,
+            0.0389483884745325,
+            0.013358451996106663
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.8796992481203008,
+              1.8796992481203008,
+              1.8796992481203008
+            ],
+            [
+              1.879699248120288,
+              1.8796992481203008,
+              1.879699248120288
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0027459798617933823,
+            0.038948400836120264,
+            0.013358452323616349
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.8796992481203008,
+              1.8796992481203008,
+              1.8796992481203008
+            ],
+            [
+              1.879699248120288,
+              1.879699248120288,
+              1.879699248120288
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.002745979585144734,
+            0.03894837927157237,
+            0.013358452065362972
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.886792452830207,
+              1.8939393939393732,
+              1.8867924528301974
+            ],
+            [
+              1.8867924528301974,
+              1.8939393939393732,
+              1.8903591682419663
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0027395965748890916,
+            0.03888971918086831,
+            0.013338730045417843
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.8796992481202945,
+              1.8796992481203008,
+              1.879699248120288
+            ],
+            [
+              1.879699248120288,
+              1.879699248120288,
+              1.879699248120288
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0027473570389393437,
+            0.038946409399267023,
+            0.013361309739779503
+          ]
+        },
+        {
+          "case": "long",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.879699248120263,
+              1.879699248120263,
+              1.879699248120263
+            ],
+            [
+              1.8796992481203634,
+              1.8796992481203634,
+              1.8796992481203634
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.002745979941722279,
+            0.03894832451077902,
+            0.013358453068611525
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "derived": {
+        "ordinary_frequency_hz": 1.8796992481203008,
+        "ordinary_frequency_error_percent": 4.42773600668338,
+        "ordinary_tail_target_fraction": 0.9153264639059725,
+        "additional_tail_gain_needed_percent": 9.250637825186448,
+        "all_active_frequency_in_target_band": true,
+        "all_active_tail_below_target": true,
+        "all_active_middle_head_above_target": true,
+        "maximum_halfstep_cycle_relative_difference": 0.0023244226989019225,
+        "maximum_halfstep_frequency_relative_difference": 0.007575757575746518,
+        "long_cycle_relative_difference": [
+          2.0029442433474455e-07,
+          1.6422695772437083e-06,
+          8.028661277598906e-08
+        ],
+        "held_cycles_zero": true
+      }
+    },
+    {
+      "seed": 6803,
+      "exit_code": 0,
+      "passed": false,
+      "iterations": 193,
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.7421602787456505,
+              1.7421602787456505,
+              1.7421602787456505
+            ],
+            [
+              1.7421602787456505,
+              1.7421602787456505,
+              1.7421602787456505
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021266740155928138,
+            0.04113991955551455,
+            0.013929264190881752
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.7421602787456505,
+              1.7421602787456505,
+              1.7421602787456505
+            ],
+            [
+              1.7421602787456505,
+              1.7421602787456505,
+              1.7421602787456505
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021266736977417072,
+            0.041139947752835034,
+            0.013929255430992243
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.7421602787456505,
+              1.7421602787456505,
+              1.7421602787456505
+            ],
+            [
+              1.7421602787456505,
+              1.7421602787456505,
+              1.7421602787456505
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.002126673395160414,
+            0.04113995048820439,
+            0.013929259342335187
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.7543859649122797,
+              1.7543859649122797,
+              1.7543859649122797
+            ],
+            [
+              1.7543859649122797,
+              1.7543859649122797,
+              1.7543859649122797
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.002122137535834595,
+            0.04108286922709337,
+            0.013910163305749262
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.7452006980802781,
+              1.7452006980802781,
+              1.7452006980802781
+            ],
+            [
+              1.7452006980802781,
+              1.7452006980802781,
+              1.7452006980802781
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021280884512141773,
+            0.04114329440170057,
+            0.013932316797477362
+          ]
+        },
+        {
+          "case": "long",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              1.7421602787456936,
+              1.7421602787456936,
+              1.7421602787456936
+            ],
+            [
+              1.7421602787456936,
+              1.7421602787456936,
+              1.7421602787456936
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0021266745214553046,
+            0.041139996081870814,
+            0.013929282302517443
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "body_Hz_tail_middle_head": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bend_rad_tail_middle_head": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "derived": {
+        "ordinary_frequency_hz": 1.7421602787456505,
+        "ordinary_frequency_error_percent": -3.213317847463859,
+        "ordinary_tail_target_fraction": 0.7088913385309379,
+        "additional_tail_gain_needed_percent": 41.06534325448769,
+        "all_active_frequency_in_target_band": true,
+        "all_active_tail_below_target": true,
+        "all_active_middle_head_above_target": true,
+        "maximum_halfstep_cycle_relative_difference": 0.002133133580867184,
+        "maximum_halfstep_frequency_relative_difference": 0.00701754385964515,
+        "long_cycle_relative_difference": [
+          2.378655530071833e-07,
+          1.8601484177064329e-06,
+          1.3002578918034515e-06
+        ],
+        "held_cycles_zero": true
+      }
+    }
+  ],
+  "total_reported_iterations": 781,
+  "observed": "Three candidates reach the1.8Hz body-frequency band; all four fail the .003rad regional tail amplitude requirement.",
+  "interpretation": "Unforced water-model cyclic body motion under implemented E070 protocol; no travelling-wave propulsion or biological fidelity demonstrated.",
+  "missing_details": [
+    "run path and checkpoint hashes",
+    "baseline-vs-best comparison",
+    "full neural/safety/coverage guards",
+    "frozen-field and perturbation/refinement flags",
+    "elapsed time and source/environment records",
+    "parameter-bound occupancy"
+  ],
+  "decision": "Preserve all candidates, prioritize seed6802 for a proposed focused tail-amplitude continuation while retaining timing; no new experiment launched"
+}

@@ -1,10 +1,11 @@
 # r-elegans skill repertoire and action-space plan
 
-E069 body-only replay completed: slowing the saved pattern increases modeled
-bending; no autonomous skill added. E070 is prepared to fit body rhythm at a
-user-selected swimming body frequency1.8Hz in liquid water while preserving
-physical time and independent parents. No clock adjustment or neuron-wide
-frequency target. The .003rad body-amplitude rung is an engineering criterion.
+E070 reported water-model rhythms meet the1.8Hz±10% timing rung in seeds6800,
+6802 and6803, but every seed misses the .003rad tail-amplitude rung. No new full
+skill qualification. Preserve all independent checkpoints;6802 is the proposed
+follow-up candidate at1.8797Hz and91.5% tail amplitude. Long/timestep/control
+results support persistent unforced wiggling, not travelling-wave swimming or
+propulsion. Source hashes/full guards remain to be read before continuation.
 
 E068 read-only server audit completed (user-reported stdout). It adds no trained
 skill or E067 promotion. Hybrid ordinary regional cycles exceed old/old under

@@ -1,19 +1,25 @@
 # WormGym: training and validation protocols
 
-E069 server timing diagnostic completed: slower BODY replay produces larger
-bends on the modeled wet substrate, with passing numerical controls. It does
-not establish a resonance peak or an autonomous skill.
+E070 server results received: four workers completed (781 reported proposals),
+all unqualified on the full engineering rung. Seeds6800/6802/6803 have body
+rhythms within1.8Hz±10%;6801 remains fast at2.212Hz. Every active validation
+misses the .003rad TAIL amplitude requirement while middle/head exceed it.
+Seed6802 is the preferred follow-up candidate by reported timing and tail
+amplitude:1.8797Hz, T/M/H=.00274598/.0389484/.0133585rad. Tail is91.5% of
+threshold, requiring~9.25% gain from its present amplitude. This is not a full-
+objective or propulsion ranking. Across reported half-step cases, cycle changes
+are<.233% and frequency changes<.758%; long amplitudes remain close to ordinary.
+Held voltage produces0 cycles. These support autonomous water-model wiggling
+under E070's unforced protocol, not coordinated swimming or biological fidelity.
 
-E070 is prepared for an eight-hour SWIMMING search, per user direction: liquid
-water physics, body-rhythm target1.8Hz, unchanged physical seconds and fixed
-kinetics/capacitance/mechanics. Unknown nonleak densities and existing neural
-connections can change. All four seeds use the same1.8Hz objective. Source wet-
-substrate reproduction is checked separately; training and all validations use
-water. The .003rad amplitude rung is engineering-only.480min search per worker,
-then full validation (additional wall time). Launch:
-`sh scripts/launch_neural_timing_mbslnx2.sh 480`.
-No training has been launched. Swimming-frequency reference is recorded in
-experiments/records/E070-neural-timing.json; this is not full biological fidelity.
+Preserve all four checkpoints; proposed next step is focused posterior-amplitude
+fitting from6802 while retaining the swim-timescale band. No new run launched.
+Run ID, checkpoint hashes, baseline gains and complete guard/bound reports were
+not supplied; verify those before a continuation. Evidence:
+[reported E070 summary](experiments/records/E070-server-summary.json).
+
+E069's earlier body-only timing replay showed larger modeled wet-substrate bends
+at slower playback. It did not establish a resonance peak or an autonomous skill.
 
 E068 server audit completed successfully (user-reported stdout; run
 `output-path-audit-20261113T041119Z-939399`). Under identical ordinary scoring,
