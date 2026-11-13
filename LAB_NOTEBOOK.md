@@ -6419,3 +6419,68 @@ manifest78514353b68be9606494a4d944937e77e094dca6139b6e574ca08fd325f1643d.
 This is local software/preparation evidence only. Actual E0706802 checkpoint
 and new E071 run identity are resolved on the server at launch; neither has
 been invented or retrieved here. No OneDrive cloud-sync status claimed.
+
+### E071 server outcome — qualified small water-model rhythm/amplitude skill
+
+User-pasted run swim-continuation-20261113T150202Z-1002622. Budget receipt:
+192.91min (printed rounded), all_steps_finishedTrue,validation_completeTrue,
+timed_outFalse,exit_code0. Thus total<=240min demonstrated by reported receipt,
+with no extra validation phase. Exact elapsed seconds, search/validation split,
+iterations, environment/source revision and raw server artifacts not retrieved.
+The pasted reporting command has terminal garbling, but final receipt/model/
+validation lines are intact. Archive the attachment verbatim; do not reconstruct
+the damaged command as an exact invocation. Actual invocation capsules remain
+on server. Parsed28 validation rows and evidence SHA are recorded in
+experiments/records/E071-server-summary.json.
+
+Reported parent SHA e42a56a329c04d747171470d5d8909fa8db22559da3a52aaeadd61862c351aa8
+identifies the E0706802 model selected by the continuation. This adds later
+checkpoint evidence to E070; its original cohort run ID is STILL unknown here.
+All four E071 workers exit0/statuscompleted.6901 passedTrue,6900/6902/6903
+passedFalse. WinnerSHA
+8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a;
+expected path from implemented layout: <run>/seed-6901/network_best.npz.
+No parameter file has been retrieved/copied to Git. Retain all selected/final
+checkpoints, RNG, original-anchor masks/bounds, source/env/argv and recursive
+input dependencies externally; successful model remains independent under H1.1.
+
+6901 ordinary frequencies all~1.8727Hz (printed4decimals), T/M/H raw cyclic
+excursions .003166766375/.038753944498/.013208665027rad. All six active cases
+passed target gates; weakest tail is neural-half .003160119242rad,5.3373% above
+.003rad. Ordinary tail increased15.32375% vs reported E0706802 .002745979392rad,
+with same scoring convention/medium. Relative to ordinary, refined neural/body
+frequencies and amplitudes remain close; long tail .003166779514rad stays above
+threshold. Held-voltage all frequenciesNone and excursions0; its own positive-
+behavior passedFalse is expected, while overall worker qualification isTrue.
+
+Other candidates are preserved as negative outcomes:6900 tail .002889697567rad;
+6902 .002886450677rad;6903 .002976334219rad, with6903 refined tail .002964903019rad.
+Do not round .002976 to .003 to promote a failure. All have acceptable printed
+frequencies but miss tail amplitude. One of four observed searches qualified;
+not a statistical estimate of success rate across weight space.
+
+Interpretation: under implemented E071's unchanged clock, real-body feedback,
+fixed water/physiology/readout and no external pacing, the reported result meets
+the preregistered small engineering rhythm/amplitude rung. Not evidence of
+biological channel accuracy, neural causality, phase propagation, wavelength,
+useful swimming/forward locomotion or all natural skills. Matching regional
+frequencies alone does not establish a travelling wave. The .003rad threshold
+is an engineering milestone, not real-animal swimming amplitude. Numerical/
+perturbation/held-voltage validation supports this scope without broad robustness
+claims. Actual parameter changes/bound occupancy were not printed.
+
+Decision: pin/preserve6901; stop extending tail-amplitude training for this rung.
+Next proposed read-only work: inspect the saved shape cycle, head-to-tail phase
+and equal-phase displacement for travelling-wave/nonreciprocal propulsion. No
+new experiment or training launch this turn; do not silently promote to swimming.
+Updated CURRENT_MODEL/README/TRAINING_PROTOCOLS/SKILL_REPERTOIRE from pending to
+qualified engineering status; earlier negatives remain. Local verification is
+parsing supplied stdout, JSON integrity and diff checks only; no new tests or
+simulations required for these record updates.
+
+E071 server evidence archive: OneDrive notebook/evidence/
+E071-server-20261113T150202Z-1002622,2 files copied and SHA256-compared (verbatim
+pasted transcript including terminal garbling, compact parsed summary);
+manifestd1c1272c9d6a1fb94b3d2710a1da514a1873330bceb2145cae990694dd4e4459.
+This archives reported evidence, not actual server parameter/trajectory files;
+no checkpoint retrieval or OneDrive cloud-sync claim.

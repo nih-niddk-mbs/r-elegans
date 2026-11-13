@@ -709,5 +709,11 @@
     "elapsed time and source/environment records",
     "parameter-bound occupancy"
   ],
-  "decision": "Preserve all candidates, prioritize seed6802 for a proposed focused tail-amplitude continuation while retaining timing; no new experiment launched"
+  "decision": "Preserve all candidates, prioritize seed6802 for a proposed focused tail-amplitude continuation while retaining timing; no new experiment launched",
+  "subsequent_E071_evidence": {
+    "parent_seed": 6802,
+    "reported_checkpoint_sha256": "e42a56a329c04d747171470d5d8909fa8db22559da3a52aaeadd61862c351aa8",
+    "source": "experiments/records/E071-server-summary.json",
+    "E070_run_identifier_still_unknown": true
+  }
 }

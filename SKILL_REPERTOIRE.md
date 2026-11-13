@@ -1,7 +1,11 @@
 # r-elegans skill repertoire and action-space plan
 
-E071 is a prepared tail-amplitude continuation of the verified E0706802 parent,
-with a four-hour TOTAL deadline. No new run or skill qualification yet.
+E071 seed6901 PASSED the small autonomous water-model timing/amplitude rung:
+~1.8727Hz body rhythm; all active validations have tail cycles>.003rad, with
+minimum .00316012rad; held-voltage cycles0. Total job192.91min<240min. Preserve
+checkpoint8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a
+and its independent lineage. This does not qualify travelling-wave swimming or
+propulsion; saved-trajectory coordination/displacement assessment is next.
 
 E070 reported water-model rhythms meet the1.8Hz±10% timing rung in seeds6800,
 6802 and6803, but every seed misses the .003rad tail-amplitude rung. No new full

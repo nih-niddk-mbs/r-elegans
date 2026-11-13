@@ -1,6 +1,6 @@
 {
   "experiment": "E071",
-  "status": "prepared_server_execution_pending",
+  "status": "completed_user_reported_qualified_seed6901",
   "command": "sh scripts/launch_swim_continuation_mbslnx2.sh",
   "total_job_minutes": 240,
   "budget_includes": [
@@ -60,5 +60,8 @@
     "expired_deadline_stops_before_neural_rollout": true,
     "no_forward_neural_simulation": true,
     "note": "Static fixture uses a local software candidate, not actual server6802"
-  }
+  },
+  "reported_server_run": "/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622",
+  "reported_parent_sha256": "e42a56a329c04d747171470d5d8909fa8db22559da3a52aaeadd61862c351aa8",
+  "server_results": "experiments/records/E071-server-summary.json"
 }

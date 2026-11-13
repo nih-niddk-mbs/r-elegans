@@ -1,0 +1,695 @@
+{
+  "experiment": "E071",
+  "evidence_type": "user_reported_server_stdout",
+  "attachment_sha256": "a6712262ff8b071a709954531562f2acc595a71d2a2c14f30546f7e0e15b4aa7",
+  "reported_run": "/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622",
+  "budget_receipt": {
+    "elapsed_minutes_reported_rounded": 192.91,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "timed_out": false,
+    "exit_code": 0
+  },
+  "total_budget_minutes": 240,
+  "reported_parent_sha256": "e42a56a329c04d747171470d5d8909fa8db22559da3a52aaeadd61862c351aa8",
+  "workers": [
+    {
+      "seed": 6900,
+      "exit_code": 0,
+      "passed": false,
+      "status": "completed",
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": false,
+          "Hz": [
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ],
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ]
+          ],
+          "bends": [
+            0.0028896975666080904,
+            0.03818079131831078,
+            0.01319052045512624
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": false,
+          "Hz": [
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ],
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ]
+          ],
+          "bends": [
+            0.002889691222603505,
+            0.038180778492653736,
+            0.013190519393637481
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": false,
+          "Hz": [
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ],
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ]
+          ],
+          "bends": [
+            0.002889710918386884,
+            0.03818065518042672,
+            0.013190520671838499
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": false,
+          "Hz": [
+            [
+              1.8886,
+              1.8904,
+              1.8868
+            ],
+            [
+              1.8868,
+              1.8868,
+              1.8868
+            ]
+          ],
+          "bends": [
+            0.0028830117140812572,
+            0.038123815186485846,
+            0.013171152757312815
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": false,
+          "Hz": [
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ],
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ]
+          ],
+          "bends": [
+            0.002891118988815465,
+            0.03817907378991742,
+            0.013193394950216042
+          ]
+        },
+        {
+          "case": "long",
+          "passed": false,
+          "Hz": [
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ],
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ]
+          ],
+          "bends": [
+            0.0028897089939841913,
+            0.038180806634023526,
+            0.01319058178937274
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "Hz": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bends": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "checkpoint_sha256": "82c2ba047275bcdd3e2fa099afe6b3508b673347cc506149805b0061a76a039c",
+      "expected_checkpoint_path": "/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622/seed-6900/network_best.npz",
+      "derived": {
+        "ordinary_tail_target_fraction": 0.9632325222026967,
+        "minimum_active_tail_rad": 0.0028830117140812572,
+        "all_active_frequency_in_band": true,
+        "maximum_halfstep_amplitude_relative_difference": 0.0023136859040515417,
+        "maximum_halfstep_frequency_relative_difference_rounded": 0.005692397723040993,
+        "held_cycles_zero": true
+      }
+    },
+    {
+      "seed": 6901,
+      "exit_code": 0,
+      "passed": true,
+      "status": "completed",
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": true,
+          "Hz": [
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ],
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ]
+          ],
+          "bends": [
+            0.0031667663749743585,
+            0.03875394449821911,
+            0.013208665027218236
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": true,
+          "Hz": [
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ],
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ]
+          ],
+          "bends": [
+            0.003166782449351341,
+            0.03875402799525818,
+            0.01320862346170723
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": true,
+          "Hz": [
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ],
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ]
+          ],
+          "bends": [
+            0.003166776822483286,
+            0.03875407960843644,
+            0.013208646752523256
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": true,
+          "Hz": [
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ],
+            [
+              1.8797,
+              1.8797,
+              1.8797
+            ]
+          ],
+          "bends": [
+            0.0031601192421821314,
+            0.038699862691032094,
+            0.013190236031402361
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": true,
+          "Hz": [
+            [
+              1.8692,
+              1.8692,
+              1.8692
+            ],
+            [
+              1.8692,
+              1.8692,
+              1.8692
+            ]
+          ],
+          "bends": [
+            0.0031682729360853062,
+            0.038752755392234425,
+            0.013211595346920069
+          ]
+        },
+        {
+          "case": "long",
+          "passed": true,
+          "Hz": [
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ],
+            [
+              1.8727,
+              1.8727,
+              1.8727
+            ]
+          ],
+          "bends": [
+            0.003166779514308063,
+            0.03875407135530417,
+            0.013208650507992858
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "Hz": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bends": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
+      "expected_checkpoint_path": "/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622/seed-6901/network_best.npz",
+      "derived": {
+        "ordinary_tail_target_fraction": 1.0555887916581195,
+        "minimum_active_tail_rad": 0.0031601192421821314,
+        "all_active_frequency_in_band": true,
+        "maximum_halfstep_amplitude_relative_difference": 0.0020990284742053128,
+        "maximum_halfstep_frequency_relative_difference_rounded": 0.0037379185133763525,
+        "held_cycles_zero": true
+      }
+    },
+    {
+      "seed": 6902,
+      "exit_code": 0,
+      "passed": false,
+      "status": "completed",
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": false,
+          "Hz": [
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ],
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ]
+          ],
+          "bends": [
+            0.0028864506774546467,
+            0.039364159793505764,
+            0.013534490147068874
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": false,
+          "Hz": [
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ],
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ]
+          ],
+          "bends": [
+            0.002886453650327983,
+            0.039364193295132,
+            0.01353448371379605
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": false,
+          "Hz": [
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ],
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ]
+          ],
+          "bends": [
+            0.002886450924836359,
+            0.03936421041673714,
+            0.01353448405811028
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": false,
+          "Hz": [
+            [
+              1.8315,
+              1.8315,
+              1.8315
+            ],
+            [
+              1.8315,
+              1.8315,
+              1.8315
+            ]
+          ],
+          "bends": [
+            0.002878030446584773,
+            0.03929583677930152,
+            0.013511730960667781
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": false,
+          "Hz": [
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ],
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ]
+          ],
+          "bends": [
+            0.002887810804710185,
+            0.03936080346640744,
+            0.013536921758573961
+          ]
+        },
+        {
+          "case": "long",
+          "passed": false,
+          "Hz": [
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ],
+            [
+              1.8182,
+              1.8182,
+              1.8182
+            ]
+          ],
+          "bends": [
+            0.0028864563834991933,
+            0.03936417645980301,
+            0.013534538315872917
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "Hz": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bends": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "checkpoint_sha256": "a38dbc188a0ddcd8f06360ca113327c2f0cf995e0c94cfce5781d7eb65e18b72",
+      "expected_checkpoint_path": "/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622/seed-6902/network_best.npz",
+      "derived": {
+        "ordinary_tail_target_fraction": 0.9621502258182155,
+        "minimum_active_tail_rad": 0.002878030446584773,
+        "all_active_frequency_in_band": true,
+        "maximum_halfstep_amplitude_relative_difference": 0.0029171573710377982,
+        "maximum_halfstep_frequency_relative_difference_rounded": 0.00731492685073142,
+        "held_cycles_zero": true
+      }
+    },
+    {
+      "seed": 6903,
+      "exit_code": 0,
+      "passed": false,
+      "status": "completed",
+      "validation": [
+        {
+          "case": "ordinary",
+          "passed": false,
+          "Hz": [
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ],
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ]
+          ],
+          "bends": [
+            0.0029763342188633204,
+            0.039524337921626115,
+            0.013571102309881372
+          ]
+        },
+        {
+          "case": "voltage-plus",
+          "passed": false,
+          "Hz": [
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ],
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ]
+          ],
+          "bends": [
+            0.002976332291897074,
+            0.03952433772997119,
+            0.013571097865826158
+          ]
+        },
+        {
+          "case": "voltage-minus",
+          "passed": false,
+          "Hz": [
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ],
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ]
+          ],
+          "bends": [
+            0.0029763325593963816,
+            0.03952434874896042,
+            0.013571093733142706
+          ]
+        },
+        {
+          "case": "neural-half",
+          "passed": false,
+          "Hz": [
+            [
+              1.8051,
+              1.8051,
+              1.8051
+            ],
+            [
+              1.8051,
+              1.8051,
+              1.8051
+            ]
+          ],
+          "bends": [
+            0.0029649030188844613,
+            0.0394432674519947,
+            0.013544201891915214
+          ]
+        },
+        {
+          "case": "body-half",
+          "passed": false,
+          "Hz": [
+            [
+              1.7825,
+              1.7825,
+              1.7825
+            ],
+            [
+              1.7825,
+              1.7825,
+              1.7825
+            ]
+          ],
+          "bends": [
+            0.0029776744405632938,
+            0.0395201279673268,
+            0.013573290223558611
+          ]
+        },
+        {
+          "case": "long",
+          "passed": false,
+          "Hz": [
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ],
+            [
+              1.7794,
+              1.7794,
+              1.7794
+            ]
+          ],
+          "bends": [
+            0.0029763364100071354,
+            0.03952436737850543,
+            0.013571107494567941
+          ]
+        },
+        {
+          "case": "held-voltage",
+          "passed": false,
+          "Hz": [
+            [
+              null,
+              null,
+              null
+            ],
+            [
+              null,
+              null,
+              null
+            ]
+          ],
+          "bends": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "checkpoint_sha256": "0648e070c470fb93e8200bc003157ab3553c842da3e136e3349f254b96c81eb7",
+      "expected_checkpoint_path": "/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622/seed-6903/network_best.npz",
+      "derived": {
+        "ordinary_tail_target_fraction": 0.9921114062877735,
+        "minimum_active_tail_rad": 0.0029649030188844613,
+        "all_active_frequency_in_band": true,
+        "maximum_halfstep_amplitude_relative_difference": 0.003840697696653419,
+        "maximum_halfstep_frequency_relative_difference_rounded": 0.014443070697987993,
+        "held_cycles_zero": true
+      }
+    }
+  ],
+  "qualified_seed": 6901,
+  "qualified_checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
+  "derived_winner": {
+    "tail_gain_vs_reported_E070_parent_percent": 15.323748769767409,
+    "minimum_active_tail_margin_percent": 5.337308072737712,
+    "ordinary_frequency_hz_reported_rounded": 1.8727
+  },
+  "scope": "Passed small autonomous water-model timing/amplitude engineering rung; travelling-wave propulsion and biological fidelity not established",
+  "actual_server_artifacts_retrieved": false,
+  "server_source_revision": null,
+  "server_environment": null,
+  "missing": [
+    "exact unrounded elapsed time and body frequencies",
+    "iteration/acceptance counts",
+    "actual search/validation time split",
+    "phase/wavelength/displacement metrics"
+  ],
+  "decision": "Preserve/pin6901; next proposed read-only saved-trajectory coordination and propulsion assessment. No new training launched."
+}

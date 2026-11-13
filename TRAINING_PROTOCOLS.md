@@ -1,17 +1,21 @@
 # WormGym: training and validation protocols
 
-E071 continuation is prepared; server execution pending. It selects the verified
-E070 seed6802 checkpoint and fits posterior cyclic amplitude while enforcing
-the1.8Hz±10% body-frequency band and retaining middle/head activity. All original
-fixed physiology, muscle/body/water parameters and clocks remain unchanged.
+E071 PASSED the small autonomous water-model timing/amplitude engineering rung
+in seed6901 (user-reported server results). All setup/search/validation/cleanup
+finished in192.91min reported, inside the240min TOTAL budget; no timeout.
+Ordinary body rhythm~1.8727Hz, T/M/H cycles .00316677/.03875394/.01320867rad.
+All six active cases pass, including the long and refined timesteps; smallest
+active tail bend .00316012rad is5.34% above the .003rad validation threshold.
+Held voltage produces0 cycles. Three other seeds remain unqualified.
 
-User budget is FOUR HOURS TOTAL, including preparation, baseline, search,
-validation and cleanup. Search reserves at least45min for validation, or more
-from measured parent validation cost, and stops before that reserve. Cooperative
-rollout deadlines plus a process-group watchdog enforce the total ceiling.
-Incomplete checks remain explicitly unqualified; nothing runs as an extra
-validation phase beyond the limit. All checkpoints/RNG/lineage remain external.
-Command: `sh scripts/launch_swim_continuation_mbslnx2.sh`.
+Qualified checkpoint SHA256:
+`8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a`.
+Run: `/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622`.
+Preserve seed6901 and its complete external lineage; no consolidation or new
+training launched. This establishes the engineering rhythm/amplitude skill,
+not travelling-wave swimming, net propulsion or biological fidelity. Next
+proposed work is read-only coordination/displacement assessment of saved traces.
+Evidence: [E071 reported outcome](experiments/records/E071-server-summary.json).
 
 E070 server results received: four workers completed (781 reported proposals),
 all unqualified on the full engineering rung. Seeds6800/6802/6803 have body
