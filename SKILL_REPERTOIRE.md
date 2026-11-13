@@ -1,7 +1,10 @@
 # r-elegans skill repertoire and action-space plan
 
-E069 is a prepared body-only timing diagnostic with replayed commands; server
-execution pending. It adds no autonomous skill and changes no trained model.
+E069 body-only replay completed: slowing the saved pattern increases modeled
+bending; no autonomous skill added. E070 is prepared to fit body rhythm at a
+user-selected swimming body frequency1.8Hz in liquid water while preserving
+physical time and independent parents. No clock adjustment or neuron-wide
+frequency target. The .003rad body-amplitude rung is an engineering criterion.
 
 E068 read-only server audit completed (user-reported stdout). It adds no trained
 skill or E067 promotion. Hybrid ordinary regional cycles exceed old/old under

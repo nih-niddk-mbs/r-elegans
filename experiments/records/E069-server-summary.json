@@ -1,0 +1,168 @@
+{
+  "experiment": "E069",
+  "evidence_type": "user_reported_server_stdout",
+  "run": "/home/carsonc/r-elegans-results/body-timing-20261113T044423Z-940182",
+  "exit_code": 0,
+  "execution_valid": true,
+  "cases": [
+    {
+      "case": "normal",
+      "speed": 1,
+      "dt": 0.002,
+      "simulated_seconds": 15,
+      "cycles_tail_middle_head": [
+        4.7872044884100795e-05,
+        0.00023299402925582371,
+        0.0002535946157825181
+      ],
+      "maximum_force_residual": 9.956986085396287e-09,
+      "mean_below_drag_regularization_fraction": 0.5721125,
+      "last_window_filtered_cycles": [
+        0.000999355940863006,
+        0.039865937825032824,
+        0.01260522727221397
+      ]
+    },
+    {
+      "case": "normal-refined",
+      "speed": 1,
+      "dt": 0.001,
+      "simulated_seconds": 15,
+      "cycles_tail_middle_head": [
+        4.8159932333563527e-05,
+        0.00023345404795402022,
+        0.0002542210596817862
+      ],
+      "maximum_force_residual": 9.99783801668392e-09,
+      "mean_below_drag_regularization_fraction": 0.5720881944444445,
+      "last_window_filtered_cycles": [
+        0.000999355940862992,
+        0.039865937825032796,
+        0.012605227272214026
+      ]
+    },
+    {
+      "case": "half-speed",
+      "speed": 0.5,
+      "dt": 0.002,
+      "simulated_seconds": 30,
+      "cycles_tail_middle_head": [
+        0.00024970264174865864,
+        0.0007397692765725127,
+        0.0007170621142437855
+      ],
+      "maximum_force_residual": 9.997487753859105e-09,
+      "mean_below_drag_regularization_fraction": 0.5564770833333333,
+      "last_window_filtered_cycles": [
+        0.0014335170448780826,
+        0.05650181616858762,
+        0.01791141817969033
+      ]
+    },
+    {
+      "case": "quarter-speed",
+      "speed": 0.25,
+      "dt": 0.002,
+      "simulated_seconds": 60,
+      "cycles_tail_middle_head": [
+        0.0007323136637411021,
+        0.0014941954969125773,
+        0.0013840095277881936
+      ],
+      "maximum_force_residual": 9.998518309458937e-09,
+      "mean_below_drag_regularization_fraction": 0.5745052083333333,
+      "last_window_filtered_cycles": [
+        0.0016618023578069338,
+        0.06584691670535078,
+        0.020842765290212784
+      ]
+    },
+    {
+      "case": "held-command",
+      "speed": 1,
+      "dt": 0.002,
+      "simulated_seconds": 15,
+      "cycles_tail_middle_head": [
+        0,
+        0,
+        0
+      ],
+      "maximum_force_residual": 9.984850093881616e-09,
+      "mean_below_drag_regularization_fraction": 0.20873472222222222,
+      "last_window_filtered_cycles": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": "eighth-speed",
+      "speed": 0.125,
+      "dt": 0.002,
+      "simulated_seconds": 120,
+      "cycles_tail_middle_head": [
+        0.001445459552956968,
+        0.0021676066442059723,
+        0.0020857242571846457
+      ],
+      "maximum_force_residual": 8.404161577561355e-09,
+      "mean_below_drag_regularization_fraction": 0.6226222222222222,
+      "last_window_filtered_cycles": [
+        0.0017326596502832206,
+        0.06912799265946154,
+        0.021854180548806806
+      ]
+    },
+    {
+      "case": "eighth-refined",
+      "speed": 0.125,
+      "dt": 0.001,
+      "simulated_seconds": 120,
+      "cycles_tail_middle_head": [
+        0.001447235452066778,
+        0.002169030646334405,
+        0.002087633599982208
+      ],
+      "maximum_force_residual": 3.2525858688648214e-09,
+      "mean_below_drag_regularization_fraction": 0.6225894097222222,
+      "last_window_filtered_cycles": [
+        0.0017326596502833663,
+        0.06912799265946157,
+        0.02185418054880678
+      ]
+    }
+  ],
+  "refinement": [
+    {
+      "pair": [
+        "normal",
+        "normal-refined"
+      ],
+      "maximum_waveform_difference_rad": 4.095007775567483e-06,
+      "maximum_cycle_difference_rad": 8.687333231567618e-07,
+      "supported_cycle_joints": 11,
+      "passed": true
+    },
+    {
+      "pair": [
+        "eighth-speed",
+        "eighth-refined"
+      ],
+      "maximum_waveform_difference_rad": 3.3345152701952374e-06,
+      "maximum_cycle_difference_rad": 2.37087122331725e-06,
+      "supported_cycle_joints": 11,
+      "passed": true
+    }
+  ],
+  "derived_eighth_over_normal": [
+    30.194230400152225,
+    9.303271208834175,
+    8.224639355014368
+  ],
+  "original_summary_retrieved": false,
+  "source_revision": null,
+  "environment": null,
+  "source_match_numeric_details": null,
+  "interpretation": "Retiming same saved command strongly increases bending in the fixed modeled medium; not autonomous slowing or a biological calibration",
+  "decision": "Prepare fresh eight-hour bounded channel-density and neural-connection timing searches; all kinetics/mechanics fixed"
+}

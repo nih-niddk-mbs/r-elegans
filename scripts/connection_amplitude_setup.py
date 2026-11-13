@@ -32,11 +32,12 @@ def setup(inputs):
     sc=EmbodiedSensoryConfig(**cfg['base_sensory_config'])
     world=cue_world(ResponseProtocol(**cfg['protocol']),sham=True)
     body=physical_muscle_body_params(12,medium='agar')
+    liquid_body=physical_muscle_body_params(12,medium='liquid')
     templates=(body,build_sensory_maps(model,sc),build_muscle_projection(11,head_at_end=True))
     state=initial_embodied_state(fixed,config,body,world,sc)
     jax.config.update('jax_enable_x64',True)
-    anchor,base,fixed,actor,model,world,templates,state=promote_floating_values(
-        (anchor,base,fixed,actor,model,world,templates,state))
+    anchor,base,fixed,actor,model,world,templates,state,liquid_body=promote_floating_values(
+        (anchor,base,fixed,actor,model,world,templates,state,liquid_body))
     if not np.array_equal(np.asarray(base.log_channel_scale),np.asarray(anchor.log_channel_scale)):
         raise ValueError('Restored channel scales differ from pinned old parent')
     spec=JointFitSpec(np.zeros_like(np.asarray(fixed.cells.conductances_nS),dtype=bool),
@@ -53,16 +54,20 @@ def setup(inputs):
         if not frozen_joint_fields_unchanged(candidate,base,spec):
             raise ValueError('Frozen channels or inactive connections changed')
         return candidate
-    def factory(dt=.002,brain_step=.1,perturbation=0.,held=False):
+    def factory(dt=.002,brain_step=.1,perturbation=0.,held=False,*,medium='wet-agar'):
+        if medium not in ('wet-agar','liquid'):raise ValueError('Unknown medium')
+        selected_templates=templates
+        if medium=='liquid':
+            selected_templates=(liquid_body,templates[1],templates[2])
         initial=state
         if perturbation:
             brain=state.brain_body.brain
             initial=state._replace(brain_body=state.brain_body._replace(
                 brain=brain._replace(voltage_mV=brain.voltage_mV+perturbation)))
-        return make_rollout(fixed,config,actor,model,medium='wet-agar',dt=dt,brain_step_ms=brain_step,
+        return make_rollout(fixed,config,actor,model,medium=medium,dt=dt,brain_step_ms=brain_step,
                             burn_in=0.,sampling='point',record_dense=True,hold_voltage=held,
-                            sensory_config=sc,chemical_world=world,rollout_templates=templates,
+                            sensory_config=sc,chemical_world=world,rollout_templates=selected_templates,
                             initial_state=initial,exact_step_clock=True)
     return dict(manifest=manifest,anchor=anchor,base=base,fixed=fixed,config=config,model=model,
                 state=state,spec=spec,origin=origin,lower=lower,upper=upper,slack=slack,
-                fingerprint=fingerprint,gains=gains,decode=decode,factory=factory)
+                fingerprint=fingerprint,gains=gains,decode=decode,factory=factory,liquid_body=liquid_body)

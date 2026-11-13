@@ -1,11 +1,19 @@
 # r-elegans
 
-E069 body timing diagnostic is prepared; server execution is pending. It replays
-the saved hybrid muscle command at1x,1/2x,1/4x and1/8x with fixed mechanics and
-the same initial body state. Normal-speed source reproduction gates the sweep;
-normal/slow half-step checks and held-command control follow on four CPU workers.
-This is an externally replayed body diagnostic, not a new autonomous neural skill.
-Launch: `sh scripts/launch_body_timing_mbslnx2.sh`. No neuron/connection fitting.
+E069 server timing diagnostic completed: slower BODY replay produces larger
+bends on the modeled wet substrate, with passing numerical controls. It does
+not establish a resonance peak or an autonomous skill.
+
+E070 is prepared for an eight-hour SWIMMING search, per user direction: liquid
+water physics, body-rhythm target1.8Hz, unchanged physical seconds and fixed
+kinetics/capacitance/mechanics. Unknown nonleak densities and existing neural
+connections can change. All four seeds use the same1.8Hz objective. Source wet-
+substrate reproduction is checked separately; training and all validations use
+water. The .003rad amplitude rung is engineering-only.480min search per worker,
+then full validation (additional wall time). Launch:
+`sh scripts/launch_neural_timing_mbslnx2.sh 480`.
+No training has been launched. Swimming-frequency reference is recorded in
+experiments/records/E070-neural-timing.json; this is not full biological fidelity.
 
 E068 server audit completed successfully (user-reported stdout; run
 `output-path-audit-20261113T041119Z-939399`). Under identical ordinary scoring,

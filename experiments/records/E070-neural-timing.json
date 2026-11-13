@@ -1,0 +1,95 @@
+{
+  "experiment": "E070",
+  "status": "prepared_server_execution_pending",
+  "question": "Can unknown densities and neural connections generate body rhythms at an observed crawling timescale on an unchanged physical clock?",
+  "parent_sha256": "f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e",
+  "source": "/home/carsonc/r-elegans-results/hybrid-validation-20261112T202746Z-868392",
+  "timing_evidence": "/home/carsonc/r-elegans-results/body-timing-20261113T044423Z-940182",
+  "command": "sh scripts/launch_neural_timing_mbslnx2.sh 480",
+  "seeds": [
+    6800,
+    6801,
+    6802,
+    6803
+  ],
+  "baseline_search_minutes_per_worker": 480,
+  "validation_additional": true,
+  "training_seconds": 60,
+  "scoring_windows_s": [
+    [
+      30,
+      45
+    ],
+    [
+      45,
+      60
+    ]
+  ],
+  "timing_reference": {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2996704/",
+    "doi": "10.1073/pnas.1003016107",
+    "table": 1,
+    "crawling_mean_hz": 0.3,
+    "crawling_sem_hz": 0.02,
+    "swimming_mean_hz": 1.76,
+    "swimming_sem_hz": 0.07,
+    "sample_size": "N>10 per condition",
+    "crawling_condition": "2% agarose in NGM",
+    "swimming_condition": "NGM buffer in thin chamber",
+    "qualification": "User target1.8Hz is near published swimming mean1.76Hz; modeled unbounded water differs from source thin chamber. SEM is not population tolerance."
+  },
+  "objective": "Small .003rad regional body-cycle rung plus body frequency error at1.8Hz; preserves half baseline neural/body amplitude; full autonomous network with real-body feedback",
+  "target_body_hz": 1.8,
+  "engineering_frequency_tolerance_fraction": 0.1,
+  "biological_claim": false,
+  "physical_clock": "Seconds for body; dt_s*1000/substeps gives neural milliseconds; no time, kinetics or capacitance rescaling",
+  "trainable": {
+    "nonleak_channel_densities": 4814,
+    "existing_chemical_strengths": 3709,
+    "electrical_pairs": 1093
+  },
+  "fixed": [
+    "LEAK",
+    "capacitance",
+    "channel kinetic constants",
+    "reversal potentials",
+    "topology and release",
+    "NMJ and muscle transfer",
+    "mechanics",
+    "sensory maps and gains"
+  ],
+  "original_anchor_max_factor": 2,
+  "initialization": "Fresh seeded search from preserved hybrid; no optimizer resume",
+  "controls": [
+    "voltage plus/minus",
+    "half neural timestep",
+    "half body timestep",
+    "300-second validation",
+    "held-voltage"
+  ],
+  "prerequisites": "Same-parent E069 completed, source replay and both refinement checks passed, held-command cycles zero; evidence copied into hashed capsule",
+  "local_verification": {
+    "software_tests_passed": 5,
+    "static_decode_identity": true,
+    "frozen_fields_unchanged": true,
+    "effective_gap_symmetric": true,
+    "no_neural_forward_simulation": true,
+    "static_fixture": "/tmp/r-elegans-E070-swimming-check",
+    "note": "Different local newer checkpoint; not a server result or promoted model"
+  },
+  "server_results": null,
+  "training_medium": "liquid",
+  "target_engineering_amplitude_rad": [
+    0.003,
+    0.003,
+    0.003
+  ],
+  "latest_user_direction": "Swimming in water first; eight-hour training targeting1.8Hz",
+  "source_reference_verification": "Original wet-substrate reference reproduced separately; water baseline initializes objective and amplitude floors",
+  "superseded_unexecuted_targets": [
+    "four different reference-neuron engineering rates",
+    "body crawling .30Hz"
+  ],
+  "interpretation": "All timings remain physical; no measured resonance established by E069",
+  "physics": "Unbounded Newtonian liquid, viscosity1e-3 Pa s, existing local Lighthill RFT; not exact thin-chamber hydrodynamics"
+}

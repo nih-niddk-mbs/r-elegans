@@ -6140,3 +6140,151 @@ manifest a4738894baa196dd7e614cf5e1c5f252a6a60f3666a3f610b6073078ac255a68.
 Includes three local software invocation cohorts and source/environment/input
 capsules; referenced older E066 artifacts remain in their existing archives.
 No actual server files retrieved, full-duration run or cloud-sync claim.
+
+### E069 server result and E070 planned eight-hour neural timing search
+
+User reported body-timing-20261113T044423Z-940182/summary.json and
+BODY_TIMING_EXIT_CODE=0. Seven cases, execution_valid True. Source replay match
+numbers were truncated/not supplied; supervisor requires baseline match before
+sweep. Ordinary/half/quarter/eighth T/M/H cycles(rad):
+4.78720449e-5/.000232994029/.000253594616;
+.000249702642/.000739769277/.000717062114;
+.000732313664/.001494195497/.001384009528;
+.001445459553/.002167606644/.002085724257.
+Eighth speed increases T/M/H~30.2/9.30/8.22x. Normal/slow refined cycles agree
+closely; both waveform+cycle refinement gates pass with11 supported joints,
+maximum waveform differences4.09500778e-6/3.33451527e-6rad. Held command has0
+cycles. Newton residual maxima<1e-8. Fraction below drag regularization .556–.623
+for rhythmic cases: conclusions depend on this modeled low-speed regime.
+This is controlled retimed BODY replay, not autonomous slowing or locomotion.
+No actual server artifacts/source revision/environment independently retrieved.
+
+E070 PLAN, user-authorized8h search: fit intrinsic unknown channel densities and
+existing neural chemical/electrical strengths in the full302-neuron network to
+produce slower autonomous rhythms with useful cyclic body amplitude. Parent is
+pinned E066 hybrid f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e;
+actor82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0.
+Fresh searches, NOT exact optimizer continuation; preserve all independent
+parents/E067 candidates. Train nonzero non-LEAK channel-density coordinates and
+all existing chemical/gap pairs; factor2 effective bounds from original anchor,
+retaining documented inherited connection roundoff slack. Fixed capacitance,
+leak, reversals, channel kinetics, release, topology, NMJ, muscle transfer, body
+mechanics, sensory maps/gains. No injected bias, ligand cue, clock multiplier,
+prescribed motor pattern or external pacing. Actual body proprioception active.
+
+Seeds6800..6803, target reference-motor frequencies .33/.5/.66/1Hz respectively;
+engineering probes, not biological targets. Baseline/search480min per worker,
+then full seven-case validation (additional wall time). Four workers, disjoint
+four-physical-core groups. Standard common source state for every rollout;
+float64,60s training, raw cyclic excursions over30–45/45–60s. Preserve baseline
+neural oscillation amplitude>=half and regional body cycles>=half, no .5x
+baseline FREQUENCY lower bound (would prohibit the requested slowing). Loss:
+existing mean+worst regional log deficits to1e-4/3e-4/3e-4rad, plus mean absolute
+log frequency error and small parameter prior. Frequency target tolerance25%
+for this engineering rung. Raw peaks/troughs guard against monotonic drift.
+Bounds/frozen fields and baseline source trajectory are verified. Accepted/final
+models, optimizer coordinates, RNG and source/env/argv preserved externally.
+
+Full validation: ordinary, initialvoltage±1mV, half-neural step, half-body step,
+300s long, held-voltage control. Require active amplitude/timing guards and
+half-step frequency/amplitude consistency; held-voltage has no cycles. No
+locomotion, steady-gait or biological promotion. Checkpoint selection remains
+training-only; no automatic next-stage training. Command planned:
+`sh scripts/launch_neural_timing_mbslnx2.sh 480`. Local verification will be
+synthetic/static setup checks; no long Mac neural simulations. Server pending.
+
+E070 plan CORRECTION BEFORE SERVER EXECUTION, user steering: r-elegans must
+operate on the true worm timescale. Supersedes the preceding proposed four
+reference-neuron target frequencies .33/.5/.66/1Hz. Those were engineering probes
+and were never executed. Keep physical simulation seconds, neural milliseconds
+and all fixed kinetic/capacitance constants unchanged. No training clock factor.
+Source inspection confirms advance_network uses h=dt_s*1000/substeps; changing
+integration resolution does not change physical duration. Computation wall time
+is separate from simulated animal time.
+
+Primary literature checked: Fang-Yen et al2010, DOI10.1073/pnas.1003016107,
+https://pmc.ncbi.nlm.nih.gov/articles/PMC2996704/ Table1/Methods. Reported body-
+undulation mean±SEM .30±.02Hz crawling on2% agarose in NGM;1.76±.07Hz swimming
+in NGM buffer, N>10 each. Reference values describe those conditions, not a
+universal worm frequency. Current1.7% wet-NGM modeled drag is a condition mismatch;
+use .30Hz only as a provisional literature benchmark, not an exact calibrated
+biological gate. ±25% is an explicitly chosen engineering tolerance, NOT SEM
+or a measured inter-animal range. Source temperature not inferred.
+
+ALL four seeds now use the SAME body-rhythm target .30Hz. Loss reads supported
+raw JOINT cycles/peak intervals in tail, middle and head, with per-region median
+frequencies over both actual15s windows. Quiet or monotonic posture does not
+supply a frequency. Reference neuron retains its rhythmic-amplitude guard;
+its frequency is NOT forced to equal body frequency. Neurons may have faster
+signals while the body undulates more slowly. Half-step validation now checks
+body frequency consistency as well as motor/body amplitude. This targets real-
+time gait output through parameters rather than slower movie playback. Body-
+amplitude floors and fixed physics/readout remain in place. No biological,
+wave-propagation or useful propulsion claim from this engineering rung.
+
+Software verification:5 tests passed (2 timing objective/proposal tests including
+slow body with a fast neuron;3 existing channel/connection fit tests). Initial
+verification command named a nonexistent test file and collected no tests;
+corrected to existing files before reporting success. No long Mac neural run.
+Static actual local parent decode check: identity unchanged, all fixed fields
+unchanged, symmetric effective gap strengths,4814 nonleak channel densities /
+3709 chemical strengths /1093 electrical pairs eligible. Every eligible density
+changed under a tiny test offset, masked/leak fields unchanged. Static fixture
+checkpoint d13901b0c7817deb969d17aab52cde00304072225bf91688f560447fe9c08aa9
+is a software artifact ONLY, never a training parent. Inputs and exact static
+verification script/capsule are external under /tmp/r-elegans-E070-static-check
+and /tmp/r-elegans-E070-setup-inputs. Static decoding does not evolve neurons.
+CLI parsing, compilation, shell syntax and diff checks passed. E070 remains
+prepared, server execution pending. Launcher links and verifies the completed
+same-parent E069 evidence and numerical controls before starting searches.
+
+E070 FINAL PLAN STEERING BEFORE EXECUTION (2026-11-13): user requests swimming
+in water first, then explicitly "set up a training run now targeting swimming
+at1.8Hz." Supersedes crawling .30Hz and all earlier multi-rate plans, none of
+which ran. Do not infer a measured resonance from E069's monotonically rising
+response at slower playback: the current body is overdamped and the sweep
+shows frequency-dependent attenuation, not a located resonance peak. The user
+selected swimming-first; no evolutionary precedence claim is established here.
+
+Actual training medium is now LIQUID (unbounded Newtonian water model,1e-3Pa s,
+existing Lighthill local RFT), not retimed wet-agar commands. All seeds6800..6803
+fit BODY frequency1.8Hz in physical time. Acceptance frequency tolerance is now
+10% engineering tolerance, not25% or the literature SEM. Initial density/neural
+connection parameter parent stays E066, all original unknown-density bounds and
+fixed kinetics/capacitance/leak/readout/body parameters remain as planned.
+Changing the medium changes drag, not the clock. Source wet-agar trajectory
+reproduction is checked SEPARATELY against old saved data. New water baseline
+sets amplitude-preservation floors, and all seven subsequent validations use
+water. Setup retains exact legacy32 templates promoted to64 and records actual
+liquid mechanical/muscle parameter scalars. No liquid source reference is
+invented; startup tests the unchanged parent in water before proposing weights.
+
+Amplitude target .003rad T/M/H is the existing small whole-body engineering rung,
+not a measured animal swimming amplitude. Frequency loss uses supported raw body
+joint cycles per region, not forcing neuronal voltages to share a single rate.
+Fast neurons with1.8Hz body motion are allowed. Actual body proprioception stays
+interleaved; no replayed command, external pacing or clock/capacitance/kinetic
+rescaling during fitting. Current water closure differs from the cited thin-
+chamber assay; record that condition mismatch and retain biological_fidelity=False.
+Targeting swim timing does not itself demonstrate travelling-wave propulsion.
+
+Verification:5 objective/proposal/parameter-fit tests pass for the1.8Hz objective;
+static local water/source rollout factories construct successfully, identity
+parameter decode/fixed fields and effective-gap symmetry checked. No forward
+neural rollout or full Mac training run performed. Source/parameter static
+artifact will be archived independently of earlier unexecuted designs. Final
+launcher defaults480min baseline/search on four independent four-core workers,
+with validation afterward. No server launch by agent. This is the concrete run
+for the user to pull and start; recorded exact commands/inputs/RNG/checkpoints
+remain enabled. Revised E070 record supersedes earlier design but earlier plans
+remain above for scientific history.
+
+E070 final swimming release archived externally: OneDrive notebook/evidence/
+E070-swimming-release-20261113,741 files including complete staged dirty-source
+snapshot, environment, static verification script/results and compact E069/E070
+records; manifest9fffd787924030b18e733b529ed954b236bd9f85c7d9f1ebbb7e7833f0c98296.
+Earlier unexecuted draft/static records remain at E070-preparation-20261113,
+758 files, manifestbf92593dd889fa77116ac1118799e134896e5b6c489b180683a79cc276b75943.
+These preserve preparation evidence, not server training results or cloud-sync
+verification. Final target is1.8Hz in water; prior crawling/multi-rate plans were
+superseded before launch. No actual server run has been started by the agent.

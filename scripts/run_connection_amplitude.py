@@ -29,6 +29,9 @@ def main():
     p.add_argument('--long-seconds',type=float,default=300.)
     p.add_argument('--software-smoke',action='store_true')
     p.add_argument('--no-affinity',action='store_true')
+    p.add_argument('--neural-timing',action='store_true')
+    p.add_argument('--sigma',type=float,default=.025)
+    p.add_argument('--timing-evidence-run',type=Path)
     a=p.parse_args()
     if (a.workers<1 or a.cores_per_worker<1 or a.seed_start<0 or a.iterations<1
             or not math.isfinite(a.minutes) or a.minutes<=0):p.error('Positive worker/core/budget settings required')
@@ -50,6 +53,28 @@ def main():
              '--expected-parent',a.expected_parent,'--output-dir',str(out/'inputs')]
     if a.software_smoke:command.append('--software-smoke')
     subprocess.run(command,cwd=repo,env=env,check=True)
+    if a.neural_timing:
+        if not a.timing_evidence_run and not a.software_smoke:p.error('E070 requires completed E069 timing evidence')
+        manifest_path=out/'inputs/manifest.json'
+        manifest=json.loads(manifest_path.read_text())
+        manifest['consumer_experiment']='E070'
+        if a.timing_evidence_run:
+            evidence=a.timing_evidence_run.resolve()
+            report=evidence/'summary.json';metadata=evidence/'inputs/manifest.json'
+            s=json.loads(report.read_text());m=json.loads(metadata.read_text())
+            rows={r['case']:r['result'] for r in s['finished']}
+            if (s['experiment']!='E069' or not s['execution_valid'] or s['software_smoke']
+                    or not s['source_inputs_unchanged'] or m['parent_sha256']!=a.expected_parent
+                    or len(s['refinement'])!=2 or not all(r['passed'] for r in s['refinement'])
+                    or not rows['normal']['source_match']['passed']
+                    or any(x!=0 for x in rows['held-command']['metrics']['minimum_regional_joint_cycles'])):
+                raise ValueError('E069 execution, same parent, source replay and numerical controls must pass')
+            for name,path in [('e069_summary.json',report),('e069_input_manifest.json',metadata)]:
+                before=file_sha256(path);shutil.copy2(path,out/'inputs'/name)
+                if before!=file_sha256(out/'inputs'/name) or before!=file_sha256(path):raise ValueError('Evidence copy mismatch')
+                manifest['sha256'][name]=before;manifest['sources'][name]=str(path)
+        manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
+        capture_run_record(out/'inputs',repo,a,phase='E070_evidence_linked')
     manifest_sha=file_sha256(out/'inputs/manifest.json')
     running={};finished=[];started=time.monotonic();heartbeat=started
     try:
@@ -58,7 +83,8 @@ def main():
             command=[sys.executable,'-u','-m','scripts.train_connection_amplitude',
                 '--inputs',str(out/'inputs'),'--output-dir',str(out/f'seed-{seed}'),
                 '--seed',str(seed),'--minutes',str(a.minutes),'--iterations',str(a.iterations),
-                '--train-seconds',str(a.train_seconds),'--window-seconds',str(a.window_seconds),'--long-seconds',str(a.long_seconds)]
+                '--sigma',str(a.sigma),'--train-seconds',str(a.train_seconds),'--window-seconds',str(a.window_seconds),'--long-seconds',str(a.long_seconds)]
+            if a.neural_timing:command.append('--neural-timing')
             if a.software_smoke:command.append('--software-smoke')
             if group is not None:command=['taskset','-c',','.join(map(str,group)),*command]
             log=(out/'logs'/f'seed-{seed}.log').open('w')
@@ -91,10 +117,10 @@ def main():
             log.close()
     valid=bool(len(finished)==a.workers and all(r['exit_code']==0 and r['result'] for r in finished)
                and file_sha256(out/'inputs/manifest.json')==manifest_sha)
-    summary=dict(experiment='E067',status='completed',execution_valid=valid,requested_search_minutes=a.minutes,
+    summary=dict(experiment='E070' if a.neural_timing else 'E067',status='completed',execution_valid=valid,requested_search_minutes=a.minutes,
         source_parent_sha256=a.expected_parent,workers=finished,elapsed_seconds=time.monotonic()-started,
         software_smoke=a.software_smoke,any_qualified=any(r['result'] and r['result']['passed'] for r in finished),
-        scope='Independent fresh connection-only small amplitude rung; no biological/locomotion qualification')
+        scope='Independent fresh neural timing/density/connection search' if a.neural_timing else 'Independent fresh connection-only small amplitude rung; no biological/locomotion qualification')
     (out/'summary.json').write_text(json.dumps(summary,indent=2,allow_nan=False)+'\n')
     for r in sorted(finished,key=lambda r:r['seed']):
         s=r['result']
@@ -102,8 +128,12 @@ def main():
             iterations=s['iterations'] if s else None,channels_frozen=s['channel_scales_unchanged'] if s else None,
             baseline_cycles=s['baseline']['minimum_cycle_excursions_rad'] if s else None,
             best_cycles=s['best']['metrics']['minimum_cycle_excursions_rad'] if s else None,
+            timing_target_hz=s.get('timing_target_hz') if s else None,
+            best_motor_profiles=s['best']['metrics']['reference_motor_profiles'] if s else None,
+            best_body_frequency_profiles=s['best']['metrics'].get('body_frequency_profiles') if s else None,
             validation=[dict(case=v['case'],cycles=v['metrics']['minimum_cycle_excursions_rad'],
-                              neural_guard=v['metrics']['neural_guard'],target_passed=v['metrics']['target_passed']) for v in s['validation']] if s else None)),flush=True)
+                              neural_guard=v['metrics']['neural_guard'],target_passed=v['metrics']['target_passed'],
+                              body_frequencies_hz=[[r['median_hz'] for r in w] for w in v['metrics'].get('body_frequency_profiles',[])]) for v in s['validation']] if s else None)),flush=True)
     print(json.dumps(dict(execution_valid=valid,any_qualified=summary['any_qualified'],report=str(out/'summary.json'))),flush=True)
     return 0 if valid else 2
 
