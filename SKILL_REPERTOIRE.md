@@ -4,7 +4,8 @@ E068 read-only server audit completed (user-reported stdout). It adds no trained
 skill or E067 promotion. Hybrid ordinary regional cycles exceed old/old under
 the same estimator; final-head-joint cancellation is strong, while weak tail
 bends remain unexplained. Preserve all independent checkpoints. NMJ/filter
-detail remains to be read from the completed audit report.
+detail now shows responsive unsaturated muscle transfer, weak tail command
+and small mechanical response. No new skill or training is claimed.
 
 Strategy update: 2026-11-06, user-directed, recorded as H1.1 / E018 in
 [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md). **Priority: cover useful behaviors with

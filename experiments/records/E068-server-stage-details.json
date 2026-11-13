@@ -1,0 +1,383 @@
+{
+  "experiment": "E068",
+  "evidence_type": "user_reported_server_reporter_stdout",
+  "run": "/home/carsonc/r-elegans-results/output-path-audit-20261113T041119Z-939399",
+  "attachment_sha256": "4687c96bd802592e3cf39e9457e8a44f11015edb77a15ba9a215a44c62a52cf5",
+  "software_smoke": false,
+  "actor_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+  "reported_cases": [
+    "old-old-sham",
+    "hybrid-sham",
+    "hybrid-long",
+    "seed-6703-ordinary",
+    "seed-6703-long"
+  ],
+  "stage_windows": [
+    {
+      "case": "old-old-sham",
+      "window_s": [
+        30,
+        45
+      ],
+      "dorsal": [
+        0.00588184,
+        0.00176895,
+        0.00670111
+      ],
+      "ventral": [
+        0.000471757,
+        0.069872,
+        0.0264821
+      ],
+      "net_command": [
+        0.00643223,
+        0.0689389,
+        0.0230095
+      ],
+      "filtered_drive": [
+        0.00363672,
+        0.0399646,
+        0.0133452
+      ],
+      "joints": [
+        2.47808e-05,
+        0.000232719,
+        0.000152271
+      ]
+    },
+    {
+      "case": "old-old-sham",
+      "window_s": [
+        45,
+        60
+      ],
+      "dorsal": [
+        0.00588824,
+        0.0017695,
+        0.00670078
+      ],
+      "ventral": [
+        0.000473361,
+        0.0698306,
+        0.0264821
+      ],
+      "net_command": [
+        0.0064348,
+        0.0688708,
+        0.0230095
+      ],
+      "filtered_drive": [
+        0.00363991,
+        0.0399272,
+        0.0133455
+      ],
+      "joints": [
+        3.14224e-05,
+        0.000198157,
+        0.000123828
+      ]
+    },
+    {
+      "case": "hybrid-sham",
+      "window_s": [
+        30,
+        45
+      ],
+      "dorsal": [
+        0.00145814,
+        0.00124531,
+        0.00710776
+      ],
+      "ventral": [
+        0.000206993,
+        0.0711642,
+        0.0263795
+      ],
+      "net_command": [
+        0.00174597,
+        0.0702634,
+        0.0221682
+      ],
+      "filtered_drive": [
+        0.000992544,
+        0.0399285,
+        0.0126046
+      ],
+      "joints": [
+        3.85139e-05,
+        0.000297538,
+        0.000317662
+      ]
+    },
+    {
+      "case": "hybrid-sham",
+      "window_s": [
+        45,
+        60
+      ],
+      "dorsal": [
+        0.00146262,
+        0.00124626,
+        0.00710784
+      ],
+      "ventral": [
+        0.000208162,
+        0.0710789,
+        0.0263802
+      ],
+      "net_command": [
+        0.00175222,
+        0.0701773,
+        0.022169
+      ],
+      "filtered_drive": [
+        0.000998,
+        0.0398816,
+        0.0126051
+      ],
+      "joints": [
+        4.68955e-05,
+        0.000244504,
+        0.000266448
+      ]
+    },
+    {
+      "case": "hybrid-long",
+      "window_s": [
+        150,
+        225
+      ],
+      "dorsal": [
+        0.00147136,
+        0.00124826,
+        0.00710804
+      ],
+      "ventral": [
+        0.000209681,
+        0.0707415,
+        0.0263824
+      ],
+      "net_command": [
+        0.00176262,
+        0.0698399,
+        0.0221715
+      ],
+      "filtered_drive": [
+        0.00100603,
+        0.0396901,
+        0.0126068
+      ],
+      "joints": [
+        8.60623e-05,
+        0.000196718,
+        0.00018165
+      ]
+    },
+    {
+      "case": "hybrid-long",
+      "window_s": [
+        225,
+        300
+      ],
+      "dorsal": [
+        0.00147246,
+        0.00124854,
+        0.00710808
+      ],
+      "ventral": [
+        0.000209654,
+        0.0706599,
+        0.0263828
+      ],
+      "net_command": [
+        0.00176394,
+        0.0697585,
+        0.0221719
+      ],
+      "filtered_drive": [
+        0.00100676,
+        0.0396438,
+        0.0126071
+      ],
+      "joints": [
+        8.71721e-05,
+        0.00020149,
+        0.000182161
+      ]
+    },
+    {
+      "case": "seed-6703-ordinary",
+      "window_s": [
+        30,
+        45
+      ],
+      "dorsal": [
+        0.00132693,
+        0.00123061,
+        0.00710252
+      ],
+      "ventral": [
+        0.000189302,
+        0.0734081,
+        0.0270271
+      ],
+      "net_command": [
+        0.00158158,
+        0.0724969,
+        0.0227689
+      ],
+      "filtered_drive": [
+        0.000899746,
+        0.0412194,
+        0.0129525
+      ],
+      "joints": [
+        4.39761e-05,
+        0.000309584,
+        0.000317979
+      ]
+    },
+    {
+      "case": "seed-6703-ordinary",
+      "window_s": [
+        45,
+        60
+      ],
+      "dorsal": [
+        0.00133136,
+        0.00123154,
+        0.00710262
+      ],
+      "ventral": [
+        0.000190469,
+        0.0733242,
+        0.0270274
+      ],
+      "net_command": [
+        0.00158766,
+        0.0724095,
+        0.0227692
+      ],
+      "filtered_drive": [
+        0.000905245,
+        0.0411713,
+        0.0129527
+      ],
+      "joints": [
+        5.11318e-05,
+        0.000254617,
+        0.000266758
+      ]
+    },
+    {
+      "case": "seed-6703-long",
+      "window_s": [
+        150,
+        225
+      ],
+      "dorsal": [
+        0.00133995,
+        0.00123343,
+        0.00710311
+      ],
+      "ventral": [
+        0.000192059,
+        0.072988,
+        0.0270296
+      ],
+      "net_command": [
+        0.00159798,
+        0.0720743,
+        0.0227719
+      ],
+      "filtered_drive": [
+        0.00091354,
+        0.0409809,
+        0.0129544
+      ],
+      "joints": [
+        8.94513e-05,
+        0.000204177,
+        0.000183543
+      ]
+    },
+    {
+      "case": "seed-6703-long",
+      "window_s": [
+        225,
+        300
+      ],
+      "dorsal": [
+        0.00134087,
+        0.00123369,
+        0.00710326
+      ],
+      "ventral": [
+        0.000192037,
+        0.0729073,
+        0.02703
+      ],
+      "net_command": [
+        0.00159911,
+        0.0719919,
+        0.0227724
+      ],
+      "filtered_drive": [
+        0.000914103,
+        0.0409345,
+        0.0129547
+      ],
+      "joints": [
+        9.15083e-05,
+        0.000208793,
+        0.000184026
+      ]
+    }
+  ],
+  "units": {
+    "joints": "radians",
+    "other_stages": "normalized activation; stage ratios are not energy efficiencies"
+  },
+  "derived_hybrid_last_ordinary": {
+    "filter_to_command_regional_cycle_ratios": [
+      0.569563182705368,
+      0.5682977259028205,
+      0.5685912761062745
+    ],
+    "tail_to_middle_command_cycle_ratio": 0.024968472711261337
+  },
+  "observed": {
+    "near_extremes_fraction_min_median_max_all_printed_windows": [
+      0,
+      0,
+      0
+    ],
+    "hybrid_last_window_sigmoid_local_slope_min_median_max": [
+      0.347534,
+      2.39822,
+      2.49974
+    ],
+    "hybrid_last_window_nmj_drive_p2p_min_median_max": [
+      1.79384e-05,
+      0.00083513,
+      0.0824891
+    ],
+    "hybrid_last_window_muscle_p2p_min_median_max": [
+      4.37084e-05,
+      0.00195674,
+      0.109812
+    ],
+    "hybrid_motor_frequency_hz": 2.6455026455026447,
+    "maximum_printed_nmj_reconstruction_error": 4.440892098500626e-16,
+    "maximum_printed_projection_error": 4.827194938217261e-08
+  },
+  "interpretation": [
+    "No observed near-extreme sigmoid clipping; local derivative remains nonzero.",
+    "Weak posterior command and substantial downstream body attenuation both need attention.",
+    "Temporal filtering is measurable but alone does not explain tiny bends.",
+    "Regional amplitude ratios cannot identify per-joint causal gains, torque errors, calibrated mechanics, phase coordination or locomotion."
+  ],
+  "decision": "Propose a separate body transfer/torque and frequency-response diagnostic before another long neural fit; preserve parameters until supported.",
+  "new_experiment_launched": false,
+  "server_artifacts_retrieved": false
+}

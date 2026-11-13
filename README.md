@@ -8,10 +8,20 @@ signal survives dorsal/ventral subtraction at the observed motor frequency;
 the strongest cancellation is the final head joint (only8–9% survives in the
 hybrid/candidates). Cancellation alone therefore does not explain weak tail
 bends. This ratio concerns one frequency, not broadband energy or causal gain.
-NMJ/muscle/filter details were computed but not included in pasted stdout;
-remaining attenuation is unresolved. No new model qualification or training.
-Use `python -m scripts.report_output_audit` to print that existing detail.
+Detailed NMJ/muscle/filter stdout has now been received; findings follow.
+No new model qualification or training.
 Evidence: [E068 server summary](experiments/records/E068-server-summary.json).
+
+E068 detailed stage report now received: muscle activation near-extreme fractions
+are0 in all printed windows, with responsive local sigmoid slopes. For hybrid
+45–60s, net command T/M/H=.00175222/.0701773/.022169; filtered activation=
+.000998/.0398816/.0126051 (~57% retained), and joint cycles=
+4.68955e-5/.000244504/.000266448rad. Tail command is only~1/40 of middle.
+Thus weak posterior command and downstream mechanical attenuation both matter;
+sigmoid clipping is not supported. These regional ratios do not establish causal
+gain or a physics error. Next proposed check: body torque/response across timing
+and spatial patterns, keeping the preserved neural models intact. No new run.
+See [stage evidence](experiments/records/E068-server-stage-details.json).
 
 `r-elegans` is an experimental JAX-native foundation for a differentiable,
 connectome-constrained *C. elegans* simulator.

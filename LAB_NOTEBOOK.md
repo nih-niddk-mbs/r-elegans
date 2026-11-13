@@ -6016,3 +6016,56 @@ E068-server-20261113T041119Z-939399:2 files SHA256-compared; archive manifest
 8e8636ccccaabbb16d6ad16d43dc1d7e65688fb50aec57b43f526ce4b16a1b47.
 Original pasted stdout is preserved verbatim; no actual server artifacts
 retrieved and no OneDrive cloud synchronization claimed.
+
+### E068 detailed output-stage evidence — user-reported server stdout
+
+Received follow-up reporter output for the SAME run
+output-path-audit-20261113T041119Z-939399. Not a new experiment. Software smoke
+False; frozen actor SHA82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0.
+Five cases printed: old/old, hybrid ordinary/long,6703 ordinary/long, two windows
+each. Compact stage vectors and attachment SHA:
+experiments/records/E068-server-stage-details.json. Full JSON/models/trajectories
+not retrieved. Source revision/environment not independently established.
+
+Numerical checks: muscle reconstruction residuals3.33e-16 to4.44e-16;
+projection residuals~4.81e-8. All reported min/median/max fractions near muscle
+activation extremes are0. For hybrid45–60s the frozen sigmoid's mean local slope
+across95 muscles min/median/max=.347534/2.39822/2.49974. Activation raw p2p
+min/median/max=4.37084e-5/.00195674/.109812; signed normalized NMJ drive p2p=
+1.79384e-5/.00083513/.0824891. This argues against near0/1 saturation or uniformly
+flat sigmoid transfer, not against every possible readout limitation.
+
+Hybrid45–60s regional raw cycles(T/M/H): net command .00175222/.0701773/.022169;
+filtered activation .000998/.0398816/.0126051; joints4.68955e-5/.000244504/
+.000266448rad. Filter/command amplitude ratios~.570/.568/.569. Tail command is
+~.02497 times middle (~40x smaller). Active synaptic output is spatially uneven.
+6703 increases ordinary tail bend even though its tail command cycle is smaller
+than hybrid: .00158766 vs .00175222. Similarly hybrid has smaller tail command
+than old/old but larger tail bends. Therefore raw regional signal magnitude
+alone is insufficient: spatial pattern, coupling, posture and timing matter.
+Do not infer per-joint gain by dividing separately aggregated regional medians.
+
+Large attenuation between normalized filtered activation and angular body motion
+is visible, but those have DIFFERENT units. This is neither percent energy loss
+nor proof of incorrect mechanics. Hybrid motor reference~2.6455Hz; body temporal
+filter/drag/stiffness and spatial forcing are plausible constraints. Static
+muscle moment calibration in current source is tied to bending modulus/preferred
+curvature, not independently fitted force data (body/calibration.py). Existing
+wet-surface closure also has explicit assumptions. No source error established
+and no empirical physics parameter changed on the basis of this report.
+
+Decision: no blind long extension or global muscle gain adjustment. Propose a
+separate body transfer/torque and timing diagnostic (including slower rhythms),
+then train posterior recruitment/coordinated neural timing with mechanics held
+fixed unless calibration evidence justifies a change. A body-only diagnostic
+would isolate transfer; only a subsequent unforced network rollout could qualify
+autonomous movement. This is a proposed next step, not a launched experiment or
+new numbered plan. Preserve full-network parents, all candidate states and
+existing skills. Local checks this turn only parse evidence/JSON and diff; no
+new simulator or tests required for recordkeeping.
+
+Follow-up evidence archived externally at OneDrive notebook/evidence/
+E068-server-stage-details-20261113T041119Z-939399:2 files copied and SHA256-
+compared; archive manifest08532f04417a5881ac0a23ca50eb7ba4ec90c89a938e8c42a2d2a2143fdc0d92.
+This archives pasted stdout and derived summary, not retrieved server artifacts;
+cloud sync is not verified.
