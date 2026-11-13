@@ -1,5 +1,13 @@
 # Current model: exact scope and computation path
 
+2026-11-13: H1.2 adds sensory initiation, stopping/rest and restart to every
+future behavior qualification. E072/E073 are implemented and **planned; server
+execution and learned control remain unverified**. The E071 winner below remains
+unchanged. The next run first learns and validates sensory stop/restart, then
+trains physical forward swimming only after the exact selected checkpoint passes
+its complete control gate. See [control policy](experiments/behavior_control_policy_v1.json).
+
+
 E071 PASSED the small autonomous water-model timing/amplitude engineering rung
 in seed6901 (user-reported server results). All setup/search/validation/cleanup
 finished in192.91min reported, inside the240min TOTAL budget; no timeout.
@@ -13,8 +21,7 @@ Qualified checkpoint SHA256:
 Run: `/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622`.
 Preserve seed6901 and its complete external lineage; no consolidation or new
 training launched. This establishes the engineering rhythm/amplitude skill,
-not travelling-wave swimming, net propulsion or biological fidelity. Next
-proposed work is read-only coordination/displacement assessment of saved traces.
+not travelling-wave swimming, net propulsion or biological fidelity. The current authorized next step is sensory control followed by gated propulsion training.
 Evidence: [E071 reported outcome](experiments/records/E071-server-summary.json).
 
 E070 server results received: four workers completed (781 reported proposals),

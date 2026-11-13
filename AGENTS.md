@@ -26,3 +26,15 @@ Maintain [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) for scientific work in this repo.
   SKILL_REPERTOIRE.md and preserve good independent full-network checkpoints.
   Shared-weight interference is recorded but does not block adding standalone
   skills. Defer consolidation; retain physical/numerical criteria per skill.
+
+# Controllable behavior requirement (user-directed H1.2)
+
+- For future behavior training, jointly preserve sensory-controlled initiation,
+  sustained execution, stopping/rest and restart. A continuously active motor
+  pattern alone is a component milestone, not a controllable behavior.
+- Validate repeated and varied cue timing, redundant cues, sensory-blocked/no-cue
+  controls, and control-interneuron dependence with baseline movement preserved.
+  Freezing all voltages or zeroing muscles is a diagnostic, not learned stopping.
+- Gate subsequent behavior training on a validated start/stop parent. Revalidate
+  start/stop on the actual changed behavior checkpoint; parent evidence does not
+  qualify new weights. Keep qualified independent parents and failed outcomes.

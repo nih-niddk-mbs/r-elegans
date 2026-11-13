@@ -1,5 +1,13 @@
 # WormGym: training and validation protocols
 
+2026-11-13: H1.2 adds sensory initiation, stopping/rest and restart to every
+future behavior qualification. E072/E073 are implemented and **planned; server
+execution and learned control remain unverified**. The E071 winner below remains
+unchanged. The next run first learns and validates sensory stop/restart, then
+trains physical forward swimming only after the exact selected checkpoint passes
+its complete control gate. See [control policy](experiments/behavior_control_policy_v1.json).
+
+
 E071 PASSED the small autonomous water-model timing/amplitude engineering rung
 in seed6901 (user-reported server results). All setup/search/validation/cleanup
 finished in192.91min reported, inside the240min TOTAL budget; no timeout.
@@ -13,8 +21,7 @@ Qualified checkpoint SHA256:
 Run: `/home/carsonc/r-elegans-results/swim-continuation-20261113T150202Z-1002622`.
 Preserve seed6901 and its complete external lineage; no consolidation or new
 training launched. This establishes the engineering rhythm/amplitude skill,
-not travelling-wave swimming, net propulsion or biological fidelity. Next
-proposed work is read-only coordination/displacement assessment of saved traces.
+not travelling-wave swimming, net propulsion or biological fidelity. The current authorized next step is sensory control followed by gated propulsion training.
 Evidence: [E071 reported outcome](experiments/records/E071-server-summary.json).
 
 E070 server results received: four workers completed (781 reported proposals),
@@ -2499,3 +2506,80 @@ The nohup launcher uses the dedicated conda Python and four disjoint physical
 CPU groups. Search runs four hours per seed; validation adds wall time. A failed
 scientific target is recorded separately from execution completion. No next
 behavior or RL stage starts automatically.
+
+## E072/E073: sensory control before physical swimming (planned)
+
+Launch on mbslnx2 from the repository:
+
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_controlled_swimming_mbslnx2.sh
+```
+
+The dedicated r-elegans conda interpreter runs under nohup. The watchdog includes
+setup, both searches, all validation and cleanup in **240 minutes total**. Four
+search workers use four physical CPU cores each; validation cases for one selected
+checkpoint are distributed across those workers. The launcher prints the exact
+log and report paths. Inspect with `python -m scripts.report_controlled_swimming`
+using the dedicated environment. Incomplete outcomes are recorded; the deadline
+does not waive acceptance gates.
+
+Parent: E071 seed6901, SHA256
+`8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a`.
+The run snapshots its model, global coordinates, selected RNG, final optimizer,
+configuration, reference trajectory and hashed recursive source capsule. Each
+stage begins a **fresh search**, not an exact mid-run optimizer resume. Parent
+trajectory reconstruction is checked before fitting. All model/data artifacts
+remain external, including selected/final parameters, optimizer/RNG and full
+source/environment/argv records.
+
+E072 seeds7200–7203 fit non-leak densities in AWA/ASE and candidate control cells
+(AIY/AIB/AIZ/RIA, RIB/RIM, AVB/PVC, RIS), and existing chemical/electrical edges
+incident on control cells. Motor densities remain fixed. All302 neurons and
+original topology remain present. Fixed fields: leak, capacitance, channel
+kinetics/reversals, synaptic release, NMJs, muscle and water mechanics, sensory
+routing/receptor kinetics/gains and physical clocks. Original-anchor factor2
+bounds remain. Candidate roles overlap; the model lacks complete RIS GABA/FLP-11
+biology, so successful control would be functional engineering evidence.
+
+Brief environmental salt pulses train STOP; diacetyl pulses through existing
+ASE/AWA transduction train START. These are learned cue associations, not claimed
+innate reflexes. No desired state or motor waveform enters the brain. Nominal90s:
+initial movement30–40; stop40–42; rest48–58; start58–60; movement68–78 and78–88.
+The8s stop/10s start settling allowances are engineering choices, not measured
+worm reflex latencies; actual transition latencies are reported.
+
+Require each active window's regional supported cyclic amplitudes to exceed both
+.003rad and80% of the parent initial amplitudes; frequencies1.62–1.98Hz and no
+peak/endpoint gap over1s. Rest maximum raw joint range≤1e-4rad without suppressing
+intrinsic dynamics. Absolute joint angles must remain below.5rad. Training first
+finds stopping, then restart while retaining stopping. These thresholds describe
+this small wiggling skill, not natural adult swimming kinematics.
+
+Full18-case validation: nominal, repeated140s, long-rest118s, shifted onset,
+low/high dose, redundant cues, neural-half, body-half; chemical-blocked, no-cue,
+independent start/stop blocks, held voltage; four candidate controller output
+blocks. Each positive must pass. Separate start/stop omissions must specifically
+remove their respective transitions; all-cue omission must retain movement.
+At least one controller block must disrupt control while preserving initial
+movement. A paralyzing block does not establish decision control. Timestep checks
+require independent passes plus amplitude/frequency/latency agreement; raw
+pointwise phase drift is descriptive. Every case is bound to the exact selected
+checkpoint hash. The old E071 evidence alone cannot satisfy this gate.
+
+E073 seeds7300–7303 are allowed only after full E072 validation and sufficient
+remaining validation budget. All9616 unknown density/connection coordinates become
+eligible while the same fixed fields/bounds remain. Candidates must retain nominal
+start/stop control. First propulsion rung: ≥.01body lengths/s forward during each
+active window, matched-phase shape closure, ≥3closed cycles/80% closure and a
+nonreciprocal whole-body shape loop. This is an initial engineering displacement
+target, not a natural swimming-speed fit. Repeat the full18-case control suite on
+the changed swimming checkpoint and check propulsion under refinement. If the
+unchanged control winner already passes every motion check, reuse its exact-model
+validation. Preserve independent qualified control and swimming parents.
+
+The user's requested E072→E073 sequence authorizes this specific automatic
+transition after complete validation. It supersedes earlier blanket pending-stage
+language for this pair only. Future behaviors must satisfy the H1.2 checkpoint-
+specific sensory initiation/stop/restart policy with behavior-specific criteria.

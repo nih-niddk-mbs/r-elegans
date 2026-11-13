@@ -1,6 +1,6 @@
 {
   "experiment": "E055",
-  "status": "E067_connections_only_small_gains_neural_guard_retained_no_amplitude_qualification",
+  "status": "E071_component_pass_E072_sensory_control_E073_conditional_propulsion_prepared",
   "interpretation": "Functional sensory-motor curriculum inspired by simpler behaviors; not an inferred evolutionary lineage",
   "shared_rules": {
     "network": "Full302-neuron existing anatomical topology throughout",
@@ -21,7 +21,8 @@
     "bounds": "Original winner7001 factor2 for neurons/connections; .5..2 times original nonzero defaults for sensory gains",
     "provenance": "New objective, fresh RNG; preserve all prior checkpoints, source/environment/invocation and recursive lineage outside Git",
     "biological_scope": "Engineering gates are not experimental diacetyl reflex targets or calibrated wet-substrate behavior",
-    "progression": "Review each validated standalone skill before implementing/promoting the next stage; no automatic promotion"
+    "progression": "User-authorized E072->E073 only after complete checkpoint-specific sensory-state validation; changed swimming weights revalidate all control gates. No other automatic promotion.",
+    "behavior_control_policy": "experiments/behavior_control_policy_v1.json"
   },
   "stages": [
     {
@@ -129,6 +130,26 @@
       "motor_goal": "Start, stop, reverse and turn within continuous trajectories",
       "sensory_goal": "Environmental cues and internal state select motor programs; navigation only after viable skills",
       "validation": "One parameter set without state resets or checkpoint swaps; held-out cue schedules and tasks"
+    },
+    {
+      "id": "sensory_start_stop",
+      "experiment": "E072",
+      "status": "planned_implemented_server_pending",
+      "parent_checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
+      "motor_goal": "Sensory stop -> sustained rest -> sensory restart, with repeated/idempotent commands",
+      "sensory_goal": "Learned AWA/ASE bath-cue association through existing interneuron network; not an innate reflex claim",
+      "protocol": "90s nominal; repeated140s, long-rest118s, timing/dose/lesion/refinement controls",
+      "input": "Brief environmental chemical cues; actual body feedback; no direct controller/motor commands",
+      "qualification": "All positive control gates, independent cue blocks, and at least one non-paralyzing controller output intervention"
+    },
+    {
+      "id": "controlled_swimming",
+      "experiment": "E073",
+      "status": "implemented_blocked_until_E072_validates",
+      "motor_goal": "Positive directed movement through water with nonreciprocal closed shape cycles, while preserving start/stop",
+      "engineering_speed_target_BL_s": 0.01,
+      "biological_speed_fidelity": false,
+      "mandatory": "Revalidate control on exact changed swimming checkpoint; parent gate alone insufficient"
     }
   ],
   "server_evidence": "experiments/records/E067-server-summary.json",

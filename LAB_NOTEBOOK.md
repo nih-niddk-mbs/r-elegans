@@ -6484,3 +6484,98 @@ pasted transcript including terminal garbling, compact parsed summary);
 manifestd1c1272c9d6a1fb94b3d2710a1da514a1873330bceb2145cae990694dd4e4459.
 This archives reported evidence, not actual server parameter/trajectory files;
 no checkpoint retrieval or OneDrive cloud-sync claim.
+
+### H1.2 / E072–E073 PLAN — controllable actions before propulsion
+
+User requires sensory inputs to decision/control neurons to start and stop the
+current behavior, verification before actual swimming, and start/stop training
+for every future behavior. Preserve the E071 amplitude/timing winner separately;
+that historical engineering pass does NOT establish controllability.
+
+E072 planned sensory-state skill: full302-neuron network, parent E0716901 SHA
+8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a at
+swim-continuation-20261113T150202Z-1002622/seed-6901. Brief bath cues enter ONLY
+existing AWA (diacetyl) and ASE (salt) transduction. Learn start vs stop cue
+associations; no asserted innate odor/salt stop reflex. No direct interneuron,
+motor or muscle commands, global freeze, desired-state input, 1.8Hz teacher or
+clock rescaling. Proprioception and all intrinsic dynamics continue during rest.
+
+Biological sources reviewed: RIS stopping, https://pmc.ncbi.nlm.nih.gov/articles/PMC6736843/;
+locomotor initiation circuits, https://pmc.ncbi.nlm.nih.gov/articles/PMC3233480/.
+Premotor/sensory-integration roles overlap and are distributed; they are not a
+separate hardwired decision-cell class. Candidate groups: AIY/AIB/AIZ/RIA,
+RIB/RIM, AVB/PVC and RIS. RIS full GABA/FLP-11 mechanisms are NOT implemented.
+Local inherited fixed RIS reversal is exploratory(-21.5778675mV), not a validated
+RIS inhibitory-synapse model. Do not silently flip its sign or claim physiological
+RIS stopping. Functional learned control must be tested through existing edges
+and a candidate-interneuron efferent-block intervention with pre-cue movement
+preserved; group labels alone are not a mechanism demonstration.
+
+Nominal90s: initial wiggle30–40s; stop cue40–42; score rest48–58; start cue58–60;
+score resumed wiggle68–88 in two10s windows. Rest is low RAW joint range, not
+posture-zero or detrended-range cancellation. Active windows retain amplitude
+and1.8Hz±10% frequency. Repeat140s, long-rest118s, shifted onset, dose changes,
+redundant cues/idempotence, cue-blocked/no-cue and held-voltage controls, half-
+timesteps, and candidate-control output blocks. Require at least one controller
+block to disrupt cue control while preserving initial movement; no positive
+claim if lesions simply paralyze the model. Cues are environmental bath events,
+not phase/current/motor targets. Labels are seen only by the objective.
+
+E072 training first emphasizes channel densities in sensory/control cells and
+existing edges incident on control interneurons; qualified motor-cell density
+settings remain fixed. Original full-network unknown-coordinate factor2 bounds
+stay; NMJ/body, leak/capacitance/kinetics/reversals, sensory routing/signs and
+receptor kinetics/gains fixed. Full topology remains present. Fresh RNG seeds
+7200..7203, selected/final models and coordinate/RNG state external.
+
+E073 planned ONLY AFTER complete E072 validation: train physical forward swimming
+with the same sensory start/stop protocol and hard state-control guards. Full
+unknown density/connection coordinate space eligible; mechanics/clocks remain
+fixed. First forward-speed engineering rung .01BL/s during active episodes,
+matched-phase shape closure and positive directed displacement required; this
+is not a measured adult swimming-speed target. Stop/start validation reruns on
+EVERY new selected swimming checkpoint. A parent gate is not transferable to
+changed weights. Preserve both the qualified control parent and any swim child.
+
+Pipeline retains the user's240min TOTAL cap, including source preparation,
+training and all required validation. Four search workers, validation cases
+parallelized for the selected checkpoint. Deadline/partial outcomes explicit.
+No swimming stage starts on a failed/unverified sensory-state gate or inadequate
+remaining budget. Exact source/env/argv, input hashes, full selected/final
+checkpoints, RNG and recursive lineage external. No server execution yet.
+
+E072/E073 local preparation verification (2026-11-13): 16 focused software tests
+passed in6.61s (behavior-control protocol/scoring/causal gates/snapshot tests,
+wall budgets, timing helpers and existing sensory transduction). Compilation,
+launcher shell syntax and diff whitespace checks passed. No Mac forward-neural
+simulation or server run was performed. Static adapter fixture reconstructed its
+own parent exactly and instantiated bath/fixed-field overrides; an expired wall
+deadline prevented any neural simulation. Fixture SHA
+ d13901b0c7817deb969d17aab52cde00304072225bf91688f560447fe9c08aa9
+is NOT the server E071 winner. Static mask count:1318 E072 trainable coordinates
+of9616 full coordinates; RMD densities excluded. These checks establish software
+wiring only. Actual sensory-state control and forward swimming remain pending.
+
+Future rule H1.2 is recorded in AGENTS.md and behavior_control_policy_v1.json:
+sensory initiation, sustained action, stop/rest and restart must be trained and
+validated on each changed behavior checkpoint. A parent's pass cannot qualify a
+child. This user-authorized E072→E073 sequence permits automatic propulsion
+training only after the full exact-model control gate; other future transitions
+are not implicitly authorized. E072 seeds7200–7203; E073 seeds7300–7303. Command:
+`sh scripts/launch_controlled_swimming_mbslnx2.sh` after pulling from the repo.
+Raw artifacts: launcher-generated controlled-swimming-<UTC>-<PID> external
+results directory. Both phases/all checks share240min TOTAL. Feature-level
+refinement includes independent state passes, amplitude/frequency/latency checks;
+pointwise periodic phase drift is descriptive. The8/10s transition allowances
+and .01BL/s first propulsion target are engineering rungs, not natural reflex or
+adult swimming-speed measurements. Full18-case validation includes independent
+start/stop omissions and non-paralyzing control-group interventions.
+
+E072/E073 preparation archive: OneDrive notebook/evidence/
+E072-E073-control-preparation-20261113,388 files plus manifest, each archived file
+SHA256-checked. Manifest SHA256
+4bb50cef1cb505bf0ab70446465776d86059811a4b119de105d540c36491e4d8.
+Includes the staged dirty-source snapshot, environment/argv and local static
+fixture result/check script. Notebook receipt added after source capture; Git
+preserves this final receipt. No actual server checkpoint retrieval or cloud-sync
+completion is claimed.

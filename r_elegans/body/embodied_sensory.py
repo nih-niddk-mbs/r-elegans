@@ -72,6 +72,12 @@ class ChemicalWorld(NamedTuple):
     washout_s: jax.Array        # [3]
 
 
+class ChemicalBathSchedule(NamedTuple):
+    """Piecewise-constant environmental concentrations; no desired motor state."""
+    times_s: jax.Array
+    concentration_um: jax.Array  # [events,3], uniform experimental bath
+
+
 def default_chemical_world():
     """Controlled stimulus fixture, not measured bacterial odor concentrations."""
     return ChemicalWorld(jnp.array([[.001, 0.]]*3), jnp.full(3, .0005),
@@ -80,6 +86,13 @@ def default_chemical_world():
 
 
 def validate_chemical_world(world):
+    if isinstance(world,ChemicalBathSchedule):
+        t,c=map(np.asarray,world)
+        if (t.ndim!=1 or len(t)<2 or t[0]!=0 or np.any(np.diff(t)<=0)
+                or c.shape!=(len(t),3) or not np.isfinite(t).all()
+                or not np.isfinite(c).all() or np.any(c<0)):
+            raise ValueError('Ordered nonnegative bath concentrations required')
+        return
     arrays = [np.asarray(x) for x in world]
     if (arrays[0].shape != (3, 2) or any(x.shape != (3,) for x in arrays[1:])
             or not all(np.isfinite(x).all() for x in arrays)
@@ -153,6 +166,9 @@ def sensory_head_position(body, body_params):
 
 
 def sample_chemical_world(head_position_m, time_s, world):
+    if isinstance(world,ChemicalBathSchedule):
+        index=jnp.clip(jnp.searchsorted(world.times_s,time_s,side='right')-1,0,len(world.times_s)-1)
+        return world.concentration_um[index]
     squared = jnp.sum((head_position_m-world.source_position_m)**2, axis=1)
     active = (time_s >= world.onset_s) & (time_s < world.washout_s)
     return world.background_um+world.peak_um*jnp.exp(-.5*squared/world.width_m**2)*active

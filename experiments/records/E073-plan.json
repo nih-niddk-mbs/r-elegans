@@ -1,0 +1,23 @@
+{
+  "experiment": "E073",
+  "status": "planned_not_executed",
+  "record_date": "2026-11-13",
+  "question": "Physical forward swimming retaining sensory control",
+  "parent_sha256": "Exact E072 selected checkpoint after full control validation; not yet known",
+  "seeds": [
+    7300,
+    7301,
+    7302,
+    7303
+  ],
+  "fit_scope": "All9616 unknown density/connection coordinates",
+  "parameters_fixed": "Leak/capacitance/channel kinetics/reversals/release/topology/NMJ/muscles/water mechanics/sensory routing and kinetics/gains/physical clock",
+  "bounds": "Original-anchor factor2",
+  "command": "sh scripts/launch_controlled_swimming_mbslnx2.sh",
+  "budget": "240 minutes total shared E072/E073 including setup, validation and cleanup",
+  "protocol": "TRAINING_PROTOCOLS.md E072/E073",
+  "qualification": "Full checkpoint-specific sensory control gate and nonreciprocal closed-cycle physical forward motion >=.01BL/s",
+  "artifacts": "/home/carsonc/r-elegans-results/controlled-swimming-<launcher-generated UTC>-<PID>",
+  "local_verification": "16 software tests; no server model control or swimming claim",
+  "biological_fidelity_qualified": false
+}

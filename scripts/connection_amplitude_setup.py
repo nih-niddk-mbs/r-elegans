@@ -54,7 +54,8 @@ def setup(inputs):
         if not frozen_joint_fields_unchanged(candidate,base,spec):
             raise ValueError('Frozen channels or inactive connections changed')
         return candidate
-    def factory(dt=.002,brain_step=.1,perturbation=0.,held=False,*,medium='wet-agar',wall_deadline=None):
+    def factory(dt=.002,brain_step=.1,perturbation=0.,held=False,*,medium='wet-agar',wall_deadline=None,
+                world_override=None,fixed_override=None):
         if medium not in ('wet-agar','liquid'):raise ValueError('Unknown medium')
         selected_templates=templates
         if medium=='liquid':
@@ -64,9 +65,9 @@ def setup(inputs):
             brain=state.brain_body.brain
             initial=state._replace(brain_body=state.brain_body._replace(
                 brain=brain._replace(voltage_mV=brain.voltage_mV+perturbation)))
-        return make_rollout(fixed,config,actor,model,medium=medium,dt=dt,brain_step_ms=brain_step,
+        return make_rollout(fixed if fixed_override is None else fixed_override,config,actor,model,medium=medium,dt=dt,brain_step_ms=brain_step,
                             burn_in=0.,sampling='point',record_dense=True,hold_voltage=held,
-                            sensory_config=sc,chemical_world=world,rollout_templates=selected_templates,
+                            sensory_config=sc,chemical_world=world if world_override is None else world_override,rollout_templates=selected_templates,
                             initial_state=initial,exact_step_clock=True,wall_deadline=wall_deadline)
     return dict(manifest=manifest,anchor=anchor,base=base,fixed=fixed,config=config,model=model,
                 state=state,spec=spec,origin=origin,lower=lower,upper=upper,slack=slack,

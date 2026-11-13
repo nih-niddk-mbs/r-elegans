@@ -1,11 +1,19 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-13: H1.2 adds sensory initiation, stopping/rest and restart to every
+future behavior qualification. E072/E073 are implemented and **planned; server
+execution and learned control remain unverified**. The E071 winner below remains
+unchanged. The next run first learns and validates sensory stop/restart, then
+trains physical forward swimming only after the exact selected checkpoint passes
+its complete control gate. See [control policy](experiments/behavior_control_policy_v1.json).
+
+
 E071 seed6901 PASSED the small autonomous water-model timing/amplitude rung:
 ~1.8727Hz body rhythm; all active validations have tail cycles>.003rad, with
 minimum .00316012rad; held-voltage cycles0. Total job192.91min<240min. Preserve
 checkpoint8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a
 and its independent lineage. This does not qualify travelling-wave swimming or
-propulsion; saved-trajectory coordination/displacement assessment is next.
+propulsion. E072/E073 now target sensory control followed by gated propulsion.
 
 E070 reported water-model rhythms meet the1.8Hz±10% timing rung in seeds6800,
 6802 and6803, but every seed misses the .003rad tail-amplitude rung. No new full

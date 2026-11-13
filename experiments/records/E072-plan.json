@@ -1,0 +1,23 @@
+{
+  "experiment": "E072",
+  "status": "planned_not_executed",
+  "record_date": "2026-11-13",
+  "question": "Sensory stop-rest-restart of qualified water wiggling",
+  "parent_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
+  "seeds": [
+    7200,
+    7201,
+    7202,
+    7203
+  ],
+  "fit_scope": "Sensory/control-cell densities and existing incident interneuron edges",
+  "parameters_fixed": "Leak/capacitance/channel kinetics/reversals/release/topology/NMJ/muscles/water mechanics/sensory routing and kinetics/gains/physical clock",
+  "bounds": "Original-anchor factor2",
+  "command": "sh scripts/launch_controlled_swimming_mbslnx2.sh",
+  "budget": "240 minutes total shared E072/E073 including setup, validation and cleanup",
+  "protocol": "TRAINING_PROTOCOLS.md E072/E073",
+  "qualification": "Full checkpoint-specific sensory control gate",
+  "artifacts": "/home/carsonc/r-elegans-results/controlled-swimming-<launcher-generated UTC>-<PID>",
+  "local_verification": "16 software tests; no server model control or swimming claim",
+  "biological_fidelity_qualified": false
+}

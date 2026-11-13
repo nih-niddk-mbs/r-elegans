@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "strategy": "H1.2 user-directed controllable actions",
+  "applies_to": "All future behavior training",
+  "required_state_sequence": [
+    "sensory initiation",
+    "sustained execution",
+    "sensory stopping/rest",
+    "sensory restart"
+  ],
+  "qualification": "Actual changed checkpoint must pass its own behavior-specific start/stop validation; parent evidence cannot be inherited",
+  "physical_input": "Environmental sensory transduction only; no desired state, motor waveform, muscle zeroing or whole-brain freeze as positive control",
+  "required_checks": [
+    "repetition",
+    "varied timing/dose",
+    "redundant cues/idempotence",
+    "independent start-cue block",
+    "independent stop-cue block",
+    "all-sensory block and no-cue",
+    "causal interneuron output block with baseline movement retained",
+    "timestep refinement"
+  ],
+  "swimming_example_validation_cases": [
+    "nominal",
+    "repeat",
+    "long-rest",
+    "onset-shift",
+    "dose-low",
+    "dose-high",
+    "redundant",
+    "neural-half",
+    "body-half",
+    "chemical-blocked",
+    "no-cue",
+    "start-blocked",
+    "stop-blocked",
+    "held-voltage",
+    "controller-sensory_integrators",
+    "controller-locomotor_integrators",
+    "controller-forward_premotor",
+    "controller-stop_candidate"
+  ],
+  "candidate_control_groups": {
+    "sensory_integrators": [
+      "AIYL",
+      "AIYR",
+      "AIBL",
+      "AIBR",
+      "AIZL",
+      "AIZR",
+      "RIAL",
+      "RIAR"
+    ],
+    "locomotor_integrators": [
+      "RIBL",
+      "RIBR",
+      "RIML",
+      "RIMR"
+    ],
+    "forward_premotor": [
+      "AVBL",
+      "AVBR",
+      "PVCL",
+      "PVCR"
+    ],
+    "stop_candidate": [
+      "RIS"
+    ]
+  },
+  "scope": "Candidate functional roles, not unique decision-cell types; RIS full GABA/peptide biology remains unimplemented",
+  "on_state_criteria": "Behavior-specific physiological timescale and motor/physical targets;1.8Hz is the current swimming example, not a universal neural rate",
+  "rest_criteria": "Actual low motion and sustained state after transient cue; no masking by detrending or externally disabled dynamics",
+  "enforcement": "r_elegans.behavior_control.qualify_behavior plus per-checkpoint complete control_report"
+}
