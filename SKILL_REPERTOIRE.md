@@ -1,5 +1,8 @@
 # r-elegans skill repertoire and action-space plan
 
+E069 is a prepared body-only timing diagnostic with replayed commands; server
+execution pending. It adds no autonomous skill and changes no trained model.
+
 E068 read-only server audit completed (user-reported stdout). It adds no trained
 skill or E067 promotion. Hybrid ordinary regional cycles exceed old/old under
 the same estimator; final-head-joint cancellation is strong, while weak tail

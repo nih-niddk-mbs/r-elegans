@@ -1,5 +1,12 @@
 # r-elegans
 
+E069 body timing diagnostic is prepared; server execution is pending. It replays
+the saved hybrid muscle command at1x,1/2x,1/4x and1/8x with fixed mechanics and
+the same initial body state. Normal-speed source reproduction gates the sweep;
+normal/slow half-step checks and held-command control follow on four CPU workers.
+This is an externally replayed body diagnostic, not a new autonomous neural skill.
+Launch: `sh scripts/launch_body_timing_mbslnx2.sh`. No neuron/connection fitting.
+
 E068 server audit completed successfully (user-reported stdout; run
 `output-path-audit-20261113T041119Z-939399`). Under identical ordinary scoring,
 the hybrid has larger T/M/H cycles than old/old by55.4%/23.4%/115.2%.

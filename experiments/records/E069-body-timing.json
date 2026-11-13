@@ -1,0 +1,80 @@
+{
+  "experiment": "E069",
+  "status": "prepared_server_execution_pending",
+  "question": "Does slower timing of the same spatial muscle command produce larger bends under fixed mechanics?",
+  "parent_sha256": "f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e",
+  "actor_sha256": "82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0",
+  "source_run": "/home/carsonc/r-elegans-results/hybrid-validation-20261112T202746Z-868392",
+  "command": "sh scripts/launch_body_timing_mbslnx2.sh",
+  "source_interval_s": [
+    45,
+    60
+  ],
+  "playback_speeds": [
+    1,
+    0.5,
+    0.25,
+    0.125
+  ],
+  "durations_s": [
+    15,
+    30,
+    60,
+    120
+  ],
+  "fixed": "All neural/readout/mechanics parameters",
+  "trainable_parameters": [],
+  "new_random_seeds": null,
+  "controls": [
+    "normal-speed source replay",
+    "normal half dt",
+    "eighth-speed half dt",
+    "held first command"
+  ],
+  "normal_dt_s": 0.002,
+  "refined_dt_s": 0.001,
+  "workers": 4,
+  "numerical_criteria": {
+    "source_joint_error_rad": 1e-07,
+    "source_filter_error": 1e-10,
+    "force_residual": 1e-08,
+    "refinement_relative": 0.05,
+    "refinement_absolute_rad": 1e-07,
+    "refinement_scope": "Both per-joint cycles and late raw waveforms; report unsupported cycles explicitly"
+  },
+  "limitations": [
+    "Replayed command bypasses neuronal feedback; cannot qualify autonomous movement.",
+    "Wet-agar effective force law and small-speed regularization remain assumptions.",
+    "Environmental torque is inferred from moment balance, not independently measured.",
+    "Source partial-state reproduction is body-only, never an exact neural/optimizer resume."
+  ],
+  "local_verification": {
+    "tests_passed": 2,
+    "source_smoke": "Existing local twelve-second E066 smoke with different candidate from server",
+    "replay_source_duration_s": 0.4,
+    "case_durations_s": [
+      0.4,
+      0.8,
+      0.4
+    ],
+    "maximum_source_joint_error_rad": 8.326672684688674e-17,
+    "maximum_source_filter_error": 5.551115123125783e-17,
+    "refinement": [
+      {
+        "pair": [
+          "normal",
+          "normal-refined"
+        ],
+        "maximum_waveform_difference_rad": 5.8605806448758235e-06,
+        "waveform_passed": true,
+        "maximum_cycle_difference_rad": 0.0,
+        "cycles_passed": true,
+        "supported_cycle_joints": 0,
+        "passed": true
+      }
+    ],
+    "output": "/tmp/r-elegans-E069-body-timing-verified-smoke",
+    "interpretation": "Short numerical/software check only; zero cycles reflect insufficient duration; no physiological inference"
+  },
+  "server_results": null
+}

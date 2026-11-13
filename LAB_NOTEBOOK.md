@@ -6069,3 +6069,74 @@ E068-server-stage-details-20261113T041119Z-939399:2 files copied and SHA256-
 compared; archive manifest08532f04417a5881ac0a23ca50eb7ba4ec90c89a938e8c42a2d2a2143fdc0d92.
 This archives pasted stdout and derived summary, not retrieved server artifacts;
 cloud sync is not verified.
+
+### E069 — planned saved-pattern body timing/torque diagnostic
+
+User authorized proceeding after E068 interpretation. Question: with the SAME
+recorded spatial muscle command and fixed mechanics, do slower playback rates
+produce larger body bends? Separate body transfer from neural recruitment.
+Parent: E066 hybrid-validation-20261112T202746Z-868392, candidate
+f024bd14b75e07a6c9c48bcc2bc03aed4b8354510c1d46ee8235e7575638f56e; frozen actor
+82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0.
+No trainable parameters, optimizer, neural simulation or random seeds. Body-only
+replay is a diagnostic input, not evidence of a new autonomous neural skill.
+
+Planned method: use saved hybrid-sham45–60s joint command and recorded body state
+at45s. Preserve piecewise-held source commands and unchanged amplitudes/spatial
+pattern; replay speeds1,.5,.25,.125 at bodydt=.002s. Simulated durations15,30,60,
+120s respectively; rates are engineering probes, not biological targets. Same
+initial q/filter/pose for every case.1x must reproduce original recorded joints
+within1e-7rad and filtered activation within1e-10 BEFORE interpreting retiming.
+Require unchanged body implementation hashes versus source invocation capsule.
+Use exact legacy32 physical body parameters widened to64 and existing1.7% wet-
+agar closure. Record full parameter values and assumptions. Include1x/slowest
+half-dt checks and held-command control. Four independent CPU workers after
+baseline check; no neural/GPU workload. Launch under nohup; no4h search budget.
+
+Scoring: raw-cycle estimator in final two quarter-duration windows, per-joint
+and T/M/H amplitudes. Record net/filter/joints and active, elastic, internal-
+viscous torques; environmental moment inferred from balance is bookkeeping,
+not independent drag validation. Require finite state, no joint-limit clipping,
+Newton residual<=1e-8, source hashes unchanged. Half-step cycle differences must
+be<=5% with1e-7rad absolute floor per joint for descriptive numerical agreement.
+No new physical/biological/locomotion pass. Do not change mechanics or train
+neurons solely to exploit a diagnostic. Preserve source trace/model hashes,
+segment/initial state, checkpoints and recursive external dependencies; capture
+exact source/env/argv and case results. Command planned:
+`sh scripts/launch_body_timing_mbslnx2.sh`. Server execution pending.
+
+E069 implementation/local verification: source body-code hashes are checked
+against its archived invocation capsule. Saved source15s segment, copied neural/
+actor parent files, exact scalar body parameters and initial-state arrays form
+an immutable external input capsule. Every worker hashes it before/after;
+supervisor also verifies original inputs after completion. Source commands are
+held over original intervals; floating-point source clock boundaries are snapped
+within1e-7 of an interval index to avoid accidental one-step offsets. Four
+single-physical-core slots, single-thread BLAS; baseline completes before other
+cases start. CPU-only JAX is used for unchanged legacy32 body-template setup;
+body evolution uses the existing NumPy reference solver, with no neuronal update.
+
+Half-step checks were strengthened to require late raw waveform agreement as
+well as cycle amplitudes; report number of supported cycles. This prevents an
+all-zero cycle gate from hiding different posture drift. Focused tests:2 passed,
+covering original/slow/refined command indexing, clock roundoff and rejection of
+different raw drift despite zero cycle estimates. Shell/diff checks passed.
+
+Final local smoke /tmp/r-elegans-E069-body-timing-verified-smoke used existing
+local E066 source (different newer checkpoint from actual server). Only .4s of
+source was used: .4s normal, .8s half-speed, .4s refined body replays. No neural
+simulation or full-duration Mac run. Normal reproduction maximum q error
+8.32667268e-17rad and filter error5.55111512e-17; Newton residual maxima<1e-8.
+Refined late raw waveform maximum difference5.86058064e-6rad within5% raw-range
+criterion; zero supported cyclic joints in this very short sample, which cannot
+establish sustained amplitude. No new biological/autonomous-motion result.
+Earlier local smoke capsules retained alongside final verification; no server
+execution has occurred. Seven full diagnostic cases remain planned for user
+launch. No trained parameters or existing solver implementations changed.
+
+E069 local verification archived at OneDrive notebook/evidence/
+E069-local-body-timing:4380 files copied and individually SHA256-compared;
+manifest a4738894baa196dd7e614cf5e1c5f252a6a60f3666a3f610b6073078ac255a68.
+Includes three local software invocation cohorts and source/environment/input
+capsules; referenced older E066 artifacts remain in their existing archives.
+No actual server files retrieved, full-duration run or cloud-sync claim.
