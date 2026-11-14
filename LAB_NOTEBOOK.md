@@ -6958,3 +6958,41 @@ E076-server-20261114T143823Z-98301; supplied raw stdout and compact interpretati
 byte-checked. Manifest SHA256
  ee092c464b02570cc4101bd0f0129a394d78b00b2335793a24fb5d5b23314bb4.
 No server trajectories/models retrieved or cloud-sync completion asserted.
+
+### E076 biological-realism review — literature context (2026-11-14)
+
+User asks whether four-cell depolarizing suppression is realistic. Reviewed
+primary studies rather than inferring biological validity from model dynamics:
+- Li et al.,2014, Encoding of both analog- and digital-like behavioral outputs
+  by one C. elegans interneuron. DOI10.1016/j.cell.2014.09.056;
+  https://pmc.ncbi.nlm.nih.gov/articles/PMC4243084/ and PubMed25417153.
+  Study reports increased locomotion speed under RIB ChR2 stimulation and
+  reduced speed under RIB inhibition; RIB activation is not a generic stop label.
+  PMC full-page open hit captcha; relevant full-text passages were returned by
+  search indexing. Do not represent that as an independently downloaded paper.
+- Li et al.,2023, A C. elegans neuron both promotes and suppresses motor behavior
+  to fine tune motor output, DOI10.3389/fnmol.2023.1228980;
+  https://www.frontiersin.org/journals/molecular-neuroscience/articles/10.3389/fnmol.2023.1228980/full
+  Article directly accessed: RIM optogenetic activation promotes reversals via
+  command interneuron electrical coupling; chemical/electrical pathways have
+  distinct effects. This does not establish simultaneous RIB/RIM activation as a
+  physiological whole-body arrest mechanism.
+
+Interpretation: imposed positive conductance is a useful idealized excitation
+probe, broadly analogous to an experimental activation, but.1nS/cell for10s has
+not been calibrated to measured synaptic/optogenetic drive or native kinetics.
+0mV is the assumed cationic reversal; no identified receptor was fitted. E076's
+four-cell coactivation mixes neurons with distinct roles. Its persistent low
+body-motion state may expose model-specific trapping, competing drives or
+missing mechanisms; the present data cannot distinguish these explanations.
+It remains a computational sensitivity observation, not evidence that the model
+has discovered the real animal's rest circuit. Full body/neuron/calcium assay
+conditions, medium and stimulus must be matched before biological comparisons.
+
+Decision refinement: before treating this group as the learned stop route, split
+RIB and RIM perturbations (and ideally member cells), compare their individual
+responses with published perturbation phenotypes, and inspect missing receptor/
+transmitter mechanisms. Explicit restart testing remains useful but does not
+by itself resolve biological validity. Preserve E076 results and original
+engineering gates; no model/reversal/channel parameter or qualification changed.
+No new experiment launched. Literature verification and notebook update only.

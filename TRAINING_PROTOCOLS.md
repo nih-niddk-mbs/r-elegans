@@ -2666,3 +2666,12 @@ imposed input. Reports distinguish body-motion suppression from neural activity.
 45min maximum TOTAL under nohup, four CPU workers; source/reference checks and
 all outputs external. No new training launches automatically. See E076-plan.json
 in experiments/records; reported outcome in experiments/records/E076-server-summary.json.
+
+2026-11-14 E076 realism caveat: the group probe remains an uncalibrated diagnostic.
+Primary RIB experiments report faster locomotion under stimulation (Li et al.,
+2014, doi:10.1016/j.cell.2014.09.056); RIM has context-dependent electrical/chemical
+roles and stimulation can promote reversals (Li et al.,2023,
+doi:10.3389/fnmol.2023.1228980). Joint RIB/RIM suppression does not validate a
+natural stop circuit. Separate RIB/RIM perturbations and match experimental
+phenotypes before training around this route; restart alone is insufficient for
+biological validation. See the dated LAB_NOTEBOOK literature review. No new run.
