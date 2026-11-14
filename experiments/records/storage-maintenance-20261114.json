@@ -1,6 +1,6 @@
 {
   "record_date": "2026-11-14",
-  "status": "first_launch_failed_before_copy_user_reported",
+  "status": "archive_blocked_then_user_requested_direct_pruning",
   "kind": "Storage maintenance, not a biological experiment",
   "user_reported": {
     "results_usage": "1.1T",
@@ -48,5 +48,14 @@
     "mode": "700",
     "copied_or_deleted_by_failed_job": false
   },
-  "next_action": "Administrator grants carsonc traverse access on /data and creates a private owned destination, then rerun. Launcher now performs foreground destination access test."
+  "next_action": "Administrator grants carsonc traverse access on /data and creates a private owned destination, then rerun. Launcher now performs foreground destination access test.",
+  "second_reported_failure": {
+    "log": "/tmp/r-elegans-results-cleanup-20261114T234718Z-113710.log",
+    "error": "Cannot inspect all own-user processes; refusing cleanup",
+    "point": "referenced_runs before candidate enumeration",
+    "result_directories_moved_or_deleted": false
+  },
+  "current_command": "sh scripts/launch_trajectory_prune_mbslnx2.sh",
+  "direct_pruning_policy": "Delete only recognized intermediate raw trajectory files in completed quiet fits; retain first/latest/selected-best, validation, explicit references and all checkpoint/model/optimizer/RNG/input/source files. No /data or /proc dependency.",
+  "direct_pruning_execution": "Prepared and software-tested only; no server deletion evidenced"
 }

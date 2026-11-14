@@ -2750,3 +2750,13 @@ writes; disk-budget outcomes remain incomplete. Already-running jobs keep their
 loaded code. Inactive prior results can be relocated with the checksum-verified
 maintenance launcher described in README/LAB_NOTEBOOK; scientific contents and
 old absolute paths are retained. No biological or optimization gate changed.
+
+2026-11-14 direct deletion update: user requested deletion rather than further
+archival troubleshooting. `sh scripts/launch_trajectory_prune_mbslnx2.sh` deletes
+only recognized intermediate raw trajectory arrays in completed fits quiet>=1h.
+First/latest/selected-best traces, validation, referenced input files and ALL
+model/checkpoint/coordinate/optimizer/RNG/source files stay. It also handles
+rejected committed CMA candidates from finished runs, protecting every selected
+CMA evaluation. No /data access, /proc inspection or sudo required. Journals/logs
+in/tmp record exact deletions. This permanently removes those intermediate arrays;
+models, scores and reconstruction metadata remain. Server deletion pending.

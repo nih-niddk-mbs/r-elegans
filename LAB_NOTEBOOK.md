@@ -7261,3 +7261,62 @@ has not executed privileged commands remotely. Launcher now checks destination
 creation/write and separate-device status in foreground before nohup, emitting
 an explicit failure rather than only a background traceback. Local shell syntax
 and diff checks passed; no server permission change or migration verified.
+
+### Direct trajectory pruning PLAN after archive/proc failure (2026-11-14)
+
+User reported second archive failure: log/tmp/r-elegans-results-cleanup-20261114T234718Z-113710.log,
+RuntimeError while scanning own-user /proc references. Failure was before result
+candidate enumeration/copy/exchange/delete. A small maintenance source snapshot
+may have been created in/data by that startup; no result-tree relocation is
+evidenced. Do not pretend uninspectable processes are inactive. User then
+explicitly instructed "just delete them", referring to excess result files.
+Replace archival workflow with narrowly scoped direct intermediate-trace deletion;
+no administrator, /data, or /proc requirement. No server deletion performed here.
+
+Command after pull: `sh scripts/launch_trajectory_prune_mbslnx2.sh`. Dedicated
+interpreter under nohup. Source/home/carsonc/r-elegans-results, default1h quiet
+age. Restrict old selected/iteration-N/{trajectory,active-trajectory,sham-trajectory,
+dose-low-trajectory}.npz and old selected/trace-N.npz in explicitly completed
+worker fits. Preserve first and latest recorded iteration, selected/initial/final
+indices from summary/best metadata, and all nonnumeric/epoch/initial groups.
+For CMA, only finished-run, told-generation g-N-c-N raw4condition files; preserve
+all selected-evaluation references. Never target network/actor/state/checkpoint/
+coordinate/optimizer/RNG/metrics/source files, best_training_trace or validation
+outputs. Source/parent/input capsules are excluded from candidate traversal.
+
+Before choosing files, scan non-source-copy JSON metadata (including input
+manifests) for explicit absolute/relative NPZ references, including absolute
+filename keys, and selected CMA evaluation directories. Any unreadable/invalid
+JSON makes its entire top-level run uncertain and ineligible. Preserve those
+references, symlinks, multiply-linked files and recent/unfinished fits. Check
+inode/size/mtime unchanged immediately before each unlink; recheck quiet worker
+summary. Normal fitting scripts create new output directories for continuations;
+no process-visibility assumption is used to label an active PID safe. This is
+not arbitrary recursive deletion or "delete all failed experiments".
+
+All intermediate MODEL checkpoints remain; only excess intermediate forward
+arrays are permanently discarded. This supersedes earlier blanket retention of
+every selected iteration's trajectory under the user's explicit deletion request,
+while preserving all selected/final model checkpoints and currently referenced
+raw dependencies. Scientific scores and exact model/optimizer/source records
+remain available for reconstruction. No raw-file full-content hashing scan
+(required for archival copy verification) is performed here; deletion ledger
+explicitly records content_hash_recorded=False with path/bytes/inode/mtime and
+worker best-model hash. No claim of a verified raw-array hash after deletion.
+The independent original parent/best/final/baseline/validation arrays remain.
+Future newly introduced dependency references to an already-pruned intermediate
+would require reconstructing it from preserved model/state/source; never claim
+those discarded bytes still exist.
+
+Exclusive per-user cleanup lock. Write-ahead and completion JSONL ledger in/tmp,
+not/home; source script hash and apply flag recorded. Default Python CLI is dry
+run; launcher explicitly passes--apply per user's instruction. Age/known schemas
+can make some runs ineligible, so no reclaimed-byte estimate promised beforehand.
+No unknown data, other projects, cache directories or source archives targeted.
+
+Local verification:5 tests passed.11s on tiny temporary files: intermediate-only
+unlink, all model/optimizer/first/best/latest protection, explicit parent-input
+reference, unfinished/recent/malformed metadata protection, committed CMA selected
+reference protection, flat legacy traces and dry-run behavior. Compilation,
+launcher shell syntax and diff checks passed. No real server deletion, neural
+simulation or behavior qualification. Current training weights unchanged.

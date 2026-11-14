@@ -1870,3 +1870,13 @@ contents are preserved; failures retain data. Journals/logs go to `/tmp`.
 Destination must be writable and on a separate filesystem. User-reported results
 occupy1.1T; reclaimed space remains unmeasured until the job runs. Future CMA
 processes now retain a50GiB free-space reserve; running jobs keep their old code.
+
+2026-11-14 direct deletion update: user requested deletion rather than further
+archival troubleshooting. `sh scripts/launch_trajectory_prune_mbslnx2.sh` deletes
+only recognized intermediate raw trajectory arrays in completed fits quiet>=1h.
+First/latest/selected-best traces, validation, referenced input files and ALL
+model/checkpoint/coordinate/optimizer/RNG/source files stay. It also handles
+rejected committed CMA candidates from finished runs, protecting every selected
+CMA evaluation. No /data access, /proc inspection or sudo required. Journals/logs
+in/tmp record exact deletions. This permanently removes those intermediate arrays;
+models, scores and reconstruction metadata remain. Server deletion pending.
