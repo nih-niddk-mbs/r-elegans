@@ -36,7 +36,7 @@ def main():
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--total-minutes',type=float,default=240.)
     p.add_argument('--source-run',type=Path)
-    p.add_argument('--pipeline',choices=['tail','state-control','control-access'],default='tail')
+    p.add_argument('--pipeline',choices=['tail','state-control','control-access','cma-curriculum'],default='tail')
     a=p.parse_args()
     if not math.isfinite(a.total_minutes) or a.total_minutes<5:p.error('At least five total minutes required')
     repo=Path(__file__).resolve().parents[1];out=a.output_dir.resolve()
@@ -44,11 +44,11 @@ def main():
     out.mkdir(parents=True,exist_ok=False)
     deadline=started+a.total_minutes*60
     # The coordinator finishes before the outer timeout; cleanup/reporting are inside total.
-    budget=dict(experiment={'state-control':'E072-E073','control-access':'E076','tail':'E071'}[a.pipeline],total_minutes=a.total_minutes,started_utc=datetime.now(timezone.utc).isoformat(),
+    budget=dict(experiment={'state-control':'E072-E073','control-access':'E076','cma-curriculum':'E077','tail':'E071'}[a.pipeline],total_minutes=a.total_minutes,started_utc=datetime.now(timezone.utc).isoformat(),
                 hard_deadline_monotonic=deadline,coordinator_finish_by=deadline-60,
                 phases_included=['preparation','baseline','search','all validation','cleanup','final reports'])
     (out/'deadline.json').write_text(json.dumps(budget,indent=2)+'\n')
-    module={'state-control':'scripts.run_controlled_swimming','control-access':'scripts.run_control_access','tail':'scripts.run_swim_continuation'}[a.pipeline]
+    module={'state-control':'scripts.run_controlled_swimming','control-access':'scripts.run_control_access','cma-curriculum':'scripts.run_cma_sensorimotor','tail':'scripts.run_swim_continuation'}[a.pipeline]
     command=[sys.executable,'-u','-m',module,'--output-dir',str(out)]
     if a.source_run:command+=['--source-run',str(a.source_run.resolve())]
     code,timed_out=run_group(command,max(.01,deadline-time.monotonic()-20))

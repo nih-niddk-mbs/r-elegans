@@ -7089,3 +7089,92 @@ seeds, checkpoints or qualification. A concrete experiment must specify exact
 parameter groups, parent, loss/constraints, seeds, budget and acceptance before
 execution. Bistability remains a hypothesis; fit sensory-controlled transitions
 without forcing an unsupported two-state mechanism or hiding existing failures.
+
+### E077 PLAN — CMA-ES with gradual cue-specific slowing and recovery (2026-11-14)
+
+User authorized CMA-ES pilot, then explicitly requested progressively rewarded
+slowing. Implement5/10/20/35/50% lower body bend cadence, not weaker bends or
+forward speed. Fresh parent qualified E0716901 SHA8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a,
+via preserved E074 control_inputs; failed E074 weights and diagnostic probe inputs
+are NOT used as training parents/teachers. No spontaneous-return criterion alone:
+paired actual sensory STOP-only vs STOP→START must reveal START-specific recovery.
+Maintain all raw data/selected parents independently. Full stopping/swimming/
+biological fidelity unqualified throughout this partial-slowing pilot.
+
+Question/method/fixed fields/commands/criteria in E077-plan.json and appended
+TRAINING_PROTOCOLS E077 section. Four paired conditions/candidate from identical
+complete initial states, chemical transduction only. STOP salt40–42; START odor
+58–60; nominal90s; lowdose.8/onsetshift3 and repeat140s before advancing. Targets
+relative to same-candidate no-cue cadence avoid credit for general weakening.
+Preserve uncued cadence within5% of parent and1.62..1.98Hz, bends>=max(.003,.9parent).
+STOP keeps>=80% matched bend amplitude, START cadence returns within3%, bends>=90%,
+while STOP-only stays slow; START-only remains unchanged. Pre-cue match1e-7.
+Slowing tolerance min(.025,.3target). Separate metrics plus continuous scalar
+penalties for CMA; selected candidates require safety/uncued/pre/bend constraints.
+No desired-state input to neurons, external neural drive or clock rescaling.
+
+Expected24 disjoint latent groups over318/9616 unknown coordinates, chosen from
+sensory/control chemical pathways, selected gap pairs and control-cell inward/
+outward densities. RIB and RIM separate; topology fixed. Motor densities, all
+stereotypical/known leak/capacitance/kinetics/reversals/release, sensory routing/
+gains and NMJ/muscle/water mechanics fixed. Each group maps within remaining
+original-anchor bounds, capped±.4log multiplier, never broadens factor2 bounds.
+Banking is a search hypothesis, not evidence of exact physiological covariance.
+Missing RIS receptor/GABA/peptide biology is not supplied by optimizer flexibility.
+
+Use pinned upstream pycma4.4.1 (official ask/tell API verified) rather than an
+untested custom CMA implementation. Installed locally in isolated.venv only;
+server installs this pure-Python package if missing in dedicated r-elegans env,
+inside total watchdog and before exact environment/source capture. No scRNA env
+changes. Population12, initial sigma.25, seed7700;4 persistent workers x4physical
+CPU cores. At each successful rung, fresh CMA distribution at retained weights,
+sigma.15/seed7700+stage because objective changed; not exact mid-run resume.
+Save asked/told/final optimizer pickles with NumPy/Python RNG, pending population,
+all evaluated model/coordinates/requests/condition trajectories and all selected/
+final references externally. Same-version pickle restoration tested, but no user
+resume CLI provided yet. Never load untrusted pickle files. Maintain complete
+recursive input/source lineage; default240min TOTAL includes install/setup, all
+forward episodes, validation and cleanup.30min reserved for final4 checks, per-
+population time forecast gates new generations. Outer process-group watchdog
+preserved. Deadline/partial outcomes explicit; no full behavior/RL promotion.
+
+Command after pull: `sh scripts/launch_cma_curriculum_mbslnx2.sh`, optional total
+minutes argument, default240. Source run fixed controlled-swimming-20261114T034629Z-30860;
+actual model is its verified E071 parent capsule. Output external
+cma-cadence-<UTC>-<PID>, not yet known. Final check on selected exact hash: paired
+low/shift, repeat, neural-half and body-half, requiring positive active-rung scores
+and cadence ratio agreement<=.02/amplitude agreement10% or1e-5rad. All full
+stopping and swimming flags stayFalse. Results pending user launch; no server run.
+
+Local software verification:23 tests passed16.11s covering objective counterexamples,
+synthetic frequency features, grouped original bounds/disjointness/motor-density
+preservation, real pycma convergence on a toy quadratic and exact restored next
+population, mocked complete coordinator advancement and final validation, cached
+worker environmental-only routing with synthetic traces, existing behavior and
+watchdog checks. No Mac neural forward simulation. Static local software fixture
+(different parent SHA d13901b0c7817deb969d17aab52cde00304072225bf91688f560447fe9c08aa9,
+NOT actual E071 winner) decoded12 CMA candidates successfully with24 groups/
+318 touched coordinates and frozen others unchanged. Source-fixture read only;
+actual E071 source reconstruction remains a mandatory server execution check.
+
+E077 final verification update:23 tests passed15.51s after adding explicit upper
+as well as lower uncued-amplitude preservation (90–110% parent). Static decoder
+check also confirmed deterministic byte-identical model serialization for the
+same candidate, supporting cross-evaluation checkpoint-hash binding. The static
+helper emitted a Matplotlib cache warning under sandboxed home; reran with a
+writable temporary MPLCONFIGDIR. This affects plotting cache only, not dynamics.
+Final reporting adds per-generation loss/checkpoint/completion counts and final
+candidate-status counts; compilation/diff checks passed. No new forward neural
+simulation or server fitting result. Completed partial-rung training checks are
+not full causal-control or biological validation. All four final validation
+variants must pass on the actual selected hash with nominal/refinement feature
+agreement before even a final partial-cadence validation pass is reported.
+
+E077 preparation archive: OneDrive notebook/evidence/E077-cma-preparation-20261114,
+801 files plus manifest, all archived hashes checked. Manifest SHA256
+0bb506abc17172534f293c205c2233889f4402388f8e7d53c1f9130f5b51174e.
+Includes staged dirty source/env/invocation, exact static script/result/candidate
+and complete160MB local software fixture input capsule for reproducibility.
+This receipt added after capture; Git preserves final receipt. No actual server
+fit or cloud-sync completion claimed. Server source/model verification still
+required before candidate optimization; user will launch via the dedicated env.

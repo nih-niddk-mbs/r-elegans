@@ -1,5 +1,14 @@
 # r-elegans
 
+2026-11-14 E077 planned CMA-ES pilot: gradual **cadence** reduction5/10/20/35/50%,
+with useful bends retained, START-specific recovery and unchanged uncued movement.
+Full302 network; fresh qualified E071 parent; expected24 grouped unknown factors.
+No direct neuron probes, motor waveforms or clock scaling. Population12 across4
+persistent CPU workers,240min TOTAL default including validation/cleanup. Full
+stopping, biological fidelity and swimming remain unqualified. Server execution
+pending. [Plan](experiments/records/E077-plan.json).
+
+
 2026-11-14 E076 diagnostic completed (user-reported):19.08min total, no timeout,
 all steps/refinement complete. RIB/RIM depolarizing.1nS probe reduced ordinary
 body range98.57%, but movement did not spontaneously recover. Neural/body-half

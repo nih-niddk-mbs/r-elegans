@@ -1,0 +1,54 @@
+{
+  "experiment": "E077",
+  "status": "planned_not_executed",
+  "record_date": "2026-11-14",
+  "question": "Can bounded grouped CMA-ES learn gradually stronger sensory-specific slowing while preserving bends, uncued movement and START recovery?",
+  "parent_checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
+  "input_capsule_source": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860/control_inputs",
+  "parent_scope": "Fresh search from qualified E0716901, not failed E074 selected weights or an exact prior optimizer resume",
+  "method": "pycma4.4.1 bounded ask/tell population12 with persistent4-worker evaluation and paired environmental cue episodes",
+  "seed": 7700,
+  "stage_seeds": "7700+stage index; new CMA distribution at retained weights when objective changes",
+  "targets_fraction_slowing": [
+    0.05,
+    0.1,
+    0.2,
+    0.35,
+    0.5
+  ],
+  "signal": "Body bend frequency, not forward speed or mere amplitude reduction",
+  "conditions": [
+    "no_cue",
+    "stop_only",
+    "start_only",
+    "stop_start"
+  ],
+  "trainable": "Expected24 disjoint tied latent log-multiplier groups spanning318 of9616 unknown coordinates; exact schema/bounds persisted at setup",
+  "fixed": "All topology, motor-neuron densities, leak/capacitance/kinetics/reversals/release, sensory gains/routing, NMJs/muscles/water mechanics/physical clocks",
+  "latent_bounds": [
+    -1,
+    1
+  ],
+  "maximum_group_log_change": 0.4,
+  "original_anchor_bounds": "Every coordinate remains within existing original-anchor factor2 bounds",
+  "objective": "Normalized cadence-ratio errors plus continuous uncued/pre-cue/bend/safety penalties; selected models require those preservation constraints",
+  "criteria": {
+    "uncued": "Frequency within5% of parent and1.62..1.98Hz; cycles within90\u2013110% parent with.003rad floor",
+    "slow": "STOP frequency/no-cue frequency targets1-target; tolerance min(.025,.3target); retain>=80% matched bend cycles",
+    "restart": "STOP->START returns within3% of no-cue cadence with>=90% bend cycles; STOP-only remains slowed; START-only remains near no-cue",
+    "pre": "All four episodes identical pre-cue V/joints within1e-7",
+    "stage_checks": "Exact selected hash passes low-dose(.8)+onsetshift3s and repeated140s paired trials",
+    "final_checks": "Selected exact model: low/shift,repeat,neural-half,body-half; independently positive scores plus nominal/refined ratio agreement<=.02 and amplitude agreement10%/1e-5rad",
+    "full_stopping": "Always unqualified in this partial-cadence pilot; no automatic swimming promotion"
+  },
+  "command": "sh scripts/launch_cma_curriculum_mbslnx2.sh",
+  "default_total_minutes": 240,
+  "validation_reserve_minutes": 30,
+  "artifacts": "/home/carsonc/r-elegans-results/cma-cadence-<UTC>-<PID>",
+  "preservation": "Exact source/env/argv/capsule/group map; every candidate model/coordinates/four traces; all selected/final models, asked/told/final CMA pickles with NumPy/Python RNG and pending population; objective-stage resets recorded as fresh searches",
+  "local_verification": "23 focused tests passed16.11s; synthetic/mock dynamics only; static12-candidate decoder check external; no Mac neural forward fit or server result",
+  "references": [
+    "https://github.com/CMA-ES/pycma",
+    "https://cma-es.github.io/apidocs-pycma/cma.evolution_strategy.CMAEvolutionStrategy.html"
+  ]
+}

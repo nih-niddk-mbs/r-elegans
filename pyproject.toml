@@ -28,6 +28,7 @@ data = [
   "openpyxl>=3.1",
 ]
 fit = [
+  "cma==4.4.1",
   "scipy>=1.11",
   "h5py>=3.10",
   "optax>=0.2",

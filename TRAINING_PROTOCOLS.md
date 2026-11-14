@@ -1,5 +1,14 @@
 # WormGym: training and validation protocols
 
+2026-11-14 E077 planned CMA-ES pilot: gradual **cadence** reduction5/10/20/35/50%,
+with useful bends retained, START-specific recovery and unchanged uncued movement.
+Full302 network; fresh qualified E071 parent; expected24 grouped unknown factors.
+No direct neuron probes, motor waveforms or clock scaling. Population12 across4
+persistent CPU workers,240min TOTAL default including validation/cleanup. Full
+stopping, biological fidelity and swimming remain unqualified. Server execution
+pending. [Plan](experiments/records/E077-plan.json).
+
+
 2026-11-14 E076 diagnostic completed (user-reported):19.08min total, no timeout,
 all steps/refinement complete. RIB/RIM depolarizing.1nS probe reduced ordinary
 body range98.57%, but movement did not spontaneously recover. Neural/body-half
@@ -2675,3 +2684,62 @@ doi:10.3389/fnmol.2023.1228980). Joint RIB/RIM suppression does not validate a
 natural stop circuit. Separate RIB/RIM perturbations and match experimental
 phenotypes before training around this route; restart alone is insufficient for
 biological validation. See the dated LAB_NOTEBOOK literature review. No new run.
+
+## E077 gradual sensory cadence curriculum (planned)
+
+Launch with `sh scripts/launch_cma_curriculum_mbslnx2.sh` after pulling. Optional
+first argument changes total minutes; default240. Watchdog includes optimizer
+installation/setup/compilation, baseline, all candidate episodes, checks, reports
+and cleanup. The pinned cma4.4.1 is installed if needed only in the dedicated
+r-elegans interpreter. No other environment or GPU is used. Read results using
+`/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_cma_curriculum`.
+
+Parent is unchanged E071 seed6901 SHA8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a,
+reconstructed from the original E074 input capsule, not E074's failed fitted
+variant. Baseline no-cue trace must reproduce the saved reference within1e-8.
+Each candidate sees no-cue, STOP-only, START-only and STOP→START episodes from
+the same complete canonical initial state. Nominal90s, STOP salt40–42, START
+AWA odor58–60. Desired labels only affect scoring. No diagnostic conductance
+hook, voltage hold, bias, artificial teacher rhythm or body-clock rescaling.
+
+Start at5% slower body bend frequency, then10/20/35/50%. This is a cadence target,
+not translational speed (the parent has no qualified propulsion). Uncued cadence
+stays within5% of parent and1.8Hz±10%; bends remain within90–110% parent with.003rad floor.
+During slowing, bend cycles retain>=80% of matched no-cue. START restores cadence
+to within3% of no-cue and bends>=90%; STOP-only must remain slower in those same
+post-START windows. START-only preserves baseline. This explicitly discourages
+always-moving, always-quiet, globally weakened and spontaneous-recovery solutions.
+All paired pre-cue voltages/joints must agree within1e-7. Separate feature errors
+are logged; pycma receives a scalar combination with strong continuous constraint
+penalties. Selection requires safety and pre/uncued/bend preservation.
+
+Grouped changes are disjoint chemical-pathway, electrical-pair and inward/outward
+control-cell density banks, with RIB and RIM separate. Motor-cell densities and
+all known kinetics/reversals/capacitance/leak, sensory/NMJ/muscle/mechanics remain
+fixed. Latent coordinates[-1,1] map to per-group remaining bound slack capped at
+±.4log units; every original coordinate stays within its existing factor2 anchor
+bounds. Source schema is expected24 groups/318 eligible coordinates; actual count
+and index mapping are saved, empty/fixed banks omitted. No anatomical edge or
+missing inhibitory/peptide mechanism is invented by fitting.
+
+CMA population12, initial sigma.25, seed7700. At a rung change, the objective
+changes, so a fresh distribution starts at selected weights (sigma.15, seed
+7700+stage), explicitly distinguished from exact continuation. Save optimizer/
+RNG before/after ask/tell and at end, including pending populations. Serialized
+same-version next-population restoration is software-tested; this launcher does
+not yet expose a resume command. Exact candidate requests/results remain external.
+Worker affinity4 physical cores each; persistent compiled rollout caches reuse
+nominal condition graphs across proposals. Completed population results are
+ordered back to their asked points before tell, independent of completion order.
+
+Advance only after the exact selected model passes all four conditions for
+reduced-dose shifted cues and repeated cues. Those are curriculum checks, not
+full biological/H1.2 qualification. Final candidate repeats those checks plus
+neural-half and body-half paired episodes; each must pass the active partial
+cadence target, cadence-ratio differences<=.02 and cyclic amplitudes within10%
+(or1e-5rad). Reserve30min for final checks; do not start a generation that its
+measured runtime forecast cannot fit. Every selected/final model and all evaluation
+trajectories/coordinates are external with immutable reference hashes. Failure,
+partial population or incomplete validation never qualifies a model. No automatic
+RL/swimming promotion; full quietness/rest and complete causal control validation
+are future milestones with unchanged criteria.
