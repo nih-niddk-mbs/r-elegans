@@ -7039,3 +7039,53 @@ analysis.py/summary.json/invocation.json plus manifest. Manifest SHA256
 Initial archive helper used system python3 and failed importing NumPy before any
 archive was created; reran successfully using the project .venv interpreter.
 No source/model/data analysis changed. No cloud-sync completion claimed.
+
+### Fitting-strategy discussion — recommendations, not an executed plan (2026-11-14)
+
+User requests alternatives to the unsuccessful stop/start fit. Recommend changing
+objective/parameterization as well as optimizer. Current best stop fit barely
+changes cue-specific output; absolute rest-range minimization can reward general
+weakening, and strongest imposed suppression lacked passive recovery. Keep
+H1.2 and all existing final acceptance/numerical/biological distinctions intact.
+
+Proposed direction: paired no-cue, STOP-only, START-only and STOP→START episodes
+from matched initial states, with actual sensory transduction only. Preserve
+uncued/pre-cue1.8Hz movement and safety as constraints. Measure suppression
+relative to matched no-cue and restart relative to matched STOP/no-restart, so
+always-moving and always-quiet models cannot qualify. Track separate stopping,
+rest persistence, restart, uncued movement and physiological objectives. Train
+partial slowing and recovery together with gradually stronger suppression;
+partial curriculum improvements are not full behavior qualifications. Never
+teach by injecting the diagnostic RIB/RIM conductance as a positive sensory cue.
+
+Reduce the initial search to roughly10–30 tied, interpretable unknown synaptic/
+channel-density adjustments within existing original-anchor bounds, full302
+network retained. Choose directions from sensitivity/biology, separating RIB
+from RIM and verifying the missing/approximate RIS inhibitory/peptide mechanisms
+before treating this circuit as a faithful stop pathway. Keep stereotypical
+leak/capacitance/kinetics/reversals/body/NMJ fixed; do not unlock measured priors
+merely to lower loss. Expand eligible parameters only when diagnostics justify.
+Population-based optimization (e.g., bounded CMA-ES in that smaller space) is a
+candidate alternative to the present greedy proposal search; independent
+candidates can use mbslnx2 CPU workers. No empirical speedup or success is claimed.
+CMA-ES itself optimizes a scalar objective; separate feature objectives/constraints
+or explicit multiobjective selection must be designed, not assumed built in.
+Retain diverse tradeoff candidates and good independent full-network parents.
+
+Primary methodological references reviewed:
+Druckmann et al.,2007, A novel multiple objective optimization framework for
+constraining conductance-based neuron models by experimental data,
+https://www.frontiersin.org/journals/neuroscience/articles/10.3389/neuro.01.1.1.001.2007/full
+supports separate feature errors and inspection of objective conflicts in neuron
+fitting; it is not evidence of success on this worm task.
+Hansen & Ostermeier,2001, Completely derandomized self-adaptation in evolution
+strategies, https://pubmed.ncbi.nlm.nih.gov/11382355/ and author's paper
+https://www.cmap.polytechnique.fr/~nikolaus.hansen/cmaartic.pdf
+introduces covariance-adapted population search. Recommendation here is an
+inference about our optimization problem, not a verified performance result.
+
+These are proposed strategy changes only: no new model, optimizer code, run,
+seeds, checkpoints or qualification. A concrete experiment must specify exact
+parameter groups, parent, loss/constraints, seeds, budget and acceptance before
+execution. Bistability remains a hypothesis; fit sensory-controlled transitions
+without forcing an unsupported two-state mechanism or hiding existing failures.
