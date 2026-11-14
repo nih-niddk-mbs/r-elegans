@@ -1,6 +1,6 @@
 {
   "record_date": "2026-11-14",
-  "status": "job_prepared_server_execution_pending",
+  "status": "first_launch_failed_before_copy_user_reported",
   "kind": "Storage maintenance, not a biological experiment",
   "user_reported": {
     "results_usage": "1.1T",
@@ -38,5 +38,15 @@
   ],
   "additional_fix": "Future E077 workers/coordinator reserve50GiB free before new work/large trace writes; already-running processes retain old code",
   "local_verification": "11 archive/CMA tests passed10.65s, no real server migration",
-  "model_or_training_changes": false
+  "model_or_training_changes": false,
+  "reported_failure": {
+    "type": "PermissionError",
+    "path": "/data/carsonc/r-elegans-results",
+    "parent_directory": "/data",
+    "owner": "user",
+    "group": "user",
+    "mode": "700",
+    "copied_or_deleted_by_failed_job": false
+  },
+  "next_action": "Administrator grants carsonc traverse access on /data and creates a private owned destination, then rerun. Launcher now performs foreground destination access test."
 }

@@ -7247,3 +7247,17 @@ on the Mac and fails closed if unavailable. No data was removed outside tiny
 unit-test temporary directories. The server job source snapshots itself to/data
 and records script hash/revision/interpreter/platform/argv in its journal before
 operating; archive migration and actual reclaimed bytes still pending execution.
+
+Storage maintenance reported failure (2026-11-14): user's first launch raised
+PermissionError at destination.mkdir, before any copy/exchange/delete. User ls
+shows/data drwx------ owned user:user; carsonc cannot traverse it. Thus no space
+reclaimed or results migrated by that invocation. This is filesystem access,
+not a checksum or data-migration failure. No current training/model effect.
+Next step requires administrator-controlled access: grant carsonc traverse-only
+ACL on/data and create private carsonc-owned/data/carsonc/r-elegans-results.
+This avoids opening/data listing or other users' contents broadly. User may run
+setup through sudo if authorized, otherwise an administrator must do it. Agent
+has not executed privileged commands remotely. Launcher now checks destination
+creation/write and separate-device status in foreground before nohup, emitting
+an explicit failure rather than only a background traceback. Local shell syntax
+and diff checks passed; no server permission change or migration verified.
