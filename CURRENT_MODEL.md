@@ -2928,3 +2928,14 @@ is c435ee69645f27163af21ef5590b05a30151a38df7389a6f2fe70ef4db1ee481;
 full artifacts have not been independently retrieved. A completed-search
 continuation wrapper now preserves offsets/RNG and original bounds for longer
 runs. No new biological qualification or bundled checkpoint promotion.
+
+E075 planned read-only follow-up (2026-11-14):
+`sh scripts/launch_control_signal_audit_mbslnx2.sh` analyzes saved E074 cue/sham
+trajectories and search histories, with a20min ceiling under nohup. No new worm
+simulation, training or model changes. The launcher prints report/log paths.
+Report includes neuron voltages/calcium, release ranges, sampled inferred
+synaptic drive, offline intended chemical replay, source/target topology and
+parameter/history diagnostics. Reconstruction is labeled separately from saved
+observations; this audit confers no behavior or causal-control qualification.
+Preserve the entire source run and recursive input capsule as dependencies.
+See experiments/records/E075-plan.json. Server results pending.

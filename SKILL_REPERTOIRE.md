@@ -767,3 +767,6 @@ inspect dorsal/ventral cancellation and the fixed NMJ transfer. NMJ weights,
 polarities and muscle transfer were held fixed here, so brain-weight fitting
 could not explore that interface. These are hypotheses to test, not diagnosed
 causes. No new model changes or experiment have been launched.
+
+2026-11-14: E075 saved-data sensory-to-motor audit implemented, server execution
+pending. Adds no trained or qualified skill; all E074 control failures remain.

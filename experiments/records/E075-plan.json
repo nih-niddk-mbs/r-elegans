@@ -1,0 +1,30 @@
+{
+  "experiment": "E075",
+  "status": "planned_not_executed",
+  "record_date": "2026-11-14",
+  "question": "Where does the E074 cue response attenuate between ligand transduction, sensory cells, control interneurons and rhythmic motor output?",
+  "method": "Read saved nominal/no-cue/chemical-blocked/stop-blocked/start-blocked trajectories; no forward neural or mechanical simulation; offline intended chemical replay and sampled synaptic-current reconstruction",
+  "source_run": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860",
+  "parent_checkpoint_sha256": "2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f",
+  "trainable_parameters": [],
+  "fixed_parameters": "All model, sensory, neuronal, synaptic and body parameters; original traces remain read-only",
+  "seeds": "None: deterministic saved-data analysis, no stochastic fitting",
+  "command": "sh scripts/launch_control_signal_audit_mbslnx2.sh",
+  "maximum_minutes": 20,
+  "integrity_criteria": [
+    "Pinned selected model and case/checkpoint/trace hashes agree",
+    "All paired time grids identical",
+    "Selected coordinates reconstruct model; fixed fields equal input capsule",
+    "Original-anchor coordinate bounds and frozen mask intact",
+    "All hashed sources unchanged before/after audit"
+  ],
+  "scientific_criteria": "Descriptive signal amplitudes/release levels/drive/topology and search changes; no new causal-control, stopping, swimming or biological-fidelity qualification",
+  "limitations": [
+    "Offline chemical replay is not recorded injection",
+    "Synaptic currents inferred from body-step voltage samples, not neural substeps",
+    "Phase divergence can contribute to paired voltage differences",
+    "Unrecorded actual historical code/environment remain in preserved source run records"
+  ],
+  "artifacts": "/home/carsonc/r-elegans-results/control-signal-audit-<UTC>-<PID>",
+  "dependency_preservation": "Preserve source E074 run and complete control_inputs capsule, all selected/final models and trajectories. Audit hashes referenced inputs, snapshots selected model/coordinates/origin and exact source/env/argv externally; never delete source dependencies"
+}

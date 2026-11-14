@@ -6704,3 +6704,58 @@ E074-server-20261114T034629Z-30860; verbatim supplied transcript and compact
 interpreted summary byte-checked against originals; manifest SHA256
 abdfa01602a8ac8ccd17dcd97857094e08c164dbc3e1cb40e4b4d311005b13f0.
 No actual server checkpoint/trajectory retrieval or cloud-sync claim.
+
+### E075 PLAN — saved-data cue-to-motor signal-flow audit (2026-11-14)
+
+User approved the short audit after E074's failed stop/control gate. Question:
+is there appreciable cue transduction and sensory response; where does the
+paired response attenuate before reaching oscillating motor cells? Parent is
+E074 selected7200 SHA2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f,
+source controlled-swimming-20261114T034629Z-30860. This is deterministic saved-
+trajectory analysis, not a forward simulation or fit; no RNG/seeds, all parameters
+fixed, original models/trajectories read-only. No new behavior qualification.
+
+Method: hash-check the entire source control_inputs capsule and pinned selected
+model; load verified nominal/no-cue/chemical-blocked/stop-blocked/start-blocked
+traces on identical grids. Quantify cue-minus-sham voltage/calcium in chemical
+sensory cells, AIY/AIB/AIZ/RIA, RIB/RIM, AVB/PVC, RIS, body/head motor groups;
+rank uncurated responses too via top20 whole-network cells. Compare muscle,
+command/filter/joint outputs across pre, stop, recovery/rest and start windows.
+Reconstruct release sigmoids and group-to-group instantaneous inward chemical/
+electrical currents at sampled recorded voltages; report topology/strengths and
+fixed source reversal potentials. These are descriptive sampled drives, not
+measured neural-substep currents, intrinsic channel-current fits or causal
+mediation. Full ionic gates were not saved, so do not invent their histories.
+
+Replay only chemical receptor/adaptation equations offline with the preserved
+initial sensory memory/config/gains and scheduled bath. Explicitly label this
+intended-input reconstruction, not recorded applied conductance; floating-point
+event boundaries can differ. No direct neuron inputs added or altered. Validate
+selected coordinates/frozen fields/bounds against the original input decoder.
+Summarize all four workers' accepted proposals/errors and first/last reported
+best stopping metrics. First history row is after first proposal, not an initial
+cued baseline. Do not compare no-cue baseline to selected cued result as pure
+training improvement. Model/coordinates/origin snapshots, source/env/argv and
+input hashes external; preserve the complete source run/recursive dependencies.
+
+Acceptance is data integrity and finite aligned diagnostics; no arbitrary neural
+amplitude threshold or biological pass. Require exact source hashes stable across
+analysis, coordinate-model equality and unchanged frozen fields/bounds. Command:
+`sh scripts/launch_control_signal_audit_mbslnx2.sh`. Dedicated conda interpreter,
+CPU0..3 under nohup, timeout20min. Expected lightweight saved-data processing;
+actual runtime unknown. External results/control-signal-audit-<UTC>-<PID> path
+is launcher-generated; no execution/result has been evidenced yet. Next training
+choice depends on these responses and is not automatically launched.
+
+Local software checks:3 tests passed in1.60s: paired-window transient localization,
+post/pre matrix orientation/current sign, and offline chemical replay matching
+actual transduction memory updates (sensory-only test, no neuron/body dynamics).
+A malformed single-timestamp replay is rejected. No Mac neural forward simulation
+or server artifact analysis occurred; actual data remain on mbslnx2.
+
+E075 preparation archive: OneDrive notebook/evidence/E075-audit-preparation-20261114,
+394 files plus manifest, all archived hashes verified. Manifest SHA256
+b5ee8d38368c054e866211b2751f36ea0a3a3d0ca16a6df32f2719697fd1e7fd.
+Includes staged source/environment/verification-invocation record; this receipt
+was added after capture. Compilation, launcher shell syntax and diff checks also
+passed. No cloud-sync completion or server execution is claimed.
