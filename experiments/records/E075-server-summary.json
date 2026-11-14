@@ -1,0 +1,342 @@
+{
+  "experiment": "E075",
+  "status": "completed_user_reported",
+  "evidence": "User-reported server audit stdout; summary/arrays and source code records remain on server",
+  "evidence_sha256": "0944b5e14f28d1b0c925cf416310d7ac959104ffa9af769fac5a228dfa4cdb7b",
+  "run": "/home/carsonc/r-elegans-results/control-signal-audit-20261114T135353Z-96957",
+  "report": "/home/carsonc/r-elegans-results/control-signal-audit-20261114T135353Z-96957/summary.json",
+  "parent_run": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860",
+  "checkpoint_sha256": "2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f",
+  "pre_cue_maximum_voltage_difference_mV": 0.0,
+  "phases": {
+    "stop_cue": {
+      "chemical_sensory": {
+        "maximum_voltage_difference_mV": 0.6400629550464743,
+        "neuron": "ASEL"
+      },
+      "sensory_integrators": {
+        "maximum_voltage_difference_mV": 0.0077216986125634435,
+        "neuron": "AIYL"
+      },
+      "locomotor_integrators": {
+        "maximum_voltage_difference_mV": 0.0019569259269687223,
+        "neuron": "RIML"
+      },
+      "forward_premotor": {
+        "maximum_voltage_difference_mV": 0.0036457907592257754,
+        "neuron": "AVBL"
+      },
+      "stop_candidate": {
+        "maximum_voltage_difference_mV": 0.00013354188376979437,
+        "neuron": "RIS"
+      },
+      "body_motor": {
+        "maximum_voltage_difference_mV": 0.0007449428381960388,
+        "neuron": "DB07"
+      },
+      "head_motor": {
+        "maximum_voltage_difference_mV": 0.06760003108271634,
+        "neuron": "RMDR"
+      },
+      "offline_chemical_peak_nS": {
+        "AWAL": 0.0,
+        "AWAR": 0.0,
+        "AWCL": 0.0,
+        "AWCR": 0.0,
+        "ASEL": 0.0003802348727484974,
+        "ASER": 0.0
+      }
+    },
+    "after_stop": {
+      "chemical_sensory": {
+        "maximum_voltage_difference_mV": 0.4708159064198725,
+        "neuron": "ASER"
+      },
+      "sensory_integrators": {
+        "maximum_voltage_difference_mV": 0.004011302503194258,
+        "neuron": "AIYL"
+      },
+      "locomotor_integrators": {
+        "maximum_voltage_difference_mV": 0.0010725383874827799,
+        "neuron": "RIML"
+      },
+      "forward_premotor": {
+        "maximum_voltage_difference_mV": 0.002042151515407653,
+        "neuron": "AVBL"
+      },
+      "stop_candidate": {
+        "maximum_voltage_difference_mV": 0.0001503227144326047,
+        "neuron": "RIS"
+      },
+      "body_motor": {
+        "maximum_voltage_difference_mV": 0.0007144982146698453,
+        "neuron": "DA08"
+      },
+      "head_motor": {
+        "maximum_voltage_difference_mV": 0.07037043684807776,
+        "neuron": "RMDR"
+      },
+      "offline_chemical_peak_nS": {
+        "AWAL": 0.0,
+        "AWAR": 0.0,
+        "AWCL": 0.0,
+        "AWCR": 0.0,
+        "ASEL": 0.00017238901569123388,
+        "ASER": 0.0002346215837213651
+      }
+    },
+    "rest": {
+      "chemical_sensory": {
+        "maximum_voltage_difference_mV": 0.032262462191482655,
+        "neuron": "ASER"
+      },
+      "sensory_integrators": {
+        "maximum_voltage_difference_mV": 0.0028094458628373786,
+        "neuron": "RIAL"
+      },
+      "locomotor_integrators": {
+        "maximum_voltage_difference_mV": 0.0002134488489815567,
+        "neuron": "RIMR"
+      },
+      "forward_premotor": {
+        "maximum_voltage_difference_mV": 0.0003214256461347986,
+        "neuron": "PVCL"
+      },
+      "stop_candidate": {
+        "maximum_voltage_difference_mV": 0.00010905815916828487,
+        "neuron": "RIS"
+      },
+      "body_motor": {
+        "maximum_voltage_difference_mV": 0.0004486129300929065,
+        "neuron": "DA08"
+      },
+      "head_motor": {
+        "maximum_voltage_difference_mV": 0.05335640033936562,
+        "neuron": "RMDR"
+      },
+      "offline_chemical_peak_nS": {
+        "AWAL": 0.0,
+        "AWAR": 0.0,
+        "AWCL": 0.0,
+        "AWCR": 0.0,
+        "ASEL": 0.0,
+        "ASER": 1.4747572637984273e-05
+      }
+    },
+    "start_cue": {
+      "chemical_sensory": {
+        "maximum_voltage_difference_mV": 8.363994834824368,
+        "neuron": "AWAL"
+      },
+      "sensory_integrators": {
+        "maximum_voltage_difference_mV": 0.9037293714989829,
+        "neuron": "AIZR"
+      },
+      "locomotor_integrators": {
+        "maximum_voltage_difference_mV": 0.122732176870187,
+        "neuron": "RIMR"
+      },
+      "forward_premotor": {
+        "maximum_voltage_difference_mV": 0.03183593456707712,
+        "neuron": "AVBL"
+      },
+      "stop_candidate": {
+        "maximum_voltage_difference_mV": 0.0034753591756526703,
+        "neuron": "RIS"
+      },
+      "body_motor": {
+        "maximum_voltage_difference_mV": 0.01000781836519593,
+        "neuron": "VB01"
+      },
+      "head_motor": {
+        "maximum_voltage_difference_mV": 0.8288373617624039,
+        "neuron": "RMDR"
+      },
+      "offline_chemical_peak_nS": {
+        "AWAL": 0.004182583600233431,
+        "AWAR": 0.004182583600233431,
+        "AWCL": 0.0,
+        "AWCR": 0.0,
+        "ASEL": 0.0,
+        "ASER": 9.936836279684976e-08
+      }
+    }
+  },
+  "sampled_stop_cue_net_drive_difference_pA": {
+    "chemical_sensory->sensory_integrators": {
+      "chemical_inward_pA": 0.0002676672952236867,
+      "electrical_inward_pA": 1.1816731887090426e-06
+    },
+    "chemical_sensory->locomotor_integrators": {
+      "chemical_inward_pA": 0.0,
+      "electrical_inward_pA": 0.0
+    },
+    "chemical_sensory->forward_premotor": {
+      "chemical_inward_pA": 0.0,
+      "electrical_inward_pA": 0.0
+    },
+    "chemical_sensory->stop_candidate": {
+      "chemical_inward_pA": 0.0,
+      "electrical_inward_pA": 0.0
+    },
+    "sensory_integrators->body_motor": {
+      "chemical_inward_pA": 2.360831098636995e-05,
+      "electrical_inward_pA": 0.0
+    },
+    "sensory_integrators->head_motor": {
+      "chemical_inward_pA": 0.0004033008647774672,
+      "electrical_inward_pA": 5.254047271661955e-06
+    },
+    "locomotor_integrators->body_motor": {
+      "chemical_inward_pA": 1.681063220403123e-05,
+      "electrical_inward_pA": 0.0
+    },
+    "locomotor_integrators->head_motor": {
+      "chemical_inward_pA": 0.00021117790239366663,
+      "electrical_inward_pA": 6.825843106017526e-07
+    },
+    "forward_premotor->body_motor": {
+      "chemical_inward_pA": 2.3808069850063396e-06,
+      "electrical_inward_pA": 3.976886492318421e-05
+    },
+    "forward_premotor->head_motor": {
+      "chemical_inward_pA": 1.0176698738047218e-08,
+      "electrical_inward_pA": 0.0
+    },
+    "stop_candidate->body_motor": {
+      "chemical_inward_pA": 0.0,
+      "electrical_inward_pA": 0.0
+    },
+    "stop_candidate->head_motor": {
+      "chemical_inward_pA": 2.785353061892813e-07,
+      "electrical_inward_pA": 1.4046479639612947e-05
+    }
+  },
+  "RIS_fixed_chemical_reversal_mV": -21.57786750793457,
+  "parameters": {
+    "total": 9616,
+    "trainable": 1318,
+    "changed": 995,
+    "frozen_unchanged": true,
+    "factor_percentiles": [
+      0.6331684512442983,
+      0.9612981099189122,
+      1.0,
+      1.0285592575705378,
+      1.323654531266183
+    ],
+    "near_bound": 1
+  },
+  "workers": [
+    {
+      "worker": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860/control/fit/seed-7200",
+      "proposals": 143,
+      "accepted": 68,
+      "errors": 0,
+      "first_reported_best": {
+        "iteration": 1,
+        "epoch": "stop",
+        "loss": 5.972506785035724,
+        "rest_ranges": [
+          0.039148832244042225
+        ]
+      },
+      "last_reported_best": {
+        "iteration": 143,
+        "epoch": "stop",
+        "loss": 5.866647040457735,
+        "rest_ranges": [
+          0.03520628649325283
+        ]
+      }
+    },
+    {
+      "worker": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860/control/fit/seed-7201",
+      "proposals": 140,
+      "accepted": 68,
+      "errors": 0,
+      "first_reported_best": {
+        "iteration": 1,
+        "epoch": "stop",
+        "loss": 5.972363806177494,
+        "rest_ranges": [
+          0.03914321958835365
+        ]
+      },
+      "last_reported_best": {
+        "iteration": 140,
+        "epoch": "stop",
+        "loss": 5.887761794133721,
+        "rest_ranges": [
+          0.03595970369519025
+        ]
+      }
+    },
+    {
+      "worker": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860/control/fit/seed-7202",
+      "proposals": 143,
+      "accepted": 56,
+      "errors": 0,
+      "first_reported_best": {
+        "iteration": 1,
+        "epoch": "stop",
+        "loss": 5.972506785035724,
+        "rest_ranges": [
+          0.039148832244042225
+        ]
+      },
+      "last_reported_best": {
+        "iteration": 143,
+        "epoch": "stop",
+        "loss": 5.8872977501537544,
+        "rest_ranges": [
+          0.035942976092010165
+        ]
+      }
+    },
+    {
+      "worker": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860/control/fit/seed-7203",
+      "proposals": 140,
+      "accepted": 56,
+      "errors": 0,
+      "first_reported_best": {
+        "iteration": 1,
+        "epoch": "stop",
+        "loss": 5.972407728345367,
+        "rest_ranges": [
+          0.039144944256331526
+        ]
+      },
+      "last_reported_best": {
+        "iteration": 140,
+        "epoch": "stop",
+        "loss": 5.908118368519061,
+        "rest_ranges": [
+          0.03670127602815226
+        ]
+      }
+    }
+  ],
+  "proposals": 566,
+  "accepted": 248,
+  "proposal_errors": 0,
+  "selected_worker_rest_reduction_from_first_reported_best_fraction": 0.10070659901712342,
+  "scope": "Descriptive signal-flow and search diagnostics; no trained skill or causal mediation qualification",
+  "interpretation": [
+    "Stop cue reaches ASEL; much smaller changes in selected downstream control/body motor groups",
+    "Start AWA response is larger; cue identity and pathway differ, so this is not a calibrated gain comparison",
+    "No selected-coordinate bound saturation across most trainables; one near bound",
+    "Optimizer accepted changes without reported proposal errors; still no learned cue-specific stopping",
+    "E074 no-cue/rest similarity means smaller rest motion does not establish improved cue control"
+  ],
+  "reporting_correction": "Glob included seed-*.log files as fake zero-proposal workers; only four directories are actual workers. Filter fixed prospectively.",
+  "unknown": [
+    "Measured membrane conductance history (only offline reconstruction provided)",
+    "Full release profiles and per-edge topology from server summary",
+    "Neuron-specific physiological calibration",
+    "Current operating voltages needed to interpret RIS reversal sign",
+    "Actual historical source/environment records and elapsed audit duration"
+  ],
+  "decision": "Preserve all parents. Before more long fitting, propose brief control-access perturbation diagnostics; later train cue-specific suppression against matched no-cue rather than merely reducing absolute motion. No new perturbation or training run launched.",
+  "biological_fidelity_qualified": false
+}

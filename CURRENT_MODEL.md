@@ -1,5 +1,18 @@
 # Current model: exact scope and computation path
 
+2026-11-14 E075 saved-data audit completed (user-reported). Stop cue changes
+ASEL by.640mV, but selected control responses are small: AIYL.00772mV,
+AVBL.00365mV, RIS.000134mV; body motor maximum.000745mV. START changes AWA
+by8.364mV. This supports cue access with weak downstream influence under these
+conditions, not learned switching. Four actual workers made566 proposals,
+accepted248, errors0; selected rest range dropped~10.07% from first reported
+best, but E074 no-cue comparison shows no stopping.995/1318 selected trainables
+changed; one near bound. No new skill or swimming qualification. Preserve parents.
+Proposed next step is a short test of control access to the oscillator, followed
+by cue-specific suppression training if feasible; no new experiment launched.
+[Audit outcome](experiments/records/E075-server-summary.json).
+
+
 2026-11-14 E074 outcome (user-reported):559.98min, no timeout, process exit0.
 Selected seed7200/checkpoint2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f
 failed all positive control cases. Nominal rest range.0352063rad versus1e-4rad
@@ -2938,4 +2951,4 @@ synaptic drive, offline intended chemical replay, source/target topology and
 parameter/history diagnostics. Reconstruction is labeled separately from saved
 observations; this audit confers no behavior or causal-control qualification.
 Preserve the entire source run and recursive input capsule as dependencies.
-See experiments/records/E075-plan.json. Server results pending.
+See experiments/records/E075-server-summary.json for the reported outcome.

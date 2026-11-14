@@ -1,6 +1,6 @@
 {
   "experiment": "E075",
-  "status": "planned_not_executed",
+  "status": "completed_read_only_user_reported",
   "record_date": "2026-11-14",
   "question": "Where does the E074 cue response attenuate between ligand transduction, sensory cells, control interneurons and rhythmic motor output?",
   "method": "Read saved nominal/no-cue/chemical-blocked/stop-blocked/start-blocked trajectories; no forward neural or mechanical simulation; offline intended chemical replay and sampled synaptic-current reconstruction",
@@ -26,5 +26,6 @@
     "Unrecorded actual historical code/environment remain in preserved source run records"
   ],
   "artifacts": "/home/carsonc/r-elegans-results/control-signal-audit-<UTC>-<PID>",
-  "dependency_preservation": "Preserve source E074 run and complete control_inputs capsule, all selected/final models and trajectories. Audit hashes referenced inputs, snapshots selected model/coordinates/origin and exact source/env/argv externally; never delete source dependencies"
+  "dependency_preservation": "Preserve source E074 run and complete control_inputs capsule, all selected/final models and trajectories. Audit hashes referenced inputs, snapshots selected model/coordinates/origin and exact source/env/argv externally; never delete source dependencies",
+  "outcome_record": "E075-server-summary.json"
 }

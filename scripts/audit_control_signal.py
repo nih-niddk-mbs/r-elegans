@@ -102,6 +102,7 @@ def main():
     if any(not np.array_equal(np.asarray(a),np.asarray(b)) for a,b in zip(rebuilt,params)):raise ValueError('Coordinates do not reconstruct selected model')
     histories=[]
     for worker in sorted((run/'control/fit').glob('seed-*')):
+        if not worker.is_dir():continue
         rows=0;accepted=0;errors=0;first=None;last=None
         path=worker/'history.jsonl'
         if path.exists():

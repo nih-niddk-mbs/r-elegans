@@ -6759,3 +6759,70 @@ b5ee8d38368c054e866211b2751f36ea0a3a3d0ca16a6df32f2719697fd1e7fd.
 Includes staged source/environment/verification-invocation record; this receipt
 was added after capture. Compilation, launcher shell syntax and diff checks also
 passed. No cloud-sync completion or server execution is claimed.
+
+### E075 outcome — stop cue sensed, weak observed downstream influence (2026-11-14)
+
+User-reported audit stdout: control-signal-audit-20261114T135353Z-96957, parent
+E074 controlled-swimming-20261114T034629Z-30860, checkpoint
+2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f.
+Audit completion reported; actual elapsed time/source/env/files not retrieved.
+Pre-cue voltage difference0 supports the paired initial-condition comparison.
+No forward neural simulation or fit, no new behavior qualification. Full parsed
+small outcome in E075-server-summary.json; original attachment/hash external.
+
+STOP cue maxima: ASEL.640063mV; AIYL.00772170mV; RIML.00195693mV;
+AVBL.00364579mV; RIS.000133542mV; DB07.000744943mV; RMDR.0676000mV.
+These are group-wise pointwise cue-minus-sham maxima, not matched-path transfer
+gains; groups peak at potentially different times, and phase changes contribute.
+AFTER STOP: ASER.470816mV; RIS.000150323mV. During REST: ASER.0322625mV,
+RIS.000109058mV. START: AWAL8.36399mV; AIZR.903729mV; AVBL.0318359mV;
+RIS.00347536mV; VB01.0100078mV; RMDR.828837mV. AWA/ASE cues use different
+ligands/pathways, so their ratio is not a calibrated receptor-gain comparison.
+Evidence supports a functioning cue-to-sensory response and small influence on
+selected control/body motor cells, not a complete sensory disconnection. It does
+not identify a unique faulty synapse or establish which cells can stop the model.
+
+Offline chemical replay (not recorded applied conductance): STOP ASEL peak
+.000380235nS; START AWA.00418258nS. Adaptation/rectification produces ASER
+response after salt removal. These transients are followed by a target sustained
+rest state; that state was not learned. Sampled group net chemical-drive changes
+(pA): sensory→integration.000267667; integration→body motor.0000236083;
+integration→head.000403301. Direct sensory-group→RIS/forward/locomotor and
+RIS→body motor net changes reported0, but zero net difference alone does not
+prove zero anatomical edges. Full topology/release profiles remain in server
+summary, not supplied here. RIS fixed reversal−21.5778675mV is exploratory;
+without operating voltages and mechanism validation it is not proof of inhibitory
+control. No unsupported reversal/sign/peptide change made.
+
+Optimizer:143/140/143/140 proposals across7200..7203 (566 total), accepted
+68/68/56/56 (248), reported proposal errors0. All remain stop epoch. Selected
+7200 first-reported-best rest.03914883224rad to.03520628649rad (~10.07% decrease).
+First history row is after first proposal, not initial cued baseline. E074's
+almost identical no-cue range means this is not evidence of cue-specific stopping;
+it is consistent with merely weakening the ongoing oscillation. Loss5.97251 to
+5.86665. Selected995 of1318 eligible coordinates changed out of9616 total;
+relative selected-coordinate factors~.633..1.324, one near original bound,
+frozen fields preserved. This does not suggest widespread bound saturation;
+actual channel physiology and ability to switch the oscillator remain uncertain.
+
+Minor audit reporting bug: seed-* glob also listed seed-*.log regular files as
+zero-proposal workers. Those are not additional workers. Correct prospectively
+by requiring directories; preserve the raw historical transcript. No selected
+model/statistical outcome changes. Decision: retain E071 motor parent, E074
+failed variants and full lineages. Propose a short, graded control-access test:
+can candidate interneurons suppress ongoing dynamics at all while the remainder
+of the model stays active? Any imposed perturbation is diagnostic only, not a
+learned-stop success. Specify a new protocol before execution. If control access
+exists, train cue-specific suppression relative to matched no-cue and preserve
+pre-cue movement, then restart; avoid rewarding only global amplitude reduction.
+Do not run another long identical search or widen physiological bounds blindly.
+No new perturbation/training run launched in this turn.
+
+E075 server evidence archive: OneDrive notebook/evidence/
+E075-server-20261114T135353Z-96957, verbatim supplied stdout and compact interpreted
+summary byte-checked. Manifest SHA256
+ a88a1e4646a36b940360161ea38b8109a292fa79fe390a79d7e6df94679ed215.
+No actual server trajectories/checkpoint retrieval or cloud-sync claim. Local
+verification: parsed4 actual workers/4 phases; module compilation and diff checks
+passed for the directory-only reporting correction. No new dynamic tests needed
+for that filter, no model parameters changed.
