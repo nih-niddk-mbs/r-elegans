@@ -50,3 +50,13 @@ def test_tail_objective_retains_frequency_and_middle_head():
     assert not fast['safety_passed']
     damaged=tail_score(trace(1.8,tail=.0016,middle=.01),0,target_hz=1.8,window_seconds=15,baseline=baseline)
     assert not damaged['middle_head_preserved'] and not damaged['safety_passed']
+
+
+def test_control_search_uses_extra_budget_and_retains_full_validation():
+    from r_elegans.wall_budget import control_search_deadline
+    reserve=3600.
+    short=control_search_deadline(4*3600.,reserve)
+    long=control_search_deadline(10*3600.,reserve)
+    assert long-short==6*3600.
+    assert 10*3600.-long==reserve+600.
+    with pytest.raises(ValueError):control_search_deadline(36000,0)

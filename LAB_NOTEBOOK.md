@@ -6609,3 +6609,41 @@ these are not a matched before/after cue-response comparison. Actual checkpoint
 hashes, source revision/environment and raw traces remain unreported. E073 is
 blocked, not executed. Small structured summary in E072-server-summary.json;
 no raw data/weights/stdout added to Git. No new training authorized/launched here.
+
+### E074 planned extended control/swimming run — maximum10h TOTAL
+
+User first requested8h then authorized up to10h. Set launcher600min TOTAL, all
+phases/cleanup included. Question: does longer control search reach validated
+sensory stopping/rest/restart, enabling subsequent controlled physical swimming?
+Parent remains E0716901 SHA8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a.
+Fresh searches7200..7203(control),7300..7303(swim); this intentionally restarts
+from the qualified motor parent, not a failed-state optimizer resume. Same seeds
+can repeat the earlier proposal prefix; no saved E072 candidate improvement is
+assumed because detailed results remain unreported. Prior failed outcomes kept.
+Fixed/trainable fields and numerical/physical/causal gates unchanged from E072/
+E073; no external motor drive, disabled dynamics or softened stopping criterion.
+Control1318 coordinates; swim9616 unknown densities/neural connections.
+
+Scheduler correction: control may search until finish minus one full selected-
+checkpoint validation reserve and600s reporting margin. A nominal pass stops
+search early; successful full validation can release remaining time to swimming.
+Even if no nominal pass, validate the best process-successful control candidate
+to obtain complete diagnostic cases. No successful worker => explicit failure.
+Swimming only after full exact-model control pass and sufficient remaining
+validation budget. Hard outer watchdog unchanged; deadline cannot qualify a
+partial model. It may finish early if stages complete or cannot proceed safely
+within remaining budget. Command after pull:
+`sh scripts/launch_controlled_swimming_mbslnx2.sh`. Exact run ID is launcher-
+generated, not known here. Full external source/env/argv, lineage hashes, selected/
+final models, coordinate/RNG/optimizer state retained. No server run launched.
+
+E072 reporting-only update local verification: module compilation and synthetic
+read-only report fixture passed; no simulation. E074 scheduler verification below.
+
+E074 local software verification:13 focused wall-budget/control tests passed
+in6.08s, including watchdog descendant cleanup, the additional6h becoming6h of
+additional available control search, and retention of validation/report reserves.
+Coordinator compilation, launcher shell syntax and diff checks passed. These are
+software checks; no new neural forward simulation, learned control or physical
+swimming result. Exact source/environment/invocation capture remains enabled in
+the server launcher/coordinator/workers. E074 remains planned pending user launch.

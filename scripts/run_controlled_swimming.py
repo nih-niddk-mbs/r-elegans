@@ -12,7 +12,7 @@ import numpy as np
 
 from scripts.experiment_records import capture_run_record,file_sha256
 from r_elegans.behavior_control import VALIDATION_CASES,CONTROL_GROUPS,control_report,qualify_behavior
-from r_elegans.wall_budget import check_deadline,validation_reserve
+from r_elegans.wall_budget import check_deadline,control_search_deadline
 
 PARENT='8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a'
 
@@ -168,14 +168,19 @@ def main():
         write(out/stage/'control_gate.json',gate)
         return gate
 
-    phases=[];searches={};remaining=finish-time.monotonic()
-    control_until=time.monotonic()+max(60.,.6*(remaining-2*reserve-600))
+    phases=[];searches={}
+    control_until=control_search_deadline(finish,reserve)
+    write(out/'phase_deadlines.json',dict(control_search_until_monotonic=control_until,
+        control_search_minutes_available=(control_until-time.monotonic())/60,
+        validation_reserve_seconds=reserve,report_margin_seconds=600,
+        policy='Use available time for control; finish early on nominal pass; validate best even if training gate fails'))
     fits=pool('control','fit',out/'control_inputs',control_until)
     searches['control']=fits
     eligible=sorted((r for r in fits if r['exit_code']==0 and r['result'] and r['result']['nominal_passed']),key=lambda r:r['result']['best']['loss'])
     control=None;swim=None;qualified=False;complete=False
-    if eligible:
-        chosen=eligible[0];control=validate('control',out/'control_inputs',chosen)
+    candidates=eligible or sorted((r for r in fits if r['exit_code']==0 and r['result']),key=lambda r:r['result']['best']['loss'])
+    if candidates:
+        chosen=candidates[0];control=validate('control',out/'control_inputs',chosen)
         phases.append(dict(stage='control',selected=chosen['path'],report=str(out/'control/control_gate.json'),passed=control['passed']))
         if qualify_behavior(control['checkpoint_sha256'],control['swimming_passed'],control):
             qualified=True;complete=True
@@ -199,7 +204,7 @@ def main():
         control_validation_complete=bool(control and control['complete']),swim_validation_complete=bool(complete),
         swimming_qualified=qualified,swimming_blocked=not bool(control and control['passed']),
         scope='Learned cue association and first physical-propulsion engineering rung; biological fidelity not established')
-    if not eligible:summary['stop_reason']='sensory_control_training_gate_not_met; swimming not started'
+    if not candidates:summary['stop_reason']='no_successful_control_fit_process; swimming not started'
     elif control and not control['passed']:summary['stop_reason']='sensory_control_validation_failed; swimming not started'
     elif not complete:summary['stop_reason']='insufficient_remaining_budget_or_incomplete_swim_validation'
     write(out/'summary.json',summary)

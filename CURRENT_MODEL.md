@@ -1,5 +1,16 @@
 # Current model: exact scope and computation path
 
+2026-11-13 E074 planned follow-up: the controlled-swimming launcher now has a
+**600-minute TOTAL ceiling** (setup, search, validation and cleanup). Control
+search uses the remaining budget minus one full validation suite and10min
+reporting margin, ending early on a nominal pass. Validate the best control
+candidate even if it misses the nominal training gate. Full control validation
+still gates any swimming. Swimming proceeds only if enough time remains for its
+own validation. This is a fresh search from unchanged E071 seed6901 with seeds
+7200–7203, not a resume of failed E072 optimizer states. Prior failed outcomes
+remain preserved. No new server execution is evidenced yet.
+
+
 2026-11-13 E072 server outcome (user-reported): four control fits exited0 after
 18–19 proposals each; all remained in the stop stage and failed the nominal
 control gate. Total77.6min; no watchdog timeout. Full control validation and E073

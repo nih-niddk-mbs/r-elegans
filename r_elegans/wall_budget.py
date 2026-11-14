@@ -19,3 +19,10 @@ def validation_reserve(parent_seconds):
 
 def can_search(remaining,reserve,slowest_evaluation):
     return remaining > reserve+max(10*60.,2*slowest_evaluation)+60
+
+
+def control_search_deadline(finish, reserve):
+    """Keep one full validation suite and reporting time; pass early to free swim time."""
+    if reserve <= 0:
+        raise ValueError('Positive validation reserve required')
+    return finish-reserve-600.
