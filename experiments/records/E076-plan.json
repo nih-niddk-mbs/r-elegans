@@ -1,0 +1,59 @@
+{
+  "experiment": "E076",
+  "status": "planned_not_executed",
+  "record_date": "2026-11-14",
+  "question": "Can candidate interneurons reversibly suppress ongoing body motion at the existing model settings?",
+  "parent_run": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860",
+  "checkpoint_sha256": "2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f",
+  "method": "17 diagnostic forward simulations: unchanged sham plus4 interneuron groups x2 strengths x2 reversals; refine strongest baseline-safe suppression candidate on matched neural/body half-step shams",
+  "groups": [
+    "sensory_integrators",
+    "locomotor_integrators",
+    "forward_premotor",
+    "stop_candidate"
+  ],
+  "conductance_strengths_nS": [
+    0.01,
+    0.1
+  ],
+  "reversals_mV": [
+    0,
+    -80
+  ],
+  "probe_window_s": [
+    30,
+    40
+  ],
+  "duration_per_case_s": 60,
+  "scoring_windows_s": {
+    "pre": [
+      20,
+      30
+    ],
+    "during": [
+      35,
+      40
+    ],
+    "recovery": [
+      50,
+      60
+    ]
+  },
+  "trainable_parameters": [],
+  "fixed_parameters": "All parent channel/synaptic/NMJ/body/sensory parameters and topology; normal sensing and proprioception active. Only additive declared conductance diagnostic changes during probe.",
+  "seeds": "None: deterministic intervention screen, no optimizer",
+  "command": "sh scripts/launch_control_access_mbslnx2.sh",
+  "maximum_total_minutes": 45,
+  "parallelism": "Four workers x4 physical CPU cores",
+  "criteria": {
+    "integrity": "Model/case/reference hash checks and exact coordinate/fixed reconstruction; ordinary sham must reproduce saved E074 no-cue to1e-8 before interpretation",
+    "baseline": "Pre-probe voltage/joints match same-grid sham within1e-8 and regional cycles>=.003rad",
+    "quiet": "Maximum raw joint range<=1e-4rad during35..40s",
+    "recovery": "Regional cyclic excursions>=max(.003rad,.8 sham) with1.62..1.98Hz frequency during50..60s",
+    "safety": "Joint magnitude<.5rad; voltage between-100 and60mV; all saved values finite",
+    "refinement": "Matched-grid sham tests with body-half/neural-half; each must independently pass reversible suppression and during/sham range ratio agreement within max(.02,20%)"
+  },
+  "scope": "Imposed neural-conductance diagnostic only; never learned stopping, biological validation or automatic training promotion",
+  "artifacts": "/home/carsonc/r-elegans-results/control-access-<UTC>-<PID>",
+  "preservation": "Exact source/env/argv/input capsule; all full trajectories/results external; preserve entire E074/E071 source lineage. No optimizer created or parameter fitting performed."
+}

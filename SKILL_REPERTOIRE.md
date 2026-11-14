@@ -783,3 +783,15 @@ causes. No new model changes or experiment have been launched.
 
 2026-11-14: E075 saved-data sensory-to-motor audit completed in user-reported stdout;
 no new skill qualification. Adds no trained or qualified skill; all E074 control failures remain.
+
+E076 planned diagnostic follow-up (2026-11-14):
+`sh scripts/launch_control_access_mbslnx2.sh` screens additive conductance probes
+in four candidate interneuron groups at.01/.1nS and0/−80mV reversal. Sham plus16
+probes;60s per case, input30–40s, recovery measured50–60s. Strongest safe matched-
+baseline candidate gets matched-sham neural/body half-step tests. All parent
+weights and mechanics fixed; sensing, all neurons and NMJs continue evolving.
+No sensory-control, learned-stop, swimming or biological pass is conferred by
+imposed input. Reports distinguish body-motion suppression from neural activity.
+45min maximum TOTAL under nohup, four CPU workers; source/reference checks and
+all outputs external. No new training launches automatically. See E076-plan.json
+in experiments/records; actual server results pending.

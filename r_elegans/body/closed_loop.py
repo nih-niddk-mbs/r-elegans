@@ -41,7 +41,7 @@ def initial_embodied_state(fixed, network_config, body_params, world,
 
 def embodied_neural_step(state, params, fixed, network_config, parent, model, body_params,
                         world, maps, dt, brain_substeps, sensory_config=EmbodiedSensoryConfig(),
-                        gain_multipliers=None):
+                        gain_multipliers=None, diagnostic_membrane_input=None):
     """Advance sensing and brain; body update follows in the same physical step.
 
     Also used by the host wet-surface reference integrator. Recording neural
@@ -50,6 +50,11 @@ def embodied_neural_step(state, params, fixed, network_config, parent, model, bo
     sensory, membrane, observed = transduce_sensory_signals(state.sensory,
         state.brain_body.body, body_params, world, maps, dt, sensory_config,
         gain_multipliers=gain_multipliers)
+    if diagnostic_membrane_input is not None:
+        # Explicit experimental intervention; never used by behavior trainers.
+        membrane = membrane._replace(
+            conductance_nS=membrane.conductance_nS+diagnostic_membrane_input.conductance_nS,
+            weighted_reversal_pA=membrane.weighted_reversal_pA+diagnostic_membrane_input.weighted_reversal_pA)
     current = membrane.weighted_reversal_pA-membrane.conductance_nS*state.brain_body.brain.voltage_mV
     brain = advance_network(state.brain_body.brain, params, fixed, dt, brain_substeps,
                             network_config, membrane_input=membrane)

@@ -6826,3 +6826,68 @@ No actual server trajectories/checkpoint retrieval or cloud-sync claim. Local
 verification: parsed4 actual workers/4 phases; module compilation and diff checks
 passed for the directory-only reporting correction. No new dynamic tests needed
 for that filter, no model parameters changed.
+
+### E076 PLAN — graded interneuron control-access screen (2026-11-14)
+
+User approved the proposed short control-access diagnostic. Question: with
+E074's parameters unchanged, can candidate interneurons reduce ongoing body
+motion reversibly while all other neurons, muscles and feedback remain active?
+Parent selected7200 SHA2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f
+from controlled-swimming-20261114T034629Z-30860. No parameter training, optimizer
+or RNG seeds; this is a deterministic intervention experiment. Preserve E071,
+all E074 variants, selected/final/optimizer/RNG and complete recursive lineage.
+
+Method: unchanged no-cue sham plus16 probes, four groups (AIY/AIB/AIZ/RIA;
+RIB/RIM; AVB/PVC; RIS), per-cell conductance.01/.1nS, reversal0/−80mV.
+These imposed conductances are diagnostic depolarizing/hyperpolarizing hypotheses,
+not identified native channels, measured optogenetic strengths or learned cues.
+No pacing waveform or clock rescaling. Each60s rollout: assess pre20–30s,
+intervene30–40s, score last5s35–40, assess recovery50–60. All normal sensory/
+proprioceptive transduction, brain dynamics, NMJs and mechanics remain active;
+no voltage freeze or muscle zeroing. Optional diagnostic hook defaultsNone and
+is never supplied by behavior trainers. It adds conductance to normal membrane
+input, leaving inherited parameters/topology/bias unchanged.
+
+Integrity before interpretation: input capsule hashes, exact global coordinates/
+model/fixed reconstruction and stable parent hashes; new ordinary sham must
+match archived E074 no-cue voltage/calcium/muscles/filter/joints within1e-8.
+Screen pre-probe voltage/joints must match same-grid sham within1e-8 and all
+regional baseline cycles>=.003rad. Quiet criterion max raw joint range<=1e-4rad
+in35–40s. Recovery regional cycles>=max(.003rad,.8 matched sham) and1.62–1.98Hz
+in50–60s. Joint magnitude<.5rad, voltage between−100 and60mV, finite outputs.
+Report target voltages versus sham and muscle/command/filter raw ranges so a
+stationary body is not assumed to mean all neural oscillators are silenced.
+This diagnostic alone cannot establish natural stopping physiology or a learned
+sensory-controlled skill. Negative results exclude only tested groups, doses and
+timing, not every possible network control mechanism.
+
+Rank safe baseline-matched candidates by during/sham body-motion range ratio;
+strongest gets neural-half(.05ms) and body-half(.001s), each with its own sham.
+Both refined comparisons must independently pass suppression/recovery and ratio
+agreement within max(.02,20% ordinary ratio) for diagnostic-access flag. Always
+keep learned_stopping_qualified=False, even if externally imposed probes work.
+No automatic fitting/promotion. All17 screen results and4 refinement trajectories
+external, with exact source/env/argv, configurations and hashes. Preserve input
+source run; no selected/final model file is overwritten.
+
+Command after pull: `sh scripts/launch_control_access_mbslnx2.sh`. Dedicated conda
+interpreter under nohup/private-process-group watchdog, four workers x4 physical
+cores.45min MAXIMUM TOTAL includes source checks, compilation,17 screen cases,
+up to4 refinement cases, reports and cleanup. Reserve15min for refinement; mark
+unstarted/failed/time-budget cases explicitly. Child absolute deadlines and outer
+watchdog remain active; partial results never certify access. Exact output path
+control-access-<UTC>-<PID> unknown until launcher runs. No server execution here.
+
+Local software verification:20 focused tests passed in6.43s: probe strengths/
+target/time-window/JIT routing, membrane addition with normal neural/NMJ path
+preserved (mocked advance, no forward neural test), matched sham/recovery/quiet
+scoring including rejection of fast recovery, existing behavior gates and
+wall-watchdog cleanup, chemical replay. Module compilation, launcher shell syntax
+and diff checks passed. No new Mac forward neural simulation or claimed server
+result. Server sham reconstruction remains a required execution check.
+
+E076 preparation archive: OneDrive notebook/evidence/E076-probe-preparation-20261114,
+401 files plus manifest, hashes verified. Manifest SHA256
+ d423f759182a5a89b9f587b7bbb7cc81e32c4040a9ff9a66de1456aac0139173.
+Staged source/environment/verification-invocation preserved; this archive receipt
+added after capture. No server execution or OneDrive cloud-sync completion claim.

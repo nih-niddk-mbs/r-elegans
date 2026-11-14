@@ -54,13 +54,15 @@ def training_windows(root, uids, frames=8, start=0):
 def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
                  brain_step_ms=.1,burn_in=2.,sampling="boxcar",record_dense=False,hold_voltage=False,
                  sensory_config=None,chemical_world=None,rollout_templates=None,initial_state=None,
-                 exact_step_clock=False,wall_deadline=None):
+                 exact_step_clock=False,wall_deadline=None,diagnostic_membrane=None):
     """Endogenous brain -> frozen NMJ -> body -> proprioception, no pacing.
 
     Media are explicitly mismatched mechanical hypotheses, not source-condition
     calibration or certified error bounds. Default chemical gains are zero because
     recording-specific food/stimulus transduction is not yet modeled. Explicit
     sensory fixtures are for separate controlled-response experiments.
+    diagnostic_membrane is an explicit imposed interneuron intervention hook;
+    behavior training never supplies it. None preserves the original dynamics.
     """
     import jax
     from r_elegans.body import physical_muscle_body_params, build_muscle_projection
@@ -71,6 +73,8 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
     from r_elegans.body.embodied_sensory import (EmbodiedSensoryConfig,default_chemical_world,
         build_sensory_maps,validate_chemical_world)
     from r_elegans.body.wet_surface import wet_agar_drag,surface_body_step
+    if diagnostic_membrane is not None and (not callable(diagnostic_membrane) or hold_voltage):
+        raise ValueError('Diagnostic membrane probe requires live dynamics and a callable schedule')
     if medium not in ('liquid','wet-agar'):
         raise ValueError('Unknown mechanical hypothesis')
     if not all(np.isfinite(v) and v>0 for v in (dt,brain_step_ms)) or not np.isfinite(burn_in) or burn_in<0:
@@ -95,7 +99,7 @@ def make_rollout(fixed, config, parent, model, *, medium='wet-agar',dt=.002,
             brain=state.brain_body.brain
             return brain,state.sensory,channel_muscle_activations(brain.voltage_mV,fixed,parent,model),None,None
         return embodied_neural_step(state,params,fixed,config,parent,model,body,world,maps,dt,substeps,sc,
-            gain_multipliers=gains)
+            gain_multipliers=gains,diagnostic_membrane_input=None if diagnostic_membrane is None else diagnostic_membrane(state.brain_body.body.time))
     fast_neural = jax.jit(neural)
     def liquid_step(state,params,gains):
         brain,sensory,muscles,_,_ = neural(state,params,gains)
