@@ -16,6 +16,10 @@ def main():
         b=json.loads((run/'budget_receipt.json').read_text())
         print('Elapsed minutes:',round(b['total_elapsed_seconds']/60,2))
         print({k:b.get(k) for k in ('all_steps_finished','validation_complete','timed_out','exit_code')})
+    if (run/'configuration.json').exists():
+        config=json.loads((run/'configuration.json').read_text())
+        reserve=config.get('validation_reserve_seconds_each')
+        if reserve is not None:print('Validation reserve minutes per stage:',round(reserve/60,2))
     if not (run/'summary.json').exists():print('No final summary yet; inspect the log.');return
     s=json.loads((run/'summary.json').read_text())
     print({k:s.get(k) for k in ('control_qualified','swimming_qualified','swimming_blocked','stop_reason')})
@@ -40,6 +44,22 @@ def main():
                 result=r.get('result') or {}
                 print(stage,r['path'],'exit:',r['exit_code'],'epoch:',result.get('epoch'),
                       'nominal passed:',result.get('nominal_passed'),'iterations:',result.get('iterations'))
+                worker=Path(r['path'])
+                baseline=worker/'baseline.json'
+                rows=[('baseline (source no-cue for control)',json.loads(baseline.read_text()))] if baseline.exists() else []
+                rows.append(('best cued',result.get('best',{}).get('metrics',{})))
+                for label,m in rows:
+                    print(label,dict(stop_loss=m.get('stop_loss'),safety=m.get('safety_passed'),
+                        initial_movement=m.get('initial_movement_passed'),
+                        rest_range_rad=[w.get('maximum_raw_joint_range_rad') for w in m.get('off',[])],
+                        active_amplitudes=[w.get('amplitudes') for w in m.get('on',[])],
+                        active_hz=[w.get('frequency_hz') for w in m.get('on',[])]))
+                print('Checkpoint:',result.get('checkpoint_sha256'))
+                history=worker/'history.jsonl'
+                if history.exists():
+                    records=[json.loads(line) for line in history.read_text().splitlines() if line.strip()]
+                    print('Accepted:',sum(bool(row.get('accepted')) for row in records),
+                          'proposal errors:',sum(bool(row.get('error')) for row in records))
 
 
 if __name__=='__main__':main()

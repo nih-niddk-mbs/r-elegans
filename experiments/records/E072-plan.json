@@ -1,6 +1,6 @@
 {
   "experiment": "E072",
-  "status": "planned_not_executed",
+  "status": "executed_training_gate_not_met_user_reported",
   "record_date": "2026-11-13",
   "question": "Sensory stop-rest-restart of qualified water wiggling",
   "parent_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
@@ -19,5 +19,6 @@
   "qualification": "Full checkpoint-specific sensory control gate",
   "artifacts": "/home/carsonc/r-elegans-results/controlled-swimming-<launcher-generated UTC>-<PID>",
   "local_verification": "16 software tests; no server model control or swimming claim",
-  "biological_fidelity_qualified": false
+  "biological_fidelity_qualified": false,
+  "outcome_record": "E072-server-summary.json"
 }

@@ -6579,3 +6579,33 @@ Includes the staged dirty-source snapshot, environment/argv and local static
 fixture result/check script. Notebook receipt added after source capture; Git
 preserves this final receipt. No actual server checkpoint retrieval or cloud-sync
 completion is claimed.
+
+### E072 outcome / E073 blocked — user-reported server stdout (2026-11-13)
+
+Run controlled-swimming-20261113T215141Z-18194 under external server results.
+Reporter invocation: cd /home/carsonc/github/r-elegans &&
+/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_controlled_swimming.
+Reported77.6min, process exit0, timed_out=False, all_steps_finished=False,
+validation_complete=False. Four worker exits0:7200/7202 each19 proposals,
+7201/7203 each18 (74 total). Every worker remained epoch=stop and failed nominal
+control. No full control validation or swimming search launched; scientific gate
+failure is distinct from process success. No new behavior qualified. Preserve
+E071 parent unchanged and every external selected/final E072 model and lineage.
+
+Code inspection: initial control search is allocated60% of remaining time after
+reserving two validation suites and600s; control gate failure ends coordinator.
+Unused downstream reserve is not reassigned to control. This explains early
+termination structurally; exact recorded reserves/worker timing unavailable here.
+77.6min is reported elapsed, not evidence of a240min optimization. Four workers
+were used concurrently; low proposal count is consistent with costly full
+rollouts, but exact per-proposal timing has not been retrieved. Do not infer
+biological impossibility, no improvement or a particular failing numerical
+constraint from a binary gate report.
+
+Decision: inspect stored best rest-motion/active-state metrics, accepted proposals
+and errors before another experiment. Reporter now includes these fields and the
+per-stage reserve. Source baseline in control fits is no-cue; best is cued, so
+these are not a matched before/after cue-response comparison. Actual checkpoint
+hashes, source revision/environment and raw traces remain unreported. E073 is
+blocked, not executed. Small structured summary in E072-server-summary.json;
+no raw data/weights/stdout added to Git. No new training authorized/launched here.

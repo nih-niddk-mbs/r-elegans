@@ -1,8 +1,18 @@
 # r-elegans
 
+2026-11-13 E072 server outcome (user-reported): four control fits exited0 after
+18–19 proposals each; all remained in the stop stage and failed the nominal
+control gate. Total77.6min; no watchdog timeout. Full control validation and E073
+swimming training did not start. No learned stopping or swimming qualification.
+The coordinator reserved later-phase time and ended after the control-search
+allocation; unused budget was not reassigned. Best rest-motion values are not yet
+reported; inspect saved metrics before choosing the next experiment. Preserve
+E071 unchanged and all E072 candidates. [Outcome](experiments/records/E072-server-summary.json).
+
+
 2026-11-13: H1.2 adds sensory initiation, stopping/rest and restart to every
-future behavior qualification. E072/E073 are implemented and **planned; server
-execution and learned control remain unverified**. The E071 winner below remains
+future behavior qualification. E072/E073 were implemented as a planned pipeline; the first E072 server
+attempt is now reported above. Learned control remains unverified. The E071 winner below remains
 unchanged. The next run first learns and validates sensory stop/restart, then
 trains physical forward swimming only after the exact selected checkpoint passes
 its complete control gate. See [control policy](experiments/behavior_control_policy_v1.json).

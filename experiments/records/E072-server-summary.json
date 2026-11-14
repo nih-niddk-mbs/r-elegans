@@ -1,0 +1,55 @@
+{
+  "experiment": "E072",
+  "evidence": "User-reported server reporter stdout; underlying files not retrieved",
+  "run": "/home/carsonc/r-elegans-results/controlled-swimming-20261113T215141Z-18194",
+  "elapsed_minutes_reported": 77.6,
+  "exit_code": 0,
+  "timed_out": false,
+  "all_steps_finished": false,
+  "validation_complete": false,
+  "control_qualified": false,
+  "swimming_qualified": false,
+  "swimming_blocked": true,
+  "stop_reason": "sensory_control_training_gate_not_met; swimming not started",
+  "workers": [
+    {
+      "seed": 7200,
+      "exit_code": 0,
+      "epoch": "stop",
+      "nominal_passed": false,
+      "iterations": 19
+    },
+    {
+      "seed": 7201,
+      "exit_code": 0,
+      "epoch": "stop",
+      "nominal_passed": false,
+      "iterations": 18
+    },
+    {
+      "seed": 7202,
+      "exit_code": 0,
+      "epoch": "stop",
+      "nominal_passed": false,
+      "iterations": 19
+    },
+    {
+      "seed": 7203,
+      "exit_code": 0,
+      "epoch": "stop",
+      "nominal_passed": false,
+      "iterations": 18
+    }
+  ],
+  "total_proposals_reported": 74,
+  "unknown": [
+    "Actual source revision/environment",
+    "Worker checkpoint hashes",
+    "Best rest motion and stop-loss improvement",
+    "Acceptance counts/proposal errors",
+    "Exact phase deadlines and validation reserves"
+  ],
+  "interpretation": "Stopping training gate not reached; full control validation and swimming not started. Coordinator preallocation explains early exit structurally; exact timing not retrieved.",
+  "decision": "Read saved fit metrics before more training; retain qualified E071 parent and all failed E072 outcomes",
+  "biological_fidelity_qualified": false
+}
