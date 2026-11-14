@@ -1861,3 +1861,12 @@ imposed input. Reports distinguish body-motion suppression from neural activity.
 45min maximum TOTAL under nohup, four CPU workers; source/reference checks and
 all outputs external. No new training launches automatically. See E076-plan.json
 in experiments/records; reported outcome in experiments/records/E076-server-summary.json.
+
+Storage maintenance on mbslnx2 (2026-11-14):
+`sh scripts/launch_results_cleanup_mbslnx2.sh` archives inactive results to
+`/data/carsonc/r-elegans-results`, checksum-verifies them, then removes duplicate
+home copies and leaves old paths as symlinks. Active/recent runs and scientific
+contents are preserved; failures retain data. Journals/logs go to `/tmp`.
+Destination must be writable and on a separate filesystem. User-reported results
+occupy1.1T; reclaimed space remains unmeasured until the job runs. Future CMA
+processes now retain a50GiB free-space reserve; running jobs keep their old code.

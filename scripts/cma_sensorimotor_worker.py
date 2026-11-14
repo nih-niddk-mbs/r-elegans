@@ -1,5 +1,5 @@
 """Persistent CPU worker for E077 paired sensory cadence evaluations."""
-import json,os,time
+import json,os,time,shutil
 from pathlib import Path
 import numpy as np
 from scripts.experiment_records import capture_run_record,file_sha256
@@ -7,6 +7,10 @@ from r_elegans.cma_curriculum import CONDITIONS,condition_protocol,features,scor
 
 _DATA=None
 _CACHE={}
+
+
+class DiskBudget(RuntimeError):
+    pass
 
 
 def initialize(inputs,schema,cpus,records,deadline):
@@ -17,6 +21,7 @@ def initialize(inputs,schema,cpus,records,deadline):
     from scripts.neural_timing_setup import setup
     _DATA=setup(Path(inputs));_DATA['root']=Path(inputs);_DATA['groups']=schema
     _DATA['deadline']=deadline
+    _DATA['minimum_free_bytes']=50*1024**3
     folder=Path(records)/f'worker-{slot}';folder.mkdir(parents=True,exist_ok=True)
     capture_run_record(folder,Path(__file__).resolve().parents[1],dict(inputs=inputs,cpus=cpus[slot],deadline=deadline,scope='Persistent E077 worker; tasks saved in evaluation request.json'))
 
@@ -33,6 +38,8 @@ def evaluate(job):
     save_network(out/'network.npz',params,d['fixed'],d['config'])
     variant=job.get('variant','nominal');grid=job.get('grid','ordinary');result=None
     try:
+        if d.get('minimum_free_bytes',0) and shutil.disk_usage(out).free<d['minimum_free_bytes']:
+            raise DiskBudget('Less than50GiB free; candidate simulation skipped')
         paired={};traces={};prefix={};reference_check=None
         for condition in CONDITIONS:
             check_deadline(job['until']);protocol=condition_protocol(condition,variant)
@@ -44,6 +51,10 @@ def evaluate(job):
             paired[condition]=features(trace,protocol)
             before=trace['dense_time_s']<40+protocol.shift
             prefix[condition]=(trace['dense_voltage_mV'][before],trace['dense_joints'][before])
+            minimum=d.get('minimum_free_bytes',0)
+            required=minimum+2*sum(v.nbytes for v in trace.values())
+            if minimum and shutil.disk_usage(out).free<required:
+                raise DiskBudget('Free-space reserve would be breached; trajectory not written')
             path=out/(condition+'.npz');np.savez_compressed(path,**trace);traces[condition]=file_sha256(path)
             if job.get('reference') and condition=='no_cue':
                 with np.load(d['root']/'parent_training_trace.npz') as z:
@@ -58,6 +69,7 @@ def evaluate(job):
         result=dict(status='completed',metrics=m,paired_features=paired,pre_cue_errors=errors,reference_check=reference_check,
             checkpoint_sha256=file_sha256(out/'network.npz'),coordinate_sha256=file_sha256(out/'coordinates.npz'),trajectory_sha256=traces)
         verify_inputs(d['root'])
+    except DiskBudget as e:result=dict(status='disk_budget',error=str(e))
     except WallDeadline as e:result=dict(status='time_budget',error=str(e))
     except (ValueError,RuntimeError,FloatingPointError) as e:result=dict(status='failed',error=str(e))
     result.update(output=str(out),elapsed_seconds=time.monotonic()-started,variant=variant,grid=grid,target=job['target'])

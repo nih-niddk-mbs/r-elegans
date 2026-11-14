@@ -1,0 +1,42 @@
+{
+  "record_date": "2026-11-14",
+  "status": "job_prepared_server_execution_pending",
+  "kind": "Storage maintenance, not a biological experiment",
+  "user_reported": {
+    "results_usage": "1.1T",
+    "home_user_usage": "2.3T",
+    "home_filesystem_size": "3.5T",
+    "home_filesystem_used": "3.2T",
+    "home_free": "302G",
+    "home_percent": 92,
+    "data_filesystem_size": "3.5T",
+    "data_free": "3.3T"
+  },
+  "source": "/home/carsonc/r-elegans-results",
+  "destination": "/data/carsonc/r-elegans-results",
+  "command": "sh scripts/launch_results_cleanup_mbslnx2.sh",
+  "method": "Largest-first inactive directory migration; rsync copy/checksum verification, Linux atomic directory<->symlink exchange, delete only verified old /home duplicate",
+  "selection": "Directories only; skip links, symlink-containing trees, special files, own-user process-referenced runs, recently modified(<30min) runs and hidden folders",
+  "retention": "All trajectories, weights, selected/final models, checkpoints, optimizer/RNG, raw stdout and recursive reference dependencies retained. Old absolute paths resolve through per-run symlinks. Top-level logs stay in /home.",
+  "guards": [
+    "Different destination filesystem required",
+    "Exclusive source lock",
+    "Source metadata stable before/after copy",
+    "No own-user active references before swap",
+    "Checksum dry-run must show no differences",
+    "Old open descriptors/cwd prevent deleting duplicate",
+    "Post-swap checksum comparison",
+    "Destination free space must exceed apparent copy size+10GiB",
+    "Any failure leaves data copies for review"
+  ],
+  "journals": "/tmp/r-elegans-archive-<UTC>-<PID>.jsonl plus archive copy; stdout log in/tmp",
+  "limitations": [
+    "Actual /data permissions/quota not yet verified; permission/copy failure deletes no original data",
+    "Linux atomic swap not executed on local Mac; tested with temporary-file exchange emulation",
+    "Background new-job races are handled conservatively but can leave duplicate copies needing review",
+    "No claimed amount reclaimed until server journal/df provided"
+  ],
+  "additional_fix": "Future E077 workers/coordinator reserve50GiB free before new work/large trace writes; already-running processes retain old code",
+  "local_verification": "11 archive/CMA tests passed10.65s, no real server migration",
+  "model_or_training_changes": false
+}

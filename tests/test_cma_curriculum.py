@@ -107,6 +107,7 @@ def test_coordinator_advances_only_after_checks_with_fake_simulations(tmp_path,m
     monkeypatch.setattr(verifier,'verify_inputs',lambda p:dict(continuation_parent_sha256=runner.PARENT))
     monkeypatch.setattr(runner,'file_sha256',lambda p:runner.PARENT)
     monkeypatch.setattr(runner,'capture_run_record',lambda *a,**k:None)
+    monkeypatch.setattr(runner.shutil,'disk_usage',lambda p:type('D',(),{'free':1024**4})())
     monkeypatch.setattr(setup_module,'setup',lambda p:dict(spec=None,model=type('M',(),{'neuron_ids':()})(),origin=np.zeros(10),lower=-np.ones(10),upper=np.ones(10)))
     monkeypatch.setattr(runner,'parameter_groups',lambda *a:[dict(name=str(i),indices=[i],lower=-.4,upper=.4) for i in range(10)])
     monkeypatch.setattr(os,'sched_getaffinity',lambda n:set(range(16)),raising=False)
@@ -160,3 +161,8 @@ def test_persistent_worker_reuses_rollouts_and_supplies_only_environmental_cues(
         result=worker.evaluate(dict(output=str(tmp_path/f'eval-{i}'),z=[.1],target=.05,until=until))
         assert result['status']=='completed' and result['metrics']['partial_cadence_passed']
     assert len(factory_calls)==4
+    worker._DATA['minimum_free_bytes']=50*1024**3
+    monkeypatch.setattr(worker.shutil,'disk_usage',lambda p:type('D',(),{'free':1})())
+    blocked=worker.evaluate(dict(output=str(tmp_path/'disk-blocked'),z=[.1],target=.05,until=until))
+    assert blocked['status']=='disk_budget' and len(factory_calls)==4
+    assert not (tmp_path/'disk-blocked/no_cue.npz').exists()

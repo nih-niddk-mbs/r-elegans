@@ -7178,3 +7178,72 @@ and complete160MB local software fixture input capsule for reproducibility.
 This receipt added after capture; Git preserves final receipt. No actual server
 fit or cloud-sync completion claimed. Server source/model verification still
 required before candidate optimization; user will launch via the dedicated env.
+
+### Storage maintenance PLAN / reported disk pressure (2026-11-14)
+
+User reports r-elegans-results1.1T, aggregate home-user2.3T. Filesystem/home
+3.5T total/3.2T used/302G available/92%; separate/data3.5T total/3.3T available.
+This is user-reported du/df, not agent-read server usage.1.1T is all project
+results, not an established measurement of this CMA pilot alone. Prior storage
+policy retained full rejected-candidate arrays as well as selected/final arrays,
+without an aggregate disk cap; this can materially grow the result tree. A
+90s ordinary trace has roughly374MB of float64 dense arrays before compression,
+about1.5GB/four-condition candidate before compression; actual compressed usage
+has not been measured per run. This is a capacity calculation, not actual du.
+
+User explicitly requests a job to delete excess files. Prefer using otherwise
+free/data to preserve scientific data while freeing/home: archive inactive runs
+and delete only checksum-verified duplicate home trees. Job:
+`sh scripts/launch_results_cleanup_mbslnx2.sh` after pull. Destination defaults
+/data/carsonc/r-elegans-results, optional first argument overrides. If creation/
+write/quota fails, no original is deleted. Dedicated env Python under nohup;
+logs/journal in/tmp (root filesystem had22G available), not already-full/home.
+Source snapshot, argv/interpreter/platform/script hash and revision recorded by
+maintenance job; journal copied to archive at end. No training/biological claim.
+
+Selection/protection: largest inactive top-level result directories first;
+minimum30min since any entry modified; protect own-user command-line/cwd/open-FD
+references; skip existing symlinks, nested symlink trees, hidden folders/special
+files. Exclusive lock prevents duplicate maintenance jobs. Copy via rsync-aH
+(sparse, hardlinks preserved); source-stat fingerprint must stay unchanged;
+checksum dry-run must be empty. Recheck active references and source stability,
+make archive durable, then Linux renameat2 atomic swap replaces old directory
+with a symlink to exact verified archive. Verify no old descriptors or cwd remain
+and recheck checksums before deleting the old home duplicate. Verification/race
+errors leave data copies for review; no rollback discards newly written archive
+content. All selected/final/raw/optimizer/RNG/source/reference files retained,
+old absolute paths continue to resolve; top-level old log files remain in/home.
+No datasets/other projects/conda environments or caches are deleted. Symlink-
+containing source runs require separate review, not broad recursive deletion.
+
+Actual/data permissions/quota and source distribution unknown; job may skip
+some/all directories or fail closed. Approximate freed bytes are apparent data
+size; actual df gain may differ with hardlinks/open handles. A1.1TB transfer plus
+checksum verification can take substantial time; no unmeasured duration promised.
+Current active CMA run is excluded. Source-directory access checks compare resolved
+paths in audit_control_signal so old/home aliases remain valid after migration.
+This job is prepared only; no server movement/deletion is claimed here.
+
+Future E077 launch correction: coordinator refuses new generation below50GiB
+free; workers check before simulation and require50GiB plus twice the uncompressed
+trace estimate before writing. Disk-budget failures are explicit/incomplete,
+not optimized as successful behavior. Existing running workers keep their old
+imported code, so these guards affect later processes, not an in-place patch.
+
+Local verification:11 focused archive/CMA tests passed10.65s. Migration tests
+use small temporary trees and test-only exchange emulation on Mac; production
+requires Linux atomic swap and never falls back to a non-atomic swap. Tests cover
+verified copy/delete with old path working, checksum failure preserving source,
+active writers/old descriptors retaining originals, own-process/log protection,
+symlink refusal and E077 low-space refusal before simulation. No actual server
+cleanup or neural forward simulation performed. Script compilation/shell syntax/
+diff checks passed. See storage-maintenance-20261114.json.
+
+Storage job final checks:11 archive/CMA tests passed after making the alias swap
+durable via source-parent fsync before duplicate deletion; portable fake-CMA tests
+now mock filesystem capacity explicitly. Compiler/shell/diff checks also passed.
+Safety tests emulate the swap locally; Linux production syscall remains untested
+on the Mac and fails closed if unavailable. No data was removed outside tiny
+unit-test temporary directories. The server job source snapshots itself to/data
+and records script hash/revision/interpreter/platform/argv in its journal before
+operating; archive migration and actual reclaimed bytes still pending execution.

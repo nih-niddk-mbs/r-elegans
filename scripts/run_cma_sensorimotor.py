@@ -96,13 +96,14 @@ def main():
             optimizer_snapshot(out/'optimizer'/'initial',es,stage,generation)
             best_loss=baseline['metrics']['loss']
             while stage<len(RUNGS):
+                if shutil.disk_usage(out).free<50*1024**3:break
                 estimate=math.ceil(12/4)*max(recent[-12:])*1.4
                 if time.monotonic()+estimate>fit_until:break
                 points=es.ask();last_pending=[list(map(float,z)) for z in points]
                 optimizer_snapshot(out/'optimizer'/f'g-{generation:05d}-asked',es,stage,generation,last_pending)
                 jobs=[job(z,RUNGS[stage],f'g-{generation:05d}-c-{i:02d}',fit_until,parent) for i,z in enumerate(points)]
                 results=run_batch(pool,jobs)
-                if any(r['status'] in ('time_budget','worker_error') for r in results):break
+                if any(r['status'] in ('time_budget','worker_error','disk_budget') for r in results):break
                 losses=[r['metrics']['loss'] if r['status']=='completed' else 1e9 for r in results]
                 es.tell(points,losses);last_pending=None
                 for z,r in zip(points,results):
@@ -162,9 +163,9 @@ def main():
                     amplitude=amplitude and bool(np.all(abs(aa-bb)<=np.maximum(1e-5,.1*aa)))
             numerical.append(dict(grid=r['grid'],maximum_cadence_ratio_difference=error,amplitudes_consistent=amplitude,passed=bool(finite and error<=.02 and amplitude)))
     final_grid_pass=bool(completed and nominal_score and nominal_score['partial_cadence_passed'] and len(numerical)==2 and all(v['passed'] for v in numerical) and all(valid(r) and r['metrics']['partial_cadence_passed'] and r.get('checkpoint_sha256')==selected['checkpoint_sha256'] for r in refinement))
-    summary=dict(experiment='E077',execution_valid=bool(failure is None and not any(r['status'] in ('worker_error','time_budget') for r in evaluations)),
+    summary=dict(experiment='E077',execution_valid=bool(failure is None and not any(r['status'] in ('worker_error','time_budget','disk_budget') for r in evaluations)),
         all_stages_finished=completed,validation_complete=completed,completed_generations=generation,dimension=len(schema),
-        evaluation_status_counts={status:sum(r['status']==status for r in evaluations) for status in ('completed','failed','worker_error','time_budget')},
+        evaluation_status_counts={status:sum(r['status']==status for r in evaluations) for status in ('completed','failed','worker_error','time_budget','disk_budget')},
         curriculum_rungs_passed_training_checks=[r['target'] for r in milestones if r['passed']],milestones=milestones,
         selected=selected,active_target=target,selected_rescored_for_active_target=nominal_score,refinement=refinement,numerical_consistency=numerical,final_grid_partial_cadence_pass=final_grid_pass,
         full_stopping_qualified=False,swimming_qualified=False,swimming_blocked=True,failure=failure,

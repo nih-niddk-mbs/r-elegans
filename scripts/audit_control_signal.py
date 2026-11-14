@@ -26,7 +26,7 @@ def main():
     manifest=verify_inputs(run/'control_inputs')
     gate=json.loads((run/'control/control_gate.json').read_text())
     summary=json.loads((run/'summary.json').read_text())
-    selected=Path(next(r['selected'] for r in summary['phases'] if r['stage']=='control'))
+    selected=Path(next(r['selected'] for r in summary['phases'] if r['stage']=='control')).resolve()
     if not selected.is_relative_to(run/'control/fit'):raise ValueError('Selected fit outside pinned run')
     model=selected/'network_best.npz'
     if gate['checkpoint_sha256']!=EXPECTED or file_sha256(model)!=EXPECTED:raise ValueError('Pinned E074 checkpoint mismatch')

@@ -2743,3 +2743,10 @@ trajectories/coordinates are external with immutable reference hashes. Failure,
 partial population or incomplete validation never qualifies a model. No automatic
 RL/swimming promotion; full quietness/rest and complete causal control validation
 are future milestones with unchanged criteria.
+
+2026-11-14 storage correction: future E077 processes reserve50GiB free. Workers
+refuse simulations below the reserve and require extra space before large trace
+writes; disk-budget outcomes remain incomplete. Already-running jobs keep their
+loaded code. Inactive prior results can be relocated with the checksum-verified
+maintenance launcher described in README/LAB_NOTEBOOK; scientific contents and
+old absolute paths are retained. No biological or optimization gate changed.
