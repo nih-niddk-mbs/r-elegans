@@ -1,6 +1,6 @@
 {
   "experiment": "E076",
-  "status": "planned_not_executed",
+  "status": "executed_diagnostic_no_reversible_pass_user_reported",
   "record_date": "2026-11-14",
   "question": "Can candidate interneurons reversibly suppress ongoing body motion at the existing model settings?",
   "parent_run": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860",
@@ -55,5 +55,6 @@
   },
   "scope": "Imposed neural-conductance diagnostic only; never learned stopping, biological validation or automatic training promotion",
   "artifacts": "/home/carsonc/r-elegans-results/control-access-<UTC>-<PID>",
-  "preservation": "Exact source/env/argv/input capsule; all full trajectories/results external; preserve entire E074/E071 source lineage. No optimizer created or parameter fitting performed."
+  "preservation": "Exact source/env/argv/input capsule; all full trajectories/results external; preserve entire E074/E071 source lineage. No optimizer created or parameter fitting performed.",
+  "outcome_record": "E076-server-summary.json"
 }

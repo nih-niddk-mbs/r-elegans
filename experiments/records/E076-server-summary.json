@@ -1,0 +1,440 @@
+{
+  "experiment": "E076",
+  "status": "completed_user_reported_no_qualified_reversible_suppression",
+  "evidence": "User-reported server stdout; underlying trajectories/checkpoints not retrieved",
+  "evidence_sha256": "93692867bf7c3af413e3bb216a63ef014fd185b6e4e04af06e66c9ea700a6f1a",
+  "run": "/home/carsonc/r-elegans-results/control-access-20261114T143823Z-98301",
+  "checkpoint_sha256": "2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f",
+  "budget_receipt": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 1144.638053183,
+    "total_minutes": 45.0,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/control-access-20261114T143823Z-98301/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model"
+  },
+  "screen_cases": [
+    {
+      "case": "locomotor_integrators-excite-0.1",
+      "range_ratio": 0.014295502817444546,
+      "quiet": false,
+      "recovery": false,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -25.03556175388248,
+        -27.828971941069362,
+        -12.34504351041223,
+        -19.21363145303591
+      ]
+    },
+    {
+      "case": "sensory_integrators-excite-0.1",
+      "range_ratio": 0.14575851988363328,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -9.605784925982869,
+        -13.835036124584766,
+        -9.749523430196682,
+        -15.984961498530534,
+        -22.196259902880143,
+        -25.864380647000917,
+        -24.191377538233386,
+        -43.016118794939864
+      ]
+    },
+    {
+      "case": "locomotor_integrators-excite-0.01",
+      "range_ratio": 0.1744111877156722,
+      "quiet": false,
+      "recovery": false,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -60.190518104328355,
+        -55.902896267565644,
+        -32.05197245826052,
+        -51.57785072306604
+      ]
+    },
+    {
+      "case": "sensory_integrators-inhibit-0.1",
+      "range_ratio": 0.21951767704993633,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -68.99033862147562,
+        -61.03880839006593,
+        -68.06814328599056,
+        -69.3011587620538,
+        -70.46861111064807,
+        -76.01093751869136,
+        -69.57621620123706,
+        -71.11094874186556
+      ]
+    },
+    {
+      "case": "sensory_integrators-excite-0.01",
+      "range_ratio": 0.27742843502286074,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -28.457576650961187,
+        -30.05030155855518,
+        -25.873240229293117,
+        -33.17870354280546,
+        -49.878606143226634,
+        -56.5478226115731,
+        -50.2858015690759,
+        -63.58347415615597
+      ]
+    },
+    {
+      "case": "stop_candidate-excite-0.1",
+      "range_ratio": 0.9866461232426103,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -20.858266044288406
+      ]
+    },
+    {
+      "case": "forward_premotor-inhibit-0.1",
+      "range_ratio": 0.998859142763004,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -54.97738757947504,
+        -58.62409647826041,
+        -68.32553805928892,
+        -74.99046614226953
+      ]
+    },
+    {
+      "case": "stop_candidate-inhibit-0.1",
+      "range_ratio": 0.9992911245498707,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -77.83746398287988
+      ]
+    },
+    {
+      "case": "forward_premotor-inhibit-0.01",
+      "range_ratio": 0.9997178559250433,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -34.47109292464912,
+        -42.003508419403786,
+        -58.49562992036431,
+        -70.15134658775956
+      ]
+    },
+    {
+      "case": "stop_candidate-inhibit-0.01",
+      "range_ratio": 0.9998192505108947,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -73.86845493402276
+      ]
+    },
+    {
+      "case": "stop_candidate-excite-0.01",
+      "range_ratio": 1.0016800645565582,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -57.36253928828812
+      ]
+    },
+    {
+      "case": "forward_premotor-excite-0.01",
+      "range_ratio": 1.0038723446023206,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -26.98623843540421,
+        -35.05588678817698,
+        -50.65736118852645,
+        -62.50359340924253
+      ]
+    },
+    {
+      "case": "forward_premotor-excite-0.1",
+      "range_ratio": 1.0158785952515357,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -14.572892835420225,
+        -20.36654937670518,
+        -27.152860562560917,
+        -33.81182354758643
+      ]
+    },
+    {
+      "case": "locomotor_integrators-inhibit-0.1",
+      "range_ratio": 1.0386774973039308,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -78.4953782749997,
+        -71.91280595773632,
+        -66.71167721685373,
+        -75.69622706226733
+      ]
+    },
+    {
+      "case": "locomotor_integrators-inhibit-0.01",
+      "range_ratio": 1.045569631917075,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -75.97668530794343,
+        -64.72684392043344,
+        -45.829115684852106,
+        -68.31091689914948
+      ]
+    },
+    {
+      "case": "sensory_integrators-inhibit-0.01",
+      "range_ratio": 1.099921051627977,
+      "quiet": false,
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "target_mean_voltage_mV": [
+        -46.06108806161548,
+        -39.90232781743459,
+        -44.19898473494608,
+        -45.39460110259864,
+        -61.10374274125472,
+        -69.92045200361473,
+        -59.668053120151825,
+        -67.1669186945251
+      ]
+    }
+  ],
+  "reported_diagnostic_result": {
+    "diagnostic_control_access": false,
+    "learned_stopping_qualified": false,
+    "validation_complete": true,
+    "refinement": [
+      {
+        "grid": "neural-half",
+        "case": {
+          "name": "locomotor_integrators-excite-0.1",
+          "group": "locomotor_integrators",
+          "conductance_nS": 0.1,
+          "reversal_mV": 0.0
+        },
+        "metrics": {
+          "windows": {
+            "pre": {
+              "frequencies_hz": [
+                1.9083969465648822,
+                1.9083969465648822,
+                1.9083969465648822
+              ],
+              "maximum_raw_joint_range_rad": 0.03515896973543471,
+              "sham_maximum_raw_joint_range_rad": 0.03515896973543471,
+              "regional_cycles_rad": [
+                0.003058632227979856,
+                0.03473611264641674,
+                0.011742665232489694
+              ],
+              "sham_regional_cycles_rad": [
+                0.003058632227979856,
+                0.03473611264641674,
+                0.011742665232489694
+              ],
+              "voltage_maximum_difference_mV": 0.0
+            },
+            "during": {
+              "frequencies_hz": [
+                null,
+                null,
+                null
+              ],
+              "maximum_raw_joint_range_rad": 0.0003975258412700633,
+              "sham_maximum_raw_joint_range_rad": 0.03515889758164337,
+              "regional_cycles_rad": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sham_regional_cycles_rad": [
+                0.0030586389847033213,
+                0.034736218803551475,
+                0.01174264702859329
+              ],
+              "voltage_maximum_difference_mV": 48.77768348567494
+            },
+            "recovery": {
+              "frequencies_hz": [
+                null,
+                null,
+                null
+              ],
+              "maximum_raw_joint_range_rad": 1.403502769919962e-06,
+              "sham_maximum_raw_joint_range_rad": 0.03515898137856502,
+              "regional_cycles_rad": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sham_regional_cycles_rad": [
+                0.003058637772058337,
+                0.0347359786579949,
+                0.011742711519896157
+              ],
+              "voltage_maximum_difference_mV": 28.300471483447
+            }
+          },
+          "pre_cue_match": true,
+          "during_to_sham_raw_range_ratio": 0.011306550222371406,
+          "quiet_during_probe": false,
+          "recovery_amplitude_preserved": false,
+          "safety_passed": true,
+          "reversible_diagnostic_suppression": false,
+          "learned_stopping_qualified": false,
+          "scope": "Imposed interneuron conductance; diagnostic body-motion suppression only, not proof of neural oscillator silencing"
+        },
+        "ratio_consistent": true,
+        "passed": false
+      },
+      {
+        "grid": "body-half",
+        "case": {
+          "name": "locomotor_integrators-excite-0.1",
+          "group": "locomotor_integrators",
+          "conductance_nS": 0.1,
+          "reversal_mV": 0.0
+        },
+        "metrics": {
+          "windows": {
+            "pre": {
+              "frequencies_hz": [
+                1.8993352326685644,
+                1.8975332068311286,
+                1.8993352326685644
+              ],
+              "maximum_raw_joint_range_rad": 0.03520482638739514,
+              "sham_maximum_raw_joint_range_rad": 0.03520482638739514,
+              "regional_cycles_rad": [
+                0.003066678514631771,
+                0.0347851746958008,
+                0.011761408249652994
+              ],
+              "sham_regional_cycles_rad": [
+                0.003066678514631771,
+                0.0347851746958008,
+                0.011761408249652994
+              ],
+              "voltage_maximum_difference_mV": 0.0
+            },
+            "during": {
+              "frequencies_hz": [
+                null,
+                null,
+                null
+              ],
+              "maximum_raw_joint_range_rad": 0.0005034746235221543,
+              "sham_maximum_raw_joint_range_rad": 0.03520477870871365,
+              "regional_cycles_rad": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sham_regional_cycles_rad": [
+                0.003066691609098185,
+                0.03478517796554448,
+                0.011761390301988306
+              ],
+              "voltage_maximum_difference_mV": 48.77750024903636
+            },
+            "recovery": {
+              "frequencies_hz": [
+                null,
+                null,
+                null
+              ],
+              "maximum_raw_joint_range_rad": 2.20990528616849e-06,
+              "sham_maximum_raw_joint_range_rad": 0.035204811900020824,
+              "regional_cycles_rad": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sham_regional_cycles_rad": [
+                0.003066691122879342,
+                0.034785230065333454,
+                0.011761417436256
+              ],
+              "voltage_maximum_difference_mV": 28.288665434467774
+            }
+          },
+          "pre_cue_match": true,
+          "during_to_sham_raw_range_ratio": 0.01430131482114778,
+          "quiet_during_probe": false,
+          "recovery_amplitude_preserved": false,
+          "safety_passed": true,
+          "reversible_diagnostic_suppression": false,
+          "learned_stopping_qualified": false,
+          "scope": "Imposed interneuron conductance; diagnostic body-motion suppression only, not proof of neural oscillator silencing"
+        },
+        "ratio_consistent": true,
+        "passed": false
+      }
+    ]
+  },
+  "interpretation": [
+    "RIB/RIM-group depolarizing .1nS probe reduces body range98.57% in ordinary grid; no detected body cycles late during probe or recovery in supplied refinements",
+    "Strict probe-window quiet criterion missed: refined raw range .000398/.000503rad includes residual drift; this is not evidence of retained cyclic motion",
+    "At50..60s,10..20s after probe removal, matched refinements have body range1.40e-6/2.21e-6rad and no detected body cycles",
+    "No spontaneous recovery demonstrated in the20s post-probe observation period; stable quiescent attractor vs long transient vs trapping not resolved",
+    "Sensory integrator excite .1nS gives85.42% reduction and ordinary-grid recovery; this candidate has not had its own refinement tests",
+    "RIS probes change target voltage substantially with little body suppression in this model; not a test of complete biological RIS mechanisms",
+    "No learned sensory stopping/restart or swimming qualification"
+  ],
+  "decision": "Preserve exact parent and all diagnostic trajectories. Propose short stop->explicit restart diagnostic with matched no-restart control, longer observation and member-cell dissection. No new experiment or training launched.",
+  "unknown": [
+    "Actual source revision/environment beyond server records",
+    "Full ordinary-grid neural/muscle/filter trajectories",
+    "Whether rhythmic motor cells cease oscillating",
+    "Mechanism and persistence beyond observed window",
+    "Which of RIBL/RIBR/RIML/RIMR is necessary/sufficient",
+    "Whether sensory start cue can escape suppressed state"
+  ],
+  "biological_fidelity_qualified": false
+}

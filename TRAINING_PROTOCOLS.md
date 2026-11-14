@@ -1,5 +1,17 @@
 # WormGym: training and validation protocols
 
+2026-11-14 E076 diagnostic completed (user-reported):19.08min total, no timeout,
+all steps/refinement complete. RIB/RIM depolarizing.1nS probe reduced ordinary
+body range98.57%, but movement did not spontaneously recover. Neural/body-half
+checks likewise found no body cycles in50–60s (probe removed40s), with raw ranges
+1.40e-6/2.21e-6rad. Strict reversible-suppression gate failed; no learned-stop or
+swimming qualification. This is strong imposed body-motion suppression, not proof of
+neural oscillator silencing or a stable rest attractor. Sensory-integrator
+excitation.1nS reduced motion85.42% with recovery on the ordinary grid only.
+Next proposed diagnostic: explicit restart after suppression, matched no-restart
+and longer observation; no new run launched. [Outcome](experiments/records/E076-server-summary.json).
+
+
 2026-11-14 E075 saved-data audit completed (user-reported). Stop cue changes
 ASEL by.640mV, but selected control responses are small: AIYL.00772mV,
 AVBL.00365mV, RIS.000134mV; body motor maximum.000745mV. START changes AWA
@@ -2653,4 +2665,4 @@ No sensory-control, learned-stop, swimming or biological pass is conferred by
 imposed input. Reports distinguish body-motion suppression from neural activity.
 45min maximum TOTAL under nohup, four CPU workers; source/reference checks and
 all outputs external. No new training launches automatically. See E076-plan.json
-in experiments/records; actual server results pending.
+in experiments/records; reported outcome in experiments/records/E076-server-summary.json.

@@ -6891,3 +6891,70 @@ E076 preparation archive: OneDrive notebook/evidence/E076-probe-preparation-2026
  d423f759182a5a89b9f587b7bbb7cc81e32c4040a9ff9a66de1456aac0139173.
 Staged source/environment/verification-invocation preserved; this archive receipt
 added after capture. No server execution or OneDrive cloud-sync completion claim.
+
+### E076 outcome — strong imposed suppression, spontaneous recovery not established (2026-11-14)
+
+User-reported stdout: control-access-20261114T143823Z-98301, selected parent
+SHA2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f.
+Budget receipt:1144.638053183s=19.0773min; exit0, no timeout, all_steps_finished
+and validation_completeTrue within45min total.17-case screen plus4 matched-grid
+refinement cases completed according to coordinator/receipt. No trained parameter
+change or new learned behavior. Actual source/environment and trajectories remain
+server-side and were not retrieved. Structured stdout parse in E076-server-summary.
+
+Strongest ordinary probe: RIB/RIM group (RIBL/RIBR/RIML/RIMR), additive.1nS/cell,
+reversal0mV,30–40s. During35–40s raw body range ratio.01429550 (~98.57% reduction),
+matched pre-probe movement and safety passed; quiet=False, recovery=False.
+Probe target mean voltages−25.036/−27.829/−12.345/−19.214mV, no biological fit
+claimed. At.01nS, ratio.174411 (82.56% reduction), also no recovery pass.
+Inhibitory-direction RIB/RIM probes instead ratios1.039/1.046 with recovery.
+Full-group perturbation does not identify a necessary/sufficient individual cell.
+
+Refinement of.1nS RIB/RIM excitation:
+- Neural-half: during raw range.000397526rad, ratio.01130655; no supported body
+  cycles detected. Recovery50–60s (10–20s after probe removal) raw range
+  1.40350e-6rad, no supported body cycles; recovery=False.
+- Body-half: during raw range.000503475rad, ratio.01430131; no supported body
+  cycles. Recovery raw range2.20991e-6rad, no supported body cycles; recovery=False.
+Both pre-probe/sham matches and safety passed; range-ratio consistency passed.
+Both strict quiet-during-probe tests fail1e-4rad because raw drift/excursion
+remains, even though detected regional cyclic amplitudes are0. Thus failed quiet
+criterion must not be paraphrased as proof of continued wiggling. No neural
+oscillator-silencing claim follows from absent body cycles; full neural/muscle/
+filter traces are available externally but not supplied here.
+
+Other candidate: sensory-integrator excitation.1nS ratio.145759 (85.42% reduction),
+ordinary recovery=True. Sensory-integrator inhibition.1nS ratio.219518 (78.05%
+reduction), ordinary recovery=True. Their own refinement checks have not run;
+only strongest RIB/RIM excitation was refined. RIS excitation.1nS moves its mean
+voltage to−20.858mV but body ratio.986646; inhibition moves mean to−77.837mV with
+ratio.999291. AVB/PVC probes also had little suppression in this envelope.
+These are model-specific sensitivity observations, not refutations of biological
+RIS/AVB roles or implementations of missing GABA/peptide mechanisms.
+
+Reported diagnostic_control_access=False and learned_stopping_qualified=False
+remain unchanged: no probe meets the full planned quiet-plus-recovery gate.
+Interpretation adds the supported component finding: imposed RIB/RIM excitation
+strongly suppresses body cycles, with low motion in the late recovery window
+under both timestep checks. Hypothesis: a quiescent basin may be accessible.
+Alternatives include a long transient, intrinsic-state adaptation or trapping;
+20s post-probe observation cannot establish an attractor. A spontaneous return
+was the diagnostic criterion, but the user's final objective requires an explicit
+sensory START; absence of spontaneous recovery is not proof restart is impossible.
+
+Decision: preserve E071/E074 parents, all E076 trajectories, source capsules and
+recursive dependencies. Propose a short stop→explicit-restart diagnostic with
+matched stop/no-restart and longer no-restart observation; then dissect individual
+RIB/RIM members. This would test controllability rather than merely waiting for
+passive return. Imposed restart inputs would remain diagnostics, not learned
+sensory control. Define method/seeds/criteria before execution; none launched
+here. Retain H1.2 sensory-controlled start/rest/restart gates before swimming.
+Local verification only: parsed16 intervention summaries, two refinements and
+budget receipt from supplied stdout; JSON/diff checks. No new model simulations
+or code changes required for this outcome interpretation.
+
+E076 evidence archive: OneDrive notebook/evidence/
+E076-server-20261114T143823Z-98301; supplied raw stdout and compact interpretation
+byte-checked. Manifest SHA256
+ ee092c464b02570cc4101bd0f0129a394d78b00b2335793a24fb5d5b23314bb4.
+No server trajectories/models retrieved or cloud-sync completion asserted.
