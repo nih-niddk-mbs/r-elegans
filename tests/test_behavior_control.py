@@ -136,3 +136,13 @@ def test_parent_snapshot_preserves_exact_selected_rng_and_hashes(tmp_path):
     assert (copied/'parent_training_trace.npz').read_bytes()==b'exact selected trace'
     assert json.loads((copied/'behavior_parent_selected_rng.json').read_text())=={'selection':3}
     assert manifest['continuation_parent_sha256']==file_sha256(worker/'network_best.npz')
+
+
+def test_failed_unlesioned_control_cannot_establish_controller_dependence():
+    rows=gate_fixture()
+    for row in rows:
+        if row['case']=='nominal':
+            row['metrics']=metrics(trace(kind='wiggle'),ControlProtocol())
+    result=control_report('a'*64,rows,True)
+    assert not result['passed']
+    assert result['causal_control_groups']==[]

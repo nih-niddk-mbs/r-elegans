@@ -1,0 +1,559 @@
+{
+  "experiment": "E074",
+  "evidence": "User-reported server stdout; underlying artifacts not retrieved",
+  "evidence_sha256": "289fda65b17d390fd40483cf9dedab6dcafcfbe0174715802b0b7ee680b8c727",
+  "run": "/home/carsonc/r-elegans-results/controlled-swimming-20261114T034629Z-30860",
+  "elapsed_minutes": 559.98,
+  "exit_code": 0,
+  "timed_out": false,
+  "all_steps_finished": false,
+  "pipeline_validation_complete": false,
+  "control_validation_complete_reported": true,
+  "control_qualified": false,
+  "swimming_qualified": false,
+  "swimming_blocked": true,
+  "stop_reason": "sensory_control_validation_failed; swimming not started",
+  "validation_reserve_minutes_each": 50.24,
+  "selected_seed": 7200,
+  "checkpoint_sha256": "2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f",
+  "positive_cases_passed": false,
+  "sensory_specificity_passed": false,
+  "negative_controls_passed": true,
+  "refinement_passed": false,
+  "reported_causal_groups": [
+    "locomotor_integrators",
+    "forward_premotor",
+    "stop_candidate"
+  ],
+  "causal_claim_correction": "No learned-control causal dependence established: unlesioned positive cases all fail. Software now requires positive baseline and cue specificity before reporting causal groups.",
+  "cases": [
+    {
+      "case": "nominal",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.901140684410647,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.901140684410647,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.03520628649325283,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.883233155803604e-06,
+        -3.882864993073277e-06
+      ]
+    },
+    {
+      "case": "onset-shift",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.9011406844106342,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.9011406844106342
+        ]
+      ],
+      "maximum_rest_range_rad": 0.035206321793233755,
+      "forward_speeds_BL_s": [
+        -3.882988632140838e-06,
+        -3.88287891879588e-06,
+        -3.883059312954647e-06
+      ]
+    },
+    {
+      "case": "long-rest",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.9011406844106342,
+          1.90114068441066
+        ],
+        [
+          1.9011406844106342,
+          1.90114068441066,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.03520632182773592,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.883140067669404e-06,
+        -3.8829244338358146e-06
+      ]
+    },
+    {
+      "case": "repeat",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.901140684410647,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.901140684410647,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.9011406844106087,
+          1.9011406844106087,
+          1.9011406844106087
+        ]
+      ],
+      "maximum_rest_range_rad": 0.03520632028507269,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.883233155803604e-06,
+        -3.882864993073277e-06,
+        -3.882372509989952e-06,
+        -3.882935555172047e-06
+      ]
+    },
+    {
+      "case": "dose-low",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.035206280400006215,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.883787279542023e-06,
+        -3.882719713007583e-06
+      ]
+    },
+    {
+      "case": "dose-high",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.901140684410647,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.901140684410647,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.03520629217787495,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.883218006573936e-06,
+        -3.883082909705948e-06
+      ]
+    },
+    {
+      "case": "redundant",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.9011406844106342,
+          1.901140684410647,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.9011406844106342,
+          1.9011406844106342
+        ]
+      ],
+      "maximum_rest_range_rad": 0.03521176123247799,
+      "forward_speeds_BL_s": [
+        -3.88122158404039e-06,
+        -3.88301794072056e-06,
+        -3.881903336139694e-06
+      ]
+    },
+    {
+      "case": "body-half",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.898434219749856,
+          1.8993352326685646,
+          1.8993352326685582
+        ],
+        [
+          1.899335232668558,
+          1.899335232668558,
+          1.8993352326685453
+        ],
+        [
+          1.8993352326685708,
+          1.8975332068311288,
+          1.8993352326685453
+        ]
+      ],
+      "maximum_rest_range_rad": 0.0352048847398897,
+      "forward_speeds_BL_s": [
+        -3.2283167736266246e-06,
+        -3.2282596253823105e-06,
+        -3.228326609884474e-06
+      ]
+    },
+    {
+      "case": "chemical-blocked",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.901140684410647,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.0352062644382099,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.88313425172817e-06,
+        -3.8825318218376984e-06
+      ]
+    },
+    {
+      "case": "no-cue",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.901140684410647,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.0352062644382099,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.88313425172817e-06,
+        -3.8825318218376984e-06
+      ]
+    },
+    {
+      "case": "held-voltage",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ],
+      "maximum_rest_range_rad": 0.0,
+      "forward_speeds_BL_s": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "case": "neural-half",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9083969465648822,
+          1.9083969465648822,
+          1.9083969465648822
+        ],
+        [
+          1.9083969465648822,
+          1.9083969465648822,
+          1.9083969465648822
+        ],
+        [
+          1.9083969465648822,
+          1.9083969465648822,
+          1.9083969465648822
+        ]
+      ],
+      "maximum_rest_range_rad": 0.035158951151732024,
+      "forward_speeds_BL_s": [
+        -3.917011371786247e-06,
+        -3.917419865842889e-06,
+        -3.917234393582177e-06
+      ]
+    },
+    {
+      "case": "start-blocked",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.03520628649325283,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.883051666898133e-06,
+        -3.882727466861267e-06
+      ]
+    },
+    {
+      "case": "stop-blocked",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.90114068441066
+        ],
+        [
+          1.90114068441066,
+          1.90114068441066,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.0352062644382099,
+      "forward_speeds_BL_s": [
+        -3.883223314327023e-06,
+        -3.8836135978433836e-06,
+        -3.8826701411591966e-06
+      ]
+    },
+    {
+      "case": "controller-sensory_integrators",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9607843137254877,
+          1.9607843137254841,
+          1.9607843137254775
+        ],
+        [
+          1.9607843137254706,
+          1.9607843137254706,
+          1.9607843137254706
+        ],
+        [
+          1.9607843137254706,
+          1.9607843137254706,
+          1.9607843137254706
+        ]
+      ],
+      "maximum_rest_range_rad": 0.0034343647696076507,
+      "forward_speeds_BL_s": [
+        -3.664159796991476e-07,
+        -3.6637975804500736e-07,
+        -3.66637266641092e-07
+      ]
+    },
+    {
+      "case": "controller-locomotor_integrators",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.7064846416382295,
+          1.7064846416382295,
+          1.7064846416382295
+        ],
+        [
+          1.7064846416382295,
+          1.7064846416382295,
+          1.7064846416382295
+        ],
+        [
+          1.7064846416382295,
+          1.7064846416382295,
+          1.7064846416382295
+        ]
+      ],
+      "maximum_rest_range_rad": 0.03655709028505352,
+      "forward_speeds_BL_s": [
+        -1.4287230312320431e-05,
+        -1.4287203725872784e-05,
+        -1.4287141657499743e-05
+      ]
+    },
+    {
+      "case": "controller-forward_premotor",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.9011406844106342,
+          1.9011406844106342,
+          1.9011406844106342
+        ],
+        [
+          1.901140684410647,
+          1.9011406844106087,
+          1.9011406844106087
+        ],
+        [
+          1.9011406844106087,
+          1.9011406844106087,
+          1.90114068441066
+        ]
+      ],
+      "maximum_rest_range_rad": 0.035103123624352583,
+      "forward_speeds_BL_s": [
+        -7.693507566932473e-06,
+        -7.694433950821696e-06,
+        -7.693075956836265e-06
+      ]
+    },
+    {
+      "case": "controller-stop_candidate",
+      "control": false,
+      "swimming": false,
+      "active_hz": [
+        [
+          1.8382352941176574,
+          1.8382352941176574,
+          1.8382352941176574
+        ],
+        [
+          1.8382352941176574,
+          1.8382352941176574,
+          1.8382352941176574
+        ],
+        [
+          1.8382352941176574,
+          1.8382352941176574,
+          1.8382352941176574
+        ]
+      ],
+      "maximum_rest_range_rad": 0.035740612963071836,
+      "forward_speeds_BL_s": [
+        -3.5631511724044154e-06,
+        -3.563228115202257e-06,
+        -3.563029772306645e-06
+      ]
+    }
+  ],
+  "stop_latency_s": null,
+  "first_movement_after_start_s": 0.0020000000000024443,
+  "start_latency_interpretation": "Ongoing movement; does not establish cue-induced restart",
+  "unknown": [
+    "Actual server source/environment records",
+    "Worker proposal counts and improvement history",
+    "Selected per-cell cue-evoked voltages",
+    "Refinement feature/latency details",
+    "Full trajectories"
+  ],
+  "decision": "Preserve all checkpoints; audit cue-to-sensory-to-interneuron-to-motor signal flow before more long fitting. No new experiment launched",
+  "biological_fidelity_qualified": false
+}

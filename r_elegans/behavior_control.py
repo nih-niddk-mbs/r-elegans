@@ -210,7 +210,8 @@ def control_report(checkpoint_sha256,cases,refinement_passed):
         start=rows['start-blocked']
         cue_specific=cue_specific and start['metrics']['initial_movement_passed'] and start.get('pre_start_maximum_difference_rad',1.)<=1e-7 and all(r['passed'] for r in start['metrics']['off']) and all(r['maximum_raw_joint_range_rad']<=1e-4 for r in start['metrics']['on'][1:])
     causal=[]
-    if complete:
+    # An unsuccessful baseline cannot establish loss of learned control.
+    if complete and positives and cue_specific:
         for group in CONTROL_GROUPS:
             r=rows['controller-'+group]['metrics']
             if r['initial_movement_passed'] and not r['control_passed']:causal.append(group)

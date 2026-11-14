@@ -1,6 +1,6 @@
 {
   "experiment": "E074",
-  "status": "planned_not_executed",
+  "status": "executed_control_validation_failed_user_reported",
   "question": "Can extended sensory-control search produce validated stop/rest/restart and then controlled swimming?",
   "parent_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
   "method": "Fresh E072/E073 search with adaptive time allocation; validate best control candidate even on training failure; swimming still fully gated",
@@ -24,5 +24,6 @@
   "acceptance": "Unchanged E072/E073 exact-checkpoint full control and physical swimming gates; no threshold relaxation",
   "artifacts": "/home/carsonc/r-elegans-results/controlled-swimming-<UTC>-<PID>",
   "exact_records": "Source/env/argv/hash capsules and all selected/final models, coordinates, RNG/optimizer and recursive parent dependencies remain external",
-  "prior_result": "E072-server-summary.json"
+  "prior_result": "E072-server-summary.json",
+  "outcome_record": "E074-server-summary.json"
 }

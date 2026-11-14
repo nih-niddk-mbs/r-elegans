@@ -1,5 +1,19 @@
 # WormGym: training and validation protocols
 
+2026-11-14 E074 outcome (user-reported):559.98min, no timeout, process exit0.
+Selected seed7200/checkpoint2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f
+failed all positive control cases. Nominal rest range.0352063rad versus1e-4rad
+limit (~352×); no-cue.0352062644rad, with persistent~1.901Hz body rhythm.
+No stop latency detected; movement2ms after START reflects ongoing movement,
+not a learned restart. Full control case set reported complete, but control
+qualification failed; pipeline validation remains incomplete because swimming
+never started. Preserve E071 and failed candidates. No propulsion qualification.
+Reported controller-group labels do not establish learned-control dependence
+when unlesioned control already fails; reporting logic corrected prospectively.
+Next proposed step: cue-to-motor signal-flow audit, not another blind long fit.
+[Outcome](experiments/records/E074-server-summary.json).
+
+
 2026-11-13 E074 planned follow-up: the controlled-swimming launcher now has a
 **600-minute TOTAL ceiling** (setup, search, validation and cleanup). Control
 search uses the remaining budget minus one full validation suite and10min

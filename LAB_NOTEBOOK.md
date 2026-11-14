@@ -6647,3 +6647,60 @@ Coordinator compilation, launcher shell syntax and diff checks passed. These are
 software checks; no new neural forward simulation, learned control or physical
 swimming result. Exact source/environment/invocation capture remains enabled in
 the server launcher/coordinator/workers. E074 remains planned pending user launch.
+
+### E074 outcome — failed sensory stopping, full control case set reported (2026-11-14)
+
+User-reported server stdout attachment e44a2b3a-e9b0-4f46-a4ee-b5b41ddd9f6f;
+SHA256 in experiments/records/E074-server-summary.json. Run external results/
+controlled-swimming-20261114T034629Z-30860,559.98min, exit0, no timeout.
+Validation reserve50.24min/stage. Selected control fitseed7200, checkpoint
+2a2b30b4324163aaba5e6c70d4d549cf0c689732d03ebb65f03aec297ee0924f.
+Control gate complete=True (all18 case results reported), but positive/control/
+sensory-specificity/refinement gatesFalse. Pipeline all_steps_finished and
+validation_completeFalse; swimming blocked/not started. Software execution
+success does not qualify behavior. Raw server models/trajectories not retrieved;
+actual source/env, proposal histories and per-cell responses remain unknown.
+
+Nominal rest max raw joint range.03520628649325283rad vs1e-4rad (~352.06×).
+No-cue and chemical-blocked each.0352062644382099rad. Difference in this scalar
+range is only2.2055e-8rad; this is NOT a full-waveform or phase-error bound.
+Nominal active regional frequencies~1.90114Hz before/after cues. No settled stop
+latency; first movement.002s after START is expected from ongoing oscillation,
+not evidence of restart. Nominal directed speed~−3.883e-6BL/s: no meaningful
+forward swimming demonstrated. Repeated/dose/shift/long-rest fail likewise.
+Held-voltage has zero motion as expected, not learned stopping. Neural/body-half
+rest ranges.03515895/.03520488rad still fail; refinement_pass=False alone cannot
+be read as numerical instability because its gate also requires positive control.
+
+Correction to interpretation/reporting: old control_report listed three causal
+groups merely because their output-blocked models moved initially and also failed
+control. Since unlesioned control itself fails, this establishes no loss of a
+learned function. Require positive control and cue specificity before listing
+causal groups. Retain historical reported fields in structured outcome with this
+explicit correction; no earlier outcome is silently promoted or removed.
+Controller interventions alter movement (sensory-integrator block rest range
+.003434rad), supporting a general dynamical influence only, not sensory stopping
+or a particular RIS mechanism. Overall control qualification was alreadyFalse;
+this correction does not change the failed outcome.
+
+Decision: retain qualified E071 motor parent and every failed E074 selected/final
+model and lineage. Do not launch more long fitting yet. Proposed read-only audit:
+cue-minus-sham ASE/AWA conductance/voltage, candidate-control responses and
+transmission into rhythmic motor cells; inspect fixed excitatory/inhibitory
+signs, parameter movement and objective sensitivity, then choose targeted
+training changes. Detailed audit protocol/experiment remains to be specified
+before execution. No new server run or physiology claim. Current records/docs
+updated, historical plan/negative entries preserved. Invocation reported:
+/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_controlled_swimming
+from /home/carsonc/github/r-elegans.
+
+Local verification of causal-report correction:9 focused behavior-control
+software tests passed in2.74s, including a regression case where unlesioned
+control fails and no causal groups may be claimed. Structured evidence parsed
+all18 cases from supplied stdout; no server forward simulation or new fit.
+
+E074 evidence archive: OneDrive notebook/evidence/
+E074-server-20261114T034629Z-30860; verbatim supplied transcript and compact
+interpreted summary byte-checked against originals; manifest SHA256
+abdfa01602a8ac8ccd17dcd97857094e08c164dbc3e1cb40e4b4d311005b13f0.
+No actual server checkpoint/trajectory retrieval or cloud-sync claim.
