@@ -6996,3 +6996,46 @@ transmitter mechanisms. Explicit restart testing remains useful but does not
 by itself resolve biological validity. Preserve E076 results and original
 engineering gates; no model/reversal/channel parameter or qualification changed.
 No new experiment launched. Literature verification and notebook update only.
+
+### Local structural check — control-set reciprocal pairs (2026-11-14)
+
+User asks about mutually connected control neurons in the toggle discussion.
+Read bundled runtime_model_v1 topology via load_connectome, canonical[post,pre]
+ordering; enumerate distinct unordered pairs among17 CONTROL_GROUPS members.
+Positive chemical counts in both directions yield20 reciprocal pairs; positive
+symmetric gap counts yield20 electrical pairs. No simulation or model change,
+no external server checkpoint read. Asset canonical sorted compact JSON SHA256
+7327d82fcd61e643ef5ec1a3f727b0323cf1619b96d96212266e3be465cda5fb.
+Complete small structural result: experiments/records/control-reciprocity-20261114.json.
+
+Examples, count a→b/b→a: RIBL↔RIS5/8, RIBR↔RIS1/18,
+RIMR↔RIS2/15, RIBL↔RIML1/9, AIBR↔RIML47/22. Also AVBL↔AVBR6/2,
+PVCL↔PVCR10/5. Electrical examples include RIBL–RIBR15, RIML–RIS2,
+RIMR–RIS2 and AVBL–AVBR18. These are bundled anatomical counts, not fitted
+conductances, inhibitory signs or a guarantee of physiological functional edges.
+Model electrical conductance is symmetric diffusive coupling; this is distinct
+from reciprocal chemical inhibition. Some pairs have both types; do not sum the
+20+20 as40 unique unordered neuron pairs.
+
+Interpretation: candidate recurrent loops exist, including RIS/RIB reciprocal
+chemical structure. Mutual inhibition depends on receptor/transmitter effects
+and voltage-dependent driving forces, and bistability additionally depends on
+strengths, intrinsic/slow variables and network context. Topology alone proves
+neither an inhibitory flip-flop nor same-pulse toggling. Current E074 weights and
+operating points remain external; source topology was frozen during fitting, but
+this check directly inspects bundled topology rather than claiming a new server
+artifact verification. Next investigations should examine actual effective
+synaptic signs/drive and state dependence, with separate RIB/RIM perturbations
+as already proposed. No new experiment or change of qualifications.
+
+Local invocation: JAX_PLATFORMS=cpu OPENBLAS_NUM_THREADS=1 .venv/bin/python
+/tmp/control_reciprocity_20261114.py. Deterministic structural analysis;20/20
+pair counts printed, no dynamical tests needed. Script and exact small result
+archived externally below for reproducibility.
+
+Reciprocity archive: OneDrive notebook/evidence/control-reciprocity-20261114,
+analysis.py/summary.json/invocation.json plus manifest. Manifest SHA256
+247c20b7c26849bec10c8be616815fde83a2b9ebf469db6a00cbc57ca01c23fd.
+Initial archive helper used system python3 and failed importing NumPy before any
+archive was created; reran successfully using the project .venv interpreter.
+No source/model/data analysis changed. No cloud-sync completion claimed.

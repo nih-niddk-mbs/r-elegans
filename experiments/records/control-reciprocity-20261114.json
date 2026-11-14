@@ -1,0 +1,299 @@
+{
+  "scope": "Local bundled structural topology; no neural simulation or actual server checkpoint retrieval",
+  "neuron_count": 17,
+  "neurons": [
+    "AIYL",
+    "AIYR",
+    "AIBL",
+    "AIBR",
+    "AIZL",
+    "AIZR",
+    "RIAL",
+    "RIAR",
+    "RIBL",
+    "RIBR",
+    "RIML",
+    "RIMR",
+    "AVBL",
+    "AVBR",
+    "PVCL",
+    "PVCR",
+    "RIS"
+  ],
+  "groups": {
+    "sensory_integrators": [
+      "AIYL",
+      "AIYR",
+      "AIBL",
+      "AIBR",
+      "AIZL",
+      "AIZR",
+      "RIAL",
+      "RIAR"
+    ],
+    "locomotor_integrators": [
+      "RIBL",
+      "RIBR",
+      "RIML",
+      "RIMR"
+    ],
+    "forward_premotor": [
+      "AVBL",
+      "AVBR",
+      "PVCL",
+      "PVCR"
+    ],
+    "stop_candidate": [
+      "RIS"
+    ]
+  },
+  "reciprocal_chemical_pairs": [
+    {
+      "a": "AIBL",
+      "b": "AIZR",
+      "a_to_b_count": 7,
+      "b_to_a_count": 50,
+      "gap_count": 4
+    },
+    {
+      "a": "AIBL",
+      "b": "RIBR",
+      "a_to_b_count": 16,
+      "b_to_a_count": 3,
+      "gap_count": 0
+    },
+    {
+      "a": "AIBL",
+      "b": "RIML",
+      "a_to_b_count": 1,
+      "b_to_a_count": 1,
+      "gap_count": 0
+    },
+    {
+      "a": "AIBL",
+      "b": "RIMR",
+      "a_to_b_count": 56,
+      "b_to_a_count": 15,
+      "gap_count": 1
+    },
+    {
+      "a": "AIBR",
+      "b": "RIBL",
+      "a_to_b_count": 11,
+      "b_to_a_count": 8,
+      "gap_count": 0
+    },
+    {
+      "a": "AIBR",
+      "b": "RIML",
+      "a_to_b_count": 47,
+      "b_to_a_count": 22,
+      "gap_count": 2
+    },
+    {
+      "a": "AIBR",
+      "b": "AVBR",
+      "a_to_b_count": 13,
+      "b_to_a_count": 1,
+      "gap_count": 0
+    },
+    {
+      "a": "AIZL",
+      "b": "RIAL",
+      "a_to_b_count": 29,
+      "b_to_a_count": 1,
+      "gap_count": 0
+    },
+    {
+      "a": "RIAL",
+      "b": "RIAR",
+      "a_to_b_count": 23,
+      "b_to_a_count": 38,
+      "gap_count": 0
+    },
+    {
+      "a": "RIAL",
+      "b": "RIBL",
+      "a_to_b_count": 2,
+      "b_to_a_count": 6,
+      "gap_count": 1
+    },
+    {
+      "a": "RIAL",
+      "b": "RIML",
+      "a_to_b_count": 2,
+      "b_to_a_count": 3,
+      "gap_count": 0
+    },
+    {
+      "a": "RIAR",
+      "b": "RIBR",
+      "a_to_b_count": 1,
+      "b_to_a_count": 8,
+      "gap_count": 0
+    },
+    {
+      "a": "RIBL",
+      "b": "RIML",
+      "a_to_b_count": 1,
+      "b_to_a_count": 9,
+      "gap_count": 0
+    },
+    {
+      "a": "RIBL",
+      "b": "RIS",
+      "a_to_b_count": 5,
+      "b_to_a_count": 8,
+      "gap_count": 0
+    },
+    {
+      "a": "RIBR",
+      "b": "RIS",
+      "a_to_b_count": 1,
+      "b_to_a_count": 18,
+      "gap_count": 0
+    },
+    {
+      "a": "RIML",
+      "b": "RIMR",
+      "a_to_b_count": 2,
+      "b_to_a_count": 4,
+      "gap_count": 0
+    },
+    {
+      "a": "RIMR",
+      "b": "RIS",
+      "a_to_b_count": 2,
+      "b_to_a_count": 15,
+      "gap_count": 2
+    },
+    {
+      "a": "AVBL",
+      "b": "AVBR",
+      "a_to_b_count": 6,
+      "b_to_a_count": 2,
+      "gap_count": 18
+    },
+    {
+      "a": "AVBL",
+      "b": "PVCR",
+      "a_to_b_count": 2,
+      "b_to_a_count": 21,
+      "gap_count": 0
+    },
+    {
+      "a": "PVCL",
+      "b": "PVCR",
+      "a_to_b_count": 10,
+      "b_to_a_count": 5,
+      "gap_count": 67
+    }
+  ],
+  "electrical_pairs": [
+    {
+      "a": "AIYL",
+      "b": "AIYR",
+      "gap_count": 4
+    },
+    {
+      "a": "AIYL",
+      "b": "RIML",
+      "gap_count": 5
+    },
+    {
+      "a": "AIYR",
+      "b": "RIMR",
+      "gap_count": 3
+    },
+    {
+      "a": "AIBL",
+      "b": "AIZR",
+      "gap_count": 4
+    },
+    {
+      "a": "AIBL",
+      "b": "RIMR",
+      "gap_count": 1
+    },
+    {
+      "a": "AIBL",
+      "b": "RIS",
+      "gap_count": 1
+    },
+    {
+      "a": "AIBR",
+      "b": "AIZL",
+      "gap_count": 3
+    },
+    {
+      "a": "AIBR",
+      "b": "RIML",
+      "gap_count": 2
+    },
+    {
+      "a": "AIBR",
+      "b": "RIS",
+      "gap_count": 3
+    },
+    {
+      "a": "AIZL",
+      "b": "AIZR",
+      "gap_count": 18
+    },
+    {
+      "a": "RIAL",
+      "b": "RIBL",
+      "gap_count": 1
+    },
+    {
+      "a": "RIBL",
+      "b": "RIBR",
+      "gap_count": 15
+    },
+    {
+      "a": "RIBL",
+      "b": "AVBL",
+      "gap_count": 6
+    },
+    {
+      "a": "RIBL",
+      "b": "AVBR",
+      "gap_count": 3
+    },
+    {
+      "a": "RIBR",
+      "b": "AVBL",
+      "gap_count": 2
+    },
+    {
+      "a": "RIBR",
+      "b": "AVBR",
+      "gap_count": 3
+    },
+    {
+      "a": "RIML",
+      "b": "RIS",
+      "gap_count": 2
+    },
+    {
+      "a": "RIMR",
+      "b": "RIS",
+      "gap_count": 2
+    },
+    {
+      "a": "AVBL",
+      "b": "AVBR",
+      "gap_count": 18
+    },
+    {
+      "a": "PVCL",
+      "b": "PVCR",
+      "gap_count": 67
+    }
+  ],
+  "reciprocal_chemical_count": 20,
+  "electrical_pair_count": 20,
+  "runtime_asset_canonical_json_sha256": "7327d82fcd61e643ef5ec1a3f727b0323cf1619b96d96212266e3be465cda5fb",
+  "method": "Nonself unordered pairs; chemical[post,pre]>0 in both directions; gap symmetric>0; anatomical counts, not fitted effective strengths/signs",
+  "limitations": "Reciprocity does not establish mutual inhibition, bistability or toggle behavior. Server weights/operating points remain external."
+}
