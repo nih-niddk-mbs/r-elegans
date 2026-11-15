@@ -1,6 +1,6 @@
 {
   "experiment": "E077",
-  "status": "planned_not_executed",
+  "status": "executed_no_first_rung_pass_user_reported",
   "record_date": "2026-11-14",
   "question": "Can bounded grouped CMA-ES learn gradually stronger sensory-specific slowing while preserving bends, uncued movement and START recovery?",
   "parent_checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
@@ -50,5 +50,6 @@
   "references": [
     "https://github.com/CMA-ES/pycma",
     "https://cma-es.github.io/apidocs-pycma/cma.evolution_strategy.CMAEvolutionStrategy.html"
-  ]
+  ],
+  "outcome_record": "E077-server-summary.json"
 }

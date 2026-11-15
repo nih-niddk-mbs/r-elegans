@@ -1,5 +1,16 @@
 # r-elegans
 
+2026-11-14 E077 CMA pilot completed (user-reported):184.07min, no errors/timeouts,
+all planned final checks complete. Three generations/36 new candidates in24
+latent dimensions; no curriculum rung passed. Selected checkpoint remains the
+original E071 parent8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a.
+STOP/no-cue cadence ratios~1.0 instead of.95: no learned5% slowing or START-
+specific recovery. Preserved original gait and paired-ratio timestep agreement
+are numerical/component findings, not behavior learning. Next: inspect saved
+population loss/constraint diagnostics before more fitting. No new run launched.
+[Outcome](experiments/records/E077-server-summary.json).
+
+
 2026-11-14 E077 planned CMA-ES pilot: gradual **cadence** reduction5/10/20/35/50%,
 with useful bends retained, START-specific recovery and unchanged uncued movement.
 Full302 network; fresh qualified E071 parent; expected24 grouped unknown factors.

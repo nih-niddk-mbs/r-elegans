@@ -1,0 +1,816 @@
+{
+  "experiment": "E077",
+  "status": "completed_no_curriculum_progress_user_reported",
+  "evidence": "User-reported server stdout; full server source/optimizer/candidate artifacts not retrieved",
+  "evidence_sha256": "222d46932f4f8a9eb1e971f8570a6657278af7dbc158693684305da4a1c21e09",
+  "run": "/home/carsonc/r-elegans-results/cma-cadence-20261114T185621Z-105869",
+  "budget_receipt": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 11043.916631747998,
+    "total_minutes": 240.0,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/cma-cadence-20261114T185621Z-105869/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model"
+  },
+  "reported_summary": {
+    "experiment": "E077",
+    "execution_valid": true,
+    "all_stages_finished": true,
+    "validation_complete": true,
+    "completed_generations": 3,
+    "dimension": 24,
+    "evaluation_status_counts": {
+      "completed": 41,
+      "failed": 0,
+      "worker_error": 0,
+      "time_budget": 0
+    },
+    "curriculum_rungs_passed_training_checks": [],
+    "active_target": 0.05,
+    "selected_rescored_for_active_target": {
+      "loss": 0.8333333333332978,
+      "data_loss": 0.8333333333332978,
+      "constraint_loss": 0.0,
+      "target_fraction": 0.05,
+      "partial_cadence_passed": false,
+      "safe": true,
+      "uncued_movement_preserved": true,
+      "pre_movement_preserved": true,
+      "bend_amplitude_preserved": true,
+      "cadence_ratios": [
+        {
+          "condition": "stop_start",
+          "window": "off",
+          "index": 0,
+          "target_ratio": 0.95,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            0.9999999999999933
+          ]
+        },
+        {
+          "condition": "stop_only",
+          "window": "off",
+          "index": 0,
+          "target_ratio": 0.95,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            0.9999999999999933
+          ]
+        },
+        {
+          "condition": "stop_only",
+          "window": "on",
+          "index": 1,
+          "target_ratio": 0.95,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "condition": "stop_only",
+          "window": "on",
+          "index": 2,
+          "target_ratio": 0.95,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "condition": "stop_start",
+          "window": "on",
+          "index": 1,
+          "target_ratio": 1.0,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "condition": "stop_start",
+          "window": "on",
+          "index": 2,
+          "target_ratio": 1.0,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "condition": "start_only",
+          "window": "on",
+          "index": 0,
+          "target_ratio": 1.0,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "condition": "start_only",
+          "window": "on",
+          "index": 1,
+          "target_ratio": 1.0,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "condition": "start_only",
+          "window": "on",
+          "index": 2,
+          "target_ratio": 1.0,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "condition": "start_only",
+          "window": "off",
+          "index": 0,
+          "target_ratio": 1.0,
+          "frequency_ratios": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "full_stopping_qualified": false,
+      "swimming_qualified": false
+    },
+    "numerical_consistency": [
+      {
+        "grid": "neural-half",
+        "maximum_cadence_ratio_difference": 6.661338147750939e-15,
+        "amplitudes_consistent": true,
+        "passed": true
+      },
+      {
+        "grid": "body-half",
+        "maximum_cadence_ratio_difference": 6.661338147750939e-15,
+        "amplitudes_consistent": true,
+        "passed": true
+      }
+    ],
+    "final_grid_partial_cadence_pass": false,
+    "full_stopping_qualified": false,
+    "swimming_qualified": false,
+    "swimming_blocked": true,
+    "failure": null,
+    "scope": "Partial sensory slowing curriculum; no full start/stop, causal-control or biological qualification"
+  },
+  "refinement_reports": [
+    {
+      "grid": "ordinary",
+      "status": "completed",
+      "metrics": {
+        "loss": 0.833333333333335,
+        "data_loss": 0.833333333333335,
+        "constraint_loss": 0.0,
+        "target_fraction": 0.05,
+        "partial_cadence_passed": false,
+        "safe": true,
+        "uncued_movement_preserved": true,
+        "pre_movement_preserved": true,
+        "bend_amplitude_preserved": true,
+        "cadence_ratios": [
+          {
+            "condition": "stop_start",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        "full_stopping_qualified": false,
+        "swimming_qualified": false
+      }
+    },
+    {
+      "grid": "ordinary",
+      "status": "completed",
+      "metrics": {
+        "loss": 0.8771929824561226,
+        "data_loss": 0.8771929824561226,
+        "constraint_loss": 0.0,
+        "target_fraction": 0.05,
+        "partial_cadence_passed": false,
+        "safe": true,
+        "uncued_movement_preserved": true,
+        "pre_movement_preserved": true,
+        "bend_amplitude_preserved": true,
+        "cadence_ratios": [
+          {
+            "condition": "stop_start",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              0.9999999999999933
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "off",
+            "index": 1,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              0.9999999999999933
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "off",
+            "index": 1,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 3,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 4,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 3,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 4,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 3,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 4,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "off",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        "full_stopping_qualified": false,
+        "swimming_qualified": false
+      }
+    },
+    {
+      "grid": "neural-half",
+      "status": "completed",
+      "metrics": {
+        "loss": 0.833333333333335,
+        "data_loss": 0.833333333333335,
+        "constraint_loss": 0.0,
+        "target_fraction": 0.05,
+        "partial_cadence_passed": false,
+        "safe": true,
+        "uncued_movement_preserved": true,
+        "pre_movement_preserved": true,
+        "bend_amplitude_preserved": true,
+        "cadence_ratios": [
+          {
+            "condition": "stop_start",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        "full_stopping_qualified": false,
+        "swimming_qualified": false
+      }
+    },
+    {
+      "grid": "body-half",
+      "status": "completed",
+      "metrics": {
+        "loss": 0.833333333333335,
+        "data_loss": 0.833333333333335,
+        "constraint_loss": 0.0,
+        "target_fraction": 0.05,
+        "partial_cadence_passed": false,
+        "safe": true,
+        "uncued_movement_preserved": true,
+        "pre_movement_preserved": true,
+        "bend_amplitude_preserved": true,
+        "cadence_ratios": [
+          {
+            "condition": "stop_start",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 0.95,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "stop_start",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 1,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "on",
+            "index": 2,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "condition": "start_only",
+            "window": "off",
+            "index": 0,
+            "target_ratio": 1.0,
+            "frequency_ratios": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        "full_stopping_qualified": false,
+        "swimming_qualified": false
+      }
+    }
+  ],
+  "new_candidate_count": 36,
+  "selection": "Original E071 parent unchanged",
+  "selected_checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
+  "interpretation": [
+    "Three generations in24 dimensions; no new candidate displaced the original parent under selected-preservation rules",
+    "Selected STOP/no-cue cadence ratios~1.0, versus target.95; first5% slowing rung not met",
+    "Preserved original movement and refined paired ratios; agreement of a null response is not learned control",
+    "No full stopping, independent restart or swimming qualified",
+    "Three generations are insufficient evidence that CMA-ES in general cannot solve the task",
+    "Why the loop ended early is not explicit in supplied summary: time forecast versus optimizer stopping not distinguished"
+  ],
+  "unknown": [
+    "Population best unconstrained losses and feasibility distribution",
+    "Cue-specific frequency ranges across36 candidate summaries",
+    "Actual CMA stopping dictionary, source revision and installed versions",
+    "Whether cadence quantization or weak sensory influence makes the objective locally flat"
+  ],
+  "decision": "Read population metadata diagnostics before further fitting; no new run or objective change launched",
+  "storage": "Excess rejected raw traces pruned after run; candidate models/coordinates/feature summaries and selected/final/parent validation traces preserved by cleanup policy",
+  "journal_backup": "User displayed cp command to results/.cleanup-records without reported error; no remote hash verification",
+  "biological_fidelity_qualified": false
+}

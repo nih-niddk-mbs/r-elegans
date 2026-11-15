@@ -7348,3 +7348,62 @@ already-completed journal there; no remote backup execution claimed. Model
 checkpoint/source/optimizer/RNG/reference protection policy unchanged. No new
 CMA run launched. Next: read the completed CMA pilot report to assess gradual
 slowing/recovery, rather than assume progress from its storage usage.
+
+### E077 outcome — no first-rung improvement, original parent retained (2026-11-14)
+
+User-reported stdout attachment3a45da02-767c-403f-bd93-d68209f43c2b, hash in
+E077-server-summary.json. Run cma-cadence-20261114T185621Z-105869. Receipt:
+11043.916631748s=184.0653min, total budget240min, exit0/no timeout,
+all_steps_finished=True/validation_complete=True. Those flags mean execution/
+final-check completion, NOT successful curriculum learning. Three CMA generations,
+24 dimensions,41 completed evaluations (parent1 + new candidates36 + final4),
+failed/worker_error/time_budget0. No rung passed; active target.05.
+
+Selected evaluation remains evaluations/parent, SHA
+8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a,
+identical to original E071. Parent loss.8333333333333, constraints0, movement/bend/
+pre-cue/safety guards preserved. Every supplied selected STOP/no-cue cadence ratio
+is~1 (only rounding-scale differences) against target.95. START-related ratios1
+reflect ongoing movement, not demonstrated restart from slowing/rest. Low/shift,
+repeat and half-step checks all completed but failed partial-cadence targets;
+repeat loss.87719298 due additional windows, not a directly comparable objective
+normalization. No new trained behavior, stopping, navigation or swimming claim.
+
+Selected-model cadence-ratio refinement difference6.66e-15 with amplitude
+consistency passed. This validates consistency of the null paired response under
+these checks, not absolute frequency identity, biological fidelity or successful
+fitting. No stopping/swimming promotion occurred. Parent and all candidate
+model/coordinate/optimizer/RNG/source records retained. Cleanup pruned excess
+unselected raw condition arrays; corresponding saved scalar/feature summaries
+remain usable for population diagnostics. Parent/selected/final traces retained.
+User also displayed journal copy command without error; actual preserved-journal
+hash not retrieved. Storage remains reported591G free/84%, results816G.
+
+Interpretation: no candidate replaced parent under preservation constraints.
+Cannot conclude from this printout whether all new candidates violated guards,
+whether feasible candidates had flat/worse cue-specific score, or why search
+ended after3 generations (forecast versus CMA stopping not included in summary).
+36 samples in24 dimensions do not invalidate CMA-ES generally. Known feature
+implementation uses median sampled interpeak spacing at2ms body step, so small
+cadence changes can be quantized; whether that limits this run is unproven until
+population features or retained/reconstructed traces are examined. Weak sensory
+influence is another hypothesis supported by prior E075, not a uniquely proven
+cause here. Do not merely extend another long run or relax pass criteria.
+
+Decision: metadata-only population report before new experiments. Added
+report_cma_curriculum --diagnostics: counts completed/constraint-preserving
+candidates, best unrestricted/eligible losses, failed preservation checks,
+eligible cue-frequency ratio ranges and recorded generation history. No raw
+trace reads, dependency on deleted intermediates, or new model simulation. One
+small synthetic metadata-only test passed.08s, explicitly distinguishing lower
+loss with constraint violations from eligible improvements. Compilation passed.
+No objective/optimizer/parameters changed; no new fitting run launched. Actual
+server source/env/CMA stopping details remain unknown beyond preserved records.
+
+E077 reported evidence archive: OneDrive notebook/evidence/
+E077-server-20261114T185621Z-105869; supplied stdout plus interpreted summary
+byte-checked. Manifest SHA256
+63aabcc0d512fb6ff689c226ab3e9ba4d1b90fa7e56f6f8363948726b4f68823.
+No actual server trajectory/model/optimizer retrieval or cloud-sync completion
+asserted. Metadata diagnostic command after pull:
+`/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_cma_curriculum --diagnostics`.
