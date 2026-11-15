@@ -1,6 +1,7 @@
 {
   "experiment": "E081",
-  "status": "planned_server_execution_not_evidenced",
+  "status": "diagnostic_completed_user_reported",
+  "outcome_record": "E081-server-summary.json",
   "record_date": "2026-11-15",
   "question": "Which RMD/SMD/SMB output subgroup carries the dominant E080 head-motor contribution to the current wiggle?",
   "checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",

@@ -1,8 +1,13 @@
 # Current model: exact scope and computation path
 
-2026-11-15 E081 **planned**: split RMD/SMD/SMB NMJ contributions on unchanged
-E078 model; sham, combined-head and all-output controls, individual-only timestep
-refinement.45min TOTAL, no training or qualification. [Plan](experiments/records/E081-plan.json).
+2026-11-15 E081 completed (user-reported):13m03s, controls and timestep checks
+passed. SMD-only NMJ release hold reduced body range88.62%, essentially matching
+combined-head suppression. RMD/SMB holds had little marginal body effect.
+SMD hold left43.77% maximum muscle variation, versus8.66% for combined head;
+remaining muscle variation does not directly measure effective body drive.
+Dominant SMD output transmission identified, not intrinsic rhythm origin or
+learned stopping. Next proposed test: reversible SMD membrane inhibition.
+[Outcome](experiments/records/E081-server-summary.json).
 
 2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
 Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body

@@ -1,0 +1,30 @@
+{
+  "experiment": "E081",
+  "record_date": "2026-11-15",
+  "evidence": "User-reported scripts.report_nmj_source --head-split stdout; remote checkpoint, full traces and source/environment records not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/head-split-20261115T181250Z-190971",
+  "protocol_checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "checkpoint_hash_evidence": "Pinned by protocol; hash not printed in supplied excerpt",
+  "execution_valid": true,
+  "validation_complete": true,
+  "failure": null,
+  "learned_stopping_qualified": false,
+  "common_flags": {"recovery": true, "pre_match": true, "safe": true},
+  "comparisons": [
+    {"case": "SMD", "grid": "ordinary", "body_range_ratio": 0.11378014629068958, "muscle_range_ratio": 0.43766545251152217},
+    {"case": "SMB", "grid": "ordinary", "body_range_ratio": 1.00094857859767, "muscle_range_ratio": 0.9999968054360828},
+    {"case": "RMD", "grid": "ordinary", "body_range_ratio": 0.995543752068011, "muscle_range_ratio": 1.0000068420220338},
+    {"case": "head", "grid": "ordinary", "body_range_ratio": 0.11378497784610712, "muscle_range_ratio": 0.08658555860958252},
+    {"case": "all", "grid": "ordinary", "body_range_ratio": 0.0, "muscle_range_ratio": 0.0},
+    {"case": "SMD", "grid": "neural-half", "body_range_ratio": 0.1137597888994425, "muscle_range_ratio": 0.4378896711111342},
+    {"case": "SMD", "grid": "body-half", "body_range_ratio": 0.1137794299242253, "muscle_range_ratio": 0.43773473384109257}
+  ],
+  "numerical_checks": [
+    {"case": "SMD", "grid": "neural-half", "suppression_ratio_difference": 2.0357391247088907e-05, "passed": true},
+    {"case": "SMD", "grid": "body-half", "suppression_ratio_difference": 7.163664642872991e-07, "passed": true}
+  ],
+  "diagnostic_controls": {"combined_head_reproduces_E080": true, "all_output_static_control": true, "passed": true},
+  "budget": {"exit_code": 0, "timed_out": false, "total_elapsed_seconds": 783.4457785999984, "total_minutes": 45.0, "all_steps_finished": true, "validation_complete": true},
+  "interpretation": "SMD-only NMJ release hold reproduces essentially the combined-head body suppression (~88.62%), whereas RMD/SMB holds have little marginal body effect. SMD hold leaves43.77% of maximum muscle variation versus8.66% for combined head, so muscle variation and body-driving effectiveness differ. This localizes a dominant output-transmission route, not an isolated SMD pacemaker or a linear fraction of movement generated.",
+  "next_proposed_step": "Test selective SMD membrane inhibition and release, recording whether neural rhythmicity and body motion suppress and recover, then inspect upstream control access. No new fit or neural-inhibition experiment launched by this record."
+}

@@ -7969,3 +7969,46 @@ no cleanup exception was swallowed and watchdog logic was not changed. The
 unchanged tests passed with ordinary process permissions outside sandbox.
 Shell syntax and coordinator CLI help passed. No actual E081 neural simulation
 or server model/trajectory inspection performed locally.
+
+### E081 reported — SMD NMJ route dominates measured body wiggle (2026-11-15)
+
+User-reported `scripts.report_nmj_source --head-split` stdout:
+`/home/carsonc/r-elegans-results/head-split-20261115T181250Z-190971`.
+[Transcribed result](experiments/records/E081-server-summary.json).
+Execution/validation complete, failureNone, exit0, no timeout;783.44578s
+(~13m03s) total within45min maximum. Protocol pins selected
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8;
+hash and remote full source/env/checkpoint/trace files not independently inspected.
+Every reported comparison passed matched prefix, safety and recovery.
+
+SMD-only NMJ release hold: body ratio.1137801463 (~88.62% suppression), maximum
+muscle variation ratio.4376654525 (~56.23% suppression). RMD hold body.9955437521,
+muscle1.0000068420; SMB hold body1.0009485786, muscle.9999968054. Combined head
+body.1137849778, muscle.0865855586 reproduces E080. All-output control body and
+muscle range zero. Prospective combined/global control checks passed.
+
+SMD neural-half body.1137597889/muscle.4378896711; body-half
+.1137794299/.4377347338. Ratio differences2.03574e-5 and7.16366e-7 passed.
+The SMD-only body effect essentially matches combined-head suppression, despite
+substantially greater residual maximum muscle variation. Thus residual muscle
+activity need not translate effectively into the measured body bend. Do not
+equate max-muscle variation with net dorsal/ventral force, infer exact force
+cancellation, sum nonlinear group effects, or conclude RMD/SMB never contribute.
+
+Interpretation: the SMD NMJ pathway is the dominant tested transmission route for
+this checkpoint's body wiggle under these conditions. Holding SMD OUTPUT release
+does not stop its neural dynamics or prove SMD is an isolated/intrinsic oscillator;
+upstream drive, network recurrence, proprioception and nonlinear muscle transfer
+remain possible. This is not physiological validation of locomotor organization,
+an AVB-dependent B-motor forward gait or learned stopping. Recovery after NMJ
+release confirms reversibility of this imposed diagnostic, not sensory restart.
+
+Next proposed step: selectively inhibit SMD membrane activity (keeping other
+neurons live), release inhibition, and compare SMD neural rhythmicity, NMJ/body
+response and recovery to matched sham, with timestep checks. This tests whether
+the actual neural group is a reversible control target before fitting sensory
+control inputs. Further input analysis is needed to identify a biological access
+route; do not introduce an unsupported AVB-to-SMD connection to force stopping.
+No new experiment/fit launched in this result-recording turn. Preserve original
+parents, failed fits and all diagnostic weights/coordinates/references. No new
+learned skill or biological/swimming qualification. Documentation only.

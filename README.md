@@ -1,10 +1,13 @@
 # r-elegans
 
-E081 head-output split (planned): after pulling on mbslnx2, run
-`sh scripts/launch_head_split_mbslnx2.sh`. Maximum45min TOTAL; frozen RMD/SMD/SMB
-output diagnostics with controls/refinement, no training. Report afterward:
-`python -m scripts.report_nmj_source --head-split` in the r-elegans environment.
-[Protocol](experiments/records/E081-plan.json).
+2026-11-15 E081 completed (user-reported):13m03s, controls and timestep checks
+passed. SMD-only NMJ release hold reduced body range88.62%, essentially matching
+combined-head suppression. RMD/SMB holds had little marginal body effect.
+SMD hold left43.77% maximum muscle variation, versus8.66% for combined head;
+remaining muscle variation does not directly measure effective body drive.
+Dominant SMD output transmission identified, not intrinsic rhythm origin or
+learned stopping. Next proposed test: reversible SMD membrane inhibition.
+[Outcome](experiments/records/E081-server-summary.json).
 
 2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
 Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body
