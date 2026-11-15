@@ -1,0 +1,30 @@
+{
+  "experiment": "E080",
+  "record_date": "2026-11-15",
+  "evidence": "User-reported scripts.report_nmj_source stdout; remote traces, checkpoint bytes and complete reports not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/nmj-source-20261115T153200Z-186726",
+  "protocol_checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "checkpoint_hash_evidence": "Pinned by implemented protocol; hash not printed in supplied report excerpt",
+  "execution_valid": true,
+  "validation_complete": true,
+  "failure": null,
+  "learned_stopping_qualified": false,
+  "common_comparison_flags": {"recovery": true, "pre_match": true, "safe": true},
+  "comparisons": [
+    {"case": "head", "grid": "ordinary", "body_range_ratio": 0.11378497784610712, "muscle_range_ratio": 0.08658555860958252},
+    {"case": "B", "grid": "ordinary", "body_range_ratio": 1.0019813063087606, "muscle_range_ratio": 1.0015630626760397},
+    {"case": "other-body", "grid": "ordinary", "body_range_ratio": 1.0116854696702282, "muscle_range_ratio": 0.9991694012468204},
+    {"case": "other", "grid": "ordinary", "body_range_ratio": 0.9928843027085928, "muscle_range_ratio": 1.0000253168789435},
+    {"case": "all", "grid": "ordinary", "body_range_ratio": 0.0, "muscle_range_ratio": 0.0},
+    {"case": "head", "grid": "neural-half", "body_range_ratio": 0.11376456441784188, "muscle_range_ratio": 0.08655422317837025},
+    {"case": "head", "grid": "body-half", "body_range_ratio": 0.11378425499496828, "muscle_range_ratio": 0.08658707262047934}
+  ],
+  "numerical_checks": [
+    {"case": "head", "grid": "neural-half", "suppression_ratio_difference": 2.041342826523962e-05, "passed": true},
+    {"case": "head", "grid": "body-half", "suppression_ratio_difference": 7.228511388485126e-07, "passed": true}
+  ],
+  "budget": {"exit_code": 0, "timed_out": false, "total_elapsed_seconds": 846.3078493009962, "total_minutes": 45.0, "all_steps_finished": true, "validation_complete": true},
+  "interpretation": "Holding RMD/SMD/SMB NMJ release at each cell's baseline mean reduces maximum body-joint range88.62% and maximum muscle variation91.34%; B-motor NMJ hold has essentially no suppression. This localizes dominant rhythm transmission to the head-motor output population under the tested conditions, not the origin of the neural rhythm. Mean holds can change muscle operating point through nonlinear transfer and feedback.",
+  "qualification": "Imposed diagnostic only, no learned stopping, forward propulsion, autonomous sensory control or biological-fidelity qualification",
+  "next_proposed_step": "Split RMD/SMD/SMB output contributions and inspect their upstream inputs. Decide separately whether to control the existing head-driven component or build B-motor-dependent forward body rhythm. Preserve independent and failed checkpoints; no new fit launched."
+}

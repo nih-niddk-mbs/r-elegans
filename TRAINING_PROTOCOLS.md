@@ -1,11 +1,12 @@
 # WormGym: training and validation protocols
 
-2026-11-15 E080 planned before further fitting: selective NMJ output holds at
-baseline mean release,30..40s, live neurons/recurrent/sensory dynamics. Six60s
-screens plus strongest non-global group/sham neural/body refinements;45min total.
-No optimization or learned stopping. Future fitter motor groups now use numbered
-AS identities; old latent points require their original schema, not the corrected
-one. [Details](experiments/records/E080-plan.json).
+2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
+Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body
+range88.62% and muscle variation91.34%; B-motor hold had essentially no effect.
+Head-group effect reproduced on neural/body refinement; recovery passed.
+This localizes dominant rhythm transmission, not neural pacemaker origin or
+learned stopping. No forward-swimming or sensory-control qualification.
+[Diagnostic outcome](experiments/records/E080-server-summary.json).
 
 2026-11-15 E079 audit reported: AVB inhibition changes B-cell voltages without
 suppressing the body pattern. Do not assume absent AVB edges or diagnose intrinsic

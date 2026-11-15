@@ -1,9 +1,12 @@
 # Current model: exact scope and computation path
 
-2026-11-15 E080 **planned**: frozen E078 NMJ-population release holds to localize
-rhythm transmission; no fit.45min total, four workers and matched timestep checks.
-Future fitter motor identities now exclude AS sensory cells; old run schemas and
-weights retained unchanged. [Protocol](experiments/records/E080-plan.json).
+2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
+Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body
+range88.62% and muscle variation91.34%; B-motor hold had essentially no effect.
+Head-group effect reproduced on neural/body refinement; recovery passed.
+This localizes dominant rhythm transmission, not neural pacemaker origin or
+learned stopping. No forward-swimming or sensory-control qualification.
+[Diagnostic outcome](experiments/records/E080-server-summary.json).
 
 2026-11-15 E079 saved-data audit reported: selected AVBL/R inhibition shifts
 means by-24.27/-19.51mV; DB07/VB11 by-5.29/-5.86mV, while E078 body motion

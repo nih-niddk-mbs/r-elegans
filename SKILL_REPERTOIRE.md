@@ -1,5 +1,13 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
+Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body
+range88.62% and muscle variation91.34%; B-motor hold had essentially no effect.
+Head-group effect reproduced on neural/body refinement; recovery passed.
+This localizes dominant rhythm transmission, not neural pacemaker origin or
+learned stopping. No forward-swimming or sensory-control qualification.
+[Diagnostic outcome](experiments/records/E080-server-summary.json).
+
 2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
 exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,
 but selected body-motion and motor-voltage RMS ratios remained~1.002/~1.000:

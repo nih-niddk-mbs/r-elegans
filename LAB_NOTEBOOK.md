@@ -7880,3 +7880,48 @@ closed-loop unit check confirms sensing/brain advance continue under the hook.
 Existing control-access checks passed after preserving the default no-hook call
 signature. No actual E078 checkpoint or server trajectories are available
 locally; no local E080 scientific forward experiment or success is claimed.
+
+### E080 reported — head-motor NMJ pathway dominates current wiggle (2026-11-15)
+
+Evidence: user-reported `scripts.report_nmj_source` stdout for
+`/home/carsonc/r-elegans-results/nmj-source-20261115T153200Z-186726`.
+[Small result record](experiments/records/E080-server-summary.json).
+execution_valid/validation_complete true, failureNone, all_steps_finished true,
+exit0, no timeout;846.30785s (~14m06s) within45min budget. Protocol pins selected
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8,
+but actual hash/source/env and full trace bytes were not printed or independently
+retrieved here. All printed comparisons passed safety, pre-match and recovery.
+
+Holding RMD/SMD/SMB NMJ release at each cell's own baseline mean reduced body
+max-joint raw range to.11378498 of sham (~88.62% reduction), maximum muscle
+variation to.08658556 (~91.34% reduction). B-motor hold left body ratio1.00198131
+and muscle ratio1.00156306. Other-body hold1.01168547/.99916940; other-neuron
+hold.99288430/1.00002532. All-output hold produced zero body/muscle variation
+in the measured window; outputs recovered after release. The latter is a static
+NMJ-output control, explicitly NOT learned neural stopping.
+
+Head-group effect reproduced on neural-half: body.11376456, muscle.08655422;
+body-half: body.11378425, muscle.08658707. Suppression-ratio differences2.04134e-5
+and7.22851e-7 passed numerical checks. This is converged diagnostic evidence for
+dominant head-motor output transmission of the current wiggle. It does not prove
+isolated RMD/SMD/SMB pacemaking, identify an individual driver, show that these
+neurons account linearly for89% of motion, or establish their role in real-worm
+body locomotion. Nonlinear NMJ transfer/feedback and residual movement remain.
+The current wiggle cannot be described as a demonstrated B-motor-dependent
+forward gait simply because all302 neurons are present.
+
+Combined with E079, AVB inhibition reaches B neurons, but E080 shows that B-motor
+NMJ transmission is not dominant for this model's present body pattern. Thus
+even a large change in B-cell output need not suppress the current wiggle.
+Neither experiment establishes whether AVB can control the head-motor route
+under other parameters/conditions. Do not strengthen AVB weights blindly or
+conclude its biological function is disproven.
+
+Next proposed diagnostic: separate RMD, SMD and SMB output contributions and
+inspect the dominant group's upstream drive before choosing a control target.
+Distinguish learning control of this independent head-driven component from
+building a B-motor-dependent forward body pattern. The latter requires its own
+mechanistic and H1.2 sensory control validation; no prescribed sine waveform or
+hardcoded muscle gate may substitute. No new experiment/fit launched here.
+Preserve existing parent/failed models and evidence. No learned-stop, swimmer
+or biological qualification added. Documentation/evidence transcription only.
