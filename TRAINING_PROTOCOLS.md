@@ -2781,3 +2781,11 @@ then longer post-cue persistence and START recovery, using more sensitive timing
 features. Current STOP40–42s is scored48–58s, already requiring memory after cue
 offset. This recommendation is not implemented/launched; original outcomes and
 final criteria unchanged. See E077-population-diagnostics.json and LAB_NOTEBOOK.
+
+2026-11-14 waveform correction: E072/E077 two-second salt/odor cue durations are
+engineering assumptions, not measured natural stop/start waveforms. They impose
+post-cue memory. Future protocol design should establish input-driven response
+before persistent stopping, distinguish receptor adaptation from neural stop
+activity and slower transmitter effects, and match measured stimulus timing.
+Neither sustained inhibition nor bistability is established by the current data.
+No new training protocol executed; historical negative results stand.

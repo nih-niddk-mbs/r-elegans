@@ -7455,3 +7455,35 @@ Small supplemental record E077-population-diagnostics.json transcribes the user-
 reported numbers; actual server metadata/optimizer/source files not retrieved.
 Local checks: numerical transcription and JSON/diff checks only; no tests or
 model simulation necessary for this record-only update.
+
+### Stop-signal waveform assumption corrected (2026-11-14)
+
+User asks whether biological stopping is known to use a pulsed signal. The exact
+2s salt STOP and2s diacetyl START were engineering choices, not fitted natural
+stimulus waveforms or demonstrated innate salt-stop associations. E077 imposed
+persistent slowing after a brief cue before establishing a during-cue motor
+response. That is an additional memory requirement; no claim that biological
+stopping must use a brief pulse, a toggle, or bistability is justified.
+
+Distinguish external ligand concentration, sensory adaptation, stop-neuron
+activity, downstream synaptic/neuropeptide effects and motor cessation: their
+time courses need not coincide. A maintained ligand can adapt; a brief neuronal
+activation can have longer biochemical effects. Model adaptation defaults and
+proxy conductances are exploratory, not measurements proving pulse duration.
+Steuer Costa et al.2019 DOI10.1038/s41467-019-12098-5 reports RIS-related calcium
+signals and fast GABA/longer FLP-11 contributions to stopping. A reported main
+locomotion optogenetic protocol uses10s baseline/10s illumination/10s post;
+that artificial stimulation waveform does not establish a natural2s sensory
+STOP pulse. Primary methods retrieved via indexed Nature/author PDF text;
+Nature full-page/PDF open failed in browser tool, so no complete PDF download
+or figure-level waveform extraction is claimed.
+https://www.nature.com/articles/s41467-019-12098-5
+https://lirias.kuleuven.be/bitstream/123456789/640803/2/Steuer%20Costa%20RIS%20NatCommun%20Sep2019%20s41467-019-12098-5.pdf
+
+Revised recommendation: specify experimentally supported input/output timing;
+first establish state-following slowing while actual control drive is present,
+then test withdrawal, persistence and explicit restart separately. Continuous
+external stimulus is not assumed to yield continuous neural drive when receptors
+adapt. Existing E077 negative result remains; no waveform, bounds, training code
+or qualification changed and no new experiment launched. Pulse-triggered memory
+is a later hypothesis to test, not a prerequisite silently inferred from anatomy.
