@@ -1,5 +1,10 @@
 # r-elegans
 
+E079 saved-data AVB influence audit (planned): after pulling on mbslnx2, run
+`sh scripts/launch_avb_audit_mbslnx2.sh`. Read-only, no simulation/training or new
+large trajectories,20min maximum. Compares individual motor cells and AVB current
+contributions in E078 parent/selected models. [Plan](experiments/records/E079-plan.json).
+
 2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
 exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,
 but selected body-motion and motor-voltage RMS ratios remained~1.002/~1.000:

@@ -7726,3 +7726,55 @@ nor overly restrictive parameterization is diagnosed by these summary ratios
 alone. A diagnostic separating AVB, competing drive and motor groups is proposed,
 not implemented/launched here. Retain H1.2 sensory control gate and biological
 caveats; no new skill or biological correspondence claimed.
+
+### E079 planned — saved-data AVB influence and motor-cell audit (2026-11-15)
+
+User says "go" to the proposed audit following E078 failure. Prepared read-only
+NumPy/SciPy server analysis of the saved E078 parent and selected ordinary paired
+traces; no new neural simulation or fit. Protocol/command/fixed parameters/seeds
+(none)/prospective evidence checks are in [E079 plan](experiments/records/E079-plan.json).
+Use exact parent8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a
+and selecteddd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8,
+verifying checkpoint and original trajectory hashes against E078 metadata before
+analysis. Source input paths are restricted to the supplied completed E078 run.
+
+Analyze pre20..30s, off35..40s and recovery50..60s. About100Hz saved samples
+support per-neuron voltage/release summaries, exact-formula sampled chemical
+and electrical current reconstruction, absolute per-edge contribution rankings
+and AVB fraction. Isolate the direct presynaptic AVB change by holding sham
+postsynaptic voltage, separating a changed descending signal from changed
+driving force. Report DB/VB independently from head motor neurons. Compare
+parent/fitted AVB synapse strengths and nonleak densities. No gate data were
+saved, so do not invent intrinsic channel currents or claim a full current
+balance; external sensory conductances likewise are not part of these synapse
+totals. Small descriptive synaptic influence does not itself establish a cause
+or justify arbitrary rewiring/bound widening.
+
+Code-inspection correction: E078's and inherited E077's broad `startswith('AS')`
+motor selection includes nonnumbered AS sensory cells (e.g. ASH) as well as AS01
+etc. This can include unintended sensory coordinates/edges in tied groups; the
+labels alone do not document intended specificity. E079 inventories actual saved
+density group indices against cell/channel ordering to quantify server membership,
+and its motor reports accept numbered AS cells only. Do not silently rewrite
+completed E078 schema or claim this explains failure. Existing E078 checkpoints
+remain the actual fitted models, with known unintended grouping as a limitation.
+No source-code correction to the old fitter is applied during this read-only audit.
+
+Launch:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_avb_audit_mbslnx2.sh`.
+Dedicated conda interpreter, nohup and20min timeout; no JAX/GPU. Reports/evidence
+hashes/source/env/argv external under
+`/home/carsonc/r-elegans-results/avb-audit-<UTC>-<PID>`; no raw copies or new large
+trajectories and no input/model mutation. Existing models, optimizer/RNG and
+reference dependencies retained. Completion requires small summary.json;
+timeout/missing report is incomplete, never a biological failure/pass.
+
+Local software verification:6 tests passed0.77s; shell syntax passed. Synthetic
+signed-current and target-orientation checks, AVB-presynaptic versus postsynaptic
+driving-force separation, paired clocks/prefix validation, actual group-index
+inventory and full synthetic CLI/hash verification passed. Float64 NumPy
+conductance reconstruction agrees with the runtime formula on a bundled canonical
+checkpoint; initial test used float32-stored inputs with an inappropriate1e-12
+tolerance, corrected by explicit float64 promotion in both offline loader and
+reference calculation. No worm forward simulation or actual E078 server audit
+has run locally; server outcome remains pending.

@@ -1,5 +1,11 @@
 # Current model: exact scope and computation path
 
+2026-11-15 E079 audit **planned**: read-only saved E078 parent/selected cell-level
+AVB current/voltage reconstruction and actual density-group inventory.
+Code inspection found that E078's AS-prefix group also admits sensory cells;
+quantify saved server membership before attributing the failed fit. No model
+change or new training. [Audit plan](experiments/records/E079-plan.json).
+
 2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
 exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,
 but selected body-motion and motor-voltage RMS ratios remained~1.002/~1.000:

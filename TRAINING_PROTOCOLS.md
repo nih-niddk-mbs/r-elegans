@@ -1,5 +1,12 @@
 # WormGym: training and validation protocols
 
+2026-11-15 E079 planned read-only audit before further fitting:
+`sh scripts/launch_avb_audit_mbslnx2.sh`. Hash-verified saved E078 pairs, individual
+DB/VB/head motor voltages and reconstructed AVB/competing synaptic currents,
+actual density-group membership. No optimization or automatic promotion; intrinsic
+gate currents cannot be reconstructed from these saved observables.
+[Protocol and limitations](experiments/records/E079-plan.json).
+
 2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
 exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,
 but selected body-motion and motor-voltage RMS ratios remained~1.002/~1.000:
