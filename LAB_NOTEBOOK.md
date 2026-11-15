@@ -7487,3 +7487,43 @@ external stimulus is not assumed to yield continuous neural drive when receptors
 adapt. Existing E077 negative result remains; no waveform, bounds, training code
 or qualification changed and no new experiment launched. Pulse-triggered memory
 is a later hypothesis to test, not a prerequisite silently inferred from anatomy.
+
+### Rhythm maintenance and tonic control — literature clarification (2026-11-14)
+
+User asks whether oscillations need continuous control input. Distinguish a
+phase-timed drive from a tonic enabling input. Intrinsic/channel or recurrent
+feedback can generate a rhythm while a steady descending input sets the regime
+in which that rhythm exists. Closed-loop proprioceptive feedback can also support
+and coordinate oscillation. Thus whole-network autonomy is compatible with motor
+oscillators needing ongoing internally generated control drive; it does not
+require every motor cell/subcircuit to oscillate unconditionally when isolated.
+
+Primary evidence reviewed:
+Xu et al.,2018, Descending pathway facilitates undulatory wave propagation in
+Caenorhabditis elegans through gap junctions, PubMed29686107/PMC5948959,
+https://pmc.ncbi.nlm.nih.gov/articles/PMC5948959/.
+Experimental/model results support distributed B-neuron oscillators and an AVB-B
+electrical input-dependent transition from stationary to oscillatory dynamics;
+AVB calcium is described as nonoscillatory. This supports tonic gating as a
+candidate, not a claim that AVB times every individual bend or that all worm
+rhythms universally require the same input under all conditions.
+Wen et al.,2012, Proprioceptive coupling within motor neurons drives C. elegans
+forward locomotion, DOI10.1016/j.neuron.2012.08.039,
+https://pubmed.ncbi.nlm.nih.gov/23177960/.
+Supports B-motor proprioception in propagation/coordination and the need to
+integrate neural/body/environment feedback. Later distributed-oscillator work
+adds detail; do not equate the earlier head-source hypothesis with the only
+possible oscillator architecture.
+
+Implication: tonic control can enable/disable a limit cycle without requiring
+bistability at an unchanged motor drive level. This is a plausible framework,
+not an established mechanism in r-elegans. E071 shows unpaced activity in the
+full302 network, not independence of an isolated motor circuit from endogenous
+control. E076 AVB/PVC probes had little influence on body range in that tested
+model, so biological correspondence remains unverified. Proposed diagnostic:
+after rhythm is established, selectively remove descending control outputs and
+compare motor-neuron rhythms and body motion to intact controls; distinguish
+initiation from maintenance and preserve live neuron dynamics. No new experiment
+protocol/parameter/qualification implemented, no external tonic current inserted
+and no new training launched. Research discussion only; maintain physiological
+and final sensory start/stop criteria.
