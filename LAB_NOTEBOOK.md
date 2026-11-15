@@ -7527,3 +7527,34 @@ initiation from maintenance and preserve live neuron dynamics. No new experiment
 protocol/parameter/qualification implemented, no external tonic current inserted
 and no new training launched. Research discussion only; maintain physiological
 and final sensory start/stop criteria.
+
+### AVB initiation versus maintenance — acute perturbation evidence (2026-11-14)
+
+User asks whether AVB must remain on for the entire movement bout. Evidence
+supports ongoing graded forward-circuit support, not a one-time trigger, but
+"on" is not a binary or fixed high firing rate and the evidence does not prove
+AVB is universally necessary for every oscillation/instant/all locomotor modes.
+Meng et al.,2024, A tonically active master neuron modulates mutually exclusive
+motor states at two timescales, DOI10.1126/sciadv.adk0002:
+https://pmc.ncbi.nlm.nih.gov/articles/PMC11006214/
+https://pubmed.ncbi.nlm.nih.gov/38598630/.
+Acute optogenetic AVB silencing decreased forward speed without a significant
+backward-speed effect in the cited assay (Fig4). This is maintenance-relevant
+causal evidence, beyond permanent ablation alone. The same study reports slow
+extrasynaptic excitation of AVB from AVA alongside fast inhibition; the title's
+tonically active master neuron is AVA, NOT a claim AVB remains at a constant
+potential. Avoid conflating those identities. The proposed AVA mechanism includes
+unidentified/redundant receptor details and need not be fully resolved to accept
+the acute perturbation result.
+
+Together with Xu2018 AVB-B electrical enabling/distributed rhythm evidence, the
+appropriate hypothesis is sustained support of normal forward locomotion with
+locally generated cycle timing. It is not established that AVB-off immediately
+abolishes every head/body oscillation in every context. r-elegans current
+full-network wiggle has not been shown to reproduce this biological dependence;
+E076 combined AVB/PVC probes had little body suppression in the tested envelope.
+Future diagnostics should separate AVB from PVC and compare acute off-during-
+movement to initiation-only manipulation, recording motor voltages as well as
+body motion. No such new test run or control parameter change here. Existing
+known limitations in release/receptor/extrasynaptic mechanisms remain; do not
+infer a complete control architecture solely from the synaptic topology.
