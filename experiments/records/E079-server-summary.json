@@ -1,0 +1,449 @@
+{
+  "experiment": "E079",
+  "record_date": "2026-11-15",
+  "evidence": "User-reported selected stdout fields; remote complete reports and source/environment records not retrieved",
+  "run": "/home/carsonc/r-elegans-results/avb-audit-20261115T135840Z-184359",
+  "source_attachment_sha256": "d4a928f8a9293b81d70ae12fd68a13df19273cc3a0648e166f164d5efe661029",
+  "reported_off_window_cells": {
+    "parent": [
+      {
+        "neuron": "AVBL",
+        "sham_mean_mV": -32.363441553248826,
+        "inhibited_mean_mV": -56.79717687934036,
+        "voltage_std_ratio": 0.9422824895392301,
+        "avb_L1_fraction": 0.04037502971561458,
+        "avb_direct_total_delta_rms_pA": 0.18414903587380166,
+        "incoming_edge_L1_mean_pA": 1.7635611509057134
+      },
+      {
+        "neuron": "AVBR",
+        "sham_mean_mV": -39.36429617631984,
+        "inhibited_mean_mV": -58.81519778913479,
+        "voltage_std_ratio": 1.1396441251361202,
+        "avb_L1_fraction": 0.20057028998829904,
+        "avb_direct_total_delta_rms_pA": 0.2699134147148258,
+        "incoming_edge_L1_mean_pA": 2.534953798295278
+      },
+      {
+        "neuron": "DB01",
+        "sham_mean_mV": -72.52431291435771,
+        "inhibited_mean_mV": -74.19925722861613,
+        "voltage_std_ratio": 0.9888338250359577,
+        "avb_L1_fraction": 0.6472941982003254,
+        "avb_direct_total_delta_rms_pA": 0.06048424186911036,
+        "incoming_edge_L1_mean_pA": 0.1592999006012105
+      },
+      {
+        "neuron": "DB02",
+        "sham_mean_mV": -69.32915628784433,
+        "inhibited_mean_mV": -69.72144077076257,
+        "voltage_std_ratio": 1.0031854127873605,
+        "avb_L1_fraction": 0.07056914971755117,
+        "avb_direct_total_delta_rms_pA": 0.0072568573196876655,
+        "incoming_edge_L1_mean_pA": 0.15841860726606524
+      },
+      {
+        "neuron": "DB03",
+        "sham_mean_mV": -65.60260809194477,
+        "inhibited_mean_mV": -66.49461572192237,
+        "voltage_std_ratio": 1.0054484676625235,
+        "avb_L1_fraction": 0.10538672788400047,
+        "avb_direct_total_delta_rms_pA": 0.0400677435248001,
+        "incoming_edge_L1_mean_pA": 0.5163794720838569
+      },
+      {
+        "neuron": "DB04",
+        "sham_mean_mV": -36.26975934335307,
+        "inhibited_mean_mV": -37.06209205787289,
+        "voltage_std_ratio": 0.9864747244868333,
+        "avb_L1_fraction": 0.03856272812980409,
+        "avb_direct_total_delta_rms_pA": 0.03039558917530934,
+        "incoming_edge_L1_mean_pA": 0.12594408411949998
+      },
+      {
+        "neuron": "DB05",
+        "sham_mean_mV": -48.00708878086483,
+        "inhibited_mean_mV": -48.32084357742973,
+        "voltage_std_ratio": 0.9917236226618951,
+        "avb_L1_fraction": 0.018070195823384455,
+        "avb_direct_total_delta_rms_pA": 0.010628496876818619,
+        "incoming_edge_L1_mean_pA": 0.29446769228652386
+      },
+      {
+        "neuron": "DB06",
+        "sham_mean_mV": -69.642742422912,
+        "inhibited_mean_mV": -70.19826143609171,
+        "voltage_std_ratio": 1.0208262024502854,
+        "avb_L1_fraction": 0.136428372048813,
+        "avb_direct_total_delta_rms_pA": 0.005918668546835163,
+        "incoming_edge_L1_mean_pA": 0.06640834729955691
+      },
+      {
+        "neuron": "DB07",
+        "sham_mean_mV": -37.79683085410337,
+        "inhibited_mean_mV": -43.264194806123264,
+        "voltage_std_ratio": 1.2001990124318689,
+        "avb_L1_fraction": 0.14305397678008178,
+        "avb_direct_total_delta_rms_pA": 0.3637525347887377,
+        "incoming_edge_L1_mean_pA": 0.4702531929362785
+      },
+      {
+        "neuron": "VB01",
+        "sham_mean_mV": -63.913899735638026,
+        "inhibited_mean_mV": -63.95787199774922,
+        "voltage_std_ratio": 1.0127964570200159,
+        "avb_L1_fraction": 0.013288408598443028,
+        "avb_direct_total_delta_rms_pA": 0.0006664530505964235,
+        "incoming_edge_L1_mean_pA": 0.06476082435708846
+      },
+      {
+        "neuron": "VB02",
+        "sham_mean_mV": -51.92321014665403,
+        "inhibited_mean_mV": -53.667176552073535,
+        "voltage_std_ratio": 1.1400061685888176,
+        "avb_L1_fraction": 0.5819120633653697,
+        "avb_direct_total_delta_rms_pA": 0.08414174948588737,
+        "incoming_edge_L1_mean_pA": 0.20870615750503274
+      },
+      {
+        "neuron": "VB03",
+        "sham_mean_mV": -52.800078463163125,
+        "inhibited_mean_mV": -53.33601031654964,
+        "voltage_std_ratio": 1.0270571985238757,
+        "avb_L1_fraction": 0.3151923188545049,
+        "avb_direct_total_delta_rms_pA": 0.018050323653827208,
+        "incoming_edge_L1_mean_pA": 0.03955783938525823
+      },
+      {
+        "neuron": "VB04",
+        "sham_mean_mV": -51.93340784085034,
+        "inhibited_mean_mV": -53.121359490582726,
+        "voltage_std_ratio": 1.038457548163727,
+        "avb_L1_fraction": 0.47779920958502625,
+        "avb_direct_total_delta_rms_pA": 0.048683830315954024,
+        "incoming_edge_L1_mean_pA": 0.07064160439913143
+      },
+      {
+        "neuron": "VB05",
+        "sham_mean_mV": -64.01872800204622,
+        "inhibited_mean_mV": -64.25515484185925,
+        "voltage_std_ratio": 1.011715588186923,
+        "avb_L1_fraction": 0.4478417541549944,
+        "avb_direct_total_delta_rms_pA": 0.0065336932044022245,
+        "incoming_edge_L1_mean_pA": 0.018728226589088542
+      },
+      {
+        "neuron": "VB06",
+        "sham_mean_mV": -59.583265038725266,
+        "inhibited_mean_mV": -60.48566247252986,
+        "voltage_std_ratio": 1.0188553975759682,
+        "avb_L1_fraction": 0.5843760791417585,
+        "avb_direct_total_delta_rms_pA": 0.03179005055566635,
+        "incoming_edge_L1_mean_pA": 0.056723999864637324
+      },
+      {
+        "neuron": "VB07",
+        "sham_mean_mV": -66.09164942152505,
+        "inhibited_mean_mV": -66.205639486692,
+        "voltage_std_ratio": 1.2758562680790007,
+        "avb_L1_fraction": 0.2654201458959041,
+        "avb_direct_total_delta_rms_pA": 0.004723862686298502,
+        "incoming_edge_L1_mean_pA": 0.02454901870259516
+      },
+      {
+        "neuron": "VB08",
+        "sham_mean_mV": -77.85310813588791,
+        "inhibited_mean_mV": -77.91674179993137,
+        "voltage_std_ratio": 0.9821030455600362,
+        "avb_L1_fraction": 0.238404639661696,
+        "avb_direct_total_delta_rms_pA": 0.0025088337558053647,
+        "incoming_edge_L1_mean_pA": 0.020341277785624143
+      },
+      {
+        "neuron": "VB09",
+        "sham_mean_mV": -67.38770780108723,
+        "inhibited_mean_mV": -67.6306234604473,
+        "voltage_std_ratio": 0.9816836042038263,
+        "avb_L1_fraction": 0.2910667285152937,
+        "avb_direct_total_delta_rms_pA": 0.007850209851109928,
+        "incoming_edge_L1_mean_pA": 0.03875725451397816
+      },
+      {
+        "neuron": "VB10",
+        "sham_mean_mV": -53.70343984551287,
+        "inhibited_mean_mV": -54.05880907551779,
+        "voltage_std_ratio": 0.9676886294423122,
+        "avb_L1_fraction": 0.11555039620471046,
+        "avb_direct_total_delta_rms_pA": 0.011745283389483026,
+        "incoming_edge_L1_mean_pA": 0.0887762001981235
+      },
+      {
+        "neuron": "VB11",
+        "sham_mean_mV": -51.07231201380714,
+        "inhibited_mean_mV": -57.064145413357416,
+        "voltage_std_ratio": 1.1113456362059253,
+        "avb_L1_fraction": 0.6536124514463173,
+        "avb_direct_total_delta_rms_pA": 0.3071577538555646,
+        "incoming_edge_L1_mean_pA": 0.2913392595076692
+      }
+    ],
+    "selected": [
+      {
+        "neuron": "AVBL",
+        "sham_mean_mV": -34.09853832590905,
+        "inhibited_mean_mV": -58.364243707163354,
+        "voltage_std_ratio": 0.8954088925413758,
+        "avb_L1_fraction": 0.038200455692974505,
+        "avb_direct_total_delta_rms_pA": 0.1853711039773017,
+        "incoming_edge_L1_mean_pA": 1.5927824194611857
+      },
+      {
+        "neuron": "AVBR",
+        "sham_mean_mV": -40.132798504673744,
+        "inhibited_mean_mV": -59.64303721599291,
+        "voltage_std_ratio": 1.17571482161566,
+        "avb_L1_fraction": 0.20842262232630923,
+        "avb_direct_total_delta_rms_pA": 0.28780758602643214,
+        "incoming_edge_L1_mean_pA": 2.4361974979641623
+      },
+      {
+        "neuron": "DB01",
+        "sham_mean_mV": -73.006231395885,
+        "inhibited_mean_mV": -74.64871834861395,
+        "voltage_std_ratio": 0.9890205146829012,
+        "avb_L1_fraction": 0.6298751178703532,
+        "avb_direct_total_delta_rms_pA": 0.05889122390992658,
+        "incoming_edge_L1_mean_pA": 0.15753554755402185
+      },
+      {
+        "neuron": "DB02",
+        "sham_mean_mV": -69.55692276779217,
+        "inhibited_mean_mV": -69.95389120770727,
+        "voltage_std_ratio": 1.0101144362337855,
+        "avb_L1_fraction": 0.06621919796680405,
+        "avb_direct_total_delta_rms_pA": 0.00706572813165032,
+        "incoming_edge_L1_mean_pA": 0.16092144852832552
+      },
+      {
+        "neuron": "DB03",
+        "sham_mean_mV": -65.92810525003878,
+        "inhibited_mean_mV": -66.80337806643323,
+        "voltage_std_ratio": 1.0118211545647295,
+        "avb_L1_fraction": 0.09955171653771336,
+        "avb_direct_total_delta_rms_pA": 0.038700371327985594,
+        "incoming_edge_L1_mean_pA": 0.510706425517681
+      },
+      {
+        "neuron": "DB04",
+        "sham_mean_mV": -36.345073824832305,
+        "inhibited_mean_mV": -37.11862993438136,
+        "voltage_std_ratio": 1.0055146216242523,
+        "avb_L1_fraction": 0.02451088136074231,
+        "avb_direct_total_delta_rms_pA": 0.02933570633626816,
+        "incoming_edge_L1_mean_pA": 0.12486319316693019
+      },
+      {
+        "neuron": "DB05",
+        "sham_mean_mV": -47.30164427898739,
+        "inhibited_mean_mV": -47.655186572437714,
+        "voltage_std_ratio": 1.0021346013955572,
+        "avb_L1_fraction": 0.014580609039450696,
+        "avb_direct_total_delta_rms_pA": 0.01031912936882522,
+        "incoming_edge_L1_mean_pA": 0.29572844070349896
+      },
+      {
+        "neuron": "DB06",
+        "sham_mean_mV": -68.58109312648358,
+        "inhibited_mean_mV": -69.13690540577888,
+        "voltage_std_ratio": 1.0217339622290875,
+        "avb_L1_fraction": 0.12209418066018567,
+        "avb_direct_total_delta_rms_pA": 0.005714997816505279,
+        "incoming_edge_L1_mean_pA": 0.06680006611526758
+      },
+      {
+        "neuron": "DB07",
+        "sham_mean_mV": -38.36639905269908,
+        "inhibited_mean_mV": -43.65216098917229,
+        "voltage_std_ratio": 1.1277028250968923,
+        "avb_L1_fraction": 0.11779901510970853,
+        "avb_direct_total_delta_rms_pA": 0.3515922303375827,
+        "incoming_edge_L1_mean_pA": 0.4572008519938322
+      },
+      {
+        "neuron": "VB01",
+        "sham_mean_mV": -64.57242188577864,
+        "inhibited_mean_mV": -64.6266102503661,
+        "voltage_std_ratio": 1.0110903168061527,
+        "avb_L1_fraction": 0.014594692012083781,
+        "avb_direct_total_delta_rms_pA": 0.0006424777848828687,
+        "incoming_edge_L1_mean_pA": 0.05528381730553538
+      },
+      {
+        "neuron": "VB02",
+        "sham_mean_mV": -52.97154595231569,
+        "inhibited_mean_mV": -54.989347964356355,
+        "voltage_std_ratio": 1.2130352128148383,
+        "avb_L1_fraction": 0.614713496311716,
+        "avb_direct_total_delta_rms_pA": 0.08324437942954889,
+        "incoming_edge_L1_mean_pA": 0.182717598780394
+      },
+      {
+        "neuron": "VB03",
+        "sham_mean_mV": -53.82589948728969,
+        "inhibited_mean_mV": -54.391583335457675,
+        "voltage_std_ratio": 1.0244668400425045,
+        "avb_L1_fraction": 0.3055272092000459,
+        "avb_direct_total_delta_rms_pA": 0.01757491900526019,
+        "incoming_edge_L1_mean_pA": 0.04037221994948318
+      },
+      {
+        "neuron": "VB04",
+        "sham_mean_mV": -53.35905972602451,
+        "inhibited_mean_mV": -54.604250267257044,
+        "voltage_std_ratio": 1.0371053595416964,
+        "avb_L1_fraction": 0.46257803376818324,
+        "avb_direct_total_delta_rms_pA": 0.04725880009108739,
+        "incoming_edge_L1_mean_pA": 0.07283529332977776
+      },
+      {
+        "neuron": "VB05",
+        "sham_mean_mV": -66.38757745330632,
+        "inhibited_mean_mV": -66.62977354011355,
+        "voltage_std_ratio": 1.0081153600293553,
+        "avb_L1_fraction": 0.42568630629081294,
+        "avb_direct_total_delta_rms_pA": 0.006325282147012172,
+        "incoming_edge_L1_mean_pA": 0.01986720893517766
+      },
+      {
+        "neuron": "VB06",
+        "sham_mean_mV": -62.17082800929531,
+        "inhibited_mean_mV": -63.04551276980698,
+        "voltage_std_ratio": 1.0154152833854933,
+        "avb_L1_fraction": 0.5952560481940958,
+        "avb_direct_total_delta_rms_pA": 0.03093948327632094,
+        "incoming_edge_L1_mean_pA": 0.0587719769981053
+      },
+      {
+        "neuron": "VB07",
+        "sham_mean_mV": -66.00384882346954,
+        "inhibited_mean_mV": -66.15365070957363,
+        "voltage_std_ratio": 1.145260892691533,
+        "avb_L1_fraction": 0.24952560255183104,
+        "avb_direct_total_delta_rms_pA": 0.0045615587074380555,
+        "incoming_edge_L1_mean_pA": 0.024070931613832305
+      },
+      {
+        "neuron": "VB08",
+        "sham_mean_mV": -77.63171998848382,
+        "inhibited_mean_mV": -77.69536905394325,
+        "voltage_std_ratio": 0.9795819129950614,
+        "avb_L1_fraction": 0.21113148386864516,
+        "avb_direct_total_delta_rms_pA": 0.0024332902772942547,
+        "incoming_edge_L1_mean_pA": 0.021577108473579056
+      },
+      {
+        "neuron": "VB09",
+        "sham_mean_mV": -66.8206985602715,
+        "inhibited_mean_mV": -67.05564654639855,
+        "voltage_std_ratio": 0.975364607032223,
+        "avb_L1_fraction": 0.25083586491431603,
+        "avb_direct_total_delta_rms_pA": 0.007605033508646304,
+        "incoming_edge_L1_mean_pA": 0.04117557504248829
+      },
+      {
+        "neuron": "VB10",
+        "sham_mean_mV": -52.89166760542746,
+        "inhibited_mean_mV": -53.199248385066376,
+        "voltage_std_ratio": 0.9687068493539792,
+        "avb_L1_fraction": 0.0938089377344369,
+        "avb_direct_total_delta_rms_pA": 0.011322753565526408,
+        "incoming_edge_L1_mean_pA": 0.09347898254380155
+      },
+      {
+        "neuron": "VB11",
+        "sham_mean_mV": -51.118096797119954,
+        "inhibited_mean_mV": -56.97358189498648,
+        "voltage_std_ratio": 1.1322918193804783,
+        "avb_L1_fraction": 0.6218332345902848,
+        "avb_direct_total_delta_rms_pA": 0.29874212889010776,
+        "incoming_edge_L1_mean_pA": 0.27775270291434445
+      }
+    ]
+  },
+  "reported_AS_density_groups": [
+    {
+      "group": "density:AS:inward",
+      "cells": [
+        "AS01",
+        "AS02",
+        "AS03",
+        "AS04",
+        "AS05",
+        "AS06",
+        "AS07",
+        "AS08",
+        "AS09",
+        "AS10",
+        "AS11",
+        "ASGL",
+        "ASGR",
+        "ASHL",
+        "ASHR",
+        "ASIL",
+        "ASIR",
+        "ASJL",
+        "ASJR",
+        "ASKL",
+        "ASKR"
+      ],
+      "coordinates": 84
+    },
+    {
+      "group": "density:AS:outward",
+      "cells": [
+        "AS01",
+        "AS02",
+        "AS03",
+        "AS04",
+        "AS05",
+        "AS06",
+        "AS07",
+        "AS08",
+        "AS09",
+        "AS10",
+        "AS11",
+        "ASGL",
+        "ASGR",
+        "ASHL",
+        "ASHR",
+        "ASIL",
+        "ASIR",
+        "ASJL",
+        "ASJR",
+        "ASKL",
+        "ASKR"
+      ],
+      "coordinates": 252
+    }
+  ],
+  "AS_group_correction": {
+    "numbered_motor_cells": 11,
+    "unintended_sensory_cells": [
+      "ASGL",
+      "ASGR",
+      "ASHL",
+      "ASHR",
+      "ASIL",
+      "ASIR",
+      "ASJL",
+      "ASJR",
+      "ASKL",
+      "ASKR"
+    ],
+    "unintended_density_coordinates": 160,
+    "total_AS_density_coordinates": 336,
+    "limitation": "Counts from reported density membership; chemical-edge group overreach not quantified by this stdout"
+  },
+  "interpretation": "Confirmed AVB voltage suppression propagates to B motor mean voltages without suppressing the reported body pattern. AVB input is not absent; some incoming synaptic edge-current L1 fractions are substantial. Intrinsic oscillation, competing rhythm sources, release operating point and restrictive tying remain hypotheses; absolute motor p2p, head-cell reports and current decomposition were not supplied.",
+  "next_step": "Identify which motor populations carry the body-driving rhythm and whether AVB shifts them through an oscillation threshold. Correct motor identity grouping before any future fitting; preserve old failed weights/schema. No new experiment launched or qualification."
+}

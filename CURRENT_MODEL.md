@@ -1,10 +1,12 @@
 # Current model: exact scope and computation path
 
-2026-11-15 E079 audit **planned**: read-only saved E078 parent/selected cell-level
-AVB current/voltage reconstruction and actual density-group inventory.
-Code inspection found that E078's AS-prefix group also admits sensory cells;
-quantify saved server membership before attributing the failed fit. No model
-change or new training. [Audit plan](experiments/records/E079-plan.json).
+2026-11-15 E079 saved-data audit reported: selected AVBL/R inhibition shifts
+means by-24.27/-19.51mV; DB07/VB11 by-5.29/-5.86mV, while E078 body motion
+remains unchanged. AVB influence is present; isolated intrinsic oscillation is
+not established. AS density groups contain11 motor and10 sensory cells,
+including160 unintended sensory density coordinates; retain this limitation of
+E078 and correct grouping before future fits. No new qualification.
+[Reported audit](experiments/records/E079-server-summary.json).
 
 2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
 exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,

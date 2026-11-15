@@ -1,9 +1,10 @@
 # r-elegans
 
-E079 saved-data AVB influence audit (planned): after pulling on mbslnx2, run
-`sh scripts/launch_avb_audit_mbslnx2.sh`. Read-only, no simulation/training or new
-large trajectories,20min maximum. Compares individual motor cells and AVB current
-contributions in E078 parent/selected models. [Plan](experiments/records/E079-plan.json).
+E079 audit reported: AVB inhibition reaches B motor cells but does not stop the
+model's body pattern. Confirmed AS-prefix grouping error included ten sensory
+cells in motor density groups. Identify the body-driving rhythm source and fix
+future grouping before more fitting; no new controllable behavior demonstrated.
+[Audit evidence](experiments/records/E079-server-summary.json).
 
 2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
 exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,

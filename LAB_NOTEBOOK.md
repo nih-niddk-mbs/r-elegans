@@ -7778,3 +7778,54 @@ checkpoint; initial test used float32-stored inputs with an inappropriate1e-12
 tolerance, corrected by explicit float64 promotion in both offline loader and
 reference calculation. No worm forward simulation or actual E078 server audit
 has run locally; server outcome remains pending.
+
+### E079 reported — AVB influence present, rhythm remains insensitive (2026-11-15)
+
+User supplied printed off-window fields from
+`/home/carsonc/r-elegans-results/avb-audit-20261115T135840Z-184359`.
+Transcribed cell-level fields and attachment SHA256 are in
+[E079 server summary](experiments/records/E079-server-summary.json). Evidence is
+user-reported stdout, not independently accessed remote checkpoints/reports.
+Full top-input rankings, signed chemical/gap decomposition, absolute voltage
+p2p/release data and head motor-cell results were not included in the supplied
+excerpt; do not invent these missing findings or claim the competing source is
+already localized.
+
+Selected AVBL mean changed-34.0985 to-58.3642mV (-24.2657mV); AVBR-40.1328
+to-59.6430mV (-19.5102mV). B-cell influence is present: DB07-38.3664 to
+-43.6522mV (-5.2858mV), VB11-51.1181 to-56.9736mV (-5.8555mV). Yet their
+voltage std ratios were1.12770 and1.13229; no variance suppression. Median
+DB/VB std ratio1.01146 (descriptive, may include cells with tiny absolute
+variation). Combined with E078 body ratio~1.00169, this rejects the simple
+interpretation that AVB is entirely disconnected or the inhibitory probe never
+reached it. It does not identify an intrinsic oscillator, prove every B cell
+oscillates, or show that AVB only has tonic effects in all conditions.
+
+AVB fractions of reconstructed incoming absolute synaptic-edge current in the
+selected model are substantial for some cells: DB01.629875, VB02.614713,
+VB06.595256, VB11.621833. These are fractions of synaptic chemical+gap edge L1
+current, NOT fractions of total membrane current including intrinsic channels,
+bias and sensory inputs. A generic "AVB weights are all too small" diagnosis is
+unsupported. Actual AVB-current signs, operating-point/release saturation,
+intrinsic dynamics and alternate recurrent/body-feedback sources require further
+analysis; stronger coupling or broader bounds are not justified by these ratios
+alone. DB/VB mean shifts without body suppression suggest the desired switch in
+network dynamics has not been obtained under the tested conditions.
+
+Saved density map confirms AS-group bug: each inward/outward group contains
+AS01..AS11 plus ASGL/R,ASHL/R,ASIL/R,ASJL/R,ASKL/R (ten sensory cells). Inward84
+and outward252 coordinates total336;10*(4+12)=160 unintended sensory density
+coordinates share these tied groups with motor cells. This is a fitting-scope
+error. It may constrain/entangle optimization, but is not established as the
+cause of failed AVB dependence. Chemical-edge grouping overreach is not quantified
+by this excerpt. Completed E078 results are retained as actual performed fits;
+no retrospective schema correction, checkpoint alteration or new training here.
+
+Decision: before another long fit, correct future motor identity matching to
+numbered AS cells and identify which motor populations supply the rhythmic NMJ
+drive. Inspect available head/body voltage amplitudes and input rankings, then
+use selective population-output interventions if needed to distinguish a
+parallel rhythm source from motor operating-point insensitivity. Treat these as
+proposed diagnostics, not executed causal evidence or a new protocol yet. Final
+sensory H1.2 start/stop remains required; no AVB-component/swimming/biological
+qualification added. Documentation update only; no new software tests needed.
