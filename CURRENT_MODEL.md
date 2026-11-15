@@ -1,5 +1,9 @@
 # Current model: exact scope and computation path
 
+2026-11-15 E081 **planned**: split RMD/SMD/SMB NMJ contributions on unchanged
+E078 model; sham, combined-head and all-output controls, individual-only timestep
+refinement.45min TOTAL, no training or qualification. [Plan](experiments/records/E081-plan.json).
+
 2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
 Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body
 range88.62% and muscle variation91.34%; B-motor hold had essentially no effect.

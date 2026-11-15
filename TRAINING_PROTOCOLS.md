@@ -1,5 +1,10 @@
 # WormGym: training and validation protocols
 
+2026-11-15 E081 planned: split head NMJ output holds into RMD, SMD and SMB,
+with sham/combined-head/all-output controls. Rank/refine an individual group only;
+45min total including independent neural/body refinements. No weights change or
+learned-stop/oscillator-origin claim. [Protocol](experiments/records/E081-plan.json).
+
 2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
 Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body
 range88.62% and muscle variation91.34%; B-motor hold had essentially no effect.

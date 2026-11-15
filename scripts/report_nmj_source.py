@@ -4,10 +4,11 @@ from pathlib import Path
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path)
+    p.add_argument('--head-split',action='store_true');a=p.parse_args()
     run=a.run
     if run is None:
-        runs=[p for p in Path('/home/carsonc/r-elegans-results').glob('nmj-source-*') if p.is_dir()]
+        runs=[p for p in Path('/home/carsonc/r-elegans-results').glob('head-split-*' if a.head_split else 'nmj-source-*') if p.is_dir()]
         if not runs:raise SystemExit('No NMJ source run found')
         run=max(runs,key=lambda p:p.name)
     print('Run:',run)
@@ -17,6 +18,7 @@ def main():
     for r in s['comparisons']+s['refinement_comparisons']:
         m=r['metrics'];print(r['case'],r['grid'],dict(body_range_ratio=m['during_to_sham_raw_range_ratio'],muscle_range_ratio=m['NMJ_muscle_range_ratio'],recovery=m['recovery_amplitude_preserved'],pre_match=m['pre_cue_match'],safe=m['safety_passed']))
     print('Numerical checks:',s['numerical_checks'])
+    if 'diagnostic_controls' in s:print('Diagnostic controls:',s['diagnostic_controls'])
     if (run/'budget_receipt.json').exists():print('Budget:',json.loads((run/'budget_receipt.json').read_text()))
 
 

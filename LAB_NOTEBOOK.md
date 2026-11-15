@@ -7925,3 +7925,47 @@ mechanistic and H1.2 sensory control validation; no prescribed sine waveform or
 hardcoded muscle gate may substitute. No new experiment/fit launched here.
 Preserve existing parent/failed models and evidence. No learned-stop, swimmer
 or biological qualification added. Documentation/evidence transcription only.
+
+### E081 planned — RMD/SMD/SMB NMJ split (2026-11-15)
+
+User approves the next short diagnostic. [Full protocol](experiments/records/E081-plan.json).
+Same frozen E078 selected checkpoint
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8;
+do not refit or replace independent skill parents. No trainable parameters or
+seeds. Reuse exact E080 capsule/coordinate reconstruction and source trajectory
+checks, NMJ-only release holds at own20..30s mean during30..40s,60s full trials,
+live full brain/recurrent output/body/proprioceptive sensing. Cases: sham, RMD,
+SMD, SMB, combined head and all-output static control. The strongest safe,
+baseline-preserving INDIVIDUAL subgroup gets neural-half/body-half trials with
+matched shams. Combined-head and global controls are excluded from selection.
+
+Prospective control checks: combined-head body ratio must reproduce E080
+.11378497784610712 within.05; all-output ratio<=.01, both with safety, matched
+prefix and recovery. Individual refined suppression ratio differences<=.05,
+matched prefix/safety; report all individual and combined effects. Completion
+means trials ran, not that a strong individual effect exists. If combined effect
+dominates all three individual effects, test interactions/redundancy rather than
+declare the rank winner a sole pacemaker. A release hold alters the output path,
+not recurrent neuronal state directly; nonlinear muscle/feedback effects remain.
+No neural silencing, sensory learning, learned stopping or swimmer qualification.
+
+Command:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_head_split_mbslnx2.sh`.
+Four concurrent CPU worker slots x4cores, dedicated conda interpreter,
+nohup and45min TOTAL watchdog including all preparation/screen/refinement/cleanup;
+15min reserved for refinement. Ten retained diagnostic trials, external
+head-split-<UTC>-<PID> with adjacent log, source/env/argv/capsule/coordinates/
+reference hashes and budget receipt. Original source files and all existing
+checkpoints unchanged;50GiB free before trace writes; no deletion or optimizer.
+Report: `python -m scripts.report_nmj_source --head-split` in r-elegans env.
+Execution remains planned until server evidence arrives.
+
+Local software validation:9 NMJ/head-split tests passed1.31s, verifying selective
+RMD/SMD/SMB membership and reversible holds, individual-only refinement ranking,
+prospective combined/global controls, correct E081 watchdog dispatch and existing
+NMJ/default behavior.5 watchdog tests passed3.80s outside sandbox. Two preceding
+sandboxed suite runs each failed orphan-process-group SIGKILL with PermissionError;
+no cleanup exception was swallowed and watchdog logic was not changed. The
+unchanged tests passed with ordinary process permissions outside sandbox.
+Shell syntax and coordinator CLI help passed. No actual E081 neural simulation
+or server model/trajectory inspection performed locally.

@@ -36,7 +36,7 @@ def main():
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--total-minutes',type=float,default=240.)
     p.add_argument('--source-run',type=Path)
-    p.add_argument('--pipeline',choices=['tail','state-control','control-access','cma-curriculum','avb-training','nmj-source'],default='tail')
+    p.add_argument('--pipeline',choices=['tail','state-control','control-access','cma-curriculum','avb-training','nmj-source','head-split'],default='tail')
     a=p.parse_args()
     if not math.isfinite(a.total_minutes) or a.total_minutes<5:p.error('At least five total minutes required')
     repo=Path(__file__).resolve().parents[1];out=a.output_dir.resolve()
@@ -44,12 +44,13 @@ def main():
     out.mkdir(parents=True,exist_ok=False)
     deadline=started+a.total_minutes*60
     # The coordinator finishes before the outer timeout; cleanup/reporting are inside total.
-    budget=dict(experiment={'state-control':'E072-E073','control-access':'E076','cma-curriculum':'E077','avb-training':'E078','nmj-source':'E080','tail':'E071'}[a.pipeline],total_minutes=a.total_minutes,started_utc=datetime.now(timezone.utc).isoformat(),
+    budget=dict(experiment={'state-control':'E072-E073','control-access':'E076','cma-curriculum':'E077','avb-training':'E078','nmj-source':'E080','head-split':'E081','tail':'E071'}[a.pipeline],total_minutes=a.total_minutes,started_utc=datetime.now(timezone.utc).isoformat(),
                 hard_deadline_monotonic=deadline,coordinator_finish_by=deadline-60,
                 phases_included=['preparation','baseline','search','all validation','cleanup','final reports'])
     (out/'deadline.json').write_text(json.dumps(budget,indent=2)+'\n')
-    module={'state-control':'scripts.run_controlled_swimming','control-access':'scripts.run_control_access','cma-curriculum':'scripts.run_cma_sensorimotor','avb-training':'scripts.run_avb_training','nmj-source':'scripts.run_nmj_source','tail':'scripts.run_swim_continuation'}[a.pipeline]
+    module={'state-control':'scripts.run_controlled_swimming','control-access':'scripts.run_control_access','cma-curriculum':'scripts.run_cma_sensorimotor','avb-training':'scripts.run_avb_training','nmj-source':'scripts.run_nmj_source','head-split':'scripts.run_nmj_source','tail':'scripts.run_swim_continuation'}[a.pipeline]
     command=[sys.executable,'-u','-m',module,'--output-dir',str(out)]
+    if a.pipeline=='head-split':command+=['--protocol','head-split']
     if a.source_run:command+=['--source-run',str(a.source_run.resolve())]
     code,timed_out=run_group(command,max(.01,deadline-time.monotonic()-20))
     summary_path=out/'summary.json'

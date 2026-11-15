@@ -1,5 +1,11 @@
 # r-elegans
 
+E081 head-output split (planned): after pulling on mbslnx2, run
+`sh scripts/launch_head_split_mbslnx2.sh`. Maximum45min TOTAL; frozen RMD/SMD/SMB
+output diagnostics with controls/refinement, no training. Report afterward:
+`python -m scripts.report_nmj_source --head-split` in the r-elegans environment.
+[Protocol](experiments/records/E081-plan.json).
+
 2026-11-15 E080 completed (user-reported):14m06s, all checks complete, no timeout.
 Holding head-motor NMJ release (RMD/SMD/SMB) at baseline means reduced body
 range88.62% and muscle variation91.34%; B-motor hold had essentially no effect.

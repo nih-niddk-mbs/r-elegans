@@ -1,10 +1,10 @@
-"""E080 bounded causal screen of rhythm-carrying NMJ populations."""
+"""E080/E081 bounded diagnostic screen of rhythm-carrying NMJ populations."""
 import argparse,json,os,shutil,subprocess,sys,time
 from pathlib import Path
 import numpy as np
 from scipy.special import expit
 from scripts.experiment_records import capture_run_record,file_sha256
-from r_elegans.nmj_source import CASES
+from r_elegans.nmj_source import protocol_settings,targets_output,refinement_target,split_controls
 from r_elegans.control_access import compare
 from r_elegans.wall_budget import check_deadline
 
@@ -16,7 +16,9 @@ def write(p,x):p.write_text(json.dumps(x,indent=2,allow_nan=False)+'\n')
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--source-run',type=Path,required=True)
+    p.add_argument('--protocol',choices=('population','head-split'),default='population')
     a=p.parse_args();out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
+    experiment,cases,_=protocol_settings(a.protocol)
     for root in (repo,source):
         if out==root or root in out.parents or out in root.parents:raise ValueError('Separate output required')
     finish=json.loads((out/'deadline.json').read_text())['coordinator_finish_by'];check_deadline(finish)
@@ -44,10 +46,9 @@ def main():
     write(inputs/'reference.json',dict(path=str(reference),sha256=ordinary['trajectory_sha256']['sham']))
     for name in ('baseline_release.npz','reference.json'):
         manifest['sha256'][name]=file_sha256(inputs/name);manifest['sources'][name]='Generated from hash-verified selected sham'
-    manifest['consumer_experiment']='E080';write(inputs/'manifest.json',manifest);verify_inputs(inputs)
-    from r_elegans.motor_identity import output_group
-    write(out/'configuration.json',dict(experiment='E080',checkpoint_sha256=SELECTED,cases=CASES,
-        groups={c:[n for n in ids if c=='all' or output_group(n)==c] for c in CASES if c!='sham'},
+    manifest['consumer_experiment']=experiment;write(inputs/'manifest.json',manifest);verify_inputs(inputs)
+    write(out/'configuration.json',dict(experiment=experiment,protocol=a.protocol,checkpoint_sha256=SELECTED,cases=cases,
+        groups={c:[n for n in ids if targets_output(n,c)] for c in cases if c!='sham'},
         onset_s=30,offset_s=40,simulation_seconds=60,baseline_mean_window=[20,30],no_training=True,
         corrected_motor_identity_used=True,scope='NMJ rhythm transmission, not isolated oscillator identity or learned stopping'))
     from scripts.benchmark_cpu import physical_core_cpus
@@ -70,7 +71,7 @@ def main():
                     if slot not in running and waiting:
                         case,grid=waiting.pop(0);name=case+'--'+grid;log=(dest/(name+'.log')).open('w')
                         cmd=['taskset','-c',','.join(map(str,groups[slot])),sys.executable,'-u','-m','scripts.nmj_source_worker',
-                             '--inputs',str(inputs),'--output-dir',str(dest/name),'--case',case,'--grid',grid,'--until',str(until-15)]
+                             '--inputs',str(inputs),'--output-dir',str(dest/name),'--case',case,'--grid',grid,'--experiment',experiment,'--until',str(until-15)]
                         proc=subprocess.Popen(cmd,cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT);running[slot]=(proc,log,name)
                         print(json.dumps(dict(starting=name,pid=proc.pid,cpus=groups[slot])),flush=True)
                 if time.monotonic()-last>30:
@@ -101,24 +102,24 @@ def main():
         return result
     failure=None;screen=[];refined=[];comparisons=[];refcomparisons=[]
     try:
-        screen=pool([(c,'ordinary') for c in CASES],'screen',finish-15*60)
+        screen=pool([(c,'ordinary') for c in cases],'screen',finish-15*60)
         comparisons=compare_rows(screen,'ordinary')
-        eligible=[r for r in comparisons if r['case']!='all' and r['metrics']['pre_cue_match'] and r['metrics']['safety_passed']]
-        if eligible:
-            best=min(eligible,key=lambda r:r['metrics']['during_to_sham_raw_range_ratio'])['case']
+        best=refinement_target(comparisons,a.protocol)
+        if best is not None:
             refined=pool([(c,g) for g in ('neural-half','body-half') for c in ('sham',best)],'refinement',finish-45)
             for grid in ('neural-half','body-half'):refcomparisons+=compare_rows(refined,grid)
     except Exception as e:failure=repr(e);print('NMJ_AUDIT_ERROR:',failure,flush=True)
     verify_inputs(inputs)
-    complete=bool(failure is None and len(screen)==6 and len(refined)==4 and len(refcomparisons)==2 and all(r['exit_code']==0 and r['result'] for r in screen+refined))
+    complete=bool(failure is None and len(screen)==len(cases) and len(refined)==4 and len(refcomparisons)==2 and all(r['exit_code']==0 and r['result'] for r in screen+refined))
     checks=[]
     for row in refcomparisons:
         ordinary=next(r for r in comparisons if r['case']==row['case'])
         delta=abs(ordinary['metrics']['during_to_sham_raw_range_ratio']-row['metrics']['during_to_sham_raw_range_ratio'])
         checks.append(dict(case=row['case'],grid=row['grid'],suppression_ratio_difference=delta,passed=bool(delta<=.05 and row['metrics']['pre_cue_match'] and row['metrics']['safety_passed'])))
-    result=dict(experiment='E080',checkpoint_sha256=SELECTED,execution_valid=complete,all_stages_finished=complete,validation_complete=complete,
+    result=dict(experiment=experiment,protocol=a.protocol,checkpoint_sha256=SELECTED,execution_valid=complete,all_stages_finished=complete,validation_complete=complete,
         failure=failure,screen=screen,comparisons=comparisons,refinement=refined,refinement_comparisons=refcomparisons,numerical_checks=checks,
         learned_stopping_qualified=False,swimming_qualified=False,scope='Imposed NMJ release holds localize rhythm transmission; do not prove isolated pacemaker origin or learned stopping')
+    if a.protocol=='head-split':result['diagnostic_controls']=split_controls(comparisons)
     write(out/'summary.json',result)
     for r in comparisons+refcomparisons:
         print(json.dumps(dict(case=r['case'],grid=r['grid'],body_range_ratio=r['metrics']['during_to_sham_raw_range_ratio'],muscle_range_ratio=r['metrics']['NMJ_muscle_range_ratio'],recovery=r['metrics']['recovery_amplitude_preserved'])),flush=True)
