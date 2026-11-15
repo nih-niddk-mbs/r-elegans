@@ -2771,3 +2771,13 @@ rejected committed CMA candidates from finished runs, protecting every selected
 CMA evaluation. No /data access, /proc inspection or sudo required. Journals/logs
 in/tmp record exact deletions. This permanently removes those intermediate arrays;
 models, scores and reconstruction metadata remain. Server deletion pending.
+
+2026-11-14 E077 population diagnostic follow-up (user-reported):25/36 candidates
+preserved constraints, but eligible STOP cadence ratios remained1 to floating-
+point precision. Constraints alone do not explain failure. Candidate7ca54754...
+changes weights but its loss differs from retained parent by only~3.3e-16.
+The next proposed curriculum should fit immediate cue-specific slowing first,
+then longer post-cue persistence and START recovery, using more sensitive timing
+features. Current STOP40–42s is scored48–58s, already requiring memory after cue
+offset. This recommendation is not implemented/launched; original outcomes and
+final criteria unchanged. See E077-population-diagnostics.json and LAB_NOTEBOOK.

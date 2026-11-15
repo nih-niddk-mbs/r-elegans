@@ -3005,3 +3005,13 @@ doi:10.3389/fnmol.2023.1228980). Joint RIB/RIM suppression does not validate a
 natural stop circuit. Separate RIB/RIM perturbations and match experimental
 phenotypes before training around this route; restart alone is insufficient for
 biological validation. See the dated LAB_NOTEBOOK literature review. No new run.
+
+2026-11-14 E077 population diagnostic follow-up (user-reported):25/36 candidates
+preserved constraints, but eligible STOP cadence ratios remained1 to floating-
+point precision. Constraints alone do not explain failure. Candidate7ca54754...
+changes weights but its loss differs from retained parent by only~3.3e-16.
+The next proposed curriculum should fit immediate cue-specific slowing first,
+then longer post-cue persistence and START recovery, using more sensitive timing
+features. Current STOP40–42s is scored48–58s, already requiring memory after cue
+offset. This recommendation is not implemented/launched; original outcomes and
+final criteria unchanged. See E077-population-diagnostics.json and LAB_NOTEBOOK.

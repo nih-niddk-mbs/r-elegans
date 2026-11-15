@@ -7407,3 +7407,51 @@ byte-checked. Manifest SHA256
 No actual server trajectory/model/optimizer retrieval or cloud-sync completion
 asserted. Metadata diagnostic command after pull:
 `/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_cma_curriculum --diagnostics`.
+
+### E077 population diagnostics received — eligible STOP-score plateau (2026-11-14)
+
+User-reported metadata-only report:36/36 complete,25 eligible. Failed checks:
+safety0, uncued11, pre9, bends0; failure counts overlap and must not be summed as
+20 distinct rejected candidates. Best unconstrained is also best eligible,
+g-00001-c-01, modelSHA7ca54754000911013acc29ca7928f43f6e8a2e6135f3ebb8959e7fa2f6daa57c,
+loss.8333333333332981 vs retained parent.8333333333332978 (difference~3.3e-16,
+not meaningful improvement). All3 generation minima are the same at practical
+precision. Thus model parameters did change, but no resolved improvement in the
+selected cadence objective occurred. No stage passed; parent preserved.
+
+Eligible STOP-only/off ratios1..1.0000000000000033; STOP-only/post-start windows
+.9999999999999866..1.0000000000000266; STOP→START/off1..1.0000000000000033.
+START-related on-window ratios.99906890..1.00187266 (~−.093% to+.187% changes),
+also seen under START-only. These are tiny perturbations, not recovery from
+slowing. Exact feature equality is not proof of exactly equal underlying voltages,
+phase or raw waveforms. Discrete median interpeak timing at2ms resolution can
+produce a locally flat score. Whether sub-grid changes exist is not established
+without more sensitive features/replay of preserved candidate models. Constraints
+alone are not the main explanation since25 valid candidates also have flat STOP
+cadence.36 samples/3 generations do not disprove the optimization method.
+
+Code inspection, not new simulation: STOP ligand pulse40–42s, score48–58s. The
+fit already demands persistent slowing6–16s after cue removal, plus STOP-only
+persistence later. EmbodiedSensoryConfig default adaptation time2s is exploratory;
+actual server config is external and not reread, so do not assert it equaled2s.
+E075 previously showed a short sensory response and weak late influence. A
+persistent-state objective may therefore be an overly advanced first curriculum
+step. More CMA generations on this unchanged measured plateau are not justified
+by current evidence alone.
+
+Recommendation (not an approved new run/implemented objective): learn immediate
+cue-specific motor slowing during/soon after actual cue, reward small signed
+responses relative to matched no-cue, with sub-sample phase/timing estimates and
+amplitude/coordination checks. Then increase effect and post-cue hold durations
+(e.g.,1,2,5,10s) and require explicit START-specific recovery; do not assume an
+existing bistable or peptidergic memory mechanism. Preserve full network, bounds,
+uncued gait and final absolute stop/numerical/biological criteria. Intermediate
+response shaping does not qualify stopping. No new external neural drive,
+parameter changes, data generation or fitting run launched. New experiment must
+record exact targets, protocol, source, optimizer/seeds/budget before execution.
+All candidate weights/coordinates/metadata remain despite pruning excess arrays.
+
+Small supplemental record E077-population-diagnostics.json transcribes the user-
+reported numbers; actual server metadata/optimizer/source files not retrieved.
+Local checks: numerical transcription and JSON/diff checks only; no tests or
+model simulation necessary for this record-only update.

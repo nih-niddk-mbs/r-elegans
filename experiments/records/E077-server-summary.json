@@ -809,8 +809,9 @@
     "Actual CMA stopping dictionary, source revision and installed versions",
     "Whether cadence quantization or weak sensory influence makes the objective locally flat"
   ],
-  "decision": "Read population metadata diagnostics before further fitting; no new run or objective change launched",
+  "decision": "Population metadata received:25 eligible candidates, STOP cadence ratios unresolved from1. Recommend immediate cue-response curriculum and sensitive timing before persistent slowing; no new run launched",
   "storage": "Excess rejected raw traces pruned after run; candidate models/coordinates/feature summaries and selected/final/parent validation traces preserved by cleanup policy",
   "journal_backup": "User displayed cp command to results/.cleanup-records without reported error; no remote hash verification",
-  "biological_fidelity_qualified": false
+  "biological_fidelity_qualified": false,
+  "population_diagnostics_record": "E077-population-diagnostics.json"
 }

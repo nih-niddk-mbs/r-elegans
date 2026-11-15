@@ -1,0 +1,78 @@
+{
+  "experiment": "E077",
+  "evidence": "User-reported metadata-only population diagnostic stdout; transcribed numerical summary, not direct server-file retrieval",
+  "run": "/home/carsonc/r-elegans-results/cma-cadence-20261114T185621Z-105869",
+  "candidates": 36,
+  "completed": 36,
+  "eligible": 25,
+  "failed_checks": {
+    "safe": 0,
+    "uncued": 11,
+    "pre": 9,
+    "bends": 0
+  },
+  "best_unconstrained_and_eligible": {
+    "name": "g-00001-c-01",
+    "loss": 0.8333333333332981,
+    "data_loss": 0.8333333333332981,
+    "constraint_loss": 0.0,
+    "checkpoint_sha256": "7ca54754000911013acc29ca7928f43f6e8a2e6135f3ebb8959e7fa2f6daa57c",
+    "partial_pass": false
+  },
+  "parent_selected_loss": 0.8333333333332978,
+  "cadence_ratio_ranges": {
+    "stop_only/off": [
+      1.0,
+      1.0000000000000033
+    ],
+    "stop_only/on": [
+      0.9999999999999866,
+      1.0000000000000266
+    ],
+    "stop_start/off": [
+      1.0,
+      1.0000000000000033
+    ],
+    "stop_start/on": [
+      0.9990689013035404,
+      1.001872659176019
+    ],
+    "start_only/off": [
+      1.0,
+      1.0
+    ],
+    "start_only/on": [
+      0.9990689013035404,
+      1.001872659176019
+    ]
+  },
+  "generation_minimum_losses": [
+    0.8333333333333165,
+    0.8333333333332981,
+    0.833333333333335
+  ],
+  "selected_parent_unchanged": true,
+  "interpretation": "STOP cadence feedback is flat at stored estimator resolution among eligible candidates; constraints alone do not explain failure. START-associated variations are at most~.19%, without STOP slowing.",
+  "code_inspection": {
+    "stop_cue_s": [
+      40,
+      42
+    ],
+    "scored_stop_window_s": [
+      48,
+      58
+    ],
+    "gap_after_cue_s": 6,
+    "frequency_estimator": "Median sampled interpeak interval; fixed2ms grid in ordinary protocol",
+    "default_sensory_adaptation_s": 2,
+    "actual_server_sensory_config": "Stored in external input capsule; not retrieved here"
+  },
+  "limitations": [
+    "Feature equality does not prove exactly zero neural/motor response",
+    "Group maxima and discretized cadence do not identify a unique missing mechanism",
+    "Three generations/36 points cannot rule out CMA-ES generally",
+    "Flatness of the stored estimator vs genuine weak/persistent response requires more sensitive measurements"
+  ],
+  "proposed_next_curriculum": "Fit immediate cue-specific motor slowing first, with sub-sample timing/phase and signed motor-response features; then gradually lengthen post-cue persistence and test START-specific recovery. Retain physiological bounds and final quietness criteria.",
+  "new_training_launched": false
+}
