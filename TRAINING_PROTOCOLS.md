@@ -1,5 +1,11 @@
 # WormGym: training and validation protocols
 
+2026-11-15 E082 planned: direct SMD neural inhibition/release diagnostic before
+sensory fitting.4h maximum TOTAL, four CPU workers,21 trials; all weights fixed.
+Dose/subgroup screen plus shifted/repeated/long-hold recovery and independent
+neural/body refinement. Partial reversible-target gate is separate from strict
+rest and H1.2 learned control. [Protocol](experiments/records/E082-plan.json).
+
 2026-11-15 E081 completed (user-reported):13m03s, controls and timestep checks
 passed. SMD-only NMJ release hold reduced body range88.62%, essentially matching
 combined-head suppression. RMD/SMB holds had little marginal body effect.

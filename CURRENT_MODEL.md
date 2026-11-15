@@ -1,5 +1,10 @@
 # Current model: exact scope and computation path
 
+2026-11-15 E082 **planned**: up to4h TOTAL frozen SMD neural inhibition/release
+diagnostic,21 trials across doses/individuals/pairs, varied timing/long hold and
+neural/body refinements. No parameters fit, no learned-stop promotion.
+[Protocol](experiments/records/E082-plan.json).
+
 2026-11-15 E081 completed (user-reported):13m03s, controls and timestep checks
 passed. SMD-only NMJ release hold reduced body range88.62%, essentially matching
 combined-head suppression. RMD/SMB holds had little marginal body effect.

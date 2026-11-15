@@ -8012,3 +8012,59 @@ route; do not introduce an unsupported AVB-to-SMD connection to force stopping.
 No new experiment/fit launched in this result-recording turn. Preserve original
 parents, failed fits and all diagnostic weights/coordinates/references. No new
 learned skill or biological/swimming qualification. Documentation only.
+
+### E082 planned — four-hour-total SMD neural inhibition/release (2026-11-15)
+
+User authorizes a4h run after proposing inhibition of actual SMD neurons and
+release to test a reversible control target. Implemented frozen-checkpoint
+diagnostic, not a parameter fit; this distinction was stated while preparing
+the run. [Full prospective protocol](experiments/records/E082-plan.json).
+Parent selected E078
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8,
+all parameters/topology/NMJ/sensory/physical water mechanics fixed, no seeds or
+optimizer. Input capsule/model/coordinates reconstructed and hashes verified.
+E081 identified NMJ transmission, not the neural rhythm source; this next step
+tests neural access without conflating output blocking with learned stopping.
+
+11 nominal60s cases: sham; all SMD cells at.003/.01/.03/.1nS added conductance
+with-80mV reversal; four individual cells and dorsal/ventral pairs at.1nS.
+Intervention30..40s, live membrane/gates/recurrence/NMJ/body/proprioception.
+Select among safe pre-matched, actually hyperpolarized cases, prioritizing
+recovery then smallest body-range ratio and lower conductance. Selection itself
+does not imply success. Six confirmation trials: selected+sham with shifted
+onset67s total, repeated120s total and long-hold150s total. Four nominal-grid
+refinements: selected+sham, neural-half and body-half. No prescribed per-bend
+wave, membrane voltage freeze, zero muscles or replaced NMJ release.
+
+Prospective reversible-target gate: targeted mean hyperpolarization>=5mV in each
+cell, centered target-voltage RMS<=.2sham, max joint range<=.2sham during last5s
+of every hold, preserved active/recovery regional amplitudes>=max(.003rad,
+.8sham) and1.62..1.98Hz, safe/matched baseline. All confirmations/refinements
+must independently qualify; refined neural/body ratios agree within.05.
+Individual SMD p2p and target std values retained to expose weak/heterogeneous
+activity. Raw strict-rest threshold1e-4rad reported separately. Partial neural
+access does not qualify learned sensory stopping or next behavior training.
+Repeated suppression/recovery under different imposed conductance conditions
+does not by itself demonstrate bistability under a common fixed input.
+
+Command:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_smd_control_mbslnx2.sh`.
+Dedicated conda interpreter, four concurrent CPU workers x4physical cores,
+float64, nohup;240min hard TOTAL includes prep/trials/confirmation/refinement/
+report/cleanup. Reserve90min after screen,30min for final refinements. It may
+finish earlier; do not pad execution or promise four hours of fitting. Output
+external smd-control-<UTC>-<PID>, adjacent log, report via
+`python -m scripts.report_smd_control`. All21 planned traces, copied verified
+capsule/model/coordinates, source reference SHA, exact source/env/argv and
+budget receipt retained. Original models/trajectories and E078 optimizer/RNG/
+recursive dependencies unchanged; no deletion.50GiB free reserve and estimated
+25GiB new-run write cap (concurrent-writer granularity, not OS quota).
+
+Local verification:17 focused tests passed2.41s for SMD metrics/negative controls,
+selective membrane dose/timing, recovery-prioritized selection, E082 watchdog
+dispatch, mocked worker hash/prefix checks and existing control-access/NMJ/
+head-split behavior. Shell syntax/coordinator CLI help passed. Unit worker
+verified the membrane probe is supplied without an NMJ override. These are
+synthetic/mock software tests, not actual E082 scientific simulations; server
+weights/full trajectories not available locally. Server execution remains
+planned until user-reported evidence arrives. No qualification yet.

@@ -1,5 +1,11 @@
 # r-elegans
 
+E082 SMD neural inhibition/release (planned): after pulling on mbslnx2, run
+`sh scripts/launch_smd_control_mbslnx2.sh`. Maximum4h TOTAL including controls,
+recovery and timestep checks; frozen weights, no training. May complete earlier.
+Report: `python -m scripts.report_smd_control` in the r-elegans environment.
+[Protocol](experiments/records/E082-plan.json).
+
 2026-11-15 E081 completed (user-reported):13m03s, controls and timestep checks
 passed. SMD-only NMJ release hold reduced body range88.62%, essentially matching
 combined-head suppression. RMD/SMB holds had little marginal body effect.
