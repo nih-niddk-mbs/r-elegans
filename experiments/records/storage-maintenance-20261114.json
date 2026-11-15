@@ -1,6 +1,6 @@
 {
   "record_date": "2026-11-14",
-  "status": "archive_blocked_then_user_requested_direct_pruning",
+  "status": "direct_pruning_completed_user_reported",
   "kind": "Storage maintenance, not a biological experiment",
   "user_reported": {
     "results_usage": "1.1T",
@@ -48,7 +48,7 @@
     "mode": "700",
     "copied_or_deleted_by_failed_job": false
   },
-  "next_action": "Administrator grants carsonc traverse access on /data and creates a private owned destination, then rerun. Launcher now performs foreground destination access test.",
+  "next_action": "Preserve deletion journal in results/.cleanup-records and read completed CMA result; no new training launched",
   "second_reported_failure": {
     "log": "/tmp/r-elegans-results-cleanup-20261114T234718Z-113710.log",
     "error": "Cannot inspect all own-user processes; refusing cleanup",
@@ -57,5 +57,18 @@
   },
   "current_command": "sh scripts/launch_trajectory_prune_mbslnx2.sh",
   "direct_pruning_policy": "Delete only recognized intermediate raw trajectory files in completed quiet fits; retain first/latest/selected-best, validation, explicit references and all checkpoint/model/optimizer/RNG/input/source files. No /data or /proc dependency.",
-  "direct_pruning_execution": "Prepared and software-tested only; no server deletion evidenced"
+  "direct_pruning_execution": "User-reported finished event and subsequent df/du; actual journal not retrieved",
+  "direct_pruning_result": {
+    "pid": 115241,
+    "log": "/tmp/r-elegans-prune-20261115T005128Z-115237.log",
+    "journal": "/tmp/r-elegans-prune-20261115T005128Z-115241.jsonl",
+    "files_deleted": 10663,
+    "bytes_unlinked": 310361154214,
+    "gib_unlinked": 289.04634920321405,
+    "home_available_before": "302G",
+    "home_available_after": "591G",
+    "home_percent_before": 92,
+    "home_percent_after": 84,
+    "results_usage_after": "816G"
+  }
 }

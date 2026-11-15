@@ -7320,3 +7320,31 @@ reference, unfinished/recent/malformed metadata protection, committed CMA select
 reference protection, flat legacy traces and dry-run behavior. Compilation,
 launcher shell syntax and diff checks passed. No real server deletion, neural
 simulation or behavior qualification. Current training weights unchanged.
+
+### Direct pruning outcome — confirmed space recovery (2026-11-14 local date)
+
+User-reported prune PID115241 completed; log
+/tmp/r-elegans-prune-20261115T005128Z-115237.log, deletion journal
+/tmp/r-elegans-prune-20261115T005128Z-115241.jsonl (UTC filenames cross midnight;
+client local date remains Nov14). Final stdout: apply=True,10663 files,
+310361154214 bytes (~310.36GB decimal/~289.05GiB) unlinked. Subsequent user df:
+/home3.5T total/3.0T used/591G available/84%, versus302G/92% before. User du:
+r-elegans-results816G, versus1.1T before. This confirms a material filesystem
+space recovery; byte ledger totals and rounded df values need not match exactly
+under concurrent writes. This was direct pruning, not a successful/data migration.
+
+Supplied sample deletion entries are four raw condition files in rejected
+CMA evaluationg-00002-c-11 under cma-cadence-20261114T185621Z-105869. Each~281MB
+compressed, illustrating why candidate traces were expensive. Journal entry
+checkpoint_sha256:null reflects no single network_best.npz at CMA run root;
+CMA models are stored per evaluation, and pruning rules never target those
+model/coordinate files. Do not mistake null for verification of missing or
+removed model weights. Actual full journal/remaining server model hashes not
+retrieved in this turn. No stopping/behavior/fitting result inferred from cleanup.
+
+Future prune jobs now also retain the completed ledger at
+results/.cleanup-records, since/tmp is temporary. Current user must copy the
+already-completed journal there; no remote backup execution claimed. Model
+checkpoint/source/optimizer/RNG/reference protection policy unchanged. No new
+CMA run launched. Next: read the completed CMA pilot report to assess gradual
+slowing/recovery, rather than assume progress from its storage usage.

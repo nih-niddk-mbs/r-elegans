@@ -3,7 +3,7 @@
 No /proc or /data access is needed. Only recognized raw-trace filenames from
 completed, quiet fits are eligible. Default is a dry run; --apply deletes them.
 """
-import argparse,hashlib,json,os,re,stat,time
+import argparse,hashlib,json,os,re,stat,time,shutil
 from pathlib import Path
 
 TRACE_NAMES={'trajectory.npz','active-trajectory.npz','sham-trajectory.npz','dose-low-trajectory.npz'}
@@ -154,6 +154,11 @@ def main():
         print(json.dumps(row),flush=True)
     event('start',base=str(base),apply=a.apply,journal=str(journal),program_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
     prune(base,a.apply,a.minimum_age_hours,event)
+    if a.apply:
+        records=base/'.cleanup-records';records.mkdir(exist_ok=True)
+        retained=records/journal.name
+        shutil.copy2(journal,retained)
+        print('Retained deletion journal:',retained,flush=True)
     print('Deletion journal:',journal,flush=True)
 
 
