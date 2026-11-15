@@ -1,5 +1,10 @@
 # Current model: exact scope and computation path
 
+2026-11-15 E080 **planned**: frozen E078 NMJ-population release holds to localize
+rhythm transmission; no fit.45min total, four workers and matched timestep checks.
+Future fitter motor identities now exclude AS sensory cells; old run schemas and
+weights retained unchanged. [Protocol](experiments/records/E080-plan.json).
+
 2026-11-15 E079 saved-data audit reported: selected AVBL/R inhibition shifts
 means by-24.27/-19.51mV; DB07/VB11 by-5.29/-5.86mV, while E078 body motion
 remains unchanged. AVB influence is present; isolated intrinsic oscillation is

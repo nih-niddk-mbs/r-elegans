@@ -3,6 +3,7 @@ import numpy as np
 from .behavior_control import CONTROL_GROUPS,ControlProtocol
 from .hybrid_assessment import cycle_excursions,peak_frequency
 from scipy.signal import find_peaks
+from .motor_identity import is_motor
 
 RUNGS=(.05,.10,.20,.35,.50)
 CONDITIONS=('no_cue','stop_only','start_only','stop_start')
@@ -22,7 +23,7 @@ def parameter_groups(spec,ids,origin,lower,upper):
     names={'ASE':('ASEL','ASER'),'AWA':('AWAL','AWAR'),
            'integrators':CONTROL_GROUPS['sensory_integrators'],'RIB':('RIBL','RIBR'),
            'RIM':('RIML','RIMR'),'RIS':('RIS',),'forward':CONTROL_GROUPS['forward_premotor'],
-           'motor':tuple(n for n in ids if n.startswith(('DA','DB','DD','VA','VB','VD','AS','RMD','SMD','SMB')) and n not in ('ASEL','ASER'))}
+           'motor':tuple(n for n in ids if is_motor(n))}
     sets={k:[ids.index(n) for n in v] for k,v in names.items()}
     def add(name,indices):
         indices=np.asarray(indices,dtype=int)

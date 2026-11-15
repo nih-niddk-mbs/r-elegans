@@ -1,5 +1,12 @@
 # WormGym: training and validation protocols
 
+2026-11-15 E080 planned before further fitting: selective NMJ output holds at
+baseline mean release,30..40s, live neurons/recurrent/sensory dynamics. Six60s
+screens plus strongest non-global group/sham neural/body refinements;45min total.
+No optimization or learned stopping. Future fitter motor groups now use numbered
+AS identities; old latent points require their original schema, not the corrected
+one. [Details](experiments/records/E080-plan.json).
+
 2026-11-15 E079 audit reported: AVB inhibition changes B-cell voltages without
 suppressing the body pattern. Do not assume absent AVB edges or diagnose intrinsic
 pacemaking from connected activity alone. Before future fitting, correct AS

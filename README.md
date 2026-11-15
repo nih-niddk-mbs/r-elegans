@@ -1,5 +1,12 @@
 # r-elegans
 
+E080 population-output diagnostic (planned): after pulling on mbslnx2, run
+`sh scripts/launch_nmj_source_mbslnx2.sh`. Maximum45min TOTAL, no training;
+temporarily holds NMJ release from selected populations while the brain remains
+live. Results: `python -m scripts.report_nmj_source` in the dedicated environment.
+Future AS motor grouping is corrected; existing fitted models are unchanged.
+[Protocol](experiments/records/E080-plan.json).
+
 E079 audit reported: AVB inhibition reaches B motor cells but does not stop the
 model's body pattern. Confirmed AS-prefix grouping error included ten sensory
 cells in motor density groups. Identify the body-driving rhythm source and fix

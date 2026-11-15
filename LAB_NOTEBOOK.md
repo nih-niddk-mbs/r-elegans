@@ -7829,3 +7829,54 @@ parallel rhythm source from motor operating-point insensitivity. Treat these as
 proposed diagnostics, not executed causal evidence or a new protocol yet. Final
 sensory H1.2 start/stop remains required; no AVB-component/swimming/biological
 qualification added. Documentation update only; no new software tests needed.
+
+### E080 planned — NMJ population rhythm transmission (2026-11-15)
+
+User approves the proposed grouping correction and short selective-output
+diagnostic. Implemented shared explicit motor identity matching: numbered
+DA/DB/DD/VA/VB/VD/AS plus RMD/SMD/SMB. AS sensory neurons no longer enter future
+E077/E078 motor groups. Completed runs' saved schemas, full coordinates and
+checkpoints are unchanged; old latent CMA points must NOT be decoded under the
+new group schema. Old full-coordinate reconstruction remains available and is
+used by this diagnostic. This fixes unintended future fitting scope, not the
+negative E078 biological result.
+
+Question/method/parent/fixed parameters/command/checks:
+[E080 plan](experiments/records/E080-plan.json). Frozen selected E078 checkpoint
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8,
+no trainable parameters, no random seeds. Six60s water-model trials: sham,
+numbered B-motor NMJ hold, head-motor hold, other numbered body-motor hold,
+remaining-neuron hold, all-neuron NMJ hold. At30..40s replace only targeted
+NMJ release by that neuron's own20..30s selected-sham release mean; release
+returns live at40s. All recurrent neuron outputs, voltages and sensing remain
+live. This is imposed output-path diagnosis, not learned stopping, intrinsic
+pacemaker isolation, direct muscle zeroing or whole-neuron voltage freezing.
+
+Presynaptic tonic release is retained, but nonlinear muscle transformation can
+shift mean activation; do not call this a perfectly selective frequency filter
+or equate its effects with silencing the source neurons. Live feedback may
+produce secondary circuit changes. Compare matched pre/during/recovery body,
+muscle and neural outputs; rank non-global safe baseline-preserving population
+effects, then refine largest effect and sham on neural-half/body-half grids.
+All-output static release is only a diagnostic body-relaxation control and never
+a learned-stop pass. Four physical-core workers x4cores;45min TOTAL watchdog,
+15min reserved for four refinement trials. Incomplete execution gets no claim.
+
+Launch:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_nmj_source_mbslnx2.sh`.
+Dedicated conda interpreter/nohup, external nmj-source-<UTC>-<PID> with adjacent
+log. Preserve copied capsule/model/coordinates/mean releases, original reference
+path+SHA, all diagnostic traces/metrics and exact source/env/argv. Inputs/models
+not mutated; no existing data deleted.50GiB free reserve before trace writes.
+There is no optimizer/RNG because no optimization/randomization occurs. Existing
+E078 optimizer/RNG and recursive reference dependencies remain at their original
+external paths. Server execution is planned, not evidenced here.
+
+Local software checks:27 focused grouping/CMA/AVB/audit/wall-budget tests passed
+18.61s before the additional closed-loop test;17 NMJ/control-access/channel-body/
+paired-recording tests passed8.57s afterward. The latter verifies corrected AS
+membership, selective/reversible output holds and unchanged no-hook behavior;
+closed-loop unit check confirms sensing/brain advance continue under the hook.
+Existing control-access checks passed after preserving the default no-hook call
+signature. No actual E078 checkpoint or server trajectories are available
+locally; no local E080 scientific forward experiment or success is claimed.

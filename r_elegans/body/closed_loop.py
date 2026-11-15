@@ -41,7 +41,7 @@ def initial_embodied_state(fixed, network_config, body_params, world,
 
 def embodied_neural_step(state, params, fixed, network_config, parent, model, body_params,
                         world, maps, dt, brain_substeps, sensory_config=EmbodiedSensoryConfig(),
-                        gain_multipliers=None, diagnostic_membrane_input=None):
+                        gain_multipliers=None, diagnostic_membrane_input=None, diagnostic_nmj_release=None):
     """Advance sensing and brain; body update follows in the same physical step.
 
     Also used by the host wet-surface reference integrator. Recording neural
@@ -58,7 +58,11 @@ def embodied_neural_step(state, params, fixed, network_config, parent, model, bo
     current = membrane.weighted_reversal_pA-membrane.conductance_nS*state.brain_body.brain.voltage_mV
     brain = advance_network(state.brain_body.brain, params, fixed, dt, brain_substeps,
                             network_config, membrane_input=membrane)
-    muscles = channel_muscle_activations(brain.voltage_mV, fixed, parent, model)
+    release=None if diagnostic_nmj_release is None else diagnostic_nmj_release(brain.voltage_mV,state.brain_body.body.time)
+    if release is None:
+        muscles=channel_muscle_activations(brain.voltage_mV,fixed,parent,model)
+    else:
+        muscles=channel_muscle_activations(brain.voltage_mV,fixed,parent,model,diagnostic_release=release)
     return brain, sensory, muscles, observed, current
 
 

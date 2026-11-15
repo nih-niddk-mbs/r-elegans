@@ -21,18 +21,24 @@ class ChannelBodyState(NamedTuple):
     body: MuscleBodyState
 
 
-def channel_muscle_activations(voltage_mV,fixed,parent,model):
+def channel_muscle_activations(voltage_mV,fixed,parent,model,*,diagnostic_release=None):
     """Same NMJ/muscle transform as the parent full actor, physical release units.
 
     No resting-tone subtraction or synthetic gait. Unknown NMJ polarities retain
     their frozen parent values. Threshold/slope are those of the channel network,
     including its documented migration bounds, not silently unmapped mV inputs.
+    diagnostic_release optionally replaces only NMJ release for explicit output
+    interventions; it does not alter the recurrent network or stored parameters.
     """
     nmj=model.neuromuscular_params
     mask=(nmj.synapse_weights>0)
     weights=nmj.synapse_weights*jax.nn.softplus(parent.raw_nmj)
     signs=jnp.where(nmj.synapse_signs!=0,nmj.synapse_signs,jnp.tanh(parent.unknown_polarity))*mask
     release=jax.nn.sigmoid((voltage_mV-fixed.release_threshold_mV)/fixed.release_slope_mV)
+    if diagnostic_release is not None:
+        # Explicit NMJ-only experiment; recurrent chemical/gap outputs stay live.
+        if diagnostic_release.shape!=release.shape:raise ValueError('NMJ release shape mismatch')
+        release=diagnostic_release
     drive=jnp.matmul(weights*signs,release,precision=jax.lax.Precision.HIGHEST)
     drive/=jnp.maximum(weights.sum(axis=1),1.)
     activation=jax.nn.sigmoid((drive-parent.muscle_threshold)/(.02+jax.nn.softplus(parent.raw_muscle_slope)))

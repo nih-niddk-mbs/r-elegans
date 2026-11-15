@@ -6,6 +6,7 @@ import numpy as np
 from scipy.signal import find_peaks
 from .cma_curriculum import parameter_groups as control_groups
 from .hybrid_assessment import cycle_excursions
+from .motor_identity import is_motor
 
 
 def protocol(variant='ordinary'):
@@ -42,7 +43,7 @@ def parameter_groups(spec, ids, origin, lower, upper):
     gi = np.nonzero(np.triu(spec.gap, 1))
     nc, ne = len(ci[0]), len(ei[0])
     avb = [ids.index(n) for n in ('AVBL', 'AVBR')]
-    motor = [i for i,n in enumerate(ids) if n.startswith(('DA','DB','DD','VA','VB','VD','AS','RMD','SMD','SMB')) and n not in ('ASEL','ASER')]
+    motor = [i for i,n in enumerate(ids) if is_motor(n)]
     def add(name, indices):
         indices = np.asarray([int(i) for i in indices if int(i) not in used], dtype=int)
         if not len(indices):

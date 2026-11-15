@@ -6,6 +6,7 @@ currents, a substep-integrated balance, or intrinsic-current reconstruction.
 import json
 import numpy as np
 from scipy.special import expit
+from .motor_identity import is_motor
 
 
 def load_saved_network(path):
@@ -40,9 +41,7 @@ def cell_rows(sham,inhibited,network):
     if not np.isfinite(sham).all() or not np.isfinite(inhibited).all():raise ValueError('Nonfinite voltages')
     if np.any(network['slope']<=0):raise ValueError('Positive release slopes required')
     ra=expit((sham-network['threshold'])/network['slope']);rb=expit((inhibited-network['threshold'])/network['slope'])
-    def motor(n):
-        return n.startswith(('RMD','SMD','SMB')) or any(n.startswith(prefix) and n[len(prefix):].isdigit() for prefix in ('DA','DB','DD','VA','VB','VD','AS'))
-    targets=[i for i,n in enumerate(ids) if n in ('AVBL','AVBR') or motor(n)]
+    targets=[i for i,n in enumerate(ids) if n in ('AVBL','AVBR') or is_motor(n)]
     rows=[]
     for post in targets:
         ca,ga=incoming_currents(sham,ra,post,network)
