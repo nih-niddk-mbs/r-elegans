@@ -1,5 +1,18 @@
 # WormGym: training and validation protocols
 
+2026-11-14 E078 **planned**: train conditional AVB motor support before attempting
+further sensory behavior. `sh scripts/launch_avb_training_mbslnx2.sh 480` launches
+a fresh E071-based CMA search on four CPU workers with an eight-hour hard total
+ceiling and reserved final validation. Unknown motor densities and AVB/motor
+connections can change; known membrane properties, topology and water mechanics
+remain fixed. Continuous body/neural suppression loss under selective AVB
+inhibition, baseline preservation and release recovery replace E077's flat
+cadence objective. Final exact-checkpoint tests include repeat, shift/weaker input
+and independent neural/body refinement. Candidate metrics/models are retained;
+full traces only for parent/final validation. This is an intervention-trained
+component, **not** H1.2 sensory start/stop qualification; behavior training remains
+gated on that separate requirement. [Full plan](experiments/records/E078-plan.json).
+
 2026-11-14 E077 CMA pilot completed (user-reported):184.07min, no errors/timeouts,
 all planned final checks complete. Three generations/36 new candidates in24
 latent dimensions; no curriculum rung passed. Selected checkpoint remains the

@@ -7558,3 +7558,102 @@ movement to initiation-only manipulation, recording motor voltages as well as
 body motion. No such new test run or control parameter change here. Existing
 known limitations in release/receptor/extrasynaptic mechanisms remain; do not
 infer a complete control architecture solely from the synaptic topology.
+
+### Working target: AVB-dependent forward motor rhythm (2026-11-14)
+
+User directs that AVB remain active during wiggling and that withdrawing AVB
+support stop that rhythm. Adopt this as a testable engineering hypothesis for
+the forward motor component, not an established universal rule for all worm
+movement. Sustained graded endogenous AVB output should enable motor-circuit
+oscillation; withdrawing that support should suppress the forward body rhythm;
+restoring support should permit restart. Local motor circuitry and
+proprioception should generate/coordinate individual bends. Head motion and
+reverse programs need separate hypotheses and must not be assumed to require
+AVB. The primary evidence and its limits are recorded in the preceding entries.
+
+This dependence must emerge through live channel/synaptic dynamics. Do not
+implement a binary AVB-to-body switch, multiply body motion by an AVB flag,
+freeze all voltages or zero muscles to manufacture stopping. Diagnostic AVB
+output perturbations would test necessity and maintenance; final qualification
+still requires sensory-driven control through the intact network under H1.2.
+Record both motor-neuron oscillation and body motion during established gait,
+selective AVB withdrawal and restoration, with matched intact controls,
+perturbation/refinement checks and retained useful baseline amplitude/timing.
+
+The E077 fitter held motor-neuron channel densities fixed. Unknown motor
+densities and motor/control coupling strengths may need joint fitting to obtain
+conditional rather than unconditional oscillation; this is a proposed model
+change, not a diagnosed cause of the failure. Preserve stereotypical known
+parameters, anatomical topology and the independent E071 parent. No new
+experiment protocol, command, seeds or acceptance thresholds have been finalized;
+no implementation, simulation or qualification occurred in this discussion.
+
+### E078 planned — AVB-dependent motor-circuit fitting (2026-11-14)
+
+User authorizes an eight-hour run following the AVB conditional-rhythm hypothesis.
+Implemented a launchable component-training protocol; server execution remains
+planned. Exact protocol, thresholds, parent, seed and parameter policy:
+[E078 plan](experiments/records/E078-plan.json).
+
+Question: can the E071 motor rhythm become dependent on sustained endogenous AVB
+support while retaining useful water-model baseline movement and recovery?
+Use independent E0716901 checkpoint
+8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a,
+reconstructed from E074 control_inputs (the capsule contains E071, not the failed
+E074 fitted weights). Fresh pycma4.4.1, seed7800, population12, four persistent
+CPU workers x4 physical cores. Fit disjoint grouped unknown motor/AVB channel
+densities and motor/control connection strengths alongside earlier E077 groups;
+retain known parameters, original factor2 bounds, topology and water mechanics.
+Unlike E077, motor densities can change. No forced per-bend waveform or external
+baseline drive is introduced.
+
+Matched sham and AVBL/AVBR-only inhibition/release episodes run60s. Added0.1nS
+conductance at-80mV acts only30..40s; voltages stay live. Reward continuous body
+range and forward/head motor voltage RMS suppression rather than quantized bend
+cadence; preserve regional cycle amplitudes and1.62..1.98Hz baseline/recovery.
+This is intervention-based circuit fitting, NOT learned sensory stopping.
+Chemical/proprioceptive pathways remain live, but no chemical command is trained
+in this component. H1.2 intact sensory initiation/rest/restart validation remains
+required before subsequent behavior training. No current checkpoint is thereby
+qualified as a controllable swimmer, biological AVB switch or rest state.
+
+Final selected exact model gets ordinary, shifted/weaker inhibition, repeated
+two-bout inhibition/release, neural-half and body-half validation. Each must
+preserve movement and suppress raw body range/neural RMS with AVB access verified;
+refined amplitudes/ratios must agree. Full thresholds are prospective in the plan,
+not post-hoc biological measurements. A population RMS reduction does not prove
+every motor cell is silent. AVB inhibition tests circuit dependence, not AVB-only
+sufficiency or endogenous sensory control of AVB.
+
+Command on mbslnx2:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_avb_training_mbslnx2.sh 480`.
+Dedicated r-elegans conda interpreter, nohup, external
+`/home/carsonc/r-elegans-results/avb-training-<UTC>-<PID>` and adjacent.log.
+Eight hours includes preparation/search/validation/reporting/cleanup: reserve
+25% (at least90min), outer private-group watchdog prevents unbounded validation.
+Timeout/incomplete validation cannot qualify the component. Completion may occur
+earlier; the budget is a maximum, not a guaranteed duration or success.
+
+Storage correction following the1.1TB accumulation: candidate full traces are
+never written; metrics and every candidate/selected/final model/coordinates are
+retained. Parent and final validation traces retained. Preserve all optimizer
+ask/tell/restart/final state, RNG, pending population, source/env/argv and copied
+immutable capsule/reference dependencies. Minimum50GiB free; stop search at15GiB
+run bytes; final writes checked against30GiB run cap (concurrent-writer granularity,
+not an OS quota). Existing results are not deleted. Exact-resume CLI not provided;
+saved states must not be advertised as an already implemented resume workflow.
+
+Local software verification (not a forward neural experiment):17 focused tests
+passed in14.41s for E078 objective/probe/grouping, worker retention, mocked
+coordinator, existing CMA and wall-budget/watchdog behavior. Synthetic tests
+reject always-moving, always-still, no-recovery and body-only suppression without
+motor-voltage suppression; verify AVB-only membrane targeting and repeated bouts.
+Shell syntax and Python compilation passed. Static12-point grouped decode on the
+local E071-shaped fixture found51 groups covering2426 unknown coordinates,
+original-anchor bounds and frozen fields preserved, parent exact reconstruction
+and candidate save/load equality. Fixture parent SHA
+d13901b0c7817deb969d17aab52cde00304072225bf91688f560447fe9c08aa9
+is NOT the actual server E071 parent. Evidence:
+`/tmp/E078-static-check.json`, `/tmp/E078-static-network.npz` (temporary local
+artifacts, no durable backup claimed). Actual server schema/counts are recorded
+at launch. No Mac forward fit, server run or component success claimed.

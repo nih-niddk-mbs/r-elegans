@@ -1,5 +1,12 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-14 E078 **planned component**: AVB-dependent baseline rhythm, suppression
+under selective inhibition and recovery on release. Eight-hour-total fit of
+unknown motor/control channels and connections from preserved E071. This adds
+no qualified skill until server validation; intact sensory start/stop remains
+unqualified and gates subsequent behavior training.
+[Plan](experiments/records/E078-plan.json).
+
 2026-11-14 E077 CMA pilot completed (user-reported):184.07min, no errors/timeouts,
 all planned final checks complete. Three generations/36 new candidates in24
 latent dimensions; no curriculum rung passed. Selected checkpoint remains the
