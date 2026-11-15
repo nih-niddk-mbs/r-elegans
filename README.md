@@ -1,13 +1,13 @@
 # r-elegans
 
-2026-11-14 E078 **planned**: AVB-dependent motor-circuit fitting, maximum eight
-hours including validation/cleanup. On mbslnx2, after pulling:
-`sh scripts/launch_avb_training_mbslnx2.sh 480`.
-Four CPU workers fit unknown motor/control channels and connections; candidate
-full traces stay in memory to limit disk use. This trains an imposed-AVB-inhibition
-component; sensory start/stop and swimming remain unqualified.
-Report afterward: `python -m scripts.report_avb_training` in the r-elegans env.
-[Protocol and criteria](experiments/records/E078-plan.json).
+2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
+exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,
+but selected body-motion and motor-voltage RMS ratios remained~1.002/~1.000:
+no learned suppression or restart. Neural/body refinement agreed with this
+negative result. No AVB-component, sensory start/stop or swimming qualification.
+Preserve independent E071 and failed selected modeldd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8.
+Next proposed step: audit cell-resolved motor dynamics and effective AVB influence
+before another long fit. [Outcome](experiments/records/E078-server-summary.json).
 
 2026-11-14 E077 CMA pilot completed (user-reported):184.07min, no errors/timeouts,
 all planned final checks complete. Three generations/36 new candidates in24

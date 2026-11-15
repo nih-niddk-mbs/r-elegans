@@ -1,6 +1,7 @@
 {
   "experiment": "E078",
-  "status": "planned_server_execution_not_evidenced",
+  "status": "executed_component_failed_user_reported",
+  "outcome_record": "E078-server-summary.json",
   "record_date": "2026-11-14",
   "question": "Can unknown motor/control channels and connections support useful endogenous water-model rhythm that is suppressed by selective AVB inhibition and returns after release?",
   "parent_checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",

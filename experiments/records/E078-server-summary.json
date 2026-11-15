@@ -1,0 +1,57 @@
+{
+  "experiment": "E078",
+  "record_date": "2026-11-15",
+  "evidence": "User-reported scripts.report_avb_training stdout; remote files and source/environment snapshots not independently retrieved",
+  "run": "/home/carsonc/r-elegans-results/avb-training-20261115T041708Z-122855",
+  "completed_generations": 23,
+  "stop_reason": "time_budget",
+  "failure": null,
+  "validation_complete": true,
+  "avb_component_qualified": false,
+  "sensory_start_stop_qualified": false,
+  "swimming_qualified": false,
+  "parent_checkpoint_sha256": "8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a",
+  "selected_checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "baseline": {
+    "loss": 1.2571050053942585,
+    "body_range_ratios": [1.00354263017121],
+    "motor_rms_ratios": [1.0000143895430875]
+  },
+  "selected": {
+    "loss": 1.2534562335187358,
+    "body_range_ratios": [1.0016895137453334],
+    "motor_rms_ratios": [1.0001486920880778]
+  },
+  "common_validation_flags": {
+    "status": "completed",
+    "safe": true,
+    "baseline_preserved": true,
+    "recovery_preserved": true,
+    "avb_inhibition_confirmed": true,
+    "avb_component_passed": false,
+    "sensory_start_stop_qualified": false,
+    "swimming_qualified": false,
+    "all_cases_same_selected_hash": true
+  },
+  "validation": [
+    {"variant": "ordinary", "grid": "ordinary", "loss": 1.2534562335187358, "body_range_ratios": [1.0016895137453334], "motor_rms_ratios": [1.0001486920880778]},
+    {"variant": "shift-weak", "grid": "ordinary", "loss": 1.25302826667554, "body_range_ratios": [1.0015141798539937], "motor_rms_ratios": [0.9999952284424604]},
+    {"variant": "repeat", "grid": "ordinary", "loss": 1.253423825208333, "body_range_ratios": [1.001683973284257, 1.0017492185349959], "motor_rms_ratios": [0.9999807137634081, 0.999970028094764]},
+    {"variant": "ordinary", "grid": "neural-half", "loss": 1.253500523779818, "body_range_ratios": [1.0017250465197112], "motor_rms_ratios": [1.0000949054062829]},
+    {"variant": "ordinary", "grid": "body-half", "loss": 1.2535110575708401, "body_range_ratios": [1.001716999666957], "motor_rms_ratios": [1.0001482093151388]}
+  ],
+  "numerical_checks": [
+    {"grid": "neural-half", "suppression_ratio_difference": 3.553277437773339e-05, "active_amplitudes_consistent": true, "passed": true},
+    {"grid": "body-half", "suppression_ratio_difference": 2.7485921623604526e-05, "active_amplitudes_consistent": true, "passed": true}
+  ],
+  "budget_receipt": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 21134.739405641987,
+    "total_minutes": 480.0,
+    "all_steps_finished": true,
+    "validation_complete": true
+  },
+  "interpretation": "No material suppression despite confirmed AVB inhibition. Numerical agreement supports this negative result. Recovery preservation alone is not a demonstrated restart because movement never stopped. This bounded grouped search does not prove AVB gating impossible or establish the cause of weak influence.",
+  "decision": "Preserve E071 and selected failed model. Audit AVB-to-motor effective influence and cell-resolved motor dynamics before another long fit. No additional run authorized or launched by this result record."
+}

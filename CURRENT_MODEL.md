@@ -1,12 +1,13 @@
 # Current model: exact scope and computation path
 
-2026-11-14 E078 **planned**: eight-hour-total AVB-dependent motor-circuit fit from
-independent E071, with unknown motor densities now trainable alongside control
-connections. Selective AVB inhibition/release tests suppression and recovery;
-four CPU workers, float64, unchanged water mechanics. Candidate full traces are
-not written; all model/optimizer states and final assay traces are retained.
-This intervention-based component does not qualify sensory start/stop or swimming.
-Server execution/results pending. [Plan](experiments/records/E078-plan.json).
+2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
+exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,
+but selected body-motion and motor-voltage RMS ratios remained~1.002/~1.000:
+no learned suppression or restart. Neural/body refinement agreed with this
+negative result. No AVB-component, sensory start/stop or swimming qualification.
+Preserve independent E071 and failed selected modeldd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8.
+Next proposed step: audit cell-resolved motor dynamics and effective AVB influence
+before another long fit. [Outcome](experiments/records/E078-server-summary.json).
 
 2026-11-14 E077 CMA pilot completed (user-reported):184.07min, no errors/timeouts,
 all planned final checks complete. Three generations/36 new candidates in24

@@ -7657,3 +7657,72 @@ is NOT the actual server E071 parent. Evidence:
 `/tmp/E078-static-check.json`, `/tmp/E078-static-network.npz` (temporary local
 artifacts, no durable backup claimed). Actual server schema/counts are recorded
 at launch. No Mac forward fit, server run or component success claimed.
+
+### E078 server launch and parent baseline — user-reported partial stdout
+
+User supplied launch/progress stdout for
+`/home/carsonc/r-elegans-results/avb-training-20261115T041708Z-122855`;
+launcher PID122861, JAX0.6.2, requested480min TOTAL. Adjacent log:
+`/home/carsonc/r-elegans-results/avb-training-20261115T041708Z-122855.log`.
+UTC run identifier is reproduced as reported; no separate server clock/source
+record or final summary was retrieved. The published launcher revision was
+019914b; actual server source/environment records remain external and uninspected.
+
+Parent evaluation completed with loss1.2571050053942585;
+inhibited/sham body raw-range ratio1.00354263017121 and motor-voltage RMS
+ratio1.0000143895430875. Safety, baseline preservation, recovery preservation
+and AVB inhibition confirmation were all true; AVB component pass false.
+Thus AVB was affected under the assay's access criterion, but neither body
+motion nor the measured motor population RMS was suppressed. This reproduces
+the starting model's missing AVB dependence; it is not a learned-stop result or
+evidence that the optimizer cannot learn the requested dependence.
+
+At472.75 remaining minutes, generation0 had12 pending candidate evaluations.
+The earlier pending1 phase was the single parent baseline; pending12 means a
+queued population, not12 concurrent simulations (configured concurrency4).
+No candidate outcome, training improvement, final qualification or completion
+is yet evidenced. Continue the authorized run; preserve the independent parent.
+
+### E078 completed — no learned AVB-dependent suppression (2026-11-15)
+
+Evidence: user-reported `scripts.report_avb_training` stdout for the same
+`avb-training-20261115T041708Z-122855` server run. Small transcribed evidence:
+[E078 server summary](experiments/records/E078-server-summary.json). No remote
+full traces, actual parameter schema, optimizer history, source/environment
+records or checkpoint bytes were retrieved. Reported23 completed generations,
+stop_reason=time_budget, failure=None, all five validation evaluations complete.
+Outer receipt: exit0, no timeout, all_steps_finished/validation_complete true;
+21134.7394s elapsed (~5h52m15s), within the480min maximum. Search lookahead and
+validation reserve can end execution before the maximum; exact final stopping
+forecast is not in supplied stdout. Do not describe this as eight hours of fit.
+
+Parent8e26b5d0b776edd29c1ded289c1d3aedc2897e4cce1159b08d98e0b75cc0ce2a
+loss1.2571050054; selected
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8
+loss1.2534562335 (~0.29% reduction). Selected ordinary inhibited/sham body range
+ratio1.00168951; measured motor-population voltage RMS ratio1.00014869.
+Thus inhibition left motion and measured motor activity essentially unchanged,
+not meaningfully slowed/suppressed. Baseline movement/safety and AVB inhibition
+access criterion passed. The preservation flag after release does NOT prove
+restart because the preceding inhibition never stopped motion.
+
+Shifted/weaker, repeated inhibition/release and independent neural/body-half
+checks all used the selected hash and likewise failed the component target.
+Repeated body ratios1.00168397/1.00174922, motor RMS.99998071/.99997003.
+Neural-half/body-half suppression-ratio differences3.55328e-5/2.74859e-5 with
+active-amplitude agreement passed: a numerically consistent negative result,
+not a learned behavior. AVB-component, sensory-start/stop and swimming remain
+unqualified. Parent preserved as independent component; failed selected model
+and all optimizer/coordinate records should remain external under the protocol.
+
+Decision: do not simply repeat a longer identical search. First inspect
+cell-resolved AVB and B-motor voltages plus effective AVB chemical/gap currents
+in the saved ordinary/final trajectories and model; check whether inhibition
+actually changes motor drive, whether other inputs dominate, and how much the
+allowed tied bounded parameters can affect conditional oscillation. Broad
+motor RMS includes head oscillators and cannot identify individual forward
+motor-cell dependence. Neither intrinsic motor pacemaking, incorrect coupling
+nor overly restrictive parameterization is diagnosed by these summary ratios
+alone. A diagnostic separating AVB, competing drive and motor groups is proposed,
+not implemented/launched here. Retain H1.2 sensory control gate and biological
+caveats; no new skill or biological correspondence claimed.

@@ -1,11 +1,13 @@
 # r-elegans skill repertoire and action-space plan
 
-2026-11-14 E078 **planned component**: AVB-dependent baseline rhythm, suppression
-under selective inhibition and recovery on release. Eight-hour-total fit of
-unknown motor/control channels and connections from preserved E071. This adds
-no qualified skill until server validation; intact sensory start/stop remains
-unqualified and gates subsequent behavior training.
-[Plan](experiments/records/E078-plan.json).
+2026-11-15 E078 completed (user-reported):23 generations, all validation complete,
+exit0/no timeout,5h52m15s total within the8h maximum. AVB inhibition was confirmed,
+but selected body-motion and motor-voltage RMS ratios remained~1.002/~1.000:
+no learned suppression or restart. Neural/body refinement agreed with this
+negative result. No AVB-component, sensory start/stop or swimming qualification.
+Preserve independent E071 and failed selected modeldd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8.
+Next proposed step: audit cell-resolved motor dynamics and effective AVB influence
+before another long fit. [Outcome](experiments/records/E078-server-summary.json).
 
 2026-11-14 E077 CMA pilot completed (user-reported):184.07min, no errors/timeouts,
 all planned final checks complete. Three generations/36 new candidates in24
