@@ -1,5 +1,11 @@
 # WormGym: training and validation protocols
 
+2026-11-15 E083 planned offline audit before further fitting: candidate periodic
+SMD synaptic inputs, NMJ release gain and residual command paths. Require archived
+source/trace hash checks and muscle/command reconstruction closure; no intrinsic
+gate-current or causal pacemaker inference.20min maximum, no simulation/training.
+[Protocol](experiments/records/E083-plan.json).
+
 2026-11-15 E082 completed (user-reported):27m47s, all planned cases/refinements
 complete, no timeout. Ventral SMD inhibition reversibly reduced body range70.54%
 but left92.93% targeted voltage RMS despite24..26mV hyperpolarization. Shifted,

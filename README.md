@@ -1,5 +1,11 @@
 # r-elegans
 
+E083 SMD signal-chain audit (planned): after pulling on mbslnx2, run
+`sh scripts/launch_smd_drive_audit_mbslnx2.sh`. Read-only saved-data analysis,
+20min maximum; no training/new simulations or large trajectory copies.
+Report: `python -m scripts.report_smd_drive_audit` in the r-elegans env.
+[Protocol](experiments/records/E083-plan.json).
+
 2026-11-15 E082 completed (user-reported):27m47s, all planned cases/refinements
 complete, no timeout. Ventral SMD inhibition reversibly reduced body range70.54%
 but left92.93% targeted voltage RMS despite24..26mV hyperpolarization. Shifted,

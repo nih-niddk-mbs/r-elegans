@@ -8121,3 +8121,59 @@ these saved traces. Use results to select a control route or a small conditional
 oscillation fit, rather than blindly increasing inhibition or linking AVB to SMD.
 No new analysis job/fit launched here. No new behavioral/swimming/biological
 qualification. Documentation/evidence update only.
+
+### E083 planned — saved SMD input/release/residual-command audit (2026-11-15)
+
+User says "go" to inspect incoming currents and NMJ release after E082's partial
+suppression. Prepared a read-only audit; server execution remains planned.
+[Question, measurements, command and checks](experiments/records/E083-plan.json).
+Parent selected E078 checkpoint
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8,
+actual saved E082 run smd-control-20261115T191006Z-193279. No trainable parameters,
+random seeds or new neural/body simulation. Analyze paired sham/inhibited
+nominal ventral, nominal whole-SMD.1nS, long-hold ventral and neural-half ventral
+records; retain original full trajectories/model/actor/capsule/source records.
+
+Important decomposition: incoming current can vary because the presynaptic
+neuron varies OR because postsynaptic SMD voltage changes its driving force.
+Compute actual sampled currents and source-varying current at held postsynaptic
+mean separately. Rank presynaptic chemical+gap harmonic amplitudes at the target
+voltage's dominant sampled frequency, record phase-sensitive sum versus sum of
+magnitudes and named-group summaries. This identifies candidate rhythmic inputs,
+not an upstream causal pacemaker; recurrence and unobserved intrinsic gate currents
+remain. Record individual SMD voltage/release mean/std/p2p, release sensitivity,
+and imposed inhibitory current from known g*(-80-V). Finite-window frequency
+resolution, sampling and single-frequency ranking limit interpretation.
+
+NMJ reconstruction uses E082's own archived runtime topology (source-record SHA
+verified and required consistent across available coordinator/worker snapshots),
+original actor, known/unknown NMJ signs, original normalization and muscle
+nonlinearity. Require muscle activation closure<=1e-8 and command closure<=1e-6
+against saved samples before trusting decomposition. NumPy11-joint projection
+reproduces the original float32 template but can differ slightly from JAX;
+the command tolerance explicitly covers that approximation, not exact error
+certification. Show residual saved command/filtered drive/joint variation and
+offline group-release holds at same-window means through fixed NMJ transfer.
+These counterfactuals omit live neural/body feedback and are nonadditive; do not
+equate them with the earlier causal closed-loop E080/E081 trials or body motion.
+
+Launch on mbslnx2:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_smd_drive_audit_mbslnx2.sh`.
+Dedicated conda interpreter, nohup/20min timeout, NumPy/SciPy and optional
+Matplotlib only (no JAX/GPU). External smd-drive-audit-<UTC>-<PID> small JSON
+reports/evidence hashes/source/env/argv and optional signal_chain.png; adjacent
+log. No original model/input mutation, no deletion or raw trace duplication.
+Original optimizer/RNG and all checkpoints/references remain external unchanged.
+Report: `python -m scripts.report_smd_drive_audit` in the r-elegans env.
+
+Local verification:10 focused tests passed1.59s. Analytic tests distinguish
+varying presynaptic source from varying postsynaptic driving force; static NMJ
+formula agrees with runtime on a bundled canonical checkpoint to1e-12, projection
+command error<1e-6. Offline nonlinear release-hold checks and full synthetic
+archived-source/hash-verified CLI passed; figure mocked in the CLI fixture.
+An initial test exposed actor string metadata in a blanket float conversion;
+conversion now selects the four numeric NMJ fields. A single-joint toy fixture
+was changed to three joints to match regional summary assumptions. These are
+test/loader corrections, not changed model parameters or scientific outcomes.
+Shell syntax/CLI help passed. No actual E082 server data read locally, no neural
+forward scientific run or new qualification claimed.

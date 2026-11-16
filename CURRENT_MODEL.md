@@ -1,5 +1,9 @@
 # Current model: exact scope and computation path
 
+2026-11-15 E083 **planned**: read-only E082 SMD current/release/residual-command
+audit using original archived NMJ asset and saved trace hashes. No neural/body
+simulation or fitting; closure checks precede interpretation. [Plan](experiments/records/E083-plan.json).
+
 2026-11-15 E082 completed (user-reported):27m47s, all planned cases/refinements
 complete, no timeout. Ventral SMD inhibition reversibly reduced body range70.54%
 but left92.93% targeted voltage RMS despite24..26mV hyperpolarization. Shifted,

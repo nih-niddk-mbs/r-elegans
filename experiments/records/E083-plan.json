@@ -1,0 +1,37 @@
+{
+  "experiment": "E083",
+  "status": "planned_server_audit_not_executed",
+  "record_date": "2026-11-15",
+  "question": "What sampled synaptic input and NMJ release modulation accompany persistent ventral SMD voltage variation and residual body commands during E082 inhibition?",
+  "source_run": "/home/carsonc/r-elegans-results/smd-control-20261115T191006Z-193279",
+  "checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "method": "Read-only NumPy/SciPy analysis of saved E082 traces/model/actor and original archived runtime NMJ asset, with no JAX or forward neural/body simulation",
+  "datasets": ["ventral nominal ordinary", "whole-SMD0.1nS nominal ordinary", "ventral long-hold ordinary", "ventral nominal neural-half"],
+  "windows": "Pre20..30s; off35..40s, or85..90s for long hold; recovery50..60s, or130..150s. Saved samples subsampled to about100Hz.",
+  "measurements": [
+    "Individual SMD voltage mean/std/p2p/frequency, release mean/std/p2p/extreme fraction and sigmoid sensitivity",
+    "Actual sampled chemical/gap currents plus source-varying currents holding each postsynaptic voltage at its own condition mean",
+    "Top8 presynaptic harmonic-current contributions at each SMD cell's dominant voltage frequency, separated into chemical/gap amplitudes; sum versus sum-of-magnitudes and group summaries retained",
+    "Imposed inhibitory current mean/std from declared g*(-80-V) for targeted cells",
+    "Recorded muscle activation reconstructed using original NMJ weights/signs/actor parameters; reconstructed command verified against saved command",
+    "Saved command/filtered-drive/joint statistics; offline same-window group release holds through the fixed NMJ transform to describe residual command contributions",
+    "Signal-chain figure showing SMDVL voltage/release, joint command and candidate rhythmic input amplitudes"
+  ],
+  "fixed": "All original weights, channels, topology, NMJ/body/medium parameters, saved time series and physical clocks; no input data modified",
+  "trainable": "None",
+  "seeds": "None; deterministic audit",
+  "checks": {
+    "evidence": "Completed E082 pinned checkpoint; verify capsule manifest and every consumed trace hash; verify original archived runtime JSON against original source records, requiring consistency across available coordinator/worker snapshots; actor identity order matches model",
+    "sampling": "Paired sampled clocks equal, sampled pre-voltage difference<=1e-8; uniform analysis samples required for FFT/harmonics",
+    "NMJ": "Reconstructed muscle activation absolute error<=1e-8 on all consumed windows; command error<=1e-6 against saved commands",
+    "projection": "NumPy reproduces original float32-template11-joint head-at-end projection and promotes it to float64.1e-6 absolute command tolerance explicitly accommodates small NumPy/JAX float32-template differences. No exact projection-byte equivalence claim."
+  },
+  "limits": "No saved gate states: intrinsic channel currents/full membrane balance are unavailable. Sensory currents not included in synaptic sums. Dominant-frequency harmonic estimates have finite-window frequency resolution and can miss other harmonics. Recurrent source correlations are not causal oscillator attribution. Postsynaptic-mean-held source currents are descriptive decompositions, not re-simulated interventions. Offline NMJ release holds use same-window means and omit live neural/body feedback; effects are nonlinear/nonadditive and do not directly predict physical displacement.",
+  "command": "sh scripts/launch_smd_drive_audit_mbslnx2.sh",
+  "maximum_wall_minutes": 20,
+  "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_smd_drive_audit",
+  "output": "/home/carsonc/r-elegans-results/smd-drive-audit-<UTC>-<PID>/{summary,evidence_hashes,<dataset>}.json and optional signal_chain.png; source/env/argv snapshots, adjacent log",
+  "preservation": "Read original archived source/capsule/actor/model/traces in place with evidence hashes. No original files deleted or modified, no full trace copies or newly simulated trajectories; original E078 optimizer/RNG/checkpoints and recursive dependencies remain external.",
+  "qualification": "None: no learned stopping, swimming, biological fidelity or intrinsic oscillator claim",
+  "local_verification": "10 focused SMD-drive/AVB-audit tests passed1.59s. Current sign/source-driving-force separation and analytic harmonic amplitude; static runtime NMJ formula agreement1e-12 with bundled canonical model; projection command agreement<1e-6; nonlinear release-hold sanity; synthetic complete archived-source/hash-verified CLI. Figure mocked in full CLI fixture. Shell syntax and CLI help passed. No actual E082 server data or forward neural simulation accessed locally."
+}
