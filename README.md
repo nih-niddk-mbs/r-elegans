@@ -1,5 +1,25 @@
 # r-elegans
 
+2026-11-15 E085 planned: sensory-controlled partial attenuation curriculum,
+2%, 5%, then 10%, preserving uncued movement and recovery. Fits unknown
+AWA/AIY/AIZ/AIB/RIA channel densities and existing relay connection strengths;
+motor channels, RIAL-to-SMD strengths, sensory gains and water physics stay fixed.
+No diagnostic clamps during fitting. Four CPU workers; float64; maximum eight
+hours TOTAL including preparation, final validation and cleanup. Repeated,
+varied and blocked cues, timestep checks and a separate RIAL mediation diagnostic
+are included. Partial attenuation remains distinct from full start/stop or swimming.
+[Plan and acceptance criteria](experiments/records/E085-plan.json).
+
+Launch on mbslnx2 (detached; safe to log out):
+```sh
+cd /home/carsonc/github/r-elegans &&
+git pull --ff-only &&
+sh scripts/launch_rial_sensory_mbslnx2.sh
+```
+Report: `/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_sensory`.
+All candidate weights and optimizer/RNG records retained externally; full raw
+trajectories saved only for parent/final tests. Server execution pending.
+
 2026-11-15 E084 completed (user-reported):30m42s, all trials and numerical
 checks passed. Holding existing RIAL->SMD chemical release at its baseline mean
 reversibly reduced body range88.04% and ventral SMD RMS98.25%, including repeated,

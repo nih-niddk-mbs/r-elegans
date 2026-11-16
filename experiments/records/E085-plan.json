@@ -1,0 +1,43 @@
+{
+  "experiment": "E085",
+  "status": "planned_server_execution_not_evidenced",
+  "record_date": "2026-11-15",
+  "question": "Can unknown sensory/relay/RIA parameters produce small cue-specific body-amplitude attenuation and recovery through existing circuitry while preserving the unpaced water-model gait?",
+  "authorization": "User requests8h run following E084 causal RIAL-to-SMD result; actual fitting, no imposed control clamps during search",
+  "parent_checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "source_run": "/home/carsonc/r-elegans-results/avb-training-20261115T041708Z-122855",
+  "initialization": "Fresh CMA optimizer relative to exact reconstructed E078 selected full coordinate vector, with original-anchor bounds unchanged. This is not exact E078 optimizer resume. Historical E078 AS-group fitting overreach remains in inherited weights, not repeated in this explicit new schema.",
+  "model": "Live full302-neuron conductance network, anatomical NMJs and physical liquid body/proprioception; original canonical initial state each trial; CPU float64",
+  "trainable": "Nonleak inward/outward densities separately per AWAL/AWAR,AIYL/AIYR,AIZL/AIZR,AIBL/AIBR,RIAL/RIAR; disjoint tied multipliers on existing chemical edges from these cells to the specified relays/RIAR or RIAL. Actual groups and full coordinate mapping/bounds persisted before fitting.",
+  "fixed": "All motor-neuron channels, RIAL-to-SMD connection strengths, all gaps, all other coordinates, leak/capacitance/channel kinetics/reversals/synaptic release fields, sensory signs/gains/routing/kinetics, NMJ weights/signs, muscles, body/water mechanics and physical clocks",
+  "bounds": "Every group log change<=0.4 from selected parent, intersected with original-anchor factor2 bounds; no new connections",
+  "method": "pycma4.4.1 ask/tell population12, initial sigma0.3, four persistent CPU workers x4physical cores. Squared continuous cycle-amplitude ratio error plus continuous baseline/recovery/useful-gait penalties; no quantized cadence objective or direct movement gate.",
+  "seed": 8500,
+  "curriculum": "Minimum partial attenuation rungs2%,5%,10%; fit response ratio toward1-1.3*target for validation margin. Advance only after same-checkpoint low-dose and shifted-cue passes. Fresh distribution sigma0.15 at each rung, seed8500+stage; stopping-condition restarts at selected point sigma0.2, seed9500+restart count, all states persisted.",
+  "stimulus": "Uniform physical chemical bath: baseline[0,0,50000]uM, diacetyl1uM during40..50s; no-cue pair has unchanged bath. Engineering cue association, not an established native diacetyl stopping reflex. Neurons see only causal sensory transduction, not labels or target amplitudes.",
+  "primary_windows": "Nominal70s: baseline30..40, EARLY attenuation41..46, recovery60..70, late46..50 reported. Original2s sensory adaptation remains fixed; persistent attenuation or memory after a pulse is not assumed.",
+  "variants": {
+    "low-dose": "0.8uM, nominal timing; used for rung checks and final retest, not independent held-out data",
+    "shift": "All events/windows shifted5s,75s total; used for rung checks/final retest",
+    "repeat": "Additional cue85..95, response86..91, recovery105..115;115s total",
+    "redundant_close_repeat": "Second cue53..63, response54..59, recovery73..83;83s total. Tests closely repeated actual concentration changes, not invisible semantic command labels.",
+    "long-cue": "Cue40..60, early41..46, late51..56, recovery75..85. Late sustained-attenuation flag is separate and not an early-response pass gate."
+  },
+  "metrics": "Root mean square across11 joints of raw-supported median up/down cycle excursion per joint. This is an amplitude statistic, not instantaneous position RMS, raw drift range or physical forward speed. Region cycle/frequency and RIAL voltage statistics retained.",
+  "criteria": {
+    "gait": "Uncued regional cycles within90..110% parent with.003rad floor; cued pre/recovery within90..110% matched no-cue with.003floor. Cadence1.62..1.98Hz and within5% reference; useful cue-response cycles50..110% matched no-cue and same frequency constraints.",
+    "cue": "Early cued/no-cue amplitude ratio<=1-target in every response window, with all signals finite, abs joints<.5rad, voltages(-100,60)mV and common paired prefix before first cue matching<=1e-8",
+    "final_normal": "Selected exact model on nominal,low-dose,shift,repeat,closely-repeated cue,long-cue,neural-half and body-half. All eight independently pass early amplitude/gait criteria; refined ratio differences<=min(.005,.25target).",
+    "sensory_block": "Final separate paired trial with chemical sensory gain0 only, proprioception unchanged: cue effect abs(ratio-1)<=.25target with baseline/recovery/useful gait preserved",
+    "RIAL_mechanism": "Final diagnostic ONLY: matched no-cue RIAL release interpolated at body-interval midpoint and replayed on EXISTING RIAL-to-SMD chemical edges from first cue onset; normal NMJs, gaps and other RIAL outputs stay live. Counterfactual no-cue and cue pair must preserve baseline/recovery/safety/useful movement; learned attenuation falls>=75%. No replay or neural/edge/NMJ clamp in search or normal tests.",
+    "claim_separation": "Partial sensory component requires normal/blocked/numerical checks. RIAL-mediated partial component additionally requires replay mediation. Preserve a good behavioral component even if mechanistic attribution fails. Report long-cue late attenuation separately. Full H1.2 sensory initiation/rest/strict stopping/restart, swimming and biological fidelity remain unqualified."
+  },
+  "selection": "Preserve every candidate/selected/rung/final neuronal model and full coordinate vector. Prefer highest rung that passed low-dose/shift checks for final validation; retain newer unvalidated search weights separately. Final model can differ from last optimizer distribution. Parameter continuation from selected weights is not exact optimizer resume; no resume CLI provided.",
+  "command": "sh scripts/launch_rial_sensory_mbslnx2.sh",
+  "maximum_total_minutes": 480,
+  "budget": "At least2h reserved for final validation, search lookahead stops generations that will not fit.10 final paired evaluations including one4-condition replay diagnostic. Outer private-group watchdog includes preparation, search, checks, validation, reports and cleanup. May finish early if curriculum completes.",
+  "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_sensory",
+  "artifacts": "/home/carsonc/r-elegans-results/rial-sensory-<UTC>-<PID>, adjacent log; copied verified parent model/coordinates/input capsule/reference path+SHA, parameter schema/origin/bounds, every candidate network/coordinates/request/metrics, generation history, parent/final full trajectories, immutable selected references, exact source/env/argv and initial/asked/told/stage/restart/final CMA plus NumPy/Python RNG and pending population",
+  "storage": "Intermediate training/rung full traces not written, metrics/models retained.50GiB free reserve; stop search at15GiB run bytes, estimated final writes checked against30GiB run cap with concurrent-writer granularity, not OS quota. No existing files deleted; all original model/optimizer/data dependencies external and preserved.",
+  "local_verification": "22 focused software tests passed in18.38s: tests/test_rial_sensory.py tests/test_cma_curriculum.py tests/test_rial_control.py. Launcher shell syntax and runner/reporter CLI checks passed. Synthetic/mock coordinator and numerical software tests only; no actual E085 scientific forward fit or actual server parent inspection locally."
+}

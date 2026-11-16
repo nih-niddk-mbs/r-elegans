@@ -8372,3 +8372,89 @@ strict rest/stopping and restart, which remain unqualified. Address residual
 motion before claiming the full worm stops. Preserve E071 and all independent/
 failed models. No new fit launched here; no learned-stop/swimming/biological
 qualification added. Documentation/evidence update only.
+
+### E085 planned — eight-hour sensory attenuation/recovery curriculum (2026-11-15)
+
+User requests8h run after the E084 causal result. Implemented actual parameter
+fitting with chemical sensory cues, no diagnostic clamps during search. Full
+question/method/parent/unknowns/fixed values/command/seeds/checks:
+[E085 plan](experiments/records/E085-plan.json). Server execution is planned.
+Initialize exact selected E078
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8
+from its original full coordinate vector, not a random fallback or E071 surrogate.
+The original full-vector decoder/anchor bounds are retained; fresh CMA at zero
+new group offsets is not an exact prior optimizer resume. E078's historical AS
+overreach remains part of inherited weights, disclosed earlier, not silently
+erased; the new schema explicitly lists only AWA/AIY/AIZ/AIB/RIA cells.
+
+All302 neurons and physical water body evolve. Fit unknown nonleak densities per
+listed control cell and existing chemical connections among sensory/relays/RIA.
+Motor channels, RIAL->SMD weights, all gaps, NMJs, sensory gains/kinetics/signs,
+leak/capacitance/kinetics/reversals and body/water clocks remain fixed. Group
+delta<=.4log, intersect original-anchor factor2 bounds. Local topology inspection
+confirms existing AWAL->AIZL->RIAL and AWAL->AIYL->RIAL chemical routes (contact
+counts23/29 and3/51 respectively); counts identify anatomy, not fitted strengths
+or a measured physiological stopping pathway. No new edges or output gates.
+
+Baby steps2%,5%,10% amplitude attenuation, fitting toward1.3times each target to
+allow dose/timing validation margin. Uniform bath diacetyl1uM40..50s versus
+matched no-cue bath; baseline NaCl50000uM unchanged. Engineering association,
+not a native avoidance claim. Score EARLY41..46s response, preserve30..40s gait
+and60..70s recovery; sensor adaptation2s stays fixed. Do not demand a bistable
+memory after a brief pulse. Long-cue late response is measured separately; passing
+the early-response component does not establish sustained suppression/rest.
+
+Amplitude is RMS across raw-supported per-joint median cycle excursions, not
+posture drift or a prescribed waveform. Baseline/recovery regions stay within
+90..110% reference with.003rad floor; cue-response retains50..110% matched cycles;
+cadence1.62..1.98Hz and within5% reference. Continuous normalized squared response
+ratio error avoids E077's cadence-bin plateau; phase-only changes, uniformly
+weakened gait and no-recovery solutions are rejected by software tests/criteria.
+Fresh pycma4.4.1, seed8500, population12, sigma.3, four persistent4core workers.
+Stage changes use fresh sigma.15 distributions at selected weights, seeds8500+
+stage; stopping-condition restarts use seed9500+restart, sigma.2. Exact RNG and
+asked/told/stage/restart/final states retained. No exact-resume launcher supplied.
+
+Advance only after same-model low-dose(.8uM) and shifted(+5s) validation; these
+are model-selection variants, not independent held-out biological data. Preserve
+each passing rung and choose highest passing rung for final tests even if later
+unvalidated search weights differ. All later candidate models/coordinates remain
+available; final optimizer state can correspond to a later stage than final
+selected checkpoint. Do not call a fresh selected-weight continuation exact resume.
+
+10 final paired evaluations, full traces retained: nominal,low-dose,shift,repeated
+cue,close-repeat/redundant cue,long cue,neural-half,body-half,chemical-sensory-blocked
+and RIAL-chemical-replay diagnostic. Counterfactual replay uses that SAME fitted
+model's no-cue RIAL release to existing SMD chemical edges at body-step midpoint
+from cue onset, with separate no-cue replay control; require baseline preservation
+and>=75% attenuation loss for a RIAL-mediation flag. Replay is FINAL DIAGNOSTIC
+ONLY, never supplied to fitting/normal tests or a deployable policy. Other neural
+and gap outputs/NMJs remain live. Partial sensory behavior, RIAL mediation and
+late sustained attenuation flags remain separate: preserve a valid independent
+component even if RIAL attribution fails. Full H1.2 initiation, rest/strict stop,
+restart and subsequent swimming/RL behavior gates remain unqualified; this is the
+first partial control curriculum, not promotion past the full-control gate.
+
+Command:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_rial_sensory_mbslnx2.sh`.
+480min hard TOTAL including prep/search/rung/final checks/report/cleanup; at least
+2h reserved for final tests. May finish earlier if all rungs complete. Dedicated
+conda interpreter, CPU float64/nohup,4workers x4physical cores. Output external
+rial-sensory-<UTC>-<PID> plus.log. Preserve copied parent/capsule/full coordinates,
+original reference SHA, every model/request/metrics, selection/generation history,
+all optimizer/RNG/pending populations, source/env/argv, parent and final full
+traces. Intermediate full traces deliberately not written.50GiB free reserve,
+stop search at15GiB run bytes, estimated final writes under30GiB cap (bounded
+concurrency, not OS quota); no existing data/checkpoints deleted. Report via
+`python -m scripts.report_rial_sensory`. No actual server checkpoint/trajectory
+read locally and no E085 scientific forward fit or behavior success claimed.
+
+Local verification for E085:22 focused software tests passed in18.38s via
+`.venv/bin/python -m pytest -q tests/test_rial_sensory.py tests/test_cma_curriculum.py tests/test_rial_control.py`.
+Tests include synthetic amplitude/phase/recovery controls, parameter freezing,
+parent-coordinate reconstruction, actual optimizer with mocked forward evaluations,
+three-rung selection, final same-checkpoint validation, independent behavior versus
+mechanism qualification, replay isolation and total-budget dispatch. Launcher shell
+syntax and runner/reporter CLI checks passed. These are software checks only;
+actual server parent was not inspected locally, no scientific forward fit or
+server execution is evidenced. No model capability is newly qualified.
