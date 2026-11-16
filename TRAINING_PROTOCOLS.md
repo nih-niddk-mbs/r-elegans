@@ -1,5 +1,11 @@
 # WormGym: training and validation protocols
 
+2026-11-16 E086 input-current audit: cue-induced mean synaptic input to
+RIAL is+0.0001933pA at common postsynaptic voltage; opposing source means partly
+cancel. This is a small depolarizing change, not a membrane-current balance or
+proof of a causal bottleneck. Next identify existing model-specific inhibitory
+inputs/headroom before choosing another fit. [Current audit](experiments/records/E086-current-audit-server-summary.json).
+
 2026-11-16 E086 completed (user-reported):4 generations,1h41m47s including
 successful automatic audit; all final gait/numerical gates passed, integrity and
 frozen-field checks passed. RIAL cycle attenuation only0.0063% versus1% target;

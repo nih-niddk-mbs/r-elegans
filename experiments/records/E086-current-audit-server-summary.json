@@ -1,0 +1,112 @@
+{
+  "experiment": "E086",
+  "record_type": "RIAL_source_current_audit_reported",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted nominal saved-trace current audit; only top12sources printed, full source list external. Runtime asserts reported via successful stdout, raw files not independently retrieved.",
+  "source_attachment_sha256": "fdfa409daabcd282679621e0c57343ac0d777961f180fa9313a4714d67ccab13",
+  "artifact": "/home/carsonc/r-elegans-results/rial-input-audit-20261116T191946Z.json",
+  "reported": {
+    "window_s": [
+      41,
+      46
+    ],
+    "held_RIAL_mV": -56.64846660797478,
+    "net_mean_input_change_pA": 0.00019329904835988955,
+    "sum_absolute_source_mean_changes_pA": 0.0003927515653935548,
+    "net_input_change_rms_pA": 0.0014818262380324552,
+    "sources": [
+      {
+        "source": "RMDR",
+        "chemical_mean_change_pA": -1.8636941506934873e-06,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": -1.8636941506934873e-06,
+        "change_rms_pA": 0.001469933672985935
+      },
+      {
+        "source": "AIZL",
+        "chemical_mean_change_pA": 0.00014453008719701255,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": 0.00014453008719701255,
+        "change_rms_pA": 0.00017744012902761653
+      },
+      {
+        "source": "RIAR",
+        "chemical_mean_change_pA": 0.00013940439452205612,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": 0.00013940439452205612,
+        "change_rms_pA": 0.00017540688427644067
+      },
+      {
+        "source": "RIML",
+        "chemical_mean_change_pA": -5.714884720932458e-05,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": -5.714884720932458e-05,
+        "change_rms_pA": 7.127010664511569e-05
+      },
+      {
+        "source": "SMDVR",
+        "chemical_mean_change_pA": -1.8174450461426335e-05,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": -1.8174450461426335e-05,
+        "change_rms_pA": 5.631339723811388e-05
+      },
+      {
+        "source": "SMDVL",
+        "chemical_mean_change_pA": 3.261144684965976e-05,
+        "gap_mean_change_pA": -3.935930563096157e-05,
+        "net_mean_change_pA": -6.7478587813018034e-06,
+        "change_rms_pA": 1.3823331836713255e-05
+      },
+      {
+        "source": "RIVL",
+        "chemical_mean_change_pA": -8.548189445332597e-06,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": -8.548189445332597e-06,
+        "change_rms_pA": 1.0713605034035062e-05
+      },
+      {
+        "source": "RMDL",
+        "chemical_mean_change_pA": -1.2725867069655478e-06,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": -1.2725867069655478e-06,
+        "change_rms_pA": 9.335462491980188e-06
+      },
+      {
+        "source": "AIBR",
+        "chemical_mean_change_pA": -4.295763077466571e-06,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": -4.295763077466571e-06,
+        "change_rms_pA": 5.31306185399281e-06
+      },
+      {
+        "source": "SMDDL",
+        "chemical_mean_change_pA": 3.855249984583033e-06,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": 3.855249984583033e-06,
+        "change_rms_pA": 4.853035998385228e-06
+      },
+      {
+        "source": "AVAL",
+        "chemical_mean_change_pA": 1.0178482466278163e-06,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": 1.0178482466278163e-06,
+        "change_rms_pA": 2.928362976778493e-06
+      },
+      {
+        "source": "AIYL",
+        "chemical_mean_change_pA": 2.0325472504280258e-06,
+        "gap_mean_change_pA": 0.0,
+        "net_mean_change_pA": 2.0325472504280258e-06,
+        "change_rms_pA": 2.5600892881366056e-06
+      }
+    ],
+    "input_sha256": {
+      "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/evaluations/final-nominal/network.npz": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022",
+      "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/evaluations/final-nominal/no_cue.npz": "8aaff38e3987bb209d7293ea9b135f9913b8e8be149baea77e91b12ffd6532fb",
+      "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/evaluations/final-nominal/cue.npz": "b08729eddd1b953b380072e73af8be8ca9be865c0ffc64a8b06a3ebaa5c0bc1e"
+    },
+    "scope": "Common-postsynaptic-voltage synaptic reconstruction; not total membrane current or causal proof"
+  },
+  "interpretation": "Common-held-postsynaptic RIAL mean-56.64847mV. Net source-current mean change+0.000193299pA (depolarizing under current sign convention), sum absolute net-source mean changes0.000392752pA. Signed net retains49.2166% of that sum; partial cancellation, not complete erasure. AIZL and RIAR contribute positive mean changes; RIML and others oppose. RMDR largest RMS change is not evidence it dominates baseline drive or causally generates oscillation; phase/recurrent effects remain possible. Source-current change is not total ionic/membrane balance, and positive mean does not mathematically rule out oscillation suppression through other mechanisms.",
+  "decision": "Do not infer that all relays or nervous system topology are insufficient. Identify model-specific existing inhibitory chemical inputs and theoretical modulation headroom before selecting a shorter sensory control route; determine reversal signs from actual saved checkpoint, not negative current change alone. No fitting or new forward run launched."
+}

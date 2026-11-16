@@ -8760,3 +8760,39 @@ reconstruction, not total membrane-current balance or a causal intervention.
 No intrinsic gating states reconstructed; no new training/forward simulation.
 Command supplied in conversation; output small timestamped external JSON with
 input hashes. Results pending. Preserve all source/optimizer/model dependencies.
+
+## 2026-11-16 — E086 current-path audit: weak mean cue drive with partial cancellation
+
+User stdout attachment SHA256 fdfa409daabcd282679621e0c57343ac0d777961f180fa9313a4714d67ccab13.
+External artifact `/home/carsonc/r-elegans-results/rial-input-audit-20261116T191946Z.json`;
+small transcription `experiments/records/E086-current-audit-server-summary.json`.
+Only12largest RMS sources printed, full list saved externally. Successful audit
+asserts matched clocks/finite arrays and exact model/no-cue/cue SHA; input hashes
+transcribed in JSON. No independent remote bytes retrieved. No forward simulation.
+
+Common RIAL postmean-56.648466608mV,41..46s. Presynaptic-source mean current
+change+.00019329904836pA, sum absolute net-source mean changes.00039275156539pA;
+net49.22% of sum, thus partial cancellation (~50.78%) rather than total erasure.
+Net change RMS.001481826238pA, RMDR change RMS.001469933673pA. RMDR is largest
+CHANGE, not a demonstrated largest baseline driver or causal rhythm source.
+AIZL mean+.000144530087pA, RIAR+.000139404395pA, RIML-.000057148847pA,
+SMDVR-.000018174450pA; SMDVL chemical+.000032611447pA and gap-.000039359306pA
+partly cancel within source. Compare same held postsynaptic voltage to avoid
+mistaking altered RIAL driving force for a presynaptic change.
+
+Under runtime sign convention positive is depolarizing. Input arrives but net
+mean is small and positive, not the hyperpolarizing direction used in earlier
+successful imposed RIAL inhibition. This does not prove depolarization cannot
+suppress oscillation or that a particular current is causal. No intrinsic gate
+currents, current-clamp sensitivity or whole-membrane current budget recovered.
+Negative cue-induced change alone cannot identify an inhibitory synapse: it can
+also reflect reduced excitation. Need actual E_pre relative to held RIAL V.
+
+Next planned read-only checkpoint/trace check: rank existing inhibitory chemical
+inputs by g*(heldV-E_pre) and remaining release-to1 headroom at baseline. List
+RIML specifically if present. These release0..1 headroom bounds assume idealized
+presynaptic control and are NOT attainable physiological changes, learned weights
+or permission to broaden connection bounds. Use actual fixed reversal signs,
+no new edges. This informs a focused sensory-inhibitory-relay-RIAL route before
+another long fit. Same selectedmodel/data; no optimizer, seeds or new simulation.
+No new qualification. Independent parent/failed models and references retained.
