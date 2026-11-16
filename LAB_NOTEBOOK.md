@@ -8612,3 +8612,72 @@ changes must be prospective, with original results retained. Do not widen1.98Hz
 ceiling just to qualify selected weights. Primary fitting bottleneck remains weak
 sensory modulation of rhythmic RIAL output, supported descriptively by earlier
 release statistics, not a new causal result. No new simulation/training launched.
+
+## 2026-11-16 — E086 planned:3h total sensory control of RIAL release-cycle amplitude
+
+User authorizes3h run after E085 audit. Full plan/criteria:
+`experiments/records/E086-plan.json`. Planned until server execution evidenced.
+Question: can1%,2%,5% cue-dependent RIAL release-cycle attenuation be learned
+before body slowing, while preserving ordinary unpaced movement and recovery?
+Parent E085 selected `f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f`,
+source `/home/carsonc/r-elegans-results/rial-sensory-20261116T041450Z-211013`.
+This failed behavior candidate is a component-fitting parent, not a qualified
+start/stop parent. Independent parents retained. Fresh CMA, not exact resume.
+Reconstruct full original-anchor coordinates and verify exact model/no-cue
+reference SHA. Local group trust region recentered at this selected point;
++-0.4log intersects original unchanged factor2 bounds. Do not call this an
+identical-bounds or optimizer continuation of E085.
+
+Same explicit AWA/AIY/AIZ/AIB/RIA nonleak densities and existing relay chemical
+weights train; all motor channels, RIAL-to-SMD edges, gaps, leak/capacitance,
+kinetics/reversals/release law, sensory signs/gains/kinetics/routing, NMJs/muscles,
+physical clocks/water/body fixed. No new edges, imposed clocks, neural clamps,
+output gates or synthetic motor drive in fitting. Actual stimuli remain chemical
+bath concentrations through causal transduction. Novel engineered association,
+not an established native stopping reflex. CPU float64;4workers x4physical cores.
+pycma4.4.1 population12 seed8600 sigma.3; stagefresh seed8600+stage sigma.15;
+stopping restarts seed9600+restart sigma.2. Save exact distribution/RNG/pending
+population at every step; final chosen rung may differ from final optimizer state.
+
+Fit RIAL release median raw up/down cycle excursion, not finite-window std (which
+can change with phase). Mean/std retained as descriptive fields. Early response
+windows/protocols unchanged; continuous squared ratio loss replaces body-response
+ratio loss. Baseline neural cycles stay90..110% parent active0, absolute.01floor;
+cue baseline/recovery90..110% matched no-cue. Body amplitude gates and original
+1.62..1.98Hz ceiling/5% relative tolerance stay fixed. Prospectively use parabolic
+subsample peak timing; preserve old E085 discrete results. Thus the neural-half
+boundary shift found in E085 can still fail E086 if not corrected by the fit.
+No claim of all-grid parent qualification before run. Train1.3times target for
+margin, stage-check low dose/shift, retain every model and each passing rung.
+Final eight normal paired tests plus chemical-block and RIAL-branch replay,
+including repeated/close-repeat/long/shift cues and neural/body refinement.
+Replay remains final diagnostic only, compares BODY attenuation for mechanism;
+neural modulation component does not establish downstream body slowing.
+
+180min HARD TOTAL including prep/search/final validation/audit/cleanup. Reserve
+20min for automatic saved-data audit, and coordinator reserves at least60min or
+40% of its remaining time for final validation. Generation lookahead. Audit
+runs even after solver failure where possible; missing/incomplete audit or failed
+integrity disallows post-audit component qualification. Original source/data and
+all weights/optimizer/RNG retained outsideGit; no existing files removed. Raw
+intermediate trajectories never written, full parent/final raw traces retained.
+50GiB free reserve, search stops at15GiB and estimated final write cap30GiB with
+concurrent-writer granularity. Audit produces small additional records.
+Command: `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_rial_release_mbslnx2.sh`.
+Report: dedicated conda Python `-m scripts.report_rial_sensory --release`.
+Output external `rial-release-<UTC>-<PID>` plus.log and sibling-audit.
+No actual server parent or forward scientific fit run locally; no capability
+qualified. Full H1.2 start/rest/stop/restart and downstream swimming/RL remain gated.
+
+E086 local software verification:32 focused tests passed in14.81s via
+`.venv/bin/python -m pytest -q tests/test_rial_release.py tests/test_rial_sensory.py tests/test_rial_sensory_audit.py tests/test_cma_curriculum.py tests/test_rial_control.py`.
+Coverage includes real CMA/mock-forward E085/E086 curricula and correct warm-parent
+selection, normal worker objective dispatch without diagnostic inputs, release
+cycle versus phase discrimination, neural/body baseline and recovery checks,
+subsample frequency across both sides of1.98Hz, actual frozen checkpoint field
+comparison, and automatic audit success versus timeout receipts. Audit now also
+checks saved latent decoding and detailed neural gate failures; fixed-field checks
+apply to selected physical checkpoint, not just a coordinate file. Launcher shell
+syntax, CLI help and diff checks passed. These tests establish software behavior,
+not actual full-model fitting or new biological/motor capability. Server launch
+and exact runtime source/environment remain pending.

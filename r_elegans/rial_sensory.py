@@ -53,22 +53,22 @@ def parameter_groups(spec,ids,origin,lower,upper):
     return groups
 
 
-def window_features(trace,ids,a,b):
+def window_features(trace,ids,a,b,frequency_estimator=peak_frequency):
     t=trace['dense_time_s'];use=(t>=a)&(t<b);q=trace['dense_joints'][use]
     if use.sum()<40:raise ValueError('Missing amplitude window')
     cy=cycle_excursions(q,late_only=False);joint=np.asarray(cy['joint_cycle_excursion_rad']);freq=[]
     for region in np.array_split(np.arange(11),3):
-        j=int(region[np.argmax(joint[region])]);freq.append(peak_frequency(t[use],q[:,j],max(1e-6,.1*joint[j])))
+        j=int(region[np.argmax(joint[region])]);freq.append(frequency_estimator(t[use],q[:,j],max(1e-6,.1*joint[j])))
     v=trace['dense_voltage_mV'][use];ri=ids.index('RIAL')
     return dict(window=[a,b],amplitude=float(np.sqrt(np.mean(joint**2))),regional_cycles_rad=cy['regional_cycle_excursion_rad'],
         frequency_hz=freq,RIAL_mean_mV=float(v[:,ri].mean()),RIAL_std_mV=float(v[:,ri].std()))
 
 
-def features(trace,ids,variant):
+def features(trace,ids,variant,frequency_estimator=peak_frequency):
     p=protocol(variant)
     if not all(np.isfinite(x).all() for x in trace.values()):raise ValueError('Nonfinite rollout')
     q=trace['dense_joints'];v=trace['dense_voltage_mV']
-    return {**{key:[window_features(trace,ids,a,b) for a,b in p[key]] for key in ('active','response','late')},
+    return {**{key:[window_features(trace,ids,a,b,frequency_estimator) for a,b in p[key]] for key in ('active','response','late')},
         'safe':bool(abs(q).max()<.5 and v.min()>-100 and v.max()<60)}
 
 

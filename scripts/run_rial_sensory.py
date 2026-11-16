@@ -1,14 +1,15 @@
-"""E085 eight-hour-total sensory attenuation curriculum through existing RIAL circuitry."""
+"""E085 body or E086 RIAL-release sensory attenuation with a total wall budget."""
 import argparse,concurrent.futures,json,math,multiprocessing,os,random,shutil,subprocess,sys,time
 from pathlib import Path
 import numpy as np
 from scripts.experiment_records import capture_run_record,file_sha256
 from scripts.run_cma_sensorimotor import optimizer_snapshot
 from scripts.rial_sensory_worker import initialize,evaluate,setup
-from r_elegans.rial_sensory import parameter_groups,RUNGS,score
+from r_elegans.rial_sensory import parameter_groups,RUNGS as BODY_RUNGS,score as body_score
 
 SEED=8500
 PARENT='dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8'
+RELEASE_PARENT='f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f'
 
 
 def write(path,value):
@@ -19,7 +20,15 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--source-run',type=Path,required=True)
-    a=p.parse_args();out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
+    p.add_argument('--objective',choices=('body','rial-release'),default='body')
+    a=p.parse_args();release_objective=a.objective=='rial-release'
+    from r_elegans.rial_release import RUNGS as RELEASE_RUNGS,score as release_score
+    RUNGS=RELEASE_RUNGS if release_objective else BODY_RUNGS
+    score=release_score if release_objective else body_score
+    experiment='E086' if release_objective else 'E085'
+    run_seed=8600 if release_objective else SEED
+    expected_parent=RELEASE_PARENT if release_objective else PARENT
+    out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
     for root in (repo,source):
         if out==root or root in out.parents or out in root.parents:
             raise ValueError('Separate external output required')
@@ -33,21 +42,22 @@ def main():
     capture_run_record(out,repo,a)
     from scripts.compare_rhythm_worker import verify_inputs
     source_summary=json.loads((source/'summary.json').read_text())
-    ordinary=next(r for r in source_summary['validation'] if r['variant']=='ordinary' and r['grid']=='ordinary')
+    ordinary=next(r for r in source_summary['validation'] if r['variant']==('nominal' if release_objective else 'ordinary') and r['grid']=='ordinary' and (not release_objective or r.get('mode')=='normal'))
     folder=Path(ordinary['output']).resolve()
-    if source not in folder.parents or ordinary['checkpoint_sha256']!=PARENT or file_sha256(folder/'network.npz')!=PARENT:
-        raise ValueError('Pinned E078 selected model required')
+    if source not in folder.parents or ordinary['checkpoint_sha256']!=expected_parent or file_sha256(folder/'network.npz')!=expected_parent:
+        raise ValueError('Pinned parent model required for '+experiment)
     verify_inputs(source/'inputs');inputs=out/'inputs';shutil.copytree(source/'inputs',inputs)
     manifest=json.loads((inputs/'manifest.json').read_text())
     for name,path in [('sensory_parent.npz',folder/'network.npz'),('sensory_parent_coordinates.npz',folder/'coordinates.npz'),('sensory_parent_summary.json',source/'summary.json')]:
         sha=file_sha256(path);shutil.copy2(path,inputs/name)
         if file_sha256(inputs/name)!=sha or file_sha256(path)!=sha:raise ValueError('Parent changed during copy')
         manifest['sha256'][name]=sha;manifest['sources'][name]=str(path)
-    reference=folder/'sham.npz'
-    if file_sha256(reference)!=ordinary['trajectory_sha256']['sham']:raise ValueError('Reference hash mismatch')
-    write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=ordinary['trajectory_sha256']['sham']))
+    reference_name='no_cue' if release_objective else 'sham'
+    reference=folder/(reference_name+'.npz')
+    if file_sha256(reference)!=ordinary['trajectory_sha256'][reference_name]:raise ValueError('Reference hash mismatch')
+    write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=ordinary['trajectory_sha256'][reference_name]))
     manifest['sha256']['sensory_reference.json']=file_sha256(inputs/'sensory_reference.json');manifest['sources']['sensory_reference.json']=str(reference)
-    manifest['consumer_experiment']='E085';write(inputs/'manifest.json',manifest);verify_inputs(inputs)
+    manifest['consumer_experiment']=experiment;write(inputs/'manifest.json',manifest);verify_inputs(inputs)
     d=setup(inputs);schema=parameter_groups(d['spec'],d['model'].neuron_ids,d['origin'],d['lower'],d['upper'])
     write(out/'parameter_groups.json',schema)
     np.savez_compressed(out/'parameter_origin.npz',origin=d['origin'],lower=d['lower'],upper=d['upper'])
@@ -57,24 +67,25 @@ def main():
     if not known:raise ValueError('Known physical CPU topology required')
     groups=worker_cpu_groups(cpus,4,4)
     os.environ.update(JAX_PLATFORMS='cpu',OMP_NUM_THREADS='4',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1')
-    reserve=max(2*3600,.25*(finish-time.monotonic()));fit_until=finish-reserve
+    reserve=max(60*60,.4*(finish-time.monotonic())) if release_objective else max(2*3600,.25*(finish-time.monotonic()));fit_until=finish-reserve
     if fit_until-time.monotonic()<20*60:raise ValueError('Insufficient search and final-validation budget')
-    write(out/'configuration.json',dict(experiment='E085',parent_sha256=PARENT,seed=SEED,
+    write(out/'configuration.json',dict(experiment=experiment,parent_sha256=expected_parent,seed=run_seed,
         optimizer='cma==4.4.1',population=12,dimension=len(schema),cpu_groups=groups,total_minutes=budget['total_minutes'],
         validation_reserve_minutes=reserve/60,rungs=RUNGS,training_margin=1.3,
-        objective='Early cue-specific2/5/10% cycle-amplitude attenuation with uncued gait and recovery preserved',
+        objective=('Early cue-specific1/2/5% RIAL release-cycle attenuation; body gait preserved' if release_objective else 'Early cue-specific2/5/10% cycle-amplitude attenuation with uncued gait and recovery preserved'),
+        frequency_estimator=('parabolic_subsample_median_period' if release_objective else 'discrete_peak_median_period'),
         trainable='Explicit AWA/AIY/AIZ/AIB/RIA nonleak densities and existing control-to-control chemical connections',
         fixed='Motor channels, RIAL-to-SMD strengths, gaps, leak/capacitance/kinetics/reversals, NMJs/sensory gains/physics',
         diagnostic_clamps_in_training=False,full_start_stop_qualified=False,maximum_new_run_GiB=30,minimum_free_GiB=50,
         retention='All model/coordinate/optimizer/RNG/request/metrics; raw trajectories only parent and final tests'))
-    random.seed(SEED);np.random.seed(SEED)
-    es=cma.CMAEvolutionStrategy(np.zeros(len(schema)),.3,{'seed':SEED,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
+    random.seed(run_seed);np.random.seed(run_seed)
+    es=cma.CMAEvolutionStrategy(np.zeros(len(schema)),.3,{'seed':run_seed,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
     optimizer_snapshot(out/'optimizer/initial',es,0,0)
     selected=None;zbest=np.zeros(len(schema));parent=None;generation=0;history=[];validation=[];failure=None;stage=0;evaluations=[]
     stop_reason='time_budget';recent=[];pending_points=None;baseline=None;qualified=None;milestones=[];restart=0
     def job(z,name,until,variant='nominal',grid='ordinary',retain=False,reference=False,mode='normal',target=None,margin=1.):
         return dict(z=list(map(float,z)),output=str(out/'evaluations'/name),until=until,parent_features=parent,
-            variant=variant,grid=grid,retain_traces=retain,reference=reference,mode=mode,
+            variant=variant,grid=grid,retain_traces=retain,reference=reference,mode=mode,objective=a.objective,
             target=RUNGS[min(stage,len(RUNGS)-1)] if target is None else target,margin=margin)
     def valid(r):
         m=r.get('metrics',{})
@@ -133,11 +144,11 @@ def main():
                         qualified=(selected,zbest.copy(),RUNGS[stage]);preserve(selected,f'rung-{stage}')
                         stage+=1
                         if stage==len(RUNGS):stop_reason='curriculum_complete';break
-                        es=cma.CMAEvolutionStrategy(zbest,.15,{'seed':SEED+stage,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
+                        es=cma.CMAEvolutionStrategy(zbest,.15,{'seed':run_seed+stage,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
                         best=score(selected['paired_features'],parent,RUNGS[stage],1.3)['loss']
                         optimizer_snapshot(out/'optimizer'/f'stage-{stage}-fresh',es,stage,generation)
                 if es.stop():
-                    restart+=1;es=cma.CMAEvolutionStrategy(zbest,.2,{'seed':SEED+1000+restart,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
+                    restart+=1;es=cma.CMAEvolutionStrategy(zbest,.2,{'seed':run_seed+1000+restart,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
                     optimizer_snapshot(out/'optimizer'/f'g-{generation:05d}-restart-{restart}',es,stage,generation)
             final_selected,final_z,final_target=qualified if qualified is not None else (selected,zbest.copy(),RUNGS[0])
             tests=[('nominal','nominal','ordinary','normal'),('low-dose','low-dose','ordinary','normal'),('shift','shift','ordinary','normal'),
@@ -163,15 +174,18 @@ def main():
         partial=bool(same and all(valid(r) and r['metrics']['partial_attenuation_passed'] for r in validation[:8])
                      and all(r['passed'] for r in convergence) and blocked)
         sustained=bool(all(r<=1-final_target for r in validation[5]['metrics']['late_amplitude_ratios']))
-    write(out/'summary.json',dict(experiment='E085',execution_valid=failure is None and stop_reason not in ('evaluation_failure','all_candidates_failed'),
+    write(out/'summary.json',dict(experiment=experiment,objective=a.objective,execution_valid=failure is None and stop_reason not in ('evaluation_failure','all_candidates_failed'),
         all_stages_finished=complete,validation_complete=complete,completed_generations=generation,active_stage=stage,
         evaluation_status_counts={status:sum(r['status']==status for r in evaluations) for status in ('completed','failed','worker_error','time_budget','disk_budget')},
         stop_reason=stop_reason,failure=failure,baseline=baseline,selected=final_selected if complete else selected,
         final_target=final_target if complete else None,milestones=milestones,validation=validation,numerical_checks=convergence,
-        partial_sensory_component_qualified=partial,sensory_block_control=blocked,RIAL_chemical_replay_mediation=mediated,
-        RIAL_mediated_partial_component_qualified=partial and mediated,
-        long_cue_sustained_attenuation=sustained,full_start_stop_qualified=False,swimming_qualified=False,
-        scope='Early sensory-triggered partial amplitude attenuation and recovery; no rest/initiation, full start/stop or navigation qualification'))
+        partial_sensory_component_qualified=partial and not release_objective,
+        sensory_RIAL_release_component_qualified=partial and release_objective,sensory_block_control=blocked,RIAL_chemical_replay_mediation=mediated,
+        RIAL_mediated_partial_component_qualified=partial and mediated and not release_objective,
+        long_cue_sustained_attenuation=sustained and not release_objective,
+        long_cue_RIAL_release_attenuation=sustained and release_objective,
+        full_start_stop_qualified=False,swimming_qualified=False,
+        scope=('Sensory-triggered partial RIAL release-cycle attenuation; no body slowing qualification' if release_objective else 'Early sensory-triggered partial amplitude attenuation and recovery; no rest/initiation, full start/stop or navigation qualification')))
     print('RIAL_SENSORY_REPORT:',out/'summary.json',flush=True)
 
 

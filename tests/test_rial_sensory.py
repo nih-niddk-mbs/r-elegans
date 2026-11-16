@@ -75,7 +75,8 @@ def test_no_cue_replay_is_final_diagnostic_on_existing_branch_only():
     np.testing.assert_allclose(after.release_probability,np.interp(45.001,t,release),rtol=1e-5)
 
 
-def test_worker_training_uses_only_bath_and_preserves_models_without_raw_traces(tmp_path,monkeypatch):
+@pytest.mark.parametrize('objective',['body','rial-release'])
+def test_worker_training_uses_only_bath_and_preserves_models_without_raw_traces(tmp_path,monkeypatch,objective):
     import scripts.rial_sensory_worker as worker
     import scripts.compare_rhythm_worker as verifier
     import r_elegans.brain.conductance_network as network
@@ -86,12 +87,14 @@ def test_worker_training_uses_only_bath_and_preserves_models_without_raw_traces(
         return lambda *args:traces['cue' if cue else 'no_cue']
     monkeypatch.setattr(worker,'_CACHE',{})
     monkeypatch.setattr(worker,'_DATA',dict(origin=np.zeros(1),lower=-np.ones(1),upper=np.ones(1),groups=[dict(indices=[0],lower=-.4,upper=.4)],
-        decode=lambda x:x,fixed=None,config=None,model=type('M',(),{'neuron_ids':ids})(),factory=factory,gains=np.ones(3),root=tmp_path))
+        decode=lambda x:x,fixed=type('F',(),{'release_threshold_mV':np.full(len(ids),-40.),'release_slope_mV':np.full(len(ids),5.)})(),config=None,model=type('M',(),{'neuron_ids':ids})(),factory=factory,gains=np.ones(3),root=tmp_path))
     monkeypatch.setattr(verifier,'verify_inputs',lambda root:None)
     monkeypatch.setattr(network,'save_network',lambda path,*args:path.write_bytes(b'model'))
     monkeypatch.setattr(worker.shutil,'disk_usage',lambda path:type('D',(),{'free':1024**4})())
-    r=worker.evaluate(dict(z=[0.],output=str(tmp_path/'candidate'),until=time.monotonic()+60,target=.1))
-    assert r['status']=='completed' and r['metrics']['partial_attenuation_passed']
+    r=worker.evaluate(dict(z=[0.],output=str(tmp_path/'candidate'),until=time.monotonic()+60,target=.1,objective=objective))
+    assert r['status']=='completed'
+    assert r['metrics']['partial_attenuation_passed']==(objective=='body')
+    if objective=='rial-release':assert r['metrics']['metric']=='RIAL_release_cycle_excursion_ratio'
     assert calls==[False,True] and (tmp_path/'candidate/network.npz').exists()
     assert not (tmp_path/'candidate/no_cue.npz').exists()
 
@@ -143,18 +146,20 @@ def test_worker_sensory_block_and_rial_replay_are_separate_final_controls(tmp_pa
 
 
 @pytest.mark.parametrize('mediation_passes',[True,False])
-def test_curriculum_advances_and_final_tests_use_same_selected_model(tmp_path,monkeypatch,mediation_passes):
+@pytest.mark.parametrize('objective',['body','rial-release'])
+def test_curriculum_advances_and_final_tests_use_same_selected_model(tmp_path,monkeypatch,mediation_passes,objective):
     import hashlib,concurrent.futures,os
     import scripts.run_rial_sensory as runner
     import scripts.compare_rhythm_worker as verifier
     import scripts.benchmark_cpu as cpu_module
+    expected_parent=runner.RELEASE_PARENT if objective=='rial-release' else runner.PARENT
     source=tmp_path/'source';(source/'inputs').mkdir(parents=True);folder=source/'ordinary';folder.mkdir()
     (source/'inputs/manifest.json').write_text(json.dumps(dict(sha256={},sources={})))
-    for name in ('network.npz','coordinates.npz','sham.npz'):(folder/name).write_bytes(b'fixture')
-    (source/'summary.json').write_text(json.dumps(dict(validation=[dict(variant='ordinary',grid='ordinary',output=str(folder),checkpoint_sha256=runner.PARENT,trajectory_sha256=dict(sham=runner.PARENT))])))
+    for name in ('network.npz','coordinates.npz','sham.npz','no_cue.npz'):(folder/name).write_bytes(b'fixture')
+    (source/'summary.json').write_text(json.dumps(dict(validation=[dict(variant='nominal' if objective=='rial-release' else 'ordinary',grid='ordinary',mode='normal',output=str(folder),checkpoint_sha256=expected_parent,trajectory_sha256=dict(sham=expected_parent,no_cue=expected_parent))])))
     out=tmp_path/'output';out.mkdir();(out/'deadline.json').write_text(json.dumps(dict(coordinator_finish_by=time.monotonic()+28800,total_minutes=480)))
     monkeypatch.setattr(verifier,'verify_inputs',lambda p:None)
-    monkeypatch.setattr(runner,'file_sha256',lambda p:runner.PARENT)
+    monkeypatch.setattr(runner,'file_sha256',lambda p:expected_parent)
     monkeypatch.setattr(runner,'capture_run_record',lambda *args,**kwargs:None)
     monkeypatch.setattr(runner.shutil,'disk_usage',lambda p:type('D',(),{'free':1024**4})())
     monkeypatch.setattr(runner,'setup',lambda p:dict(spec=None,model=type('M',(),{'neuron_ids':()})(),origin=np.zeros(10),lower=-np.ones(10),upper=np.ones(10)))
@@ -166,7 +171,13 @@ def test_curriculum_advances_and_final_tests_use_same_selected_model(tmp_path,mo
         path=__import__('pathlib').Path(job['output']);path.mkdir(parents=True)
         point=tuple(job['z']);effect=model_effect.setdefault(point,0. if job['reference'] else job['target']*1.31)
         data,_,_=paired(job['variant'],effect=effect,mode='blocked' if job['mode']=='sensory-blocked' else 'normal')
-        m=score(data,job['parent_features'] or data['no_cue'],job['target'],job['margin'])
+        if objective=='rial-release':
+            from r_elegans.rial_release import score as scorer
+            for condition in data.values():
+                for category in ('active','response','late'):
+                    for row in condition[category]:row['RIAL_release_cycle_excursion']=10*row['amplitude']
+        else:scorer=score
+        m=scorer(data,job['parent_features'] or data['no_cue'],job['target'],job['margin'])
         payload=f'model-effect={effect:.12f}'.encode();sha=hashlib.sha256(payload).hexdigest()
         r=dict(status='completed',metrics=m,paired_features=data,checkpoint_sha256=sha,output=str(path),elapsed_seconds=1,
                variant=job['variant'],grid=job['grid'],mode=job['mode'],mediation=dict(cue_attenuation_reduced=mediation_passes) if job['mode']=='rial-replay' else None)
@@ -180,12 +191,14 @@ def test_curriculum_advances_and_final_tests_use_same_selected_model(tmp_path,mo
         def submit(self,fn,j):
             f=concurrent.futures.Future();f.set_result(fn(j));return f
     monkeypatch.setattr(concurrent.futures,'ProcessPoolExecutor',Pool)
-    monkeypatch.setattr(sys,'argv',['fit','--output-dir',str(out),'--source-run',str(source)])
+    monkeypatch.setattr(sys,'argv',['fit','--output-dir',str(out),'--source-run',str(source),'--objective',objective])
     runner.main();s=json.loads((out/'summary.json').read_text())
     assert s['validation_complete'] and s['completed_generations']==3
-    assert s['partial_sensory_component_qualified'] and s['final_target']==.1
-    assert s['RIAL_mediated_partial_component_qualified']==mediation_passes
+    assert s['partial_sensory_component_qualified']==(objective=='body')
+    assert s['sensory_RIAL_release_component_qualified']==(objective=='rial-release')
+    assert s['final_target']==(.05 if objective=='rial-release' else .1)
+    assert s['RIAL_mediated_partial_component_qualified']==(mediation_passes and objective=='body')
     assert not s['full_start_stop_qualified'] and not s['long_cue_sustained_attenuation']
-    assert [r['target'] for r in s['milestones'] if r['passed']]==[.02,.05,.1]
+    assert [r['target'] for r in s['milestones'] if r['passed']]==([.01,.02,.05] if objective=='rial-release' else [.02,.05,.1])
     assert len(s['validation'])==10 and (out/'optimizer/final/optimizer.pkl').exists()
     assert len({r['checkpoint_sha256'] for r in s['validation']})==1

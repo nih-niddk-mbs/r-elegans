@@ -3,6 +3,19 @@ import numpy as np
 from scripts.audit_rial_sensory import gait_failures, signal_windows
 
 
+def test_audit_checks_actual_fixed_fields_not_only_coordinate_file(tmp_path):
+    from scripts.audit_rial_sensory import frozen_network_fields
+    data = dict(cells_conductances_nS=np.ones((1,17)),fixed_chemical_mask=np.ones((1,1)),
+                params_log_channel_scale=np.zeros((1,17)),params_raw_chemical=np.zeros((1,1)),
+                fixed_capacitance=np.ones(1))
+    parent=tmp_path/'parent.npz';selected=tmp_path/'selected.npz';np.savez(parent,**data)
+    used=np.zeros(17,dtype=bool);used[0]=True
+    data['params_log_channel_scale'][0,0]=.1;np.savez(selected,**data)
+    assert frozen_network_fields(parent,selected,used)
+    data['fixed_capacitance'][0]=2;np.savez(selected,**data)
+    assert not frozen_network_fields(parent,selected,used)
+
+
 def test_failed_gait_gate_names_region_and_window():
     def row(frequency):
         return dict(regional_cycles_rad=[.01]*3, frequency_hz=frequency)

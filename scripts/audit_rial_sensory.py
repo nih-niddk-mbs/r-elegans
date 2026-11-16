@@ -14,6 +14,32 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2, allow_nan=False) + '\n')
 
 
+def frozen_network_fields(parent_path, selected_path, used):
+    """Check physical checkpoint arrays outside the explicit allowed coordinates."""
+    with np.load(parent_path, allow_pickle=False) as parent, np.load(selected_path, allow_pickle=False) as selected:
+        if set(parent.files) != set(selected.files):
+            return False
+        channels = parent['cells_conductances_nS'] > 0
+        channels[:, 16] = False
+        chemical = parent['fixed_chemical_mask'].astype(bool)
+        nc, ne = int(channels.sum()), int(chemical.sum())
+        if len(used) < nc+ne or np.any(used[nc+ne:]):
+            return False  # These protocols never train gap parameters.
+        masks = {}
+        masks['params_log_channel_scale'] = np.zeros(channels.shape, dtype=bool)
+        masks['params_log_channel_scale'][np.nonzero(channels)] = used[:nc]
+        masks['params_raw_chemical'] = np.zeros(chemical.shape, dtype=bool)
+        masks['params_raw_chemical'][np.nonzero(chemical)] = used[nc:nc+ne]
+        for key in parent.files:
+            a, b = parent[key], selected[key]
+            if a.shape != b.shape:
+                return False
+            mask = masks.get(key)
+            if not np.array_equal(a if mask is None else a[~mask], b if mask is None else b[~mask]):
+                return False
+    return True
+
+
 def gait_failures(paired, parent):
     """Expand the exact E085 preservation predicates into named failed checks."""
     failures = []
@@ -39,6 +65,25 @@ def gait_failures(paired, parent):
         check(row, ref, f'cue/active/{i}', .9, .003)
     for i, (row, ref) in enumerate(zip(b['response'], a['response'])):
         check(row, ref, f'cue/response/{i}', .5, 0.)
+    return failures
+
+
+def release_failures(paired, parent, target):
+    """E086 only: retain detailed neural preservation/response failures."""
+    key='RIAL_release_cycle_excursion'
+    if key not in parent['active'][0]: return []
+    failures=[]
+    def check(row, reference, low, high, label):
+        value=row[key]
+        if not low <= value <= high:
+            failures.append(dict(window=label,check=key,value=value,lower=low,upper=high,reference=reference))
+    a,b=paired['no_cue'],paired['cue'];base=parent['active'][0][key]
+    for category in ('active','response','late'):
+        for i,row in enumerate(a[category]):check(row,base,max(.01,.9*base),1.1*base,f'no_cue/{category}/{i}')
+    for i,(row,ref) in enumerate(zip(b['active'],a['active'])):
+        check(row,ref[key],.9*ref[key],1.1*ref[key],f'cue/active/{i}')
+    for i,(row,ref) in enumerate(zip(b['response'],a['response'])):
+        check(row,ref[key],0.,(1-target)*ref[key],f'cue/response/{i}')
     return failures
 
 
@@ -119,9 +164,10 @@ def main():
         offsets, latent = z['offsets'], z['z']
     if latent.shape != (len(groups),):
         raise ValueError('Parameter schema/coordinate dimension mismatch')
-    used = np.zeros(len(origin), dtype=bool); group_rows = []
+    used = np.zeros(len(origin), dtype=bool); group_rows = []; reconstructed = origin.copy()
     for value, group in zip(latent, groups):
         ix = np.asarray(group['indices']); used[ix] = True
+        reconstructed[ix] += value*(group['upper'] if value >= 0 else -group['lower'])
         group_rows.append(dict(name=group['name'], coordinates=len(ix), latent=float(value),
             near_group_bound=bool(abs(value) >= .99),
             log_delta_range=[float((offsets-origin)[ix].min()), float((offsets-origin)[ix].max())],
@@ -129,8 +175,15 @@ def main():
                                           (upper[ix]-offsets[ix] <= .01*(upper[ix]-lower[ix]))))))
     frozen = bool(np.array_equal(offsets[~used], origin[~used]))
     if not frozen: problems.append('Coordinates outside trainable groups changed')
+    in_bounds = bool(np.all(offsets >= lower-1e-10) and np.all(offsets <= upper+1e-10))
+    decoded = bool(np.allclose(offsets, reconstructed, rtol=0., atol=1e-12))
+    network_frozen = frozen_network_fields(run/'inputs/sensory_parent.npz', selected_path/'network.npz', used)
+    if not in_bounds: problems.append('Original coordinate bounds exceeded')
+    if not decoded: problems.append('Selected latent point does not decode to saved coordinates')
+    if not network_frozen: problems.append('Frozen physical checkpoint fields changed')
     write(out/'parameters.json', dict(groups=group_rows, frozen_coordinates_unchanged=frozen,
-        original_bounds_respected=bool(np.all(offsets >= lower-1e-10) and np.all(offsets <= upper+1e-10))))
+        frozen_network_fields_unchanged=network_frozen, latent_coordinates_consistent=decoded,
+        original_bounds_respected=in_bounds))
     with np.load(selected_path/'network.npz', allow_pickle=False) as z:
         ids = z['neuron_ids'].tolist()
         threshold, slope = z['fixed_release_threshold_mV'], z['fixed_release_slope_mV']
@@ -149,7 +202,8 @@ def main():
         if not paired:
             problems.append('Missing final features: ' + str(folder)); continue
         gate_rows.append(dict(output=str(folder), metrics=row['metrics'], mediation=row.get('mediation'),
-                              failures=gait_failures(paired, parent)))
+                              failures=gait_failures(paired, parent),
+                              RIAL_release_failures=release_failures(paired,parent,row['metrics']['target'])))
         for condition, sha in row.get('trajectory_sha256', {}).items():
             path = folder/(condition+'.npz'); verify(path, sha)
             if path.is_file():
@@ -169,8 +223,10 @@ def main():
     result = dict(run=str(run), audit_complete=True, integrity_passed=not problems, problems=problems,
         candidate_count=len(candidates), final_cases=len(gate_rows),
         failed_gait_checks={Path(r['output']).name:len(r['failures']) for r in gate_rows},
+        failed_RIAL_release_checks={Path(r['output']).name:len(r['RIAL_release_failures']) for r in gate_rows},
         groups_near_bound=[r['name'] for r in group_rows if r['near_group_bound']],
         frozen_coordinates_unchanged=frozen,
+        frozen_network_fields_unchanged=network_frozen,
         scope='Saved-data audit only: no forward simulation, fitting, causal intervention or qualification. Release statistics use recorded voltage and fixed release law, not channel-current attribution. Optimizer/source records remain in source run; hashes here cover models, coordinates, declared inputs and final traces. Missing stage fields are explicit.')
     write(out/'summary.json', result)
     print(json.dumps(result, indent=2), flush=True)

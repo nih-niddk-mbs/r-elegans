@@ -1,5 +1,15 @@
 # Current model: exact scope and computation path
 
+2026-11-16 E086 planned: three-hour TOTAL sensory-to-RIAL fitting run,
+including final validation and automatic post-run audit. Fresh CMA from pinned
+E085 selected weights targets1%,2%,5% reduction of RIAL release-cycle excursion;
+preserve uncued neural/body rhythm and cue recovery. Motor/NMJ/sensory-gain/water
+parameters fixed. Subsample frequency measurement prospectively replaces discrete
+peaks;1.98Hz ceiling unchanged. This is a neural control component, not body
+stopping or swimming qualification. [Plan](experiments/records/E086-plan.json).
+Launch: `sh scripts/launch_rial_release_mbslnx2.sh`.
+Report: `python -m scripts.report_rial_sensory --release`. Server execution pending.
+
 2026-11-16 E085 frequency check: interpolated ordinary/body-half baseline
 frequencies agree at1.97854Hz; body-half boundary failure is a sampling artifact
 in30..40s. Neural-half remains1.98734Hz (~0.44% faster), so its boundary failure

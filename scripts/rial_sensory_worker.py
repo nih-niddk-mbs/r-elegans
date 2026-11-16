@@ -1,4 +1,4 @@
-"""E085 persistent fitting workers; diagnostic clamps are absent from training."""
+"""E085/E086 persistent fitting workers; diagnostic clamps absent from training."""
 import json,os,time,shutil
 from pathlib import Path
 import numpy as np
@@ -25,7 +25,8 @@ def initialize(inputs,schema,cpus,records):
     import multiprocessing
     slot=(multiprocessing.current_process()._identity[-1]-1)%len(cpus);os.sched_setaffinity(0,cpus[slot])
     _DATA=setup(Path(inputs));_DATA['groups']=schema
-    capture_run_record(Path(records)/f'worker-{slot}',Path(__file__).resolve().parents[1],dict(inputs=inputs,cpus=cpus[slot],experiment='E085'))
+    experiment=json.loads((Path(inputs)/'manifest.json').read_text()).get('consumer_experiment','E085')
+    capture_run_record(Path(records)/f'worker-{slot}',Path(__file__).resolve().parents[1],dict(inputs=inputs,cpus=cpus[slot],experiment=experiment))
 
 
 def evaluate(job):
@@ -35,6 +36,9 @@ def evaluate(job):
     from r_elegans.brain.conductance_network import save_network
     from r_elegans.wall_budget import WallDeadline,check_deadline
     from scripts.compare_rhythm_worker import verify_inputs
+    release_objective=job.get('objective')=='rial-release'
+    if release_objective:
+        from r_elegans.rial_release import features as release_features,score
     d=_DATA;out=Path(job['output']);out.mkdir(parents=True,exist_ok=False);started=time.monotonic()
     (out/'request.json').write_text(json.dumps(job,indent=2)+'\n');mode=job.get('mode','normal')
     try:
@@ -55,7 +59,11 @@ def evaluate(job):
             key=(condition,variant,grid,job['until'],modelsha if condition.endswith('_replay') else None)
             if key not in _CACHE:_CACHE[key]=d['factory'](dt,brain,**kwargs)
             trace=_CACHE[key](params,np.linspace(0,p['duration'],121),gains)
-            paired[condition]=features(trace,d['model'].neuron_ids,variant)
+            if release_objective:
+                ri=d['model'].neuron_ids.index('RIAL')
+                paired[condition]=release_features(trace,d['model'].neuron_ids,variant,
+                    float(d['fixed'].release_threshold_mV[ri]),float(d['fixed'].release_slope_mV[ri]))
+            else:paired[condition]=features(trace,d['model'].neuron_ids,variant)
             before=trace['dense_time_s']<p['events'][0][0]
             current=tuple(trace[k][before].copy() for k in ('dense_voltage_mV','dense_joints'))
             if prefix is None:prefix=current
@@ -81,7 +89,8 @@ def evaluate(job):
         mediation=None
         if mode=='rial-replay':
             counter=score(dict(no_cue=paired['no_cue_replay'],cue=paired['cue_replay']),parent,job['target'])
-            original=metrics['response_amplitude_ratios'];replayed=counter['response_amplitude_ratios']
+            ratio_key='body_response_amplitude_ratios' if release_objective else 'response_amplitude_ratios'
+            original=metrics[ratio_key];replayed=counter[ratio_key]
             mediation=dict(replay_amplitude_ratios=replayed,baseline_preserved=counter['baseline_and_recovery_preserved'],
                 cue_attenuation_reduced=bool(counter['safe'] and counter['useful_response_preserved'] and counter['baseline_and_recovery_preserved'] and all(max(0.,1-r)<=.25*max(1e-6,1-a) for a,r in zip(original,replayed))),
                 scope='Final diagnostic only: matched no-cue RIAL release replay on existing SMD chemical edges from cue onset; not used in fitting')

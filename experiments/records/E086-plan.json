@@ -1,0 +1,47 @@
+{
+  "experiment": "E086",
+  "status": "planned_server_execution_not_evidenced",
+  "record_date": "2026-11-16",
+  "question": "Can chemical sensing reduce the cycle amplitude of RIAL release by1%,2%,5%, while preserving unpaced body gait, baseline RIAL rhythm and post-cue recovery?",
+  "parent_checkpoint_sha256": "f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f",
+  "source_run": "/home/carsonc/r-elegans-results/rial-sensory-20261116T041450Z-211013",
+  "initialization": "Fresh CMA at pinned E085 selected failed behavioral candidate; complete original-anchor offsets reconstructed and model/pair reference hashes verified. Not exact optimizer resume or qualified start/stop parent. Independent E071/E078 parents retained.",
+  "method": "Reuse full302-neuron embodied water model and original chemical schedules. Change fitting objective from body amplitude to RIAL release raw-supported median up/down cycle excursion. Standard deviation/mean remain descriptive; phase shift alone cannot satisfy amplitude gate. Protocols nominal,low-dose,shift,repeat,close-repeat,long-cue unchanged.",
+  "trainable": "Explicit E085 AWA/AIY/AIZ/AIB/RIA inward/outward nonleak channel density groups and existing source-to-relay/RIAL chemical groups; actual full mapping saved before fitting.",
+  "fixed": "Motor channels, RIAL-to-SMD strengths, all gaps, other parameters, leak/capacitance/kinetics/reversals/release law, sensory gains/signs/kinetics/routing, NMJs, muscles, physical water/body parameters and clocks. No added edges, external oscillatory drive, clamps or direct body-output gates during training.",
+  "bounds": "Fresh local group changes within+-0.4log from E085 selected, intersected with unchanged original-anchor factor2 bounds. This recenters the trust region; it is not exact continuation of old local bounds or optimizer.",
+  "optimization": {
+    "optimizer": "cma==4.4.1",
+    "seed": 8600,
+    "population": 12,
+    "sigma": 0.3,
+    "workers": 4,
+    "physical_cores_per_worker": 4,
+    "rungs": [
+      0.01,
+      0.02,
+      0.05
+    ],
+    "training_margin": 1.3,
+    "stage_sigma": 0.15,
+    "stage_seeds": "8600+stage",
+    "restart_sigma": 0.2,
+    "restart_seeds": "9600+restart"
+  },
+  "criteria": {
+    "neural": "Cue/no-cue RIAL release cycle-excursion ratio<=1-target on all eight final normal paired cases; train toward1-1.3*target. All no-cue windows within90..110% parent baseline release excursion and >=.01 absolute release excursion. Cue baseline/recovery within90..110% matched no-cue.",
+    "body": "Preserve original E085 regional amplitude gates: baseline90..110% and.003rad floor; useful cue movement50..110%. Absolute frequency1.62..1.98Hz and within5% reference unchanged. Prospective parabolic subsample median-period estimator replaces sampled peak time; old E085 results not rewritten.",
+    "selection": "Advance after same-model low-dose/shift checks, preserve each passing rung; final highest passing rung preferred over later unvalidated weights. Raw/body response ratios retained separately; neural component does not qualify body slowing.",
+    "controls": "No-cue, chemical-sensory-blocked, varied/repeated/close-repeat cues, long-cue, neural-half/body-half. Final RIAL-to-SMD replay is diagnostic only and measures downstream body response, not required for neural modulation component. No clamps in normal trials.",
+    "numerical": "Refined neural response ratio differences<=min(.005,.25target), with all body/neural preservation gates. A strict neural-half frequency failure remains a failed gate; ceiling is not widened.",
+    "claim": "Only partial sensory-to-RIAL modulation component. Full sensory initiation/rest/stop/restart, swimming, navigation and biological fidelity remain unqualified. H1.2 downstream behavior training remains gated."
+  },
+  "command": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_rial_release_mbslnx2.sh",
+  "maximum_total_minutes": 180,
+  "budget": "20min reserved for automatic saved-data audit plus final receipt; coordinator ends before that reserve, dedicates max60min or40% remaining to final validation; search uses remaining time and generation lookahead. Private-group watchdog covers prep,search,validation,audit,cleanup. Incomplete/timed-out audit prevents post-audit qualification. May finish early.",
+  "audit": "Automatic scripts.audit_rial_sensory on new run into sibling<run>-audit. All candidate model/coordinate digests, input/reference digests, final trajectory hashes/finiteness, detailed gait gates, grouped bounds/latent reconstruction, actual selected frozen checkpoint fields, full neuronal release/stage summaries. No new simulation, no full intermediate trajectory writes. Audit success and model capability remain separate.",
+  "artifacts": "/home/carsonc/r-elegans-results/rial-release-<UTC>-<PID>, adjacent.log, sibling-audit; all candidate/selected/final weights/coordinates and CMA NumPy/Python RNG/asked/told/stage/restart/final records, original recursive dependencies and source/env/argv external. Intermediate raw traces in memory; full parent/final traces saved.",
+  "storage": "50GiB free reserve;15GiB search stop threshold, estimated30GiB training-run cap with concurrent writer granularity; audit adds small JSON/source records. No deletions.",
+  "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_sensory --release",
+  "local_verification": "32 focused software tests passed in14.81s: tests/test_rial_release.py tests/test_rial_sensory.py tests/test_rial_sensory_audit.py tests/test_cma_curriculum.py tests/test_rial_control.py. Real CMA with mocked rollouts covers E085/E086 stage progression and selected-model consistency. Tests cover phase rejection, recovery/baseline preservation, release-objective worker routing without diagnostic inputs, interpolated boundary frequency, physical frozen checkpoint fields and automatic audit success/timeout receipts. Shell syntax, CLI help and git diff checks passed. No actual E086 forward fit or server parent bytes inspected locally."
+}
