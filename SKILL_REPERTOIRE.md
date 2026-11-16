@@ -1,5 +1,14 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-16 E087 planned: restore AIYL operating range and sensory cue
+responsiveness together while preserving baseline wiggling/recovery. Focus unknown
+AWAL/AIYL densities, existing inputs to AIYL and AIYL->RIAL compensation; keep
+fixed signs, motor/RIAL channels, NMJs and water physics. Headroom2/5/10% curriculum,
+not a global requirement to desaturate every neuron or evidence of motor stopping.
+Three-hour TOTAL with automatic post-run audit. [Plan](experiments/records/E087-plan.json).
+Launch: `sh scripts/launch_relay_range_mbslnx2.sh`.
+Report: `python -m scripts.report_rial_sensory --relay`. Server execution pending.
+
 2026-11-16 E086 headroom audit: modeled AIYL release is98.96%, with
 large tonic RIAL inhibition(~0.630pA) but only0.00659pA ideal remaining inhibitory
 headroom at fixed RIAL voltage. RIML is excitatory in this saved checkpoint;

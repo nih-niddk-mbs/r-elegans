@@ -1,4 +1,4 @@
-"""E085 body or E086 RIAL-release sensory attenuation with a total wall budget."""
+"""E085-E087 body, RIAL release or relay operating-range fitting with a total wall budget."""
 import argparse,concurrent.futures,json,math,multiprocessing,os,random,shutil,subprocess,sys,time
 from pathlib import Path
 import numpy as np
@@ -9,6 +9,7 @@ from r_elegans.rial_sensory import parameter_groups,RUNGS as BODY_RUNGS,score as
 
 SEED=8500
 PARENT='dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8'
+RELAY_PARENT='5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022'
 RELEASE_PARENT='f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f'
 
 
@@ -20,14 +21,16 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--source-run',type=Path,required=True)
-    p.add_argument('--objective',choices=('body','rial-release'),default='body')
-    a=p.parse_args();release_objective=a.objective=='rial-release'
+    p.add_argument('--objective',choices=('body','rial-release','relay-range'),default='body')
+    a=p.parse_args();release_objective=a.objective=='rial-release';relay_objective=a.objective=='relay-range'
+    neural_objective=release_objective or relay_objective
     from r_elegans.rial_release import RUNGS as RELEASE_RUNGS,score as release_score
-    RUNGS=RELEASE_RUNGS if release_objective else BODY_RUNGS
-    score=release_score if release_objective else body_score
-    experiment='E086' if release_objective else 'E085'
-    run_seed=8600 if release_objective else SEED
-    expected_parent=RELEASE_PARENT if release_objective else PARENT
+    from r_elegans.relay_range import RUNGS as RELAY_RUNGS,score as relay_score,parameter_groups as relay_groups,CUE_SCALE,direction_consistent
+    RUNGS=RELAY_RUNGS if relay_objective else RELEASE_RUNGS if release_objective else BODY_RUNGS
+    score=relay_score if relay_objective else release_score if release_objective else body_score
+    experiment='E087' if relay_objective else 'E086' if release_objective else 'E085'
+    run_seed=8700 if relay_objective else 8600 if release_objective else SEED
+    expected_parent=RELAY_PARENT if relay_objective else RELEASE_PARENT if release_objective else PARENT
     out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
     for root in (repo,source):
         if out==root or root in out.parents or out in root.parents:
@@ -42,7 +45,7 @@ def main():
     capture_run_record(out,repo,a)
     from scripts.compare_rhythm_worker import verify_inputs
     source_summary=json.loads((source/'summary.json').read_text())
-    ordinary=next(r for r in source_summary['validation'] if r['variant']==('nominal' if release_objective else 'ordinary') and r['grid']=='ordinary' and (not release_objective or r.get('mode')=='normal'))
+    ordinary=next(r for r in source_summary['validation'] if r['variant']==('nominal' if neural_objective else 'ordinary') and r['grid']=='ordinary' and (not neural_objective or r.get('mode')=='normal'))
     folder=Path(ordinary['output']).resolve()
     if source not in folder.parents or ordinary['checkpoint_sha256']!=expected_parent or file_sha256(folder/'network.npz')!=expected_parent:
         raise ValueError('Pinned parent model required for '+experiment)
@@ -52,13 +55,13 @@ def main():
         sha=file_sha256(path);shutil.copy2(path,inputs/name)
         if file_sha256(inputs/name)!=sha or file_sha256(path)!=sha:raise ValueError('Parent changed during copy')
         manifest['sha256'][name]=sha;manifest['sources'][name]=str(path)
-    reference_name='no_cue' if release_objective else 'sham'
+    reference_name='no_cue' if neural_objective else 'sham'
     reference=folder/(reference_name+'.npz')
     if file_sha256(reference)!=ordinary['trajectory_sha256'][reference_name]:raise ValueError('Reference hash mismatch')
     write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=ordinary['trajectory_sha256'][reference_name]))
     manifest['sha256']['sensory_reference.json']=file_sha256(inputs/'sensory_reference.json');manifest['sources']['sensory_reference.json']=str(reference)
     manifest['consumer_experiment']=experiment;write(inputs/'manifest.json',manifest);verify_inputs(inputs)
-    d=setup(inputs);schema=parameter_groups(d['spec'],d['model'].neuron_ids,d['origin'],d['lower'],d['upper'])
+    d=setup(inputs);schema=(relay_groups if relay_objective else parameter_groups)(d['spec'],d['model'].neuron_ids,d['origin'],d['lower'],d['upper'])
     write(out/'parameter_groups.json',schema)
     np.savez_compressed(out/'parameter_origin.npz',origin=d['origin'],lower=d['lower'],upper=d['upper'])
     from scripts.benchmark_cpu import physical_core_cpus
@@ -67,14 +70,14 @@ def main():
     if not known:raise ValueError('Known physical CPU topology required')
     groups=worker_cpu_groups(cpus,4,4)
     os.environ.update(JAX_PLATFORMS='cpu',OMP_NUM_THREADS='4',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1')
-    reserve=max(60*60,.4*(finish-time.monotonic())) if release_objective else max(2*3600,.25*(finish-time.monotonic()));fit_until=finish-reserve
+    reserve=max(60*60,.4*(finish-time.monotonic())) if neural_objective else max(2*3600,.25*(finish-time.monotonic()));fit_until=finish-reserve
     if fit_until-time.monotonic()<20*60:raise ValueError('Insufficient search and final-validation budget')
     write(out/'configuration.json',dict(experiment=experiment,parent_sha256=expected_parent,seed=run_seed,
         optimizer='cma==4.4.1',population=12,dimension=len(schema),cpu_groups=groups,total_minutes=budget['total_minutes'],
         validation_reserve_minutes=reserve/60,rungs=RUNGS,training_margin=1.3,
-        objective=('Early cue-specific1/2/5% RIAL release-cycle attenuation; body gait preserved' if release_objective else 'Early cue-specific2/5/10% cycle-amplitude attenuation with uncued gait and recovery preserved'),
-        frequency_estimator=('parabolic_subsample_median_period' if release_objective else 'discrete_peak_median_period'),
-        trainable='Explicit AWA/AIY/AIZ/AIB/RIA nonleak densities and existing control-to-control chemical connections',
+        objective=('AIYL release headroom2/5/10% plus cue responsiveness and recovery; body gait preserved' if relay_objective else 'Early cue-specific1/2/5% RIAL release-cycle attenuation; body gait preserved' if release_objective else 'Early cue-specific2/5/10% cycle-amplitude attenuation with uncued gait and recovery preserved'),
+        frequency_estimator=('parabolic_subsample_median_period' if neural_objective else 'discrete_peak_median_period'),
+        trainable=('AWAL/AIYL nonleak densities, existing inputs to AIYL and AIYL-to-RIAL compensation' if relay_objective else 'Explicit AWA/AIY/AIZ/AIB/RIA nonleak densities and existing control-to-control chemical connections'),
         fixed='Motor channels, RIAL-to-SMD strengths, gaps, leak/capacitance/kinetics/reversals, NMJs/sensory gains/physics',
         diagnostic_clamps_in_training=False,full_start_stop_qualified=False,maximum_new_run_GiB=30,minimum_free_GiB=50,
         retention='All model/coordinate/optimizer/RNG/request/metrics; raw trajectories only parent and final tests'))
@@ -139,6 +142,7 @@ def main():
                 if valid(selected) and current['training_margin_met'] and time.monotonic()+max(recent[-12:])*1.5<fit_until:
                     checks=batch(pool,[job(zbest,f'rung-{stage}-g-{generation}-'+v,fit_until,variant=v) for v in ('low-dose','shift')])
                     passed=all(valid(r) and r['metrics']['partial_attenuation_passed'] and r.get('checkpoint_sha256')==selected['checkpoint_sha256'] for r in checks)
+                    if relay_objective and passed:passed=direction_consistent([selected]+checks)
                     milestones.append(dict(target=RUNGS[stage],passed=passed,checks=checks,checkpoint_sha256=selected['checkpoint_sha256']))
                     if passed:
                         qualified=(selected,zbest.copy(),RUNGS[stage]);preserve(selected,f'rung-{stage}')
@@ -154,7 +158,7 @@ def main():
             tests=[('nominal','nominal','ordinary','normal'),('low-dose','low-dose','ordinary','normal'),('shift','shift','ordinary','normal'),
                    ('repeat','repeat','ordinary','normal'),('redundant','redundant','ordinary','normal'),('long-cue','long-cue','ordinary','normal'),
                    ('neural-half','nominal','neural-half','normal'),('body-half','nominal','body-half','normal'),
-                   ('sensory-blocked','nominal','ordinary','sensory-blocked'),('rial-replay','nominal','ordinary','rial-replay')]
+                   ('sensory-blocked','nominal','ordinary','sensory-blocked'),('relay-replay' if relay_objective else 'rial-replay','nominal','ordinary','relay-replay' if relay_objective else 'rial-replay')]
             validation=batch(pool,[job(final_z,'final-'+label,finish-90,v,g,True,mode=mode,target=final_target) for label,v,g,mode in tests])
             preserve(final_selected,'final')
         except Exception as e:
@@ -162,30 +166,37 @@ def main():
     optimizer_snapshot(out/'optimizer/final',es,stage,generation,pending_points)
     verify_inputs(inputs)
     complete=bool(failure is None and len(validation)==10 and all(r['status']=='completed' for r in validation))
-    convergence=[];partial=False;blocked=False;mediated=False;sustained=False
+    convergence=[];partial=False;blocked=False;mediated=False;sustained=False;relay_direction=False
     if complete:
         nominal=validation[0]['metrics']
         for row in validation[6:8]:
             error=max(abs(x-y) for x,y in zip(nominal['response_amplitude_ratios'],row['metrics']['response_amplitude_ratios']))
-            convergence.append(dict(grid=row['grid'],amplitude_ratio_difference=error,passed=bool(error<=min(.005,.25*final_target))))
-        blocked=bool(valid(validation[8]) and all(abs(r-1)<=.25*final_target for r in validation[8]['metrics']['response_amplitude_ratios']))
+            convergence.append(dict(grid=row['grid'],amplitude_ratio_difference=error,passed=bool(error<=min(.005,.25*final_target)*(CUE_SCALE if relay_objective else 1.))))
+        blocked=bool(valid(validation[8]) and all(abs(r-1)<=.25*final_target*(CUE_SCALE if relay_objective else 1.) for r in validation[8]['metrics']['response_amplitude_ratios']))
         mediated=bool(validation[9]['mediation']['cue_attenuation_reduced'])
         same=all(r.get('checkpoint_sha256')==final_selected['checkpoint_sha256'] for r in validation)
         partial=bool(same and all(valid(r) and r['metrics']['partial_attenuation_passed'] for r in validation[:8])
                      and all(r['passed'] for r in convergence) and blocked)
-        sustained=bool(all(r<=1-final_target for r in validation[5]['metrics']['late_amplitude_ratios']))
+        if relay_objective:
+            relay_direction=direction_consistent(validation[:8]);partial=partial and relay_direction
+        sustained=bool(all(r<=1-final_target*(CUE_SCALE if relay_objective else 1.) for r in validation[5]['metrics']['late_amplitude_ratios']))
     write(out/'summary.json',dict(experiment=experiment,objective=a.objective,execution_valid=failure is None and stop_reason not in ('evaluation_failure','all_candidates_failed'),
         all_stages_finished=complete,validation_complete=complete,completed_generations=generation,active_stage=stage,
         evaluation_status_counts={status:sum(r['status']==status for r in evaluations) for status in ('completed','failed','worker_error','time_budget','disk_budget')},
         stop_reason=stop_reason,failure=failure,baseline=baseline,selected=final_selected if complete else selected,
         final_target=final_target if complete else None,milestones=milestones,validation=validation,numerical_checks=convergence,
-        partial_sensory_component_qualified=partial and not release_objective,
-        sensory_RIAL_release_component_qualified=partial and release_objective,sensory_block_control=blocked,RIAL_chemical_replay_mediation=mediated,
-        RIAL_mediated_partial_component_qualified=partial and mediated and not release_objective,
-        long_cue_sustained_attenuation=sustained and not release_objective,
+        final_target_meaning='minimum_AIYL_upper_release_headroom' if relay_objective else 'minimum_fractional_amplitude_attenuation',
+        partial_sensory_component_qualified=partial and not neural_objective,
+        sensory_RIAL_release_component_qualified=partial and release_objective,
+        sensory_relay_range_component_qualified=partial and relay_objective,sensory_block_control=blocked,RIAL_chemical_replay_mediation=mediated and not relay_objective,
+        relay_response_direction_consistent_across_cases=relay_direction,
+        AIYL_to_RIAL_body_effect_mediation=mediated and relay_objective,
+        RIAL_mediated_partial_component_qualified=partial and mediated and not neural_objective,
+        long_cue_sustained_attenuation=sustained and not neural_objective,
         long_cue_RIAL_release_attenuation=sustained and release_objective,
+        long_cue_relay_response=sustained and relay_objective,
         full_start_stop_qualified=False,swimming_qualified=False,
-        scope=('Sensory-triggered partial RIAL release-cycle attenuation; no body slowing qualification' if release_objective else 'Early sensory-triggered partial amplitude attenuation and recovery; no rest/initiation, full start/stop or navigation qualification')))
+        scope=('AIYL operating range and sensory responsiveness only; no RIAL/body stopping qualification' if relay_objective else 'Sensory-triggered partial RIAL release-cycle attenuation; no body slowing qualification' if release_objective else 'Early sensory-triggered partial amplitude attenuation and recovery; no rest/initiation, full start/stop or navigation qualification')))
     print('RIAL_SENSORY_REPORT:',out/'summary.json',flush=True)
 
 

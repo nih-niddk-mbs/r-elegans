@@ -54,7 +54,8 @@ def test_interpolated_frequency_resolves_boundary_without_widening_gate():
 
 
 @pytest.mark.parametrize('audit_timeout',[False,True])
-def test_three_hour_budget_includes_audit_and_failure_receipt(tmp_path,monkeypatch,audit_timeout):
+@pytest.mark.parametrize('pipeline',['rial-release','relay-range'])
+def test_three_hour_budget_includes_audit_and_failure_receipt(tmp_path,monkeypatch,audit_timeout,pipeline):
     import scripts.total_job_budget as runner
     out = tmp_path/'output'; calls=[]
     def run(cmd, seconds):
@@ -67,14 +68,14 @@ def test_three_hour_budget_includes_audit_and_failure_receipt(tmp_path,monkeypat
             (out/'summary.json').write_text(json.dumps(dict(execution_valid=True,validation_complete=True)))
         return 0,False
     monkeypatch.setattr(runner,'run_group',run)
-    monkeypatch.setattr(sys,'argv',['budget','--pipeline','rial-release','--output-dir',str(out),
+    monkeypatch.setattr(sys,'argv',['budget','--pipeline',pipeline,'--output-dir',str(out),
                                    '--source-run',str(tmp_path/'source'),'--total-minutes','180'])
     assert runner.main() == (124 if audit_timeout else 0)
     assert len(calls)==2
-    assert '--objective' in calls[0][0] and 'rial-release' in calls[0][0]
+    assert '--objective' in calls[0][0] and pipeline in calls[0][0]
     receipt = json.loads((out/'budget_receipt.json').read_text())
     assert receipt['total_minutes']==180 and receipt['all_steps_finished']==(not audit_timeout)
     assert receipt['audit_complete']==(not audit_timeout)
     assert receipt['audit_integrity_passed']==(not audit_timeout)
     assert calls[0][1] < 160*60 and calls[1][1] <= 180*60
-    assert json.loads((out/'deadline.json').read_text())['experiment']=='E086'
+    assert json.loads((out/'deadline.json').read_text())['experiment']==('E087' if pipeline=='relay-range' else 'E086')

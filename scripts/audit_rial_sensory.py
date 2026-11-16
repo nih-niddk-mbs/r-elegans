@@ -87,6 +87,30 @@ def release_failures(paired, parent, target):
     return failures
 
 
+def relay_failures(paired, target):
+    if 'AIYL_release_mean' not in paired['no_cue']['active'][0]: return []
+    from r_elegans.relay_range import CUE_SCALE
+    failures=[];a,b=paired['no_cue'],paired['cue'];minimum=target*CUE_SCALE
+    for label,rows in [('no_cue/'+category,a[category]) for category in ('active','response','late')]+[('cue/active',b['active'])]:
+        for i,row in enumerate(rows):
+            if row['AIYL_release_q01']<.05 or row['AIYL_release_q99']>1-target:
+                failures.append(dict(window=f'{label}/{i}',check='AIYL_operating_range',
+                    q01=row['AIYL_release_q01'],q99=row['AIYL_release_q99'],lower=.05,upper=1-target))
+    directions=[]
+    for i,(row,ref) in enumerate(zip(b['response'],a['response'])):
+        change=row['AIYL_release_mean']-ref['AIYL_release_mean']
+        if abs(change)<minimum:failures.append(dict(window=f'cue/response/{i}',check='AIYL_cue_change',value=change,minimum_absolute=minimum))
+        if row['AIYL_release_q01']<.005 or row['AIYL_release_q99']>.995:
+            failures.append(dict(window=f'cue/response/{i}',check='AIYL_response_railed'))
+        directions.extend(x-y for x,y in zip(row['AIYL_release_half_means'],ref['AIYL_release_half_means']))
+    if not (all(x>0 for x in directions) or all(x<0 for x in directions)):
+        failures.append(dict(check='AIYL_response_direction_inconsistent'))
+    for i,(row,ref) in enumerate(zip(b['active'],a['active'])):
+        difference=abs(row['AIYL_release_mean']-ref['AIYL_release_mean'])
+        if difference>max(1e-6,.25*minimum):failures.append(dict(window=f'cue/active/{i}',check='AIYL_recovery',difference=difference))
+    return failures
+
+
 def signal_windows(no_cue, cue, ids, threshold, slope, windows):
     if not np.array_equal(no_cue['dense_time_s'], cue['dense_time_s']):
         raise ValueError('Paired trace clocks differ')
@@ -194,7 +218,7 @@ def main():
         if row.get('status') != 'completed':
             problems.append('Incomplete final evaluation: ' + str(folder))
         required = {'no_cue', 'cue'}
-        if row['mode'] == 'rial-replay': required.update(('no_cue_replay', 'cue_replay'))
+        if row['mode'] in ('rial-replay','relay-replay'): required.update(('no_cue_replay', 'cue_replay'))
         if not required.issubset(row.get('trajectory_sha256', {})):
             problems.append('Missing declared final trajectory hashes: ' + str(folder))
         if row.get('checkpoint_sha256') != summary['selected']['checkpoint_sha256']:
@@ -203,7 +227,8 @@ def main():
             problems.append('Missing final features: ' + str(folder)); continue
         gate_rows.append(dict(output=str(folder), metrics=row['metrics'], mediation=row.get('mediation'),
                               failures=gait_failures(paired, parent),
-                              RIAL_release_failures=release_failures(paired,parent,row['metrics']['target'])))
+                              RIAL_release_failures=release_failures(paired,parent,row['metrics']['target']),
+                              relay_range_failures=relay_failures(paired,row['metrics']['target'])))
         for condition, sha in row.get('trajectory_sha256', {}).items():
             path = folder/(condition+'.npz'); verify(path, sha)
             if path.is_file():
@@ -224,6 +249,7 @@ def main():
         candidate_count=len(candidates), final_cases=len(gate_rows),
         failed_gait_checks={Path(r['output']).name:len(r['failures']) for r in gate_rows},
         failed_RIAL_release_checks={Path(r['output']).name:len(r['RIAL_release_failures']) for r in gate_rows},
+        failed_relay_range_checks={Path(r['output']).name:len(r['relay_range_failures']) for r in gate_rows},
         groups_near_bound=[r['name'] for r in group_rows if r['near_group_bound']],
         frozen_coordinates_unchanged=frozen,
         frozen_network_fields_unchanged=network_frozen,

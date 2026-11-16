@@ -113,11 +113,11 @@ def score(paired,parent,target,margin=1.):
         target=target,margin=margin,full_start_stop_qualified=False,swimming_qualified=False)
 
 
-def replay_probe(ids,chemical_mask,times,release,onset,dt):
+def replay_probe(ids,chemical_mask,times,release,onset,dt,source_name='RIAL',post_names=None):
     """Final diagnostic only: replay matched no-cue RIAL release on its SMD edges."""
     import jax.numpy as jnp
     from .brain.conductance_network import ChemicalReleaseOverride
-    source=ids.index('RIAL');posts=[i for i,n in enumerate(ids) if n.startswith('SMD') and chemical_mask[i,source]>0]
+    source=ids.index(source_name);posts=[i for i,n in enumerate(ids) if (n.startswith('SMD') if post_names is None else n in post_names) and chemical_mask[i,source]>0]
     times=np.asarray(times);release=np.asarray(release)
     if not posts or times.shape!=release.shape or not np.isfinite(times).all() or np.any(np.diff(times)<=0) or not np.isfinite(release).all() or np.any((release<0)|(release>1)):
         raise ValueError('Valid matched no-cue release and existing branch required')

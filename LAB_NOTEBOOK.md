@@ -8833,3 +8833,86 @@ loss/criteria and biological prior review if changing fixed parameters. No
 synapse sign edits, unbounded weights, actual clamp training, new simulation or
 new optimization launched from this record. Four generations do not prove
 network insufficiency. Preserve all failed/independent checkpoints and audits.
+
+## 2026-11-16 — E087 planned: responsive AIYL operating range, baseline gait preserved
+
+User: "So we need to get it to work without full saturation" then "OK, do this
+then". Implement next component, retaining preceding3h TOTAL limit and automatic
+audit. Plan: `experiments/records/E087-plan.json`; execution NOT evidenced.
+Parent E086 selected5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022,
+source `/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910`.
+Exact full original-anchor coordinate reconstruction and model/reference hashes,
+no random fallback. Fresh CMA not exact optimizer resume. Original parent and
+all independent/failed models remain external and preserved.
+
+Focus AWAL/AIYL nonleak inward/outward densities, existing chemical inputs into
+AIYL separately per source, and AIYL->RIAL strength to permit tonic compensation.
+Local bundled canonical topology lists12incoming sources ASIL,AWAL,AWBL,ASEL,
+ASER,AFDL,AWCL,AWCR,BAGR,RIH,AIYR,AUAL. This suggests up to17groups, not an actual
+server parameter inventory. Actual group schema/bounds recorded at runtime.
+No leak/capacitance/kinetics/reversal/release-function or sign edits, no new edges,
+no motor/RIAL channel changes, no RIAL->SMD/gap/NMJ/muscle/water/clock changes.
+Sensory gains/routing/kinetics fixed. Group+-0.4log re-centered at E086selected
+with original-anchor factor2 bounds unchanged. Fixed signs remain model-specific
+assumptions, not cell-specific biological truth. No sign change disguised as fit.
+
+Baby steps AIYL release upper headroom2%,5%,10%: in uncued active/response/late
+and cued active windows q01>=.05, q99<=.98/.95/.90. Training margin1.3 targets
+q99<=1-1.3*headroom. Not a universal target for all neurons. Simultaneously require
+absolute cue-minus-sham mean release changes2e-5/5e-5/1e-4, fit1.3times those
+thresholds, response q01>=.005/q99<=.995, same response sign in each half-window,
+repeat and all normal dose/timing/refinement cases. Either sign is acceptable
+for this first relay component and reported; this does NOT qualify inhibitory
+control of RIAL or stopping. Recovery active mean difference<=max(1e-6,.25*minimum
+cue change) vs matched no-cue. Merely desaturating or altering baseline cannot
+qualify. Operating-range penalties guide partial candidates while selection
+requires safety/body gait/recovery. Smooth normalized losses; no direct clamp.
+
+Entire302-cell brain, muscles, water mechanics and proprioception remain live.
+Original body amplitude/frequency preservation gates unchanged; parabolic peak
+interpolation inherited prospectively from E086. Eight final normal paired
+protocols nominal/low-dose/shift/repeat/close-repeat/long/neural-half/body-half,
+plus chemical sensory block and final AIYL->RIAL branch replay diagnostic. Replay
+uses no-cue release at body-step midpoint only on existing edge, from cue onset,
+with no-cue replay control. Never a training input/deployable output gate. Body
+mediation separate/optional; no downstream swimming/RL promotion. H1.2 full
+start/stop/rest/restart remains unqualified. Same exact chosen checkpoint for all
+final cases, preserve each low-dose/shift validated rung and later unvalidated
+search state separately. Final selected weights may differ from final optimizer.
+
+Fresh pycma4.4.1 seed8700 population12 sigma.3,4persistentCPU workers x4physical
+cores,float64; stagefresh seeds8700+stage sigma.15, restarts9700+count sigma.2.
+All optimizer/NumPy/Python RNG/asked/told/stage/restart/final records retained.
+Three-hour hard TOTAL includes prep/search/checks/final tests/automatic audit and
+cleanup.20min audit reserve; coordinator final reserve>=60min or40% remaining,
+generation lookahead; early finish possible. Full raw intermediate traces not
+written, all weights/request/features retained; parent/final full traces saved.
+50GiB free reserve,15GiB search stop, estimated30GiB new-run cap with concurrent
+writer granularity; audit adds small files. No deletions or unrequested data copy.
+Exact source/env/argv captured. Audit now expands relay range/response/recovery
+checks along with gait, integrity, fixed physical fields and selected latent
+reconstruction. Timeout/missing/failed integrity audit prevents post-audit
+qualification. Audit success is not evidence behavior gates passed.
+
+Command: `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_range_mbslnx2.sh`.
+Report: dedicated conda Python `-m scripts.report_rial_sensory --relay`.
+External output relay-range-<UTC>-<PID> plus.log and sibling-audit. No actual
+server weights inspected or scientific forward fit executed locally.
+
+E087 local verification:42 focused software tests passed in15.42s via
+`.venv/bin/python -m pytest -q tests/test_relay_range.py tests/test_rial_sensory.py tests/test_rial_release.py tests/test_rial_sensory_audit.py tests/test_cma_curriculum.py tests/test_rial_control.py`.
+Tests cover range-only/cue-only/weak-gait/no-recovery rejection, smooth progress
+before range gate, consistent versus opposite response signs, focused coordinate
+masks, normal no-clamp worker routing, exact AIYL->RIAL diagnostic branch,
+real CMA/mock-forward stage selection/warm starts for3objectives, and audit
+success versus timeout receipts. Launcher shell syntax, CLI help and diff checks
+passed. Actual server weights/forward scientific fitting not tested locally.
+An initial test-only fake coordinator omitted patching the new group-builder;
+corrected fixture, not a runtime scientific failure or new experiment outcome.
+
+Diagnostic correction: replay mediation must have original body attenuation>1e-6
+before claiming its reduction; previously a zero original/replay body effect
+could satisfy a nonnegative floor comparison. New zero-effect regression test
+rejects this. E085/E086 actual printed effects exceed threshold and alreadyfailed
+mediation; historical results are unchanged. Relay-only success still cannot
+qualify motor stopping/swimming. E087 server execution remains planned.

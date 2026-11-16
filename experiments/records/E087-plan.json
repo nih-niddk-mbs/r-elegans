@@ -1,0 +1,64 @@
+{
+  "experiment": "E087",
+  "status": "planned_server_execution_not_evidenced",
+  "record_date": "2026-11-16",
+  "question": "Can the saturated AIYL relay acquire usable operating range and a cue-specific response/recovery while baseline autonomous body motion is preserved?",
+  "authorization": "User asks to implement non-saturated responsive operating-point fitting; retain preceding3h total launch policy and automatic post-run audit.",
+  "parent_checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022",
+  "source_run": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910",
+  "initialization": "Fresh CMA from exact E086 selected full original-anchor coordinates, pinned model/no-cue trace hashes verified; no fallback. Not exact optimizer resume. Parent remains a failed component, not qualified start/stop. Preserve independent parents and failed candidates.",
+  "trainable": "AWAL and AIYL nonleak inward/outward channel-density groups; one existing chemical edge per input source into AIYL; existing AIYL-to-RIAL strength for tonic compensation. Bundled canonical topology inspection lists12 incoming AIYL chemical sources (ASIL,AWAL,AWBL,ASEL,ASER,AFDL,AWCL,AWCR,BAGR,RIH,AIYR,AUAL), giving up to17groups with4channel groups+1compensation edge. Actual mapping/count saved from server model; no new edges.",
+  "fixed": "All other neuron channel densities including RIAL/motor cells, all other chemical strengths including RIAL-to-SMD, all gaps, leak/capacitance/kinetics/reversals/release thresholds/slopes, sensory gains/signs/routing/kinetics, NMJs, muscles, water/body mechanics and clocks.",
+  "bounds": "Group log changes within+-0.4 relative to E086 selected, intersect original-anchor factor2 bounds. Recentering is explicit, not old-local-bound/optimizer resume. No fixed sign edits.",
+  "method": {
+    "optimizer": "cma==4.4.1",
+    "seed": 8700,
+    "population": 12,
+    "sigma": 0.3,
+    "workers": 4,
+    "physical_cores_per_worker": 4,
+    "precision": "float64",
+    "stage_seeds": "8700+stage",
+    "stage_sigma": 0.15,
+    "restart_seeds": "9700+restart",
+    "restart_sigma": 0.2
+  },
+  "curriculum": {
+    "minimum_upper_release_headroom": [
+      0.02,
+      0.05,
+      0.1
+    ],
+    "meaning": "AIYL baseline/recovery release q01>=.05 and q99<=.98,.95,.90 respectively. Engineering targets, not biological measurements; no requirement that every neuron have midrange release.",
+    "minimum_absolute_cue_mean_release_change": [
+      2e-05,
+      5e-05,
+      0.0001
+    ],
+    "cue_direction": "Either sign allowed and reported at this relay component stage, but same sign in both response half-windows, repeated cues and across all normal final cases. A relay decrease is not qualified RIAL inhibition.",
+    "training_margin": 1.3,
+    "training_range": "q99<=1-1.3*headroom; q01>=.05",
+    "training_cue": "abs(cue-minus-sham mean release)>=1.3*headroom*.001"
+  },
+  "criteria": {
+    "gait": "Unchanged E085 regional cycle amplitude preservation, absolute1.62..1.98Hz and5% relative frequency. Parabolic subsample median-period estimator from E086. Entire live embodied brain remains active; not a relay-only toy.",
+    "range": "All uncued active/response/late and cued active windows satisfy q01>=.05/q99<=1-headroom. Cue response q01>=.005 and q99<=.995.",
+    "cue": "Matched cue-minus-sham AIYL release means over response windows exceed headroom*.001 absolute with consistent sign across halves/repeats/variants. Continuous error targets margin; range, cue response and gait are jointly required, so merely lowering AIYL or changing baseline cannot qualify.",
+    "recovery": "Cued active/baseline/recovery AIYL mean differs from matched no-cue by<=max(1e-6,.25*headroom*.001). Body baseline/recovery remains preserved.",
+    "selection": "Only safe body-gait/recovery-preserving proposals can replace selected; operating-range failure does not prohibit retaining improving partial candidates. Advance after same-model low-dose/shift checks and common response direction; prefer highest validated rung for final.",
+    "controls": "Eight final normal paired protocols: nominal,low-dose,shift,repeat,close-repeat,long-cue,neural-half,body-half. Chemical sensory block must remove response within.25*headroom*.001 while proprioception live.",
+    "numerical": "Neural/body refined absolute response-statistic differences<=min(.005,.25*headroom)*.001 with all gait/relay gates. Endpoint1-abs(mean_release_change) is a reporting transport field, not a body amplitude ratio or fractional neural attenuation.",
+    "counterfactual": "Final diagnostic ONLY: replay matched no-cue AIYL release onto its existing RIAL chemical edge from cue onset; all other neural/gap/NMJ pathways live. Includes matched no-cue replay. Body-effect mediation optional and separate; no clamp/forcing during fitting or normal validation.",
+    "claims": "Only AIYL operating range/response component. Full motor stop/start/rest/restart, RIAL rhythm control, swimming/navigation and biological fidelity remain unqualified. No automatic downstream behavior promotion."
+  },
+  "stimulus": "Same E085 physical chemical bath, diacetyl1uM40..50s vs no-cue, NaCl50000uM baseline; low-dose.8uM, shifted/repeated/close-repeat/long schedules unchanged. No hidden cue labels or imposed oscillatory drive.",
+  "maximum_total_minutes": 180,
+  "budget": "Maximum3h total preparation,search,final validation,automatic audit and cleanup.20min reserved for audit, coordinator reserves max60min or40% remaining for final tests. Generation lookahead; may finish early. Audit timeout/integrity failure disallows post-audit qualification.",
+  "command": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_range_mbslnx2.sh",
+  "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_sensory --relay",
+  "artifacts": "/home/carsonc/r-elegans-results/relay-range-<UTC>-<PID>, adjacent.log and sibling-audit; all candidate/model/coordinates/selection, exact source/env/argv, parent model/recursive references, every CMA/NumPy/Python RNG/asked/told/stage/restart/final state external; full raw parent/final traces only.",
+  "audit": "Automatic all-candidate checkpoint/coordinate digests, fixed input/model/trace hashes, final raw finiteness, actual selected frozen physical fields, latent reconstruction/bounds, gait gates, detailed relay range/cue/recovery failures, saved all-neuron release and neural-to-body window summaries. No forward simulation for audit; missing evidence explicit.",
+  "storage": "50GiB free reserve,15GiB search stop, estimated30GiB training-run cap with concurrent-writer granularity plus small audit records. No existing files removed.",
+  "local_verification": "42 focused software tests passed in15.42s: tests/test_relay_range.py tests/test_rial_sensory.py tests/test_rial_release.py tests/test_rial_sensory_audit.py tests/test_cma_curriculum.py tests/test_rial_control.py. Tests cover joint range/response/recovery/gait gates, either-direction responses with sign consistency, partial-loss gradient, focused parameter masks, real CMA/mock-forward three-stage selection and pinned warm starts for all3objectives, no-clamp training worker routing, existing-edge AIYL counterfactual and refusal of mediation without body effect, audit success/timeout budgets and prior E085/E086 behavior. Shell syntax/CLI/diff checks passed. Local bundled topology inspected; actual server parent/forward scientific fit not run locally.",
+  "diagnostic_software_correction": "Mediation additionally requires original body attenuation>1e-6 so zero original body effect cannot qualify by also having zero replay effect. Previous E085/E086 reported effects exceed this threshold and remain failed mediation tests; no historical outcome rewritten."
+}
