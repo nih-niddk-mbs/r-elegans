@@ -247,6 +247,8 @@ def main():
     write(out/'integrity.json', integrity)
     result = dict(run=str(run), audit_complete=True, integrity_passed=not problems, problems=problems,
         candidate_count=len(candidates), final_cases=len(gate_rows),
+        RIAL_release_checks_applicable='RIAL_release_cycle_excursion' in parent['active'][0],
+        relay_range_checks_applicable='AIYL_release_mean' in parent['active'][0],
         failed_gait_checks={Path(r['output']).name:len(r['failures']) for r in gate_rows},
         failed_RIAL_release_checks={Path(r['output']).name:len(r['RIAL_release_failures']) for r in gate_rows},
         failed_relay_range_checks={Path(r['output']).name:len(r['relay_range_failures']) for r in gate_rows},

@@ -1,5 +1,12 @@
 # r-elegans
 
+2026-11-16 E087 completed (user-reported):4 generations,1h41m21s including
+clean automatic audit. Loss fell27.65%; AIYL cue response grew47.31% but reaches
+only23.51% of required magnitude. Release-headroom gate still fails; no component
+qualified. All gait/refinement, integrity and frozen-field checks pass. AIYL
+outward group near a bound; inspect saved quantiles/bounds before continuation.
+Four generations do not establish convergence. [Outcome](experiments/records/E087-server-summary.json).
+
 2026-11-16 E087 planned: restore AIYL operating range and sensory cue
 responsiveness together while preserving baseline wiggling/recovery. Focus unknown
 AWAL/AIYL densities, existing inputs to AIYL and AIYL->RIAL compensation; keep

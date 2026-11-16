@@ -8916,3 +8916,58 @@ could satisfy a nonnegative floor comparison. New zero-effect regression test
 rejects this. E085/E086 actual printed effects exceed threshold and alreadyfailed
 mediation; historical results are unchanged. Relay-only success still cannot
 qualify motor stopping/swimming. E087 server execution remains planned.
+
+## 2026-11-16 — E087 improving relay fit, still fails range and response targets
+
+Evidence user-pasted report stdout, attachment SHA256
+dd2c2567e418c9d53ae1642069af4bc49bfeabe0f851c79e3349c66fb3a7805f.
+Structured12baseline/selected/final rows, budget/numerical/audit fields:
+`experiments/records/E087-server-summary.json`. Attachment ends after audit scope
+string without final root brace; only that closing brace was added to parse the
+supplied fields. No audit values inferred. Remote raw traces/models/source/env
+not independently retrieved. Run
+`/home/carsonc/r-elegans-results/relay-range-20261116T194725Z-293645`, audit sibling
+`relay-range-20261116T194725Z-293645-audit`.
+
+4generations/48population candidates;59records consistent with parent+48+10final.
+6080.994378595002s=1h41m21s within180min including complete automatic audit;
+exit0, no timeout/failure, all validation complete. stop time_budget, no milestones.
+Lookahead/reserves can yield early finish; no phase timing breakdown is provided.
+Do not report3h of fitting or infer proven efficient resource utilization.
+Parent5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022;
+selected608587d8cc9267674b5828df02d7891ae8940f46cc6981b62518b7f89068de73.
+
+Training loss4.973822681->3.598432301 (~27.65% reduction). Nominal AIYL cue change
+-3.191931938e-6 ->-4.701975154e-6 (~47.31% stronger absolute response),23.51% of
+required2e-5. Release-headroom2% gate remains failed in every case. Negative
+response direction consistent and recovery/response-not-railed flags pass in
+normal cases; these do not qualify the missing range or magnitude targets.
+Low-dose-4.128486879e-6; repeated about-4.70e-6; close-repeat second-3.571834943e-6,
+all below minimum. Long-cue late response essentially absent. Body ratio
+.9991787666 (~.08212% reduction) is separate, not motor stop/swim. AIYL-branch
+replay body ratio.9991775941 slightly increases small effect, mediation false.
+Chemical block removes cue response as intended.
+
+All final gait failures0, safety/body/RIAL-independent preservation true.
+Neural/body refined cue-statistic differences4.9642113e-10/1.3562110e-9 pass.
+Integrity true, problems[], selected frozen coordinates AND actual
+physical fields unchanged. Only density:AIYL:outward near bound; its exact sign,
+local-vs-original distance and actual release q99 are not printed. Need those
+saved fields before claiming original-bound limitation or widening anything.
+RIAL-release audit zeros mean that assay is INAPPLICABLE to E087 features, not
+passed RIAL rhythm control. Blocked-control cue/direction failures are expected;
+blocked operating-range failure is still real. No component/post-audit/full
+start-stop/swimming qualification, no thresholds changed.
+
+Interpretation: progress in the new objective, not a converged plateau. Only4
+CMA generations do not establish network insufficiency. Next inspect exact saved
+parent/selected release quantiles and selected physical group deltas/bounds;
+then choose longer continuation of SAME objective. A selected-weight fresh
+optimizer would not be exact state resume. Preserve failed/current/independent
+models, optimizer/RNG and recursive dependencies. No new job or bounds change.
+
+Audit-report clarification implemented after this outcome: future saved-data audit
+summaries explicitly label RIAL-release and relay-range assay applicability,
+so an empty/inapplicable failure list is not confused with an assay pass. Old
+printed E087 zeros remain preserved above. This is reporting metadata only;
+no evaluation/qualification criterion changes or new forward run.
