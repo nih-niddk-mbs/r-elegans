@@ -1,5 +1,11 @@
 # Current model: exact scope and computation path
 
+2026-11-16 E085 saved-data audit reported complete: integrity passed,251
+evaluation records,10 final cases. Refined gait failures:21 neural-half,19
+body-half; three latent parameter groups near a bound, frozen coordinates
+unchanged. Detailed failures/signal summaries still need inspection before more
+fitting; E085 remains unqualified. [Audit record](experiments/records/E085-audit-server-summary.json).
+
 2026-11-16 E085 completed (user-reported):20 CMA generations,6h12m05s,
 all final evaluations complete within8h cap. Nominal sensory attenuation improved
 from0.0381% to0.0873%, below the first2% target; no rung advanced. Ordinary-grid

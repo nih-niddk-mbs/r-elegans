@@ -1,0 +1,33 @@
+{
+  "experiment": "E085",
+  "record_type": "saved_data_audit_reported_outcome",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted audit stdout and summary.json text; remote files not independently retrieved. No attachment bytes or source hash available for these chat messages.",
+  "run": "/home/carsonc/r-elegans-results/rial-sensory-20261116T041450Z-211013",
+  "audit": "/home/carsonc/r-elegans-results/rial-sensory-audit-20261116T155003Z",
+  "audit_complete": true,
+  "integrity_passed": true,
+  "problems": [],
+  "candidate_count": 251,
+  "final_cases": 10,
+  "failed_gait_checks": {
+    "final-nominal": 0,
+    "final-low-dose": 0,
+    "final-shift": 0,
+    "final-repeat": 0,
+    "final-redundant": 0,
+    "final-long-cue": 0,
+    "final-neural-half": 21,
+    "final-body-half": 19,
+    "final-sensory-blocked": 0,
+    "final-rial-replay": 0
+  },
+  "groups_near_bound": [
+    "density:RIAL:outward",
+    "chemical:AWAR->relays",
+    "chemical:AIYR->relays"
+  ],
+  "frozen_coordinates_unchanged": true,
+  "interpretation": "Declared artifact integrity checks passed and selected coordinates outside trainable groups unchanged. Three selected latent groups within1% of a bound, not evidence of a general bound-limited optimum. Refined gait failures persist; exact checks and signal-chain details remain unavailable in supplied aggregate report. No changed qualification or forward experiment.",
+  "next_step": "Read gait_gates.json, parameters.json and saved signal-window summaries before changing bounds or launching more fitting."
+}

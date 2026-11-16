@@ -8533,3 +8533,23 @@ Audit server execution pending; no result claimed.
 Local software verification:2 tests passed in0.20s for exact failed frequency gate
 identification and paired voltage/release window statistics, including explicit
 missing stages. CLI help passed. Actual E085 server files unavailable locally.
+
+## 2026-11-16 — E085 saved-data audit reported complete
+
+User-pasted stdout and summary.json from
+`/home/carsonc/r-elegans-results/rial-sensory-audit-20261116T155003Z`.
+Structured transcription: `experiments/records/E085-audit-server-summary.json`.
+No remote raw audit/trace/source bytes independently retrieved; no new attachment
+hash available for chat-pasted text. Audit reports complete, integrity passed,
+no problems,251 evaluation records and10 final cases. This is a saved-data
+inspection; no forward simulation or training and no new capability.
+
+Ordinary final cases have0 failed gait checks; neural-half has21 and body-half19.
+Frozen coordinates outside trainable groups unchanged. Selected latent groups
+within1% of bound: density:RIAL:outward, chemical:AWAR->relays and
+chemical:AIYR->relays. Direction, exact values and detailed regional/window gait
+failures have not been provided. Near-bound membership alone does not establish
+that relaxing bounds would improve the objective or be physiologically justified.
+Integrity success does not qualify gait convergence or control. E085 remains a
+failed2% attenuation fit. Next: retrieve detailed gait and sensory/relay/RIAL
+release statistics from existing audit before choosing another fit. No job launched.
