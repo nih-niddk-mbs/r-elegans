@@ -1,0 +1,257 @@
+{
+  "experiment": "E086",
+  "record_type": "detailed_candidate_and_signal_audit",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted server stdout;8-decimal release values rounded. Raw remote artifacts not independently retrieved.",
+  "source_attachment_sha256": "531caad49da00ac95570d2608c1f7f4db455b2989e990dad6338214b3764b17b",
+  "run": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910",
+  "generation_history": [
+    {
+      "generation": 0,
+      "target": 0.01,
+      "minimum_loss": 1.687168969596891,
+      "selected": "37e996d100e7440890f7700d327ac2f9103680cbf1afbba54af2bc67d6548e42",
+      "selected_evaluation": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/evaluations/g-00000-c-08"
+    },
+    {
+      "generation": 1,
+      "target": 0.01,
+      "minimum_loss": 1.6821321807464236,
+      "selected": "97178846206e1adb78e85abd30b00ee8159863272bcdc3da1b29a9498eddc23f",
+      "selected_evaluation": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/evaluations/g-00001-c-02"
+    },
+    {
+      "generation": 2,
+      "target": 0.01,
+      "minimum_loss": 1.668693898609935,
+      "selected": "7acfd1f9e97b7cf566145584c9fb7a5aa2be8d57d35ea96cb99b81c38f8687a6",
+      "selected_evaluation": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/evaluations/g-00002-c-07"
+    },
+    {
+      "generation": 3,
+      "target": 0.01,
+      "minimum_loss": 1.6736967810637209,
+      "selected": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022",
+      "selected_evaluation": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/evaluations/g-00003-c-04"
+    }
+  ],
+  "ten_largest_absolute_latent_groups": [
+    {
+      "name": "density:RIAR:inward",
+      "coordinates": 4,
+      "latent": -0.9925013140458102,
+      "near_group_bound": true,
+      "log_delta_range": [
+        -0.3970005256183241,
+        -0.3970005256183241
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "density:AIZR:outward",
+      "coordinates": 12,
+      "latent": -0.7050441004280594,
+      "near_group_bound": false,
+      "log_delta_range": [
+        -0.28201764017122377,
+        -0.28201764017122377
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "density:AIBR:inward",
+      "coordinates": 4,
+      "latent": -0.6580029770724088,
+      "near_group_bound": false,
+      "log_delta_range": [
+        -0.26320119082896354,
+        -0.26320119082896354
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "chemical:AWAL->relays",
+      "coordinates": 2,
+      "latent": -0.5597846825201261,
+      "near_group_bound": false,
+      "log_delta_range": [
+        -0.2239138730080505,
+        -0.22391387300805046
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "density:AIBR:outward",
+      "coordinates": 12,
+      "latent": 0.5554949701886354,
+      "near_group_bound": false,
+      "log_delta_range": [
+        0.22219798807545416,
+        0.22219798807545416
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "chemical:AIBL->relays",
+      "coordinates": 2,
+      "latent": 0.537345405211061,
+      "near_group_bound": false,
+      "log_delta_range": [
+        0.2149381620844244,
+        0.2149381620844244
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "density:RIAL:outward",
+      "coordinates": 12,
+      "latent": -0.5210168236557685,
+      "near_group_bound": false,
+      "log_delta_range": [
+        -0.05618910020413481,
+        -0.05618910020413481
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "chemical:AIYL->relays",
+      "coordinates": 2,
+      "latent": -0.3962882963272024,
+      "near_group_bound": false,
+      "log_delta_range": [
+        -0.15851531853088097,
+        -0.15851531853088097
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "density:AIBL:outward",
+      "coordinates": 12,
+      "latent": -0.39030754729640244,
+      "near_group_bound": false,
+      "log_delta_range": [
+        -0.10325973401637278,
+        -0.10325973401637273
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "density:AIZR:inward",
+      "coordinates": 4,
+      "latent": -0.36878826584442354,
+      "near_group_bound": false,
+      "log_delta_range": [
+        -0.1475153063377694,
+        -0.1475153063377694
+      ],
+      "near_original_bound": 0
+    }
+  ],
+  "response_window_s": [
+    41,
+    46
+  ],
+  "release_statistics": {
+    "AWAL": {
+      "no_cue_mean": 0.00062137,
+      "cue_mean": 0.00087638,
+      "no_cue_std": 1e-08,
+      "cue_std": 0.00020154,
+      "difference_rms": 0.00032504
+    },
+    "AWAR": {
+      "no_cue_mean": 0.05580003,
+      "cue_mean": 0.07155361,
+      "no_cue_std": 2.68e-06,
+      "cue_std": 0.01180085,
+      "difference_rms": 0.0196835
+    },
+    "AIYL": {
+      "no_cue_mean": 0.98964809,
+      "cue_mean": 0.98964489,
+      "no_cue_std": 5.4e-07,
+      "cue_std": 2.53e-06,
+      "difference_rms": 4.02e-06
+    },
+    "AIYR": {
+      "no_cue_mean": 0.5341642,
+      "cue_mean": 0.53735852,
+      "no_cue_std": 2.23e-06,
+      "cue_std": 0.0024018,
+      "difference_rms": 0.0039966
+    },
+    "AIZL": {
+      "no_cue_mean": 0.71736878,
+      "cue_mean": 0.71800171,
+      "no_cue_std": 0.00085144,
+      "cue_std": 0.00095955,
+      "difference_rms": 0.00077705
+    },
+    "AIZR": {
+      "no_cue_mean": 0.16821626,
+      "cue_mean": 0.17722227,
+      "no_cue_std": 9.227e-05,
+      "cue_std": 0.00683004,
+      "difference_rms": 0.01130541
+    },
+    "AIBL": {
+      "no_cue_mean": 0.68023788,
+      "cue_mean": 0.6885097,
+      "no_cue_std": 0.00025594,
+      "cue_std": 0.00616537,
+      "difference_rms": 0.01032378
+    },
+    "AIBR": {
+      "no_cue_mean": 0.28464253,
+      "cue_mean": 0.28524965,
+      "no_cue_std": 0.00043897,
+      "cue_std": 0.00061028,
+      "difference_rms": 0.0007509
+    },
+    "RIAL": {
+      "no_cue_mean": 0.41605579,
+      "cue_mean": 0.41620376,
+      "no_cue_std": 0.07090025,
+      "cue_std": 0.07090213,
+      "difference_rms": 0.00069277
+    },
+    "RIAR": {
+      "no_cue_mean": 0.01282758,
+      "cue_mean": 0.0132244,
+      "no_cue_std": 0.00018519,
+      "cue_std": 0.00035385,
+      "difference_rms": 0.0004993
+    },
+    "SMDDL": {
+      "no_cue_mean": 0.06643075,
+      "cue_mean": 0.06650768,
+      "no_cue_std": 0.00126198,
+      "cue_std": 0.00126316,
+      "difference_rms": 9.684e-05
+    },
+    "SMDDR": {
+      "no_cue_mean": 0.00021266,
+      "cue_mean": 0.0002135,
+      "no_cue_std": 1.064e-05,
+      "cue_std": 1.069e-05,
+      "difference_rms": 1.05e-06
+    },
+    "SMDVL": {
+      "no_cue_mean": 0.17123334,
+      "cue_mean": 0.1708161,
+      "no_cue_std": 0.04278396,
+      "cue_std": 0.04274127,
+      "difference_rms": 0.00065256
+    },
+    "SMDVR": {
+      "no_cue_mean": 0.5642278,
+      "cue_mean": 0.56442216,
+      "no_cue_std": 0.06199227,
+      "cue_std": 0.06195084,
+      "difference_rms": 0.00060225
+    }
+  },
+  "interpretation": "Sensory detection and relay response remain present. RIAL release mean.41605579->.41620376; std.07090025->.07090213, essentially unattenuated, while baseline mean differs substantially from E085 parent. Large changes in several groups alter baseline state without meaningful cue control. RIAR inward local logdelta-.3970 is near local limit but not original bound. AIZR/AIBR etc move substantially; this is not evidence of pathway-specific sensitivity because candidates change groups jointly.",
+  "selection_limitation": "Generation minimum_loss includes ineligible candidates; it is not the selected eligible loss. Gen2 minimum1.66869 below gen3 selected loss1.67370 cannot alone establish a selection regression or bug. Selected-evaluation metrics would be needed. Only4 generations, no optimizer convergence claim.",
+  "next_planned_audit": "Read-only nominal no-cue/cue41..46s chemical and gap current reconstruction into RIAL at a common fixed postsynaptic mean to isolate presynaptic changes; rank sources and compare signed sums versus sum of absolute source changes for cancellation. Existing network formula/masks/release law, exact checkpoint/trace hashes and paired clock checks. No injected current, new edges, training or claim of causal sufficiency."
+}

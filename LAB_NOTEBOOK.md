@@ -8723,3 +8723,40 @@ Four generations do not establish optimizer convergence or network insufficiency
 Preserve selected failed model, parent, all optimizer/RNG and recursive references.
 Next proposed step: inspect candidate/parameter sensitivity and cue-driven RIAL
 input/output changes before another identical long search. No new job launched.
+
+## 2026-11-16 — E086 detailed audit: baseline shifts without sensory rhythm control
+
+User stdout attachment SHA256 531caad49da00ac95570d2608c1f7f4db455b2989e990dad6338214b3764b17b.
+Structured history/top10groups/rounded release stats:
+`experiments/records/E086-audit-detail-server-summary.json`.
+Generations0..3 population minima1.68716897,1.68213218,1.66869390,1.67369678.
+These minima include potentially ineligible candidates, so do not infer a best
+eligible regression merely because final population minimum exceeds previous
+minimum. The stdout does not supply historical selected eligible losses.
+
+RIAR inward group logdelta-.39700053 (4coordinates), AIZR outward-.28201764,
+AIBR inward-.26320119/outward+.22219799, AWAL->relays-.22391387,
+AIBL->relays+.21493816; RIAL outward-.05618910 (12coordinates). All top10report
+0coordinates near ORIGINAL bounds. Latent magnitude is not a direct comparison
+of physical multiplier magnitudes when per-group bounds differ. Joint candidate
+changes do not supply one-parameter sensitivities or causal attributions.
+
+AWAR mean release.05580003->.07155361, AIZR.16821626->.17722227,
+AIBL.68023788->.68850970: chemical information reaches multiple relays.
+AIYL near.98964809 remains nearly unchanged. RIAL mean.41605579->.41620376,
+std.07090025->.07090213, no meaningful rhythmic std attenuation; cycle-amplitude
+objective separately failed as already recorded. RIAL baseline mean was~.34898
+in E085selected and now~.41606, despite weak cue-specific change. Do not confuse
+baseline parameter adaptation with learned control. Cannot diagnose intrinsic
+pacemaking or missing connections from these voltage/release summaries.
+
+Next planned read-only current-path audit: same selected checkpoint, matched
+nominal no-cue/cue41..46s traces, existing chemical/gap formulas and masks;
+verify model/trace SHA and identical clocks, finite signals. Hold postsynaptic
+RIAL at common no-cue window mean for BOTH conditions when reconstructing
+source-varying currents. Rank individual changes and compare signed net change
+versus sum absolute changes to identify possible cancellation. This is a source
+reconstruction, not total membrane-current balance or a causal intervention.
+No intrinsic gating states reconstructed; no new training/forward simulation.
+Command supplied in conversation; output small timestamped external JSON with
+input hashes. Results pending. Preserve all source/optimizer/model dependencies.
