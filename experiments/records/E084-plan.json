@@ -1,6 +1,6 @@
 {
   "experiment": "E084",
-  "status": "planned_server_execution_not_evidenced",
+  "status": "diagnostic_completed_reversible_partial_causal_attenuation_user_reported",
   "record_date": "2026-11-15",
   "question": "Does RIAL causally support the persistent SMD/body rhythm through its existing chemical RIAL-to-SMD route, and is the influence reversible?",
   "checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
@@ -39,5 +39,6 @@
   "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_control",
   "artifacts": "/home/carsonc/r-elegans-results/rial-control-<UTC>-<PID>, adjacent log; verified copied capsule/model/coordinates, baseline release probabilities and original reference path/SHA; every trial's source/env/argv, metadata/branch indices, trace/hash, metrics, configuration and budget receipt. No optimizer/RNG because no fit/randomization.",
   "storage": "Retain all20 diagnostic traces and original E078/E080-E083 dependencies/checkpoints; no deletion.50GiB free before writes; inherited25GiB estimated new-run cap with concurrent-writer granularity, not OS quota.",
-  "local_verification": "34 focused tests passed15.41s. Sparse edge equation/reference-matrix checks; inactive override bit-identical to original single neural substep; active substep matches explicit conductance equation and leaves other neurons/gates/Ca unchanged in that substep. Branch worker/source/hash and sensing/NMJ-live plumbing checks; membrane versus branch access semantics; existing conductance/body/recording regressions. Initial broader run exposed a unit-test global x64 setting leak, corrected by restoring prior precision per test; no model defaults changed. Shell syntax and CLI help passed. This includes one-substep bundled-checkpoint software verification, not an E084 scientific forward experiment or server result."
+  "local_verification": "34 focused tests passed15.41s. Sparse edge equation/reference-matrix checks; inactive override bit-identical to original single neural substep; active substep matches explicit conductance equation and leaves other neurons/gates/Ca unchanged in that substep. Branch worker/source/hash and sensing/NMJ-live plumbing checks; membrane versus branch access semantics; existing conductance/body/recording regressions. Initial broader run exposed a unit-test global x64 setting leak, corrected by restoring prior precision per test; no model defaults changed. Shell syntax and CLI help passed. This includes one-substep bundled-checkpoint software verification, not an E084 scientific forward experiment or server result.",
+  "outcome_record": "E084-server-summary.json"
 }

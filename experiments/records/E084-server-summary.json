@@ -1,0 +1,507 @@
+{
+  "experiment": "E084",
+  "record_date": "2026-11-15",
+  "evidence": "User-reported report_rial_control stdout; remote full trace/model/source/environment bytes not independently retrieved",
+  "source_attachment_sha256": "2eda9867b549592976f7980d0927c4ed73e2b3d921a68ec26a1acbb5d2a31ebe",
+  "protocol_checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "checkpoint_hash_evidence": "Pinned by implemented protocol; not printed in supplied excerpt",
+  "run": "/home/carsonc/r-elegans-results/rial-control-20261116T025857Z-206316",
+  "execution_valid": true,
+  "validation_complete": true,
+  "failure": null,
+  "selected_membrane": {
+    "name": "RIAL-0.1",
+    "kind": "membrane",
+    "targets": [
+      "RIAL"
+    ],
+    "conductance_nS": 0.1
+  },
+  "attenuation": {
+    "RIAL-0.1": {
+      "expected_evaluations": 5,
+      "observed_evaluations": 5,
+      "numerically_consistent": true,
+      "reversible_body_attenuation": true,
+      "downstream_SMD_variance_attenuation": false
+    },
+    "RIAL-SMD-mean": {
+      "expected_evaluations": 5,
+      "observed_evaluations": 5,
+      "numerically_consistent": true,
+      "reversible_body_attenuation": true,
+      "downstream_SMD_variance_attenuation": true
+    }
+  },
+  "learned_stopping_qualified": false,
+  "numerical_checks": [
+    {
+      "case": "RIAL-SMD-mean",
+      "grid": "neural-half",
+      "body_ratio_difference": 3.226693594361729e-05,
+      "neural_ratio_difference": 7.656620111919435e-05,
+      "passed": true
+    },
+    {
+      "case": "RIAL-0.1",
+      "grid": "neural-half",
+      "body_ratio_difference": 2.431724332827012e-06,
+      "neural_ratio_difference": 0.0015656587025645319,
+      "passed": true
+    },
+    {
+      "case": "RIAL-0.1",
+      "grid": "body-half",
+      "body_ratio_difference": 1.9937882618364933e-06,
+      "neural_ratio_difference": 2.880516409486944e-05,
+      "passed": true
+    },
+    {
+      "case": "RIAL-SMD-mean",
+      "grid": "body-half",
+      "body_ratio_difference": 3.334604324611856e-07,
+      "neural_ratio_difference": 3.878005050902966e-07,
+      "passed": true
+    }
+  ],
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 1841.9181174080004,
+    "total_minutes": 60.0,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/rial-control-20261116T025857Z-206316/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model"
+  },
+  "comparisons": [
+    {
+      "case": "RIAL-0.03",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.4982883749747022
+      ],
+      "SMD_rms_ratios": [
+        0.8949538147748568
+      ],
+      "RIA_mean_voltage": [
+        [
+          -64.58882841090933,
+          -69.26972795223602
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.1553869741446585,
+          0.08396339876665065
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-0.1",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.11334971701669654
+      ],
+      "SMD_rms_ratios": [
+        0.33247347122930376
+      ],
+      "RIA_mean_voltage": [
+        [
+          -70.95655426525532,
+          -69.43794677163537
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          0.7825191138859144,
+          0.06728677084507835
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-0.01",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.9479849810094516
+      ],
+      "SMD_rms_ratios": [
+        1.0664132351966753
+      ],
+      "RIA_mean_voltage": [
+        [
+          -60.743280311580655,
+          -69.11442990489367
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.3214397118459604,
+          0.09500931244387631
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAR-0.1",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        1.002037298493769
+      ],
+      "SMD_rms_ratios": [
+        1.0016100413528228
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.98249238039444,
+          -74.20936054081109
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.4311264807754078,
+          0.09086365336710214
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-SMD-mean",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.11960032069295487
+      ],
+      "SMD_rms_ratios": [
+        0.017489841247674002
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.96806804778639,
+          -68.9834707548678
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.485508284718751,
+          0.137312754307862
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-ventral-mean",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.11981673787420262
+      ],
+      "SMD_rms_ratios": [
+        0.017744847471423592
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.968790749537575,
+          -68.98341381433026
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.4853665380607264,
+          0.13859593969758616
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-ventral-zero",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.11274082228969981
+      ],
+      "SMD_rms_ratios": [
+        0.04298589881774319
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.76389414585107,
+          -68.6950591966528
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.5219561280507283,
+          0.14191845129370656
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-SMD-mean",
+      "variant": "repeat",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.11960032069295487,
+        0.1196022376903175
+      ],
+      "SMD_rms_ratios": [
+        0.017489841247674002,
+        0.01755681314188472
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.96806804778639,
+          -68.9834707548678
+        ],
+        [
+          -57.89485108912031,
+          -68.98105687272734
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.485508284718751,
+          0.137312754307862
+        ],
+        [
+          1.4978605700774759,
+          0.13842626892483817
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-0.1",
+      "variant": "repeat",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.11334971701669654,
+        0.11335768114187167
+      ],
+      "SMD_rms_ratios": [
+        0.33247347122930376,
+        0.3275178757458275
+      ],
+      "RIA_mean_voltage": [
+        [
+          -70.95655426525532,
+          -69.43794677163537
+        ],
+        [
+          -70.96347900282538,
+          -69.4393761564757
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          0.7825191138859144,
+          0.06728677084507835
+        ],
+        [
+          0.779470641809423,
+          0.06692017278382315
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-0.1",
+      "variant": "long-hold",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.11332060119452632
+      ],
+      "SMD_rms_ratios": [
+        0.3303337007055994
+      ],
+      "RIA_mean_voltage": [
+        [
+          -70.91190352415138,
+          -69.43791389106322
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          0.7846460845966114,
+          0.06717440350744164
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-SMD-mean",
+      "variant": "long-hold",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.1196022325771609
+      ],
+      "SMD_rms_ratios": [
+        0.017557567876211638
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.91071183172657,
+          -68.98235390175239
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.4992619823882365,
+          0.13782985622738983
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-SMD-mean",
+      "variant": "nominal",
+      "grid": "neural-half",
+      "body_ratios": [
+        0.11956805375701125
+      ],
+      "SMD_rms_ratios": [
+        0.017566407448793196
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.8839648448115,
+          -68.97962034712718
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.494998175826158,
+          0.13870208941997417
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-0.1",
+      "variant": "nominal",
+      "grid": "neural-half",
+      "body_ratios": [
+        0.11335214874102936
+      ],
+      "SMD_rms_ratios": [
+        0.33090781252673923
+      ],
+      "RIA_mean_voltage": [
+        [
+          -70.92696840525429,
+          -69.43919661364164
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          0.7862931857004882,
+          0.06671630203213447
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-0.1",
+      "variant": "nominal",
+      "grid": "body-half",
+      "body_ratios": [
+        0.1133477232284347
+      ],
+      "SMD_rms_ratios": [
+        0.3324446660652089
+      ],
+      "RIA_mean_voltage": [
+        [
+          -70.95669875183144,
+          -69.4379667859571
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          0.7824712340257529,
+          0.06728422532902428
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    },
+    {
+      "case": "RIAL-SMD-mean",
+      "variant": "nominal",
+      "grid": "body-half",
+      "body_ratios": [
+        0.11960065415338733
+      ],
+      "SMD_rms_ratios": [
+        0.01748945344716891
+      ],
+      "RIA_mean_voltage": [
+        [
+          -57.96801999862399,
+          -68.98348665331675
+        ]
+      ],
+      "RIA_voltage_std": [
+        [
+          1.485562537415155,
+          0.13729807902649924
+        ]
+      ],
+      "recovery": true,
+      "pre_match": true,
+      "safe": true,
+      "strict_body_rest": false
+    }
+  ],
+  "interpretation": "Replacing only existing RIAL-to-SMD chemical release by its pre-intervention mean causally attenuates downstream ventral SMD RMS~98.25% and body range~88.04%, reversibly and with numerical consistency. Whole RIAL inhibition reduces body range~88.67% but leaves more downstream neural variation. RIAR counterpart has little body effect in this checkpoint. No isolated RIAL pacemaker or biological left-right necessity claim.",
+  "limitations": "Strict rest fails in every printed case. Approximately12% body range remains after mean-branch intervention; do not claim full stopping or equate nonlinear RMS/body-range ratios with additive movement fractions. RIAL remains variable under branch intervention, but printed std alone is not proof of periodicity or intrinsic oscillation.",
+  "next_proposed_step": "Fit graded sensory-cued attenuation and recovery through existing RIAL control circuitry, starting with an achievable prospective partial target and retaining baseline gait. Keep full H1.2 stop/start and residual-motion requirements separate; no new fitting run launched by this record."
+}

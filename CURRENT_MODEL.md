@@ -1,9 +1,13 @@
 # Current model: exact scope and computation path
 
-2026-11-15 E084 **planned**: causal RIAL neural inhibition versus existing
-RIAL->SMD chemical mean-release hold, with recovery/repetition and independent
-refinements.60min TOTAL,20 frozen-checkpoint trials; no fit or qualification.
-[Protocol](experiments/records/E084-plan.json).
+2026-11-15 E084 completed (user-reported):30m42s, all trials and numerical
+checks passed. Holding existing RIAL->SMD chemical release at its baseline mean
+reversibly reduced body range88.04% and ventral SMD RMS98.25%, including repeated,
+long-hold and refined cases. RIAL inhibition reduced body range88.67%; RIAR
+counterpart had little effect. Causal transmission route supported, not isolated
+pacemaker identity or complete stopping: strict rest still fails.
+Next proposed step: small sensory-controlled attenuation/recovery fit without
+imposed clamps. [Outcome](experiments/records/E084-server-summary.json).
 
 2026-11-15 E083 audit reported: RIAL is the largest reconstructed rhythmic
 synaptic input to both ventral SMD cells across all audited conditions. SMD

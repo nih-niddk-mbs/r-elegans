@@ -8299,3 +8299,76 @@ prior precision after each test; no runtime/model-default change or tolerance
 relaxation. Rerun34passed. Shell syntax and CLI help passed. This is static/one-
 substep/mock software verification, not an actual E084 scientific simulation,
 fit or physiological qualification; server checkpoint not retrieved locally.
+
+### E084 partial server execution — refinement underway (2026-11-15)
+
+User-reported log excerpt for
+`/home/carsonc/r-elegans-results/rial-control-20261116T025857Z-206316.log`.
+This is a snapshot, not independent live process inspection. All8 screen trials
+and6 repeated/long-hold confirmation trials exited0. RIAL-.1nS and the declared
+RIAL-SMD-mean branch proceeded to confirmation/refinement; selection alone is
+not proof of causal suppression/recovery. Last heartbeat: refinement4 running,
+2 pending,36.1926min remaining in total budget. Thus14/20 trials reported done;
+the final summary is legitimately absent while final trials/aggregation remain.
+Remaining budget is not an ETA. No traceback or nonzero exit appears in the
+supplied excerpt. Continue existing job; do not restart/duplicate it. Final
+metrics, numerical checks and any causal attenuation finding remain pending.
+
+### E084 completed — causal RIAL->SMD rhythmic transmission, partial body suppression (2026-11-15)
+
+User supplies final `scripts.report_rial_control` stdout for
+`/home/carsonc/r-elegans-results/rial-control-20261116T025857Z-206316`.
+[Transcribed results/attachment SHA](experiments/records/E084-server-summary.json).
+Execution and validation true, failureNone, exit0, no timeout, all steps complete;
+1841.91812s (~30m42s) within60min budget. Reported20 planned trials completed;
+remote full traces/model/source/environment bytes not independently retrieved.
+Protocol model pin remains
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8,
+not a newly fitted checkpoint. Every printed comparison passed safety, pre-match
+and active/recovery preservation; strict_body_rest false throughout.
+
+RIAL membrane dose response: body ratio.947985 at.01nS,.498288 at.03nS,
+.113350 at.1nS. Selected.1nS RIAL gives ventral SMD RMS ratio.332473,
+RIAL mean-70.9566mV/std.782519mV. RIAR.1nS counterpart: body1.002037,
+SMD RMS1.001610. This is model/checkpoint-specific asymmetry, not evidence of
+universal biological left-sided locomotor control.
+
+Primary causal branch intervention RIAL->SMD mean release: body ratio.11960032
+(~88.04% suppression), ventral SMD RMS.01748984 (~98.25% reduction). RIAL
+remains variable (mean-57.9681mV/std1.48551mV), so the effect did not require
+freezing or globally silencing RIAL. Means/std alone do not prove its exact
+periodicity under this intervention. Holding only the ventral branch gives
+body.11981674/SMD RMS.01774485, nearly the same effect. Zero-release ventral
+branch gives body.11274082/SMD RMS.04298590. Removing source modulation while
+retaining pre-intervention mean transmission is sufficient to strongly attenuate
+the tested downstream variation; removing all tonic transmission is not needed
+for that result. Nonlinear gating/feedback remains and cannot be decomposed into
+additive causal fractions.
+
+The predeclared branch result persists in both repeated bouts (body.11960032/
+.11960224, SMD.01748984/.01755681), long hold (.11960223/.01755757), neural-half
+(.11956805/.01756641) and body-half (.11960065/.01748945). Branch numerical
+body/SMD ratio differences3.22669e-5/7.65662e-5 and3.33460e-7/3.87801e-7 pass.
+Selected RIAL membrane effect also repeats and recovers, with body~.11332..11336
+and SMD~.32752..33247; independent numerical differences pass. Both selected
+interventions meet prospective reversible_body_attenuation; only the mean branch
+meets downstream_SMD_variance_attenuation. No retrospective threshold change.
+
+Interpretation: this advances E083 correlation to causal contribution of the
+EXISTING RIAL chemical route to SMD for the current component under these
+conditions. It does not identify an isolated RIAL oscillator, prove RIAL is the
+sole upstream source, validate native worm control biology or show a complete
+behavioral stop. Roughly12% max joint range remains; residual NMJ/body pathways
+cannot be ignored for full rest. Imposed release replacement is a diagnostic,
+not a learned policy or a mechanism that may silently enter behavior training.
+
+Decision: sufficient mechanism now exists to design a SMALL sensory-controlled
+partial attenuation/recovery fit through existing RIAL circuitry, rather than
+more blind broad motor fitting. Start with a prospective achievable attenuation
+target and preserve uncued gait, cue specificity, repeated/redundant/varied timing
+and recovery; remove all imposed diagnostic clamps from actual fitting. A future
+partial-control milestone must be clearly separate from full H1.2 initiation,
+strict rest/stopping and restart, which remain unqualified. Address residual
+motion before claiming the full worm stops. Preserve E071 and all independent/
+failed models. No new fit launched here; no learned-stop/swimming/biological
+qualification added. Documentation/evidence update only.
