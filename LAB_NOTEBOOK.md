@@ -8501,3 +8501,35 @@ route and restrictive fitting coordinates; these remain hypotheses. Do not
 blindly extend the same long fit. No new server job launched by this entry.
 Local verification limited to parsing the supplied stdout and checking consistency
 of the transcription and derived arithmetic; no forward scientific run.
+
+## 2026-11-16 — Post-run audit requirement and E085 saved-data audit planned
+
+User: "just provide the commands. After each run, we will always do a complete
+audit". Added standing AGENTS.md instruction. Before further fitting, inspect
+E085 saved outputs, not a new forward model or optimized candidate. Parent/run
+and selected hashes remain those in E085-server-summary.json. No trainable
+parameters, new randomness or physical time advancement. Source artifact root:
+`/home/carsonc/r-elegans-results/rial-sensory-20261116T041450Z-211013`.
+Command: dedicated conda Python `-m scripts.audit_rial_sensory --run <source>
+--output-dir <separate external audit directory>`, launched under nohup.
+
+Audit planned: all evaluation statuses/features, SHA of each completed candidate
+model and coordinate file, declared input hashes and external parent reference,
+all final declared trajectory hashes/finiteness, selected-coordinate group changes
+and bound proximity, coordinates outside allowed groups unchanged; failed gait
+checks identified by window, region and threshold. Save all final paired voltage,
+calcium, muscle, command, filtered drive and joint window summaries and inferred
+release statistics for every neuron, allowing sensory-to-motor signal comparison.
+No extra full trajectories written; no files removed. Actual current attribution,
+causal experiments and new capability qualification are outside this saved-data
+pass. Candidate/final/source optimizer records remain in original run; stored
+source/environment records are evidence for historical execution, not inferred
+from current audit environment. Missing fields/dependencies and mismatched hashes
+must remain explicit; completed execution is distinct from integrity pass and
+behavioral pass. Output summary.json, candidates.json, parameters.json,
+gait_gates.json, integrity.json, signals-*.json and exact audit source/env/argv.
+Audit server execution pending; no result claimed.
+
+Local software verification:2 tests passed in0.20s for exact failed frequency gate
+identification and paired voltage/release window statistics, including explicit
+missing stages. CLI help passed. Actual E085 server files unavailable locally.

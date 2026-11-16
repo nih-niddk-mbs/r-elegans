@@ -2,6 +2,13 @@
 
 Maintain [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) for scientific work in this repo.
 
+- User instruction 2026-11-16: after every run, perform a complete post-run audit
+  before continuing training. Include execution/budget, candidate selection,
+  parameter changes/bounds/frozen fields, signal propagation, all behavioral and
+  numerical gates, controls and artifact integrity. Record unavailable evidence
+  explicitly; an aggregate success flag alone is insufficient. Provide concise
+  launch/report commands to the user.
+
 - Before a new experiment, record its question, planned method, parent model,
   fixed/trainable parameters, command, seeds and acceptance criteria. Label
   plans as planned until execution/results are evidenced.
