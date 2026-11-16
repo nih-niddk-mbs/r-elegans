@@ -8458,3 +8458,46 @@ mechanism qualification, replay isolation and total-budget dispatch. Launcher sh
 syntax and runner/reporter CLI checks passed. These are software checks only;
 actual server parent was not inspected locally, no scientific forward fit or
 server execution is evidenced. No model capability is newly qualified.
+
+## 2026-11-16 — E085 server outcome: first sensory attenuation rung not reached
+
+Evidence: user-pasted `scripts.report_rial_sensory` stdout, attachment SHA256
+b10ecb33495ea35117d665545abad081e8157e1a90f6bd2be20c7ba5c5f2a462. Full remote summary/traces/weights and actual source/env records were
+not independently retrieved. Small structured transcription:
+`experiments/records/E085-server-summary.json`.
+Run `/home/carsonc/r-elegans-results/rial-sensory-20261116T041450Z-211013`.
+20 generations; no milestones; stop time_budget; no reported failure. All steps
+and validation complete, exit0, no timeout;22325.03214573901s=6h12m05s,
+within480min total maximum. Finishing earlier than8h is compatible with reserved
+validation time; stdout alone does not give search/validation time breakdown.
+
+Parent `dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8`;
+selected `f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f`.
+Nominal response ratio0.9996193171 ->0.9991273460: attenuation0.0380683% ->
+0.0872654%, only4.36% of requested2% reduction. Training loss1.6408735 ->
+1.5784588 (~3.8% decrease), not a qualified behavior. Low-dose reduction0.0766%;
+shift0.0965%; repeated and close-repeat responses also fail. Long-cue late ratio
+0.9999912771 (~0.0008723% reduction); sustained attenuation false.
+
+All ordinary cases safe and baseline/recovery/useful movement preserved. Chemical
+sensory block gives ratio1 exactly, control passes. RIAL replay gives0.9992586661,
+about15.05% attenuation reduction relative to the normal response, below75%
+criterion; this is a failed specified mediation test, not proof RIAL is irrelevant.
+Both neural-half/body-half response ratio errors are small (8.10748e-5/1.66817e-5),
+passing ratio checks. However both refined cases report baseline/recovery false
+AND useful-response false, despite safety true. Separate absolute regional gait,
+frequency or relative-reference criteria have failed; detailed cause unknown from
+aggregate stdout. Do not claim overall convergence based only on ratio agreement,
+or diagnose physical/numerical instability without inspecting the saved metrics.
+
+Interpretation/decision: bounded sensory/relay fitting barely changes cue-dependent
+motor amplitude. No partial sensory component, RIAL-mediated component, sustained
+attenuation, full start/stop or swimming qualification. Preserve all failed/parent
+models, optimizer/RNG and referenced data. Next proposed read-only audit should
+locate failed window/region gait checks, inspect grouped parameter bound occupancy,
+and compare cue-minus-sham AWA/relay/RIAL voltage/release and RIAL-to-SMD drive.
+This can distinguish weak sensory propagation, weak effect on the oscillatory
+route and restrictive fitting coordinates; these remain hypotheses. Do not
+blindly extend the same long fit. No new server job launched by this entry.
+Local verification limited to parsing the supplied stdout and checking consistency
+of the transcription and derived arithmetic; no forward scientific run.

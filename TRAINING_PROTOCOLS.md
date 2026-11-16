@@ -1,5 +1,17 @@
 # WormGym: training and validation protocols
 
+2026-11-16 E085 completed (user-reported):20 CMA generations,6h12m05s,
+all final evaluations complete within8h cap. Nominal sensory attenuation improved
+from0.0381% to0.0873%, below the first2% target; no rung advanced. Ordinary-grid
+baseline gait/recovery preserved; chemical blocking removes the small effect.
+RIAL replay mediation and sustained attenuation gates failed. Refined cue ratios
+agree, but BOTH refined trials fail separate gait-preservation/useful-response
+criteria; the printed report does not identify the failing windows/regions.
+No partial-control, full start/stop or swimming promotion. Preserve the failed
+selected checkpoint and independent parent. Next proposed step: saved-trace
+sensory-to-RIAL signal audit and detailed gait-gate/bound breakdown before more
+long fitting. [Outcome](experiments/records/E085-server-summary.json).
+
 2026-11-15 E085 planned: sensory-controlled partial attenuation curriculum,
 2%, 5%, then 10%, preserving uncued movement and recovery. Fits unknown
 AWA/AIY/AIZ/AIB/RIA channel densities and existing relay connection strengths;

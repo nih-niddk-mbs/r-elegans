@@ -1,5 +1,12 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-16 E085: no new skill qualified. Twenty generations preserved ordinary-grid
+wiggling/recovery but produced only0.0873% nominal cue attenuation against2%
+target. Sensory-block control passed; RIAL mediation and sustained attenuation
+failed. Refined cue ratios agreed, while refined gait criteria failed. Keep
+independent parents and failed selected model; audit sensory propagation and gait
+gates before further fitting. [Outcome](experiments/records/E085-server-summary.json).
+
 2026-11-15 E084 completed (user-reported):30m42s, all trials and numerical
 checks passed. Holding existing RIAL->SMD chemical release at its baseline mean
 reversibly reduced body range88.04% and ventral SMD RMS98.25%, including repeated,
