@@ -1,5 +1,11 @@
 # WormGym: training and validation protocols
 
+2026-11-15 E084 planned before fitting: causal RIAL membrane versus existing
+RIAL-to-SMD chemical release interventions. No invented connections or NMJ gates;
+20 fixed-model trials, repeated/long-hold recovery and both refined grids for
+both selected interventions.60min total. No H1.2 behavior qualification from
+imposed suppression. [Prospective criteria](experiments/records/E084-plan.json).
+
 2026-11-15 E083 audit reported: RIAL is the largest reconstructed rhythmic
 synaptic input to both ventral SMD cells across all audited conditions. SMD
 inhibition reduces release variation far more than voltage variation; nominal

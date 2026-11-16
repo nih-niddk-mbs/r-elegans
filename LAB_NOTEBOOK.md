@@ -8240,3 +8240,62 @@ SMD inhibition blindly, declare RIAL a pacemaker from this ranking, or relax
 E082 acceptance retrospectively. Preserve all existing checkpoints and results.
 No fit, new simulation or learned-stop/swimming/biological qualification in this
 recording turn. Documentation/evidence update only.
+
+### E084 planned — causal RIAL membrane versus RIAL->SMD branch tests (2026-11-15)
+
+User authorizes continuing with the proposed causal RIAL experiment after E083.
+[Full question, prospective protocol and acceptance](experiments/records/E084-plan.json).
+Same pinned selected E078 model
+dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8,
+all weights/topology/physiological and body/water parameters fixed; no fit/seeds.
+Eight60s screens: sham; RIAL inhibition.01/.03/.1nS; RIAR.1nS counterpart
+(not presumed inert); RIAL->SMD mean-release hold; RIAL->ventral-SMD mean hold;
+RIAL->ventral-SMD zero-release transmission control. Membrane reversal-80mV,
+intervention30..40s, baseline20..30s and recovery50..60s.
+
+Mean holds use RIAL's own release mean over20..30s of the verified E078 selected
+sham, replacing only existing chemical edges to selected SMD neurons. New sparse
+diagnostic override recomputes release correction at EVERY neural substep: both
+total g*release and weighted-reversal drive are changed consistently. No edge is
+invented and no negative external conductance is supplied; algebraically this
+replaces a nonnegative existing g*r by g*r_hold with probability in[0,1]. Outside
+the interval it is inactive. RIAL's actual voltage/other outputs, gap junctions,
+NMJ transfer and all other neuron dynamics remain live; their currents can still
+change secondarily through feedback. Actual overridden post/pre indices and held
+probabilities are saved. The mean hold isolates loss of presynaptic modulation
+more narrowly than whole-neuron inhibition; zero release also removes tonic
+transmission and must not be interpreted as the same perturbation.
+
+Confirm BOTH the strongest safe RIAL membrane case and predeclared RIAL->SMD
+mean-release branch, with matched sham, on repeated120s and long-hold150s trials
+(6 calls), and independent neural/body-half nominal trials (6 calls). Total20
+planned traces. Compare RIAL/RIAR voltage means/std, ventral SMD variation, body
+range and recovery. Branch holds do not require RIAL hyperpolarization or quiet
+RIAL activity to count as a valid manipulation. Reversible-body-attenuation and
+downstream SMD variance flags are separate and require their own prospective
+thresholds/consistency checks. No learned stop or biological pacemaker claim.
+
+Command:
+`cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_rial_control_mbslnx2.sh`.
+60min hard TOTAL, four concurrent CPU workers x4cores, float64/nohup/dedicated
+conda interpreter; reserve30min after screen,15min for final refinement. No need
+to occupy the whole budget after all trials finish. External rial-control-<UTC>-<PID>,
+adjacent log; report via `python -m scripts.report_rial_control`. Preserve copied
+capsule/model/full coordinates/release means, original reference SHA and recursive
+dependencies, all trial traces/metadata/hashes/source/env/argv, and budget receipt.
+Existing optimizer/RNG/checkpoints/trajectories unchanged; no deletion.50GiB free
+before writes, inherited estimated25GiB new-run cap (bounded concurrency granularity).
+No optimizer because no fit. Server execution remains planned until evidenced.
+
+Local software verification:34 focused tests passed15.41s, including sparse
+edge algebra against explicit replaced-release matrix, inactive override exact
+identity for one bundled-network neural substep, active result against explicit
+conductance update, unaffected other neurons/gates/Ca in that one substep, live
+sensing/NMJ plumbing and worker input/hash/branch metadata. Existing conductance,
+channel-body, recording, control-access, NMJ and SMD checks passed. Initial broader
+run:33passed/1failed because the new substep unit test left global JAX x64 on,
+changing a legacy float32 bundle reconstruction. Added test fixture restores
+prior precision after each test; no runtime/model-default change or tolerance
+relaxation. Rerun34passed. Shell syntax and CLI help passed. This is static/one-
+substep/mock software verification, not an actual E084 scientific simulation,
+fit or physiological qualification; server checkpoint not retrieved locally.

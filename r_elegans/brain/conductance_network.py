@@ -74,6 +74,22 @@ class MembraneConductanceInput(NamedTuple):
     weighted_reversal_pA: jax.Array
 
 
+class ChemicalReleaseOverride(NamedTuple):
+    """Sparse diagnostic replacement of release on existing chemical edges only."""
+    post_indices: jax.Array
+    pre_indices: jax.Array
+    release_probability: jax.Array
+    active: jax.Array
+
+
+def chemical_release_adjustment(chemical,release,reversals,override):
+    """Replace g*r by g*r_hold on selected [post,pre] edges; no new conductances."""
+    delta=chemical[override.post_indices,override.pre_indices]*(override.release_probability-release[override.pre_indices])
+    total=jnp.zeros_like(release).at[override.post_indices].add(delta)
+    drive=jnp.zeros_like(release).at[override.post_indices].add(delta*reversals[override.pre_indices])
+    return total,drive
+
+
 def indicator_equilibrium(calcium, config):
     fraction = jnp.maximum(calcium, 0.) / config.indicator_kd_uM
     power = fraction**config.indicator_hill
@@ -137,7 +153,7 @@ def channel_open_fractions(x):
         x[:,33],jnp.ones(x.shape[0]),x[:,34],jnp.ones(x.shape[0])),axis=1)
 
 
-def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkConfig(),*,membrane_input=None):
+def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkConfig(),*,membrane_input=None,chemical_release_override=None):
     """Frozen-conductance exponential voltage/gate/Ca update; first order.
 
     All neurons evolve simultaneously, including unobserved ones. No calcium
@@ -146,6 +162,10 @@ def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkCo
     omitting it retains the historical no-input calculation unchanged.
     """
     h = dt_s*1000./substeps
+    if chemical_release_override is not None:
+        o=chemical_release_override
+        if o.post_indices.ndim!=1 or o.pre_indices.shape!=o.post_indices.shape or o.release_probability.shape!=o.post_indices.shape or o.active.shape!=():
+            raise ValueError('Sparse chemical override arrays must match; active must be scalar')
     if membrane_input is not None:
         expected = state.voltage_mV.shape
         if (membrane_input.conductance_nS.shape != expected or
@@ -165,6 +185,11 @@ def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkCo
         total = conductance.sum(axis=1)+chemical@release+gap_total
         drive = ((conductance*reversals).sum(axis=1)+chemical@(release*fixed.synapse_reversal_mV)
                  +gap@s.voltage_mV+fixed.bias_pA)
+        if chemical_release_override is not None:
+            def altered(values):
+                dg,de=chemical_release_adjustment(chemical,release,fixed.synapse_reversal_mV,chemical_release_override)
+                return values[0]+dg,values[1]+de
+            total,drive=jax.lax.cond(chemical_release_override.active,altered,lambda x:x,(total,drive))
         if membrane_input is not None:
             total = total+membrane_input.conductance_nS
             drive = drive+membrane_input.weighted_reversal_pA

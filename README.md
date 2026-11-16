@@ -1,5 +1,11 @@
 # r-elegans
 
+E084 RIAL causal test (planned): after pulling on mbslnx2, run
+`sh scripts/launch_rial_control_mbslnx2.sh`. Maximum60min TOTAL; fixed checkpoint,
+RIAL membrane and existing chemical-branch interventions with recovery/controls.
+Report: `python -m scripts.report_rial_control` in the r-elegans env.
+[Protocol](experiments/records/E084-plan.json).
+
 2026-11-15 E083 audit reported: RIAL is the largest reconstructed rhythmic
 synaptic input to both ventral SMD cells across all audited conditions. SMD
 inhibition reduces release variation far more than voltage variation; nominal

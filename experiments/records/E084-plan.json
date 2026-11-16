@@ -1,0 +1,43 @@
+{
+  "experiment": "E084",
+  "status": "planned_server_execution_not_evidenced",
+  "record_date": "2026-11-15",
+  "question": "Does RIAL causally support the persistent SMD/body rhythm through its existing chemical RIAL-to-SMD route, and is the influence reversible?",
+  "checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "source_run": "/home/carsonc/r-elegans-results/avb-training-20261115T041708Z-122855",
+  "motivation": "E083 identifies RIAL as largest sampled rhythmic chemical input to ventral SMD, but does not establish causal necessity or isolated oscillator identity",
+  "fixed": "All302-neuron parameters/topology/kinetics/reversals, NMJ weights/signs/transfer, sensory mappings and body/water mechanics; original checkpoints and input files unchanged",
+  "trainable": "None",
+  "seeds": "None; deterministic diagnostic",
+  "screen_cases": [
+    "Sham",
+    "RIAL membrane conductance.01nS at-80mV",
+    "RIAL membrane conductance.03nS at-80mV",
+    "RIAL membrane conductance.1nS at-80mV",
+    "RIAR counterpart membrane conductance.1nS at-80mV; no assumption it is inert",
+    "Hold existing RIAL-to-SMD chemical release at RIAL's own selected-sham20..30s mean",
+    "Hold existing RIAL-to-ventral-SMD chemical release at that mean",
+    "Set release on existing RIAL-to-ventral-SMD chemical edges to0 as a tonic-plus-rhythmic transmission control"
+  ],
+  "branch_implementation": "Sparse existing-edge override at every neural substep: replace g[post,pre]*release(pre) by g[post,pre]*held_probability and adjust both total conductance and weighted-reversal drive. No new edge, reversal change, externally negative conductance, NMJ hold or voltage freeze. RIAL voltage/other outputs/gap junctions remain live; secondary network/body-feedback changes are allowed. Only existing targets included, actual post/pre indices and held probabilities recorded.",
+  "timing": "Eight60s screens, interventions30..40s. Baseline20..30s, response35..40s, recovery50..60s. Select best safe RIAL membrane condition prioritizing confirmed hyperpolarization/recovery then body attenuation, plus predeclared RIAL-to-SMD mean-release branch.",
+  "confirmation": "Both selected interventions plus shared matched sham, repeated120s(30..40 and80..90 holds) and long-hold150s(30..90 hold,130..150 recovery):6 trials",
+  "refinement": "Both interventions plus shared sham at neural-half and body-half:6 nominal trials. Controls cannot be selected as RIAL membrane winner. Total20 planned trials.",
+  "criteria": {
+    "source": "Hash-verified capsule/model/traces; full coordinate vector reconstructs pinned model. Ordinary sham and pre-intervention prefixes match original<=1e-8; same-grid paired prefix and finite/safe state checks inherited from E082.",
+    "recovery": "Active/recovery regional cycles>=max(.003rad,.8matched sham), regional cadence1.62..1.98Hz; no requirement of exact post-intervention phase",
+    "membrane_access": "RIAL mean hyperpolarization>=5mV; reported separately and not demanded of branch holds",
+    "branch": "Declared existing-edge release replacement, probabilities0..1, duplicate/absent branches rejected, outside selected interval inactive identity. Branch intervention does not require RIAL voltage or neural variability to be suppressed.",
+    "effect": "Report body range and downstream ventral-SMD centered-voltage RMS ratios separately. Prospective reversible-body-attenuation flag requires<=.2body/sham with pre/safety/recovery on nominal and all confirmations/refinements; separate downstream-variance flag<=.2SMD/sham. Strict1e-4rad rest retained as a separate diagnostic.",
+    "numerical": "Two refined body/SMD RMS ratio differences<=.05 for EACH of the two selected interventions; both flags require these consistency checks. Completion alone is not a positive effect.",
+    "qualification": "No learned stopping, sensory start/stop, swimming, biological fidelity or isolated RIAL pacemaker qualification"
+  },
+  "interpretation_rules": "Mean-release branch suppression would support causal contribution of rhythmic transmission under this operating point. Zero-release-only suppression could involve tonic support or operating-point change. Whole-neuron suppression without branch effect could involve other RIAL routes/feedback. Persistence may involve redundancy/compensation; no single result establishes universal or biological necessity.",
+  "command": "sh scripts/launch_rial_control_mbslnx2.sh",
+  "maximum_total_minutes": 60,
+  "budget": "Four concurrent workers x4physical cores, CPU float64 dedicated conda interpreter, nohup;30min reserved after screening and15min for refinement. Outer private-process-group watchdog includes preparation/all20trials/reports/cleanup. May finish early.",
+  "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_control",
+  "artifacts": "/home/carsonc/r-elegans-results/rial-control-<UTC>-<PID>, adjacent log; verified copied capsule/model/coordinates, baseline release probabilities and original reference path/SHA; every trial's source/env/argv, metadata/branch indices, trace/hash, metrics, configuration and budget receipt. No optimizer/RNG because no fit/randomization.",
+  "storage": "Retain all20 diagnostic traces and original E078/E080-E083 dependencies/checkpoints; no deletion.50GiB free before writes; inherited25GiB estimated new-run cap with concurrent-writer granularity, not OS quota.",
+  "local_verification": "34 focused tests passed15.41s. Sparse edge equation/reference-matrix checks; inactive override bit-identical to original single neural substep; active substep matches explicit conductance equation and leaves other neurons/gates/Ca unchanged in that substep. Branch worker/source/hash and sensing/NMJ-live plumbing checks; membrane versus branch access semantics; existing conductance/body/recording regressions. Initial broader run exposed a unit-test global x64 setting leak, corrected by restoring prior precision per test; no model defaults changed. Shell syntax and CLI help passed. This includes one-substep bundled-checkpoint software verification, not an E084 scientific forward experiment or server result."
+}
