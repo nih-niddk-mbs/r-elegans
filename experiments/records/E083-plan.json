@@ -1,12 +1,17 @@
 {
   "experiment": "E083",
-  "status": "planned_server_audit_not_executed",
+  "status": "audit_completed_user_reported",
   "record_date": "2026-11-15",
   "question": "What sampled synaptic input and NMJ release modulation accompany persistent ventral SMD voltage variation and residual body commands during E082 inhibition?",
   "source_run": "/home/carsonc/r-elegans-results/smd-control-20261115T191006Z-193279",
   "checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
   "method": "Read-only NumPy/SciPy analysis of saved E082 traces/model/actor and original archived runtime NMJ asset, with no JAX or forward neural/body simulation",
-  "datasets": ["ventral nominal ordinary", "whole-SMD0.1nS nominal ordinary", "ventral long-hold ordinary", "ventral nominal neural-half"],
+  "datasets": [
+    "ventral nominal ordinary",
+    "whole-SMD0.1nS nominal ordinary",
+    "ventral long-hold ordinary",
+    "ventral nominal neural-half"
+  ],
   "windows": "Pre20..30s; off35..40s, or85..90s for long hold; recovery50..60s, or130..150s. Saved samples subsampled to about100Hz.",
   "measurements": [
     "Individual SMD voltage mean/std/p2p/frequency, release mean/std/p2p/extreme fraction and sigmoid sensitivity",
@@ -33,5 +38,6 @@
   "output": "/home/carsonc/r-elegans-results/smd-drive-audit-<UTC>-<PID>/{summary,evidence_hashes,<dataset>}.json and optional signal_chain.png; source/env/argv snapshots, adjacent log",
   "preservation": "Read original archived source/capsule/actor/model/traces in place with evidence hashes. No original files deleted or modified, no full trace copies or newly simulated trajectories; original E078 optimizer/RNG/checkpoints and recursive dependencies remain external.",
   "qualification": "None: no learned stopping, swimming, biological fidelity or intrinsic oscillator claim",
-  "local_verification": "10 focused SMD-drive/AVB-audit tests passed1.59s. Current sign/source-driving-force separation and analytic harmonic amplitude; static runtime NMJ formula agreement1e-12 with bundled canonical model; projection command agreement<1e-6; nonlinear release-hold sanity; synthetic complete archived-source/hash-verified CLI. Figure mocked in full CLI fixture. Shell syntax and CLI help passed. No actual E082 server data or forward neural simulation accessed locally."
+  "local_verification": "10 focused SMD-drive/AVB-audit tests passed1.59s. Current sign/source-driving-force separation and analytic harmonic amplitude; static runtime NMJ formula agreement1e-12 with bundled canonical model; projection command agreement<1e-6; nonlinear release-hold sanity; synthetic complete archived-source/hash-verified CLI. Figure mocked in full CLI fixture. Shell syntax and CLI help passed. No actual E082 server data or forward neural simulation accessed locally.",
+  "outcome_record": "E083-server-summary.json"
 }

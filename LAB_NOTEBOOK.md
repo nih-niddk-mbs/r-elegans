@@ -8177,3 +8177,66 @@ was changed to three joints to match regional summary assumptions. These are
 test/loader corrections, not changed model parameters or scientific outcomes.
 Shell syntax/CLI help passed. No actual E082 server data read locally, no neural
 forward scientific run or new qualification claimed.
+
+### E083 reported — RIAL candidate rhythmic input; SMD output gain reduced (2026-11-15)
+
+User supplies `scripts.report_smd_drive_audit` stdout for
+`/home/carsonc/r-elegans-results/smd-drive-audit-20261116T012112Z-202942`.
+The UTC run identifier is preserved; this record uses the client local date.
+[Transcribed numeric results and attachment SHA](experiments/records/E083-server-summary.json).
+Status completed; no remote full JSON, original source/env/checkpoint bytes or
+figure image independently retrieved/viewed here. Reported figure:
+`/home/carsonc/r-elegans-results/smd-drive-audit-20261116T012112Z-202942/signal_chain.png`.
+All four datasets reported zero sampled pre-voltage difference, muscle closure
+max3.33e-16..4.44e-16 and command error~4.55e-8..4.56e-8 (<1e-6 tolerance).
+The declared NMJ/projection reconstruction checks passed; no reconstruction
+failure supports dismissing the signal-chain findings as a numerical artifact.
+
+Nominal ventral sham: RIAL is the largest reported source-varying harmonic input
+to SMDVL (.283016pA, chemical.280317/gap.0026995) versus RIML.003810pA next;
+to SMDVR RIAL.373866pA chemical versus SMDVL.001534pA next. During ventral
+inhibition RIAL remains largest: SMDVL.506334pA (chemical.503429/gap.0029055),
+SMDVR.773936pA chemical. Other reported inputs are substantially smaller. This
+ranking persists in whole-SMD inhibition, long hold and neural-half datasets.
+RIAL is therefore a concrete candidate upstream rhythmic input/control route
+in THIS fitted model, not a confirmed isolated/intrinsic pacemaker or an
+established biological master oscillator. Recurrent network/proprioceptive
+origin remains unresolved; a causal intervention is still required.
+
+The source decomposition holds post voltage at each condition's own mean.
+Hyperpolarization increases the magnitude of chemical driving force, so larger
+RIAL-current harmonic amplitude in the inhibited condition does not by itself
+mean RIAL release/voltage activity increased. Do not divide a single-source
+harmonic by the magnitude of the summed complex current to call it a causal
+fraction: cancellation can make a source exceed that summed magnitude.
+Printed dominant frequency2.0Hz is a5s-window FFT bin (~.2Hz spacing), not a new
+precise gait-frequency estimate or evidence the model's swimming frequency was
+recalibrated. Full source spectra/gate currents were not supplied.
+
+Nominal SMDVL: voltage std2.77557->2.30269mV (ratio.829625), but release std
+.0369441->.00220175 (ratio.0595969,~94.04% reduction); mean release
+.126124->.00793233. SMDVR: voltage std3.28515->3.26603mV (ratio.994179),
+release std.0721175->.0241997 (ratio.335560,~66.44% reduction); mean release
+.500626->.0919504. Joint-command centered RMS.01660695->.00486605
+(ratio.293013). This quantitatively supports weaker voltage-to-NMJ transmission
+under the changed operating point despite persisting voltage variation. It does
+not show a stopped neural rhythm; mean release and release sensitivity are not
+measured biological secretion rates.
+
+Offline same-window mean-release hold on ventral SMD during inhibited traces
+leaves.339724 of residual command RMS; holding all head release leaves.287669;
+RMD-only.940708 and B1.016448. Similar long-hold/neural-half results. Residual
+command modulation still substantially depends on ventral-SMD release under this
+fixed-voltage counterfactual; no causal body-motion fractions or linear summation
+follow because these holds omit neural/body feedback and nonlinear transfer.
+
+Decision: test RIAL's causal contribution next, preferably compare reversible
+RIAL neural inhibition with selective modulation/mean-release hold of its
+existing chemical RIAL->SMD route and matched shams/recovery/refinement. Inspect
+RIAL, ventral SMD, NMJ command and body responses together. A branch-specific
+test would isolate transmission without inventing a new connection; it is only
+proposed here, not implemented or run. Do not train increasingly strong direct
+SMD inhibition blindly, declare RIAL a pacemaker from this ranking, or relax
+E082 acceptance retrospectively. Preserve all existing checkpoints and results.
+No fit, new simulation or learned-stop/swimming/biological qualification in this
+recording turn. Documentation/evidence update only.

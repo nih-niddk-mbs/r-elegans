@@ -1,8 +1,12 @@
 # Current model: exact scope and computation path
 
-2026-11-15 E083 **planned**: read-only E082 SMD current/release/residual-command
-audit using original archived NMJ asset and saved trace hashes. No neural/body
-simulation or fitting; closure checks precede interpretation. [Plan](experiments/records/E083-plan.json).
+2026-11-15 E083 audit reported: RIAL is the largest reconstructed rhythmic
+synaptic input to both ventral SMD cells across all audited conditions. SMD
+inhibition reduces release variation far more than voltage variation; nominal
+command RMS falls to29.30% of sham. Reconstruction checks passed.
+RIAL is a candidate drive/control node, not a proven intrinsic oscillator.
+Next proposed step: reversible RIAL/its existing SMD-output route intervention.
+No new fit or qualification. [Outcome](experiments/records/E083-server-summary.json).
 
 2026-11-15 E082 completed (user-reported):27m47s, all planned cases/refinements
 complete, no timeout. Ventral SMD inhibition reversibly reduced body range70.54%

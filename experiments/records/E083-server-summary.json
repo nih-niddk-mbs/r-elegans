@@ -1,0 +1,648 @@
+{
+  "experiment": "E083",
+  "record_date": "2026-11-15",
+  "evidence": "User-reported report_smd_drive_audit stdout; remote full JSON/figure/source/checkpoint bytes not independently retrieved",
+  "source_attachment_sha256": "8b5adda79463eeb4a3c268f0028a34abcf3bf4ca3d7e066ed0fc2f61ea34db59",
+  "protocol_checkpoint_sha256": "dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8",
+  "checkpoint_hash_evidence": "Pinned by protocol, not printed in supplied excerpt",
+  "run": "/home/carsonc/r-elegans-results/smd-drive-audit-20261116T012112Z-202942",
+  "status": "completed",
+  "checks": {
+    "ventral--nominal--ordinary": {
+      "sampled_pre_voltage_max_difference_mV": 0.0,
+      "maximum_muscle_reconstruction_error": 3.3306690738754696e-16,
+      "maximum_command_reconstruction_error": 4.5620982158656176e-08,
+      "command_tolerance": 1e-06
+    },
+    "SMD-0.1--nominal--ordinary": {
+      "sampled_pre_voltage_max_difference_mV": 0.0,
+      "maximum_muscle_reconstruction_error": 3.3306690738754696e-16,
+      "maximum_command_reconstruction_error": 4.5483038557669886e-08,
+      "command_tolerance": 1e-06
+    },
+    "ventral--long-hold--ordinary": {
+      "sampled_pre_voltage_max_difference_mV": 0.0,
+      "maximum_muscle_reconstruction_error": 3.3306690738754696e-16,
+      "maximum_command_reconstruction_error": 4.562098562810313e-08,
+      "command_tolerance": 1e-06
+    },
+    "ventral--nominal--neural-half": {
+      "sampled_pre_voltage_max_difference_mV": 0.0,
+      "maximum_muscle_reconstruction_error": 4.440892098500626e-16,
+      "maximum_command_reconstruction_error": 4.562098560034755e-08,
+      "command_tolerance": 1e-06
+    }
+  },
+  "figure": "/home/carsonc/r-elegans-results/smd-drive-audit-20261116T012112Z-202942/signal_chain.png",
+  "reported_limitations": "Sampled synaptic reconstruction, not intrinsic-current balance. Source harmonics hold postsynaptic voltage at its own condition mean; recurrent correlations are not causal oscillator proof. Same-window NMJ mean-release counterfactuals omit neural/body feedback and are not additive causal fractions. NumPy float32-template projection is verified only within1e-6 absolute command error.",
+  "datasets": {
+    "ventral--nominal--ordinary": {
+      "sham": {
+        "command_centered_rms": 0.0166069528810599,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -36.357285422045855,
+            "voltage_std_mV": 2.7755748538703986,
+            "release_mean": 0.12612394733096133,
+            "release_std": 0.03694408165217269,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.28535153730692797,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.28301643639761004,
+                "chemical_harmonic_pA": 0.28031699701909485,
+                "gap_harmonic_pA": 0.002699485278248751
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.0038100395839246117,
+                "chemical_harmonic_pA": 0.0038100395839246117,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.0017516844912463328,
+                "chemical_harmonic_pA": 0.0017516844912463328,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -28.851937564004185,
+            "voltage_std_mV": 3.285152584125945,
+            "release_mean": 0.5006255616723665,
+            "release_std": 0.072117457613776,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.37311086305387786,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.3738656743243751,
+                "chemical_harmonic_pA": 0.3738656743243751,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVL",
+                "source_harmonic_pA": 0.001533907307033253,
+                "chemical_harmonic_pA": 0.001533907307033253,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.0003743349868794333,
+                "chemical_harmonic_pA": 4.3283084908576824e-08,
+                "gap_harmonic_pA": 0.0003743782697395349
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.10039330412158654,
+          "dorsal-SMD": 1.0037948895986795,
+          "SMD": 0.09914168461196905,
+          "RMD": 0.9993079731379811,
+          "SMB": 1.000763413966903,
+          "B": 1.0169723984328753,
+          "head": 0.09479048789887347,
+          "all": 4.1307277509114875e-14
+        }
+      },
+      "inhibited": {
+        "command_centered_rms": 0.004866049027603597,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -60.25349660601851,
+            "voltage_std_mV": 2.3026863277457874,
+            "release_mean": 0.007932334170375949,
+            "release_std": 0.0022017511005307795,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.5142771644995517,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.5063342892962328,
+                "chemical_harmonic_pA": 0.5034287866437994,
+                "gap_harmonic_pA": 0.002905545243901475
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.007982519987381436,
+                "chemical_harmonic_pA": 0.007982519987381436,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.00028807621238073806,
+                "chemical_harmonic_pA": 0.00028807621238073806,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -55.11462245525829,
+            "voltage_std_mV": 3.26603087372479,
+            "release_mean": 0.09195037489578475,
+            "release_std": 0.02419972614182296,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.7750091039759646,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.7739363669714874,
+                "chemical_harmonic_pA": 0.7739363669714874,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDDL",
+                "source_harmonic_pA": 0.00045655806221737256,
+                "chemical_harmonic_pA": 0.00045655806221737256,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.0004158052379155186,
+                "chemical_harmonic_pA": 7.47452751276861e-07,
+                "gap_harmonic_pA": 0.0004150577889533583
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.3397243647830602,
+          "dorsal-SMD": 1.0161526936752154,
+          "SMD": 0.3316561491454946,
+          "RMD": 0.9407083759318365,
+          "SMB": 1.0022798523768144,
+          "B": 1.016448348774139,
+          "head": 0.2876692527085807,
+          "all": 2.1232420441981685e-13
+        }
+      }
+    },
+    "SMD-0.1--nominal--ordinary": {
+      "sham": {
+        "command_centered_rms": 0.0166069528810599,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -36.357285422045855,
+            "voltage_std_mV": 2.7755748538703986,
+            "release_mean": 0.12612394733096133,
+            "release_std": 0.03694408165217269,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.28535153730692797,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.28301643639761004,
+                "chemical_harmonic_pA": 0.28031699701909485,
+                "gap_harmonic_pA": 0.002699485278248751
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.0038100395839246117,
+                "chemical_harmonic_pA": 0.0038100395839246117,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.0017516844912463328,
+                "chemical_harmonic_pA": 0.0017516844912463328,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -28.851937564004185,
+            "voltage_std_mV": 3.285152584125945,
+            "release_mean": 0.5006255616723665,
+            "release_std": 0.072117457613776,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.37311086305387786,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.3738656743243751,
+                "chemical_harmonic_pA": 0.3738656743243751,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVL",
+                "source_harmonic_pA": 0.001533907307033253,
+                "chemical_harmonic_pA": 0.001533907307033253,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.0003743349868794333,
+                "chemical_harmonic_pA": 4.3283084908576824e-08,
+                "gap_harmonic_pA": 0.0003743782697395349
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.10039330412158654,
+          "dorsal-SMD": 1.0037948895986795,
+          "SMD": 0.09914168461196905,
+          "RMD": 0.9993079731379811,
+          "SMB": 1.000763413966903,
+          "B": 1.0169723984328753,
+          "head": 0.09479048789887347,
+          "all": 4.1307277509114875e-14
+        }
+      },
+      "inhibited": {
+        "command_centered_rms": 0.004891674680707491,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -60.41177622718188,
+            "voltage_std_mV": 2.30658844386838,
+            "release_mean": 0.007784640712221801,
+            "release_std": 0.0021692769176275923,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.49983852848525673,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.49223432092072406,
+                "chemical_harmonic_pA": 0.48940712675937353,
+                "gap_harmonic_pA": 0.0028272396495228583
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.007670420539799189,
+                "chemical_harmonic_pA": 0.007670420539799189,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.00027573571258793217,
+                "chemical_harmonic_pA": 0.00027573571258793217,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -55.33229212210547,
+            "voltage_std_mV": 3.2794627762835784,
+            "release_mean": 0.09038924479900552,
+            "release_std": 0.023969664012624032,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.7542392474570706,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.7533728627271852,
+                "chemical_harmonic_pA": 0.7533728627271852,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "AVAR",
+                "source_harmonic_pA": 0.0004134632841236265,
+                "chemical_harmonic_pA": 0.0004134632841236265,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.0004070606335154181,
+                "chemical_harmonic_pA": 7.334981455510416e-07,
+                "gap_harmonic_pA": 0.0004063271389855526
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.344263245458628,
+          "dorsal-SMD": 1.0021132725656354,
+          "SMD": 0.34376624446941784,
+          "RMD": 0.9415193292509934,
+          "SMB": 1.0024036604255413,
+          "B": 1.0170817237958214,
+          "head": 0.3019168484847312,
+          "all": 2.842962514154357e-13
+        }
+      }
+    },
+    "ventral--long-hold--ordinary": {
+      "sham": {
+        "command_centered_rms": 0.016775583177392025,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -36.24094249396672,
+            "voltage_std_mV": 2.807845510032609,
+            "release_mean": 0.12775545623234769,
+            "release_std": 0.03746063996867332,
+            "dominant_voltage_frequency_hz": 1.9999999999989768,
+            "source_harmonic_sum_pA": 0.2906072777851633,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.2882147288514231,
+                "chemical_harmonic_pA": 0.28546037042414624,
+                "gap_harmonic_pA": 0.002754405760238557
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.003900035084190435,
+                "chemical_harmonic_pA": 0.003900035084190435,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.0017976907742294147,
+                "chemical_harmonic_pA": 0.0017976907742294147,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -28.70139485689845,
+            "voltage_std_mV": 3.313475107188955,
+            "release_mean": 0.5039246008714467,
+            "release_std": 0.0727349964119091,
+            "dominant_voltage_frequency_hz": 1.9999999999989768,
+            "source_harmonic_sum_pA": 0.37916827649764284,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.37995483209113845,
+                "chemical_harmonic_pA": 0.37995483209113845,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVL",
+                "source_harmonic_pA": 0.0015866806808926728,
+                "chemical_harmonic_pA": 0.0015866806808926728,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.00038531956337802914,
+                "chemical_harmonic_pA": 4.903739663676591e-08,
+                "gap_harmonic_pA": 0.0003853686003024115
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.10057698091050954,
+          "dorsal-SMD": 1.0038359532450838,
+          "SMD": 0.09929787661010117,
+          "RMD": 0.9992845487076464,
+          "SMB": 1.000771693533756,
+          "B": 1.016747750376564,
+          "head": 0.09501842695086526,
+          "all": 4.556657367606754e-14
+        }
+      },
+      "inhibited": {
+        "command_centered_rms": 0.0049003877454002545,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -60.123317444493004,
+            "voltage_std_mV": 2.321380404637961,
+            "release_mean": 0.008059484005224654,
+            "release_std": 0.002225973801106154,
+            "dominant_voltage_frequency_hz": 1.9999999999989768,
+            "source_harmonic_sum_pA": 0.5198445137754131,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.5117841772932502,
+                "chemical_harmonic_pA": 0.5088453789280183,
+                "gap_harmonic_pA": 0.0029388400196465225
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.008091289801480658,
+                "chemical_harmonic_pA": 0.008091289801480658,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.0002948959985068951,
+                "chemical_harmonic_pA": 0.0002948959985068951,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -54.92654410028238,
+            "voltage_std_mV": 3.2871817484153714,
+            "release_mean": 0.09336264003887934,
+            "release_std": 0.0244148538128634,
+            "dominant_voltage_frequency_hz": 1.9999999999989768,
+            "source_harmonic_sum_pA": 0.7823962820225702,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.7812819678675815,
+                "chemical_harmonic_pA": 0.7812819678675815,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDDL",
+                "source_harmonic_pA": 0.0004627441323180857,
+                "chemical_harmonic_pA": 0.0004627441323180857,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.0004268855294228026,
+                "chemical_harmonic_pA": 7.6285196358695e-07,
+                "gap_harmonic_pA": 0.0004261226849744478
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.3406355147913955,
+          "dorsal-SMD": 1.0169271023389987,
+          "SMD": 0.3325814908643044,
+          "RMD": 0.9409144585223819,
+          "SMB": 1.0023567553028419,
+          "B": 1.0160333356552242,
+          "head": 0.28950008718354714,
+          "all": 2.083810145451085e-13
+        }
+      }
+    },
+    "ventral--nominal--neural-half": {
+      "sham": {
+        "command_centered_rms": 0.016762134569946824,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -36.22237546842997,
+            "voltage_std_mV": 2.8058774700854636,
+            "release_mean": 0.12799292416194247,
+            "release_std": 0.037431993368077,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.2989500847497822,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.29648793996631195,
+                "chemical_harmonic_pA": 0.2936536688259819,
+                "gap_harmonic_pA": 0.002834316186827124
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.004013782619673067,
+                "chemical_harmonic_pA": 0.004013782619673067,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.001850707296732798,
+                "chemical_harmonic_pA": 0.001850707296732798,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -28.681524078359033,
+            "voltage_std_mV": 3.3099760528817557,
+            "release_mean": 0.5043622181461885,
+            "release_std": 0.07265964509339332,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.3899795479926006,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.3907899221205693,
+                "chemical_harmonic_pA": 0.3907899221205693,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVL",
+                "source_harmonic_pA": 0.0016357683147033744,
+                "chemical_harmonic_pA": 0.0016357683147033744,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.00039769793414214495,
+                "chemical_harmonic_pA": 5.1214328964728403e-08,
+                "gap_harmonic_pA": 0.0003977491479961471
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.10050441992394542,
+          "dorsal-SMD": 1.0038436112436315,
+          "SMD": 0.0992248644995038,
+          "RMD": 0.9992633714402447,
+          "SMB": 1.0007730647027615,
+          "B": 1.0165730299466376,
+          "head": 0.09493855073797175,
+          "all": 7.6840775675011e-14
+        }
+      },
+      "inhibited": {
+        "command_centered_rms": 0.004899610235509,
+        "cells": [
+          {
+            "neuron": "SMDVL",
+            "voltage_mean_mV": -60.13141537560093,
+            "voltage_std_mV": 2.321432044480079,
+            "release_mean": 0.008051791645005,
+            "release_std": 0.002225193931822004,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.5390963259822235,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.5307438012970044,
+                "chemical_harmonic_pA": 0.5276965009470539,
+                "gap_harmonic_pA": 0.0030473426621296855
+              },
+              {
+                "neuron": "RIML",
+                "source_harmonic_pA": 0.008386524649840021,
+                "chemical_harmonic_pA": 0.008386524649840021,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDVR",
+                "source_harmonic_pA": 0.0003054480388245475,
+                "chemical_harmonic_pA": 0.0003054480388245475,
+                "gap_harmonic_pA": 0.0
+              }
+            ]
+          },
+          {
+            "neuron": "SMDVR",
+            "voltage_mean_mV": -54.9389393462257,
+            "voltage_std_mV": 3.2871682997807143,
+            "release_mean": 0.09327114907131537,
+            "release_std": 0.02440736548924137,
+            "dominant_voltage_frequency_hz": 2.000000000000398,
+            "source_harmonic_sum_pA": 0.8114500829599698,
+            "top_inputs": [
+              {
+                "neuron": "RIAL",
+                "source_harmonic_pA": 0.8102997143461401,
+                "chemical_harmonic_pA": 0.8102997143461401,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "SMDDL",
+                "source_harmonic_pA": 0.0004773881763727693,
+                "chemical_harmonic_pA": 0.0004773881763727693,
+                "gap_harmonic_pA": 0.0
+              },
+              {
+                "neuron": "RIVR",
+                "source_harmonic_pA": 0.00044133501017369587,
+                "chemical_harmonic_pA": 7.889997737998188e-07,
+                "gap_harmonic_pA": 0.0004405460181598102
+              }
+            ]
+          }
+        ],
+        "release_hold_command_rms_ratios": {
+          "ventral-SMD": 0.34068701271521484,
+          "dorsal-SMD": 1.0168447340971836,
+          "SMD": 0.3326464773799025,
+          "RMD": 0.940953379018036,
+          "SMB": 1.0023491254885306,
+          "B": 1.0160461477591676,
+          "head": 0.2894948165435299,
+          "all": 2.281227835908393e-13
+        }
+      }
+    }
+  },
+  "derived_nominal_ratios": {
+    "SMDVL": {
+      "voltage_std_ratio": 0.8296250142685966,
+      "release_std_ratio": 0.05959685562792422,
+      "release_mean_ratio": 0.06289316452775415
+    },
+    "SMDVR": {
+      "voltage_std_ratio": 0.9941793539534352,
+      "release_std_ratio": 0.3355598899703903,
+      "release_mean_ratio": 0.18367095477230447
+    },
+    "command_centered_rms_ratio": 0.293012755708682
+  },
+  "interpretation": "RIAL is the dominant reported sampled source-varying rhythmic input to ventral SMD, primarily chemical. Hyperpolarizing SMD reduces NMJ release modulation much more than voltage modulation. Residual commands remain sensitive to ventral-SMD same-window release holds. RIAL is a candidate upstream control/drive node, not an established isolated pacemaker.",
+  "cautions": "Held postsynaptic means differ across conditions, so larger reconstructed RIAL current under inhibition need not imply stronger RIAL activity. The2Hz FFT bin from5s windows has0.2Hz resolution, not a new precise frequency calibration. Offline nonlinear release holds are not live closed-loop interventions or additive movement fractions.",
+  "next_proposed_step": "Reversible RIAL inhibition and/or selective RIAL-to-SMD transmission intervention with release recovery, paired shams and timestep checks, before further fitting. Inspect RIAL voltages and downstream SMD/command/body effects. No new job or fit launched by this result record."
+}
