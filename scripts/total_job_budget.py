@@ -36,8 +36,10 @@ def main():
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--total-minutes',type=float,default=240.)
     p.add_argument('--source-run',type=Path)
+    p.add_argument('--continue-relay',action='store_true')
     p.add_argument('--pipeline',choices=['tail','state-control','control-access','cma-curriculum','avb-training','nmj-source','head-split','smd-control','rial-control','rial-sensory','rial-release','relay-range'],default='tail')
     a=p.parse_args()
+    if a.continue_relay and a.pipeline!='relay-range':p.error('--continue-relay requires --pipeline relay-range')
     if not math.isfinite(a.total_minutes) or a.total_minutes<5:p.error('At least five total minutes required')
     repo=Path(__file__).resolve().parents[1];out=a.output_dir.resolve()
     if out==repo or repo in out.parents or out in repo.parents:p.error('External output required')
@@ -52,11 +54,13 @@ def main():
     if automatic_audit:
         budget['phases_included'].append('complete saved-data post-run audit')
         budget['audit_reserve_seconds']=audit_reserve
+    if a.continue_relay:budget['experiment']='E088'
     (out/'deadline.json').write_text(json.dumps(budget,indent=2)+'\n')
     module={'state-control':'scripts.run_controlled_swimming','control-access':'scripts.run_control_access','cma-curriculum':'scripts.run_cma_sensorimotor','avb-training':'scripts.run_avb_training','nmj-source':'scripts.run_nmj_source','head-split':'scripts.run_nmj_source','smd-control':'scripts.run_smd_control','rial-control':'scripts.run_rial_control','rial-sensory':'scripts.run_rial_sensory','rial-release':'scripts.run_rial_sensory','relay-range':'scripts.run_rial_sensory','tail':'scripts.run_swim_continuation'}[a.pipeline]
     command=[sys.executable,'-u','-m',module,'--output-dir',str(out)]
     if a.pipeline=='head-split':command+=['--protocol','head-split']
     if automatic_audit:command+=['--objective',a.pipeline]
+    if a.continue_relay:command+=['--continue-relay']
     if a.source_run:command+=['--source-run',str(a.source_run.resolve())]
     code,timed_out=run_group(command,max(.01,deadline-audit_reserve-time.monotonic()-20))
     summary_path=out/'summary.json'

@@ -8971,3 +8971,60 @@ summaries explicitly label RIAL-release and relay-range assay applicability,
 so an empty/inapplicable failure list is not confused with an assay pass. Old
 printed E087 zeros remain preserved above. This is reporting metadata only;
 no evaluation/qualification criterion changes or new forward run.
+
+## 2026-11-16 — E087 exact operating-range/bound evidence and E088 continuation planned
+
+User-pasted stdout, no attachment bytes/hash available for this chat message.
+`experiments/records/E087-range-bound-server-summary.json` transcribes12rows
+and full printed outward-group information. Source E087
+`/home/carsonc/r-elegans-results/relay-range-20261116T194725Z-293645`.
+Mean release.9896480862 ->.9868168587 (98.9648%->98.6817%); selected baselineq99
+.9868177420 means1.3182% upper headroom, still below2%. Recovery matches no-cue
+closely; cue response remains tiny as E087 outcome already recorded.
+
+Outward group12coordinates: latent+.9975458504, delta+.3990183402log
+(~1.49036multiplier from parent), local range[-.4,+.4], near_original_bound0.
+Original lower/upper minimum room.8860293789/.3553920759log. Thus local trust
+window was reached, not original-anchor cap. Remaining allowable common upward
+factor exp(.3553920759)~1.4267. This does not show it suffices to reach target,
+or isolate its causal effect from jointly changed inputs/densities. Original
+bounds are fitting-prior limits, not experimentally proven physiological maxima.
+
+Plan E088: `experiments/records/E088-plan.json`. Prepare a three-hour TOTAL
+continuation of SAME improving objective/gates, not another objective switch.
+Pinned parent608587d8cc9267674b5828df02d7891ae8940f46cc6981b62518b7f89068de73.
+Explicit --continue-relay requires source experimentE087, pinned selectedhash,
+full original-coordinate model reconstruction and exact no-cue reference SHA.
+Fresh CMA seed8800 population12 sigma.3,4workers x4physical cores,float64;
+stagefresh8800+stage sigma.15, restart9800+count sigma.2. Recenter group steps
+at selected weights; original lower/upper arrays unchanged. Outward group new
+upper+.3553920759, lower-.4. No original-bound enlargement, fixed sign changes,
+new edges or diagnostic clamps in fitting. This is selected-weight continuation
+with a FRESH optimizer, not exact saved-CMA/RNG resume. Prior full states retained.
+
+Same AWAL/AIYL unknown nonleak densities, existing AIYL inputs and AIYL->RIAL
+compensation. Other neuron/motor/RIAL channels, other synapses/gaps, sensory gains,
+release/kinetic/leak/capacitance fields, NMJ/muscle/water/clock parameters fixed.
+Same2/5/10% headroom, small cue response/recovery and body gait constraints;
+same8normal paired tests, blocked control, refined comparisons and final branch
+replay diagnostic. No automatic RIAL-control/motor-stop/swimming promotion.
+Three-hour total includes final validation, automatic full saved-data audit and
+cleanup;20min audit reserve,>=60min or40% coordinator-final reserve/lookahead,
+early finish possible. Qualification requires complete integrity-passing audit.
+Same50GiB free/15GiB search-stop/estimated30GiB training cap, no deletions;
+all model/optimizer/RNG/reference dependencies and exact source/env/argv retained.
+
+Launch: `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_continuation_mbslnx2.sh`.
+Report dedicated conda Python `-m scripts.report_rial_sensory --relay`.
+External relay-range-<UTC>-<PID> plus.log/sibling-audit. Execution remains planned;
+no E088 server or scientific forward run evidenced locally.
+
+E088 local software checks:47 focused tests passed in18.03s using
+`.venv/bin/python -m pytest -q tests/test_relay_continuation.py tests/test_relay_range.py tests/test_rial_sensory.py tests/test_rial_release.py tests/test_rial_sensory_audit.py tests/test_cma_curriculum.py tests/test_rial_control.py`.
+New coverage includes recentered outward group stopping at original cap,
+continued pinned source/model and seed8800/E088 metadata in real CMA/mock-forward
+curriculum, total-budget/automatic-audit dispatch and wrong-objective rejection
+before output creation. Existing range/cue/recovery/physical/numerical/control
+checks remain passing. Launcher shell syntax, CLI help and diff checks passed.
+No local actual server-weight inspection or scientific forward fit/capability
+verification. Server execution remains planned until reported.

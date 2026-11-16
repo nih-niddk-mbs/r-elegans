@@ -146,17 +146,17 @@ def test_worker_sensory_block_and_rial_replay_are_separate_final_controls(tmp_pa
 
 
 @pytest.mark.parametrize('mediation_passes',[True,False])
-@pytest.mark.parametrize('objective',['body','rial-release','relay-range'])
-def test_curriculum_advances_and_final_tests_use_same_selected_model(tmp_path,monkeypatch,mediation_passes,objective):
+@pytest.mark.parametrize('objective,continued',[('body',False),('rial-release',False),('relay-range',False),('relay-range',True)])
+def test_curriculum_advances_and_final_tests_use_same_selected_model(tmp_path,monkeypatch,mediation_passes,objective,continued):
     import hashlib,concurrent.futures,os
     import scripts.run_rial_sensory as runner
     import scripts.compare_rhythm_worker as verifier
     import scripts.benchmark_cpu as cpu_module
-    expected_parent=runner.RELAY_PARENT if objective=='relay-range' else runner.RELEASE_PARENT if objective=='rial-release' else runner.PARENT
+    expected_parent=runner.RELAY_CONTINUATION_PARENT if continued else runner.RELAY_PARENT if objective=='relay-range' else runner.RELEASE_PARENT if objective=='rial-release' else runner.PARENT
     source=tmp_path/'source';(source/'inputs').mkdir(parents=True);folder=source/'ordinary';folder.mkdir()
     (source/'inputs/manifest.json').write_text(json.dumps(dict(sha256={},sources={})))
     for name in ('network.npz','coordinates.npz','sham.npz','no_cue.npz'):(folder/name).write_bytes(b'fixture')
-    (source/'summary.json').write_text(json.dumps(dict(validation=[dict(variant='nominal' if objective!='body' else 'ordinary',grid='ordinary',mode='normal',output=str(folder),checkpoint_sha256=expected_parent,trajectory_sha256=dict(sham=expected_parent,no_cue=expected_parent))])))
+    (source/'summary.json').write_text(json.dumps(dict(experiment='E087' if continued else 'fixture',selected=dict(checkpoint_sha256=expected_parent),validation=[dict(variant='nominal' if objective!='body' else 'ordinary',grid='ordinary',mode='normal',output=str(folder),checkpoint_sha256=expected_parent,trajectory_sha256=dict(sham=expected_parent,no_cue=expected_parent))])))
     out=tmp_path/'output';out.mkdir();(out/'deadline.json').write_text(json.dumps(dict(coordinator_finish_by=time.monotonic()+28800,total_minutes=480)))
     monkeypatch.setattr(verifier,'verify_inputs',lambda p:None)
     monkeypatch.setattr(runner,'file_sha256',lambda p:expected_parent)
@@ -201,9 +201,12 @@ def test_curriculum_advances_and_final_tests_use_same_selected_model(tmp_path,mo
         def submit(self,fn,j):
             f=concurrent.futures.Future();f.set_result(fn(j));return f
     monkeypatch.setattr(concurrent.futures,'ProcessPoolExecutor',Pool)
-    monkeypatch.setattr(sys,'argv',['fit','--output-dir',str(out),'--source-run',str(source),'--objective',objective])
+    monkeypatch.setattr(sys,'argv',['fit','--output-dir',str(out),'--source-run',str(source),'--objective',objective]+(['--continue-relay'] if continued else []))
     runner.main();s=json.loads((out/'summary.json').read_text())
     assert s['validation_complete'] and s['completed_generations']==3
+    if continued:
+        assert s['experiment']=='E088'
+        assert json.loads((out/'configuration.json').read_text())['seed']==8800
     assert s['partial_sensory_component_qualified']==(objective=='body')
     assert s['sensory_RIAL_release_component_qualified']==(objective=='rial-release')
     assert s['sensory_relay_range_component_qualified']==(objective=='relay-range')

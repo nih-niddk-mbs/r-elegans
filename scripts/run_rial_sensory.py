@@ -1,4 +1,4 @@
-"""E085-E087 body, RIAL release or relay operating-range fitting with a total wall budget."""
+"""E085-E088 body, RIAL release or relay operating-range fitting with a total wall budget."""
 import argparse,concurrent.futures,json,math,multiprocessing,os,random,shutil,subprocess,sys,time
 from pathlib import Path
 import numpy as np
@@ -10,6 +10,7 @@ from r_elegans.rial_sensory import parameter_groups,RUNGS as BODY_RUNGS,score as
 SEED=8500
 PARENT='dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8'
 RELAY_PARENT='5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022'
+RELAY_CONTINUATION_PARENT='608587d8cc9267674b5828df02d7891ae8940f46cc6981b62518b7f89068de73'
 RELEASE_PARENT='f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f'
 
 
@@ -22,7 +23,9 @@ def main():
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--source-run',type=Path,required=True)
     p.add_argument('--objective',choices=('body','rial-release','relay-range'),default='body')
+    p.add_argument('--continue-relay',action='store_true',help='Fresh optimizer at pinned E087 selected weights, original-anchor bounds unchanged')
     a=p.parse_args();release_objective=a.objective=='rial-release';relay_objective=a.objective=='relay-range'
+    if a.continue_relay and not relay_objective:p.error('--continue-relay requires --objective relay-range')
     neural_objective=release_objective or relay_objective
     from r_elegans.rial_release import RUNGS as RELEASE_RUNGS,score as release_score
     from r_elegans.relay_range import RUNGS as RELAY_RUNGS,score as relay_score,parameter_groups as relay_groups,CUE_SCALE,direction_consistent
@@ -31,6 +34,8 @@ def main():
     experiment='E087' if relay_objective else 'E086' if release_objective else 'E085'
     run_seed=8700 if relay_objective else 8600 if release_objective else SEED
     expected_parent=RELAY_PARENT if relay_objective else RELEASE_PARENT if release_objective else PARENT
+    if a.continue_relay:
+        experiment='E088';run_seed=8800;expected_parent=RELAY_CONTINUATION_PARENT
     out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
     for root in (repo,source):
         if out==root or root in out.parents or out in root.parents:
@@ -45,6 +50,8 @@ def main():
     capture_run_record(out,repo,a)
     from scripts.compare_rhythm_worker import verify_inputs
     source_summary=json.loads((source/'summary.json').read_text())
+    if a.continue_relay and (source_summary.get('experiment')!='E087' or source_summary.get('selected',{}).get('checkpoint_sha256')!=expected_parent):
+        raise ValueError('Continuation requires pinned E087 selected checkpoint; no fallback')
     ordinary=next(r for r in source_summary['validation'] if r['variant']==('nominal' if neural_objective else 'ordinary') and r['grid']=='ordinary' and (not neural_objective or r.get('mode')=='normal'))
     folder=Path(ordinary['output']).resolve()
     if source not in folder.parents or ordinary['checkpoint_sha256']!=expected_parent or file_sha256(folder/'network.npz')!=expected_parent:
@@ -73,6 +80,7 @@ def main():
     reserve=max(60*60,.4*(finish-time.monotonic())) if neural_objective else max(2*3600,.25*(finish-time.monotonic()));fit_until=finish-reserve
     if fit_until-time.monotonic()<20*60:raise ValueError('Insufficient search and final-validation budget')
     write(out/'configuration.json',dict(experiment=experiment,parent_sha256=expected_parent,seed=run_seed,
+        initialization='Fresh CMA at selected weights; local trust region recentered, original-anchor bounds unchanged; not exact optimizer resume',
         optimizer='cma==4.4.1',population=12,dimension=len(schema),cpu_groups=groups,total_minutes=budget['total_minutes'],
         validation_reserve_minutes=reserve/60,rungs=RUNGS,training_margin=1.3,
         objective=('AIYL release headroom2/5/10% plus cue responsiveness and recovery; body gait preserved' if relay_objective else 'Early cue-specific1/2/5% RIAL release-cycle attenuation; body gait preserved' if release_objective else 'Early cue-specific2/5/10% cycle-amplitude attenuation with uncued gait and recovery preserved'),

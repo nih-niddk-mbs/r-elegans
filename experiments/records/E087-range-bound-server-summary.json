@@ -1,0 +1,151 @@
+{
+  "experiment": "E087",
+  "record_type": "selected_operating_range_and_bound_audit",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted server stdout, no attachment SHA available for this chat text. Full remote files not independently retrieved.",
+  "run": "/home/carsonc/r-elegans-results/relay-range-20261116T194725Z-293645",
+  "release_rows": {
+    "baseline": {
+      "no_cue": [
+        {
+          "window_s": [
+            30,
+            40
+          ],
+          "mean": 0.9896480861756689,
+          "q01": 0.9896473760103851,
+          "q99": 0.9896488610002651
+        },
+        {
+          "window_s": [
+            60,
+            70
+          ],
+          "mean": 0.9896480903089377,
+          "q01": 0.9896473759971811,
+          "q99": 0.9896488610066595
+        },
+        {
+          "window_s": [
+            41,
+            46
+          ],
+          "mean": 0.9896480867078277,
+          "q01": 0.9896473759910268,
+          "q99": 0.9896488610024781
+        }
+      ],
+      "cue": [
+        {
+          "window_s": [
+            30,
+            40
+          ],
+          "mean": 0.9896480861756689,
+          "q01": 0.9896473760103851,
+          "q99": 0.9896488610002651
+        },
+        {
+          "window_s": [
+            60,
+            70
+          ],
+          "mean": 0.9896480903299207,
+          "q01": 0.9896473760094591,
+          "q99": 0.9896488610054117
+        },
+        {
+          "window_s": [
+            41,
+            46
+          ],
+          "mean": 0.9896448947758896,
+          "q01": 0.989638027121006,
+          "q99": 0.9896481657373102
+        }
+      ]
+    },
+    "selected": {
+      "no_cue": [
+        {
+          "window_s": [
+            30,
+            40
+          ],
+          "mean": 0.9868168586799502,
+          "q01": 0.986816046728411,
+          "q99": 0.9868177420186574
+        },
+        {
+          "window_s": [
+            60,
+            70
+          ],
+          "mean": 0.9868168492655077,
+          "q01": 0.9868160466816037,
+          "q99": 0.9868177419877134
+        },
+        {
+          "window_s": [
+            41,
+            46
+          ],
+          "mean": 0.9868168381604128,
+          "q01": 0.9868160466865441,
+          "q99": 0.9868177420110514
+        }
+      ],
+      "cue": [
+        {
+          "window_s": [
+            30,
+            40
+          ],
+          "mean": 0.9868168586799502,
+          "q01": 0.986816046728411,
+          "q99": 0.9868177420186574
+        },
+        {
+          "window_s": [
+            60,
+            70
+          ],
+          "mean": 0.9868168491696521,
+          "q01": 0.9868160467078108,
+          "q99": 0.9868177420096399
+        },
+        {
+          "window_s": [
+            41,
+            46
+          ],
+          "mean": 0.9868121361852591,
+          "q01": 0.9868023858666265,
+          "q99": 0.9868167713352014
+        }
+      ]
+    }
+  },
+  "outward_group": {
+    "name": "density:AIYL:outward",
+    "coordinates": 12,
+    "latent": 0.9975458504325599,
+    "near_group_bound": true,
+    "log_delta_range": [
+      0.399018340173024,
+      0.399018340173024
+    ],
+    "near_original_bound": 0,
+    "local_lower": -0.4,
+    "local_upper": 0.4,
+    "min_original_lower_distance": 0.8860293789225215,
+    "min_original_upper_distance": 0.35539207588997085
+  },
+  "derived": {
+    "selected_upper_release_headroom": 0.013182257981342649,
+    "additional_shared_outward_multiplier_to_original_limit": 1.4267399349638379,
+    "selected_outward_multiplier_from_parent": 1.4903609518344787
+  },
+  "interpretation": "Baseline AIYL mean falls98.9648%->98.6817%; q99-based remaining release headroom1.3182% still below2%. Selected outward density is near old local +.4log step, not original-anchor cap. Fresh selected-weight search can allow at most+.355392log (~42.67%) further common outward increase while keeping original bounds. Simultaneous changes in other parameters prevent attributing release change to this group alone; no proof remaining bound suffices.",
+  "decision": "Prepare explicit selected-weight continuation with unchanged objective/gates and original-anchor bounds; recenter local step window and initialize fresh CMA. Preserve old states. No exact optimizer-resume claim or actual new run evidence."
+}

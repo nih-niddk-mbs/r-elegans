@@ -1,5 +1,15 @@
 # WormGym: training and validation protocols
 
+2026-11-16 E087 bound audit: AIYL baseline release98.9648%->98.6817%;
+upper headroom1.3182%, still below2%. Outward density hit local+.4log step;
+original cap still allows+.35539log (~42.7%) further common increase. E088
+prepared as fresh-optimizer continuation from pinned E087 selected weights,
+same objective/gates and original bounds,3h TOTAL with automatic audit.
+No success promised or exact-resume claim. [Evidence](experiments/records/E087-range-bound-server-summary.json),
+[plan](experiments/records/E088-plan.json).
+Launch: `sh scripts/launch_relay_continuation_mbslnx2.sh`.
+Report: `python -m scripts.report_rial_sensory --relay`. Server execution pending.
+
 2026-11-16 E087 completed (user-reported):4 generations,1h41m21s including
 clean automatic audit. Loss fell27.65%; AIYL cue response grew47.31% but reaches
 only23.51% of required magnitude. Release-headroom gate still fails; no component
