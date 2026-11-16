@@ -8796,3 +8796,40 @@ or permission to broaden connection bounds. Use actual fixed reversal signs,
 no new edges. This informs a focused sensory-inhibitory-relay-RIAL route before
 another long fit. Same selectedmodel/data; no optimizer, seeds or new simulation.
 No new qualification. Independent parent/failed models and references retained.
+
+## 2026-11-16 — E086 inhibitory headroom: saturated strong AIYL input
+
+Evidence user-pasted command/stdout; no attachment bytes/hash available. External
+`/home/carsonc/r-elegans-results/rial-inhibitory-inputs-20261116T192614Z.json`.
+Structured8inhibitory sources plusRIML in
+`experiments/records/E086-inhibitory-headroom-server-summary.json`.
+Same selected5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022;
+reported command verifies it against prior current-audit SHA, loads exact fixed
+reversals and baseline releases at41..46s. Remote files not independently read.
+
+AIYL baseline chemical current into held RIAL~-0.63018465pA, modeled release
+.9896480867, g.02246004nS,E=-85mV. At fixed heldV-56.64847mV, ideal additional
+inhibition by raising release all the way to1 is.00659186pA. This large tonic
+input has only~1.035percentage points of upward release dynamic range. Eight
+printed inhibitory inputs: SMDVL/VR,RIVL,DVA,AVAL,AIYL,AIBR,RMDDL. Largest ideal
+remaining current headroom belongs toSMDVL(.0647758pA),SMDVR(.0407470),RIVL(.0390373),
+DVA(.0165530); this does NOT establish an available sensory control policy or
+attainable currents. RIML is excitatory in THIS checkpoint (E=0mV,current+.0099561pA);
+its earlier negative current change is reduced excitation, not proof of inhibitory
+transmission. Do not train an imagined inhibitory RIML route by relabeling it.
+
+These fixed signs/operating points are inherited model assumptions/fit values,
+not established cell-specific biological validation. No biological claim that
+AIYL/SMD are universally inhibitory is made. Postsynaptic receptors and actual
+measurements would matter for physiological sign constraints. Current mean and
+ideal release headroom do not establish causality or whole-membrane balance.
+
+Interpretation: AIYL saturation is a concrete limitation for cue-increased
+inhibition on a strong existing route. Earlier response stats show tiny AIYL cue
+change. A sensible next baby step is relay operating-point/dynamic-range and cue
+response fitting, jointly preserving baseline body gait and recovery, before
+returning to RIAL amplitude control. Need a separately specified prospective
+loss/criteria and biological prior review if changing fixed parameters. No
+synapse sign edits, unbounded weights, actual clamp training, new simulation or
+new optimization launched from this record. Four generations do not prove
+network insufficiency. Preserve all failed/independent checkpoints and audits.

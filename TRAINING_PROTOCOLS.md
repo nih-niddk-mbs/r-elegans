@@ -1,5 +1,13 @@
 # WormGym: training and validation protocols
 
+2026-11-16 E086 headroom audit: modeled AIYL release is98.96%, with
+large tonic RIAL inhibition(~0.630pA) but only0.00659pA ideal remaining inhibitory
+headroom at fixed RIAL voltage. RIML is excitatory in this saved checkpoint;
+negative cue current change meant reduced excitation. These are model findings,
+not biological sign validation. Next recommended component: sensory-relay dynamic
+range and cue response with baseline gait/recovery preserved, before RIAL control.
+No new run launched. [Headroom audit](experiments/records/E086-inhibitory-headroom-server-summary.json).
+
 2026-11-16 E086 input-current audit: cue-induced mean synaptic input to
 RIAL is+0.0001933pA at common postsynaptic voltage; opposing source means partly
 cancel. This is a small depolarizing change, not a membrane-current balance or

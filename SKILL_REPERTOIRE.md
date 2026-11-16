@@ -1,5 +1,13 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-16 E086 headroom audit: modeled AIYL release is98.96%, with
+large tonic RIAL inhibition(~0.630pA) but only0.00659pA ideal remaining inhibitory
+headroom at fixed RIAL voltage. RIML is excitatory in this saved checkpoint;
+negative cue current change meant reduced excitation. These are model findings,
+not biological sign validation. Next recommended component: sensory-relay dynamic
+range and cue response with baseline gait/recovery preserved, before RIAL control.
+No new run launched. [Headroom audit](experiments/records/E086-inhibitory-headroom-server-summary.json).
+
 2026-11-16 E086 completed (user-reported):4 generations,1h41m47s including
 successful automatic audit; all final gait/numerical gates passed, integrity and
 frozen-field checks passed. RIAL cycle attenuation only0.0063% versus1% target;

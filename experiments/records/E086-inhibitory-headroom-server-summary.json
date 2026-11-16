@@ -1,0 +1,87 @@
+{
+  "experiment": "E086",
+  "record_type": "inhibitory_input_headroom_reported",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted server command/stdout; no attachment hash available for chat text. Remote JSON/network not independently retrieved. Eight inhibitory sources plus RIML printed.",
+  "artifact": "/home/carsonc/r-elegans-results/rial-inhibitory-inputs-20261116T192614Z.json",
+  "parent_checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022",
+  "checkpoint_hash_evidence": "Same model as preceding current audit, verified by reported command against that audit; hash not reprinted here.",
+  "held_RIAL_mV": -56.64846660797478,
+  "rows": [
+    {
+      "source": "SMDVL",
+      "conductance_nS": 0.002756791251808318,
+      "reversal_mV": -85.0,
+      "baseline_release": 0.17123334016611594,
+      "baseline_current_pA": -0.013383471022945535,
+      "ideal_additional_inhibition_pA": 0.064775788207541
+    },
+    {
+      "source": "SMDVR",
+      "conductance_nS": 0.003501540016719047,
+      "reversal_mV": -83.3525390625,
+      "baseline_release": 0.5642277968881318,
+      "baseline_current_pA": -0.052758333600413425,
+      "ideal_additional_inhibition_pA": 0.04074704470847145
+    },
+    {
+      "source": "RIVL",
+      "conductance_nS": 0.001744486418723266,
+      "reversal_mV": -85.0,
+      "baseline_release": 0.21071132780208965,
+      "baseline_current_pA": -0.01042154310569752,
+      "ideal_additional_inhibition_pA": 0.039037321846669644
+    },
+    {
+      "source": "DVA",
+      "conductance_nS": 0.0007027324290280802,
+      "reversal_mV": -85.0,
+      "baseline_release": 0.16917492335514692,
+      "baseline_current_pA": -0.003370563678505339,
+      "ideal_additional_inhibition_pA": 0.01655297824874327
+    },
+    {
+      "source": "AVAL",
+      "conductance_nS": 0.0017874037382394044,
+      "reversal_mV": -85.0,
+      "baseline_release": 0.8088008620818128,
+      "baseline_current_pA": -0.04098649870589853,
+      "ideal_additional_inhibition_pA": 0.009689138063826644
+    },
+    {
+      "source": "AIYL",
+      "conductance_nS": 0.022460037416720455,
+      "reversal_mV": -85.0,
+      "baseline_release": 0.9896480867078277,
+      "baseline_current_pA": -0.6301846456834461,
+      "ideal_additional_inhibition_pA": 0.006591855122839576
+    },
+    {
+      "source": "AIBR",
+      "conductance_nS": 0.0002495677604259354,
+      "reversal_mV": -85.0,
+      "baseline_release": 0.28464252743170165,
+      "baseline_current_pA": -0.002014024834426009,
+      "ideal_additional_inhibition_pA": 0.0050616038588628485
+    },
+    {
+      "source": "RMDDL",
+      "conductance_nS": 0.0002698959285318247,
+      "reversal_mV": -85.0,
+      "baseline_release": 0.807799747182836,
+      "baseline_current_pA": -0.006181254124320755,
+      "ideal_additional_inhibition_pA": 0.0014707093058209243
+    },
+    {
+      "source": "RIML",
+      "conductance_nS": 0.0009674402181816315,
+      "reversal_mV": 0.0,
+      "baseline_release": 0.1816666268764528,
+      "baseline_current_pA": 0.009956058708572366,
+      "ideal_additional_inhibition_pA": 0.0
+    }
+  ],
+  "interpretation": "AIYL is the strongest printed baseline inhibitory chemical input into RIAL by absolute mean current,~0.630pA, but modeled release~0.98965 leaves only~1.035percentage points upward release headroom, corresponding to0.006592pA additional inhibitory current at fixed postV. SMD/RIV/DVA sources have more ideal release-to1 headroom but this does not show sensory controllability or actual attainable current. RIML reversal0mV is excitatory at held RIAL voltage; its negative cue-induced current change in previous audit is reduced excitation, not an inhibitory synapse.",
+  "limitations": "Reversal signs and release operating points are those of this inherited fitted/migrated checkpoint, not established biological identities. A model synapse sign cannot be inferred from a neurotransmitter alone without receptor context. Common-postV current/headroom is not whole-membrane budget or nonlinear oscillation sensitivity. AIYL saturation is a concrete dynamic-range limitation, not proof it uniquely causes failure; alternative paths and only4optimizer generations remain.",
+  "next_recommended_stage": "Prospectively fit sensory relay operating point/dynamic range and cue responsiveness on existing routes while preserving baseline body gait and recovery, before asking for RIAL rhythmic attenuation. Preserve current/independent models; do not silently change fixed synapse signs, broaden original bounds or promote motor/RL behavior. Requires separate planned experiment; no new run launched."
+}
