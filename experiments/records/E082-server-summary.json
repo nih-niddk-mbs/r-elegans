@@ -1,0 +1,390 @@
+{
+  "experiment": "E082",
+  "record_date": "2026-11-15",
+  "evidence": "User-reported report_smd_control stdout; remote full traces/source/env/model bytes not independently inspected",
+  "source_attachment_sha256": "55ec505dab2b30030e8f3c0f62dd289bd596e8ea7045d1eb172ae0419cc100ad",
+  "run": "/home/carsonc/r-elegans-results/smd-control-20261115T191006Z-193279",
+  "execution_valid": true,
+  "validation_complete": true,
+  "failure": null,
+  "selected": {
+    "name": "ventral",
+    "targets": [
+      "SMDVL",
+      "SMDVR"
+    ],
+    "conductance_nS": 0.1
+  },
+  "reversible_smd_neural_access": false,
+  "learned_stopping_qualified": false,
+  "numerical_checks": [
+    {
+      "case": "ventral",
+      "grid": "neural-half",
+      "body_ratio_difference": 1.1918899777141334e-05,
+      "neural_ratio_difference": 0.0019582624193464904,
+      "passed": true
+    },
+    {
+      "case": "ventral",
+      "grid": "body-half",
+      "body_ratio_difference": 5.25577921650644e-06,
+      "neural_ratio_difference": 1.709561185736508e-05,
+      "passed": true
+    }
+  ],
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 1666.6206287560053,
+    "total_minutes": 240.0,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/smd-control-20261115T191006Z-193279/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model"
+  },
+  "comparisons": [
+    {
+      "case": "SMD-0.01",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.9539393768207101
+      ],
+      "neural_ratios": [
+        1.0470228274993238
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -4.802657856562678,
+          -2.1568076333254105,
+          -4.727730814801423,
+          -4.922740535951666
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "SMD-0.003",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.9914409200007334
+      ],
+      "neural_ratios": [
+        1.0179071359246967
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -1.5949796918870753,
+          -0.7271433101577084,
+          -1.5421518623410067,
+          -1.5887372855142101
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "SMD-0.03",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.7669523856136329
+      ],
+      "neural_ratios": [
+        1.0689387342779306
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -11.347194826992979,
+          -4.851714325935149,
+          -11.615442824505454,
+          -12.354913138281484
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "SMD-0.1",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.2971199910627531
+      ],
+      "neural_ratios": [
+        0.9322486040244086
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -20.448172870144408,
+          -8.430081102161084,
+          -24.05478422449527,
+          -26.4809560246189
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "SMDDL",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        1.0102955863293472
+      ],
+      "neural_ratios": [
+        1.3245050144695911
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -20.678763203746048
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "SMDDR",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.9995913908201854
+      ],
+      "neural_ratios": [
+        0.5979982535543694
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -8.497891738373694
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "SMDVL",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.7048557522181071
+      ],
+      "neural_ratios": [
+        0.7861574784204197
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -24.807159161461865
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "SMDVR",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.6944458803236814
+      ],
+      "neural_ratios": [
+        0.9507950550587204
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -25.32285022598868
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "dorsal",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        1.0098774481162114
+      ],
+      "neural_ratios": [
+        0.8021686674590938
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -20.67977424870545,
+          -8.518339455847814
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "ventral",
+      "variant": "nominal",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.2945610938541052
+      ],
+      "neural_ratios": [
+        0.9293314824000062
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -23.895758042030483,
+          -26.262412548088292
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "ventral",
+      "variant": "shift",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.29454817134308786
+      ],
+      "neural_ratios": [
+        0.9302117284794333
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -23.93542715500111,
+          -26.273242699947446
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "ventral",
+      "variant": "repeat",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.2945610938541052,
+        0.29456737798962623
+      ],
+      "neural_ratios": [
+        0.9293314824000062,
+        0.9277996816636455
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -23.895758042030483,
+          -26.262412548088292
+        ],
+        [
+          -23.898629995988202,
+          -26.246385370471923
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "ventral",
+      "variant": "long-hold",
+      "grid": "ordinary",
+      "body_ratios": [
+        0.2945528485211812
+      ],
+      "neural_ratios": [
+        0.9263206772312069
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -23.88444757109445,
+          -26.227036472530976
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "ventral",
+      "variant": "nominal",
+      "grid": "neural-half",
+      "body_ratios": [
+        0.29457301275388237
+      ],
+      "neural_ratios": [
+        0.9273732199806597
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -23.91069939022392,
+          -26.258675817616073
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    },
+    {
+      "case": "ventral",
+      "variant": "nominal",
+      "grid": "body-half",
+      "body_ratios": [
+        0.29456634963332173
+      ],
+      "neural_ratios": [
+        0.9293485780118635
+      ],
+      "target_mean_shifts_mV": [
+        [
+          -23.895703413855063,
+          -26.26237816920926
+        ]
+      ],
+      "preserved": true,
+      "safe": true,
+      "pre_match": true,
+      "access": false,
+      "strict_body_rest": false
+    }
+  ],
+  "interpretation": "Ventral SMD neural inhibition reversibly reduces body range~70.54% while targeted centered voltage RMS remains~92.93% of sham. Strong mean hyperpolarization is not neural rhythmic-variance suppression. Confirmed across repeated, shifted, long-hold and refined tests. Stringent access/body thresholds and strict rest failed; partial suppression is not learned stopping.",
+  "next_proposed_step": "Inspect periodic incoming currents and NMJ release modulation in ventral SMD to distinguish recurrent forcing, intrinsic dynamics and voltage-to-muscle transfer before another long fit. No additional run launched."
+}

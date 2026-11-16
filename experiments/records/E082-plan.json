@@ -1,6 +1,6 @@
 {
   "experiment": "E082",
-  "status": "planned_server_execution_not_evidenced",
+  "status": "diagnostic_completed_partial_suppression_gate_failed_user_reported",
   "record_date": "2026-11-15",
   "question": "Can selective SMD membrane inhibition reversibly suppress neural variation and the SMD-transmitted body wiggle, with recovery on release?",
   "authorization": "User requests a4h run after proposing SMD neuron inhibition/release; frozen diagnostic, not parameter training",
@@ -31,5 +31,6 @@
   "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_smd_control",
   "artifacts": "/home/carsonc/r-elegans-results/smd-control-<UTC>-<PID> and adjacent log; copied verified model/coordinates/input capsule, original reference path+SHA, every trial trajectory/metrics, source/env/argv, configuration and total-budget receipt. No optimizer/RNG because no fit/randomization; original recursive dependencies retained.",
   "storage": "No candidate populations or deletion.50GiB free reserve before each trace write; estimated writes checked against25GiB new-run cap, with bounded concurrency granularity rather than OS quota.",
-  "local_verification": "17 focused SMD/control-access/NMJ/head-split tests passed2.41s. Synthetic positive and negative control/recovery/clock tests; SMD-only dose/timing tests; selection and240min watchdog dispatch; mocked worker verifies membrane hook with no NMJ override, source prefix and retained hash. Shell syntax and coordinator CLI help passed. No actual E082 server checkpoint/trajectory access or forward scientific run locally."
+  "local_verification": "17 focused SMD/control-access/NMJ/head-split tests passed2.41s. Synthetic positive and negative control/recovery/clock tests; SMD-only dose/timing tests; selection and240min watchdog dispatch; mocked worker verifies membrane hook with no NMJ override, source prefix and retained hash. Shell syntax and coordinator CLI help passed. No actual E082 server checkpoint/trajectory access or forward scientific run locally.",
+  "outcome_record": "E082-server-summary.json"
 }

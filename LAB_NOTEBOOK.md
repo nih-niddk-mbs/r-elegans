@@ -8068,3 +8068,56 @@ verified the membrane probe is supplied without an NMJ override. These are
 synthetic/mock software tests, not actual E082 scientific simulations; server
 weights/full trajectories not available locally. Server execution remains
 planned until user-reported evidence arrives. No qualification yet.
+
+### E082 reported — reversible ventral SMD motor suppression, neural gate failed (2026-11-15)
+
+Evidence: user-reported `scripts.report_smd_control` stdout in attached text,
+transcribed with attachment SHA into
+[E082 server summary](experiments/records/E082-server-summary.json).
+Run `/home/carsonc/r-elegans-results/smd-control-20261115T191006Z-193279`.
+Execution and validation complete, failureNone, exit0, no timeout, all steps
+finished.1666.62063s (~27m47s), within240min TOTAL maximum; completed planned
+diagnostic cases rather than four hours of fitting. No weights were trained.
+Actual remote source/env/model/full trace bytes were not independently retrieved.
+
+Screen whole SMD inhibition gives body/sham range ratios.991441 at.003nS,
+.953939 at.01nS,.766952 at.03nS,.297120 at.1nS. Individual dorsal cells and
+dorsal pair have little body effect (SMDDL1.01030,SMDDR.999591,pair1.00988).
+Individual ventral inhibitions yield.704856(SMDVL)/.694446(SMDVR); inhibiting both
+ventral neurons gives.294561. These marginal nonlinear effects are not additive
+fractions of movement generated. All recorded cases preserved baseline/recovery,
+safety and paired pre-intervention matching, but none met the prospective neural
+access/body-rest gates.
+
+Selected ventral pair at.1nS: mean shifts-23.89576/-26.26241mV, body ratio
+.29456109 (~70.54% reduction), target centered-voltage RMS ratio.92933148
+(only~7.07% reduction). Thus strong mean hyperpolarization does not imply the
+targeted neural variation stopped. The body response may involve changed
+voltage-to-release/force gain, changed phase or other network/body effects;
+release traces/current spectra are not in supplied stdout, so no specific cause
+is diagnosed. Persistence in a connected circuit is not proof of intrinsic SMD
+pacemaking. Whole-SMD.1nS similarly body.297120/neural.932249.
+
+Selected response repeats across shifted onset (body.294548/neural.930212),
+two repeated bouts (.294561/.294567, neural.929331/.927800),60s long hold
+(body.294553/neural.926321), neural-half (.294573/.927373) and body-half
+(.294566/.929349). Body/neural ratio differences on refinement1.19189e-5/
+.00195826 and5.25578e-6/1.70956e-5 passed. All recoveries preserved. This is
+robust reversible PARTIAL motor suppression by an imposed neural intervention,
+not sensory control, strict rest, a validated full stop or a quiet neural state.
+The arbitrary prospective target required body<=.2sham AND neuralRMS<=.2sham;
+neither is met. Do not relax those thresholds post hoc or silently promote the
+partial result. Also do not require all neural activity to cease as a universal
+biological condition for behavioral rest; the stringent RMS gate was an
+engineering test of oscillator suppression in this experiment.
+
+Decision: retain the useful partial-control finding and original checkpoint,
+while reversible_smd_neural_access/learned_stopping remain false. Before another
+long fit, inspect ventral SMD periodic incoming chemical/gap currents, source
+voltages and NMJ release modulation during inhibition versus sham. Distinguish
+ongoing upstream/recurrent forcing from intrinsic dynamics or altered output
+gain; full intrinsic-current reconstruction still needs gate states absent from
+these saved traces. Use results to select a control route or a small conditional-
+oscillation fit, rather than blindly increasing inhibition or linking AVB to SMD.
+No new analysis job/fit launched here. No new behavioral/swimming/biological
+qualification. Documentation/evidence update only.

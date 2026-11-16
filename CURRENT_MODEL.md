@@ -1,9 +1,12 @@
 # Current model: exact scope and computation path
 
-2026-11-15 E082 **planned**: up to4h TOTAL frozen SMD neural inhibition/release
-diagnostic,21 trials across doses/individuals/pairs, varied timing/long hold and
-neural/body refinements. No parameters fit, no learned-stop promotion.
-[Protocol](experiments/records/E082-plan.json).
+2026-11-15 E082 completed (user-reported):27m47s, all planned cases/refinements
+complete, no timeout. Ventral SMD inhibition reversibly reduced body range70.54%
+but left92.93% targeted voltage RMS despite24..26mV hyperpolarization. Shifted,
+repeated/long-hold and refined results agree. Partial motor suppression is real;
+prospective reversible-neural-access, strict-rest and learned-stop gates failed.
+No parameters were trained. Next: audit incoming rhythmic drive and NMJ release
+before another long fit. [Outcome](experiments/records/E082-server-summary.json).
 
 2026-11-15 E081 completed (user-reported):13m03s, controls and timestep checks
 passed. SMD-only NMJ release hold reduced body range88.62%, essentially matching
