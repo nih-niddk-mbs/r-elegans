@@ -1,0 +1,101 @@
+{
+  "experiment": "E085",
+  "record_type": "saved_trace_frequency_resolution",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted server command/stdout; remote JSON and raw trace bytes not independently retrieved. No attachment hash available for this chat message.",
+  "run": "/home/carsonc/r-elegans-results/rial-sensory-20261116T041450Z-211013",
+  "artifact": "/home/carsonc/r-elegans-results/frequency-resolution-20261116T161147Z.json",
+  "window_s": [
+    30,
+    40
+  ],
+  "condition": "no_cue",
+  "method": "In each region select greatest raw-range joint, find prominent peaks, compare discrete median periods, parabolic sub-sample peak median periods and linear regression of refined peak time versus peak index. This regional joint selection differs from cycle-excursion argmax in original gate; printed joints3/7/8.",
+  "rows": [
+    {
+      "grid": "ordinary",
+      "region": 0,
+      "joint": 3,
+      "sample_peak_Hz": 1.9762845849802362,
+      "interpolated_peak_Hz": 1.9785416367669773,
+      "whole_train_Hz": 1.9785414778906327,
+      "peaks": 20
+    },
+    {
+      "grid": "ordinary",
+      "region": 1,
+      "joint": 7,
+      "sample_peak_Hz": 1.9762845849802362,
+      "interpolated_peak_Hz": 1.9785425010915354,
+      "whole_train_Hz": 1.9785414951423221,
+      "peaks": 20
+    },
+    {
+      "grid": "ordinary",
+      "region": 2,
+      "joint": 8,
+      "sample_peak_Hz": 1.9762845849802362,
+      "interpolated_peak_Hz": 1.9785423708875665,
+      "whole_train_Hz": 1.9785415203502912,
+      "peaks": 20
+    },
+    {
+      "grid": "neural-half",
+      "region": 0,
+      "joint": 3,
+      "sample_peak_Hz": 1.9841269841269928,
+      "interpolated_peak_Hz": 1.9873374592468358,
+      "whole_train_Hz": 1.9873375082600402,
+      "peaks": 19
+    },
+    {
+      "grid": "neural-half",
+      "region": 1,
+      "joint": 7,
+      "sample_peak_Hz": 1.9841269841269928,
+      "interpolated_peak_Hz": 1.987337823094486,
+      "whole_train_Hz": 1.987337534439403,
+      "peaks": 19
+    },
+    {
+      "grid": "neural-half",
+      "region": 2,
+      "joint": 8,
+      "sample_peak_Hz": 1.9841269841269928,
+      "interpolated_peak_Hz": 1.9873378549820582,
+      "whole_train_Hz": 1.9873375070915704,
+      "peaks": 19
+    },
+    {
+      "grid": "body-half",
+      "region": 0,
+      "joint": 3,
+      "sample_peak_Hz": 1.9801980198019702,
+      "interpolated_peak_Hz": 1.9785411873286145,
+      "whole_train_Hz": 1.9785411645046067,
+      "peaks": 20
+    },
+    {
+      "grid": "body-half",
+      "region": 1,
+      "joint": 7,
+      "sample_peak_Hz": 1.9801980198019702,
+      "interpolated_peak_Hz": 1.9785412169936258,
+      "whole_train_Hz": 1.9785411604726224,
+      "peaks": 20
+    },
+    {
+      "grid": "body-half",
+      "region": 2,
+      "joint": 8,
+      "sample_peak_Hz": 1.9801980198019702,
+      "interpolated_peak_Hz": 1.9785411644228226,
+      "whole_train_Hz": 1.9785411686069865,
+      "peaks": 20
+    }
+  ],
+  "acceptance_gates_changed": false,
+  "interpretation": "Ordinary/body-half interpolated frequencies both~1.97854Hz and whole-train regression agrees. Body-half discrete1.980198Hz crossing is a sampling artifact in this window. Neural-half refined~1.98734Hz remains above1.98Hz; difference~0.008796Hz/~0.4446% versus ordinary is not removed by interpolation. Do not describe all refined failures as peak quantization. Small grid dependence near a hard boundary, not evidence of collapsed gait.",
+  "limitations": "One baseline window only, no quarter neural grid; no continuum frequency or global convergence certification. Original qualification remains failed regardless of revised estimator because2% sensory attenuation target was missed.",
+  "next_decision": "Use a prospectively specified subsample/multi-cycle estimator in future protocols; retain original E085 gates/results. Prioritize sensory-to-RIAL transfer and controllable rhythmic output rather than another unchanged long fit. Further neural refinement needed if a strict upper frequency boundary determines acceptance."
+}

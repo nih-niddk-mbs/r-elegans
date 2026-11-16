@@ -1,5 +1,11 @@
 # WormGym: training and validation protocols
 
+2026-11-16 E085 frequency check: interpolated ordinary/body-half baseline
+frequencies agree at1.97854Hz; body-half boundary failure is a sampling artifact
+in30..40s. Neural-half remains1.98734Hz (~0.44% faster), so its boundary failure
+is not removed by interpolation. No acceptance criteria changed;2% sensory
+attenuation still fails. [Frequency audit](experiments/records/E085-frequency-resolution-server-summary.json).
+
 2026-11-16 E085 audit clarification: all40 refined gait failures are solely
 absolute frequency slightly above1.98Hz (1.9802..1.9841); no amplitude or relative
 frequency failures. Investigate discrete peak-timing resolution before diagnosing

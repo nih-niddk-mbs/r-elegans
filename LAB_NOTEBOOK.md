@@ -8584,3 +8584,31 @@ peak sample spacing versus parabolic subsample peaks and whole-peak-train linear
 regression, using fixed recorded windows and prominent joint in each region.
 No forward model, changed parameters or random seed. Save exact command/stdout
 externally. Numerical diagnostic only; no altered acceptance gates or new run.
+
+## 2026-11-16 — E085 frequency resolution: sampling artifact plus neural-grid shift
+
+Evidence: user-pasted command/stdout; saved server JSON
+`/home/carsonc/r-elegans-results/frequency-resolution-20261116T161147Z.json`.
+Remote raw/JSON bytes not independently retrieved; no attachment hash available.
+Transcribed all9 rows in `experiments/records/E085-frequency-resolution-server-summary.json`.
+Read-only baseline no-cue30..40s, regionwise maximum raw-range joints3/7/8,
+parabolic peak interpolation and peak-index/time regression. This chosen-joint
+rule differs from cycle-excursion argmax in original gate; do not silently replace
+old acceptance metrics.20 peaks ordinary/body-half,19 neural-half.
+
+Ordinary discrete1.97628458Hz -> interpolated~1.978542Hz; body-half discrete
+1.98019802Hz ->~1.978541Hz. Whole-train regression agrees, body-half crossing
+of1.98Hz is a sampling artifact for this window. Neural-half discrete1.98412698Hz
+-> interpolated~1.9873377Hz with regression~1.9873375Hz, still above1.98.
+Neural-grid difference~.008796Hz=.4446% relative to ordinary persists after peak
+refinement. Correct the hypothesis that ALL boundary failures might be sample
+quantization: only body-half is explained here. No amplitude failure/large gait
+collapse is established. A quarter neural grid or further solver analysis is
+needed to establish a limiting frequency; one baseline window cannot certify
+all windows or full numerical convergence.
+
+No acceptance gates changed; E0852% attenuation remains failed. Future estimator
+changes must be prospective, with original results retained. Do not widen1.98Hz
+ceiling just to qualify selected weights. Primary fitting bottleneck remains weak
+sensory modulation of rhythmic RIAL output, supported descriptively by earlier
+release statistics, not a new causal result. No new simulation/training launched.
