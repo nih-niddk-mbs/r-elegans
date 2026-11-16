@@ -1,5 +1,13 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-16 E086 completed (user-reported):4 generations,1h41m47s including
+successful automatic audit; all final gait/numerical gates passed, integrity and
+frozen-field checks passed. RIAL cycle attenuation only0.0063% versus1% target;
+no milestones, neural control/full start-stop/swimming remain unqualified.
+Four generations do not establish optimizer convergence or network insufficiency.
+Inspect candidate sensitivity and sensory-to-RIAL transfer before another
+unchanged fit. [Outcome and audit](experiments/records/E086-server-summary.json).
+
 2026-11-16 E086 planned: three-hour TOTAL sensory-to-RIAL fitting run,
 including final validation and automatic post-run audit. Fresh CMA from pinned
 E085 selected weights targets1%,2%,5% reduction of RIAL release-cycle excursion;

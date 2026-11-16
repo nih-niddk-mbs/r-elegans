@@ -1,0 +1,442 @@
+{
+  "experiment": "E086",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted report_rial_sensory --release stdout. Full remote weights/traces/audit JSON/source/env not independently retrieved.",
+  "source_attachment_sha256": "5318ec409b0a0be01a9688423fb0f70258c886216fa25d5a64e32f5984770c5c",
+  "run": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910",
+  "execution_valid": true,
+  "validation_complete": true,
+  "completed_generations": 4,
+  "stop_reason": "time_budget",
+  "failure": null,
+  "final_target": 0.01,
+  "objective": "rial-release",
+  "milestones": [],
+  "sensory_RIAL_release_component_qualified": false,
+  "partial_sensory_component_qualified": false,
+  "sensory_block_control": true,
+  "RIAL_chemical_replay_mediation": false,
+  "RIAL_mediated_partial_component_qualified": false,
+  "long_cue_sustained_attenuation": false,
+  "long_cue_RIAL_release_attenuation": false,
+  "full_start_stop_qualified": false,
+  "rows": [
+    {
+      "case": "baseline",
+      "metrics": {
+        "loss": 1.6986567614314718,
+        "response_amplitude_ratios": [
+          1.0000332527077145
+        ],
+        "late_amplitude_ratios": [
+          1.0000006168691156
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.3,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9991273460440832
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f"
+    },
+    {
+      "case": "selected",
+      "metrics": {
+        "loss": 1.6736967810637209,
+        "response_amplitude_ratios": [
+          0.9999371433518521
+        ],
+        "late_amplitude_ratios": [
+          0.999996072542626
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.3,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9990888038995182
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "nominal/ordinary/normal",
+      "metrics": {
+        "loss": 0.9874681799525918,
+        "response_amplitude_ratios": [
+          0.9999371433518521
+        ],
+        "late_amplitude_ratios": [
+          0.999996072542626
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9990888038995182
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "low-dose/ordinary/normal",
+      "metrics": {
+        "loss": 0.9897275097194608,
+        "response_amplitude_ratios": [
+          0.9999485049616486
+        ],
+        "late_amplitude_ratios": [
+          0.9999958191617102
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9991987531772871
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "shift/ordinary/normal",
+      "metrics": {
+        "loss": 0.989357663074194,
+        "response_amplitude_ratios": [
+          0.9999466459828135
+        ],
+        "late_amplitude_ratios": [
+          0.999991976361488
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9991325366467592
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "repeat/ordinary/normal",
+      "metrics": {
+        "loss": 0.9861758061182013,
+        "response_amplitude_ratios": [
+          0.9999371433518521,
+          0.9999241293435939
+        ],
+        "late_amplitude_ratios": [
+          0.999996072542626,
+          1.000004093252151
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9990888038995182,
+          0.9991122574613338
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "redundant/ordinary/normal",
+      "metrics": {
+        "loss": 0.9881628744330304,
+        "response_amplitude_ratios": [
+          0.9999371433518521,
+          0.9999441317816764
+        ],
+        "late_amplitude_ratios": [
+          0.999996072542626
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9990888038995182,
+          0.9992925300763694
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "long-cue/ordinary/normal",
+      "metrics": {
+        "loss": 0.9874681799525918,
+        "response_amplitude_ratios": [
+          0.9999371433518521
+        ],
+        "late_amplitude_ratios": [
+          1.0000035153081814
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9990888038995182
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "nominal/neural-half/normal",
+      "metrics": {
+        "loss": 0.9870826301734359,
+        "response_amplitude_ratios": [
+          0.9999352032197305
+        ],
+        "late_amplitude_ratios": [
+          0.9999938597020889
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9991035463177231
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "nominal/body-half/normal",
+      "metrics": {
+        "loss": 0.9877239790139892,
+        "response_amplitude_ratios": [
+          0.9999384303540045
+        ],
+        "late_amplitude_ratios": [
+          0.9999946850136657
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9990829362478882
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "nominal/ordinary/sensory-blocked",
+      "metrics": {
+        "loss": 1.0000000000000018,
+        "response_amplitude_ratios": [
+          1.0
+        ],
+        "late_amplitude_ratios": [
+          1.0
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          1.0
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    },
+    {
+      "case": "nominal/ordinary/rial-replay",
+      "metrics": {
+        "loss": 0.9874681799525918,
+        "response_amplitude_ratios": [
+          0.9999371433518521
+        ],
+        "late_amplitude_ratios": [
+          0.999996072542626
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.01,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9990888038995182
+        ],
+        "metric": "RIAL_release_cycle_excursion_ratio",
+        "RIAL_baseline_and_recovery_preserved": true
+      },
+      "mediation": {
+        "replay_amplitude_ratios": [
+          0.9992324745058155
+        ],
+        "baseline_preserved": true,
+        "cue_attenuation_reduced": false,
+        "scope": "Final diagnostic only: matched no-cue RIAL release replay on existing SMD chemical edges from cue onset; not used in fitting"
+      },
+      "checkpoint_sha256": "5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022"
+    }
+  ],
+  "numerical_checks": [
+    {
+      "grid": "neural-half",
+      "amplitude_ratio_difference": 1.9401321216250267e-06,
+      "passed": true
+    },
+    {
+      "grid": "body-half",
+      "amplitude_ratio_difference": 1.2870021524058473e-06,
+      "passed": true
+    }
+  ],
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 6107.477124407014,
+    "total_minutes": 180.0,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model",
+    "audit_exit_code": 0,
+    "audit_timed_out": false,
+    "audit_complete": true,
+    "audit_integrity_passed": true,
+    "audit_report": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910-audit/summary.json",
+    "post_audit_component_qualified": false
+  },
+  "audit": {
+    "run": "/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910",
+    "audit_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "candidate_count": 59,
+    "final_cases": 10,
+    "failed_gait_checks": {
+      "final-nominal": 0,
+      "final-low-dose": 0,
+      "final-shift": 0,
+      "final-repeat": 0,
+      "final-redundant": 0,
+      "final-long-cue": 0,
+      "final-neural-half": 0,
+      "final-body-half": 0,
+      "final-sensory-blocked": 0,
+      "final-rial-replay": 0
+    },
+    "failed_RIAL_release_checks": {
+      "final-nominal": 1,
+      "final-low-dose": 1,
+      "final-shift": 1,
+      "final-repeat": 2,
+      "final-redundant": 2,
+      "final-long-cue": 1,
+      "final-neural-half": 1,
+      "final-body-half": 1,
+      "final-sensory-blocked": 1,
+      "final-rial-replay": 1
+    },
+    "groups_near_bound": [
+      "density:RIAR:inward"
+    ],
+    "frozen_coordinates_unchanged": true,
+    "frozen_network_fields_unchanged": true,
+    "scope": "Saved-data audit only: no forward simulation, fitting, causal intervention or qualification. Release statistics use recorded voltage and fixed release law, not channel-current attribution. Optimizer/source records remain in source run; hashes here cover models, coordinates, declared inputs and final traces. Missing stage fields are explicit."
+  },
+  "interpretation": "Four CMA generations,48 population evaluations;59 total evaluation records consistent with parent+48+10 final. All printed final cases safe, body/RIAL baseline and recovery preserved, useful movement preserved, no gait failures, small refined neural-response ratio errors. Nominal release-cycle ratio1.0000332527->0.9999371434, from0.003325% enhancement to0.006286% attenuation, only0.629% of requested1% reduction. Nominal body reduction~0.09112%, distinct from primary neural objective. No milestones. Sensory block removes effect. Failed release-check counts in blocked control are expected, not failed control. Replay body attenuation reduction~15.77%, below75% criterion.",
+  "limitations": "Only4 generations, so neither optimizer convergence nor network insufficiency demonstrated. RIAR inward group near local bound; direction/absolute factors not supplied. No proof of failed sensory detection, missing topology, or specific current bottleneck. All gait gates passed in these cases; no claim of continuum numerical convergence or biological fidelity. Early finish within180min is compatible with lookahead/reserves; phase timing breakdown not provided.",
+  "decision": "Preserve failed selected model5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022 and independent parents/all optimizer/RNG/reference dependencies. Before longer identical fitting, inspect generation/candidate objective sensitivity and cue-related RIAL input/output changes to choose a tractable control route. No new run launched."
+}

@@ -8681,3 +8681,45 @@ apply to selected physical checkpoint, not just a coordinate file. Launcher shel
 syntax, CLI help and diff checks passed. These tests establish software behavior,
 not actual full-model fitting or new biological/motor capability. Server launch
 and exact runtime source/environment remain pending.
+
+## 2026-11-16 — E086 complete with automatic audit;1% neural modulation not reached
+
+User-pasted `scripts.report_rial_sensory --release` stdout, attachment SHA256
+5318ec409b0a0be01a9688423fb0f70258c886216fa25d5a64e32f5984770c5c.
+Structured transcription `experiments/records/E086-server-summary.json` includes
+all12 baseline/selected/final rows, numerical checks, budget and audit summary.
+Remote raw weights/trace/source/env bytes not independently retrieved.
+Run `/home/carsonc/r-elegans-results/rial-release-20261116T163801Z-287910`;
+audit sibling `rial-release-20261116T163801Z-287910-audit`.
+4 generations;48 population candidates;59 evaluation records consistent with
+parent+48+10final; no milestones. stop time_budget, no failure, full validation.
+Total6107.477124407014s=1h41m47s, within180min including automatic audit, no timeout.
+Generation lookahead and validation/audit reserves can yield early finish;
+stdout does not provide phase timing breakdown or prove efficient resource use.
+
+Parent f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f;
+selected5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022.
+Nominal RIAL release-cycle ratio1.0000332527077145 ->.9999371433518521,
+from.003325% enhancement to.006286% attenuation versus1% target (~.629% of
+target). Training-margin loss1.69865676 ->1.67369678; weak improvement, no
+qualified neural component. Body ratio.9990888038995182, ~.09112% attenuation;
+this is separate from neural cycle objective, not swimming speed or full stop.
+Late/long-cue neural modulation effectively absent. Chemical-block ratio1,
+control passes. RIAL-branch replay body ratio.9992324745058155 versus ordinary
+.9990888038995182, ~15.77% reduction in small cue effect, below75% criterion.
+No claim of proven mechanism from this failed test.
+
+All final cases report safety, baseline/recovery and useful movement true.
+Neural-half/body-half release-ratio differences1.9401321e-6/1.2870022e-6 pass;
+audit lists0 gait failures in every final case. This shows these prospective
+gates passed, not a general continuum/biological validation. Every normal test
+misses the release target. Blocked-control release target failure is expected
+and does not negate passing sensory-block control.
+
+Automatic audit complete, exit0/no timeout, integrity true, problems[].
+Frozen coordinates AND physical network fields unchanged; only density:RIAR:inward
+near local bound, direction/value not in excerpt. No post-audit qualification.
+Four generations do not establish optimizer convergence or network insufficiency.
+Preserve selected failed model, parent, all optimizer/RNG and recursive references.
+Next proposed step: inspect candidate/parameter sensitivity and cue-driven RIAL
+input/output changes before another identical long search. No new job launched.
