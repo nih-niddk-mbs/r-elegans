@@ -8553,3 +8553,34 @@ that relaxing bounds would improve the objective or be physiologically justified
 Integrity success does not qualify gait convergence or control. E085 remains a
 failed2% attenuation fit. Next: retrieve detailed gait and sensory/relay/RIAL
 release statistics from existing audit before choosing another fit. No job launched.
+
+## 2026-11-16 — E085 audit details: boundary frequency failures and weak RIAL modulation
+
+User-provided stdout attachment SHA256: f807ccfd608c272b97f5adbfaa6733542582d42e30ed200c05057558efd8052a.
+Structured rows: `experiments/records/E085-audit-detail-server-summary.json`.
+All21 neural-half and19 body-half failed checks are ABSOLUTE frequency only,
+1.9841269841Hz and1.9801980198Hz versus upper1.98. No regional cycle-amplitude
+or relative-frequency failures were printed. This narrows the prior unresolved
+gait finding; do not infer collapsed gait or large timestep sensitivity. Existing
+peak_frequency uses reciprocal median discrete peak spacing; quantization near
+the boundary is a plausible explanation requiring saved-trace verification.
+
+Response41..46s: AWAR release mean.05564583->.07135578, AIYR.53904090->.54237529,
+AIZR.15251195->.16183351, AIBL.61608311->.62598878. AIYL near.98937655 and barely
+changes; possible saturation, not a demonstrated causal bottleneck. RIAL mean
+.34898343->.34907983; std.06610970->.06611076 (no meaningful attenuation).
+Ventral SMD std.03882908->.03880667 and.07271721->.07267012 (only~.058%/.065%
+reduction). Pointwise release RMS differences can include phase changes; do not
+interpret them as rhythmic amplitude reduction or additive transmission fractions.
+
+Near selected group bounds: RIAL outward logdelta-.39966558 (~.6705factor),
+AWAR->relays+.39937481 (~1.4909factor), AIYR->relays-.39984688 (~.6704factor).
+These are local grouped limits, with0 coordinates near original-anchor bounds.
+No evidence justifies opening all bounds yet. Goal2% attenuation still failed,
+independent of boundary frequency issue; no retrospective requalification.
+
+Next planned read-only check: existing final nominal/neural-half/body-half trace
+peak sample spacing versus parabolic subsample peaks and whole-peak-train linear
+regression, using fixed recorded windows and prominent joint in each region.
+No forward model, changed parameters or random seed. Save exact command/stdout
+externally. Numerical diagnostic only; no altered acceptance gates or new run.

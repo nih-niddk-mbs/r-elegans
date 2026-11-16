@@ -1,0 +1,395 @@
+{
+  "experiment": "E085",
+  "record_type": "detailed_saved_data_audit",
+  "record_date": "2026-11-16",
+  "evidence": "User-pasted remote stdout; recorded release statistics rounded8 decimals; raw remote signals not retrieved",
+  "source_attachment_sha256": "f807ccfd608c272b97f5adbfaa6733542582d42e30ed200c05057558efd8052a",
+  "audit": "/home/carsonc/r-elegans-results/rial-sensory-audit-20261116T155003Z",
+  "failed_gait_checks": {
+    "final-neural-half": [
+      {
+        "window": "no_cue/active/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/active/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/active/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/active/1",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/active/1",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9841269841270208
+      },
+      {
+        "window": "no_cue/active/1",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/response/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/response/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/response/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269789
+      },
+      {
+        "window": "no_cue/late/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/late/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "no_cue/late/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "cue/active/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "cue/active/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "cue/active/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "cue/active/1",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9841269841270208
+      },
+      {
+        "window": "cue/active/1",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9841269841270208
+      },
+      {
+        "window": "cue/active/1",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9841269841270208
+      },
+      {
+        "window": "cue/response/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "cue/response/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      },
+      {
+        "window": "cue/response/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9841269841269928
+      }
+    ],
+    "final-body-half": [
+      {
+        "window": "no_cue/active/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/active/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/active/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/active/1",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019562
+      },
+      {
+        "window": "no_cue/active/1",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019422
+      },
+      {
+        "window": "no_cue/active/1",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019562
+      },
+      {
+        "window": "no_cue/response/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/response/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/response/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/late/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/late/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "no_cue/late/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "cue/active/0",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "cue/active/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "cue/active/0",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      },
+      {
+        "window": "cue/active/1",
+        "region": 0,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019562
+      },
+      {
+        "window": "cue/active/1",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019562
+      },
+      {
+        "window": "cue/active/1",
+        "region": 2,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019562
+      },
+      {
+        "window": "cue/response/0",
+        "region": 1,
+        "check": "absolute_frequency",
+        "value": 1.9801980198019702
+      }
+    ]
+  },
+  "groups_near_bound": [
+    {
+      "name": "density:RIAL:outward",
+      "coordinates": 12,
+      "latent": -0.9991639599795454,
+      "near_group_bound": true,
+      "log_delta_range": [
+        -0.39966558399181823,
+        -0.3996655839918181
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "chemical:AWAR->relays",
+      "coordinates": 2,
+      "latent": 0.9984370349120784,
+      "near_group_bound": true,
+      "log_delta_range": [
+        0.3993748139648314,
+        0.39937481396483143
+      ],
+      "near_original_bound": 0
+    },
+    {
+      "name": "chemical:AIYR->relays",
+      "coordinates": 3,
+      "latent": -0.9996172079616813,
+      "near_group_bound": true,
+      "log_delta_range": [
+        -0.39984688318467254,
+        -0.3998468831846725
+      ],
+      "near_original_bound": 0
+    }
+  ],
+  "response_window_s": [
+    41,
+    46
+  ],
+  "release_statistics": {
+    "AWAL": {
+      "no_cue_mean": 0.00059855,
+      "cue_mean": 0.00084507,
+      "no_cue_std": 1e-08,
+      "cue_std": 0.00019496,
+      "difference_rms": 0.0003143
+    },
+    "AWAR": {
+      "no_cue_mean": 0.05564583,
+      "cue_mean": 0.07135578,
+      "no_cue_std": 2.91e-06,
+      "cue_std": 0.01176945,
+      "difference_rms": 0.01962959
+    },
+    "AIYL": {
+      "no_cue_mean": 0.98937655,
+      "cue_mean": 0.98937314,
+      "no_cue_std": 4.8e-07,
+      "cue_std": 2.67e-06,
+      "difference_rms": 4.3e-06
+    },
+    "AIYR": {
+      "no_cue_mean": 0.5390409,
+      "cue_mean": 0.54237529,
+      "no_cue_std": 3.81e-06,
+      "cue_std": 0.00250668,
+      "difference_rms": 0.00417153
+    },
+    "AIZL": {
+      "no_cue_mean": 0.64282537,
+      "cue_mean": 0.64353365,
+      "no_cue_std": 0.00080157,
+      "cue_std": 0.00091542,
+      "difference_rms": 0.00087143
+    },
+    "AIZR": {
+      "no_cue_mean": 0.15251195,
+      "cue_mean": 0.16183351,
+      "no_cue_std": 8.254e-05,
+      "cue_std": 0.00710099,
+      "difference_rms": 0.01171967
+    },
+    "AIBL": {
+      "no_cue_mean": 0.61608311,
+      "cue_mean": 0.62598878,
+      "no_cue_std": 0.00026667,
+      "cue_std": 0.00745155,
+      "difference_rms": 0.0123916
+    },
+    "AIBR": {
+      "no_cue_mean": 0.23669612,
+      "cue_mean": 0.23727528,
+      "no_cue_std": 0.00030729,
+      "cue_std": 0.00050817,
+      "difference_rms": 0.00071653
+    },
+    "RIAL": {
+      "no_cue_mean": 0.34898343,
+      "cue_mean": 0.34907983,
+      "no_cue_std": 0.0661097,
+      "cue_std": 0.06611076,
+      "difference_rms": 0.00096656
+    },
+    "RIAR": {
+      "no_cue_mean": 0.0118744,
+      "cue_mean": 0.01226195,
+      "no_cue_std": 0.00015874,
+      "cue_std": 0.00032949,
+      "difference_rms": 0.00048867
+    },
+    "SMDDL": {
+      "no_cue_mean": 0.06679413,
+      "cue_mean": 0.06687343,
+      "no_cue_std": 0.00096057,
+      "cue_std": 0.00096054,
+      "difference_rms": 0.00010082
+    },
+    "SMDDR": {
+      "no_cue_mean": 0.00021914,
+      "cue_mean": 0.00021997,
+      "no_cue_std": 1.076e-05,
+      "cue_std": 1.077e-05,
+      "difference_rms": 1.05e-06
+    },
+    "SMDVL": {
+      "no_cue_mean": 0.15019054,
+      "cue_mean": 0.14965967,
+      "no_cue_std": 0.03882908,
+      "cue_std": 0.03880667,
+      "difference_rms": 0.00083534
+    },
+    "SMDVR": {
+      "no_cue_mean": 0.4964824,
+      "cue_mean": 0.49667143,
+      "no_cue_std": 0.07271721,
+      "cue_std": 0.07267012,
+      "difference_rms": 0.00102577
+    }
+  },
+  "interpretation": "All40 refined failures are absolute-frequency checks alone: neural-half~1.984127Hz, body-half~1.980198Hz, versus ceiling1.98Hz. No cycle-amplitude or relative-frequency failures printed. Existing peak_frequency uses median differences of discrete sample peak times; sample quantization can affect a borderline gate, but continuous frequency and overall convergence are not established without further analysis. Cue strongly changes some AWA/relay release means while RIAL release std changes0.06610970->0.06611076, effectively unchanged; ventral SMD release std decreases only~0.058%/~0.065%. Weak modulation of RIAL rhythmic output is a candidate bottleneck, not a proven causal explanation. AIYL release near0.989 with tiny response suggests saturation as a hypothesis.",
+  "decision": "Preserve original failed gates. Next read-only check uses subsample peak interpolation and whole-peak-train regression on saved traces; no retrospective tolerance relaxation, new optimization or biological claim."
+}

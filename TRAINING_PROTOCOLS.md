@@ -1,5 +1,12 @@
 # WormGym: training and validation protocols
 
+2026-11-16 E085 audit clarification: all40 refined gait failures are solely
+absolute frequency slightly above1.98Hz (1.9802..1.9841); no amplitude or relative
+frequency failures. Investigate discrete peak-timing resolution before diagnosing
+poor convergence. Cue changes AWA/relay release but barely changes RIAL rhythmic
+release variation. The2% slowing target remains failed. No gates changed.
+[Detailed evidence](experiments/records/E085-audit-detail-server-summary.json).
+
 2026-11-16 E085 saved-data audit reported complete: integrity passed,251
 evaluation records,10 final cases. Refined gait failures:21 neural-half,19
 body-half; three latent parameter groups near a bound, frozen coordinates
