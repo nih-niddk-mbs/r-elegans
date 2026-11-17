@@ -9028,3 +9028,70 @@ before output creation. Existing range/cue/recovery/physical/numerical/control
 checks remain passing. Launcher shell syntax, CLI help and diff checks passed.
 No local actual server-weight inspection or scientific forward fit/capability
 verification. Server execution remains planned until reported.
+
+## 2026-11-16 — E088 outcome and E089 separate8h optimization budget planned
+
+E088 user-pasted stdout attachment SHA256 e8237b80948053ada2952b4d56c227a4c5f4b879e64c68d796126edef6039519.
+Structured12rows plus complete budget/audit/numerical results:
+`experiments/records/E088-server-summary.json`. Source run
+`/home/carsonc/r-elegans-results/relay-range-20261116T222253Z-298495`.
+4generations/48population candidates,59totalrecords incl parent+10final.
+6091.384207414987s=1h41m31s TOTAL, no timeout/failure, complete validation/audit.
+Loss3.598432301->2.391871981 (~33.53% reduction), nominal AIYL cue difference
+-4.701975154e-6 ->-7.125976349e-6 (~51.55% stronger),35.63% of2e-5 threshold.
+Still fails release-headroom2% and response magnitude, no milestones/component.
+All normal response directions/recovery/useful movement/safety pass; no gait
+failures. Refined response errors6.9062145e-10/2.0930486e-9 pass. Block removes
+cue effect; branch replay does not remove tiny body effect, mediation false.
+Audit complete/integrity/frozen actual fields and coordinates pass, no groups
+near local bounds. RIAL-cycle assay explicitly inapplicable. Exact relay quantiles
+and original bound headroom absent in excerpt. No convergence/insufficiency claim.
+Parent608587d8cc9267674b5828df02d7891ae8940f46cc6981b62518b7f89068de73;
+selected1270489a0fb5d625740092dca8d73049faaf52aef568a9d724ffecc27df78dbb.
+No raw server weights/traces/source/env independently retrieved locally.
+
+User steering: "set up an8hour run for optimization. Then validate afterwards".
+Supersedes prior total-time budget. Plan `experiments/records/E089-plan.json`.
+Fresh CMA from pinned latest E088selected, same objective/gates/17focused groups
+(actual runtime schema retained), original-anchor bounds unchanged and local
+steps recentered. This is not exact optimizer resume; all oldstates retained.
+Seed8900 pop12 sigma.3,4workers x4physical cores,float64; stagefresh8900+stage
+sigma.15, restarts9900+count sigma.2. Same fixed neuron/motor/sensory/NMJ/physics
+fields and signs, no new edges or diagnostic forcing in training.
+
+480min SEARCH budget starts only after setup/verified baseline. Old fractional
+validation reserve and generation lookahead do not shorten this search window.
+Continue until search deadline or achieved curriculum/disk/error condition.
+If final generation is partial at deadline, retain every asked point/RNG/model,
+select any completed valid improvement, save partial_generation.json and final
+pending optimizer snapshot; do NOT tell CMA an incomplete population. Expected
+search timeout is normal stop_reason optimization_time_budget, not failure of
+final model. Completed-only selected weights go through final tests. Highest
+qualified rung still preferred over unvalidated later-stage weights.
+
+Validation THEN runs on same10paired cases with up to120min, followed by automatic
+full saved-data audit.11h overall private-group watchdog includes setup/baseline,
+8hoptimization,2hvalidation,20min audit reserve and cleanup. Baseline must finish
+with room for fullsearch+validation; fail rather than silently shorten budget.
+Record optimization_budget.json requested/start/deadline/actualtime; logs show
+baseline/optimization/validation phase and separate search time remaining.
+Slight queue/deadline cleanup overhead reported. No busy sleep to fill hours.
+All H1.2 downstream behavior gates remain, no RIAL-control/stop/swim qualification.
+Same50GiB reserve,15GiB search stop/estimated30GiB training cap; no deletions.
+All model/coords/source/env/argv/optimizer/RNG/recursive dependencies preserved;
+intermediate full traces not written. Automatic audit required before promotion.
+
+Launch `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_8h_mbslnx2.sh`.
+Report dedicated conda Python `-m scripts.report_rial_sensory --relay`.
+E089 execution remains planned; no new forward run/actualserver parent inspected.
+Local52focused tests passed in19.07s before final progress-logging metadata change,
+including long-mode seed/source dispatch, full CMA/mock-forward curriculum and
+partial lastgeneration preserving pending state while final validation remains
+execution-valid. Source/method tests are not biological or actual fit evidence.
+
+E089 final verification: after logging metadata changes,4long-mode/partial-generation
+coordinator tests passed in11.58s (`.venv/bin/python -m pytest -q tests/test_rial_sensory.py -k 'long or partial'`), including exact deadline-minus-start equality to requested
+optimization minutes in mocked runs. Earlier full focused suite52passed in19.07s.
+Launcher shell syntax, CLI help, compile and diff checks passed. Reporter now
+prints experiment identifier and separate optimization_budget.json. No actual
+E089 server execution or scientific capability is evidenced by these tests.

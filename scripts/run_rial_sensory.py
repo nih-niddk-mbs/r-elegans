@@ -1,4 +1,4 @@
-"""E085-E088 body, RIAL release or relay operating-range fitting with a total wall budget."""
+"""E085-E089 body, RIAL release or relay operating-range fitting with a total wall budget."""
 import argparse,concurrent.futures,json,math,multiprocessing,os,random,shutil,subprocess,sys,time
 from pathlib import Path
 import numpy as np
@@ -11,6 +11,7 @@ SEED=8500
 PARENT='dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8'
 RELAY_PARENT='5b77ec25266a4849b9e843c4fb1891f243ef31beef18c46fc9fd0d84f989c022'
 RELAY_CONTINUATION_PARENT='608587d8cc9267674b5828df02d7891ae8940f46cc6981b62518b7f89068de73'
+RELAY_LONG_PARENT='1270489a0fb5d625740092dca8d73049faaf52aef568a9d724ffecc27df78dbb'
 RELEASE_PARENT='f8cd5b401d81d297eb40d44ee3e355d5915ef2a07576077e022e16ca6d464b7f'
 
 
@@ -23,9 +24,12 @@ def main():
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--source-run',type=Path,required=True)
     p.add_argument('--objective',choices=('body','rial-release','relay-range'),default='body')
-    p.add_argument('--continue-relay',action='store_true',help='Fresh optimizer at pinned E087 selected weights, original-anchor bounds unchanged')
+    p.add_argument('--continue-relay',action='store_true',help='Fresh optimizer at pinned relay parent, original-anchor bounds unchanged')
+    p.add_argument('--optimization-minutes',type=float,help='Separate search budget after baseline; validation follows outside this budget')
     a=p.parse_args();release_objective=a.objective=='rial-release';relay_objective=a.objective=='relay-range'
     if a.continue_relay and not relay_objective:p.error('--continue-relay requires --objective relay-range')
+    if a.optimization_minutes is not None and (not a.continue_relay or not math.isfinite(a.optimization_minutes) or a.optimization_minutes<=0):
+        p.error('--optimization-minutes requires --continue-relay and a positive finite duration')
     neural_objective=release_objective or relay_objective
     from r_elegans.rial_release import RUNGS as RELEASE_RUNGS,score as release_score
     from r_elegans.relay_range import RUNGS as RELAY_RUNGS,score as relay_score,parameter_groups as relay_groups,CUE_SCALE,direction_consistent
@@ -36,6 +40,8 @@ def main():
     expected_parent=RELAY_PARENT if relay_objective else RELEASE_PARENT if release_objective else PARENT
     if a.continue_relay:
         experiment='E088';run_seed=8800;expected_parent=RELAY_CONTINUATION_PARENT
+    if a.optimization_minutes is not None:
+        experiment='E089';run_seed=8900;expected_parent=RELAY_LONG_PARENT
     out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
     for root in (repo,source):
         if out==root or root in out.parents or out in root.parents:
@@ -50,8 +56,9 @@ def main():
     capture_run_record(out,repo,a)
     from scripts.compare_rhythm_worker import verify_inputs
     source_summary=json.loads((source/'summary.json').read_text())
-    if a.continue_relay and (source_summary.get('experiment')!='E087' or source_summary.get('selected',{}).get('checkpoint_sha256')!=expected_parent):
-        raise ValueError('Continuation requires pinned E087 selected checkpoint; no fallback')
+    source_experiment='E088' if a.optimization_minutes is not None else 'E087'
+    if a.continue_relay and (source_summary.get('experiment')!=source_experiment or source_summary.get('selected',{}).get('checkpoint_sha256')!=expected_parent):
+        raise ValueError('Continuation requires pinned '+source_experiment+' selected checkpoint; no fallback')
     ordinary=next(r for r in source_summary['validation'] if r['variant']==('nominal' if neural_objective else 'ordinary') and r['grid']=='ordinary' and (not neural_objective or r.get('mode')=='normal'))
     folder=Path(ordinary['output']).resolve()
     if source not in folder.parents or ordinary['checkpoint_sha256']!=expected_parent or file_sha256(folder/'network.npz')!=expected_parent:
@@ -78,11 +85,15 @@ def main():
     groups=worker_cpu_groups(cpus,4,4)
     os.environ.update(JAX_PLATFORMS='cpu',OMP_NUM_THREADS='4',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1')
     reserve=max(60*60,.4*(finish-time.monotonic())) if neural_objective else max(2*3600,.25*(finish-time.monotonic()));fit_until=finish-reserve
-    if fit_until-time.monotonic()<20*60:raise ValueError('Insufficient search and final-validation budget')
+    if a.optimization_minutes is not None:
+        reserve=120*60
+        fit_until=finish-reserve-a.optimization_minutes*60  # Baseline must finish before separate search window.
+    if fit_until-time.monotonic()<(60 if a.optimization_minutes is not None else 20*60):raise ValueError('Insufficient preparation/search/final-validation budget')
     write(out/'configuration.json',dict(experiment=experiment,parent_sha256=expected_parent,seed=run_seed,
         initialization='Fresh CMA at selected weights; local trust region recentered, original-anchor bounds unchanged; not exact optimizer resume',
         optimizer='cma==4.4.1',population=12,dimension=len(schema),cpu_groups=groups,total_minutes=budget['total_minutes'],
         validation_reserve_minutes=reserve/60,rungs=RUNGS,training_margin=1.3,
+        optimization_minutes=a.optimization_minutes,
         objective=('AIYL release headroom2/5/10% plus cue responsiveness and recovery; body gait preserved' if relay_objective else 'Early cue-specific1/2/5% RIAL release-cycle attenuation; body gait preserved' if release_objective else 'Early cue-specific2/5/10% cycle-amplitude attenuation with uncued gait and recovery preserved'),
         frequency_estimator=('parabolic_subsample_median_period' if neural_objective else 'discrete_peak_median_period'),
         trainable=('AWAL/AIYL nonleak densities, existing inputs to AIYL and AIYL-to-RIAL compensation' if relay_objective else 'Explicit AWA/AIY/AIZ/AIB/RIA nonleak densities and existing control-to-control chemical connections'),
@@ -93,7 +104,8 @@ def main():
     es=cma.CMAEvolutionStrategy(np.zeros(len(schema)),.3,{'seed':run_seed,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
     optimizer_snapshot(out/'optimizer/initial',es,0,0)
     selected=None;zbest=np.zeros(len(schema));parent=None;generation=0;history=[];validation=[];failure=None;stage=0;evaluations=[]
-    stop_reason='time_budget';recent=[];pending_points=None;baseline=None;qualified=None;milestones=[];restart=0
+    stop_reason='optimization_time_budget' if a.optimization_minutes is not None else 'time_budget'
+    recent=[];pending_points=None;baseline=None;qualified=None;milestones=[];restart=0;optimization_started=None;phase='baseline'
     def job(z,name,until,variant='nominal',grid='ordinary',retain=False,reference=False,mode='normal',target=None,margin=1.):
         return dict(z=list(map(float,z)),output=str(out/'evaluations'/name),until=until,parent_features=parent,
             variant=variant,grid=grid,retain_traces=retain,reference=reference,mode=mode,objective=a.objective,
@@ -117,7 +129,9 @@ def main():
                 evaluations.append(r)
                 print(json.dumps(dict(evaluation=Path(j['output']).name,status=r['status'],metrics=r.get('metrics'),error=r.get('error'))),flush=True)
             if time.monotonic()-last>30:
-                print(json.dumps(dict(generation=generation,pending=len(futures),stage=stage,remaining_total_minutes=(finish-time.monotonic())/60)),flush=True);last=time.monotonic()
+                print(json.dumps(dict(phase=phase,generation=generation,pending=len(futures),stage=stage,
+                    remaining_total_minutes=(finish-time.monotonic())/60,
+                    remaining_optimization_minutes=max(0.,(fit_until-time.monotonic())/60) if optimization_started is not None and phase=='optimization' else None)),flush=True);last=time.monotonic()
         return [rows[j['output']] for j in jobs]
     ctx=multiprocessing.get_context('spawn')
     with concurrent.futures.ProcessPoolExecutor(max_workers=4,mp_context=ctx,initializer=initialize,
@@ -127,15 +141,35 @@ def main():
             if baseline['status']!='completed':raise ValueError('Parent baseline failed: '+str(baseline))
             parent=baseline['paired_features']['no_cue'];selected=baseline;recent=[baseline['elapsed_seconds']]
             best=baseline['metrics']['loss'];write(out/'parent_features.json',parent);preserve(baseline,'parent')
+            phase='optimization'
+            if a.optimization_minutes is not None:
+                optimization_started=time.monotonic();fit_until=optimization_started+a.optimization_minutes*60
+                if fit_until+reserve>finish:raise ValueError('Cannot supply full optimization plus subsequent validation budget')
+                write(out/'optimization_budget.json',dict(requested_minutes=a.optimization_minutes,
+                    started_monotonic=optimization_started,deadline_monotonic=fit_until,
+                    scope='Search window starts after preparation/baseline; final validation and audit follow'))
             while stage<len(RUNGS):
                 estimate=3*max(recent[-12:])*1.4
-                if time.monotonic()+estimate>fit_until:break
+                if a.optimization_minutes is not None:
+                    if time.monotonic()>=fit_until:break
+                elif time.monotonic()+estimate>fit_until:break
                 size=sum(p.stat().st_size for p in out.rglob('*') if p.is_file())
                 if size>15*1024**3 or shutil.disk_usage(out).free<50*1024**3:stop_reason='disk_budget';break
                 points=es.ask();pending_points=[list(map(float,z)) for z in points]
                 optimizer_snapshot(out/'optimizer'/f'g-{generation:05d}-asked',es,stage,generation,pending_points)
                 rows=batch(pool,[job(z,f'g-{generation:05d}-c-{i:02d}',fit_until,margin=1.3) for i,z in enumerate(points)])
-                if any(r['status'] in ('time_budget','disk_budget','worker_error') for r in rows):stop_reason='evaluation_failure';break
+                if any(r['status'] in ('time_budget','disk_budget','worker_error') for r in rows):
+                    if a.optimization_minutes is not None and any(r['status']=='time_budget' for r in rows) and not any(r['status'] in ('disk_budget','worker_error') for r in rows):
+                        # Keep completed improvements; retain asked population/RNG without telling an incomplete generation.
+                        for z,r in zip(points,rows):
+                            if valid(r) and r['metrics']['loss']<best:
+                                selected=r;zbest=np.asarray(z).copy();best=r['metrics']['loss']
+                        write(out/'partial_generation.json',dict(generation=generation,target=RUNGS[stage],
+                            completed=sum(r['status']=='completed' for r in rows),evaluations=rows,
+                            selected=selected['checkpoint_sha256'],selected_evaluation=selected['output'],
+                            optimizer_told=False,pending_points=pending_points))
+                        stop_reason='optimization_time_budget';break
+                    stop_reason='evaluation_failure';break
                 losses=[r['metrics']['loss'] if r['status']=='completed' else 1e6 for r in rows]
                 es.tell(points,losses);pending_points=None
                 for z,r in zip(points,rows):
@@ -162,12 +196,19 @@ def main():
                 if es.stop():
                     restart+=1;es=cma.CMAEvolutionStrategy(zbest,.2,{'seed':run_seed+1000+restart,'popsize':12,'bounds':[-1,1],'verbose':-9,'verb_log':0})
                     optimizer_snapshot(out/'optimizer'/f'g-{generation:05d}-restart-{restart}',es,stage,generation)
+            if optimization_started is not None:
+                write(out/'optimization_budget.json',dict(requested_minutes=a.optimization_minutes,
+                    started_monotonic=optimization_started,deadline_monotonic=fit_until,
+                    elapsed_seconds=time.monotonic()-optimization_started,stop_reason=stop_reason,
+                    scope='Optimization only; final validation and automatic audit follow'))
             final_selected,final_z,final_target=qualified if qualified is not None else (selected,zbest.copy(),RUNGS[0])
             tests=[('nominal','nominal','ordinary','normal'),('low-dose','low-dose','ordinary','normal'),('shift','shift','ordinary','normal'),
                    ('repeat','repeat','ordinary','normal'),('redundant','redundant','ordinary','normal'),('long-cue','long-cue','ordinary','normal'),
                    ('neural-half','nominal','neural-half','normal'),('body-half','nominal','body-half','normal'),
                    ('sensory-blocked','nominal','ordinary','sensory-blocked'),('relay-replay' if relay_objective else 'rial-replay','nominal','ordinary','relay-replay' if relay_objective else 'rial-replay')]
-            validation=batch(pool,[job(final_z,'final-'+label,finish-90,v,g,True,mode=mode,target=final_target) for label,v,g,mode in tests])
+            validation_until=min(finish-90,time.monotonic()+reserve) if a.optimization_minutes is not None else finish-90
+            phase='validation'
+            validation=batch(pool,[job(final_z,'final-'+label,validation_until,v,g,True,mode=mode,target=final_target) for label,v,g,mode in tests])
             preserve(final_selected,'final')
         except Exception as e:
             failure=repr(e);print('RIAL_SENSORY_ERROR:',failure,flush=True)

@@ -1,5 +1,15 @@
 # WormGym: training and validation protocols
 
+2026-11-16 E088 complete (reported):4generations, clean audit, loss down33.53%,
+AIYL cue magnitude35.63% of target; headroom/magnitude still fail, gait/recovery
+preserved. No component qualified. User requests E089:8hours OPTIMIZATION,
+then validation and automatic audit afterwards. Fresh CMA from pinned latest
+selected weights; objective and original bounds unchanged.11h overall safety
+watchdog includes preparation and later checks. [Outcome](experiments/records/E088-server-summary.json),
+[plan](experiments/records/E089-plan.json).
+Launch: `sh scripts/launch_relay_8h_mbslnx2.sh`.
+Report: `python -m scripts.report_rial_sensory --relay`. E089 execution pending.
+
 2026-11-16 E087 bound audit: AIYL baseline release98.9648%->98.6817%;
 upper headroom1.3182%, still below2%. Outward density hit local+.4log step;
 original cap still allows+.35539log (~42.7%) further common increase. E088

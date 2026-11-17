@@ -1,0 +1,23 @@
+{
+  "experiment": "E089",
+  "status": "planned_server_execution_not_evidenced",
+  "record_date": "2026-11-16",
+  "authorization": "User: set up8hour run for optimization, then validate afterwards. This supersedes prior total3h semantics.",
+  "question": "Can sustained8h optimization of the unchanged relay operating-range objective improve headroom/cue responsiveness without losing baseline gait?",
+  "parent_checkpoint_sha256": "1270489a0fb5d625740092dca8d73049faaf52aef568a9d724ffecc27df78dbb",
+  "source_run": "/home/carsonc/r-elegans-results/relay-range-20261116T222253Z-298495",
+  "initialization": "Fresh CMA at exact E088 selected full original-anchor coordinates, with explicit source experiment/hash guard and model/reference reconstruction. Local+-0.4log trust region recentered, original-anchor factor2 bounds unchanged. Not exact saved optimizer resume; previous full weights/states/references preserved.",
+  "method": "Unchanged E087/E088 focused AWAL/AIYL channel densities and existing AIYL inputs/AIYL-to-RIAL compensation; same range/cue/recovery/body-gait/control/numerical/claim criteria. Seed8900 population12 sigma.3,4CPUworkers x4physicalcores,float64. Stage seeds8900+stage sigma.15, restarts9900+count sigma.2.",
+  "fixed": "All other neuron/motor/RIAL channels, other chemical/gap strengths, leak/capacitance/kinetics/reversals/release fields, sensory gains/signs/routing/kinetics, NMJs,muscles,water/body/physical clocks. No clamp or imposed drive during training.",
+  "optimization_minutes": 480,
+  "optimization_budget": "Starts only AFTER preparation and verified baseline. No fractional total-time validation reserve deducted from these480min. Disable old generation lookahead for this mode: keep starting evaluations until optimization deadline, preserve partial asked population and completed safe improvements if last generation times out. Do not tell incomplete CMA generation; exact pending/RNG snapshots retained. Budget-end is expected stop, not execution failure.",
+  "after_optimization": "Validate highest previously qualified rung or selected best complete candidate on all10final paired tests with up to120min deadline; then complete automatic saved-data audit. Same exact final model across tests. No qualification from timeout/missing audit or changed gates.",
+  "overall_watchdog_minutes": 660,
+  "overall_budget": "11h overall safety ceiling includes prep/baseline,8h search,up to2h validation,20min audit reserve and cleanup. Baseline must finish early enough to supply full search plus validation allowance. Early stop permitted for curriculum completion, disk reserve or actual errors. Queue teardown can add small boundary overhead, actual search duration reported.",
+  "command": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_8h_mbslnx2.sh",
+  "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_sensory --relay",
+  "artifacts": "/home/carsonc/r-elegans-results/relay-range-<UTC>-<PID>, adjacent.log/sibling-audit; optimization_budget.json records requested/actual search time separately, phase labels and search remaining in progress logs. partial_generation.json if needed. Every model/coordinate/selected/rung/final, all optimizer/RNG/asked/told/stage/restart/final state, exact source/env/argv and recursive dependencies external; intermediate full traces in memory only.",
+  "storage": "Same50GiB free reserve,15GiB search stop, estimated30GiB training-run cap/concurrent-write granularity plus small audit files; no deletion.",
+  "acceptance": "Same relay release q01>=.05,q99<=.98/.95/.90; cue mean differences>=2e-5/5e-5/1e-4, consistent sign, recovery/gait. Same low-dose/shift rung selection and final8normal,blocked and AIYL branch replay. Full RIAL rhythm/motor stop/start/rest/restart/swimming/biological fidelity remain unqualified.",
+  "local_verification": "52 focused tests passed in19.07s (relay continuation/range/sensory/release/audit/CMA/physical controls), then4 long-mode/partial-generation coordinator tests passed in11.58s after progress-logging changes, explicitly asserting optimization_deadline-start equals requested60min in mocked runs. Covers8h dispatch, normal expected partial-generation timeout, completed candidates retained, pending optimizer population untold and successful final validation. Launcher syntax, CLI/compile and diff checks passed. No actual E089 scientific forward run or actual server parent inspection locally."
+}

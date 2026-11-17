@@ -23,7 +23,8 @@ def test_recentered_group_stops_at_original_bound():
     np.testing.assert_allclose(decoded[group['indices']],np.log(2.))
 
 
-def test_continuation_budget_dispatch(tmp_path,monkeypatch):
+@pytest.mark.parametrize('optimization_minutes',[None,480])
+def test_continuation_budget_dispatch(tmp_path,monkeypatch,optimization_minutes):
     import scripts.total_job_budget as runner
     out=tmp_path/'out';calls=[]
     def run(cmd,seconds):
@@ -34,9 +35,10 @@ def test_continuation_budget_dispatch(tmp_path,monkeypatch):
         else:(out/'summary.json').write_text(json.dumps(dict(execution_valid=True,validation_complete=True,sensory_relay_range_component_qualified=True)))
         return 0,False
     monkeypatch.setattr(runner,'run_group',run)
-    monkeypatch.setattr(sys,'argv',['budget','--pipeline','relay-range','--continue-relay','--total-minutes','180','--output-dir',str(out)])
+    monkeypatch.setattr(sys,'argv',['budget','--pipeline','relay-range','--continue-relay','--total-minutes','660' if optimization_minutes else '180','--output-dir',str(out)]+(['--optimization-minutes','480'] if optimization_minutes else []))
     assert runner.main()==0 and '--continue-relay' in calls[0]
-    assert json.loads((out/'deadline.json').read_text())['experiment']=='E088'
+    if optimization_minutes:assert calls[0][calls[0].index('--optimization-minutes')+1]=='480.0'
+    assert json.loads((out/'deadline.json').read_text())['experiment']==('E089' if optimization_minutes else 'E088')
     assert json.loads((out/'budget_receipt.json').read_text())['post_audit_component_qualified']
 
 
