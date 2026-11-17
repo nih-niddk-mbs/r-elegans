@@ -9259,3 +9259,16 @@ Preserve current/independent failed models, exact optimizer/RNG/pending states a
 recursive raw dependencies. Next read-only audit: exact baseline/selected range,
 late selected-eligible losses, actual local/original coordinate room for near-bound
 groups. No new seed/job, changed threshold or downstream behavior launched here.
+
+E090 follow-up audit display planned/provided as
+`python -m scripts.report_rial_sensory --run /home/carsonc/r-elegans-results/relay-range-20261117T184013Z-380160 --audit-details`.
+New read-only helper prints exact parent/selected baseline operating quantiles,
+last10population versus selected stored losses with their metric target/margin,
+near-local-bound group deltas and original-bound room, pending-state metadata and
+partial-evaluation status counts. It reads saved JSON/coordinate NPZ only; no
+simulation, altered qualification or files written. No optimizer pickle loaded.
+Missing required artifacts raise explicit file/schema errors, not an audit pass.
+Focused software test passed1/1 in.16s, verifies actual original-coordinate bound
+room and headroom arithmetic, distinguishes selected versus population loss and
+checks source artifact bytes remain unchanged. CLI/diff checks passed. No actual
+server details independently retrieved by this helper locally; results pending.

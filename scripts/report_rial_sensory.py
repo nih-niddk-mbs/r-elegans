@@ -1,10 +1,50 @@
-"""Report E085-E089 and automatic audit without importing JAX."""
+"""Report sensory fitting and automatic audit without importing JAX."""
 import argparse,json
 from pathlib import Path
 
 
+def audit_details(run,summary):
+    import numpy as np
+    result=dict(scope='Read-only saved-data details; no changed acceptance criteria or new simulation',
+                experiment=summary.get('experiment'),operating_range={},recent_generations=[],near_bound_groups=[])
+    for label in ('baseline','selected'):
+        row=summary.get(label) or {};paired=row.get('paired_features',{})
+        if not paired or 'AIYL_release_q99' not in paired['no_cue']['active'][0]:
+            result['operating_range'][label]=dict(applicable=False);continue
+        windows=sum([paired['no_cue'][k] for k in ('active','response','late')],[])+paired['cue']['active']
+        maximum=max(w['AIYL_release_q99'] for w in windows)
+        result['operating_range'][label]=dict(minimum_q01=min(w['AIYL_release_q01'] for w in windows),
+            maximum_q99=maximum,upper_release_headroom=1-maximum,
+            required_headroom=summary['final_target'],
+            cue_changes=row['metrics'].get('relay_response_mean_changes'))
+    for g in json.loads((run/'generation_history.json').read_text())[-10:]:
+        selected=json.loads((Path(g['selected_evaluation'])/'summary.json').read_text())['metrics']
+        result['recent_generations'].append(dict(generation=g['generation'],target=g['target'],
+            population_minimum=g['minimum_loss'],selected_loss=selected['loss'],
+            selected_metric_target=selected.get('target'),selected_metric_margin=selected.get('margin'),
+            cue_changes=selected.get('relay_response_mean_changes'),range_pass=selected.get('relay_operating_range_passed')))
+    audit=run.with_name(run.name+'-audit')
+    parameters=json.loads((audit/'parameters.json').read_text())
+    schema={g['name']:g for g in json.loads((run/'parameter_groups.json').read_text())}
+    with np.load(run/'parameter_origin.npz',allow_pickle=False) as z:lower,upper=z['lower'],z['upper']
+    with np.load(Path(summary['selected']['output'])/'coordinates.npz',allow_pickle=False) as z:offsets=z['offsets']
+    for row in parameters['groups']:
+        if not row['near_group_bound']:continue
+        g=schema[row['name']];ix=g['indices']
+        result['near_bound_groups'].append(dict(**row,local_log_bounds=[g['lower'],g['upper']],
+            minimum_original_lower_room=float(np.min(offsets[ix]-lower[ix])),
+            minimum_original_upper_room=float(np.min(upper[ix]-offsets[ix]))))
+    meta=json.loads((run/'optimizer/final/metadata.json').read_text())
+    result['optimizer']=dict(stage=meta['stage'],generation=meta['generation'],pending_points=len(meta.get('pending') or []))
+    if (run/'partial_generation.json').exists():
+        from collections import Counter
+        partial=json.loads((run/'partial_generation.json').read_text())
+        result['partial_generation_statuses']=dict(Counter(r['status'] for r in partial['evaluations']))
+    return result
+
+
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path);p.add_argument('--release',action='store_true');p.add_argument('--relay',action='store_true');a=p.parse_args();run=a.run
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path);p.add_argument('--release',action='store_true');p.add_argument('--relay',action='store_true');p.add_argument('--audit-details',action='store_true');a=p.parse_args();run=a.run
     if run is None:
         runs=[p for p in Path('/home/carsonc/r-elegans-results').glob('relay-range-*' if a.relay else 'rial-release-*' if a.release else 'rial-sensory-*') if p.is_dir() and not p.name.endswith('-audit') and not p.name.startswith('rial-sensory-audit-')]
         if not runs:raise SystemExit('No RIAL sensory run found')
@@ -12,6 +52,8 @@ def main():
     print('Run:',run)
     if not (run/'summary.json').exists():print('No final summary; inspect adjacent .log');return
     s=json.loads((run/'summary.json').read_text())
+    if a.audit_details:
+        print(json.dumps(audit_details(run,s),indent=2));return
     for k in ('experiment','execution_valid','validation_complete','completed_generations','stop_reason','failure','final_target','final_target_meaning',
               'objective','sensory_RIAL_release_component_qualified','sensory_relay_range_component_qualified','AIYL_to_RIAL_body_effect_mediation',
               'partial_sensory_component_qualified','sensory_block_control','RIAL_chemical_replay_mediation',
