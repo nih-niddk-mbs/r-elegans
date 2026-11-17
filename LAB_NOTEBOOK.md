@@ -9202,3 +9202,17 @@ argument validation, real CMA/mock-forward E090 curriculum, prior-mode regressio
 and original-bound clipping are covered. Launcher syntax, CLI help and diff checks
 passed. These establish software behavior only; no actual E090 scientific forward
 run or server model bytes independently retrieved. Execution remains planned.
+
+## 2026-11-17 — E090 duration amended before evidenced execution
+
+User: "Do a3hour run". Reduce E090 optimization480->180min while retaining
+preceding instruction that validation/audit follow optimization. Overall watchdog
+660->360min (6h) covers preparation,3h search,up to2h validation,audit/cleanup.
+Same pinned E089selected parent, seed9000, freshCMA/source verification, original
+bounds, objectives, criteria and storage policy. Structured plan retains prior
+8h/11h proposal in duration_revision; no server execution/start/cancel is evidenced.
+No existing remote job modified. Launcher `sh scripts/launch_relay_e090_mbslnx2.sh`
+now requests --optimization-minutes180 --total-minutes360. Same report --relay.
+This is a launcher/plan-only duration change; shell syntax and diff checks passed.
+Prior tests cover variable optimization deadlines, explicit-parent forwarding and
+automatic audit/timeout handling. No new scientific forward run locally.

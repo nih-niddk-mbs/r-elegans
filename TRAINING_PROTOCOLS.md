@@ -1,8 +1,12 @@
 # WormGym: training and validation protocols
 
+2026-11-17 E090 duration amendment:3h optimization, then validation and automatic
+audit,6h overall watchdog. Same parent/objective/original bounds; execution pending.
+Launch: `sh scripts/launch_relay_e090_mbslnx2.sh`. [Revised plan](experiments/records/E090-plan.json).
+
 2026-11-17 E089 late audit: AIYL headroom1.775% vs2% target; late selected
 loss improves3.45% over10generations. AFDL->AIYL has~1.8% original downward room;
-AIYR->AIYL has more original upward room. E090 prepared:8h fresh-optimizer
+AIYR->AIYL has more original upward room. E090 prepared:3h fresh-optimizer
 continuation from pinned best weights, same objective/original bounds, then
 validation and automatic audit. Prior optimizer/pending state preserved.
 [Audit](experiments/records/E089-late-audit-server-summary.json), [plan](experiments/records/E090-plan.json).

@@ -23,13 +23,21 @@
     "restart_sigma": 0.2
   },
   "criteria": "Unchanged E087/E0892/5/10% headroom,2e-5/5e-5/1e-4 absolute AIYL mean cue change, stable sign across halfwindows/variants, recovery/body gait/numerical/control gates; training margin1.3. Final8normal,chemical-block and separate branch replay, same selected checkpoint. No global saturation, RIAL-control/motor-stop/swim or biological validation claim.",
-  "optimization_minutes": 480,
+  "optimization_minutes": 180,
   "subsequent_validation_minutes": 120,
-  "overall_watchdog_minutes": 660,
-  "budget": "After preparation/baseline, full480min optimization window; validate afterwards up to120min and run automatic audit.20min audit reserve inside11h overall safety limit. Preserve last partial asked population and completed safe improvements without telling incomplete generation. Curriculum completion/disk/errors can end earlier.",
+  "overall_watchdog_minutes": 360,
+  "budget": "After preparation/baseline, full180min optimization window; validate afterwards up to120min and run automatic audit.20min audit reserve inside6h overall watchdog. Preserve partial asked population/completed improvements without telling incomplete generation. Curriculum completion/disk/errors may end earlier.",
   "command": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_e090_mbslnx2.sh",
   "report_command": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_rial_sensory --relay",
   "artifacts": "/home/carsonc/r-elegans-results/relay-range-<UTC>-<PID>, adjacent.log/sibling-audit; full original coordinates and recursive references, exact source/env/argv, every candidate/selected/rung/final model, optimizer/RNG/asked/told/stage/restart/final/pending states. Raw intermediate traces stay in memory; full parent/final saved. Nothing deleted.",
   "storage": "Unchanged50GiB reserve,15GiB search stop, estimated30GiB training-run cap with concurrent writer granularity; small audit records additional.",
-  "local_verification": "60 focused software tests passed in21.66s across relay-parent/continuation/range/sensory/release/audit/CMA/physical-control tests; then10 parent-specific tests passed in11.80s including4new rejection tests for missing/incomplete/failed source audit and mismatched selected hash. Explicit-pinned source/seed/E090 dispatch exercised with real CMA and mocked forward rollouts. Launcher shell syntax, CLI help and diff checks passed. No actual E090 scientific forward fit or actual server parent inspection locally."
+  "local_verification": "60 focused software tests passed in21.66s across relay-parent/continuation/range/sensory/release/audit/CMA/physical-control tests; then10 parent-specific tests passed in11.80s including4new rejection tests for missing/incomplete/failed source audit and mismatched selected hash. Explicit-pinned source/seed/E090 dispatch exercised with real CMA and mocked forward rollouts. Launcher shell syntax, CLI help and diff checks passed. No actual E090 scientific forward fit or actual server parent inspection locally.",
+  "duration_revision": {
+    "date": "2026-11-17",
+    "user_instruction": "Do a3hour run",
+    "interpretation": "Reduce optimization to3h; retain prior instruction to validate/audit afterwards.",
+    "previous_optimization_minutes": 480,
+    "previous_overall_watchdog_minutes": 660,
+    "server_execution": "Not evidenced before this amendment; no existing job killed or altered."
+  }
 }
