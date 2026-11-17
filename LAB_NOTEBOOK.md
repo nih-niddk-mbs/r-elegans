@@ -9216,3 +9216,46 @@ now requests --optimization-minutes180 --total-minutes360. Same report --relay.
 This is a launcher/plan-only duration change; shell syntax and diff checks passed.
 Prior tests cover variable optimization deadlines, explicit-parent forwarding and
 automatic audit/timeout handling. No new scientific forward run locally.
+
+## 2026-11-17 — E090 nominal cue magnitude crossed, full relay gate still failed
+
+Evidence user-pasted report stdout attachment SHA256
+66a479ce39cf8a4e486b853874803f3583924188273dcee86b79bf27be47e135.
+Structured12baseline/selected/final rows plus exact budget/numerical/audit:
+`experiments/records/E090-server-summary.json`. Remote model/trace/optimizer/source/
+environment not independently retrieved. Source
+`/home/carsonc/r-elegans-results/relay-range-20261117T184013Z-380160`, sibling-audit.
+10completed generations, optimization10800.34086316498s=180min+.34s, then final
+validation/audit. Total12856.88816858799s=3h34m17s, complete/no outer timeout/failure.
+143records consistent with1parent+120requests for10full populations+12lastpartial
+requests+10final; partial statuses not in excerpt. Baseline/validation/audit sum
+~2056.55s beyond optimization; do not label it all validation time.
+
+Parenta84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57;
+selected18eadad77c048a86aa305d59ec37defa3fa2e34ba2da8cf72139d9e6965c00cc.
+Training loss1.480388816->.8205276525 (~44.57% lower). Nominal AIYL mean cue change
+-1.244378969e-5 ->-2.039644130e-5 (~63.91% stronger),101.98% of2e-5 minimum.
+This is the first REPORTED nominal cue-magnitude crossing in this relay-range
+series, not a validated full component: release-headroom2% flag false everywhere.
+Low-dose1.790109345e-5 (~89.51% target), close-repeat second1.548494039e-5
+(~77.42%) still fail. Repeated standard second2.041989314e-5, onset-shift and
+both refined early responses cross magnitude threshold. Long-cue late effect
+~1.14e-7 only; no sustained response. Training1.3margin remains unmet.
+
+All final body gait failures0, safe/useful movement/body and relay recovery flags
+true. Direction consistent in normal tests, response-not-railed true (distinct
+from stricter baseline operating range). Numerical response differences
+8.7419305e-10/6.0249878e-9 pass. Chemical block removes response; blocked cue/
+direction failures expected. Body ratio.9993172813 (~.06827% small reduction)
+not a stop/swim claim. Branch replay ratio.9993056529 does not remove effect,
+mediation false. All criteria/milestones/full H1.2 qualification unchanged.
+
+Automatic audit complete/integrity true, problems[], actual frozen fields and
+coordinates preserved. RIAL-cycle checks explicitly inapplicable. Local near-bound
+AWAL inward density and ASEL/AWCR/AIYR->AIYL chemical groups; exact directions/
+original-bound room absent. No blanket original-bound exhaustion inferred.
+Operating q99 not printed; do not estimate headroom by reverse engineering loss.
+Preserve current/independent failed models, exact optimizer/RNG/pending states and
+recursive raw dependencies. Next read-only audit: exact baseline/selected range,
+late selected-eligible losses, actual local/original coordinate room for near-bound
+groups. No new seed/job, changed threshold or downstream behavior launched here.

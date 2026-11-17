@@ -1,5 +1,12 @@
 # r-elegans
 
+2026-11-17 E090 completed (reported):180min optimization,10generations,
+3h34m17s total with clean validation/audit. Nominal AIYL cue magnitude crosses
+minimum (101.98% target); low-dose89.51% and close-repeat second77.42% miss,
+release-headroom gate still fails. Gait/recovery/numerical and frozen-field/
+integrity checks pass; no full relay or motor-control qualification.
+Inspect exact range and bound room before continuation. [Outcome](experiments/records/E090-server-summary.json).
+
 2026-11-17 E090 duration amendment:3h optimization, then validation and automatic
 audit,6h overall watchdog. Same parent/objective/original bounds; execution pending.
 Launch: `sh scripts/launch_relay_e090_mbslnx2.sh`. [Revised plan](experiments/records/E090-plan.json).
