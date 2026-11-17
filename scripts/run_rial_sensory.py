@@ -1,4 +1,4 @@
-"""E085-E089 body, RIAL release or relay operating-range fitting with a total wall budget."""
+"""Body, RIAL release or relay operating-range fitting with a total wall budget."""
 import argparse,concurrent.futures,json,math,multiprocessing,os,random,shutil,subprocess,sys,time
 from pathlib import Path
 import numpy as np
@@ -6,6 +6,7 @@ from scripts.experiment_records import capture_run_record,file_sha256
 from scripts.run_cma_sensorimotor import optimizer_snapshot
 from scripts.rial_sensory_worker import initialize,evaluate,setup
 from r_elegans.rial_sensory import parameter_groups,RUNGS as BODY_RUNGS,score as body_score
+from scripts.relay_parent import add_arguments as add_parent_arguments,validate as validate_parent_arguments
 
 SEED=8500
 PARENT='dd42e3f62bc00befc6052fae60c102bc89aaf9266ae88da1f78f3be30c2766a8'
@@ -26,10 +27,12 @@ def main():
     p.add_argument('--objective',choices=('body','rial-release','relay-range'),default='body')
     p.add_argument('--continue-relay',action='store_true',help='Fresh optimizer at pinned relay parent, original-anchor bounds unchanged')
     p.add_argument('--optimization-minutes',type=float,help='Separate search budget after baseline; validation follows outside this budget')
+    add_parent_arguments(p)
     a=p.parse_args();release_objective=a.objective=='rial-release';relay_objective=a.objective=='relay-range'
     if a.continue_relay and not relay_objective:p.error('--continue-relay requires --objective relay-range')
     if a.optimization_minutes is not None and (not a.continue_relay or not math.isfinite(a.optimization_minutes) or a.optimization_minutes<=0):
         p.error('--optimization-minutes requires --continue-relay and a positive finite duration')
+    explicit_parent=validate_parent_arguments(p,a,a.continue_relay and relay_objective)
     neural_objective=release_objective or relay_objective
     from r_elegans.rial_release import RUNGS as RELEASE_RUNGS,score as release_score
     from r_elegans.relay_range import RUNGS as RELAY_RUNGS,score as relay_score,parameter_groups as relay_groups,CUE_SCALE,direction_consistent
@@ -42,6 +45,7 @@ def main():
         experiment='E088';run_seed=8800;expected_parent=RELAY_CONTINUATION_PARENT
     if a.optimization_minutes is not None:
         experiment='E089';run_seed=8900;expected_parent=RELAY_LONG_PARENT
+    if explicit_parent:experiment=a.experiment_id;run_seed=a.seed;expected_parent=a.parent_sha256
     out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
     for root in (repo,source):
         if out==root or root in out.parents or out in root.parents:
@@ -57,6 +61,12 @@ def main():
     from scripts.compare_rhythm_worker import verify_inputs
     source_summary=json.loads((source/'summary.json').read_text())
     source_experiment='E088' if a.optimization_minutes is not None else 'E087'
+    if explicit_parent:
+        source_experiment=source_summary.get('experiment')
+        receipt=json.loads((source/'budget_receipt.json').read_text())
+        if source_summary.get('objective')!='relay-range' or not source_summary.get('execution_valid') or not source_summary.get('validation_complete') or not all(receipt.get(k) for k in ('all_steps_finished','audit_complete','audit_integrity_passed')):
+            raise ValueError('Explicit relay parent must have completed execution/validation and clean automatic audit')
+        if source_experiment==experiment:raise ValueError('New continuation requires a new experiment identifier')
     if a.continue_relay and (source_summary.get('experiment')!=source_experiment or source_summary.get('selected',{}).get('checkpoint_sha256')!=expected_parent):
         raise ValueError('Continuation requires pinned '+source_experiment+' selected checkpoint; no fallback')
     ordinary=next(r for r in source_summary['validation'] if r['variant']==('nominal' if neural_objective else 'ordinary') and r['grid']=='ordinary' and (not neural_objective or r.get('mode')=='normal'))

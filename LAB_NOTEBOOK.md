@@ -9140,3 +9140,65 @@ groups, final optimizer metadata and partial-generation completed/status counts.
 This determines whether to continue/recenter or change method. Same saved
 checkpoint/data, no new random seed/forward simulation. No new job, threshold
 relaxation or bound edit authorized/executed by this record.
+
+## 2026-11-17 — E089 late audit and E090 original-bounded continuation planned
+
+Evidence user-pasted stdout (no attachment bytes/hash available for this message).
+Structured exact last10generation values, range/bounds and pending-state counts:
+`experiments/records/E089-late-audit-server-summary.json`.
+Last10selected loss1.5332934755->1.4803888164 (~3.45% gain), latest improvement24,
+none25..27. Diminishing local improvement, not global convergence proof. All12
+last pending evaluations are time_budget, no completed late improvement to select.
+Optimizer saved stage0,generation28,pending12; preserve full es/RNG/pending state.
+AIYL q99.9840043326->.9822500979, headroom1.7750% vs2%, short by.225percentage
+points. Cue magnitude remains62.22% oftarget; both gates stillfail.
+
+AFDL->AIYL delta-.3976420859log, oldlatent-.9941052; original lowerroom.0181476180
+(~1.8% further conductance reduction), upperroom1.3681467431. AIYR->AIYL delta
++.3990795905, oldlatent+.997699; original upperroom.4815935427 (~1.6186factor),
+lowerroom.9047008184. Old near_original flag0 uses a1% log-span threshold; it
+does not mean substantial room in AFDL. Do not widen original bounds or infer
+causality from jointly optimized edges. Other groups' original distances not shown.
+
+Plan E090 `experiments/records/E090-plan.json`:same objective and original bounds,
+new local search box recentered at selected
+a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57,
+source `/home/carsonc/r-elegans-results/relay-range-20261117T031207Z-308052`.
+Fresh CMA seed9000 pop12 sigma.3,4workers x4physical cores,float64. Stagefresh
+9000+stage sigma.15; restarts10000+count sigma.2. NOT exact pending-state resume:
+recenter moves outside old local step box while original anchor constraints stay.
+Retain all oldoptimizer/RNG/asked points/weights unchanged. Same AWAL/AIYL unknown
+densities, existing inputs and AIYL->RIAL compensation; other neuron/motor/RIAL,
+synapse/gap/sensory/NMJ/muscle/water/clock and kinetic/leak/release/sign fields fixed.
+AFDL new downward limit-.018147618log, AIYR new upward min(.4,.48159)=+.4log.
+Remaining AIYR room does not guarantee target attainable; learning tests determine.
+
+Add explicit pinned-parent/experiment/seed CLI triplet for reproducible future
+relay continuations. Reject partial/invalid triplets, unrelated pipelines and
+source without complete execution/validation+clean audit receipt, verify source
+selected/model SHA and original-coordinate/no-cue reference reconstruction.
+Require a new experimentidentifier; do not silently label new weights old E089.
+Same low-dose/shift rung preservation,8normal final protocols, blocked control,
+separate AIYL branch replay and full automatic saved-data audit. All threshold/
+response-direction/recovery/gait/numerical criteria unchanged; no full motor
+stop/start/swimming/RIAL-control or biological promotion.
+
+Full8h optimization after baseline, then<=2h validation and automatic audit,
+11h overall safetywatchdog,20min audit reserve; last partial-generation state
+preserved and completed safe improvements considered without false time-budget
+failure. Same50GiB reserve/15GiB search stop/estimated30GiB training cap,
+concurrent-write granularity, no deletion; every weight/source/env/argv/RNG/
+optimizer/reference dependency preserved outsideGit. Intermediate rawtraces memory.
+Launch `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_e090_mbslnx2.sh`.
+Report dedicated conda Python `-m scripts.report_rial_sensory --relay`.
+Execution stillplanned; no E090 actual server model/forward fit tested locally.
+
+E090 local software verification:60focused tests passed in21.66s using
+`.venv/bin/python -m pytest -q tests/test_relay_parent.py tests/test_relay_continuation.py tests/test_relay_range.py tests/test_rial_sensory.py tests/test_rial_release.py tests/test_rial_sensory_audit.py tests/test_cma_curriculum.py tests/test_rial_control.py`.
+Then10parent-specific tests passed in11.80s, including4new source-rejection checks
+for missing/incomplete/failed audit receipt and wrong selected SHA before any
+input copying/training. Explicit pin/experiment/seed forwarding, scoped/complete
+argument validation, real CMA/mock-forward E090 curriculum, prior-mode regressions
+and original-bound clipping are covered. Launcher syntax, CLI help and diff checks
+passed. These establish software behavior only; no actual E090 scientific forward
+run or server model bytes independently retrieved. Execution remains planned.

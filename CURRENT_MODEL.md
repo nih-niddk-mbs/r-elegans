@@ -1,5 +1,14 @@
 # Current model: exact scope and computation path
 
+2026-11-17 E089 late audit: AIYL headroom1.775% vs2% target; late selected
+loss improves3.45% over10generations. AFDL->AIYL has~1.8% original downward room;
+AIYR->AIYL has more original upward room. E090 prepared:8h fresh-optimizer
+continuation from pinned best weights, same objective/original bounds, then
+validation and automatic audit. Prior optimizer/pending state preserved.
+[Audit](experiments/records/E089-late-audit-server-summary.json), [plan](experiments/records/E090-plan.json).
+Launch: `sh scripts/launch_relay_e090_mbslnx2.sh`.
+Report: `python -m scripts.report_rial_sensory --relay`. E090 execution pending.
+
 2026-11-17 E089 completed (reported): full480min optimization,28generations,
 8h34m26s total with clean final validation/audit. AIYL cue magnitude improves74.63%
 to62.22% of required response; headroom and cue gates still fail, no milestone.

@@ -1,0 +1,146 @@
+{
+  "experiment": "E089",
+  "record_type": "late_optimization_and_bound_audit",
+  "record_date": "2026-11-17",
+  "evidence": "User-pasted server stdout; no attachment SHA available for this chat text; full remote files not independently retrieved.",
+  "run": "/home/carsonc/r-elegans-results/relay-range-20261117T031207Z-308052",
+  "last_ten_generations": [
+    {
+      "generation": 18,
+      "population_minimum": 1.5706197940163995,
+      "selected_loss": 1.533293475517282,
+      "cue_change": [
+        -1.225724625819602e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 19,
+      "population_minimum": 1.5424848395133233,
+      "selected_loss": 1.533293475517282,
+      "cue_change": [
+        -1.225724625819602e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 20,
+      "population_minimum": 1.4880064603603778,
+      "selected_loss": 1.4880064603603778,
+      "cue_change": [
+        -1.2415569400348048e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 21,
+      "population_minimum": 1.5772776825347747,
+      "selected_loss": 1.4880064603603778,
+      "cue_change": [
+        -1.2415569400348048e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 22,
+      "population_minimum": 1.5124842607462345,
+      "selected_loss": 1.4880064603603778,
+      "cue_change": [
+        -1.2415569400348048e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 23,
+      "population_minimum": 1.5214248427249697,
+      "selected_loss": 1.4880064603603778,
+      "cue_change": [
+        -1.2415569400348048e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 24,
+      "population_minimum": 1.4803888163877486,
+      "selected_loss": 1.4803888163877486,
+      "cue_change": [
+        -1.2443789692229146e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 25,
+      "population_minimum": 1.5175068761700858,
+      "selected_loss": 1.4803888163877486,
+      "cue_change": [
+        -1.2443789692229146e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 26,
+      "population_minimum": 1.5398219213944009,
+      "selected_loss": 1.4803888163877486,
+      "cue_change": [
+        -1.2443789692229146e-05
+      ],
+      "range_pass": false
+    },
+    {
+      "generation": 27,
+      "population_minimum": 1.5269780286146222,
+      "selected_loss": 1.4803888163877486,
+      "cue_change": [
+        -1.2443789692229146e-05
+      ],
+      "range_pass": false
+    }
+  ],
+  "operating_range": {
+    "baseline": {
+      "minimum_q01": 0.9840021827967349,
+      "maximum_q99": 0.9840043326401766
+    },
+    "selected": {
+      "minimum_q01": 0.9822482233627222,
+      "maximum_q99": 0.9822500979041839
+    }
+  },
+  "near_bound_groups": [
+    {
+      "name": "chemical:AFDL->AIYL",
+      "coordinates": 1,
+      "latent": -0.9941052146992716,
+      "log_delta": -0.3976420858797087,
+      "near_original_bound": 0,
+      "original_lower_room": 0.01814761800153397,
+      "original_upper_room": 1.3681467431183565
+    },
+    {
+      "name": "chemical:AIYR->AIYL",
+      "coordinates": 1,
+      "latent": 0.9976989762347058,
+      "log_delta": 0.39907959049388236,
+      "near_original_bound": 0,
+      "original_lower_room": 0.9047008184123144,
+      "original_upper_room": 0.4815935427075762
+    }
+  ],
+  "optimizer": {
+    "stage": 0,
+    "generation": 28,
+    "pending_points": 12
+  },
+  "partial_generation_statuses": {
+    "time_budget": 12
+  },
+  "derived": {
+    "selected_release_headroom": 0.01774990209581606,
+    "release_headroom_shortfall": 0.002250097904183939,
+    "late_selected_loss_reduction": 0.034503935465899804,
+    "maximum_remaining_AFDL_fractional_decrease": 0.017983941589835073,
+    "maximum_remaining_AIYR_multiplier": 1.6186517387739625
+  },
+  "interpretation": "Selected loss improves3.45% over reported last10generations, latest improvement at24; no further completed improvement25..27. No proof global convergence. Release headroom1.7750% vs2% target,0.225percentage-point shortfall; cue magnitude62.22% target. AFDL already within~1.8% decrease of original lower limit despite old local-near_original flag0; AIYR has more original upward room. Last pending12evaluations alltime_budget, so no additional complete late candidate to promote.",
+  "decision": "Prepare same-objective8h selected-weight continuation with local recentering within unchanged original bounds. Fresh optimizer explicit, not exact resume of pending population. Preserve old fullstate/checkpoints; no further AFDL reduction beyond original floor or threshold relaxation."
+}
