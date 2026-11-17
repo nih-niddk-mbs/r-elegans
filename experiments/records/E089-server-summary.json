@@ -1,0 +1,552 @@
+{
+  "experiment": "E089",
+  "record_date": "2026-11-17",
+  "evidence": "User-pasted report stdout; remote raw model/trace/source/environment/optimizer files not independently retrieved.",
+  "source_attachment_sha256": "a1466b5c8c4b48a54569702b68b4f5111b84e104e8b72e327853feb964e3a8ea",
+  "run": "/home/carsonc/r-elegans-results/relay-range-20261117T031207Z-308052",
+  "execution_valid": true,
+  "validation_complete": true,
+  "completed_generations": 28,
+  "stop_reason": "optimization_time_budget",
+  "failure": null,
+  "objective": "relay-range",
+  "final_target": 0.02,
+  "milestones": [],
+  "sensory_relay_range_component_qualified": false,
+  "full_start_stop_qualified": false,
+  "sensory_block_control": true,
+  "AIYL_to_RIAL_body_effect_mediation": false,
+  "optimization_budget": {
+    "requested_minutes": 480.0,
+    "started_monotonic": 280543.14807605,
+    "deadline_monotonic": 309343.14807605,
+    "elapsed_seconds": 28800.77070667903,
+    "stop_reason": "optimization_time_budget",
+    "scope": "Optimization only; final validation and automatic audit follow"
+  },
+  "rows": [
+    {
+      "case": "baseline",
+      "metrics": {
+        "loss": 2.3918719813784044,
+        "response_amplitude_ratios": [
+          0.9999928740236512
+        ],
+        "late_amplitude_ratios": [
+          0.9999994195707277
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.3,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.999108765870061
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -7.1259763487763195e-06
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "1270489a0fb5d625740092dca8d73049faaf52aef568a9d724ffecc27df78dbb"
+    },
+    {
+      "case": "selected",
+      "metrics": {
+        "loss": 1.4803888163877486,
+        "response_amplitude_ratios": [
+          0.9999875562103078
+        ],
+        "late_amplitude_ratios": [
+          0.9999989875428282
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.3,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9993723867610753
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443789692229146e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "nominal/ordinary/normal",
+      "metrics": {
+        "loss": 0.21868489153803738,
+        "response_amplitude_ratios": [
+          0.9999875562103078
+        ],
+        "late_amplitude_ratios": [
+          0.9999989875428282
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9993723867610753
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443789692229146e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "low-dose/ordinary/normal",
+      "metrics": {
+        "loss": 0.2819160865282969,
+        "response_amplitude_ratios": [
+          0.9999890768272115
+        ],
+        "late_amplitude_ratios": [
+          0.9999991006101776
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9994460508608733
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.0923172788501745e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "shift/ordinary/normal",
+      "metrics": {
+        "loss": 0.218698050197772,
+        "response_amplitude_ratios": [
+          0.9999875565585774
+        ],
+        "late_amplitude_ratios": [
+          0.9999989873198363
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9993066653630722
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443441422593793e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "repeat/ordinary/normal",
+      "metrics": {
+        "loss": 0.29436216563125595,
+        "response_amplitude_ratios": [
+          0.9999875562103078,
+          0.9999875420718991
+        ],
+        "late_amplitude_ratios": [
+          0.9999989875428282,
+          0.9999989867003617
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9993723867610753,
+          0.9992799864978902
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443789692229146e-05,
+          -1.2457928100895188e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "redundant/ordinary/normal",
+      "metrics": {
+        "loss": 0.2990882012289876,
+        "response_amplitude_ratios": [
+          0.9999875562103078,
+          0.9999905495535557
+        ],
+        "late_amplitude_ratios": [
+          0.9999989875428282
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9993723867610753,
+          0.9994628606440076
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443789692229146e-05,
+          -9.450446444292382e-06
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "long-cue/ordinary/normal",
+      "metrics": {
+        "loss": 0.2186848922142971,
+        "response_amplitude_ratios": [
+          0.9999875562103078
+        ],
+        "late_amplitude_ratios": [
+          0.9999999303325904
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9993723867610753
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443789692229146e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "nominal/neural-half/normal",
+      "metrics": {
+        "loss": 0.21870133387895882,
+        "response_amplitude_ratios": [
+          0.9999875566481564
+        ],
+        "late_amplitude_ratios": [
+          0.9999989871848128
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9992916529746958
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443351843582917e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "nominal/body-half/normal",
+      "metrics": {
+        "loss": 0.21854625985342424,
+        "response_amplitude_ratios": [
+          0.999987552539925
+        ],
+        "late_amplitude_ratios": [
+          0.9999989872836719
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.999366625282991
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2447460075004635e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "nominal/ordinary/sensory-blocked",
+      "metrics": {
+        "loss": 2.0759441061758817,
+        "response_amplitude_ratios": [
+          1.0
+        ],
+        "late_amplitude_ratios": [
+          1.0
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          1.0
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          0.0
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": false,
+        "relay_response_not_railed": true
+      },
+      "mediation": null,
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    },
+    {
+      "case": "nominal/ordinary/relay-replay",
+      "metrics": {
+        "loss": 0.21868489153803738,
+        "response_amplitude_ratios": [
+          0.9999875562103078
+        ],
+        "late_amplitude_ratios": [
+          0.9999989875428282
+        ],
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "useful_response_preserved": true,
+        "partial_attenuation_passed": false,
+        "training_margin_met": false,
+        "target": 0.02,
+        "margin": 1.0,
+        "full_start_stop_qualified": false,
+        "swimming_qualified": false,
+        "body_response_amplitude_ratios": [
+          0.9993723867610753
+        ],
+        "metric": "one_minus_absolute_AIYL_mean_release_change",
+        "relay_response_mean_changes": [
+          -1.2443789692229146e-05
+        ],
+        "relay_minimum_cue_change": 2e-05,
+        "relay_operating_range_passed": false,
+        "relay_recovery_preserved": true,
+        "relay_response_direction_consistent": true,
+        "relay_response_not_railed": true
+      },
+      "mediation": {
+        "replay_amplitude_ratios": [
+          0.9993635512677784
+        ],
+        "baseline_preserved": true,
+        "original_body_attenuation_nontrivial": true,
+        "cue_attenuation_reduced": false,
+        "scope": "Final diagnostic only: matched no-cue AIYL release replay on existing RIAL chemical edge"
+      },
+      "checkpoint_sha256": "a84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57"
+    }
+  ],
+  "numerical_checks": [
+    {
+      "grid": "neural-half",
+      "amplitude_ratio_difference": 4.378486462286446e-10,
+      "passed": true
+    },
+    {
+      "grid": "body-half",
+      "amplitude_ratio_difference": 3.670382775489145e-09,
+      "passed": true
+    }
+  ],
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 30866.348536349018,
+    "total_minutes": 660.0,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/relay-range-20261117T031207Z-308052/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model",
+    "audit_exit_code": 0,
+    "audit_timed_out": false,
+    "audit_complete": true,
+    "audit_integrity_passed": true,
+    "audit_report": "/home/carsonc/r-elegans-results/relay-range-20261117T031207Z-308052-audit/summary.json",
+    "post_audit_component_qualified": false
+  },
+  "audit": {
+    "run": "/home/carsonc/r-elegans-results/relay-range-20261117T031207Z-308052",
+    "audit_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "candidate_count": 359,
+    "final_cases": 10,
+    "RIAL_release_checks_applicable": false,
+    "relay_range_checks_applicable": true,
+    "failed_gait_checks": {
+      "final-nominal": 0,
+      "final-low-dose": 0,
+      "final-shift": 0,
+      "final-repeat": 0,
+      "final-redundant": 0,
+      "final-long-cue": 0,
+      "final-neural-half": 0,
+      "final-body-half": 0,
+      "final-sensory-blocked": 0,
+      "final-relay-replay": 0
+    },
+    "failed_RIAL_release_checks": {
+      "final-nominal": 0,
+      "final-low-dose": 0,
+      "final-shift": 0,
+      "final-repeat": 0,
+      "final-redundant": 0,
+      "final-long-cue": 0,
+      "final-neural-half": 0,
+      "final-body-half": 0,
+      "final-sensory-blocked": 0,
+      "final-relay-replay": 0
+    },
+    "failed_relay_range_checks": {
+      "final-nominal": 7,
+      "final-low-dose": 7,
+      "final-shift": 7,
+      "final-repeat": 14,
+      "final-redundant": 9,
+      "final-long-cue": 7,
+      "final-neural-half": 7,
+      "final-body-half": 7,
+      "final-sensory-blocked": 8,
+      "final-relay-replay": 7
+    },
+    "groups_near_bound": [
+      "chemical:AFDL->AIYL",
+      "chemical:AIYR->AIYL"
+    ],
+    "frozen_coordinates_unchanged": true,
+    "frozen_network_fields_unchanged": true,
+    "scope": "Saved-data audit only: no forward simulation, fitting, causal intervention or qualification. Release statistics use recorded voltage and fixed release law, not channel-current attribution. Optimizer/source records remain in source run; hashes here cover models, coordinates, declared inputs and final traces. Missing stage fields are explicit."
+  },
+  "derived": {
+    "training_loss_reduction_fraction": 0.38107522981450703,
+    "absolute_cue_response_improvement_fraction": 0.7462575067858606,
+    "fraction_of_required_cue_response": 0.6221894846114573
+  },
+  "interpretation": "Full480min optimization delivered,28completed CMA generations.359evaluation records consistent with parent+10final+348search requests, i.e.336requests for28full populations plus12for last partial population; actual partial statuses not in excerpt. Nominal cue response1.244379e-5 is62.22% of2e-5 target and~74.63% larger than parent. Training loss2.39187->1.48039 (~38.11% reduction). Range and magnitude gates still fail, all gait/recovery/numerical/control integrity/frozen checks pass. AFDL-to-AIYL and AIYR-to-AIYL near local group bounds; original-bound remaining room/directions not printed. No plateau or final saturation quantile inferred.",
+  "decision": "Retain selecteda84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57,parent,all optimizer/RNG/pending population and recursive references. Read late selected-eligible loss trajectory, exact operating quantiles and physical/local/original bound distances before deciding continuation. No new optimization, altered thresholds or bounds launched."
+}

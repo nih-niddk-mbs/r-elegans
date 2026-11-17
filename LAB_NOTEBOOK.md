@@ -9095,3 +9095,48 @@ optimization minutes in mocked runs. Earlier full focused suite52passed in19.07s
 Launcher shell syntax, CLI help, compile and diff checks passed. Reporter now
 prints experiment identifier and separate optimization_budget.json. No actual
 E089 server execution or scientific capability is evidenced by these tests.
+
+## 2026-11-17 — E089 full8h optimization completed, relay target still unmet
+
+User-pasted report stdout attachment SHA256 a1466b5c8c4b48a54569702b68b4f5111b84e104e8b72e327853feb964e3a8ea.
+Structured12baseline/selected/final rows and optimizer-budget/numerical/total/audit
+fields in `experiments/records/E089-server-summary.json`. Remote rawmodel/trace/
+optimizer/source/env not independently retrieved. Run
+`/home/carsonc/r-elegans-results/relay-range-20261117T031207Z-308052` and sibling-audit.
+28completed generations, stop optimization_time_budget, failureNone. Exact search
+28800.77070667903s (~480min plus.77s boundary handling), then final checks.
+Total30866.348536349018s=8h34m26s including prep/baseline/validation/audit, no
+outer timeout, complete validation/audit. Extra2065.58s beyond optimization includes
+ALL other phases; do not label it pure validation time. Eight-hour requested search
+was delivered. Partial-population preservation is expected, not execution failure.
+359audit records consistent with1parent+10final+348search requests (336for28full
+populations and12for last partial batch); actual lastbatch statuses not printed.
+
+Parent1270489a0fb5d625740092dca8d73049faaf52aef568a9d724ffecc27df78dbb;
+selecteda84145d65ff503e71b6e6f0bf54ec69d396eed29cc3dfc3010d1c13bb89f4b57.
+Training loss2.391871981->1.480388816 (~38.11% lower). Nominal AIYL mean cue change
+-7.125976349e-6 ->-1.244378969e-5 (~74.63% stronger absolute response),62.22% of
+required2e-5. Low-dose-1.092317279e-5 (~54.62% target), close-repeat second
+-9.450446444e-6 (~47.25%), still belowminimum. Release-headroom2% flag remains
+false; exact q99 not printed. No milestone/relay/RIAL/motor-stop/swim qualification.
+Response signs/recovery/not-railed and all safe/useful-gait flags preserved.
+Long-cue late response near absent. Body ratio.9993723868 (~.06276% attenuation)
+is not swimming speed or stopping, and it is not the relay learning objective.
+Branch replay ratio.9993635513 slightly increases small body effect, not mediation.
+Chemical blocking removes response as intended.
+
+Neural/body response-statistic differences4.3784865e-10/3.6703828e-9 pass. Final
+gait checks0, integritytrue, problems[], actual frozenfields/coordinates unchanged.
+RIAL-cycle checks explicitly inapplicable. AFDL->AIYL and AIYR->AIYL chemical
+groups near local bounds; directions and remaining original-bound room absent.
+Do not infer original-bound saturation, full-numerical/biological fidelity or
+optimizer plateau from this aggregate summary. All failed/independent models,
+full optimizer/RNG/pending population and recursive reference records retained.
+
+Next read-only audit: last10generations' selected-eligible losses/flags (population
+minimum alone includes ineligible points), final selected/no-cue release mean/q99
+and parent comparison, local/original physical-coordinate room on near-bound
+groups, final optimizer metadata and partial-generation completed/status counts.
+This determines whether to continue/recenter or change method. Same saved
+checkpoint/data, no new random seed/forward simulation. No new job, threshold
+relaxation or bound edit authorized/executed by this record.

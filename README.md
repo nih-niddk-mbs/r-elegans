@@ -1,5 +1,12 @@
 # r-elegans
 
+2026-11-17 E089 completed (reported): full480min optimization,28generations,
+8h34m26s total with clean final validation/audit. AIYL cue magnitude improves74.63%
+to62.22% of required response; headroom and cue gates still fail, no milestone.
+Gait/recovery/numerical and frozen-field/integrity checks pass. Near-bound inputs:
+AFDL->AIYL and AIYR->AIYL. Inspect late selected losses, exact release quantiles
+and original-bound room before next continuation. [Outcome](experiments/records/E089-server-summary.json).
+
 2026-11-16 E088 complete (reported):4generations, clean audit, loss down33.53%,
 AIYL cue magnitude35.63% of target; headroom/magnitude still fail, gait/recovery
 preserved. No component qualified. User requests E089:8hours OPTIMIZATION,
