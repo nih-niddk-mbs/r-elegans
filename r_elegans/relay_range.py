@@ -46,7 +46,8 @@ def features(trace, ids, variant, threshold, slope):
     return result
 
 
-def score(paired, parent, target, margin=1.):
+def score(paired, parent, target, margin=1., *, response_aggregation='mean'):
+    if response_aggregation not in ('mean','weakest'):raise ValueError('Unknown relay response aggregation')
     body = rial_sensory.score(paired,parent,target,margin)
     body_ratios = body['response_amplitude_ratios']
     old_error = np.mean([((r-(1-target*margin))/target)**2 for r in body_ratios])
@@ -69,12 +70,14 @@ def score(paired, parent, target, margin=1.):
     not_railed = all(x['AIYL_release_q01']>=.005 and x['AIYL_release_q99']<=.995 for x in b['response'])
     penalty += sum((max(0.,.005-x['AIYL_release_q01'])/.005)**2 +
                    (max(0.,x['AIYL_release_q99']-.995)/.005)**2 for x in b['response'])
-    error = np.mean([((abs(x)-cue_min*margin)/cue_min)**2 for x in changes])
+    error = (((min(abs(x) for x in changes)-cue_min*margin)/cue_min)**2 if response_aggregation=='weakest'
+             else np.mean([((abs(x)-cue_min*margin)/cue_min)**2 for x in changes]))
     body.update(loss=float(max(0.,body['loss']-old_error)+penalty+error+float(not consistent)),
         body_response_amplitude_ratios=body_ratios,
         response_amplitude_ratios=[1-abs(x) for x in changes],
         late_amplitude_ratios=[1-abs(x['AIYL_release_mean']-y['AIYL_release_mean']) for x,y in zip(b['late'],a['late'])],
         metric='one_minus_absolute_AIYL_mean_release_change',
+        relay_response_aggregation=response_aggregation,
         relay_response_mean_changes=changes,relay_minimum_cue_change=cue_min,
         relay_operating_range_passed=bool(operating),relay_recovery_preserved=bool(recovery),
         relay_response_direction_consistent=consistent,relay_response_not_railed=bool(not_railed))

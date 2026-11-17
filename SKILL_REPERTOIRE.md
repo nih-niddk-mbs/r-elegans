@@ -1,5 +1,14 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-17 E090 details: AIYL headroom1.8967% vs2%, nominal cue crosses
+minimum but low-dose/close-repeat remain weak. Four groups reach local limits;
+original limits retained. E091 prepared to train first and close-repeat together,
+prioritizing weaker response, with same final criteria. Fresh CMA from pinned
+best weights,3h optimization then validation/automatic audit,6h overall limit.
+[Audit](experiments/records/E090-audit-detail-server-summary.json), [plan](experiments/records/E091-plan.json).
+Launch: `sh scripts/launch_relay_e091_mbslnx2.sh`.
+Report: `python -m scripts.report_rial_sensory --relay`. E091 execution pending.
+
 2026-11-17 E090 completed (reported):180min optimization,10generations,
 3h34m17s total with clean validation/audit. Nominal AIYL cue magnitude crosses
 minimum (101.98% target); low-dose89.51% and close-repeat second77.42% miss,

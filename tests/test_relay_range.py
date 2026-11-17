@@ -1,6 +1,7 @@
 from copy import deepcopy
 from types import SimpleNamespace
 import numpy as np
+import pytest
 from scipy.special import logit
 from r_elegans.relay_range import features, score, parameter_groups
 from scripts.audit_rial_sensory import relay_failures
@@ -74,15 +75,18 @@ def test_relay_counterfactual_only_uses_existing_aiyl_rial_edge():
     assert not bool(probe(30).active)
 
 
-def test_worker_relay_diagnostic_does_not_claim_body_mediation_without_body_effect(tmp_path,monkeypatch):
+@pytest.mark.parametrize('variant',['nominal','redundant'])
+def test_worker_relay_diagnostic_does_not_claim_body_mediation_without_body_effect(tmp_path,monkeypatch,variant):
     import time
     import scripts.rial_sensory_worker as worker
     import scripts.compare_rhythm_worker as verifier
     import r_elegans.brain.conductance_network as network
-    _,traces,ids=paired(effect=0.);ai=ids.index('AIYL');ri=ids.index('RIAL');calls=[]
+    _,traces,ids=paired(variant=variant,effect=0.);ai=ids.index('AIYL');ri=ids.index('RIAL');calls=[]
     for name,trace in traces.items():
         t=trace['dense_time_s'];release=np.full(len(t),.95)
-        if name=='cue':release[(t>=41)&(t<46)]+=.0001
+        if name=='cue':
+            release[(t>=41)&(t<46)]+=.0001
+            if variant=='redundant':release[(t>=54)&(t<59)]+=.00001
         trace['dense_voltage_mV'][:,ai]=-40+5*logit(release)
     mask=np.zeros((len(ids),len(ids)));mask[ri,ai]=1
     fixed=SimpleNamespace(chemical_mask=mask,release_threshold_mV=np.full(len(ids),-40.),release_slope_mV=np.full(len(ids),5.))
@@ -99,8 +103,30 @@ def test_worker_relay_diagnostic_does_not_claim_body_mediation_without_body_effe
     monkeypatch.setattr(verifier,'verify_inputs',lambda root:None)
     monkeypatch.setattr(network,'save_network',lambda path,*args:path.write_bytes(b'model'))
     monkeypatch.setattr(worker.shutil,'disk_usage',lambda path:SimpleNamespace(free=1024**4))
-    r=worker.evaluate(dict(z=[0.],output=str(tmp_path/'result'),until=time.monotonic()+60,target=.02,objective='relay-range',mode='relay-replay'))
-    assert r['status']=='completed' and r['metrics']['partial_attenuation_passed']
+    r=worker.evaluate(dict(z=[0.],output=str(tmp_path/'result'),until=time.monotonic()+60,target=.02,objective='relay-range',mode='relay-replay',variant=variant,response_aggregation='weakest'))
+    assert r['status']=='completed'
+    assert r['metrics']['partial_attenuation_passed']==(variant=='nominal')
+    assert r['metrics']['relay_response_aggregation']=='weakest'
+    if variant=='redundant':np.testing.assert_allclose(r['metrics']['loss'],.25,atol=1e-7)
     assert not r['mediation']['cue_attenuation_reduced']
     assert not r['mediation']['original_body_attenuation_nontrivial']
     assert calls==[(False,False),(True,False),(False,True),(True,True)]
+
+
+def test_weakest_response_objective_does_not_hide_weak_repeat_with_strong_first_cue():
+    data=relay_pair(effect=.0001);parent=data['no_cue']
+    for condition in data.values():condition['response'].append(deepcopy(condition['response'][0]))
+    base=data['no_cue']['response'][0]['AIYL_release_mean']
+    def response(row,delta):
+        row['AIYL_release_mean']=base+delta
+        row['AIYL_release_half_means']=[base+delta]*2
+    response(data['cue']['response'][0],.0001)
+    response(data['cue']['response'][1],.00001)
+    initial=score(data,parent,.02,1.3,response_aggregation='weakest')
+    response(data['cue']['response'][0],.0002)
+    unchanged=score(data,parent,.02,1.3,response_aggregation='weakest')
+    np.testing.assert_allclose(unchanged['loss'],initial['loss'])
+    assert not unchanged['partial_attenuation_passed']
+    response(data['cue']['response'][1],.0000261)
+    improved=score(data,parent,.02,1.3,response_aggregation='weakest')
+    assert improved['loss']<unchanged['loss'] and improved['training_margin_met']

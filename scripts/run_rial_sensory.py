@@ -27,17 +27,23 @@ def main():
     p.add_argument('--objective',choices=('body','rial-release','relay-range'),default='body')
     p.add_argument('--continue-relay',action='store_true',help='Fresh optimizer at pinned relay parent, original-anchor bounds unchanged')
     p.add_argument('--optimization-minutes',type=float,help='Separate search budget after baseline; validation follows outside this budget')
+    p.add_argument('--training-variant',choices=('nominal','redundant'),default='nominal')
     add_parent_arguments(p)
     a=p.parse_args();release_objective=a.objective=='rial-release';relay_objective=a.objective=='relay-range'
     if a.continue_relay and not relay_objective:p.error('--continue-relay requires --objective relay-range')
     if a.optimization_minutes is not None and (not a.continue_relay or not math.isfinite(a.optimization_minutes) or a.optimization_minutes<=0):
         p.error('--optimization-minutes requires --continue-relay and a positive finite duration')
     explicit_parent=validate_parent_arguments(p,a,a.continue_relay and relay_objective)
+    if a.training_variant!='nominal' and not explicit_parent:p.error('Changed training variant requires explicit pinned relay parent, new experiment identifier and seed')
     neural_objective=release_objective or relay_objective
     from r_elegans.rial_release import RUNGS as RELEASE_RUNGS,score as release_score
     from r_elegans.relay_range import RUNGS as RELAY_RUNGS,score as relay_score,parameter_groups as relay_groups,CUE_SCALE,direction_consistent
     RUNGS=RELAY_RUNGS if relay_objective else RELEASE_RUNGS if release_objective else BODY_RUNGS
     score=relay_score if relay_objective else release_score if release_objective else body_score
+    response_aggregation='weakest' if a.training_variant=='redundant' else 'mean'
+    if relay_objective and response_aggregation=='weakest':
+        def score(paired,parent,target,margin=1.):
+            return relay_score(paired,parent,target,margin,response_aggregation=response_aggregation)
     experiment='E087' if relay_objective else 'E086' if release_objective else 'E085'
     run_seed=8700 if relay_objective else 8600 if release_objective else SEED
     expected_parent=RELAY_PARENT if relay_objective else RELEASE_PARENT if release_objective else PARENT
@@ -104,6 +110,7 @@ def main():
         optimizer='cma==4.4.1',population=12,dimension=len(schema),cpu_groups=groups,total_minutes=budget['total_minutes'],
         validation_reserve_minutes=reserve/60,rungs=RUNGS,training_margin=1.3,
         optimization_minutes=a.optimization_minutes,
+        training_variant=a.training_variant,response_aggregation=response_aggregation,
         objective=('AIYL release headroom2/5/10% plus cue responsiveness and recovery; body gait preserved' if relay_objective else 'Early cue-specific1/2/5% RIAL release-cycle attenuation; body gait preserved' if release_objective else 'Early cue-specific2/5/10% cycle-amplitude attenuation with uncued gait and recovery preserved'),
         frequency_estimator=('parabolic_subsample_median_period' if neural_objective else 'discrete_peak_median_period'),
         trainable=('AWAL/AIYL nonleak densities, existing inputs to AIYL and AIYL-to-RIAL compensation' if relay_objective else 'Explicit AWA/AIY/AIZ/AIB/RIA nonleak densities and existing control-to-control chemical connections'),
@@ -115,10 +122,11 @@ def main():
     optimizer_snapshot(out/'optimizer/initial',es,0,0)
     selected=None;zbest=np.zeros(len(schema));parent=None;generation=0;history=[];validation=[];failure=None;stage=0;evaluations=[]
     stop_reason='optimization_time_budget' if a.optimization_minutes is not None else 'time_budget'
-    recent=[];pending_points=None;baseline=None;qualified=None;milestones=[];restart=0;optimization_started=None;phase='baseline'
+    recent=[];pending_points=None;baseline=None;baseline_training=None;qualified=None;milestones=[];restart=0;optimization_started=None;phase='baseline'
     def job(z,name,until,variant='nominal',grid='ordinary',retain=False,reference=False,mode='normal',target=None,margin=1.):
         return dict(z=list(map(float,z)),output=str(out/'evaluations'/name),until=until,parent_features=parent,
             variant=variant,grid=grid,retain_traces=retain,reference=reference,mode=mode,objective=a.objective,
+            response_aggregation=response_aggregation,
             target=RUNGS[min(stage,len(RUNGS)-1)] if target is None else target,margin=margin)
     def valid(r):
         m=r.get('metrics',{})
@@ -151,6 +159,12 @@ def main():
             if baseline['status']!='completed':raise ValueError('Parent baseline failed: '+str(baseline))
             parent=baseline['paired_features']['no_cue'];selected=baseline;recent=[baseline['elapsed_seconds']]
             best=baseline['metrics']['loss'];write(out/'parent_features.json',parent);preserve(baseline,'parent')
+            if a.training_variant!='nominal':
+                baseline_training=batch(pool,[job(zbest,'parent-training',fit_until,variant=a.training_variant,retain=True,margin=1.3)])[0]
+                if baseline_training['status']!='completed' or baseline_training['checkpoint_sha256']!=baseline['checkpoint_sha256']:
+                    raise ValueError('Same-parent training-variant baseline failed')
+                selected=baseline_training;best=selected['metrics']['loss'];recent.append(selected['elapsed_seconds'])
+                preserve(selected,'parent-training')
             phase='optimization'
             if a.optimization_minutes is not None:
                 optimization_started=time.monotonic();fit_until=optimization_started+a.optimization_minutes*60
@@ -167,7 +181,7 @@ def main():
                 if size>15*1024**3 or shutil.disk_usage(out).free<50*1024**3:stop_reason='disk_budget';break
                 points=es.ask();pending_points=[list(map(float,z)) for z in points]
                 optimizer_snapshot(out/'optimizer'/f'g-{generation:05d}-asked',es,stage,generation,pending_points)
-                rows=batch(pool,[job(z,f'g-{generation:05d}-c-{i:02d}',fit_until,margin=1.3) for i,z in enumerate(points)])
+                rows=batch(pool,[job(z,f'g-{generation:05d}-c-{i:02d}',fit_until,variant=a.training_variant,margin=1.3) for i,z in enumerate(points)])
                 if any(r['status'] in ('time_budget','disk_budget','worker_error') for r in rows):
                     if a.optimization_minutes is not None and any(r['status']=='time_budget' for r in rows) and not any(r['status'] in ('disk_budget','worker_error') for r in rows):
                         # Keep completed improvements; retain asked population/RNG without telling an incomplete generation.
@@ -239,10 +253,12 @@ def main():
         if relay_objective:
             relay_direction=direction_consistent(validation[:8]);partial=partial and relay_direction
         sustained=bool(all(r<=1-final_target*(CUE_SCALE if relay_objective else 1.) for r in validation[5]['metrics']['late_amplitude_ratios']))
-    write(out/'summary.json',dict(experiment=experiment,objective=a.objective,execution_valid=failure is None and stop_reason not in ('evaluation_failure','all_candidates_failed'),
+    write(out/'summary.json',dict(experiment=experiment,objective=a.objective,
+        training_variant=a.training_variant,response_aggregation=response_aggregation,
+        execution_valid=failure is None and stop_reason not in ('evaluation_failure','all_candidates_failed'),
         all_stages_finished=complete,validation_complete=complete,completed_generations=generation,active_stage=stage,
         evaluation_status_counts={status:sum(r['status']==status for r in evaluations) for status in ('completed','failed','worker_error','time_budget','disk_budget')},
-        stop_reason=stop_reason,failure=failure,baseline=baseline,selected=final_selected if complete else selected,
+        stop_reason=stop_reason,failure=failure,baseline=baseline,baseline_training=baseline_training,selected=final_selected if complete else selected,
         final_target=final_target if complete else None,milestones=milestones,validation=validation,numerical_checks=convergence,
         final_target_meaning='minimum_AIYL_upper_release_headroom' if relay_objective else 'minimum_fractional_amplitude_attenuation',
         partial_sensory_component_qualified=partial and not neural_objective,

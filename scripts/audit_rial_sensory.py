@@ -177,6 +177,9 @@ def main():
         if r['status'] == 'completed':
             verify(folder/'network.npz', r['checkpoint_sha256'])
             verify(folder/'coordinates.npz')
+            if not folder.name.startswith('final-'):
+                for condition,sha in r.get('trajectory_sha256',{}).items():
+                    verify(folder/(condition+'.npz'),sha)
         candidates.append(dict(output=str(folder), status=r['status'], error=r.get('error'),
             metrics=r.get('metrics'), paired_features=r.get('paired_features'),
             checkpoint_sha256=r.get('checkpoint_sha256')))

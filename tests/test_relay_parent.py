@@ -38,9 +38,11 @@ def test_parent_pin_is_forwarded_and_recorded_in_watchdog(tmp_path,monkeypatch):
         return 0,False
     monkeypatch.setattr(runner,'run_group',run)
     monkeypatch.setattr(sys,'argv',['budget','--pipeline','relay-range','--continue-relay','--optimization-minutes','480',
-        '--total-minutes','660','--output-dir',str(out),'--parent-sha256','a'*64,'--experiment-id','E090','--seed','9000'])
+        '--total-minutes','660','--output-dir',str(out),'--parent-sha256','a'*64,'--experiment-id','E090','--seed','9000',
+        '--training-variant','redundant'])
     assert runner.main()==0
     assert calls[0][calls[0].index('--parent-sha256')+1]=='a'*64
+    assert calls[0][calls[0].index('--training-variant')+1]=='redundant'
     record=json.loads((out/'deadline.json').read_text())
     assert record['experiment']=='E090' and record['seed']==9000 and record['parent_sha256']=='a'*64
 

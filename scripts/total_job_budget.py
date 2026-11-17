@@ -39,6 +39,7 @@ def main():
     p.add_argument('--source-run',type=Path)
     p.add_argument('--continue-relay',action='store_true')
     p.add_argument('--optimization-minutes',type=float)
+    p.add_argument('--training-variant',choices=('nominal','redundant'),default='nominal')
     add_parent_arguments(p)
     p.add_argument('--pipeline',choices=['tail','state-control','control-access','cma-curriculum','avb-training','nmj-source','head-split','smd-control','rial-control','rial-sensory','rial-release','relay-range'],default='tail')
     a=p.parse_args()
@@ -47,6 +48,7 @@ def main():
     if a.optimization_minutes is not None and a.total_minutes<a.optimization_minutes+145:
         p.error('Overall budget must also allow subsequent validation, audit and preparation')
     explicit_parent=validate_parent_arguments(p,a,a.continue_relay and a.pipeline=='relay-range')
+    if a.training_variant!='nominal' and not explicit_parent:p.error('Changed training variant requires explicit pinned relay continuation')
     if not math.isfinite(a.total_minutes) or a.total_minutes<5:p.error('At least five total minutes required')
     repo=Path(__file__).resolve().parents[1];out=a.output_dir.resolve()
     if out==repo or repo in out.parents or out in repo.parents:p.error('External output required')
@@ -73,6 +75,7 @@ def main():
     if a.continue_relay:command+=['--continue-relay']
     if a.optimization_minutes is not None:command+=['--optimization-minutes',str(a.optimization_minutes)]
     if explicit_parent:command+=['--parent-sha256',a.parent_sha256,'--experiment-id',a.experiment_id,'--seed',str(a.seed)]
+    if a.training_variant!='nominal':command+=['--training-variant',a.training_variant]
     if a.source_run:command+=['--source-run',str(a.source_run.resolve())]
     code,timed_out=run_group(command,max(.01,deadline-audit_reserve-time.monotonic()-20))
     summary_path=out/'summary.json'

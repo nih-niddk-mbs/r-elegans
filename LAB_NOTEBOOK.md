@@ -9272,3 +9272,85 @@ Focused software test passed1/1 in.16s, verifies actual original-coordinate boun
 room and headroom arithmetic, distinguishes selected versus population loss and
 checks source artifact bytes remain unchanged. CLI/diff checks passed. No actual
 server details independently retrieved by this helper locally; results pending.
+
+## 2026-11-17 — E090 detailed audit and E091 repeated-cue training planned
+
+User audit-details stdout attachment SHA256 5de6794100258492214d7eb7121c23921559da1c4a8593e6e49a08263a67017e.
+Exact JSON transcription `experiments/records/E090-audit-detail-server-summary.json`.
+Source `/home/carsonc/r-elegans-results/relay-range-20261117T184013Z-380160`.
+Headroom1.8966613043% vs2%, short.1033386957percentage points. AIYL maximumq99
+.9810333869574, minimumq01.9810313321517. Recent selected loss improves through5
+(.8236440399), flat6..9; final.8205276525 is slightly better due partial final
+population with8completed/4time_budget. This confirms completed improvements were
+retained without incorrectly telling CMA an incomplete generation. Stage0/gen10,
+pending12 remain saved. No independent remote raw/model retrieval.
+
+Old local-bound groups: AWAL inward+.3986718368log, original upperroom.3318857688;
+ASEL->AIYL-.3992262193log, original lowerroom.1423419311; AWCR->AIYL-.3996932989,
+original lowerroom.4158594971; AIYR->AIYL+.3981916816, original upperroom.0834018611.
+No original-bound relaxation is justified/included. Parent/current/failed weights,
+old CMA/RNG/pending population and references remain untouched. No causal effect
+of an individual group can be assigned from joint optimization.
+
+E091 plan `experiments/records/E091-plan.json`:same3h optimization then validation/
+automatic audit,6h overall cap. Parent18eadad77c048a86aa305d59ec37defa3fa2e34ba2da8cf72139d9e6965c00cc,
+fresh CMA seed9100/pop12/sigma.3,4workers x4cores,float64. Stagefresh9100+stage
+sigma.15,restarts10100+count sigma.2. Explicit source/audit/selected SHA/original
+coordinate verification. Recenter local box within original factor2 bounds;
+AWAL inward new upper+.33188577,ASEL lower-.14234193,AWCR lower-.4,AIYR upper
++.08340186. Same AWAL/AIYL channels, existing inputs/AIYL->RIAL compensation;
+other channels/synapses/gaps/motor/sensory/NMJ/physics/kinetics/signs fixed.
+
+Method change: candidates train EXISTING redundant83s chemical protocol, first
+cue40..50,response41..46,close repeat53..63,response54..59. First and weaker
+second responses now learned together. Optimize squared error of WEAKEST
+absolute mean-release response toward1.3times minimum, rather than averaging
+errors that can compromise the second response while first overshoots. Still
+continuous; sign consistency remains required. Mean aggregator remains default
+for E087-E090; new field records aggregation explicitly. No historical metrics
+or final acceptance criteria changed. No hidden time/cue labels delivered to
+neurons, only original physical chemical bath with causal transduction.
+
+Preserve nominal70s parent baseline to verify actual source trajectory. Then
+same EXACT parent on redundant83s as baseline_training, full raw/model/hash
+retained and separately reported. Compare population to same-protocol baseline
+and start full3h search clock after both baselines. All candidates use same
+training variant/aggregation per run; phase comparisons stay meaningful. New
+training variant requires explicit parent/experiment/seed to prevent silently
+relabeling old protocol IDs. Baseline/selected and metric variant displayed.
+
+Same range2/5/10%,cue2e-5/5e-5/1e-4,recovery/body/cadence/numerical/control criteria,
+margin1.3. Low-dose/shift rung checks and final8normal+blocked+AIYL-branch replay
+remain. Nominal/redundant final cases are engineering RETESTS of training cues,
+not independent held-out biological generalization. Full H1.2 stop/start/rest/
+restart, RIAL-control and swimming remain gated. No automatic downstream launch.
+Same exact chosen checkpoint validated; partial states/independent models retained.
+
+Up to2h validation AFTER180min search; automatic audit/cleanup within360min total,
+20min audit reserve. Same50GiB free,15GiB search-stop,estimated30GiB training cap
+with concurrent-write granularity, no deletions. Full raw intermediate traces
+memory-only; retain nominal/training baseline and final traces. Audit now also
+checks all retained nonfinal baseline trajectory hashes, alongside existing full
+model/frozen/latent/gait/neural/final trace checks. Training83s costs~19%more
+simulated time per pair than70s but fits both cue windows together, avoiding
+three independent paired rollouts. Actual performance not yet measured.
+Launch `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_relay_e091_mbslnx2.sh`.
+Report dedicated conda Python `-m scripts.report_rial_sensory --relay`.
+Actual E091 execution remains planned; no server forward fit or parent bytes
+inspected locally. Local initial suite67passed,1new synthetic boundary test
+failed because exact threshold subtraction rounded just below gate. Fixture
+moved above threshold (no criterion change); all6objective tests then passed
+in1.20s. Other coordinator/explicit-source/training-baseline/worker tests passed.
+CLI,launcher shell syntax and diff checks passed. Tests are software evidence only.
+
+E091 final targeted verification:6tests passed in12.74s via
+`.venv/bin/python -m pytest -q tests/test_relay_range.py tests/test_rial_sensory.py -k 'redundant or diagnostic or weakest'`.
+New worker plumbing explicitly demonstrates weakest response loss (not mean of
+strong+weak cue errors); verifies no body-mediation claim without body effect,
+AIYL-only existing branch probe, matching83s training baseline, optimization clock
+starts after both baselines and candidate deadlines honor separate search budget.
+Same-protocol baseline loss differs from nominal as expected; do not compare
+selected83s weakest loss directly to old70s nominal loss. Compare to explicit
+baseline_training. This is software/mock-forward evidence only. Retained parent/
+training-baseline raw hash verification compiles; launcher syntax/CLI/diff pass.
+No actual E091 run, biological validation or behavior promotion is evidenced.

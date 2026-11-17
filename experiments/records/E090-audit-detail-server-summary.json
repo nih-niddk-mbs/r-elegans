@@ -1,0 +1,238 @@
+{
+  "experiment": "E090",
+  "record_type": "operating_range_and_local_bound_details",
+  "record_date": "2026-11-17",
+  "evidence": "User-pasted audit-details stdout, source attachment hash below; remote raw files not independently retrieved.",
+  "source_attachment_sha256": "5de6794100258492214d7eb7121c23921559da1c4a8593e6e49a08263a67017e",
+  "run": "/home/carsonc/r-elegans-results/relay-range-20261117T184013Z-380160",
+  "details": {
+    "scope": "Read-only saved-data details; no changed acceptance criteria or new simulation",
+    "experiment": "E090",
+    "operating_range": {
+      "baseline": {
+        "minimum_q01": 0.9822482233627222,
+        "maximum_q99": 0.9822500979041839,
+        "upper_release_headroom": 0.01774990209581606,
+        "required_headroom": 0.02,
+        "cue_changes": [
+          -1.2443789692229146e-05
+        ]
+      },
+      "selected": {
+        "minimum_q01": 0.9810313321517068,
+        "maximum_q99": 0.9810333869574133,
+        "upper_release_headroom": 0.018966613042586733,
+        "required_headroom": 0.02,
+        "cue_changes": [
+          -2.039644129636642e-05
+        ]
+      }
+    },
+    "recent_generations": [
+      {
+        "generation": 0,
+        "target": 0.02,
+        "population_minimum": 1.371682381989188,
+        "selected_loss": 1.371682381989188,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -1.4009353415223025e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 1,
+        "target": 0.02,
+        "population_minimum": 1.0330759105528171,
+        "selected_loss": 1.0330759105528171,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -1.7750485808543104e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 2,
+        "target": 0.02,
+        "population_minimum": 0.8661350547826434,
+        "selected_loss": 0.8661350547826434,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -1.9743958284412777e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 3,
+        "target": 0.02,
+        "population_minimum": 0.9110195397316565,
+        "selected_loss": 0.8661350547826434,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -1.9743958284412777e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 4,
+        "target": 0.02,
+        "population_minimum": 0.8466586297688612,
+        "selected_loss": 0.8466586297688612,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.0095517097695748e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 5,
+        "target": 0.02,
+        "population_minimum": 0.8236440399281509,
+        "selected_loss": 0.8236440399281509,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.0366952996564436e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 6,
+        "target": 0.02,
+        "population_minimum": 0.8319121859302874,
+        "selected_loss": 0.8236440399281509,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.0366952996564436e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 7,
+        "target": 0.02,
+        "population_minimum": 0.8369657508589984,
+        "selected_loss": 0.8236440399281509,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.0366952996564436e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 8,
+        "target": 0.02,
+        "population_minimum": 0.8481491776708134,
+        "selected_loss": 0.8236440399281509,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.0366952996564436e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 9,
+        "target": 0.02,
+        "population_minimum": 0.830833600526248,
+        "selected_loss": 0.8236440399281509,
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.0366952996564436e-05
+        ],
+        "range_pass": false
+      }
+    ],
+    "near_bound_groups": [
+      {
+        "name": "density:AWAL:inward",
+        "coordinates": 4,
+        "latent": 0.996679591917733,
+        "near_group_bound": true,
+        "log_delta_range": [
+          0.3986718367670932,
+          0.3986718367670933
+        ],
+        "near_original_bound": 0,
+        "local_log_bounds": [
+          -0.4,
+          0.4
+        ],
+        "minimum_original_lower_room": 0.8564752315629989,
+        "minimum_original_upper_room": 0.3318857687888318
+      },
+      {
+        "name": "chemical:ASEL->AIYL",
+        "coordinates": 1,
+        "latent": -0.9980655482090405,
+        "near_group_bound": true,
+        "log_delta_range": [
+          -0.39922621928361623,
+          -0.39922621928361623
+        ],
+        "near_original_bound": 0,
+        "local_log_bounds": [
+          -0.4,
+          0.4
+        ],
+        "minimum_original_lower_room": 0.14234193105839255,
+        "minimum_original_upper_room": 1.2439524300614981
+      },
+      {
+        "name": "chemical:AWCR->AIYL",
+        "coordinates": 1,
+        "latent": -0.9992332473443035,
+        "near_group_bound": true,
+        "log_delta_range": [
+          -0.39969329893772143,
+          -0.39969329893772143
+        ],
+        "near_original_bound": 0,
+        "local_log_bounds": [
+          -0.4,
+          0.4
+        ],
+        "minimum_original_lower_room": 0.4158594970830617,
+        "minimum_original_upper_room": 0.9704348640368289
+      },
+      {
+        "name": "chemical:AIYR->AIYL",
+        "coordinates": 1,
+        "latent": 0.9954792039734501,
+        "near_group_bound": true,
+        "log_delta_range": [
+          0.39819168158938006,
+          0.39819168158938006
+        ],
+        "near_original_bound": 0,
+        "local_log_bounds": [
+          -0.4,
+          0.4
+        ],
+        "minimum_original_lower_room": 1.3028925000016944,
+        "minimum_original_upper_room": 0.08340186111819614
+      }
+    ],
+    "optimizer": {
+      "stage": 0,
+      "generation": 10,
+      "pending_points": 12
+    },
+    "partial_generation_statuses": {
+      "completed": 8,
+      "time_budget": 4
+    }
+  },
+  "derived": {
+    "headroom_shortfall_percentage_points": 0.10333869574132674
+  },
+  "interpretation": "Selected headroom1.8966613%, short0.1033387percentage points of2%. Generational selected loss improved through5 thenflat6..9; final selected.82052765 is better than last told-generation selected.82364404 because last partial population retained8completed/4time_budget candidates, consistent with intended completed-improvement handling. Four groups reach local bounds; AWAL inward original upper room.33188577log,ASEL lower.14234193,AWCR lower.41585950,AIYR upper.08340186. Local and original bounds differ. No optimizer/full component qualification inferred.",
+  "next_method": "Recenter within original caps, train first and close-repeat cue response together in the83s redundant protocol. Prioritize weakest response instead of average symmetric errors, while all final acceptance criteria remain unchanged. New experiment E091/fresh optimizer; preserve E090 states and weights."
+}

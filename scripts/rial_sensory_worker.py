@@ -41,7 +41,9 @@ def evaluate(job):
     if release_objective:
         from r_elegans.rial_release import features as release_features,score
     if relay_objective:
-        from r_elegans.relay_range import features as relay_features,score
+        from r_elegans.relay_range import features as relay_features,score as relay_score
+        def score(paired,parent,target,margin=1.):
+            return relay_score(paired,parent,target,margin,response_aggregation=job.get('response_aggregation','mean'))
     d=_DATA;out=Path(job['output']);out.mkdir(parents=True,exist_ok=False);started=time.monotonic()
     (out/'request.json').write_text(json.dumps(job,indent=2)+'\n');mode=job.get('mode','normal')
     try:
