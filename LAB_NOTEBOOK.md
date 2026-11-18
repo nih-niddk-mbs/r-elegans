@@ -9398,3 +9398,51 @@ AIYR actual logdelta/local/original distances and partial population statuses.
 Use existing `scripts.report_rial_sensory --run <source> --audit-details`.
 No forward simulation, new optimizer/run, bound change or full behavior promotion
 launched by this result record. Continue only after interpreting remaining limits.
+
+## 2026-11-17 — E091 original-cap audit: AIYR->AIYL essentially exhausted
+
+User-pasted audit-details stdout attachment SHA256
+06f5cb0ef28f71ed349c0ed2d34ebc9b16302636dde638c14f96e5d609ee4841.
+Structured exact detail JSON and derived quantities:
+`experiments/records/E091-cap-audit-server-summary.json`. Same E091source
+`/home/carsonc/r-elegans-results/relay-range-20261117T232652Z-388058`, selected
+0020499c6b900183e954a0e577563584c7ffa19e9cd5264f90c584d8b5b116da per preceding
+report; hash not reprinted in this excerpt. Raw remote bytes not independently read.
+
+Selected q99.9807257586254045 (q01.9807235901948181), headroom1.9274241375%,
+short.0725758625percentage points of2%. Parent nominal/training q99~.981033387,
+headroom1.8966613%, so range improves but remains failed. Weakest second cue
+1.71193658e-5 vs2e-5 is still85.60% target; low-dose98.95% from outcome record.
+Training selected loss improves1.097478949gen0 ->.988791159gen4 then flat5..8.
+CMA savedstage0,generation9,pending12; all last12 time_budget. No additional
+complete late candidate to promote. No global convergence or insufficiency proof.
+
+AIYR->AIYL group1coordinate latent+.9987809605, delta+.08330019096log;
+local bounds[-.4,+.08340186112],near_original_bound1. Original upper remaining
+.0001016701624869log, allowing only expm1(room)~.0001016753fraction=.01017%
+further increase; actual strength~1.99979667times original anchor. This is now an
+ORIGINAL prior cap, not merely the old local step edge. Recenter alone does not
+unlock it. Other coordinates could still admit an original-bounded solution;
+an active constraint is not proof it uniquely causes failure or of biological
+necessity. The2times bound is our fitting prior, not a measured physiological max.
+
+Next recommendation (PROPOSED, NOT IMPLEMENTED/EXECUTED): short deterministic
+one-connection bound-sensitivity scan with only effective AIYR->AIYL conductance
+scaled1.00,1.05,1.10,1.25 from current selected value; preserve all other weights,
+cell/kinetic/release/sensory/NMJ/physics parameters and source state. Check same
+chemical cue/no-cue pairs, baseline body preservation, release headroom/response/
+recovery, and numerical/blocked controls, followed by complete saved-data audit.
+Any >original-cap case is an explicit diagnostic exception (up to~2.49975times
+anchor), never label it original-bounded or automatically promote it as a normal
+fit parent. Keep every diagnostic model/trace external and the original parent
+untouched. No cap relaxation on other coordinates, no new edge/sign or injected
+motor pattern. This tests local leverage, not total-network necessity. A negative
+one-factor test may still be recoverable by joint compensation; a positive one
+is an engineering result, not physiological evidence.
+
+No launcher/command, new run ID, forward simulation or actual weights/bounds change
+is supplied/executed by this recommendation. A concrete assay plan/implementation
+and prospective control/refinement/selection criteria must precede its execution.
+Original E091 gate failures and full H1.2 motor-control/swimming status unchanged.
+Local verification: parsed reported JSON and checked arithmetic/diff consistency
+only; no new model simulation or software implementation tests required here.

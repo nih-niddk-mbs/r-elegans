@@ -1,5 +1,12 @@
 # Current model: exact scope and computation path
 
+2026-11-17 E091 cap audit: AIYL headroom1.9274% vs2%, selected loss flat
+last4generations. AIYR->AIYL now at ORIGINAL fitting cap (~1.99980times anchor),
+with only0.01017% further increase allowed. Recenter alone cannot unlock that
+edge; no global impossibility proved. Recommend an explicitly labeled one-edge
+cap-sensitivity diagnostic before more optimization. No new run/bounds change
+launched. [Audit](experiments/records/E091-cap-audit-server-summary.json).
+
 2026-11-17 E091 completed (reported):180min optimization,9generations,
 3h40m43s total with clean validation/audit. Matched repeated-cue training loss
 falls13.43%; nominal response112.75% target, low-dose98.95%, close-repeat85.60%.

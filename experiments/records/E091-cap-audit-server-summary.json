@@ -1,0 +1,212 @@
+{
+  "experiment": "E091",
+  "record_type": "late_selected_loss_operating_range_and_original_cap_audit",
+  "record_date": "2026-11-17",
+  "evidence": "User-pasted saved-data audit-details stdout; raw remote model/coordinate/optimizer files not independently retrieved.",
+  "source_attachment_sha256": "06f5cb0ef28f71ed349c0ed2d34ebc9b16302636dde638c14f96e5d609ee4841",
+  "run": "/home/carsonc/r-elegans-results/relay-range-20261117T232652Z-388058",
+  "checkpoint_sha256_from_preceding_report": "0020499c6b900183e954a0e577563584c7ffa19e9cd5264f90c584d8b5b116da",
+  "details": {
+    "scope": "Read-only saved-data details; no changed acceptance criteria or new simulation",
+    "experiment": "E091",
+    "training_variant": "redundant",
+    "response_aggregation": "weakest",
+    "operating_range": {
+      "baseline": {
+        "variant": "nominal",
+        "minimum_q01": 0.9810313321517068,
+        "maximum_q99": 0.9810333869574133,
+        "upper_release_headroom": 0.018966613042586733,
+        "required_headroom": 0.02,
+        "cue_changes": [
+          -2.039644129636642e-05
+        ]
+      },
+      "baseline_training": {
+        "variant": "redundant",
+        "minimum_q01": 0.9810313321436142,
+        "maximum_q99": 0.9810333869894865,
+        "upper_release_headroom": 0.0189666130105135,
+        "required_headroom": 0.02,
+        "cue_changes": [
+          -2.039644129636642e-05,
+          -1.548494039160797e-05
+        ]
+      },
+      "selected": {
+        "variant": "redundant",
+        "minimum_q01": 0.9807235901948181,
+        "maximum_q99": 0.9807257586254045,
+        "upper_release_headroom": 0.019274241374595547,
+        "required_headroom": 0.02,
+        "cue_changes": [
+          -2.2550011388511315e-05,
+          -1.711936583725926e-05
+        ]
+      }
+    },
+    "recent_generations": [
+      {
+        "generation": 0,
+        "target": 0.02,
+        "population_minimum": 1.0974789490434016,
+        "selected_loss": 1.0974789490434016,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.1017724483818334e-05,
+          -1.595619306771212e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 1,
+        "target": 0.02,
+        "population_minimum": 1.0324907495264248,
+        "selected_loss": 1.0324907495264248,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.2310981397821728e-05,
+          -1.6938181720660417e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 2,
+        "target": 0.02,
+        "population_minimum": 1.0084738762517764,
+        "selected_loss": 1.0084738762517764,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.225861002003171e-05,
+          -1.689887640021759e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 3,
+        "target": 0.02,
+        "population_minimum": 0.9996531674463972,
+        "selected_loss": 0.9996531674463972,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.2386189355572128e-05,
+          -1.699568502022686e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 4,
+        "target": 0.02,
+        "population_minimum": 0.9887911586298704,
+        "selected_loss": 0.9887911586298704,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.2550011388511315e-05,
+          -1.711936583725926e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 5,
+        "target": 0.02,
+        "population_minimum": 1.002328023781852,
+        "selected_loss": 0.9887911586298704,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.2550011388511315e-05,
+          -1.711936583725926e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 6,
+        "target": 0.02,
+        "population_minimum": 0.9891221444284346,
+        "selected_loss": 0.9887911586298704,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.2550011388511315e-05,
+          -1.711936583725926e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 7,
+        "target": 0.02,
+        "population_minimum": 0.990488756303405,
+        "selected_loss": 0.9887911586298704,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.2550011388511315e-05,
+          -1.711936583725926e-05
+        ],
+        "range_pass": false
+      },
+      {
+        "generation": 8,
+        "target": 0.02,
+        "population_minimum": 0.9928442055044423,
+        "selected_loss": 0.9887911586298704,
+        "selected_variant": "redundant",
+        "selected_metric_target": 0.02,
+        "selected_metric_margin": 1.3,
+        "cue_changes": [
+          -2.2550011388511315e-05,
+          -1.711936583725926e-05
+        ],
+        "range_pass": false
+      }
+    ],
+    "near_bound_groups": [
+      {
+        "name": "chemical:AIYR->AIYL",
+        "coordinates": 1,
+        "latent": 0.9987809605070703,
+        "near_group_bound": true,
+        "log_delta_range": [
+          0.08330019095570929,
+          0.08330019095570929
+        ],
+        "near_original_bound": 1,
+        "local_log_bounds": [
+          -0.4,
+          0.08340186111819614
+        ],
+        "minimum_original_lower_room": 1.3861926909574036,
+        "minimum_original_upper_room": 0.00010167016248685545
+      }
+    ],
+    "optimizer": {
+      "stage": 0,
+      "generation": 9,
+      "pending_points": 12
+    },
+    "partial_generation_statuses": {
+      "time_budget": 12
+    }
+  },
+  "derived": {
+    "selected_headroom_percent": 1.9274241374595547,
+    "headroom_shortfall_percentage_points": 0.07257586254044539,
+    "remaining_AIYR_fractional_increase": 0.00010167533107298769,
+    "AIYR_current_factor_relative_to_original_anchor": 1.999796670011498
+  },
+  "interpretation": "AIYR-to-AIYL latent0.998781 at local upper0.08340186, actual delta0.08330019; only0.0001016702log/~0.01017% additional conductance remains before ORIGINAL cap. Current effective strength~1.999797times anchor. Local recentering does not create additional original room on this edge. Selected loss0.988791 unchanged generations5..8; not proof of global convergence or that no original-bounded solution exists through other coordinates. Headroom1.927424% remains below2%.",
+  "decision": "Recommend controlled one-edge sensitivity scan at current-conductance multipliers1,1.05,1.10,1.25 with all other parameters fixed, unchanged gait/sensory/recovery/numerical checks and complete audit. Multipliers>~1.0001017 intentionally exceed original fitting prior and must be explicitly labeled exceptions, not silently admitted to normal fitting or claimed biological validation. No new simulation, bounds change or training launched."
+}
