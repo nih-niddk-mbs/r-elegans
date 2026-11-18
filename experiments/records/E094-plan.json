@@ -1,0 +1,22 @@
+{
+ "experiment": "E094",
+ "record_date": "2026-11-18",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "Does adding the right sensory/relay path (AWAR/AIYR/RIAR, AIYR->RIAR, RIAR->SMD) and a worst-region loss term increase cue-on body-motion suppression beyond E093 while preserving baseline gait, recovery and relay behavior?",
+ "motivation": "E093: nominal suppression 0.04-0.11% vs required 1%; AIYL release saturated near 0.98 and moved ~3e-5, AIYR (0.53) moved ~3e-3 but was mostly frozen; mean loss fell 5.48% while weakest-region suppression regressed after generation 3.",
+ "source_run": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433",
+ "parent": "Same audited unique passing E092 isolated 1.25 AIYR->AIYL panel as E093 (matched comparison). Not the E093 selected checkpoint a499c523f31881f3df71fb1d1281ab21130545efa26493a0faa36cb93de0e92a.",
+ "parent_checkpoint_sha256": null,
+ "pinning": "Runtime verification identical to E093; resolved hash is written into the new input manifest before fitting. No invented hash.",
+ "initialization": "Fresh CMA at parent, seed 9300, population 12, sigma 0.3, same rungs and training margin 1.05; not an exact optimizer/RNG resume.",
+ "command": "sh scripts/launch_sensory_motion_bilateral_mbslnx2.sh",
+ "report": "python -m scripts.report_sensory_motion --run <E094 run folder>",
+ "budget": {"total_minutes": 240, "validation_reserve_minutes": 70, "audit_reserve_minutes": 20},
+ "trainable": "E093 groups (AWAL/AIYL densities, incoming AIYL chemical strengths, AIYL->RIAL, RIAL densities, RIAL->SMD) plus AWAR/AIYR/RIAR inward/outward density groups, incoming AIYR chemical strengths, AIYR->RIAR and RIAR->SMD chemical edges. Group list is saved in inputs/cap_groups.json and audited.",
+ "fixed": "All other densities/strengths/gaps, topology/signs, reversals, leak, kinetics, release law, sensory gains, NMJ/muscle/body/water physics and physical clocks.",
+ "bounds": "Same one-edge exception as E092/E093 (AIYR->AIYL upper factor 2 -> 2.5); all other original bounds unchanged; local +/-0.4 log.",
+ "objective": "E093 regional joint angular-speed hinge loss with an added maximum-region squared-deficit term (worst_region_term); all preservation penalties unchanged.",
+ "acceptance": "Unchanged E093 gates: all regions and cases reach the attained rung, baseline/recovery/relay preserved, sensory-blocked control, neural/body half-grid checks, replay dependence.",
+ "dependence_diagnostics": "relay-replay replays AIYL->RIAL and AIYR->RIAR; rial-replay replays RIAL->SMD and RIAR->SMD. Final diagnostics only, not used in fitting.",
+ "claims_not_made": "No initial sensory initiation, full start/stop, swimming or biological validation."
+}

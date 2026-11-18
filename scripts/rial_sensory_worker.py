@@ -40,7 +40,9 @@ def evaluate(job):
     release_objective=job.get('objective')=='rial-release'
     motion_objective=job.get('objective')=='sensory-motion'
     if motion_objective:
-        from r_elegans.sensory_motion import features as motion_features,score
+        from r_elegans.sensory_motion import features as motion_features,score as motion_score,combine_replays
+        def score(paired,parent,target,margin=1.):
+            return motion_score(paired,parent,target,margin,worst_region=bool(job.get('worst_region')))
     if release_objective:
         from r_elegans.rial_release import features as release_features,score
     if relay_objective:
@@ -96,9 +98,13 @@ def evaluate(job):
                         if not np.array_equal(trace['dense_time_s'][a],z['dense_time_s'][b]):raise ValueError('Parent clock mismatch')
                         if any(np.max(abs(trace[k][a]-z[k][b]))>1e-8 for k in ('dense_voltage_mV','dense_muscles','dense_joints')):raise ValueError('Parent source mismatch')
                 if mode in ('rial-replay','relay-replay'):
-                    source_name='AIYL' if mode=='relay-replay' else 'RIAL'
-                    ri=d['model'].neuron_ids.index(source_name);reference_release=expit((trace['dense_voltage_mV'][:,ri]-float(d['fixed'].release_threshold_mV[ri]))/float(d['fixed'].release_slope_mV[ri]))
-                    replay=replay_probe(d['model'].neuron_ids,np.asarray(d['fixed'].chemical_mask),trace['dense_time_s'],reference_release,p['events'][0][0],dt,source_name=source_name,post_names=('RIAL',) if mode=='relay-replay' else None)
+                    pairs=[('AIYL',('RIAL',))] if mode=='relay-replay' else [('RIAL',None)]
+                    if job.get('bilateral'):pairs+=[('AIYR',('RIAR',))] if mode=='relay-replay' else [('RIAR',None)]
+                    probes=[]
+                    for source_name,post_names in pairs:
+                        ri=d['model'].neuron_ids.index(source_name);reference_release=expit((trace['dense_voltage_mV'][:,ri]-float(d['fixed'].release_threshold_mV[ri]))/float(d['fixed'].release_slope_mV[ri]))
+                        probes.append(replay_probe(d['model'].neuron_ids,np.asarray(d['fixed'].chemical_mask),trace['dense_time_s'],reference_release,p['events'][0][0],dt,source_name=source_name,post_names=post_names))
+                    replay=probes[0] if len(probes)==1 else combine_replays(probes)
             if job.get('retain_traces'):
                 estimated=2*sum(v.nbytes for v in trace.values());used=sum(p.stat().st_size for p in d['root'].parent.rglob('*') if p.is_file())
                 if used+estimated>30*1024**3 or shutil.disk_usage(out).free<50*1024**3+estimated:raise RuntimeError('disk_budget: reserve or30GiB new-run cap')
@@ -114,7 +120,7 @@ def evaluate(job):
             mediation=dict(replay_amplitude_ratios=replayed,baseline_preserved=counter['baseline_and_recovery_preserved'],
                 original_body_attenuation_nontrivial=bool(all(1-a>1e-6 for a in original)),
                 cue_attenuation_reduced=bool(counter['safe'] and counter['useful_response_preserved'] and counter['baseline_and_recovery_preserved'] and all(1-a>1e-6 and max(0.,1-r)<=.25*(1-a) for a,r in zip(original,replayed))),
-                scope=('Final diagnostic only: matched no-cue AIYL release replay on existing RIAL chemical edge' if mode=='relay-replay' else 'Final diagnostic only: matched no-cue RIAL release replay on existing SMD chemical edges from cue onset; not used in fitting'))
+                scope=('Final diagnostic only: matched no-cue AIYL release replay on existing RIAL chemical edge' if mode=='relay-replay' else 'Final diagnostic only: matched no-cue RIAL release replay on existing SMD chemical edges from cue onset; not used in fitting')+('; bilateral: also the right-side AIYR->RIAR / RIAR->SMD edges' if job.get('bilateral') else ''))
         verify_inputs(d['root'])
         result=dict(status='completed',metrics=metrics,paired_features=paired,checkpoint_sha256=modelsha,trajectory_sha256=hashes,
                     mediation=mediation,pre_cue_match=True)

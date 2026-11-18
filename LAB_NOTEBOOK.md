@@ -9813,3 +9813,43 @@ rows and nonlinear gain curves remain external/unknown here.
 Verification: parsed stdout metadata, checked arithmetic and inspected existing
 score/group code and bundled masks. Documentation-only changes require JSON/
 whitespace checks, not new model/software tests. No scientific forward run.
+
+## 2026-11-18 — E094 planned: bilateral sensory/relay motion suppression
+
+Status: planned; execution not evidenced. [Plan](experiments/records/E094-plan.json).
+
+Question: does training the right sensory/relay path (unsaturated AIYR release)
+together with the left path, using a loss that cannot trade away the weakest
+body region, increase cue-on motion suppression beyond E093's 0.04-0.11%
+(required 1%) while preserving baseline gait, recovery and relay behavior?
+
+Post-run audit of the E093 outcome informing this plan (from the records above;
+no new data): execution/audit clean, no qualification; AIYL release is near
+saturation (0.98) and moves ~3e-5, whereas AIYR (0.53) moves ~3e-3 but was
+mostly frozen; the mean-squared loss improved 5.48% while weakest-region
+suppression fell after generation 3. Left AIYL->RIAL replay did not remove the
+residual suppression, so the tested left branch does not mediate it.
+
+Method: same pinned E092 isolated 1.25 AIYR->AIYL parent as E093 (matched
+comparison; not the E093 selected checkpoint), fresh CMA seed 9300, population
+12, same rungs/margin/protocol, 4 h TOTAL. Trainable: E093 groups plus AWAR/
+AIYR/RIAR densities, incoming AIYR chemical strengths, AIYR->RIAR and
+RIAR->SMD chemical edges. Fixed: everything else incl. water physics, clocks,
+sensory gains, topology/signs, SMD channels/gaps. Loss: mean plus maximum of
+squared regional hinge deficits (worst-region term); acceptance gates unchanged.
+Final dependence diagnostics replay both sides (AIYL->RIAL with AIYR->RIAR;
+RIAL->SMD with RIAR->SMD). The same single-edge prior exception applies.
+
+Acceptance: unchanged E093 criteria (>=1% motion reduction in every region at
+every case, baseline/recovery/relay preserved, sensory-block control, neural/
+body half-grid checks, replay dependence). Failure remains a recorded negative
+result. Not initial sensory initiation, full start/stop, swimming or biology.
+
+Command: `sh scripts/launch_sensory_motion_bilateral_mbslnx2.sh`.
+Report: `python -m scripts.report_sensory_motion --run <E094 run folder>`.
+
+Local software verification: 54 focused tests pass (bilateral groups unique and
+non-overlapping with E093 groups unchanged, worst-region term only when enabled,
+replay combiner, E094 budget dispatch/audit hooks). The audit accepts E093 and
+E094; the E093 scoring path is unchanged by construction (existing tests pass).
+No scientific forward run.

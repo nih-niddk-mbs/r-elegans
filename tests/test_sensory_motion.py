@@ -62,6 +62,40 @@ def test_motion_groups_add_existing_rial_output_but_freeze_smd_channels_and_gaps
     assert len(used)==len(set(used))
 
 
+def test_bilateral_groups_add_right_path_without_changing_left_groups_or_overlapping():
+    ids=('AWAL','AWAR','AIYL','AIYR','RIAL','RIAR','SMDVL','SMDVR');n=len(ids)
+    channels=np.ones((n,17),bool);channels[:,16]=False
+    spec=SimpleNamespace(channels=channels,chemical=np.ones((n,n),bool));size=int(channels.sum()+spec.chemical.sum())
+    args=(spec,ids,np.zeros(size),-np.ones(size),np.ones(size))
+    left=parameter_groups(*args);both=parameter_groups(*args,bilateral=True)
+    assert both[:len(left)]==left and len(both)>len(left)
+    names=[g['name'] for g in both[len(left):]]
+    assert {'chemical:AIYR->RIAR','chemical:RIAR->SMDVL','density:AWAR:inward','density:RIAR:outward'}<=set(names)
+    ci=np.nonzero(channels);nc=len(ci[0]);used=[i for g in both for i in g['indices']]
+    assert len(used)==len(set(used))
+    assert all(ids[ci[0][i]] in ('AWAL','AWAR','AIYL','AIYR','RIAL','RIAR') for i in used if i<nc)
+
+
+def test_worst_region_term_penalizes_the_weakest_region_only_when_enabled():
+    parent=data()['no_cue'];pair=data(effect=.03)
+    row=pair['cue']['response'][0]['regional_angular_speed_rms_rad_s']
+    base=parent['response'][0]['regional_angular_speed_rms_rad_s'];row[0]=base[0]
+    plain=score(pair,parent,.05,1.05);worst=score(pair,parent,.05,1.05,worst_region=True)
+    assert worst['loss']>plain['loss'] and worst['worst_region_term'] and 'worst_region_term' not in plain
+    assert score(pair,parent,.05,1.05,worst_region=False)==plain
+
+
+def test_combine_replays_concatenates_source_edges_with_shared_activation():
+    import jax.numpy as jnp
+    from r_elegans.brain.conductance_network import ChemicalReleaseOverride
+    from r_elegans.sensory_motion import combine_replays
+    one=lambda t:ChemicalReleaseOverride(jnp.array([4]),jnp.array([2]),jnp.array([.3]),jnp.asarray(t>=1))
+    two=lambda t:ChemicalReleaseOverride(jnp.array([5,6]),jnp.array([3,3]),jnp.array([.6,.6]),jnp.asarray(t>=1))
+    o=combine_replays([one,two])(2.)
+    assert o.post_indices.tolist()==[4,5,6] and o.pre_indices.tolist()==[2,3,3] and bool(o.active)
+    assert np.allclose(o.release_probability,[.3,.6,.6])
+
+
 def test_panel_requires_cue_block_and_both_control_interneuron_replays():
     pair=data();m=score(pair,pair['no_cue'],.05)
     rows=[dict(status='completed',checkpoint_sha256='same',grid='ordinary',metrics=deepcopy(m)) for i in range(11)]
@@ -88,6 +122,22 @@ def test_four_hour_budget_dispatches_training_and_automatic_audit(tmp_path,monke
     assert '--objective' not in calls[0][0] and calls[0][1]<=220*60
     assert 'scripts.audit_relay_experiments' in calls[1][0]
     assert json.loads((out/'budget_receipt.json').read_text())['post_audit_component_qualified']
+
+
+def test_bilateral_pipeline_dispatches_e094_profile(tmp_path,monkeypatch):
+    import scripts.total_job_budget as runner
+    out=tmp_path/'out';calls=[]
+    def run(cmd,seconds):
+        calls.append(cmd)
+        if 'scripts.audit_relay_experiments' in cmd:
+            audit=tmp_path/'out-audit';audit.mkdir();(audit/'summary.json').write_text(json.dumps(dict(audit_complete=True,integrity_passed=True)))
+        else:(out/'summary.json').write_text(json.dumps(dict(execution_valid=True,validation_complete=True,sensory_motion_component_qualified=False)))
+        return 0,False
+    monkeypatch.setattr(runner,'run_group',run)
+    monkeypatch.setattr(sys,'argv',['budget','--pipeline','sensory-motion-bilateral','--total-minutes','240','--output-dir',str(out),'--source-run',str(tmp_path/'source')])
+    assert runner.main()==0 and 'scripts.run_sensory_motion' in calls[0] and calls[0][calls[0].index('--profile')+1]=='e094'
+    assert '--objective' not in calls[0] and 'scripts.audit_relay_experiments' in calls[1]
+    assert json.loads((out/'deadline.json').read_text())['experiment']=='E094'
 
 
 def test_worker_keeps_aiyl_and_rial_replay_factories_distinct(tmp_path,monkeypatch):
@@ -131,7 +181,7 @@ def test_curriculum_coordinator_keeps_state_and_runs_all_final_controls(tmp_path
     schemas={'aiyr_2p5':parameter_groups(spec,ids,origin,lower,upper)}
     out=tmp_path/'run';out.mkdir();(out/'deadline.json').write_text(json.dumps(dict(coordinator_finish_by=time.monotonic()+20000)))
     parent_sha='test-parent';pair=data(effect=.1)
-    monkeypatch.setattr(runner,'prepare',lambda source,out:(tmp_path/'inputs',None,schemas,edge,parent_sha,'audit-path'))
+    monkeypatch.setattr(runner,'prepare',lambda source,out,experiment,bilateral:(tmp_path/'inputs',None,schemas,edge,parent_sha,'audit-path'))
     monkeypatch.setattr(runner,'capture_run_record',lambda *args:None)
     monkeypatch.setattr(runner.os,'sched_getaffinity',lambda pid:set(range(32)),raising=False)
     monkeypatch.setattr(topology,'physical_core_cpus',lambda allowed:(list(range(32)),True))

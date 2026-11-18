@@ -29,7 +29,8 @@ def setup(inputs):
 def initialize(inputs,schemas,cpus,records):
     slot=(multiprocessing.current_process()._identity[-1]-1)%len(cpus);os.sched_setaffinity(0,cpus[slot])
     core._DATA=setup(Path(inputs));core._DATA['groups']=schemas['aiyr_2p5']
-    capture_run_record(Path(records)/f'worker-{slot}',Path(__file__).resolve().parents[1],dict(inputs=inputs,cpus=cpus[slot],experiment='E093'))
+    experiment=json.loads((Path(inputs)/'manifest.json').read_text())['consumer_experiment']
+    capture_run_record(Path(records)/f'worker-{slot}',Path(__file__).resolve().parents[1],dict(inputs=inputs,cpus=cpus[slot],experiment=experiment))
 
 
 def evaluate(job):

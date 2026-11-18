@@ -38,7 +38,7 @@ def audit(run,out):
     def verify(path,sha):
         actual=file_sha256(path);check(actual==sha,'Hash mismatch: '+str(path))
         evidence.append(dict(path=str(path),sha256=actual,expected=sha))
-    s=json.loads((run/'summary.json').read_text());motion=s.get('experiment')=='E093';config=json.loads((run/'configuration.json').read_text())
+    s=json.loads((run/'summary.json').read_text());motion=s.get('experiment') in ('E093','E094');config=json.loads((run/'configuration.json').read_text())
     manifest=json.loads((run/'inputs/manifest.json').read_text())
     for name,sha in manifest['sha256'].items():verify(run/'inputs'/name,sha)
     ref=json.loads((run/'inputs/sensory_reference.json').read_text());verify(Path(ref['path']),ref['sha256'])
@@ -61,7 +61,7 @@ def audit(run,out):
     if motion:
         from r_elegans.sensory_motion import parameter_groups,features,score
     spec=SimpleNamespace(channels=channels,chemical=mask)
-    for cap in schemas:check(schemas[cap]==parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge)),'Unexpected group policy: '+cap)
+    for cap in schemas:check(schemas[cap]==(parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge),bilateral=bool(config.get('bilateral'))) if motion else parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge))),'Unexpected group policy: '+cap)
     parent_features=json.loads((run/'parent_features.json').read_text());saved={}
     for request in sorted((run/'evaluations').glob('*/request.json')):
         folder=request.parent;j=json.loads(request.read_text())
@@ -93,7 +93,7 @@ def audit(run,out):
                 check(set(hashes)==(expected_conditions if j['retain_traces'] else set()),'Raw retention policy mismatch: '+folder.name)
                 for key,value in paired.items():check(close(value,r['paired_features'][key]),'Raw features mismatch: '+folder.name+'/'+key)
                 metrics=score(r['paired_features'],j.get('parent_features') or r['paired_features']['no_cue'],j['target'],j['margin'],
-                    **({} if motion else dict(response_aggregation=j['response_aggregation'])))
+                    **(dict(worst_region=bool(j.get('worst_region'))) if motion else dict(response_aggregation=j['response_aggregation'])))
                 check(close(metrics,r['metrics']),'Recorded score mismatch: '+folder.name)
                 if motion and j['mode'] in ('relay-replay','rial-replay'):
                     counter=score(dict(no_cue=r['paired_features']['no_cue_replay'],cue=r['paired_features']['cue_replay']),

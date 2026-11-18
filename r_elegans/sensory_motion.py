@@ -1,7 +1,8 @@
-"""E093 sensory-dependent motion suppression, recovery and repeated restart.
+"""E093/E094 sensory-dependent motion suppression, recovery and repeated restart.
 
 Cue-off recovery is restart evidence; initial sensory initiation from rest is
 not tested here and never receives full start/stop qualification.
+E094 adds the right sensory/relay path and a worst-region loss term.
 """
 import numpy as np
 from . import relay_range
@@ -10,7 +11,7 @@ from .rial_sensory import protocol
 RUNGS=(.01,.02,.05,.10,.25,.50,.75,.95)
 
 
-def parameter_groups(spec,ids,origin,lower,upper):
+def parameter_groups(spec,ids,origin,lower,upper,bilateral=False):
     groups=relay_range.parameter_groups(spec,ids,origin,lower,upper)
     ci=np.nonzero(spec.channels);ei=np.nonzero(spec.chemical);nc=len(ci[0])
     def add(name,indices):
@@ -19,10 +20,20 @@ def parameter_groups(spec,ids,origin,lower,upper):
         lo=max(-.4,float(np.max(lower[ix]-origin[ix])));hi=min(.4,float(np.min(upper[ix]-origin[ix])))
         if lo>1e-10 or hi<-1e-10:raise ValueError('Motion parent outside declared prior')
         if hi-lo>1e-8:groups.append(dict(name=name,indices=ix.tolist(),lower=min(lo,0.),upper=max(hi,0.)))
-    for label,columns in [('inward',[6,7,8,14]),('outward',[0,1,2,3,4,5,9,10,11,12,13,15])]:
+    inward,outward=[6,7,8,14],[0,1,2,3,4,5,9,10,11,12,13,15]
+    for label,columns in [('inward',inward),('outward',outward)]:
         add('density:RIAL:'+label,np.flatnonzero((ci[0]==ids.index('RIAL'))&np.isin(ci[1],columns)))
     for post in sorted({int(i) for i,j in zip(*ei) if j==ids.index('RIAL') and ids[i].startswith('SMD')}):
         add('chemical:RIAL->'+ids[post],nc+np.flatnonzero((ei[0]==post)&(ei[1]==ids.index('RIAL'))))
+    if bilateral:
+        for name in ('AWAR','AIYR','RIAR'):
+            for label,columns in [('inward',inward),('outward',outward)]:
+                add('density:'+name+':'+label,np.flatnonzero((ci[0]==ids.index(name))&np.isin(ci[1],columns)))
+        for pre in np.unique(ei[1][ei[0]==ids.index('AIYR')]):
+            add('chemical:'+ids[pre]+'->AIYR',nc+np.flatnonzero((ei[0]==ids.index('AIYR'))&(ei[1]==pre)))
+        add('chemical:AIYR->RIAR',nc+np.flatnonzero((ei[0]==ids.index('RIAR'))&(ei[1]==ids.index('AIYR'))))
+        for post in sorted({int(i) for i,j in zip(*ei) if j==ids.index('RIAR') and ids[i].startswith('SMD')}):
+            add('chemical:RIAR->'+ids[post],nc+np.flatnonzero((ei[0]==post)&(ei[1]==ids.index('RIAR'))))
     ix=[i for g in groups for i in g['indices']]
     if len(ix)!=len(set(ix)):raise ValueError('Overlapping motion groups')
     return groups
@@ -39,7 +50,17 @@ def features(trace,ids,variant,threshold,slope):
     return result
 
 
-def score(paired,parent,target,margin=1.):
+def combine_replays(probes):
+    """Concatenate diagnostic release overrides from several matched source neurons."""
+    import jax.numpy as jnp
+    from .brain.conductance_network import ChemicalReleaseOverride
+    def probe(t):
+        parts=[p(t) for p in probes]
+        return ChemicalReleaseOverride(*(jnp.concatenate([getattr(x,k) for x in parts]) for k in ('post_indices','pre_indices','release_probability')),parts[0].active)
+    return probe
+
+
+def score(paired,parent,target,margin=1.,worst_region=False):
     if target not in RUNGS or not 1<=margin<=1.1:raise ValueError('Invalid motion rung or margin')
     a,b=paired['no_cue'],paired['cue'];base=parent['active'][0];penalty=0.;preserved=True
     def preserve(row,ref):
@@ -77,9 +98,10 @@ def score(paired,parent,target,margin=1.):
     relay_penalty+=sum((max(0.,2e-5-abs(x))/2e-5)**2 for x in relay['relay_response_mean_changes'])
     if not relay['relay_recovery_preserved'] or not relay['relay_response_direction_consistent'] or not relay['relay_response_not_railed']:relay_penalty+=1.
     values=np.asarray(ratios);aim=max(0.,1-target*margin)
-    objective=float(np.mean((np.maximum(0.,values-aim)/target)**2))
+    deficit=(np.maximum(0.,values-aim)/target)**2
+    objective=float(np.mean(deficit)+(np.max(deficit) if worst_region else 0.))
     safe=bool(a['safe'] and b['safe']);qualified=bool(safe and preserved and relay_ok and np.all(values<=1-target))
-    return dict(loss=float(objective+100*penalty+100*relay_penalty+1000*(not safe)),target=target,margin=margin,
+    return dict(loss=float(objective+100*penalty+100*relay_penalty+1000*(not safe)),target=target,margin=margin,**({'worst_region_term':True} if worst_region else {}),
         metric='maximum_regional_joint_angular_speed_rms_ratio',regional_motion_ratios=ratios,
         cue_off_recovery_ratios=recovery_ratios,cue_recovery_tolerance=recovery_tolerance,
         response_amplitude_ratios=[max(r) for r in ratios],regional_cycle_ratios=cycles,

@@ -1,5 +1,14 @@
 # r-elegans
 
+2026-11-18 E093 audited negative (user-reported): clean audit, no qualification;
+nominal motion reduction 0.04-0.11% vs required 1%. AIYL release is saturated
+(~0.98, moves ~3e-5); the right path (AIYR, 0.53) moved ~3e-3 but was mostly
+frozen, and weakest-region suppression regressed while mean loss fell 5.48%.
+E094 planned (not run): bilateral sensory/relay fit with a worst-region loss
+term, same E092 parent, 4 h total. Launch: `sh scripts/launch_sensory_motion_bilateral_mbslnx2.sh`.
+[Plan](experiments/records/E094-plan.json).
+
+
 2026-11-18 E093 detail report received: matched loss improves5.48%,65
 coordinates change, frozen fields unchanged. Weakest-region suppression peaks
 at generation3 (0.04843%) and ends0.04331% despite falling average loss. E093's

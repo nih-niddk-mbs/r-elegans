@@ -1,4 +1,4 @@
-"""E093 four-hour total sensory movement-suppression curriculum."""
+"""E093/E094 four-hour total sensory movement-suppression curriculum."""
 import argparse,concurrent.futures,json,multiprocessing,os,shutil,time
 from pathlib import Path
 import numpy as np
@@ -10,7 +10,7 @@ from r_elegans.relay_cap_experiments import edge_coordinate,eligible
 from r_elegans.sensory_motion import RUNGS,parameter_groups,score,panel_assessment
 
 
-def prepare(source,out):
+def prepare(source,out,experiment='E093',bilateral=False):
     from scripts.compare_rhythm_worker import verify_inputs
     from scripts.report_relay_experiments import audit_path
     from scripts.audit_rial_sensory import frozen_network_fields
@@ -55,13 +55,13 @@ def prepare(source,out):
     write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=row['trajectory_sha256']['no_cue']))
     np.savez_compressed(inputs/'cap_prior.npz',origin=origin,lower=lower,upper=upper,edge=edge)
     for name in ('sensory_reference.json','cap_prior.npz'):
-        manifest['sha256'][name]=file_sha256(inputs/name);manifest['sources'][name]=str(reference) if name=='sensory_reference.json' else 'E093 selected coordinates; unchanged E092 original bounds and one-edge policy'
-    manifest['consumer_experiment']='E093';write(inputs/'manifest.json',manifest)
+        manifest['sha256'][name]=file_sha256(inputs/name);manifest['sources'][name]=str(reference) if name=='sensory_reference.json' else experiment+' selected E092 coordinates; unchanged E092 original bounds and one-edge policy'
+    manifest['consumer_experiment']=experiment;write(inputs/'manifest.json',manifest)
     d=setup(inputs)
     if edge_coordinate(d['spec'],d['model'].neuron_ids)!=edge:raise ValueError('Prior exception edge changed')
-    schemas={'aiyr_2p5':parameter_groups(d['spec'],d['model'].neuron_ids,origin,d['lower'],d['upper'])}
+    schemas={'aiyr_2p5':parameter_groups(d['spec'],d['model'].neuron_ids,origin,d['lower'],d['upper'],bilateral=bilateral)}
     write(inputs/'cap_groups.json',schemas);manifest['sha256']['cap_groups.json']=file_sha256(inputs/'cap_groups.json')
-    manifest['sources']['cap_groups.json']='E093 focused sensory/relay output groups';write(inputs/'manifest.json',manifest);verify_inputs(inputs)
+    manifest['sources']['cap_groups.json']=experiment+' focused sensory/relay output groups';write(inputs/'manifest.json',manifest);verify_inputs(inputs)
     return inputs,d,schemas,edge,sha,str(ap)
 
 
@@ -69,18 +69,20 @@ def main():
     import cma
     from importlib.metadata import version
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--source-run',type=Path,required=True);p.add_argument('--generation-limit',type=int)
+    p.add_argument('--profile',choices=('e093','e094'),default='e093',help='e094: bilateral sensory/relay groups and worst-region loss term')
     a=p.parse_args();out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
+    experiment=a.profile.upper();bilateral=worst_region=a.profile=='e094'
     if any(out==r or r in out.parents or out in r.parents for r in (source,repo)):raise ValueError('External separate output required')
     if a.generation_limit is not None and a.generation_limit<1:p.error('Positive generation limit required')
     if version('cma')!='4.4.1':raise ValueError('Dedicated cma==4.4.1 required')
     capture_run_record(out,repo,a);deadline=json.loads((out/'deadline.json').read_text());finish=deadline['coordinator_finish_by'];fit_until=finish-70*60
-    inputs,d,schemas,edge,parent_sha,source_audit=prepare(source,out)
+    inputs,d,schemas,edge,parent_sha,source_audit=prepare(source,out,experiment,bilateral)
     from scripts.benchmark_cpu import physical_core_cpus
     from scripts.benchmark_cpu_parallel import worker_cpu_groups
     cpus,known=physical_core_cpus(sorted(os.sched_getaffinity(0)))
     if not known or len(cpus)<16:raise ValueError('Known topology and >=16physical cores required')
     workers=8 if len(cpus)>=32 else 4;cpugroups=worker_cpu_groups(cpus,workers,4)
-    write(out/'configuration.json',dict(experiment='E093',parent_sha256=parent_sha,parent_filename='motion_parent.npz',
+    write(out/'configuration.json',dict(experiment=experiment,bilateral=bilateral,worst_region_term=worst_region,parent_sha256=parent_sha,parent_filename='motion_parent.npz',
         source_audit=source_audit,only_extended_coordinate=edge,caps={'aiyr_2p5':2.5},seed=9300,workers=workers,cpu_groups=cpugroups,
         population=12,rungs=RUNGS,training_variant='redundant',initial_sigma=.3,training_margin=1.05,
         prior='Same E092 exception: only AIYR->AIYL original upper factor2 becomes2.5; all other bounds fixed',
@@ -93,7 +95,7 @@ def main():
     optimizer_snapshot(out/'optimizer'/name/'initial',es,stage,generation)
     def job(z,label,until,variant='redundant',grid='ordinary',mode='normal',retain=False,reference=False,kind='fit',target=None):
         return dict(z=list(map(float,z)),output=str(out/'evaluations'/label),cap='aiyr_2p5',kind=kind,objective='sensory-motion',
-            until=until,variant=variant,grid=grid,mode=mode,retain_traces=retain,reference=reference,
+            until=until,variant=variant,grid=grid,mode=mode,retain_traces=retain,reference=reference,bilateral=bilateral,worst_region=worst_region,
             target=RUNGS[stage] if target is None else target,margin=1. if kind=='final' else 1.05,parent_features=parent)
     def batch(pool,jobs,phase):
         futures={pool.submit(evaluate,j):j for j in jobs};results={};last=time.monotonic()
@@ -121,7 +123,7 @@ def main():
                 points=es.ask();pending=[list(map(float,x)) for x in points]
                 optimizer_snapshot(out/'optimizer'/name/f'g-{generation:05d}-asked',es,stage,generation,pending)
                 rows=batch(pool,[job(z,f'g-{generation:05d}-c-{i:02d}',fit_until) for i,z in enumerate(points)],'optimization')
-                current=score(best['paired_features'],parent,RUNGS[stage],1.05)['loss']
+                current=score(best['paired_features'],parent,RUNGS[stage],1.05,worst_region)['loss']
                 for z,r in zip(points,rows):
                     if eligible(r) and r['metrics']['relay_component_preserved'] and r['metrics']['loss']<current:
                         best=r;zbest=np.asarray(z).copy();current=r['metrics']['loss']
@@ -131,7 +133,7 @@ def main():
                     stop='search_time_budget' if all(r['status'] not in ('disk_budget','worker_error') for r in rows) else 'evaluation_failure';break
                 es.tell(points,[r['metrics']['loss'] if r['status']=='completed' else 1e6 for r in rows]);pending=None
                 optimizer_snapshot(out/'optimizer'/name/f'g-{generation:05d}-told',es,stage,generation);generation+=1
-                m=score(best['paired_features'],parent,RUNGS[stage],1.05)
+                m=score(best['paired_features'],parent,RUNGS[stage],1.05,worst_region)
                 history.append(dict(generation=generation,target=RUNGS[stage],selected=best['checkpoint_sha256'],selected_evaluation=best['output'],rescored_loss=m['loss']))
                 write(out/'generation_history.json',history)
                 advance=m['training_margin_met'] and stage<len(RUNGS)-1
@@ -151,18 +153,18 @@ def main():
                 ('nominal','neural-half','normal'),('nominal','body-half','normal'),('nominal','ordinary','sensory-blocked'),
                 ('nominal','ordinary','relay-replay'),('nominal','ordinary','rial-replay')]
             validation=batch(pool,[job(zbest,f'final-{i:02d}',finish-90,v,g,m,True,kind='final',target=target) for i,(v,g,m) in enumerate(variants)],'final-validation')
-        except Exception as e:failure=repr(e);print('E093_ERROR:',failure,flush=True)
+        except Exception as e:failure=repr(e);print(experiment+'_ERROR:',failure,flush=True)
     if not (out/'optimizer'/name/'final').exists():optimizer_snapshot(out/'optimizer'/name/'final',es,stage,generation,pending)
     target=target if 'target' in locals() else RUNGS[0];assessment=panel_assessment(validation,target)
     panels=[dict(checkpoint_sha256=best['checkpoint_sha256'],cap='aiyr_2p5',labels=['motion-seed-9300'],training_output=best['output'],
         full_raw_retained=True,target=target,validation=validation,assessment=assessment)] if best else []
-    write(out/'summary.json',dict(experiment='E093',execution_valid=failure is None and stop!='evaluation_failure',failure=failure,stop_reason=stop,
+    write(out/'summary.json',dict(experiment=experiment,execution_valid=failure is None and stop!='evaluation_failure',failure=failure,stop_reason=stop,
         validation_complete=assessment['complete'],all_stages_finished=assessment['complete'],completed_generations=generation,
         active_stage=stage,target=target,scan=[],scan_controls=[],panels=panels,evaluation_count=len(rows_all),
         arms={name:dict(seed=9300,cap='aiyr_2p5',primary=best,best_all_completed=best)},
         sensory_motion_component_qualified=assessment.get('engineering_criteria_met',False),
         rest_restart_component_qualified=assessment.get('rest_restart_component_qualified',False),full_start_stop_qualified=False,swimming_qualified=False))
-    print('E093_REPORT:',out/'summary.json',flush=True);return 0 if failure is None else 2
+    print(experiment+'_REPORT:',out/'summary.json',flush=True);return 0 if failure is None else 2
 
 
 if __name__=='__main__':raise SystemExit(main())
