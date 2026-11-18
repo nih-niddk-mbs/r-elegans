@@ -1,5 +1,12 @@
 # Current model: exact scope and computation path
 
+2026-11-17 E091 completed (reported):180min optimization,9generations,
+3h40m43s total with clean validation/audit. Matched repeated-cue training loss
+falls13.43%; nominal response112.75% target, low-dose98.95%, close-repeat85.60%.
+Range still fails; gait/recovery/numerical/frozen-field checks pass. No relay or
+motor qualification. Inspect AIYR->AIYL bound direction/original room and exact
+headroom before another run. [Outcome](experiments/records/E091-server-summary.json).
+
 2026-11-17 E090 details: AIYL headroom1.8967% vs2%, nominal cue crosses
 minimum but low-dose/close-repeat remain weak. Four groups reach local limits;
 original limits retained. E091 prepared to train first and close-repeat together,

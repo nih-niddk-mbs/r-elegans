@@ -9354,3 +9354,47 @@ selected83s weakest loss directly to old70s nominal loss. Compare to explicit
 baseline_training. This is software/mock-forward evidence only. Retained parent/
 training-baseline raw hash verification compiles; launcher syntax/CLI/diff pass.
 No actual E091 run, biological validation or behavior promotion is evidenced.
+
+## 2026-11-17 — E091 repeated-cue fit improves, range/weak-cue gates still fail
+
+User-pasted report stdout attachment SHA256 71850cd109776f27fb4354576815ddc9b263f55cbbeec90731253ca7912b17a1.
+Structured13nominal-baseline/training-baseline/selected/final rows plus complete
+budgets/numerical/audit in `experiments/records/E091-server-summary.json`.
+Source `/home/carsonc/r-elegans-results/relay-range-20261117T232652Z-388058`
+and sibling-audit. No independent remote weight/trace/source/environment retrieval.
+9completed generations,10800.616275327979s=180min+.62s optimization; total
+13242.706354647002s=3h40m43s including BOTH baselines/final validation/audit.
+All steps complete, exit0/no outer timeout/failure.132records consistent with
+2parent baselines+108requests for9full populations+12lastpartial+10final;
+partial completed/time_budget counts not supplied, do not infer them.
+
+Parent18eadad77c048a86aa305d59ec37defa3fa2e34ba2da8cf72139d9e6965c00cc;
+selected0020499c6b900183e954a0e577563584c7ffa19e9cd5264f90c584d8b5b116da.
+Training redundant83s/weakest loss1.142115508 ->.9887911586 (~13.43% lower).
+DO NOT compare selected to nominal-baseline.8205276525 as if same protocol.
+First response-2.039644130e-5 ->-2.255001139e-5; weaker second-1.548494039e-5 ->
+-1.711936584e-5 (~10.55% magnitude increase),85.60% of2e-5 minimum.
+Nominal112.75% target, low-dose1.979095528e-5=98.95%, normal long-gap repeat
+second2.257613446e-5 crosses threshold. Range flagfalse in every case, no
+milestones/component. Exact q99/headroom not printed; do not estimate it fromloss.
+Late long-cue response~1.26e-7 effectively absent by target, no sustained-control
+qualification. Sensory block removes cue change, expected cue/direction failures
+inside blocked control do not negate control pass. No criteria relaxed.
+
+All final gait failures0 and safety/useful/body+relay recovery true; normal signs
+consistent and response-not-railed true (distinct from baseline range gate).
+Refined response differences1.1104719e-9/6.6615821e-9 pass. Body ratio.9992639204
+is a tiny separate effect, not locomotion/rest/stop evidence. Branch replay ratio
+.9992540303 does not remove it; mediationfalse. RIAL-cycle assay inapplicable.
+Automatic audit complete/integritytrue,problems[],actual frozenfields/coordinates
+unchanged. Only chemical:AIYR->AIYL near localbound. Direction and original room
+absent; cannot conclude original ceiling reached. If it has been reached,
+recentering cannot expand original available space in that direction.
+
+Preserve all current/independent/failed weights, optimizer/RNG/pending points and
+recursive dependencies. Next read-only detailed audit: matched training-baseline
+versus selected operating quantiles, last eligible-selected loss trajectory,
+AIYR actual logdelta/local/original distances and partial population statuses.
+Use existing `scripts.report_rial_sensory --run <source> --audit-details`.
+No forward simulation, new optimizer/run, bound change or full behavior promotion
+launched by this result record. Continue only after interpreting remaining limits.
