@@ -239,6 +239,33 @@ def test_expanded_parent_reconstructs_exactly_and_cannot_widen_other_bounds(tmp_
     with pytest.raises(ValueError,match='reconstruction'):motion_worker.setup(tmp_path)
 
 
+def test_scan_groups_widen_only_scanned_edges_in_the_real_network_worker(tmp_path,monkeypatch):
+    from pathlib import Path
+    from scripts import sensory_motion_worker as motion_worker
+    from scripts import rial_sensory_worker as core
+    from r_elegans.brain.conductance_network import load_network,save_network
+    from r_elegans.brain.joint_autonomous_fit import joint_fit_reference,apply_joint_offsets
+    from scripts.assess_sensorimotor_resolution import promote_floating_values
+    from r_elegans.relay_cap_experiments import edge_coordinate
+    from r_elegans.edge_scan import scan_groups,extend_upper
+    params,fixed,config=load_network(Path('r_elegans/assets/autonomous_wiggle_v1/network.npz'))
+    params,fixed=promote_floating_values((params,fixed));_,spec=joint_fit_reference(fixed)
+    with np.load('r_elegans/assets/autonomous_wiggle_v1/network.npz',allow_pickle=False) as z:ids=tuple(z['neuron_ids'])
+    edge=edge_coordinate(spec,ids);origin=np.zeros(spec.size);lower=np.full(spec.size,-np.log(2));upper=-lower
+    np.savez(tmp_path/'cap_prior.npz',origin=origin,lower=lower,upper=upper,edge=edge)
+    save_network(tmp_path/'motion_parent.npz',params,fixed,config)
+    groups=scan_groups(spec,ids,origin,lower,upper);(tmp_path/'cap_groups.json').write_text(json.dumps(dict(scan=groups)))
+    monkeypatch.setattr(core,'setup',lambda inputs:dict(base=params,fixed=fixed,config=config,spec=spec,origin=origin))
+    d=motion_worker.setup(tmp_path);c=groups[0]['indices'][0]
+    x=origin.copy();x[c]=np.log(4.)
+    assert np.array_equal(d['upper'],extend_upper(upper,origin,groups)+np.where(np.arange(spec.size)==edge,np.log(1.25),0.))
+    assert d['decode'](x) is not None
+    bad=origin.copy();bad[c]=np.log(4.)+.001
+    with pytest.raises(ValueError):d['decode'](bad)
+    other=origin.copy();other[0]=np.log(4.)
+    with pytest.raises(ValueError):d['decode'](other)
+
+
 def test_parent_selection_requires_latest_clean_audit(tmp_path):
     from scripts.run_sensory_motion import prepare,E091_PARENT
     source=tmp_path/'source';source.mkdir();out=tmp_path/'out';out.mkdir()

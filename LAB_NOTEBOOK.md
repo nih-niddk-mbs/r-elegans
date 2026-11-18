@@ -9980,3 +9980,42 @@ Interpretation (hypothesis): original-prior caps limit extra AWA->AIYR gain to
 cue gain from AWA into the relay is therefore prior/operating-point limited.
 Not tested: whether relaxing these caps would yield 1% motion reduction. No
 fit launched.
+
+## 2026-11-18 — E095 planned: single-edge dose-response under a widened prior
+
+Status: planned; execution not evidenced. [Plan](experiments/records/E095-plan.json).
+User choice (2026-11-18): scan with relaxed caps (option 1 of the E094 follow-up).
+
+Question: can any single cue-to-motor chemical edge, scaled 0.5x-4x of the
+parent under an explicit widened engineering prior, give >=1% motion reduction
+in every region while preserving baseline gait and recovery?
+
+Method: no optimizer. Parent = the same E092 isolated 1.25 edge parent as
+E093/E094 (hash pinned at runtime). Edges: AWAR->AIYR, AIBR->AIYR, AWAL->AIYL,
+AIYR->RIAR, AIZR->RIAR, AIZL->RIAL, RIAL->SMDVL, RIAL->SMDVR. Factors 0.5, 0.75,
+1.5, 2, 3, 4 (lower-bound-limited factors skipped, not widened). One nominal-
+protocol evaluation per case, target 1%, margin 1; unit factor is the parent
+reproduction. Top two gait-preserving cases by weakest-region reduction are
+re-run with raw traces plus neural-half, body-half and sensory-blocked controls.
+Fixed: everything except the single scanned edge. Prior: E092 AIYR->AIYL
+exception retained; scanned edges may exceed original upper bounds up to 4x the
+parent (engineering prior, not biology; nothing admitted as a standard).
+
+Acceptance (set before running): an informative route needs a finalist with all
+regions >=1%, safe, baseline/recovery preserved, same checkpoint in all four
+controls, half-grid differences <=0.25%, and sensory block within 0.25% of 1
+with relay change <=5e-6. Otherwise negative. Scan cases are metrics-only
+diagnostics, not qualified models. No start/stop, swimming or biology claim.
+
+Budget: 180 min total (20 min audit reserve), 8 workers x 4 cores. No seed
+(deterministic). Command: `sh scripts/launch_edge_scan_mbslnx2.sh`. Report:
+`python -m scripts.report_edge_scan --run <E095 run folder>`.
+
+Local software verification: 144 related tests (including the new E095 tests)
+pass: groups/skip rule/decode, widened bounds only on scanned edges, finalist
+ranking, coordinator with finalist controls, budget dispatch, audit accepting a
+single widened edge and rejecting a second changed edge, and the real-network
+worker setup accepting a 4x scanned edge while rejecting other coordinates. The
+pre-existing test_posterior_excitability float32 test fails under the x64
+environment on the unmodified tree and is unrelated. No real evaluation or
+scientific forward run.

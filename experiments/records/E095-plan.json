@@ -1,0 +1,27 @@
+{
+ "experiment": "E095",
+ "record_date": "2026-11-18",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "Can any single cue-to-motor chemical edge strength, scaled within 0.5x-4x of the parent and under an explicit widened engineering prior, produce at least 1% cue-on motion reduction in every body region while preserving baseline gait and recovery?",
+ "motivation": "E093/E094 reached 0.04-0.11% reduction. E094 details: AWA depolarizes ~2.5 mV but AIYR/AIYL move ~0.1/0.01 mV; AIYL release is saturated (0.979); RIAR release is ~0.009; AWAR->AIYR and AIBR->AIYR moved to within ~12%/9% of their original upper caps.",
+ "method": "No optimizer. One evaluation per (edge, factor): a single chemical edge multiplied by the factor, all else equal to the parent, nominal protocol, target 1%, margin 1. Unit-factor control is the pinned parent reproduction. Then the two cases with the largest weakest-region reduction among gait-and-recovery-preserving cases are re-run with raw traces plus neural-half, body-half and sensory-blocked controls.",
+ "source_run": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433",
+ "parent": "Same audited unique passing E092 isolated 1.25 AIYR->AIYL panel as E093/E094; hash pinned at runtime in the new input manifest, not invented here.",
+ "parent_checkpoint_sha256": null,
+ "edges": ["AWAR->AIYR", "AIBR->AIYR", "AWAL->AIYL", "AIYR->RIAR", "AIZR->RIAR", "AIZL->RIAL", "RIAL->SMDVL", "RIAL->SMDVR"],
+ "factors": [0.5, 0.75, 1.5, 2.0, 3.0, 4.0],
+ "skipped_rule": "Factors that would go below the original lower bound are skipped and recorded, never widened.",
+ "prior_exception": "E092 AIYR->AIYL one-edge exception retained. Each scanned edge may exceed its original upper bound up to 4x the parent strength. This is an engineering prior, not measured biology; no scanned edge is admitted as a global standard.",
+ "fixed": "All other densities/strengths/gaps, topology/signs, reversals, leak, kinetics, release law, sensory gains, NMJ/muscle/body/water physics and physical clocks.",
+ "command": "sh scripts/launch_edge_scan_mbslnx2.sh",
+ "report": "python -m scripts.report_edge_scan --run <E095 run folder>",
+ "budget": {"total_minutes": 180, "audit_reserve_minutes": 20, "scan_deadline": "25 min before coordinator finish", "workers": "8 x 4 physical cores if >=32 available else 4 x 4"},
+ "seeds": "not applicable (deterministic evaluations, no optimizer)",
+ "acceptance_criteria": {
+  "informative_route": "A finalist with all three regional reductions >= 1%, safe, baseline and recovery preserved, same checkpoint across its four controls, neural/body half-grid differences <= 0.25 x target (0.25%), and sensory-blocked ratios within 0.25% of 1 with relay change <= 5e-6.",
+  "negative": "No case reaches 1% in all regions, or finalist controls fail. This would show that none of the scanned single edges, even widened, supplies enough cue gain.",
+  "scan_cases": "Metrics-only. The scan is a diagnostic; a passing case is not a fitted or qualified model."
+ },
+ "audit": "scripts.audit_edge_scan runs automatically inside the budget: input/trace hashes, decode of every z, single-changed-edge and frozen-field checks, widened-prior use, retained-trace feature and score recomputation, finalist ranking and rerun consistency.",
+ "claims_not_made": "No fitting, component qualification, initial sensory initiation, full start/stop, swimming or biological validation."
+}

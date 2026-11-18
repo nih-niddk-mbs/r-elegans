@@ -5,6 +5,7 @@ import numpy as np
 from scripts import rial_sensory_worker as core
 from scripts.experiment_records import capture_run_record
 from r_elegans.relay_cap_experiments import upper_for
+from r_elegans.edge_scan import extend_upper
 
 
 def setup(inputs):
@@ -15,6 +16,8 @@ def setup(inputs):
     with np.load(inputs/'cap_prior.npz',allow_pickle=False) as z:
         origin,lower,upper,edge=z['origin'],z['lower'],z['upper'],int(z['edge'])
     allowed=upper_for('aiyr_2p5',upper,edge)
+    scan=json.loads((inputs/'cap_groups.json').read_text()).get('scan') if (inputs/'cap_groups.json').exists() else None
+    if scan:allowed=extend_upper(allowed,origin,scan)
     parent,fixed,config=load_network(inputs/'motion_parent.npz');assert_fixed_equal(d['fixed'],fixed,d['config'],config)
     if np.any(origin<lower-1e-12) or np.any(origin>allowed+1e-12):raise ValueError('Motion parent exceeds explicit prior')
     rebuilt=apply_joint_offsets(d['base'],origin-d['origin'],d['spec'])
@@ -28,12 +31,12 @@ def setup(inputs):
 
 def initialize(inputs,schemas,cpus,records):
     slot=(multiprocessing.current_process()._identity[-1]-1)%len(cpus);os.sched_setaffinity(0,cpus[slot])
-    core._DATA=setup(Path(inputs));core._DATA['groups']=schemas['aiyr_2p5']
+    core._DATA=setup(Path(inputs));core._DATA['groups']=schemas.get('scan') or schemas['aiyr_2p5']
     experiment=json.loads((Path(inputs)/'manifest.json').read_text())['consumer_experiment']
     capture_run_record(Path(records)/f'worker-{slot}',Path(__file__).resolve().parents[1],dict(inputs=inputs,cpus=cpus[slot],experiment=experiment))
 
 
 def evaluate(job):
-    result=core.evaluate(job);result.update(cap='aiyr_2p5',kind=job['kind'])
+    result=core.evaluate(job);result.update(cap=job.get('cap','aiyr_2p5'),kind=job['kind'])
     (Path(job['output'])/'summary.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     return result
