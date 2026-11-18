@@ -1,5 +1,18 @@
 # WormGym: training and validation protocols
 
+2026-11-18 E093 detail report received: matched loss improves5.48%,65
+coordinates change, frozen fields unchanged. Weakest-region suppression peaks
+at generation3 (0.04843%) and ends0.04331% despite falling average loss. E093's
+mean squared regional deficit does not prioritize the weakest-region gate. AWAR/AIYR
+release changes are~56/~108times AWAL/AIYL; E093 fits left sensory groups and
+RIAL output, leaving right sensory/relay parameters mostly fixed. AIYL remains
+~98% released and its modulated RIAL current is tiny relative to tonic input.
+Only AWBL->AIYL is printed near a local bound, with original lower room left.
+Recommend bilateral sensory/relay fitting and worst-region/weakest-repeat loss,
+preserving gait/recovery and explicit priors. No new run or objective change.
+[Details](experiments/records/E093-detail-server-summary.json).
+
+
 2026-11-18 E093 completed and audited (user-reported):9generations,
 2h49m31s total;121completed/12time-budget evaluations. Clean audit, all final
 cases complete, but first1% motion-reduction rung FAILS. Nominal tail/middle/head

@@ -546,13 +546,14 @@
   "missing_evidence": "Current stdout omits parent-versus-selected matched training loss, selected parameter changes/bound room, generation trends and downstream voltage/release/current changes. Do not infer learning gain or bound exhaustion from final metrics alone.",
   "decision": "Preserve model and all failed outcomes; no motion/rest/full-start-stop/swimming qualification. Inspect matched progress, local/original/declared bounds and saved-sample signal/current changes before deciding on more fitting.",
   "supplemental_analysis": {
-    "status": "planned_server_execution_not_evidenced",
+    "status": "server_stdout_reported",
     "command": "python -m scripts.report_sensory_motion --details --run /home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620",
     "question": "Did selection improve matched motion loss and where is cue influence attenuated between sensory cells, AIYL, RIAL and SMD? Are trainable groups at local or declared prior limits?",
     "method": "Read-only E093 saved models/coordinates/summaries/raw nominal voltages, source audit and evidence hashes. Re-score parent and selected on redundant protocol at same final target/margin1. Report generation progression, changed/frozen coordinates and bound room. Sample saved voltage at approximately100Hz for release and effective chemical/gap currents; separate release-only current changes holding postsynaptic voltage at no-cue value from actual current changes.",
     "fixed_trainable": "No model or data changes; no fitting or forward simulation. Seeds not applicable.",
     "acceptance": "No acceptance thresholds changed. Require completed source with clean audit, SHA-matched selected model/coordinates/nominal traces, matched finite clocks, and external separate analysis folder. Observational current attribution is not causal proof or integrated current balance.",
     "artifacts": "New timestamped sibling details folder with exact source/environment/invocation records, evidence hashes and compact JSON; source run unchanged. Actual folder and computed results pending.",
-    "local_verification": "14 focused software tests passed, including current/driving-force separation, explicit expanded-bound reporting and complete retained-trace details generation with source-file hashes unchanged. CLI help, Python compilation and whitespace checks passed. Synthetic data and bundled parameter fixtures only; server detailed-analysis results pending."
+    "local_verification": "14 focused software tests passed, including current/driving-force separation, explicit expanded-bound reporting and complete retained-trace details generation with source-file hashes unchanged. CLI help, Python compilation and whitespace checks passed. Synthetic data and bundled parameter fixtures only; server detailed-analysis results pending.",
+    "reported_outcome_record": "E093-detail-server-summary.json"
   }
 }

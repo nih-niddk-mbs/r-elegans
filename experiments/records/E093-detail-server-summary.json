@@ -1,0 +1,483 @@
+{
+  "experiment": "E093",
+  "record_date": "2026-11-18",
+  "evidence": "User-reported saved-data diagnostic stdout; no independent access to server artifacts",
+  "evidence_sha256": "10d4788f1258f956e42af77fbeae6e4e8bbf0c0a42062e2da0dbde85276eaf6e",
+  "run": "/home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620",
+  "detailed_report": "/home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620-details-20261118T194438127343Z/summary.json",
+  "analysis_source_revision": "30f2c74",
+  "revision_limit": "User stdout shows fast-forward before command; dirty tree/environment/source archive not supplied. Revision alone does not reproduce source.",
+  "reported_progress": {
+    "checkpoint_sha256": "a499c523f31881f3df71fb1d1281ab21130545efa26493a0faa36cb93de0e92a",
+    "target": 0.01,
+    "loss_reduction_percent": 5.480956840878843,
+    "changed_coordinates": 65,
+    "frozen_fields_unchanged": true,
+    "completed_generation_progress": [
+      {
+        "generation": 1,
+        "checkpoint_sha256": "11ca76ef032679ae5391e1a85fb0166dcbd59cd0f37c9733dedeaf08e1ba544b",
+        "loss_at_final_target": 0.855100635715533,
+        "minimum_regional_suppression_percent": 0.04683447361807369
+      },
+      {
+        "generation": 2,
+        "checkpoint_sha256": "11ca76ef032679ae5391e1a85fb0166dcbd59cd0f37c9733dedeaf08e1ba544b",
+        "loss_at_final_target": 0.855100635715533,
+        "minimum_regional_suppression_percent": 0.04683447361807369
+      },
+      {
+        "generation": 3,
+        "checkpoint_sha256": "bb6820fd896d91f210a7f2777f619fdd594d8f2d298b0a67e4c878942c1c49fe",
+        "loss_at_final_target": 0.8330026483687271,
+        "minimum_regional_suppression_percent": 0.048429206463751484
+      },
+      {
+        "generation": 4,
+        "checkpoint_sha256": "1e94533c0fe13fec21783a35a8dd53e68376a15480ae6961ca9af8461fcfa677",
+        "loss_at_final_target": 0.8328547518302489,
+        "minimum_regional_suppression_percent": 0.04457205456238622
+      },
+      {
+        "generation": 5,
+        "checkpoint_sha256": "1e94533c0fe13fec21783a35a8dd53e68376a15480ae6961ca9af8461fcfa677",
+        "loss_at_final_target": 0.8328547518302489,
+        "minimum_regional_suppression_percent": 0.04457205456238622
+      },
+      {
+        "generation": 6,
+        "checkpoint_sha256": "1e94533c0fe13fec21783a35a8dd53e68376a15480ae6961ca9af8461fcfa677",
+        "loss_at_final_target": 0.8328547518302489,
+        "minimum_regional_suppression_percent": 0.04457205456238622
+      },
+      {
+        "generation": 7,
+        "checkpoint_sha256": "1e94533c0fe13fec21783a35a8dd53e68376a15480ae6961ca9af8461fcfa677",
+        "loss_at_final_target": 0.8328547518302489,
+        "minimum_regional_suppression_percent": 0.04457205456238622
+      },
+      {
+        "generation": 8,
+        "checkpoint_sha256": "41ec1502a1b744f78ad02914afc729be8e743e13a57ee4bcfd7e2f5989d6719b",
+        "loss_at_final_target": 0.8315048583218987,
+        "minimum_regional_suppression_percent": 0.04293879580998805
+      },
+      {
+        "generation": 9,
+        "checkpoint_sha256": "a499c523f31881f3df71fb1d1281ab21130545efa26493a0faa36cb93de0e92a",
+        "loss_at_final_target": 0.8302601886007399,
+        "minimum_regional_suppression_percent": 0.04330793094775576
+      }
+    ]
+  },
+  "reported_near_local_bound_groups": [
+    {
+      "name": "chemical:AWBL->AIYL",
+      "coordinates": 1,
+      "latent": -0.9997431475530949,
+      "near_local_bound": true,
+      "local_log_delta_range": [
+        -0.399897259021238,
+        -0.399897259021238
+      ],
+      "original_upper_exceptions": 0,
+      "minimum_original_upper_room_log": 1.2370549587708437,
+      "minimum_declared_lower_room_log": 0.14923940234904698,
+      "minimum_declared_upper_room_log": 1.2370549587708437,
+      "near_declared_bound_coordinates": 0
+    }
+  ],
+  "reported_response_window": {
+    "category": "response",
+    "window": [
+      41.0,
+      46.0
+    ],
+    "samples": 500,
+    "sample_stride": 5,
+    "cells": [
+      {
+        "neuron": "AWAL",
+        "no_cue_voltage_mean_mV": -76.99834115923888,
+        "cue_voltage_mean_mV": -74.52211478492923,
+        "voltage_difference_rms_mV": 2.9725219374166194,
+        "no_cue_release_mean": 0.0006956894631655936,
+        "cue_release_mean": 0.0009760729797858557,
+        "release_mean_change": 0.0002803835166202622,
+        "no_cue_release_std": 8.848433622403274e-09,
+        "cue_release_std": 0.00022105277024480276,
+        "no_cue_release_q01_q99": [
+          0.0006956782595467858,
+          0.0006957027475772887
+        ]
+      },
+      {
+        "neuron": "AWAR",
+        "no_cue_voltage_mean_mV": -67.46380623738031,
+        "cue_voltage_mean_mV": -65.14493858089345,
+        "voltage_difference_rms_mV": 2.7856210560984307,
+        "no_cue_release_mean": 0.055887001703494234,
+        "cue_release_mean": 0.07168989453724653,
+        "release_mean_change": 0.015802892833752292,
+        "no_cue_release_std": 3.1614044881369022e-06,
+        "cue_release_std": 0.011839775251247669,
+        "no_cue_release_q01_q99": [
+          0.05588266401804998,
+          0.05589171116418004
+        ]
+      },
+      {
+        "neuron": "AIYL",
+        "no_cue_voltage_mean_mV": -40.324772094197584,
+        "cue_voltage_mean_mV": -40.33427957355836,
+        "voltage_difference_rms_mV": 0.012033634135889416,
+        "no_cue_release_mean": 0.9797655322514892,
+        "cue_release_mean": 0.9797358606766491,
+        "release_mean_change": -2.967157484004912e-05,
+        "no_cue_release_std": 7.825002580547676e-07,
+        "cue_release_std": 2.3044188238647703e-05,
+        "no_cue_release_q01_q99": [
+          0.9797645732709432,
+          0.9797666850999178
+        ]
+      },
+      {
+        "neuron": "AIYR",
+        "no_cue_voltage_mean_mV": -34.179553565824705,
+        "cue_voltage_mean_mV": -34.09827397200611,
+        "voltage_difference_rms_mV": 0.10171683835174493,
+        "no_cue_release_mean": 0.5335327407836816,
+        "cue_release_mean": 0.5367371190250517,
+        "release_mean_change": 0.003204378241370057,
+        "no_cue_release_std": 8.07520156684915e-06,
+        "cue_release_std": 0.0024098939062601257,
+        "no_cue_release_q01_q99": [
+          0.5335218726736186,
+          0.5335448475104662
+        ]
+      },
+      {
+        "neuron": "RIAL",
+        "no_cue_voltage_mean_mV": -59.7014661094765,
+        "cue_voltage_mean_mV": -59.69884276472835,
+        "voltage_difference_rms_mV": 0.01426382971135645,
+        "no_cue_release_mean": 0.2776388177436046,
+        "cue_release_mean": 0.2777441796806828,
+        "release_mean_change": 0.0001053619370783097,
+        "no_cue_release_std": 0.056796502811964834,
+        "cue_release_std": 0.0568026678473942,
+        "no_cue_release_q01_q99": [
+          0.21105976211510677,
+          0.35504483689155514
+        ]
+      },
+      {
+        "neuron": "SMDDL",
+        "no_cue_voltage_mean_mV": -48.896791809246494,
+        "cue_voltage_mean_mV": -48.885964137007015,
+        "voltage_difference_rms_mV": 0.01365044656944734,
+        "no_cue_release_mean": 0.06291829130453218,
+        "cue_release_mean": 0.06299284969899001,
+        "release_mean_change": 7.455839445783524e-05,
+        "no_cue_release_std": 0.0009784259027746233,
+        "cue_release_std": 0.0009815671766317542,
+        "no_cue_release_q01_q99": [
+          0.061750385599758685,
+          0.06442664569742106
+        ]
+      },
+      {
+        "neuron": "SMDDR",
+        "no_cue_voltage_mean_mV": -67.6152697227102,
+        "cue_voltage_mean_mV": -67.59314538546745,
+        "voltage_difference_rms_mV": 0.027852451085794705,
+        "no_cue_release_mean": 0.00019332727123730914,
+        "cue_release_mean": 0.00019409729489915832,
+        "release_mean_change": 7.700236618492015e-07,
+        "no_cue_release_std": 9.285990693986679e-06,
+        "cue_release_std": 9.33142092846776e-06,
+        "no_cue_release_q01_q99": [
+          0.00018244781554924895,
+          0.00020678691996713126
+        ]
+      },
+      {
+        "neuron": "SMDVL",
+        "no_cue_voltage_mean_mV": -38.58653858370357,
+        "cue_voltage_mean_mV": -38.61876502513434,
+        "voltage_difference_rms_mV": 0.04722983504044151,
+        "no_cue_release_mean": 0.0995710567053841,
+        "cue_release_mean": 0.09923869915096432,
+        "release_mean_change": -0.0003323575544197942,
+        "no_cue_release_std": 0.03012386378041421,
+        "cue_release_std": 0.030082966614729353,
+        "no_cue_release_q01_q99": [
+          0.06575813678938666,
+          0.14273446517385005
+        ]
+      },
+      {
+        "neuron": "SMDVR",
+        "no_cue_voltage_mean_mV": -27.726857559124234,
+        "cue_voltage_mean_mV": -27.71693701813249,
+        "voltage_difference_rms_mV": 0.035497804466839006,
+        "no_cue_release_mean": 0.5249376524020805,
+        "cue_release_mean": 0.5251523190418834,
+        "release_mean_change": 0.0002146666398030501,
+        "no_cue_release_std": 0.0762322424315786,
+        "cue_release_std": 0.07618680865914593,
+        "no_cue_release_q01_q99": [
+          0.4290831186115723,
+          0.6240049706528257
+        ]
+      }
+    ],
+    "AIYL_to_RIAL": {
+      "source": "AIYL",
+      "target": "RIAL",
+      "chemical_nS": 0.03042457837454969,
+      "gap_nS": 0.0,
+      "reversal_mV": -85.0,
+      "no_cue_release_mean": 0.9797655322514892,
+      "cue_release_mean": 0.9797358606766491,
+      "no_cue_chemical_mean_inward_pA": -0.7541228286265699,
+      "actual_chemical_delta_mean_pA": -5.541133181138336e-05,
+      "actual_total_delta_rms_pA": 0.00041877509757920023,
+      "release_only_delta_mean_pA": 2.2783903817979787e-05,
+      "release_only_delta_rms_pA": 2.87928451787886e-05,
+      "presynaptic_gap_delta_mean_pA": 0.0,
+      "presynaptic_total_delta_rms_pA": 2.87928451787886e-05
+    },
+    "top_RIAL_presynaptic_current_changes": [
+      {
+        "source": "RMDR",
+        "target": "RIAL",
+        "chemical_nS": 0.007430279886456772,
+        "gap_nS": 0.0,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.5972999821038711,
+        "cue_release_mean": 0.5972325267142122,
+        "no_cue_chemical_mean_inward_pA": 0.2625600804171158,
+        "actual_chemical_delta_mean_pA": -4.0812273850659056e-05,
+        "actual_total_delta_rms_pA": 0.0015539121218551648,
+        "release_only_delta_mean_pA": -4.0935640206408374e-05,
+        "release_only_delta_rms_pA": 0.0015924962695393903,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 0.0015924962695393903
+      },
+      {
+        "source": "AIZL",
+        "target": "RIAL",
+        "chemical_nS": 0.004031020271496717,
+        "gap_nS": 0.0,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.7197444287767034,
+        "cue_release_mean": 0.720390105762189,
+        "no_cue_chemical_mean_inward_pA": 0.17320877693708472,
+        "actual_chemical_delta_mean_pA": 0.00014790593442828943,
+        "actual_total_delta_rms_pA": 0.00018512033313708754,
+        "release_only_delta_mean_pA": 0.00015554324159150755,
+        "release_only_delta_rms_pA": 0.00019151284695455273,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 0.00019151284695455273
+      },
+      {
+        "source": "RIAR",
+        "target": "RIAL",
+        "chemical_nS": 0.006201481078855911,
+        "gap_nS": 0.0,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.012472288602472105,
+        "cue_release_mean": 0.012868078914015365,
+        "no_cue_chemical_mean_inward_pA": 0.004616593766592356,
+        "actual_chemical_delta_mean_pA": 0.0001464307831160063,
+        "actual_total_delta_rms_pA": 0.00018438003489644564,
+        "release_only_delta_mean_pA": 0.00014665249914057522,
+        "release_only_delta_rms_pA": 0.00018468572913372036,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 0.00018468572913372036
+      },
+      {
+        "source": "RIML",
+        "target": "RIAL",
+        "chemical_nS": 0.0009674402181816315,
+        "gap_nS": 0.0,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.17575011501894683,
+        "cue_release_mean": 0.17471974732870946,
+        "no_cue_chemical_mean_inward_pA": 0.010149010300457192,
+        "actual_chemical_delta_mean_pA": -6.000143243178946e-05,
+        "actual_total_delta_rms_pA": 7.493431076987629e-05,
+        "release_only_delta_mean_pA": -5.955832585057874e-05,
+        "release_only_delta_rms_pA": 7.431251078632357e-05,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 7.431251078632357e-05
+      },
+      {
+        "source": "SMDVR",
+        "target": "RIAL",
+        "chemical_nS": 0.003501540016719047,
+        "gap_nS": 0.0,
+        "reversal_mV": -83.3525390625,
+        "no_cue_release_mean": 0.5249376524020805,
+        "cue_release_mean": 0.5251523190418834,
+        "no_cue_chemical_mean_inward_pA": -0.043833452773006897,
+        "actual_chemical_delta_mean_pA": -2.2332136676539548e-05,
+        "actual_total_delta_rms_pA": 8.937260264375845e-05,
+        "release_only_delta_mean_pA": -1.6879148236489156e-05,
+        "release_only_delta_rms_pA": 6.373190639089839e-05,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 6.373190639089839e-05
+      },
+      {
+        "source": "SMDVL",
+        "target": "RIAL",
+        "chemical_nS": 0.002756791251808318,
+        "gap_nS": 0.0015657564168322544,
+        "reversal_mV": -85.0,
+        "no_cue_release_mean": 0.0995710567053841,
+        "cue_release_mean": 0.09923869915096432,
+        "no_cue_chemical_mean_inward_pA": -0.00705134975245344,
+        "actual_chemical_delta_mean_pA": 2.2612602386907798e-05,
+        "actual_total_delta_rms_pA": 4.328012757987712e-05,
+        "release_only_delta_mean_pA": 2.3676560470192848e-05,
+        "release_only_delta_rms_pA": 3.527271222550432e-05,
+        "presynaptic_gap_delta_mean_pA": -5.045875746188588e-05,
+        "presynaptic_total_delta_rms_pA": 4.125562178264604e-05
+      }
+    ],
+    "RIAL_to_SMD": [
+      {
+        "source": "RIAL",
+        "target": "SMDDL",
+        "chemical_nS": 0.009973327284741543,
+        "gap_nS": 0.0,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.2776388177436046,
+        "cue_release_mean": 0.2777441796806828,
+        "no_cue_chemical_mean_inward_pA": 0.13534195289140702,
+        "actual_chemical_delta_mean_pA": 2.156294336472722e-05,
+        "actual_total_delta_rms_pA": 0.0002785772431746573,
+        "release_only_delta_mean_pA": 5.0862228732527116e-05,
+        "release_only_delta_rms_pA": 0.0002875125749372254,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 0.0002875125749372254
+      },
+      {
+        "source": "RIAL",
+        "target": "SMDDR",
+        "chemical_nS": 0.0031288067169496048,
+        "gap_nS": 0.0,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.2776388177436046,
+        "cue_release_mean": 0.2777441796806828,
+        "no_cue_chemical_mean_inward_pA": 0.058697574297834884,
+        "actual_chemical_delta_mean_pA": 3.204194097517363e-06,
+        "actual_total_delta_rms_pA": 0.00011947605346657458,
+        "release_only_delta_mean_pA": 2.205449083113941e-05,
+        "release_only_delta_rms_pA": 0.0001246882077588888,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 0.0001246882077588888
+      },
+      {
+        "source": "RIAL",
+        "target": "SMDVL",
+        "chemical_nS": 0.10186816962447039,
+        "gap_nS": 0.0015657564168322544,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.2776388177436046,
+        "cue_release_mean": 0.2777441796806828,
+        "no_cue_chemical_mean_inward_pA": 1.076253906512049,
+        "actual_chemical_delta_mean_pA": 0.0012985668093240064,
+        "actual_total_delta_rms_pA": 0.0023650694173487706,
+        "release_only_delta_mean_pA": 0.00036321309480466556,
+        "release_only_delta_rms_pA": 0.0022652682102491093,
+        "presynaptic_gap_delta_mean_pA": 4.107518872970274e-06,
+        "presynaptic_total_delta_rms_pA": 0.002287559589694206
+      },
+      {
+        "source": "RIAL",
+        "target": "SMDVR",
+        "chemical_nS": 0.21816777474541862,
+        "gap_nS": 0.0,
+        "reversal_mV": 0.0,
+        "no_cue_release_mean": 0.2776388177436046,
+        "cue_release_mean": 0.2777441796806828,
+        "no_cue_chemical_mean_inward_pA": 1.637130139874611,
+        "actual_chemical_delta_mean_pA": 5.511286653027447e-05,
+        "actual_total_delta_rms_pA": 0.0016627873799012181,
+        "release_only_delta_mean_pA": 0.0005577555346713669,
+        "release_only_delta_rms_pA": 0.0034368271032509377,
+        "presynaptic_gap_delta_mean_pA": 0.0,
+        "presynaptic_total_delta_rms_pA": 0.0034368271032509377
+      }
+    ]
+  },
+  "derived_ratios": {
+    "AWAR_to_AWAL_release_change": 56.361704226553954,
+    "AIYR_to_AIYL_release_change": 107.99488259871387,
+    "RMDR_to_AIYL_release_current_rms": 55.3087497831776,
+    "AIYL_release_current_delta_fraction_of_tonic": 3.0212457378427976e-05,
+    "peak_worst_region_suppression_percent": 0.048429206463751484,
+    "final_worst_region_suppression_percent": 0.04330793094775576
+  },
+  "findings": [
+    "Matched loss improved5.48095684%,65coordinates changed,frozen fields unchanged; not zero optimizer movement.",
+    "Worst-region suppression is nonmonotonic while average deficit loss improves: generation3=.0484292%,generation9=.0433079%. Current E093 objective averages squared deficits; acceptance requires all regions/repeats.",
+    "Only printed near-local-bound group is AWBL->AIYL at-.399897log, with.149239log declared/original lower room. Local box exhaustion is distinct from original prior exhaustion. Full unprinted bound rows remain external.",
+    "AWAR/AIYR cue release changes substantially exceed AWAL/AIYL. E093 fits left sensory/relay groups and RIAL outputs; right-side sensory/relay parameters remain mostly fixed.",
+    "AIYL remains near upper release rail(.97977baseline) and changes only-2.97e-5. Release-only AIYL->RIAL modulation is+2.278e-5pA versus-.7541pA tonic mean; actual current differences also include postsynaptic driving-force changes.",
+    "Largest reported presynaptic current-change RMS into RIAL is RMDR,~55.3times AIYL. AIZL and RIAR also exceed AIYL. Ranking sampled changes does not establish causal drivers; oscillator feedback/phase can contribute."
+  ],
+  "local_topology_check": {
+    "evidence": "Locally inspected bundled anatomical masks; server mask hashes not independently checked here.",
+    "asset": "r_elegans/assets/autonomous_wiggle_v1/network.npz",
+    "asset_sha256": "482995e03f28cfd62704b20630c28c2fb1706aec87dbd4e2cc6eecd9315a2ff6",
+    "existing_routes": [
+      {
+        "source": "AWAL",
+        "target": "AIYL",
+        "chemical": true,
+        "gap": false
+      },
+      {
+        "source": "AWAR",
+        "target": "AIYR",
+        "chemical": true,
+        "gap": false
+      },
+      {
+        "source": "AIYL",
+        "target": "RIAL",
+        "chemical": true,
+        "gap": false
+      },
+      {
+        "source": "AIYR",
+        "target": "RIAR",
+        "chemical": true,
+        "gap": false
+      },
+      {
+        "source": "RIAR",
+        "target": "RIAL",
+        "chemical": true,
+        "gap": false
+      },
+      {
+        "source": "RIAR",
+        "target": "SMDVL",
+        "chemical": true,
+        "gap": false
+      },
+      {
+        "source": "RIAR",
+        "target": "SMDVR",
+        "chemical": true,
+        "gap": true
+      }
+    ]
+  },
+  "decision": "Preserve all E092/E093 models and negative outcomes. Recommend a separately planned bilateral sensory-to-RIA/SMD fitting experiment with worst-region/weakest-repeat loss and unchanged gait/recovery/relay criteria and explicit prior policy. Recentring AWBL alone does not address the weak left route or average-loss tradeoff. No new run, bounds or objective changed now.",
+  "limits": "Descriptive saved-sample currents at~100Hz; no integrated balance, channel-current reconstruction, new intervention or biological pathway/sign proof. Detailed stdout omits full bound rows and nonlinear gain curves. No full motor-control qualification or global impossibility follows."
+}

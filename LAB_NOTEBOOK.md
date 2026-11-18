@@ -9753,3 +9753,63 @@ all source files. Python compilation, CLI help and whitespace checks pass.
 These use synthetic traces and bundled parameter fixtures, not E093 server data;
 computed server bounds/progress/current results remain pending. No fitting or
 acceptance thresholds changed.
+
+## 2026-11-18 — E093 details: bilateral sensory asymmetry and mean-loss tradeoff
+
+User stdout SHA256 `10d4788f1258f956e42af77fbeae6e4e8bbf0c0a42062e2da0dbde85276eaf6e`; structured record
+[E093-detail-server-summary.json](experiments/records/E093-detail-server-summary.json).
+Detailed saved-data report: `/home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620-details-20261118T194438127343Z/summary.json`.
+Selected SHA remains `a499c523f31881f3df71fb1d1281ab21130545efa26493a0faa36cb93de0e92a`. Stdout shows pull to30f2c74
+before analysis; dirty tree/environment/source archive not supplied, so this is
+not independent full server provenance verification. No fitting/forward
+simulation is performed by this report.
+
+Matched redundant-protocol loss improves5.48095684%;65coordinates changed,
+frozen fields unchanged. The optimizer did move. But weakest-region suppression
+peaks at generation3=.0484292%, then falls to.0433079% at generation9 while loss
+falls. Code inspection confirms E093 averages squared deficits over regions/
+repeats, while qualification demands all pass. Average progress can trade away
+the weakest region, so more optimization alone need not close the tail gap.
+
+Only printed near-local-bound group: AWBL->AIYL latent-.999743/log change-.399897.
+It retains.149239log lower room (about13.9% further strength decrease), a local
+box limit rather than exhausted original prior. Unprinted groups' full bound
+room is not supplied here; no assertions about those limits are justified.
+
+Cue41..46s: AWAL depolarizes~2.48mV but release changes+.0002804 from.0006957;
+AWAR depolarizes~2.32mV and release changes+.0158029. AIYL release changes
+-2.96716e-5 from.9797655; AIYR changes+.00320438 from.533533. Absolute right/left
+release changes are~56.36 at AWA and~108 at AIY. E093 trains AWAL/AIYL/RIAL;
+AWAR/AIYR/RIAR are mostly fixed. RIAL release mean changes+.00010536, but std
+changes only.0567965 to.0568027. SMD rhythm magnitudes also change little. A relay
+headroom pass does not imply strong motor-oscillator control.
+
+AIYL->RIAL conductance.0304246nS, modeled reversal-85mV, tonic mean current
+-.754123pA. Release-only cue change at matched no-cue postsynaptic voltage is
++2.27839e-5pA (RMS2.87928e-5pA),~0.00302% of tonic magnitude. Actual chemical
+current difference is-5.54113e-5pA because driving force also changes; this cannot
+be called a presynaptic inhibitory change. Positive current is inward in this
+model. RMDR's presynaptic release-current RMS into RIAL,.00159250pA, is~55.3times
+AIYL; AIZL and RIAR also exceed AIYL. These saved-sample rankings can include
+feedback/phase effects and do not identify causal drivers. Earlier replay
+findings remain the causal diagnostic evidence for the tested branches.
+
+Local bundled anatomical masks (asset SHA in structured record) contain existing
+AWAR->AIYR->RIAR and RIAR->RIAL/SMD chemical routes, alongside AWAL->AIYL->RIAL.
+This is a local topology check; the server mask hash was not supplied. Reported
+server currents directly confirm RIAR->RIAL and RIAL->SMD edges. No novel
+anatomical connections are proposed.
+
+Decision: retain independent E092/E093 checkpoints and all negative outcomes.
+Recommend a separately planned bilateral sensory/relay fit and worst-region/
+weakest-repeat objective, with physical clocks/water physics, no-cue gait,
+recovery, relay preservation and explicit priors retained. Small intermediate
+targets can guide fitting; do not silently lower final1%/rest gates. Recentring
+AWBL alone would not address both identified issues. This is a recommendation,
+not implemented/launched new fitting. No global impossibility, learned motor
+stop/restart, swimming or biological pathway/sign validation follows. Full bound
+rows and nonlinear gain curves remain external/unknown here.
+
+Verification: parsed stdout metadata, checked arithmetic and inspected existing
+score/group code and bundled masks. Documentation-only changes require JSON/
+whitespace checks, not new model/software tests. No scientific forward run.
