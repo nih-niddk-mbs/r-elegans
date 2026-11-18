@@ -1,0 +1,69 @@
+{
+  "experiment": "E092",
+  "status": "planned_server_execution_not_evidenced",
+  "record_date": "2026-11-17",
+  "question": "Does the self-imposed original AIYR->AIYL effective-strength cap restrict AIYL headroom and repeated sensory responsiveness? Compare isolated changes and matched optimization before more identical fitting.",
+  "parent_checkpoint_sha256": "0020499c6b900183e954a0e577563584c7ffa19e9cd5264f90c584d8b5b116da",
+  "source_run": "/home/carsonc/r-elegans-results/relay-range-20261117T232652Z-388058",
+  "initialization": "Require audited completed E091 with pinned selected model, original bounds, coordinates and exact nominal source trace reproduction. Fresh independent optimizers; not exact mid-run resume. All old dependencies remain external.",
+  "command": "sh scripts/launch_relay_experiments_mbslnx2.sh",
+  "environment": "Dedicated /home/carsonc/miniconda3/envs/r-elegans/bin/python; CPU JAX, float64, cma==4.4.1. Runtime argv/environment/source records and input SHA manifests enabled. No server execution/environment inspection asserted here.",
+  "budget": {
+    "total_minutes": 480,
+    "includes": [
+      "preparation",
+      "parent reproduction",
+      "single-edge scan and controls",
+      "matched optimization",
+      "final validation",
+      "saved-data audit",
+      "cleanup/reporting"
+    ],
+    "validation_reserve_minutes": 120,
+    "audit_reserve_minutes": 20,
+    "watchdog": "Private process groups; hard outer deadline. Incomplete or timed-out cases cannot qualify. Finite work may finish early."
+  },
+  "fixed": "All 302 neurons retained. Anatomy/signs/reversals/release law/leak/capacitance/channel kinetics, gaps, other neural parameters, sensory gains/routing, NMJ/muscles/water mechanics and physical clocks unchanged. No imposed drive or clamp in fitting. Final release replay is diagnostic only.",
+  "scan": {
+    "effective_AIYR_to_AIYL_factors": [
+      0.8,
+      0.9,
+      1.0,
+      1.025,
+      1.05,
+      1.1,
+      1.25
+    ],
+    "all_other_coordinates": "exactly fixed",
+    "protocol": "83s redundant paired cue/no-cue",
+    "controls": "Unit factor must reproduce parent model hash; control and maximum factor neural-half/body-half; maximum factor sensory-blocked."
+  },
+  "matched_optimization": {
+    "caps": [
+      "original factor2 relative anchor",
+      "explicit one-edge AIYR->AIYL factor2.5 relative anchor"
+    ],
+    "exception": "Increase original upper log bound by log(1.25) ONLY for AIYR->AIYL; all other original bounds unchanged. This is a diagnostic engineering-prior exception, not measured physiology. Standard fitting policy unchanged.",
+    "groups": "Same focused AWAL/AIYL nonleak density groups, existing AIYL incoming chemical strengths, AIYL->RIAL compensation. Local log boxes +/-0.4 clipped to each declared policy.",
+    "seeds_per_cap": [
+      9200,
+      9201
+    ],
+    "population_per_arm": 12,
+    "initial_sigma": 0.3,
+    "workers": "8 x4 physical CPU cores if at least32 available, otherwise4 x4; require known topology and >=16cores",
+    "fairness": "Paired seeds and independent RNG streams. Interleave48 evaluations across4 arms; update primary comparisons only after all4 populations finish. Keep completed partial-cohort candidates separately as exploratory. Equal complete generation count, not equal elapsed per arm. Each arm includes same parent as incumbent.",
+    "restarts": "Restart all arms together every8 full cohorts or any optimizer termination, at each primary winner; sigma.15, seed+1000*restart. Snapshot asked/told/restart/final including pending points.",
+    "objective": "Unchanged relay-range loss, weakest close-repeat response, target headroom2%, minimum absolute cue release change2e-5, training margin1.3; body gait/recovery and sensory responsiveness preserved."
+  },
+  "final_validation": "Each primary arm winner, best eligible scan and best all-completed exploratory candidate, deduplicated by physical checkpoint hash: nominal, low-dose, shifted, repeated, close-repeat, long cue, neural-half, body-half, sensory-blocked, AIYL->RIAL release replay. Same model required throughout each panel. Select raw-trace cap champions using training data before final tests.",
+  "criteria": "Engineering panel requires all8 normal cases safe, baseline/recovery/useful response preserved and relay headroom/cue criteria met; same sign; neural/body response changes <=5e-6; sensory-block removes cue-specific release change within5e-6. Replay reports mediation, no automatic full-control gate. No change to original physical/gait thresholds. These engineering retests do not constitute independent biological validation.",
+  "audit": "Automatic offline audit of every evaluation model/coordinate/raw hash, independent physical-coordinate reconstruction, frozen arrays, declared original versus single-edge-expanded bounds, score/retained-raw feature recomputation, pre-cue matching, stage/release diagnostics, optimizer hashes and complete-cohort records. Planned metrics-only cases lack raw replay; this limitation stays explicit. No forward simulation performed by audit.",
+  "storage": "External relay-experiments-* outputs; all candidate weights/coordinates/RNG/optimizer states retained including timeout models where constructed. Full raw for parent, selected scan/control cases and cap/scan champion final panels; other traces deliberately metrics-only. Existing worker30GiB run cap and50GiB free reserve; stop starting optimization above15GiB to leave validation room.",
+  "promotion": "No automatic parent, full stop/start/rest/restart, swimming, propulsion or biological qualification; expanded-prior winners remain labeled diagnostic. H1.2 still gates behavior training.",
+  "local_verification": {
+    "software_checks": "68 targeted tests passed across the combined run and separate watchdog rerun. Combined run:67passed,1sandbox signalling failure; all5watchdog tests passed outside sandbox. New suite tests include mocked complete matched cohort/final-panel dispatch, independent paired RNG/snapshot restoration, explicit cap isolation, deadline artifact preservation, independent coordinate reconstruction and audit frozen-field tampering detection.",
+    "static_checks": "CLI help, Python compilation, shell syntax and git diff whitespace checks passed.",
+    "scientific_forward_runs": "None; no server result or fitting claimed."
+  }
+}

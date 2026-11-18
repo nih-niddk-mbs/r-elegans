@@ -1,5 +1,19 @@
 # WormGym: training and validation protocols
 
+2026-11-17 E092 planned: an eight-hour TOTAL diagnostic suite will test the
+AIYR->AIYL engineering cap before more identical optimization. Seven isolated
+edge factors (0.8..1.25), then two matched seeds per original versus one-edge
+expanded cap (2 vs2.5 times original anchor). Same pinned E091 model, water
+physics, physical clocks, topology/signs and sensory gains. Equal complete
+optimizer cohorts; incomplete-cohort improvements remain exploratory. Final
+cue/recovery/gait/grid/control tests and automatic saved-data audit are included
+within480min. All weights/RNG retained externally; routine candidate traces are
+metrics-only. No automatic expanded-prior admission, full start/stop, swimming
+or biological qualification. Execution pending; [plan](experiments/records/E092-plan.json).
+Launch: `sh scripts/launch_relay_experiments_mbslnx2.sh`.
+Report: `python -m scripts.report_relay_experiments`.
+
+
 2026-11-17 E091 cap audit: AIYL headroom1.9274% vs2%, selected loss flat
 last4generations. AIYR->AIYL now at ORIGINAL fitting cap (~1.99980times anchor),
 with only0.01017% further increase allowed. Recenter alone cannot unlock that

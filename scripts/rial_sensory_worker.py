@@ -46,12 +46,15 @@ def evaluate(job):
             return relay_score(paired,parent,target,margin,response_aggregation=job.get('response_aggregation','mean'))
     d=_DATA;out=Path(job['output']);out.mkdir(parents=True,exist_ok=False);started=time.monotonic()
     (out/'request.json').write_text(json.dumps(job,indent=2)+'\n');mode=job.get('mode','normal')
+    artifacts={};hashes={}
     try:
         if mode not in ('normal','sensory-blocked','rial-replay','relay-replay'):raise ValueError('Unknown evaluation mode')
         if shutil.disk_usage(out).free<50*1024**3:raise RuntimeError('disk_budget: less than50GiB free')
         x=decode_groups(job['z'],d['groups'],d['origin'],d['lower'],d['upper']);params=d['decode'](x)
         np.savez_compressed(out/'coordinates.npz',offsets=x,z=job['z']);save_network(out/'network.npz',params,d['fixed'],d['config'])
-        modelsha=file_sha256(out/'network.npz');variant=job.get('variant','nominal');grid=job.get('grid','ordinary');p=protocol(variant)
+        modelsha=file_sha256(out/'network.npz')
+        artifacts=dict(checkpoint_sha256=modelsha,coordinates_sha256=file_sha256(out/'coordinates.npz'))
+        variant=job.get('variant','nominal');grid=job.get('grid','ordinary');p=protocol(variant)
         dt=.001 if grid=='body-half' else .002;brain=.05 if grid=='neural-half' else .1
         paired={};prefix=None;hashes={};reference_release=None;replay=None
         conditions=('no_cue','cue','no_cue_replay','cue_replay') if mode in ('rial-replay','relay-replay') else ('no_cue','cue')
@@ -110,5 +113,6 @@ def evaluate(job):
                     mediation=mediation,pre_cue_match=True)
     except WallDeadline as e:result=dict(status='time_budget',error=str(e))
     except (ValueError,RuntimeError,FloatingPointError) as e:result=dict(status='disk_budget' if str(e).startswith('disk_budget:') else 'failed',error=str(e))
+    result.update(artifacts);result.setdefault('trajectory_sha256',hashes)
     result.update(output=str(out),elapsed_seconds=time.monotonic()-started,variant=job.get('variant','nominal'),grid=job.get('grid','ordinary'),mode=mode)
     (out/'summary.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');return result

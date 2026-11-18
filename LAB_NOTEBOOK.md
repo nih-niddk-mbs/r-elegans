@@ -9446,3 +9446,68 @@ and prospective control/refinement/selection criteria must precede its execution
 Original E091 gate failures and full H1.2 motor-control/swimming status unchanged.
 Local verification: parsed reported JSON and checked arithmetic/diff consistency
 only; no new model simulation or software implementation tests required here.
+
+## 2026-11-17 — E092 planned: matched engineering-prior experiments in eight hours
+
+User authorizes an eight-hour multi-experiment run. Question: does the original
+factor2 AIYR->AIYL strength cap restrict relay headroom/weak repeated responses,
+or do coupled parameters remain the obstacle? The cap is an engineering prior,
+not a measured biological maximum. E091's original-cap exhaustion remains a
+negative finding; no claim of global impossibility follows.
+
+Parent: E091 server run
+`/home/carsonc/r-elegans-results/relay-range-20261117T232652Z-388058`,
+SHA256 `0020499c6b900183e954a0e577563584c7ffa19e9cd5264f90c584d8b5b116da`.
+Require clean audited receipt, copied input hashes, original bounds and exact
+nominal source trajectory reproduction before experiments. Fresh optimizers,
+not a mid-run resume. No source checkpoint is overwritten.
+
+Method: [E092-plan.json](experiments/records/E092-plan.json) records all phases,
+fixed/trainable fields, controls and acceptance. First scan the existing single
+AIYR->AIYL effective conductance at factors0.8,0.9,1,1.025,1.05,1.1,1.25, all
+other parameters fixed. Run refinement/block controls. Then compare two CMA
+seeds9200/9201 under each cap: original factor2 versus factor2.5 for ONLY this
+edge. Same focused AWAL/AIYL channel/existing-connection groups and unchanged
+weakest repeated-cue objective/margin1.3. No signs, edges, gaps, kinetic/leak/
+capacitance/release/sensory/NMJ/body/medium/clock changes; no forcing in fitting.
+Paired initial RNG streams; all four arms update only on complete48-candidate
+cohorts. Preserve partial cohorts as exploratory. Matched restarts retain states.
+
+Ten-case same-checkpoint panels test primary arm winners, optional scan winner
+and best completed exploratory point, deduplicated by physical model hash.
+Acceptance retains baseline gait/recovery/safety,2% headroom,2e-5 cue release
+change and direction, repeated/varied/low-dose cues, sensory block and numerical
+checks. Release replay remains a causal diagnostic; passing a relay panel does
+not qualify full sensory start/stop/rest/restart, swimming or biological fidelity.
+Expanded-bound models remain explicitly diagnostic and cannot silently become
+standard parents. H1.2 remains in force.
+
+Command: `sh scripts/launch_relay_experiments_mbslnx2.sh` after `git pull --ff-only`.
+Dedicated server conda interpreter, CPU/x64;8workers x4physical cores if possible,
+otherwise4x4.480min TOTAL covers preparation, experiments, final validation,
+automatic audit and process cleanup, with120min validation/20min audit reserves.
+The job may finish early; timeout/incomplete validation never qualifies. Source,
+environment/argv, input hashes, all candidate models/coordinates and optimizer/
+RNG/pending states remain external under `r-elegans-results/relay-experiments-*`.
+Keep recursive source dependencies. Raw retained for parents, chosen scans and
+cap/scan champion panels; other cases deliberately metrics-only.50GiB free
+reserve/30GiB new-run ceiling; optimization stops starting above15GiB.
+Audit independently checks bounds/physical coordinates/frozen arrays/hashes,
+saved features/scores/controls, available stage signals and optimizer metadata;
+metrics-only evaluations have no raw replay evidence. Report command:
+`python -m scripts.report_relay_experiments`.
+
+Status: implemented locally; software verification in progress. No scientific
+forward fitting or server execution/result is evidenced for E092 yet.
+
+E092 local verification outcome:68 targeted software tests pass when the5
+process-watchdog tests run outside the filesystem/process sandbox. The combined
+run had67passes and1PermissionError when signalling an orphaned private process
+group; all5watchdog tests then passed outside sandbox with no watchdog changes.
+The tests exercise a mocked complete matched cohort and final-panel dispatch,
+independent paired-seed/RNG snapshot restoration, one-edge bound isolation,
+retention of constructed model artifacts at deadline, independent physical
+coordinate reconstruction, and detection of a frozen-field mutation even after
+its model hash is updated. CLI help, Python compilation, shell syntax and
+whitespace checks pass. These are software checks, not scientific simulation,
+physical movement or biological validation. Server E092 remains planned.
