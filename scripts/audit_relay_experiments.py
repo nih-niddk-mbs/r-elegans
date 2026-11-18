@@ -63,6 +63,7 @@ def audit(run,out):
     parent_features=json.loads((run/'parent_features.json').read_text());saved={}
     for request in sorted((run/'evaluations').glob('*/request.json')):
         folder=request.parent;j=json.loads(request.read_text())
+        if j.get('retain_traces'):print('Auditing retained signals:',folder.name,flush=True)
         try:
             r=json.loads((folder/'summary.json').read_text());saved[str(folder)]=r;counts[r['status']]+=1
             check(Path(r['output']).resolve()==folder and Path(j['output']).resolve()==folder,'Evaluation path mismatch: '+folder.name)
@@ -101,7 +102,8 @@ def audit(run,out):
                     for trace in traces.values():
                         check(np.array_equal(trace['dense_time_s'],base['dense_time_s']),'Clock mismatch: '+folder.name)
                         check(all(np.max(abs(trace[k][before]-base[k][before]))<=1e-8 for k in ('dense_voltage_mV','dense_joints')),'Pre-cue mismatch: '+folder.name)
-                    windows=[r['window'] for c in ('active','response','late') for r in r['paired_features']['no_cue'][c]]
+                    windows=[feature_row['window'] for category in ('active','response','late')
+                             for feature_row in r['paired_features']['no_cue'][category]]
                     write(out/(folder.name+'-signals.json'),dict(windows=signal_windows(base,traces['cue'],ids,threshold,slope,windows)))
                 details.append(row)
         except Exception as e:problems.append(folder.name+': '+repr(e))

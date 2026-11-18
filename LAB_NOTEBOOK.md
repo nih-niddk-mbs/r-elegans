@@ -9511,3 +9511,57 @@ coordinate reconstruction, and detection of a frozen-field mutation even after
 its model hash is updated. CLI help, Python compilation, shell syntax and
 whitespace checks pass. These are software checks, not scientific simulation,
 physical movement or biological validation. Server E092 remains planned.
+
+## 2026-11-18 — E092 server outcome reported; corrected audit required
+
+Evidence: user-pasted server reporter stdout, SHA256
+`7b78d43511ec782185deadf8528f084f547ff3db1f190797e35f562fd2fc47d6`; compact structured record
+[E092-server-summary.json](experiments/records/E092-server-summary.json).
+Run `/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433`.
+Actual server revision/dirty tree/environment and artifacts have not been
+independently inspected. Parent and experimental methods remain in E092 plan.
+
+Six matched generations completed. All seven isolated tests completed: loss
+falls monotonically with AIYR->AIYL strength,0.988791 atfactor1 to0.608637 at1.25.
+The latter crosses the range gate and both repeated cue changes exceed2e-5
+(2.96415e-5/2.25007e-5). Factors below1 worsen loss. Original-cap seed9200/9201
+winners have losses0.980920/0.980745; expanded-cap winners0.605440/0.607544.
+Both expanded-cap models and isolated1.25 model pass reported complete
+engineering panels; both original-cap models fail. Reported same-checkpoint,
+sensory-block, direction and numerical comparisons pass across all five panels.
+This supports a local engineering-cap limitation and weak incremental benefit
+from optimization over the simple perturbation. It does not establish global
+necessity, biological strength values, stopping, restart or swimming.
+
+375 evaluations completed,24 hit search time budget. Original audit counts189
+explicit expanded-prior upper-bound exceptions and0 original-arm exceptions.
+Original receipt:24240.965978s (6h44m00.966s),not timed out, validation complete,
+exit2 and all_steps_finishedFalse due audit failure. Original auditor emitted
+39 UnboundLocalError entries on retained-trace cases; its summary audit_complete
+True denotes end of traversal, while wrapper audit_completeFalse reflects exit2.
+No clean integrity audit or component promotion is evidenced. Keep provisional.
+
+Local code inspection found the signal-window list comprehension uses
+`for r in r['paired_features']...`, shadowing the enclosing result variable.
+The corrected comprehension names each feature row separately. Earlier audit
+fixture exercised metrics-only cases and missed this branch; extend it to raw
+cue/no-cue traces and verify signal output, plus reporter re-audit selection.
+This changes no fitting code, model, bound or acceptance criteria.
+
+Planned corrective action: read-only full saved-data re-audit, dedicated conda
+CPU/x64 interpreter, using the same completed E092 source, all399 evaluation
+records, retained raw data, models/coordinates and optimizer metadata. Command:
+`sh scripts/reaudit_relay_experiments_mbslnx2.sh`. This writes a new timestamped
+sibling audit with exact invocation/source/environment records under nohup;
+preserve original audit and budget receipt. Reporter displays historical receipt
+and newest corrected audit separately, and must not select audit directories as
+training runs or silently fall back to an earlier pass if a new audit is pending.
+No forward simulation/training is needed. Full corrected audit is required
+before more fitting. Actual server re-audit execution/results remain pending.
+
+Corrective local verification:13 focused software tests passed, including both
+retained raw and metrics-only audit paths, generated per-window signal records,
+frozen-field tampering detection and safe report/re-audit selection. Python
+compilation, launcher shell syntax and whitespace checks passed. This validates
+software, not the server's artifacts or experimental qualification. Corrected
+server audit remains pending.

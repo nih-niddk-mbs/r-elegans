@@ -1,0 +1,284 @@
+{
+  "experiment": "E092",
+  "record_date": "2026-11-18",
+  "evidence": "User-reported server stdout; original artifacts not locally inspected",
+  "evidence_sha256": "7b78d43511ec782185deadf8528f084f547ff3db1f190797e35f562fd2fc47d6",
+  "reported_run": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433",
+  "source_revision": null,
+  "execution": {
+    "execution_valid": true,
+    "validation_complete": true,
+    "completed_matched_generations": 6,
+    "stop_reason": "search_time_budget",
+    "failure": null
+  },
+  "scan": [
+    {
+      "name": "factor-0.8",
+      "status": "completed",
+      "cap": "original",
+      "loss": 1.3987434530218659,
+      "range": false,
+      "cue_changes": [
+        -1.7200362076308373e-05,
+        -1.3059536438153607e-05
+      ]
+    },
+    {
+      "name": "factor-0.9",
+      "status": "completed",
+      "cap": "original",
+      "loss": 1.1831090817008785,
+      "range": false,
+      "cue_changes": [
+        -1.9839602054316785e-05,
+        -1.5062479536087636e-05
+      ]
+    },
+    {
+      "name": "factor-1",
+      "status": "completed",
+      "cap": "original",
+      "loss": 0.9887911586298704,
+      "range": false,
+      "cue_changes": [
+        -2.2550011388511315e-05,
+        -1.711936583725926e-05
+      ]
+    },
+    {
+      "name": "factor-1.025",
+      "status": "completed",
+      "cap": "aiyr_2p5",
+      "loss": 0.9437588538146701,
+      "range": false,
+      "cue_changes": [
+        -2.3238808742109818e-05,
+        -1.7642072718149215e-05
+      ]
+    },
+    {
+      "name": "factor-1.05",
+      "status": "completed",
+      "cap": "aiyr_2p5",
+      "loss": 0.900204507228062,
+      "range": false,
+      "cue_changes": [
+        -2.3932103786483694e-05,
+        -1.8168188634537508e-05
+      ]
+    },
+    {
+      "name": "factor-1.1",
+      "status": "completed",
+      "cap": "aiyr_2p5",
+      "loss": 0.8176500514082853,
+      "range": false,
+      "cue_changes": [
+        -2.5332225879859394e-05,
+        -1.9230677075210423e-05
+      ]
+    },
+    {
+      "name": "factor-1.25",
+      "status": "completed",
+      "cap": "aiyr_2p5",
+      "loss": 0.6086368971179666,
+      "range": true,
+      "cue_changes": [
+        -2.964153914775114e-05,
+        -2.2500718829587818e-05
+      ]
+    }
+  ],
+  "matched_arms": [
+    {
+      "name": "original-seed-9200",
+      "loss": 0.9809200441609294,
+      "checkpoint_sha256": "611bdff24bdae81acb3c3575bd7b50ef2328292699094f6c1672a08a12567bd6"
+    },
+    {
+      "name": "original-seed-9201",
+      "loss": 0.9807449232671941,
+      "checkpoint_sha256": "c28539b8b629d9b1c68bb8db8d22b42f70eefbaf7a919815c0676fe7a772b023"
+    },
+    {
+      "name": "aiyr_2p5-seed-9200",
+      "loss": 0.6054395811695041,
+      "checkpoint_sha256": "cb4eb42c948fafee5f7067e98f013e60d21c6b1a0abd8e4c0988453900d65009"
+    },
+    {
+      "name": "aiyr_2p5-seed-9201",
+      "loss": 0.6075436331565912,
+      "checkpoint_sha256": "d3c8f592ee3b99107a08f2e142f41ef46695d5bbbe6ecdddfd68ffb13c79b613"
+    }
+  ],
+  "panels": [
+    {
+      "labels": [
+        "original-seed-9200"
+      ],
+      "cap": "original",
+      "assessment": {
+        "complete": true,
+        "same_checkpoint": true,
+        "numerical_checks": [
+          {
+            "grid": "neural-half",
+            "difference": 7.855359696051778e-10,
+            "passed": true
+          },
+          {
+            "grid": "body-half",
+            "difference": 6.675561992075529e-09,
+            "passed": true
+          }
+        ],
+        "direction_consistent": true,
+        "sensory_block_passed": true,
+        "engineering_criteria_met": false,
+        "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+      }
+    },
+    {
+      "labels": [
+        "original-seed-9201"
+      ],
+      "cap": "original",
+      "assessment": {
+        "complete": true,
+        "same_checkpoint": true,
+        "numerical_checks": [
+          {
+            "grid": "neural-half",
+            "difference": 1.3796420672562704e-09,
+            "passed": true
+          },
+          {
+            "grid": "body-half",
+            "difference": 6.687067122257417e-09,
+            "passed": true
+          }
+        ],
+        "direction_consistent": true,
+        "sensory_block_passed": true,
+        "engineering_criteria_met": false,
+        "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+      }
+    },
+    {
+      "labels": [
+        "aiyr_2p5-seed-9200",
+        "best-all-completed-exploratory"
+      ],
+      "cap": "aiyr_2p5",
+      "assessment": {
+        "complete": true,
+        "same_checkpoint": true,
+        "numerical_checks": [
+          {
+            "grid": "neural-half",
+            "difference": 1.1553251688667387e-09,
+            "passed": true
+          },
+          {
+            "grid": "body-half",
+            "difference": 8.769112658235656e-09,
+            "passed": true
+          }
+        ],
+        "direction_consistent": true,
+        "sensory_block_passed": true,
+        "engineering_criteria_met": true,
+        "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+      }
+    },
+    {
+      "labels": [
+        "aiyr_2p5-seed-9201"
+      ],
+      "cap": "aiyr_2p5",
+      "assessment": {
+        "complete": true,
+        "same_checkpoint": true,
+        "numerical_checks": [
+          {
+            "grid": "neural-half",
+            "difference": 1.5526535612764292e-09,
+            "passed": true
+          },
+          {
+            "grid": "body-half",
+            "difference": 8.763803682754201e-09,
+            "passed": true
+          }
+        ],
+        "direction_consistent": true,
+        "sensory_block_passed": true,
+        "engineering_criteria_met": true,
+        "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+      }
+    },
+    {
+      "labels": [
+        "best-single-edge"
+      ],
+      "cap": "aiyr_2p5",
+      "assessment": {
+        "complete": true,
+        "same_checkpoint": true,
+        "numerical_checks": [
+          {
+            "grid": "neural-half",
+            "difference": 1.396125770547485e-09,
+            "passed": true
+          },
+          {
+            "grid": "body-half",
+            "difference": 8.755243308122829e-09,
+            "passed": true
+          }
+        ],
+        "direction_consistent": true,
+        "sensory_block_passed": true,
+        "engineering_criteria_met": true,
+        "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+      }
+    }
+  ],
+  "original_budget_receipt": {
+    "exit_code": 2,
+    "timed_out": false,
+    "total_elapsed_seconds": 24240.965978411958,
+    "total_minutes": 480.0,
+    "all_steps_finished": false,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model",
+    "audit_exit_code": 2,
+    "audit_timed_out": false,
+    "audit_complete": false,
+    "audit_integrity_passed": false,
+    "audit_report": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433-audit/summary.json",
+    "post_audit_component_qualified": false
+  },
+  "original_audit": {
+    "audit_complete": true,
+    "integrity_passed": false,
+    "problem_count": 39,
+    "error": "factor-1: UnboundLocalError(\"cannot access local variable 'r' where it is not associated with a value\")",
+    "status_counts": {
+      "completed": 375,
+      "time_budget": 24
+    },
+    "deliberate_original_upper_bound_exceptions": {
+      "original": 0,
+      "aiyr_2p5": 189
+    }
+  },
+  "interpretation": "Expanded one-edge cap is a local limitation: both matched expanded-cap seeds and isolated factor1.25 pass engineering relay panels; both original-cap seeds fail. Provisional until corrected complete audit succeeds. No learned stopping/swimming/biological qualification.",
+  "correction": "Local audit bug: retained-trace signal-window comprehension shadows outer result r and reads an unbound local r. Fix renames feature-row loop variable. Changes audit/reporting only, no model/fitting/criteria changes. Original audit/receipt preserved.",
+  "next_step": "Read-only corrected full saved-data re-audit into a new timestamped sibling; no retraining. Execution pending.",
+  "command": "sh scripts/reaudit_relay_experiments_mbslnx2.sh",
+  "local_verification": "13 focused software tests passed, including retained and metrics-only raw-audit paths, signal-window generation, fixed-field tampering detection, and re-audit report selection. Python compilation, shell syntax and whitespace checks passed. No server re-audit result asserted."
+}

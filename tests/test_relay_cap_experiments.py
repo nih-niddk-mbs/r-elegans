@@ -146,7 +146,8 @@ def test_coordinator_completes_matched_cohort_and_deduplicated_final_panel(tmp_p
         assert (out/'optimizer'/name/'final/optimizer.pkl').exists()
 
 
-def test_saved_data_audit_runs_and_rejects_changed_frozen_array(tmp_path):
+@pytest.mark.parametrize('retain',[False,True])
+def test_saved_data_audit_runs_and_rejects_changed_frozen_array(tmp_path,retain):
     from pathlib import Path
     from scripts.audit_relay_experiments import audit
     from scripts.experiment_records import file_sha256
@@ -168,21 +169,54 @@ def test_saved_data_audit_runs_and_rejects_changed_frozen_array(tmp_path):
     write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=file_sha256(reference)))
     write(inputs/'manifest.json',dict(sha256={p.name:file_sha256(p) for p in inputs.iterdir()}))
     write(run/'configuration.json',dict(parent_sha256=file_sha256(inputs/'sensory_parent.npz'),only_extended_coordinate=edge))
-    paired=relay_pair();write(run/'parent_features.json',paired['no_cue'])
+    paired=relay_pair();traces={}
+    if retain:
+        from r_elegans.relay_range import features
+        from scipy.special import logit
+        t=np.arange(0.,70.001,.02)
+        for condition in ('no_cue','cue'):
+            release=np.full(len(t),.94)
+            if condition=='cue':release[(t>=41)&(t<46)]+=.0001
+            voltage=np.full((len(t),len(ids)),-40.)
+            voltage[:,ids.index('AIYL')]=-40+5*logit(release)
+            traces[condition]=dict(dense_time_s=t,dense_voltage_mV=voltage,
+                dense_joints=.01*np.sin(2*np.pi*1.8*t[:,None]+np.arange(11)[None,:]/10))
+            paired[condition]=features(traces[condition],ids,'nominal',-40.,5.)
+    write(run/'parent_features.json',paired['no_cue'])
     folder=run/'evaluations/case';folder.mkdir(parents=True)
     np.savez(folder/'network.npz',**data);np.savez(folder/'coordinates.npz',offsets=origin,z=np.zeros(len(schemas['original'])))
-    request=dict(output=str(folder),cap='original',kind='fit',z=[0.]*len(schemas['original']),retain_traces=False,
+    request=dict(output=str(folder),cap='original',kind='fit',z=[0.]*len(schemas['original']),retain_traces=retain,
         variant='nominal',mode='normal',parent_features=paired['no_cue'],target=.02,margin=1.3,response_aggregation='weakest')
     write(folder/'request.json',request)
     result=dict(status='completed',output=str(folder),checkpoint_sha256=file_sha256(folder/'network.npz'),
         coordinates_sha256=file_sha256(folder/'coordinates.npz'),paired_features=paired,
         metrics=score(paired,paired['no_cue'],.02,1.3,response_aggregation='weakest'),trajectory_sha256={})
+    for condition,trace in traces.items():
+        np.savez_compressed(folder/(condition+'.npz'),**trace)
+        result['trajectory_sha256'][condition]=file_sha256(folder/(condition+'.npz'))
     write(folder/'summary.json',result)
     write(run/'summary.json',dict(evaluation_count=1,panels=[],scan=[result],scan_controls=[],arms={},completed_matched_generations=0))
     assert audit(run,tmp_path/'audit')==0
+    if retain:
+        signals=json.loads((tmp_path/'audit/case-signals.json').read_text())['windows']
+        assert len(signals)==4 and 'AIYL' in signals[0]['release_by_neuron']
     data['fixed_release_slope_mV']=np.full(4,6.);np.savez(folder/'network.npz',**data)
     # Even updating the recorded model hash cannot hide a frozen-field mutation.
     result['checkpoint_sha256']=file_sha256(folder/'network.npz');write(folder/'summary.json',result)
     assert audit(run,tmp_path/'bad-audit')==2
     problems=json.loads((tmp_path/'bad-audit/summary.json').read_text())['problems']
     assert any('Frozen model changed' in p for p in problems)
+
+
+def test_report_keeps_reaudits_separate_and_does_not_hide_pending_audit(tmp_path):
+    from scripts.report_relay_experiments import latest_run,audit_path
+    run=tmp_path/'relay-experiments-20261118T035453Z-398433';run.mkdir()
+    (run/'configuration.json').write_text('{}')
+    original=tmp_path/(run.name+'-audit');original.mkdir()
+    (original/'summary.json').write_text('{"integrity_passed":false}')
+    corrected=tmp_path/(run.name+'-audit-20261118T120000Z-1');corrected.mkdir()
+    assert latest_run(tmp_path)==run
+    assert audit_path(run)==corrected/'summary.json'
+    assert not audit_path(run).exists()  # Pending latest audit stays pending.
+    (corrected/'summary.json').write_text('{"integrity_passed":true}')
+    assert audit_path(run)==corrected/'summary.json'

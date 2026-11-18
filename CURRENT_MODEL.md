@@ -1,5 +1,17 @@
 # Current model: exact scope and computation path
 
+2026-11-18 E092 reported: six matched generations; both original-cap seeds
+fail relay criteria, both expanded-cap seeds and the isolated1.25 edge factor
+pass their engineering panels. This supports a local cap limitation. Validation
+completed in6h44m01s total, but saved-data audit failed on a retained-trace Python
+variable-shadowing bug. Results remain provisional; no parent/behavior promotion.
+Audit-only correction prepared; original audit/budget receipt remain historical.
+Run `sh scripts/reaudit_relay_experiments_mbslnx2.sh` for a fresh read-only full
+audit, then `python -m scripts.report_relay_experiments`. No retraining required.
+[Reported outcome](experiments/records/E092-server-summary.json). Corrected server
+audit execution/results are pending.
+
+
 2026-11-17 E092 planned: an eight-hour TOTAL diagnostic suite will test the
 AIYR->AIYL engineering cap before more identical optimization. Seven isolated
 edge factors (0.8..1.25), then two matched seeds per original versus one-edge
