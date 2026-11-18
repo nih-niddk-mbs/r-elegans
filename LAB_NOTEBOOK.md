@@ -9952,3 +9952,31 @@ Interpretation (hypothesis): the limit is low cue gain at AWA->AIY and the
 operating points (AIYL saturated, RIAR near off), not the number of trained
 groups or local bounds. Decision: no new fit launched; E092-E094 checkpoints
 and negative outcomes retained.
+
+### E094 bound rows for AWA/AIY groups (user-reported, same details report)
+
+Printed columns: coordinates, latent, local log change from parent, declared
+upper room (log), declared lower room (log). "Near local bound" in the report
+uses |latent|>=0.99 and does NOT flag declared-prior caps; correction to the
+"bounds not binding" reading above, which applied to local boxes only.
+
+- Right cue path moved toward declared caps: AWAR->AIYR +0.145 log (latent
+  0.562), upper room 0.113 log (~12% more strength); AIBR->AIYR +0.251, upper
+  room 0.087 (~9%); AWAR densities +0.18/+0.21 (room 0.41/0.44). AIYR->RIAR
+  +0.145 (room 0.78). Latents are at 0.56/0.74 of their (declared-clipped) boxes,
+  so not pinned, but little further expansion is allowed by the original prior.
+- Left path is pinned by the parent: AIYL inward/outward densities moved only
+  -3e-4/+1.4e-4 log and sit at their declared lower/upper limits (room 6e-4 /
+  1.2e-4); ASER->AIYL, AFDL->AIYL, AUAL->AIYL are within 0.004-0.024 log of a
+  cap; AIYR->AIYL stays at the E092 one-edge cap (room 4e-5, +6e-5 change).
+  AWAL->AIYL has upper room 1.32 but moved only -0.016, with AIYL saturated
+  (release 0.979), so more AWAL->AIYL gain is not obviously useful.
+- Other larger moves: RIH->AIYL -0.300, AWCR->AIYL -0.168, AWCR->AIYR/ASER->AIYR
+  -0.146/-0.332, AWAL density outward -0.228. Per-coordinate response (cause)
+  not supplied.
+
+Interpretation (hypothesis): original-prior caps limit extra AWA->AIYR gain to
+~12% and AIYL is held at saturation by earlier relay training; the first-order
+cue gain from AWA into the relay is therefore prior/operating-point limited.
+Not tested: whether relaxing these caps would yield 1% motion reduction. No
+fit launched.
