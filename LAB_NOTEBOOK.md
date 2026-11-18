@@ -9853,3 +9853,59 @@ non-overlapping with E093 groups unchanged, worst-region term only when enabled,
 replay combiner, E094 budget dispatch/audit hooks). The audit accepts E093 and
 E094; the E093 scoring path is unchanged by construction (existing tests pass).
 No scientific forward run.
+
+## 2026-11-18 — E094 audited negative outcome reported
+
+Evidence: user-pasted `report_sensory_motion` stdout (hash not computed; the
+paste was not saved to a file); record
+[E094-server-summary.json](experiments/records/E094-server-summary.json). Run
+`/home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320`,
+selected SHA256 `4d57367e4c9bc67dff1b3906b7ee233e3d59b47bf1efcd07c073b11a885f0c52`.
+Server source/dirty state/environment not inspected; plan commit 67f516e was
+pushed before launch but the server revision was not printed.
+
+Post-run audit.
+- Execution/budget: valid, no failure; 9 complete generations; 10173.95 s
+  (2h49m33.95s) inside 240 min; stop reason search_time_budget; exit 0.
+  Records: 129 completed, 4 time_budget (133, as E093). Inference, not stated:
+  the tenth cohort was incomplete (8 completed, 4 timed out) and never told to
+  CMA; whether the selected checkpoint came from it is not supplied.
+- Integrity: saved-data audit complete, integrity passed, no problems; 133
+  deliberate original-upper-bound exceptions under the declared one-edge prior.
+- Candidate/progress: one panel, same checkpoint in all 11 cases. Matched
+  parent-versus-selected loss and per-generation progress NOT supplied.
+- Parameters/bounds/frozen fields: changed/frozen counts, bound room and the
+  frozen-field check NOT supplied (audit passed its coordinate/bound checks).
+- Behavioral gates: training stays at the first 1% rung. Nominal reduction
+  tail/middle/head 0.0564%/0.1059%/0.0943% (E093 0.0433/0.1130/0.1135), about
+  18x short of 1% in the best region; all cases fail partial attenuation.
+  Baseline, recovery, safety and AIYL relay preservation pass. No rest/restart,
+  start/stop or swimming qualification.
+- Objective check (recomputed from reported ratios): mean squared deficit
+  0.8367 (E093 0.8293) and worst-region term 0.8904 (E093 0.9153), total
+  1.7271 as reported. The worst-region term did its job (tail up, 0.0433 ->
+  0.0564%) by trading middle/head down; mean deficit is 0.9% worse. This is
+  not a loss-reduction claim against E093 (different objectives).
+- Numerical: neural/body half-grid differences 5.51e-5 / 1.38e-6 pass; the
+  tolerance does not certify arbitrary relative accuracy of this tiny response.
+- Controls: sensory block gives ratios exactly 1 and zero AIYL response.
+  Dependence still fails. Replaying AIYL->RIAL with AIYR->RIAR leaves the
+  worst-region ratio 0.999447 vs 0.999436 (not reduced). Replaying RIAL->SMD
+  with RIAR->SMD gives 1.000684 (reduced). Same pattern as E093: the RIA
+  output carries the small response, the tested AIY->RIA edges on both sides
+  do not. Other RIA inputs, gap coupling, feedback or phase effects are not
+  excluded; no causal pathway is established.
+- Signal propagation: AIYL release change -3.03e-5 (E093 -2.96e-5);
+  AIYR/RIAR/AWAR changes not supplied.
+
+Interpretation: adding the right path and a worst-region term barely moved the
+response. The result does not support "training the right AWA-AIY-RIA relay
+unlocks motor suppression"; it is consistent with RIA being driven mostly by
+inputs other than the AIYs (E093 detail showed RMDR, AIZL, RIAR currents into
+RIAL exceeding AIYL), but this is a hypothesis. Decision: retain the E092/E093/
+E094 checkpoints and negative results; no automatic parent promotion; no
+further fitting launched. First run the read-only saved-data report (now
+accepts E094, uses the worst-region score, and adds AIYR->RIAR, RIAR inputs
+and RIAR->SMD): 
+`python -m scripts.report_sensory_motion --details --run /home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320`.
+Local software verification: 18 focused tests pass; no scientific forward run.

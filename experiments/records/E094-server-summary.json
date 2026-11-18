@@ -1,0 +1,66 @@
+{
+ "experiment": "E094",
+ "record_date": "2026-11-18",
+ "evidence": "User-pasted report_sensory_motion stdout; server artifacts/source/environment not independently inspected",
+ "evidence_sha256": null,
+ "evidence_note": "Pasted stdout was not saved to a file here, so no hash was computed. Do not infer one.",
+ "run": "/home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320",
+ "audit_report": "/home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320-audit/summary.json",
+ "checkpoint_sha256": "4d57367e4c9bc67dff1b3906b7ee233e3d59b47bf1efcd07c073b11a885f0c52",
+ "source_revision": null,
+ "source_revision_note": "Plan commit 67f516e was pushed before launch; the server revision/dirty state was not printed.",
+ "execution": {
+  "execution_valid": true,
+  "validation_complete": true,
+  "completed_generations": 9,
+  "target": 0.01,
+  "stop_reason": "search_time_budget",
+  "failure": null,
+  "total_elapsed_seconds": 10173.950453092984,
+  "exit_code": 0,
+  "timed_out": false,
+  "all_steps_finished": true,
+  "audit_complete": true,
+  "audit_integrity_passed": true,
+  "audit_problems": [],
+  "status_counts": {"completed": 129, "time_budget": 4},
+  "deliberate_original_upper_bound_exceptions": 133,
+  "sensory_motion_component_qualified": false,
+  "rest_restart_component_qualified": false,
+  "full_start_stop_qualified": false,
+  "post_audit_component_qualified": false
+ },
+ "nominal_motion_reduction_percent_tail_middle_head": [0.05640146, 0.10588567, 0.09428772],
+ "e093_nominal_motion_reduction_percent_tail_middle_head": [0.04330794, 0.11302221, 0.11349375],
+ "nominal_loss_components_at_margin_1": {
+  "mean_squared_deficit": 0.8367111269122441,
+  "worst_region_squared_deficit": 0.8903782118095517,
+  "reported_total_loss": 1.7270893387217958,
+  "e093_mean_squared_deficit": 0.8292942166273795,
+  "e093_worst_region_squared_deficit": 0.9152597149874657
+ },
+ "assessment": {
+  "same_checkpoint": true,
+  "numerical_checks": [
+   {"grid": "neural-half", "difference": 5.514962362040965e-05, "passed": true},
+   {"grid": "body-half", "difference": 1.3774934695121033e-06, "passed": true}
+  ],
+  "sensory_block_passed": true,
+  "control_interneuron_dependence_passed": false,
+  "engineering_criteria_met": false
+ },
+ "replay_diagnostics": {
+  "relay_replay_AIYL_to_RIAL_and_AIYR_to_RIAR": {"original_worst_region_ratio": 0.9994359854377248, "replay_worst_region_ratio": 0.9994472802564833, "cue_attenuation_reduced": false},
+  "rial_replay_RIAL_and_RIAR_to_SMD": {"original_worst_region_ratio": 0.9994359854377248, "replay_worst_region_ratio": 1.0006838816390529, "cue_attenuation_reduced": true}
+ },
+ "relay_response_mean_changes_nominal": [-3.0326536256009007e-05],
+ "not_supplied": [
+  "matched parent-versus-selected loss",
+  "per-generation selected loss and weakest-region suppression",
+  "changed/frozen coordinate counts and frozen-field check",
+  "bound room per group, including right-path groups",
+  "AIYR/RIAR release and current changes",
+  "whether the selected checkpoint came from the incomplete tenth cohort",
+  "server source/dirty state and environment"
+ ]
+}

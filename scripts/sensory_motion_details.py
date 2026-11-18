@@ -1,4 +1,4 @@
-"""Read-only E093 bounds, matched progress and sampled signal/current report.
+"""Read-only E093/E094 bounds, matched progress and sampled signal/current report.
 
 Currents are reconstructed at saved samples. They are not integrated current
 balances, physiological measurements or new causal interventions.
@@ -52,9 +52,10 @@ def analyze(run,out=None):
     if any(out==r or r in out.parents or out in r.parents for r in (run,repo)):raise ValueError('Separate external analysis output required')
     s=json.loads((run/'summary.json').read_text());audit_folder=run.with_name(run.name+'-audit')
     audit=json.loads((audit_folder/'summary.json').read_text());receipt=json.loads((run/'budget_receipt.json').read_text())
-    if s.get('experiment')!='E093' or not s.get('execution_valid') or not s.get('validation_complete') or not receipt.get('all_steps_finished') or not audit.get('integrity_passed') or not audit.get('audit_complete'):
-        raise ValueError('Completed E093 with clean saved-data audit required')
-    if len(s['panels'])!=1:raise ValueError('Unique E093 panel required')
+    if s.get('experiment') not in ('E093','E094') or not s.get('execution_valid') or not s.get('validation_complete') or not receipt.get('all_steps_finished') or not audit.get('integrity_passed') or not audit.get('audit_complete'):
+        raise ValueError('Completed E093/E094 with clean saved-data audit required')
+    if len(s['panels'])!=1:raise ValueError('Unique motion panel required')
+    config=json.loads((run/'configuration.json').read_text());worst=bool(config.get('worst_region_term'));bilateral=bool(config.get('bilateral'))
     panel=s['panels'][0];folder=Path(panel['training_output']).resolve()
     if run not in folder.parents:raise ValueError('Selected model outside source run')
     out.mkdir(parents=True,exist_ok=False);capture_run_record(out,repo,dict(run=str(run),output_dir=str(out),method='saved-data-only'))
@@ -77,14 +78,14 @@ def analyze(run,out=None):
     with np.load(folder/'coordinates.npz',allow_pickle=False) as z:offsets,point=z['offsets'],z['z']
     groups=load(run/'inputs/cap_groups.json')['aiyr_2p5'];parent=load(run/'parent_features.json')
     initial=load(run/'evaluations/parent-redundant/summary.json');selected=load(folder/'summary.json')
-    target=s['target'];baseline_score=score(initial['paired_features'],parent,target,1.)
-    selected_score=score(selected['paired_features'],parent,target,1.)
+    target=s['target'];baseline_score=score(initial['paired_features'],parent,target,1.,worst)
+    selected_score=score(selected['paired_features'],parent,target,1.,worst)
     history=load(run/'generation_history.json') if (run/'generation_history.json').exists() else []
     progress=[]
     for entry in history:
         path=Path(entry['selected_evaluation']).resolve()
         if run not in path.parents:raise ValueError('History model outside source run')
-        r=load(path/'summary.json');m=score(r['paired_features'],parent,target,1.)
+        r=load(path/'summary.json');m=score(r['paired_features'],parent,target,1.,worst)
         progress.append(dict(generation=entry['generation'],checkpoint_sha256=r['checkpoint_sha256'],loss_at_final_target=m['loss'],
             minimum_regional_suppression_percent=float(100*(1-np.max(m['regional_motion_ratios'])))))
     from r_elegans.avb_audit import load_saved_network
@@ -104,7 +105,7 @@ def analyze(run,out=None):
             if len(ix)<4:raise ValueError('Missing saved signal window')
             a0,b0=v0[ix],v1[ix];cells=[]
             for i,name in enumerate(n['ids']):
-                if name not in ('AWAL','AWAR','AIYL','AIYR','RIAL') and not name.startswith('SMD'):continue
+                if name not in ('AWAL','AWAR','AIYL','AIYR','RIAL','RIAR') and not name.startswith('SMD'):continue
                 ra=expit((a0[:,i]-n['threshold'][i])/n['slope'][i]);rb=expit((b0[:,i]-n['threshold'][i])/n['slope'][i])
                 cells.append(dict(neuron=name,no_cue_voltage_mean_mV=float(a0[:,i].mean()),cue_voltage_mean_mV=float(b0[:,i].mean()),
                     voltage_difference_rms_mV=float(np.sqrt(np.mean((a0[:,i]-b0[:,i])**2))),
@@ -117,6 +118,11 @@ def analyze(run,out=None):
             output=[edge_summary(a0,b0,n,i,rial) for i,name in enumerate(n['ids']) if name.startswith('SMD') and (n['chemical'][i,rial]>0 or n['gap'][i,rial]>0)]
             signals.append(dict(category=category,window=[a,b],samples=len(ix),sample_stride=stride,cells=cells,
                 AIYL_to_RIAL=edge_summary(a0,b0,n,rial,ai),top_RIAL_presynaptic_current_changes=incoming[:6],RIAL_to_SMD=output))
+            if bilateral:
+                rr=n['ids'].index('RIAR');air=n['ids'].index('AIYR')
+                right_in=sorted([edge_summary(a0,b0,n,rr,i) for i in range(len(n['ids'])) if n['chemical'][rr,i]>0 or n['gap'][rr,i]>0],key=lambda e:e['presynaptic_total_delta_rms_pA'],reverse=True)
+                signals[-1].update(AIYR_to_RIAR=edge_summary(a0,b0,n,rr,air),top_RIAR_presynaptic_current_changes=right_in[:6],
+                    RIAR_to_SMD=[edge_summary(a0,b0,n,i,rr) for i,name in enumerate(n['ids']) if name.startswith('SMD') and (n['chemical'][i,rr]>0 or n['gap'][i,rr]>0)])
     bounds=bound_rows(groups,point,origin,offsets,lower,upper,edge)
     result=dict(run=str(run),checkpoint_sha256=panel['checkpoint_sha256'],target=target,
         baseline_and_selected_protocol='redundant; both re-scored at final target and margin1',
