@@ -1,5 +1,20 @@
 # r-elegans
 
+2026-11-18 E093 prepared (execution pending): four-hour TOTAL sensory motion
+curriculum from E092's audited isolated1.25-edge parent, resolved and SHA-pinned
+at runtime with no fallback. Retain the explicit one-edge expanded prior. Train
+regional body angular-speed RMS reductions1/2/5/10/25/50/75/95%, requiring baseline
+wiggle, AIYL relay preservation and cue-off recovery. Fit focused sensory/relay
+parameters plus RIAL channels/existing SMD outputs; physics, sensory gains, NMJs
+and other parameters fixed. Eight CPU workers if available. Repeated/varied cues,
+sensory block, both AIYL/RIAL branch replay controls, numerical checks and full
+saved-data audit included within240min. Rest/restart is a component; initial
+sensory initiation from rest and swimming remain unqualified. No result yet.
+[Plan](experiments/records/E093-plan.json).
+Launch: `sh scripts/launch_sensory_motion_mbslnx2.sh`.
+Report: `python -m scripts.report_sensory_motion`.
+
+
 2026-11-18 E092 corrected audit PASSED (user-reported): no integrity
 problems;375 completed/24 time-budget evaluations, six matched generations.
 Both expanded-cap seeds and the isolated1.25 AIYR->AIYL strength factor pass

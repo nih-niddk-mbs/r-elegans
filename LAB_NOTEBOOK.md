@@ -9608,3 +9608,82 @@ single-edge hash or artifact path is invented.
 Recordkeeping verification: structured JSON parses and whitespace checks only;
 no new software or scientific forward test was needed for this documentation
 update. Corrected audit success above is user-reported server evidence.
+
+## 2026-11-18 — E093 planned: sensory body-motion suppression and restart,4h total
+
+User authorizes4h training. Question and exact method:
+[E093-plan.json](experiments/records/E093-plan.json). Select the simplest E092
+passing isolated1.25 AIYR->AIYL model, not an optimizer alternative or random
+fallback. Its SHA was not printed in supplied stdout: runtime must select the
+unique clean-audited best-single-edge panel, match the factor1.25 scan, verify
+model/coordinate/no-cue hashes, prove the isolated coordinate change and exact
+physical reconstruction, then record the resolved SHA. Latest corrected audit
+must be clean and agree with all E092 panels. Preserve old failed receipt.
+
+Command: `sh scripts/launch_sensory_motion_mbslnx2.sh` after pulling. Dedicated
+conda CPU/x64 interpreter;8workers x4physical cores when possible (else4x4).
+Maximum240min TOTAL includes preparation, nominal exact-reference reproduction,
+redundant83s parent baseline, fitting,11final cases, automatic saved-data audit
+and cleanup. Reserve70min final validation and20min audit. Runtime watchdog
+terminates private process groups; incomplete validation never qualifies.
+
+Fresh CMA seed9300,population12,sigma.3. Grade regional joint angular-speed RMS
+attenuation through1%,2%,5%,10%,25%,50%,75%,95%, training margin1.05. Dense time
+steps measure actual motion rate; both slower oscillation and smaller bends can
+improve it, so this is not a pure cadence claim. All regions and both response
+windows must improve. Preserve no-cue amplitude/frequency/motion and AIYL range/
+responsiveness/recovery. Cue-off rate residual must be <=25% of target (floor
+1e-5) as well as baseline gait within10%; partial suppression cannot masquerade
+as recovery merely by falling within the wider baseline tolerance. At rest,
+cue-on oscillation is permitted to vanish; cue-off movement must return.
+
+Focused AWAL/AIYL density/incoming-connection and AIYL->RIAL groups remain;
+add RIAL nonleak inward/outward densities and existing RIAL->SMD chemical outputs.
+All other parameters including other motor channels, gaps, NMJs, sensory gains,
+mechanics/water/physical clocks/signs/kinetics/leak/capacitance/release fixed.
+Admit only E092's explicitly documented AIYR->AIYL cap2.5 exception; no other
+original bounds change. Recenter local boxes within+-0.4log. No forcing/clamp
+or release replay in fitting. Keep source as an experiment-specific parent,
+not a silent global standard-prior promotion.
+
+Training uses existing redundant cue40..50/53..63 with response41..46/54..59 and
+baseline/recovery30..40/73..83. Advance only after complete-population margin
+pass; preserve eligible completed points in partial populations without telling
+an incomplete CMA population. Stage/restart optimizers save RNG and pending
+points; seed9300+restart,sigma.15. All good stage models remain externally saved.
+Validate the changed model itself at the highest achieved rung across six cue
+variants, both refined grids, sensory block, and separate AIYL->RIAL and
+RIAL->SMD no-cue-release replay controls. Require recovered baseline and reduced
+attenuation under both counterfactuals. Separate replay-cache keys prevent one
+intervention from reusing the other intervention's factory. The no-cue/normal
+cache behavior remains shared as before.
+
+The audit is extended to E093 while retaining E092 checks/schema: all source/
+model/coordinate/raw/optimizer hashes, physical/frozen/bound checks, raw-feature
+and score recomputation, stage/release signals, motion/recovery diagnostics,
+independent replay-mediation checks, selected-model and generation records.
+All weights/RNG/metadata retained, parents and finals have full raw; routine
+candidates metrics-only.30GiB run cap/50GiB free reserve, stop search above15GiB.
+
+Qualification is reversible sensory-dependent suppression; >=95% suppression
+plus<=10% residual cyclic amplitude may qualify a rest/restart component after
+all controls. Cue-off restart is distinct from initial sensory initiation from
+rest. full_start_stop_qualified and swimming_qualified remainFalse, H1.2 still
+blocks subsequent behavior training. This is not a test of bistable pulse
+memory. Source/parameters/criteria and negative results stay in the record.
+
+Status: local software verification in progress; no E093 scientific forward fit
+or server execution/results evidenced. Report: `python -m scripts.report_sensory_motion`.
+
+E093 local implementation verification outcome:77 focused software tests pass.
+Coverage includes monotonic reward for small movement-rate reductions, all-region
+and relay preservation requirements, quiet cue-on rest with cue-off recovery,
+complete varied/repeated/control panel requirements, independent AIYL/RIAL
+replay caches, exact expanded-parent reconstruction and bound enforcement,
+positive clean-audit parent admission and rejection of changed coordinates
+against audit evidence, mocked curriculum/final orchestration with optimizer
+state retained, retained/metrics-only E092/E093 audit paths and root-qualification
+consistency, plus total-budget dispatch. Compilation, CLI help, shell syntax and
+whitespace checks pass. Synthetic traces/parameter fixtures and mocked jobs
+validate software; no scientific forward Mac fit or server E093 execution is
+claimed. The launcher is prepared for user execution; outcomes remain pending.

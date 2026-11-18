@@ -147,7 +147,8 @@ def test_coordinator_completes_matched_cohort_and_deduplicated_final_panel(tmp_p
 
 
 @pytest.mark.parametrize('retain',[False,True])
-def test_saved_data_audit_runs_and_rejects_changed_frozen_array(tmp_path,retain):
+@pytest.mark.parametrize('motion',[False,True])
+def test_saved_data_audit_runs_and_rejects_changed_frozen_array(tmp_path,retain,motion):
     from pathlib import Path
     from scripts.audit_relay_experiments import audit
     from scripts.experiment_records import file_sha256
@@ -163,15 +164,28 @@ def test_saved_data_audit_runs_and_rejects_changed_frozen_array(tmp_path,retain)
     np.savez(inputs/'sensory_parent_coordinates.npz',offsets=origin)
     np.savez(inputs/'source_bounds.npz',lower=lower,upper=upper)
     np.savez(inputs/'cap_prior.npz',origin=origin,lower=lower,upper=upper,edge=edge)
-    schemas={cap:parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge)) for cap in ('original','aiyr_2p5')}
+    groups_fn=parameter_groups
+    if motion:
+        from r_elegans.sensory_motion import parameter_groups as motion_groups
+        groups_fn=motion_groups
+    schemas={cap:groups_fn(spec,ids,origin,lower,upper_for(cap,upper,edge)) for cap in ('original','aiyr_2p5')}
     write(inputs/'cap_groups.json',schemas)
     reference=tmp_path/'external-trace';reference.write_bytes(b'reference evidence')
     write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=file_sha256(reference)))
     write(inputs/'manifest.json',dict(sha256={p.name:file_sha256(p) for p in inputs.iterdir()}))
     write(run/'configuration.json',dict(parent_sha256=file_sha256(inputs/'sensory_parent.npz'),only_extended_coordinate=edge))
     paired=relay_pair();traces={}
-    if retain:
+    if motion:
+        from r_elegans.sensory_motion import score
+        np.savez(inputs/'motion_parent.npz',**data)
+        np.savez(inputs/'motion_parent_coordinates.npz',offsets=origin)
+        manifest=json.loads((inputs/'manifest.json').read_text())
+        for name in ('motion_parent.npz','motion_parent_coordinates.npz'):manifest['sha256'][name]=file_sha256(inputs/name)
+        write(inputs/'manifest.json',manifest)
+    if retain or motion:
         from r_elegans.relay_range import features
+        if motion:
+            from r_elegans.sensory_motion import features
         from scipy.special import logit
         t=np.arange(0.,70.001,.02)
         for condition in ('no_cue','cue'):
@@ -190,12 +204,13 @@ def test_saved_data_audit_runs_and_rejects_changed_frozen_array(tmp_path,retain)
     write(folder/'request.json',request)
     result=dict(status='completed',output=str(folder),checkpoint_sha256=file_sha256(folder/'network.npz'),
         coordinates_sha256=file_sha256(folder/'coordinates.npz'),paired_features=paired,
-        metrics=score(paired,paired['no_cue'],.02,1.3,response_aggregation='weakest'),trajectory_sha256={})
-    for condition,trace in traces.items():
+        metrics=score(paired,paired['no_cue'],.02,1.05 if motion else 1.3,**({} if motion else dict(response_aggregation='weakest'))),trajectory_sha256={})
+    if motion:request['margin']=1.05;write(folder/'request.json',request)
+    for condition,trace in (traces.items() if retain else []):
         np.savez_compressed(folder/(condition+'.npz'),**trace)
         result['trajectory_sha256'][condition]=file_sha256(folder/(condition+'.npz'))
     write(folder/'summary.json',result)
-    write(run/'summary.json',dict(evaluation_count=1,panels=[],scan=[result],scan_controls=[],arms={},completed_matched_generations=0))
+    write(run/'summary.json',dict(experiment='E093' if motion else 'E092',evaluation_count=1,panels=[],scan=[result],scan_controls=[],arms={},completed_matched_generations=0,completed_generations=0))
     assert audit(run,tmp_path/'audit')==0
     if retain:
         signals=json.loads((tmp_path/'audit/case-signals.json').read_text())['windows']

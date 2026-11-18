@@ -1,0 +1,64 @@
+{
+  "experiment": "E093",
+  "record_date": "2026-11-18",
+  "status": "planned_server_execution_not_evidenced",
+  "question": "Can the audited expanded-prior relay parent support sensory-dependent graded body-motion suppression, sustained cue-on execution/rest and cue-off recovery/restart, preserving baseline wiggle and relay responsiveness?",
+  "source_run": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433",
+  "parent": "Unique passing E092 best-single-edge panel; must equal factor1.25 scan model. Select nominal ordinary normal retained source trace. No fitted/random fallback.",
+  "parent_checkpoint_sha256": null,
+  "pinning": "The single-edge hash was not printed in supplied stdout. Runtime requires latest clean corrected E092 audit and exact panel agreement, verifies model/coordinate/no-cue hashes, checks source E091 parent0020499c6b900183e954a0e577563584c7ffa19e9cd5264f90c584d8b5b116da, proves only AIYR->AIYL log coordinate differs by log1.25, reconstructs exact parameters, copies hashes and pins resolved SHA in new configuration/input manifest before fitting. No invented hash.",
+  "initialization": "Fresh CMA at selected parent with recentered local boxes; not exact optimizer/RNG resume. Retain all original dependencies externally.",
+  "command": "sh scripts/launch_sensory_motion_mbslnx2.sh",
+  "report": "python -m scripts.report_sensory_motion",
+  "budget": {
+    "total_minutes": 240,
+    "includes": [
+      "source admission",
+      "input preparation",
+      "parent nominal reproduction",
+      "parent redundant-cue baseline",
+      "training",
+      "11-case validation",
+      "automatic full saved-data audit",
+      "cleanup/reporting"
+    ],
+    "validation_reserve_minutes": 70,
+    "audit_reserve_minutes": 20,
+    "watchdog": "Private process groups with hard outer total deadline. Incomplete/timeout validation cannot qualify."
+  },
+  "environment": "Dedicated /home/carsonc/miniconda3/envs/r-elegans/bin/python; CPU JAX float64; cma==4.4.1; 8 workers x4 physical cores if >=32 available else4x4 with known topology. Source/dirty tree/argv/environment captured at runtime.",
+  "optimizer": {
+    "seed": 9300,
+    "population": 12,
+    "sigma": 0.3,
+    "rungs": [
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.95
+    ],
+    "training_margin": 1.05,
+    "advance": "After complete population and training-margin pass; re-score incumbent explicitly at next target. All eligible completed partial-population points retained; incomplete population never told.",
+    "restarts": "On stage advance, optimizer termination, or every8 completed generations: at incumbent, sigma.15 and seed9300+restart. Save initial/asked/told/restart/final optimizer+RNG and pending points."
+  },
+  "trainable": "Focused AWAL/AIYL nonleak density groups, existing incoming AIYL chemical strengths and AIYL->RIAL, plus RIAL inward/outward nonleak density groups and existing RIAL->SMD chemical output edges. All302 neurons remain modeled; do not fit all weights at this stage.",
+  "fixed": "All other neural channel densities/chemical/gap strengths; topology/signs/reversals/leak/capacitance/channel kinetics/release law; sensory gains/kinetics/routing; all NMJ/muscle/body/water physics and physical clocks. No direct neural forcing/clamp/replay during fitting.",
+  "bounds": "Admit only the same explicit E092 one-edge exception: AIYR->AIYL original upper strength factor2 becomes2.5. All other original bounds unchanged; local +/-0.4 log clipped to declared policy. This is an engineering prior, not measured biology; source is not silently admitted as a global standard parent.",
+  "training_protocol": "Existing redundant83s paired bath/no-cue protocol. Cues40..50 and53..63; response windows41..46 and54..59; baseline/recovery30..40 and73..83. Physical sensory bath drives existing AWA pathway; no internal control pulses imposed.",
+  "objective": "Regional joint angular-speed RMS from dense time/joint differences, normalized to matched no-cue window in tail/middle/head. Hinge reward toward increasing suppression; every region and both responses must meet target. Frequency and bend amplitude also recorded. This measures motion attenuation and can improve through slower oscillation and/or smaller bends; no claim of pure cadence slowing.",
+  "preservation": "No-cue cycle amplitudes and joint angular-speed RMS90..110% of original baseline (cycle floor.003rad); frequency1.62..1.98Hz and within5% of reference. Cue-off active windows preserve baseline gait and movement, and cue-minus-sham regional rate residual <=max(1e-5,.25*target). Preserve AIYL headroom>=2%, q01>=.05, abs cue mean response>=2e-5, stable half-window sign, recovery and nonrailing. Safety unchanged. During cue, zero frequency/zero cycle amplitude permitted as rest progresses.",
+  "final_validation": "One changed selected checkpoint at highest training-achieved rung (or1% if none), tested nominal, low-dose, shift, repeat, redundant close-repeat, long-cue, nominal neural-half, nominal body-half, sensory-blocked, AIYL no-cue release replay only on existing RIAL edge, and RIAL no-cue release replay on existing SMD outputs. Retain full raw in all11 final cases. Counterfactual matched no-cue replays are final diagnostics only.",
+  "criteria": "All8 normal cases meet regional motion suppression plus safety, gait/recovery/relay preservation on same checkpoint. Sensory block removes cue-specific rate response within.25*target and AIYL change within5e-6. Grid differences <=.25*target. Both AIYL->RIAL and RIAL->SMD release replays must reduce cue attenuation to<=25% of original while preserving baseline. These two probes have separate cache keys. Rest/restart component additionally requires>=95% rate reduction and cycle amplitudes<=10% baseline in all8 normal cases.",
+  "scope": "Engineering reversible cue-on suppression/cue-off restart, not initial sensory initiation from a resting animal or bistable pulse memory. full_start_stop_qualified and swimming_qualified always false. H1.2 still gates subsequent behavior training. Record failures and preserve independent parents.",
+  "storage": "All weights/coordinates/summaries/optimizer/RNG/pending states retained outside Git. Full raw for nominal/redundant parents and all11 final cases; routine candidates metrics-only. Worker30GiB new-run cap,50GiB free reserve; stop starting search above15GiB to reserve validation space.",
+  "audit": "Automatic full saved-data audit: source/input/model/coordinate/raw/optimizer hashes; independent physical reconstruction and frozen arrays; declared one-edge versus original bounds; feature/score recomputation; per-window signals including all neuronal release and available body/muscle stages; motion/recovery/relay diagnostics; independent replay-score/mediation reproduction; same-checkpoint panel, selection references and generation records. Metrics-only cases cannot supply raw replay evidence. No forward simulation in audit.",
+  "local_verification": {
+    "tests": "77 focused tests passed, covering graded motion/recovery/rest, preservation of relay and fixed parameters, exact expanded-parent reconstruction/admission and evidence tampering rejection, mocked curriculum/final-control orchestration, both replay branches with distinct cache factories, E092/E093 retained/metrics-only audit paths, root qualification consistency and total-budget dispatch.",
+    "static": "Python compilation, CLI help, shell syntax and git whitespace checks passed.",
+    "scientific_forward_runs": "None; synthetic traces, saved bundled parameter fixtures and mocked coordinator only. E093 server execution/result pending."
+  }
+}

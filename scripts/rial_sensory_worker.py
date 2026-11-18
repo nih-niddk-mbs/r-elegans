@@ -38,6 +38,9 @@ def evaluate(job):
     from scripts.compare_rhythm_worker import verify_inputs
     relay_objective=job.get('objective')=='relay-range'
     release_objective=job.get('objective')=='rial-release'
+    motion_objective=job.get('objective')=='sensory-motion'
+    if motion_objective:
+        from r_elegans.sensory_motion import features as motion_features,score
     if release_objective:
         from r_elegans.rial_release import features as release_features,score
     if relay_objective:
@@ -64,10 +67,14 @@ def evaluate(job):
             check_deadline(job['until']);cued=condition in ('cue','cue_replay')
             kwargs=dict(wall_deadline=job['until'],world_override=world(variant,cued))
             if condition.endswith('_replay'):kwargs['diagnostic_chemical_release']=replay
-            key=(condition,variant,grid,job['until'],modelsha if condition.endswith('_replay') else None)
+            key=(condition,variant,grid,job['until'],mode if condition.endswith('_replay') else None,modelsha if condition.endswith('_replay') else None)
             if key not in _CACHE:_CACHE[key]=d['factory'](dt,brain,**kwargs)
             trace=_CACHE[key](params,np.linspace(0,p['duration'],121),gains)
-            if relay_objective:
+            if motion_objective:
+                ai=d['model'].neuron_ids.index('AIYL')
+                paired[condition]=motion_features(trace,d['model'].neuron_ids,variant,
+                    float(d['fixed'].release_threshold_mV[ai]),float(d['fixed'].release_slope_mV[ai]))
+            elif relay_objective:
                 ai=d['model'].neuron_ids.index('AIYL')
                 paired[condition]=relay_features(trace,d['model'].neuron_ids,variant,
                     float(d['fixed'].release_threshold_mV[ai]),float(d['fixed'].release_slope_mV[ai]))

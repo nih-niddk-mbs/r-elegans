@@ -38,16 +38,16 @@ def audit(run,out):
     def verify(path,sha):
         actual=file_sha256(path);check(actual==sha,'Hash mismatch: '+str(path))
         evidence.append(dict(path=str(path),sha256=actual,expected=sha))
-    s=json.loads((run/'summary.json').read_text());config=json.loads((run/'configuration.json').read_text())
+    s=json.loads((run/'summary.json').read_text());motion=s.get('experiment')=='E093';config=json.loads((run/'configuration.json').read_text())
     manifest=json.loads((run/'inputs/manifest.json').read_text())
     for name,sha in manifest['sha256'].items():verify(run/'inputs'/name,sha)
     ref=json.loads((run/'inputs/sensory_reference.json').read_text());verify(Path(ref['path']),ref['sha256'])
-    parent=run/'inputs/sensory_parent.npz';verify(parent,config['parent_sha256'])
+    parent=run/'inputs'/('motion_parent.npz' if motion else 'sensory_parent.npz');verify(parent,config['parent_sha256'])
     with np.load(run/'inputs/cap_prior.npz',allow_pickle=False) as z:
         origin,lower,upper,edge=z['origin'],z['lower'],z['upper'],int(z['edge'])
     with np.load(run/'inputs/source_bounds.npz',allow_pickle=False) as z:
         check(np.array_equal(lower,z['lower']) and np.array_equal(upper,z['upper']),'Original bound policy changed')
-    with np.load(run/'inputs/sensory_parent_coordinates.npz',allow_pickle=False) as z:check(np.array_equal(origin,z['offsets']),'Parent coordinates changed')
+    with np.load(run/'inputs'/('motion_parent_coordinates.npz' if motion else 'sensory_parent_coordinates.npz'),allow_pickle=False) as z:check(np.array_equal(origin,z['offsets']),'Parent coordinates changed')
     with np.load(parent,allow_pickle=False) as z:
         ids=list(z['neuron_ids']);mask=z['fixed_chemical_mask'].astype(bool);post,pre=np.nonzero(mask)
         channels=z['cells_conductances_nS']>0;channels[:,16]=False
@@ -58,6 +58,8 @@ def audit(run,out):
     # Reconstruct the declared focused groups from unchanged anatomical masks.
     from types import SimpleNamespace
     from r_elegans.relay_range import parameter_groups,features,score
+    if motion:
+        from r_elegans.sensory_motion import parameter_groups,features,score
     spec=SimpleNamespace(channels=channels,chemical=mask)
     for cap in schemas:check(schemas[cap]==parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge)),'Unexpected group policy: '+cap)
     parent_features=json.loads((run/'parent_features.json').read_text());saved={}
@@ -87,14 +89,25 @@ def audit(run,out):
                 paired[condition]=features(trace,ids,j['variant'],float(threshold[ids.index('AIYL')]),float(slope[ids.index('AIYL')]))
                 traces[condition]=trace
             if r['status']=='completed':
-                expected_conditions={'no_cue','cue'}|({'no_cue_replay','cue_replay'} if j['mode']=='relay-replay' else set())
+                expected_conditions={'no_cue','cue'}|({'no_cue_replay','cue_replay'} if j['mode'] in ('relay-replay','rial-replay') else set())
                 check(set(hashes)==(expected_conditions if j['retain_traces'] else set()),'Raw retention policy mismatch: '+folder.name)
                 for key,value in paired.items():check(close(value,r['paired_features'][key]),'Raw features mismatch: '+folder.name+'/'+key)
-                metrics=score(r['paired_features'],j.get('parent_features') or r['paired_features']['no_cue'],j['target'],j['margin'],response_aggregation=j['response_aggregation'])
+                metrics=score(r['paired_features'],j.get('parent_features') or r['paired_features']['no_cue'],j['target'],j['margin'],
+                    **({} if motion else dict(response_aggregation=j['response_aggregation'])))
                 check(close(metrics,r['metrics']),'Recorded score mismatch: '+folder.name)
+                if motion and j['mode'] in ('relay-replay','rial-replay'):
+                    counter=score(dict(no_cue=r['paired_features']['no_cue_replay'],cue=r['paired_features']['cue_replay']),
+                        j.get('parent_features') or r['paired_features']['no_cue'],j['target'])
+                    original=metrics['response_amplitude_ratios'];replayed=counter['response_amplitude_ratios']
+                    expected_mediation=dict(replay_amplitude_ratios=replayed,baseline_preserved=counter['baseline_and_recovery_preserved'],
+                        original_body_attenuation_nontrivial=bool(all(1-a>1e-6 for a in original)),
+                        cue_attenuation_reduced=bool(counter['safe'] and counter['useful_response_preserved'] and counter['baseline_and_recovery_preserved'] and
+                            all(1-a>1e-6 and max(0.,1-b)<=.25*(1-a) for a,b in zip(original,replayed))))
+                    check(close(expected_mediation,{k:r.get('mediation',{}).get(k) for k in expected_mediation}),'Replay mediation mismatch: '+folder.name)
                 row=dict(output=str(folder),cap=j['cap'],kind=j['kind'],raw_retained=bool(hashes),
-                    gait_failures=gait_failures(r['paired_features'],j.get('parent_features') or r['paired_features']['no_cue']),
-                    relay_failures=relay_failures(r['paired_features'],j['target']))
+                    gait_failures=([] if metrics['baseline_and_recovery_preserved'] else [dict(check='motion_baseline_or_recovery_failed')]) if motion else gait_failures(r['paired_features'],j.get('parent_features') or r['paired_features']['no_cue']),
+                    relay_failures=relay_failures(r['paired_features'],.02 if motion else j['target']))
+                if motion:row['motion_metrics']=metrics
                 if traces:
                     from r_elegans.rial_sensory import protocol
                     onset=protocol(j['variant'])['events'][0][0]
@@ -111,7 +124,7 @@ def audit(run,out):
     for r in s['scan']+s.get('scan_controls',[])+[r for arm in s['arms'].values() for r in (arm.get('primary'),arm.get('best_all_completed')) if r]:
         check(saved.get(r['output'])==r,'Selected/scan record mismatch: '+r['output'])
     history=json.loads((run/'generation_history.json').read_text()) if (run/'generation_history.json').exists() else []
-    check(len(history)==s['completed_matched_generations'],'Completed cohort history mismatch')
+    check(len(history)==s['completed_generations' if motion else 'completed_matched_generations'],'Completed cohort history mismatch')
     for generation in history:
         for name,arm in s['arms'].items():
             check((run/'optimizer'/name/f"g-{generation['generation']-1:05d}-told/metadata.json").is_file(),'Missing matched optimizer update: '+name)
@@ -119,8 +132,17 @@ def audit(run,out):
         rows=[]
         for r in panel['validation']:
             actual=saved.get(r['output']);check(actual==r,'Panel result mismatch: '+r['output']);rows.append(actual or r)
-        check(panel_assessment(rows)==panel['assessment'],'Panel acceptance mismatch: '+panel['checkpoint_sha256'])
+        assessment=None
+        if motion:
+            from r_elegans.sensory_motion import panel_assessment as motion_assessment
+            assessment=motion_assessment(rows,panel['target'])
+        else:assessment=panel_assessment(rows)
+        check(assessment==panel['assessment'],'Panel acceptance mismatch: '+panel['checkpoint_sha256'])
         check(all(r.get('checkpoint_sha256')==panel['checkpoint_sha256'] for r in rows if r['status']=='completed'),'Panel checkpoint mismatch')
+    if motion:
+        check(bool(s.get('sensory_motion_component_qualified'))==bool(s['panels'] and all(p['assessment'].get('engineering_criteria_met') for p in s['panels'])),'Root motion qualification differs from audited panels')
+        check(bool(s.get('rest_restart_component_qualified'))==bool(s['panels'] and all(p['assessment'].get('rest_restart_component_qualified') for p in s['panels'])),'Root rest qualification differs from audited panels')
+        check(not s.get('full_start_stop_qualified') and not s.get('swimming_qualified'),'Untested full behavior promoted')
     for metadata in (run/'optimizer').glob('*/*/metadata.json'):
         m=json.loads(metadata.read_text());verify(metadata.parent/'optimizer.pkl',m['optimizer_sha256'])
     for name in s['arms']:
@@ -128,7 +150,7 @@ def audit(run,out):
     write(out/'evidence.json',evidence);write(out/'cases.json',details)
     result=dict(audit_complete=True,integrity_passed=not problems,problems=problems,status_counts=dict(counts),
         deliberate_original_upper_bound_exceptions=dict(violations),
-        completed_matched_generations=s['completed_matched_generations'],
+        **{('completed_generations' if motion else 'completed_matched_generations'):s['completed_generations' if motion else 'completed_matched_generations']},
         panels=[dict(labels=p['labels'],cap=p['cap'],assessment=p['assessment']) for p in s['panels']],
         scope='Saved-data integrity, independent coordinate/bound and score checks; planned metrics-only cases lack raw replay. No forward simulation, causal proof or automatic qualification.')
     write(out/'summary.json',result);print(json.dumps(result,indent=2),flush=True)
