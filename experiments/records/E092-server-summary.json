@@ -280,5 +280,6 @@
   "correction": "Local audit bug: retained-trace signal-window comprehension shadows outer result r and reads an unbound local r. Fix renames feature-row loop variable. Changes audit/reporting only, no model/fitting/criteria changes. Original audit/receipt preserved.",
   "next_step": "Read-only corrected full saved-data re-audit into a new timestamped sibling; no retraining. Execution pending.",
   "command": "sh scripts/reaudit_relay_experiments_mbslnx2.sh",
-  "local_verification": "13 focused software tests passed, including retained and metrics-only raw-audit paths, signal-window generation, fixed-field tampering detection, and re-audit report selection. Python compilation, shell syntax and whitespace checks passed. No server re-audit result asserted."
+  "local_verification": "13 focused software tests passed, including retained and metrics-only raw-audit paths, signal-window generation, fixed-field tampering detection, and re-audit report selection. Python compilation, shell syntax and whitespace checks passed. No server re-audit result asserted.",
+  "subsequent_evidence_record": "E092-reaudit-server-summary.json"
 }

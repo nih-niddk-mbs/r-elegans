@@ -1,5 +1,19 @@
 # Current model: exact scope and computation path
 
+2026-11-18 E092 corrected audit PASSED (user-reported): no integrity
+problems;375 completed/24 time-budget evaluations, six matched generations.
+Both expanded-cap seeds and the isolated1.25 AIYR->AIYL strength factor pass
+engineering relay panels; both original-cap seeds fail. Sensory-block, stable
+response direction, same-checkpoint and neural/body numerical checks pass.
+The original engineering cap was a local limitation. This is an audited relay
+component under an explicit one-edge prior exception, not learned motor
+stop/start, swimming or biological validation. Preserve independent passing
+models and original-cap failures; no automatic parent promotion or new training.
+The old failed receipt remains historical; the later audit does not rewrite it.
+Exact corrected audit folder/revision/duration were not supplied.
+[Corrected audit record](experiments/records/E092-reaudit-server-summary.json).
+
+
 2026-11-18 E092 reported: six matched generations; both original-cap seeds
 fail relay criteria, both expanded-cap seeds and the isolated1.25 edge factor
 pass their engineering panels. This supports a local cap limitation. Validation

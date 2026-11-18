@@ -1,0 +1,182 @@
+{
+  "experiment": "E092",
+  "record_date": "2026-11-18",
+  "evidence": "User-pasted corrected server audit JSON; original server artifacts not independently inspected",
+  "source_run": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433",
+  "corrected_audit_directory": null,
+  "corrected_audit_source_revision": null,
+  "raw_stdout_sha256": null,
+  "missing_evidence": "Exact corrected audit path, invocation/source/environment records, elapsed time and raw stdout attachment hash were not included in this message; do not infer them from the launcher or local revision.",
+  "reported_audit": {
+    "audit_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "status_counts": {
+      "completed": 375,
+      "time_budget": 24
+    },
+    "deliberate_original_upper_bound_exceptions": {
+      "original": 0,
+      "aiyr_2p5": 189
+    },
+    "completed_matched_generations": 6,
+    "panels": [
+      {
+        "labels": [
+          "original-seed-9200"
+        ],
+        "cap": "original",
+        "assessment": {
+          "complete": true,
+          "same_checkpoint": true,
+          "numerical_checks": [
+            {
+              "grid": "neural-half",
+              "difference": 7.855359696051778e-10,
+              "passed": true
+            },
+            {
+              "grid": "body-half",
+              "difference": 6.675561992075529e-09,
+              "passed": true
+            }
+          ],
+          "direction_consistent": true,
+          "sensory_block_passed": true,
+          "engineering_criteria_met": false,
+          "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+        }
+      },
+      {
+        "labels": [
+          "original-seed-9201"
+        ],
+        "cap": "original",
+        "assessment": {
+          "complete": true,
+          "same_checkpoint": true,
+          "numerical_checks": [
+            {
+              "grid": "neural-half",
+              "difference": 1.3796420672562704e-09,
+              "passed": true
+            },
+            {
+              "grid": "body-half",
+              "difference": 6.687067122257417e-09,
+              "passed": true
+            }
+          ],
+          "direction_consistent": true,
+          "sensory_block_passed": true,
+          "engineering_criteria_met": false,
+          "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+        }
+      },
+      {
+        "labels": [
+          "aiyr_2p5-seed-9200",
+          "best-all-completed-exploratory"
+        ],
+        "cap": "aiyr_2p5",
+        "assessment": {
+          "complete": true,
+          "same_checkpoint": true,
+          "numerical_checks": [
+            {
+              "grid": "neural-half",
+              "difference": 1.1553251688667387e-09,
+              "passed": true
+            },
+            {
+              "grid": "body-half",
+              "difference": 8.769112658235656e-09,
+              "passed": true
+            }
+          ],
+          "direction_consistent": true,
+          "sensory_block_passed": true,
+          "engineering_criteria_met": true,
+          "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+        }
+      },
+      {
+        "labels": [
+          "aiyr_2p5-seed-9201"
+        ],
+        "cap": "aiyr_2p5",
+        "assessment": {
+          "complete": true,
+          "same_checkpoint": true,
+          "numerical_checks": [
+            {
+              "grid": "neural-half",
+              "difference": 1.5526535612764292e-09,
+              "passed": true
+            },
+            {
+              "grid": "body-half",
+              "difference": 8.763803682754201e-09,
+              "passed": true
+            }
+          ],
+          "direction_consistent": true,
+          "sensory_block_passed": true,
+          "engineering_criteria_met": true,
+          "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+        }
+      },
+      {
+        "labels": [
+          "best-single-edge"
+        ],
+        "cap": "aiyr_2p5",
+        "assessment": {
+          "complete": true,
+          "same_checkpoint": true,
+          "numerical_checks": [
+            {
+              "grid": "neural-half",
+              "difference": 1.396125770547485e-09,
+              "passed": true
+            },
+            {
+              "grid": "body-half",
+              "difference": 8.755243308122829e-09,
+              "passed": true
+            }
+          ],
+          "direction_consistent": true,
+          "sensory_block_passed": true,
+          "engineering_criteria_met": true,
+          "scope": "Relay diagnostic criteria only; no automatic fitting-parent, biological or full start/stop promotion"
+        }
+      }
+    ],
+    "scope": "Saved-data integrity, independent coordinate/bound and score checks; planned metrics-only cases lack raw replay. No forward simulation, causal proof or automatic qualification."
+  },
+  "outcome": "Corrected audit passes. Both expanded-cap optimizer seeds and isolated factor1.25 pass engineering relay panels; both original-cap seeds fail. Existing same-checkpoint, direction, sensory-block and neural/body refinement checks pass for all panels.",
+  "decision": "Record as an audited engineering relay component under an explicit one-edge expanded prior. This supports a local limitation from the original cap. Preserve original-bound models and all failed outcomes. No automatic standard-parent promotion or biological/full-stop/swimming qualification.",
+  "preserved_historical_receipt": "Original run budget receipt retains exit2 and audit failure. This later corrected audit does not rewrite it or demonstrate completion within the original eight-hour window including the later re-audit.",
+  "next_recommendation": "Use the simplest passing single-edge model as a candidate for a separately planned sensory-dependent graded slowing/rest/restart test, after explicit lineage/prior selection. Retain both expanded-cap fitted alternatives. No new training launched.",
+  "checkpoint_lineage": [
+    {
+      "role": "original-seed-9200",
+      "checkpoint_sha256": "611bdff24bdae81acb3c3575bd7b50ef2328292699094f6c1672a08a12567bd6"
+    },
+    {
+      "role": "original-seed-9201",
+      "checkpoint_sha256": "c28539b8b629d9b1c68bb8db8d22b42f70eefbaf7a919815c0676fe7a772b023"
+    },
+    {
+      "role": "aiyr_2p5-seed-9200",
+      "checkpoint_sha256": "cb4eb42c948fafee5f7067e98f013e60d21c6b1a0abd8e4c0988453900d65009"
+    },
+    {
+      "role": "aiyr_2p5-seed-9201",
+      "checkpoint_sha256": "d3c8f592ee3b99107a08f2e142f41ef46695d5bbbe6ecdddfd68ffb13c79b613"
+    }
+  ],
+  "single_edge_checkpoint_sha256": null,
+  "checkpoint_note": "Matched optimizer hashes are carried from earlier reported E092 stdout. The best single-edge hash was not printed; retrieve/verify it before using that model as a parent."
+}

@@ -9565,3 +9565,46 @@ frozen-field tampering detection and safe report/re-audit selection. Python
 compilation, launcher shell syntax and whitespace checks passed. This validates
 software, not the server's artifacts or experimental qualification. Corrected
 server audit remains pending.
+
+## 2026-11-18 — E092 corrected saved-data audit passes (server stdout reported)
+
+User reports audit_completeTrue, integrity_passedTrue, problems[],375completed/
+24time-budget records and6matched generations. The reported deliberate original
+upper-bound exceptions are0 in original arms and189 in expanded-cap arms;
+these are the planned, labeled one-edge prior exceptions, not hidden changes.
+All five panel assessments match the earlier report: original seeds9200/9201
+fail engineering relay criteria; expanded seeds9200/9201 and best isolated edge
+factor pass. All panels have same-checkpoint, direction, sensory-block and
+neural/body numerical checks passed; maximum reported difference8.76912e-9.
+Structured evidence: [E092-reaudit-server-summary.json](experiments/records/E092-reaudit-server-summary.json).
+This supersedes the provisional integrity status, preserving the original
+failed audit and receipt. No checkpoint or model changed for this correction.
+
+Evidence limit: user-pasted JSON, not independent local inspection of the server
+files. Exact corrected-audit directory, source/dirty tree/environment, runtime
+and a raw stdout attachment hash were not supplied and remain unknown here.
+The original run receipt still records exit2; do not rewrite it, merge the later
+re-audit into its measured duration or claim all corrected work finished inside
+the original budget. Planned metrics-only evaluations lack raw replay evidence.
+Audit checks saved data; no new forward/causal experiment was executed by it.
+
+Interpretation: matched seeds plus isolated one-edge perturbation support a
+local bottleneck from the self-imposed original AIYR->AIYL strength cap. The
+engineering headroom/response relay gate is achieved under the declared cap
+extension. This does not prove that biological strengths have those values or
+that another original-bound solution is impossible. The relay response is not
+a demonstration of learned rest/start/stop/restart or swimming. H1.2 remains.
+
+Decision: preserve the passing single-edge and both fitted independent models,
+all original-bound failures and exact optimizer/RNG/source dependencies. No
+automatic standard-parent promotion or new run. Next recommended experiment is
+sensory-dependent graded slowing followed by rest/restart from the simplest
+passing one-edge model, with unchanged water physics/gait/numerical controls.
+First retrieve and pin its actual checkpoint hash (not printed in current
+stdout) and explicitly record the expanded prior before planning that run.
+The fitted alternatives retain their previously reported hashes; no missing
+single-edge hash or artifact path is invented.
+
+Recordkeeping verification: structured JSON parses and whitespace checks only;
+no new software or scientific forward test was needed for this documentation
+update. Corrected audit success above is user-reported server evidence.
