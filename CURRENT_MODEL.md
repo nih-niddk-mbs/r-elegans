@@ -5,7 +5,8 @@
 (tail/middle/head) vs required 1%; E093 0.043/0.113/0.113%. Worst-region term
 raised the weakest region by trading the others. Sensory block passes; AIY->RIA
 replay (both sides) does not reduce the response, RIA->SMD replay does. No
-promotion. Next: read-only `--details` report on E094.
+promotion. Details (partial): AWA +2.5 mV becomes ~0.1 mV at AIYR, <0.02 mV at AIYL,
+<0.05 mV at SMD; AIYL saturated, RIAR near off. No fit launched.
 [Record](experiments/records/E094-server-summary.json).
 
 2026-11-18 E093 audited negative (user-reported): clean audit, no qualification;

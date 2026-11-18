@@ -1,0 +1,40 @@
+{
+ "experiment": "E094",
+ "record_date": "2026-11-18",
+ "evidence": "User-pasted --details stdout: header block (matched progress, changed/frozen counts) and the nominal response window 41-46 s; other windows and per-group bound rows not supplied",
+ "evidence_sha256": null,
+ "detailed_report": "/home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320-details-20261118T230327842215Z/summary.json",
+ "analysis_source_revision": "a586aa3",
+ "revision_limit": "Server pull to a586aa3 preceded the analysis; the server was at 67f516e before that pull, which suggests (does not prove) the run used 67f516e. Dirty tree/environment not supplied.",
+ "reported_progress": {
+  "loss_reduction_percent": 5.590709752278579,
+  "changed_coordinates": 130,
+  "frozen_fields_unchanged": true,
+  "loss_at_final_target_by_generation": [1.7913045, 1.7538106, 1.7538106, 1.7538106, 1.7374517, 1.7374517, 1.7297085, 1.7297085, 1.7265144],
+  "minimum_regional_suppression_percent_by_generation": [0.039727, 0.049060, 0.049060, 0.049060, 0.049419, 0.049419, 0.050502, 0.050502, 0.056401],
+  "note": "Selected model improved in generations 1, 2, 5, 7 and 9 only; the matched parent loss itself was not printed (about 1.829 implied by the 5.59% reduction)."
+ },
+ "run": "/home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320",
+ "checkpoint_sha256": "4d57367e4c9bc67dff1b3906b7ee233e3d59b47bf1efcd07c073b11a885f0c52",
+ "near_local_bound_groups": [],
+ "response_window_41_46s": {
+  "AWAL_mean_voltage_change_mV": 2.497,
+  "AWAR_mean_voltage_change_mV": 2.292,
+  "AIYL_voltage_difference_rms_mV": 0.01215,
+  "AIYR_voltage_difference_rms_mV": 0.10438,
+  "RIAL_voltage_difference_rms_mV": 0.01947,
+  "RIAR_voltage_difference_rms_mV": 0.21989,
+  "SMD_voltage_difference_rms_mV": {"SMDDL": 0.01037, "SMDDR": 0.02073, "SMDVL": 0.04991, "SMDVR": 0.04375},
+  "release_mean_change": {"AWAL": 2.741e-4, "AWAR": 0.015763, "AIYL": -3.04e-5, "AIYR": 0.003248, "RIAL": 8.50e-5, "RIAR": 2.475e-4},
+  "release_no_cue_mean": {"AIYL": 0.97947, "AIYR": 0.56343, "RIAL": 0.30913, "RIAR": 0.008913},
+  "AIYR_to_RIAR": {"chemical_nS": 0.0929, "reversal_mV": -85.0, "release_only_delta_mean_pA": -0.006159, "tonic_inward_pA": -1.0684},
+  "AIZR_to_RIAR": {"chemical_nS": 0.0406, "reversal_mV": 0.0, "release_only_delta_mean_pA": 0.022981},
+  "RIAL_to_SMDVL_and_SMDVR_tonic_inward_pA": [1.2286, 1.7257],
+  "RIAR_to_SMD_tonic_inward_pA": {"SMDDL": 0.0123, "SMDDR": 0.01076, "SMDVL": 0.0012, "SMDVR": 0.00097}
+ },
+ "caveats": [
+  "RMS differences include oscillation phase differences between cue and no-cue traces (e.g. RMDR->RIAL rms 0.0022 pA with mean -5.4e-5 pA); use mean changes for cue attribution.",
+  "One nominal response window; matched progress, changed/frozen counts and bound rows were in the unsupplied header/report file.",
+  "Saved-sample reconstruction, not integrated current balance or a causal intervention."
+ ]
+}

@@ -9909,3 +9909,46 @@ accepts E094, uses the worst-region score, and adds AIYR->RIAR, RIAR inputs
 and RIAR->SMD): 
 `python -m scripts.report_sensory_motion --details --run /home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320`.
 Local software verification: 18 focused tests pass; no scientific forward run.
+
+## 2026-11-18 — E094 details (partial): signal attenuation along the relay chain
+
+Evidence: user-pasted `--details` stdout (header block and nominal response
+window 41-46 s; other windows and per-group bound rows not supplied), report
+`/home/carsonc/r-elegans-results/sensory-motion-e094-20261118T200731Z-473320-details-20261118T230327842215Z/summary.json`;
+record [E094-detail-server-summary.json](experiments/records/E094-detail-server-summary.json).
+Analysis ran after a pull to a586aa3; the server was at 67f516e before that
+pull, which suggests (does not prove) the run used 67f516e. Dirty tree and
+environment not supplied. Not an
+integrated current balance or causal test; RMS differences include oscillation
+phase differences, so cue attribution below uses mean changes.
+
+- Near-local-bound groups: none (E093 had AWBL->AIYL). Local boxes were not
+  binding; declared-bound room per group not supplied.
+- Matched progress: the redundant-protocol loss (worst-region objective, final
+  target, margin 1) falls 5.5907% (E093: 5.4810%, mean-only objective, so not
+  strictly comparable); 130 coordinates changed (E093: 65); frozen fields
+  unchanged. Selected loss by generation 1.7913, 1.7538, 1.7538, 1.7538,
+  1.7375, 1.7375, 1.7297, 1.7297, 1.7265; weakest-region suppression rose
+  monotonically 0.0397 -> 0.0564% (improved in generations 1, 2, 5, 7, 9
+  only). Implied parent loss ~1.829; the parent's own value was not printed.
+  Unlike E093, the weakest region did not regress.
+- Attenuation: AWAL/AWAR depolarize 2.50/2.29 mV, but AIYL/AIYR voltage
+  differences are 0.012/0.104 mV rms (0.4%/3.8% of AWA), RIAL/RIAR 0.019/0.220
+  mV, SMD 0.010-0.050 mV. AIYL sits at release 0.979 (saturated), AIYR at 0.563
+  (+0.0032 with cue).
+- Right path is nearly silent: RIAR release is 0.0089 (voltage -64.6 mV), so
+  RIAR->SMD tonic current is 0.001-0.012 pA against 1.2-1.7 pA from RIAL to
+  SMDVL/SMDVR. AIYR->RIAR (0.0929 nS, reversal -85 mV) changes by -0.0062 pA
+  (release-only mean), while AIZR->RIAR (excitatory) changes by +0.0230 pA,
+  3.7x larger and opposite in sign. So RIAR's cue response is mostly AIZR-driven.
+- Left RIAL (release 0.309, large edges to SMDVL/VR) gets almost no cue-driven
+  input: summed release-only mean changes of listed inputs are ~+1.7e-4 pA, led
+  by AIZL (+1.5e-4) and RIAR (+9e-5); AIYL contributes +2.3e-5.
+- Consistent with earlier replay results: RIA outputs carry the small response;
+  the AIY->RIA edges are not its main source. Not shown: AWA->AIY edge currents
+  and why AWA->AIY transmission is so small (bound room/gain not reported).
+
+Interpretation (hypothesis): the limit is low cue gain at AWA->AIY and the
+operating points (AIYL saturated, RIAR near off), not the number of trained
+groups or local bounds. Decision: no new fit launched; E092-E094 checkpoints
+and negative outcomes retained.
