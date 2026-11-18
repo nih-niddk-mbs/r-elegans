@@ -1,5 +1,18 @@
 # r-elegans
 
+2026-11-18 E093 completed and audited (user-reported):9generations,
+2h49m31s total;121completed/12time-budget evaluations. Clean audit, all final
+cases complete, but first1% motion-reduction rung FAILS. Nominal tail/middle/head
+reductions0.0433%/0.1130%/0.1135%; baseline/recovery/relay preserved. RIAL->SMD
+replay removes the tiny response; AIYL->RIAL replay does not, so the proposed
+relay branch does not pass dependence. No motion/rest/start-stop/swimming
+qualification. Inspect matched baseline progress, selected bounds and sampled
+signal/current propagation before more training. Supplementary read-only report:
+`python -m scripts.report_sensory_motion --details`. No new fit launched.
+[Outcome](experiments/records/E093-server-summary.json); supplementary server
+analysis is prepared, results pending.
+
+
 2026-11-18 E093 prepared (execution pending): four-hour TOTAL sensory motion
 curriculum from E092's audited isolated1.25-edge parent, resolved and SHA-pinned
 at runtime with no fallback. Retain the explicit one-edge expanded prior. Train

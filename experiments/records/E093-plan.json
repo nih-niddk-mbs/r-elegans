@@ -60,5 +60,6 @@
     "tests": "77 focused tests passed, covering graded motion/recovery/rest, preservation of relay and fixed parameters, exact expanded-parent reconstruction/admission and evidence tampering rejection, mocked curriculum/final-control orchestration, both replay branches with distinct cache factories, E092/E093 retained/metrics-only audit paths, root qualification consistency and total-budget dispatch.",
     "static": "Python compilation, CLI help, shell syntax and git whitespace checks passed.",
     "scientific_forward_runs": "None; synthetic traces, saved bundled parameter fixtures and mocked coordinator only. E093 server execution/result pending."
-  }
+  },
+  "reported_outcome_record": "E093-server-summary.json"
 }

@@ -1,0 +1,558 @@
+{
+  "experiment": "E093",
+  "record_date": "2026-11-18",
+  "evidence": "User-reported server stdout; server artifacts/source/environment not independently inspected",
+  "evidence_sha256": "4b8f91070c4f430303e14c44ae9aa37e0b5ccdbd392942ef6c35ff90b6967ae6",
+  "run": "/home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620",
+  "checkpoint_sha256": "a499c523f31881f3df71fb1d1281ab21130545efa26493a0faa36cb93de0e92a",
+  "source_revision": null,
+  "execution": {
+    "execution_valid": true,
+    "validation_complete": true,
+    "completed_generations": 9,
+    "target": 0.01,
+    "stop_reason": "search_time_budget",
+    "failure": null,
+    "sensory_motion_component_qualified": false,
+    "rest_restart_component_qualified": false,
+    "full_start_stop_qualified": false
+  },
+  "nominal_motion_reduction_percent_tail_middle_head": [
+    0.04330793094775576,
+    0.1130222065206854,
+    0.11349375142121199
+  ],
+  "assessment": {
+    "complete": true,
+    "same_checkpoint": true,
+    "numerical_checks": [
+      {
+        "grid": "neural-half",
+        "difference": 4.2893435233004595e-05,
+        "passed": true
+      },
+      {
+        "grid": "body-half",
+        "difference": 1.337343945806424e-06,
+        "passed": true
+      }
+    ],
+    "sensory_block_passed": true,
+    "control_interneuron_dependence_passed": false,
+    "engineering_criteria_met": false,
+    "target": 0.01,
+    "rest_restart_component_qualified": false,
+    "full_start_stop_qualified": false,
+    "scope": "Partial suppression or rest/restart component only; no initial sensory initiation or swimming qualification"
+  },
+  "cases": [
+    {
+      "variant": "nominal",
+      "grid": "ordinary",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8292942166273795,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995669206905224,
+            0.9988697779347931,
+            0.9988650624857879
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.000009008919353,
+            1.0000114524339372,
+            1.0000132784338984
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9603412503798054e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "low-dose",
+      "grid": "ordinary",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8492542219865369,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9996187636467284,
+            0.9990090287383422,
+            0.9990051681658957
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.000007993251169,
+            1.000010170759646,
+            1.0000117940515043
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.598016869648223e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "shift",
+      "grid": "ordinary",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8645917603675626,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9997611968931878,
+            0.9990604747717443,
+            0.9990556258885444
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.00001326315045,
+            1.0000114767872355,
+            1.0000123094221585
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9603035848646542e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "repeat",
+      "grid": "ordinary",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8147793455887681,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995669206905224,
+            0.9988697779347931,
+            0.9988650624857879
+          ],
+          [
+            0.9994368550996828,
+            0.9986838116299357,
+            0.9986957762027567
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.000009008919353,
+            1.0000114524339372,
+            1.0000132784338984
+          ],
+          [
+            1.000000044777123,
+            0.9999985478283329,
+            0.9999983230931809
+          ],
+          [
+            0.9999968286259839,
+            0.9999948978931871,
+            0.9999951092400811
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9603412503798054e-05,
+          -2.963710660430774e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "redundant",
+      "grid": "ordinary",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8302601886007399,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995669206905224,
+            0.9988697779347931,
+            0.9988650624857879
+          ],
+          [
+            0.9995137598992766,
+            0.9989145020477606,
+            0.9989099873171413
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            0.9999930854948655,
+            0.9999901480818392,
+            0.999992223411661
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9603412503798054e-05,
+          -2.247260450216615e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "long-cue",
+      "grid": "ordinary",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8292942166273795,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995669206905224,
+            0.9988697779347931,
+            0.9988650624857879
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.0000000449803825,
+            0.99999853773093,
+            0.9999983114512048
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9603412503798054e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "nominal",
+      "grid": "neural-half",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8254675479631822,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995810946103523,
+            0.9988268844995601,
+            0.9988277403953593
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            0.9999777378125378,
+            0.9999886840875735,
+            0.9999813477846549
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9602468785805414e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "nominal",
+      "grid": "body-half",
+      "mode": "normal",
+      "metrics": {
+        "loss": 0.8294927731142859,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995682580344682,
+            0.9988707063158502,
+            0.9988660498294367
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.0000076502732713,
+            1.000010018310397,
+            1.000011757861122
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.961215704266884e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "nominal",
+      "grid": "ordinary",
+      "mode": "sensory-blocked",
+      "metrics": {
+        "loss": 201.0,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "relay_response_mean_changes": [
+          0.0
+        ],
+        "relay_component_preserved": false,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": null
+    },
+    {
+      "variant": "nominal",
+      "grid": "ordinary",
+      "mode": "relay-replay",
+      "metrics": {
+        "loss": 0.8292942166273795,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995669206905224,
+            0.9988697779347931,
+            0.9988650624857879
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.000009008919353,
+            1.0000114524339372,
+            1.0000132784338984
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9603412503798054e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": {
+        "replay_amplitude_ratios": [
+          0.9995632281784801
+        ],
+        "baseline_preserved": true,
+        "original_body_attenuation_nontrivial": true,
+        "cue_attenuation_reduced": false,
+        "scope": "Final diagnostic only: matched no-cue AIYL release replay on existing RIAL chemical edge"
+      }
+    },
+    {
+      "variant": "nominal",
+      "grid": "ordinary",
+      "mode": "rial-replay",
+      "metrics": {
+        "loss": 0.8292942166273795,
+        "target": 0.01,
+        "regional_motion_ratios": [
+          [
+            0.9995669206905224,
+            0.9988697779347931,
+            0.9988650624857879
+          ]
+        ],
+        "cue_off_recovery_ratios": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            1.000009008919353,
+            1.0000114524339372,
+            1.0000132784338984
+          ]
+        ],
+        "relay_response_mean_changes": [
+          -2.9603412503798054e-05
+        ],
+        "relay_component_preserved": true,
+        "safe": true,
+        "baseline_and_recovery_preserved": true,
+        "partial_attenuation_passed": false
+      },
+      "mediation": {
+        "replay_amplitude_ratios": [
+          1.000392660091225
+        ],
+        "baseline_preserved": true,
+        "original_body_attenuation_nontrivial": true,
+        "cue_attenuation_reduced": true,
+        "scope": "Final diagnostic only: matched no-cue RIAL release replay on existing SMD chemical edges from cue onset; not used in fitting"
+      }
+    }
+  ],
+  "budget_receipt": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_elapsed_seconds": 10170.943072829046,
+    "total_minutes": 240.0,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "report": "/home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620/summary.json",
+    "scope": "Timeout/incomplete validation never qualifies a model",
+    "audit_exit_code": 0,
+    "audit_timed_out": false,
+    "audit_complete": true,
+    "audit_integrity_passed": true,
+    "audit_report": "/home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620-audit/summary.json",
+    "post_audit_component_qualified": false
+  },
+  "audit": {
+    "audit_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "status_counts": {
+      "completed": 121,
+      "time_budget": 12
+    },
+    "deliberate_original_upper_bound_exceptions": {
+      "aiyr_2p5": 133
+    },
+    "completed_generations": 9,
+    "panels": [
+      {
+        "labels": [
+          "motion-seed-9300"
+        ],
+        "cap": "aiyr_2p5",
+        "assessment": {
+          "complete": true,
+          "same_checkpoint": true,
+          "numerical_checks": [
+            {
+              "grid": "neural-half",
+              "difference": 4.2893435233004595e-05,
+              "passed": true
+            },
+            {
+              "grid": "body-half",
+              "difference": 1.337343945806424e-06,
+              "passed": true
+            }
+          ],
+          "sensory_block_passed": true,
+          "control_interneuron_dependence_passed": false,
+          "engineering_criteria_met": false,
+          "target": 0.01,
+          "rest_restart_component_qualified": false,
+          "full_start_stop_qualified": false,
+          "scope": "Partial suppression or rest/restart component only; no initial sensory initiation or swimming qualification"
+        }
+      }
+    ],
+    "scope": "Saved-data integrity, independent coordinate/bound and score checks; planned metrics-only cases lack raw replay. No forward simulation, causal proof or automatic qualification."
+  },
+  "interpretation": "Clean completed and audited negative training result. First1% movement-reduction rung not met. Relay response, uncued motion/recovery and safety preserved. RIAL->SMD no-cue release replay removes/reverses the small suppression; AIYL->RIAL replay leaves it essentially unchanged. The tested AIYL->RIAL branch is not demonstrated to mediate this response. Other chemical/gap paths/feedback and small-effect numerical sensitivity remain possible; no global necessity or biological claim.",
+  "missing_evidence": "Current stdout omits parent-versus-selected matched training loss, selected parameter changes/bound room, generation trends and downstream voltage/release/current changes. Do not infer learning gain or bound exhaustion from final metrics alone.",
+  "decision": "Preserve model and all failed outcomes; no motion/rest/full-start-stop/swimming qualification. Inspect matched progress, local/original/declared bounds and saved-sample signal/current changes before deciding on more fitting.",
+  "supplemental_analysis": {
+    "status": "planned_server_execution_not_evidenced",
+    "command": "python -m scripts.report_sensory_motion --details --run /home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620",
+    "question": "Did selection improve matched motion loss and where is cue influence attenuated between sensory cells, AIYL, RIAL and SMD? Are trainable groups at local or declared prior limits?",
+    "method": "Read-only E093 saved models/coordinates/summaries/raw nominal voltages, source audit and evidence hashes. Re-score parent and selected on redundant protocol at same final target/margin1. Report generation progression, changed/frozen coordinates and bound room. Sample saved voltage at approximately100Hz for release and effective chemical/gap currents; separate release-only current changes holding postsynaptic voltage at no-cue value from actual current changes.",
+    "fixed_trainable": "No model or data changes; no fitting or forward simulation. Seeds not applicable.",
+    "acceptance": "No acceptance thresholds changed. Require completed source with clean audit, SHA-matched selected model/coordinates/nominal traces, matched finite clocks, and external separate analysis folder. Observational current attribution is not causal proof or integrated current balance.",
+    "artifacts": "New timestamped sibling details folder with exact source/environment/invocation records, evidence hashes and compact JSON; source run unchanged. Actual folder and computed results pending.",
+    "local_verification": "14 focused software tests passed, including current/driving-force separation, explicit expanded-bound reporting and complete retained-trace details generation with source-file hashes unchanged. CLI help, Python compilation and whitespace checks passed. Synthetic data and bundled parameter fixtures only; server detailed-analysis results pending."
+  }
+}

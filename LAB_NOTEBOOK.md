@@ -9687,3 +9687,69 @@ consistency, plus total-budget dispatch. Compilation, CLI help, shell syntax and
 whitespace checks pass. Synthetic traces/parameter fixtures and mocked jobs
 validate software; no scientific forward Mac fit or server E093 execution is
 claimed. The launcher is prepared for user execution; outcomes remain pending.
+
+## 2026-11-18 — E093 audited negative motion-control outcome reported
+
+Evidence: user-pasted reporter stdout SHA256
+`4b8f91070c4f430303e14c44ae9aa37e0b5ccdbd392942ef6c35ff90b6967ae6`, structured record
+[E093-server-summary.json](experiments/records/E093-server-summary.json).
+Run `/home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620`;
+selected SHA256 `a499c523f31881f3df71fb1d1281ab21130545efa26493a0faa36cb93de0e92a`.
+Server files and actual revision/dirty state/environment have not been inspected
+locally; do not infer them from the launcher or local Git revision.
+
+Execution/validation/audit all complete, no integrity problems;9complete
+generations,121completed records (2parents+108fit+11final),12time-budget records.
+The133 deliberate original-cap exceptions are under the declared single-edge
+prior. Runtime10170.943073s=2h49m30.943s inside240min ceiling; reserved final
+phases completed early. No timeout/software failure. Training remains at the
+first1% rung, and all motion/rest/full-control qualifications remainFalse.
+
+Nominal motion-rate reduction tail/middle/head is0.04331%/0.11302%/0.11349%,
+far below the required1% in every region. Body cycle ratios remain near1.
+Low-dose, shifted, repeated, close-repeat, long-cue and both refined normal
+cases also miss. Baseline movement/recovery, safety and AIYL relay preservation
+pass in active cases. Sensory block gives exactly matched motion ratios1 and
+zero AIYL cue response. Neural/body grid comparison errors4.28934e-5/1.33734e-6
+in ratio units pass the existing target-scaled tolerance. Passing that tolerance
+does not certify arbitrary relative accuracy of this very small response.
+
+AIYL->RIAL no-cue release replay leaves the nominal worst-region ratio at
+0.999563228 versus normal0.999566921: small suppression persists and dependence
+fails. RIAL->SMD replay yields1.000392660 (small acceleration), so its criterion
+passes. These diagnostics are consistent with the RIAL output branch carrying
+this small modeled response, while the tested AIYL->RIAL branch does not mediate
+it. They do not establish a complete causal pathway or exclude other AIYL paths,
+gap coupling, feedback, phase effects or numerical sensitivity. No biological
+inference, stopping/restart or swimming is demonstrated.
+
+The supplied report omits matched parent-versus-selected losses, parameter/
+bound room, late-generation progress and downstream signal/current magnitudes.
+Do not assert learning gain, saturation or insufficient original-cap room from
+these final values. Decision: preserve all checkpoints/source/optimizer/RNG and
+negative outcomes; no further fit launched. First inspect these saved-data
+quantities. Clean integrity audit does not equal successful skill training.
+
+Planned supplementary read-only analysis (same E093, no new experiment/fitting):
+`python -m scripts.report_sensory_motion --details --run /home/carsonc/r-elegans-results/sensory-motion-20261118T155314Z-465620`.
+Use existing clean-audited source and selected SHA. Compare parent-redundant and
+selected features at identical protocol/target/margin1, record each generation's
+selected loss and rate reduction, actual changed/frozen parameters and local/
+original/declared bound room. Inspect nominal saved voltage/release changes in
+AWA/AIY/RIAL/SMD windows and effective AIYL->RIAL, other RIAL incoming and RIAL->SMD
+chemical/gap currents. Release-only contribution holds postsynaptic voltage at
+matched no-cue value; actual current difference includes altered driving force.
+Use saved samples at approximately100Hz, not substep integration or channel
+current reconstruction. No causal interventions, acceptance changes, parameter
+changes or new training. Seeds not applicable. Save a separate external derived
+folder with exact invocation/environment/source records, consumed evidence
+hashes and JSON. Actual server analysis path/results remain pending.
+
+Supplementary reporter local verification:14 focused software tests pass.
+Tests distinguish release-only current modulation from changes in postsynaptic
+driving force, report original-bound exceptions separately from declared-bound
+room, and exercise the complete retained-trace report with unchanged hashes of
+all source files. Python compilation, CLI help and whitespace checks pass.
+These use synthetic traces and bundled parameter fixtures, not E093 server data;
+computed server bounds/progress/current results remain pending. No fitting or
+acceptance thresholds changed.
