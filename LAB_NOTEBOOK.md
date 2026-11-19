@@ -10403,3 +10403,63 @@ widened pathway edge and rejects a second changed coordinate. Not tested locally
 a real evaluation, the new replay diagnostics on the real network, and the
 node-feature path inside the real worker; a systematic failure would show in the
 first jobs. No scientific forward run.
+
+## 2026-11-19 — E098 outcome reported: large gain, tail still below the gate
+
+Evidence: user-pasted `report_sensory_motion` stdout (hash not computed); record
+[E098-server-summary.json](experiments/records/E098-server-summary.json). Run
+`/home/carsonc/r-elegans-results/pathway-training-20261119T143748Z-561835`, selected SHA256
+`95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b`. The plan commit
+edf5ad9 was pulled before launch; server revision, dirty tree and environment were
+not printed.
+
+Post-run audit.
+- Execution/budget: valid, validation complete, stop reason search_time_budget;
+  24 completed generations; 533 completed and 5 time_budget evaluations (538);
+  23020.48 s (6h23m40.5s) of the 420 min budget; exit 0.
+- Integrity: saved-data audit complete, integrity passed, no problems. The audit's
+  "deliberate original-upper-bound exceptions" counter reads 538 = every evaluation
+  because it also counts the inherited AIYR->AIYL exception coordinate; it does not
+  say how many evaluations widened a pathway edge.
+- Candidate selection and parameters: one panel, same checkpoint in all 11 cases.
+  Per-generation progress, changed/frozen counts, which groups moved and bound
+  room (how many widened edges sit at 4x) were NOT supplied; the audit's frozen-
+  field and coordinate checks passed.
+- Behavioral gates, nominal (tail/middle/head reduction): 0.530/1.203/1.427 %
+  (E097 cue run on the parent 0.0251/0.0857/0.0867; E094 0.056/0.106/0.094), i.e.
+  21x/14x/16.5x the parent in tail/middle/head. Middle and head pass 1 % in the
+  nominal, low-dose, repeat and long-cue cases; the tail misses 1 % in every case
+  (low-dose 0.451, shift 0.262, second cues 0.430 and 0.491), and the shifted and
+  redundant-second-cue cases also miss in the middle (0.933, 0.795 %). The weakest
+  region needs about 1.9x more to reach the gate. No qualification.
+- Node signal: cue-driven mean RIAL/RIAR release change 0.01319 nominal (0.01136
+  low-dose and redundant), against 0.000257 on the parent (about 51x) and the
+  ~0.014 estimated need; the training target 0.02 was not reached (node term 0.116).
+  The response grew sub-proportionally: the node change rose ~51x, the tail ~21x.
+- Preservation: baseline, recovery, safety and AIYL relay preservation pass in all
+  ordinary-grid active cases.
+- Numerical: neural-half difference 0.001767 and body-half 2.2e-5 (tolerance
+  0.0025) pass; the neural-half grid gives a smaller tail reduction (0.374 vs
+  0.530 %) and its baseline/recovery flag reads False (second recovery ratio
+  0.9972-0.9977 vs 0.0025 tolerance), so grid sensitivity is ~0.15 pp.
+- Controls: sensory block gives ratios exactly 1 and zero RIA release change.
+  Both dependence replays pass for the first time: replacing the hop-1 interneuron
+  release onto RIA with no-cue values leaves tail ratio 0.998696 (residual
+  attenuation 0.130 % vs the allowed 0.25 x 0.530 = 0.132 %, a narrow pass), and
+  replacing RIAL/RIAR release onto SMD/RMD gives 1.00206 (motion rises slightly).
+
+Interpretation (hypotheses). The pathway training raised the cue-driven RIA
+drive ~51x and the body effect 14-21x, so the node-level calibration was a
+useful target; within the model the suppression now depends on both the hop-1
+inputs to RIA and RIA's output edges. The tail is still the limiting region and
+the node target (0.02) is not reached, so more RIA drive, or more tail-directed
+gain, is probably needed; whether the search was still improving at the time budget
+(24 generations only) and whether widened edges are pinned at 4x is unknown until
+the details report. Not a gate pass, not qualified, no claim about start/stop,
+swimming or biology; all checkpoints are retained as independent parents.
+
+Decision: no new training launched. Next: run the read-only details report
+(extended to E098: pathway groups, widened-bound accounting, node term, hop-1 cells)
+to read progress, moved groups, bound room and signal propagation; then decide
+on a continuation from this checkpoint as a separate recorded plan.
+

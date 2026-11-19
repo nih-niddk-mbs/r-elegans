@@ -1,4 +1,4 @@
-"""Read-only E093/E094 bounds, matched progress and sampled signal/current report.
+"""Read-only E093/E094/E098 bounds, matched progress and sampled signal/current report.
 
 Currents are reconstructed at saved samples. They are not integrated current
 balances, physiological measurements or new causal interventions.
@@ -12,6 +12,7 @@ from scripts.experiment_records import capture_run_record,file_sha256
 from scripts.audit_rial_sensory import frozen_network_fields
 from r_elegans.relay_cap_experiments import upper_for
 from r_elegans.sensory_motion import score
+from r_elegans.pathway import extend_pathway_upper
 
 
 def edge_summary(v0,v1,network,post,pre):
@@ -32,7 +33,7 @@ def edge_summary(v0,v1,network,post,pre):
 
 
 def bound_rows(groups,z,origin,offsets,lower,original_upper,edge):
-    upper=upper_for('aiyr_2p5',original_upper,edge);rows=[]
+    upper=extend_pathway_upper(upper_for('aiyr_2p5',original_upper,edge),origin,groups);rows=[]
     for value,g in zip(z,groups):
         ix=np.asarray(g['indices'],dtype=int);delta=offsets[ix]-origin[ix]
         rows.append(dict(name=g['name'],coordinates=len(ix),latent=float(value),near_local_bound=bool(abs(value)>=.99),
@@ -52,10 +53,10 @@ def analyze(run,out=None):
     if any(out==r or r in out.parents or out in r.parents for r in (run,repo)):raise ValueError('Separate external analysis output required')
     s=json.loads((run/'summary.json').read_text());audit_folder=run.with_name(run.name+'-audit')
     audit=json.loads((audit_folder/'summary.json').read_text());receipt=json.loads((run/'budget_receipt.json').read_text())
-    if s.get('experiment') not in ('E093','E094') or not s.get('execution_valid') or not s.get('validation_complete') or not receipt.get('all_steps_finished') or not audit.get('integrity_passed') or not audit.get('audit_complete'):
-        raise ValueError('Completed E093/E094 with clean saved-data audit required')
+    if s.get('experiment') not in ('E093','E094','E098') or not s.get('execution_valid') or not s.get('validation_complete') or not receipt.get('all_steps_finished') or not audit.get('integrity_passed') or not audit.get('audit_complete'):
+        raise ValueError('Completed E093/E094/E098 with clean saved-data audit required')
     if len(s['panels'])!=1:raise ValueError('Unique motion panel required')
-    config=json.loads((run/'configuration.json').read_text());worst=bool(config.get('worst_region_term'));bilateral=bool(config.get('bilateral'))
+    config=json.loads((run/'configuration.json').read_text());worst=bool(config.get('worst_region_term'));bilateral=bool(config.get('bilateral'));node_target=config.get('node_target');hop1=tuple(config.get('pathway_hop1') or ())
     panel=s['panels'][0];folder=Path(panel['training_output']).resolve()
     if run not in folder.parents:raise ValueError('Selected model outside source run')
     out.mkdir(parents=True,exist_ok=False);capture_run_record(out,repo,dict(run=str(run),output_dir=str(out),method='saved-data-only'))
@@ -76,16 +77,16 @@ def analyze(run,out=None):
     with np.load(run/'inputs/cap_prior.npz',allow_pickle=False) as z:
         origin,lower,upper,edge=z['origin'],z['lower'],z['upper'],int(z['edge'])
     with np.load(folder/'coordinates.npz',allow_pickle=False) as z:offsets,point=z['offsets'],z['z']
-    groups=load(run/'inputs/cap_groups.json')['aiyr_2p5'];parent=load(run/'parent_features.json')
+    cap_groups=load(run/'inputs/cap_groups.json');groups=cap_groups.get('pathway') or cap_groups['aiyr_2p5'];parent=load(run/'parent_features.json')
     initial=load(run/'evaluations/parent-redundant/summary.json');selected=load(folder/'summary.json')
-    target=s['target'];baseline_score=score(initial['paired_features'],parent,target,1.,worst)
-    selected_score=score(selected['paired_features'],parent,target,1.,worst)
+    target=s['target'];baseline_score=score(initial['paired_features'],parent,target,1.,worst,node_target)
+    selected_score=score(selected['paired_features'],parent,target,1.,worst,node_target)
     history=load(run/'generation_history.json') if (run/'generation_history.json').exists() else []
     progress=[]
     for entry in history:
         path=Path(entry['selected_evaluation']).resolve()
         if run not in path.parents:raise ValueError('History model outside source run')
-        r=load(path/'summary.json');m=score(r['paired_features'],parent,target,1.,worst)
+        r=load(path/'summary.json');m=score(r['paired_features'],parent,target,1.,worst,node_target)
         progress.append(dict(generation=entry['generation'],checkpoint_sha256=r['checkpoint_sha256'],loss_at_final_target=m['loss'],
             minimum_regional_suppression_percent=float(100*(1-np.max(m['regional_motion_ratios'])))))
     from r_elegans.avb_audit import load_saved_network
@@ -105,7 +106,7 @@ def analyze(run,out=None):
             if len(ix)<4:raise ValueError('Missing saved signal window')
             a0,b0=v0[ix],v1[ix];cells=[]
             for i,name in enumerate(n['ids']):
-                if name not in ('AWAL','AWAR','AIYL','AIYR','RIAL','RIAR') and not name.startswith('SMD'):continue
+                if name not in ('AWAL','AWAR','AIYL','AIYR','RIAL','RIAR',*hop1) and not name.startswith('SMD'):continue
                 ra=expit((a0[:,i]-n['threshold'][i])/n['slope'][i]);rb=expit((b0[:,i]-n['threshold'][i])/n['slope'][i])
                 cells.append(dict(neuron=name,no_cue_voltage_mean_mV=float(a0[:,i].mean()),cue_voltage_mean_mV=float(b0[:,i].mean()),
                     voltage_difference_rms_mV=float(np.sqrt(np.mean((a0[:,i]-b0[:,i])**2))),

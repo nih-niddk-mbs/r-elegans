@@ -1,5 +1,11 @@
 # r-elegans
 
+2026-11-19 E098 (user-reported, audit clean, 24 generations, 6h24m): joint cue-to-RIA-to-motor pathway
+training under a widened (4x) edge prior. Nominal cue-driven suppression 0.53/1.20/1.43% (tail/middle/head),
+about 21x/14x/16x the parent; cue-driven RIA release change ~51x. Tail misses the 1% gate in every case, so no
+qualification; sensory block and both dependence replays pass. Details report pending.
+[Record](experiments/records/E098-server-summary.json).
+
 2026-11-19 E097 (user-reported, audit clean, 54/54 runs, 23 min): low-dose node calibration. Thresholds
 for whole-body suppression (>=1% in every region, reversible) bracketed at about 0.3-1 pS (RIA excite),
 1-3 pS (AIZ, SMD excite), 3-10 pS (RIA, SMD inhibit). AIZ excitation is ~linear (~1%/pS tail). The

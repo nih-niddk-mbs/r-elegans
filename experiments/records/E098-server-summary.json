@@ -1,0 +1,61 @@
+{
+ "experiment": "E098",
+ "record_date": "2026-11-19",
+ "evidence": "User-pasted report_sensory_motion stdout (assessment, 11 validation cases, budget receipt, audit summary); server artifacts not independently inspected",
+ "evidence_sha256": null,
+ "run": "/home/carsonc/r-elegans-results/pathway-training-20261119T143748Z-561835",
+ "audit_report": "/home/carsonc/r-elegans-results/pathway-training-20261119T143748Z-561835-audit/summary.json",
+ "checkpoint_sha256": "95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b",
+ "source_revision": null,
+ "source_revision_note": "Commit edf5ad9 was committed locally and pushed before launch (user pulled it); server revision/dirty tree/environment were not printed.",
+ "execution": {
+  "execution_valid": true,
+  "validation_complete": true,
+  "completed_generations": 24,
+  "target": 0.01,
+  "stop_reason": "search_time_budget",
+  "failure": null,
+  "total_elapsed_seconds": 23020.484393259045,
+  "total_minutes_budget": 420,
+  "exit_code": 0,
+  "audit_complete": true,
+  "audit_integrity_passed": true,
+  "audit_problems": [],
+  "status_counts": {"completed": 533, "time_budget": 5},
+  "deliberate_original_upper_bound_exceptions_pathway": 538,
+  "exceptions_note": "538 equals the evaluation count: the audit counter also counts the inherited E092 AIYR->AIYL exception coordinate, so it does not by itself show how many evaluations widened a pathway edge.",
+  "sensory_motion_component_qualified": false,
+  "rest_restart_component_qualified": false,
+  "full_start_stop_qualified": false,
+  "post_audit_component_qualified": false
+ },
+ "assessment": {
+  "same_checkpoint": true,
+  "numerical_checks": [
+   {"grid": "neural-half", "difference": 0.001767067281530199, "passed": true},
+   {"grid": "body-half", "difference": 2.213941918827178e-05, "passed": true}
+  ],
+  "sensory_block_passed": true,
+  "control_interneuron_dependence_passed": true,
+  "engineering_criteria_met": false
+ },
+ "validation_cases_reduction_percent_tail_middle_head": {
+  "nominal": [0.5298, 1.2026, 1.4266],
+  "low-dose": [0.4509, 1.0339, 1.2285],
+  "shift": [0.2616, 0.9335, 1.1503],
+  "repeat_second_cue": [0.4298, 1.1336, 1.3565],
+  "redundant_second_cue": [0.4909, 0.7947, 0.9913],
+  "long-cue": [0.5298, 1.2026, 1.4266],
+  "nominal_neural-half": [0.3744, 1.0425, 1.2499],
+  "nominal_body-half": [0.5319, 1.2047, 1.4288]
+ },
+ "cue_driven_mean_RIA_release_change": {"nominal": 0.013186, "low-dose": 0.011362, "shift": 0.013168, "repeat": 0.013241, "redundant": 0.011349, "neural-half": 0.012922, "body-half": 0.013191, "target": 0.02, "e097_cue_run": 0.000257, "estimated_need": 0.014},
+ "relative_to_earlier_nominal": {"tail_vs_parent_cue_run_0.0251": 21.1, "middle_vs_0.0857": 14.0, "head_vs_0.0867": 16.5, "tail_vs_E094_0.0564": 9.4, "ria_release_change_vs_parent": 51.3},
+ "preservation": "Baseline, recovery, safety and AIYL relay preservation pass in all ordinary-grid active cases. On the neural-half grid the baseline/recovery flag reads False (second recovery ratio 0.9977/0.9972/0.9973 vs tolerance 0.0025), so that case's loss is dominated by the penalty.",
+ "controls": {
+  "sensory_block": "ratios exactly 1, zero RIA release change",
+  "relay_replay_hop1_to_RIA": {"original_tail_ratio": 0.9947021889800441, "replay_tail_ratio": 0.998696352615251, "cue_attenuation_reduced": true, "margin_note": "residual attenuation 0.1304% against the allowed 0.25 x 0.5298% = 0.1324%, a narrow pass"},
+  "ria_replay_to_SMD_RMD": {"replay_tail_ratio": 1.0020615953417675, "cue_attenuation_reduced": true}
+ },
+ "not_supplied": ["per-generation selected loss and weakest-region progress", "changed/frozen coordinate counts and which groups moved", "bound room (including how many widened edges sit at 4x)", "per-neuron release/voltage changes along the pathway", "server dirty tree and environment"]
+}
