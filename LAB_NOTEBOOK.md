@@ -10099,3 +10099,46 @@ interpretations above remain hypotheses; no fit, qualification, parent promotion
 start/stop, swimming or biological claim. Decision: no new experiment launched;
 a tail-targeted route (locomotion circuit rather than RIA/SMD) is the open
 question and needs a separate recorded plan.
+
+## 2026-11-18 — E096 planned: imposed node-conductance dose-response (step 1 of the gain budget)
+
+Status: planned; execution not evidenced. [Plan](experiments/records/E096-plan.json).
+User choice (2026-11-18): run step 1 of "work backward from the motor end" and
+keep it within 30 minutes; it runs on mbslnx2 (the E092 parent files live there;
+the Mac has no copy of the E092 run).
+
+Context from a read-only trace of the bundled network (not an experiment): from
+AWAL/AWAR the first motor neurons are two chemical synapses away (SMDDR, SMDVL,
+SMDVR and VB02), reached via AIZ and ADA, not via the weaker AWA->AIY edges
+(AWA->AIZ 0.18-0.22 nS vs AWA->AIY 0.03-0.07 nS). AVA, AVB and PVC are also two
+hops away. Hop 3 reaches nearly all body A/B/AS motor neurons through very weak
+final synapses (0.008-0.06 nS), several of them inhibitory under the model's
+sign convention. Weights are from the bundled network, not the E092 parent.
+
+Question: how much imposed membrane conductance at one node group suppresses
+cue-window body motion by >=1% in every region with baseline/recovery preserved,
+and which node groups can?
+
+Method: no optimizer, no weight change. Nominal protocol with the cue bath off;
+imposed conductance on named neurons during 40-50 s. Ten groups (RIM, RIB, RIS,
+AVA, AVB, PVC, RIA, SMD, AIZ, AIB) x excitatory (0 mV) / inhibitory (-80 mV) x
+0.01, 0.03, 0.1 nS = 60 probes plus one baseline. Parent = the same E092
+isolated 1.25 edge parent as E093-E095. Envelope as E076 (<=0.1 nS).
+
+Acceptance (set before running): per-case gate = all regional ratios <=0.99,
+safe, baseline/recovery preserved. Positive = some group reaches it at <=0.1 nS
+(that dose is the node-level drive budget). Negative = none does. If RIM/RIB
+excitation at 0.1 nS does not suppress strongly, record the discrepancy with
+E076 (older parent) as such. An imposed conductance is not a sensory cue; no
+fit, qualification, learned stop or biological claim.
+
+Budget: 30 min total (4.5 min audit reserve), up to 21 workers x 4 cores (84 of
+128 server CPUs). GPUs unused (CPU float64 pipeline). Command:
+`sh scripts/launch_node_probe_mbslnx2.sh`. Report:
+`python -m scripts.report_node_probe --run <E096 run folder>`.
+
+Local software verification: 155 related tests pass, including the new E096
+tests (probe confinement and envelope, coordinator over 61 runs, budget dispatch,
+and an audit that recomputes scores and flags a mislabelled probe). Not tested
+locally: the worker on the real network (no E092 files on the Mac); a systematic
+failure would show in the first jobs. No scientific forward run.
