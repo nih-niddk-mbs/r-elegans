@@ -1,5 +1,11 @@
 # Current model: exact scope and computation path
 
+2026-11-18 E095 negative (user-reported): single-edge x0.5-x4 scan of eight cue-to-motor
+edges under a widened prior; 43 cases, none near 1% (best 0.052% weakest region vs
+0.025% parent; tail is weakest everywhere). Saved-data audit flagged 52/52 on an
+audit bug (inherited AIYR->AIYL exception); fixed, corrected re-audit pending, so
+results are provisional. No qualification. [Record](experiments/records/E095-server-summary.json).
+
 2026-11-18 E094 audited negative (user-reported): clean audit, 9 generations,
 2h49m34s, no qualification. Nominal motion reduction 0.056/0.106/0.094%
 (tail/middle/head) vs required 1%; E093 0.043/0.113/0.113%. Worst-region term

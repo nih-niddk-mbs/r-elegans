@@ -10019,3 +10019,62 @@ worker setup accepting a 4x scanned edge while rejecting other coordinates. The
 pre-existing test_posterior_excitability float32 test fails under the x64
 environment on the unmodified tree and is unrelated. No real evaluation or
 scientific forward run.
+
+## 2026-11-18 — E095 negative outcome reported; saved-data audit failed on an audit bug
+
+Evidence: user-pasted `report_edge_scan` stdout and audit summary (hash not
+computed); record [E095-server-summary.json](experiments/records/E095-server-summary.json).
+Run `/home/carsonc/r-elegans-results/edge-scan-20261118T233345Z-479923`. The
+server fast-forwarded to c0f58f4 immediately before launch; dirty tree and
+environment were not supplied.
+
+Post-run audit.
+- Execution/budget: valid, stop reason complete, 4140.41 s (1h09m00s) of 180 min.
+  52 evaluations, all completed: parent, 43 scan cases, 8 finalist controls.
+  Five cases were skipped because they fell below the original lower bound
+  (AWAL->AIYL x0.5/x0.75, AIYR->RIAR x0.5, AIZL->RIAL x0.5, RIAL->SMDVL x0.5).
+- Candidate selection: finalists AIYR->RIAR x2 and x1.5 (largest weakest-region
+  reduction among gait-preserving cases); selection matched the audit's
+  recomputed ranking and the reruns reproduced checkpoint and metrics.
+- Parameters/frozen fields: the audit reported no coordinate-decode, single-
+  changed-edge, frozen-field, physical-coordinate, hash or retained-trace
+  score problems. It did report 52/52 "Undeclared original-bound violation".
+  Cause (my audit bug, not a data finding): the parent already sits above the
+  original upper bound on AIYR->AIYL under the inherited E092 one-edge
+  exception, and the E095 audit did not exempt that coordinate. The toy test
+  fixture had no such parent, so it did not catch it. Fixed in
+  scripts/audit_edge_scan.py with a regression test (fails on the old code).
+  Integrity is therefore NOT yet established; the budget receipt says
+  all_steps_finished False, audit_integrity_passed False. Corrected re-audit
+  pending; treat the results below as provisional until it passes.
+- Behavioral gates: no case reaches 1%. Parent weakest-region reduction 0.0251%;
+  best 0.0516% (AIYR->RIAR x2), then 0.0503% (x1.5), 0.045% (AIZR->RIAR x4,
+  fails baseline preservation), 0.0428%, 0.0368%. Tail is the weakest region in
+  every case. Largest regional effects are in the middle/head: AIZR->RIAR x4
+  gives 0.245%/0.303% but the tail only 0.045% and baseline/recovery fail.
+- Direction/shape: AWAR->AIYR and AIBR->AIYR strengthen the effect when weakened
+  (x0.5: 0.0265/0.0255%) and weaken it when strengthened (x4: 0.0187/0.0238%).
+  AWAL->AIYL x1.5-4 is identical to the parent to seven digits (AIYL saturated).
+  AIYR->RIAR peaks near x1.5-2 and declines at x3-4. AIZL->RIAL x4 makes the
+  tail ratio 1.000588 (more tail motion). RIAL->SMD and AIZL->RIAL edges break
+  baseline/recovery preservation at most factors.
+- Numerical: half-grid differences x2: neural 3.30e-4, body 1.21e-6; x1.5:
+  neural 8.15e-5, body 1.62e-6 (all inside the 0.25% tolerance). But the x2
+  tail ratio changes from 0.999484 to 0.999814 on the neural-half grid (effect
+  0.0516% -> 0.0186%), so at this size the result is not numerically robust even
+  though the gate passes; the gate tolerance is larger than the effect.
+- Controls: sensory block gives ratios exactly 1 and zero relay change; all four
+  controls of each finalist share one checkpoint.
+- Signal propagation: scan cases are metrics-only; per-edge currents are not
+  available.
+
+Interpretation (hypotheses): acceptance criteria not met, so this is a negative
+result for the question. No single scanned edge, even widened to 4x, gets within
+about 19x of the 1% gate, and the best single-edge gain (about 2x the parent) is
+comparable to the neural-grid sensitivity. The tail is the bottleneck; the
+cue route through head neurons (RIA, SMD) acts mostly on middle and head, so a
+route that also moves the tail (for example through the locomotion circuit
+rather than RIA/SMD) may be needed. Not tested. No fit, qualification, parent
+promotion or biological claim. Decision: retain all E092-E095 results; no new
+experiment launched. Next: push the audit fix, run the corrected re-audit
+(command given to the user), then decide on the tail-targeted route.

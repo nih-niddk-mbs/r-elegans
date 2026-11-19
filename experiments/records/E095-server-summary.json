@@ -1,0 +1,47 @@
+{
+ "experiment": "E095",
+ "record_date": "2026-11-18",
+ "evidence": "User-pasted report_edge_scan stdout and the audit summary; server artifacts not independently inspected",
+ "evidence_sha256": null,
+ "run": "/home/carsonc/r-elegans-results/edge-scan-20261118T233345Z-479923",
+ "audit_report": "/home/carsonc/r-elegans-results/edge-scan-20261118T233345Z-479923-audit/summary.json",
+ "source_revision": "c0f58f4 (server fast-forwarded to it immediately before launch; dirty tree/environment not supplied)",
+ "execution": {
+  "execution_valid": true,
+  "validation_complete": true,
+  "stop_reason": "complete",
+  "failure": null,
+  "total_elapsed_seconds": 4140.4119573059725,
+  "evaluation_count": 52,
+  "status_counts": {"completed": 52},
+  "scan_cases_run": 43,
+  "scan_cases_skipped_below_original_lower_bound": [["AWAL->AIYL", 0.5], ["AWAL->AIYL", 0.75], ["AIYR->RIAR", 0.5], ["AIZL->RIAL", 0.5], ["RIAL->SMDVL", 0.5]],
+  "any_motion_target_reached": false,
+  "exit_code": 2,
+  "audit_complete": true,
+  "audit_integrity_passed": false,
+  "audit_failure_cause": "Audit software bug, not a data finding: every evaluation (52/52) was flagged 'Undeclared original-bound violation' because the inherited E092 AIYR->AIYL one-edge exception coordinate sits above the original upper bound in the parent and was not exempted. All other audit checks produced no problems. Fixed in scripts/audit_edge_scan.py with a regression test; a corrected re-audit is pending.",
+  "post_audit_component_qualified": false
+ },
+ "scan_best_weakest_region_reduction_percent": {
+  "parent": 0.0251,
+  "AIYR->RIAR x2": 0.0516, "AIYR->RIAR x1.5": 0.0503, "AIZR->RIAR x4": 0.045, "AIZR->RIAR x0.5": 0.0428, "AIYR->RIAR x3": 0.0368
+ },
+ "scan_extremes": {
+  "best_all_regions_gait_preserving": "AIYR->RIAR x2: tail/middle/head ratios 0.999484/0.998922/0.99896",
+  "largest_middle_head": "AIZR->RIAR x4: middle 0.2452%, head 0.3029%, tail 0.045%, fails baseline/recovery preservation",
+  "worst": "AIZL->RIAL x4: tail ratio 1.000588 (tail motion increases)",
+  "tail_is_weakest_region_in_every_case": true,
+  "failed_baseline_or_recovery_preservation": "AIZL->RIAL x1.5-4, RIAL->SMDVL x0.75-4, RIAL->SMDVR x0.5 and x1.5-4, AIZR->RIAR x4",
+  "no_effect": "AWAL->AIYL x1.5-4 identical to parent to seven digits"
+ },
+ "finalists": {
+  "ranking": "AIYR->RIAR x2 then x1.5 (selection matched the recomputed ranking; no audit problem)",
+  "same_checkpoint_across_four_controls": true,
+  "rerun_consistency": {"same_checkpoint": true, "metrics_match": true},
+  "half_grid_differences": {"x2": {"neural_half": 0.00032989864146537595, "body_half": 1.20713717677301e-06}, "x1.5": {"neural_half": 8.15291331184298e-05, "body_half": 1.6182248275820044e-06}},
+  "tail_ratio_ordinary_vs_neural_half": {"x2": [0.9994840299242853, 0.9998139285657507], "x1.5": [0.9994968449196852, 0.9995783740528036]},
+  "sensory_block": "ratios exactly 1, relay change 0"
+ },
+ "not_supplied": ["per-edge currents or voltages in the scan cases (metrics-only)", "server dirty tree and environment", "corrected audit result"]
+}

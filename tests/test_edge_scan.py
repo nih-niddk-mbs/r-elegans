@@ -125,12 +125,14 @@ def test_saved_data_audit_accepts_single_widened_edge_and_rejects_second_changed
     from scripts.audit_edge_scan import audit
     from scripts.experiment_records import file_sha256
     spec,origin,lower,upper=design(room=1.);n=len(IDS);nc=int(np.count_nonzero(spec.channels))
+    from r_elegans.relay_cap_experiments import edge_coordinate,upper_for
+    inherited=edge_coordinate(SimpleNamespace(channels=spec.channels,chemical=spec.chemical),IDS);origin[inherited]=upper[inherited]+.2
     run=tmp_path/'run';inputs=run/'inputs';inputs.mkdir(parents=True)
     def write(path,value):path.write_text(json.dumps(value))
     base=dict(neuron_ids=IDS,cells_conductances_nS=np.ones((n,17)),fixed_chemical_mask=spec.chemical,params_log_channel_scale=np.zeros((n,17)),
         params_raw_chemical=np.zeros((n,n)),fixed_release_threshold_mV=np.full(n,-40.),fixed_release_slope_mV=np.full(n,5.))
     np.savez(inputs/'motion_parent.npz',**base);np.savez(inputs/'motion_parent_coordinates.npz',offsets=origin)
-    np.savez(inputs/'source_bounds.npz',lower=lower,upper=upper);np.savez(inputs/'cap_prior.npz',origin=origin,lower=lower,upper=upper,edge=0)
+    np.savez(inputs/'source_bounds.npz',lower=lower,upper=upper);np.savez(inputs/'cap_prior.npz',origin=origin,lower=lower,upper=upper,edge=inherited)
     groups=scan_groups(spec,IDS,origin,lower,upper);write(inputs/'cap_groups.json',dict(scan=groups));cases=planned_cases(groups)
     reference=tmp_path/'external-trace';reference.write_bytes(b'reference evidence')
     write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=file_sha256(reference)))
@@ -143,7 +145,7 @@ def test_saved_data_audit_accepts_single_widened_edge_and_rejects_second_changed
         return raw
     def evaluation(label,z,updates,reference_job=False):
         folder=run/'evaluations'/label;folder.mkdir(parents=True)
-        x=decode_groups(z,groups,origin,lower,extend_upper(upper,origin,groups));model=dict(base);model['params_raw_chemical']=raw_for(updates)
+        x=decode_groups(z,groups,origin,lower,extend_upper(upper_for('aiyr_2p5',upper,inherited),origin,groups));model=dict(base);model['params_raw_chemical']=raw_for(updates)
         np.savez(folder/'network.npz',**model);np.savez(folder/'coordinates.npz',offsets=x,z=z)
         parent=None if reference_job else parent_features
         write(folder/'request.json',dict(output=str(folder),cap='scan',kind='scan',z=list(z),retain_traces=False,variant='nominal',mode='normal',grid='ordinary',

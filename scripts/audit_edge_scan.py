@@ -53,9 +53,9 @@ def audit(run,out):
                 check(set(np.flatnonzero(used).tolist())==scanned,'Changed coordinates differ from the single scanned edge: '+folder.name)
                 check(frozen_network_fields(parent,folder/'network.npz',used),'Frozen model changed: '+folder.name)
                 check(coordinate_check(parent,folder/'network.npz',origin,x),'Physical coordinate mismatch: '+folder.name)
-                outside=np.flatnonzero(x>upper+1e-10)
-                check(set(outside.tolist())<=scanned,'Undeclared original-bound violation: '+folder.name)
-                extended[folder.name.split('-')[0]]+=int(bool(len(outside)))
+                outside=set(np.flatnonzero(x>upper+1e-10).tolist())
+                check(outside<=scanned|{edge},'Undeclared original-bound violation: '+folder.name)
+                extended[folder.name.split('-')[0]]+=int(bool(outside&scanned))
             elif r['status']=='completed':check(False,'Completed evaluation missing model: '+folder.name)
             hashes=r.get('trajectory_sha256',{});paired={};traces={}
             for condition,sha in hashes.items():
