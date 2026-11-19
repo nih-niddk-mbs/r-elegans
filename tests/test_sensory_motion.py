@@ -181,7 +181,7 @@ def test_curriculum_coordinator_keeps_state_and_runs_all_final_controls(tmp_path
     schemas={'aiyr_2p5':parameter_groups(spec,ids,origin,lower,upper)}
     out=tmp_path/'run';out.mkdir();(out/'deadline.json').write_text(json.dumps(dict(coordinator_finish_by=time.monotonic()+20000)))
     parent_sha='test-parent';pair=data(effect=.1)
-    monkeypatch.setattr(runner,'prepare',lambda source,out,experiment,bilateral:(tmp_path/'inputs',None,schemas,edge,parent_sha,'audit-path'))
+    monkeypatch.setattr(runner,'prepare',lambda source,out,experiment,bilateral,pathway=False:(tmp_path/'inputs',None,schemas,edge,parent_sha,'audit-path'))
     monkeypatch.setattr(runner,'capture_run_record',lambda *args:None)
     monkeypatch.setattr(runner.os,'sched_getaffinity',lambda pid:set(range(32)),raising=False)
     monkeypatch.setattr(topology,'physical_core_cpus',lambda allowed:(list(range(32)),True))

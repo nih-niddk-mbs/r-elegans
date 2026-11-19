@@ -38,7 +38,7 @@ def audit(run,out):
     def verify(path,sha):
         actual=file_sha256(path);check(actual==sha,'Hash mismatch: '+str(path))
         evidence.append(dict(path=str(path),sha256=actual,expected=sha))
-    s=json.loads((run/'summary.json').read_text());motion=s.get('experiment') in ('E093','E094');config=json.loads((run/'configuration.json').read_text())
+    s=json.loads((run/'summary.json').read_text());motion=s.get('experiment') in ('E093','E094','E098');config=json.loads((run/'configuration.json').read_text())
     manifest=json.loads((run/'inputs/manifest.json').read_text())
     for name,sha in manifest['sha256'].items():verify(run/'inputs'/name,sha)
     ref=json.loads((run/'inputs/sensory_reference.json').read_text());verify(Path(ref['path']),ref['sha256'])
@@ -61,7 +61,14 @@ def audit(run,out):
     if motion:
         from r_elegans.sensory_motion import parameter_groups,features,score
     spec=SimpleNamespace(channels=channels,chemical=mask)
-    for cap in schemas:check(schemas[cap]==(parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge),bilateral=bool(config.get('bilateral'))) if motion else parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge))),'Unexpected group policy: '+cap)
+    from r_elegans.pathway import pathway_groups,extend_pathway_upper,widened_coordinates
+    def allowed_for(cap):
+        if cap!='pathway':return upper_for(cap,upper,edge)
+        return extend_pathway_upper(upper_for('aiyr_2p5',upper,edge),origin,schemas['pathway'])
+    for cap in schemas:
+        expected_groups=pathway_groups(spec,ids,origin,lower,upper_for('aiyr_2p5',upper,edge)) if cap=='pathway' else (parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge),bilateral=bool(config.get('bilateral'))) if motion else parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge)))
+        check(schemas[cap]==expected_groups,'Unexpected group policy: '+cap)
+    node_names=('RIAL','RIAR');nodes={n:(float(threshold[ids.index(n)]),float(slope[ids.index(n)])) for n in node_names} if config.get('node_target') else None
     parent_features=json.loads((run/'parent_features.json').read_text());saved={}
     for request in sorted((run/'evaluations').glob('*/request.json')):
         folder=request.parent;j=json.loads(request.read_text())
@@ -69,7 +76,7 @@ def audit(run,out):
         try:
             r=json.loads((folder/'summary.json').read_text());saved[str(folder)]=r;counts[r['status']]+=1
             check(Path(r['output']).resolve()==folder and Path(j['output']).resolve()==folder,'Evaluation path mismatch: '+folder.name)
-            x=decode_groups(j['z'],schemas[j['cap']],origin,lower,upper_for(j['cap'],upper,edge))
+            x=decode_groups(j['z'],schemas[j['cap']],origin,lower,allowed_for(j['cap']))
             if (folder/'network.npz').exists():
                 verify(folder/'network.npz',r['checkpoint_sha256']);verify(folder/'coordinates.npz',r['coordinates_sha256'])
                 with np.load(folder/'coordinates.npz',allow_pickle=False) as z:check(np.array_equal(x,z['offsets']) and np.array_equal(z['z'],j['z']),'Coordinate decode mismatch: '+folder.name)
@@ -77,7 +84,7 @@ def audit(run,out):
                 check(frozen_network_fields(parent,folder/'network.npz',used),'Frozen model changed: '+folder.name)
                 check(coordinate_check(parent,folder/'network.npz',origin,x),'Physical coordinate mismatch: '+folder.name)
                 outside=np.flatnonzero(x>upper+1e-10)
-                check(not len(outside) or (j['cap']=='aiyr_2p5' and np.array_equal(outside,[edge])),'Undeclared original-bound violation: '+folder.name)
+                check(not len(outside) or (j['cap']=='aiyr_2p5' and np.array_equal(outside,[edge])) or (j['cap']=='pathway' and set(outside.tolist())<=({edge}|widened_coordinates(schemas['pathway']))),'Undeclared original-bound violation: '+folder.name)
                 violations[j['cap']]+=int(bool(len(outside)))
                 if j['kind']=='single_edge':check(not np.any(used[np.arange(len(x))!=edge]),'Single-edge test changed other coordinates: '+folder.name)
             elif r['status']=='completed':check(False,'Completed evaluation missing model: '+folder.name)
@@ -86,14 +93,14 @@ def audit(run,out):
                 path=folder/(condition+'.npz');verify(path,sha)
                 with np.load(path,allow_pickle=False) as z:trace={k:z[k] for k in z.files}
                 check(all(np.isfinite(v).all() for v in trace.values() if np.issubdtype(v.dtype,np.number)),'Nonfinite raw trace: '+str(path))
-                paired[condition]=features(trace,ids,j['variant'],float(threshold[ids.index('AIYL')]),float(slope[ids.index('AIYL')]))
+                paired[condition]=features(trace,ids,j['variant'],float(threshold[ids.index('AIYL')]),float(slope[ids.index('AIYL')]),**(dict(nodes=nodes) if motion and j.get('node_target') else {}))
                 traces[condition]=trace
             if r['status']=='completed':
                 expected_conditions={'no_cue','cue'}|({'no_cue_replay','cue_replay'} if j['mode'] in ('relay-replay','rial-replay') else set())
                 check(set(hashes)==(expected_conditions if j['retain_traces'] else set()),'Raw retention policy mismatch: '+folder.name)
                 for key,value in paired.items():check(close(value,r['paired_features'][key]),'Raw features mismatch: '+folder.name+'/'+key)
                 metrics=score(r['paired_features'],j.get('parent_features') or r['paired_features']['no_cue'],j['target'],j['margin'],
-                    **(dict(worst_region=bool(j.get('worst_region'))) if motion else dict(response_aggregation=j['response_aggregation'])))
+                    **(dict(worst_region=bool(j.get('worst_region')),node_target=j.get('node_target')) if motion else dict(response_aggregation=j['response_aggregation'])))
                 check(close(metrics,r['metrics']),'Recorded score mismatch: '+folder.name)
                 if motion and j['mode'] in ('relay-replay','rial-replay'):
                     counter=score(dict(no_cue=r['paired_features']['no_cue_replay'],cue=r['paired_features']['cue_replay']),

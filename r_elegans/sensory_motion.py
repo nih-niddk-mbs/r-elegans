@@ -39,7 +39,7 @@ def parameter_groups(spec,ids,origin,lower,upper,bilateral=False):
     return groups
 
 
-def features(trace,ids,variant,threshold,slope):
+def features(trace,ids,variant,threshold,slope,nodes=None):
     result=relay_range.features(trace,ids,variant,threshold,slope)
     for category in ('active','response','late'):
         for row in result[category]:
@@ -47,6 +47,11 @@ def features(trace,ids,variant,threshold,slope):
             t=trace['dense_time_s'][use];q=trace['dense_joints'][use]
             rate=np.diff(q,axis=0)/np.diff(t)[:,None]
             row['regional_angular_speed_rms_rad_s']=[float(np.sqrt(np.mean(rate[:,region]**2))) for region in np.array_split(np.arange(q.shape[1]),3)]
+            if nodes:
+                from scipy.special import expit
+                release={n:expit((trace['dense_voltage_mV'][use][:,ids.index(n)]-th)/sl) for n,(th,sl) in nodes.items()}
+                row['node_release_mean']={n:float(r.mean()) for n,r in release.items()}
+                row['node_release_q01_q99']={n:list(map(float,np.quantile(r,[.01,.99]))) for n,r in release.items()}
     return result
 
 
@@ -60,7 +65,7 @@ def combine_replays(probes):
     return probe
 
 
-def score(paired,parent,target,margin=1.,worst_region=False):
+def score(paired,parent,target,margin=1.,worst_region=False,node_target=None):
     if target not in RUNGS or not 1<=margin<=1.1:raise ValueError('Invalid motion rung or margin')
     a,b=paired['no_cue'],paired['cue'];base=parent['active'][0];penalty=0.;preserved=True
     def preserve(row,ref):
@@ -101,7 +106,17 @@ def score(paired,parent,target,margin=1.,worst_region=False):
     deficit=(np.maximum(0.,values-aim)/target)**2
     objective=float(np.mean(deficit)+(np.max(deficit) if worst_region else 0.))
     safe=bool(a['safe'] and b['safe']);qualified=bool(safe and preserved and relay_ok and np.all(values<=1-target))
-    return dict(loss=float(objective+100*penalty+100*relay_penalty+1000*(not safe)),target=target,margin=margin,**({'worst_region_term':True} if worst_region else {}),
+    node={}
+    if node_target:
+        names=sorted(a['response'][0]['node_release_mean'])
+        change=float(np.mean([np.mean([rb['node_release_mean'][n]-ra['node_release_mean'][n] for n in names]) for ra,rb in zip(a['response'],b['response'])]))
+        term=(max(0.,node_target-change)/node_target)**2;headroom=0.
+        for row in a['active']+a['response']+a['late']+b['active']+b['response']:
+            for n in names:
+                lo,hi=row['node_release_q01_q99'][n];headroom+=(max(0.,hi-.98)/.02)**2+(max(0.,.02-lo)/.02)**2
+        node=dict(node_release_change=change,node_target=node_target,node_term=float(term),node_headroom_penalty=float(headroom))
+        objective+=float(term)+100*float(headroom)
+    return dict(loss=float(objective+100*penalty+100*relay_penalty+1000*(not safe)),target=target,margin=margin,**({'worst_region_term':True} if worst_region else {}),**node,
         metric='maximum_regional_joint_angular_speed_rms_ratio',regional_motion_ratios=ratios,
         cue_off_recovery_ratios=recovery_ratios,cue_recovery_tolerance=recovery_tolerance,
         response_amplitude_ratios=[max(r) for r in ratios],regional_cycle_ratios=cycles,

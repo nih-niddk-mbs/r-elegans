@@ -42,7 +42,7 @@ def evaluate(job):
     if motion_objective:
         from r_elegans.sensory_motion import features as motion_features,score as motion_score,combine_replays
         def score(paired,parent,target,margin=1.):
-            return motion_score(paired,parent,target,margin,worst_region=bool(job.get('worst_region')))
+            return motion_score(paired,parent,target,margin,worst_region=bool(job.get('worst_region')),node_target=job.get('node_target'))
     if release_objective:
         from r_elegans.rial_release import features as release_features,score
     if relay_objective:
@@ -73,9 +73,10 @@ def evaluate(job):
             if key not in _CACHE:_CACHE[key]=d['factory'](dt,brain,**kwargs)
             trace=_CACHE[key](params,np.linspace(0,p['duration'],121),gains)
             if motion_objective:
-                ai=d['model'].neuron_ids.index('AIYL')
+                ai=d['model'].neuron_ids.index('AIYL');ids_=d['model'].neuron_ids
+                nodes=None if not job.get('node_target') else {n:(float(d['fixed'].release_threshold_mV[ids_.index(n)]),float(d['fixed'].release_slope_mV[ids_.index(n)])) for n in ('RIAL','RIAR')}
                 paired[condition]=motion_features(trace,d['model'].neuron_ids,variant,
-                    float(d['fixed'].release_threshold_mV[ai]),float(d['fixed'].release_slope_mV[ai]))
+                    float(d['fixed'].release_threshold_mV[ai]),float(d['fixed'].release_slope_mV[ai]),nodes=nodes)
             elif relay_objective:
                 ai=d['model'].neuron_ids.index('AIYL')
                 paired[condition]=relay_features(trace,d['model'].neuron_ids,variant,
@@ -100,6 +101,9 @@ def evaluate(job):
                 if mode in ('rial-replay','relay-replay'):
                     pairs=[('AIYL',('RIAL',))] if mode=='relay-replay' else [('RIAL',None)]
                     if job.get('bilateral'):pairs+=[('AIYR',('RIAR',))] if mode=='relay-replay' else [('RIAR',None)]
+                    if job.get('pathway_hop1'):
+                        motor=tuple(n for n in d['model'].neuron_ids if n.startswith(('SMD','RMD')))
+                        pairs=[(h,('RIAL','RIAR')) for h in job['pathway_hop1']] if mode=='relay-replay' else [(r,motor) for r in ('RIAL','RIAR')]
                     probes=[]
                     for source_name,post_names in pairs:
                         ri=d['model'].neuron_ids.index(source_name);reference_release=expit((trace['dense_voltage_mV'][:,ri]-float(d['fixed'].release_threshold_mV[ri]))/float(d['fixed'].release_slope_mV[ri]))

@@ -15,11 +15,11 @@ PARENT='0020499c6b900183e954a0e577563584c7ffa19e9cd5264f90c584d8b5b116da'
 def write(path,value):path.write_text(json.dumps(value,indent=2,allow_nan=False)+'\n')
 
 
-def new_optimizer(cma,dimension,seed,mean=None,sigma=.3):
+def new_optimizer(cma,dimension,seed,mean=None,sigma=.3,popsize=12):
     # Per-arm RNG: initializing another optimizer cannot change this arm's stream.
     rng=np.random.RandomState(seed)
     return cma.CMAEvolutionStrategy(np.zeros(dimension) if mean is None else mean,sigma,
-        dict(seed=seed,randn=rng.randn,popsize=12,bounds=[-1,1],verbose=-9,verb_log=0))
+        dict(seed=seed,randn=rng.randn,popsize=popsize,bounds=[-1,1],verbose=-9,verb_log=0))
 
 
 def prepare(source,out):

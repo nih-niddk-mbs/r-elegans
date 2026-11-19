@@ -1,0 +1,27 @@
+{
+ "experiment": "E098",
+ "record_date": "2026-11-19",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "Can joint training of the cue-to-RIA-to-motor pathway, under an explicit widened engineering prior and with a RIA node-level target, produce cue-driven whole-body motion suppression of at least 1% in every region with baseline gait, recovery and relay behavior preserved, validated by the full 11-case panel?",
+ "motivation": "E096/E097: whole-body suppression needs about 0.3-1 pS of imposed RIA excitation (1-3 pS at AIZ or SMD); the real cue's effect (0.025/0.086/0.087 %) is consistent with its +0.000257 mean RIA release change by the probe curve, which is roughly 22-73x (about 55x for the tail) below the gate, about +0.014 in absolute release change. E095: single edges give at most ~2x, so the gain must be built across several stages together.",
+ "method": "Fresh CMA-ES from the pinned E092 isolated 1.25 parent, population 21 (one wave on 21 workers), sigma 0.3 in the grouped latent space, restart at the incumbent with sigma 0.15 on rung advance, optimizer stop or every 8 generations, seed 9800. Same redundant two-cue protocol, rungs (1, 2, 5, 10, 25, 50, 75, 95 %), training margin 1.05 and final 11-case validation as E093/E094.",
+ "source_run": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433",
+ "parent": "Same audited unique passing E092 isolated 1.25 AIYR->AIYL panel as E093-E097; hash pinned at runtime, not invented here.",
+ "parent_checkpoint_sha256": null,
+ "trainable": "53 groups: 37 single chemical edges (AWAL/AWAR to AIZ, AIY, ADFR, ASHL, RIFR; those interneurons plus AIBR to RIAL/RIAR; RIAL and RIAR to SMD and RMD targets) and 16 channel-density groups (inward and outward for AIZL, AIZR, RIAL, RIAR and the four SMD cells). The group list is saved in inputs/cap_groups.json and audited.",
+ "fixed": "All other densities/strengths/gaps, topology/signs, reversals, leak, kinetics, release law, sensory gains, NMJ/muscle/body/water physics and physical clocks. The inherited AIYR->AIYL one-edge exception stays frozen.",
+ "bounds": "Pathway edges may exceed their original upper bound up to 4x the parent strength (explicit engineering prior, as E095; lower bounds not widened; nothing admitted as a global standard). Densities stay inside the original prior with the usual +/-0.4 log local box.",
+ "objective": "E094 worst-region motion loss plus a node-level term (squared deficit of the cue-driven mean RIAL/RIAR release change below 0.02, about 1.4x the ~0.014 estimated need) plus a RIA headroom penalty (q01 >= 0.02 and q99 <= 0.98 in every window). Preservation of baseline gait, recovery and the AIYL relay component is unchanged from E093/E094 and may constrain the search.",
+ "final_validation": "Eleven cases as E093/E094. The relay replay replaces the hop-1 interneuron release onto RIA with no-cue values; the RIA replay replaces RIAL/RIAR release onto SMD and RMD targets. Both must reduce the attenuation for the dependence criterion.",
+ "command": "sh scripts/launch_pathway_training_mbslnx2.sh [total minutes, default 420]",
+ "report": "python -m scripts.report_sensory_motion --run <E098 run folder>",
+ "budget": {"total_minutes_default": 420, "audit_reserve_minutes": 20, "validation_reserve_minutes": 30, "workers": "21 x 4 physical cores (84 of 128 server CPUs)"},
+ "acceptance_criteria": {
+  "success": "Selected checkpoint passes all 11 validation cases at a rung >= 1% with all regions reduced, safe, baseline/recovery and relay preserved, sensory-block control, neural/body half-grid agreement and both dependence replays, and the automatic audit is clean.",
+  "partial": "Reports the attained rung, the weakest-region reduction and the cue-driven RIA release change against the ~0.014 estimate; a checkpoint that improves but misses the gate is a negative result for the question and stays an independent checkpoint.",
+  "negative": "No rung attained, or validation fails. Failed outcomes and all checkpoints are retained."
+ },
+ "risks": "Dimension 53 with about 40-45 generations; the inherited AIYL relay-preservation penalties may fight the pathway change; the effective total gain needed is large and may exceed what 4x edges plus densities provide; the first-wave per-process compile adds several minutes.",
+ "audit": "scripts.audit_relay_experiments runs automatically inside the budget with pathway-aware group reconstruction, widened-bound accounting (only declared pathway coordinates may exceed the original upper bound), node-level features and scores, frozen-field and coordinate checks.",
+ "claims_not_made": "No biological claim, no initial sensory initiation, full start/stop or swimming claim. A passing result would be an engineering component under an explicit widened prior."
+}
