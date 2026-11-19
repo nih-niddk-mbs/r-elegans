@@ -1,5 +1,12 @@
 # Current model: exact scope and computation path
 
+2026-11-18 E096 (user-reported, audit clean, 61/61 runs, 19 min): imposed node-conductance
+dose-response on the E092 parent. AIZ excitation gives graded reversible whole-body
+suppression (9-18%) at 0.01-0.1 nS; RIA, SMD, RIB also reach the 1% gate, RIM suppresses
+but does not recover, AVA/AVB/PVC/RIS do not suppress the whole body. Tail is weakest
+throughout. Thresholds below 0.01 nS are unbracketed. No fit or qualification.
+[Record](experiments/records/E096-server-summary.json).
+
 2026-11-18 E095 negative (user-reported): single-edge x0.5-x4 scan of eight cue-to-motor
 edges under a widened prior; 43 cases, none near 1% (best 0.052% weakest region vs
 0.025% parent; tail is weakest everywhere). Original saved-data audit failed on an

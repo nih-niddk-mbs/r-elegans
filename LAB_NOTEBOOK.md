@@ -10142,3 +10142,71 @@ tests (probe confinement and envelope, coordinator over 61 runs, budget dispatch
 and an audit that recomputes scores and flags a mislabelled probe). Not tested
 locally: the worker on the real network (no E092 files on the Mac); a systematic
 failure would show in the first jobs. No scientific forward run.
+
+## 2026-11-18 — E096 outcome reported: imposed node-conductance dose-response
+
+Evidence: user-pasted `report_node_probe` stdout (hash not computed); record
+[E096-server-summary.json](experiments/records/E096-server-summary.json) holds all
+60 cases. Run `/home/carsonc/r-elegans-results/node-probe-20261119T033115Z-489778`.
+The plan commit was pulled before launch; server revision, dirty tree and
+environment were not printed.
+
+Post-run audit.
+- Execution/budget: valid, stop reason complete, 61/61 evaluations (baseline +
+  60 probes) completed, 1155.89 s (19m15.9s) of 30 min, exit 0.
+- Candidate selection and parameters: none selected, no weight changes by
+  design; the audit confirmed every evaluation used the pinned parent checkpoint.
+- Integrity: audit complete, integrity passed, no problems; 21 retained traces
+  (baseline + 20 cases at 0.1 nS) matched recomputed features, had identical
+  pre-probe trajectories and the correct probe voltage sign.
+- Controls: the baseline reproduced the parent reference (worker check). Neural/
+  body half-grid checks were not planned and are unavailable; E095 showed
+  neural-grid shifts of ~0.03% in the weakest region, small against most effects
+  below but comparable to the smallest margins (RIB excitation at 0.03 nS).
+- Gates: all 60 cases were safe. A case reaches the gate with all regional
+  reductions >=1% and baseline/recovery preserved (recovery tolerance 0.25%).
+  Reached: RIB excite 0.03/0.1; RIA excite 0.03; RIA inhibit 0.01/0.03/0.1; SMD
+  excite and inhibit 0.01/0.03/0.1; AIZ excite 0.01/0.03/0.1. Minimum tested doses:
+  SMD, AIZ(excite) and RIA(inhibit) 0.01 nS (smallest tested, so not bracketed);
+  RIB and RIA(excite) 0.03 nS.
+
+Findings (tail/middle/head reduction, %; negative = more motion).
+- AIZ excitation gives a graded, uniform, reversible suppression at tiny doses:
+  0.01 nS 9.1/9.6/10.3, 0.03 nS 13.9/14.4/15.6, 0.1 nS 15.6/16.5/17.9 (saturating).
+  AIZ inhibition increases motion (0.1 nS: -4.7/-13.8/-12.9). A signed,
+  bidirectional, whole-body knob.
+- RIA and SMD suppress with either sign, strongly in middle/head (RIA excite
+  0.03 nS: 14.8/96.0/92.9; RIA inhibit 0.1 nS: 13.9/96.0/82.5; SMD excite 0.1 nS:
+  44.5/82.3/87.2), and the tail is always the weakest region. Sign-independent
+  suppression is consistent with disrupting an oscillator loop rather than a
+  graded drive (hypothesis). RIA excite 0.01 and 0.1 nS fail baseline/recovery.
+- RIM excitation suppresses strongly (0.1 nS: 42.7/48.2/56.7) but motion does
+  not return to baseline afterwards (not preserved at 0.03, 0.1 nS); RIM
+  inhibition increases tail motion (0.1 nS: -69.8/12.6/9.8). RIB excitation is
+  weak but reversible (0.1 nS: 9.4/5.5/6.6; gate reached at 0.03 nS).
+- AVA, AVB, PVC and RIS produce no whole-body suppression at <=0.1 nS: AVB drive
+  changes the body by <0.5%; AVA and PVC move mainly the tail (AVA inhibit 0.03
+  nS: -17.4/0.3/0.1; PVC excite 0.03: 6.2/-0.8/0.05); RIS excite 0.03 gives
+  3.5/-0.5/-0.2 (RIS stop mechanisms beyond this conductance are not modeled).
+  AIB excitation raises tail motion (-39.9/14.2/12.3 at 0.1 nS).
+- E076 comparison, not reproduced: that older-parent result (RIB and RIM together
+  at 0.1 nS, 98.6% body range) is far above RIB alone (9.4/5.5/6.6) or RIM alone
+  (42.7/48.2/56.7) here; parent, metric and combination differ, so unresolved.
+
+Interpretation (hypotheses): the node-level drive needed for a gated, reversible,
+whole-body suppression is small, <=10 pS at AIZ, SMD or RIA (upper-bounded, not
+bracketed), versus the cue-delivered drive seen in E093/E094 (about 3 pS-equivalent
+excitation to AIZR by my estimate from release changes with bundled weights, not
+measured on the E092 parent). The 0.05-0.1% observed suppression is far below
+what a matching probe would give, so the cue's actual drive at AIZ may be lower
+than that estimate, or the response is strongly nonlinear below 0.01 nS; neither is
+tested. AIZ is the cleanest candidate control node; RIA/SMD can suppress but
+possibly by clamping the oscillator. No fit, qualification, learned stop, start/
+stop, swimming or biological claim; an imposed conductance is not a sensory cue.
+
+Decision: no new experiment launched. Proposed next step (not run): a
+dose-response below 0.01 nS (e.g. 0.001-0.01 nS) on AIZ, RIA, SMD and RIB with
+all traces retained, to bracket the thresholds and calibrate motion reduction
+against the node's own release/voltage change, then compare with the cue-
+delivered change at the same nodes from E093/E094 to state the upstream gain
+budget. Requires a separate recorded plan.
