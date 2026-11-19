@@ -1,0 +1,52 @@
+{
+ "experiment": "E097",
+ "record_date": "2026-11-19",
+ "evidence": "User-pasted report_node_probe stdout (probe table, budget receipt, audit summary). The analyze_node_calibration output was not supplied.",
+ "evidence_sha256": null,
+ "run": "/home/carsonc/r-elegans-results/node-calibration-20261119T041158Z-494689",
+ "audit_report": "/home/carsonc/r-elegans-results/node-calibration-20261119T041158Z-494689-audit/summary.json",
+ "source_revision": null,
+ "source_revision_note": "Commit 9916489 was pushed before launch (user pulled it); server revision/dirty tree/environment were not printed.",
+ "execution": {
+  "execution_valid": true,
+  "validation_complete": true,
+  "stop_reason": "complete",
+  "failure": null,
+  "total_elapsed_seconds": 1387.510557451984,
+  "evaluation_count": 54,
+  "status_counts": {"completed": 54},
+  "exit_code": 0,
+  "audit_complete": true,
+  "audit_integrity_passed": true,
+  "audit_problems": [],
+  "retained_probe_traces": 54,
+  "post_audit_component_qualified": false
+ },
+ "cue_run_reduction_percent_tail_middle_head": [0.0251, 0.0857, 0.0867],
+ "minimum_tested_dose_reaching_1pct_in_every_region_nS": {"AIZ-excite": 0.003, "RIA-excite": 0.001, "RIA-inhibit": 0.01, "SMD-excite": 0.003, "SMD-inhibit": 0.01},
+ "bracketed_thresholds_nS": {"RIA-excite": [0.0003, 0.001], "AIZ-excite": [0.001, 0.003], "SMD-excite": [0.001, 0.003], "RIA-inhibit": [0.003, 0.01], "SMD-inhibit": [0.003, 0.01]},
+ "no_gate_in_range": ["AIZ-inhibit (increases motion)", "AIY excite and inhibit", "RIB excite and inhibit", "RIM excite and inhibit"],
+ "cases_columns": ["tail_reduction_pct", "middle_reduction_pct", "head_reduction_pct"],
+ "cases": {
+  "AIZ-excite-0.0003": [0.251, 0.443, 0.453], "AIZ-excite-0.001": [0.933, 1.473, 1.521], "AIZ-excite-0.003": [3.293, 4.249, 4.46], "AIZ-excite-0.01": [9.072, 9.581, 10.347],
+  "AIZ-inhibit-0.0003": [-0.074, -0.141, -0.143], "AIZ-inhibit-0.001": [-0.23, -0.463, -0.469], "AIZ-inhibit-0.003": [-0.57, -1.327, -1.329], "AIZ-inhibit-0.01": [-1.179, -4.078, -3.91],
+  "AIY-excite-0.0003": [0.01, -0.043, -0.06], "AIY-excite-0.001": [0.034, -0.134, -0.189], "AIY-excite-0.003": [0.096, -0.342, -0.482], "AIY-excite-0.01": [0.26, -0.76, -1.045],
+  "AIY-inhibit-0.0003": [-0.006, 0.05, 0.069], "AIY-inhibit-0.001": [-0.017, 0.173, 0.239], "AIY-inhibit-0.003": [-0.026, 0.586, 0.8], "AIY-inhibit-0.01": [0.475, 3.106, 3.953],
+  "RIA-excite-0.0003": [0.339, 1.396, 1.79], "RIA-excite-0.001": [1.586, 5.243, 6.347], "RIA-excite-0.003": [7.164, 18.972, 21.213], "RIA-excite-0.01": [20.55, 62.08, 66.284],
+  "RIA-inhibit-0.0003": [0.212, 0.008, -0.148], "RIA-inhibit-0.001": [0.771, 0.135, -0.409], "RIA-inhibit-0.003": [2.773, 1.285, -0.53], "RIA-inhibit-0.01": [12.12, 12.606, 5.055],
+  "SMD-excite-0.0003": [0.182, 0.347, 0.438], "SMD-excite-0.001": [0.613, 1.161, 1.458], "SMD-excite-0.003": [1.894, 3.517, 4.366], "SMD-excite-0.01": [6.865, 11.976, 14.542],
+  "SMD-inhibit-0.0003": [0.254, 0.178, 0.026], "SMD-inhibit-0.001": [0.85, 0.62, 0.108], "SMD-inhibit-0.003": [2.573, 2.069, 0.486], "SMD-inhibit-0.01": [8.339, 8.811, 3.21],
+  "RIB-excite-0.0003": [0.008, 0.006, 0.008], "RIB-excite-0.001": [0.026, 0.022, 0.027], "RIB-excite-0.003": [0.085, 0.069, 0.086], "RIB-excite-0.01": [0.358, 0.274, 0.335],
+  "RIB-inhibit-0.0003": [-0.002, -0.001, -0.002], "RIB-inhibit-0.001": [-0.006, -0.005, -0.006], "RIB-inhibit-0.003": [-0.018, -0.013, -0.016], "RIB-inhibit-0.01": [-0.052, -0.039, -0.047],
+  "RIM-excite-0.0003": [0.912, -0.298, -0.112], "RIM-excite-0.001": [2.663, -0.82, -0.154], "RIM-excite-0.003": [2.305, -3.758, -1.39], "RIM-excite-0.01": [-4.866, -1.922, 7.176],
+  "RIM-inhibit-0.0003": [-0.894, 0.357, 0.191], "RIM-inhibit-0.001": [-2.968, 1.461, 0.962], "RIM-inhibit-0.003": [-9.859, 5.085, 3.858], "RIM-inhibit-0.01": [-32.493, 8.893, 6.786]
+ },
+ "grid_controls": {
+  "AIZ-excite-0.003@neural-half": [3.862, 4.888, 5.158], "AIZ-excite-0.003@body-half": [3.229, 4.204, 4.399],
+  "AIZ-excite-0.01@neural-half": [9.518, 10.136, 10.943], "AIZ-excite-0.01@body-half": [9.015, 9.54, 10.292]
+ },
+ "grid_control_assessment": "All four differ from the ordinary-grid case by <= 0.70 percentage points and <= about 17% relative, inside the pre-registered tolerance max(0.25 pp, 20%). Neural-half gives higher reductions (+0.57/+0.64/+0.70 pp at 0.003 nS; +0.45/+0.56/+0.60 pp at 0.01 nS). The baseline/recovery flag reads False for all four grid controls; this is probably an artifact of comparing against the ordinary-grid baseline, which was not verified.",
+ "not_preserved_ordinary_grid_cases": ["RIA-excite-0.01", "RIM-excite-0.003"],
+ "reproducibility": "The 0.01 nS cases shared with E096 reproduce its reductions to three decimals; the cue run reproduces the E095 parent reductions (0.0251/0.0857/0.0867).",
+ "not_supplied": ["analyze_node_calibration output (cue node release change, probe-equivalent dose, predicted reduction)", "server dirty tree and environment"]
+}

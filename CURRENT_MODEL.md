@@ -1,5 +1,11 @@
 # Current model: exact scope and computation path
 
+2026-11-19 E097 (user-reported, audit clean, 54/54 runs, 23 min): low-dose node calibration. Thresholds
+for whole-body suppression (>=1% in every region, reversible) bracketed at about 0.3-1 pS (RIA excite),
+1-3 pS (AIZ, SMD excite), 3-10 pS (RIA, SMD inhibit). AIZ excitation is ~linear (~1%/pS tail). The
+real cue gives 0.025/0.086/0.087%, a crude ~12-40x below the gate. Calibration analysis output pending.
+No fit or qualification. [Record](experiments/records/E097-server-summary.json).
+
 2026-11-18 E096 (user-reported, audit clean, 61/61 runs, 19 min): imposed node-conductance
 dose-response on the E092 parent. AIZ excitation gives graded reversible whole-body
 suppression (9-18%) at 0.01-0.1 nS; RIA, SMD, RIB also reach the 1% gate, RIM suppresses

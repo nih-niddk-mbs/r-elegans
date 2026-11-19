@@ -10256,3 +10256,56 @@ audit's probe-sign check now flags only changes larger than 0.05 mV because
 sub-picosiemens probes can have noise-level mean voltage changes. Not tested
 locally: the worker's cue-run and grid paths on the real network. No scientific
 forward run.
+
+## 2026-11-19 — E097 outcome reported (calibration analysis output pending)
+
+Evidence: user-pasted `report_node_probe` stdout (hash not computed); record
+[E097-server-summary.json](experiments/records/E097-server-summary.json). The
+`analyze_node_calibration` output was not supplied: cue node release changes,
+probe-equivalent doses and predicted reductions are unavailable. Run
+`/home/carsonc/r-elegans-results/node-calibration-20261119T041158Z-494689`; the plan
+commit 9916489 was pulled before launch; server revision, dirty tree and
+environment were not printed.
+
+Post-run audit.
+- Execution/budget: valid, complete, 54/54 evaluations, 1387.51 s (23m07.5s) of
+  60 min, exit 0. No selection and no weight change by design; the audit confirmed
+  the pinned parent for every evaluation.
+- Integrity: audit complete, passed, no problems; all 54 traces retained.
+- Reproducibility: the 0.01 nS cases shared with E096 reproduce its numbers to
+  three decimals; the cue run reproduces the E095 parent reductions
+  (0.0251/0.0857/0.0867 % tail/middle/head), so the new cue-run and probe
+  paths run on the same footing as earlier work.
+- Numerical gate (pre-registered: <= max(0.25 pp, 20%)): all four AIZ grid
+  controls pass. Differences from the ordinary grid are <= 0.70 pp (<= ~17%
+  relative); the neural-half grid gives higher reductions (+0.57/+0.64/+0.70 pp
+  at 0.003 nS; +0.45/+0.56/+0.60 pp at 0.01 nS). Their baseline/recovery flag
+  reads False, probably from comparing against the ordinary-grid baseline (not
+  verified). The ~0.5 pp grid sensitivity is comparable to threshold margins.
+- Thresholds (all regions >=1% with baseline/recovery preserved), bracketed:
+  RIA excitation 0.3-1 pS, AIZ excitation 1-3 pS, SMD excitation 1-3 pS, RIA
+  inhibition 3-10 pS, SMD inhibition 3-10 pS. No gate in range: AIZ inhibition
+  (raises motion), AIY (excitation raises head/middle motion; inhibition 0.5/
+  3.1/4.0 % at 10 pS), RIB (0.36/0.27/0.34 % at 10 pS), RIM (mixed signs,
+  non-monotone). RIA excitation at 0.01 nS and RIM at 0.003 nS fail
+  baseline/recovery.
+- AIZ excitation is nearly linear at low dose: tail reduction about 0.8-1.1 %
+  per pS from 0.3 to 10 pS (0.25, 0.93, 3.29, 9.07 % at 0.3, 1, 3, 10 pS), middle
+  and head about 1.4-1.5 % per pS; AIZ inhibition raises motion monotonically.
+- Signal propagation: per-node release/voltage changes are in the retained traces
+  but the analysis output is pending.
+
+Interpretation (hypotheses). A gated, reversible, whole-body suppression needs
+roughly 1-3 pS of imposed excitatory conductance on AIZ or SMD, or 0.3-1 pS on RIA.
+The real cue gives 0.0251/0.0857/0.0867 %. As a crude estimate only (assuming the
+whole cue effect came through AIZ and stays linear), that equals about
+0.03-0.06 pS of AIZ drive, roughly 12x (middle/head) to 40x (tail) below the
+gate; the node-release analysis will replace this. Pattern: the cue's tail/head
+ratio is 0.29 and middle/head 0.99, against AIZ excitation 0.6-0.7 and ~0.97 and
+RIA excitation 0.19-0.34 and ~0.8; none matches exactly, so the cue's effect may not
+act through a single node (not tested). No fit, qualification, learned stop,
+start/stop, swimming or biological claim; an imposed conductance is not a cue.
+
+Decision: no new experiment launched. Next: obtain the calibration analysis
+output, then plan E098 (joint upstream training with node-level targets) as a
+separate recorded plan after this audit.
