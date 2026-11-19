@@ -10343,3 +10343,63 @@ not act like a symmetric steady probe. A single stage cannot supply a ~55x gain:
 E095 showed at most ~2x per edge, so the gain has to be built across several
 stages (cue-to-interneuron, interneuron-to-RIA, and RIA-to-motor coupling).
 Next: plan E098 from these numbers, as a separate recorded plan.
+
+## 2026-11-19 — E098 planned: joint cue-to-RIA-to-motor pathway training
+
+Status: planned; execution not evidenced. [Plan](experiments/records/E098-plan.json).
+User choices (2026-11-19): widen pathway edges up to 4x; train pathway edges plus
+node densities; loss = motion loss plus a RIA node-level term; time budget up to
+8 hours (launcher default 420 min, adjustable).
+
+Question: can joint training of the cue-to-RIA-to-motor pathway reach >=1%
+cue-driven suppression in every region with gait, recovery and relay preserved,
+validated by the full 11-case panel?
+
+Basis (E096/E097, user-reported): whole-body suppression needs about 0.3-1 pS
+of RIA-equivalent drive; the real cue's effect is consistent with its +0.000257
+mean RIA release change by the probe curve, which is ~22-73x (about 55x for the
+tail; about +0.014 absolute) too small. E095: single edges give at most ~2x.
+
+Method: fresh CMA-ES from the same pinned E092 isolated 1.25 parent as E093-E097;
+population 21, sigma 0.3, seed 9800, restarts at the incumbent (sigma 0.15) on rung
+advance, optimizer stop or every 8 generations; E093/E094 rungs, margin 1.05 and
+redundant protocol. Trainable (53 groups): 37 single chemical edges (AWAL/AWAR to
+AIZ, AIY, ADFR, ASHL, RIFR; those interneurons plus AIBR to RIAL/RIAR; RIAL and
+RIAR to SMD and RMD targets, from the bundled connectome mask) and 16 channel-
+density groups (inward/outward for AIZL, AIZR, RIAL, RIAR, four SMD cells). Fixed:
+everything else, including the inherited AIYR->AIYL exception. Prior: pathway edges
+up to 4x the parent (engineering prior, not biology; lower bounds not widened;
+nothing admitted as a standard); densities inside the original prior.
+
+Loss: E094 worst-region motion loss + (max(0, 0.02 - cue-driven mean RIAL/RIAR
+release change) / 0.02)^2 + 100 x RIA headroom penalty (q01 >= 0.02, q99 <= 0.98);
+baseline gait, recovery and AIYL relay preservation unchanged and possibly
+conflicting. Final validation: the 11 E093/E094 cases; relay replay swaps the
+hop-1 interneuron release onto RIA, RIA replay swaps RIAL/RIAR release onto SMD
+and RMD; both must remove the attenuation.
+
+Acceptance (set before running): success = selected checkpoint passes all 11
+cases at a rung >= 1% with all regions reduced and a clean audit; otherwise a
+negative result. The attained rung, weakest-region reduction and cue-driven RIA
+release change (against the ~0.014 estimate) are reported either way. No biological,
+start/stop or swimming claim; a pass would be an engineering component under an
+explicit widened prior.
+
+Risks (recorded in advance): dimension 53 with about 40-45 generations; AIYL
+relay penalties may fight the pathway change; the needed total gain may exceed
+4x edges plus densities; first-wave compile time.
+
+Budget: default 420 min total (20 min audit reserve, 30 min validation reserve),
+21 workers x 4 cores (84 of 128 CPUs). Command:
+`sh scripts/launch_pathway_training_mbslnx2.sh [minutes]`. Report:
+`python -m scripts.report_sensory_motion --run <E098 run folder>`.
+
+Local software verification: 177 related tests pass, including new tests for the
+pathway groups (toy and real connectome: 37 edges, 53 groups, widened bounds only
+on edges), the worker accepting a 4x widened edge and rejecting other coordinates,
+the node-level loss term and headroom penalty, the E098 coordinator (population
+21, node target, 11 final controls), pipeline dispatch, and an audit that accepts a
+widened pathway edge and rejects a second changed coordinate. Not tested locally:
+a real evaluation, the new replay diagnostics on the real network, and the
+node-feature path inside the real worker; a systematic failure would show in the
+first jobs. No scientific forward run.
