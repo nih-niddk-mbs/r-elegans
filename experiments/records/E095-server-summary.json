@@ -20,7 +20,8 @@
   "exit_code": 2,
   "audit_complete": true,
   "audit_integrity_passed": false,
-  "audit_failure_cause": "Audit software bug, not a data finding: every evaluation (52/52) was flagged 'Undeclared original-bound violation' because the inherited E092 AIYR->AIYL one-edge exception coordinate sits above the original upper bound in the parent and was not exempted. All other audit checks produced no problems. Fixed in scripts/audit_edge_scan.py with a regression test; a corrected re-audit is pending.",
+  "audit_failure_cause": "Audit software bug, not a data finding: every evaluation (52/52) was flagged 'Undeclared original-bound violation' because the inherited E092 AIYR->AIYL one-edge exception coordinate sits above the original upper bound in the parent and was not exempted. All other audit checks produced no problems. Fixed in scripts/audit_edge_scan.py with a regression test.",
+  "corrected_audit": {"evidence": "User-pasted corrected audit summary; output folder and exact invocation were not printed; server was at 6029a91 after the pull", "audit_complete": true, "integrity_passed": true, "problems": [], "status_counts": {"completed": 52}, "widened_prior_evaluations_by_phase": {"final": 0, "parent": 0, "scan": 22}, "finalist_rerun_consistency": "both finalists: same checkpoint, metrics match"},
   "post_audit_component_qualified": false
  },
  "scan_best_weakest_region_reduction_percent": {
@@ -43,5 +44,5 @@
   "tail_ratio_ordinary_vs_neural_half": {"x2": [0.9994840299242853, 0.9998139285657507], "x1.5": [0.9994968449196852, 0.9995783740528036]},
   "sensory_block": "ratios exactly 1, relay change 0"
  },
- "not_supplied": ["per-edge currents or voltages in the scan cases (metrics-only)", "server dirty tree and environment", "corrected audit result"]
+ "not_supplied": ["per-edge currents or voltages in the scan cases (metrics-only)", "server dirty tree and environment", "corrected audit output folder and exact invocation"]
 }

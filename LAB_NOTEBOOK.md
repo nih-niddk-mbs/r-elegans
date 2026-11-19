@@ -10078,3 +10078,24 @@ rather than RIA/SMD) may be needed. Not tested. No fit, qualification, parent
 promotion or biological claim. Decision: retain all E092-E095 results; no new
 experiment launched. Next: push the audit fix, run the corrected re-audit
 (command given to the user), then decide on the tail-targeted route.
+
+## 2026-11-18 — E095 corrected saved-data audit passed
+
+Evidence: user-pasted corrected audit summary; the output folder and exact
+invocation were not printed, and the server was at 6029a91 after the pull. Not
+independently verified locally.
+
+- Audit complete, integrity passed, no problems; 52 evaluations completed.
+- Widened-prior use: 22 scan cases exceed an original upper bound on their
+  scanned edge; 0 parent and 0 finalist evaluations do (the finalists, AIYR->RIAR
+  x1.5/x2, are inside the original bound). The inherited AIYR->AIYL exception is
+  now exempted, which resolves the earlier 52/52 false flags.
+- Both finalists reproduce checkpoint and metrics on rerun.
+
+This removes the provisional status of the E095 data: the negative outcome stands
+(no case near 1%; best weakest-region reduction 0.052% vs parent 0.025%; tail
+weakest everywhere; best effect comparable to neural-grid sensitivity). The
+interpretations above remain hypotheses; no fit, qualification, parent promotion,
+start/stop, swimming or biological claim. Decision: no new experiment launched;
+a tail-targeted route (locomotion circuit rather than RIA/SMD) is the open
+question and needs a separate recorded plan.
