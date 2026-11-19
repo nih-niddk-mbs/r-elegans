@@ -3,7 +3,7 @@ import argparse,json
 from collections import Counter
 from pathlib import Path
 import numpy as np
-from r_elegans.node_probe import cases,GROUPS,TARGET,reduction_percent,reaches_target,minimum_doses
+from r_elegans.node_probe import cases,ALL_GROUPS,TARGET,reduction_percent,reaches_target,minimum_doses
 from r_elegans.sensory_motion import features,score
 from scripts.audit_relay_experiments import write,close
 from scripts.experiment_records import capture_run_record,file_sha256
@@ -17,14 +17,14 @@ def audit(run,out):
     def verify(path,sha):
         actual=file_sha256(path);check(actual==sha,'Hash mismatch: '+str(path));evidence.append(dict(path=str(path),sha256=actual,expected=sha))
     s=json.loads((run/'summary.json').read_text());config=json.loads((run/'configuration.json').read_text())
-    check(s.get('experiment')=='E096','Not an E096 run')
+    check(s.get('experiment') in ('E096','E097'),'Not an E096/E097 run')
     manifest=json.loads((run/'inputs/manifest.json').read_text())
     for name,sha in manifest['sha256'].items():verify(run/'inputs'/name,sha)
     ref=json.loads((run/'inputs/sensory_reference.json').read_text());verify(Path(ref['path']),ref['sha256'])
     parent=run/'inputs/motion_parent.npz';verify(parent,config['parent_sha256'])
     with np.load(parent,allow_pickle=False) as z:
         ids=[str(x) for x in z['neuron_ids']];threshold=z['fixed_release_threshold_mV'];slope=z['fixed_release_slope_mV']
-    planned=cases();check(close(config['planned'],planned),'Planned probe table changed')
+    planned=cases(config.get('profile','e096'));check(close(config['planned'],planned),'Planned probe table changed')
     saved={};requests={};traces={}
     for request in sorted((run/'evaluations').glob('*/request.json')):
         folder=request.parent;j=json.loads(request.read_text());requests[str(folder)]=j
@@ -43,7 +43,14 @@ def audit(run,out):
                 traces[str(folder)]=trace
         except Exception as e:problems.append(folder.name+': '+repr(e))
     check(sum(counts.values())==s['evaluation_count'],'Evaluation count mismatch')
-    base_path=next((k for k,j in requests.items() if j['probe'] is None),None);check(base_path is not None and saved.get(base_path)==s.get('baseline'),'Baseline record mismatch')
+    base_path=next((k for k,j in requests.items() if j['probe'] is None and not j.get('cue')),None);check(base_path is not None and saved.get(base_path)==s.get('baseline'),'Baseline record mismatch')
+    cue_path=next((k for k,j in requests.items() if j.get('cue')),None)
+    if config.get('profile')=='e097':
+        check(cue_path is not None and saved.get(cue_path)==s.get('cue_run'),'Cue-run record mismatch')
+        if cue_path and base_path and saved[cue_path]['status']=='completed' and saved[base_path]['status']=='completed':
+            m=score(dict(no_cue=saved[base_path]['features'],cue=saved[cue_path]['features']),saved[base_path]['features'],TARGET,1.)
+            check(close(reduction_percent(m),s.get('cue_reduction_percent')),'Cue-run reduction mismatch')
+    else:check(cue_path is None,'Unexpected cue run')
     by_name={j['probe']['name']:k for k,j in requests.items() if j['probe']}
     check(set(by_name)<=({c['name'] for c in planned}),'Unplanned probe evaluated')
     check(all(saved.get(by_name.get(c['name'],''),{}).get('status') for c in planned) or not s.get('validation_complete'),'Planned probe missing from a complete run')
@@ -57,14 +64,14 @@ def audit(run,out):
             expected=dict(reduction_percent=reduction_percent(m),regional_motion_ratios=m['regional_motion_ratios'][0],safe=m['safe'],
                 baseline_and_recovery_preserved=m['baseline_and_recovery_preserved'],regional_cycle_ratios=m['regional_cycle_ratios'][0],target_reached=reaches_target(m))
             check(close(expected,{k:row.get(k) for k in expected}),'Recorded score mismatch: '+c['name'])
-            if path in traces and base_path in traces:
+            if path in traces and base_path in traces and not c.get('grid'):
                 t=traces[path]['dense_time_s'];b=traces[base_path];x=traces[path]
                 check(np.array_equal(t,b['dense_time_s']),'Clock mismatch: '+c['name'])
                 before=t<config['probe_window_s'][0];window=(t>=41.)&(t<46.)
                 check(all(np.max(abs(x[k][before]-b[k][before]))<=1e-8 for k in ('dense_voltage_mV','dense_joints')),'Pre-probe mismatch: '+c['name'])
-                idx=[ids.index(n) for n in GROUPS[c['group']]]
+                idx=[ids.index(n) for n in ALL_GROUPS[c['group']]]
                 change=float(np.mean(x['dense_voltage_mV'][window][:,idx]-b['dense_voltage_mV'][window][:,idx]))
-                check(change>0 if c['reversal_mV']==0 else change<0,'Probe voltage change has the wrong sign: '+c['name'])
+                check(not ((change<0 if c['reversal_mV']==0 else change>0) and abs(change)>.05),'Probe voltage change has the wrong sign: '+c['name'])
         check(close(s['minimum_doses_reaching_target_nS'],minimum_doses(s['probe_table'])),'Minimum-dose summary mismatch')
     write(out/'evidence.json',evidence)
     result=dict(audit_complete=True,integrity_passed=not problems,problems=problems,status_counts=dict(counts),retained_probe_traces=len(traces),

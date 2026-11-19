@@ -10210,3 +10210,49 @@ all traces retained, to bracket the thresholds and calibrate motion reduction
 against the node's own release/voltage change, then compare with the cue-
 delivered change at the same nodes from E093/E094 to state the upstream gain
 budget. Requires a separate recorded plan.
+
+## 2026-11-18 — E097 planned: low-dose node calibration and cue-versus-probe comparison
+
+Status: planned; execution not evidenced. [Plan](experiments/records/E097-plan.json).
+User context (2026-11-18): about 8 hours of mbslnx2 time are available. Because
+the next training run must be designed from this result and each run needs a
+post-run audit before continuing (AGENTS.md), E097 runs first (60 min total);
+a joint upstream training run (E098, up to ~5 h) is planned only after the E097
+audit. GPUs are not used (CPU float64 pipeline).
+
+Questions: (1) thresholds below 0.01 nS (E096 results at the smallest dose were
+not bracketed); (2) motion reduction against the node's own release change;
+(3) what the probe curve predicts at the release change the real cue produces on
+the same parent, versus the observed 0.03-0.1% reduction.
+
+Method: no optimizer, no weight change, nominal protocol, same E092 parent as
+E093-E096. Baseline (no cue, no probe); a cue run (cue on, no probe) with traces;
+48 probes (AIZ, AIY, RIA, SMD, RIB, RIM x excite 0 mV / inhibit -80 mV x 0.0003,
+0.001, 0.003, 0.01 nS during 40-50 s) with all traces retained; 4 grid controls
+(AIZ excite 0.003, 0.01 nS on neural-half and body-half grids). Read-only
+analysis `scripts.analyze_node_calibration` compares the cue run's mean release
+change (41-46 s) with each probe curve.
+
+Acceptance (set before running): gate as E096; a threshold is bracketed only if a
+lower dose fails and the next passes, otherwise reported as an upper bound; grid
+control passes if reductions differ by <= max(0.25 pp, 20% of the ordinary
+value); the cue is consistent with the probe curve if the predicted reduction at
+the cue's release change is within a factor of 3 of the observed reduction in each
+region (below-range predictions are linear extrapolations, labelled). If
+consistent, E098 raises the cue-delivered drive at the calibrated node; if
+predicted >> observed, the cue's drive is not equivalent to a symmetric steady
+probe and that must be resolved first. No fit, qualification, learned stop or
+biological claim.
+
+Budget: 60 min total (9 min audit reserve), up to 21 workers x 4 cores.
+Command: `sh scripts/launch_node_calibration_mbslnx2.sh`. Reports:
+`python -m scripts.report_node_probe --run <E097 run folder>` and
+`python -m scripts.analyze_node_calibration --run <E097 run folder>`.
+
+Local software verification: 169 related tests pass, including new E097 tests
+(profile cases, interpolation, coordinator with cue run, budget dispatch, audit
+with cue run and grid control, calibration analysis on synthetic traces). The
+audit's probe-sign check now flags only changes larger than 0.05 mV because
+sub-picosiemens probes can have noise-level mean voltage changes. Not tested
+locally: the worker's cue-run and grid paths on the real network. No scientific
+forward run.

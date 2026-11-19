@@ -1,0 +1,26 @@
+{
+ "experiment": "E097",
+ "record_date": "2026-11-18",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "(1) What are the thresholds, below 0.01 nS, at which imposed single-node conductance suppresses cue-window body motion by >=1% in every region? (2) How does motion reduction scale with the node's own release change? (3) Given the release change the actual cue produces at each node on the same parent, what reduction would the probe curve predict, and how does that compare with the observed 0.03-0.1%?",
+ "motivation": "E096 found whole-body suppression at <=0.01 nS on AIZ (excite), SMD and RIA (inhibit), but those doses were the smallest tested so the thresholds are not bracketed, and E096 retained traces only at 0.1 nS. The cue-delivered drive was only estimated (about 3 pS-equivalent at AIZR from bundled weights), not measured on the same parent.",
+ "method": "No optimizer, no weight change, nominal protocol. (a) Baseline run without cue or probe. (b) Cue run on the same parent (cue bath on, no probe) with all traces retained, giving the node-level drive the real cue delivers. (c) 48 low-dose probes: AIZ, AIY, RIA, SMD, RIB, RIM x excitatory (0 mV) / inhibitory (-80 mV) x 0.0003, 0.001, 0.003, 0.01 nS during 40-50 s, all traces retained. (d) 4 grid controls: AIZ excitation at 0.003 and 0.01 nS on the neural-half and body-half grids. A separate read-only analysis (scripts.analyze_node_calibration) compares the cue run's mean release change in the response window 41-46 s with each probe curve.",
+ "source_run": "/home/carsonc/r-elegans-results/relay-experiments-20261118T035453Z-398433",
+ "parent": "Same audited unique passing E092 isolated 1.25 AIYR->AIYL panel as E093-E096; hash pinned at runtime, not invented here.",
+ "parent_checkpoint_sha256": null,
+ "fixed": "All weights, topology/signs, reversals, kinetics, release law, sensory gains, NMJ/muscle/body/water physics and physical clocks. Probe envelope as E096 (<=0.1 nS, reversal 0 or -80 mV).",
+ "command": "sh scripts/launch_node_calibration_mbslnx2.sh",
+ "report": "python -m scripts.report_node_probe --run <E097 run folder>; python -m scripts.analyze_node_calibration --run <E097 run folder>",
+ "budget": {"total_minutes": 60, "audit_reserve_minutes": 9, "workers": "up to 21 x 4 physical cores (84 of 128 server CPUs)"},
+ "seeds": "not applicable (deterministic)",
+ "acceptance_criteria": {
+  "gate": "A probe case reaches the gate when all three regional ratios are <= 0.99, safe, and baseline/recovery are preserved (as E096).",
+  "bracketing": "A threshold is bracketed for a group and sign when some tested dose fails the gate and the next higher dose passes it; otherwise the threshold is reported as an upper bound only.",
+  "numerical_check": "A grid control passes when its regional reductions differ from the ordinary-grid case by at most max(0.25 percentage points, 20% of the ordinary reduction).",
+  "consistency": "The cue is consistent with the probe curve at a node when the predicted reduction at the cue's release change is within a factor of 3 of the observed cue reduction in each region. Predictions below the lowest tested dose are linear extrapolations and are labeled as such.",
+  "decision_rule": "Consistent: the cue-delivered drive is simply too small, and the next run should raise it at the calibrated node. Predicted >> observed: the cue's drive is not equivalent to a symmetric steady probe (phase, asymmetry or route), and that must be resolved before training."
+ },
+ "audit": "scripts.audit_node_probe runs automatically inside the budget (input/trace hashes, pinned-parent checkpoint, planned-case coverage, probe identity, independent score recomputation, retained-trace feature recomputation, pre-probe identity, probe voltage sign when the change exceeds 0.05 mV, cue-run record and reduction).",
+ "claims_not_made": "No fitting, component qualification, learned stop, start/stop, swimming or biological claim. An imposed conductance is not a sensory cue.",
+ "next_step": "E098: a joint upstream training run of up to ~5 h with node-level targets from this calibration, planned and recorded after the E097 audit."
+}
