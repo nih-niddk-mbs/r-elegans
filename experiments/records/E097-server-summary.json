@@ -48,5 +48,20 @@
  "grid_control_assessment": "All four differ from the ordinary-grid case by <= 0.70 percentage points and <= about 17% relative, inside the pre-registered tolerance max(0.25 pp, 20%). Neural-half gives higher reductions (+0.57/+0.64/+0.70 pp at 0.003 nS; +0.45/+0.56/+0.60 pp at 0.01 nS). The baseline/recovery flag reads False for all four grid controls; this is probably an artifact of comparing against the ordinary-grid baseline, which was not verified.",
  "not_preserved_ordinary_grid_cases": ["RIA-excite-0.01", "RIM-excite-0.003"],
  "reproducibility": "The 0.01 nS cases shared with E096 reproduce its reductions to three decimals; the cue run reproduces the E095 parent reductions (0.0251/0.0857/0.0867).",
- "not_supplied": ["analyze_node_calibration output (cue node release change, probe-equivalent dose, predicted reduction)", "server dirty tree and environment"]
+ "calibration_analysis": {
+  "evidence": "User-pasted analyze_node_calibration stdout; report /home/carsonc/r-elegans-results/node-calibration-20261119T041158Z-494689-calibration-20261119T141923059250Z/summary.json (not read)",
+  "window_s": [41.0, 46.0],
+  "per_group": {
+   "AIZ": {"cue_release_change": 0.00483, "matching_probe_sign": "excite", "probe_equivalent_dose_nS": 0.000146, "predicted_reduction_pct_tail_middle_head": [0.122, 0.215, 0.22], "status": "extrapolated-below-range"},
+   "AIY": {"cue_release_change": 0.00158, "matching_probe_sign": "excite", "probe_equivalent_dose_nS": 0.000141, "predicted_reduction_pct_tail_middle_head": [0.005, -0.02, -0.028], "status": "extrapolated-below-range"},
+   "RIA": {"cue_release_change": 0.000257, "matching_probe_sign": "excite", "probe_equivalent_dose_nS": 1.36e-05, "predicted_reduction_pct_tail_middle_head": [0.015, 0.063, 0.081], "status": "extrapolated-below-range"},
+   "SMD": {"cue_release_change": -1.52e-05, "matching_probe_sign": "inhibit", "probe_equivalent_dose_nS": 2.71e-06, "predicted_reduction_pct_tail_middle_head": [0.002, 0.002, 0.0], "status": "extrapolated-below-range"},
+   "RIB": {"cue_release_change": 1.63e-05, "matching_probe_sign": "excite", "probe_equivalent_dose_nS": 9.36e-06, "predicted_reduction_pct_tail_middle_head": [0.0, 0.0, 0.0], "status": "extrapolated-below-range"},
+   "RIM": {"cue_release_change": -0.000386, "matching_probe_sign": "inhibit", "probe_equivalent_dose_nS": 2.11e-05, "predicted_reduction_pct_tail_middle_head": [-0.063, 0.025, 0.013], "status": "extrapolated-below-range"}
+  },
+  "observed_cue_reduction_pct_tail_middle_head": [0.0251, 0.0857, 0.0867],
+  "preregistered_consistency_factor_3": {"RIA": "consistent in all three regions (predicted/observed 0.60, 0.74, 0.93)", "AIZ": "middle and head within 3x (predicted/observed 2.5), tail not (4.9)", "AIY": "not consistent (predicted about zero or negative)", "SMD": "not consistent", "RIB": "not consistent", "RIM": "not consistent (tail sign opposite)"},
+  "caveat": "All predictions are linear extrapolations below the lowest tested dose by the analysis script, and an association through the probe curves, not a causal decomposition. The mean over a group hides left/right asymmetry (the cue mostly changes AIZR)."
+ },
+ "not_supplied": ["server dirty tree and environment", "left/right and per-neuron release changes (in the calibration summary file, not pasted)"]
 }

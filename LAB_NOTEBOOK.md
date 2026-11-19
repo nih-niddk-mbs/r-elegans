@@ -10309,3 +10309,37 @@ start/stop, swimming or biological claim; an imposed conductance is not a cue.
 Decision: no new experiment launched. Next: obtain the calibration analysis
 output, then plan E098 (joint upstream training with node-level targets) as a
 separate recorded plan after this audit.
+
+### E097 calibration analysis (user-reported stdout, window 41-46 s)
+
+Report `.../node-calibration-20261119T041158Z-494689-calibration-20261119T141923059250Z/summary.json`
+(not read; per-neuron values unavailable here). Cue-run mean release change per
+node group, the probe-equivalent dose, and the reduction the probe curve predicts
+there (all below the lowest tested dose, so linear extrapolations):
+
+| Group | Cue release change | Probe-equivalent dose | Predicted tail/middle/head % |
+|---|---|---|---|
+| AIZ | +0.00483 | 0.146 pS | 0.122 / 0.215 / 0.220 |
+| AIY | +0.00158 | 0.141 pS | 0.005 / -0.020 / -0.028 |
+| RIA | +0.000257 | 0.0136 pS | 0.015 / 0.063 / 0.081 |
+| SMD | -1.52e-5 | 0.0027 pS | 0.002 / 0.002 / 0.000 |
+| RIB | +1.63e-5 | 0.0094 pS | 0.0 / 0.0 / 0.0 |
+| RIM | -0.000386 | 0.0211 pS | -0.063 / 0.025 / 0.013 |
+
+Observed cue reduction 0.0251/0.0857/0.0867 %. Pre-registered consistency (within
+a factor of 3 in every region): RIA consistent (predicted/observed 0.60, 0.74,
+0.93); AIZ within 3x in middle/head (2.5) but not tail (4.9); AIY, SMD, RIB and
+RIM not consistent. Association through the probe curves only, not a causal
+decomposition; group means hide left/right asymmetry (the cue mostly changes
+AIZR).
+
+Interpretation (hypotheses): the real cue's effect on the body is quantitatively
+accounted for by its small release change at RIA (about 0.026 percentage points).
+Reaching the gate needs about 0.3-1 pS of RIA-equivalent drive, i.e. a cue-driven
+RIA release change roughly 22-73x (about 55x for the tail by linear scaling)
+larger, or about 0.014 absolute. The AIZ route predicts more than observed
+(2.5-4.9x), so part of its release change is probably cancelled elsewhere or does
+not act like a symmetric steady probe. A single stage cannot supply a ~55x gain:
+E095 showed at most ~2x per edge, so the gain has to be built across several
+stages (cue-to-interneuron, interneuron-to-RIA, and RIA-to-motor coupling).
+Next: plan E098 from these numbers, as a separate recorded plan.
