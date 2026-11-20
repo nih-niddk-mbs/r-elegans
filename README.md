@@ -2,6 +2,10 @@
 
 How to install, get the data, run the model and follow the training schedule: see [REPRODUCE.md](REPRODUCE.md).
 
+2026-11-20 Edge polarity set into the model (no training): data-based per-edge synapse polarity (Fenyves 2020; 2,921 of 3,709
+chemical edges signed, 788 undetermined) is bundled and opt-in at initialization; `mac_rhythm_v1_polarized` is the pinned network
+with only its reversal field changed (RMD rhythm persists). Behavior and control pathways are not requalified.
+
 2026-11-20 E100 (user-reported, 22 min, no training): unchanged E099 checkpoint vs the Randi 2023 optogenetic
 atlas, held-out animals. Weak rank agreement (Spearman 0.074, p=0.002; AUC excited 0.545), model silent on 99%
 of significant pairs; AUC and silence criteria missed, convergence passed. Reference baseline for fitting; no claim

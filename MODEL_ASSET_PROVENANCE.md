@@ -133,3 +133,24 @@ SHA256 `82f418ac0a0b078960c8bacd0e7a6bc7bddb99ddf68820dd6d8ac6bb8247dcb0`.
 The compact parameter pair is bundled to reproduce the requested trained
 wiggle; raw search/assay histories remain external. See E030 notebook/record
 for exact commands, masks, numerical tests and longer validation results.
+
+## Edge polarity (`edge_polarity_v1`, 2026-11-20)
+
+`r_elegans/assets/edge_polarity_v1.npz` (10 KB) and `edge_polarity_v1.json` hold a sign in {-1, 0, +1} for each of the 3,709
+neuron-to-neuron chemical edges of the runtime topology, with a source code and a method-conflict flag. Source: Fenyves et al.,
+"Synaptic polarity and sign-balance prediction using gene expression data in the *C. elegans* chemical synapse connectome
+network," *PLOS Computational Biology* (2020), DOI `10.1371/journal.pcbi.1007974` (Creative Commons Attribution). Precedence: the
+NT+receptor prediction (SI s003), then the transmitter-only prediction (SI s004). 1,705 edges take a sign from the first, 1,216 from
+the second (2,402 excitatory, 519 inhibitory, together about 84 % of chemical weight); 788 edges (about 16 % of weight) stay
+undetermined (complex, no prediction, or absent from the tables) and are marked 0. The two methods disagree in sign on 264 edges
+(the receptor-based sign is used). The asset records the SHA-256 of both source tables and of `runtime_model_v1.json`; the source
+tables themselves are not redistributed. Rebuild with `scripts/build_edge_polarity_asset.py`.
+
+`r_elegans.brain.edge_polarity.apply_edge_polarity` turns the signs into a per-edge `[post, pre]` reversal matrix (excitatory 0 mV,
+inhibitory -85 mV, both project priors rather than verified literature values; undetermined edges keep the network's presynaptic
+reversal unless a neutral value is requested). `initialize_conductance_network(..., edge_polarity=True)` uses it; the default keeps the
+legacy behavior-trained reversals so existing pinned checkpoints still reproduce.
+
+`r_elegans/assets/mac_rhythm_v1_polarized/` (74 KB, SHA-256 in `inputs.json`) is `mac_rhythm_v1` with only the reversal field replaced
+by this polarity; every other parameter is identical (tested). RMDL/RMDR still oscillate in a 60 s free run (std 3.8/4.5 mV against 5.1/4.6 mV
+before). This is a component check, not a qualification: locomotion, sensory control and swimming have not been requalified on it.

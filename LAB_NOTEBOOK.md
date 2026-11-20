@@ -10838,3 +10838,26 @@ Server commands for E099 (audit before and after; outputs stay on the server):
 (RUN = /home/carsonc/r-elegans-results/pathway-continuation-20261120T001737Z-577769; the
 server data root needs raw/neurotransmitters/synaptic_polarity_2020 and the Cook,
 Wang and physiology folders.)
+
+## 2026-11-20 — Edge polarity set into the model (code and bundled assets; no training)
+
+Change: the network's synapse reversal can now be a per-edge `[post, pre]` matrix and the data-based polarity (Fenyves 2020) is part
+of the package. `r_elegans/assets/edge_polarity_v1.{npz,json}` (signs for the 3,709 runtime chemical edges, source hashes),
+`r_elegans/brain/edge_polarity.py` (`load_edge_polarity`, `polarized_reversal`, `apply_edge_polarity`),
+`initialize_conductance_network(..., edge_polarity=False)` (opt-in; the default keeps the legacy reversals so pinned checkpoints
+and their tests are unchanged), `scripts/build_edge_polarity_asset.py` (rebuild from the raw tables) and
+`scripts/apply_synapse_polarity.py` (now reads the bundled asset, no raw data needed).
+Counts (unchanged from the earlier entry): 2,921 determined edges (2,402 excitatory, 519 inhibitory; 84 % of chemical weight),
+788 undetermined (kept at the parent's reversal and listed), 264 method conflicts (receptor-based sign used). Reversal values
+0 and -85 mV are project priors.
+Bundled model state: `r_elegans/assets/mac_rhythm_v1_polarized/` = `mac_rhythm_v1` with only the reversal field changed (SHA-256
+47a369a1...2482d, parent 870444a4...). Tests: `tests/test_edge_polarity_asset.py`, `tests/test_polarized_bundle.py`,
+`tests/test_edge_polarity.py`; 38 related tests pass without JAX_ENABLE_X64 (the bundled checkpoints are float32; under x64 the
+legacy pinned-bundle test and two embodied-sensory tests fail, with or without this change). Full suite: 479 passed, 20 failed; the
+same 20 fail on the commit before the polarity work (469 passed there), they pass in isolation for the file I checked
+(tests/test_petri_dish.py), i.e. order-dependent test interaction, not investigated.
+Rhythm component check (60 s free run, last 30 s, float32): parent RMDL/RMDR membrane std 5.07/4.62 mV (span 15.2/13.8 mV), polarized
+3.83/4.49 mV (span 11.4/13.2 mV); 2 neurons with std > 1 mV in both; all finite. No locomotion, sensory-control or swimming
+qualification; those pathways must be requalified on any polarized checkpoint (earlier E092-E099 evidence does not carry over).
+Not done: the 788 undetermined edges; the E099 checkpoint has not been polarized or audited (it lives on the server; the
+asset-based script and the audit command are in the previous entry).

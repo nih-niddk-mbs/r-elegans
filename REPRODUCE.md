@@ -9,8 +9,9 @@ reproduced from this repository is stated at the end.
 - Numerics used for every recorded run: CPU, float64: `export JAX_PLATFORMS=cpu JAX_ENABLE_X64=true`.
 - Server runs used a conda environment named `r-elegans` and the launch scripts `scripts/launch_*_mbslnx2.sh`; per-run package
   versions are captured by `scripts/experiment_records.py` in each run folder (not stored here).
-- Tests: `python -m pytest`. Known failures at the time of writing: two tests in `tests/test_embodied_sensory.py` under
-  `JAX_ENABLE_X64` (dtype mismatch, present before the polarity change) and one process-timing test in `tests/test_wall_budget.py`.
+- Tests: `JAX_PLATFORMS=cpu python -m pytest` without `JAX_ENABLE_X64` (the bundled checkpoints are float32; under x64 the pinned-bundle test and two
+  embodied-sensory tests fail). The full suite currently has 20 failures that also occurred before the polarity work; at least
+  `tests/test_petri_dish.py` passes alone, so they look order-dependent (not investigated). Recorded server runs used `JAX_ENABLE_X64=true`.
 
 ## 2. Data (never stored in Git)
 
@@ -32,8 +33,10 @@ reproduced from this repository is stated at the end.
   bundled runtime model (`r_elegans/assets/`, provenance in `MODEL_ASSET_PROVENANCE.md`).
 - `r_elegans/assets/mac_rhythm_v1/` is the pinned 302-neuron conductance network; it produces rhythmic RMD cells and small bends.
   Qualified swimming, sensory start/stop and sensory-controlled rest have NOT been demonstrated (see `CURRENT_MODEL.md`).
-- Synapse polarity from data: `python -m scripts.apply_synapse_polarity --network <network.npz> --data-root $R_ELEGANS_DATA_DIR --output-dir <new dir>`
-  writes a copy with per-edge reversals (Fenyves 2020). A polarized checkpoint must be requalified before use.
+- Synapse polarity from data is bundled (`r_elegans/assets/edge_polarity_v1.*`, Fenyves 2020; 2,921 of 3,709 edges signed, 788 undetermined).
+  `r_elegans/assets/mac_rhythm_v1_polarized/` is the pinned network with that polarity; `initialize_conductance_network(..., edge_polarity=True)`
+  applies it to a new network; `python -m scripts.apply_synapse_polarity --network N.npz --output-dir OUT` polarizes any checkpoint.
+  No raw data is needed to use it (`scripts/build_edge_polarity_asset.py` rebuilds the asset from the raw tables). Polarized checkpoints must be requalified.
 
 ## 4. Reproduce the analyses
 

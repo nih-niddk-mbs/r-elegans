@@ -1,0 +1,10 @@
+{
+ "model": "mac_rhythm_v1_polarized",
+ "derived_from": "r_elegans/assets/mac_rhythm_v1/network.npz (SHA-256 870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a)",
+ "method": "scripts/apply_synapse_polarity.py with the bundled edge_polarity_v1 asset (Fenyves et al. 2020, NT+receptor then transmitter-only); excitatory 0 mV, inhibitory -85 mV, undetermined edges keep the parent's presynaptic reversal; run without JAX_ENABLE_X64 so arrays stay float32 like the parent",
+ "network_sha256": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d",
+ "changed": "fixed synapse_reversal_mV only: now a [post, pre] matrix. 2122 of 3709 chemical edges changed reversal (52.8 % of chemical weight); 788 undetermined edges (about 16 % of weight) kept the parent's reversal. All channel, edge-strength, gap, release and body parameters are identical to the parent.",
+ "polarity_agreement": "all 2921 data-determined edges now agree with the predicted sign; before, 829 of them (28.8 % of their weight) did not",
+ "rhythm_check": "60 s free run, last 30 s: RMDL/RMDR membrane std 3.83/4.49 mV (span 11.4/13.2 mV), parent 5.07/4.62 mV (span 15.2/13.8 mV); 2 neurons with std > 1 mV in both; all values finite. A component check only.",
+ "scope": "No qualification of locomotion, sensory control or swimming. Reversal values 0 and -85 mV are project priors. Any behavior built on the parent must be requalified on this network."
+}

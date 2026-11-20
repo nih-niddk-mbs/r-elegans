@@ -102,8 +102,11 @@ def indicator_equilibrium(calcium, config):
     return power/(1.+power)
 
 
-def initialize_conductance_network(parent, neuron_ids, config=ConductanceNetworkConfig()):
+def initialize_conductance_network(parent, neuron_ids, config=ConductanceNetworkConfig(), *, edge_polarity=False):
     """Retain parent edges/release fields; add explicitly transferred cell priors.
+
+    ``edge_polarity=True`` replaces the parent's presynaptic reversals by the per-edge data-based polarity
+    (r_elegans.brain.edge_polarity); the default keeps the legacy behavior-trained reversals.
 
     Vphysical=100*Vparent-25 mV by default. A common g unit and C_i=g*tau_i
     preserve the passive time-constant convention and symmetric electrical edges.
@@ -134,7 +137,11 @@ def initialize_conductance_network(parent, neuron_ids, config=ConductanceNetwork
         jnp.clip(config.voltage_scale_mV*neural.slope,2.,20.),jnp.zeros(302),cells.leak_reversal_mV)
     state = initial_network_state(fixed,config)
     currents = jax.vmap(ionic_currents)(SingleCompartmentState(state.voltage_mV,state.gates,state.calcium_uM),cells)
-    return params,fixed._replace(bias_pA=currents.sum(axis=1))
+    fixed = fixed._replace(bias_pA=currents.sum(axis=1))
+    if edge_polarity:
+        from .edge_polarity import apply_edge_polarity
+        fixed = apply_edge_polarity(fixed)
+    return params,fixed
 
 
 def initial_network_state(fixed,config):

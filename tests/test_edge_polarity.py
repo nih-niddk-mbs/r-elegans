@@ -8,7 +8,7 @@ from r_elegans.brain.conductance_network import (ConductanceNetworkConfig, advan
 from r_elegans.data import synapse_polarity
 from r_elegans.model import load_builtin_model
 from r_elegans.rl.full_network_actor import init_full_network_actor
-from scripts.apply_synapse_polarity import polarized_reversal
+from r_elegans.brain.edge_polarity import polarized_reversal
 
 
 @pytest.fixture(scope='module')

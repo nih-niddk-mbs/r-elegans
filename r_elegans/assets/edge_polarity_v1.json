@@ -1,0 +1,31 @@
+{
+ "schema_version": 1,
+ "source": "Fenyves et al. 2020, Synaptic polarity and sign-balance prediction using gene expression data in the C. elegans chemical synapse connectome network, PLOS Comput Biol",
+ "doi": "10.1371/journal.pcbi.1007974",
+ "license_note": "Creative Commons Attribution; retain source attribution. Derived signs only; source tables are not redistributed.",
+ "precedence": "NT+receptor prediction (SI s003, sheet 5. Sign prediction, column Predicted polarity), then transmitter-only (SI s004, sheet Connectome)",
+ "source_codes": {
+  "1": "NT+receptor",
+  "2": "transmitter-only",
+  "0": "undetermined (complex, no prediction, or absent from the tables)"
+ },
+ "source_sha256": {
+  "pcbi.1007974.s003.xlsx": "85959066fd7cbdbc2024d0ebb323b71c4365f4083bc85e555ee973f470697c47",
+  "pcbi.1007974.s004.xlsx": "cfd032aa9b398e9cf5dec326aea77321a50157bbeb00e08cfcc831d088d52b9a"
+ },
+ "runtime_model_sha256": "012d1267f01c7a2df50af5cfb5d3f703d0af4295c20190af4fc47011984eb064",
+ "model_chemical_edges": 3709,
+ "edges_nt_receptor": 1705,
+ "edges_nt_only": 1216,
+ "edges_undetermined": 788,
+ "excitatory": 2402,
+ "inhibitory": 519,
+ "method_sign_conflicts": 264,
+ "table_names_unknown_to_model": [],
+ "reversal_priors_mV": {
+  "excitatory": 0.0,
+  "inhibitory": -85.0,
+  "neutral_if_requested": -40.0,
+  "status": "project priors, not verified literature values"
+ }
+}
