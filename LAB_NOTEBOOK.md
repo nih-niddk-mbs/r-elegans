@@ -11046,3 +11046,14 @@ Change not covered by any criterion: RMDVL, essentially quiet in the bundle (std
 (std 4.5-4.7 mV), so the atlas fit added a third rhythmic RMD cell; whether that alters the E092-E099 gait chain is
 untested. Interpretation: the two RMD cells the earlier gait work used keep a sustained oscillation of similar size after
 atlas fitting (provisional, pending periods); no locomotion, coordination or start/stop claim.
+
+Follow-up (user-reported server output, from `/home/carsonc/r-elegans-results/rhythm-check-20261120T234029Z/rhythm_check.json`;
+per-cell values: median period s / mean window amplitude mV / late peaks / amplitude retention):
+- bundle: RMDL 0.234 / 18.92 / 84 / 1.00; RMDR 0.230 / 19.06 / 87 / 0.963; RMDVL 0.230 / 2.05 / 87 / 0.812 (fails gates).
+- E101 final: RMDL 0.230 / 18.90 / 85 / 1.00; RMDR 0.218 / 18.65 / 91 / 1.00; RMDVL 0.238 / 14.90 / 84 / 1.004.
+- E102 final: RMDL 0.230 / 19.31 / 87 / 1.00; RMDR 0.220 / 17.96 / 91 / 1.00; RMDVL 0.234 / 14.72 / 85 / 1.01.
+Criteria now evaluated: period within +/-10 % of the bundle - met (RMDL -1.7 % both finals; RMDR -5.2 % E101, -4.3 % E102);
+amplitude within +/-25 % - met (RMDL -0.1 % / +2.1 %; RMDR -2.2 % / -5.8 %); retention 0.8-1.2 - met. All declared criteria
+are met for both finals: the RMDL/RMDR rhythm component is preserved (period within 5 %, amplitude within 6 %). RMDVL
+now oscillates at the same period (0.23-0.24 s) with 15 mV amplitude (2 mV in the bundle), so the fit recruited it into the
+rhythm. Still not shown: the +35.7 mV excursion in E101 (neuron and time unknown), any body/gait/start-stop behavior.
