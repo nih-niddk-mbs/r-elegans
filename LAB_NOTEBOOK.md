@@ -11057,3 +11057,23 @@ amplitude within +/-25 % - met (RMDL -0.1 % / +2.1 %; RMDR -2.2 % / -5.8 %); ret
 are met for both finals: the RMDL/RMDR rhythm component is preserved (period within 5 %, amplitude within 6 %). RMDVL
 now oscillates at the same period (0.23-0.24 s) with 15 mV amplitude (2 mV in the bundle), so the fit recruited it into the
 rhythm. Still not shown: the +35.7 mV excursion in E101 (neuron and time unknown), any body/gait/start-stop behavior.
+
+## Lineage correction and E099 checkpoint polarization (2026-11-20; user-reported server output; no training)
+
+Correction: E101/E102 started from `mac_rhythm_v1_polarized`, the Mac rhythm reference, whose provenance states small bends
+and an RMD rhythm only ("useful locomotion remains unestablished"). The gait/recovery evidence of E092-E099 belongs to the
+server checkpoint lineage (E099 = the E100 parent), which the atlas fits never touched. The RMD rhythm check therefore
+shows the rhythm of the Mac proxy was kept, not that any gait was preserved; "gait preserved" is not applicable to E101/E102.
+Server polarization of the E099 selected checkpoint (`apply_synapse_polarity`, bundled Fenyves 2020 asset): input
+`.../pathway-continuation-20261120T001737Z-577769/evaluations/final-00/network.npz`, SHA-256 57fc914e...58a7 (matches the E100
+hash); output `/home/carsonc/r-elegans-results/e099-polarized/network.npz`, SHA-256
+a7a122a747ccc55136b440013772418e1cd05ca1a90f2e28ea14152ce079604a. Edges: 3,709 model edges, 2,921 determined (2,402
+excitatory, 519 inhibitory; 83.4 % of weight), 788 undetermined kept at the parent value, 264 method conflicts; 2,122 edges
+changed reversal (45.6 % of chemical weight changed). Only the reversal field changed; the checkpoint was not retrained, so
+its E092-E099 behavior (gait, recovery, sensory attenuation) is NOT established and must be requalified before any use as a
+behavior parent. Failed step: `audit_model_data_adherence` on the same checkpoint raised ModuleNotFoundError: openpyxl in the
+server `r-elegans` conda env, so the E099 model-versus-data audit did not run (`/home/carsonc/e099_model_audit.json` not
+produced). Gait requalification harness: the gait-preservation gates (frequency 1.62-1.98 Hz within 5 % of the parent,
+regional cycles within +/-10 %) live inside the E09x worker path (`scripts/rial_sensory_worker.py`,
+`r_elegans/sensory_motion.py`, `r_elegans/rial_sensory.py`) and need the pipeline input directory; no standalone assay
+for an arbitrary checkpoint exists yet.
