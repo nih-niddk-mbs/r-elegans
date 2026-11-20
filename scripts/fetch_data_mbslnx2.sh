@@ -9,5 +9,6 @@ echo "Data root: $R_ELEGANS_DATA_DIR"
 df -h "$R_ELEGANS_DATA_DIR" | tail -1
 python3 scripts/fetch_osf_project.py e2syt "$R/functional/randi2023_osf" --skip pre_review
 sh scripts/fetch_secondary_data.sh
+python3 scripts/fetch_dandi_assets.py 001075 "$R/functional/randi2023_dandi001075_segmentation" --match desc-segmentation
 echo "Finished. Manifests:"
 find "$R" -name download_manifest.json
