@@ -32,6 +32,10 @@ def main():
     args = parser.parse_args()
     model = load_builtin_model()
     params, fixed, config = load_network(args.network)
+    # Float32 bundles must match the active default float width or scan carries differ.
+    float_type = jnp.result_type(float)
+    params, fixed = jax.tree_util.tree_map(
+        lambda a: a.astype(float_type) if jnp.issubdtype(a.dtype, jnp.floating) else a, (params, fixed))
     windows = []
     for start in np.linspace(0, 900, max(args.batches)).astype(int):
         windows.append(load_identified_calcium(args.recording, args.labels, model.neuron_ids, args.uid,
@@ -41,8 +45,8 @@ def main():
         raise SystemExit('Windows must share the same identified neurons')
     masks, _ = conservative_fit_constraints(fixed, model.neuron_ids, names)
     indices = jnp.asarray(windows[0]['indices'])
-    intervals_all = jnp.asarray(np.stack([w['intervals_s'] for w in windows]))
-    target_all = jnp.asarray(np.stack([w['normalized'] for w in windows]))
+    intervals_all = jnp.asarray(np.stack([w['intervals_s'] for w in windows]), float_type)
+    target_all = jnp.asarray(np.stack([w['normalized'] for w in windows]), float_type)
     substeps = math.ceil(float(intervals_all.max()) * 1000. / args.max_step_ms)
     devices = jax.devices()
     print(json.dumps(dict(devices=[str(d) for d in devices], x64=bool(jax.config.jax_enable_x64),
