@@ -10967,3 +10967,46 @@ retention. Software check: the continuation code path (start/anchor options, sna
 on 4 targets; not a result. Plan record `experiments/records/E102-plan.json`; command
 `sh scripts/launch_atlas_gradient_continue_mbslnx2.sh 180`; the launcher refuses to start if another atlas gradient run is
 active.
+
+### E102 result and post-run audit (user-reported server report output; not locally re-run)
+
+Run folder (server): `/home/carsonc/r-elegans-results/atlas-gradient-continue-20261120T193418Z-668699`, run record
+`20261120T193420775240Z-97aa9bb3`; source revision/dirty state of the run not separately verified here.
+Execution: completed, stop reason deadline, 1752 steps in 170.5 of 180 min (about 5.8 s per step at substeps 40, both
+A100s, float64); no non-finite step; start checkpoint = E101 final (SHA-256 afa6eceb...7b8a, hash-checked by the
+launcher against E101's summary.json); anchor = original bundle 47a369a1...2482d; optimizer fresh; final and
+best-train-loss hashes match summary.json. Only the final checkpoint was evaluated on held-out; snapshots every 250 steps
+were kept (not evaluated; evaluating them against held-out and picking one would be test-set selection).
+Parameters: all 10,631 entries changed; frozen-field changes 0/0/0; entries at the anchor-based clip bounds (30/176/84 in
+E101): 47 of 4,736 channels, 349 of 3,709 chemical (9.4 %), 128 of 2,186 gap (5.9 %), i.e. the bounds (not data-derived)
+bind more as training continues.
+Signal: random-half-pair loss 0.857 (first step) -> 0.726 (last; best 0.696 at step 1745; minibatch-noisy); pooled
+0.042 -> 0.180, per-target 0.244 -> 0.368. Channel-gradient norm 0.11 at step 0, 1.24 at the last recorded step and 5.04 in
+the printed step-1750 record (global-norm clipping at 1 applies); chemical 0.59 -> 0.19, gap 0.12 -> 0.03.
+Gates (declared in E102-plan.json):
+- improvement: NOT met. Final held-out Spearman 0.1071 (needed > 0.1338) and AUC excited 0.5626 (needed >= 0.574).
+  Step-0 evaluation of the E101 final at substeps 40: held-out 0.1205 / 0.5750 (train 0.1326 / 0.607), so the E101
+  result largely holds at the finer step. Over the run train rose to 0.182 / 0.640 while held-out fell to 0.107 / 0.563
+  (curve: held-out Spearman 0.084-0.123 with a trough of 0.084 at step 200, mostly 0.09-0.11 afterwards; maximum 0.1227
+  at step 125). Train-held-out Spearman gap 0.012 at step 0 -> 0.075.
+- overfitting flag: strictly not triggered at the end (final 0.1071 is 0.0156 below the curve maximum 0.1227, threshold
+  0.02) but intermediate evaluations were up to 0.038 below it; train Spearman (0.182) exceeds the train-vs-test
+  pair-mean ceiling (0.1515), so part of the training fit is training-animal noise. Recorded as: no held-out gain, widened gap.
+- numerical: met. Substep 40-vs-80 correlation 0.99996, max |difference| / max |response| 0.0095 (E101 at 20-vs-40:
+  0.516); 13 targets only.
+- integrity: met (no non-finite step, 0 frozen changes, hashes match).
+Reported, not criteria: held-out silent fraction among significant pairs 0.963 (step 0) -> 0.869 (train 0.945 -> 0.820);
+response magnitude quantiles (|indicator change|, initial -> final): median 1.1e-11 -> 1.1e-10, p90 7.9e-9 -> 1.3e-7,
+p99 1.35e-6 -> 4.1e-5, max 0.0044 -> 0.038 (amplitudes grew about 10-30x without being targeted); held-out sign agreement
+among active significant pairs 0.75 -> 0.80 (small counts); self-response fraction 0.844 -> 0.874.
+Interpretation and decision: outcome negative for the performance goal and positive for the numerical goal. Three more
+hours of the same scale-free objective on the same split did not improve held-out agreement; the E101 held-out level
+(about 0.11 Spearman, 0.57 AUC, comparable to the best anatomy-only predictors 0.108 / 0.568, below the 0.15 ceiling) is
+a plateau for this objective, parameter set and bounds. Further training on this split mostly fits training animals.
+Checkpoints: E101 final and E102 final are both kept as independent atlas-fit checkpoints; preferring E101 final over
+E102 final on held-out numbers is a selection on the test split, so its held-out numbers are mildly optimistic; E102
+final is the numerically converged one (convergence at 20 vs 40 substeps fails for E101 final). Not shown: any
+locomotion, start/stop, swimming, trajectory or fidelity claim; retention of the E092-E099 rhythm/gait (untested on
+either checkpoint); a shuffled-label control; a validation split separate from the test split.
+Next (not yet decided): rhythm/component check of both finals; a train/validation/test animal split with early stopping
+and data-derived bounds before more atlas training; amplitude via self-response ratios; then the start/stop stage.
