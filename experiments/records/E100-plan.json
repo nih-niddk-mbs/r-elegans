@@ -1,0 +1,22 @@
+{
+ "experiment": "E100",
+ "record_date": "2026-11-20",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "Does the unchanged audited E099 selected checkpoint reproduce the direction and ranking of signal propagation measured in the Randi et al. 2023 optogenetic atlas (110 wild-type animals, DANDI 001075 segmentation files) on held-out animals, when a single-neuron stimulus of one calibrated strength is simulated?",
+ "motivation": "Starting point for fitting parameters to data. The atlas reports that propagation differs from anatomy-based predictions and that extrasynaptic peptide signaling contributes; the model has none. A baseline separates what the current wiring-and-channel model already explains from what needs new freedom or parameters.",
+ "method": "No training. Load the checkpoint by SHA-256, settle it for 60 s, simulate a 0.5 s added membrane conductance (reversal 0 mV) on each stimulated named neuron, and take the window-mean (1-11 s after offset) change of the calcium indicator relative to an identical unstimulated run. Data responses are relative green/red ratio changes z-scored by per-ROI sham-window spread; only stimulations with a self-response z >= 3 are used. Animals are split by subject (every third held out). The only free quantity, the stimulus conductance (coarse 8-point log grid 0.003-3 nS, then a finer 7-point grid), is chosen on training animals by the maximum Spearman correlation between model response and pooled mean z (declared before the run). Then phase sensitivity (8 settling durations 60-102 s), their average, and a substep-doubling convergence check.",
+ "parent_checkpoint": "E099 selected checkpoint 57fc914e84050099e6be190d1efc418fc207962e81fc28520d3f4bfd180558a7, located by hash under /home/carsonc/r-elegans-results/pathway-continuation-20261120T001737Z-577769",
+ "fixed": "All network parameters. Nothing is trained.",
+ "data": "~/r-elegans-data/raw/functional/randi2023_dandi001075_segmentation (110 files; DANDI gives no SHA-256, size-only checks plus our SHA-256 in the manifest). On the Mac the loader found 14,039 ROIs (5,783 named), 5,614 stimulations (2,815 with an identified target, 1,592 with a named target); a dry run with a toy checkpoint kept 650 successful trials across 87 animals.",
+ "command": "sh scripts/launch_atlas_baseline_mbslnx2.sh 180",
+ "report": "python -m scripts.report_atlas_baseline --run <run folder>",
+ "budget": {"total_minutes_default": 180, "reserve_minutes": 10, "note": "A cap. The computation may finish much earlier; unused time is not padded."},
+ "acceptance_criteria": {
+  "evidence_of_agreement": "On held-out animals at the chosen conductance (phase-averaged): Spearman permutation p < 0.01, AUC for excited pairs > 0.55, model silent on fewer than 50 % of significant pairs, and substep-doubling correlation >= 0.9.",
+  "negative": "Any criterion fails: the unchanged model's propagation is not detectably related to the atlas at this resolution. A failure of the convergence check makes the other metrics unreliable and is reported as such.",
+  "inconclusive": "Fewer than about 30 held-out pairs with evidence, or the model silent for most targets at every strength."
+ },
+ "risks": "Intrinsic oscillators make stimulated-minus-control differences depend on phase (checked by the phase stage but not removed); the indicator is a simple Hill function, not GCaMP; only named neurons are compared; response windows and the z-score null are our choices; the success filter keeps about 40 % of named-target stimulations; the grid may miss the best strength; the checkpoint was tuned for movement control, not for propagation; no extrasynaptic signaling in the model.",
+ "audit": "After the run: checkpoint hash vs requested hash, data counts vs the Mac dry run, convergence stage, whether the deadline was reached, run_records captured, summary hashes; unavailable evidence is stated explicitly.",
+ "claims_not_made": "No fit, no biological fidelity, no behavior claim. A match would not show the mechanism is correct; a mismatch would not show which mechanism is missing."
+}

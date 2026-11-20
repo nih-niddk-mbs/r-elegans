@@ -67,12 +67,17 @@ def ratio_signal(animal):
         return np.where(red > 0, green / red, np.nan)
 
 
-def stimulus_responses(animal, *, pre_s=10., post_window=(1., 11.), signal=None):
-    """Relative change (mean post - mean pre)/mean pre of the green/red ratio for each stimulation [stim, roi]."""
+def stimulus_responses(animal, *, pre_s=10., post_window=(1., 11.), signal=None, starts=None, stops=None):
+    """Relative change (mean post - mean pre)/mean pre of the green/red ratio for each stimulation [stim, roi].
+
+    ``starts``/``stops`` replace the recorded stimulus times, e.g. for sham windows.
+    """
     signal = ratio_signal(animal) if signal is None else signal
     time = animal['time_s']
-    out = np.full((animal['stim_start_s'].size, signal.shape[1]), np.nan)
-    for k, (start, stop) in enumerate(zip(animal['stim_start_s'], animal['stim_stop_s'])):
+    starts = animal['stim_start_s'] if starts is None else np.asarray(starts, float)
+    stops = animal['stim_stop_s'] if stops is None else np.asarray(stops, float)
+    out = np.full((starts.size, signal.shape[1]), np.nan)
+    for k, (start, stop) in enumerate(zip(starts, stops)):
         before = (time >= start - pre_s) & (time < start)
         after = (time >= stop + post_window[0]) & (time < stop + post_window[1])
         if before.sum() < 3 or after.sum() < 3:

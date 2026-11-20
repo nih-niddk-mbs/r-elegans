@@ -10702,3 +10702,38 @@ change, and compare sign, rank correlation and latency with the atlas on held-ou
 animals. A baseline checkpoint available on this Mac is still to be chosen; the
 server E092-E099 checkpoints are not here. Amplitude calibration of the calcium
 observation model is fit on training animals only.
+
+## E100 - Unchanged-checkpoint baseline against the Randi atlas (PLANNED 2026-11-20; not executed)
+
+Question: does the audited E099 selected checkpoint (SHA-256
+57fc914e84050099e6be190d1efc418fc207962e81fc28520d3f4bfd180558a7, located by hash on
+the server) reproduce the direction and ranking of optogenetic signal propagation in
+the Randi et al. 2023 atlas on held-out animals when a single-neuron stimulus of one
+calibrated strength is simulated? User chose this run on 2026-11-20 (3-hour cap).
+
+Method (no training): settle 60 s; add a 0.5 s membrane conductance (reversal 0 mV)
+to each stimulated named neuron; model response = window-mean (1-11 s after offset)
+calcium-indicator change minus an unstimulated run. Data response = relative
+green/red ratio change z-scored by per-ROI sham-window spread, kept only when the
+target's own z >= 3. Animals split by subject (every third held out). The one free
+quantity, the stimulus conductance, is chosen on training animals by the maximum
+Spearman correlation (declared beforehand), coarse then fine grid; then phase
+sensitivity (8 settling durations), their average, and a substep-doubling check.
+Full plan: `experiments/records/E100-plan.json`. Command (mbslnx2):
+`sh scripts/launch_atlas_baseline_mbslnx2.sh 180`; report:
+`python -m scripts.report_atlas_baseline --run <run>`.
+
+Acceptance (held-out, chosen strength, phase-averaged): Spearman permutation p < 0.01,
+AUC (excited pairs) > 0.55, model silent on < 50 % of significant pairs, substep
+correlation >= 0.9. Otherwise negative; inconclusive if fewer than about 30 evidenced
+held-out pairs or the model is silent at every strength.
+
+Local verification: `tests/test_atlas_evaluation.py` and `tests/test_randi_atlas.py`
+(7 tests pass) and a dry run of the runner with a toy checkpoint on the real atlas data
+(650 successful trials, 87 animals, 58 train / 29 test; coarse, fine, phase and
+convergence stages executed). The toy substeps=2 convergence check differed strongly,
+as expected for a 50 ms step; the real run uses 20 versus 40. The run may finish well
+inside the 3 hours; the budget is a cap, not padded.
+
+Risks, claims not made: see the plan record. No fit, no biological-fidelity or
+behavior claim; the model has no extrasynaptic signaling.
