@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-31T23:20:00-04:00",
+  "artifact_count": 10,
+  "total_bytes": 27457519,
+  "sources": [
+    {
+      "id": "nicoletti2019",
+      "title": "Biophysical modeling of C. elegans neurons: Single ion currents and whole-cell dynamics of AWCon and RMD",
+      "doi": "10.1371/journal.pone.0218738",
+      "license_note": "Creative Commons Attribution 4.0; retain source attribution.",
+      "artifacts": [
+        {
+          "relative_path": "raw/physiology/nicoletti2019/pone.0218738.s001.pdf",
+          "bytes": 147953,
+          "sha256": "88f3b5c0d414ca033eb9d7e23d7b2d64f0070a847e103a985e33a99b9400632f",
+          "url": "https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0218738.s001"
+        },
+        {
+          "relative_path": "raw/physiology/nicoletti2019/pone.0218738.s002.pdf",
+          "bytes": 104966,
+          "sha256": "41196153bfe633906f259cc404691c3c5449034d750766f3dfd03d9771f2faf6",
+          "url": "https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0218738.s002"
+        },
+        {
+          "relative_path": "processed/parameters/single_compartment_v1.json",
+          "bytes": 3434,
+          "sha256": "eaf247448a041782defbb4697ace4f4b4ab7a00ee988765a92c8cb1b4a33c545",
+          "derived_from": ["pone.0218738.s001.pdf", "pone.0218738.s002.pdf", "Table 2 in the article"],
+          "processing_code_version": "r-elegans working tree 2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "baaiworm2024",
+      "title": "BAAIWorm integrative data-driven C. elegans model: digitized electrophysiology validation traces",
+      "source_repository": "https://github.com/Jessie940611/BAAIWorm",
+      "source_commit": "b99ca5ab9c00aef739fceb1cf007bc50b06f2ccc",
+      "license_note": "Apache License 2.0 repository; trace files retain upstream provenance.",
+      "artifacts": [
+        {"relative_path": "raw/physiology/baaiworm2024/AIYL_Current_Clamp_Trace.txt", "bytes": 6204081, "sha256": "7796547357edd61abad98c04035cc290f825319c17c741b3db58d761709973d6"},
+        {"relative_path": "raw/physiology/baaiworm2024/AVAL_Current_Clamp_Trace.txt", "bytes": 2644296, "sha256": "d5bbef1456255ea35539fda6678e5e45d76cf5f25e04dba80f646fa8be7129d6"},
+        {"relative_path": "raw/physiology/baaiworm2024/AWAL_Current_Clamp_Trace.txt", "bytes": 5690453, "sha256": "3b1038a60e2dfee7da59b2cfb73438dfa4499a5b469d77de033935bd3d9e3593"},
+        {"relative_path": "raw/physiology/baaiworm2024/AWAL_Current_Clamp_Trace_0.txt", "bytes": 6236774, "sha256": "8899ee9c0d4732fb0cab7b8f0656114ff01250d9ba862bd1c6b89ee00df592b1"},
+        {"relative_path": "raw/physiology/baaiworm2024/AWCL_Voltage_Clamp_Trace.txt", "bytes": 37314, "sha256": "4c42fc52287dfc4f523047ba9ee501b38165e4ed66d85625fe50131de388361f"},
+        {"relative_path": "raw/physiology/baaiworm2024/RIML_Current_Clamp_Trace.txt", "bytes": 6146291, "sha256": "241c31c7665b0c2a6c6993231dbc417fa467a87c63b5bf5a2b9e99609969cc24"},
+        {"relative_path": "raw/physiology/baaiworm2024/VD05_Voltage_Clamp_Trace.txt", "bytes": 241957, "sha256": "919954fef9dd18e0ee96b586dd52be11a21906da35c8a4f0086e88cca2760656"}
+      ]
+    }
+  ]
+}

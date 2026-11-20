@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-31T23:07:07.358177+00:00",
+  "data_root": "$R_ELEGANS_DATA_DIR",
+  "artifact_count": 22,
+  "total_bytes": 17004625,
+  "sources": [
+    {
+      "id": "cook2019",
+      "title": "Whole-animal connectomes of both Caenorhabditis elegans sexes",
+      "doi": "10.1038/s41586-019-1352-7",
+      "license_note": "See the source publication and Springer Nature terms; do not redistribute from Git.",
+      "artifacts": [
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM5_ESM.xlsx",
+          "bytes": 11006,
+          "sha256": "9232c92111df9adef4b739b2a838f0be26e6fc434962d58cf7bce3ccc837257a",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM5_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM6_ESM.xlsx",
+          "bytes": 2650751,
+          "sha256": "cff825a6be2c110a78bbde766352fa8c515781c035df701af6d507e064a11073",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM6_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM7_ESM.xlsx",
+          "bytes": 1381843,
+          "sha256": "e72b5ff3dba07d12cc4c11f814b1b4a5d1969a8e1fb5d3a954dc9cecf833a1b1",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM7_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM8_ESM.xlsx",
+          "bytes": 27554,
+          "sha256": "cf442a285c43f6fd95fbaa6b50b3e0696187cdf39242377d95a5446354ae2244",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM8_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM9_ESM.xlsx",
+          "bytes": 4172457,
+          "sha256": "86d3f24c77752b1f7df4b26cdf9583461fe7e8fc76f86d2d81b3879cdaa0e389",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM9_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM10_ESM.xlsx",
+          "bytes": 11412,
+          "sha256": "db2ea247369dc3b2e69ab0e7b1fe1cac66f0ce24596d02d711e6ab933f998ee6",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM10_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM11_ESM.xlsx",
+          "bytes": 210839,
+          "sha256": "5179cfd413ee8cbd6855e2a380cf10a7a56a3df1e9dc3d61f8a5f878969fd124",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM11_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM12_ESM.xlsx",
+          "bytes": 90384,
+          "sha256": "fe61a19f12f4ba08e415f047fd344f9d416a4eae11418062099b368c9624b5e2",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM12_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM13_ESM.xlsx",
+          "bytes": 237776,
+          "sha256": "f2ac1753a75f37c96cf86ce5b43f7ae4b5db1a67a37a4b3ffd6fff62011027a7",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM13_ESM.xlsx"
+        },
+        {
+          "relative_path": "raw/connectome/cook2019/41586_2019_1352_MOESM14_ESM.xlsx",
+          "bytes": 258067,
+          "sha256": "1917adee6dbc330d01cb67f474a421f539a397c965e687a40ebb0a950c98fe2a",
+          "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1352-7/MediaObjects/41586_2019_1352_MOESM14_ESM.xlsx"
+        }
+      ]
+    },
+    {
+      "id": "fenyves2020_synaptic_polarity",
+      "title": "Synaptic polarity and sign-balance prediction using gene expression data",
+      "doi": "10.1371/journal.pcbi.1007974",
+      "license_note": "Creative Commons Attribution license; retain source attribution.",
+      "artifacts": [
+        {
+          "relative_path": "raw/neurotransmitters/synaptic_polarity_2020/pcbi.1007974.s003.xlsx",
+          "bytes": 983199,
+          "sha256": "85959066fd7cbdbc2024d0ebb323b71c4365f4083bc85e555ee973f470697c47",
+          "url": "https://journals.plos.org/ploscompbiol/article/file?type=supplementary&id=info:doi/10.1371/journal.pcbi.1007974.s003"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/synaptic_polarity_2020/pcbi.1007974.s004.xlsx",
+          "bytes": 859153,
+          "sha256": "cfd032aa9b398e9cf5dec326aea77321a50157bbeb00e08cfcc831d088d52b9a",
+          "url": "https://journals.plos.org/ploscompbiol/article/file?type=supplementary&id=info:doi/10.1371/journal.pcbi.1007974.s004"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/synaptic_polarity_2020/pcbi.1007974.s005.xlsx",
+          "bytes": 336965,
+          "sha256": "a7cb83defe55680ebbdc0d7a02b8ace1dace1be9c29caca7d2b801968678957d",
+          "url": "https://journals.plos.org/ploscompbiol/article/file?type=supplementary&id=info:doi/10.1371/journal.pcbi.1007974.s005"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/synaptic_polarity_2020/pcbi.1007974.s006.xlsx",
+          "bytes": 3563837,
+          "sha256": "42862e8074a0a998eeae3099b9de83ca6a28d74e5188b17d88c48bfe85f914a1",
+          "url": "https://journals.plos.org/ploscompbiol/article/file?type=supplementary&id=info:doi/10.1371/journal.pcbi.1007974.s006"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/synaptic_polarity_2020/pcbi.1007974.s007.xlsx",
+          "bytes": 1654011,
+          "sha256": "35902e0f43842ed25a65b4cc1c95028bcd73db121c6ad4d831ddc5ce5612ec81",
+          "url": "https://journals.plos.org/ploscompbiol/article/file?type=supplementary&id=info:doi/10.1371/journal.pcbi.1007974.s007"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/synaptic_polarity_2020/pcbi.1007974.s008.xlsx",
+          "bytes": 92376,
+          "sha256": "ea971b4a79cbcf4d4119e61cb0140838898fe1946b49b55f8627084e53082be9",
+          "url": "https://journals.plos.org/ploscompbiol/article/file?type=supplementary&id=info:doi/10.1371/journal.pcbi.1007974.s008"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/synaptic_polarity_2020/pcbi.1007974.s009.xlsx",
+          "bytes": 229367,
+          "sha256": "600e596cc4a7e81bf6772a85096e06b013870e2329b01b1a504a244fa210f0ea",
+          "url": "https://journals.plos.org/ploscompbiol/article/file?type=supplementary&id=info:doi/10.1371/journal.pcbi.1007974.s009"
+        }
+      ]
+    },
+    {
+      "id": "wang2024_neurotransmitter_atlas",
+      "title": "A neurotransmitter atlas of C. elegans males and hermaphrodites",
+      "doi": "10.7554/eLife.95402",
+      "license_note": "Creative Commons Attribution 4.0; retain source attribution.",
+      "artifacts": [
+        {
+          "relative_path": "raw/neurotransmitters/wang2024/elife-95402-supp1-v1.xlsx",
+          "bytes": 38655,
+          "sha256": "bc472336595b6dc631bf52c265e5a347dfb9f57cbe665edd5f2e45e5156c9d66",
+          "url": "https://cdn.elifesciences.org/articles/95402/elife-95402-supp1-v1.xlsx"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/wang2024/elife-95402-supp2-v1.xlsx",
+          "bytes": 72914,
+          "sha256": "ad5175b5e53748acf77c6dfff1b5efcf15ed4364091239bd2def0095544eb18c",
+          "url": "https://cdn.elifesciences.org/articles/95402/elife-95402-supp2-v1.xlsx"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/wang2024/elife-95402-supp3-v1.xlsx",
+          "bytes": 101438,
+          "sha256": "34e8fddd31bcb2227d30c31cabb0d0c6d98d477140974d89d48d423987a41724",
+          "url": "https://cdn.elifesciences.org/articles/95402/elife-95402-supp3-v1.xlsx"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/wang2024/elife-95402-supp4-v1.xlsx",
+          "bytes": 10402,
+          "sha256": "d69a4d78e7fe01bbf890398a8c4de34862900461fad05068619404e2580c5e1a",
+          "url": "https://cdn.elifesciences.org/articles/95402/elife-95402-supp4-v1.xlsx"
+        },
+        {
+          "relative_path": "raw/neurotransmitters/wang2024/elife-95402-supp5-v1.xlsx",
+          "bytes": 10219,
+          "sha256": "fce87f6550ecd4b4331f95fd47d31d40496d7072052f23d157e72063d694bd39",
+          "url": "https://cdn.elifesciences.org/articles/95402/elife-95402-supp5-v1.xlsx"
+        }
+      ]
+    }
+  ]
+}

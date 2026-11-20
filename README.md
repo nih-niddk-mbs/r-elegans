@@ -1,5 +1,7 @@
 # r-elegans
 
+How to install, get the data, run the model and follow the training schedule: see [REPRODUCE.md](REPRODUCE.md).
+
 2026-11-20 E100 (user-reported, 22 min, no training): unchanged E099 checkpoint vs the Randi 2023 optogenetic
 atlas, held-out animals. Weak rank agreement (Spearman 0.074, p=0.002; AUC excited 0.545), model silent on 99%
 of significant pairs; AUC and silence criteria missed, convergence passed. Reference baseline for fitting; no claim
