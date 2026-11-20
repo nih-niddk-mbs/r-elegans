@@ -1,0 +1,16 @@
+{
+ "experiment": "E100",
+ "evidence_source": "user-reported server stdout (scripts.report_atlas_baseline), not re-run locally",
+ "checkpoint_sha256": "57fc914e84050099e6be190d1efc418fc207962e81fc28520d3f4bfd180558a7",
+ "execution": {"elapsed_minutes": 21.9, "budget_minutes": 180, "deadline_reached": false, "stages": ["coarse_sweep", "fine_sweep", "phase x8", "phase_averaged", "substep_convergence"]},
+ "data": {"animals": 110, "successful_trials": 650, "train_trials": 417, "test_trials": 233, "train_animals": 58, "test_animals": 29, "targets": 135, "train_pairs": 6312, "test_pairs": 2950},
+ "chosen_conductance_nS": 0.011182781160944818,
+ "heldout_phase_averaged": {"spearman_mean_z": 0.0742, "permutation_p_spearman": 0.002, "auc_excited": 0.545, "permutation_p_auc_excited": 0.00399, "auc_inhibited": 0.535, "sign_agreement_among_significant_active": 0.4, "model_silent_fraction_among_significant": 0.988},
+ "train": {"spearman_mean_z": 0.0254, "permutation_p_spearman": 0.012, "auc_excited": 0.529, "permutation_p_auc_excited": 0.002},
+ "self_response_fraction_positive": 0.874,
+ "convergence": {"targets": 13, "max_abs_difference_over_max_abs_response": 0.0036851954705592422, "correlation": 0.999999369223178},
+ "criteria": {"spearman_p_below_0.01": true, "auc_excited_above_0.55": false, "silent_below_50_percent": false, "convergence_corr_at_least_0.9": true},
+ "outcome": "negative against pre-declared criteria; reference baseline for fitting",
+ "note": "permutation p-values at the 500-permutation floor (0.002); rho and AUC nearly flat over 0.003-3 nS and over eight settling phases",
+ "unavailable": ["run_records and source revision of the run", "summary and npz hashes", "run folder name", "response-magnitude quantiles", "count of active significant pairs behind sign agreement", "connectome-only or degree-only control predictor"]
+}

@@ -1,5 +1,10 @@
 # r-elegans
 
+2026-11-20 E100 (user-reported, 22 min, no training): unchanged E099 checkpoint vs the Randi 2023 optogenetic
+atlas, held-out animals. Weak rank agreement (Spearman 0.074, p=0.002; AUC excited 0.545), model silent on 99%
+of significant pairs; AUC and silence criteria missed, convergence passed. Reference baseline for fitting; no claim
+about mechanism. [Record](experiments/records/E100-server-summary.json).
+
 2026-11-20 E099 (user-reported, audit clean, 7 generations, 143 min): continuation of E098 with 4x more edge
 headroom and a weaker-side RIA node term. Negative for the 1% gate: nominal suppression 0.77/1.27/1.35%
 (E098 0.53/1.20/1.43%), weakest 0.56-0.77% across cases; the search stalled after generation 1. RIAL release

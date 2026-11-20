@@ -10737,3 +10737,50 @@ inside the 3 hours; the budget is a cap, not padded.
 
 Risks, claims not made: see the plan record. No fit, no biological-fidelity or
 behavior claim; the model has no extrasynaptic signaling.
+
+### E100 result and post-run audit (user-reported server stdout; not locally re-run)
+
+Run: `/home/carsonc/r-elegans-results/atlas-baseline-*` (folder name not pasted; the
+report was read from it with `scripts.report_atlas_baseline`).
+
+Outcome: NEGATIVE against the pre-declared criteria (a baseline, not a fit).
+- Held-out animals, chosen conductance 0.0112 nS, phase-averaged: Spearman rho 0.074
+  (permutation p = 0.002, the floor for 500 permutations), AUC excited pairs 0.545
+  (p = 0.004), AUC inhibited pairs 0.535, sign agreement among significant and model-
+  active pairs 0.40, model silent (|response| <= 1e-6 indicator units) on 98.8 % of
+  significant pairs, stimulated neuron's own simulated response positive for 87 % of
+  targets, 2,950 test pairs from 29 animals (233 trials).
+- Criteria: Spearman p < 0.01 met; AUC > 0.55 not met (0.545); silent < 50 % not met
+  (98.8 %); substep-doubling correlation >= 0.9 met (0.9999994; max difference 0.37 %
+  of the largest response, 13 targets).
+- Training animals (6,312 pairs, 58 animals, 417 trials): rho 0.025 (p = 0.012), AUC
+  excited 0.529 (p = 0.002). The held-out values are not lower than the training ones.
+
+Audit:
+1. Execution: 21.9 of 180 min, deadline not reached, all stages ran (8-point coarse
+   sweep, 7-point fine sweep, 8 phase runs, phase average, convergence check).
+2. Checkpoint: the report shows SHA-256 57fc914e...8a7, the requested hash.
+3. Data: 110 animals, 650 successful trials, 417/233 train/test trials, 6,312/2,950
+   pairs, 135 targets; identical to the Mac dry run, so the server read the same data.
+4. Selection: the conductance was chosen by train Spearman, as declared. The metric
+   is almost flat across 0.003-3 nS (train rho 0.017-0.025, test rho 0.066-0.076), so
+   the choice is not informative.
+5. Numerics: phase-sensitivity is nil (test rho 0.0742-0.0743 for all eight settling
+   durations), consistent with the unstimulated network sitting at a steady state
+   rather than oscillating; convergence passed.
+6. Signal propagation: the stimulated neuron responds in the model (self-response 0.86
+   at 0.003 nS rising to 1.0 at >= 1.1 nS) but almost no other neuron does by the
+   1e-6 deadband; the response magnitudes themselves were not reported.
+7. Unavailable here: run_records, summary/npz hashes, log tail, the run folder name,
+   response-magnitude quantiles, the number of significant active pairs behind the
+   0.40 sign agreement, any connectome-only or degree-only control predictor.
+
+Interpretation: the unchanged checkpoint is detectably, but only barely, related to the
+atlas in rank terms (rho about 0.07, AUC about 0.54) and transmits almost nothing
+downstream of the stimulated cell. The weak association is flat over a 1000x range of
+stimulus strength and over oscillation phase, so it likely reflects structure
+(connectivity) rather than dynamics; this was not tested. No claim about mechanism
+(including peptides) follows. Decision: keep E100 as the reference baseline for fitting.
+Before fitting, add structural control predictors (connectome weight, path length,
+degree) to see whether the model beats them, inspect response magnitudes, and test
+sensitivity to the self-response threshold and response window.
