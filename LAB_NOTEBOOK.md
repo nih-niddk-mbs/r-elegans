@@ -11010,3 +11010,18 @@ locomotion, start/stop, swimming, trajectory or fidelity claim; retention of the
 either checkpoint); a shuffled-label control; a validation split separate from the test split.
 Next (not yet decided): rhythm/component check of both finals; a train/validation/test animal split with early stopping
 and data-derived bounds before more atlas training; amplitude via self-response ratios; then the start/stop stage.
+
+## Rhythm component check of the atlas-fit checkpoints (PLANNED 2026-11-20; not executed on the server)
+
+Question: do the E101 final and E102 final still sustain the RMDL/RMDR membrane oscillation of the starting bundle
+(the component the earlier E092-E099 gait work builds on) after the atlas fit changed up to x10 in channel densities
+and +/-2 in edge strengths? Tool: `scripts/assay_network_rhythm.py` (40 s free run from the stored initial state, no
+stimulus, sample dt 2 ms, 1 ms integration steps; existing gates in `r_elegans.brain.rhythm_qualification`; coarse
+versus fine (0.5 ms) comparison). Networks: committed bundle `mac_rhythm_v1_polarized` (reference), E101 final, E102
+final. Acceptance (declared now): all values finite; RMDL and RMDR both pass the persistence gates (bounded, sustained
+amplitude, amplitude retention 0.8-1.2, >= 5 late cycles); median period within +/-10 % and window peak-to-peak
+amplitude within +/-25 % of the bundle's. Reference values from a 20 s local run of the bundle (Mac CPU, x64): RMDL/RMDR
+pass, median period 0.234/0.230 s, window amplitudes about 18-19 mV, retention 0.99, late-window std 6.3 mV in exactly
+two neurons (RMDL, RMDR); the bundle itself fails the strict coarse-vs-fine gate (period error 1.7 % / 6.7 %), so
+convergence is reported relative to the bundle, not as a criterion. Scope: RMD membrane rhythm only; no locomotion,
+coordination, start/stop or biological claim. Software check: runs locally for the bundle and a smoke checkpoint.
