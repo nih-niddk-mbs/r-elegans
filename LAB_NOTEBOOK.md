@@ -10507,30 +10507,112 @@ parent.
 
 
 
-## E099 - Continued pathway training from the E098 checkpoint (PLANNED 2026-11-19; not executed)
+## E099 - Continued pathway training from the E098 checkpoint (2026-11-19 plan; 2026-11-20 server run, user-reported)
+
+Correction 2026-11-19: the plan entry first committed in `7034109` was garbled
+by a shell heredoc (repeated text fragments). It is replaced here by the same
+plan, re-entered cleanly; the full plan is also in
+`experiments/records/E099-plan.json`.
+
+### Plan (recorded before execution)
 
 Question: can further joint training of the same cue-to-RIA-to-motor pathway,
 with up to 4x more edge headroom above the E098 checkpoint and a weaker-side
-(bilateral) RIA node term, raise the weakest-region (tail) cue-driven
-suppression from 0.53 % to >= 1 % with baseline gait, recovery and relay
-behavior preserved?
-
-Basis: E098 details (search stalled at 0.49 % for generations 18-24; solution
-right-sided: RIAR +0.021 vs RIAL +0.0055 against a 0.02 node target; several
-edges near their widened caps).
+(bilateral) RIA node term, raise the weakest-region cue-driven suppression from
+0.53 % to >= 1 % with baseline gait, recovery and relay behavior preserved?
 
 Method: fresh CMA-ES (not an exact optimizer/RNG resume) from the audited E098
-selected checkpoint (SHA-256 95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b),
-same 53 pathway groups recentered on it, edges up to 4x above the checkpoint
-(explicit engineering prior, not biology), densities inside the original prior,
-gait/recovery preservation anchored to the E092 parent, loss = E098 loss with
-weaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaketotweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweak21weaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweatiweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweake
+selected checkpoint (SHA-256 95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b);
+same 53 pathway groups recentered on it; edges up to 4x above the checkpoint
+(explicit engineering prior, not biology); densities inside the original prior;
+gait/recovery preservation anchored to the E092 parent; E098 loss with a
+weaker-side node term (min of RIAL/RIAR release change, target 0.02). Seed 9900,
+population 21, 180 min total, planned about 15 generations, 21 workers x 4 cores.
+Command: `sh scripts/launch_pathway_continuation_mbslnx2.sh 180`.
 
+Acceptance: all 11 validation cases pass at rung >= 1 % with all regions
+reduced and a clean automatic audit; otherwise report per-region reductions
+against E098 (0.53/1.20/1.43 %) and per-side RIA changes; failures retained.
 
-eaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eaker-siweaker-siwn aeaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eake/1eaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eaktieaker-siweaker-siweaker-siweakmuseaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eakereckpoint's distance from
-it is not evidenced here); the continuation setup is tested locally
-(7 software tests) but not on a real run.
-
-Local verification: new tests/test_pathLocal verification: new tests/test_pathLocal verification: new tests/test_pathtwLocal verification: new tests/test_pathLocal verification: new tests/test_pa_wall_budget` watchdog descendant
-cleanup, a process-timing test unrelated to this change; not investigated).
 Claims not made: no biological, initiation, start/stop or swimming claim.
+
+### Result (user-reported server stdout; not locally re-run)
+
+Run: `/home/carsonc/r-elegans-results/pathway-continuation-20261120T001737Z-577769`
+(audit folder `...-audit`; details folder
+`...-details-20261120T031206313533Z`). Selected checkpoint SHA-256
+57fc914e84050099e6be190d1efc418fc207962e81fc28520d3f4bfd180558a7.
+
+Outcome: NEGATIVE for the 1 % gate. `engineering_criteria_met` false,
+`partial_attenuation_passed` and `training_margin_met` false in every case,
+no component, rest/restart, start/stop or swimming qualification.
+
+Nominal cue-driven motion ratios 0.99235 / 0.98730 / 0.98652, that is
+0.77 / 1.27 / 1.35 % suppression (region order assumed the same as E098's
+tail/middle/head; the order is not labelled in this output). E098 was
+0.53 / 1.20 / 1.43 %. Weakest region by case: nominal 0.77, low-dose 0.65,
+shift 0.56, redundant second cue 0.64 %, i.e. below 1 % everywhere.
+Loss reduction from the parent 13.5 % (parent loss value not in the output).
+
+### Post-run audit
+
+1. Execution/budget: exit 0, 8607.5 s of 180 min (143.5 min), all steps
+   finished, validation complete, stop reason `search_time_budget`. Only 7
+   generations completed against about 15 planned. Audit exit 0, complete,
+   integrity passed, no problems; 176 evaluations completed, 5 with status
+   `time_budget` (which cases they are is not in the output; unavailable).
+2. Selection: the incumbent checkpoint hash and minimum regional suppression
+   (0.640 %, equal to the redundant second-cue case) are identical at
+   generations 1-7. All improvement happened in generation 1; generations 2-7
+   found nothing better (a stall like E098 generations 18-24, so the shortfall
+   of planned generations is unlikely to explain the miss).
+3. Parameters: 165 coordinates changed, frozen fields unchanged, no groups
+   near a local bound, 181 deliberate original-upper-bound exceptions accounted
+   for by the audit (widened prior). Which groups moved is not in the output
+   (unavailable). Initial parent hash agreement is covered by the audit's
+   coordinate checks; the raw comparison is not shown here.
+4. Signal propagation (nominal cue window 41-46 s release changes):
+   AWAR +0.0160 (0.0561 -> 0.0721), AWAL +0.0003; AIZR +0.0289, AIZL +0.0012;
+   AIYR +0.0035, AIYL -0.00003 (AIYL release 0.9797, just under the 0.98
+   headroom limit); RIAR +0.0156 (0.0706 -> 0.0862), RIAL +0.0046;
+   SMDDL +0.0070, SMDVR +0.0056, SMDVL +0.0025, SMDDR +0.00002.
+   Dominant path is right-sided: AWAR -> AIZR -> RIAR -> SMDDL/SMDDR
+   (release-only current changes AIZR->RIAR +0.121 pA, RIAR->SMDDL +0.034 pA).
+   AIYR->RIAR is inhibitory (-0.043 pA actual). The left side barely carries the
+   cue: AWAL release stays near 0.0007-0.0009, AIYL->RIAL change is
+   ~2e-5 pA, and RIAL changes mainly via RIAR->RIAL (+0.0055 pA). RIAL baseline
+   release oscillates (std 0.070, q01-q99 0.297-0.472), so its RIAL->SMD
+   current changes are oscillation-dominated (rms much larger than mean).
+   Node term: RIAL +0.0046 against the 0.02 target; node term 0.59 of a
+   nominal loss of 0.664, so about 89 % of the loss is the node term.
+   RIAR (+0.0156) and RIAL (+0.0046) are both lower than E098's reported
+   +0.021 and +0.0055 while the weakest region improved, so these node
+   changes are not what limits the tail (an inference, not tested).
+5. Behavior and numerical gates: all nominal-type cases safe, relay preserved,
+   cue-off recovery inside the 0.0025 tolerance (largest deviation 0.0017).
+   Neural-half difference 0.00157 and body-half 1.7e-05 passed. Caveat: the
+   neural-half case has `baseline_and_recovery_preserved` false (loss
+   669457); the cause is not in this output and is unresolved. Whether E098
+   showed the same is not recorded here.
+6. Controls: sensory-blocked case gives ratios exactly 1.0 and zero node change
+   (pass). Replays (final diagnostic, not fit): relay-replay ratio 0.99950 and
+   RIAL-replay ratio 1.00214 against 0.99235 original, baseline preserved, so
+   the attenuation is removed by matched no-cue release replay (dependence
+   supported; `control_interneuron_dependence_passed` true).
+7. Artifact integrity: audit integrity passed; checkpoint, coordinates and
+   run hashes are on the server. Unavailable here: source revision and
+   working-tree state of the run, rung history, per-group parameter table,
+   the 5 `time_budget` cases, optimizer logs.
+
+### Interpretation and decision
+
+Weakest-region suppression rose modestly (0.53 -> 0.77 %, nominal) but the
+gate (>= 1 %, margin 1.0) was missed in all cases, and a 1 % reduction is far
+from a visible stop. The search stalled after generation 1. The weaker-side node
+term was not met (RIAL +0.0046 vs 0.02) and carries most of the loss, so it
+may be steering the search toward a target the frozen-release left-hand path
+cannot reach (hypothesis, untested). Decision: do not launch a longer
+repetition of the same configuration. The checkpoint is retained as an
+independent parent (not a start/stop parent). Candidate next steps, none yet
+planned: drop or right-restrict the node term; or change the control route
+(command-drive dose-response for an off-default state; RIS-like stop path).

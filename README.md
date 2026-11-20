@@ -1,5 +1,12 @@
 # r-elegans
 
+2026-11-20 E099 (user-reported, audit clean, 7 generations, 143 min): continuation of E098 with 4x more edge
+headroom and a weaker-side RIA node term. Negative for the 1% gate: nominal suppression 0.77/1.27/1.35%
+(E098 0.53/1.20/1.43%), weakest 0.56-0.77% across cases; the search stalled after generation 1. RIAL release
+change +0.0046 vs 0.02 target; the cue acts mainly through the right side. Sensory block and replays pass;
+neural-half baseline preservation flag is false and unexplained. No qualification.
+[Record](experiments/records/E099-server-summary.json).
+
 2026-11-19 E098 (user-reported, audit clean, 24 generations, 6h24m): joint cue-to-RIA-to-motor pathway
 training under a widened (4x) edge prior. Nominal cue-driven suppression 0.53/1.20/1.43% (tail/middle/head),
 about 21x/14x/16x the parent; cue-driven RIA release change ~51x. Tail misses the 1% gate in every case, so no

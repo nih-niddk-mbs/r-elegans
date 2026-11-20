@@ -1,0 +1,19 @@
+{
+ "experiment": "E099",
+ "evidence_source": "user-reported server stdout (report and --details), not re-run locally",
+ "run": "/home/carsonc/r-elegans-results/pathway-continuation-20261120T001737Z-577769",
+ "audit": "/home/carsonc/r-elegans-results/pathway-continuation-20261120T001737Z-577769-audit/summary.json",
+ "details": "/home/carsonc/r-elegans-results/pathway-continuation-20261120T001737Z-577769-details-20261120T031206313533Z/summary.json",
+ "parent_checkpoint_sha256": "95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b",
+ "selected_checkpoint_sha256": "57fc914e84050099e6be190d1efc418fc207962e81fc28520d3f4bfd180558a7",
+ "execution": {"exit_code": 0, "total_elapsed_seconds": 8607.53, "total_minutes_limit": 180, "completed_generations": 7, "planned_generations_approx": 15, "stop_reason": "search_time_budget", "audit_integrity_passed": true, "audit_problems": [], "status_counts": {"completed": 176, "time_budget": 5}, "original_upper_bound_exceptions": 181},
+ "selection": {"incumbent_changed_after_generation": 1, "minimum_regional_suppression_percent": 0.6399774532731883, "loss_reduction_percent": 13.54122076169531, "changed_coordinates": 165, "frozen_fields_unchanged": true, "near_local_bound_groups": []},
+ "nominal_regional_motion_ratios": [0.9923491581613312, 0.9872985230008223, 0.986524545002425],
+ "nominal_suppression_percent": [0.765, 1.270, 1.348],
+ "region_order_note": "assumed tail/middle/head as in E098; not labelled in the output",
+ "node_release_changes": {"RIAL": 0.0046336669977373734, "RIAR": 0.015603182924596032, "target": 0.02},
+ "gates": {"engineering_criteria_met": false, "partial_attenuation_passed": false, "training_margin_met": false, "sensory_block_passed": true, "control_interneuron_dependence_passed": true, "neural_half_difference": 0.0015667324430367335, "body_half_difference": 1.7108112214447857e-05, "neural_half_baseline_and_recovery_preserved": false},
+ "replays": {"relay_replay_amplitude_ratio": 0.9995020863583552, "rial_replay_amplitude_ratio": 1.0021389159611434},
+ "outcome": "negative for the 1 percent gate; no qualification of any kind",
+ "unavailable": ["source revision and working-tree state", "rung history", "per-group parameter changes", "the 5 time_budget cases", "cause of neural-half baseline_and_recovery_preserved false", "optimizer logs", "parent loss value"]
+}
