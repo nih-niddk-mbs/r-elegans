@@ -10665,3 +10665,40 @@ pair, and a switch that disables the term. Fit the wild-type minus unc-31
 difference to the peptide-dependent part; hold out animals and stimulated neurons.
 Receptor coupling sign and range (short/mid) are open items. Needs a recorded
 plan and user approval before model changes.
+
+## 2026-11-19 — Randi atlas loader and validation (software/data check; no model fit)
+
+Code: `r_elegans/data/randi_atlas.py`, `scripts/summarize_randi_atlas.py`,
+`tests/test_randi_atlas.py` (3 tests on a synthetic NWB; the pathway tests still pass).
+Local verification only; results below are from the 110 `desc-segmentation` files
+on the Mac (DANDI 001075; size-only checks, our SHA-256 in the download manifest).
+
+Loader choices (documented, not the paper's definitions): interpolated green and red
+signals, ratio green/red; response = (mean post - mean pre)/mean pre with pre = 10 s
+before onset and post = 1-11 s after offset; a ROI is named only with a canonical
+model neuron label, NeuroPAL confidence >= 0.8 and a unique name in the animal;
+'merge', blank and unmatched ROIs are unlabeled.
+
+Coverage: 110 wild-type animals (the unc-31 data are in the OSF export, not these
+files), 14,039 ROIs of which 5,783 are named (median 53.5 of 125 per animal), 5,614
+stimulations of which 2,815 have an identified target ROI and 1,592 a named target;
+167 distinct named targets and 20,932 distinct (target, named responder) pairs (about
+23 % of the 91,204 possible). ROI status: named 5,785; unlabeled 2,622; non-canonical
+or low confidence 1,754; blank 3,107; merge 732; unmatched 39.
+
+Target mapping check (first 40 animals, 1,372 stimulations with a finite response):
+`target_pumpprobe_id` equals the 0-based ROI id (index = id); the id-1 alternative is
+worse. With the 1-11 s window the target ROI ranks in the top 10 % of ROIs in 57.5 %
+of stimulations (median rank fraction 0.063, exactly the top ROI in 20.1 %); with a
+0-4 s window 39.4 % (median 0.188). Many stimulations therefore do not give the
+target its own clear response, so trial quality filtering and a stimulus-strength
+calibration are needed before fitting; this check does not establish which trials
+are good.
+
+Next (planned, not done): simulate the unchanged conductance network with a
+membrane-conductance stimulus on the target (reversal 0 mV, amplitude calibrated on
+the target's own response), take responses as stimulated minus unstimulated indicator
+change, and compare sign, rank correlation and latency with the atlas on held-out
+animals. A baseline checkpoint available on this Mac is still to be chosen; the
+server E092-E099 checkpoints are not here. Amplitude calibration of the calcium
+observation model is fit on training animals only.
