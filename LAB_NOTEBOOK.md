@@ -11025,3 +11025,24 @@ pass, median period 0.234/0.230 s, window amplitudes about 18-19 mV, retention 0
 two neurons (RMDL, RMDR); the bundle itself fails the strict coarse-vs-fine gate (period error 1.7 % / 6.7 %), so
 convergence is reported relative to the bundle, not as a criterion. Scope: RMD membrane rhythm only; no locomotion,
 coordination, start/stop or biological claim. Software check: runs locally for the bundle and a smoke checkpoint.
+
+### Rhythm component check result (user-reported server stdout; per-cell JSON not yet read; not locally re-run)
+
+Server run of `scripts/assay_network_rhythm.py` (40 s free run, x64, 1 ms steps, three networks; the output folder name
+was not reported, so `rhythm_check.json` is unlocated here). Hashes printed: bundle 47a369a1...2482d (matches the committed
+bundle), E101 final afa6eceb...7b8a (matches the E102 start hash), E102 final b9f72864...3bb29.
+Printed results (RMD late-window std in mV; cells passing the persistence gates):
+- bundle: RMDL 6.286, RMDR 6.325, RMDVL 0.571, others < 0.1; passing RMDL, RMDR; neurons with late std > 1 mV: 2; voltage
+  range -80.2 to 5.4 mV; no cell passes the strict coarse-vs-fine gate.
+- E101 final: RMDL 6.062, RMDR 6.366, RMDVL 4.679; passing RMDL, RMDR and RMDVL; neurons > 1 mV: 3; voltage range -81.1 to
+  +35.7 mV (the neuron and time of the +35.7 mV excursion are not known; the bundle and E102 do not show it); no cell
+  passes coarse-vs-fine.
+- E102 final: RMDL 6.385, RMDR 6.105, RMDVL 4.456; passing RMDL, RMDR and RMDVL; neurons > 1 mV: 3; voltage range -81.2
+  to 5.4 mV; RMDL passes coarse-vs-fine.
+Gates versus the declared criteria: finite - met for all; RMDL and RMDR pass persistence - met for both finals;
+median period within +/-10 % and window amplitude within +/-25 % of the bundle - NOT evaluable (the printed lines omit
+periods and amplitudes; late std of RMDL/RMDR is within 4 % of the bundle's for both finals, a proxy for amplitude only).
+Change not covered by any criterion: RMDVL, essentially quiet in the bundle (std 0.57 mV), now oscillates in both finals
+(std 4.5-4.7 mV), so the atlas fit added a third rhythmic RMD cell; whether that alters the E092-E099 gait chain is
+untested. Interpretation: the two RMD cells the earlier gait work used keep a sustained oscillation of similar size after
+atlas fitting (provisional, pending periods); no locomotion, coordination or start/stop claim.
