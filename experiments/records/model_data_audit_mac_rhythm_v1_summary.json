@@ -1,0 +1,474 @@
+{
+ "network": "/Users/carsonc/github/r-elegans/r_elegans/assets/mac_rhythm_v1/network.npz",
+ "s1_topology_vs_cook": {
+  "chemical": {
+   "model_edges": 3709,
+   "raw_edges": 3709,
+   "model_total": 20965.0,
+   "raw_total": 20965.0,
+   "entries_that_differ": 0,
+   "names_missing_in_sheet": [],
+   "examples": []
+  },
+  "gap": {
+   "model_edges": 2186,
+   "raw_edges": 2199,
+   "model_total": 11580.0,
+   "raw_total": 11612.0,
+   "entries_that_differ": 16,
+   "names_missing_in_sheet": [
+    "AS07",
+    "AS08",
+    "AS09",
+    "RMFR"
+   ],
+   "examples": [
+    [
+     "M4",
+     "M4",
+     1.0,
+     0.0
+    ],
+    [
+     "M5",
+     "M5",
+     1.0,
+     0.0
+    ],
+    [
+     "ASKR",
+     "ASKR",
+     2.0,
+     0.0
+    ],
+    [
+     "PVM",
+     "PVM",
+     1.0,
+     0.0
+    ],
+    [
+     "AIAR",
+     "AIAR",
+     2.0,
+     0.0
+    ],
+    [
+     "PVPL",
+     "PVPL",
+     1.0,
+     0.0
+    ],
+    [
+     "DVB",
+     "DVB",
+     2.0,
+     0.0
+    ],
+    [
+     "RIBL",
+     "RIBL",
+     3.0,
+     0.0
+    ]
+   ]
+  },
+  "gap_raw_asymmetric_pairs_unequal": 1087
+ },
+ "s2_polarity_vs_wang": {
+  "counts": {
+   "*ACh | excitatory": 1,
+   "*ACh - NEW | excitatory": 2,
+   "*GABA | excitatory": 2,
+   "*Glu | excitatory": 2,
+   "*Glu - NEW | excitatory": 1,
+   "*betaine (uptake) - NEW | excitatory": 2,
+   "5-HT | excitatory": 2,
+   "ACh | excitatory": 121,
+   "ACh | inhibitory": 23,
+   "ACh | intermediate": 12,
+   "ACh - NEW | excitatory": 2,
+   "DA | excitatory": 6,
+   "DA | intermediate": 2,
+   "GABA | excitatory": 18,
+   "GABA | inhibitory": 10,
+   "GABA | intermediate": 1,
+   "GABA (uptake) | excitatory": 1,
+   "GABA (uptake) | intermediate": 1,
+   "Glu | excitatory": 62,
+   "Glu | inhibitory": 8,
+   "Glu | intermediate": 3,
+   "Unknown (orphan, unc-47 expression) | excitatory": 1,
+   "betaine (uptake) | excitatory": 2,
+   "octopamine | excitatory": 1,
+   "octopamine | intermediate": 1,
+   "unknown (orphan) | excitatory": 9,
+   "unknown (orphan, unc-46 expression) | excitatory": 2,
+   "unknown (orphan, unc-47 expression) | excitatory": 4
+  },
+  "outgoing_weight": {
+   "*ACh | excitatory": 0.0161,
+   "*ACh - NEW | excitatory": 0.0422,
+   "*GABA | excitatory": 0.0241,
+   "*Glu | excitatory": 0.0331,
+   "*Glu - NEW | excitatory": 0.02,
+   "*betaine (uptake) - NEW | excitatory": 0.0196,
+   "5-HT | excitatory": 0.0231,
+   "ACh | excitatory": 2.2961,
+   "ACh | inhibitory": 0.778,
+   "ACh | intermediate": 0.18,
+   "ACh - NEW | excitatory": 0.0122,
+   "DA | excitatory": 0.1837,
+   "DA | intermediate": 0.0427,
+   "GABA | excitatory": 0.2036,
+   "GABA | inhibitory": 0.0416,
+   "GABA | intermediate": 0.0006,
+   "GABA (uptake) | excitatory": 0.0148,
+   "GABA (uptake) | intermediate": 0.0143,
+   "Glu | excitatory": 1.8797,
+   "Glu | inhibitory": 0.3574,
+   "Glu | intermediate": 0.0978,
+   "Unknown (orphan, unc-47 expression) | excitatory": 0.0058,
+   "betaine (uptake) | excitatory": 0.0,
+   "octopamine | excitatory": 0.0329,
+   "octopamine | intermediate": 0.0286,
+   "unknown (orphan) | excitatory": 0.1431,
+   "unknown (orphan, unc-46 expression) | excitatory": 0.0041,
+   "unknown (orphan, unc-47 expression) | excitatory": 0.0623
+  },
+  "gaba_only_not_inhibitory": 19,
+  "ach_only_not_excitatory": 35,
+  "reversal_values": [
+   [
+    0.0,
+    87
+   ],
+   [
+    -85.0,
+    28
+   ],
+   [
+    -5.0,
+    8
+   ],
+   [
+    -22.0,
+    3
+   ],
+   [
+    -23.1,
+    3
+   ],
+   [
+    -8.5,
+    2
+   ]
+  ]
+ },
+ "s3_cell_provenance": {
+  "cell_kinds": {
+   "AWC composition x transferred scale (placeholder)": 296,
+   "RMD (measured values, rhythm prior may modify)": 6
+  },
+  "transferred_channel_scale": 0.01,
+  "trained_channel_scale_changed_cells": 0,
+  "trained_channel_scale_abs_log_median": 0.0,
+  "trained_channel_scale_abs_log_max": 0.0,
+  "evidence_labels_in_measured_classes": {
+   "AWCON": {
+    "whole_cell_fit": 16,
+    "expression_inference": 1
+   },
+   "RMD": {
+    "whole_cell_fit": 14,
+    "expression_inference": 3
+   }
+  }
+ },
+ "s4_clip_bound_pileup": {
+  "initial_voltage_mV": {
+   "at_low": 167,
+   "at_high": 15
+  },
+  "leak_reversal_mV": {
+   "at_low": 173,
+   "at_high": 9
+  },
+  "release_threshold_mV": {
+   "at_low": 16,
+   "at_high": 135
+  },
+  "release_slope_mV": {
+   "at_low": 0,
+   "at_high": 11
+  },
+  "synapse_reversal_mV": {
+   "at_low": 28,
+   "at_high": 87
+  },
+  "capacitance_pF": {
+   "at_low": 8,
+   "at_high": 10
+  },
+  "neurons": 302
+ },
+ "s5_resting_transmission": {
+  "voltage_mV": {
+   "min": -80.2784144510761,
+   "median": -74.73723047802972,
+   "max": -12.756067008764113
+  },
+  "release_below_0p01": 153,
+  "release_above_0p99": 2,
+  "release_between": 147,
+  "median_release_gain_per_mV": 0.0013777867284205723,
+  "neurons_with_gain_above_0p01_per_mV": 65,
+  "chemical_weight_total_nS": 6.5575957370429725,
+  "chemical_weight_with_presynaptic_gain_below_1e3": 0.4611463702482375,
+  "median_edge_sensitivity_over_postsynaptic_leak": 1.7504027128410643e-05,
+  "fraction_of_edges_with_sensitivity_over_leak_above_1e3": 0.09005122674575357,
+  "voltage_by_neuron": {
+   "AWAL": -80.28,
+   "AWAR": -68.0,
+   "AIYL": -35.55,
+   "AIYR": -62.41,
+   "RIML": -37.0,
+   "AVAL": -65.16,
+   "AVBL": -39.5,
+   "RIAL": -60.28,
+   "RIAR": -42.38,
+   "RMDDL": -18.21,
+   "SMDDL": -48.21
+  }
+ },
+ "s6_rest_voltage_vs_traces": {
+  "AVAL": {
+   "trace_first_100ms_mV": [
+    -30.0,
+    -30.0,
+    -30.0,
+    -30.0
+   ],
+   "trace_unit": null,
+   "model_rest_mV": -65.2
+  },
+  "AIYL": {
+   "trace_first_100ms_mV": [
+    -54.4,
+    -54.7,
+    -52.4,
+    -53.2
+   ],
+   "trace_unit": "V",
+   "model_rest_mV": -35.6
+  },
+  "RIML": {
+   "trace_first_100ms_mV": [
+    -38.3,
+    -43.9,
+    -45.9,
+    -39.5
+   ],
+   "trace_unit": "V",
+   "model_rest_mV": -37.0
+  },
+  "AWAL": {
+   "trace_first_100ms_mV": [
+    -75.8,
+    -76.3,
+    -75.0,
+    -75.1
+   ],
+   "trace_unit": "V",
+   "model_rest_mV": -80.3
+  }
+ },
+ "s7_atlas_controls": {
+  "data_ceiling_train_vs_test_pair_mean_z": {
+   "shared_pairs": 2091,
+   "spearman": 0.1515
+  },
+  "direct_chemical": {
+   "train": {
+    "pairs": 6312,
+    "excited": 825,
+    "inhibited": 182,
+    "spearman_mean_z": 0.0359,
+    "auc_excited": 0.521,
+    "auc_inhibited": 0.4879,
+    "sign_agreement_among_significant_active": 0.839,
+    "model_silent_fraction_among_significant": 0.8828,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   },
+   "test": {
+    "pairs": 2950,
+    "excited": 367,
+    "inhibited": 62,
+    "spearman_mean_z": 0.0786,
+    "auc_excited": 0.5255,
+    "auc_inhibited": 0.4983,
+    "sign_agreement_among_significant_active": 0.9,
+    "model_silent_fraction_among_significant": 0.8834,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   }
+  },
+  "direct_gap": {
+   "train": {
+    "pairs": 6312,
+    "excited": 825,
+    "inhibited": 182,
+    "spearman_mean_z": 0.0701,
+    "auc_excited": 0.5246,
+    "auc_inhibited": 0.5038,
+    "sign_agreement_among_significant_active": 0.9275,
+    "model_silent_fraction_among_significant": 0.9315,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   },
+   "test": {
+    "pairs": 2950,
+    "excited": 367,
+    "inhibited": 62,
+    "spearman_mean_z": 0.1077,
+    "auc_excited": 0.5342,
+    "auc_inhibited": 0.5027,
+    "sign_agreement_among_significant_active": 0.9474,
+    "model_silent_fraction_among_significant": 0.9114,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   }
+  },
+  "two_step_walks": {
+   "train": {
+    "pairs": 6312,
+    "excited": 825,
+    "inhibited": 182,
+    "spearman_mean_z": 0.0647,
+    "auc_excited": 0.5695,
+    "auc_inhibited": 0.4932,
+    "sign_agreement_among_significant_active": 0.8429,
+    "model_silent_fraction_among_significant": 0.3615,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   },
+   "test": {
+    "pairs": 2950,
+    "excited": 367,
+    "inhibited": 62,
+    "spearman_mean_z": 0.0955,
+    "auc_excited": 0.5682,
+    "auc_inhibited": 0.528,
+    "sign_agreement_among_significant_active": 0.8923,
+    "model_silent_fraction_among_significant": 0.3939,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   }
+  },
+  "three_step_walks": {
+   "train": {
+    "pairs": 6312,
+    "excited": 825,
+    "inhibited": 182,
+    "spearman_mean_z": 0.0593,
+    "auc_excited": 0.5638,
+    "auc_inhibited": 0.4929,
+    "sign_agreement_among_significant_active": 0.8251,
+    "model_silent_fraction_among_significant": 0.1311,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   },
+   "test": {
+    "pairs": 2950,
+    "excited": 367,
+    "inhibited": 62,
+    "spearman_mean_z": 0.0902,
+    "auc_excited": 0.5602,
+    "auc_inhibited": 0.5142,
+    "sign_agreement_among_significant_active": 0.8712,
+    "model_silent_fraction_among_significant": 0.1492,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0033
+   }
+  },
+  "responder_in_degree": {
+   "train": {
+    "pairs": 6312,
+    "excited": 825,
+    "inhibited": 182,
+    "spearman_mean_z": 0.0079,
+    "auc_excited": 0.5238,
+    "auc_inhibited": 0.4892,
+    "sign_agreement_among_significant_active": 0.8193,
+    "model_silent_fraction_among_significant": 0.0,
+    "permutation_p_spearman": 0.1894,
+    "permutation_p_auc_excited": 0.01
+   },
+   "test": {
+    "pairs": 2950,
+    "excited": 367,
+    "inhibited": 62,
+    "spearman_mean_z": 0.0069,
+    "auc_excited": 0.5181,
+    "auc_inhibited": 0.4571,
+    "sign_agreement_among_significant_active": 0.8555,
+    "model_silent_fraction_among_significant": 0.0,
+    "permutation_p_spearman": 0.4684,
+    "permutation_p_auc_excited": 0.1561
+   }
+  },
+  "stimulated_out_degree": {
+   "train": {
+    "pairs": 6312,
+    "excited": 825,
+    "inhibited": 182,
+    "spearman_mean_z": -0.0133,
+    "auc_excited": 0.4894,
+    "auc_inhibited": 0.4995,
+    "sign_agreement_among_significant_active": 0.8194,
+    "model_silent_fraction_among_significant": 0.005,
+    "permutation_p_spearman": 1.0,
+    "permutation_p_auc_excited": 1.0
+   },
+   "test": {
+    "pairs": 2950,
+    "excited": 367,
+    "inhibited": 62,
+    "spearman_mean_z": 0.0043,
+    "auc_excited": 0.5163,
+    "auc_inhibited": 0.4403,
+    "sign_agreement_among_significant_active": 0.8555,
+    "model_silent_fraction_among_significant": 0.0,
+    "permutation_p_spearman": 1.0,
+    "permutation_p_auc_excited": 1.0
+   }
+  },
+  "peptide_candidate_pairs": {
+   "train": {
+    "pairs": 6312,
+    "excited": 825,
+    "inhibited": 182,
+    "spearman_mean_z": 0.0035,
+    "auc_excited": 0.509,
+    "auc_inhibited": 0.4717,
+    "sign_agreement_among_significant_active": 0.8129,
+    "model_silent_fraction_among_significant": 0.0447,
+    "permutation_p_spearman": 0.309,
+    "permutation_p_auc_excited": 0.2126
+   },
+   "test": {
+    "pairs": 2950,
+    "excited": 367,
+    "inhibited": 62,
+    "spearman_mean_z": 0.0233,
+    "auc_excited": 0.5212,
+    "auc_inhibited": 0.5053,
+    "sign_agreement_among_significant_active": 0.8564,
+    "model_silent_fraction_among_significant": 0.0746,
+    "permutation_p_spearman": 0.0033,
+    "permutation_p_auc_excited": 0.0498
+   }
+  }
+ }
+}
