@@ -10861,3 +10861,28 @@ Rhythm component check (60 s free run, last 30 s, float32): parent RMDL/RMDR mem
 qualification; those pathways must be requalified on any polarized checkpoint (earlier E092-E099 evidence does not carry over).
 Not done: the 788 undetermined edges; the E099 checkpoint has not been polarized or audited (it lives on the server; the
 asset-based script and the audit command are in the previous entry).
+
+## 2026-11-20 — Gradient throughput benchmark (measurement only; no training, no parameter update)
+
+Question: can the gradient regimen use batched calcium windows on mbslnx2 (two A100 80GB, 128 CPUs), and what batch
+size is worthwhile? Tool: `scripts/benchmark_gradient_windows.py` (commits f47e326, dad887a); loss = mean squared error of
+the indicator against normalized calcium, windows of 16 frames (649 substeps/frame, ~10.4k steps) from one recording
+(2022-06-14-01, 55 identified neurons), start frames spaced over 0-900, parent `mac_rhythm_v1_polarized`, no updates.
+Provenance: user-reported server stdout (pasted into the session, not a saved record except the last pass, which was
+logged to `/home/carsonc/r-elegans-results/bench/gradient_windows_large.log`; no run directory, source hash or environment
+record exists for these runs). Server: jax 0.6.2, CUDA devices 0 and 1, x64 on; the float32 asset is cast to float64 in
+the script (Mac CPU x64 loss 2.0473237 vs float32 2.0473235 for one 8-frame window).
+Local (Mac CPU, float32, 8-16 frames): gradients finite; analytic vs central-difference directional derivative
+0.00335 vs 0.00334 (16 frames) and 0.00472 vs 0.00465 (32 frames); 2.1-3.3 s per window gradient.
+Server (gradient seconds / windows per second):
+- one GPU: batch 1 3.28/0.31, 8 3.53/2.27, 32 3.96/8.09, 64 5.19/12.33.
+- two GPUs sharded: 32 4.70/6.8, 64 5.10/12.56, 128 6.60/19.38, 256 8.94/28.64, 512 15.15/33.79, 1024 26.65/38.43.
+All gradients finite; no out-of-memory error through batch 1024. Window start frames depend on the largest batch in a
+run (`linspace(0,900,max_batch)`), so losses are not comparable across runs; only timings are.
+Interpretation: cost per step is a ~3 s sequential-time-step floor plus ~0.023 s per extra window when sharded, so
+throughput saturates near 44 windows/s (extrapolated). Sharding gives no gain up to batch 64. Longer windows add steps
+and raise the floor; larger batches amortize it. This establishes gradient correctness and cost only; it does not show
+that training lowers held-out calcium error, and nothing about locomotion or biological fidelity.
+Decision: working batch 256 windows per optimizer step (8.9 s per gradient, 65 % of saturated throughput); 512 is
+available (15 s, 77 %). Unmeasured: gradient quality for windows longer than 32 frames, multi-animal batches with
+different observed sets, and body/behavior tasks (which cost more per step).
