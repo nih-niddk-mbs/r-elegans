@@ -10463,3 +10463,46 @@ Decision: no new training launched. Next: run the read-only details report
 to read progress, moved groups, bound room and signal propagation; then decide
 on a continuation from this checkpoint as a separate recorded plan.
 
+### E098 details (user-reported, nominal response window 41-46 s)
+
+Report `.../pathway-training-20261119T143748Z-561835-details-20261119T235254577777Z/summary.json`
+(not read; only the pasted progress, group and nominal-window tables are available);
+record [E098-detail-server-summary.json](experiments/records/E098-detail-server-summary.json).
+Server was at 521cb12; dirty tree and environment not supplied.
+
+- Matched protocol loss fell 99.59 %; all 165 coordinates changed (37 edges + 128
+  density coordinates); frozen fields unchanged.
+- Progress is stepwise: loss 2.5226 (generations 1-3), 2.0563 (4-8), 1.5729 (9),
+  1.4685 (10), 1.0803 (11-12), 0.6645 (13-17), 0.5334 (18-24); weakest-region
+  suppression 0.048 -> 0.157 -> 0.272 -> 0.324 -> 0.367 -> 0.423 -> 0.491 %.
+  Generations 18-24 (seven) were flat, so the search had stalled at the end even
+  though the time budget, not convergence, stopped it.
+- Largest edge changes (log; x factor): AWAR->AIZR +1.348 (x3.85, 3.9 % below the
+  4x cap, an original-bound exception), ADFR->RIAR +1.032 (x2.81, room 0.354),
+  AIBR->RIAL +1.008 (x2.74, room 0.379), AIZR->RIAR +0.507, AWAL->AIZL +0.531,
+  AWAL->AIYL +0.585, RIAL->RMDDL +0.575, RIAL->RMDVR +0.661, RIAR->RMDVL +0.586,
+  RIAR->SMDVR +0.734; AIYR->RIAR -0.432 and AWAR->AIYR -0.362 went down. Exactly
+  four edges exceed the original upper bound (AWAR->AIZR, AIZR->RIAR, ADFR->RIAR,
+  AIBR->RIAL); the rest stayed inside the original prior. AIZL outward density sits at
+  its +/-0.4 local box edge (-0.393, latent -0.98); other densities moved little.
+- Signal chain (release change; parent values from E094 details): AWAR depolarizes
+  2.82 mV (+0.01615); AIZR +0.0447 (parent +0.0088; baseline release 0.2545 vs 0.164),
+  ΔV rms 2.02 mV; RIAR +0.02095 (parent +0.000248; baseline 0.071 vs 0.0089),
+  ΔV rms 2.10 mV; RIAL +0.00547 (parent +8.5e-5); SMDVR +0.00839, SMDDL +0.00407,
+  SMDVL +0.00214 (parent <=5e-4). AIYR (+0.0029) and AIYL (-3e-5) are unchanged
+  from the parent; ADFR and AIBR change little. The mean RIA change 0.0132 is
+  mostly right-sided (RIAR 0.021 vs RIAL 0.0055).
+
+Interpretation (hypotheses). The solution is asymmetric: the right path
+AWAR->AIZR->RIAR (with ADFR->RIAR and AIBR->RIAL) carries almost all of the gain,
+and its first edge is at the widened cap, so the cap is probably binding. A
+right-dominated RIA drive may be less effective per unit mean release change than
+the bilateral probes of E096/E097, which would explain why the node change reached
+the calibrated need (~0.014 mean) while the tail is only at 0.53 %. The late
+plateau (generations 18-24) is a stalled search, not proven convergence. Open:
+more cap room on AWAR->AIZR (and the symmetric AWAL->AIZL), a continuation from
+this checkpoint, and a node term that rewards bilateral or tail-directed drive.
+Decision: no new training launched; the checkpoint is retained as an independent
+parent.
+
+
