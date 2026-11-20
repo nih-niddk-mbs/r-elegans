@@ -76,7 +76,9 @@ def correlation_loss(response, z, w):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--network', type=Path, required=True)
+    parser.add_argument('--network', type=Path, required=True, help='starting checkpoint')
+    parser.add_argument('--anchor-network', type=Path, default=None,
+                        help='checkpoint that defines clip bounds, the prior and frozen fields (default: --network); use the original bundle when continuing')
     parser.add_argument('--data-root', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--experiment-id', default='E101')
@@ -88,6 +90,7 @@ def main():
     parser.add_argument('--resettle-every', type=int, default=10)
     parser.add_argument('--eval-every', type=int, default=25)
     parser.add_argument('--checkpoint-every', type=int, default=50)
+    parser.add_argument('--snapshot-every', type=int, default=0, help='also keep numbered network snapshots (0 = off)')
     parser.add_argument('--max-steps', type=int, default=10**9)
     parser.add_argument('--max-targets', type=int, default=None, help='dry runs only')
     parser.add_argument('--substeps', type=int, default=20)
@@ -105,12 +108,17 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     capture_run_record(output, repo, args)
     shutil.copy2(args.network, output / 'parent_network.npz')
+    if args.anchor_network:
+        shutil.copy2(args.anchor_network, output / 'anchor_network.npz')
 
     neuron_ids = list(load_asset_document('runtime_model_v1.json')['neuron_ids'])
     float_type = jnp.result_type(float)
-    parent, fixed, config = load_network(args.network)
+    begin, fixed, config = load_network(args.network)
     cast = lambda a: a.astype(float_type) if jnp.issubdtype(a.dtype, jnp.floating) else a
-    parent, fixed = jax.tree_util.tree_map(cast, (parent, fixed))
+    parent, anchor_fixed, _ = load_network(args.anchor_network or args.network)
+    begin, fixed, parent, anchor_fixed = jax.tree_util.tree_map(cast, (begin, fixed, parent, anchor_fixed))
+    if not all(np.array_equal(a, b) for a, b in zip(jax.tree_util.tree_leaves(fixed), jax.tree_util.tree_leaves(anchor_fixed))):
+        parser.error('Start and anchor checkpoints must have identical fixed fields')
     animals, trials, train_stats, test_stats, train_subjects, test_subjects, n_train, n_test = build_statistics(
         args.data_root / 'raw/functional/randi2023_dandi001075_segmentation', neuron_ids, args.seed)
     targets = sorted({t['target'] for t in trials})
@@ -201,7 +209,7 @@ def main():
                     self_response_fraction=self_response_fraction(np.asarray(response), targets, neuron_ids))
 
     rng = np.random.default_rng(args.seed)
-    params, opt_state = parent, optimizer.init(parent)
+    params, opt_state = begin, optimizer.init(begin)
     history = (output / 'history.jsonl').open('w')
     evaluations, best = [], dict(loss=math.inf)
     status, stop_reason, state0, step = 'completed', 'max_steps', None, 0
@@ -235,6 +243,8 @@ def main():
         if step % 5 == 0:
             print(json.dumps(record), flush=True)
         params, opt_state, step = new, new_opt, step + 1
+        if args.snapshot_every and step % args.snapshot_every == 0:
+            save_network(output / f'network_step{step:06d}.npz', params, fixed, config)
         if step % args.checkpoint_every == 0:
             save_network(output / 'network_latest.npz', params, fixed, config)
             (output / 'optimizer_latest.msgpack').write_bytes(serialization.to_bytes(jax.device_get(opt_state)))
@@ -262,6 +272,8 @@ def main():
         experiment=args.experiment_id, scope=SCOPE, status=status, stop_reason=stop_reason, steps=step, elapsed_minutes=(time.monotonic() - started) / 60.,
         budget_minutes=args.minutes, deadline_reached=stop_reason == 'deadline',
         parent_network=str(args.network.resolve()), parent_sha256=sha256(args.network),
+        anchor_network=str((args.anchor_network or args.network).resolve()), anchor_sha256=sha256(args.anchor_network or args.network),
+        optimizer_start='fresh (not a mid-run state resume)',
         final_sha256=sha256(output / 'network_final.npz'), best_train_loss_sha256=sha256(output / 'network_best_train_loss.npz'),
         best_train_loss=dict(loss=best['loss'], step=best.get('step')), devices=[str(d) for d in devices],
         data=data_summary, stimulus_nS=args.stimulus_nS, learning_rate=args.learning_rate, pair_fraction=args.pair_fraction,

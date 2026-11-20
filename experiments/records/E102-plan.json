@@ -1,0 +1,22 @@
+{
+ "experiment": "E102",
+ "record_date": "2026-11-20",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "Does a longer continuation of the E101 atlas fit improve held-out agreement further, and does training at half the integration step (substeps 40) remove the E101 step-size dependence of response amplitude (max |difference| / max |response| 0.516 between substeps 20 and 40)?",
+ "parent_checkpoint": "E101 final network (/home/carsonc/r-elegans-results/atlas-gradient-20261120T182817Z-664349/network_final.npz); the launcher verifies its SHA-256 against that run's summary.json before starting and prints it.",
+ "anchor_checkpoint": "r_elegans/assets/mac_rhythm_v1_polarized/network.npz (SHA-256 47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d). Clip bounds, the prior and frozen fields stay anchored to the original bundle, so total movement is still limited to x10 (channels) and +/-2 (edges) of the original.",
+ "method": "Same objective, data, split, seed, stimulus conductance, learning rate and 50 % pair subsampling as E101 (plan: E101-plan.json), with: start from the E101 final network, fresh Adam state (a fresh optimizer continuation, not an exact mid-run resume), integration substeps 40 (5 ms to 2.5 ms; final convergence check at 80), numbered network snapshots every 250 steps, 180 min wall budget with a 10 min final reserve.",
+ "trainable": "Unchanged from E101: 4,736 channel densities (non-RMD, LEAK excluded), 3,709 chemical and 2,186 gap magnitudes; edge sign/reversal, topology, kinetics, release fields, RMD, LEAK and the stimulus conductance fixed.",
+ "command": "sh scripts/launch_atlas_gradient_continue_mbslnx2.sh 180",
+ "report": "python -m scripts.report_atlas_gradient --run <run folder>",
+ "acceptance_criteria": {
+  "improvement": "Final held-out Spearman(mean z) > 0.1338 (E101 final 0.1138 + 0.02) and held-out AUC for excited pairs >= 0.574.",
+  "numerical": "Substep 40-vs-80 correlation >= 0.9 and max |difference| / max |response| < 0.1 on 13 targets.",
+  "integrity": "No non-finite step, zero frozen-field changes, hashes match.",
+  "overfitting": "Train Spearman rising while held-out Spearman falls by more than 0.02 from its maximum over the evaluation curve; the final checkpoint is still the reported one (held-out data are the only validation set and are not used for selection); snapshots allow a later, separately declared analysis.",
+  "reported_not_criteria": "Silent fraction among significant pairs (the scale-free loss does not target amplitude); response-magnitude quantiles; self-response fraction."
+ },
+ "risks": "Held-out animals are the only validation split, so long training can overfit them without a clean selection rule; clip bounds (not data-derived) already limit 176 chemical edges; a 5 ms to 2.5 ms change alters the dynamics the E101 weights were trained at, so step 0 may differ from the E101 final evaluation (reported as the step-0 evaluation); fresh Adam moments cause an initial perturbation; no amplitude term, no trajectory, behavior, start/stop or rhythm/gait retention test.",
+ "audit": "As E101, plus: step-0 versus E101-final metrics at the finer step, snapshot count/hashes, anchor hash, and the held-out curve over the full run.",
+ "claims_not_made": "No locomotion, start/stop, swimming or biological-fidelity claim; no trajectory-level calcium match."
+}

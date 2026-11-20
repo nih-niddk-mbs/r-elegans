@@ -10949,3 +10949,21 @@ Open: a second identical launch (`atlas-gradient-20261120T192810Z-667237`, PID 6
 the same parent/seed/config; it duplicates E101 and should be stopped or recorded as a reproducibility repeat.
 Next decisions: amplitude term (scalar gain from training pairs), numerically converged step size, data-derived
 bounds, continuation versus fresh start.
+
+## E102 - Continuation of the E101 atlas fit at a finer step (PLANNED 2026-11-20; not executed)
+
+User instruction: a 3 hour run. Chosen as a continuation of E101 (not a fresh restart), with the E101 numerical flaw
+addressed by training at substeps 40. Question: does a longer continuation improve held-out agreement, and does the finer
+step remove the E101 amplitude dependence on step size (0.516 between substeps 20 and 40)? Start: E101 final network
+(hash verified by the launcher against that run's summary.json). Anchor for clip bounds, prior and frozen fields: the
+original `mac_rhythm_v1_polarized` bundle (47a369a1...2482d), so total movement stays within x10 / +/-2 of the original.
+Same objective, data, seed, stimulus conductance, learning rate and pair subsampling as E101; fresh Adam state (a fresh
+optimizer continuation, not an exact mid-run resume); snapshots every 250 steps; 180 min wall budget, 10 min reserve.
+Acceptance (declared now): held-out Spearman > 0.1338 and AUC excited >= 0.574; substep 40-vs-80 correlation >= 0.9 and
+max |diff| / max |response| < 0.1; no non-finite step, no frozen-field change. Overfitting flag: train Spearman rising
+while held-out falls more than 0.02 from its maximum. Held-out animals remain the only validation set and are not used
+for selection (the final checkpoint is reported). Not targeted: amplitude/silence, trajectories, behavior, rhythm/gait
+retention. Software check: the continuation code path (start/anchor options, snapshots, report) ran locally for 2 steps
+on 4 targets; not a result. Plan record `experiments/records/E102-plan.json`; command
+`sh scripts/launch_atlas_gradient_continue_mbslnx2.sh 180`; the launcher refuses to start if another atlas gradient run is
+active.

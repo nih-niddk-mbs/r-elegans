@@ -44,7 +44,8 @@ def main():
         response_magnitude=dict(initial=quantiles(responses['initial']), final=quantiles(responses['final'])),
         final=summary['final'], substep_convergence=summary['substep_convergence'],
         artifacts=dict(hashes_match_summary=hashes, run_records=sorted(p.name for p in (run / 'run_records').iterdir()),
-                       parent_sha256=summary['parent_sha256'], parent_copy_sha256=sha256(run / 'parent_network.npz')),
+                       parent_sha256=summary['parent_sha256'], parent_copy_sha256=sha256(run / 'parent_network.npz'),
+                       anchor_sha256=summary.get('anchor_sha256'), optimizer_start=summary.get('optimizer_start')),
         unavailable=summary['unavailable'])
     print(json.dumps(out, indent=1, default=float))
 
