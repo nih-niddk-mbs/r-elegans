@@ -10909,3 +10909,43 @@ Local software checks (Mac CPU x64, 8 targets, 6 steps and 4 targets, 2 steps; n
 excited > 0.55, silent fraction among significant pairs < 50 %, substep convergence >= 0.9; negative if training
 improves but held-out does not. Claims not made: no locomotion, start/stop, swimming, trajectory or fidelity claim; the
 atlas fit may damage the E092-E099 components (not tested). Command: `sh scripts/launch_atlas_gradient_mbslnx2.sh 60`.
+
+### E101 result and post-run audit (user-reported server report output; not locally re-run)
+
+Run folder (server): `/home/carsonc/r-elegans-results/atlas-gradient-20261120T182817Z-664349` (one run record
+`20261120T182819118357Z-c5e2c870`; source revision/dirty state of that run not separately verified here).
+Execution: completed, stop reason deadline, 1096 steps in 55.4 min of the 60 min budget (about 3 s per step, both
+A100s, float64); no non-finite step; parent SHA-256 47a369a1...2482d matches the committed bundle and the run's parent
+copy; final and best-train-loss network hashes match summary.json.
+Selection: final and best-train-loss checkpoints kept (best loss 0.718 at step 1073); the loss uses a random 50 % of
+pairs per step, so best-by-loss is a noisy minibatch minimum; only the final checkpoint was evaluated on held-out
+animals; held-out never used for selection.
+Parameters: all 10,631 trainable entries changed; frozen-field changes 0/0/0; at the clip bounds (my own x10 and +/-2
+limits, not data-derived): 30 of 4,736 channel entries, 176 of 3,709 chemical, 84 of 2,186 gap; max changes equal the
+bounds (2.303, 2.0, 2.0), so some parameters are bound-limited.
+Signal: gradient norms (channel/chemical/gap) 0.0070/0.0217/0.0054 at step 0 and 0.103/0.079/0.0185 at the last step;
+random-half-pair training loss 0.985 -> 0.749 (pooled 0.003 -> 0.168, per-target 0.026 -> 0.333).
+Gates (single settling phase, all pairs; initial parent -> final):
+- held-out Spearman(mean z) 0.0458 -> 0.1138 (+0.068; criterion > +0.05 met); train 0.0203 -> 0.1431;
+- held-out AUC excited 0.522 -> 0.574 (> 0.55 met); train 0.521 -> 0.614; permutation p at the 500-permutation floor
+  (0.002) for both train and held-out;
+- model silent among significant held-out pairs 0.991 -> 0.965 (criterion < 0.5 NOT met); train 0.994 -> 0.946;
+- self-response fraction positive 0.852 -> 0.844;
+- substep-doubling (13 targets): correlation 0.937 (>= 0.9 met) but max |difference| / max |response| 0.516 (E100
+  parent: 0.0037): the trained responses depend strongly on the step size in amplitude, so magnitudes are not
+  numerically converged and the fit may partly exploit the discretization.
+Context (committed audit of the parent, held-out Spearman / AUC excited): direct gap 0.108/0.534, direct chemical
+0.079/0.526, two-step walks 0.096/0.568, three-step walks 0.090/0.560; data train-vs-test pair-mean ceiling 0.1515. The
+trained model (0.114/0.574) reaches the level of the best anatomy-only predictors, not above them.
+Interpretation and decision: the pre-declared component milestone (all four criteria) is NOT met because the silence
+criterion fails; two of four met plus convergence correlation. The loss is scale-free (Pearson), so it gives no
+incentive to raise response amplitude, and the silence criterion (|response| < 1e-6 indicator units) is not targeted by
+it; the parent's responses are tiny (local smoke check: median 7e-12, p99 1.7e-7). Held-out improved with a modest
+train-held-out gap, so there is no clear overfitting at 1096 steps; best loss occurred near the end, so training had
+not converged. Not shown: any locomotion, start/stop, swimming, trajectory or fidelity claim, retention of the
+E092-E099 rhythm/gait, a shuffled-label control, response-magnitude quantiles on the server (the report now prints
+them), or the held-out curve over steps (the report now prints it).
+Open: a second identical launch (`atlas-gradient-20261120T192810Z-667237`, PID 667646) was started at about 19:28 from
+the same parent/seed/config; it duplicates E101 and should be stopped or recorded as a reproducibility repeat.
+Next decisions: amplitude term (scalar gain from training pairs), numerically converged step size, data-derived
+bounds, continuation versus fresh start.
