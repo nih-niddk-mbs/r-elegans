@@ -23,7 +23,12 @@ def setup(inputs):
     if pathway:allowed=extend_pathway_upper(allowed,origin,pathway)
     parent,fixed,config=load_network(inputs/'motion_parent.npz');assert_fixed_equal(d['fixed'],fixed,d['config'],config)
     if np.any(origin<lower-1e-12) or np.any(origin>allowed+1e-12):raise ValueError('Motion parent exceeds explicit prior')
-    rebuilt=apply_joint_offsets(d['base'],origin-d['origin'],d['spec'])
+    lineage=inputs/'lineage_parent.npz'
+    if lineage.exists():
+        with np.load(inputs/'lineage_parent_coordinates.npz',allow_pickle=False) as z:lineage_origin=z['offsets']
+        lineage_params,lineage_fixed,lineage_config=load_network(lineage);assert_fixed_equal(d['fixed'],lineage_fixed,d['config'],lineage_config)
+        rebuilt=apply_joint_offsets(lineage_params,origin-lineage_origin,d['spec'])
+    else:rebuilt=apply_joint_offsets(d['base'],origin-d['origin'],d['spec'])
     if any(not np.array_equal(np.asarray(x),np.asarray(y)) for x,y in zip(rebuilt,parent)):raise ValueError('Motion parent reconstruction mismatch')
     def decode(x):
         if x.shape!=origin.shape or not np.isfinite(x).all() or np.any(x<lower-1e-12) or np.any(x>allowed+1e-12):raise ValueError('Motion candidate exceeds explicit prior')

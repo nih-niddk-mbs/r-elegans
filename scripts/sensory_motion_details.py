@@ -53,10 +53,10 @@ def analyze(run,out=None):
     if any(out==r or r in out.parents or out in r.parents for r in (run,repo)):raise ValueError('Separate external analysis output required')
     s=json.loads((run/'summary.json').read_text());audit_folder=run.with_name(run.name+'-audit')
     audit=json.loads((audit_folder/'summary.json').read_text());receipt=json.loads((run/'budget_receipt.json').read_text())
-    if s.get('experiment') not in ('E093','E094','E098') or not s.get('execution_valid') or not s.get('validation_complete') or not receipt.get('all_steps_finished') or not audit.get('integrity_passed') or not audit.get('audit_complete'):
+    if s.get('experiment') not in ('E093','E094','E098','E099') or not s.get('execution_valid') or not s.get('validation_complete') or not receipt.get('all_steps_finished') or not audit.get('integrity_passed') or not audit.get('audit_complete'):
         raise ValueError('Completed E093/E094/E098 with clean saved-data audit required')
     if len(s['panels'])!=1:raise ValueError('Unique motion panel required')
-    config=json.loads((run/'configuration.json').read_text());worst=bool(config.get('worst_region_term'));bilateral=bool(config.get('bilateral'));node_target=config.get('node_target');hop1=tuple(config.get('pathway_hop1') or ())
+    config=json.loads((run/'configuration.json').read_text());worst=bool(config.get('worst_region_term'));bilateral=bool(config.get('bilateral'));node_target=config.get('node_target');node_mode=config.get('node_mode','mean');hop1=tuple(config.get('pathway_hop1') or ())
     panel=s['panels'][0];folder=Path(panel['training_output']).resolve()
     if run not in folder.parents:raise ValueError('Selected model outside source run')
     out.mkdir(parents=True,exist_ok=False);capture_run_record(out,repo,dict(run=str(run),output_dir=str(out),method='saved-data-only'))
@@ -79,14 +79,14 @@ def analyze(run,out=None):
     with np.load(folder/'coordinates.npz',allow_pickle=False) as z:offsets,point=z['offsets'],z['z']
     cap_groups=load(run/'inputs/cap_groups.json');groups=cap_groups.get('pathway') or cap_groups['aiyr_2p5'];parent=load(run/'parent_features.json')
     initial=load(run/'evaluations/parent-redundant/summary.json');selected=load(folder/'summary.json')
-    target=s['target'];baseline_score=score(initial['paired_features'],parent,target,1.,worst,node_target)
-    selected_score=score(selected['paired_features'],parent,target,1.,worst,node_target)
+    target=s['target'];baseline_score=score(initial['paired_features'],parent,target,1.,worst,node_target,node_mode)
+    selected_score=score(selected['paired_features'],parent,target,1.,worst,node_target,node_mode)
     history=load(run/'generation_history.json') if (run/'generation_history.json').exists() else []
     progress=[]
     for entry in history:
         path=Path(entry['selected_evaluation']).resolve()
         if run not in path.parents:raise ValueError('History model outside source run')
-        r=load(path/'summary.json');m=score(r['paired_features'],parent,target,1.,worst,node_target)
+        r=load(path/'summary.json');m=score(r['paired_features'],parent,target,1.,worst,node_target,node_mode)
         progress.append(dict(generation=entry['generation'],checkpoint_sha256=r['checkpoint_sha256'],loss_at_final_target=m['loss'],
             minimum_regional_suppression_percent=float(100*(1-np.max(m['regional_motion_ratios'])))))
     from r_elegans.avb_audit import load_saved_network

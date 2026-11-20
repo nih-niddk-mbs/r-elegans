@@ -66,26 +66,71 @@ def prepare(source,out,experiment='E093',bilateral=False,pathway=False):
     return inputs,d,schemas,edge,sha,str(ap)
 
 
+def prepare_continuation(source,out,experiment='E099'):
+    """Continue from the audited E098 selected checkpoint; gait preservation stays anchored to the original E092 gait."""
+    from scripts.compare_rhythm_worker import verify_inputs
+    from scripts.report_relay_experiments import audit_path
+    from scripts.audit_rial_sensory import frozen_network_fields
+    from r_elegans.relay_cap_experiments import upper_for
+    s=json.loads((source/'summary.json').read_text());ap=audit_path(source)
+    audit=json.loads(ap.read_text());receipt=json.loads((source/'budget_receipt.json').read_text())
+    if s.get('experiment')!='E098' or not s.get('execution_valid') or not s.get('validation_complete') or not receipt.get('all_steps_finished'):raise ValueError('Completed E098 required')
+    if not audit.get('audit_complete') or not audit.get('integrity_passed') or audit.get('problems'):raise ValueError('Latest E098 audit must pass; no fallback')
+    if len(s['panels'])!=1:raise ValueError('Unique E098 panel required')
+    panel=s['panels'][0];row=panel['validation'][0];folder=Path(row['output']).resolve();sha=panel['checkpoint_sha256']
+    if source not in folder.parents or (row['variant'],row['grid'],row['mode'])!=('nominal','ordinary','normal') or row['checkpoint_sha256']!=sha or file_sha256(folder/'network.npz')!=sha:
+        raise ValueError('Invalid E098 selected model')
+    evidence=json.loads((ap.parent/'evidence.json').read_text());hashes={str(Path(e['path']).resolve()):e['sha256'] for e in evidence}
+    for name in ('network.npz','coordinates.npz','no_cue.npz'):
+        if hashes.get(str((folder/name).resolve()))!=file_sha256(folder/name):raise ValueError('Selected model differs from E098 audit evidence: '+name)
+    verify_inputs(source/'inputs');inputs=out/'inputs';shutil.copytree(source/'inputs',inputs)
+    manifest=json.loads((inputs/'manifest.json').read_text())
+    with np.load(source/'inputs/cap_prior.npz',allow_pickle=False) as z:old_origin,lower,upper,edge=z['origin'],z['lower'],z['upper'],int(z['edge'])
+    with np.load(folder/'coordinates.npz',allow_pickle=False) as z:origin=z['offsets']
+    if not frozen_network_fields(source/'inputs/motion_parent.npz',folder/'network.npz',origin!=old_origin):raise ValueError('E098 selected model changed frozen fields')
+    def place(name,path,note=None):
+        digest=file_sha256(path);shutil.copy2(path,inputs/name)
+        if file_sha256(inputs/name)!=digest or file_sha256(path)!=digest:raise ValueError('Source changed during copy')
+        manifest['sha256'][name]=digest;manifest['sources'][name]=note or str(path)
+    place('lineage_parent.npz',source/'inputs/motion_parent.npz');place('lineage_parent_coordinates.npz',source/'inputs/motion_parent_coordinates.npz')
+    place('anchor_parent_features.json',source/'parent_features.json','E098 anchor: original E092 parent no-cue features')
+    for name,path in (('motion_parent.npz',folder/'network.npz'),('motion_parent_coordinates.npz',folder/'coordinates.npz'),('motion_parent_summary.json',source/'summary.json'),
+            ('motion_parent_audit.json',ap),('motion_parent_audit_evidence.json',ap.parent/'evidence.json')):place(name,path)
+    reference=folder/'no_cue.npz';reference_sha=row['trajectory_sha256']['no_cue']
+    if file_sha256(reference)!=reference_sha:raise ValueError('Selected no-cue trace mismatch')
+    write(inputs/'sensory_reference.json',dict(path=str(reference),sha256=reference_sha))
+    np.savez_compressed(inputs/'cap_prior.npz',origin=origin,lower=lower,upper=upper,edge=edge)
+    for name in ('sensory_reference.json','cap_prior.npz'):
+        manifest['sha256'][name]=file_sha256(inputs/name);manifest['sources'][name]=str(reference) if name=='sensory_reference.json' else experiment+' E098 selected coordinates; original bounds and one-edge policy unchanged'
+    manifest['consumer_experiment']=experiment;write(inputs/'manifest.json',manifest)
+    d=setup(inputs)
+    if edge_coordinate(d['spec'],d['model'].neuron_ids)!=edge:raise ValueError('Prior exception edge changed')
+    schemas={'pathway':pathway_groups(d['spec'],d['model'].neuron_ids,origin,lower,upper_for('aiyr_2p5',upper,edge),inherited=edge)}
+    write(inputs/'cap_groups.json',schemas);manifest['sha256']['cap_groups.json']=file_sha256(inputs/'cap_groups.json')
+    manifest['sources']['cap_groups.json']=experiment+' pathway groups relative to the E098 checkpoint';write(inputs/'manifest.json',manifest);verify_inputs(inputs)
+    return inputs,d,schemas,edge,sha,str(ap)
+
+
 def main():
     import cma
     from importlib.metadata import version
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--source-run',type=Path,required=True);p.add_argument('--generation-limit',type=int)
-    p.add_argument('--profile',choices=('e093','e094','e098'),default='e093',help='e094: bilateral sensory/relay groups and worst-region loss term; e098: cue-to-RIA-to-motor pathway with a RIA node-level term')
+    p.add_argument('--profile',choices=('e093','e094','e098','e099'),default='e093',help='e094: bilateral sensory/relay groups and worst-region loss term; e098: cue-to-RIA-to-motor pathway with a RIA node-level term; e099: continuation of an E098 checkpoint with a weaker-side node term')
     a=p.parse_args();out=a.output_dir.resolve();source=a.source_run.resolve();repo=Path(__file__).resolve().parents[1]
-    experiment=a.profile.upper();bilateral=worst_region=a.profile in ('e094','e098');pathway=a.profile=='e098'
-    node_target=NODE_TARGET if pathway else None;seed=9800 if pathway else 9300;population=21 if pathway else 12;capname='pathway' if pathway else 'aiyr_2p5'
+    experiment=a.profile.upper();bilateral=worst_region=a.profile in ('e094','e098','e099');pathway=a.profile in ('e098','e099');continuation=a.profile=='e099'
+    node_target=NODE_TARGET if pathway else None;node_mode='min' if continuation else 'mean';seed=9900 if continuation else 9800 if pathway else 9300;population=21 if pathway else 12;capname='pathway' if pathway else 'aiyr_2p5'
     if any(out==r or r in out.parents or out in r.parents for r in (source,repo)):raise ValueError('External separate output required')
     if a.generation_limit is not None and a.generation_limit<1:p.error('Positive generation limit required')
     if version('cma')!='4.4.1':raise ValueError('Dedicated cma==4.4.1 required')
     capture_run_record(out,repo,a);deadline=json.loads((out/'deadline.json').read_text());finish=deadline['coordinator_finish_by'];fit_until=finish-(30 if pathway else 70)*60
-    inputs,d,schemas,edge,parent_sha,source_audit=prepare(source,out,experiment,bilateral,pathway)
+    inputs,d,schemas,edge,parent_sha,source_audit=prepare_continuation(source,out,experiment) if continuation else prepare(source,out,experiment,bilateral,pathway)
     from scripts.benchmark_cpu import physical_core_cpus
     from scripts.benchmark_cpu_parallel import worker_cpu_groups
     cpus,known=physical_core_cpus(sorted(os.sched_getaffinity(0)))
     if not known or len(cpus)<16:raise ValueError('Known topology and >=16physical cores required')
     workers=min(21,len(cpus)//4) if pathway else 8 if len(cpus)>=32 else 4;cpugroups=worker_cpu_groups(cpus,workers,4)
     hop1=hop1_with_edges(d['spec'],d['model'].neuron_ids) if pathway else None
-    write(out/'configuration.json',dict(experiment=experiment,bilateral=bilateral,worst_region_term=worst_region,pathway=pathway,node_target=node_target,pathway_hop1=hop1,parent_sha256=parent_sha,parent_filename='motion_parent.npz',
+    write(out/'configuration.json',dict(experiment=experiment,bilateral=bilateral,worst_region_term=worst_region,pathway=pathway,continuation=continuation,node_target=node_target,node_mode=node_mode,pathway_hop1=hop1,parent_sha256=parent_sha,parent_filename='motion_parent.npz',
         source_audit=source_audit,only_extended_coordinate=edge,caps={'aiyr_2p5':2.5},seed=seed,workers=workers,cpu_groups=cpugroups,
         population=population,rungs=RUNGS,training_variant='redundant',initial_sigma=.3,training_margin=1.05,
         prior='Same E092 exception: only AIYR->AIYL original upper factor2 becomes2.5; all other bounds fixed',
@@ -99,7 +144,7 @@ def main():
     def job(z,label,until,variant='redundant',grid='ordinary',mode='normal',retain=False,reference=False,kind='fit',target=None):
         return dict(z=list(map(float,z)),output=str(out/'evaluations'/label),cap=capname,kind=kind,objective='sensory-motion',
             until=until,variant=variant,grid=grid,mode=mode,retain_traces=retain,reference=reference,bilateral=bilateral,worst_region=worst_region,
-            **(dict(node_target=node_target,pathway_hop1=hop1) if pathway else {}),
+            **(dict(node_target=node_target,pathway_hop1=hop1,node_mode=node_mode) if pathway else {}),
             target=RUNGS[stage] if target is None else target,margin=1. if kind=='final' else 1.05,parent_features=parent)
     def batch(pool,jobs,phase):
         futures={pool.submit(evaluate,j):j for j in jobs};results={};last=time.monotonic()
@@ -119,7 +164,9 @@ def main():
         try:
             baseline=batch(pool,[job(zero,'parent',fit_until,variant='nominal',retain=True,reference=True,kind='reference')],'parent-reference')[0]
             if baseline['status']!='completed' or baseline['checkpoint_sha256']!=parent_sha:raise ValueError('Pinned parent reproduction failed')
-            parent=baseline['paired_features']['no_cue'];write(out/'parent_features.json',parent)
+            parent=baseline['paired_features']['no_cue']
+            if continuation:parent=json.loads((inputs/'anchor_parent_features.json').read_text())
+            write(out/'parent_features.json',parent)
             best=batch(pool,[job(zero,'parent-redundant',fit_until,retain=True,kind='reference')],'parent-redundant')[0]
             if not eligible(best) or not best['metrics']['relay_component_preserved']:raise ValueError('Parent movement or relay preservation failed')
             while time.monotonic()<fit_until and (a.generation_limit is None or generation<a.generation_limit):
@@ -127,7 +174,7 @@ def main():
                 points=es.ask();pending=[list(map(float,x)) for x in points]
                 optimizer_snapshot(out/'optimizer'/name/f'g-{generation:05d}-asked',es,stage,generation,pending)
                 rows=batch(pool,[job(z,f'g-{generation:05d}-c-{i:02d}',fit_until) for i,z in enumerate(points)],'optimization')
-                current=score(best['paired_features'],parent,RUNGS[stage],1.05,worst_region,node_target)['loss']
+                current=score(best['paired_features'],parent,RUNGS[stage],1.05,worst_region,node_target,node_mode)['loss']
                 for z,r in zip(points,rows):
                     if eligible(r) and r['metrics']['relay_component_preserved'] and r['metrics']['loss']<current:
                         best=r;zbest=np.asarray(z).copy();current=r['metrics']['loss']
@@ -137,7 +184,7 @@ def main():
                     stop='search_time_budget' if all(r['status'] not in ('disk_budget','worker_error') for r in rows) else 'evaluation_failure';break
                 es.tell(points,[r['metrics']['loss'] if r['status']=='completed' else 1e6 for r in rows]);pending=None
                 optimizer_snapshot(out/'optimizer'/name/f'g-{generation:05d}-told',es,stage,generation);generation+=1
-                m=score(best['paired_features'],parent,RUNGS[stage],1.05,worst_region,node_target)
+                m=score(best['paired_features'],parent,RUNGS[stage],1.05,worst_region,node_target,node_mode)
                 history.append(dict(generation=generation,target=RUNGS[stage],selected=best['checkpoint_sha256'],selected_evaluation=best['output'],rescored_loss=m['loss']))
                 write(out/'generation_history.json',history)
                 advance=m['training_margin_met'] and stage<len(RUNGS)-1

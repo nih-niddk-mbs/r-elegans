@@ -49,7 +49,8 @@ def edge_coordinate(spec, ids, pre, post):
     return int(np.count_nonzero(spec.channels)) + int(ix[0])
 
 
-def pathway_groups(spec, ids, origin, lower, upper):
+def pathway_groups(spec, ids, origin, lower, upper, inherited=None):
+    """inherited=None skips any edge already above the original prior; a coordinate skips only that one, so a continuation can train edges widened earlier."""
     groups = []
     ci = np.nonzero(spec.channels)
 
@@ -65,9 +66,11 @@ def pathway_groups(spec, ids, origin, lower, upper):
             groups.append(dict(name=name, indices=ix.tolist(), lower=min(lo, 0.), upper=max(hi, 0.)))
     for pre, post in pathway_edges(spec, ids):
         c = edge_coordinate(spec, ids, pre, post)
-        if origin[c] > upper[c] + 1e-10 or origin[c] < lower[c] - 1e-10:
-            # Inherited exceptions (E092) stay frozen rather than becoming trainable.
+        if c == inherited or (inherited is None and (origin[c] > upper[c] + 1e-10 or origin[c] < lower[c] - 1e-10)):
+            # The inherited E092 exception stays frozen rather than becoming trainable.
             continue
+        if origin[c] < lower[c] - 1e-10:
+            raise ValueError('Parent below the original lower bound')
         down = min(float(origin[c] - lower[c]), float(np.log(MAX_FACTOR)))
         groups.append(dict(name=f'chemical:{pre}->{post}', indices=[c], lower=-max(down, 0.), upper=float(np.log(MAX_FACTOR)), widened=True))
     for name in DENSITY_NEURONS:

@@ -10506,3 +10506,31 @@ Decision: no new training launched; the checkpoint is retained as an independent
 parent.
 
 
+
+## E099 - Continued pathway training from the E098 checkpoint (PLANNED 2026-11-19; not executed)
+
+Question: can further joint training of the same cue-to-RIA-to-motor pathway,
+with up to 4x more edge headroom above the E098 checkpoint and a weaker-side
+(bilateral) RIA node term, raise the weakest-region (tail) cue-driven
+suppression from 0.53 % to >= 1 % with baseline gait, recovery and relay
+behavior preserved?
+
+Basis: E098 details (search stalled at 0.49 % for generations 18-24; solution
+right-sided: RIAR +0.021 vs RIAL +0.0055 against a 0.02 node target; several
+edges near their widened caps).
+
+Method: fresh CMA-ES (not an exact optimizer/RNG resume) from the audited E098
+selected checkpoint (SHA-256 95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b),
+same 53 pathway groups recentered on it, edges up to 4x above the checkpoint
+(explicit engineering prior, not biology), densities inside the original prior,
+gait/recovery preservation anchored to the E092 parent, loss = E098 loss with
+weaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaketotweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweak21weaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweatiweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweake
+
+
+eaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eaker-siweaker-siwn aeaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eake/1eaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eaktieaker-siweaker-siweaker-siweakmuseaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-siweaker-ns eakereckpoint's distance from
+it is not evidenced here); the continuation setup is tested locally
+(7 software tests) but not on a real run.
+
+Local verification: new tests/test_pathLocal verification: new tests/test_pathLocal verification: new tests/test_pathtwLocal verification: new tests/test_pathLocal verification: new tests/test_pa_wall_budget` watchdog descendant
+cleanup, a process-timing test unrelated to this change; not investigated).
+Claims not made: no biological, initiation, start/stop or swimming claim.

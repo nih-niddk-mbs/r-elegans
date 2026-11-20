@@ -42,7 +42,7 @@ def evaluate(job):
     if motion_objective:
         from r_elegans.sensory_motion import features as motion_features,score as motion_score,combine_replays
         def score(paired,parent,target,margin=1.):
-            return motion_score(paired,parent,target,margin,worst_region=bool(job.get('worst_region')),node_target=job.get('node_target'))
+            return motion_score(paired,parent,target,margin,worst_region=bool(job.get('worst_region')),node_target=job.get('node_target'),node_mode=job.get('node_mode','mean'))
     if release_objective:
         from r_elegans.rial_release import features as release_features,score
     if relay_objective:

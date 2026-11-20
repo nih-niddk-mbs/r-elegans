@@ -1,0 +1,28 @@
+{
+ "experiment": "E099",
+ "record_date": "2026-11-19",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "Starting from the audited E098 selected checkpoint, can further joint training of the same cue-to-RIA-to-motor pathway, with more edge headroom and a weaker-side (bilateral) RIA node term, raise the weakest-region (tail) cue-driven suppression from 0.53 % to at least 1 % with baseline gait, recovery and relay behavior preserved?",
+ "motivation": "E098 details: the search stalled for generations 18-24 at 0.49 % weakest-region suppression; the solution is right-sided (RIAR +0.021 vs RIAL +0.0055 release change); AWAR->AIZR sits at 3.9 % below its widened 4x cap; ADFR->RIAR and AIBR->RIAL are at x2.8 and x2.7 with ~0.35-0.38 log room. The calibrated need (about 0.014 mean RIA release change) was met on average but not on both sides.",
+ "method": "Fresh CMA-ES (not an exact optimizer or RNG resume) from the pinned E098 selected checkpoint, population 21, sigma 0.3 in the grouped latent space, seed 9900, restarts at the incumbent (sigma 0.15) on rung advance, optimizer stop or every 8 generations. Same redundant two-cue protocol, rungs, training margin 1.05 and 11-case validation as E098.",
+ "source_run": "/home/carsonc/r-elegans-results/pathway-training-20261119T143748Z-561835",
+ "parent": "E098 selected checkpoint 95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b (audited, integrity passed); verified at runtime against the E098 audit evidence and copied with its coordinates and no-cue reference trace. The E092 lineage parent is kept so the worker can rebuild the checkpoint exactly.",
+ "parent_checkpoint_sha256": "95097d5be6adddb605515ea6509092fdccf819bde253bafa4738937652e8248b",
+ "gait_anchor": "Baseline/recovery preservation stays anchored to the original E092 parent's no-cue features (copied from the E098 run), not to the E098 checkpoint, so drift cannot compound beyond the original +/-10 % tolerances. The E098 checkpoint's own distance from that anchor is not known from the pasted output and could constrain the search.",
+ "trainable": "The same 53 pathway groups as E098 defined relative to the E098 checkpoint: 37 single chemical edges and 16 channel-density groups (inward/outward for AIZL, AIZR, RIAL, RIAR and the four SMD cells). Edges already above the original bound (AWAR->AIZR, AIZR->RIAR, ADFR->RIAR, AIBR->RIAL) are trainable; the inherited AIYR->AIYL exception stays frozen.",
+ "fixed": "All other densities/strengths/gaps, topology/signs, reversals, leak, kinetics, release law, sensory gains, NMJ/muscle/body/water physics and physical clocks.",
+ "bounds": "Each pathway edge may rise up to 4x above the E098 checkpoint (up to about 16x the E092 parent; explicit engineering prior, not biology; lower bound the smaller of the original lower bound and 4x below the checkpoint); densities inside the original prior with the usual +/-0.4 log local box recentered at the checkpoint. Nothing admitted as a global standard.",
+ "objective": "E094 worst-region motion loss plus a node-level term on the weaker side: squared deficit of min(mean RIAL release change, mean RIAR release change) below 0.02, plus 100 x the RIA headroom penalty (q01 >= 0.02, q99 <= 0.98). Baseline gait, recovery and AIYL relay preservation unchanged.",
+ "final_validation": "Eleven cases as E098, with the same hop-1-to-RIA and RIA-to-SMD/RMD replay diagnostics.",
+ "command": "sh scripts/launch_pathway_continuation_mbslnx2.sh [total minutes, default 180]",
+ "report": "python -m scripts.report_sensory_motion --run <E099 run folder>",
+ "budget": {"total_minutes_default": 180, "audit_reserve_minutes": 20, "validation_reserve_minutes": 30, "expected_generations": "about 15 at ~8 min each", "workers": "21 x 4 physical cores (84 of 128 server CPUs)"},
+ "acceptance_criteria": {
+  "success": "Selected checkpoint passes all 11 validation cases at a rung >= 1 % with all regions reduced, safe, baseline/recovery and relay preserved, sensory-block control, neural/body half-grid agreement and both dependence replays, with a clean automatic audit.",
+  "partial": "Report the tail/middle/head reduction against E098 (0.53/1.20/1.43 %), the per-side RIA release changes against 0.02, and whether the weakest region improved; a checkpoint that improves but misses the gate is a negative result for the gate question and is kept as an independent checkpoint.",
+  "negative": "No improvement over E098 or failed validation. Failed outcomes and all checkpoints are retained."
+ },
+ "risks": "Only about 15 generations; the late E098 plateau may recur; the weaker-side term asks RIAL to rise to about +0.02 from +0.0055; the E092 gait anchor may be tight; the first-wave compile adds several minutes; the new continuation setup (lineage reconstruction, anchored features) was tested locally but not on a real run.",
+ "audit": "scripts.audit_relay_experiments runs automatically with continuation-aware group reconstruction, widened-bound accounting, node features and scores in weaker-side mode, and frozen-field and coordinate checks against the E098 parent.",
+ "claims_not_made": "No biological claim, no initial sensory initiation, full start/stop or swimming claim. A pass would be an engineering component under an explicit widened prior."
+}

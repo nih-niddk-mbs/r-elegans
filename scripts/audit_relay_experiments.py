@@ -38,7 +38,7 @@ def audit(run,out):
     def verify(path,sha):
         actual=file_sha256(path);check(actual==sha,'Hash mismatch: '+str(path))
         evidence.append(dict(path=str(path),sha256=actual,expected=sha))
-    s=json.loads((run/'summary.json').read_text());motion=s.get('experiment') in ('E093','E094','E098');config=json.loads((run/'configuration.json').read_text())
+    s=json.loads((run/'summary.json').read_text());motion=s.get('experiment') in ('E093','E094','E098','E099');config=json.loads((run/'configuration.json').read_text())
     manifest=json.loads((run/'inputs/manifest.json').read_text())
     for name,sha in manifest['sha256'].items():verify(run/'inputs'/name,sha)
     ref=json.loads((run/'inputs/sensory_reference.json').read_text());verify(Path(ref['path']),ref['sha256'])
@@ -66,7 +66,7 @@ def audit(run,out):
         if cap!='pathway':return upper_for(cap,upper,edge)
         return extend_pathway_upper(upper_for('aiyr_2p5',upper,edge),origin,schemas['pathway'])
     for cap in schemas:
-        expected_groups=pathway_groups(spec,ids,origin,lower,upper_for('aiyr_2p5',upper,edge)) if cap=='pathway' else (parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge),bilateral=bool(config.get('bilateral'))) if motion else parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge)))
+        expected_groups=pathway_groups(spec,ids,origin,lower,upper_for('aiyr_2p5',upper,edge),**(dict(inherited=edge) if config.get('continuation') else {})) if cap=='pathway' else (parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge),bilateral=bool(config.get('bilateral'))) if motion else parameter_groups(spec,ids,origin,lower,upper_for(cap,upper,edge)))
         check(schemas[cap]==expected_groups,'Unexpected group policy: '+cap)
     node_names=('RIAL','RIAR');nodes={n:(float(threshold[ids.index(n)]),float(slope[ids.index(n)])) for n in node_names} if config.get('node_target') else None
     parent_features=json.loads((run/'parent_features.json').read_text());saved={}
@@ -100,7 +100,7 @@ def audit(run,out):
                 check(set(hashes)==(expected_conditions if j['retain_traces'] else set()),'Raw retention policy mismatch: '+folder.name)
                 for key,value in paired.items():check(close(value,r['paired_features'][key]),'Raw features mismatch: '+folder.name+'/'+key)
                 metrics=score(r['paired_features'],j.get('parent_features') or r['paired_features']['no_cue'],j['target'],j['margin'],
-                    **(dict(worst_region=bool(j.get('worst_region')),node_target=j.get('node_target')) if motion else dict(response_aggregation=j['response_aggregation'])))
+                    **(dict(worst_region=bool(j.get('worst_region')),node_target=j.get('node_target'),node_mode=j.get('node_mode','mean')) if motion else dict(response_aggregation=j['response_aggregation'])))
                 check(close(metrics,r['metrics']),'Recorded score mismatch: '+folder.name)
                 if motion and j['mode'] in ('relay-replay','rial-replay'):
                     counter=score(dict(no_cue=r['paired_features']['no_cue_replay'],cue=r['paired_features']['cue_replay']),
