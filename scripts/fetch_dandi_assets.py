@@ -3,15 +3,29 @@ import argparse
 import hashlib
 import json
 import sys
+import time
 import urllib.request
 from pathlib import Path
 
 API = 'https://api.dandiarchive.org/api'
 
 
+def retry(action, attempts=6):
+    for attempt in range(attempts):
+        try:
+            return action()
+        except Exception as error:
+            print('retry', attempt + 1, error, file=sys.stderr, flush=True)
+            if attempt == attempts - 1:
+                raise
+            time.sleep(5 * (attempt + 1))
+
+
 def get_json(url):
-    with urllib.request.urlopen(url, timeout=60) as response:
-        return json.load(response)
+    def fetch():
+        with urllib.request.urlopen(url, timeout=60) as response:
+            return json.load(response)
+    return retry(fetch)
 
 
 def sha256(path):
@@ -49,7 +63,7 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         if not (target.exists() and target.stat().st_size == a['size']):
             part = target.with_name(target.name + '.part')
-            urllib.request.urlretrieve(f"{API}/assets/{a['asset_id']}/download/", part)
+            retry(lambda: urllib.request.urlretrieve(f"{API}/assets/{a['asset_id']}/download/", part))
             part.rename(target)
         digest_ok = target.stat().st_size == a['size']
         actual = sha256(target)
