@@ -10616,3 +10616,52 @@ repetition of the same configuration. The checkpoint is retained as an
 independent parent (not a start/stop parent). Candidate next steps, none yet
 planned: drop or right-restrict the node term; or change the control route
 (command-drive dose-response for an off-default state; RIS-like stop path).
+
+## 2026-11-19 — Extrasynaptic (neuropeptide) signaling: data acquisition and candidate set (data/design; no training run)
+
+Rationale: Randi et al. 2023 (Nature, 10.1038/s41586-023-06683-4) report that evoked
+signal propagation differs from anatomy-based predictions and that extrasynaptic,
+dense-core-vesicle-dependent signaling contributes (abstract verified via DANDI
+001075 metadata). The current model has only Cook-connectome synapses and gap
+junctions, so peptide-mediated responses cannot be fit without a model extension.
+User decision 2026-11-19: include this signaling.
+
+Data fetched on the Mac (user-directed, verified where a checksum is published):
+- Randi atlas, OSF `e2syt` processed exports (exported_data, _unc31, _full tarballs
+  md5-verified; raw_extracted_data text files in progress on the server run).
+- DANDI 001075 `desc-segmentation` files only (110 files, 1.70 GB; traces, labels,
+  stimulus tables; DANDI gives no SHA-256, size-only check plus our own SHA-256 in
+  `download_manifest.json`). The raw imaging files (4.07 TB) were not downloaded.
+- Zenodo: Dag 2023 (19414639), NeuroPAL (3906530), Atanas & Kim summary files
+  (19388374 subset); CeNGEN thresholded expression tables and counts. md5 verified.
+- Supplementary tables of Ripoll-Sanchez 2023 (Neuron, 10.1016/j.neuron.2023.09.043)
+  and Beets 2023 (Cell Reports, 10.1016/j.celrep.2023.113058), copied from the
+  user's Zotero storage (user-supplied; no publisher checksum). SHA-256 list in
+  `raw/neuropeptides/SHA256SUMS`.
+- Not found/not downloaded: Kato 2015 and Nichols 2017 data, Uzel 2022, motor-neuron
+  electrophysiology, the authors' finished peptide adjacency matrices (the
+  supplements hold only the ingredients), other DANDI dandisets (000981, 001623,
+  000692, 000541, 000565, 000776), and the 2025 Lu-lab and Chitturi datasets.
+
+Candidate set (`scripts/build_peptide_candidates.py`, local computation on the
+supplement tables; summary in `experiments/records/extrasynaptic_candidates_v1_summary.json`):
+sender expresses a peptide precursor (CeNGEN), receiver expresses a GPCR with a
+Beets EC50 <= 500 nM for that peptide. Beets gives 461 EC50 rows (68 receptors,
+153 peptides); 269 peptide-receptor pairs pass the cutoff. At CeNGEN threshold 2
+(medium) 87,018 of 91,204 neuron pairs (95 %) have at least one candidate
+peptide-receptor pair (median 15 pairs per edge); thresholds 1/3/4 give
+89,715 / 72,016 / 53,395. Gaps: five precursor genes absent from CeNGEN
+(nlp-37, nlp-44, nlp-54, nlp-72, nlp-75), two peptides without a precursor
+(NLP-73-4, SNET-1-1), AWCL/AWCR assigned by union of AWC_ON/AWC_OFF, dorsal/ventral
+and shared CeNGEN classes (VD_DD, RMD_DV/LR, RME_DV/LR, VC_4_5) mapped by rule.
+No sign, strength, range or time constant has been inferred.
+
+Consequence for design (planned, not implemented): the candidate graph is
+essentially dense, so a per-neuron-pair parameterization would be unconstrained.
+Plan to parameterize at the peptide-receptor pair level (269 gains, bounded, with
+EC50-derived priors), with neuron-pair coupling following from quantitative
+expression of sender precursor and receiver receptor, a slow time constant per
+pair, and a switch that disables the term. Fit the wild-type minus unc-31
+difference to the peptide-dependent part; hold out animals and stimulated neurons.
+Receptor coupling sign and range (short/mid) are open items. Needs a recorded
+plan and user approval before model changes.

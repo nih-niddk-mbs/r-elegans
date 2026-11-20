@@ -1,0 +1,95 @@
+{
+ "ec50_rows": 461,
+ "peptides_without_precursor": [
+  "NLP-73-4",
+  "SNET-1-1"
+ ],
+ "receptors_unmapped": [],
+ "pairs_within_cutoff": 269,
+ "thresholds": {
+  "1": {
+   "candidate_neuron_pairs": 89715,
+   "senders": 302,
+   "receivers": 302,
+   "self_pairs": 298,
+   "median_pairs_per_edge": 29.0,
+   "neurons_without_class": [],
+   "cengen_classes_unused": [],
+   "ambiguous_neurons": [
+    "AWCL",
+    "AWCR"
+   ],
+   "precursor_genes_missing_in_cengen": [
+    "nlp-37",
+    "nlp-44",
+    "nlp-54",
+    "nlp-72",
+    "nlp-75"
+   ],
+   "receptor_genes_missing_in_cengen": []
+  },
+  "2": {
+   "candidate_neuron_pairs": 87018,
+   "senders": 302,
+   "receivers": 302,
+   "self_pairs": 287,
+   "median_pairs_per_edge": 15.0,
+   "neurons_without_class": [],
+   "cengen_classes_unused": [],
+   "ambiguous_neurons": [
+    "AWCL",
+    "AWCR"
+   ],
+   "precursor_genes_missing_in_cengen": [
+    "nlp-37",
+    "nlp-44",
+    "nlp-54",
+    "nlp-72",
+    "nlp-75"
+   ],
+   "receptor_genes_missing_in_cengen": []
+  },
+  "3": {
+   "candidate_neuron_pairs": 72016,
+   "senders": 302,
+   "receivers": 302,
+   "self_pairs": 240,
+   "median_pairs_per_edge": 9.0,
+   "neurons_without_class": [],
+   "cengen_classes_unused": [],
+   "ambiguous_neurons": [
+    "AWCL",
+    "AWCR"
+   ],
+   "precursor_genes_missing_in_cengen": [
+    "nlp-37",
+    "nlp-44",
+    "nlp-54",
+    "nlp-72",
+    "nlp-75"
+   ],
+   "receptor_genes_missing_in_cengen": []
+  },
+  "4": {
+   "candidate_neuron_pairs": 53395,
+   "senders": 298,
+   "receivers": 292,
+   "self_pairs": 171,
+   "median_pairs_per_edge": 6.0,
+   "neurons_without_class": [],
+   "cengen_classes_unused": [],
+   "ambiguous_neurons": [
+    "AWCL",
+    "AWCR"
+   ],
+   "precursor_genes_missing_in_cengen": [
+    "nlp-37",
+    "nlp-44",
+    "nlp-54",
+    "nlp-72",
+    "nlp-75"
+   ],
+   "receptor_genes_missing_in_cengen": []
+  }
+ }
+}
