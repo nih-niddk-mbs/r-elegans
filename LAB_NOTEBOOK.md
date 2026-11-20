@@ -10886,3 +10886,26 @@ that training lowers held-out calcium error, and nothing about locomotion or bio
 Decision: working batch 256 windows per optimizer step (8.9 s per gradient, 65 % of saturated throughput); 512 is
 available (15 s, 77 %). Unmeasured: gradient quality for windows longer than 32 frames, multi-animal batches with
 different observed sets, and body/behavior tasks (which cost more per step).
+
+## E101 - Gradient fit to the Randi atlas (PLANNED 2026-11-20; not executed)
+
+Design finding that shaped this: a deterministic autonomous network started from one settled state gives the same
+trajectory for every window, so it cannot be fit to window-specific spontaneous calcium traces by gradient (the
+optimum is the average window). Spontaneous traces need an explicit, recorded input or data-assimilated start; that
+stage (and the on/off and swim stages) is deferred. The atlas task is input-driven (known stimulated neuron), so
+distinct windows are distinct stimuli and a gradient fit is well posed.
+Question: do gradient-trained channel densities and synapse strengths raise held-out agreement with the atlas beyond
+the unchanged parent? Parent: committed `mac_rhythm_v1_polarized` (SHA-256 47a369a1...2482d; the E099 server checkpoint
+is not yet audited/polarized). Trainable: channel densities of non-RMD cells (4,736), all anatomical chemical (3,709)
+and gap (2,186) magnitudes; fixed: topology, edge sign/reversal, kinetics, capacitance, release fields, RMD, LEAK,
+stimulus conductance 0.01118 nS (E100 train-selected). Loss: 1 - (pooled + mean per-target Pearson)/2 against
+training-animal pooled mean z, random 50 % of pairs per step; Adam lr 0.005; clip bounds x10 channels, +/-2 edges;
+batch = all 135 targets across both GPUs; seed 0; 60 min wall budget, 5 min final reserve. Held-out animals evaluated
+only. Plan record: `experiments/records/E101-plan.json`. Trainer `scripts/train_atlas_gradient.py`, launcher
+`scripts/launch_atlas_gradient_mbslnx2.sh`, report `scripts/report_atlas_gradient.py`.
+Local software checks (Mac CPU x64, 8 targets, 6 steps and 4 targets, 2 steps; not a result): runs end to end, loss
+1.056 -> 1.016, all gradients finite, frozen-field changes 0, outputs and report written; 3 unit tests pass
+(`tests/test_train_atlas_gradient.py`). Acceptance: held-out Spearman above the step-0 parent value by > 0.05, AUC
+excited > 0.55, silent fraction among significant pairs < 50 %, substep convergence >= 0.9; negative if training
+improves but held-out does not. Claims not made: no locomotion, start/stop, swimming, trajectory or fidelity claim; the
+atlas fit may damage the E092-E099 components (not tested). Command: `sh scripts/launch_atlas_gradient_mbslnx2.sh 60`.

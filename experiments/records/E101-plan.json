@@ -1,0 +1,24 @@
+{
+ "experiment": "E101",
+ "record_date": "2026-11-20",
+ "status": "planned_server_execution_not_evidenced",
+ "question": "Can gradient descent on all unknown channel densities and synapse strengths (anatomy, sign and reversal fixed) raise the agreement between simulated single-neuron stimulation responses and the Randi et al. 2023 atlas on held-out animals, beyond the unchanged parent?",
+ "motivation": "Stage A of the gradient regimen (user request 2026-11-20): population-level calcium-response structure first, then on/off control, then swim/wiggle amplitude and frequency, then sensory cues. Gradients through the network were verified finite and consistent with finite differences, and batched windows run fast on the two A100s (notebook, 2026-11-20 benchmark). E100 showed the unchanged checkpoint is nearly silent on significant pairs, so there is room to improve.",
+ "method": "Each optimizer step settles the network (every 10 steps, 60 s, stop-gradient), simulates a 0.5 s added membrane conductance (reversal 0 mV, E100 train-selected 0.01118 nS) on every named atlas target (E100 windows: 12 s recording, response = mean (stimulated - control) indicator over 1.5-11.5 s), and minimizes 1 - (pooled Pearson + mean per-target Pearson)/2 between the response and the training-animal pooled mean z (clipped to +/-5) on a random 50 % of training pairs. Adam (lr 0.005, global-norm clip 1), prior 0.001 x mean squared change from the parent, channel densities within a factor 10 of the parent and edge strengths within +/-2 raw units. Batch = all targets (sharded across both GPUs). Held-out animals (E100 split, every third subject) are evaluated every 25 steps and at the end; never used to select or stop.",
+ "parent_checkpoint": "r_elegans/assets/mac_rhythm_v1_polarized/network.npz, SHA-256 47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d (mac_rhythm_v1 with only the synapse reversal field replaced by the data-based edge polarity). Not the E099 server checkpoint (not yet audited or polarized).",
+ "trainable": "Channel densities of all neurons except the six RMD cells, LEAK excluded (4,736 entries); every anatomical chemical edge magnitude (3,709); every anatomical gap edge (2,186 independent). Verified by frozen_parameter_changes at the end.",
+ "fixed": "Topology, edge sign/reversal, channel kinetics and reversals, capacitance, calcium handling, release thresholds/slopes, bias, initial voltage, indicator constants, stimulus conductance, RMD profiles, LEAK.",
+ "data": "raw/functional/randi2023_dandi001075_segmentation on the server (110 animals, 650 successful trials, 135 targets, 6,312 training pairs, 2,950 held-out pairs, as in E100).",
+ "seed": 0,
+ "command": "sh scripts/launch_atlas_gradient_mbslnx2.sh 60",
+ "report": "python -m scripts.report_atlas_gradient --run <run folder>",
+ "budget": {"total_minutes": 60, "final_reserve_minutes": 5, "note": "Wall budget includes data loading and the final evaluation; training stops at the deadline or earlier only on a non-finite loss or gradient."},
+ "acceptance_criteria": {
+  "component_milestone": "Held-out phase-single-settle Spearman(mean z) above the parent's at step 0 by more than 0.05, held-out AUC for excited pairs above 0.55, model silent on fewer than 50 % of significant held-out pairs, substep-doubling correlation >= 0.9.",
+  "negative": "Training correlation rises but held-out metrics do not (overfitting to training animals), or training correlation does not rise.",
+  "failure": "Non-finite loss/gradient, a frozen field changed, or a convergence correlation below 0.9 (metrics unreliable)."
+ },
+ "risks": "Responses are near zero for the parent (loss is scale-free so gradients exist, but landscape is flat); about 10.6k free parameters against 6.3k training pairs (overfitting; mitigated by clip bounds, prior, pair subsampling, held-out evaluation); stop-gradient settle; a single settling phase (intrinsic oscillators make differences phase-dependent); one fixed stimulus strength; the indicator is a Hill function; the loss does not target self-responses, amplitude calibration, trajectories or behavior; an atlas fit may damage the E092-E099 rhythm and gait components, which this run does not test.",
+ "audit": "After the run: parent hash vs the committed bundle, devices used, stop reason and elapsed time, gradient norms and finiteness over the run, parameter-change counts and clip-bound pile-up, frozen-field change counts, initial vs final train and held-out metrics, substep convergence, run_records, artifact hashes; unavailable evidence is stated explicitly.",
+ "claims_not_made": "No locomotion, start/stop control, swimming or biological-fidelity claim; no trajectory-level calcium match."
+}
