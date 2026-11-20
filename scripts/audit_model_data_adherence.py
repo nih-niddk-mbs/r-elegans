@@ -76,6 +76,20 @@ def reversal_category(value):
 
 
 def s2_polarity(root, fixed, chemical):
+    from r_elegans.data.synapse_polarity import edge_polarity
+    reversal = np.asarray(fixed.synapse_reversal_mV)
+    per_edge = np.broadcast_to(reversal[None, :], chemical.shape) if reversal.ndim == 1 else reversal
+    sign, source, conflict, _ = edge_polarity(root / 'raw/neurotransmitters/synaptic_polarity_2020', NEURONS, chemical > 0)
+    edges = chemical > 0
+    category = np.where(per_edge > -40, 1, np.where(per_edge < -60, -1, 0))
+    determined = edges & (sign != 0)
+    agree = determined & (category == sign)
+    per_edge_result = dict(model_edges=int(edges.sum()), determined_edges=int(determined.sum()), determined_weight_fraction=float(chemical[determined].sum() / chemical.sum()),
+                           agree_edges=int(agree.sum()), disagree_edges=int((determined & ~agree).sum()),
+                           disagree_weight_fraction_of_determined=float(chemical[determined & ~agree].sum() / max(chemical[determined].sum(), 1e-30)),
+                           sign_conflicts_between_prediction_methods=int((conflict & edges).sum()), undetermined_edges=int((edges & (sign == 0)).sum()))
+    if reversal.ndim == 2:
+        return dict(per_edge_vs_fenyves2020=per_edge_result, per_neuron_vs_wang='not applicable (per-edge reversal matrix)')
     labels = parse_wang_neurotransmitter_workbook(root=root)
     table, weighted = Counter(), Counter()
     outgoing = chemical.sum(axis=0)
@@ -85,7 +99,7 @@ def s2_polarity(root, fixed, chemical):
         category = reversal_category(float(fixed.synapse_reversal_mV[i]))
         table[(label, category)] += 1
         weighted[(label, category)] += float(outgoing[i])
-    return dict(counts={f'{k[0]} | {k[1]}': v for k, v in sorted(table.items())},
+    return dict(per_edge_vs_fenyves2020=per_edge_result, counts={f'{k[0]} | {k[1]}': v for k, v in sorted(table.items())},
                 outgoing_weight={f'{k[0]} | {k[1]}': round(v, 4) for k, v in sorted(weighted.items())},
                 gaba_only_not_inhibitory=sum(v for (l, c), v in table.items() if l.lower() == 'gaba' and c != 'inhibitory'),
                 ach_only_not_excitatory=sum(v for (l, c), v in table.items() if l.lower() == 'ach' and c != 'excitatory'),
@@ -119,7 +133,7 @@ def s4_clip_bounds(fixed):
         return dict(at_low=int((np.abs(v - low) < tol).sum()), at_high=int((np.abs(v - high) < tol).sum()))
     return dict(initial_voltage_mV=at(fixed.initial_voltage_mV, -80., -35.), leak_reversal_mV=at(fixed.cells.leak_reversal_mV, -80., -35.),
                 release_threshold_mV=at(fixed.release_threshold_mV, -65., -20.), release_slope_mV=at(fixed.release_slope_mV, 2., 20.),
-                synapse_reversal_mV=at(fixed.synapse_reversal_mV, -85., 0.), capacitance_pF=at(fixed.cells.capacitance_pF, 1., 20.),
+                synapse_reversal_mV=at(np.asarray(fixed.synapse_reversal_mV)[np.asarray(fixed.chemical_mask) > 0] if np.asarray(fixed.synapse_reversal_mV).ndim == 2 else fixed.synapse_reversal_mV, -85., 0.), capacitance_pF=at(fixed.cells.capacitance_pF, 1., 20.),
                 neurons=302)
 
 

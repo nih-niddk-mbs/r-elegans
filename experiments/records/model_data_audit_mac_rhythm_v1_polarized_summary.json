@@ -1,0 +1,209 @@
+{
+ "network": "/tmp/polar_mac/network.npz",
+ "s1_topology_vs_cook": {
+  "chemical": {
+   "model_edges": 3709,
+   "raw_edges": 3709,
+   "model_total": 20965.0,
+   "raw_total": 20965.0,
+   "entries_that_differ": 0,
+   "names_missing_in_sheet": [],
+   "examples": []
+  },
+  "gap": {
+   "model_edges": 2186,
+   "raw_edges": 2199,
+   "model_total": 11580.0,
+   "raw_total": 11612.0,
+   "entries_that_differ": 16,
+   "names_missing_in_sheet": [
+    "AS07",
+    "AS08",
+    "AS09",
+    "RMFR"
+   ],
+   "examples": [
+    [
+     "M4",
+     "M4",
+     1.0,
+     0.0
+    ],
+    [
+     "M5",
+     "M5",
+     1.0,
+     0.0
+    ],
+    [
+     "ASKR",
+     "ASKR",
+     2.0,
+     0.0
+    ],
+    [
+     "PVM",
+     "PVM",
+     1.0,
+     0.0
+    ],
+    [
+     "AIAR",
+     "AIAR",
+     2.0,
+     0.0
+    ],
+    [
+     "PVPL",
+     "PVPL",
+     1.0,
+     0.0
+    ],
+    [
+     "DVB",
+     "DVB",
+     2.0,
+     0.0
+    ],
+    [
+     "RIBL",
+     "RIBL",
+     3.0,
+     0.0
+    ]
+   ]
+  },
+  "gap_raw_asymmetric_pairs_unequal": 1087
+ },
+ "s2_polarity_vs_wang": {
+  "per_edge_vs_fenyves2020": {
+   "model_edges": 3709,
+   "determined_edges": 2921,
+   "determined_weight_fraction": 0.8395624499626849,
+   "agree_edges": 2921,
+   "disagree_edges": 0,
+   "disagree_weight_fraction_of_determined": 0.0,
+   "sign_conflicts_between_prediction_methods": 264,
+   "undetermined_edges": 788
+  },
+  "per_neuron_vs_wang": "not applicable (per-edge reversal matrix)"
+ },
+ "s3_cell_provenance": {
+  "cell_kinds": {
+   "AWC composition x transferred scale (placeholder)": 296,
+   "RMD (measured values, rhythm prior may modify)": 6
+  },
+  "transferred_channel_scale": 0.01,
+  "trained_channel_scale_changed_cells": 0,
+  "trained_channel_scale_abs_log_median": 0.0,
+  "trained_channel_scale_abs_log_max": 0.0,
+  "evidence_labels_in_measured_classes": {
+   "AWCON": {
+    "whole_cell_fit": 16,
+    "expression_inference": 1
+   },
+   "RMD": {
+    "whole_cell_fit": 14,
+    "expression_inference": 3
+   }
+  }
+ },
+ "s4_clip_bound_pileup": {
+  "initial_voltage_mV": {
+   "at_low": 167,
+   "at_high": 15
+  },
+  "leak_reversal_mV": {
+   "at_low": 173,
+   "at_high": 9
+  },
+  "release_threshold_mV": {
+   "at_low": 16,
+   "at_high": 135
+  },
+  "release_slope_mV": {
+   "at_low": 0,
+   "at_high": 11
+  },
+  "synapse_reversal_mV": {
+   "at_low": 581,
+   "at_high": 2648
+  },
+  "capacitance_pF": {
+   "at_low": 8,
+   "at_high": 10
+  },
+  "neurons": 302
+ },
+ "s5_resting_transmission": {
+  "voltage_mV": {
+   "min": -80.08605039090915,
+   "median": -72.9852414244134,
+   "max": -11.652187610865267
+  },
+  "release_below_0p01": 144,
+  "release_above_0p99": 1,
+  "release_between": 157,
+  "median_release_gain_per_mV": 0.001778450956683236,
+  "neurons_with_gain_above_0p01_per_mV": 68,
+  "chemical_weight_total_nS": 6.5575957370429725,
+  "chemical_weight_with_presynaptic_gain_below_1e3": 0.4397246158122042,
+  "median_edge_sensitivity_over_postsynaptic_leak": 2.4468881114646204e-05,
+  "fraction_of_edges_with_sensitivity_over_leak_above_1e3": 0.08843354003774602,
+  "voltage_by_neuron": {
+   "AWAL": -69.5,
+   "AWAR": -67.95,
+   "AIYL": -36.32,
+   "AIYR": -78.8,
+   "RIML": -24.03,
+   "AVAL": -36.15,
+   "AVBL": -25.09,
+   "RIAL": -66.35,
+   "RIAR": -57.15,
+   "RMDDL": -18.99,
+   "SMDDL": -46.28
+  }
+ },
+ "s6_rest_voltage_vs_traces": {
+  "AVAL": {
+   "trace_first_100ms_mV": [
+    -30.0,
+    -30.0,
+    -30.0,
+    -30.0
+   ],
+   "trace_unit": null,
+   "model_rest_mV": -36.2
+  },
+  "AIYL": {
+   "trace_first_100ms_mV": [
+    -54.4,
+    -54.7,
+    -52.4,
+    -53.2
+   ],
+   "trace_unit": "V",
+   "model_rest_mV": -36.3
+  },
+  "RIML": {
+   "trace_first_100ms_mV": [
+    -38.3,
+    -43.9,
+    -45.9,
+    -39.5
+   ],
+   "trace_unit": "V",
+   "model_rest_mV": -24.0
+  },
+  "AWAL": {
+   "trace_first_100ms_mV": [
+    -75.8,
+    -76.3,
+    -75.0,
+    -75.1
+   ],
+   "trace_unit": "V",
+   "model_rest_mV": -69.5
+  }
+ }
+}

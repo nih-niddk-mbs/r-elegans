@@ -10784,3 +10784,57 @@ stimulus strength and over oscillation phase, so it likely reflects structure
 Before fitting, add structural control predictors (connectome weight, path length,
 degree) to see whether the model beats them, inspect response magnitudes, and test
 sensitivity to the self-response threshold and response window.
+
+## 2026-11-20 — Audit completion and data-based synapse polarity (local; no training)
+
+Audit additions (`scripts/audit_model_data_adherence.py`, Mac network `mac_rhythm_v1`;
+the E099 checkpoint is still unaudited, see below).
+- Neuromuscular part: the bundled neuron-to-muscle matrix equals the raw Cook sheet
+  exactly (95 x 302, 956 edges, total 5,515, 0 differing entries) and the bundled signs
+  equal those re-derived from Wang 2024 (735 excitatory, 145 inhibitory, 76 unsigned).
+- Body physics: `tests/test_physical_calibration.py` 8 passed. These are consistency
+  checks, not calibration against measured waveforms (PHYSICS.md says so). Parameters come
+  from Fang-Yen 2010, Boyle 2012, Rabets 2014 (published fits); the active muscle
+  moment scale is a modelling closure; no spatial convergence or waveform-to-force
+  benchmark exists.
+- Sensory and proprioception: engineered seven-parameter controller and an opt-in
+  proprioceptive branch with no transduction data. `tests/test_embodied_sensory.py`
+  has 2 failures that exist without the polarity change (dtype mismatch under
+  JAX_ENABLE_X64); not investigated here.
+- Component status summary: topology exact; polarity now data-based for 79 % of edges;
+  recurrent edge strengths and gap conductances behavior-trained; cell conductances
+  placeholders except 6 RMD cells; resting voltage and release thresholds clip-dominated;
+  calcium indicator generic; extrasynaptic signaling absent; no electrophysiology
+  benchmark with documented protocols; Atanas calcium fits not audited.
+
+Polarity (new): `r_elegans/data/synapse_polarity.py` reads Fenyves et al. 2020 (PLOS
+Comput Biol, 10.1371/journal.pcbi.1007974) edge predictions: NT+receptor first, then
+transmitter-only. Of the model's 3,709 chemical edges, 1,705 get a sign from NT+R and
+1,216 from NT-only (2,921 total, 2,402 excitatory and 519 inhibitory, 84 % of chemical
+weight); 788 edges (16 % of weight) are undetermined (complex, no prediction, or absent
+from the tables, e.g. pharyngeal edges); the two methods disagree in sign on 264 edges
+(receptor-based used). The model's per-edge reversal is now a [post, pre] matrix
+(`advance_network` accepts a vector or a matrix; identical dynamics when the matrix is the
+broadcast vector, tested). `scripts/apply_synapse_polarity.py` writes a copy of any
+checkpoint with excitatory 0 mV and inhibitory -85 mV on determined edges and the old
+presynaptic reversal on undetermined edges (policy `keep`; `neutral` available). Those
+two reversal values are project priors, not verified literature values.
+On the Mac network, before: 829 of the 2,921 determined edges (28.8 % of their weight)
+had the wrong sign; after: 0. 2,122 edges (52.8 % of weight) changed reversal.
+Provenance: `experiments/records/synapse_polarity_mac_rhythm_v1_provenance.json`
+(input SHA-256 870444a4..., output SHA-256 5b1493ef..., source table hashes).
+Tests: `tests/test_edge_polarity.py` (5 pass) plus the neighbouring conductance,
+release-override and control-access tests (all pass).
+
+Consequence: changing reversals changes network function. Earlier qualifications
+(E092-E099 control pathways, the E099 checkpoint) do not carry over; any polarized
+checkpoint must be requalified. Undetermined edges remain a data gap (their sign is
+not known; candidate treatments: a fitted bounded sign, or CeNGEN receptor-based
+prediction extended to the unpredicted pairs). Not done: other constraints (data-based
+cell conductances, clip-bound pile-up, measured thresholds and strengths).
+Server commands for E099 (audit before and after; outputs stay on the server):
+`python -m scripts.audit_model_data_adherence --run RUN --checkpoint-sha256 57fc914e... --data-root /home/carsonc/r-elegans-data --skip-controls --out /home/carsonc/e099_model_audit.json`
+`python -m scripts.apply_synapse_polarity --run RUN --checkpoint-sha256 57fc914e... --data-root /home/carsonc/r-elegans-data --output-dir /home/carsonc/r-elegans-results/e099-polarized`
+(RUN = /home/carsonc/r-elegans-results/pathway-continuation-20261120T001737Z-577769; the
+server data root needs raw/neurotransmitters/synaptic_polarity_2020 and the Cook,
+Wang and physiology folders.)

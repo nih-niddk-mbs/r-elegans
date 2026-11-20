@@ -1,0 +1,28 @@
+{
+ "input_network": "r_elegans/assets/mac_rhythm_v1/network.npz",
+ "input_sha256": "870444a4a1122818d9124af242242c506778b25c0079d4ee8a441cf8c64fe63a",
+ "output_sha256": "5b1493efb5491fe2fada8086fa5fef999c2d14dd541de8962baab2addbb39e93",
+ "polarity_sha256": {
+  "pcbi.1007974.s003.xlsx": "85959066fd7cbdbc2024d0ebb323b71c4365f4083bc85e555ee973f470697c47",
+  "pcbi.1007974.s004.xlsx": "cfd032aa9b398e9cf5dec326aea77321a50157bbeb00e08cfcc831d088d52b9a"
+ },
+ "policy": {
+  "excitatory_mV": 0.0,
+  "inhibitory_mV": -85.0,
+  "undetermined": "keep",
+  "neutral_mV": -40.0,
+  "precedence": "NT+receptor, then transmitter-only"
+ },
+ "model_edges": 3709,
+ "edges_nt_receptor": 1705,
+ "edges_nt_only": 1216,
+ "edges_undetermined": 788,
+ "weight_fraction_determined": 0.8395624499626849,
+ "sign_conflicts_between_methods": 264,
+ "edges_whose_reversal_changed": 2122,
+ "weight_fraction_changed": 0.5284606232875313,
+ "determined_excitatory": 2402,
+ "determined_inhibitory": 519,
+ "names_unknown_to_model": [],
+ "scope": "Fixed reversal field only; the checkpoint was not retrained, so behavior and requalification are not established."
+}

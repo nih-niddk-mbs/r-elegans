@@ -86,8 +86,14 @@ def chemical_release_adjustment(chemical,release,reversals,override):
     """Replace g*r by g*r_hold on selected [post,pre] edges; no new conductances."""
     delta=chemical[override.post_indices,override.pre_indices]*(override.release_probability-release[override.pre_indices])
     total=jnp.zeros_like(release).at[override.post_indices].add(delta)
-    drive=jnp.zeros_like(release).at[override.post_indices].add(delta*reversals[override.pre_indices])
+    edge_reversal=reversals[override.post_indices,override.pre_indices] if reversals.ndim==2 else reversals[override.pre_indices]
+    drive=jnp.zeros_like(release).at[override.post_indices].add(delta*edge_reversal)
     return total,drive
+
+
+def chemical_reversal_drive(chemical,release,reversal):
+    """sum_pre g[post,pre]*r[pre]*E for a per-presynaptic vector E[pre] or a per-edge matrix E[post,pre]."""
+    return (chemical*reversal)@release if reversal.ndim==2 else chemical@(release*reversal)
 
 
 def indicator_equilibrium(calcium, config):
@@ -183,7 +189,7 @@ def advance_network(state,params,fixed,dt_s,substeps,config=ConductanceNetworkCo
         conductance = g*channel_open_fractions(s.gates)
         release = jax.nn.sigmoid((s.voltage_mV-fixed.release_threshold_mV)/fixed.release_slope_mV)
         total = conductance.sum(axis=1)+chemical@release+gap_total
-        drive = ((conductance*reversals).sum(axis=1)+chemical@(release*fixed.synapse_reversal_mV)
+        drive = ((conductance*reversals).sum(axis=1)+chemical_reversal_drive(chemical,release,fixed.synapse_reversal_mV)
                  +gap@s.voltage_mV+fixed.bias_pA)
         if chemical_release_override is not None:
             def altered(values):
@@ -244,7 +250,8 @@ def load_network(path):
     if (params.log_channel_scale.shape != (302,17)
             or params.raw_chemical.shape != (302,302) or params.raw_gap.shape != (302,302)
             or fixed.chemical_mask.shape != (302,302) or fixed.gap_mask.shape != (302,302)
-            or any(v.shape != (302,) for k,v in fixed._asdict().items() if k not in ('cells','chemical_mask','gap_mask'))
+            or any(v.shape != (302,) for k,v in fixed._asdict().items() if k not in ('cells','chemical_mask','gap_mask','synapse_reversal_mV'))
+            or fixed.synapse_reversal_mV.shape not in ((302,),(302,302))
             or any(v.shape != ((302,17) if k=='conductances_nS' else (302,)) for k,v in cells._asdict().items())):
         raise ValueError("Invalid conductance network shapes")
     if not all(np.isfinite(x).all() for x in jax.tree_util.tree_leaves((params,fixed))):
