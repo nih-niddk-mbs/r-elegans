@@ -11214,3 +11214,11 @@ number of channel/edge entries at their bounds. Local software check (Mac CPU x6
 checkpoint loads, only the allowed fields differ, 0 frozen-field changes, loss 0.964 at step 0; not a result. Claims not made:
 no locomotion, start/stop, gait, trajectory or biological-fidelity claim; the rhythm check must be repeated on any kept
 checkpoint before it is used as a parent, and the earlier E092-E099 gait is not part of this lineage.
+
+Date-corrected budget (2026-11-20, user instruction "do a long 12 hour run"): the E104 wall budget is 720 min (12 h; 10 min
+final reserve) instead of 180 min; everything else in the plan above, including the four variants, the validation-based
+selection and the declared acceptance criteria, is unchanged. Command: `sh scripts/launch_all_parameters_mbslnx2.sh 720`.
+The E102 audit showed held-out agreement plateauing with a widening train-held-out gap after about 1,000 steps, so the 12 h run
+relies on the validation split to select the kept checkpoint; the final checkpoint and `network_latest` are also kept. The
+trainer has no mid-run state resume: a crash would leave `network_latest.npz`/`network_best_val.npz` (written every 50 steps)
+and `history.jsonl` but not a restartable optimizer state.
