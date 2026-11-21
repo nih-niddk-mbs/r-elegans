@@ -1,5 +1,14 @@
 # r-elegans
 
+2026-11-21 E107 prepared, server run pending: unchanged selected network
+control and stored parent, one model per A100. Five atlas and five free-rhythm
+refinement levels, fixed parameters/initial-state rules and float64; no fitting.
+Require both finest successive comparisons to pass existing criteria. Automatic
+post-run artifact/control/parameter/numerical audit, including timeout outcomes.
+Maximum120minutes TOTAL including audit. No model or behavioral promotion.
+[Plan](experiments/records/E107-plan.json).
+Launch: `sh scripts/launch_neural_convergence_mbslnx2.sh`.
+
 2026-11-21 E106 parameter recheck completed (user-reported): all eight
 selected models pass parameter bounds/frozen-field/mask checks. The earlier
 per-cell bound flags were audit false positives caused by float32 tolerance

@@ -1,0 +1,19 @@
+{
+  "experiment": "E107",
+  "status": "planned; server execution not yet evidenced",
+  "recorded_date": "2026-11-21",
+  "question": "Do atlas cue-minus-sham responses and sustained RMD cycles converge with finer neural steps on the unchanged selected network control and its stored parent?",
+  "source_audit": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144",
+  "selected_checkpoint_sha256": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f",
+  "parent_checkpoint_sha256": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d",
+  "fixed": "All model parameters, initial voltage/state construction, release law, stimulus amplitude/targets/timing, float64, simulator implementation. No peptide term, body model or optimizer.",
+  "trainable": [],
+  "seed": "No random operations or fitting; deterministic original initial-state construction",
+  "atlas": {"substeps_per_100ms": [40, 80, 160, 320, 640], "settle_seconds": 60, "record_seconds": 12, "pulse_seconds": 0.5, "indicator_mean_window_seconds": [1.5, 11.5], "targets": "First 13 from pinned E106 copied responses; extra zero-conductance sham row"},
+  "rhythm": {"neural_step_ms": [1, 0.5, 0.25, 0.125, 0.0625], "settle_seconds": 60, "record_seconds": 40, "sample_dt_seconds": 0.002, "cells_for_cycle_gates": ["RMDL", "RMDR"]},
+  "acceptance": "Both last adjacent refinement pairs must pass existing atlas max-normalized error<0.1 and correlation>=0.9; both cells must pass persistence and existing phase-aligned cycle criteria (<1% period, <2% amplitude, <0.5mV cycle RMSE). Zero-drive responses must be zero within1e-12. Every saved artifact/input hash and grid count must verify. Incomplete/timeout never qualifies. Assesses only numerical/component convergence; no biological, gait, start/stop or swimming promotion.",
+  "resources": "Two A100s, one unchanged model per GPU, sequential grids. Maximum120minutes TOTAL including automatic post-run saved-data audit; may finish earlier.",
+  "artifacts": "Separate external neural-convergence timestamped folder. Copy/checksum models and target metadata; preserve source E106 files. Save atlas responses and RMD traces only, all-neuron late voltage standard deviations and runtime metadata; no full-brain trajectory per evaluation.",
+  "command": "sh scripts/launch_neural_convergence_mbslnx2.sh",
+  "audit": "Always execute post-run audit, including after timeout/failure; verify source/artifact hashes, parameters unchanged, a-priori model selection, all grids/controls/numerical gates, source/env and elapsed budget. Unavailable behavior evidence explicit. No fitting or model promotion."
+}

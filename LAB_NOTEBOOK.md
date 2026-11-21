@@ -11619,3 +11619,51 @@ long optimization run until numerical evidence supports its objective. This entr
 records a recommendation; no new scientific run or training was launched.
 Documentation-only follow-up; existing21 focused software tests passed for the
 code used by this recheck. No code changes or new test run required here.
+
+### 2026-11-21 — E107 planned: unchanged-model neural convergence study
+
+User authorized the recommended convergence study. Plan recorded before
+implementation/execution in `experiments/records/E107-plan.json`. Compare the
+pinned E104 selected network control4d72ef33...3511f with its unchanged stored
+parent47a369a1...2482d. Parent is a diagnostic reference, not a newly fitted or
+behavior-qualified model. All weights, cell parameters, initial-state rules,
+release law and stimulus conditions are fixed. No optimizer, random seed use,
+peptide fitting or body simulation. No local scientific run is planned.
+
+Independent refinement series: atlas40/80/160/320/640 substeps per100ms, and
+free neural rhythm1/.5/.25/.125/.0625ms with fixed2ms recording. Atlas re-settles
+60s on each grid; same initial-state rule and cue-minus-sham protocol. Rhythms
+settle60s then record40s. These are distinct neural-step series and will be
+labeled with actual effective steps. Retain all five levels, not just favorable
+comparisons. First13 targets come from hashed original E106 responses, with an
+additional zero-drive/sham row. No held-out atlas accuracy is retested or used
+for selection in this numerical diagnostic.
+
+Use two GPU workers, one model each. Maximum120minutes TOTAL including a reserved
+post-run saved-data audit; incomplete/timeout cannot pass. Audit input and output
+hashes, no parameter changes, all planned grids, zero-drive control, propagation
+summaries, RMD persistence and both last successive refinements using unchanged
+criteria. Preserve source files and report gaps explicitly. Save RMD-only traces
+plus response arrays and all-neuron voltage standard deviations to limit disk.
+Any convergence result is a numerical/component result, not sensory start/stop,
+body gait, swimming or biological qualification. Server execution remains planned.
+Launch: `sh scripts/launch_neural_convergence_mbslnx2.sh`.
+
+E107 implementation/local verification:33 focused software tests pass across
+new convergence workflow, selected-atlas audit/report and parameter recheck.
+Synthetic saved traces exercise both last-refinement requirements, lost rhythm,
+zero-drive control failure, malformed metadata/nonfinite arrays, tampering,
+missing levels and timeout non-qualification. Input-preparation test verifies
+pinned copies and source preservation. Supervisor timeout test confirms the
+automatic saved-data audit still runs and marks execution incomplete. Existing
+trainer/auditor forward-definition tests also pass on tiny software fixtures;
+no new scientific fit, full-model convergence study or Mac/server scientific
+outcome is asserted. CLI help, shell syntax and whitespace checks pass. Final
+input hashes are rechecked after post-run auditing. Server E107 remains planned.
+
+Launch/report workflow: pull, then `sh scripts/launch_neural_convergence_mbslnx2.sh`.
+The launcher prints the exact log and report command. To report later:
+`python -m scripts.run_neural_convergence --output-dir <printed-run-folder> --report`.
+No raw NWB download is required: this is a fixed13-target numerical diagnostic,
+not a repeat of held-out atlas fitting. Network copies/source/environment records,
+compact arrays, per-worker logs and `audit.json`/`budget_receipt.json` stay external.
