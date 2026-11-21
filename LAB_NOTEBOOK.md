@@ -11118,3 +11118,39 @@ values (frequency, regional cycles) were not pasted, so the size of the baseline
 bounds versus loss of the rhythm) is unknown here; `comparison.json` in the run folder holds them. Not shown: whether a
 subset or milder polarity, or a refit under fixed polarity, restores the gates. Earlier E092-E099 evidence therefore
 applies to the unchanged E099 only.
+
+Per-window gait values (user-reported, from `comparison.json`; three regional values = anterior/middle/posterior joint
+groups; saved = control to all printed digits): saved/control baseline frequency 1.9772 Hz in all regions and windows
+(0.0028 Hz below the 1.98 Hz upper bound of the 1.62-1.98 Hz gate, so the E099 gait sits at the band edge), regional
+joint cycle excursion 0.003624 / 0.036498 / 0.012898 rad. Polarized: frequency 2.2764 Hz (+15.1 %, above the band and
+beyond the 5 % bound), regional cycles 4.01e-5 / 0.012650 / 0.003180 rad, i.e. 1.1 % / 34.7 % / 24.7 % of the control
+(bounds: >= 90 % of the parent and >= 0.003 rad floor; anterior 4.0e-5 is below the floor). The oscillation persists but is
+faster and much weaker, most strongly in the anterior region. Cue-window values equal the no-cue values in the 60-70 s window
+(recovery preserved, matching `relay_recovery_preserved` true). Reading: polarity changes the gait by a large margin
+(not a marginal gate miss); the E099 band-edge frequency means almost any upward frequency shift fails the strict band, so a
+sweep should report relative frequency/amplitude changes, not only pass/fail.
+
+## E103 - Polarity sweep on the E099 gait (PLANNED 2026-11-20; not executed)
+
+User direction: use all available compute and run several experiments at once to see what works. Question: which part of
+the data-based synapse polarity breaks the E099 gait (full polarity: frequency +15.1 %, regional cycle excursion to 1 % /
+35 % / 25 % of the control, relay operating range lost), and does any graded or partial polarity keep the E092-anchored
+baseline/recovery and relay gates? Variants (each = the E099 checkpoint 57fc914e...58a7 with only `synapse_reversal_mV`
+changed on determined edges; parameters and all other fixed fields identical; produced by
+`scripts/make_polarity_variants.py`, unit-tested): alpha010/025/050/075 (reversal blended that fraction of the way to full
+polarity), inhibitory_only, excitatory_only, nt_receptor_only (NT+receptor evidence only), inhibitory_mild70 (inhibitory
+reversal -70 mV instead of -85), heavy50 / light50 (full polarity on the heaviest determined edges covering half of the
+determined weight / on the rest), contradicting_only (only edges whose old reversal class contradicts the data sign). Local
+check on the Mac original network (not the E099 checkpoint): edges changed 164-2,214, weight fraction changed 0.10-0.57.
+Assay: the validated replay harness (`scripts/assay_checkpoint_gait.py --only polarized`, same job and protocol as the full
+run whose control reproduced E099 exactly), one process per variant pinned to its own 4 cores
+(`scripts/launch_polarity_sweep_mbslnx2.sh`, cores 8-51, CPU float64, nohup), no training. Report:
+`scripts/report_polarity_sweep.py` (flags, frequency ratio and regional cycle ratios against the saved E099 result; includes
+the full-polarity run as a reference row). Acceptance (declared now, descriptive per variant): a variant is a candidate partial
+polarity if `safe`, `baseline_and_recovery_preserved` and `relay_operating_range_passed` are all true; frequency ratio and
+regional cycle ratios are reported for all variants regardless of the flags. Variants are not retrained and untested edges stay
+at the parent's reversal; a passing variant does not establish behavior beyond this protocol (nominal 70 s sensory-motion
+job) and the 788 undetermined edges remain unresolved. Risk: the E099 frequency sits 0.0028 Hz below the 1.98 Hz band
+edge, so many variants may fail the strict band while shifting only slightly; the ratios show this. Software checks: 2 unit
+tests for variant construction and a local generator and report run on synthetic/original-network inputs; the sweep itself
+has not been run.

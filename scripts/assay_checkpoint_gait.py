@@ -39,6 +39,18 @@ def gait_rows(result):
                         for r in rows['active']] for condition, rows in paired.items() if 'active' in rows}
 
 
+def gait_ratios(result, reference):
+    """Per-window frequency ratio and mean regional-cycle ratio of no-cue active windows against the saved evaluation."""
+    rows = lambda r: ((r.get('paired_features') or {}).get('no_cue') or {}).get('active')
+    a, b = rows(result), rows(reference)
+    if not a or not b:
+        return None
+    mean = lambda values: float(np.mean([np.nan if v is None else v for v in values]))
+    return dict(frequency_ratio=[mean(x['frequency_hz']) / mean(y['frequency_hz']) for x, y in zip(a, b)],
+                regional_cycle_ratio=np.mean([np.asarray(x['regional_cycles_rad']) / np.asarray(y['regional_cycles_rad'])
+                                              for x, y in zip(a, b)], axis=0).tolist())
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', type=Path, required=True, help='pipeline run folder containing evaluations/ and inputs/')
@@ -47,6 +59,7 @@ def main():
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--minutes', type=float, default=120., help='wall deadline per replay')
     parser.add_argument('--check-only', action='store_true', help='verify identity of parameters/fields and exit')
+    parser.add_argument('--only', choices=('control', 'polarized'), help='run a single replay (for parallel sweeps)')
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     out = args.output_dir.expanduser().resolve()
@@ -85,7 +98,7 @@ def main():
     from scripts.sensory_motion_worker import evaluate, setup
     core._DATA = setup(run / 'inputs')
     results = {}
-    for label in ('control', 'polarized'):
+    for label in ((args.only,) if args.only else ('control', 'polarized')):
         replay = dict(job, output=str(out / label), until=time.monotonic() + args.minutes * 60., params_network=str(source / 'network.npz'))
         replay.pop('fixed_network', None)
         if label == 'polarized':
@@ -95,20 +108,21 @@ def main():
         results[label] = evaluate(replay)
         print(json.dumps(dict(label=label, status=results[label]['status'], elapsed_seconds=results[label].get('elapsed_seconds'),
                               checkpoint_sha256=results[label].get('checkpoint_sha256'))), flush=True)
-    control, polarized = results['control'], results['polarized']
-    flags = lambda r: {k: v for k, v in (r.get('metrics') or {}).items() if isinstance(v, (bool, str))}
+    control, polarized = results.get('control'), results.get('polarized')
+    flags = lambda r: {k: v for k, v in ((r or {}).get('metrics') or {}).items() if isinstance(v, (bool, str))}
     comparison = dict(
         evaluation=args.evaluation, saved_checkpoint_sha256=reference.get('checkpoint_sha256'),
-        control_checkpoint_matches_saved=control.get('checkpoint_sha256') == reference.get('checkpoint_sha256'),
-        control_metrics_max_relative_difference_from_saved=max_relative_difference(control.get('metrics'), reference.get('metrics')),
-        control_status=control['status'], polarized_status=polarized['status'],
+        control_checkpoint_matches_saved=None if control is None else control.get('checkpoint_sha256') == reference.get('checkpoint_sha256'),
+        control_metrics_max_relative_difference_from_saved=None if control is None else max_relative_difference(control.get('metrics'), reference.get('metrics')),
+        control_status=None if control is None else control['status'], polarized_status=None if polarized is None else polarized['status'],
         saved_flags=flags(reference), control_flags=flags(control), polarized_flags=flags(polarized),
-        polarized_checkpoint_sha256=polarized.get('checkpoint_sha256'),
-        gait_windows=dict(saved=gait_rows(reference), control=gait_rows(control), polarized=gait_rows(polarized)),
+        polarized_checkpoint_sha256=None if polarized is None else polarized.get('checkpoint_sha256'),
+        polarized_gait_ratio_to_saved=None if polarized is None else gait_ratios(polarized, reference),
+        gait_windows=dict(saved=gait_rows(reference), control=gait_rows(control or {}), polarized=gait_rows(polarized or {})),
         scope='Fixed reversal field only; gait/recovery/cue-response metrics of the same protocol; no retraining.')
     (out / 'comparison.json').write_text(json.dumps(comparison, indent=1, default=float) + '\n')
     print(json.dumps({k: v for k, v in comparison.items() if k != 'gait_windows'}, default=float), flush=True)
-    return 0 if control['status'] == polarized['status'] == 'completed' else 1
+    return 0 if all(r['status'] == 'completed' for r in results.values()) else 1
 
 
 if __name__ == '__main__':
