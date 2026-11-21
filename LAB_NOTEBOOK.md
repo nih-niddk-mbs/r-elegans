@@ -11155,6 +11155,35 @@ edge, so many variants may fail the strict band while shifting only slightly; th
 tests for variant construction and a local generator and report run on synthetic/original-network inputs; the sweep itself
 has not been run.
 
+### E103 result and post-run audit (user-reported server report output; per-run JSON not read; not locally re-run)
+
+Sweep folder `/home/carsonc/r-elegans-results/polarity-sweep-20261121T020705Z-683035`; all 11 variants status completed
+(one process each, CPU float64, replay harness validated earlier by the exact control reproduction), plus the earlier
+full-polarity run as a reference row. Source revision/dirty state of the sweep run was not separately verified here.
+Table (edges changed / weight fraction changed; frequency ratio to the saved E099 baseline 1.9772 Hz; regional cycle
+excursion ratios anterior / middle / posterior to the saved E099 0.003624 / 0.036498 / 0.012898 rad; `safe` true for all;
+`baseline_and_recovery_preserved` false and `relay_operating_range_passed` false for ALL variants):
+- alpha010 (2122 / 0.46): 1.026; 0.68 / 0.85 / 0.84.  alpha025: 1.071; 0.31 / 0.55 / 0.54.  alpha050: 1.100; 0.07 / 0.21 / 0.21.
+  alpha075: 1.134; 0.02 / 0.05 / 0.03.  full: 1.151; 0.01 / 0.35 / 0.25 (non-monotone: amplitude is lowest near 75 %).
+- inhibitory_only (427 / 0.08): 1.031; 2.33 / 0.37 / 0.25.  nt_receptor_only (1167 / 0.30): 1.012; 0.24 / 0.33 / 0.24.
+  inhibitory_mild70 (2214 / 0.49): 1.127; 0.00 / 0.10 / 0.07.  light50 (2049 / 0.30): 0.962; 1.90 / 0.33 / 0.10.
+- excitatory_only (1695 / 0.37): frequency not available (nan), regional cycles 0.00 / 0.00 / 0.00 (no gait).
+  heavy50 (73 / 0.16): frequency not available, regional cycles 0.00 / 0.00 / 0.00 (no gait).
+- contradicting_only (829 / 0.20): 1.150; 0.01 / 0.35 / 0.25, identical to the full-polarity row to the printed digits.
+Declared criterion (safe, baseline_and_recovery_preserved and relay_operating_range_passed all true): NOT met by any variant.
+Findings: (1) the E099 gait is brittle to the reversal field: even a 10 % blend toward the data polarity lowers the regional
+amplitudes by 15-32 % and raises the frequency 2.6 % (the saved gait is 0.0028 Hz under the 1.98 Hz band edge); (2) changing
+only the 73 heaviest determined edges (16 % of weight) or only the excitatory edges removes the gait entirely; (3) the full-
+polarity effect is reproduced exactly by changing only the 829 edges whose legacy reversal class contradicts the data sign,
+so the within-class value changes of the other determined edges do not matter at this resolution; (4) amplitude versus
+blend fraction is not monotone, so the gait is a sensitive nonlinear operating point, not a smooth function of polarity.
+Not shown: which synapses the gait depends on (the 73-edge and 829-edge sets can be listed from the variant checkpoints),
+whether the legacy signs on those edges are wrong, compensating for a missing mechanism (gap junctions, peptides,
+proprioception) or the data-based predictions are wrong for them (264 method conflicts, 788 undetermined edges), and
+whether a refit under the data polarity can recover amplitude and frequency. Decision: no partial polarity preserves the E099
+gait; the data-based polarity and the E099 gait cannot both be kept by reversal edits alone. A new gait regime must be fitted
+under fixed data polarity (user direction), keeping E099 as an independent legacy-sign checkpoint.
+
 ## E104 - All-parameter gradient fit to the Randi atlas, four variants in parallel (PLANNED 2026-11-20; not executed)
 
 User direction: forget the polarity sweep (diagnostic only; if it was already launched it is CPU-only and unaffected) and fit
