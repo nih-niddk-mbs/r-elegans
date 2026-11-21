@@ -11667,3 +11667,15 @@ The launcher prints the exact log and report command. To report later:
 No raw NWB download is required: this is a fixed13-target numerical diagnostic,
 not a repeat of held-out atlas fitting. Network copies/source/environment records,
 compact arrays, per-worker logs and `audit.json`/`budget_receipt.json` stay external.
+
+### 2026-11-21 — E107 server launch reported; outcome pending
+
+User stdout reports pull through268f33e, successful dedicated-environment
+preflight (two GPUs, float64), and nohup supervisor PID778514.
+Run: `/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363`.
+Log: adjacent `.log`; automatic audit target: `audit.json` inside the run.
+Configured maximum120minutes TOTAL including the post-run audit. This establishes
+launcher/preflight success only; worker execution, actual environment/source
+records, input integrity, grid completion, budget and scientific results remain
+pending external evidence. No convergence or behavioral qualification asserted.
+Report command: `/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_neural_convergence --output-dir /home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363 --report`.
