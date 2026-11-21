@@ -1,0 +1,11 @@
+{
+  "status": "planned saved-data analysis; server execution not yet evidenced",
+  "recorded_date": "2026-11-21",
+  "source_run": "/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363",
+  "question": "How do interpolated full-window cycle timing, within-window variation and cycle-averaged waveforms differ from the last-five-cycle statistics in E107?",
+  "method": "Read all ten hashed E107 saved RMD traces; analyze the final20s and four5s subwindows. Fixed1mV peak prominence and20ms minimum peak separation match existing cycle detector settings. Compare sampled peaks with parabolically interpolated peak times, full-train regression, period quantiles and last-five periods. Compare full-window cycle waveforms descriptively. Preserve original acceptance results verbatim.",
+  "fixed_trainable": "All parameters and source artifacts unchanged. No fitting, simulation, random operations or new acceptance criteria.",
+  "integrity": "Verify each artifact against worker summaries and original E107 audit, worker model/manifest identities, input hashes before/after and original budget receipt. Record source/environment and emit a separate timestamped sibling report. Missing or tampered evidence fails, never overwrites source audit.",
+  "limits": "Only RMD voltage and atlas mean responses were saved. No full state, stimulus-locked voltage traces or phase-conditioned cue ensemble; cannot establish cause of atlas instability or validate behavior. Numerical results remain unqualified.",
+  "command": "python -m scripts.analyze_convergence_cycles --run /home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363"
+}

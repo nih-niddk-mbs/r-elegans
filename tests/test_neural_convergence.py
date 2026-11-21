@@ -159,3 +159,24 @@ def test_supervisor_timeout_runs_audit_and_records_failure(tmp_path, monkeypatch
     assert receipt['timed_out']
     assert not receipt['all_steps_finished']
     assert not receipt['numerical_component_passed']
+
+
+def test_cycle_analysis_preserves_source_gates_and_hashes(tmp_path):
+    from scripts.analyze_convergence_cycles import analyze
+    root = fixture_study(tmp_path / 'study')
+    original = audit(root, complete_execution=True)
+    (root / 'budget_receipt.json').write_text(json.dumps(dict(all_steps_finished=True)))
+    before = {p: file_sha256(p) for p in root.rglob('*') if p.is_file()}
+    output = tmp_path / 'cycles';output.mkdir()
+    result = analyze(root, output)
+    assert result['analysis_complete'] and result['integrity_passed']
+    assert result['original_numerical_component_passed'] == original['numerical_component_passed']
+    assert not result['acceptance_gates_changed']
+    assert not result['model_promoted']
+    assert before == {p: file_sha256(p) for p in root.rglob('*') if p.is_file()}
+    assert result['models']['selected']['original_comparisons'] == original['models']['selected']['comparisons']
+    assert len(result['models']['selected']['levels']) == 5
+    with (root / 'selected' / 'level-4.npz').open('ab') as stream:
+        stream.write(b'changed')
+    with pytest.raises(ValueError, match='checksum mismatch'):
+        analyze(root, output)

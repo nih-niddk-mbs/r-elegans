@@ -11736,3 +11736,31 @@ qualification follows from neural RMD rhythms. Original checkpoints remain intac
 
 Documentation/evidence-only update; no simulation code changed and no new tests
 were needed. JSON parsing/transcription shape checks and `git diff --check` pass.
+
+### 2026-11-21 — E107 saved-cycle analysis planned
+
+User approved proceeding after the E107 interpretation. Begin with read-only
+saved-trace analysis, before any new simulation. Plan:
+`experiments/records/E107-cycle-analysis-plan.json`. All ten model/grid traces
+and original numerical failures remain in scope. Fixed detector:1mV prominence,
+20ms minimum separation; analyze final20s and four5s windows. Measure full-window
+and last-five sampled/interpolated periods, period variation/quantiles and
+whole-train regression. Compare full-window averaged cycles descriptively;
+no new acceptance thresholds or retrospective promotion. No trainable parameters,
+random operations, neuron/body simulation or optimizer. Check input/model/trace
+hashes against original manifests, worker summaries and E107 audit before and
+after; preserve original reports and record the new invocation/environment/source.
+Save external JSON and an optional static period-versus-time figure. Missing
+full neural state and stimulus-locked traces prevent causal attribution of the
+atlas failures; this analysis cannot resolve that by itself. Server execution
+is pending. Command: `python -m scripts.analyze_convergence_cycles --run /home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363`.
+
+Saved-cycle analyzer local validation:16 focused tests pass across pure timing
+analysis and E107 saved-data workflow. Synthetic incommensurate-period traces
+check interpolation and full-train regression; changing-period and plateau
+fixtures check window sensitivity and insufficient peaks. Saved-artifact tests
+verify no source changes, exact preservation of original comparisons/qualification,
+all ten traces, and tamper rejection. Existing E107 workflow negatives, missing
+grids and timeout checks still pass. CLI help and whitespace checks pass. No
+scientific full-network simulation or server analysis executed locally. Software
+fixtures do not establish phase causality, biological rhythm or convergence.

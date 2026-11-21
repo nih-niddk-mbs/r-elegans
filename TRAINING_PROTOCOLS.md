@@ -1,5 +1,12 @@
 # WormGym: training and validation protocols
 
+2026-11-21 E107 saved-cycle analyzer prepared; server analysis pending.
+Read all ten hashed saved RMD traces, compare full-window/interpolated periods,
+last-five-cycle timing and four late subwindows; export a static timing figure.
+Original numerical failures and acceptance gates remain unchanged. No simulation
+or fitting. [Analysis plan](experiments/records/E107-cycle-analysis-plan.json).
+Command: `python -m scripts.analyze_convergence_cycles --run <E107-run-folder>`.
+
 2026-11-21 E107 completed (user-reported): both unchanged models finished
 all five grids in449.59s, with audit/integrity and sham controls passing; no timeout.
 RMDL/RMDR persist on every grid, but neither model passes numerical convergence.
