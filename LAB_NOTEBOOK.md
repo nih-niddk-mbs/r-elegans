@@ -11462,3 +11462,65 @@ non-promotion. Related existing extrasynaptic/all-parameter/atlas tests also pas
 Python compilation, command help, shell syntax and whitespace checks pass.
 No full test-suite status inferred; no scientific fit/behavior run or server
 E106 execution occurred locally. Actual selected-model outcomes remain pending.
+
+### 2026-11-21 — E106 server outcome: selected-checkpoint audit completed; no promotion
+
+Evidence: user-reported output of `scripts.report_selected_atlas_audit`, run
+`/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144`.
+Small structured transcription and attachment SHA256 are retained in
+`experiments/records/E106-server-summary.json`; raw stdout remains external.
+No independent access to server artifacts is asserted. All eight cases completed,
+preparation failures were empty; watchdog receipt reports exit0, no timeout,
+711.9875626270659 seconds within the 120-minute total cap, no model promoted.
+Exact server revision, dirty-tree state and environment were not printed.
+
+Selected network/checkpoint, matching peptide term, atlas data replay, selection,
+parameters, controls and rhythm were checked by the server audit. Its combined
+integrity/numerics gate fails for all eight. The supplied problems lists name
+`parameters` for all_lr005, all_lr002 and all_from_e102; selected atlas refinement
+errors are respectively0.000018836,0.005364 and0.000493 (pass). The actual
+parameter error strings, bounds, frozen-field comparisons and mask agreement
+are not printed: these failures do not yet establish a physiological violation
+or distinguish an audit-accounting issue. Do not change tolerances on this evidence.
+
+The selected network_control fails atlas refinement (relative error1.3024),
+correcting any interpretation that its final checkpoint's earlier convergence
+qualifies the selected weights. Four selected peptide models fail refinement
+(errors0.5088,0.4901,0.5711,1.9699); each corresponding peptide-off check also
+fails. No causal/performance benefit can be qualified from those unstable atlas
+responses. Selected peptide tau values are7.741,8.842,11.556 and30.000seconds,
+not the previously reported final-checkpoint values. Network-only and peptide-only
+control share a network hash; the peptide sidecar distinguishes the models.
+Its hash was not supplied in stdout.
+
+Candidate selection: audit reports original performance thresholds missed by
+all eight, no test-based reselection. E104-all_from_e102 retains validation
+leakage. Selected baseline settling was not fresh for network_control,
+pep_joint_lr005 and pep_joint_from_ctrl; this caveat remains part of the
+record. Exact selected checkpoint hashes and all reported train/validation/test
+metrics are in the JSON transcription. Silence is the atlas indicator deadband
+classification for significant pairs, not evidence of whole-brain inactivity.
+Optimizer/RNG/source archives and full retained artifacts remain external;
+individual hashes/check results beyond printed checkpoint hashes are unavailable
+in supplied stdout. No independent raw artifact integrity claim is added here.
+
+Neural signal/rhythm: the three all-parameter models fail parent-relative RMD
+criteria; the network control and all four peptide models pass that component.
+All eight fail strict rhythm convergence. The report omits per-neuron reasons,
+so failure of sustained oscillation must not be inferred from the aggregate
+relative gate. This assay contains no body gait, sensory-controlled start/stop,
+rest/restart, swimming or biological validation. No H1.2 behavior parent qualified.
+
+Decision: inspect existing saved JSON before planning more fitting. Read-only
+report expansion will expose parameter errors/counts/bounds, selection metadata,
+selected and peptide-off numerical checks, coarse/fine RMD measurements and
+parent reference evidence. No simulation, optimization, checkpoint changes,
+threshold relaxation or model promotion. Command:
+`python -m scripts.report_selected_atlas_audit --run /home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144 --details`.
+Local tests below validate reporting software only; server detail evidence remains pending.
+
+Local verification:18 focused tests pass across `test_selected_atlas_report.py`
+and `test_selected_atlas_audit.py` (CPU, x64). New checks confirm the CLI exposes
+saved parameter errors and rhythm evidence, reports absent/mismatched references
+explicitly, and leaves source artifacts unchanged. No audit criteria or simulator
+code changed. `git diff --check` passes. No full-suite or new scientific-run claim.

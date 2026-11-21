@@ -1,15 +1,17 @@
 # Current model: exact scope and computation path
 
-2026-11-21 E106 prepared, server execution pending: read-only audit of all8
-E104/E105 best-validation checkpoints and matching selected peptide sidecars.
-Verify source hashes/frozen fields/bounds/selection; independently rebuild atlas
-splits and replay selected responses and metrics; selected40-vs80 numerical
-checks plus peptide-off controls; fresh parent-relative RMD rhythm checks.
-No fitting, test-based reselection or source overwrite. Two GPU workers under
-nohup, maximum120min TOTAL. Historical evidence gaps remain explicit; no model
-or behavioral promotion. [Plan](experiments/records/E106-plan.json).
-Launch: `sh scripts/launch_selected_atlas_audit_mbslnx2.sh`.
-Report: `python -m scripts.report_selected_atlas_audit`.
+2026-11-21 E106 completed (user-reported server audit): all eight selected
+E104/E105 checkpoints were audited in 712 seconds, within the 120-minute cap.
+None passed combined integrity and atlas numerics. The three all-parameter
+selections pass atlas refinement but fail parameter checks and parent-relative
+RMD criteria; the specific parameter errors remain unavailable in supplied
+stdout. The selected network-only control and all four peptide models fail
+atlas refinement, including the peptide-off checks. Five models pass the RMD
+component criterion; all eight fail strict rhythm convergence. No behavioral
+parent or model promoted. Next: inspect saved errors and per-cell rhythm
+measurements; no new training or relaxed thresholds.
+[Reported evidence](experiments/records/E106-server-summary.json).
+Read-only details: `python -m scripts.report_selected_atlas_audit --details`.
 
 
 2026-11-21 repository review (through38284d7; recorded results, not new runs):

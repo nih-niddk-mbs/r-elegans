@@ -3,8 +3,36 @@ import argparse,json
 from pathlib import Path
 
 
+def print_details(run, checks):
+    """Expose saved evidence without importing the simulator or changing gates."""
+    for key in ('parameters', 'selection', 'selected_substep_convergence',
+                'peptide_off_substep_convergence'):
+        print(' Detail', key + ':', json.dumps(checks.get(key, 'unavailable'), sort_keys=True))
+    rhythm = checks.get('rhythm', {})
+    reference_path = run / 'references' / str(rhythm.get('reference_checkpoint_sha256', 'missing')) / 'summary.json'
+    reference = {}
+    try:
+        reference = json.loads(reference_path.read_text())
+    except (OSError, ValueError) as exc:
+        print(' Rhythm reference unavailable:', reference_path, str(exc))
+    expected = rhythm.get('reference_checkpoint_sha256')
+    matches = expected is not None and reference.get('checkpoint_sha256') == expected
+    print(' Rhythm reference:', dict(path=str(reference_path), checkpoint_matches=matches,
+                                    finite=reference.get('finite')))
+    for name in ('RMDL', 'RMDR'):
+        cell = rhythm.get('cells', {}).get(name)
+        print(' Rhythm', name + ':', json.dumps(cell if cell is not None else 'unavailable', sort_keys=True))
+        # These are the actual reference measurements used by the worker, not
+        # reconstructed claims about why its relative gate failed.
+        parent = reference.get('cells', {}).get(name) if matches else None
+        print(' Parent', name + ':', json.dumps(parent if parent is not None else 'unavailable', sort_keys=True))
+    print(' Details are saved evidence; missing fields are unavailable. No gates changed.')
+
+
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path)
+    p.add_argument('--details',action='store_true',help='Show saved parameter errors, bounds, selection and per-cell rhythm evidence; no simulations')
+    a=p.parse_args()
     run=a.run or max((p for p in Path('/home/carsonc/r-elegans-results').glob('selected-atlas-audit-*') if p.is_dir()),default=None)
     if run is None:raise SystemExit('No selected-checkpoint audit found')
     print('Run:',run)
@@ -24,6 +52,7 @@ def main():
             for name,metric in result.get('selected_metrics',{}).items():print(' ',name,{k:metric.get(k) for k in ('spearman_mean_z','auc_excited','model_silent_fraction_among_significant')})
             if r.get('declared_performance'):print(' Original performance gates:',r['declared_performance'])
             if result.get('selected_peptide_off_metrics'):print(' peptide-off test:',result['selected_peptide_off_metrics']['test'])
+            if a.details:print_details(run, checks)
     if (run/'budget_receipt.json').exists():print('Budget:',json.loads((run/'budget_receipt.json').read_text()))
     print('No model promoted; rhythm and atlas checks do not establish body gait, sensory start/stop or swimming.')
 

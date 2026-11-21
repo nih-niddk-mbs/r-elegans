@@ -1,0 +1,433 @@
+{
+  "experiment": "E106",
+  "recorded_date": "2026-11-21",
+  "evidence_kind": "User-reported server stdout; no independent access to server artifacts",
+  "evidence_sha256": "9ebb3da7bbd1023c29766ab15b60893b989044eb6b2d545c40b90b3f260f0f34",
+  "run": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144",
+  "reported_invocation": "cd /home/carsonc/github/r-elegans && /home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.report_selected_atlas_audit",
+  "audit_complete": true,
+  "preparation_failures": [],
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "audit_complete": true,
+    "total_elapsed_seconds": 711.9875626270659,
+    "total_minutes": 120.0,
+    "model_promoted": false,
+    "scope": "Audit completion does not imply numerical, rhythm, biological or behavior acceptance; no training"
+  },
+  "cases": [
+    {
+      "label": "E104-all_lr005",
+      "complete": true,
+      "checkpoint_sha256": "d546bcaf087072c6659bdfe69adf7de653b181ab19d1766774220bba8cdcc54d",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "parameters"
+      ],
+      "selected_relative_numerical_error": 1.883596159740505e-05,
+      "selected_numerical_pass": true,
+      "rhythm_component_pass": false,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": false,
+      "selected_peptide_tau_s": null,
+      "selection_baseline_fresh": true,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.37246203624952406,
+          "auc_excited": 0.7599296095469456,
+          "model_silent_fraction_among_significant": 1.0
+        },
+        "val": {
+          "spearman_mean_z": 0.10133397181906885,
+          "auc_excited": 0.6308150136394801,
+          "model_silent_fraction_among_significant": 0.9553072625698324
+        },
+        "test": {
+          "spearman_mean_z": 0.08438313163196774,
+          "auc_excited": 0.5818899722667915,
+          "model_silent_fraction_among_significant": 0.9953379953379954
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point127": false,
+          "test_auc_at_least_point574": true,
+          "beats_network_control_by_point02": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": true,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      }
+    },
+    {
+      "label": "E104-all_lr002",
+      "complete": true,
+      "checkpoint_sha256": "16f89386e864739f46dbcca90d3e8d26049082e81840e1d93446c40ec29929aa",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "parameters"
+      ],
+      "selected_relative_numerical_error": 0.005363634227011034,
+      "selected_numerical_pass": true,
+      "rhythm_component_pass": false,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": false,
+      "selected_peptide_tau_s": null,
+      "selection_baseline_fresh": true,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.1653038050415297,
+          "auc_excited": 0.6263468164226761,
+          "model_silent_fraction_among_significant": 1.0
+        },
+        "val": {
+          "spearman_mean_z": 0.08336238017462497,
+          "auc_excited": 0.5993299392666287,
+          "model_silent_fraction_among_significant": 0.994413407821229
+        },
+        "test": {
+          "spearman_mean_z": 0.08988884461106895,
+          "auc_excited": 0.5773581402610445,
+          "model_silent_fraction_among_significant": 1.0
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point127": false,
+          "test_auc_at_least_point574": true,
+          "beats_network_control_by_point02": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": true,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      }
+    },
+    {
+      "label": "E104-network_control",
+      "complete": true,
+      "checkpoint_sha256": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "selected_substep_convergence"
+      ],
+      "selected_relative_numerical_error": 1.3023877079953863,
+      "selected_numerical_pass": false,
+      "rhythm_component_pass": true,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": false,
+      "selected_peptide_tau_s": null,
+      "selection_baseline_fresh": false,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.10970332210558939,
+          "auc_excited": 0.5914234473772464,
+          "model_silent_fraction_among_significant": 0.9808219178082191
+        },
+        "val": {
+          "spearman_mean_z": 0.08505831264858675,
+          "auc_excited": 0.58616699002689,
+          "model_silent_fraction_among_significant": 0.9888268156424581
+        },
+        "test": {
+          "spearman_mean_z": 0.10561813962969006,
+          "auc_excited": 0.5697597264022465,
+          "model_silent_fraction_among_significant": 0.986013986013986
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point127": false,
+          "test_auc_at_least_point574": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": true,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      }
+    },
+    {
+      "label": "E104-all_from_e102",
+      "complete": true,
+      "checkpoint_sha256": "f5f087de6e9a578bf5e33abf648050ac25d17f27685867466709f444d45d77db",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "parameters"
+      ],
+      "selected_relative_numerical_error": 0.0004933578482925851,
+      "selected_numerical_pass": true,
+      "rhythm_component_pass": false,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": true,
+      "selected_peptide_tau_s": null,
+      "selection_baseline_fresh": true,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.19079684789276896,
+          "auc_excited": 0.6568064739343367,
+          "model_silent_fraction_among_significant": 0.6808219178082192
+        },
+        "val": {
+          "spearman_mean_z": 0.17295231662966823,
+          "auc_excited": 0.6177298653557206,
+          "model_silent_fraction_among_significant": 0.7653631284916201
+        },
+        "test": {
+          "spearman_mean_z": 0.08791482367130932,
+          "auc_excited": 0.5593995955529816,
+          "model_silent_fraction_among_significant": 0.7878787878787878
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point127": false,
+          "test_auc_at_least_point574": false,
+          "beats_network_control_by_point02": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": false,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      }
+    },
+    {
+      "label": "E105-pep_joint_lr005",
+      "complete": true,
+      "checkpoint_sha256": "671db23b2602bfdefddc0bf5ffdfa662d9cb37c3f9fda61a5d0cf0ab3665e2bf",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "selected_substep_convergence",
+        "peptide_off_substep_convergence"
+      ],
+      "selected_relative_numerical_error": 0.5087559960005108,
+      "selected_numerical_pass": false,
+      "rhythm_component_pass": true,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": false,
+      "selected_peptide_tau_s": 7.740993622057327,
+      "selection_baseline_fresh": false,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.07700689128145859,
+          "auc_excited": 0.5625694919410383,
+          "model_silent_fraction_among_significant": 0.9808219178082191
+        },
+        "val": {
+          "spearman_mean_z": 0.06760450199342631,
+          "auc_excited": 0.5421121987036416,
+          "model_silent_fraction_among_significant": 0.9832402234636871
+        },
+        "test": {
+          "spearman_mean_z": 0.04461978066417122,
+          "auc_excited": 0.5378058801997129,
+          "model_silent_fraction_among_significant": 0.9790209790209791
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point126": false,
+          "test_auc_at_least_point574": false,
+          "peptide_on_beats_same_checkpoint_off_by_point02": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": true,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      },
+      "peptide_off_test": {
+        "pairs": 2950,
+        "excited": 367,
+        "inhibited": 62,
+        "spearman_mean_z": 0.06980040503166723,
+        "auc_excited": 0.5639905017189526,
+        "auc_inhibited": 0.46843445625949426,
+        "sign_agreement_among_significant_active": 1.0,
+        "model_silent_fraction_among_significant": 0.9883449883449883
+      }
+    },
+    {
+      "label": "E105-pep_joint_lr002",
+      "complete": true,
+      "checkpoint_sha256": "29a907b04f1f1c78b8d79cd767f61c9e2ece18fe3c364b7a0c5c11ab0c39fc18",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "selected_substep_convergence",
+        "peptide_off_substep_convergence"
+      ],
+      "selected_relative_numerical_error": 0.49006739654299586,
+      "selected_numerical_pass": false,
+      "rhythm_component_pass": true,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": false,
+      "selected_peptide_tau_s": 8.84187860255169,
+      "selection_baseline_fresh": true,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.06358605915981266,
+          "auc_excited": 0.5423751088331444,
+          "model_silent_fraction_among_significant": 0.9876712328767123
+        },
+        "val": {
+          "spearman_mean_z": 0.05447872285554394,
+          "auc_excited": 0.558392048742299,
+          "model_silent_fraction_among_significant": 0.9832402234636871
+        },
+        "test": {
+          "spearman_mean_z": 0.022439280518295537,
+          "auc_excited": 0.5295713642227897,
+          "model_silent_fraction_among_significant": 0.986013986013986
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point126": false,
+          "test_auc_at_least_point574": false,
+          "peptide_on_beats_same_checkpoint_off_by_point02": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": true,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      },
+      "peptide_off_test": {
+        "pairs": 2950,
+        "excited": 367,
+        "inhibited": 62,
+        "spearman_mean_z": 0.08481175770476741,
+        "auc_excited": 0.5574111171240167,
+        "auc_inhibited": 0.48171521758555985,
+        "sign_agreement_among_significant_active": 1.0,
+        "model_silent_fraction_among_significant": 0.993006993006993
+      }
+    },
+    {
+      "label": "E105-pep_joint_from_ctrl",
+      "complete": true,
+      "checkpoint_sha256": "6c5bc5b203de5f74be59c6a4f69219b69beb998ad645ecae9fada2b5e1fb86f8",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "selected_substep_convergence",
+        "peptide_off_substep_convergence"
+      ],
+      "selected_relative_numerical_error": 0.5711354349748663,
+      "selected_numerical_pass": false,
+      "rhythm_component_pass": true,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": false,
+      "selected_peptide_tau_s": 11.556357080386157,
+      "selection_baseline_fresh": false,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.1064664109791918,
+          "auc_excited": 0.5773439544064752,
+          "model_silent_fraction_among_significant": 0.9383561643835616
+        },
+        "val": {
+          "spearman_mean_z": 0.06447123787087719,
+          "auc_excited": 0.560045319056858,
+          "model_silent_fraction_among_significant": 0.9553072625698324
+        },
+        "test": {
+          "spearman_mean_z": 0.05256961356634747,
+          "auc_excited": 0.538356535764657,
+          "model_silent_fraction_among_significant": 0.958041958041958
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point126": false,
+          "test_auc_at_least_point574": false,
+          "peptide_on_beats_same_checkpoint_off_by_point02": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": true,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      },
+      "peptide_off_test": {
+        "pairs": 2950,
+        "excited": 367,
+        "inhibited": 62,
+        "spearman_mean_z": 0.10163076610677152,
+        "auc_excited": 0.5776007662762498,
+        "auc_inhibited": 0.4922426503440264,
+        "sign_agreement_among_significant_active": 0.7777777777777778,
+        "model_silent_fraction_among_significant": 0.9790209790209791
+      }
+    },
+    {
+      "label": "E105-pep_only_from_ctrl",
+      "complete": true,
+      "checkpoint_sha256": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f",
+      "integrity_and_atlas_numerics": false,
+      "problems": [
+        "selected_substep_convergence",
+        "peptide_off_substep_convergence"
+      ],
+      "selected_relative_numerical_error": 1.9699067680642317,
+      "selected_numerical_pass": false,
+      "rhythm_component_pass": true,
+      "strict_rhythm_convergence": false,
+      "validation_leakage": false,
+      "selected_peptide_tau_s": 30.000000000000004,
+      "selection_baseline_fresh": true,
+      "selected_metrics": {
+        "train": {
+          "spearman_mean_z": 0.09613401985681365,
+          "auc_excited": 0.5843413295894331,
+          "model_silent_fraction_among_significant": 0.9808219178082191
+        },
+        "val": {
+          "spearman_mean_z": 0.09611938622395039,
+          "auc_excited": 0.5461092228170754,
+          "model_silent_fraction_among_significant": 0.994413407821229
+        },
+        "test": {
+          "spearman_mean_z": 0.06377744552825611,
+          "auc_excited": 0.5351391038238915,
+          "model_silent_fraction_among_significant": 0.986013986013986
+        }
+      },
+      "declared_performance": {
+        "criteria": {
+          "test_spearman_above_point126": false,
+          "test_auc_at_least_point574": false,
+          "peptide_on_beats_same_checkpoint_off_by_point02": false
+        },
+        "passed": false,
+        "numerical_interpretation_allowed": false,
+        "validation_selection_uncontaminated": true,
+        "note": "Original experiment thresholds; no test-based reselection. Passing arithmetic thresholds without numerics/integrity is not qualification."
+      },
+      "peptide_off_test": {
+        "pairs": 2950,
+        "excited": 367,
+        "inhibited": 62,
+        "spearman_mean_z": 0.10561881506396588,
+        "auc_excited": 0.5697607812979648,
+        "auc_inhibited": 0.4720478509516576,
+        "sign_agreement_among_significant_active": 0.6666666666666666,
+        "model_silent_fraction_among_significant": 0.986013986013986
+      }
+    }
+  ],
+  "interpretation": [
+    "All eight cases completed; none passed combined integrity and atlas numerics.",
+    "Three all-parameter selections pass atlas refinement but fail parameter checks and parent-relative RMD criteria. Error strings and per-cell failure reasons are not in supplied stdout; no claim that model bounds or frozen fields were actually violated.",
+    "Selected network-only control and all four peptide models fail atlas refinement; all peptide-off refinement checks also fail. Final-checkpoint convergence cannot qualify selected weights.",
+    "Five conservative/network and peptide models pass parent-relative RMD component criteria. All eight fail strict rhythm convergence; component persistence is distinct from numerical agreement.",
+    "All eight miss original held-out performance gates. E104-all_from_e102 retains validation leakage; three selections used stale cached settling baselines.",
+    "Silence fractions concern significant atlas-pair modeled indicator responses below the project deadband; they do not establish whole-brain inactivity.",
+    "Matching network hashes for E104-network_control and E105-pep_only_from_ctrl do not imply identical models: the latter has a peptide sidecar.",
+    "No checkpoints reselected using test results; no model, body gait, start/stop or swimming promotion."
+  ],
+  "unavailable_evidence": [
+    "Exact server audit source revision, dirty-tree status, environment and source archive hashes are not printed in supplied stdout.",
+    "Full parameter errors/bounds/frozen-field details, source hash checks, mask agreement and per-neuron rhythm metrics must be read from saved audit JSON.",
+    "Selected peptide sidecar hashes, optimizer/RNG evidence and individual worker exit codes are not printed.",
+    "No new body, sensory start/stop, recovery/restart or biological tests were performed in this neural/atlas audit."
+  ],
+  "decision": "Inspect saved parameter failures and per-neuron rhythm evidence with report --details before planning further training. Do not loosen criteria or infer biological failure from these diagnostics."
+}
