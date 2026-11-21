@@ -1,5 +1,29 @@
 # WormGym: training and validation protocols
 
+2026-11-21 repository review (through38284d7; recorded results, not new runs):
+E101/E102 added two-A100 gradient fitting to the stimulation atlas; held-out
+Spearman is about0.11, comparable to anatomy-only baselines, with many near-silent
+responses. These fits start from the polarized Mac rhythm bundle, not E099's
+server gait lineage. RMD rhythm checks pass the declared component criteria;
+body gait/control are unqualified. Applying predicted per-edge polarity to E099
+breaks its gait; none of E103's11 partial variants preserves all gates.
+E104's12h all-parameter fit overfits and does not beat its network-only control
+(test~0.106 versus0.084-0.090 for selected all-parameter variants). E105's peptide
+extension worsens held-out agreement (best~0.064; peptide-off control~0.106) and
+its final models fail numerical convergence. The peptide term is in atlas
+stimulation simulations, not the embodied body path. No qualified sensory
+start/stop, rest/restart or swimming parent emerges from these studies.
+
+2026-11-21 audit clarification: E104/E105 headline accuracy uses best-validation
+weights, but the printed convergence, bounds/parameter counts and E105 peptide
+tau/gains use final weights. Those final-checkpoint checks do not qualify or
+fully characterize the selected best-validation checkpoint. Earlier notebook
+parameter/convergence interpretations must be read with this distinction.
+Selected checkpoints require their own checks. Recent server integrity evidence
+is incomplete; original report limitations remain in LAB_NOTEBOOK.md.
+[Repository review](experiments/records/repository-review-20261121.json).
+
+
 2026-11-18 E093 detail report received: matched loss improves5.48%,65
 coordinates change, frozen fields unchanged. Weakest-region suppression peaks
 at generation3 (0.04843%) and ends0.04331% despite falling average loss. E093's

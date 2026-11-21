@@ -1,0 +1,58 @@
+{
+  "record_date": "2026-11-21",
+  "kind": "Repository/source review; no new scientific experiment",
+  "observed_head": "38284d7",
+  "comparison_base": "76aa1f8",
+  "new_commits": 50,
+  "remote": "origin/main fetched and equal to local main before documentation update",
+  "working_tree": "clean before review",
+  "evidence": "Local tracked code, experiment records and LAB_NOTEBOOK server-result narratives; server data/checkpoints/jobs were not accessed or rerun",
+  "results": {
+    "behavior": "E094-E099 improve cue-to-motor response; E099 nominal tail/middle/head suppression0.77/1.27/1.35percent, tail/varied cases and neural-half baseline gate still miss; no qualification",
+    "polarity": "Bundled per-edge predictions added; E099 loses baseline gait under polarization; all11 partial-polarity variants miss preservation gates",
+    "atlas": "Separate polarized Mac reference lineage; E101/E102 held-out Spearman~0.11; RMD component retained, gait/control not established",
+    "all_parameters": "E104 selected all-parameter runs test Spearman0.084-0.090; network-only control0.106; no improvement and overfitting",
+    "peptides": "E105 best-validation test Spearman0.022-0.064 versus0.070-0.106 with peptide term off. Final-checkpoint resolution differences0.387-1.321 versus required<0.1; selected-checkpoint convergence not evaluated by current trainer"
+  },
+  "locally_verified_source_findings": [
+    {
+      "finding": "Best-validation accuracy versus final-checkpoint convergence/parameter metadata are mixed in recent reports",
+      "files": [
+        "scripts/train_all_parameters.py:251",
+        "scripts/train_atlas_peptides.py:286",
+        "scripts/report_all_parameters.py:21",
+        "scripts/report_atlas_peptides.py:21"
+      ],
+      "limit": "Does not establish whether selected checkpoints converge; needs their own numerical/integrity evaluation"
+    },
+    {
+      "finding": "Peptide term is in stimulation-atlas model, not embodied core/body simulation",
+      "files": [
+        "r_elegans/brain/extrasynaptic.py:1",
+        "scripts/train_atlas_peptides.py:333"
+      ]
+    },
+    {
+      "finding": "Reproduction guide was stale about CPU-only numerics, CMA-only fitting and universal automatic audits",
+      "files": [
+        "REPRODUCE.md"
+      ],
+      "action": "Corrected to distinguish experiment families and audit guarantees"
+    },
+    {
+      "finding": "README/current model/protocols/skill repertoire lacked newest E101-E105 summaries",
+      "action": "Added dated cross-lineage/status summary; original notebook negative results preserved"
+    }
+  ],
+  "remaining_gaps": [
+    "No qualified sensory initiation/stop/rest/restart or swimming checkpoint",
+    "Do not attach E092-E099 gait evidence to Mac-reference atlas fits",
+    "Need complete same-selected-checkpoint integrity and numerical audit for E104/E105",
+    "Full test-suite failures documented historically, not rerun here",
+    "E104 from-E102 validation scores contaminated by earlier exposure; test split remains separate",
+    "Cannot establish current server jobs, files, hashes or runtime environment from repository alone"
+  ],
+  "next_priority": "Audit and numerically stabilize the actual selected checkpoints before further fitting; preserve independent behavior/atlas lineages and explicitly choose the intended one. Peptide failure is implementation-specific and does not disprove extrasynaptic signaling.",
+  "changes": "Documentation/recordkeeping only; no model, trainer, data, checkpoint or acceptance threshold changed; no training launched",
+  "verification": "Read history/source and parsed JSON; whitespace checks. No scientific simulation or full-suite test claimed."
+}

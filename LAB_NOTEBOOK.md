@@ -11326,3 +11326,56 @@ not shown): a zero-effect start (gains exactly 0 at step 0) would remove the ini
 wild-type objective cannot distinguish peptide effects from residual; about 550 steps is short. Decision: negative result for this
 implementation of the peptide term; it provides no evidence for or against extrasynaptic signaling in general. Nothing from E105
 is kept as a model checkpoint. Not shown: the pairs carrying the gains, rhythm retention, the unc-31 comparison, behavior.
+
+## 2026-11-21 — Repository reconciliation and same-checkpoint audit clarification
+
+At user request, inspected main and fetched origin: both at38284d7, clean working
+tree,50commits after76aa1f8 (our prior E093 details record). No server login,
+checkpoint inspection, new fit or scientific forward simulation. Evidence is
+tracked source, notebook and structured records; outcomes below remain the
+previously user-reported server evidence, not independent reproductions.
+[Review](experiments/records/repository-review-20261121.json).
+
+The work progresses through bilateral/wider-edge/body-node/pathway probes and
+fits (E094-E099), data acquisition/manifests and reproducibility guide,
+predicted per-edge polarity, atlas baseline and GPU gradient fitting
+(E100-E102), polarity/gait requalification (E103), all-parameter atlas fitting
+(E104,12h) and the extrasynaptic atlas model (E105,2h). E099 gets nominal tail
+suppression to0.77%, but does not qualify. E101/E102 retain the Mac-reference RMD
+rhythm and reach held-out atlas Spearman~0.11; they never inherited E099's gait.
+Predicted polarity disrupts E099's gait and all11partial variants fail its gates.
+E104 adds parameters and overfits rather than improving held-out agreement;
+E105 worsens agreement relative to peptide-off counterparts and its final
+checkpoints fail the resolution threshold. The peptide implementation is only
+in the atlas stimulation simulations, not in the embodied motor/body pipeline.
+No full sensory start/stop/rest/restart or swimming parent is established.
+
+Dated clarification to E104/E105 interpretations above, from source inspection:
+`train_all_parameters.py` evaluates best_theta for best-validation accuracy but
+uses final theta/final_fixed/final_response for substep convergence and final
+parameter/bound statistics. `train_atlas_peptides.py` likewise computes accuracy
+for best_theta but convergence, frozen-field counts, peptide tau and top gain
+summaries from final theta (lines286-331). Reports put those fields on the same
+row. Therefore E105's reported tau30s/other gain values and convergence errors
+characterize final models, not necessarily the selected best-validation models.
+The final-checkpoint numerical failures remain real recorded failures; they do
+not prove the selected checkpoint fails, nor qualify it. A selected model's
+same-checkpoint audit must be performed before using it. The same distinction
+applies to E104's reported convergence, bounds and final parameter summaries.
+This supplements rather than overwrites earlier reported tables/negative
+outcomes. No new model score or checkpoint property is invented.
+
+Recent reports also omit parts of the independent integrity evidence; the
+notebook already records unavailable hashes/run records/frozen-field counts.
+E104's from-E102 validation contamination remains a separate recorded issue.
+The historical full-suite failures in REPRODUCE.md were not rerun during this
+review; do not present that count as a fresh test result.
+
+Reconciled latest outcomes into CURRENT_MODEL.md, README.md,
+TRAINING_PROTOCOLS.md and SKILL_REPERTOIRE.md. Corrected REPRODUCE.md's stale
+CPU-only, CMA-only and universal automatic-audit statements. Documentation only:
+no simulation, parameter, threshold, model code or training launcher change.
+Priority is a complete integrity and numerical audit of actual selected models,
+then an explicit lineage choice and numerically stable next experiment. Keep
+negative outcomes and independent older checkpoints. JSON/whitespace checks
+validate this documentation update; no software test or scientific run needed.
