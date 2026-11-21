@@ -1,5 +1,15 @@
 # r-elegans
 
+2026-11-21 E106 detail follow-up: `all_lr005` and `all_lr002` lost late
+RMDL/RMDR oscillation on both grids; `all_from_e102` lost RMDR persistence.
+The five conservative/network and peptide selections retain both components
+but fail strict cycle convergence. A local audit bug was reproduced: float32
+anchor arithmetic discards the existing per-cell bound tolerance and can falsely
+reject float64 rounding at a bound. Calculation now uses float64 with the same
+1e-8 tolerance; hash-checked server parameter recheck is pending. Original
+reports remain unchanged. Numerical/performance failures still block promotion.
+[Detailed evidence](experiments/records/E106-server-details.json).
+
 2026-11-21 E106 completed (user-reported server audit): all eight selected
 E104/E105 checkpoints were audited in 712 seconds, within the 120-minute cap.
 None passed combined integrity and atlas numerics. The three all-parameter

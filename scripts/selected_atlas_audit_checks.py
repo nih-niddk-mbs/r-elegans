@@ -62,13 +62,17 @@ def parameter_audit(selected_path,parent_path,anchor_path,experiment,args):
             bounds[key]=dict(max_abs_change=float(np.max(abs(delta))),at_bound=int(np.sum(mask&(abs(delta)>=limit-1e-6))))
             if np.any(abs(delta[mask])>limit+1e-9):errors.append('Parameter bound exceeded: '+key)
         elif key in allowed_extra:
-            x=anchor[key]
+            # Keep the declared tolerance representable for float32 anchors.
+            # Otherwise e.g. float32(20) + 1e-8 rounds back to 20, rejecting
+            # harmless float64 log/exp roundoff in saved selected weights.
+            x=np.asarray(anchor[key],dtype=np.float64)
             if key=='cells_capacitance_pF':lo,hi=np.minimum(x,1.),np.maximum(x,20.)
             elif key=='cells_leak_reversal_mV':lo,hi=np.minimum(x,-80.),np.maximum(x,-35.)
             elif key=='fixed_release_threshold_mV':lo,hi=np.minimum(x,-65.),np.maximum(x,-20.)
             elif key=='fixed_release_slope_mV':lo,hi=np.minimum(x,2.),np.maximum(x,20.)
             else:lo,hi=x/3.,x*3.
-            bounds[key]=dict(changed=int(np.count_nonzero(a-x)),at_lower=int(np.sum(abs(a-lo)<=1e-8)),at_upper=int(np.sum(abs(a-hi)<=1e-8)),minimum=float(a.min()),maximum=float(a.max()))
+            bounds[key]=dict(changed=int(np.count_nonzero(a-x)),at_lower=int(np.sum(abs(a-lo)<=1e-8)),at_upper=int(np.sum(abs(a-hi)<=1e-8)),minimum=float(a.min()),maximum=float(a.max()),
+                maximum_below_lower=float(np.maximum(lo-a,0.).max()),maximum_above_upper=float(np.maximum(a-hi,0.).max()),absolute_tolerance=1e-8,bound_arithmetic_dtype=str(x.dtype))
             if np.any(a<lo-1e-8) or np.any(a>hi+1e-8):errors.append('Per-cell bound exceeded: '+key)
         elif not np.array_equal(a,b):errors.append('Frozen field changed: '+key)
     return dict(passed=not errors,errors=errors,changed_entries=changes,trainable_entries=counts,

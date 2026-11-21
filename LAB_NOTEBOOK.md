@@ -11524,3 +11524,63 @@ and `test_selected_atlas_audit.py` (CPU, x64). New checks confirm the CLI expose
 saved parameter errors and rhythm evidence, reports absent/mismatched references
 explicitly, and leaves source artifacts unchanged. No audit criteria or simulator
 code changed. `git diff --check` passes. No full-suite or new scientific-run claim.
+
+### 2026-11-21 — E106 detailed server evidence; parameter-audit arithmetic correction
+
+User supplied the `--details` report from the same completed audit, after pulling
+bdc0c7b. This is saved-data evidence, not another forward run. Its exact attachment
+hash and extracted parameter/selection/numerical/per-cell reference evidence are
+in `experiments/records/E106-server-details.json`. Prior reported budget,
+selection, controls and integrity limitations remain in force; no new environment,
+source-run optimizer or behavior evidence was supplied.
+
+RMD failure is now identifiable. For all_lr005, late RMDL/RMDR voltages settle
+near+9.45/+11.96mV, with zero late peaks on either grid. For all_lr002, they
+settle near+13.24/-19.68mV, also with zero late peaks. All_from_e102 retains
+cycling RMDL, but RMDR has no sustained rhythm. Thus these three models fail
+more than a parent-relative amplitude criterion. This finding concerns the
+assayed RMD cells and initialization, not every neuron or possible attractor.
+The other five models retain sustained RMDL/RMDR rhythms. Their strict numerical
+failures are real measured differences: network-control RMDL period differs
+3.51%, amplitude7.61%; RMDR period1.43%, amplitude5.03%. These exceed existing
+1% period/2% amplitude criteria; no relaxation proposed. Atlas-response numerical
+failures and held-out performance failures remain as recorded previously.
+
+Parameter error strings only name capacitance/release-slope bounds. Recorded
+masks match for all three all-parameter models. Their printed extrema include
+20.000000000000007pF and release slopes1.9999999999999998mV. Local inspection
+and reproduction identify an audit defect: bounds are constructed from float32
+anchor arrays, so adding/subtracting the existing absolute tolerance1e-8 can
+round back to the bound. Comparing float64 selected values then rejects
+machine-roundoff excess. With float64 bounds, the SAME tolerance is representable.
+Corrected only the bound arithmetic dtype; frozen-field, mask, trainability and
+numerical criteria are unchanged. Added maximum excess above/below each bound,
+tolerance and arithmetic dtype to future parameter reports. This does not prove
+all server per-coordinate errors disappear: the saved-file recheck must establish
+that. Original audit JSON and earlier negative outcomes are preserved.
+
+Planned saved-parameter recheck (no training/simulation): question is whether
+these reported parameter errors persist under correctly evaluated existing
+bounds. Inputs are the original E106 copied selected, parent and anchor NPZs,
+summary and optional trainable masks, pinned by the original manifest hashes,
+job/manifest hash and selected checkpoint hash. All eight are checked without
+reselection; no seeds or trainable updates apply. Capture invocation/environment/
+source, verify consumed input hashes before and after, compare old/new parameter
+checks, write a separate timestamped sibling report. Acceptance is unchanged
+parameter bounds/frozen fields/masks; missing/tampered inputs fail. No atlas,
+rhythm, performance or behavioral gate is reclassified or model promoted.
+Command: `python -m scripts.recheck_selected_parameters --run /home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144`.
+
+Next scientific decision: establish numerically reliable response/rhythm
+simulation and preserve intrinsic rhythm during any new fit before expanding
+parameter freedom. A stable equilibrium can match atlas summaries while losing
+the motor component, so held-out atlas score alone is insufficient. No new
+training is launched or presented as authorized by this evidence upload.
+
+Local software verification:21 focused tests pass (CPU/x64): selected audit,
+detailed reporter and new parameter recheck. Regression cases reproduce float32
+anchor/float64 selected rounding at both lower and upper bounds, accept errors
+within unchanged1e-8 tolerance and reject2e-8 violations. Recheck test verifies
+old audit preservation, checksum matching and tamper rejection. This is software
+evidence only; no server corrected-parameter outcome is asserted. Whitespace
+check and CLI help pass; no full-suite status asserted.

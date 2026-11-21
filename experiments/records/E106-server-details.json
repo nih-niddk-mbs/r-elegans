@@ -1,0 +1,2201 @@
+{
+  "experiment": "E106",
+  "recorded_date": "2026-11-21",
+  "evidence_kind": "User-reported server detailed report; no independent access to server artifacts",
+  "evidence_sha256": "dd415d0df7fc19db5f7b538d5c0662320ac228c7149c64b67fae43acb3576969",
+  "run": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144",
+  "cases": [
+    {
+      "label": "E104-all_lr005",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "d546bcaf087072c6659bdfe69adf7de653b181ab19d1766774220bba8cdcc54d",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "parameters"
+        ],
+        "selected_relative_numerical_error": 1.883596159740505e-05,
+        "selected_numerical_pass": true,
+        "rhythm_component_pass": false,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": false,
+        "selected_peptide_tau_s": null,
+        "selection_baseline_fresh": true
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 0.017179023508137433,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": 9.449651028443794,
+            "voltage_min_mV": 9.449651027395614,
+            "window_amplitudes_mV": [
+              3.929301328753354e-12,
+              1.4299672557172016e-12,
+              3.481659405224491e-13,
+              1.1191048088221578e-13,
+              6.750155989720952e-14
+            ]
+          },
+          "coarse_vs_fine": {
+            "passed": false,
+            "reason": "Persistence failed"
+          },
+          "fine": {
+            "amplitude_retention": 0.004387889425186486,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": 9.449651028443865,
+            "voltage_min_mV": 9.449651027403865,
+            "window_amplitudes_mV": [
+              4.048317236993171e-12,
+              9.912071163853398e-13,
+              3.3573144264664734e-13,
+              1.3322676295501878e-13,
+              1.7763568394002505e-14
+            ]
+          },
+          "relative_reference_criteria_passed": false
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 0.0043859649122807015,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": 11.960314990344099,
+            "voltage_min_mV": 11.960314989798714,
+            "window_amplitudes_mV": [
+              2.8350655156827997e-12,
+              9.592326932761353e-13,
+              3.517186542012496e-13,
+              1.3500311979441904e-13,
+              1.2434497875801753e-14
+            ]
+          },
+          "coarse_vs_fine": {
+            "passed": false,
+            "reason": "Persistence failed"
+          },
+          "fine": {
+            "amplitude_retention": 0.014360313315926894,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": 11.960314990343957,
+            "voltage_min_mV": 11.960314989798624,
+            "window_amplitudes_mV": [
+              2.7213786779611837e-12,
+              9.78772618509538e-13,
+              3.481659405224491e-13,
+              7.638334409421077e-14,
+              3.907985046680551e-14
+            ]
+          },
+          "relative_reference_criteria_passed": false
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 1.000468840141937,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 85,
+          "median_period_s": 0.234,
+          "passed": true,
+          "period_cv": 0.02082828663723368,
+          "voltage_max_mV": -3.220172252954426,
+          "voltage_min_mV": -22.18121278786702,
+          "window_amplitudes_mV": [
+            18.951602483941965,
+            18.942356273588732,
+            18.959496187731432,
+            18.829628138210275,
+            18.96048775594047
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 0.9994350818034636,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 87,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.017645564035337354,
+          "voltage_max_mV": -2.4403879288452925,
+          "voltage_min_mV": -21.717813773632322,
+          "window_amplitudes_mV": [
+            19.269619487394415,
+            18.544033512539016,
+            19.261780721566318,
+            18.39604596204764,
+            19.258733728705653
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "cells_calcium_removal_ms": {
+            "at_lower": 0,
+            "at_upper": 3,
+            "changed": 302,
+            "maximum": 150.0,
+            "minimum": 16.666666666666664
+          },
+          "cells_capacitance_pF": {
+            "at_lower": 27,
+            "at_upper": 36,
+            "changed": 298,
+            "maximum": 20.000000000000007,
+            "minimum": 0.9999999999999999
+          },
+          "cells_free_calcium_fraction": {
+            "at_lower": 15,
+            "at_upper": 3,
+            "changed": 302,
+            "maximum": 0.003000000142492354,
+            "minimum": 0.0003333333491658171
+          },
+          "cells_leak_reversal_mV": {
+            "at_lower": 13,
+            "at_upper": 0,
+            "changed": 289,
+            "maximum": -35.039812722036686,
+            "minimum": -80.0
+          },
+          "fixed_release_slope_mV": {
+            "at_lower": 12,
+            "at_upper": 3,
+            "changed": 294,
+            "maximum": 20.0,
+            "minimum": 1.9999999999999998
+          },
+          "fixed_release_threshold_mV": {
+            "at_lower": 7,
+            "at_upper": 30,
+            "changed": 262,
+            "maximum": -20.0,
+            "minimum": -65.0
+          },
+          "params_log_channel_scale": {
+            "at_bound": 26,
+            "max_abs_change": 2.302585092994046
+          },
+          "params_raw_chemical": {
+            "at_bound": 377,
+            "max_abs_change": 2.0
+          },
+          "params_raw_gap": {
+            "at_bound": 196,
+            "max_abs_change": 2.0
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 5116,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        },
+        "errors": [
+          "Per-cell bound exceeded: cells_capacitance_pF",
+          "Per-cell bound exceeded: fixed_release_slope_mV"
+        ],
+        "network_frozen": false,
+        "passed": false,
+        "per_cell_extras_allowed": [
+          "cells_calcium_removal_ms",
+          "cells_capacitance_pF",
+          "cells_free_calcium_fraction",
+          "cells_leak_reversal_mV",
+          "fixed_release_slope_mV",
+          "fixed_release_threshold_mV"
+        ],
+        "recorded_masks_match": true,
+        "reference": "anchor",
+        "trainable_entries": {
+          "params_log_channel_scale": 5116,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": true,
+        "expected_step": 3250,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.10133397181906885,
+        "recorded_step": 3250
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.9999999993538734,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 3.226267184759722e-07,
+        "max_abs_difference_over_max_abs_response": 1.883596159740505e-05,
+        "max_abs_reference_response": 0.017128231909350415,
+        "minimum_correlation": 0.9,
+        "passed": true,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": "unavailable",
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    },
+    {
+      "label": "E104-all_lr002",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "16f89386e864739f46dbcca90d3e8d26049082e81840e1d93446c40ec29929aa",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "parameters"
+        ],
+        "selected_relative_numerical_error": 0.005363634227011034,
+        "selected_numerical_pass": true,
+        "rhythm_component_pass": false,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": false,
+        "selected_peptide_tau_s": null,
+        "selection_baseline_fresh": true
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 0.1641093384818616,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": 13.244204128264219,
+            "voltage_min_mV": 13.244204127362126,
+            "window_amplitudes_mV": [
+              3.496225531307573e-11,
+              2.1602275523946446e-11,
+              1.4129142300589592e-11,
+              8.999023748401669e-12,
+              5.737632591262809e-12
+            ]
+          },
+          "coarse_vs_fine": {
+            "passed": false,
+            "reason": "Persistence failed"
+          },
+          "fine": {
+            "amplitude_retention": 0.16341132233131397,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": 13.244204128260138,
+            "voltage_min_mV": 13.244204127361899,
+            "window_amplitudes_mV": [
+              3.4013680760835996e-11,
+              2.2144064359963522e-11,
+              1.4075851595407585e-11,
+              9.00790553259867e-12,
+              5.558220550483384e-12
+            ]
+          },
+          "relative_reference_criteria_passed": false
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 0.16552462526766595,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": -19.68495159582222,
+            "voltage_min_mV": -19.684951597122236,
+            "window_amplitudes_mV": [
+              4.977351863999502e-11,
+              3.175770757479768e-11,
+              2.0378365661599673e-11,
+              1.2722267683784594e-11,
+              8.238743021138362e-12
+            ]
+          },
+          "coarse_vs_fine": {
+            "passed": false,
+            "reason": "Persistence failed"
+          },
+          "fine": {
+            "amplitude_retention": 0.16538544435663483,
+            "gates": {
+              "amplitude_retained": false,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": -19.684951595827876,
+            "voltage_min_mV": -19.68495159712247,
+            "window_amplitudes_mV": [
+              4.945022169522417e-11,
+              3.155875560878485e-11,
+              2.0126122990404838e-11,
+              1.2885692513009417e-11,
+              8.178346888598753e-12
+            ]
+          },
+          "relative_reference_criteria_passed": false
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 1.000468840141937,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 85,
+          "median_period_s": 0.234,
+          "passed": true,
+          "period_cv": 0.02082828663723368,
+          "voltage_max_mV": -3.220172252954426,
+          "voltage_min_mV": -22.18121278786702,
+          "window_amplitudes_mV": [
+            18.951602483941965,
+            18.942356273588732,
+            18.959496187731432,
+            18.829628138210275,
+            18.96048775594047
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 0.9994350818034636,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 87,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.017645564035337354,
+          "voltage_max_mV": -2.4403879288452925,
+          "voltage_min_mV": -21.717813773632322,
+          "window_amplitudes_mV": [
+            19.269619487394415,
+            18.544033512539016,
+            19.261780721566318,
+            18.39604596204764,
+            19.258733728705653
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "cells_calcium_removal_ms": {
+            "at_lower": 0,
+            "at_upper": 4,
+            "changed": 302,
+            "maximum": 150.0,
+            "minimum": 16.666666666666664
+          },
+          "cells_capacitance_pF": {
+            "at_lower": 6,
+            "at_upper": 11,
+            "changed": 295,
+            "maximum": 20.0,
+            "minimum": 1.0
+          },
+          "cells_free_calcium_fraction": {
+            "at_lower": 2,
+            "at_upper": 3,
+            "changed": 302,
+            "maximum": 0.003000000142492354,
+            "minimum": 0.0003333333491658171
+          },
+          "cells_leak_reversal_mV": {
+            "at_lower": 14,
+            "at_upper": 1,
+            "changed": 287,
+            "maximum": -35.0,
+            "minimum": -80.0
+          },
+          "fixed_release_slope_mV": {
+            "at_lower": 1,
+            "at_upper": 2,
+            "changed": 295,
+            "maximum": 20.0,
+            "minimum": 1.9999999999999998
+          },
+          "fixed_release_threshold_mV": {
+            "at_lower": 4,
+            "at_upper": 35,
+            "changed": 259,
+            "maximum": -20.0,
+            "minimum": -65.0
+          },
+          "params_log_channel_scale": {
+            "at_bound": 0,
+            "max_abs_change": 2.295468015442783
+          },
+          "params_raw_chemical": {
+            "at_bound": 10,
+            "max_abs_change": 2.0
+          },
+          "params_raw_gap": {
+            "at_bound": 2,
+            "max_abs_change": 2.0
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 5116,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        },
+        "errors": [
+          "Per-cell bound exceeded: fixed_release_slope_mV"
+        ],
+        "network_frozen": false,
+        "passed": false,
+        "per_cell_extras_allowed": [
+          "cells_calcium_removal_ms",
+          "cells_capacitance_pF",
+          "cells_free_calcium_fraction",
+          "cells_leak_reversal_mV",
+          "fixed_release_slope_mV",
+          "fixed_release_threshold_mV"
+        ],
+        "recorded_masks_match": true,
+        "reference": "anchor",
+        "trainable_entries": {
+          "params_log_channel_scale": 5116,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": true,
+        "expected_step": 1000,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.08336238017462497,
+        "recorded_step": 1000
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.9999990772753894,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 3.6720905453158483e-07,
+        "max_abs_difference_over_max_abs_response": 0.005363634227011034,
+        "max_abs_reference_response": 6.846273235455461e-05,
+        "minimum_correlation": 0.9,
+        "passed": true,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": "unavailable",
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    },
+    {
+      "label": "E104-network_control",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "selected_substep_convergence"
+        ],
+        "selected_relative_numerical_error": 1.3023877079953863,
+        "selected_numerical_pass": false,
+        "rhythm_component_pass": true,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": false,
+        "selected_peptide_tau_s": null,
+        "selection_baseline_fresh": false
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 0.9998826729174418,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 84,
+            "median_period_s": 0.23600000000000002,
+            "passed": true,
+            "period_cv": 0.020226244874692895,
+            "voltage_max_mV": -3.524049728617958,
+            "voltage_min_mV": -22.161486596522526,
+            "window_amplitudes_mV": [
+              18.63501555907152,
+              18.636004556960494,
+              18.632670529128976,
+              18.48477275864464,
+              18.632829167062546
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.07611766027651566,
+            "coarse_period_s": 0.23600000000000002,
+            "fine_period_s": 0.228,
+            "passed": false,
+            "period_relative_error": 0.03508771929824565,
+            "phase_aligned_waveform_rmse_mV": 0.7858152736409726,
+            "pointwise_rmse_mV": 8.847922037667313
+          },
+          "fine": {
+            "amplitude_retention": 1.0005908763268854,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 86,
+            "median_period_s": 0.23,
+            "passed": true,
+            "period_cv": 0.02317346492799804,
+            "voltage_max_mV": -2.890579774644315,
+            "voltage_min_mV": -22.267730742618987,
+            "window_amplitudes_mV": [
+              19.3620255166302,
+              19.35901922701021,
+              19.374086880306418,
+              19.37715096797467,
+              19.37346607914853
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 0.9918050098412021,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 87,
+            "median_period_s": 0.23,
+            "passed": true,
+            "period_cv": 0.016709787339149986,
+            "voltage_max_mV": -2.3977811108337668,
+            "voltage_min_mV": -21.726084772945146,
+            "window_amplitudes_mV": [
+              18.982855344090783,
+              19.323843706928553,
+              19.315707149846077,
+              19.302380038084287,
+              18.827291031360076
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.050294326768050054,
+            "coarse_period_s": 0.22719999999999999,
+            "fine_period_s": 0.224,
+            "passed": false,
+            "period_relative_error": 0.014285714285714199,
+            "phase_aligned_waveform_rmse_mV": 0.3805971489193775,
+            "pointwise_rmse_mV": 9.059373743874502
+          },
+          "fine": {
+            "amplitude_retention": 1.0011788644428257,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 91,
+            "median_period_s": 0.222,
+            "passed": true,
+            "period_cv": 0.018059704901924573,
+            "voltage_max_mV": -1.9409877907658903,
+            "voltage_min_mV": -21.81695097473754,
+            "window_amplitudes_mV": [
+              19.852118813155954,
+              19.45653975838331,
+              19.858665824531545,
+              19.866259308906116,
+              19.875521770139535
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 1.000468840141937,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 85,
+          "median_period_s": 0.234,
+          "passed": true,
+          "period_cv": 0.02082828663723368,
+          "voltage_max_mV": -3.220172252954426,
+          "voltage_min_mV": -22.18121278786702,
+          "window_amplitudes_mV": [
+            18.951602483941965,
+            18.942356273588732,
+            18.959496187731432,
+            18.829628138210275,
+            18.96048775594047
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 0.9994350818034636,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 87,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.017645564035337354,
+          "voltage_max_mV": -2.4403879288452925,
+          "voltage_min_mV": -21.717813773632322,
+          "window_amplitudes_mV": [
+            19.269619487394415,
+            18.544033512539016,
+            19.261780721566318,
+            18.39604596204764,
+            19.258733728705653
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "params_log_channel_scale": {
+            "at_bound": 6,
+            "max_abs_change": 2.302585092994046
+          },
+          "params_raw_chemical": {
+            "at_bound": 11,
+            "max_abs_change": 2.0
+          },
+          "params_raw_gap": {
+            "at_bound": 2,
+            "max_abs_change": 2.0
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        },
+        "errors": [],
+        "network_frozen": false,
+        "passed": true,
+        "per_cell_extras_allowed": [],
+        "recorded_masks_match": true,
+        "reference": "anchor",
+        "trainable_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": false,
+        "expected_step": 475,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.09224008038996775,
+        "recorded_step": 475
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": -0.6449242205976856,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 4.5123586131210483e-05,
+        "max_abs_difference_over_max_abs_response": 1.3023877079953863,
+        "max_abs_reference_response": 3.464681511825996e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": "unavailable",
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    },
+    {
+      "label": "E104-all_from_e102",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "f5f087de6e9a578bf5e33abf648050ac25d17f27685867466709f444d45d77db",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "parameters"
+        ],
+        "selected_relative_numerical_error": 0.0004933578482925851,
+        "selected_numerical_pass": true,
+        "rhythm_component_pass": false,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": true,
+        "selected_peptide_tau_s": null,
+        "selection_baseline_fresh": true
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 1.0000241967337635,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 64,
+            "median_period_s": 0.314,
+            "passed": true,
+            "period_cv": 0.0007961585312448758,
+            "voltage_max_mV": 6.126721036631596,
+            "voltage_min_mV": -23.51988141192712,
+            "window_amplitudes_mV": [
+              29.640020215379497,
+              29.635911095806513,
+              29.62951906078841,
+              29.634705703112946,
+              29.640737407057394
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.009559100803272196,
+            "coarse_period_s": 0.314,
+            "fine_period_s": 0.30519999999999997,
+            "passed": false,
+            "period_relative_error": 0.028833551769331688,
+            "phase_aligned_waveform_rmse_mV": 0.18368934890665425,
+            "pointwise_rmse_mV": 13.369585599725701
+          },
+          "fine": {
+            "amplitude_retention": 1.0000218115383837,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 65,
+            "median_period_s": 0.306,
+            "passed": true,
+            "period_cv": 0.0032716081587116017,
+            "voltage_max_mV": 6.320789143428592,
+            "voltage_min_mV": -23.60801106942016,
+            "window_amplitudes_mV": [
+              29.928059931559275,
+              29.928506758609057,
+              29.928355001862922,
+              29.927866247819303,
+              29.92871270858722
+            ]
+          },
+          "relative_reference_criteria_passed": false
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 0.9995733454785147,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": -14.920299252932749,
+            "voltage_min_mV": -15.188140640079004,
+            "window_amplitudes_mV": [
+              0.26773866274806046,
+              0.2677294623261659,
+              0.2677073675550403,
+              0.2676723615906269,
+              0.2676244308370226
+            ]
+          },
+          "coarse_vs_fine": {
+            "passed": false,
+            "reason": "Persistence failed"
+          },
+          "fine": {
+            "amplitude_retention": 1.0033737759594497,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": false,
+              "sustained_amplitude": false
+            },
+            "late_peaks": 0,
+            "median_period_s": null,
+            "passed": false,
+            "period_cv": null,
+            "voltage_max_mV": -14.913314156994787,
+            "voltage_min_mV": -15.190724623892446,
+            "window_amplitudes_mV": [
+              0.2764581820706482,
+              0.2754164579915024,
+              0.276399158977501,
+              0.2771552220528246,
+              0.2773908900391113
+            ]
+          },
+          "relative_reference_criteria_passed": false
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 1.000636125117246,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 86,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.022959516923168867,
+          "voltage_max_mV": -2.751081339858088,
+          "voltage_min_mV": -22.068925635257024,
+          "window_amplitudes_mV": [
+            19.302454748876773,
+            19.315175758177215,
+            19.2932530268323,
+            19.317305623089826,
+            19.314733525167036
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 1.0003572727107,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 91,
+          "median_period_s": 0.22,
+          "passed": true,
+          "period_cv": 0.00864789459004433,
+          "voltage_max_mV": -3.3187866638977095,
+          "voltage_min_mV": -21.288629169961094,
+          "window_amplitudes_mV": [
+            17.953921707264296,
+            17.946303416609474,
+            17.96132684078422,
+            17.968065781092406,
+            17.960336153540347
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "cells_calcium_removal_ms": {
+            "at_lower": 0,
+            "at_upper": 11,
+            "changed": 302,
+            "maximum": 150.0,
+            "minimum": 16.666666666666664
+          },
+          "cells_capacitance_pF": {
+            "at_lower": 4,
+            "at_upper": 16,
+            "changed": 301,
+            "maximum": 20.000000000000007,
+            "minimum": 1.0
+          },
+          "cells_free_calcium_fraction": {
+            "at_lower": 8,
+            "at_upper": 10,
+            "changed": 302,
+            "maximum": 0.003000000142492354,
+            "minimum": 0.0003333333491658171
+          },
+          "cells_leak_reversal_mV": {
+            "at_lower": 7,
+            "at_upper": 1,
+            "changed": 294,
+            "maximum": -35.0,
+            "minimum": -80.0
+          },
+          "fixed_release_slope_mV": {
+            "at_lower": 2,
+            "at_upper": 1,
+            "changed": 294,
+            "maximum": 20.0,
+            "minimum": 2.0
+          },
+          "fixed_release_threshold_mV": {
+            "at_lower": 0,
+            "at_upper": 26,
+            "changed": 272,
+            "maximum": -20.0,
+            "minimum": -64.97369196352625
+          },
+          "params_log_channel_scale": {
+            "at_bound": 25,
+            "max_abs_change": 2.302585092994046
+          },
+          "params_raw_chemical": {
+            "at_bound": 222,
+            "max_abs_change": 2.0
+          },
+          "params_raw_gap": {
+            "at_bound": 100,
+            "max_abs_change": 2.0
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 5116,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        },
+        "errors": [
+          "Per-cell bound exceeded: cells_capacitance_pF"
+        ],
+        "network_frozen": false,
+        "passed": false,
+        "per_cell_extras_allowed": [
+          "cells_calcium_removal_ms",
+          "cells_capacitance_pF",
+          "cells_free_calcium_fraction",
+          "cells_leak_reversal_mV",
+          "fixed_release_slope_mV",
+          "fixed_release_threshold_mV"
+        ],
+        "recorded_masks_match": true,
+        "reference": "anchor",
+        "trainable_entries": {
+          "params_log_channel_scale": 5116,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": true,
+        "expected_step": 2250,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.17295231662966823,
+        "recorded_step": 2250
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.9999997225213465,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 1.1011227441009013e-05,
+        "max_abs_difference_over_max_abs_response": 0.0004933578482925851,
+        "max_abs_reference_response": 0.02231894653975145,
+        "minimum_correlation": 0.9,
+        "passed": true,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": "unavailable",
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/b9f72864ff9b119ff35f19e2fb655b68da351443b9d6b748ee81d5fc2cc3bb29/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    },
+    {
+      "label": "E105-pep_joint_lr005",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "671db23b2602bfdefddc0bf5ffdfa662d9cb37c3f9fda61a5d0cf0ab3665e2bf",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "selected_substep_convergence",
+          "peptide_off_substep_convergence"
+        ],
+        "selected_relative_numerical_error": 0.5087559960005108,
+        "selected_numerical_pass": false,
+        "rhythm_component_pass": true,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": false,
+        "selected_peptide_tau_s": 7.740993622057327,
+        "selection_baseline_fresh": false
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 1.0000003221795624,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 84,
+            "median_period_s": 0.23600000000000002,
+            "passed": true,
+            "period_cv": 0.0038018986021915308,
+            "voltage_max_mV": -4.6780972724489285,
+            "voltage_min_mV": -22.06423592897358,
+            "window_amplitudes_mV": [
+              17.386055041278688,
+              17.386059452369476,
+              17.38609926580878,
+              17.38606542736808,
+              17.38606064271029
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.045453796618501685,
+            "coarse_period_s": 0.2356,
+            "fine_period_s": 0.2288,
+            "passed": false,
+            "period_relative_error": 0.029720279720279724,
+            "phase_aligned_waveform_rmse_mV": 0.41050215753507563,
+            "pointwise_rmse_mV": 8.775967918802474
+          },
+          "fine": {
+            "amplitude_retention": 1.0000036778163768,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 87,
+            "median_period_s": 0.23,
+            "passed": true,
+            "period_cv": 0.004365187908246281,
+            "voltage_max_mV": -3.9822381447775963,
+            "voltage_min_mV": -22.196743132409818,
+            "window_amplitudes_mV": [
+              18.214170158945414,
+              18.21442894183681,
+              18.21415255783672,
+              18.21446112837075,
+              18.214237147318713
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 0.999999869137933,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 85,
+            "median_period_s": 0.23600000000000002,
+            "passed": true,
+            "period_cv": 0.0037877077157099912,
+            "voltage_max_mV": -4.299492387260759,
+            "voltage_min_mV": -21.505354981159034,
+            "window_amplitudes_mV": [
+              17.205553459078985,
+              17.20555865422043,
+              17.205540748449774,
+              17.20554253664848,
+              17.205551207524696
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.039001330982403895,
+            "coarse_period_s": 0.2356,
+            "fine_period_s": 0.2288,
+            "passed": false,
+            "period_relative_error": 0.029720279720279724,
+            "phase_aligned_waveform_rmse_mV": 0.3041763036426452,
+            "pointwise_rmse_mV": 8.662870940591468
+          },
+          "fine": {
+            "amplitude_retention": 1.0000000386315993,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 87,
+            "median_period_s": 0.23,
+            "passed": true,
+            "period_cv": 0.004365187908246281,
+            "voltage_max_mV": -3.7235848823492885,
+            "voltage_min_mV": -21.627037700487712,
+            "window_amplitudes_mV": [
+              17.903376548483312,
+              17.903144121576823,
+              17.903377816008717,
+              17.903224634561937,
+              17.90337724011938
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 1.000468840141937,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 85,
+          "median_period_s": 0.234,
+          "passed": true,
+          "period_cv": 0.02082828663723368,
+          "voltage_max_mV": -3.220172252954426,
+          "voltage_min_mV": -22.18121278786702,
+          "window_amplitudes_mV": [
+            18.951602483941965,
+            18.942356273588732,
+            18.959496187731432,
+            18.829628138210275,
+            18.96048775594047
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 0.9994350818034636,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 87,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.017645564035337354,
+          "voltage_max_mV": -2.4403879288452925,
+          "voltage_min_mV": -21.717813773632322,
+          "window_amplitudes_mV": [
+            19.269619487394415,
+            18.544033512539016,
+            19.261780721566318,
+            18.39604596204764,
+            19.258733728705653
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "params_log_channel_scale": {
+            "at_bound": 0,
+            "max_abs_change": 2.202482105223454
+          },
+          "params_raw_chemical": {
+            "at_bound": 0,
+            "max_abs_change": 1.8353778247975687
+          },
+          "params_raw_gap": {
+            "at_bound": 0,
+            "max_abs_change": 1.4615137880048366
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        },
+        "errors": [],
+        "network_frozen": false,
+        "passed": true,
+        "per_cell_extras_allowed": [],
+        "reference": "anchor",
+        "trainable_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": false,
+        "expected_step": 325,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.06664685133082049,
+        "recorded_step": 325
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.9219379745797625,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 1.6456774343932558e-05,
+        "max_abs_difference_over_max_abs_response": 0.5087559960005108,
+        "max_abs_reference_response": 3.234708676321141e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.927641181381628,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 7.012599936531139e-06,
+        "max_abs_difference_over_max_abs_response": 0.3829232303622313,
+        "max_abs_reference_response": 1.8313331186247117e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1
+      },
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    },
+    {
+      "label": "E105-pep_joint_lr002",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "29a907b04f1f1c78b8d79cd767f61c9e2ece18fe3c364b7a0c5c11ab0c39fc18",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "selected_substep_convergence",
+          "peptide_off_substep_convergence"
+        ],
+        "selected_relative_numerical_error": 0.49006739654299586,
+        "selected_numerical_pass": false,
+        "rhythm_component_pass": true,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": false,
+        "selected_peptide_tau_s": 8.84187860255169,
+        "selection_baseline_fresh": true
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 0.9999887502123534,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 85,
+            "median_period_s": 0.23600000000000002,
+            "passed": true,
+            "period_cv": 0.0034107199657779108,
+            "voltage_max_mV": -4.619369345286713,
+            "voltage_min_mV": -22.046771893934935,
+            "window_amplitudes_mV": [
+              17.426222566197694,
+              17.426102106811292,
+              17.42601495823627,
+              17.426019150712968,
+              17.426026524894343
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.04525487361638783,
+            "coarse_period_s": 0.2356,
+            "fine_period_s": 0.2292,
+            "passed": false,
+            "period_relative_error": 0.02792321116928454,
+            "phase_aligned_waveform_rmse_mV": 0.3801618035085492,
+            "pointwise_rmse_mV": 8.850144440855416
+          },
+          "fine": {
+            "amplitude_retention": 0.9999933480220577,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 87,
+            "median_period_s": 0.23,
+            "passed": true,
+            "period_cv": 0.00418821844447968,
+            "voltage_max_mV": -3.9253102513030753,
+            "voltage_min_mV": -22.178760535719903,
+            "window_amplitudes_mV": [
+              18.252473981532418,
+              18.25245518181824,
+              18.252408708840495,
+              18.25238674745106,
+              18.252352566478102
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 0.9999847161361045,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 85,
+            "median_period_s": 0.23600000000000002,
+            "passed": true,
+            "period_cv": 0.0034107199657779108,
+            "voltage_max_mV": -4.5410618731110794,
+            "voltage_min_mV": -21.472917561729467,
+            "window_amplitudes_mV": [
+              16.930655693709827,
+              16.93059369054319,
+              16.930527781640222,
+              16.930480280331587,
+              16.930396927872543
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.041526178234056486,
+            "coarse_period_s": 0.2356,
+            "fine_period_s": 0.2296,
+            "passed": false,
+            "period_relative_error": 0.026132404181184694,
+            "phase_aligned_waveform_rmse_mV": 0.35726721633366365,
+            "pointwise_rmse_mV": 8.59520382503483
+          },
+          "fine": {
+            "amplitude_retention": 0.9999925792765191,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 87,
+            "median_period_s": 0.23,
+            "passed": true,
+            "period_cv": 0.00418821844447968,
+            "voltage_max_mV": -3.938261368067202,
+            "voltage_min_mV": -21.602931133738995,
+            "window_amplitudes_mV": [
+              17.66353153484362,
+              17.663459736303075,
+              17.66342828734275,
+              17.663417837654148,
+              17.663400458660405
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 1.000468840141937,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 85,
+          "median_period_s": 0.234,
+          "passed": true,
+          "period_cv": 0.02082828663723368,
+          "voltage_max_mV": -3.220172252954426,
+          "voltage_min_mV": -22.18121278786702,
+          "window_amplitudes_mV": [
+            18.951602483941965,
+            18.942356273588732,
+            18.959496187731432,
+            18.829628138210275,
+            18.96048775594047
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 0.9994350818034636,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 87,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.017645564035337354,
+          "voltage_max_mV": -2.4403879288452925,
+          "voltage_min_mV": -21.717813773632322,
+          "window_amplitudes_mV": [
+            19.269619487394415,
+            18.544033512539016,
+            19.261780721566318,
+            18.39604596204764,
+            19.258733728705653
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "params_log_channel_scale": {
+            "at_bound": 0,
+            "max_abs_change": 1.5266413108311425
+          },
+          "params_raw_chemical": {
+            "at_bound": 0,
+            "max_abs_change": 1.1847455064727703
+          },
+          "params_raw_gap": {
+            "at_bound": 0,
+            "max_abs_change": 1.117282472357854
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        },
+        "errors": [],
+        "network_frozen": false,
+        "passed": true,
+        "per_cell_extras_allowed": [],
+        "reference": "anchor",
+        "trainable_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": true,
+        "expected_step": 550,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.05447872285554394,
+        "recorded_step": 550
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.8727619790221822,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 1.3809409340200807e-05,
+        "max_abs_difference_over_max_abs_response": 0.49006739654299586,
+        "max_abs_reference_response": 2.8178592245912126e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.9392482642330242,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 5.113731956600809e-06,
+        "max_abs_difference_over_max_abs_response": 0.4209675375327754,
+        "max_abs_reference_response": 1.2147568400574516e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1
+      },
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    },
+    {
+      "label": "E105-pep_joint_from_ctrl",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "6c5bc5b203de5f74be59c6a4f69219b69beb998ad645ecae9fada2b5e1fb86f8",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "selected_substep_convergence",
+          "peptide_off_substep_convergence"
+        ],
+        "selected_relative_numerical_error": 0.5711354349748663,
+        "selected_numerical_pass": false,
+        "rhythm_component_pass": true,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": false,
+        "selected_peptide_tau_s": 11.556357080386157,
+        "selection_baseline_fresh": false
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 0.9999309936641526,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 86,
+            "median_period_s": 0.234,
+            "passed": true,
+            "period_cv": 0.003165756154319601,
+            "voltage_max_mV": -4.875405378137494,
+            "voltage_min_mV": -21.96289750266349,
+            "window_amplitudes_mV": [
+              17.080200657426975,
+              17.079763839031376,
+              17.07944299524994,
+              17.079166120850076,
+              17.079022015364067
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.04940420351581609,
+            "coarse_period_s": 0.2344,
+            "fine_period_s": 0.2288,
+            "passed": false,
+            "period_relative_error": 0.024475524475524448,
+            "phase_aligned_waveform_rmse_mV": 0.40536327041897147,
+            "pointwise_rmse_mV": 7.821087622905869
+          },
+          "fine": {
+            "amplitude_retention": 1.0160750360744006,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 87,
+            "median_period_s": 0.228,
+            "passed": true,
+            "period_cv": 0.014329223485953639,
+            "voltage_max_mV": -4.131901264634505,
+            "voltage_min_mV": -22.106796693802774,
+            "window_amplitudes_mV": [
+              17.69051968702446,
+              17.668621134275,
+              17.613322864233425,
+              17.57738778284539,
+              17.97489542916827
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 0.9999355869360594,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 85,
+            "median_period_s": 0.234,
+            "passed": true,
+            "period_cv": 0.0030871776305178983,
+            "voltage_max_mV": -4.548148971589347,
+            "voltage_min_mV": -21.444244170301637,
+            "window_amplitudes_mV": [
+              16.89020155127551,
+              16.889692122605357,
+              16.889420727640182,
+              16.88925686770323,
+              16.889113601643018
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.04808696395934927,
+            "coarse_period_s": 0.2344,
+            "fine_period_s": 0.22840000000000002,
+            "passed": false,
+            "period_relative_error": 0.02626970227670743,
+            "phase_aligned_waveform_rmse_mV": 0.3568231159337971,
+            "pointwise_rmse_mV": 8.00006109522267
+          },
+          "fine": {
+            "amplitude_retention": 1.0589827497742028,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 89,
+            "median_period_s": 0.228,
+            "passed": true,
+            "period_cv": 0.013144818478287168,
+            "voltage_max_mV": -3.0029722886181025,
+            "voltage_min_mV": -21.789728883207303,
+            "window_amplitudes_mV": [
+              17.432154820953045,
+              17.415455519430516,
+              17.38404310276298,
+              18.7867565945892,
+              18.46035124678248
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 0.9998826729174418,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 84,
+          "median_period_s": 0.23600000000000002,
+          "passed": true,
+          "period_cv": 0.020226244874692895,
+          "voltage_max_mV": -3.524049728617958,
+          "voltage_min_mV": -22.161486596522526,
+          "window_amplitudes_mV": [
+            18.63501555907152,
+            18.636004556960494,
+            18.632670529128976,
+            18.48477275864464,
+            18.632829167062546
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 0.9918050098412021,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 87,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.016709787339149986,
+          "voltage_max_mV": -2.3977811108337668,
+          "voltage_min_mV": -21.726084772945146,
+          "window_amplitudes_mV": [
+            18.982855344090783,
+            19.323843706928553,
+            19.315707149846077,
+            19.302380038084287,
+            18.827291031360076
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "params_log_channel_scale": {
+            "at_bound": 11,
+            "max_abs_change": 2.302585092994046
+          },
+          "params_raw_chemical": {
+            "at_bound": 19,
+            "max_abs_change": 2.0
+          },
+          "params_raw_gap": {
+            "at_bound": 6,
+            "max_abs_change": 2.0
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        },
+        "errors": [],
+        "network_frozen": false,
+        "passed": true,
+        "per_cell_extras_allowed": [],
+        "reference": "anchor",
+        "trainable_entries": {
+          "params_log_channel_scale": 4736,
+          "params_raw_chemical": 3709,
+          "params_raw_gap": 2186
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": false,
+        "expected_step": 425,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.06442103108166411,
+        "recorded_step": 425
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.9448426910616882,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 2.7995202957328273e-05,
+        "max_abs_difference_over_max_abs_response": 0.5711354349748663,
+        "max_abs_reference_response": 4.9016750218904286e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": 0.9429470594117023,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 0.0006296078635933501,
+        "max_abs_difference_over_max_abs_response": 27.001462461237892,
+        "max_abs_reference_response": 2.331754676240916e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1
+      },
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    },
+    {
+      "label": "E105-pep_only_from_ctrl",
+      "headline": {
+        "complete": true,
+        "checkpoint_sha256": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f",
+        "integrity_and_atlas_numerics": false,
+        "problems": [
+          "selected_substep_convergence",
+          "peptide_off_substep_convergence"
+        ],
+        "selected_relative_numerical_error": 1.9699067680642317,
+        "selected_numerical_pass": false,
+        "rhythm_component_pass": true,
+        "strict_rhythm_convergence": false,
+        "validation_leakage": false,
+        "selected_peptide_tau_s": 30.000000000000004,
+        "selection_baseline_fresh": true
+      },
+      "rhythm": {
+        "RMDL": {
+          "coarse": {
+            "amplitude_retention": 0.9818311184969145,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 85,
+            "median_period_s": 0.23600000000000002,
+            "passed": true,
+            "period_cv": 0.015556297852565406,
+            "voltage_max_mV": -6.0829153100309705,
+            "voltage_min_mV": -21.850380916568056,
+            "window_amplitudes_mV": [
+              15.751060658801805,
+              15.27583587920285,
+              15.748163961960062,
+              15.699883512822659,
+              15.464881504144124
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.17584993578151104,
+            "coarse_period_s": 0.24280000000000002,
+            "fine_period_s": 0.2316,
+            "passed": false,
+            "period_relative_error": 0.048359240069084694,
+            "phase_aligned_waveform_rmse_mV": 1.493867658563237,
+            "pointwise_rmse_mV": 7.301813920002914
+          },
+          "fine": {
+            "amplitude_retention": 0.9997510330169014,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 85,
+            "median_period_s": 0.234,
+            "passed": true,
+            "period_cv": 0.014576375631878042,
+            "voltage_max_mV": -5.083833421022962,
+            "voltage_min_mV": -22.050967136423196,
+            "window_amplitudes_mV": [
+              16.95220459125526,
+              16.951494126620222,
+              16.81025443496975,
+              16.950269685119544,
+              16.947984052021305
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        },
+        "RMDR": {
+          "coarse": {
+            "amplitude_retention": 1.0226859112077122,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 86,
+            "median_period_s": 0.232,
+            "passed": true,
+            "period_cv": 0.019386408138045364,
+            "voltage_max_mV": -3.8163771484527795,
+            "voltage_min_mV": -21.659569793054754,
+            "window_amplitudes_mV": [
+              17.41523624158926,
+              16.83399905824816,
+              17.843192644601974,
+              16.64243735602133,
+              17.810316744627286
+            ]
+          },
+          "coarse_vs_fine": {
+            "amplitude_relative_error": 0.021217051428492232,
+            "coarse_period_s": 0.228,
+            "fine_period_s": 0.22840000000000002,
+            "passed": false,
+            "period_relative_error": 0.0017513134851138855,
+            "phase_aligned_waveform_rmse_mV": 0.3654349978387479,
+            "pointwise_rmse_mV": 8.774465548545983
+          },
+          "fine": {
+            "amplitude_retention": 1.0008206410403362,
+            "gates": {
+              "amplitude_retained": true,
+              "bounded": true,
+              "multiple_cycles": true,
+              "sustained_amplitude": true
+            },
+            "late_peaks": 89,
+            "median_period_s": 0.226,
+            "passed": true,
+            "period_cv": 0.021132577099668634,
+            "voltage_max_mV": -3.23046777084931,
+            "voltage_min_mV": -21.77388500021037,
+            "window_amplitudes_mV": [
+              18.487692628532834,
+              18.481871144032326,
+              18.487242473794353,
+              18.19870582061756,
+              18.50286438784493
+            ]
+          },
+          "relative_reference_criteria_passed": true
+        }
+      },
+      "parent_rhythm": {
+        "RMDL": {
+          "amplitude_retention": 0.9998826729174418,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 84,
+          "median_period_s": 0.23600000000000002,
+          "passed": true,
+          "period_cv": 0.020226244874692895,
+          "voltage_max_mV": -3.524049728617958,
+          "voltage_min_mV": -22.161486596522526,
+          "window_amplitudes_mV": [
+            18.63501555907152,
+            18.636004556960494,
+            18.632670529128976,
+            18.48477275864464,
+            18.632829167062546
+          ]
+        },
+        "RMDR": {
+          "amplitude_retention": 0.9918050098412021,
+          "gates": {
+            "amplitude_retained": true,
+            "bounded": true,
+            "multiple_cycles": true,
+            "sustained_amplitude": true
+          },
+          "late_peaks": 87,
+          "median_period_s": 0.23,
+          "passed": true,
+          "period_cv": 0.016709787339149986,
+          "voltage_max_mV": -2.3977811108337668,
+          "voltage_min_mV": -21.726084772945146,
+          "window_amplitudes_mV": [
+            18.982855344090783,
+            19.323843706928553,
+            19.315707149846077,
+            19.302380038084287,
+            18.827291031360076
+          ]
+        }
+      },
+      "parameters": {
+        "bounds": {
+          "params_log_channel_scale": {
+            "at_bound": 0,
+            "max_abs_change": 0.0
+          },
+          "params_raw_chemical": {
+            "at_bound": 0,
+            "max_abs_change": 0.0
+          },
+          "params_raw_gap": {
+            "at_bound": 0,
+            "max_abs_change": 0.0
+          }
+        },
+        "changed_entries": {
+          "params_log_channel_scale": 0,
+          "params_raw_chemical": 0,
+          "params_raw_gap": 0
+        },
+        "errors": [],
+        "network_frozen": true,
+        "passed": true,
+        "per_cell_extras_allowed": [],
+        "reference": "parent",
+        "trainable_entries": {
+          "params_log_channel_scale": 0,
+          "params_raw_chemical": 0,
+          "params_raw_gap": 0
+        }
+      },
+      "selection": {
+        "baseline_resettled_at_selected_step": true,
+        "expected_step": 500,
+        "note": "Matches logged validation maximum, not proof cached settling states equal fresh selected-checkpoint evaluation. No checkpoint reselected using test results.",
+        "passed": true,
+        "recorded_selection_score": 0.09611938622395039,
+        "recorded_step": 500
+      },
+      "selected_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": -0.28538824221320763,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 0.0001586668879184061,
+        "max_abs_difference_over_max_abs_response": 1.9699067680642317,
+        "max_abs_reference_response": 8.054537935027417e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1,
+        "targets": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADLL",
+          "ADLR",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AIYL",
+          "AIYR"
+        ]
+      },
+      "peptide_off_substep_convergence": {
+        "absolute_tolerance": 0.0,
+        "constant_response": false,
+        "correlation": -0.6449242205744617,
+        "finite_and_same_shape": true,
+        "max_abs_difference": 4.5123586130728644e-05,
+        "max_abs_difference_over_max_abs_response": 1.302387707981521,
+        "max_abs_reference_response": 3.4646815118258847e-05,
+        "minimum_correlation": 0.9,
+        "passed": false,
+        "relative_tolerance": 0.1
+      },
+      "reference": {
+        "path": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144/references/4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f/summary.json",
+        "checkpoint_matches": true,
+        "finite": true
+      }
+    }
+  ],
+  "interpretation": [
+    "All_lr005 and all_lr002 have no late RMDL/RMDR peaks on either tested grid and near-constant late voltages. All_from_e102 retains RMDL cycling but RMDR fails persistence. This identifies genuine loss of the declared RMD component in these assays, not whole-brain inactivity.",
+    "Five network/peptide selections preserve both declared RMD components but fail strict cycle convergence. Network-control RMDL has 3.51% period and 7.61% amplitude differences; RMDR 1.43% and 5.03%.",
+    "All three parameter failures name only per-cell capacitance or release-slope bounds; printed recorded masks match. A local float32-anchor tolerance-arithmetic bug is reproduced and fixed without changing the tolerance. Full server parameter recheck remains planned, not inferred from extrema.",
+    "No numerical or performance acceptance is overturned by the local parameter-arithmetic fix. No model or behavioral promotion."
+  ],
+  "limitations": [
+    "Detailed report is saved-data evidence, not a new forward run.",
+    "Per-coordinate server bound violations and corrected parameter results await hash-checked saved-file recheck.",
+    "No new execution/environment/optimizer evidence or behavior validation supplied."
+  ]
+}
