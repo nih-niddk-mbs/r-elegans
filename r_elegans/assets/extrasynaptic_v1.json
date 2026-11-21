@@ -1,0 +1,1920 @@
+{
+ "version": "extrasynaptic_v1",
+ "cengen_threshold": 3,
+ "cutoff_nM": 500.0,
+ "pairs": 269,
+ "pairs_skipped_without_expression": [],
+ "neurons_without_cengen_class": [],
+ "source_sha256": {
+  "1-s2.0-S2211124723010690-mmc2.xlsx": "7462e65b709f6965cb6cc62d843e2b69d29d2db3042f8d6ac89e8f8b402af5ff",
+  "1-s2.0-S2211124723010690-mmc3.xlsx": "98d7e563873d4ecfe2bafa2337eaf6e26b8ca9cc7de80f9146cc3bb59c92308f",
+  "1-s2.0-S2211124723010690-mmc6.xlsx": "27e942c99c72a297c017e694365a1b66961f547600a69930489fbda3656f00e7",
+  "021821_conservative_threshold3.csv": "2454624b7b0409b8ce62c5687c431e0c9b9dd5f38148e0bc9b0fb48c26887236"
+ },
+ "pair_labels": [
+  {
+   "peptide": "NLP-13-1",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "npr-41"
+  },
+  {
+   "peptide": "NLP-13-2",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "npr-41"
+  },
+  {
+   "peptide": "NLP-13-5",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "npr-41"
+  },
+  {
+   "peptide": "NLP-13-6",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "npr-41"
+  },
+  {
+   "peptide": "NLP-13-7",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "npr-41"
+  },
+  {
+   "peptide": "pyroNLP-13-3",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "npr-41"
+  },
+  {
+   "peptide": "NLP-3-3",
+   "precursor": [
+    "nlp-3"
+   ],
+   "receptor": "npr-42"
+  },
+  {
+   "peptide": "FLP-15-1",
+   "precursor": [
+    "flp-15"
+   ],
+   "receptor": "npr-3"
+  },
+  {
+   "peptide": "FLP-15-2",
+   "precursor": [
+    "flp-15"
+   ],
+   "receptor": "npr-3"
+  },
+  {
+   "peptide": "FLP-15-3",
+   "precursor": [
+    "flp-15"
+   ],
+   "receptor": "npr-3"
+  },
+  {
+   "peptide": "NLP-37-1",
+   "precursor": [
+    "nlp-37",
+    "pdf-2"
+   ],
+   "receptor": "pdfr-1"
+  },
+  {
+   "peptide": "FLP-18-1",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "FLP-18-2",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "FLP-18-3",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "FLP-18-4",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "FLP-18-5",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "FLP-18-7",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "FLP-18-8",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "pyroFLP-18-2",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "pyroFLP-18-4",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-4"
+  },
+  {
+   "peptide": "NLP-49-2",
+   "precursor": [
+    "nlp-49"
+   ],
+   "receptor": "seb-3"
+  },
+  {
+   "peptide": "FLP-34-1",
+   "precursor": [
+    "flp-34"
+   ],
+   "receptor": "npr-11"
+  },
+  {
+   "peptide": "FLP-34-2",
+   "precursor": [
+    "flp-34"
+   ],
+   "receptor": "npr-11"
+  },
+  {
+   "peptide": "FLP-34-3",
+   "precursor": [
+    "flp-34"
+   ],
+   "receptor": "npr-11"
+  },
+  {
+   "peptide": "FLP-34-4",
+   "precursor": [
+    "flp-34"
+   ],
+   "receptor": "npr-11"
+  },
+  {
+   "peptide": "FLP-20-1",
+   "precursor": [
+    "flp-20"
+   ],
+   "receptor": "frpr-3"
+  },
+  {
+   "peptide": "FLP-20-2",
+   "precursor": [
+    "flp-20"
+   ],
+   "receptor": "frpr-3"
+  },
+  {
+   "peptide": "FLP-20-3",
+   "precursor": [
+    "flp-20"
+   ],
+   "receptor": "frpr-3"
+  },
+  {
+   "peptide": "NLP-54-1",
+   "precursor": [
+    "nlp-54",
+    "trh-1"
+   ],
+   "receptor": "trhr-1"
+  },
+  {
+   "peptide": "NLP-54-2",
+   "precursor": [
+    "nlp-54",
+    "trh-1"
+   ],
+   "receptor": "trhr-1"
+  },
+  {
+   "peptide": "FLP-1-1",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-1-10",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-1-2",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-1-3",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-1-4",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-1-5",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-1-6",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-1-7",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-11-3",
+   "precursor": [
+    "flp-11"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-13-1",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-13-3",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-13-5",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-16-2",
+   "precursor": [
+    "flp-16"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-23-1",
+   "precursor": [
+    "flp-23"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-23-2",
+   "precursor": [
+    "flp-23"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-27-4",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-4-1",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-4-2",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-5-1",
+   "precursor": [
+    "flp-5"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-5-2",
+   "precursor": [
+    "flp-5"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-5-3",
+   "precursor": [
+    "flp-5"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-7-1",
+   "precursor": [
+    "flp-7"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-9-2",
+   "precursor": [
+    "flp-9"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "pyroFLP-23-2",
+   "precursor": [
+    "flp-23"
+   ],
+   "receptor": "dmsr-7"
+  },
+  {
+   "peptide": "FLP-12-1",
+   "precursor": [
+    "flp-12"
+   ],
+   "receptor": "dmsr-8"
+  },
+  {
+   "peptide": "FLP-12-2",
+   "precursor": [
+    "flp-12"
+   ],
+   "receptor": "dmsr-8"
+  },
+  {
+   "peptide": "FLP-12-1",
+   "precursor": [
+    "flp-12"
+   ],
+   "receptor": "dmsr-8"
+  },
+  {
+   "peptide": "NLP-58-1",
+   "precursor": [
+    "nlp-58"
+   ],
+   "receptor": "tkr-1"
+  },
+  {
+   "peptide": "NLP-58-2",
+   "precursor": [
+    "nlp-58"
+   ],
+   "receptor": "tkr-1"
+  },
+  {
+   "peptide": "NLP-58-3",
+   "precursor": [
+    "nlp-58"
+   ],
+   "receptor": "tkr-1"
+  },
+  {
+   "peptide": "FLP-21-1",
+   "precursor": [
+    "flp-21"
+   ],
+   "receptor": "npr-1"
+  },
+  {
+   "peptide": "FLP-10-1",
+   "precursor": [
+    "flp-10"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-17-1",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-17-2",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-17-3",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-17-4",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-9-2",
+   "precursor": [
+    "flp-9"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "pyroFLP-10-1",
+   "precursor": [
+    "flp-10"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-10-1",
+   "precursor": [
+    "flp-10"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-17-1",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-17-2",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-17-4",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-4-1",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-5-1",
+   "precursor": [
+    "flp-5"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-6-1",
+   "precursor": [
+    "flp-6"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "FLP-9-2",
+   "precursor": [
+    "flp-9"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "pyroFLP-10-1",
+   "precursor": [
+    "flp-10"
+   ],
+   "receptor": "egl-6"
+  },
+  {
+   "peptide": "NLP-44-1",
+   "precursor": [
+    "capa-1",
+    "nlp-44"
+   ],
+   "receptor": "nmur-1"
+  },
+  {
+   "peptide": "NLP-44-3",
+   "precursor": [
+    "capa-1",
+    "nlp-44"
+   ],
+   "receptor": "nmur-1"
+  },
+  {
+   "peptide": "NLP-58-2",
+   "precursor": [
+    "nlp-58"
+   ],
+   "receptor": "tkr-2"
+  },
+  {
+   "peptide": "NLP-10-1",
+   "precursor": [
+    "nlp-10"
+   ],
+   "receptor": "npr-35"
+  },
+  {
+   "peptide": "NLP-10-2",
+   "precursor": [
+    "nlp-10"
+   ],
+   "receptor": "npr-35"
+  },
+  {
+   "peptide": "FLP-3-1",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "npr-10"
+  },
+  {
+   "peptide": "FLP-3-2",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "npr-10"
+  },
+  {
+   "peptide": "FLP-3-4",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "npr-10"
+  },
+  {
+   "peptide": "FLP-3-7",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "npr-10"
+  },
+  {
+   "peptide": "FLP-3-8",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "npr-10"
+  },
+  {
+   "peptide": "FLP-27-3",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "FLP-27-4",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "pyroFLP-27-3",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "pyroFLP-27-4",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "FLP-27-3",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "FLP-27-4",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "pyroFLP-27-3",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "pyroFLP-27-4",
+   "precursor": [
+    "flp-27"
+   ],
+   "receptor": "npr-8"
+  },
+  {
+   "peptide": "NLP-2-1",
+   "precursor": [
+    "nlp-2"
+   ],
+   "receptor": "gnrr-6"
+  },
+  {
+   "peptide": "NLP-2-3",
+   "precursor": [
+    "nlp-2"
+   ],
+   "receptor": "gnrr-6"
+  },
+  {
+   "peptide": "NLP-22-1",
+   "precursor": [
+    "nlp-22"
+   ],
+   "receptor": "gnrr-6"
+  },
+  {
+   "peptide": "NLP-23-2",
+   "precursor": [
+    "nlp-23"
+   ],
+   "receptor": "gnrr-6"
+  },
+  {
+   "peptide": "FLP-33-1",
+   "precursor": [
+    "flp-33"
+   ],
+   "receptor": "frpr-6"
+  },
+  {
+   "peptide": "FLP-33-2",
+   "precursor": [
+    "flp-33"
+   ],
+   "receptor": "frpr-6"
+  },
+  {
+   "peptide": "FLP-1-1",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-10",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-2",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-3",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-4",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-5",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-6",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-7",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-1",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-10",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-2",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-3",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-4",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-5",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "FLP-1-6",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "frpr-7"
+  },
+  {
+   "peptide": "NLP-38-1",
+   "precursor": [
+    "nlp-38"
+   ],
+   "receptor": "sprr-2"
+  },
+  {
+   "peptide": "NLP-38-2",
+   "precursor": [
+    "nlp-38"
+   ],
+   "receptor": "sprr-2"
+  },
+  {
+   "peptide": "NLP-38-3",
+   "precursor": [
+    "nlp-38"
+   ],
+   "receptor": "sprr-2"
+  },
+  {
+   "peptide": "NLP-38-4",
+   "precursor": [
+    "nlp-38"
+   ],
+   "receptor": "sprr-2"
+  },
+  {
+   "peptide": "NLP-38-6",
+   "precursor": [
+    "nlp-38"
+   ],
+   "receptor": "sprr-2"
+  },
+  {
+   "peptide": "FLP-10-1",
+   "precursor": [
+    "flp-10"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-11-1",
+   "precursor": [
+    "flp-11"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-11-2",
+   "precursor": [
+    "flp-11"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-12-1",
+   "precursor": [
+    "flp-12"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-12-2",
+   "precursor": [
+    "flp-12"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-13-1",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-13-3",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-13-5",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-14-1",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-14-2",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-16-1",
+   "precursor": [
+    "flp-16"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-16-2",
+   "precursor": [
+    "flp-16"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-17-1",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-17-3",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-17-4",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-25-2",
+   "precursor": [
+    "flp-25"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-32-1",
+   "precursor": [
+    "flp-32"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-4-1",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-4-2",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-8-1",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-8-2",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-9-1",
+   "precursor": [
+    "flp-9"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-9-2",
+   "precursor": [
+    "flp-9"
+   ],
+   "receptor": "frpr-8"
+  },
+  {
+   "peptide": "FLP-19-1",
+   "precursor": [
+    "flp-19"
+   ],
+   "receptor": "frpr-9"
+  },
+  {
+   "peptide": "FLP-19-2",
+   "precursor": [
+    "flp-19"
+   ],
+   "receptor": "frpr-9"
+  },
+  {
+   "peptide": "FLP-19-1",
+   "precursor": [
+    "flp-19"
+   ],
+   "receptor": "frpr-9"
+  },
+  {
+   "peptide": "FLP-19-2",
+   "precursor": [
+    "flp-19"
+   ],
+   "receptor": "frpr-9"
+  },
+  {
+   "peptide": "pyroNLP-47-1",
+   "precursor": [
+    "nlp-47"
+   ],
+   "receptor": "gnrr-1"
+  },
+  {
+   "peptide": "pyroNLP-17-2",
+   "precursor": [
+    "nlp-17"
+   ],
+   "receptor": "npr-43"
+  },
+  {
+   "peptide": "pyroNLP-17-3",
+   "precursor": [
+    "nlp-17"
+   ],
+   "receptor": "npr-43"
+  },
+  {
+   "peptide": "FLP-14-1",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "npr-39"
+  },
+  {
+   "peptide": "FLP-8-1",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "npr-39"
+  },
+  {
+   "peptide": "FLP-11-3",
+   "precursor": [
+    "flp-11"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-1",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-2",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-3",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-4",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-5",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-6",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-7",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-16-1",
+   "precursor": [
+    "flp-16"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-16-2",
+   "precursor": [
+    "flp-16"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-17-1",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-33-2",
+   "precursor": [
+    "flp-33"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-4-1",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-10-1",
+   "precursor": [
+    "flp-10"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-11-3",
+   "precursor": [
+    "flp-11"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-12-1",
+   "precursor": [
+    "flp-12"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-12-2",
+   "precursor": [
+    "flp-12"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-1",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-2",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-3",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-4",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-5",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-6",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-13-7",
+   "precursor": [
+    "flp-13"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-16-1",
+   "precursor": [
+    "flp-16"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-16-2",
+   "precursor": [
+    "flp-16"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-17-1",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-17-3",
+   "precursor": [
+    "flp-17"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-25-1",
+   "precursor": [
+    "flp-25"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-25-2",
+   "precursor": [
+    "flp-25"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-28-1",
+   "precursor": [
+    "flp-28"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-4-1",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-4-2",
+   "precursor": [
+    "flp-4"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "FLP-9-2",
+   "precursor": [
+    "flp-9"
+   ],
+   "receptor": "dmsr-1"
+  },
+  {
+   "peptide": "NLP-44-2",
+   "precursor": [
+    "capa-1",
+    "nlp-44"
+   ],
+   "receptor": "nmur-2"
+  },
+  {
+   "peptide": "NLP-44-3",
+   "precursor": [
+    "capa-1",
+    "nlp-44"
+   ],
+   "receptor": "nmur-2"
+  },
+  {
+   "peptide": "FLP-8-1",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "frpr-15"
+  },
+  {
+   "peptide": "NLP-17-1",
+   "precursor": [
+    "nlp-17"
+   ],
+   "receptor": "npr-37"
+  },
+  {
+   "peptide": "NLP-17-1",
+   "precursor": [
+    "nlp-17"
+   ],
+   "receptor": "npr-37"
+  },
+  {
+   "peptide": "NLP-42-1",
+   "precursor": [
+    "nlp-42"
+   ],
+   "receptor": "sprr-1"
+  },
+  {
+   "peptide": "NLP-42-2",
+   "precursor": [
+    "nlp-42"
+   ],
+   "receptor": "sprr-1"
+  },
+  {
+   "peptide": "FLP-3-1",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "frpr-16"
+  },
+  {
+   "peptide": "FLP-3-2",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "frpr-16"
+  },
+  {
+   "peptide": "FLP-3-4",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "frpr-16"
+  },
+  {
+   "peptide": "FLP-3-5",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "frpr-16"
+  },
+  {
+   "peptide": "FLP-3-7",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "frpr-16"
+  },
+  {
+   "peptide": "FLP-3-9",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "frpr-16"
+  },
+  {
+   "peptide": "pyroFLP-3-3",
+   "precursor": [
+    "flp-3"
+   ],
+   "receptor": "frpr-16"
+  },
+  {
+   "peptide": "FLP-21-1",
+   "precursor": [
+    "flp-21"
+   ],
+   "receptor": "npr-2"
+  },
+  {
+   "peptide": "FLP-21-1",
+   "precursor": [
+    "flp-21"
+   ],
+   "receptor": "npr-2"
+  },
+  {
+   "peptide": "FLP-8-1",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "ntr-1"
+  },
+  {
+   "peptide": "NTC-1-1 (C1-C6)",
+   "precursor": [
+    "nlp-75",
+    "ntc-1"
+   ],
+   "receptor": "ntr-1"
+  },
+  {
+   "peptide": "NLP-40-2",
+   "precursor": [
+    "nlp-40"
+   ],
+   "receptor": "aex-2"
+  },
+  {
+   "peptide": "FLP-2-1",
+   "precursor": [
+    "flp-2"
+   ],
+   "receptor": "frpr-18"
+  },
+  {
+   "peptide": "FLP-2-2",
+   "precursor": [
+    "flp-2"
+   ],
+   "receptor": "frpr-18"
+  },
+  {
+   "peptide": "FLP-2-1",
+   "precursor": [
+    "flp-2"
+   ],
+   "receptor": "frpr-18"
+  },
+  {
+   "peptide": "FLP-2-2",
+   "precursor": [
+    "flp-2"
+   ],
+   "receptor": "frpr-18"
+  },
+  {
+   "peptide": "NLP-12-1",
+   "precursor": [
+    "nlp-12"
+   ],
+   "receptor": "ckr-1"
+  },
+  {
+   "peptide": "NLP-12-2",
+   "precursor": [
+    "nlp-12"
+   ],
+   "receptor": "ckr-1"
+  },
+  {
+   "peptide": "NLP-64-2 (C4-C11)",
+   "precursor": [
+    "nlp-64"
+   ],
+   "receptor": "npr-32"
+  },
+  {
+   "peptide": "NLP-13-1",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "dmsr-2"
+  },
+  {
+   "peptide": "NLP-13-2",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "dmsr-2"
+  },
+  {
+   "peptide": "NLP-13-4",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "dmsr-2"
+  },
+  {
+   "peptide": "NLP-13-5",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "dmsr-2"
+  },
+  {
+   "peptide": "NLP-13-6",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "dmsr-2"
+  },
+  {
+   "peptide": "NLP-13-7",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "dmsr-2"
+  },
+  {
+   "peptide": "pyroNLP-13-3",
+   "precursor": [
+    "nlp-13"
+   ],
+   "receptor": "dmsr-2"
+  },
+  {
+   "peptide": "NLP-12-1",
+   "precursor": [
+    "nlp-12"
+   ],
+   "receptor": "ckr-2"
+  },
+  {
+   "peptide": "NLP-12-2",
+   "precursor": [
+    "nlp-12"
+   ],
+   "receptor": "ckr-2"
+  },
+  {
+   "peptide": "FLP-14-1",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "frpr-19"
+  },
+  {
+   "peptide": "FLP-8-1",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "frpr-19"
+  },
+  {
+   "peptide": "FLP-14-1",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "frpr-19"
+  },
+  {
+   "peptide": "FLP-8-1",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "frpr-19"
+  },
+  {
+   "peptide": "FLP-1-1",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-1-10",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-1-2",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-1-3",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-1-4",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-1-5",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-1-6",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-1-7",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-5"
+  },
+  {
+   "peptide": "FLP-14-1",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "dmsr-3"
+  },
+  {
+   "peptide": "FLP-14-2",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "dmsr-3"
+  },
+  {
+   "peptide": "FLP-1-1",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-1-10",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-1-2",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-1-3",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-1-4",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-1-5",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-1-6",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-1-7",
+   "precursor": [
+    "flp-1"
+   ],
+   "receptor": "dmsr-6"
+  },
+  {
+   "peptide": "FLP-18-1",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-2",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-3",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-4",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-5",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-6",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-7",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-8",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "pyroFLP-18-2",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "pyroFLP-18-4",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-1",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-2",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-3",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-4",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-5",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-6",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-7",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "FLP-18-8",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "pyroFLP-18-2",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "pyroFLP-18-4",
+   "precursor": [
+    "flp-18"
+   ],
+   "receptor": "npr-5"
+  },
+  {
+   "peptide": "NLP-72-1",
+   "precursor": [
+    "lury-1",
+    "nlp-72"
+   ],
+   "receptor": "npr-22"
+  },
+  {
+   "peptide": "NLP-72-2",
+   "precursor": [
+    "lury-1",
+    "nlp-72"
+   ],
+   "receptor": "npr-22"
+  },
+  {
+   "peptide": "FLP-14-1",
+   "precursor": [
+    "flp-14"
+   ],
+   "receptor": "npr-40"
+  },
+  {
+   "peptide": "FLP-8-1",
+   "precursor": [
+    "flp-8"
+   ],
+   "receptor": "npr-40"
+  },
+  {
+   "peptide": "NLP-23-2",
+   "precursor": [
+    "nlp-23"
+   ],
+   "receptor": "gnrr-3"
+  }
+ ],
+ "sender_counts_per_pair": {
+  "min": 2,
+  "median": 34.0,
+  "max": 178
+ },
+ "receiver_counts_per_pair": {
+  "min": 9,
+  "median": 73.0,
+  "max": 198
+ },
+ "note": "Candidate peptide-receptor pairs from expression x EC50 only; no sign, strength, range or time constant inferred."
+}

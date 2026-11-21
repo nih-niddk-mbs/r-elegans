@@ -32,4 +32,5 @@ htmlcov/
 !r_elegans/assets/autonomous_wiggle_v1/parent_actor.npz
 !r_elegans/assets/mac_rhythm_v1_polarized/network.npz
 !r_elegans/assets/edge_polarity_v1.npz
+!r_elegans/assets/extrasynaptic_v1.npz
 

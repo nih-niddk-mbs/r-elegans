@@ -11259,3 +11259,37 @@ raise held-out agreement; the best generalizing result of the atlas work remains
 parameters did not help; the limit is likely missing mechanism (extrasynaptic signaling, unobserved inputs) or the objective,
 not parameter count. Not shown: response magnitudes/silent fractions, any behavior, rhythm retention of these checkpoints,
 gating-kinetics freedom (not trainable), the effect of a train-only early stopping rule applied to the all-parameter runs.
+
+## E105 - Extrasynaptic (peptide) signaling term fitted to the Randi atlas, four variants in parallel (PLANNED 2026-11-21; not executed)
+
+User instruction: a 2 hour run including extrasynaptic effects (the 2026-11-19 notebook entry records the earlier user
+decision to include this signaling, the paper's finding that dense-core-vesicle-dependent signaling contributes, and the
+plan; the E100-E104 runs used the wired-only model). Question: does adding a data-constrained peptide-receptor term raise
+held-out agreement with the atlas beyond the wired network, with a validation split and an ablation that switches the term off?
+Model (`r_elegans/brain/extrasynaptic.py`, asset `r_elegans/assets/extrasynaptic_v1.{npz,json}` built by
+`scripts/build_extrasynaptic_asset.py` from Beets 2023 EC50 <= 500 nM x CeNGEN threshold 3 expression): 269 peptide-receptor
+pairs (all have expressing senders and receivers; senders per pair 2-178, median 34; receivers 9-198, median 73). Each sender's
+release fraction sigmoid((V - theta)/slope) (the chemical-edge release function, a proxy for dense-core-vesicle release) is
+low-pass filtered with one shared time constant (init 5 s, bounds 1-30 s) to a peptide level; a receiver gets a modulatory
+conductance unit(0.03 nS) x sum over senders of C[r,s] p_s with C = sum_k gain_k receiver_k sender_k, with separate
+non-negative excitatory (reversal 0 mV) and inhibitory (-85 mV) gains per pair (softplus, bounded 0-3), so no sign is assumed.
+It acts through the existing membrane-input hook (core step and body unchanged) and is present in the 60 s settle and the
+stimulation runs. 539 peptide values (269 + 269 + 1). Initial gains ~1e-4 (tonic peptide conductance ~0.1 x leak; a trial at
+gain 0.02 gave about 30 x leak and was rejected). Simplifications declared: all-to-all within expression (no range or
+diffusion), one shared time constant instead of one per pair, release fraction rather than calcium, wild-type atlas only (the
+unc-31 export in `raw/functional/randi2023_osf` is not loaded yet, so the gains can absorb any residual, not only peptide
+effects). Code: `scripts/train_atlas_peptides.py` (same objective, data, split and selection as E104: 43 fit / 15 validation /
+29 test animals, substeps 40, stimulus 0.01118 nS, Adam, prior, pair subsampling), launcher
+`scripts/launch_atlas_peptides_mbslnx2.sh`, report `scripts/report_atlas_peptides.py`, 4 unit tests. Variants (two per A100,
+memory fraction 0.45, 120 min wall budget, 10 min reserve): pep_joint_lr005 and pep_joint_lr002 (from the polarized Mac bundle,
+network set of E101/E102 plus peptides), pep_only_from_ctrl (start = E104 network_control best-validation checkpoint, hash-
+checked, network frozen, peptides only, lr 0.01), pep_joint_from_ctrl (same start, network plus peptides, lr 0.002); the E104
+control start was trained on fit animals only, so validation stays clean. Acceptance (declared now): integrity - no non-finite
+step, zero frozen-field changes (network-trained runs), substep 40-vs-80 max difference / max response < 0.1; improvement - a
+best-validation checkpoint with test Spearman > 0.126 (E104 network_control 0.106 + 0.02) and test AUC for excited pairs >= 0.574,
+and the same checkpoint evaluated with the peptide term off scores at least 0.02 lower in test Spearman (the term is used);
+overfitting flag - validation rising while test falls by more than 0.02 from its maximum. Reported, not criteria: the fitted time
+constant, the pairs with gains above 0.1 and the top pairs, silent fractions. Local software checks (Mac CPU x64, 6 targets,
+4 steps, both joint and network-frozen variants): run end to end, peptide gradients are finite and non-zero, ablation outputs and
+report written; not a result. Claims not made: no behavior, gait or start/stop claim (the term is not in the core network or
+the body); peptide identification, sign or range; the rhythm check is required before any kept checkpoint is used as a parent.
