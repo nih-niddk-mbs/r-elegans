@@ -11097,3 +11097,24 @@ reported, not required. A harness failure makes the polarized numbers uninterpre
 functions and `--help` run locally; the 6 test failures in the four touched test files (sensory worker, pathway) are
 identical with and without the worker change (pre-existing); the assay itself has not been run end to end (needs the server run
 folder). Commands: `--check-only` first, then the full run (see the session record).
+
+### Gait requalification result: polarized E099 FAILS baseline preservation (user-reported server stdout; not locally re-run)
+
+Run: `/home/carsonc/r-elegans-results/e099-polarized-gait-20261121T000743Z` (assay launched under nohup, CPU float64, one
+Python process, four sequential rollouts; control 326 s, polarized 349 s; both status completed). Identity check printed:
+identical parameters and cell fields, only `synapse_reversal_mV` differs; evaluation network = E099 57fc914e...58a7;
+polarized a7a122a7...604a. Job: sensory-motion, nominal, ordinary grid, E092-anchored parent features, `reference` false.
+Harness validity: MET. Control checkpoint hash equals the saved one and the control's metrics equal the saved
+`final-00/summary.json` metrics exactly (maximum relative difference 0.0).
+Flags (saved = control, identical): safe true; baseline_and_recovery_preserved true; relay_component_preserved true;
+relay_operating_range_passed true; relay_recovery_preserved true; useful_response_preserved true; partial_attenuation_passed
+false; training_margin_met false; rest_component_passed false; full_start_stop_qualified false; swimming_qualified false.
+Polarized: safe true; useful_response_preserved true; relay_recovery_preserved true; **baseline_and_recovery_preserved FALSE**;
+**relay_component_preserved FALSE**; **relay_operating_range_passed FALSE**; the remaining flags false as before.
+Declared criterion (safe and baseline_and_recovery_preserved): NOT met. Replacing the reversal field with the data-based
+polarity (45.6 % of chemical weight changed) broke the E092-anchored baseline gait/recovery gates and the AIYL relay
+operating range of the E099 checkpoint; the polarized E099 is not a qualified behavior parent. The per-window gait
+values (frequency, regional cycles) were not pasted, so the size of the baseline change (small shift outside the 5 % / 10 %
+bounds versus loss of the rhythm) is unknown here; `comparison.json` in the run folder holds them. Not shown: whether a
+subset or milder polarity, or a refit under fixed polarity, restores the gates. Earlier E092-E099 evidence therefore
+applies to the unchanged E099 only.
