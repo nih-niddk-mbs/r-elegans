@@ -11379,3 +11379,86 @@ Priority is a complete integrity and numerical audit of actual selected models,
 then an explicit lineage choice and numerically stable next experiment. Keep
 negative outcomes and independent older checkpoints. JSON/whitespace checks
 validate this documentation update; no software test or scientific run needed.
+
+## 2026-11-21 — E106 planned: same-selected-checkpoint atlas and rhythm audit
+
+User authorizes the proposed audit before further fitting. Question: do each of
+E104/E105's actual best-validation networks (and E105 matching peptide files)
+pass their own integrity, numerical and rhythm checks? Previous reports attach
+final-model bounds/convergence/peptide statistics to selected-model performance;
+E106 removes that mismatch. Exact cases, source folders, fields, commands,
+criteria and runtime limits are in [E106-plan.json](experiments/records/E106-plan.json).
+No source checkpoint, original receipt, model, fitting objective or gate is
+rewritten; no optimizer instantiated. No best model chosen from test results.
+
+Sources: E104 allparams-20261121T023851Z-685266 (4variants), E105
+peptides-20261121T164252Z-759054 (4variants), under external server results.
+Per-case selected network and selected peptide hashes are read from original
+summaries and verified; all hashes not supplied in prior stdout remain unknown
+locally until execution. Original matching command/source/environment records
+are inspected rather than guessing substeps, stimulus, seeds or splits. Parent
+and anchor copies are hash-verified. The network-frozen E105 is checked against
+its actual E104-control parent, not against the Mac anchor's fitted parameters.
+Inspect actual selected frozen fields, allowed masks, channel/edge bounds and
+E104 six extra-field bounds; E105 selected tau/gains/bounds are recomputed from
+its selected sidecar. Verify source loss-log finiteness and count, optimizer-file
+hashes (no deserialization), source archive integrity and relevant current/source
+forward/data module identity. Missing historical raw data checksums or exact
+RNG/resume records are explicit gaps, not fabricated evidence.
+
+Rebuild current WT atlas split statistics once per original seed/validation
+period (expected0/4), recording file hashes before/after. Use original split
+logic, targets and counts, no data reselection. Recompute all selected coarse
+responses under the original source protocol (0.1s outer step,60s settle,
+12s stimulation/control run,0.5s added conductance,1.5..11.5s window). Compare
+with stored selected responses and metrics; no permutation retesting. Fine
+replay first13original targets at2xsubsteps, with fresh same-protocol settle.
+E105 peptide-off repeats both response grids and stored-response/metric checks
+on the same selected network. The original performance thresholds are reported
+without changing them; raw thresholds do not qualify numerically unstable
+models. Known E104-from-E102 validation leakage stays flagged.
+
+Separate free-rhythm protocol:40s recording at2ms with1ms/0.5ms neural steps.
+Parent references are corresponding stored parent networks without peptides,
+not one unrelated gait lineage. Warmup60s for parents and selected wired models;
+selected peptide model warmup max(60s,5tau), rounded up to0.1s. This avoids calling
+an early peptide transient an asymptotic rhythm failure. During warmup/recording,
+peptide levels still update only every original100ms, with membrane conductance
+held within each interval. Refining the neural step does not accelerate peptide
+release. Require RMDL/RMDR persistence on both grids and parent-relative period
+within10%/amplitude within25%; report strict compare_cycles convergence
+separately and retain all RMD metrics. This is not an embodied behavior test.
+
+Commands: `sh scripts/launch_selected_atlas_audit_mbslnx2.sh`, then
+`python -m scripts.report_selected_atlas_audit`. Dedicated conda float64, CPU
+preparation and one audit per A100, nohup. Maximum120min TOTAL private-group
+watchdog, may finish early. Incomplete preparation/timeout/worker checks never
+qualify. Preserve partial completed-case results. New audit folder is external,
+source folders untouched; all copied model pairs/parent/anchor/source metadata,
+input hashes, derived statistics, responses, RMD traces, per-case reports and
+receipt retained. Raw NWBs not duplicated. H1.2 remains: no sensory start/stop,
+rest/restart, swimming or biological qualification, and no model promoted.
+
+Additional source caveat surfaced: original validation snapshots use the
+currently cached settled baseline, recomputed only every10optimizer steps.
+A selected step not divisible by10 may have been scored with a stale baseline;
+its later freshly settled snapshot is a different evaluation. E106 checks the
+logged validation-max choice and reports whether selection-step settling was
+fresh, but does not retrospectively reselect checkpoints. Match stored fresh
+best_val responses, not a cached-baseline selection score.
+
+Local software validation in progress uses tiny bundled-model forward tests,
+actual trainer forward definitions and mock source/queue/watchdog cases. No
+scientific forward fit, original server replay or E106 outcome asserted here.
+
+E106 local verification outcome:29 focused software checks pass. Tests compare
+forward replay with the actual existing trainer response definitions on tiny
+bundled-model fixtures, check dense peptide recording preserves the original
+level-update clock, verify selected network/sidecar pairing while deliberately
+invalid final files remain unread, frozen fields/extra bounds, logged validation
+selection, ablation direction, source hash tampering, eight-case GPU dispatch,
+negative results versus incomplete parent-reference workers and timeout
+non-promotion. Related existing extrasynaptic/all-parameter/atlas tests also pass.
+Python compilation, command help, shell syntax and whitespace checks pass.
+No full test-suite status inferred; no scientific fit/behavior run or server
+E106 execution occurred locally. Actual selected-model outcomes remain pending.

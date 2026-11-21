@@ -1,5 +1,17 @@
 # WormGym: training and validation protocols
 
+2026-11-21 E106 prepared, server execution pending: read-only audit of all8
+E104/E105 best-validation checkpoints and matching selected peptide sidecars.
+Verify source hashes/frozen fields/bounds/selection; independently rebuild atlas
+splits and replay selected responses and metrics; selected40-vs80 numerical
+checks plus peptide-off controls; fresh parent-relative RMD rhythm checks.
+No fitting, test-based reselection or source overwrite. Two GPU workers under
+nohup, maximum120min TOTAL. Historical evidence gaps remain explicit; no model
+or behavioral promotion. [Plan](experiments/records/E106-plan.json).
+Launch: `sh scripts/launch_selected_atlas_audit_mbslnx2.sh`.
+Report: `python -m scripts.report_selected_atlas_audit`.
+
+
 2026-11-21 repository review (through38284d7; recorded results, not new runs):
 E101/E102 added two-A100 gradient fitting to the stimulation atlas; held-out
 Spearman is about0.11, comparable to anatomy-only baselines, with many near-silent

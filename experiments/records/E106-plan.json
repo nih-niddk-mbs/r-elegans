@@ -1,0 +1,56 @@
+{
+  "experiment": "E106",
+  "record_date": "2026-11-21",
+  "status": "planned_server_execution_not_evidenced",
+  "question": "Do the actual best-validation E104/E105 checkpoints, including matching peptide sidecars, pass their own integrity, saved-response reproduction, numerical resolution and parent-relative RMD rhythm checks?",
+  "method": "Read-only forward audit of all8 selected models. Do not fit, reselection-rank or overwrite any source experiment. Compare selected to selected, never substitute final-checkpoint statistics.",
+  "sources": {
+    "E104": "/home/carsonc/r-elegans-results/allparams-20261121T023851Z-685266",
+    "E105": "/home/carsonc/r-elegans-results/peptides-20261121T164252Z-759054"
+  },
+  "models": {
+    "E104": [
+      "all_lr005",
+      "all_lr002",
+      "all_from_e102",
+      "network_control"
+    ],
+    "E105": [
+      "pep_joint_lr005",
+      "pep_joint_lr002",
+      "pep_only_from_ctrl",
+      "pep_joint_from_ctrl"
+    ]
+  },
+  "pinning": "Resolve each selected SHA and E105 selected peptide SHA from its existing summary; verify before copying and replay. Use copied parent and anchor files verified against their historical recorded hashes. Require one matching original command record. Record all consumed/current data hashes. Historical data and responses hashes missing from originals stay explicitly unavailable.",
+  "parent_checkpoint_sha256": "Per-case best_val_sha256 and best_val_peptides_sha256, verified at runtime; exact hashes not all printed in supplied earlier stdout and not invented here.",
+  "command": "sh scripts/launch_selected_atlas_audit_mbslnx2.sh",
+  "report_command": "python -m scripts.report_selected_atlas_audit",
+  "budget": {
+    "maximum_total_minutes": 120,
+    "includes": [
+      "source/archive/integrity preparation",
+      "independent data statistics rebuild",
+      "unique parent rhythm references",
+      "8selected-model audits",
+      "reports/cleanup"
+    ],
+    "enforcement": "Private outer process-group watchdog; incomplete cases remain visible, timeout never qualifies. May finish well before ceiling."
+  },
+  "environment": "Dedicated server conda /home/carsonc/miniconda3/envs/r-elegans/bin/python, float64. CPU coordinator rebuilds data once per seed/split; GPU workers one per A100, sequential cases on each GPU, 0.8 memory fraction and no preallocation. Existing JAX/NumPy/SciPy/h5py only; no dependency installation. Original/current source/env/argv captured separately.",
+  "fixed_trainable": "Every selected network, fixed field and peptide value is fixed throughout primary replay. No optimizer created and no parameter updates. Peptide-off diagnostic uses the original E105 raw=-50 ablation only in memory; selected sidecar unchanged. Rhythm references use corresponding stored parent network without a peptide term.",
+  "data": "Rebuild the identical WT atlas pair statistics with each original seed and every-nth validation split. Record current NWB SHA256 before/after building statistics, reuse derived cache across matching cases. Verify source split counts and targets; replay fit/validation/test metrics without permutation tests. Preserve the known E104-from-E102 validation-contamination flag. No test-based checkpoint selection.",
+  "integrity": "Verify source completed status, selected/parent/anchor/peptide SHA, copied artifacts and original source archive files, current forward/data/constraint source match, finite source loss log and step count, logged validation-max selection. Derive actual per-run trainable masks and compare saved masks where present. Inspect selected model frozen arrays and declared channel/edge/extra-field bounds, using actual parent for network-frozen E105. Hash optimizer files without deserialization; no exact RNG/state resume claimed.",
+  "atlas_replay": "Match original dt0.1s,60s settle,120frames,0.5s stimulus at recorded nS/reversal0mV,1.5..11.5s indicator-difference window. Replay all original targets at recorded substeps40, including selected peptide term. Compare fresh replay with stored best_val response. Fine check first13 recorded targets at80substeps with fresh same-protocol settle; no cherry-picking. E105 repeats coarse/fine with original peptide-off diagnostic and checks saved off responses/metrics.",
+  "numerical_criteria": "Fresh selected-to-saved reproduction: relative tolerance1e-6 plus absolute1e-12, correlation>=0.999999 (exact constants count reproducible, not informative). Coarse-vs-fine: correlation>=0.9 and max absolute difference/max absolute coarse response<0.1; full finite/shape checks. Replayed non-permutation metrics match source best-validation snapshot within rtol1e-7/atol1e-9. Zero-response equality is numerical consistency, not atlas performance.",
+  "rhythm": "Separate from source-protocol atlas replay:40s no-stimulus recording every2ms with neural max steps1ms versus0.5ms. Warm up parent without peptide60s; selected models60s, or max(60s,5selected peptide tau) rounded up to0.1s. Hold E105 peptide conductance fixed over each original100ms outer interval and update levels only at its boundary, including warmup; refining neural steps must not change peptide cadence. Retain RMD traces and full-network finite/range/late-std diagnostics.",
+  "rhythm_criteria": "Report persistence on both grids for RMDL/RMDR plus all other RMD cells. Component: bounded sustained amplitude>=2mV, retention0.8..1.2,>=5late peaks; selected period within10% and mean window amplitude within25% of its corresponding parent. Parent must itself pass persistence. Strict cycle convergence (existing compare_cycles) reported separately; no inherited claim of body movement. Capture peptide-related slow settling as protocol, not new fitted dynamics.",
+  "original_performance_criteria": "E104 selected models: test Spearman>0.127,AUC>=0.574,and for all-parameter variants>network_control by0.02. E105: test Spearman>0.126,AUC>=0.574,and same-checkpoint peptide-on exceeds off by>=0.02. Report these arithmetic gates and whether numerics/integrity allow interpretation; do not reselect by test score. Contaminated validation selection remains flagged.",
+  "limits": "No body/gait/sensory initiation/stop/rest/restart/swimming/biological qualification. Original 60s atlas settle and independent post-warmup rhythm assay are distinct protocols. Historical raw input hashes/exact resume not manufactured. Peptide term remains stimulation-model-only; no unc-31 comparison or range/diffusion inference. Reproduction checks cover all coarse targets, numerical refinement only first13.",
+  "artifacts": "Separate external selected-atlas-audit-* folder: source copies of selected models/peptide pairs, parent/anchor, summaries/arguments/source metadata; current data-statistics/evidence cache, per-case responses and RMD traces, parameter/peptide summaries, checks, source hashes and budget receipt. Raw NWBs not copied. All old experiment folders and recursive dependencies retained.",
+  "verification": {
+    "tests": "29 focused software tests passed: exact selected-model and selected-peptide pairing despite invalid final files, independent responses versus actual trusted trainer definitions, original peptide update clock, bounds/frozen/selection/performance gates, input tampering, all8case scheduling with negative/failed-reference outcomes, and timeout non-promotion; related extrasynaptic/all-parameter/atlas tests included.",
+    "static": "Python compilation, CLI help, shell syntax and whitespace checks passed.",
+    "scientific_execution": "No E106 server audit or original checkpoint result claimed. Local forwards are tiny software fixtures, not biological/behavior results."
+  }
+}
