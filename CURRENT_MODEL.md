@@ -1,28 +1,15 @@
 # Current model: exact scope and computation path
 
-2026-11-21 E106 detail follow-up: `all_lr005` and `all_lr002` lost late
-RMDL/RMDR oscillation on both grids; `all_from_e102` lost RMDR persistence.
-The five conservative/network and peptide selections retain both components
-but fail strict cycle convergence. A local audit bug was reproduced: float32
-anchor arithmetic discards the existing per-cell bound tolerance and can falsely
-reject float64 rounding at a bound. Calculation now uses float64 with the same
-1e-8 tolerance; hash-checked server parameter recheck is pending. Original
-reports remain unchanged. Numerical/performance failures still block promotion.
-[Detailed evidence](experiments/records/E106-server-details.json).
-
-2026-11-21 E106 completed (user-reported server audit): all eight selected
-E104/E105 checkpoints were audited in 712 seconds, within the 120-minute cap.
-None passed combined integrity and atlas numerics. The three all-parameter
-selections pass atlas refinement but fail parameter checks and parent-relative
-RMD criteria; the specific parameter errors remain unavailable in supplied
-stdout. The selected network-only control and all four peptide models fail
-atlas refinement, including the peptide-off checks. Five models pass the RMD
-component criterion; all eight fail strict rhythm convergence. No behavioral
-parent or model promoted. Next: inspect saved errors and per-cell rhythm
-measurements; no new training or relaxed thresholds.
-[Reported evidence](experiments/records/E106-server-summary.json).
-Read-only details: `python -m scripts.report_selected_atlas_audit --details`.
-
+2026-11-21 E106 parameter recheck completed (user-reported): all eight
+selected models pass parameter bounds/frozen-field/mask checks. The earlier
+per-cell bound flags were audit false positives caused by float32 tolerance
+arithmetic; the tolerance remains 1e-8. Original audit files are preserved.
+The three all-parameter models still fail the RMD component; the other five
+still fail atlas numerical refinement. All eight fail strict rhythm convergence
+and original performance criteria. No model or behavior promoted.
+Next priority: resolve numerical convergence and preserve the motor rhythm
+before further fitting.
+[Recheck evidence](experiments/records/E106-parameter-recheck-server-summary.json).
 
 2026-11-21 repository review (through38284d7; recorded results, not new runs):
 E101/E102 added two-A100 gradient fitting to the stimulation atlas; held-out

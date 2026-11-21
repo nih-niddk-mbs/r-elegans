@@ -11584,3 +11584,38 @@ within unchanged1e-8 tolerance and reject2e-8 violations. Recheck test verifies
 old audit preservation, checksum matching and tamper rejection. This is software
 evidence only; no server corrected-parameter outcome is asserted. Whitespace
 check and CLI help pass; no full-suite status asserted.
+
+### 2026-11-21 — E106 saved-parameter recheck server outcome: all eight pass
+
+User-reported foreground invocation of `scripts.recheck_selected_parameters`
+against the original selected-atlas audit completed and returned the shell prompt.
+Report: `/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144-parameter-recheck-20261121T230917366462Z/summary.json`.
+Structured stdout transcription: `experiments/records/E106-parameter-recheck-server-summary.json`.
+No independent access to the full server JSON, recorded source/environment or
+input hashes is asserted; elapsed time was not printed. This is a parameter-only
+saved-file recheck, with no simulation, optimization or candidate reselection.
+
+All eight selected models have empty corrected error lists and parameter_passed
+True. The historical capacitance/release-slope errors for all_lr005, all_lr002
+and all_from_e102 disappear with float64 bound arithmetic at the unchanged1e-8
+tolerance. The other five remain passes. Those earlier per-cell flags were
+false positives in our audit, not model-bound violations. The script verifies
+consumed input hashes and frozen fields/masks; the actual hashes and detailed
+coordinate/bound report remain in the external report, not supplied stdout.
+Original audit and checkpoints remain unchanged; no model promotion.
+
+This correction concerns only the parameter gate. Selected atlas convergence
+passes for the three all-parameter models; each still fails the RMD component
+(two lose both assayed rhythms; all_from_e102 loses RMDR). The network control
+and four peptide models retain the RMD component but fail atlas convergence.
+All eight still fail strict cycle convergence and original performance criteria.
+Existing leakage, cached-baseline selection and behavioral-control limitations
+remain. No start/stop or swimming parent is qualified. Earlier negative parameter
+findings are preserved above with this dated correction.
+
+Decision: prioritize a convergence study on an unchanged rhythm-preserving
+parent, then design fitting that retains the motor component. Do not spend another
+long optimization run until numerical evidence supports its objective. This entry
+records a recommendation; no new scientific run or training was launched.
+Documentation-only follow-up; existing21 focused software tests passed for the
+code used by this recheck. No code changes or new test run required here.

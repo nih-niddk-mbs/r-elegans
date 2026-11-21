@@ -1,0 +1,70 @@
+{
+  "experiment": "E106",
+  "recorded_date": "2026-11-21",
+  "evidence_kind": "User-reported server stdout from saved-parameter recheck; raw server files not independently accessed",
+  "source_run": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144",
+  "report": "/home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144-parameter-recheck-20261121T230917366462Z/summary.json",
+  "invocation": "python -m scripts.recheck_selected_parameters --run /home/carsonc/r-elegans-results/selected-atlas-audit-20261121T221402Z-771144",
+  "cases": [
+    {
+      "label": "E104-all_lr005",
+      "previous_errors": [
+        "Per-cell bound exceeded: cells_capacitance_pF",
+        "Per-cell bound exceeded: fixed_release_slope_mV"
+      ],
+      "corrected_errors": [],
+      "parameter_passed": true
+    },
+    {
+      "label": "E104-all_lr002",
+      "previous_errors": [
+        "Per-cell bound exceeded: fixed_release_slope_mV"
+      ],
+      "corrected_errors": [],
+      "parameter_passed": true
+    },
+    {
+      "label": "E104-network_control",
+      "previous_errors": [],
+      "corrected_errors": [],
+      "parameter_passed": true
+    },
+    {
+      "label": "E104-all_from_e102",
+      "previous_errors": [
+        "Per-cell bound exceeded: cells_capacitance_pF"
+      ],
+      "corrected_errors": [],
+      "parameter_passed": true
+    },
+    {
+      "label": "E105-pep_joint_lr005",
+      "previous_errors": [],
+      "corrected_errors": [],
+      "parameter_passed": true
+    },
+    {
+      "label": "E105-pep_joint_lr002",
+      "previous_errors": [],
+      "corrected_errors": [],
+      "parameter_passed": true
+    },
+    {
+      "label": "E105-pep_joint_from_ctrl",
+      "previous_errors": [],
+      "corrected_errors": [],
+      "parameter_passed": true
+    },
+    {
+      "label": "E105-pep_only_from_ctrl",
+      "previous_errors": [],
+      "corrected_errors": [],
+      "parameter_passed": true
+    }
+  ],
+  "interpretation": "All eight parameter checks pass with corrected float64 bound arithmetic and unchanged tolerance. Historical per-cell flags were audit false positives. No numerical, rhythm, performance or behavior gates reclassified; no model promoted.",
+  "unavailable_evidence": [
+    "Full recheck JSON, input hashes, source/environment records and timing are retained on the server but not printed in supplied stdout.",
+    "No new forward simulation, candidate selection or training occurred."
+  ]
+}
