@@ -33,7 +33,7 @@ def evaluate(job):
     from scipy.special import expit
     from r_elegans.rial_sensory import protocol,world,features,score,replay_probe
     from r_elegans.cma_curriculum import decode_groups
-    from r_elegans.brain.conductance_network import save_network
+    from r_elegans.brain.conductance_network import save_network,load_network
     from r_elegans.wall_budget import WallDeadline,check_deadline
     from scripts.compare_rhythm_worker import verify_inputs
     relay_objective=job.get('objective')=='relay-range'
@@ -55,8 +55,13 @@ def evaluate(job):
     try:
         if mode not in ('normal','sensory-blocked','rial-replay','relay-replay'):raise ValueError('Unknown evaluation mode')
         if shutil.disk_usage(out).free<50*1024**3:raise RuntimeError('disk_budget: less than50GiB free')
-        x=decode_groups(job['z'],d['groups'],d['origin'],d['lower'],d['upper']);params=d['decode'](x)
-        np.savez_compressed(out/'coordinates.npz',offsets=x,z=job['z']);save_network(out/'network.npz',params,d['fixed'],d['config'])
+        override=None
+        if job.get('fixed_network') or job.get('params_network'):
+            from scripts.assess_sensorimotor_resolution import promote_floating_values
+        if job.get('fixed_network'):override=promote_floating_values(load_network(job['fixed_network'])[1])
+        if job.get('params_network'):x=np.zeros(0);params=promote_floating_values(load_network(job['params_network'])[0])
+        else:x=decode_groups(job['z'],d['groups'],d['origin'],d['lower'],d['upper']);params=d['decode'](x)
+        np.savez_compressed(out/'coordinates.npz',offsets=x,z=job.get('z',[]));save_network(out/'network.npz',params,d['fixed'] if override is None else override,d['config'])
         modelsha=file_sha256(out/'network.npz')
         artifacts=dict(checkpoint_sha256=modelsha,coordinates_sha256=file_sha256(out/'coordinates.npz'))
         variant=job.get('variant','nominal');grid=job.get('grid','ordinary');p=protocol(variant)
@@ -68,8 +73,9 @@ def evaluate(job):
         for condition in conditions:
             check_deadline(job['until']);cued=condition in ('cue','cue_replay')
             kwargs=dict(wall_deadline=job['until'],world_override=world(variant,cued))
+            if override is not None:kwargs['fixed_override']=override
             if condition.endswith('_replay'):kwargs['diagnostic_chemical_release']=replay
-            key=(condition,variant,grid,job['until'],mode if condition.endswith('_replay') else None,modelsha if condition.endswith('_replay') else None)
+            key=(condition,variant,grid,job['until'],mode if condition.endswith('_replay') else None,modelsha if condition.endswith('_replay') else None,job.get('fixed_network'))
             if key not in _CACHE:_CACHE[key]=d['factory'](dt,brain,**kwargs)
             trace=_CACHE[key](params,np.linspace(0,p['duration'],121),gains)
             if motion_objective:

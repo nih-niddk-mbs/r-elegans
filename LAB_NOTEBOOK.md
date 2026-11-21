@@ -11077,3 +11077,23 @@ produced). Gait requalification harness: the gait-preservation gates (frequency 
 regional cycles within +/-10 %) live inside the E09x worker path (`scripts/rial_sensory_worker.py`,
 `r_elegans/sensory_motion.py`, `r_elegans/rial_sensory.py`) and need the pipeline input directory; no standalone assay
 for an arbitrary checkpoint exists yet.
+
+## Gait requalification of the polarized E099 checkpoint (PLANNED 2026-11-20; not executed)
+
+Question: after replacing only the synapse reversal field of the E099 selected checkpoint with the data-based edge polarity
+(45.6 % of chemical weight changed), do the E092-anchored gait, recovery and cue-response gates still pass under the same
+protocol that qualified E099? Method: `scripts/assay_checkpoint_gait.py` takes the saved `evaluations/final-00/request.json`
+of the E099 run (variant, grid, target, objective, parent features unchanged), replays it twice with
+`scripts.sensory_motion_worker.setup/evaluate` on the pipeline `inputs/`: (1) control, unchanged fields; (2) polarized,
+`fixed_overrides` = the polarized checkpoint's fixed fields (`scripts/rial_sensory_worker.py` gained optional
+`params_network`/`fixed_network` job keys; default behavior unchanged). Identity check before running: parameters and cell
+fields identical, only `synapse_reversal_mV` differs. Same checkpoint hashes as above (E099 57fc914e...58a7; polarized
+a7a122a7...604a), CPU float64, no training, no new parameters.
+Acceptance (declared now): harness valid if the control's checkpoint hash equals the saved one and its metrics match the
+saved `final-00/summary.json` metrics to a maximum relative difference < 1e-6; polarized passes if `safe` and
+`baseline_and_recovery_preserved` are true (the E092-anchored frequency band 1.62-1.98 Hz within 5 %, regional cycles and
+angular speed within the existing bounds); the cue-response ratios, `useful_response_preserved` and every other flag are
+reported, not required. A harness failure makes the polarized numbers uninterpretable. Software checks: the helper
+functions and `--help` run locally; the 6 test failures in the four touched test files (sensory worker, pathway) are
+identical with and without the worker change (pre-existing); the assay itself has not been run end to end (needs the server run
+folder). Commands: `--check-only` first, then the full run (see the session record).
