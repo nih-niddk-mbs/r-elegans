@@ -11293,3 +11293,36 @@ constant, the pairs with gains above 0.1 and the top pairs, silent fractions. Lo
 4 steps, both joint and network-frozen variants): run end to end, peptide gradients are finite and non-zero, ablation outputs and
 report written; not a result. Claims not made: no behavior, gait or start/stop claim (the term is not in the core network or
 the body); peptide identification, sign or range; the rhythm check is required before any kept checkpoint is used as a parent.
+
+### E105 result and post-run audit (user-reported server report output; not locally re-run)
+
+Sweep folder `/home/carsonc/r-elegans-results/peptides-20261121T164252Z-759054`; four runs, 553-599 steps each in the 120 min
+budget (about 11-12 s per step, two processes per A100, float64, substeps 40; E104 averaged 12.7 s per step). Source revision,
+artifact hashes, run records, frozen-field counts and stop reasons were not separately checked here (the report does not
+print them). Table (Spearman of mean z; sp0 = first evaluation = start; spB = best-validation checkpoint; test AUC = excited
+pairs; "pep-off" = the same checkpoint evaluated with the peptide term switched off):
+- pep_only_from_ctrl (network frozen at the E104 control best-validation checkpoint, 599 steps): val 0.015 -> spB 0.096 (step
+  500); test 0.019 -> 0.064, AUC 0.535; pep-off test 0.106, AUC 0.570; tau 30.0 s (the upper bound); 3 pairs with excitatory
+  gain > 0.1, 0 inhibitory; substep max difference / max response 1.321.
+- pep_joint_from_ctrl (558 steps): val 0.015 -> 0.064 (425); test 0.019 -> 0.053, AUC 0.538; pep-off 0.102 / 0.578; tau 14.3 s;
+  no pair above 0.1; convergence 0.516.
+- pep_joint_lr005 (553): val 0.013 -> 0.068 (325); test -0.011 -> 0.045, AUC 0.538; pep-off 0.070 / 0.564; tau 7.5 s; 0.387.
+- pep_joint_lr002 (553): val 0.013 -> 0.054 (550); test -0.011 -> 0.022, AUC 0.530; pep-off 0.085 / 0.557; tau 8.9 s; 0.508.
+Pipeline check: the pep-off evaluation of pep_only_from_ctrl (network identical to the E104 control best-validation checkpoint)
+gives test Spearman 0.106 and AUC 0.570, the values E104 reported for that checkpoint, so the evaluation reproduces.
+Declared criteria: improvement NOT met - best test Spearman 0.064 (needed > 0.126), AUC 0.530-0.538 (needed >= 0.574), and the
+ablation is in the wrong direction: with the term off every checkpoint scores higher (0.106 / 0.102 / 0.070 / 0.085) than with
+it on (0.064 / 0.053 / 0.045 / 0.022); the required evidence that the term is used (off at least 0.02 lower) is the opposite of
+what was observed. Numerical criterion NOT met - substep 40-vs-80 max difference / max response 0.387-1.321 (needed < 0.1; E104
+control 0.013). Integrity items printed: none non-finite is not shown by the report; frozen-field changes not printed.
+Observations: (1) adding the peptide term at the initial gains (about 1e-4, tonic peptide conductance about 0.1 x leak) took the
+frozen control's test Spearman from 0.106 to 0.019 at step 0, i.e. the held-out metric is highly sensitive to tiny baseline
+perturbations (the model's responses are near silent, so the correlation is fragile); training for about 600 steps recovered
+only part of that. (2) The fitted time constant went to the 30 s bound in the frozen-network run (7.5-14 s in the joint runs),
+and almost no pair gain exceeded 0.1 (3 pairs; none in the joint runs), i.e. the optimizer used the term mostly as a slow,
+near-tonic shift, not as stimulus-evoked signaling. (3) The 40-vs-80 failure means the trained responses depend on the
+integration step through the settled baseline, so these numbers are not numerically trustworthy. Interpretation (hypotheses,
+not shown): a zero-effect start (gains exactly 0 at step 0) would remove the initial damage and make step 0 equal the control; the
+wild-type objective cannot distinguish peptide effects from residual; about 550 steps is short. Decision: negative result for this
+implementation of the peptide term; it provides no evidence for or against extrasynaptic signaling in general. Nothing from E105
+is kept as a model checkpoint. Not shown: the pairs carrying the gains, rhythm retention, the unc-31 comparison, behavior.
