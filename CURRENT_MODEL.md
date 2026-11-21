@@ -1,13 +1,14 @@
 # Current model: exact scope and computation path
 
-2026-11-21 E107 prepared, server run pending: unchanged selected network
-control and stored parent, one model per A100. Five atlas and five free-rhythm
-refinement levels, fixed parameters/initial-state rules and float64; no fitting.
-Require both finest successive comparisons to pass existing criteria. Automatic
-post-run artifact/control/parameter/numerical audit, including timeout outcomes.
-Maximum120minutes TOTAL including audit. No model or behavioral promotion.
-[Plan](experiments/records/E107-plan.json).
-Launch: `sh scripts/launch_neural_convergence_mbslnx2.sh`.
+2026-11-21 E107 completed (user-reported): both unchanged models finished
+all five grids in449.59s, with audit/integrity and sham controls passing; no timeout.
+RMDL/RMDR persist on every grid, but neither model passes numerical convergence.
+All atlas adjacent comparisons fail, including the stored parent. The selected
+finest cycle comparison improves substantially, but RMDL period error1.081%
+still exceeds1%, and the preceding pair fails. No qualified integration grid
+or model/behavior promotion. Next: distinguish finite-step error from long-run
+phase sensitivity before further fitting; cause remains unresolved.
+[Evidence](experiments/records/E107-server-summary.json).
 
 2026-11-21 E106 parameter recheck completed (user-reported): all eight
 selected models pass parameter bounds/frozen-field/mask checks. The earlier

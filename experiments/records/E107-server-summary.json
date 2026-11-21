@@ -1,0 +1,639 @@
+{
+  "experiment": "E107",
+  "recorded_date": "2026-11-21",
+  "evidence_kind": "User-reported server report stdout; no independent access to server artifacts",
+  "evidence_sha256": "efa8e79f93c8cf92ae1d1194444d0aa283b2953861d7a3ae4f85cd64072b90fb",
+  "run": "/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363",
+  "report": "/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363/audit.json",
+  "headline": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "numerical_component_passed": false
+  },
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_minutes": 120.0,
+    "total_elapsed_seconds": 449.59329138696194,
+    "audit_complete": true,
+    "all_steps_finished": true,
+    "numerical_component_passed": false,
+    "model_promoted": false
+  },
+  "models": {
+    "selected": {
+      "numerical_component_passed": false,
+      "comparisons": [
+        {
+          "levels": [
+            0,
+            1
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": -0.6449242205976856,
+            "max_abs_difference": 4.5123586131210483e-05,
+            "max_abs_reference_response": 3.464681511825996e-05,
+            "max_abs_difference_over_max_abs_response": 1.3023877079953863,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.03508771929824565,
+              "amplitude_relative_error": 0.07611766027651566,
+              "phase_aligned_waveform_rmse_mV": 0.7858152736409726,
+              "coarse_period_s": 0.23600000000000002,
+              "fine_period_s": 0.228,
+              "pointwise_rmse_mV": 8.847922037667313
+            },
+            "RMDR": {
+              "passed": false,
+              "period_relative_error": 0.014285714285714199,
+              "amplitude_relative_error": 0.050294326768050054,
+              "phase_aligned_waveform_rmse_mV": 0.3805971489193775,
+              "coarse_period_s": 0.22719999999999999,
+              "fine_period_s": 0.224,
+              "pointwise_rmse_mV": 9.059373743874502
+            }
+          }
+        },
+        {
+          "levels": [
+            1,
+            2
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": -0.3466503823242554,
+            "max_abs_difference": 2.4137689972132393e-05,
+            "max_abs_reference_response": 1.0476771012950526e-05,
+            "max_abs_difference_over_max_abs_response": 2.303924552927172,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.03553299492385783,
+              "amplitude_relative_error": 0.039264474792831495,
+              "phase_aligned_waveform_rmse_mV": 0.7137838499907743,
+              "coarse_period_s": 0.228,
+              "fine_period_s": 0.2364,
+              "pointwise_rmse_mV": 8.840777958455723
+            },
+            "RMDR": {
+              "passed": false,
+              "period_relative_error": 0.058601134215500915,
+              "amplitude_relative_error": 0.03571214591814118,
+              "phase_aligned_waveform_rmse_mV": 0.5274463778169213,
+              "coarse_period_s": 0.224,
+              "fine_period_s": 0.2116,
+              "pointwise_rmse_mV": 9.75503844379877
+            }
+          }
+        },
+        {
+          "levels": [
+            2,
+            3
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": 0.8825053340078275,
+            "max_abs_difference": 2.5464413360932745e-05,
+            "max_abs_reference_response": 1.3660918959181867e-05,
+            "max_abs_difference_over_max_abs_response": 1.8640337035172465,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.05347593582887693,
+              "amplitude_relative_error": 0.06622805983407298,
+              "phase_aligned_waveform_rmse_mV": 1.0251989911583685,
+              "coarse_period_s": 0.2364,
+              "fine_period_s": 0.22440000000000002,
+              "pointwise_rmse_mV": 8.582953961425755
+            },
+            "RMDR": {
+              "passed": false,
+              "period_relative_error": 0.03467153284671531,
+              "amplitude_relative_error": 0.0038959736567719364,
+              "phase_aligned_waveform_rmse_mV": 0.3331654963541374,
+              "coarse_period_s": 0.2116,
+              "fine_period_s": 0.2192,
+              "pointwise_rmse_mV": 9.69384804657321
+            }
+          }
+        },
+        {
+          "levels": [
+            3,
+            4
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": -0.07054066576372647,
+            "max_abs_difference": 3.993783988333721e-05,
+            "max_abs_reference_response": 3.912533232011461e-05,
+            "max_abs_difference_over_max_abs_response": 1.0207667900830808,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.01081081081081087,
+              "amplitude_relative_error": 0.0018531109379828071,
+              "phase_aligned_waveform_rmse_mV": 0.09648907666463402,
+              "coarse_period_s": 0.22440000000000002,
+              "fine_period_s": 0.222,
+              "pointwise_rmse_mV": 9.764640649218778
+            },
+            "RMDR": {
+              "passed": true,
+              "period_relative_error": 0.005504587155963333,
+              "amplitude_relative_error": 0.00943736045741371,
+              "phase_aligned_waveform_rmse_mV": 0.06008796175674381,
+              "coarse_period_s": 0.2192,
+              "fine_period_s": 0.218,
+              "pointwise_rmse_mV": 10.816315539871578
+            }
+          }
+        }
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.23600000000000002,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.23,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 1,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.23,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.222,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 2,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.226,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.22,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 3,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.224,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.218,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 4,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.224,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.218,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        }
+      ]
+    },
+    "parent": {
+      "numerical_component_passed": false,
+      "comparisons": [
+        {
+          "levels": [
+            0,
+            1
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": 0.6438101743708543,
+            "max_abs_difference": 2.005820097234268e-05,
+            "max_abs_reference_response": 8.671735512789658e-06,
+            "max_abs_difference_over_max_abs_response": 2.313054975299869,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.03008849557522124,
+              "amplitude_relative_error": 0.034914529203351086,
+              "phase_aligned_waveform_rmse_mV": 0.2813585113528214,
+              "coarse_period_s": 0.2328,
+              "fine_period_s": 0.226,
+              "pointwise_rmse_mV": 9.129592248944055
+            },
+            "RMDR": {
+              "passed": false,
+              "period_relative_error": 0.03035714285714286,
+              "amplitude_relative_error": 0.03259777050821121,
+              "phase_aligned_waveform_rmse_mV": 0.36327966487840313,
+              "coarse_period_s": 0.2308,
+              "fine_period_s": 0.224,
+              "pointwise_rmse_mV": 9.045255186270758
+            }
+          }
+        },
+        {
+          "levels": [
+            1,
+            2
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": 0.9761475347037024,
+            "max_abs_difference": 1.2175150322540908e-05,
+            "max_abs_reference_response": 2.8729936485132336e-05,
+            "max_abs_difference_over_max_abs_response": 0.4237792286398376,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.0017667844522968703,
+              "amplitude_relative_error": 0.022682982043501096,
+              "phase_aligned_waveform_rmse_mV": 0.2829768911669009,
+              "coarse_period_s": 0.226,
+              "fine_period_s": 0.22640000000000002,
+              "pointwise_rmse_mV": 9.114553805411083
+            },
+            "RMDR": {
+              "passed": false,
+              "period_relative_error": 0.03703703703703707,
+              "amplitude_relative_error": 0.003317411094372687,
+              "phase_aligned_waveform_rmse_mV": 0.18788938274535644,
+              "coarse_period_s": 0.224,
+              "fine_period_s": 0.216,
+              "pointwise_rmse_mV": 9.75753572370308
+            }
+          }
+        },
+        {
+          "levels": [
+            2,
+            3
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": 0.1940395157383059,
+            "max_abs_difference": 1.4769065043150897e-05,
+            "max_abs_reference_response": 1.6554786162591428e-05,
+            "max_abs_difference_over_max_abs_response": 0.8921326375404537,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.029159519725557345,
+              "amplitude_relative_error": 0.00030261631409208515,
+              "phase_aligned_waveform_rmse_mV": 0.2718390465764648,
+              "coarse_period_s": 0.22640000000000002,
+              "fine_period_s": 0.2332,
+              "pointwise_rmse_mV": 8.904911239549747
+            },
+            "RMDR": {
+              "passed": false,
+              "period_relative_error": 0.02272727272727272,
+              "amplitude_relative_error": 0.05519333646733606,
+              "phase_aligned_waveform_rmse_mV": 0.4224788282740613,
+              "coarse_period_s": 0.216,
+              "fine_period_s": 0.2112,
+              "pointwise_rmse_mV": 9.524205217504432
+            }
+          }
+        },
+        {
+          "levels": [
+            3,
+            4
+          ],
+          "atlas": {
+            "passed": false,
+            "finite_and_same_shape": true,
+            "correlation": 0.023016629398837956,
+            "max_abs_difference": 2.09974199314944e-05,
+            "max_abs_reference_response": 8.063816632037924e-06,
+            "max_abs_difference_over_max_abs_response": 2.603905928127217,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "cycles": {
+            "RMDL": {
+              "passed": false,
+              "period_relative_error": 0.02280701754385957,
+              "amplitude_relative_error": 0.04496800544950616,
+              "phase_aligned_waveform_rmse_mV": 0.5914372513778542,
+              "coarse_period_s": 0.2332,
+              "fine_period_s": 0.228,
+              "pointwise_rmse_mV": 10.330371549511185
+            },
+            "RMDR": {
+              "passed": false,
+              "period_relative_error": 0.022222222222222216,
+              "amplitude_relative_error": 0.0037587118305975786,
+              "phase_aligned_waveform_rmse_mV": 0.14180887232530082,
+              "coarse_period_s": 0.2112,
+              "fine_period_s": 0.216,
+              "pointwise_rmse_mV": 10.70864318953355
+            }
+          }
+        }
+      ],
+      "levels": [
+        {
+          "level": 0,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.234,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.23,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 1,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.228,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.224,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 2,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.224,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.22,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 3,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.222,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.218,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        },
+        {
+          "level": 4,
+          "rhythm": {
+            "RMDL": {
+              "passed": true,
+              "period_s": 0.222,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            },
+            "RMDR": {
+              "passed": true,
+              "period_s": 0.218,
+              "reason": null,
+              "gates": {
+                "bounded": true,
+                "sustained_amplitude": true,
+                "amplitude_retained": true,
+                "multiple_cycles": true
+              }
+            }
+          },
+          "sham_passed": true
+        }
+      ]
+    }
+  },
+  "conclusions": [
+    "All ten planned grid/model cases complete. Reported integrity passes, problems empty, no timeout. All twenty per-cell persistence checks and all ten sham checks pass.",
+    "Neither model meets the two-finest-successive-pairs numerical criterion. Every atlas adjacent comparison fails; no atlas response grid is qualified.",
+    "Selected finest comparison cycle RMSE RMDL/RMDR 0.09649/0.06009mV; amplitude differences0.185/0.944%; period differences1.081/0.550%. RMDL narrowly misses1%; RMDR passes. Penultimate comparisons do not pass, so this is not overall convergence.",
+    "Whole-late-window median RMD periods agree at printed2ms resolution on both finest grids, whereas last-five-cycle comparisons still differ. These summaries assess different windows; neither overrides existing criteria.",
+    "Atlas differences occur in stored parent as well as selected fit, so additional fitting is not the immediate diagnostic priority. This does not identify a specific integrator defect or establish chaotic dynamics.",
+    "Long-warmup phase sensitivity and the small cue-minus-sham observable are plausible contributors, not established causes. Recommend examine saved full-window cycle statistics and then common-state short-horizon/phase-controlled tests before choosing a new fitting objective.",
+    "No new fitted checkpoint, neuron/body-frequency equivalence, behavior or biological qualification. No model promoted."
+  ],
+  "unavailable_evidence": [
+    "Actual per-file hashes, full parameter/frozen-field report, source/environment records, worker exit codes, all-cell voltage summaries and raw response/trace arrays are external; supplied stdout reports aggregate integrity only.",
+    "No paired full neural state, phase-triggered trials, phase ensemble, independent solver reference, full atlas accuracy, body dynamics or sensory start/stop tests in this report."
+  ],
+  "decision": "Retain all grids and audit; do not launch more fitting or relax thresholds. Diagnose full-window cycles, shared-state finite-horizon convergence and phase dependence before another scientific run."
+}

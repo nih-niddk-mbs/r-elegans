@@ -11679,3 +11679,60 @@ launcher/preflight success only; worker execution, actual environment/source
 records, input integrity, grid completion, budget and scientific results remain
 pending external evidence. No convergence or behavioral qualification asserted.
 Report command: `/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_neural_convergence --output-dir /home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363 --report`.
+
+### 2026-11-21 — E107 server result: persistent rhythms, convergence not qualified
+
+User-reported `scripts.run_neural_convergence --report` for
+`/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363`.
+Exact stdout attachment SHA256 and all printed comparisons/control results are
+transcribed in `experiments/records/E107-server-summary.json`. This is reported
+server evidence, not independent raw artifact access or a local scientific run.
+
+Execution/budget: exit0, no timeout,449.59329138696194s (7.49min), all steps
+finished within120min cap. Both predetermined models completed five grids;
+no candidate selection, optimizer/RNG updates or parameter fitting. Post-run
+audit_complete, execution_complete and integrity_passed are True, problems[].
+The audit code verifies input/trace hashes and unchanged models/fields; individual
+hashes, parameter reports, worker exit codes and actual environment/source
+record contents were not printed and remain external. All ten zero-drive/sham
+checks pass. No behavior/sensory/muscle assay was part of this study.
+
+All20 RMDL/RMDR cell/grid persistence gates pass: bounded, sustained amplitude,
+retention and multiple cycles. Thus the unchanged models retain neural rhythmic
+components over the tested windows. Every atlas adjacent refinement comparison
+fails for both selected and stored parent. For the finest pair, selected atlas
+correlation=-0.07054 and normalized max error=1.02077; parent correlation=0.02302
+and error=2.60391. Responses are small (coarser member maxima~3.91e-5 and8.06e-6
+indicator units respectively), but existing relative criteria are not waived.
+These measurements do not show that the stimulated pathway lacks a response
+or that biology is incorrect; the current response observable is unqualified.
+
+Selected finest RMD cycle comparison improves: RMDL period error1.081%,
+amplitude0.185%, aligned cycle RMSE0.09649mV; RMDR period0.550%, amplitude0.944%,
+RMSE0.06009mV. RMDR passes, RMDL narrowly misses the predeclared1% period bound.
+The preceding pair fails both cells, so two successive comparisons do not pass.
+Parent finest cycle errors still miss criteria (RMDL period2.281%, amplitude4.497%;
+RMDR period2.222%). Neither model qualifies. No threshold relaxation or promotion.
+
+Whole-late-window median periods at the two finest grids agree at the printed
+2ms resolution: selected RMDL0.224s/RMDR0.218s; parent0.222s/0.218s. Strict
+cycle comparisons instead average the last five cycles and compare averaged
+waveforms. These summaries use different windows; stable medians do not overturn
+failed cycle tests. Pointwise voltage RMSE~10mV despite much smaller aligned
+cycle RMSE is consistent with phase sensitivity, but does not establish its
+cause. Atlas re-settles60s separately on every grid. Step-dependent phase drift,
+modulation and the small cue-minus-sham signal may contribute; no common-state
+short-horizon, phase ensemble, alternate solver or chaos test was performed.
+Do not claim a proven integrator bug, converged attractor or phase-only explanation.
+
+Decision: do not run more optimization yet. First examine saved traces over the
+full late window (cycle count/distribution, interpolated peak timing and window
+variability); then design common-state short-horizon and controlled-phase cue
+comparisons to distinguish integration error from long-run phase dependence.
+Any changed observable must be declared prospectively, retain the original
+negative results and receive its own convergence checks. No new experiment is
+launched by this entry. No body frequency, locomotion, start/stop or swimming
+qualification follows from neural RMD rhythms. Original checkpoints remain intact.
+
+Documentation/evidence-only update; no simulation code changed and no new tests
+were needed. JSON parsing/transcription shape checks and `git diff --check` pass.
