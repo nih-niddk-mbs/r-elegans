@@ -11154,3 +11154,34 @@ job) and the 788 undetermined edges remain unresolved. Risk: the E099 frequency 
 edge, so many variants may fail the strict band while shifting only slightly; the ratios show this. Software checks: 2 unit
 tests for variant construction and a local generator and report run on synthetic/original-network inputs; the sweep itself
 has not been run.
+
+## E104 - All-parameter gradient fit to the Randi atlas, four variants in parallel (PLANNED 2026-11-20; not executed)
+
+User direction: forget the polarity sweep (diagnostic only; if it was already launched it is CPU-only and unaffected) and fit
+all the parameters at once; use all compute and run several variants to see what works. Question: does opening every
+non-structural parameter, trained jointly by gradient, raise held-out agreement with the atlas beyond the channel/edge-only
+fits of E101/E102, evaluated with a validation split that is separate from the test animals? Trainable (`--parameter-set all`):
+5,116 channel densities (every positive density of every neuron, now including RMD and LEAK), 3,709 chemical and 2,186 gap
+edge strengths, and six per-cell fields x 302 neurons (capacitance, leak reversal, release threshold, release slope, calcium
+removal time, free calcium fraction; offsets from the anchor) = 12,823 values. Still fixed: gating kinetics (code constants,
+not parameters of the current network class), ion reversals, cell volume, calcium equilibrium, bias, initial voltage, topology,
+edge sign/reversal, the stimulus conductance (0.01118 nS) and the indicator constants. Bounds: channels x10 and edges +/-2 raw
+as in E101/E102; extras inside the project's existing initialization clip limits (capacitance 1-20 pF, leak reversal -80..-35 mV,
+release threshold -65..-20 mV, slope 2..20 mV) and an assumed factor 3 for calcium removal and free fraction; none of these
+bounds is measured. Prior 0.001 x mean squared offset; Adam (clip 1), pair subsampling 50 %, settle every 10 steps, substeps 40
+(the E102 converged resolution), seed 0. Split: E100's held-out test animals (29) unchanged; the training animals are divided
+into 43 fit and 15 validation animals (every 4th); the loss uses fit animals only; best-validation-Spearman checkpoint and the
+final checkpoint are kept; test animals are evaluated, never used for selection. Code: `r_elegans/brain/all_parameters.py`,
+`scripts/train_all_parameters.py`, `scripts/launch_all_parameters_mbslnx2.sh`, `scripts/report_all_parameters.py`, 3 unit tests.
+Variants (two per A100, memory fraction 0.45 each, 180 min wall budget, 10 min reserve): all_lr005 (from the polarized Mac
+bundle, lr 0.005), all_lr002 (lr 0.002), all_from_e102 (start = E102 final, hash-checked, anchored to the bundle, lr 0.003),
+network_control (the E101/E102 parameter set under the same split and protocol, lr 0.005). Acceptance (declared now):
+integrity - no non-finite step, zero frozen-field changes, hashes match, substep 40-vs-80 correlation >= 0.9 and max
+|difference| / max |response| < 0.1; improvement - a best-validation checkpoint with test Spearman > 0.127 (E102 final 0.1071
+at substeps 40, plus 0.02) and test AUC for excited pairs >= 0.574, and, to credit the extra parameters, a test Spearman more
+than 0.02 above network_control's best-validation checkpoint; overfitting flag - validation Spearman rising while test falls by
+more than 0.02 from its maximum. Reported, not criteria: silent fraction, response magnitudes, extras at their bounds, the
+number of channel/edge entries at their bounds. Local software check (Mac CPU x64, 6 targets, 4 steps): runs end to end,
+checkpoint loads, only the allowed fields differ, 0 frozen-field changes, loss 0.964 at step 0; not a result. Claims not made:
+no locomotion, start/stop, gait, trajectory or biological-fidelity claim; the rhythm check must be repeated on any kept
+checkpoint before it is used as a parent, and the earlier E092-E099 gait is not part of this lineage.
