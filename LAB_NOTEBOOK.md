@@ -11222,3 +11222,40 @@ The E102 audit showed held-out agreement plateauing with a widening train-held-o
 relies on the validation split to select the kept checkpoint; the final checkpoint and `network_latest` are also kept. The
 trainer has no mid-run state resume: a crash would leave `network_latest.npz`/`network_best_val.npz` (written every 50 steps)
 and `history.jsonl` but not a restartable optimizer state.
+
+### E104 result and post-run audit (user-reported server report output; not locally re-run)
+
+Sweep folder `/home/carsonc/r-elegans-results/allparams-20261121T023851Z-685266`; four runs, status completed, 3,354-3,392
+steps in 711 min of the 720 min budget (two processes per A100, float64, substeps 40). Source revision/dirty state of the
+run, artifact hashes (the report does not verify them) and per-run run records were not separately checked here; frozen-field
+changes were printed only for all_lr005 (0/0/0). Table (Spearman of mean z; val = 15 validation animals, test = 29 E100
+test animals; sp0 = first evaluation = start network, spF = final, spB = best-validation checkpoint):
+- all_lr005 (bundle, lr 0.005): val 0.029 -> spF 0.098, spB 0.101 (step 3250); test 0.046 -> spB 0.084, AUC excited 0.582.
+- all_lr002 (bundle, lr 0.002): val 0.029 -> 0.069, spB 0.083 (step 1000); test 0.046 -> 0.090, AUC 0.577.
+- all_from_e102 (start E102 final, lr 0.003): val 0.160 -> 0.126, spB 0.173 (step 2250); test 0.107 -> 0.088, AUC 0.559.
+- network_control (E101/E102 parameter set, lr 0.005): val 0.029 -> 0.053, spB 0.085 (step 475); test 0.046 -> 0.106, AUC 0.570.
+Final training-animal Spearman (from the log tails, fit animals, 4,814 pairs): 0.375 / 0.298 / 0.212 / 0.199 and AUC excited
+0.761 / 0.710 / 0.666 / 0.656 for all_lr005 / all_lr002 / all_from_e102 / network_control.
+Declared criteria: improvement NOT met - no best-validation checkpoint reaches test Spearman 0.127 (best 0.106, the control),
+and none exceeds network_control by 0.02 (the all-parameter runs are 0.016-0.022 below it); the AUC >= 0.574 part is met only
+by all_lr002 and all_lr005. Numerical criterion met: substep 40-vs-80 correlation >= 0.99999999 and max difference / max
+response 5.8e-5 (all_lr005; table column 'conv diff' 0.000 for the other all-parameter runs, 0.013 for the control).
+Integrity: no run reported a non-finite stop; frozen-field changes checked for all_lr005 only.
+Overfitting: strong for the all-parameter runs. all_lr005 training Spearman 0.375 against test 0.084 (gap 0.29) with 12,823
+trainable values against 4,814 fit pairs; network_control train 0.199 vs test 0.106. Validation selected an early step for the
+control (475) and the lr 0.002 run (1000), late steps for the others.
+Validation caveat: all_from_e102 starts from the E102 final, which was trained on all 58 training animals including these
+15 validation animals, so its validation scores (sp0 0.160) are not held out and its best-validation selection is not
+meaningful; only its test numbers are clean (0.107 at the start, 0.088 for the selected checkpoint: worse than the start).
+Selection bias: the best-validation step is the maximum over about 135 noisy evaluations, so the validation numbers are
+optimistic; test numbers are unbiased for the chosen checkpoint.
+Parameter use (all_lr005): entries at the clip bounds 30 channels, 390 chemical edges, 198 gap edges; extras at bounds
+(of 302 each) 68 capacitance, 4 leak reversal, 36 release threshold, 11 release slope, 22 calcium removal, 20 free calcium;
+largest changes: capacitance x20 (log 3.00, the 20 pF bound), leak reversal 8.8 mV, release threshold 22.1 mV, release slope
+x8.6, calcium removal and free calcium x3 (the assumed bound). Bounds are project clip limits or assumptions, not data.
+Interpretation: freeing the six per-cell fields and the RMD/LEAK densities raises training agreement strongly but does not
+raise held-out agreement; the best generalizing result of the atlas work remains the channel/edge-only fits (test Spearman about
+0.106-0.114, AUC 0.57), which match the best anatomy-only predictors (0.108) and stay below the data ceiling (0.15). More
+parameters did not help; the limit is likely missing mechanism (extrasynaptic signaling, unobserved inputs) or the objective,
+not parameter count. Not shown: response magnitudes/silent fractions, any behavior, rhythm retention of these checkpoints,
+gating-kinetics freedom (not trainable), the effect of a train-only early stopping rule applied to the all-parameter runs.
