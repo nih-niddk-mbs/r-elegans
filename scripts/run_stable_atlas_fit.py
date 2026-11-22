@@ -165,10 +165,16 @@ def analyze_results(results, manifest, statistics, ids, targets, levels, split, 
 
 def coordinator(root):
     budget = json.loads((root/'deadline.json').read_text());start = budget['started_monotonic']
-    train_deadline = start+330*60;final_deadline = budget['deadline_monotonic']-600
-    mfest = prepare(Path(budget['source']), root);statistics = json.loads(Path(mfest['statistics']).read_text())
+    own = budget.get('own_state', False)
+    train_deadline = start+budget.get('optimization_minutes', 330)*60;final_deadline = budget['deadline_monotonic']-600
+    mfest = prepare(Path(budget['source']), root)
+    if own:
+        mfest.update(experiment='E114', own_state=True, seed=1140)
+        mfest['policy'].update(training_cutoff_minutes=90, total_minutes=240, selection='Own-state full-atlas numerical gates and validation loss only')
+        write(root/'manifest.json', mfest)
+    statistics = json.loads(Path(mfest['statistics']).read_text())
     arrays = saved_arrays(mfest['parent']);ids = arrays['neuron_ids'].tolist();codec = Coordinates(arrays)
-    rng = np.random.default_rng(1130);x = np.zeros(codec.size);mom = x.copy();var = x.copy()
+    rng = np.random.default_rng(1140 if own else 1130);x = np.zeros(codec.size);mom = x.copy();var = x.copy()
     pool = None;ledger = [];iteration = 0;accepted = 0;moment_steps = 0;selected = None
     checkpoint_dir = root/'checkpoints';checkpoint_dir.mkdir()
     def save(name, values):
@@ -190,6 +196,21 @@ def coordinator(root):
         write(folder/'selection.json', dict(current=str(current), selected=str(selected), validation_loss=best_score,
             accepted=accepted, iteration=iteration, semantics='Fresh trajectory; no exact live-worker-queue resume implemented; Adam moments advance on valid perturbation pairs, even if update rejected'))
         write(root/'history.json', ledger)
+    anchor_cache = {}
+    def own_anchors(models, deadline):
+        missing = {file_sha256(model):model for model in models if file_sha256(model) not in anchor_cache}
+        specs = []
+        for sha, model in missing.items():
+            spec = task(root, 'own-anchors-'+sha, model);spec['kind'] = 'anchors';specs.append(spec)
+        for row in pool.tasks(specs, deadline) if specs else []:
+            anchor_cache[row['task']['model_sha256']] = row['anchors']
+        return [anchor_cache[file_sha256(model)] for model in models]
+    def specs_for(name, model, targets, levels, deadline):
+        anchors = own_anchors([model], deadline)[0] if own else mfest['anchors']
+        specs = replay_tasks(root, mfest, name, model, anchors, targets, levels)
+        if own:
+            for spec in specs:spec['require_own_state'] = True
+        return specs
     try:
         pool = Pool(root)
         # Source endpoint replay before fitting; both numerical groups when available.
@@ -201,6 +222,15 @@ def coordinator(root):
             [mfest['targets'].index(t) for t in batch]]).max()) for l in [1,2]]
         write(root/'source-replay.json', dict(screen=screen, maximum_response_errors=differences))
         if not screen['passed'] or max(differences) > 1e-10:raise ValueError('Source endpoint replay/screen failed')
+        if own:
+            own_anchors([current], train_deadline)
+            baseline_specs = specs_for('own-parent-baseline', current, val_targets, [1,2], train_deadline)
+            baseline_results = pool.tasks(baseline_specs, train_deadline)
+            metrics, _ = analyze_results(baseline_results, mfest, statistics, ids, val_targets, [1,2], 'val')
+            if not metrics['passed']:raise ValueError('Fresh-parent baseline screen failed')
+            parent_score = best_score = metrics['data_loss']
+            write(root/'own-parent-baseline.json', dict(metrics=metrics, model=str(current)))
+            recent = max(2400., 3*(time.monotonic()-last_validation))
         while admit(time.monotonic(), train_deadline, recent):
             began = time.monotonic();iteration += 1
             batch = choose_batch(rng, train_pool, mfest['hard'], iteration)
@@ -211,8 +241,9 @@ def coordinator(root):
             plus_x = np.clip(x+.005*direction, -.1, .1);minus_x = np.clip(x-.005*direction, -.1, .1)
             plus = save(f'{iteration:05d}-plus', plus_x);minus = save(f'{iteration:05d}-minus', minus_x)
             record.update(plus=str(plus), minus=str(minus));write(round_dir/'intent.json', record)
-            specs = replay_tasks(root, mfest, f'r{iteration}-plus', plus, mfest['anchors'], batch, [1,2])
-            specs += replay_tasks(root, mfest, f'r{iteration}-minus', minus, mfest['anchors'], batch, [1,2])
+            if own:own_anchors([plus, minus], train_deadline)
+            specs = specs_for(f'r{iteration}-plus', plus, batch, [1,2], train_deadline)
+            specs += specs_for(f'r{iteration}-minus', minus, batch, [1,2], train_deadline)
             results = pool.tasks(specs, train_deadline);half = len(results)//2
             a, _ = analyze_results(results[:half], mfest, statistics, ids, batch, [1,2], 'train')
             b, _ = analyze_results(results[half:], mfest, statistics, ids, batch, [1,2], 'train')
@@ -222,8 +253,8 @@ def coordinator(root):
                 moment_steps += 1
                 proposal_x, mom, var = adam_step(x, mom, var, gradient, moment_steps)
                 proposal = save(f'{iteration:05d}-proposal', proposal_x);record['proposal'] = str(proposal)
-                specs = replay_tasks(root, mfest, f'r{iteration}-current', current, mfest['anchors'], batch, [1,2])
-                specs += replay_tasks(root, mfest, f'r{iteration}-proposal', proposal, mfest['anchors'], batch, [1,2])
+                specs = specs_for(f'r{iteration}-current', current, batch, [1,2], train_deadline)
+                specs += specs_for(f'r{iteration}-proposal', proposal, batch, [1,2], train_deadline)
                 results = pool.tasks(specs, train_deadline);half = len(results)//2
                 c, _ = analyze_results(results[:half], mfest, statistics, ids, batch, [1,2], 'train')
                 d, _ = analyze_results(results[half:], mfest, statistics, ids, batch, [1,2], 'train')
@@ -234,17 +265,22 @@ def coordinator(root):
             print(json.dumps(dict(iteration=iteration, accepted=record['accepted'], selected_validation_loss=best_score)), flush=True)
             recent = max(60., time.monotonic()-began)
             # Full validation panel is expensive; admit only with substantial remaining search budget.
-            if accepted and time.monotonic()-last_validation >= 1800 and train_deadline-time.monotonic() > max(1800, 2*recent):
+            if (record['accepted'] and own) or (not own and accepted and time.monotonic()-last_validation >= 1800 and train_deadline-time.monotonic() > max(1800, 2*recent)):
                 val_start = time.monotonic()
-                specs = replay_tasks(root, mfest, f'validation-{iteration}', current, mfest['anchors'], val_targets, [1,2])
+                selection_targets = mfest['targets'] if own else val_targets
+                selection_levels = [0,1,2] if own else [1,2]
+                specs = specs_for(f'validation-{iteration}', current, selection_targets, selection_levels, train_deadline)
                 results = pool.tasks(specs, train_deadline)
-                metrics, _ = analyze_results(results, mfest, statistics, ids, val_targets, [1,2], 'val')
+                metrics, _ = analyze_results(results, mfest, statistics, ids, selection_targets, selection_levels, 'val', final=own)
                 score = metrics['data_loss']+prior(x)
-                chosen = bool(metrics['passed'] and score < best_score)
+                chosen = bool(metrics['passed'] and score < best_score and (not own or metrics['data_loss'] < parent_score))
                 write(root/f'validation-{iteration}.json', dict(model=str(current), sha256=file_sha256(current),
-                    offsets=x.tolist(), metrics=metrics, score=score, selected=chosen, previous_score=best_score))
+                    offsets=x.tolist(), metrics=metrics, score=score, selected=chosen, previous_score=best_score,
+                    levels=selection_levels, own_state=own))
                 if chosen:best_score = score;selected = current;best_x = x.copy()
-                last_validation = time.monotonic();recent = max(recent, time.monotonic()-val_start);save_state()
+                last_validation = time.monotonic()
+                recent = recent+(time.monotonic()-val_start) if own else max(recent, time.monotonic()-val_start)
+                save_state()
     except TimeoutError as exc:
         write(root/'training-stop.json', dict(reason='optimization_deadline', detail=str(exc), iteration=iteration))
     finally:
@@ -262,22 +298,26 @@ def coordinator(root):
         fresh = auto[1]['anchors'];parent_fresh = auto[0]['anchors']
         specs = replay_tasks(root, mfest, 'final', chosen_model, fresh, mfest['targets'], [0,1,2])
         specs += replay_tasks(root, mfest, 'fresh-parent-validation', mfest['parent'], parent_fresh, val_targets, [2])
+        if own:
+            for spec in specs:spec['require_own_state'] = True
         results = pool.tasks(specs, final_deadline)
         count = len(replay_tasks(root, mfest, 'unused', chosen_model, fresh, mfest['targets'], [0,1,2]))
         metrics, matrices = analyze_results(results[:count], mfest, statistics, ids, mfest['targets'], [0,1,2], 'val', reference=False, final=True)
         parent_metrics, _ = analyze_results(results[count:], mfest, statistics, ids, val_targets, [2], 'val', reference=False)
+        selected_data_loss = best_score-prior(best_x)
+        selection_reproduced = bool(not own or abs(metrics['data_loss']-selected_data_loss) <= 1e-10)
         scores = {split:loss(matrices[2], mfest['targets'], ids, statistics, split) for split in ('train','val','test')}
         np.savez_compressed(root/'final-matrices.npz', **{'level_'+str(l):v for l, v in matrices.items()})
         autonomy_pass = all(preserved(auto[0]['rhythms'][l][j], auto[1]['rhythms'][l][j]) for l in range(2) for j in range(2))
         params = codec.audit(saved_arrays(chosen_model), best_x)
-        passed = bool(metrics['passed'] and parent_metrics['passed'] and autonomy_pass and params['passed'] and
+        passed = bool(selection_reproduced and metrics['passed'] and parent_metrics['passed'] and autonomy_pass and params['passed'] and
             params['changed_coordinates'] > 0 and best_score < parent_score and scores['val'] < parent_metrics['data_loss'])
-        result = dict(experiment='E113', execution_complete=True, validation_complete=True, iterations=iteration,
+        result = dict(experiment='E114' if own else 'E113', own_state=own, selection_reproduced=selection_reproduced, execution_complete=True, validation_complete=True, iterations=iteration,
             accepted_updates=accepted, fit_qualified_before_audit=passed, final_metrics=metrics,
             fresh_parent_validation=parent_metrics, scores=scores, autonomy_passed=autonomy_pass,
             parameters=params, selected_sha256=file_sha256(chosen_model), model_promoted=False,
             biological_fidelity_qualified=False, sensory_start_stop_qualified=False, swimming_qualified=False,
-            limits=['Supervised conditional atlas statistics; not calibrated calcium amplitudes or behavior.',
+            limits=['Supervised own-state atlas statistics; not calibrated calcium amplitudes or behavior.' if own else 'Supervised conditional atlas statistics; not calibrated calcium amplitudes or behavior.',
                     'Historical test set repeatedly inspected; no untouched holdout claim.',
                     'No new sensory start/stop, physical body or learned swimming evidence.'])
         write(root/'summary.json', result)
@@ -287,10 +327,19 @@ def coordinator(root):
 def main():
     p = argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir', type=Path, required=True)
     p.add_argument('--source', type=Path, default=Path(DEFAULT_SOURCE));p.add_argument('--coordinator', action='store_true');p.add_argument('--report', action='store_true')
+    p.add_argument('--own-state', action='store_true', help='E114: four-hour run; own-state training and selection')
     a = p.parse_args();root = a.output_dir.resolve()
     if a.report:
         for name in ('summary.json','audit.json','budget_receipt.json'):
-            path = root/name;print(name+':', path.read_text() if path.exists() else 'not written yet')
+            path = root/name
+            if not path.exists():print(name+': not written yet');continue
+            value = json.loads(path.read_text())
+            keys = {'summary.json':('experiment','iterations','accepted_updates','autonomy_passed','selection_reproduced','parameters','scores','fit_qualified_before_audit'),
+                    'audit.json':('audit_complete','execution_complete','integrity_passed','problems','unavailable_evidence'),
+                    'budget_receipt.json':('total_minutes','elapsed_seconds','all_steps_finished','timed_out','validation_complete','audit_complete','fit_qualified')}[name]
+            print(name+':', json.dumps({key:value.get(key) for key in keys}))
+            if name == 'summary.json':
+                print('Final gates:', {key:value.get('final_metrics', {}).get(key) for key in ('passed','controls_passed','rhythms_passed','numerical_passed','loss_grid_stable')})
         return
     if a.coordinator:
         try:coordinator(root)
@@ -298,9 +347,10 @@ def main():
             traceback.print_exc();write(root/'failure.json', dict(error=repr(exc)));raise
         return
     if root == REPO or REPO in root.parents or root in REPO.parents:p.error('External output required')
-    start = time.monotonic();deadline = start+480*60;root.mkdir(parents=True, exist_ok=False)
+    total_minutes = 240 if a.own_state else 480
+    start = time.monotonic();deadline = start+total_minutes*60;root.mkdir(parents=True, exist_ok=False)
     write(root/'deadline.json', dict(started_monotonic=start, deadline_monotonic=deadline,
-        source=str(a.source.resolve()), total_minutes=480, optimization_minutes=330,
+        source=str(a.source.resolve()), total_minutes=total_minutes, optimization_minutes=90 if a.own_state else 330, own_state=a.own_state,
         started_utc=datetime.now(timezone.utc).isoformat(), includes='Preparation, optimization, fresh states, validation, audit and cleanup'))
     capture_run_record(root, REPO, vars(a), phase='stable-atlas-supervisor')
     from scripts.total_job_budget import run_group
@@ -312,9 +362,9 @@ def main():
     audit_path = root/'audit.json';audit = json.loads(audit_path.read_text()) if audit_path.exists() else {}
     summary_path = root/'summary.json';summary = json.loads(summary_path.read_text()) if summary_path.exists() else {}
     elapsed = time.monotonic()-start
-    finished = bool(code == 0 and not timeout and audit_code == 0 and not audit_timeout and audit.get('audit_complete') and audit.get('execution_complete') and elapsed <= 480*60)
+    finished = bool(code == 0 and not timeout and audit_code == 0 and not audit_timeout and audit.get('audit_complete') and audit.get('execution_complete') and elapsed <= total_minutes*60)
     receipt = dict(exit_code=code, timed_out=timeout, audit_exit_code=audit_code, audit_timed_out=audit_timeout,
-        total_minutes=480, elapsed_seconds=elapsed, all_steps_finished=finished,
+        total_minutes=total_minutes, elapsed_seconds=elapsed, all_steps_finished=finished,
         validation_complete=bool(summary.get('validation_complete')), audit_complete=bool(audit.get('audit_complete')),
         fit_qualified=bool(finished and audit.get('integrity_passed') and summary.get('fit_qualified_before_audit')),
         report=str(summary_path), audit=str(audit_path))

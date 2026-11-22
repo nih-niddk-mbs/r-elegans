@@ -14,6 +14,7 @@ from scripts.stable_atlas_policy import Coordinates, loss, prior, preserved
 def audit(root):
     from scripts.run_stable_atlas_fit import analyze_results
     from r_elegans.brain.rhythm_qualification import rhythm_metrics
+    experiment = 'E113'
     problems = [];unavailable = [];hashes = {};model_checks = [];task_checks = [];parameter_counts = {}
     def read(path, expected=None):
         path = Path(path);sha = file_sha256(path);hashes[str(path)] = sha
@@ -22,9 +23,10 @@ def audit(root):
     def document(path):return json.loads(read(path).read_text())
     manifest_path = root/'manifest.json';summary_path = root/'summary.json'
     try:
-        m = document(manifest_path);statistics = document(m['statistics']);origin = saved_arrays(read(m['parent'], m['parent_sha256']))
+        m = document(manifest_path);experiment = m.get('experiment', 'E113');statistics = document(m['statistics']);origin = saved_arrays(read(m['parent'], m['parent_sha256']))
         codec = Coordinates(origin);ids = origin['neuron_ids'].tolist()
         read(m['anchors'], m['anchors_sha256'])
+        own = m.get('own_state', False)
         for path, sha in m['evidence_sha256'].items():read(path, sha)
         for folder in sorted((root/'checkpoints').glob('*')):
             identity = document(folder/'identity.json');path = read(folder/'network.npz', identity['sha256'])
@@ -43,13 +45,22 @@ def audit(root):
             if r['task'] != spec:raise ValueError('Task/result identity differs')
             if r['status'] != 'completed':
                 problems.append('Task failed: '+spec['name']);continue
-            if spec['kind'] == 'autonomy':
-                read(r['anchors'], r['anchors_sha256']);metrics = []
+            if spec['kind'] in ('autonomy', 'anchors'):
+                anchor = saved_arrays(read(r['anchors'], r['anchors_sha256']))
+                if own and str(anchor.get('model_sha256', 'missing')) != spec['model_sha256']:
+                    raise ValueError('State generation model mismatch')
+                if spec['kind'] == 'anchors':
+                    task_checks.append(dict(name=spec['name'], own_state_model_verified=True));continue
+                metrics = []
                 for step in (.03125, .015625):
                     a = saved_arrays(read(Path(spec['output'])/('rhythm-'+str(step)+'.npz')))
                     metrics.append([rhythm_metrics(a['rmd_mV'][:, j], .002) for j in range(2)])
                 if metrics != r['rhythms']:raise ValueError('Autonomy metrics differ')
                 task_checks.append(dict(name=spec['name'], rhythms=metrics));continue
+            if own and not spec['name'].startswith('source-check-'):
+                anchor = saved_arrays(spec['anchors'])
+                if str(anchor.get('model_sha256', 'missing')) != spec['model_sha256']:
+                    raise ValueError('Replay did not use own model states')
             a = saved_arrays(read(r['artifact'], r['sha256']));targets = spec['targets'];n = len(targets)
             count = 2*((n+7)//8)+(-n)%8
             labels = [f'batch-{begin//8}-condition-{k}' for begin in range(0, n, 8) for k in range(min(8, n-begin), 10)]
@@ -68,9 +79,9 @@ def audit(root):
             task_checks.append(dict(name=spec['name'], controls_passed=controls, rhythms=rhythm,
                 maximum_response=float(abs(a['response']).max()), control_count=count))
         # Independently recompute every completed optimization pair, same-minibatch decision and validation selection.
-        def panel(prefix, targets, split, levels=(1,2)):
+        def panel(prefix, targets, split, levels=(1,2), final=False):
             rows = [r for name,r in results.items() if name.startswith(prefix+'-') and r['status'] == 'completed']
-            metrics, _ = analyze_results(rows, m, statistics, ids, targets, list(levels), split)
+            metrics, _ = analyze_results(rows, m, statistics, ids, targets, list(levels), split, final=final)
             return metrics
         for decision_path in sorted((root/'rounds').glob('*/decision.json')):
             d = document(decision_path);i = d['iteration'];batch = d['batch'];a = panel(f'r{i}-plus', batch, 'train');b = panel(f'r{i}-minus', batch, 'train')
@@ -84,11 +95,18 @@ def audit(root):
                 expected = bool(a['passed'] and b['passed'] and c['passed'] and v['passed'] and v['data_loss']+prior(px) < c['data_loss']+prior(cx))
             if expected != d['accepted']:raise ValueError('Wrong update acceptance')
         baseline = saved_arrays(read(m['baselines'][-1]))['response']
-        expected_score = loss(baseline, m['targets'], ids, statistics, 'val');winner_sha = file_sha256(root/'checkpoints/initial/network.npz')
+        expected_score = loss(baseline, m['targets'], ids, statistics, 'val')
+        if own:
+            baseline_record = document(root/'own-parent-baseline.json')
+            bm = panel('own-parent-baseline', baseline_record['metrics']['targets'], 'val')
+            if bm != baseline_record['metrics'] or not bm['passed']:raise ValueError('Own parent baseline differs')
+            expected_score = bm['data_loss']
+        parent_score = expected_score
+        winner_sha = file_sha256(root/'checkpoints/initial/network.npz')
         for path in sorted(root.glob('validation-*.json'), key=lambda p:int(p.stem.split('-')[-1])):
             row = document(path);model = read(row['model'], row['sha256']);targets = row['metrics']['targets']
-            metrics = panel(path.stem, targets, 'val');values = saved_arrays(model.parent/'coordinates.npz')['offsets']
-            score = metrics['data_loss']+prior(values);chosen = bool(metrics['passed'] and score < expected_score)
+            metrics = panel(path.stem, targets, 'val', row.get('levels', (1,2)), final=own);values = saved_arrays(model.parent/'coordinates.npz')['offsets']
+            score = metrics['data_loss']+prior(values);chosen = bool(metrics['passed'] and score < expected_score and (not own or metrics['data_loss'] < parent_score))
             if metrics != row['metrics'] or score != row['score'] or chosen != row['selected'] or expected_score != row['previous_score']:
                 raise ValueError('Validation selection arithmetic differs')
             if chosen:expected_score = score;winner_sha = file_sha256(model)
@@ -112,7 +130,9 @@ def audit(root):
             parent_metrics, _ = analyze_results(parent_rows, m, statistics, ids, targets, [2], 'val', reference=False)
             scores = {split:loss(matrices[2], m['targets'], ids, statistics, split) for split in ('train','val','test')}
             values = saved_arrays(chosen.parent/'coordinates.npz')['offsets'];params = codec.audit(saved_arrays(chosen), values)
-            qualified = bool(final['passed'] and parent_metrics['passed'] and autonomy and params['passed'] and params['changed_coordinates'] > 0 and
+            reproduced = bool(not own or abs(final['data_loss']-(expected_score-prior(values))) <= 1e-10)
+            if own and reproduced != summary['selection_reproduced']:raise ValueError('Final selection reproducibility differs')
+            qualified = bool(reproduced and final['passed'] and parent_metrics['passed'] and autonomy and params['passed'] and params['changed_coordinates'] > 0 and
                 expected_score < selection['parent_validation_loss'] and scores['val'] < parent_metrics['data_loss'])
             if scores != summary['scores'] or params != summary['parameters'] or parent_metrics != summary['fresh_parent_validation'] or autonomy != summary['autonomy_passed'] or qualified != summary['fit_qualified_before_audit']:
                 raise ValueError('Final scientific score/qualification arithmetic differs')
@@ -131,7 +151,7 @@ def audit(root):
     except Exception as exc:
         traceback.print_exc();problems.append(repr(exc))
     complete = summary_path.exists() and not unavailable
-    result = dict(experiment='E113', audit_complete=True, execution_complete=bool(complete), integrity_passed=not problems,
+    result = dict(experiment=experiment, audit_complete=True, execution_complete=bool(complete), integrity_passed=not problems,
         problems=problems, unavailable_evidence=unavailable, candidate_parameter_checks=model_checks,
         signal_and_control_checks=task_checks, evidence_sha256=hashes,
         behavioral_gates=dict(sensory_start_stop=False, swimming=False, body_simulated=False, biological_fidelity=False),

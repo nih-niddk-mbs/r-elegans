@@ -35,10 +35,14 @@ def evaluate(task, cache):
     p, f, c = load_network(task['model'])
     p, f = jax.tree.map(lambda a: a.astype(jnp.float64) if jnp.issubdtype(a.dtype, jnp.floating) else a, (p, f))
     ids = saved_arrays(task['model'])['neuron_ids'].tolist();rmd = [ids.index(n) for n in ('RMDL', 'RMDR')]
-    if task['kind'] == 'autonomy':
+    if task['kind'] in ('autonomy', 'anchors'):
         starts, reference = collect_anchors(p, f, c, rmd, step_ms=.03125)
         anchor = out/'anchors.npz'
-        np.savez_compressed(anchor, **{'start_'+k:np.asarray(getattr(starts, k)) for k in FIELDS})
+        np.savez_compressed(anchor, model_sha256=task['model_sha256'], reference_indices=reference['indices'],
+            **{'start_'+k:np.asarray(getattr(starts, k)) for k in FIELDS})
+        if task['kind'] == 'anchors':
+            pin(task['model'], task['model_sha256'])
+            return dict(anchors=str(anchor), anchors_sha256=file_sha256(anchor), reference_indices=reference['indices'])
         traces, metrics = [], []
         for step in (.03125, .015625):
             voltage = rhythm_forward(p, f, c, seconds=40., sample_dt=.002, max_step_ms=step, warmup_seconds=60.)
@@ -51,6 +55,8 @@ def evaluate(task, cache):
     else:
         pin(task['anchors'], task['anchors_sha256'])
         anchors = saved_arrays(task['anchors'])
+        if task.get('require_own_state') and str(anchors.get('model_sha256', 'missing')) != task['model_sha256']:
+            raise ValueError('Own-state anchor/model identity mismatch')
         starts = ConductanceNetworkState(*(jnp.asarray(anchors['start_'+k], dtype=jnp.float64) for k in FIELDS))
         targets = task['targets'];step = task['step_ms']
         # Configuration is invariant across tasks; only params and phase states vary.

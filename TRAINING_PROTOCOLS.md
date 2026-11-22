@@ -1,5 +1,16 @@
 # WormGym: training and validation protocols
 
+2026-11-22 E114 prepared; server execution pending. Corrected four-hour total
+atlas fit from audited E112 parent with a fresh optimizer (seed1140). Every model
+uses its own60s-settled neural states during training, checkpoint selection and
+final evaluation. Accepted updates must pass full135-target three-level numerical
+validation and improve own-state validation before selection. Final selection
+loss must reproduce within1e-10; original parent retained otherwise. Up to90min
+for baseline/fitting/selection and150min for final validation/audit, including a
+last10min audit reserve. No sensory-controlled behavior or biological promotion.
+Launch: `sh scripts/launch_own_state_atlas_fit_mbslnx2.sh`.
+[Plan](experiments/records/E114-plan.json).
+
 2026-11-22 E113 completed (user-reported): 25 optimizer iterations,16 accepted
 updates; all9538 unknown coordinates changed with maximum offset0.01955 and
 no near-bound coordinates. Frozen fields and parameter policy pass. Completed

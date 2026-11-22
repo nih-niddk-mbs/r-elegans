@@ -12513,3 +12513,48 @@ Selection did not establish fresh-state improvement. This discrepancy motivates
 matching selection/evaluation conditions; it does not prove the mechanistic cause
 of regression. Further timestep refinement alone cannot fix worse validation loss.
 No new training, simulation, promotion or behavior qualification performed.
+
+### 2026-11-22 — E114 planned: matching own-state optimization, selection and final evaluation
+
+User requests a four-hour run with corrected validation conditions. Plan recorded
+before edits in experiments/records/E114-plan.json. Start afresh from qualified
+E112 selected parent, not E113 failed weights; seed1140. Keep existing bounded
+unknown-coordinate and fixed-field policy. Generate each candidate's own60s
+settled full-state quarter-cycle anchors for perturbation, acceptance, selection
+and final evaluation. Anchor caching keyed by exact checkpoint SHA only. Original
+source-state replay remains a separate parent reproduction test, never the new
+selection baseline. Fresh-parent validation is the comparison baseline.
+
+At every accepted training update run full135-target three-level validation from
+its own states; require vector/mixed numerical checks, controls and rhythms,
+lower validation loss (plus prior for ranking), never test-based selection.
+Four-hour TOTAL ceiling: at most90min optimization/baseline/selection,150min final
+validation/audit reserve including last10min audit. This may permit few updates;
+correctly evaluated negative/unchanged results are preferable to a falsely
+qualified fit. Final selection loss must reproduce within1e-10 under identical
+own-state protocol. Full audit includes exact model-to-anchor provenance and
+selection arithmetic. No guarantee of biological success or server runtime;
+software checks and actual scientific evidence remain distinct. Server pending.
+
+E114 local implementation verification:42 focused tests passed across
+`test_stable_atlas_fit`, `test_atlas_composite`, `test_common_state` and
+`test_atlas_target_refinement` (CPU,float64; synthetic/mocked coordinator where
+applicable). Tests include unchanged-parent rejection, successful synthetic
+own-state selection, training improvement with validation regression rejected,
+independent full saved-data audit and artifact-tampering detection. Existing
+source/shared-state numerical helpers remain covered. Shell syntax, Python
+compilation and diff whitespace checks pass. No Mac scientific fitting or A100
+execution claimed. Server performance remains pending.
+
+Implementation preserves E113 legacy mode for audit reproducibility; new launcher
+uses `--own-state`,240min inclusive watchdog/90min search budget. Both GPUs handle
+state generation and replay; model/state identity is enforced at replay and audit.
+Fresh-parent baseline and every candidate selection use own states; selection
+checks all135targets/all3 grids against existing vector and pair criteria.
+Final replay independently regenerates states and requires validation-loss
+reproduction within1e-10. Numerical target grouping remains a rechecked
+hypothesis; it is not silently expanded or exempted after failures. Conservative
+round admission includes observed selection cost; incomplete tasks/validation
+cannot qualify. Automatic audit reports all model/state/selection evidence and
+remaining limits. Compact `--report` now avoids dumping full audit arrays.
+Scientific scope remains supervised physiology, not sensory-controlled behavior.

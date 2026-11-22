@@ -1,0 +1,13 @@
+{
+  "experiment": "E114",
+  "recorded_date": "2026-11-22",
+  "status": "planned; server execution pending",
+  "question": "Does training and selecting from each network's own settled state improve fresh-state validation while preserving rhythms and numerical consistency?",
+  "parent": "Audited E112 selected 4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f; fresh optimizer, not E113 continuation",
+  "method": "E113 bounded SPSA/Adam, seed1140, fixed/passive/kinetic/release/LEAK/RMD and anatomy policy unchanged. Every current/plus/minus/proposal replay starts from its own deterministic 60s-settled, quarter-cycle full-state anchors. Cache anchors only by exact model SHA. Source-anchored parent replay remains a separate startup reproducibility check.",
+  "selection": "Fresh parent validation baseline at levels1/2. Every accepted training update is evaluated on full135 targets, all3 resolution levels, own anchors. Selection uses validation loss plus declared prior and requires full numerical/control/rhythm gates and improved raw validation loss. No test-based selection. Same finest-step own-state protocol in selection and final; rejected E113 candidate not promoted.",
+  "budget": "240 minutes TOTAL, optimization including baseline/selection at most90 minutes; remaining150 for final own-state/RMD/full-atlas validation and audit. Last10 minutes reserved for automatic audit. Admit new rounds conservatively using recent timing. Incomplete work never qualifies; may finish early.",
+  "acceptance": "Changed bounded parameters, exact frozen fields, full numerical/control checks, own-state RMD preservation and fresh validation improvement over parent. Final replay must reproduce selected own-state validation loss within1e-10. Complete automatic post-run audit, including model-to-anchor provenance and selection. No behavior or biology promotion.",
+  "artifacts": "All models, anchor/task hashes, optimizer/RNG, selections and compact responses retained externally; exact live-worker queue resume unsupported.",
+  "command": "sh scripts/launch_own_state_atlas_fit_mbslnx2.sh"
+}

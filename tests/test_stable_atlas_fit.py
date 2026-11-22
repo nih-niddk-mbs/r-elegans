@@ -105,7 +105,8 @@ def test_interrupted_run_audit_explicitly_unavailable(tmp_path):
     assert result['problems'] and not result['behavioral_gates']['swimming']
 
 
-def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeypatch):
+@pytest.mark.parametrize('own_state,improve,validation_regression', [(False,False,False),(True,False,False),(True,True,False),(True,True,True)])
+def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeypatch,own_state,improve,validation_regression):
     """Drive one actual optimizer round/final selection and complete saved-data audit."""
     import types
     import scripts.run_stable_atlas_fit as runner
@@ -125,12 +126,12 @@ def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeyp
     trace=np.tile(v[None,:,None],(4,1,2));rhythm=[[rhythm_metrics(v,.001)]*2 for _ in range(4)]
     m=dict(parent=str(model),parent_sha256=file_sha256(model),anchors=str(anchors),anchors_sha256=file_sha256(anchors),
         statistics=str(statfile),baselines=baselines,targets=targets,hard=[targets[0]],stimulus_nS=.03,
-        rhythm_references={str(step):rhythm for step in runner.COARSE_STEPS+runner.FINE_STEPS},evidence_sha256={})
+        rhythm_references={str(step):rhythm for step in runner.COARSE_STEPS+runner.FINE_STEPS},evidence_sha256={}, policy={})
     def prepare(source,folder):write(folder/'manifest.json',m);return m
     monkeypatch.setattr(runner,'prepare',prepare)
     rounds=iter([True,False]);monkeypatch.setattr(runner,'admit',lambda *a:next(rounds))
     clock=[100.];monkeypatch.setattr(runner,'time',types.SimpleNamespace(monotonic=lambda:clock[0]))
-    write(root/'deadline.json',dict(started_monotonic=100.,deadline_monotonic=28900.,source='synthetic'))
+    write(root/'deadline.json',dict(started_monotonic=100.,deadline_monotonic=28900.,source='synthetic', own_state=own_state))
     class FakePool:
         def __init__(self,folder):self.root=folder
         def close(self):pass
@@ -139,15 +140,21 @@ def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeyp
             for t in tasks:
                 folder=Path(t['result']).parent;folder.mkdir(parents=True);write(folder/'task.json',t)
                 out=Path(t['output']);out.mkdir()
-                if t['kind']=='autonomy':
-                    anchor=out/'anchors.npz';np.savez_compressed(anchor,fake=np.zeros(4))
+                if t['kind'] in ('autonomy','anchors'):
+                    anchor=out/'anchors.npz';np.savez_compressed(anchor,fake=np.zeros(4), model_sha256=t['model_sha256'])
                     vv=20*np.sin(2*np.pi*2*np.arange(20000)*.002)-40
                     rhythms=[[rhythm_metrics(vv,.002)]*2 for _ in range(2)]
                     for step in (.03125,.015625):np.savez_compressed(out/f'rhythm-{step}.npz',rmd_mV=np.tile(vv[:,None],(1,2)))
                     r=dict(anchors=str(anchor),anchors_sha256=file_sha256(anchor),rhythms=rhythms)
                 else:
                     names=t['targets'];n=len(names);controls=2*((n+7)//8)+(-n)%8
-                    a=base[:,[targets.index(name) for name in names]]
+                    a=base[:,[targets.index(name) for name in names]].copy()
+                    changed = not np.array_equal(saved_arrays(t['model'])['params_log_channel_scale'], arrays['params_log_channel_scale'])
+                    if improve and (t['name'].startswith('r1-plus-') or (changed and not t['name'].startswith('r1-minus-'))):
+                        for pair, z in zip(pairs, stats['stats']['train']['mean_z']):
+                            if pair[0] in names:
+                                sign = -1 if validation_regression and t['name'].startswith('validation-') else 1
+                                a[:,names.index(pair[0]),ids.index(pair[1])] = sign*z*1e-5
                     path=out/'responses.npz'
                     np.savez_compressed(path,response=a,targets=names,neuron_ids=ids,
                         anchors_sha256=t['anchors_sha256'],neural_step_ms=t['step_ms'],
@@ -162,7 +169,9 @@ def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeyp
     runner.coordinator(root)
     summary=json.loads((root/'summary.json').read_text())
     assert summary['execution_complete'] and summary['validation_complete'] and summary['iterations']==1
-    assert not summary['fit_qualified_before_audit']  # unchanged parent cannot masquerade as trained success
+    if own_state:assert summary['selection_reproduced']
+    if improve:assert summary['accepted_updates'] == 1
+    assert summary['fit_qualified_before_audit'] == (improve and not validation_regression)  # unchanged parent cannot masquerade as trained success
     result=audit(root)
     assert result['integrity_passed'],result['problems']
     assert result['execution_complete'] and result['candidate_parameter_checks'] and result['signal_and_control_checks']
