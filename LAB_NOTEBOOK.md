@@ -12486,3 +12486,30 @@ server summary. Detailed traces, runtime environment/source and RNG/optimizer
 records have not been locally inspected. Next: read saved final comparisons and
 fresh-parent validation loss. Preserve candidate separately and keep E112 as
 qualified numerical reference; no additional training or behavioral promotion.
+
+### 2026-11-22 — E113 follow-up: localized resolution failures and worse fresh-state fit
+
+Additional user-reported saved-summary stdout supplies fresh-parent validation
+loss0.9377836678668792 versus candidate0.9486316004722503 (lower is better;
+candidate worsens by0.0108479326053711). Thus resolving the numerical gate alone
+would not qualify the fit. Failed-comparison-only report shows levels0->1 phase0
+has4 mixed pair failures, phase3 has2. Both global vector checks pass with
+correlations0.9998620056/0.9999609813 and maximum relative vector errors about
+1.24%/0.934%. No other failing comparison printed, including levels1->2 and
+phase means. This is localized failure under unchanged per-pair criteria, not a
+broad failure of response vectors to converge.
+
+Reported phase0 failures include RMER->RMDR, RIVR->RMDR, FLPL->RMDR; fourth
+identity not printed. Worst mixed ratio1.7437. Phase3 failures ADEL->RMDVL and
+RMER->RMDL, ratios1.1853/1.0380. These newly problematic targets differ from the
+parent's fine-group assignment; that assignment was correctly rechecked rather
+than inherited. No threshold changes or retroactive qualification.
+
+Decision: retain candidate as a negative-result checkpoint and E112 as numerical
+reference. Recommended next design is fresh own-state validation for checkpoint
+selection, with candidate-specific numerical screening. Optimization used fixed
+parent conditioning anchors; final evaluation used candidate's own states.
+Selection did not establish fresh-state improvement. This discrepancy motivates
+matching selection/evaluation conditions; it does not prove the mechanistic cause
+of regression. Further timestep refinement alone cannot fix worse validation loss.
+No new training, simulation, promotion or behavior qualification performed.

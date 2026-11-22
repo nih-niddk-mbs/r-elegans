@@ -54,11 +54,57 @@
     "unavailable_evidence": []
   },
   "unavailable_in_compact_stdout": [
-    "Specific failed numerical levels/phases/pairs and vector versus mixed-tolerance criteria",
-    "Parent validation scores and magnitude of validation improvement",
+    "Identity of fourth phase0 mixed-failure pair; only top3 printed",
+    "Exact conditional-validation parent/candidate scores and selection history",
     "Detailed signal/control traces and numerical errors",
     "Exact runtime source/environment and optimizer/source provenance records, retained on server"
   ],
-  "decision": "Keep candidate and audited E112 parent separate. No model promotion or further training until failed comparisons are examined. Inspect saved final comparisons and fresh-parent loss next; no new simulation required.",
-  "scope": "Server audit reports complete evidence and integrity; this record captures compact user stdout only. Autonomous neural components preserved, no new body/swimming or sensory start/stop qualification."
+  "decision": "Do not promote candidate or continue optimizing it by default. Preserve E112 numerical reference. Recommend matching checkpoint selection to fresh own-state validation and updating target-specific numerical screening; finer replay alone cannot repair worse validation loss. No further experiment launched.",
+  "scope": "Server audit reports complete evidence and integrity; this record captures compact user stdout only. Autonomous neural components preserved, no new body/swimming or sensory start/stop qualification.",
+  "followup_user_reported": {
+    "fresh_parent_validation_loss": 0.9377836678668792,
+    "candidate_validation_loss": 0.9486316004722503,
+    "candidate_minus_parent_loss": 0.010847932605371091,
+    "failed_comparisons": [
+      {
+        "levels": [
+          0,
+          1
+        ],
+        "phase": 0,
+        "vector_passed": true,
+        "vector_correlation": 0.9998620056185432,
+        "mixed_failures": 4,
+        "reported_worst_targets": [
+          "RMER",
+          "RIVR",
+          "FLPL"
+        ],
+        "reported_worst_receiver": "RMDR",
+        "maximum_reported_tolerance_ratio": 1.7437007754531186
+      },
+      {
+        "levels": [
+          0,
+          1
+        ],
+        "phase": 3,
+        "vector_passed": true,
+        "vector_correlation": 0.9999609813111954,
+        "mixed_failures": 2,
+        "reported_failed_pairs": [
+          [
+            "ADEL",
+            "RMDVL"
+          ],
+          [
+            "RMER",
+            "RMDL"
+          ]
+        ],
+        "maximum_reported_tolerance_ratio": 1.185302994096576
+      }
+    ],
+    "interpretation": "User script printed only failed comparisons: no failures reported at levels1->2 or phase mean. Global vectors pass; six pair-phase checks fail at levels0->1. Candidate is worse than fresh parent under identical final validation objective. Conditional-anchor checkpoint selection did not establish improvement from own-state evaluation; mechanism not proved."
+  }
 }

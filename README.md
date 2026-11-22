@@ -6,8 +6,10 @@ no near-bound coordinates. Frozen fields and parameter policy pass. Completed
 in5h36min within8h, validation and saved-data audit complete, integrity passes.
 Autonomous RMD and conditional rhythms/controls pass, but final numerical
 convergence fails despite stable aggregate loss across grids. Candidate remains
-unqualified; preserve audited E112 parent. Specific failed comparisons and parent
-losses are not in compact stdout; inspect those saved results before training.
+unqualified; preserve audited E112 parent. Follow-up: six pair checks fail only at the coarsest comparison; vector
+checks and the finer comparison pass. Fresh-state validation loss worsens from
+parent0.93778 to candidate0.94863. Keep parent; align future selection with
+own-state validation before more training.
 No new behavioral/biological qualification.
 [Evidence](experiments/records/E113-server-summary.json).
 
