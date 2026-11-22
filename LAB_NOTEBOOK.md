@@ -12324,3 +12324,71 @@ matrices/step maps, full downstream error/sign masks and descriptive split score
 with input/output hashes and elapsed time in a separate external folder. CPU-only
 foreground launcher prints progress before source capture. Server E112 analysis
 remains pending; no fitting or promotion occurred during implementation.
+
+### 2026-11-21 — E112 reported result: selected complete atlas numerical protocol passes
+
+User reports pull throughdbb36a9 and completed CPU-only saved-data audit.
+Report:`/home/carsonc/r-elegans-results/atlas-composite-audit-20261122T041912596864Z/summary.json`.
+Local record dateNov21; UTC identifierNov22. Raw login/session text stays external;
+structured scientific transcription and full attachment SHA256 are in
+`experiments/records/E112-server-summary.json`. Actual source revision/dirty-tree,
+archive contents and raw matrices were not independently accessed. Pull revision
+is reported, not substituted for recorded execution source/environment evidence.
+
+Audit complete and integrity pass,31.0506385830231s. No new simulation, random draws,
+parameter/optimizer changes or model promotion. No process exit code or new
+budget receipt printed; final report and elapsed time supplied. Complete135target/
+6462unique observed downstream support retained, four phases.48targets lack
+qualifying cached downstream pairs and remain explicitly listed/simulated.
+Fixed12target group uses0.0078125/.00390625/.001953125ms; remaining123 use0.125/
+0.0625/.03125ms. Each target halves its step at each composite refinement.
+No favorable per-pair output selection or new group reassignment.
+
+Both models' independently recomputed baseline bridges pass; forward-archive/
+recorded Python/JAX/JAXlib/NumPy/numerical-setting identity checks completed under
+code's required successful path. Model/anchor hashes fixed; control and sham-
+rhythm checks pass. Source/input/output matrices and per-target step-map hashes,
+original failure-mask group lineage and numerical error/sign masks remain external.
+Supplied stdout reports these outcomes, not independent inspection of those files.
+Recorded version equality is not a wheel/image checksum or independent solver.
+Original E109/E110/E111 outcomes/source folders remain unchanged.
+
+Selected checkpoint now passes all per-phase and phase-mean vector and mixed-
+pair checks for BOTH successive COMPLETE atlas composites. All selected observed
+pair failure/active-sign-flip counts are zero. Finest max per-phase normalized
+vector error0.68249%, max mixed ratio0.44512; finest phase-mean error0.094454%,
+correlation0.999999631, max mixed ratio0.051733. This achieves the declared full-
+support TARGET-DEPENDENT numerical protocol for this fixed checkpoint, not
+uniform finest-grid solution or a physiological error bound.
+
+Parent phase mean passes both comparisons; per-phase remainsFalse due to first
+comparison phase index1 RMDR->RMDVL (same E111 ratio1.44959). Finest full comparisons
+pass all parent phases/pairs; two successive passes are still required. Preserve
+negative parent flag and all homogeneous-grid failures. No more parent refinement
+merely to change its flag is warranted for the selected model's next step.
+
+Numerically qualified descriptive selected scores: train Spearman0.111825,
+validation0.089935, test0.116318; test excitation AUC0.576258, inhibition AUC0.474438.
+Parent test Spearman0.047771/AUC0.506784. These are weak atlas agreement, not
+successful biological fitting. No weights changed during diagnostics, so these
+score changes are not new learning. Both models have0.986014 modeled-silent
+fraction among significant test pairs at the project's indicator deadband1e-6;
+this is not whole-brain inactivity or an experimentally calibrated silence
+criterion. Test split has been repeatedly inspected and is not a new untouched
+holdout. Data support and indicator-amplitude calibration remain limited.
+
+Decision: numerical comparison milestone achieved for selected fixed checkpoint;
+stop further refinements unless a new failure warrants them. Propose a short
+supervised atlas-fitting pilot before any long run, with stereotypical properties
+fixed, explicit motor-rhythm preservation and changed-weight numerical validation.
+A fitted network can change which targets need fine steps: do not inherit E112's
+step assignment or convergence qualification without rechecking actual new weights.
+Any future fitting plan must declare train/validation loss, parameter freedom,
+held-out use, source/state initialization and numerical/rhythm acceptance before
+execution. No pilot, new simulation or training launched on this upload.
+
+This protocol does not establish biological fidelity, new reference-cycle
+robustness, independent solver truth, full dynamical state convergence, body motion,
+sensory initiation/stopping/rest/restart or swimming. H1.2 behavioral gates remain.
+Documentation/evidence-only update: parsing/coverage assertions and whitespace
+check pass; no software changes or new tests required.

@@ -1,13 +1,15 @@
 # Current model: exact scope and computation path
 
-2026-11-21 E112 saved-data composite audit prepared; server execution pending.
-Explicit target-dependent steps combine E111's fine12target outputs with E109's
-coarser remaining123target outputs at three complete refinement levels. Verify
-archived forward identity, exact same-step bridges, coverage, controls and all
-observed-pair/vector criteria. No simulation or fitting; original failures remain.
-This is a new numerical protocol, not a uniform finest-grid or biological claim.
-[Plan](experiments/records/E112-plan.json).
-Command: `sh scripts/launch_atlas_composite_audit_mbslnx2.sh`.
+2026-11-21 E112 completed (user-reported): selected checkpoint passes all
+full-atlas numerical checks under the declared target-dependent protocol:
+135 targets,6462 observed downstream pairs, all phases and both refinements.
+Source/bridge/control/sham-rhythm checks pass; CPU saved-data audit31.05s, no
+simulation or weight updates. Test Spearman0.1163/AUC0.5763 remain weak biological
+agreement despite numerical qualification. Parent phase mean passes; its
+per-phase flag retains one preceding failure. Next: short supervised fitting
+pilot with rhythm preservation and changed-weight numerical revalidation;
+no model, behavioral or biological promotion.
+[Evidence](experiments/records/E112-server-summary.json).
 
 2026-11-21 E111 completed (user-reported): selected checkpoint passes both
 successive per-phase AND phase-mean numerical checks for the entire12target/
