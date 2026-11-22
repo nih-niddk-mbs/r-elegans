@@ -1,13 +1,15 @@
 # WormGym: training and validation protocols
 
-2026-11-22 E115 prepared; server execution pending. Scheduler uses measured
-per-step/per-batch replay and own-state generation costs, simulating two GPU
-workers for an entire training/selection round; it logs calibrated forecasts and
-admission decisions. Four-hour TOTAL:120min baseline/fitting/selection,120min
-final validation/audit including last10min audit reserve. Fresh E112 parent,
-seed1150; E114 own-state numerical/selection/qualification rules unchanged.
-Launch: `sh scripts/launch_measured_atlas_fit_mbslnx2.sh`.
-[Plan](experiments/records/E115-plan.json).
+2026-11-22 E115 completed (user-reported): one training iteration/update,
+all9538 unknown coordinates changed (maximum offset0.002); frozen fields exact,
+no near bounds. Own-state validation loss0.932771 (prior unchanged-parent
+reference0.937784); selection reproduces, autonomy/control/rhythm/numerical
+checks pass. Complete audit/integrity passes,98.60min elapsed, no timeout:
+fit_qualified=True under the declared supervised fitting criteria. This is a
+small fitting milestone, not biological fidelity or controllable swimming.
+Exact run path/checkpoint hash are absent from compact stdout; pin before
+continuation. Preserve candidate and E112 reference separately; no new run launched.
+[Evidence](experiments/records/E115-server-summary.json).
 
 2026-11-22 E114 completed (user-reported): ZERO training iterations/updates,
 zero changed coordinates. Own-state validation, autonomous RMD, numerical and

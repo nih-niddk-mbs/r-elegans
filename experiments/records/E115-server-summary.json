@@ -1,0 +1,66 @@
+{
+  "experiment": "E115",
+  "recorded_date": "2026-11-22",
+  "evidence_type": "User-reported compact server stdout; raw artifacts not locally inspected",
+  "run": null,
+  "checkpoint_sha256": null,
+  "identity_note": "Latest measured-atlas-fit run selected by report command; exact path and selected hash not printed. Pin before using as continuation parent.",
+  "iterations": 1,
+  "accepted_updates": 1,
+  "autonomy_passed": true,
+  "selection_reproduced": true,
+  "parameters": {
+    "passed": true,
+    "mismatched_fields": [],
+    "coordinates": 9538,
+    "changed_coordinates": 9538,
+    "maximum_offset": 0.0019999980467482127,
+    "near_bound": 0,
+    "fixed_fields_exact": true,
+    "channel_chemical_gap_coordinates": [
+      4736,
+      3709,
+      1093
+    ]
+  },
+  "scores": {
+    "train": 0.8528866418648333,
+    "val": 0.9327709759189401,
+    "test": 0.9194401323047322
+  },
+  "prior_unchanged_parent_scores_E114": {
+    "train": 0.8529367369580239,
+    "val": 0.9377836678668792,
+    "test": 0.9217044765952424
+  },
+  "final_gates": {
+    "passed": true,
+    "controls_passed": true,
+    "rhythms_passed": true,
+    "numerical_passed": true,
+    "loss_grid_stable": true
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "unavailable_evidence": []
+  },
+  "budget": {
+    "total_minutes": 240,
+    "elapsed_seconds": 5916.138476318913,
+    "all_steps_finished": true,
+    "timed_out": false,
+    "validation_complete": true,
+    "audit_complete": true,
+    "fit_qualified": true
+  },
+  "interpretation": "One actual accepted update qualifies under declared supervised own-state fitting criteria, including numerical convergence, preserved autonomous RMD, fixed fields, loss reproduction and complete server audit. All9538 coordinates changed in one SPSA/Adam step; this does not identify individual biological parameters or establish broad convergence. Losses decrease relative to unchanged parent reported in E114; not biological fidelity, calibrated calcium amplitude, swimming or sensory-controlled start/stop. Historically inspected test set is not an untouched holdout.",
+  "unavailable_in_compact_stdout": [
+    "Exact run path and selected checkpoint SHA",
+    "E115 fresh-parent score detail and selection/admission timing history",
+    "Detailed controls/traces/runtime source/environment/optimizer records retained on server"
+  ],
+  "decision": "Preserve candidate independently as a reported qualifying physiology-fit milestone; pin path/hash and inspect admission history before continuation. Do not overwrite E112 reference or qualify behavior. No new experiment launched."
+}

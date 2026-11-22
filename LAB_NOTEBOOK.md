@@ -12620,3 +12620,33 @@ tasks, snapshots timing-input hashes, and records total actual round duration.
 Final artifact/parameter/source/state/control/numerical/selection audits retained.
 Exact E114 task starts/ends are absent; listed task times overlap on two GPUs.
 No further server experiment executed by this agent; E115 launch prepared.
+
+### 2026-11-22 — E115 reported qualifying own-state physiology fit after one update
+
+Compact user server stdout reports E115 iterations1/accepted1,9538 coordinates
+changed, maximum offset0.0019999980467482127, no near bounds, fixed fields exact,
+parameter checks pass (4736channel/3709chemical/1093gap independent coordinates).
+Autonomy preservation and selection reproduction pass. All final numerical,
+controls, rhythms and loss-grid stability gates pass. Complete server audit
+reports execution/integrity passed, no problems or unavailable evidence. Budget
+5916.138476318913s (98.60min) of240min ceiling, all steps finished, no timeout,
+fit_qualified=True. Preserve this positive outcome and prior negative results.
+
+Losses train0.8528866418648333,val0.9327709759189401,test0.9194401323047322;
+prior unchanged-parent E114 values0.8529367369580239/0.9377836678668792/
+0.9217044765952424. Small decreases under the declared correlation objective;
+not accuracy percentages, calcium calibration or experimental physiological
+fidelity. One common SPSA/Adam update altered every trainable coordinate; that
+does not mean each weight/channel has been independently identified. No new
+body behavior, swimming or sensory-controlled start/stop qualification.
+Historically inspected test statistics remain descriptive, not untouched holdout.
+
+Evidence is user-reported compact stdout only. Exact run identifier/checkpoint
+SHA, detailed E115 fresh-parent comparison and selection/admission history,
+full signals and source/environment/optimizer records absent from this excerpt;
+remain external/uninspected, not invented. Next pin selected checkpoint and run
+identity, retain both candidate and E112 original, then consider continuation
+using unchanged own-state and numerical gates. Do not infer why only one round
+was admitted without timing/admission records. No new experiment launched.
+Local changes only transcribe results/update status; no numerical rerun/tests
+needed for this documentation-only outcome. Record:E115-server-summary.json.
