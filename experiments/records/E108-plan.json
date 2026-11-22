@@ -1,0 +1,20 @@
+{
+  "experiment": "E108",
+  "recorded_date": "2026-11-21",
+  "status": "planned; server execution not evidenced",
+  "question": "Do pulse-minus-sham responses converge when all grids start from identical complete states, and how strongly do those responses depend on reference RMDL phase?",
+  "source_run": "/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363",
+  "models": {"selected": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f", "parent": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d"},
+  "fixed": "All weights, channel/physiology parameters, initial-state rule, pulse amplitude/reversal, model implementation; float64. No fitting, peptide term or body dynamics.",
+  "trainable": [],
+  "random_seed": "none; deterministic",
+  "anchors": "Each model settles60s with0.03125ms neural step; then record1s at1ms intervals. Select first complete RMDL peak-to-peak cycle using fixed1mV prominence/20ms minimum separation; save full voltage, gates, calcium and indicator at phases0,1/4,1/2,3/4, rounded to1ms samples. Reuse the exact saved states across every tested step. Phase reference is model/grid-specific, not an independently converged attractor or a constraint on RMDR phase.",
+  "targets": ["ADAL", "AIYL", "AIYR"],
+  "target_selection": "A priori subset from E106/E107 pinned first13; no response-based target/model reselection, no atlas accuracy claim.",
+  "trials": "Three pulses plus two duplicate zero-drive shams per phase/model/grid. Pulse0.5s at original E107 amplitude and0mV reversal; horizon12s, fixed1ms output/accumulation; mean indicator over1.5..11.5s. Save all-cell full states at20ms and RMD voltage trajectories for pulse/sham conditions, means and differences. No full-brain long trajectory archive.",
+  "neural_step_ms": [0.25, 0.125, 0.0625, 0.03125],
+  "checks": "Automatic post-run audit verifies copied model and anchor hashes, exact states reused, all planned cases, float64/finite arrays, duplicate-sham response<=1e-12, input/artifact hashes before/after, no parameter changes, execution budget. Report short-horizon errors separately for voltage/gates/calcium/indicator without new physiological thresholds. Apply existing atlas relative-error<0.1/correlation>=0.9 criteria to each phase and phase-mean responses, requiring both finest consecutive pairs. Phase-average is a prospectively declared diagnostic, not a replacement for original atlas failures or a biological observable. No automatic model promotion.",
+  "limits": "Does not establish phase as sole cause, independent-solver truth, full-atlas accuracy, biological fidelity, autonomous body movement or sensory start/stop. Failure/incomplete remains explicit.",
+  "budget": "Maximum120minutes TOTAL including automatic audit; two A100 workers, one fixed model each; nohup. May finish earlier.",
+  "command": "sh scripts/launch_common_state_mbslnx2.sh"
+}

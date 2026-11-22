@@ -1,5 +1,14 @@
 # r-elegans
 
+2026-11-21 E108 prepared; server execution pending. Compare pulse/sham
+responses from identical saved complete neural states across four integration
+grids and four reference RMDL phases, on both pinned unchanged models. Fixed
+targets ADAL/AIYL/AIYR; no fitting. Short20ms full-state errors and long-window
+per-phase/phase-mean responses are separate diagnostics. Two A100 workers,
+maximum120minutes TOTAL with automatic post-run audit; no model/behavior promotion.
+[Plan](experiments/records/E108-plan.json).
+Launch: `sh scripts/launch_common_state_mbslnx2.sh`.
+
 2026-11-21 E107 saved-cycle analysis completed (user-reported): full-window
 RMD periods change monotonically with refinement, with period increments roughly
 halving as expected for the first-order method. Finest descriptive differences

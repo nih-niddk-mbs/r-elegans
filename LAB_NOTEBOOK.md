@@ -11815,3 +11815,51 @@ No fitting, phase test or new experiment was launched on this evidence upload.
 No start/stop, body movement, swimming or biological promotion. Documentation-only
 update; transcription/shape assertions and whitespace checks pass. No software
 code changed or new tests required.
+
+### 2026-11-21 — E108 planned: complete-state and reference-phase cue diagnostics
+
+User approved the next diagnostic. Protocol recorded before implementation in
+`experiments/records/E108-plan.json`; server execution remains pending. Both
+pinned E107 models retained; no optimizer, parameter changes or random operations.
+Reference anchors use voltage, all35channel gates, calcium and indicator, not
+voltage alone. Settle60s and record1s at finest0.03125ms; select the first complete
+RMDL peak-to-peak cycle and its quarter phases at1ms recording resolution. This
+reference is not asserted to be an independently converged attractor; RMDR phase
+is not separately fixed. Exact saved full states reused across tested steps.
+
+A priori targets ADAL/AIYL/AIYR from the pinned first13, four reference phases,
+three pulses plus two duplicate shams, and four grids .25/.125/.0625/.03125ms.
+Pulse0.5s at the original amplitude/reversal, horizon12s,1ms recording and mean
+indicator window1.5..11.5s. Save short20ms complete states and RMD-only trajectories,
+not full-brain long traces. Evaluate short-horizon discrepancies by state field;
+no ad hoc physiological tolerances. Report per-phase and prospectively defined
+phase-mean response refinement using existing relative/correlation thresholds,
+requiring two finest successive pairs. Do not replace original negative atlas
+results or call an ensemble response biologically validated. No behavioral parent
+or training promotion. Fixed reference-phase variability is descriptive evidence,
+not proof that all atlas instability comes from phase.
+
+Two A100s, one model each, nohup,120min TOTAL including reserved post-run audit.
+Audit exact input/anchor/checkpoint hashes, full-state reuse, all cases, float64/
+finite arrays, zero-drive duplicates, parameter immutability, original execution
+and new budget, source/environment and every numerical result. Explicitly record
+missing behavior/independent-solver evidence. Preserve parents and source E107
+reports. Launch: `sh scripts/launch_common_state_mbslnx2.sh`.
+
+E108 local software verification:43 focused checks pass across new common-state
+workflow and related E107/selected-checkpoint/parameter/cycle-analysis code.
+Tests compare all four short-state fields against direct integration from the
+same initial state on tiny software fixtures, verify duplicate sham equality,
+reference phase detection, copied parent hashes, missing/tampered artifacts,
+wrong anchor identity, sham failures and timeout audit/non-promotion. Additional
+reference metadata checks verify saved peak/quarter indices, reference sampling,
+anchor voltages and construction clock; all9 E108 checks pass after that addition.
+No full-model scientific fitting or reference-phase experiment ran locally.
+CLI help, shell syntax and whitespace checks pass; no full-suite status asserted.
+
+Interpretation limit added explicitly: different reference-phase anchors also
+differ in slow states and the phases of other cells. Between-anchor variability
+is not a selective causal intervention on RMDL phase. Audit records this limit
+and preserves original failed atlas criteria. The launcher prints the main log
+and exact report command; the final report includes full checkpoint/anchor hashes
+and reference timings. Per-model logs remain inside the output folder. Scientific execution/results remain pending user server output.
