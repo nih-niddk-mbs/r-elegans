@@ -1,0 +1,64 @@
+{
+  "experiment": "E113",
+  "recorded_date": "2026-11-22",
+  "evidence_type": "User-reported compact server stdout; raw artifacts not locally inspected",
+  "run": "/home/carsonc/r-elegans-results/stable-atlas-fit-20261122T045223Z-795974",
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 20175.447370255948,
+    "all_steps_finished": true,
+    "validation_complete": true,
+    "audit_complete": true,
+    "fit_qualified": false
+  },
+  "optimization": {
+    "iterations": 25,
+    "accepted_updates": 16
+  },
+  "parameters": {
+    "passed": true,
+    "mismatched_fields": [],
+    "coordinates": 9538,
+    "changed_coordinates": 9538,
+    "maximum_offset": 0.01954664256513094,
+    "near_bound": 0,
+    "fixed_fields_exact": true,
+    "channel_chemical_gap_coordinates": [
+      4736,
+      3709,
+      1093
+    ]
+  },
+  "scores": {
+    "train": 0.8801524207736408,
+    "val": 0.9486316004722503,
+    "test": 0.9711656617982765
+  },
+  "score_definition": "Clipped-z pooled/per-target correlation loss; lower is better. Not accuracy, Spearman, calibrated calcium amplitude or biological qualification.",
+  "selected_sha256": "94a6efa4f14c4707337913f4e788c5167ed7f15fd1923318181f508d2e9a2b65",
+  "autonomy_passed": true,
+  "final_gates": {
+    "passed": false,
+    "controls_passed": true,
+    "rhythms_passed": true,
+    "numerical_passed": false,
+    "loss_grid_stable": true,
+    "data_loss": 0.9486316004722503
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "unavailable_evidence": []
+  },
+  "unavailable_in_compact_stdout": [
+    "Specific failed numerical levels/phases/pairs and vector versus mixed-tolerance criteria",
+    "Parent validation scores and magnitude of validation improvement",
+    "Detailed signal/control traces and numerical errors",
+    "Exact runtime source/environment and optimizer/source provenance records, retained on server"
+  ],
+  "decision": "Keep candidate and audited E112 parent separate. No model promotion or further training until failed comparisons are examined. Inspect saved final comparisons and fresh-parent loss next; no new simulation required.",
+  "scope": "Server audit reports complete evidence and integrity; this record captures compact user stdout only. Autonomous neural components preserved, no new body/swimming or sensory start/stop qualification."
+}

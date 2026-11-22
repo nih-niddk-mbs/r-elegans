@@ -12458,3 +12458,31 @@ checks cannot qualify fitting; original parent preserved. Duplicate voltage erro
 are saved reductions, not independently replayable full duplicate traces; audit
 states this limit. H1.2 behavior gates remain unqualified. Launch/report commands
 are printed by the nohup launcher; no manual environment activation required.
+
+### 2026-11-22 — E113 reported complete: rhythms retained, final numerical gate failed
+
+Evidence is user-reported compact stdout for
+`/home/carsonc/r-elegans-results/stable-atlas-fit-20261122T045223Z-795974`;
+structured transcription in `experiments/records/E113-server-summary.json`.
+No local access to server artifacts or independent scientific rerun claimed.
+Execution exit0, no timeout,20175.447370255948s (5h36min), all steps/validation/
+audit complete. A maximum8h budget does not require using all8h.25 optimizer
+iterations,16 accepted updates. Selected checkpoint
+`94a6efa4f14c4707337913f4e788c5167ed7f15fd1923318181f508d2e9a2b65`.
+All9538 coordinates changed:4736 channel,3709 chemical,1093 undirected gap.
+Maximum coordinate offset0.01954664256513094, no near bounds, frozen fields exact,
+parameter audit passed. This is not evidence every biological connection is known.
+
+Autonomy preservation, conditional rhythms, duplicate controls and loss-grid
+stability all pass. Final numerical gate FAILS; overall fit remains unqualified.
+Audit reports complete/execution complete/integrity passed with no problems or
+unavailable evidence. Clean artifact integrity does not imply numerical or
+biological qualification. Losses train0.8801524207736408, val0.9486316004722503,
+test0.9711656617982765 use the declared correlation objective, not accuracy or
+prior Spearman statistics. Parent losses are absent from compact stdout, so no
+quantified improvement claim yet. Failed levels/phases/pairs and vector versus
+mixed-tolerance breakdown also absent from this excerpt, although retained in
+server summary. Detailed traces, runtime environment/source and RNG/optimizer
+records have not been locally inspected. Next: read saved final comparisons and
+fresh-parent validation loss. Preserve candidate separately and keep E112 as
+qualified numerical reference; no additional training or behavioral promotion.

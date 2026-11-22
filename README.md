@@ -1,16 +1,15 @@
 # r-elegans
 
-2026-11-21 E113 prepared; server execution pending. Eight-hour total supervised
-atlas fitting pilot: two persistent A100 workers, full302-cell simulation,
-bounded unknown channel/chemical/gap coordinates; stereotypical properties,
-LEAK reference and RMD channel profiles fixed. Optimization cutoff330min;
-remaining150min covers fresh-state/RMD checks, full135-target three-level
-changed-weight numerical validation and complete saved-data audit (last10min
-reserved for audit). Provisional selection uses validation data only; incomplete
-validation or an unchanged parent cannot qualify a fit. No behavior/RL promotion.
-Launch: `sh scripts/launch_stable_atlas_fit_mbslnx2.sh`.
-[Plan](experiments/records/E113-plan.json). Local synthetic software checks only;
-scientific performance, GPU execution and runtime remain unverified.
+2026-11-22 E113 completed (user-reported): 25 optimizer iterations,16 accepted
+updates; all9538 unknown coordinates changed with maximum offset0.01955 and
+no near-bound coordinates. Frozen fields and parameter policy pass. Completed
+in5h36min within8h, validation and saved-data audit complete, integrity passes.
+Autonomous RMD and conditional rhythms/controls pass, but final numerical
+convergence fails despite stable aggregate loss across grids. Candidate remains
+unqualified; preserve audited E112 parent. Specific failed comparisons and parent
+losses are not in compact stdout; inspect those saved results before training.
+No new behavioral/biological qualification.
+[Evidence](experiments/records/E113-server-summary.json).
 
 2026-11-21 E112 completed (user-reported): selected checkpoint passes all
 full-atlas numerical checks under the declared target-dependent protocol:
