@@ -12392,3 +12392,69 @@ robustness, independent solver truth, full dynamical state convergence, body mot
 sensory initiation/stopping/rest/restart or swimming. H1.2 behavioral gates remain.
 Documentation/evidence-only update: parsing/coverage assertions and whitespace
 check pass; no software changes or new tests required.
+
+### 2026-11-21 — E113 planned: eight-hour bounded supervised atlas fitting pilot
+
+User explicitly requested an8hour next run. Plan recorded before implementation
+in `experiments/records/E113-plan.json`. Start only from audited selected4d72ef33...3511f
+and exact882a7f41...c879full-state conditioning anchors, verified through E112
+full-atlas protocol. All302cells simulated. Keep stereotypical passive/kinetic/
+reversal/calcium/release/indicator/anatomy/bias properties, LEAK reference and
+RMD channel profiles fixed. Fit only unknown non-RMD/non-LEAK positive channel
+scales and existing chemical/undirected-gap strengths, within0.1coordinate offset
+of this parent; preserve all frozen fields and gap reciprocity.
+
+One seed1130 antithetic-SPSA/Adam trajectory, lr0.002/perturbation0.005; two
+persistent A100 workers evaluate paired perturbations, then current/proposed
+updates on identical training minibatches. Finite differences bound memory at
+fine neural resolution; this is an exploratory fitting strategy, not a claim of
+optimal optimizer or guaranteed learning. Train minibatches2, periodically include
+fine-group training targets. All training labels only; same existing correlation
+objective plus parent prior. Conditional parent anchors are held explicitly fixed
+during optimization, not mistaken for a candidate's own self-generated state.
+Evaluate two resolution levels for provisional screens, require stable loss/
+per-pair response screens and preserved conditional RMD components; unchanged
+full vector/mixed criteria are required at final changed-weight validation.
+
+480min TOTAL: optimization cutoff330min from start,150min reserved for final
+own-state dynamics/full-atlas validation and automatic audit. No new optimization
+work admitted near cutoff when recent timing predicts it cannot fit. Provisional
+best uses complete validation loss, never test scores. Final optimizer checkpoint
+and best validation checkpoint retained separately. All proposals, directions,
+batches, Adam/RNG state and rejection/selection records external; no exact live
+GPU-worker queue resume claim. No huge target-wise full-brain archives.
+
+Final checks generate fresh parent and candidate states from each network's own
+stored initial conditions,60s settle/40s free recording at.03125/.015625ms; require
+RMD persistence and period/mean amplitude within10%/25% of parent. Strict cycle
+comparisons reported separately, not a hidden substitute for response convergence.
+Candidate gets its own full-state phase anchors for all135-target/6462-pair
+three-level validation. Original fine/coarse step assignment is a candidate
+hypothesis requiring revalidation, not inherited qualification. Test only after
+selection; historical repeated inspection remains explicit. Success also requires
+changed parameters and validation improvement; unchanged parent/failing candidate
+cannot be relabeled trained success. Automatic audit covers every required domain,
+including on timeout/failure; no behavioral/biological promotion or H1.2 bypass.
+Launch: `sh scripts/launch_stable_atlas_fit_mbslnx2.sh`. Server execution pending.
+
+E113 implementation prepared locally (2026-11-21): seven focused software tests
+passed, including parameter/frozen-field policy, existing objective equivalence,
+optimizer bounds, numerical/coverage/control failures, interrupted audit reporting,
+and a synthetic complete coordinator/selection/final-validation/audit cycle with
+post-run artifact-tampering detection. Shell syntax and Python compilation passed.
+No local scientific forward run or server execution claimed. User requested push
+without further validation and accepts that the server pilot may fail.
+
+Implementation details: two persistent file-task GPU workers cache forward kernels;
+all task inputs/results, proposed weights, Adam moments and RNG states retained
+externally. Paired perturbations and current/proposed comparison use identical
+training minibatches. Adam moments advance on valid perturbation pairs even when
+a weight update is rejected; moment-step bias correction counts those pairs.
+Validation winner is frozen before final/test scoring. Fresh parent validation
+is also evaluated from its own states. The final10min of the150min validation/audit
+reserve is reserved for the separate saved-data audit. Hard process-group watchdog
+includes GPU descendants. Missing evidence, failed execution or incomplete final
+checks cannot qualify fitting; original parent preserved. Duplicate voltage errors
+are saved reductions, not independently replayable full duplicate traces; audit
+states this limit. H1.2 behavior gates remain unqualified. Launch/report commands
+are printed by the nohup launcher; no manual environment activation required.
