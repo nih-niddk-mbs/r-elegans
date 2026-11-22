@@ -1,5 +1,13 @@
 # Current model: exact scope and computation path
 
+2026-11-21 E111 prepared; server execution pending. Retain the entire E110
+12target/986pair subset, both unchanged models and exact prior full-state anchors.
+Replay0.0078125ms baseline, then0.00390625/0.001953125ms; require reproduction and
+two new successive comparisons under unchanged criteria. No fitting, target
+narrowing or full-atlas promotion. Two A100s,120min TOTAL including automatic audit.
+[Plan](experiments/records/E111-plan.json).
+Launch: `sh scripts/launch_atlas_target_continuation_mbslnx2.sh`.
+
 2026-11-21 E110 completed (user-reported):12 failure-selected/control
 targets,986 observed pairs;8.47min, integrity/controls/sham rhythms pass. Same-step
 baseline replay matches exactly. Selected model passes both targeted phase-mean

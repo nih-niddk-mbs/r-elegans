@@ -1,0 +1,15 @@
+{
+  "experiment": "E111",
+  "recorded_date": "2026-11-21",
+  "status": "planned; server execution not evidenced",
+  "question": "Do the remaining E110 individual-phase and parent phase-mean discrepancies pass two finer successive refinements with the identical twelve targets and full-state anchors?",
+  "source_run": "/home/carsonc/r-elegans-results/atlas-target-refinement-20261122T025343Z-789212",
+  "targets": ["ADAL", "AIYL", "AIYR", "AIZR", "AVER", "RIAL", "RIAR", "RIMR", "RIVL", "RMDL", "RMDR", "SMDDL"],
+  "selection": "Retain exact E110 target union, all observed pairs/phases and both models. Recheck original E109 failure-mask selection lineage. No narrowing to successful cases or selection using accuracy.",
+  "fixed_trainable": "All parameters, source/model/full-state anchor hashes, pulse and observation clocks fixed; no optimizer, random operations or fitting.",
+  "steps_ms": [0.0078125, 0.00390625, 0.001953125],
+  "baseline": "Copy/hash-check E110 finest0.0078125ms targeted artifact, replay same-step baseline, then two finer steps. Require unchanged baseline reproduction tolerance (relative1e-6+absolute1e-12/correlation0.999999) and both new refinements under unchanged vector/mixed-pair criteria.",
+  "checks": "Automatic audit reconstructs original target-selection lineage, verifies all inputs/anchors/weights/baselines/new artifacts, controls and sham rhythms, full target/pair/phase/grid coverage, source/environment/execution/budget and timeout non-qualification. Preserve earlier positive phase-mean component and remaining failures separately. No atlas accuracy reevaluation or full-atlas/body/behavior promotion.",
+  "resources": "Two A100 workers, fixed batches8, nohup; maximum120minutes TOTAL including automatic audit. May finish earlier. Retain compact means/control evidence and parent dependencies outside Git.",
+  "command": "sh scripts/launch_atlas_target_continuation_mbslnx2.sh"
+}

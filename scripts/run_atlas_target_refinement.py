@@ -1,4 +1,4 @@
-"""E110 finer-step follow-up selected only by prior numerical failures."""
+"""E110/E111 fixed-target refinement with pinned states and automatic audits."""
 import argparse
 import json
 import math
@@ -17,6 +17,7 @@ from scripts.atlas_refinement_checks import choose_targets, layer_values
 
 REPO = Path(__file__).resolve().parents[1]
 REPLAY_STEPS = (.03125, .015625, .0078125)
+PROTOCOLS = {'E110': REPLAY_STEPS, 'E111': (.0078125, .00390625, .001953125)}
 
 
 def prepare(source, root):
@@ -70,9 +71,69 @@ def prepare(source, root):
     return result
 
 
+def prepare_continuation(source, root):
+    """Keep the complete prior target union and replace only the baseline/grid."""
+    old = json.loads((source / 'manifest.json').read_text())
+    previous = json.loads((source / 'audit.json').read_text())
+    receipt = json.loads((source / 'budget_receipt.json').read_text())
+    if old.get('experiment') != 'E110' or not previous.get('audit_complete') or not previous.get('execution_complete') or not previous.get('integrity_passed') or not receipt.get('all_steps_finished'):
+        raise ValueError('Completed E110 integrity audit required for E111')
+    dest = root / 'inputs';dest.mkdir();evidence = {}
+    def pin(path, expected=None, name=None):
+        path = Path(path);digest = file_sha256(path)
+        if expected is not None and digest != expected:raise ValueError('Continuation input hash mismatch: ' + str(path))
+        evidence[str(path)] = digest
+        if name:
+            copy = dest / name;shutil.copy2(path, copy)
+            if file_sha256(copy) != digest:raise ValueError('Continuation copy mismatch')
+            evidence[str(copy)] = digest
+            return copy
+        return path
+    for name in ('manifest.json', 'audit.json', 'budget_receipt.json'):pin(source / name, name='preceding-' + name)
+    for path, digest in old['evidence_sha256'].items():pin(path, digest)
+    for path, digest in previous['evidence_sha256'].items():pin(path, digest)
+    stats_path = pin(old['statistics'], old['evidence_sha256'][old['statistics']], 'statistics.json')
+    original_audit = pin(old['source_audit'], old['evidence_sha256'][old['source_audit']], 'original-selection-audit.json')
+    mask_paths, masks, models = {}, {}, {}
+    for label, expected in (('selected', SELECTED_SHA), ('parent', PARENT_SHA)):
+        m = previous['models'][label]
+        if not m.get('complete') or not all(x['passed'] for x in m.get('baseline_reproduction', [])) or len(m.get('baseline_reproduction', [])) != 5:
+            raise ValueError('Complete E110 baseline reproduction required')
+        if len(m['levels']) != 4 or m['levels'][-1]['neural_step_ms'] != PROTOCOLS['E111'][0]:raise ValueError('E110 finest baseline missing')
+        model = pin(old['models'][label]['path'], expected, label + '.npz')
+        anchor = pin(old['models'][label]['anchors'], ANCHOR_SHA[label], label + '-anchors.npz')
+        mask = pin(old['source_masks'][label], old['evidence_sha256'][old['source_masks'][label]], label + '-source-errors.npz')
+        mask_paths[label] = str(mask);masks[label] = saved_arrays(mask)
+        baseline = pin(source / label / 'level-2.npz', m['levels'][-1]['artifact_sha256'], label + '-baseline.npz')
+        models[label] = dict(path=str(model), sha256=expected, anchors=str(anchor), anchors_sha256=ANCHOR_SHA[label],
+                             baseline=str(baseline), baseline_sha256=file_sha256(baseline))
+    statistics = json.loads(stats_path.read_text());ids = saved_arrays(models['selected']['path'])['neuron_ids'].tolist()
+    targets, failures = choose_targets(statistics, ids, masks, json.loads(original_audit.read_text()))
+    if targets != old['targets'] or failures != old['failures'] or statistics['targets'] != old['original_targets']:
+        raise ValueError('Continuation must retain exact original target selection')
+    result = dict(experiment='E111', source_run=str(source), source_audit=str(original_audit), models=models,
+        source_masks=mask_paths, evidence_sha256=evidence, statistics=str(stats_path), original_targets=old['original_targets'],
+        targets=targets, stimulus_nS=old['stimulus_nS'], failures=failures, observed_downstream_pairs=old['observed_downstream_pairs'],
+        targets_without_observed_pairs=old['targets_without_observed_pairs'], neural_step_ms=list(PROTOCOLS['E111']),
+        baseline_step_ms=PROTOCOLS['E111'][0], baseline_targets=targets, trainable_parameters=[],
+        selection='Exact E110 target union and original E109 mask lineage retained; no further target selection')
+    write(root / 'manifest.json', result)
+    print('E111 unchanged target union:', targets, 'steps_ms:', result['neural_step_ms'], flush=True)
+    return result
+
+
+def protocol_steps(manifest):
+    if manifest.get('experiment') not in PROTOCOLS:raise ValueError('Unknown refinement experiment')
+    steps = PROTOCOLS[manifest['experiment']]
+    if manifest['neural_step_ms'] != list(steps) or manifest['baseline_step_ms'] != steps[0]:
+        raise ValueError('Refinement protocol/grid changed')
+    return steps
+
+
 def audit(root, execution_complete):
     from r_elegans.brain.rhythm_qualification import rhythm_metrics
     manifest_path = root / 'manifest.json';manifest = json.loads(manifest_path.read_text())
+    steps = protocol_steps(manifest)
     hashes = dict(manifest['evidence_sha256']);hashes[str(manifest_path)] = file_sha256(manifest_path)
     statistics = json.loads(Path(manifest['statistics']).read_text())
     source_audit = json.loads(Path(manifest['source_audit']).read_text())
@@ -98,11 +159,13 @@ def audit(root, execution_complete):
             if len(summary['levels']) > 3:raise ValueError('Unexpected fine grids')
             baseline_path = Path(model['baseline'])
             if file_sha256(baseline_path) != model['baseline_sha256']:raise ValueError('Original baseline changed')
-            entries = [(baseline_path, statistics['targets'], .03125, model['baseline_sha256'], 'copied E109 baseline')]
+            baseline_targets = statistics['targets'] if manifest['experiment'] == 'E110' else targets
+            if manifest.get('baseline_targets', baseline_targets) != baseline_targets:raise ValueError('Baseline target scope changed')
+            entries = [(baseline_path, baseline_targets, steps[0], model['baseline_sha256'], 'copied prior baseline')]
             for i, row in enumerate(summary['levels']):
                 path = root / label / ('level-' + str(i) + '.npz')
                 if row['level'] != i or Path(row['artifact']).resolve() != path.resolve():raise ValueError('Fine-grid ordering changed')
-                entries.append((path, targets, REPLAY_STEPS[i], row['sha256'], 'new targeted replay'))
+                entries.append((path, targets, steps[i], row['sha256'], 'new targeted replay'))
             levels, comparisons, ratios_all, flips_all, previous = [], [], [], [], None
             reproduction = None
             for path, layer_targets, step, expected_sha, origin in entries:
@@ -148,7 +211,7 @@ def audit(root, execution_complete):
         if not Path(path).is_file() or file_sha256(path) != sha:problems.append('Consumed input changed: ' + path)
     if problems:
         for m in models.values():m.update(targeted_per_phase_checks_passed=False, targeted_phase_mean_checks_passed=False)
-    result = dict(experiment='E110', audit_complete=True, execution_complete=execution_complete, integrity_passed=not problems,
+    result = dict(experiment=manifest['experiment'], audit_complete=True, execution_complete=execution_complete, integrity_passed=not problems,
         problems=problems, targets=targets, observed_downstream_pairs=len(pairs), source_failures=failures,
         targets_without_observed_pairs=manifest['targets_without_observed_pairs'], models=models, evidence_sha256=hashes,
         trainable_parameters=[], model_promoted=False, full_atlas_qualified=False,
@@ -179,9 +242,12 @@ def report(root):
 def main():
     started = time.monotonic();p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--source-run', type=Path);p.add_argument('--output-dir', type=Path, required=True);p.add_argument('--minutes', type=float, default=120.)
-    p.add_argument('--worker', choices=('selected', 'parent'));p.add_argument('--coordinate', action='store_true');p.add_argument('--report', action='store_true');args = p.parse_args();root = args.output_dir.resolve()
+    p.add_argument('--worker', choices=('selected', 'parent'));p.add_argument('--coordinate', action='store_true');p.add_argument('--report', action='store_true')
+    p.add_argument('--continue-refinement', action='store_true', help='E111: keep E110 target union and refine from its finest baseline')
+    args = p.parse_args();root = args.output_dir.resolve()
     if args.report:report(root);return 0
-    if args.worker:atlas_worker(root, args.worker, steps=REPLAY_STEPS);return 0
+    if args.worker:
+        atlas_worker(root, args.worker, steps=protocol_steps(json.loads((root / 'manifest.json').read_text())));return 0
     if args.coordinate:return coordinate(root, 'scripts.run_atlas_target_refinement')
     if args.source_run is None:p.error('--source-run required')
     if not math.isfinite(args.minutes) or not 5 <= args.minutes <= 1440:p.error('Budget must be5..1440minutes')
@@ -190,7 +256,8 @@ def main():
     root.mkdir(parents=True, exist_ok=False);code, timeout = 1, False
     try:
         capture_run_record(root, REPO, args, phase='atlas-target-refinement')
-        prepare(source, root)
+        if args.continue_refinement:prepare_continuation(source, root)
+        else:prepare(source, root)
         from scripts.total_job_budget import run_group
         seconds = started + args.minutes * 60 - time.monotonic() - 60
         if seconds <= 0:raise TimeoutError('Preparation exhausted budget')

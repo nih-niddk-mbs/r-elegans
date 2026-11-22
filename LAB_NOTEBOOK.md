@@ -12176,3 +12176,42 @@ scores, independent-solver/anchor-cycle tests, body movement, sensory start/stop
 rest/restart, swimming or biological qualification. No model promoted.
 Documentation-only update; transcription/coverage assertions and whitespace check
 pass; no source-code changes or new tests required.
+
+### 2026-11-21 — E111 planned: same targeted diagnostic, two further refinements
+
+User approved continuing the identical12target/986observed-pair E110 subset,
+all4reference phases and both unchanged models. Protocol recorded before
+implementation in `experiments/records/E111-plan.json`. No target narrowing,
+new anchoring, parameter/optimizer/RNG updates or fitting. Reconstruct original
+E109 mask-driven selection lineage as an audit invariant; retain E110's selected
+phase-mean success and remaining phase/parent failures separately.
+
+Copy the E110 finest0.0078125ms source artifact, reproduce that same step with
+the exact same targets/anchors, then run0.00390625/0.001953125ms. Require same-step
+reproduction and both NEW adjacent comparisons under unchanged criteria. No
+new tolerance, full-atlas inference, score selection or behavioral promotion.
+Two A100 workers, batches8, duplicate/padded shams,120min TOTAL including automatic
+audit and compact response/control output. Audit immutable model/anchor/source/
+mask/baseline hashes, original target choice, coverage, rhythm/controls, scores,
+source/environment and budget; timeout/missing inputs never qualify. Preserve all
+parents and prior records externally. Server execution remains planned.
+Launch: `sh scripts/launch_atlas_target_continuation_mbslnx2.sh`.
+
+E111 local software verification:68 focused checks pass across continuation,
+original targeted/full-atlas audits, common-state replay, E107, selected-checkpoint,
+parameter and cycle-analysis code. New continuation fixtures check immutable
+source files, exact target-union/baseline retention, three declared new replay
+steps, two new refinement comparisons, grid/subset tamper rejection, changed
+source-baseline rejection before forward work and incomplete/timeout non-
+qualification. Existing supervisor timeout/automatic-audit checks remain passing.
+No full-network scientific simulation or fitting was run locally. CLI help,
+shell syntax and whitespace checks pass; no full-suite status asserted.
+
+The runner supports separate declared E110/E111 protocols; workers read the
+pinned manifest protocol, so the continuation flag cannot silently fall back to
+E110 steps. E110 defaults and historical source/selection checks remain unchanged.
+E111 preserves the original full-target selection evidence while evaluating only
+the same targeted support. Baseline target scope is now explicit for a subset
+baseline. All parent/source/anchor/mask dependencies, optimizer history (unchanged)
+and new compact arrays/source/environment records remain external. Server
+execution/results remain pending user launch/output.

@@ -155,3 +155,68 @@ def test_supervisor_timeout_always_audits_and_cannot_pass(tmp_path,monkeypatch):
     assert not receipt['all_steps_finished'] and not receipt['model_promoted']
     result=json.loads((output/'audit.json').read_text())
     assert not any(m.get('targeted_per_phase_checks_passed') for m in result['models'].values())
+
+
+def continuation_job(tmp_path,monkeypatch):
+    import scripts.run_atlas_target_refinement as job
+    source=fixture_job(tmp_path,monkeypatch)
+    source_audit=job.audit(source,True)
+    assert source_audit['integrity_passed']
+    (source/'budget_receipt.json').write_text(json.dumps(dict(all_steps_finished=True)))
+    root=tmp_path/'continuation';root.mkdir()
+    manifest=job.prepare_continuation(source,root)
+    for label,model in manifest['models'].items():
+        folder=root/label;folder.mkdir()
+        with np.load(model['baseline']) as z:baseline=dict(z)
+        levels=[]
+        for i,step in enumerate(job.PROTOCOLS['E111']):
+            path=folder/('level-'+str(i)+'.npz')
+            data=dict(baseline);data['neural_step_ms']=np.asarray(step)
+            np.savez_compressed(path,**data)
+            levels.append(dict(level=i,artifact=str(path),sha256=file_sha256(path)))
+        (folder/'summary.json').write_text(json.dumps(dict(checkpoint_sha256=model['sha256'],anchors_sha256=model['anchors_sha256'],manifest_sha256=file_sha256(root/'manifest.json'),levels=levels)))
+    return source,root
+
+
+def test_continuation_preserves_target_union_baseline_and_all_prior_files(tmp_path,monkeypatch):
+    import scripts.run_atlas_target_refinement as job
+    source,root=continuation_job(tmp_path,monkeypatch)
+    before={p:file_sha256(p) for p in source.rglob('*') if p.is_file()}
+    result=job.audit(root,True)
+    assert result['integrity_passed'],result['problems']
+    assert result['experiment']=='E111'
+    original=json.loads((source/'manifest.json').read_text())
+    assert result['targets']==original['targets']
+    assert all(m['targeted_per_phase_checks_passed'] and m['targeted_phase_mean_checks_passed'] for m in result['models'].values())
+    assert not result['full_atlas_qualified'] and not result['model_promoted']
+    assert before=={p:file_sha256(p) for p in source.rglob('*') if p.is_file()}
+    m=result['models']['selected']
+    assert [c['steps_ms'] for c in m['comparisons']]==[[.0078125,.00390625],[.00390625,.001953125]]
+
+
+def test_continuation_rejects_grid_or_subset_changes(tmp_path,monkeypatch):
+    import scripts.run_atlas_target_refinement as job
+    _,root=continuation_job(tmp_path,monkeypatch)
+    path=root/'manifest.json';manifest=json.loads(path.read_text())
+    manifest['neural_step_ms'][0]=.03125;path.write_text(json.dumps(manifest))
+    with pytest.raises(ValueError,match='protocol/grid changed'):job.audit(root,True)
+    manifest['neural_step_ms']=list(job.PROTOCOLS['E111']);manifest['targets'].remove('RIVL')
+    path.write_text(json.dumps(manifest))
+    with pytest.raises(ValueError,match='selection changed'):job.audit(root,True)
+
+
+def test_continuation_timeout_cannot_qualify_saved_results(tmp_path,monkeypatch):
+    import scripts.run_atlas_target_refinement as job
+    _,root=continuation_job(tmp_path,monkeypatch)
+    result=job.audit(root,False)
+    assert result['integrity_passed']
+    assert not any(m['targeted_phase_mean_checks_passed'] for m in result['models'].values())
+
+
+def test_continuation_rejects_changed_source_baseline_before_replay(tmp_path,monkeypatch):
+    import scripts.run_atlas_target_refinement as job
+    source=fixture_job(tmp_path,monkeypatch);job.audit(source,True)
+    (source/'budget_receipt.json').write_text(json.dumps(dict(all_steps_finished=True)))
+    with (source/'selected'/'level-2.npz').open('ab') as stream:stream.write(b'changed')
+    root=tmp_path/'bad-continuation';root.mkdir()
+    with pytest.raises(ValueError,match='hash mismatch'):job.prepare_continuation(source,root)
