@@ -1,0 +1,16 @@
+{
+  "experiment": "E109",
+  "recorded_date": "2026-11-21",
+  "status": "planned; server execution not evidenced",
+  "question": "Does the E108 matched-state response protocol remain numerically reliable across all cached atlas targets and observed downstream receiver pairs, excluding direct stimulated-cell responses?",
+  "source_run": "/home/carsonc/r-elegans-results/common-state-20261122T010707Z-782722",
+  "parents": "Same selected4d72ef33...3511f and stored parent47a369a1...2482d; exact full-state anchors copied from completed E108 with printed and saved hashes. No new settling/anchor selection.",
+  "fixed_trainable": "All parameters and anchors fixed. No fitting, model/target reselection, random operations or physiological changes.",
+  "targets_pairs": "All targets in hashed E106 cached statistics, recovered through recorded E107/E108 lineage; union of cached train/val/test observed pairs, excluding target==receiver. Unknown target/receiver identifiers fail preparation; missing coverage is not silently dropped. Direct self responses reported separately.",
+  "trials": "Four existing E108 anchor phases, each target pulse0.5s at recorded amplitude/0mV reversal, horizon12s and fixed1ms recording. Neural steps0.25/0.125/0.0625/0.03125ms. Batches of8targets plus duplicate shams; last batch zero-padded and checked. Source anchors immutable; save full response means and compact sham RMD traces, not long all-cell or all-target voltage/state trajectories.",
+  "numerical_checks": "Original vector criterion max-normalized error<0.1 and correlation>=0.9 on observed downstream pair vectors, separately each phase and phase mean. Also prospectively report per-pair mixed tolerance: abs(coarse-fine)<=1e-7 +0.1*max(abs(coarse),abs(fine));1e-7 is one tenth of the existing1e-6 model-response deadband, an engineering resolution convention, not experimental noise or physiology. Require all observed pairs and both finest successive comparisons for a declared check pass. Report worst pairs/fractions and sign changes for modeled responses at/above1e-6. No gate silently replaces an older criterion.",
+  "controls_audit": "Automatic post-run audit: budget/execution, all batches/targets/grids/models, source/statistics/anchor/checkpoint/response hashes, full-state identity, immutable parameters, duplicate/padded shams and sham RMD persistence. Recompute scores from saved means. Source raw NWB files not re-read; cached statistics and data-evidence records hashed/copied. No optimizer/RNG state changed. Incomplete/timeout or hash failure cannot pass.",
+  "accuracy": "Report frozen finest-grid phase-mean Spearman/AUC by original split descriptively, with numerical qualification status; no test-based reselection. Repeatedly inspected test split is not a new untouched holdout. No biological, body or sensory start/stop promotion.",
+  "resources": "Two A100 workers, one fixed model per GPU; batches limit memory and saved output. Maximum120minutes TOTAL including automatic audit under nohup; may finish earlier.",
+  "command": "sh scripts/launch_atlas_shared_state_mbslnx2.sh"
+}

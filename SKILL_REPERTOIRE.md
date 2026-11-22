@@ -1,5 +1,14 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-21 E109 prepared; server execution pending. Fixed E108 models and
+exact anchors, all cached atlas targets and observed downstream pairs. Self
+responses excluded from numerical scoring and reported separately. Four grids,
+four phases, batches8 on two A100s; no fitting or new data download. Original
+vector checks plus explicitly planned per-pair numerical resolution checks;
+full automatic audit within120min TOTAL. No model/behavior promotion.
+[Plan](experiments/records/E109-plan.json).
+Launch: `sh scripts/launch_atlas_shared_state_mbslnx2.sh`.
+
 2026-11-21 E108 completed (user-reported): both unchanged models pass
 shared-complete-state pulse-response checks at all four reference phases and
 all grid comparisons. Integrity, duplicate shams and sham rhythms pass; all

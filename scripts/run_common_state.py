@@ -103,13 +103,13 @@ def worker(root, label):
         raise ValueError('Input changed during worker')
 
 
-def coordinate(root):
+def coordinate(root, module='scripts.run_common_state'):
     processes = []
     try:
         for gpu, label in enumerate(('selected', 'parent')):
             env = dict(os.environ, JAX_PLATFORMS='cuda', CUDA_VISIBLE_DEVICES=str(gpu), XLA_PYTHON_CLIENT_PREALLOCATE='false', XLA_PYTHON_CLIENT_MEM_FRACTION='.8')
             log = (root / (label + '.log')).open('w')
-            process = subprocess.Popen([sys.executable, '-u', '-m', 'scripts.run_common_state', '--worker', label,
+            process = subprocess.Popen([sys.executable, '-u', '-m', module, '--worker', label,
                                         '--output-dir', str(root)], env=env, stdout=log, stderr=subprocess.STDOUT)
             processes.append((label, process, log))
         while any(p.poll() is None for _, p, _ in processes):

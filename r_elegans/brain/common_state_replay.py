@@ -40,7 +40,7 @@ def collect_anchors(params, fixed, config, rmd_indices, *, warmup=60., seconds=1
                          reference_step_ms=step_ms, warmup_seconds=warmup)
 
 
-def replay(params, fixed, config, anchors, conductances, rmd_indices, step_ms, *,
+def make_replay(config, rmd_indices, step_ms, *,
            dt=.001, seconds=12., pulse_seconds=.5, short_seconds=.02, window=(1.5, 11.5)):
     steps = int(round(dt * 1000 / step_ms))
     frames = round(seconds / dt)
@@ -62,5 +62,10 @@ def replay(params, fixed, config, anchors, conductances, rmd_indices, step_ms, *
             (_, short, total), voltage = jax.lax.scan(step, (state0, state0, jnp.zeros_like(state0.indicator)), jnp.arange(frames))
             return total / (hi - lo), short, voltage
         return jax.vmap(lambda s: jax.vmap(lambda g: trial(s, g))(gs))(starts)
+    return batch
+
+
+def replay(params, fixed, config, anchors, conductances, rmd_indices, step_ms, **options):
+    batch = make_replay(config, rmd_indices, step_ms, **options)
     means, short, voltage = batch(params, fixed, jax.tree.map(jnp.asarray, anchors), jnp.asarray(conductances))
     return np.asarray(means), jax.tree.map(np.asarray, short), np.asarray(voltage)

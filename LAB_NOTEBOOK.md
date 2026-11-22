@@ -11931,3 +11931,63 @@ fit. No new scientific run or training launched on this evidence upload. No
 body gait, sensory start/stop, rest/restart, swimming or biological qualification;
 no model promoted. Documentation/evidence-only update: parsing/shape checks and
 whitespace check pass; no software code or new tests required.
+
+### 2026-11-21 — E109 planned: all-target observed-pair matched-state validation
+
+User approved extending E108 to the full atlas target set and measured downstream
+pairs before new fitting. Prospective protocol in `experiments/records/E109-plan.json`.
+No fitting or parameter changes. Reuse exact hashed E108 complete-state anchors,
+not newly settled states. Resolve the hashed E106 cached statistics via recorded
+E107/E108 lineage; copy metadata/data-evidence externally, do not redownload or
+re-read raw NWB files. Include all cached targets and union of observed train/
+validation/test pairs, with self pairs explicitly excluded and coverage gaps
+fatal. Direct stimulated-cell responses are separate diagnostics, never the
+normalization source for downstream claims.
+
+Use four reference phases, four neural grids, all targets in batches of8 plus
+duplicate shams and checked zero padding. Identical physical pulse and1ms clocks
+as E108. Save response means and small sham RMD traces; discard long target-wise
+voltage/short-state arrays after numerical extraction to avoid large archives.
+All source parents/anchors and old negative outcomes retained. Original observed-
+vector criteria remain. Add a separately labeled prospective per-pair numerical
+resolution convention: absolute error<=1e-7+10% of larger modeled response. The
+absolute term is one tenth of existing modeled1e-6deadband, not empirical calcium
+noise or a biological tolerance. Report every pair, worst errors/fractions and
+active sign flips; require both finest successive pairs. Phase-mean and per-phase
+results are separate; no retrospective criterion replacement or automatic promotion.
+
+Frozen finest phase-mean atlas scores may be reported descriptively by original
+split, explicitly tagged with numerical status. No checkpoint/target selection
+using test results, and repeated prior inspection means this is not a fresh
+untouched holdout. No independent solver, full neuronal trajectory convergence,
+new anchor-cycle robustness, sensory start/stop or swimming qualification claimed.
+Two GPUs, batches8,120min TOTAL with reserved automatic post-run audit, exact
+invocation/environment/source and input/output hashes, fixed-parameter checks,
+control/rhythm/coverage/budget checks and all artifacts external. Server execution
+pending. Launch: `sh scripts/launch_atlas_shared_state_mbslnx2.sh`.
+
+E109 implementation/local verification:55 focused software checks pass across
+new atlas workflow, common-state replay, E107 audit, selected-model audit,
+parameter arithmetic and cycle analysis. New adversarial cases verify full
+cached-statistics lineage hashes, downstream self exclusion, target/receiver
+coverage rejection, pair-level errors hidden by large peer responses, active sign
+flips, tiny-signal mixed-pass/vector-fail separation, duplicate/padded controls,
+missing/tampered grids and timeout audit/non-promotion. Cached targets with no
+observed downstream pair remain simulated but are listed explicitly; all12 new
+atlas tests pass after this reporting addition. No raw NWB or scientific full-
+network validation run executed locally. Source/environment/source-tree capture,
+original parents and anchor dependencies remain external at server execution.
+CLI help, shell syntax and whitespace checks pass; no full-suite status asserted.
+
+Implementation retains a single compiled forward per grid across fixed-size
+batches instead of recompiling each target batch. E108's public replay wrapper
+keeps the same numerical computation; existing direct short-step equivalence
+tests pass. Worker outputs retain all target indicator means, every duplicate/
+padded sham indicator mean, and full-time sham-voltage differences relative to
+one retained reference; expected zero differences compress efficiently. Target-
+wise voltage trajectories and short states are intentionally not archived in
+this expansion. Audit independently recomputes observed-pair/vector checks and
+scores from the saved means and retains all pair tolerance ratios/sign-flip masks
+in separate compressed audit artifacts. Mean indicators cannot be reconstructed
+from the omitted target trajectories; this saved-data limitation is explicit.
+No scientific E109 outcome or fitting promotion asserted; server run pending.
