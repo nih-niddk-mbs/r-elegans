@@ -1,15 +1,14 @@
 # r-elegans skill repertoire and action-space plan
 
-2026-11-22 E114 prepared; server execution pending. Corrected four-hour total
-atlas fit from audited E112 parent with a fresh optimizer (seed1140). Every model
-uses its own60s-settled neural states during training, checkpoint selection and
-final evaluation. Accepted updates must pass full135-target three-level numerical
-validation and improve own-state validation before selection. Final selection
-loss must reproduce within1e-10; original parent retained otherwise. Up to90min
-for baseline/fitting/selection and150min for final validation/audit, including a
-last10min audit reserve. No sensory-controlled behavior or biological promotion.
-Launch: `sh scripts/launch_own_state_atlas_fit_mbslnx2.sh`.
-[Plan](experiments/records/E114-plan.json).
+2026-11-22 E114 completed (user-reported): ZERO training iterations/updates,
+zero changed coordinates. Own-state validation, autonomous RMD, numerical and
+control checks all pass; selection loss reproduces. Complete audit/integrity
+passes;64.84min elapsed of240min maximum, no timeout. Fit correctly unqualified:
+this validated the unchanged parent, not a new fitted model. Initial conservative
+round-admission estimate prevented optimization within the90min search window.
+Obtain actual task timings before changing admission; do not repeat unchanged
+launcher expecting training. Exact run identifier absent from compact stdout.
+[Evidence](experiments/records/E114-server-summary.json).
 
 2026-11-22 E113 completed (user-reported): 25 optimizer iterations,16 accepted
 updates; all9538 unknown coordinates changed with maximum offset0.01955 and

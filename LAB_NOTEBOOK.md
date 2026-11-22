@@ -12558,3 +12558,28 @@ round admission includes observed selection cost; incomplete tasks/validation
 cannot qualify. Automatic audit reports all model/state/selection evidence and
 remaining limits. Compact `--report` now avoids dumping full audit arrays.
 Scientific scope remains supervised physiology, not sensory-controlled behavior.
+
+### 2026-11-22 — E114 reported complete with no optimization: admission estimate too conservative
+
+User compact server report:3890.4756455869647s (64.84min),240min maximum,
+all steps/validation/audit complete, no timeout, no integrity problems/missing
+server evidence. Own-state final numerical/control/rhythm gates and autonomy
+preservation pass; selected loss reproduces. However iterations0, accepted0,
+changed coordinates0. Fit correctly remains unqualified. This is validation of
+the unchanged parent, not an optimization result or evidence of training progress.
+Train/val/test losses0.8529367369580239/0.9377836678668792/0.9217044765952424.
+Parameter/frozen checks pass,9538-coordinate schema unchanged. Exact run ID and
+checkpoint SHA not printed; remain unknown rather than invented. Full runtime
+source/environment and traces not locally inspected.
+
+Local source inspection identifies the pre-admission estimate:
+`recent=max(2400,3*(now-last_validation))` after startup/source replay/fresh-parent
+baseline; `admit` requires remaining search time greater than1.3*recent.
+Search window is90min. Zero iterations with successful final execution means
+this gate skipped optimization entirely. Treating startup/baseline cost as a
+tripled recurring-round estimate was overly conservative. This is an engineering
+scheduling failure in the prepared fitting run; numerical validation working
+correctly does not excuse missing the requested training. No new launch or
+scientific claim. Next obtain per-task elapsed times/run identifier, then correct
+cost estimation using measured work while preserving total watchdog and complete
+post-run audit. Do not simply repeat the unchanged launcher.
