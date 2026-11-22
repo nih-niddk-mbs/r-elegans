@@ -12650,3 +12650,35 @@ using unchanged own-state and numerical gates. Do not infer why only one round
 was admitted without timing/admission records. No new experiment launched.
 Local changes only transcribe results/update status; no numerical rerun/tests
 needed for this documentation-only outcome. Record:E115-server-summary.json.
+
+### 2026-11-22 — E116 planned: continue from qualified E115, pin identity on server
+
+User says go after E115 qualifying fit. Plan recorded before edits in
+experiments/records/E116-plan.json. Exact E115 run/hash absent locally: launcher
+must resolve latest E115 on server, require completed qualifying receipt,
+summary and complete passing audit, verify selected hash and saved evidence,
+print/persist exact identity. No fallback to older/random network. Fresh optimizer
+seed1160; not an exact live-worker/Adam resume. Reuse E115 own-state protocol,
+full numerical/validation/rhythm/controls and measured two-GPU scheduling.
+Four-hour inclusive ceiling (120min fitting/selection,120min final/audit).
+Keep local coordinate offset within0.1 AND cumulative offsets within0.1 of
+original E112 origin; continuation must not reset absolute biological bounds.
+Reproduce parent's saved response endpoint, then compare fresh-state validation
+against this E115 parent rather than initial E112 scores. Preserve all ancestors,
+optimizer and selected/final records externally. Acceptance remains a supervised
+physiology milestone, not sensory start/stop or swimming qualification. Planned
+until actual server execution evidenced; no run identifier or hash invented.
+
+E116 local verification:20 focused tests pass (continuation parent preparation/
+pinning plus existing stable-atlas software tests). Coverage includes selected
+hash mismatch, failed/incomplete qualification/audit, unchanged-parent refusal,
+newer incomplete run without silent fallback, evidence-hash failure, cumulative
+bound refusal, source files unchanged during copying, and inherited origin/
+coordinate provenance. Existing synthetic own-state fitting/selection/regression/
+full-audit/scheduling tests remain passing. Python compilation, launcher shell
+syntax and diff checks pass. These are software checks, not a server fitting run.
+Launcher prints exact chosen parent run/hash; new manifests copy and hash parent,
+anchors, statistics, final response matrices, original origin and cumulative
+offsets while retaining recursive external reference hashes. Reports now print
+run path and selected SHA to avoid the earlier compact-report identity gap.
+No numerical criterion or biological acceptance threshold changed.

@@ -1,0 +1,12 @@
+{
+  "experiment":"E116",
+  "recorded_date":"2026-11-22",
+  "status":"planned; server execution pending",
+  "question":"Can further own-state fitting improve on the qualified E115 checkpoint while preserving its validation, rhythms and numerical checks?",
+  "parent":"Resolve latest completed qualified E115 measured-atlas-fit run on server; verify its selection SHA against summary, receipt and complete audit plus recorded artifact hashes. Fail if unavailable or inconsistent. Exact run/hash currently unknown locally; print and persist them at launch.",
+  "method":"Fresh SPSA/Adam optimizer seed1160 from E115 validation-selected weights, not exact mid-run resume. Same own-state training/selection/final protocol and measured two-GPU scheduling. Refresh parent baseline and reproduce saved parent responses. Retain all previous checkpoints/dependencies externally.",
+  "parameters":"Same9538 unknown coordinates; fixed stereotypical properties, LEAK/RMD and anatomy. Local bound0.1 AND cumulative bound0.1 against original E112 coordinates, clipping perturbations/proposals to intersection. Preserve original parent/cumulative offset provenance; do not silently widen bounds at continuation.",
+  "budget":"240min total,120min setup/fitting/selection,120min final/audit including10min audit reserve. Runtime forecasts may stop fitting early; incomplete validation never qualifies.",
+  "acceptance":"Actual changed parameters, lower fresh own-state validation than E115 parent, unchanged numerical/control/parameter/RMD checks, final selection reproduction and complete independent saved-data audit. Test statistics only after selection; no behavior/biological qualification.",
+  "command":"sh scripts/launch_atlas_continuation_mbslnx2.sh"
+}

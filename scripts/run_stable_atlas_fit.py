@@ -168,17 +168,24 @@ def coordinator(root):
     own = budget.get('own_state', False)
     measured = budget.get('measured_schedule', False)
     train_deadline = start+budget.get('optimization_minutes', 330)*60;final_deadline = budget['deadline_monotonic']-600
-    mfest = prepare(Path(budget['source']), root)
+    continuing = bool(budget.get('parent_run'))
+    if continuing:
+        from scripts.atlas_fit_continuation import prepare_continuation
+        mfest = prepare_continuation(Path(budget['parent_run']), root)
+    else:mfest = prepare(Path(budget['source']), root)
     if own:
-        mfest.update(experiment='E115' if measured else 'E114', own_state=True, seed=1150 if measured else 1140, measured_schedule=measured)
+        mfest.update(experiment='E116' if continuing else 'E115' if measured else 'E114', own_state=True, seed=1160 if continuing else 1150 if measured else 1140, measured_schedule=measured)
         mfest['policy'].update(training_cutoff_minutes=budget.get('optimization_minutes', 90), total_minutes=240, selection='Own-state full-atlas numerical gates and validation loss only')
         write(root/'manifest.json', mfest)
     statistics = json.loads(Path(mfest['statistics']).read_text())
     arrays = saved_arrays(mfest['parent']);ids = arrays['neuron_ids'].tolist();codec = Coordinates(arrays)
-    rng = np.random.default_rng(1150 if measured else 1140 if own else 1130);x = np.zeros(codec.size);mom = x.copy();var = x.copy()
+    rng = np.random.default_rng(1160 if continuing else 1150 if measured else 1140 if own else 1130);x = np.zeros(codec.size);mom = x.copy();var = x.copy()
     pool = None;ledger = [];iteration = 0;accepted = 0;moment_steps = 0;selected = None
+    absolute = saved_arrays(mfest['parent_absolute_offsets'])['offsets'] if continuing else np.zeros(codec.size)
+    lower = np.maximum(-.1, -.1-absolute);upper = np.minimum(.1, .1-absolute)
     checkpoint_dir = root/'checkpoints';checkpoint_dir.mkdir()
     def save(name, values):
+        if np.max(abs(absolute+values)) > .1+1e-12:raise ValueError('Cumulative parameter bound exceeded')
         folder = checkpoint_dir/name;folder.mkdir();path = folder/'network.npz'
         np.savez_compressed(path, **codec.apply(values));np.savez_compressed(folder/'coordinates.npz', offsets=values)
         write(folder/'identity.json', dict(sha256=file_sha256(path), coordinates_sha256=file_sha256(folder/'coordinates.npz')))
@@ -254,7 +261,7 @@ def coordinator(root):
             record = dict(iteration=iteration, batch=batch, current_before=str(current), rng_before=rng.bit_generator.state)
             round_dir = root/'rounds'/f'{iteration:05d}';round_dir.mkdir(parents=True)
             np.savez_compressed(round_dir/'direction.npz', direction=direction)
-            plus_x = np.clip(x+.005*direction, -.1, .1);minus_x = np.clip(x-.005*direction, -.1, .1)
+            plus_x = np.clip(x+.005*direction, lower, upper);minus_x = np.clip(x-.005*direction, lower, upper)
             plus = save(f'{iteration:05d}-plus', plus_x);minus = save(f'{iteration:05d}-minus', minus_x)
             record.update(plus=str(plus), minus=str(minus));write(round_dir/'intent.json', record)
             if own:own_anchors([plus, minus], train_deadline)
@@ -268,6 +275,7 @@ def coordinator(root):
                 gradient = ((a['data_loss']+prior(plus_x))-(b['data_loss']+prior(minus_x)))/.01*direction
                 moment_steps += 1
                 proposal_x, mom, var = adam_step(x, mom, var, gradient, moment_steps)
+                proposal_x = np.clip(proposal_x, lower, upper)
                 proposal = save(f'{iteration:05d}-proposal', proposal_x);record['proposal'] = str(proposal)
                 specs = specs_for(f'r{iteration}-current', current, batch, [1,2], train_deadline)
                 specs += specs_for(f'r{iteration}-proposal', proposal, batch, [1,2], train_deadline)
@@ -329,7 +337,7 @@ def coordinator(root):
         params = codec.audit(saved_arrays(chosen_model), best_x)
         passed = bool(selection_reproduced and metrics['passed'] and parent_metrics['passed'] and autonomy_pass and params['passed'] and
             params['changed_coordinates'] > 0 and best_score < parent_score and scores['val'] < parent_metrics['data_loss'])
-        result = dict(experiment='E115' if measured else 'E114' if own else 'E113', own_state=own, selection_reproduced=selection_reproduced, execution_complete=True, validation_complete=True, iterations=iteration,
+        result = dict(experiment='E116' if continuing else 'E115' if measured else 'E114' if own else 'E113', own_state=own, selection_reproduced=selection_reproduced, execution_complete=True, validation_complete=True, iterations=iteration,
             accepted_updates=accepted, fit_qualified_before_audit=passed, final_metrics=metrics,
             fresh_parent_validation=parent_metrics, scores=scores, autonomy_passed=autonomy_pass,
             parameters=params, selected_sha256=file_sha256(chosen_model), model_promoted=False,
@@ -345,15 +353,18 @@ def main():
     p = argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir', type=Path, required=True)
     p.add_argument('--source', type=Path, default=Path(DEFAULT_SOURCE));p.add_argument('--coordinator', action='store_true');p.add_argument('--report', action='store_true')
     p.add_argument('--own-state', action='store_true', help='E114: four-hour run; own-state training and selection')
+    p.add_argument('--parent-run', type=Path, help='E116: qualified fitting parent; fresh optimizer')
     p.add_argument('--measured-schedule', action='store_true', help='E115: measured recurring task costs and120/120min budget')
     a = p.parse_args();root = a.output_dir.resolve()
+    if a.parent_run and not (a.own_state and a.measured_schedule):p.error('--parent-run requires own-state measured scheduling')
     if a.measured_schedule and not a.own_state:p.error('--measured-schedule requires --own-state')
     if a.report:
+        print('Run:', root)
         for name in ('summary.json','audit.json','budget_receipt.json'):
             path = root/name
             if not path.exists():print(name+': not written yet');continue
             value = json.loads(path.read_text())
-            keys = {'summary.json':('experiment','iterations','accepted_updates','autonomy_passed','selection_reproduced','parameters','scores','fit_qualified_before_audit'),
+            keys = {'summary.json':('experiment','iterations','accepted_updates','autonomy_passed','selection_reproduced','selected_sha256','parameters','scores','fit_qualified_before_audit'),
                     'audit.json':('audit_complete','execution_complete','integrity_passed','problems','unavailable_evidence'),
                     'budget_receipt.json':('total_minutes','elapsed_seconds','all_steps_finished','timed_out','validation_complete','audit_complete','fit_qualified')}[name]
             print(name+':', json.dumps({key:value.get(key) for key in keys}))
@@ -369,7 +380,7 @@ def main():
     total_minutes = 240 if a.own_state else 480
     start = time.monotonic();deadline = start+total_minutes*60;root.mkdir(parents=True, exist_ok=False)
     write(root/'deadline.json', dict(started_monotonic=start, deadline_monotonic=deadline,
-        source=str(a.source.resolve()), total_minutes=total_minutes, optimization_minutes=120 if a.measured_schedule else 90 if a.own_state else 330, own_state=a.own_state, measured_schedule=a.measured_schedule,
+        source=str(a.source.resolve()), parent_run=str(a.parent_run.resolve()) if a.parent_run else None, total_minutes=total_minutes, optimization_minutes=120 if a.measured_schedule else 90 if a.own_state else 330, own_state=a.own_state, measured_schedule=a.measured_schedule,
         started_utc=datetime.now(timezone.utc).isoformat(), includes='Preparation, optimization, fresh states, validation, audit and cleanup'))
     capture_run_record(root, REPO, vars(a), phase='stable-atlas-supervisor')
     from scripts.total_job_budget import run_group

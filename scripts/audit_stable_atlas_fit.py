@@ -25,12 +25,17 @@ def audit(root):
     try:
         m = document(manifest_path);experiment = m.get('experiment', 'E113');statistics = document(m['statistics']);origin = saved_arrays(read(m['parent'], m['parent_sha256']))
         codec = Coordinates(origin);ids = origin['neuron_ids'].tolist()
+        absolute = np.zeros(codec.size)
+        if 'parent_absolute_offsets' in m:
+            absolute = saved_arrays(read(m['parent_absolute_offsets'],m['parent_absolute_offsets_sha256']))['offsets']
+            read(m['absolute_origin'],m['absolute_origin_sha256'])
         read(m['anchors'], m['anchors_sha256'])
         own = m.get('own_state', False)
         for path, sha in m['evidence_sha256'].items():read(path, sha)
         for folder in sorted((root/'checkpoints').glob('*')):
             identity = document(folder/'identity.json');path = read(folder/'network.npz', identity['sha256'])
             values = saved_arrays(read(folder/'coordinates.npz', identity['coordinates_sha256']))['offsets']
+            if np.max(abs(absolute+values)) > .1+1e-12:raise ValueError('Cumulative parameter bound exceeded')
             check = codec.audit(saved_arrays(path), values);model_checks.append(dict(model=str(path), **check))
             if not check['passed']:problems.append('Parameter policy failed: '+str(path))
         specs = {};results = {}
