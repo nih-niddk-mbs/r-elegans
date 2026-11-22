@@ -11991,3 +11991,69 @@ scores from the saved means and retains all pair tolerance ratios/sign-flip mask
 in separate compressed audit artifacts. Mean indicators cannot be reconstructed
 from the omitted target trajectories; this saved-data limitation is explicit.
 No scientific E109 outcome or fitting promotion asserted; server run pending.
+
+### 2026-11-21 — E109 reported result: broad numerical agreement, residual pair failures
+
+User supplied automatic final report for
+`/home/carsonc/r-elegans-results/atlas-shared-state-20261122T014924Z-785140`;
+external audit:`audit.json`, budget:`budget_receipt.json`. Raw stdout stays
+external; structured transcription with attachment SHA256 is
+`experiments/records/E109-server-summary.json`. UTC run identifier Nov22; local
+record date Nov21. Actual source/environment record contents, input/checkpoint/
+anchor/artifact hashes and pair masks were not printed or independently accessed.
+Reported audit complete, execution complete and integrity passed, problems[].
+
+Execution:1048.661529614008s (17.48min), exit0, no timeout, all steps finished
+within120min total cap. Both preselected models used exact E108 complete-state
+anchors,135targets,4phases,4grids; batches8 with2shams and1padded target slot per
+last batch. This schedules4320pulse and1120control trials across both models.
+No model/target selection, optimizer, new weights or random operations. All eight
+model/grid duplicate/padded-control and sham-rhythm aggregate checks pass.
+Hash/policy/coverage/finite-array checks were performed by saved-data audit;
+full records remain external. Original E108 anchors and original model parameters
+stay unchanged. Raw NWB not re-read: cached statistics/data-evidence hashes used.
+
+Coverage:6462unique observed downstream pairs excluding self.87stimulus targets
+have qualifying pair support;48of135have none under the cached statistics policy
+and are explicitly listed, though still simulated. This is limited qualifying
+experimental support, not absent model neurons or proof no observations exist
+outside the cached preparation. No response-based support/model reselection.
+
+Neither model passes both finest successive comparisons at all required phases/
+pairs. Selected finest phase mean: vector error1.867%, correlation0.999848,
+all6462mixed-pair checks pass. Previous pair has one mixed failure RMDL->RMDR
+(error3.4043e-6, tolerance2.5358e-6), so overall phase-mean flag remains False.
+Selected finest individual phases have4/3/1/2mixed failures; these are counts per
+phase, not a known union of unique pairs. Finest per-phase vector checks pass,
+but one previous phase vector misses10% (12.11%). Per-phase pair identities are
+in external audit/masks, not printed in supplied stdout. Do not silently exclude
+those failures or loosen the1e-7+10% prospective resolution convention.
+
+Parent finest phase mean: vector error1.340%, correlation0.999932, one mixed
+failure RIVL->RMDVL; previous pair has two, adding RMDR->RMDVL. Finest individual
+phases0/3/1/3mixed failures, all vector checks pass. Parent RIVL->RMDVL adjacent
+absolute differences shrink3.316e-6->2.076e-6->1.183e-6, while tolerance ratio
+increases4.35->4.83->5.32 as modeled response shrinks near zero. A rising ratio
+here does not establish divergent integration. One active sign flip occurs at
+one penultimate-grid phase in each model; none at finest comparisons or phase
+means. Every original negative outcome remains recorded.
+
+Most observed pairs pass the engineering numerical resolution checks, but
+finest phase-mean comparisons mark only41selected/51parent modeled pairs at/above
+1e-6 in at least one of the two grids, among6462. Passing many nearly silent responses is not high biological accuracy.
+Finest descriptive test scores: selected Spearman0.1159563/AUC0.5757157;
+parent0.0471355/0.5076011. Both accuracy_numerically_qualified flags remain False.
+Both have0.986014 modeled-silent fraction among significant test pairs under
+project deadband, not whole-brain inactivity. Test labels have been repeatedly
+inspected; this is not a new untouched generalization result. Self responses
+were reported separately and excluded from downstream normalization/scoring.
+
+Decision: no long fit yet. Inspect saved per-phase pair identities/masks and
+focus finer-step follow-up on affected stimulus targets using the same anchors,
+retaining both models, all identified failures and original criteria. A targeted
+follow-up would be a diagnostic, not full-atlas qualification by extrapolation
+to unsimulated targets. No new follow-up simulation or fitting launched on this
+upload. Full independent-solver accuracy, new anchor-cycle robustness, biological
+amplitude calibration, body gait, sensory initiation/stopping/restart and swimming
+remain untested/unqualified. Documentation-only update: transcription/coverage
+assertions and whitespace check pass; no software changes or new tests required.

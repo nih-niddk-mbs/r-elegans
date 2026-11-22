@@ -1,13 +1,15 @@
 # r-elegans
 
-2026-11-21 E109 prepared; server execution pending. Fixed E108 models and
-exact anchors, all cached atlas targets and observed downstream pairs. Self
-responses excluded from numerical scoring and reported separately. Four grids,
-four phases, batches8 on two A100s; no fitting or new data download. Original
-vector checks plus explicitly planned per-pair numerical resolution checks;
-full automatic audit within120min TOTAL. No model/behavior promotion.
-[Plan](experiments/records/E109-plan.json).
-Launch: `sh scripts/launch_atlas_shared_state_mbslnx2.sh`.
+2026-11-21 E109 completed (user-reported):135 targets,6462 observed
+downstream pairs,17.48min; all steps, integrity, controls and sham rhythms pass.
+Neither fixed model passes all numerical criteria. Selected finest phase mean
+passes every observed pair, but the preceding pair comparison fails RMDL->RMDR;
+parent finest phase mean fails RIVL->RMDVL. Individual-phase failures remain.
+Test Spearman/AUC selected0.116/0.576 and parent0.047/0.508 are descriptive,
+not numerically qualified or a biological match.48 targets lack qualifying
+observed downstream pairs in cached data. Next: inspect pair-specific failures
+and refine affected targets without changing criteria; no long fitting run yet.
+[Evidence](experiments/records/E109-server-summary.json).
 
 2026-11-21 E108 completed (user-reported): both unchanged models pass
 shared-complete-state pulse-response checks at all four reference phases and
