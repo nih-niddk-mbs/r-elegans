@@ -1,0 +1,649 @@
+{
+  "experiment": "E107 saved-cycle analysis",
+  "recorded_date": "2026-11-21",
+  "evidence_kind": "User-reported server analysis stdout; raw artifacts not independently accessed",
+  "evidence_sha256": "8bd8c45c10591bf8f263bf72f4a83a181c3a1655cc440aa6c71ceb6d1d5e20e6",
+  "source_run": "/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363",
+  "report": "/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363-cycles-20261122T000322316819Z/summary.json",
+  "figure": "/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363-cycles-20261122T000322316819Z/cycle-periods.png",
+  "models": {
+    "selected": {
+      "levels": [
+        {
+          "step_ms": 1.0,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 84,
+            "whole_train_period_s": 0.23773247119574478,
+            "interpolated_median_period_s": 0.23543304481241734,
+            "last_five_sampled_mean_period_s": 0.23599999999999993,
+            "last_five_interpolated_mean_period_s": 0.23573898382618097,
+            "period_cv": 0.019959662636797198,
+            "period_quantiles_5_50_95_s": [
+              0.2337537840489375,
+              0.23543304481241734,
+              0.247091719644229
+            ]
+          },
+          "window_period_s": [
+            0.2356683249978651,
+            0.2353573648789911,
+            0.23543812451961746,
+            0.23590367125770026
+          ]
+        },
+        {
+          "step_ms": 1.0,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 87,
+            "whole_train_period_s": 0.2276143996061264,
+            "interpolated_median_period_s": 0.2297066195364028,
+            "last_five_sampled_mean_period_s": 0.22720000000000057,
+            "last_five_interpolated_mean_period_s": 0.22700330949034253,
+            "period_cv": 0.016480418667762488,
+            "period_quantiles_5_50_95_s": [
+              0.21947902646569162,
+              0.2297066195364028,
+              0.2309809121817974
+            ]
+          },
+          "window_period_s": [
+            0.2282431426212416,
+            0.22883210496534181,
+            0.22927499820021818,
+            0.22964368049931608
+          ]
+        },
+        {
+          "step_ms": 0.5,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 87,
+            "whole_train_period_s": 0.23158333703141157,
+            "interpolated_median_period_s": 0.22900934250885996,
+            "last_five_sampled_mean_period_s": 0.22800000000000012,
+            "last_five_interpolated_mean_period_s": 0.2279509196504506,
+            "period_cv": 0.022304961256816094,
+            "period_quantiles_5_50_95_s": [
+              0.22736394437225282,
+              0.22900934250885996,
+              0.2406278764903016
+            ]
+          },
+          "window_period_s": [
+            0.23268542073954798,
+            0.2328701257739998,
+            0.2331547892245509,
+            0.23295298675487155
+          ]
+        },
+        {
+          "step_ms": 0.5,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 91,
+            "whole_train_period_s": 0.220892494404161,
+            "interpolated_median_period_s": 0.223062936676639,
+            "last_five_sampled_mean_period_s": 0.22399999999999948,
+            "last_five_interpolated_mean_period_s": 0.22413900784917756,
+            "period_cv": 0.017744193447485544,
+            "period_quantiles_5_50_95_s": [
+              0.21210023561178773,
+              0.223062936676639,
+              0.22428266129728253
+            ]
+          },
+          "window_period_s": [
+            0.219840479512895,
+            0.21967281316292206,
+            0.21986545587418288,
+            0.21996211806371418
+          ]
+        },
+        {
+          "step_ms": 0.25,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 87,
+            "whole_train_period_s": 0.22816798897953178,
+            "interpolated_median_period_s": 0.22611930115886203,
+            "last_five_sampled_mean_period_s": 0.236399999999999,
+            "last_five_interpolated_mean_period_s": 0.23625916827278814,
+            "period_cv": 0.023814387052879357,
+            "period_quantiles_5_50_95_s": [
+              0.22411865703502443,
+              0.22611930115886203,
+              0.24097034116606775
+            ]
+          },
+          "window_period_s": [
+            0.22637514103843448,
+            0.2264941265961668,
+            0.22662565588962108,
+            0.22712972047679283
+          ]
+        },
+        {
+          "step_ms": 0.25,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 91,
+            "whole_train_period_s": 0.2177413362955742,
+            "interpolated_median_period_s": 0.21950934373764674,
+            "last_five_sampled_mean_period_s": 0.21159999999999995,
+            "last_five_interpolated_mean_period_s": 0.21166702635917858,
+            "period_cv": 0.018706874161526086,
+            "period_quantiles_5_50_95_s": [
+              0.20873158266914302,
+              0.21950934373764674,
+              0.22095429510217296
+            ]
+          },
+          "window_period_s": [
+            0.21902467853750268,
+            0.21886215058707778,
+            0.21841008902436587,
+            0.21810599181690446
+          ]
+        },
+        {
+          "step_ms": 0.125,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 88,
+            "whole_train_period_s": 0.22660811667418349,
+            "interpolated_median_period_s": 0.22421042715940942,
+            "last_five_sampled_mean_period_s": 0.2244,
+            "last_five_interpolated_mean_period_s": 0.22414903020400628,
+            "period_cv": 0.022293960699083088,
+            "period_quantiles_5_50_95_s": [
+              0.22248797685325564,
+              0.22421042715940942,
+              0.2384267368156671
+            ]
+          },
+          "window_period_s": [
+            0.2260300208482173,
+            0.22670793386620766,
+            0.22727975187954622,
+            0.2276910364745876
+          ]
+        },
+        {
+          "step_ms": 0.125,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 93,
+            "whole_train_period_s": 0.21604497245279486,
+            "interpolated_median_period_s": 0.218209291370437,
+            "last_five_sampled_mean_period_s": 0.2191999999999993,
+            "last_five_interpolated_mean_period_s": 0.21916055158874742,
+            "period_cv": 0.017713104667414534,
+            "period_quantiles_5_50_95_s": [
+              0.20745799462083614,
+              0.218209291370437,
+              0.21931390948542956
+            ]
+          },
+          "window_period_s": [
+            0.21604819614424742,
+            0.21543420593460186,
+            0.21516133028300882,
+            0.21504140541012404
+          ]
+        },
+        {
+          "step_ms": 0.0625,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 89,
+            "whole_train_period_s": 0.22580801293005834,
+            "interpolated_median_period_s": 0.22315921190789823,
+            "last_five_sampled_mean_period_s": 0.2220000000000013,
+            "last_five_interpolated_mean_period_s": 0.22189005020040184,
+            "period_cv": 0.022431867685071882,
+            "period_quantiles_5_50_95_s": [
+              0.22166820052956346,
+              0.22315921190789823,
+              0.23790363513758628
+            ]
+          },
+          "window_period_s": [
+            0.22607545690183253,
+            0.22658574363270365,
+            0.22707394593502378,
+            0.22706566114662932
+          ]
+        },
+        {
+          "step_ms": 0.0625,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 93,
+            "whole_train_period_s": 0.21521468548901188,
+            "interpolated_median_period_s": 0.21740688137902175,
+            "last_five_sampled_mean_period_s": 0.2180000000000007,
+            "last_five_interpolated_mean_period_s": 0.21823395718691502,
+            "period_cv": 0.0177323490162682,
+            "period_quantiles_5_50_95_s": [
+              0.20663017524523078,
+              0.21740688137902175,
+              0.21848132907914425
+            ]
+          },
+          "window_period_s": [
+            0.214533533722833,
+            0.21430362728067673,
+            0.21423423128934074,
+            0.2145139563756166
+          ]
+        }
+      ],
+      "finest_descriptive_comparison": {
+        "levels": [
+          3,
+          4
+        ],
+        "cells": {
+          "RMDL": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.003543292081370719,
+            "full_window_mean_amplitude_relative_difference": 0.004607708686409251,
+            "full_window_cycle_rmse_mV": 0.0404768473733951,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          },
+          "RMDR": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.003857947527588168,
+            "full_window_mean_amplitude_relative_difference": 0.0028153313457578433,
+            "full_window_cycle_rmse_mV": 0.02543398265309364,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          }
+        }
+      },
+      "period_refinement": {
+        "RMDL": {
+          "step_ms": [
+            1.0,
+            0.5,
+            0.25,
+            0.125,
+            0.0625
+          ],
+          "whole_train_periods_s": [
+            0.23773247119574478,
+            0.23158333703141157,
+            0.22816798897953178,
+            0.22660811667418349,
+            0.22580801293005834
+          ],
+          "successive_absolute_period_changes_s": [
+            0.006149134164333214,
+            0.0034153480518797907,
+            0.0015598723053482921,
+            0.0008001037441251468
+          ],
+          "successive_change_ratios": [
+            0.5554193420741758,
+            0.45672425815862194,
+            0.5129290015483016
+          ]
+        },
+        "RMDR": {
+          "step_ms": [
+            1.0,
+            0.5,
+            0.25,
+            0.125,
+            0.0625
+          ],
+          "whole_train_periods_s": [
+            0.2276143996061264,
+            0.220892494404161,
+            0.2177413362955742,
+            0.21604497245279486,
+            0.21521468548901188
+          ],
+          "successive_absolute_period_changes_s": [
+            0.006721905201965389,
+            0.0031511581085867935,
+            0.0016963638427793526,
+            0.0008302869637829835
+          ],
+          "successive_change_ratios": [
+            0.468789430065964,
+            0.5383302850329286,
+            0.4894509909045377
+          ]
+        }
+      }
+    },
+    "parent": {
+      "levels": [
+        {
+          "step_ms": 1.0,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 85,
+            "whole_train_period_s": 0.23612130422355346,
+            "interpolated_median_period_s": 0.2338609688191351,
+            "last_five_sampled_mean_period_s": 0.23279999999999887,
+            "last_five_interpolated_mean_period_s": 0.232669033470782,
+            "period_cv": 0.020538189338257996,
+            "period_quantiles_5_50_95_s": [
+              0.23250612371334115,
+              0.2338609688191351,
+              0.2490662408904983
+            ]
+          },
+          "window_period_s": [
+            0.23893698643022485,
+            0.2350552873503717,
+            0.23321155304111021,
+            0.23727054384967716
+          ]
+        },
+        {
+          "step_ms": 1.0,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 87,
+            "whole_train_period_s": 0.228005307820606,
+            "interpolated_median_period_s": 0.2298448472762722,
+            "last_five_sampled_mean_period_s": 0.23079999999999928,
+            "last_five_interpolated_mean_period_s": 0.23072412187214297,
+            "period_cv": 0.01718345029107731,
+            "period_quantiles_5_50_95_s": [
+              0.21904237562045648,
+              0.2298448472762722,
+              0.23102981992626415
+            ]
+          },
+          "window_period_s": [
+            0.22598311304772004,
+            0.22718971019977527,
+            0.23046197869766788,
+            0.22783479456878422
+          ]
+        },
+        {
+          "step_ms": 0.5,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 87,
+            "whole_train_period_s": 0.22959156891409033,
+            "interpolated_median_period_s": 0.22698220115346857,
+            "last_five_sampled_mean_period_s": 0.2260000000000005,
+            "last_five_interpolated_mean_period_s": 0.22609460404367496,
+            "period_cv": 0.020922734812312608,
+            "period_quantiles_5_50_95_s": [
+              0.22599481199114368,
+              0.22698220115346857,
+              0.24049836314956607
+            ]
+          },
+          "window_period_s": [
+            0.2309443433676736,
+            0.22710967353020675,
+            0.22722642086398262,
+            0.23079681152624784
+          ]
+        },
+        {
+          "step_ms": 0.5,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 90,
+            "whole_train_period_s": 0.2214109065450069,
+            "interpolated_median_period_s": 0.22341691508823658,
+            "last_five_sampled_mean_period_s": 0.22399999999999948,
+            "last_five_interpolated_mean_period_s": 0.22409541424172233,
+            "period_cv": 0.016939145507374753,
+            "period_quantiles_5_50_95_s": [
+              0.21315339769486882,
+              0.22341691508823658,
+              0.2243334424536357
+            ]
+          },
+          "window_period_s": [
+            0.2198145065325968,
+            0.22258933131591468,
+            0.22367386582643065,
+            0.22116427554872817
+          ]
+        },
+        {
+          "step_ms": 0.25,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 88,
+            "whole_train_period_s": 0.22606647486252943,
+            "interpolated_median_period_s": 0.22403091579020185,
+            "last_five_sampled_mean_period_s": 0.226400000000001,
+            "last_five_interpolated_mean_period_s": 0.22641307751930667,
+            "period_cv": 0.020836092943146766,
+            "period_quantiles_5_50_95_s": [
+              0.2227303751199859,
+              0.22403091579020185,
+              0.23706539982500346
+            ]
+          },
+          "window_period_s": [
+            0.22766917810412496,
+            0.2285808902298364,
+            0.22641626697861952,
+            0.22344928591461366
+          ]
+        },
+        {
+          "step_ms": 0.25,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 91,
+            "whole_train_period_s": 0.21833546181070654,
+            "interpolated_median_period_s": 0.2199698869169051,
+            "last_five_sampled_mean_period_s": 0.21599999999999966,
+            "last_five_interpolated_mean_period_s": 0.2159801085792168,
+            "period_cv": 0.017077326717979034,
+            "period_quantiles_5_50_95_s": [
+              0.20968007880585163,
+              0.2199698869169051,
+              0.22099654004613747
+            ]
+          },
+          "window_period_s": [
+            0.21783554318959958,
+            0.2163795622989723,
+            0.21719463860356433,
+            0.2199592429368641
+          ]
+        },
+        {
+          "step_ms": 0.125,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 89,
+            "whole_train_period_s": 0.22438119979703453,
+            "interpolated_median_period_s": 0.2224847202807041,
+            "last_five_sampled_mean_period_s": 0.23319999999999935,
+            "last_five_interpolated_mean_period_s": 0.23346158497548403,
+            "period_cv": 0.022977711355020584,
+            "period_quantiles_5_50_95_s": [
+              0.22108981972794037,
+              0.2224847202807041,
+              0.23644138143056245
+            ]
+          },
+          "window_period_s": [
+            0.2240116551110877,
+            0.22650219245888478,
+            0.22664420242500477,
+            0.22397834149271034
+          ]
+        },
+        {
+          "step_ms": 0.125,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 93,
+            "whole_train_period_s": 0.21668125071198874,
+            "interpolated_median_period_s": 0.21828154038136027,
+            "last_five_sampled_mean_period_s": 0.21119999999999947,
+            "last_five_interpolated_mean_period_s": 0.21120026196340974,
+            "period_cv": 0.0183830342373647,
+            "period_quantiles_5_50_95_s": [
+              0.20720286834289858,
+              0.21828154038136027,
+              0.21934341661169104
+            ]
+          },
+          "window_period_s": [
+            0.21756726938815932,
+            0.21558965584926246,
+            0.21472812291468416,
+            0.21594590738776867
+          ]
+        },
+        {
+          "step_ms": 0.0625,
+          "cell": "RMDL",
+          "statistics": {
+            "peaks": 89,
+            "whole_train_period_s": 0.2235545703289717,
+            "interpolated_median_period_s": 0.22158186278564074,
+            "last_five_sampled_mean_period_s": 0.22800000000000012,
+            "last_five_interpolated_mean_period_s": 0.22795983445198403,
+            "period_cv": 0.022223273785283628,
+            "period_quantiles_5_50_95_s": [
+              0.22026245682526593,
+              0.22158186278564074,
+              0.2350311628157055
+            ]
+          },
+          "window_period_s": [
+            0.22184572407483605,
+            0.2251119134833508,
+            0.2258927972613609,
+            0.22461880663419365
+          ]
+        },
+        {
+          "step_ms": 0.0625,
+          "cell": "RMDR",
+          "statistics": {
+            "peaks": 93,
+            "whole_train_period_s": 0.21585493062745623,
+            "interpolated_median_period_s": 0.21754746923723545,
+            "last_five_sampled_mean_period_s": 0.21599999999999966,
+            "last_five_interpolated_mean_period_s": 0.21600653252999535,
+            "period_cv": 0.017774688093403646,
+            "period_quantiles_5_50_95_s": [
+              0.20666906042265687,
+              0.21754746923723545,
+              0.21851369368350912
+            ]
+          },
+          "window_period_s": [
+            0.21766764580954884,
+            0.21538530969654596,
+            0.21397686323684328,
+            0.21454850325674
+          ]
+        }
+      ],
+      "finest_descriptive_comparison": {
+        "levels": [
+          3,
+          4
+        ],
+        "cells": {
+          "RMDL": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.003697663021813513,
+            "full_window_mean_amplitude_relative_difference": 0.006454494796976018,
+            "full_window_cycle_rmse_mV": 0.09979530294421508,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          },
+          "RMDR": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.0038281269838522647,
+            "full_window_mean_amplitude_relative_difference": 0.004405044942415781,
+            "full_window_cycle_rmse_mV": 0.039495832697270625,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          }
+        }
+      },
+      "period_refinement": {
+        "RMDL": {
+          "step_ms": [
+            1.0,
+            0.5,
+            0.25,
+            0.125,
+            0.0625
+          ],
+          "whole_train_periods_s": [
+            0.23612130422355346,
+            0.22959156891409033,
+            0.22606647486252943,
+            0.22438119979703453,
+            0.2235545703289717
+          ],
+          "successive_absolute_period_changes_s": [
+            0.0065297353094631305,
+            0.003525094051560901,
+            0.0016852750654949011,
+            0.0008266294680628339
+          ],
+          "successive_change_ratios": [
+            0.5398525184400975,
+            0.4780794613830705,
+            0.49050121549154013
+          ]
+        },
+        "RMDR": {
+          "step_ms": [
+            1.0,
+            0.5,
+            0.25,
+            0.125,
+            0.0625
+          ],
+          "whole_train_periods_s": [
+            0.228005307820606,
+            0.2214109065450069,
+            0.21833546181070654,
+            0.21668125071198874,
+            0.21585493062745623
+          ],
+          "successive_absolute_period_changes_s": [
+            0.006594401275599099,
+            0.0030754447343003533,
+            0.0016542110987178005,
+            0.0008263200845325114
+          ],
+          "successive_change_ratios": [
+            0.4663720944129155,
+            0.5378770362115203,
+            0.4995251725568776
+          ]
+        }
+      }
+    }
+  },
+  "original_numerical_component_passed": false,
+  "acceptance_gates_changed": false,
+  "model_promoted": false,
+  "interpretation": [
+    "Both models and both RMD cells show monotonic whole-train period changes toward a limit as neural step shrinks. Successive period changes approximately halve, consistent with the existing first-order integrator; not proof of an exact continuum result.",
+    "Finest whole-train period differences0.354-0.386%; mean cycle amplitude differences0.282-0.645%; full-window cycle waveform RMSE0.0254-0.0998mV. These are descriptive, not replacement acceptance gates.",
+    "Within-trace period CV remains about1.65-2.38%. Last-five estimates can differ from whole-train estimates and vary across grid-dependent cycle endpoints. Subsample interpolation alone does not eliminate these differences.",
+    "Atlas response convergence remains unresolved. Saved free-running RMD traces cannot establish phase dependence of stimulus-locked indicator responses. No new simulation, fitting, behavior validation or model promotion."
+  ],
+  "unavailable_evidence": [
+    "Actual analysis input hashes and source/environment record content, analysis elapsed time and figure bytes are not supplied in stdout. Report generation follows code paths that verify source hashes before/after; this is user-reported evidence, not independent verification.",
+    "No full neural state, stimulus-locked voltage/indicator traces, common-state or controlled-phase pulse tests were included."
+  ],
+  "decision": "Next diagnostic should compare cue/sham propagation from an identical complete neural state across steps, then evaluate phase-conditioned pulses. Keep original negative atlas/cycle criteria; do not resume fitting on the current atlas objective."
+}

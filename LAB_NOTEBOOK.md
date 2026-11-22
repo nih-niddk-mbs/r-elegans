@@ -11764,3 +11764,54 @@ all ten traces, and tamper rejection. Existing E107 workflow negatives, missing
 grids and timeout checks still pass. CLI help and whitespace checks pass. No
 scientific full-network simulation or server analysis executed locally. Software
 fixtures do not establish phase causality, biological rhythm or convergence.
+
+### 2026-11-21 — E107 saved-cycle analysis reported: full-window refinement is smoother
+
+User reports completion of `scripts.analyze_convergence_cycles` after pulling
+19386ab. Source is the unchanged E107 run. Separate report:
+`/home/carsonc/r-elegans-results/neural-convergence-20261121T232040Z-778363-cycles-20261122T000322316819Z/summary.json`;
+figure:`cycle-periods.png` in that folder. UTC identifier is Nov22; local
+record date remains Nov21. Full printed summaries, derived period-increment
+ratios and attachment SHA256 are in
+`experiments/records/E107-cycle-analysis-server-summary.json`. No figure bytes
+or raw arrays were supplied or independently inspected. No forward simulation,
+new candidate selection, optimizer/RNG changes or parameter updates occurred.
+
+The completed reporter follows code paths that require the original audit/
+budget completion, verify model/worker/manifest identity and each trace hash
+against both worker summary and E107 audit, recheck consumed inputs afterwards,
+and preserve original comparisons. Supplied stdout confirms report generation
+and unchanged original numerical failure, not independently inspected hashes,
+source/environment contents or analysis timing. Those remain external. Source
+checkpoints, source reports and original controls/failures remain preserved.
+
+Full-window results: selected finest RMDL/RMDR period differences0.3543/0.3858%,
+mean amplitude differences0.4608/0.2815%, waveform RMSE0.04048/0.02543mV. Parent
+finest differences0.3698/0.3828%, amplitudes0.6454/0.4405%, RMSE0.09980/0.03950mV.
+Whole-train period estimates decrease monotonically with smaller neural steps
+for both cells and both models. Consecutive absolute period changes roughly
+halve (all derived contraction ratios~0.46-0.56), consistent with the declared
+first-order method. Finite-grid evidence does not certify the continuum solution.
+
+Period variability is not solely sample rounding: full-window CV~1.65-2.38%,
+and interpolated last-five periods still differ from full-window estimates.
+At the selected finest grid, RMDL whole-train period0.225808s versus last-five
+interpolated0.221890s; parent RMDL0.223555s versus0.227960s. Five-second subwindow
+estimates also vary. Last-five-cycle comparisons sample a small changing portion
+of these records; this helps explain their sensitivity, but is not grounds to
+replace the original predeclared gates after observing failures. These are neural
+RMD periods, not body swimming frequency or a biological match.
+
+Interpretation/decision: the oscillator component looks more reproducible under
+full-window descriptive statistics than last-five measures suggested. Do not
+call all integration broken or declare convergence qualified. Atlas responses
+still fail; the saved free-running RMD traces contain no stimulus-locked states
+that could establish the cause. Recommend next a common-complete-state short-
+horizon refinement test, then pulse/sham trials at controlled oscillator phases.
+The full state must include voltage, channel gates, calcium and indicator, not
+voltage alone. If an ensemble observable is later introduced, declare it before
+execution and verify its convergence without erasing the original failures.
+No fitting, phase test or new experiment was launched on this evidence upload.
+No start/stop, body movement, swimming or biological promotion. Documentation-only
+update; transcription/shape assertions and whitespace checks pass. No software
+code changed or new tests required.

@@ -1,11 +1,15 @@
 # r-elegans
 
-2026-11-21 E107 saved-cycle analyzer prepared; server analysis pending.
-Read all ten hashed saved RMD traces, compare full-window/interpolated periods,
-last-five-cycle timing and four late subwindows; export a static timing figure.
-Original numerical failures and acceptance gates remain unchanged. No simulation
-or fitting. [Analysis plan](experiments/records/E107-cycle-analysis-plan.json).
-Command: `python -m scripts.analyze_convergence_cycles --run <E107-run-folder>`.
+2026-11-21 E107 saved-cycle analysis completed (user-reported): full-window
+RMD periods change monotonically with refinement, with period increments roughly
+halving as expected for the first-order method. Finest descriptive differences
+across both models/cells: periods0.35-0.39%, amplitudes below0.65%, cycle RMSE
+below0.10mV. Last-five-cycle estimates remain sensitive to cycle endpoints and
+within-trace variability. This does not replace original failed criteria or
+resolve atlas convergence. Next diagnostic: common-full-state short-horizon
+integration and controlled-phase cue/sham responses before further fitting.
+No model/behavior promotion.
+[Evidence](experiments/records/E107-cycle-analysis-server-summary.json).
 
 2026-11-21 E107 completed (user-reported): both unchanged models finished
 all five grids in449.59s, with audit/integrity and sham controls passing; no timeout.
