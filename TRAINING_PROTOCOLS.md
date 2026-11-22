@@ -1,5 +1,14 @@
 # WormGym: training and validation protocols
 
+2026-11-21 E110 prepared; server execution pending. Identify every target
+implicated by the complete E109 last-two-comparison failure masks, union across
+both fixed models/phases/means, plus fixed ADAL/AIYL/AIYR controls. Reuse exact
+anchors and source baseline, verify same-step targeted replay, then test
+0.015625/0.0078125ms. Unchanged criteria, no fitting or full-atlas promotion.
+Two A100s,120min TOTAL including automatic post-run audit.
+[Plan](experiments/records/E110-plan.json).
+Launch: `sh scripts/launch_atlas_target_refinement_mbslnx2.sh`.
+
 2026-11-21 E109 completed (user-reported):135 targets,6462 observed
 downstream pairs,17.48min; all steps, integrity, controls and sham rhythms pass.
 Neither fixed model passes all numerical criteria. Selected finest phase mean

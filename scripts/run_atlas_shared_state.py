@@ -77,7 +77,7 @@ def prepare(source, root):
     return result
 
 
-def worker(root, label):
+def worker(root, label, steps=STEPS):
     import jax
     import jax.numpy as jnp
     from r_elegans.brain.conductance_network import load_network, ConductanceNetworkState
@@ -94,7 +94,7 @@ def worker(root, label):
     ids = saved_arrays(model['path'])['neuron_ids'].tolist();rmd = [ids.index(n) for n in ('RMDL', 'RMDR')]
     anchors = saved_arrays(model['anchors']);starts = ConductanceNetworkState(*(jnp.asarray(anchors['start_' + k]) for k in FIELDS))
     targets = manifest['targets'];levels = []
-    for level, step in enumerate(STEPS):
+    for level, step in enumerate(steps):
         began = time.monotonic();forward = make_replay(c, rmd, step)
         means_all = np.empty((4, len(targets), len(ids)), dtype=np.float64)
         controls, deltas, labels, base = [], [], [], None

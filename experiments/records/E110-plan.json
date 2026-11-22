@@ -1,0 +1,17 @@
+{
+  "experiment": "E110",
+  "status": "planned; server execution not evidenced",
+  "recorded_date": "2026-11-21",
+  "question": "Do the stimulus targets implicated in E109's last two refinement failures converge at two finer steps, with unchanged complete-state anchors and numerical criteria?",
+  "source_run": "/home/carsonc/r-elegans-results/atlas-shared-state-20261122T014924Z-785140",
+  "selection": "Before simulation, verify each model's hashed E109 pair-errors.npz against audit. Select the union of all stimulus targets with any mixed-tolerance ratio>1 or active sign flip in either of the last two adjacent comparisons, any individual phase or phase mean, across both models. Retain every implicated pair, and add fixed E108 controls ADAL/AIYL/AIYR. No performance/test-label selection or post-run dropping. Print exact failed pair names and target union at preparation.",
+  "fixed": "Same selected and parent parameter hashes, same E108 full-state anchor hashes, pulse amplitude/reversal/timing, four phases,12s horizon,1ms accumulation, cached observed-pair identities. No fitting or new reference-state construction.",
+  "trainable": [],
+  "seed": "none; deterministic replay",
+  "grids": "Copy/hash-check E109 finest0.03125ms baseline; replay targeted subset at0.03125ms first to check batch-change reproduction, then0.015625 and0.0078125ms. Require per-phase/phase-mean baseline reproduction at original replay tolerance (relative1e-6+absolute1e-12,correlation>=0.999999) and both finer adjacent comparisons under unchanged downstream criteria. Subset normalization cannot qualify full atlas.",
+  "controls": "Targets batched8 plus exact duplicate and zero-padded shams as E109. Preserve all control means/full-time differences and sham RMD reference; no target-wise full trajectories. Fixed control targets without measured pair support remain simulated and explicitly identified.",
+  "audit": "Automatic post-run audit includes input/model/anchor/statistics/mask/baseline/fine-grid hashes, independent reconstruction of failure-selection rule, all targeted observed pairs, all phases/grids/controls, sham persistence, immutable parameters, budget and incomplete/timeout non-qualification. Recompute original baseline subset and new scores from saved means; no atlas accuracy re-evaluation or fitting promotion. Original E109 failures retained.",
+  "limits": "Targeted numerical follow-up only; no claim about unsimulated finer-grid targets, new biological tolerance, independent solver, general anchor robustness, body motion, sensory start/stop or swimming. Full-atlas numerical qualification remains incomplete even if targeted checks pass.",
+  "resources": "Two A100 workers, one unchanged model each; compiled batches. Maximum120minutes TOTAL including automatic audit under nohup; may finish earlier.",
+  "command": "sh scripts/launch_atlas_target_refinement_mbslnx2.sh"
+}

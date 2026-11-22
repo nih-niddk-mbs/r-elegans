@@ -12057,3 +12057,60 @@ upload. Full independent-solver accuracy, new anchor-cycle robustness, biologica
 amplitude calibration, body gait, sensory initiation/stopping/restart and swimming
 remain untested/unqualified. Documentation-only update: transcription/coverage
 assertions and whitespace check pass; no software changes or new tests required.
+
+### 2026-11-21 — E110 planned: inspect complete failure masks and refine their targets
+
+User approved next-step follow-up. Plan recorded before implementation in
+`experiments/records/E110-plan.json`. Resolve exact per-phase failed identities
+from all hashed E109 pair-error masks, not just printed top10 lists. Fixed rule:
+union of every stimulus target implicated by mixed error>1 or active sign flip
+in either last-two adjacent comparisons, any phase/mean and either unchanged
+model; add ADAL/AIYL/AIYR as fixed controls. No selection using atlas accuracy
+or test-label values, and no dropping later failures. Exact target/pair names
+will print during server preparation; unavailable locally until those masks read.
+
+Reuse exact E108 anchor/model hashes and E109 finest0.03125ms artifact as baseline.
+Simulate only selected target union at0.015625/.0078125ms, all4reference phases,
+physical pulse/clocks unchanged. Require both adjacent comparisons using unchanged
+vector/mixed thresholds. Vector normalization on subset may be stricter/different
+from full-vector scale; do not reclassify original E109 gates or extrapolate
+qualification to other targets. Fixed controls with no cached observed pair support
+are simulated and flagged, not treated as new data. No fitting/optimizer/random
+operations, new anchoring, body simulation or biological promotion.
+
+Two A100s, batches8 with duplicate/padded shams,120min TOTAL including automatic
+audit. Audit all source/model/anchor/baseline/mask/statistics/response hashes,
+recompute selection and baseline subsets, all phases/pairs/grids/controls/sham
+rhythms, parameter immutability, exact invocation/environment/source and budget;
+timeout/missing evidence cannot pass. Store compact response/control artifacts,
+all ratios/signs and parent dependencies outside Git. Server execution pending.
+Command: `sh scripts/launch_atlas_target_refinement_mbslnx2.sh`.
+
+E110 implementation refinement before execution: add a targeted-subset replay at
+the original0.03125ms baseline step, followed by the two finer grids. This checks
+that changing batch membership/order reproduces source responses before attributing
+differences to step refinement. Compare original copied baseline subset with new
+same-step responses using existing replay tolerance (relative1e-6+absolute1e-12,
+correlation>=0.999999), per phase and mean. Reproduction is an additional required
+control, not a relaxed convergence rule. Only the two NEW step-refinement pairs
+count toward targeted convergence. Plan updated prospectively; no execution yet.
+
+E110 local software verification:64 focused checks pass across new target-
+refinement, E109 batching/pair audit, common-state, E107, selected-checkpoint,
+parameter arithmetic and cycle analysis. New tests exercise complete numerical-
+failure-mask selection across both models and both last comparisons, fixed
+controls, mask/audit identity consistency, target coverage and baseline-subset
+projection, two fine comparisons, same-step reproduction failure despite matching
+new fine outputs, local fine error, altered source selection, missing/tampered
+grids and supervisor timeout auditing/non-promotion. No full-network scientific
+simulation or fitting was run locally. CLI help, shell syntax and whitespace
+checks pass; no full-suite status asserted. Exact failing target/pair list remains
+runtime-selected from server masks under the fixed prospective rule, not invented
+from incomplete printed summaries. Server E110 execution remains pending.
+
+E109 worker now accepts an explicit step tuple while retaining its original four-
+grid default. E110 reuses the same compiled/batched pulse implementation with
+same-step reproduction plus two finer steps; existing E109 and E108 tests pass.
+Every new input, source mask, original baseline and selected/final reference
+remains outside Git with hashes and source/environment records at execution.
+No optimizer or parent files are overwritten and no numerical threshold relaxed.
