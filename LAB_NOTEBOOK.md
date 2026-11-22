@@ -12215,3 +12215,61 @@ the same targeted support. Baseline target scope is now explicit for a subset
 baseline. All parent/source/anchor/mask dependencies, optimizer history (unchanged)
 and new compact arrays/source/environment records remain external. Server
 execution/results remain pending user launch/output.
+
+### 2026-11-21 — E111 reported result: selected targeted protocol passes all phases
+
+User supplied final automatic audit from
+`/home/carsonc/r-elegans-results/atlas-target-continuation-20261122T032855Z-792463`.
+External audit:`audit.json`; budget:`budget_receipt.json`. UTC identifierNov22,
+local record dateNov21. Structured scientific report and attachment SHA256:
+`experiments/records/E111-server-summary.json`. No independent raw artifact,
+source revision/dirty-tree or environment inspection claimed; these records
+remain external. Do not infer the actual source revision solely from our last push.
+
+Execution/budget:1709.0183910910273s (28.48min), exit0, no timeout, all steps
+finished within120min cap. Audit complete, execution complete, integrity passed,
+problems[]. Exact original12target/986pair union retained; AIYL remains simulated
+without qualifying cached downstream support. Both model/anchor hashes printed
+unchanged. No optimizer/parameter updates, new anchoring, random operations or
+selection using performance. Same phase/trial counts as E110:288pulse/192control
+new trials across both models,4phases and3new replay grids. Original baseline
+copied separately, not a new forward trial. Full hash/source/control residual/
+selection-mask checks performed by code; actual files were not supplied in stdout.
+
+All10baseline reproduction vectors have zero maximum difference. Controls pass
+and sham rhythms are preserved. Selected checkpoint now passes BOTH successive
+refinements0.0078125->0.00390625 and0.00390625->0.001953125ms at every phase and
+for phase mean. All986pair mixed checks pass in every comparison; zero active
+sign flips. Finest selected maximum per-phase vector normalized error2.0114%,
+maximum mixed ratio0.29156; finest phase-mean vector error0.323607%, correlation
+0.999998994, maximum mixed ratio0.031128. This is a targeted finite-grid numerical
+component milestone under the unchanged declared criteria, not a physiological
+error bound or full-atlas/behavioral qualification.
+
+Parent now passes BOTH phase-mean comparisons. Its individual-phase flag remains
+False because first comparison phase index1 RMDR->RMDVL changes4.69502e-7->7.18633e-7,
+difference2.49132e-7 versus1.71863e-7 tolerance (ratio1.44959). The finest comparison
+passes all parent phases/pairs (maximum mixed ratio0.67620), but two successive
+passes are required; do not erase the preceding negative. All active-sign-flip
+counts printed are zero, not proof sub-deadband responses never change sign.
+
+Decision: stop further selected-subset refinement; its declared numerical test
+is achieved. Keep parent negative result without further runs merely to improve
+its flag. Full135target/6462pair coverage remains unqualified at uniform fine
+steps. Proposed next step is a separately declared saved-data composite audit:
+for the12selected targets use E111's0.0078125/.00390625/.001953125ms outputs; for
+remaining123 use E109's0.125/.0625/.03125ms outputs. Each complete composite level
+therefore refines every target by2 with explicitly different target-wise steps.
+Verify common checkpoint/anchor hashes and pulse/observation clocks, source
+coverage, baseline bridges, all observed-pair/vector criteria and controls,
+and recompute full support from saved means. This would be a new protocol,
+not retroactive qualification of original homogeneous-grid failures or proof
+of numerical accuracy for newly fitted weights. It remains proposed, not executed.
+
+Only after that separate audit should a short, rhythm-preserving fit be designed;
+revalidate actual changed weights. No new scientific run, composite computation
+or fitting launched by this upload. No new atlas accuracy, independent-solver,
+anchor-cycle robustness, body movement, sensory start/stop/rest/restart, swimming
+or biological qualification. No model promoted. Documentation-only update;
+transcription/coverage assertions and whitespace checks pass. No source code
+changed or new tests required.
