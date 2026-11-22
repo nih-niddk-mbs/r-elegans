@@ -8,7 +8,7 @@ import numpy as np
 from scripts.experiment_records import file_sha256
 from scripts.selected_atlas_audit_checks import saved_arrays
 from scripts.stable_atlas_worker import atomic_json as write
-from scripts.stable_atlas_policy import Coordinates, loss, prior, preserved
+from scripts.stable_atlas_policy import Coordinates, loss, prior, preserved, estimate_own_round, admit
 
 
 def audit(root):
@@ -137,6 +137,15 @@ def audit(root):
             if scores != summary['scores'] or params != summary['parameters'] or parent_metrics != summary['fresh_parent_validation'] or autonomy != summary['autonomy_passed'] or qualified != summary['fit_qualified_before_audit']:
                 raise ValueError('Final scientific score/qualification arithmetic differs')
         else:unavailable.append('No final full-atlas/own-state validation summary')
+        if m.get('measured_schedule'):
+            for path in sorted(root.glob('admission-*.json')):
+                entry = document(path);timings = []
+                for source, sha in entry['timing_inputs'].items():
+                    timings.append(json.loads(read(source, sha).read_text()))
+                expected = estimate_own_round(timings, m['targets'], m['hard'], entry['batch'])
+                if expected != entry['estimate'] or entry['admitted'] != admit(0., entry['remaining_seconds'], expected['predicted_seconds']):
+                    raise ValueError('Round admission arithmetic differs')
+            for path in root.glob('round-timing-*.json'):document(path)
         states = sorted((root/'optimizer').glob('*'))
         if not states:unavailable.append('No optimizer/RNG state')
         for folder in states:

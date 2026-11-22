@@ -2,8 +2,8 @@
   "experiment": "E114",
   "recorded_date": "2026-11-22",
   "evidence_type": "User-reported compact server stdout; artifacts not locally inspected",
-  "run": null,
-  "run_identifier_note": "Report command selected latest own-state-atlas-fit directory but did not print its name; exact identifier unavailable in supplied stdout",
+  "run": "/home/carsonc/r-elegans-results/own-state-atlas-fit-20261122T142801Z-860515",
+  "run_identifier_note": "Exact identifier supplied in follow-up task-timing stdout",
   "iterations": 0,
   "accepted_updates": 0,
   "autonomy_passed": true,
@@ -51,10 +51,30 @@
     "fit_qualified": false
   },
   "interpretation": "Unchanged-parent own-state validation only; no optimization attempted. Current code initial round estimate max(2400s,3*elapsed startup/baseline), and admission requires remaining optimization time >1.3*estimate. This pre-admission gate skipped every training round; completed final validation does not imply any fitting happened. Exact timing inputs absent from compact stdout.",
-  "decision": "Retain unchanged parent, preserve complete audit. Obtain per-task timing and exact run identifier before revising round admission; do not repeat same launcher expecting training. No new experiment launched.",
+  "decision": "Preserve unchanged-parent validation. Prepare E115 with measured recurring task costs, four-hour inclusive watchdog and120/120min split. No E115 server execution evidenced.",
   "unavailable_in_report": [
-    "Exact run identifier",
-    "Per-task timings and startup/baseline elapsed time",
-    "Checkpoint hash and runtime source/environment/optimizer records"
-  ]
+    "Checkpoint hash and runtime source/environment/optimizer records",
+    "Exact task wall-clock start/end times; individual task durations overlap across GPUs"
+  ],
+  "task_elapsed_minutes_user_reported": {
+    "autonomy-parent": 13.96,
+    "autonomy-selected": 13.91,
+    "final-0-coarse": 2.12,
+    "final-0-fine": 3.92,
+    "final-1-coarse": 4.04,
+    "final-1-fine": 7.75,
+    "final-2-coarse": 7.9,
+    "final-2-fine": 15.45,
+    "fresh-parent-validation-2-coarse": 1.96,
+    "fresh-parent-validation-2-fine": 7.78,
+    "own-anchors-parent": 2.41,
+    "own-parent-baseline-1-coarse": 1.01,
+    "own-parent-baseline-1-fine": 3.82,
+    "own-parent-baseline-2-coarse": 1.96,
+    "own-parent-baseline-2-fine": 7.66,
+    "source-check-1-coarse": 0.36,
+    "source-check-1-fine": 3.92,
+    "source-check-2-coarse": 0.53,
+    "source-check-2-fine": 7.7
+  }
 }

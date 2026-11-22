@@ -13,7 +13,7 @@ import numpy as np
 from scripts.experiment_records import capture_run_record, file_sha256
 from scripts.selected_atlas_audit_checks import saved_arrays
 from scripts.stable_atlas_worker import atomic_json as write
-from scripts.stable_atlas_policy import Coordinates, loss, prior, adam_step, choose_batch, eligible_targets, preserved, admit
+from scripts.stable_atlas_policy import Coordinates, loss, prior, adam_step, choose_batch, eligible_targets, preserved, admit, estimate_own_round
 from scripts.atlas_shared_checks import observed_pairs, compare_downstream
 from scripts.audit_atlas_composite import COARSE_STEPS, FINE_STEPS
 from scripts.run_atlas_shared_state import SELECTED_SHA, ANCHOR_SHA
@@ -166,15 +166,16 @@ def analyze_results(results, manifest, statistics, ids, targets, levels, split, 
 def coordinator(root):
     budget = json.loads((root/'deadline.json').read_text());start = budget['started_monotonic']
     own = budget.get('own_state', False)
+    measured = budget.get('measured_schedule', False)
     train_deadline = start+budget.get('optimization_minutes', 330)*60;final_deadline = budget['deadline_monotonic']-600
     mfest = prepare(Path(budget['source']), root)
     if own:
-        mfest.update(experiment='E114', own_state=True, seed=1140)
-        mfest['policy'].update(training_cutoff_minutes=90, total_minutes=240, selection='Own-state full-atlas numerical gates and validation loss only')
+        mfest.update(experiment='E115' if measured else 'E114', own_state=True, seed=1150 if measured else 1140, measured_schedule=measured)
+        mfest['policy'].update(training_cutoff_minutes=budget.get('optimization_minutes', 90), total_minutes=240, selection='Own-state full-atlas numerical gates and validation loss only')
         write(root/'manifest.json', mfest)
     statistics = json.loads(Path(mfest['statistics']).read_text())
     arrays = saved_arrays(mfest['parent']);ids = arrays['neuron_ids'].tolist();codec = Coordinates(arrays)
-    rng = np.random.default_rng(1140 if own else 1130);x = np.zeros(codec.size);mom = x.copy();var = x.copy()
+    rng = np.random.default_rng(1150 if measured else 1140 if own else 1130);x = np.zeros(codec.size);mom = x.copy();var = x.copy()
     pool = None;ledger = [];iteration = 0;accepted = 0;moment_steps = 0;selected = None
     checkpoint_dir = root/'checkpoints';checkpoint_dir.mkdir()
     def save(name, values):
@@ -231,7 +232,22 @@ def coordinator(root):
             parent_score = best_score = metrics['data_loss']
             write(root/'own-parent-baseline.json', dict(metrics=metrics, model=str(current)))
             recent = max(2400., 3*(time.monotonic()-last_validation))
-        while admit(time.monotonic(), train_deadline, recent):
+        while True:
+            if measured:
+                preview = np.random.default_rng();preview.bit_generator.state = rng.bit_generator.state
+                batch = choose_batch(preview, train_pool, mfest['hard'], iteration+1)
+                timing_paths = sorted((root/'tasks').glob('*/result.json'))
+                timings = [json.loads(path.read_text()) for path in timing_paths]
+                estimate = estimate_own_round(timings, mfest['targets'], mfest['hard'], batch)
+                remaining = train_deadline-time.monotonic()
+                admitted = admit(0., remaining, estimate['predicted_seconds'])
+                write(root/f'admission-{iteration+1}.json', dict(batch=batch, admitted=admitted, estimate=estimate,
+                    remaining_seconds=remaining, safety_factor=1.3,
+                    timing_inputs={str(path):file_sha256(path) for path in timing_paths}))
+                print(json.dumps(dict(event='round_admission', iteration=iteration+1, admitted=admitted,
+                    estimated_minutes=estimate['predicted_seconds']/60)), flush=True)
+                if not admitted:break
+            elif not admit(time.monotonic(), train_deadline, recent):break
             began = time.monotonic();iteration += 1
             batch = choose_batch(rng, train_pool, mfest['hard'], iteration)
             direction = rng.choice([-1., 1.], codec.size)
@@ -281,6 +297,7 @@ def coordinator(root):
                 last_validation = time.monotonic()
                 recent = recent+(time.monotonic()-val_start) if own else max(recent, time.monotonic()-val_start)
                 save_state()
+            if measured:write(root/f'round-timing-{iteration}.json', dict(iteration=iteration, elapsed_seconds=time.monotonic()-began))
     except TimeoutError as exc:
         write(root/'training-stop.json', dict(reason='optimization_deadline', detail=str(exc), iteration=iteration))
     finally:
@@ -312,7 +329,7 @@ def coordinator(root):
         params = codec.audit(saved_arrays(chosen_model), best_x)
         passed = bool(selection_reproduced and metrics['passed'] and parent_metrics['passed'] and autonomy_pass and params['passed'] and
             params['changed_coordinates'] > 0 and best_score < parent_score and scores['val'] < parent_metrics['data_loss'])
-        result = dict(experiment='E114' if own else 'E113', own_state=own, selection_reproduced=selection_reproduced, execution_complete=True, validation_complete=True, iterations=iteration,
+        result = dict(experiment='E115' if measured else 'E114' if own else 'E113', own_state=own, selection_reproduced=selection_reproduced, execution_complete=True, validation_complete=True, iterations=iteration,
             accepted_updates=accepted, fit_qualified_before_audit=passed, final_metrics=metrics,
             fresh_parent_validation=parent_metrics, scores=scores, autonomy_passed=autonomy_pass,
             parameters=params, selected_sha256=file_sha256(chosen_model), model_promoted=False,
@@ -328,7 +345,9 @@ def main():
     p = argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir', type=Path, required=True)
     p.add_argument('--source', type=Path, default=Path(DEFAULT_SOURCE));p.add_argument('--coordinator', action='store_true');p.add_argument('--report', action='store_true')
     p.add_argument('--own-state', action='store_true', help='E114: four-hour run; own-state training and selection')
+    p.add_argument('--measured-schedule', action='store_true', help='E115: measured recurring task costs and120/120min budget')
     a = p.parse_args();root = a.output_dir.resolve()
+    if a.measured_schedule and not a.own_state:p.error('--measured-schedule requires --own-state')
     if a.report:
         for name in ('summary.json','audit.json','budget_receipt.json'):
             path = root/name
@@ -350,7 +369,7 @@ def main():
     total_minutes = 240 if a.own_state else 480
     start = time.monotonic();deadline = start+total_minutes*60;root.mkdir(parents=True, exist_ok=False)
     write(root/'deadline.json', dict(started_monotonic=start, deadline_monotonic=deadline,
-        source=str(a.source.resolve()), total_minutes=total_minutes, optimization_minutes=90 if a.own_state else 330, own_state=a.own_state,
+        source=str(a.source.resolve()), total_minutes=total_minutes, optimization_minutes=120 if a.measured_schedule else 90 if a.own_state else 330, own_state=a.own_state, measured_schedule=a.measured_schedule,
         started_utc=datetime.now(timezone.utc).isoformat(), includes='Preparation, optimization, fresh states, validation, audit and cleanup'))
     capture_run_record(root, REPO, vars(a), phase='stable-atlas-supervisor')
     from scripts.total_job_budget import run_group

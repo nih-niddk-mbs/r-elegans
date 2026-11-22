@@ -1,0 +1,12 @@
+{
+  "experiment":"E115",
+  "recorded_date":"2026-11-22",
+  "status":"planned; server execution not evidenced",
+  "question":"Can measured two-GPU task scheduling admit actual own-state training rounds within four hours while preserving complete validation and audit?",
+  "parent":"Audited E112 selected checkpoint; E114 changed no weights. Fresh optimizer seed1150, not an exact resume.",
+  "method":"E114 own-state fitting/selection and all scientific gates unchanged. Estimate recurring round cost from measured per-step replay time per batch and own-anchor generation, simulate two-worker scheduling for paired perturbation, acceptance and full-atlas selection. Calibrate again from this run's completed tasks. Never multiply total startup cost as a recurring round. Record predicted/actual costs and refused batches.",
+  "budget":"240min TOTAL. Up to120min baseline/search/selection,120min final validation/audit including10min audit reserve. Revised from E114's90/150 split using user-reported final tasks; final validation previously fit comfortably within120min. Retain1.3 admission margin and hard watchdog; no guarantee of exact runtime or success.",
+  "fixed_trainable_acceptance":"Same as E114:9538 bounded unknown coordinates, stereotypical properties/LEAK/RMD fixed; own60s-settled states at every stage, full numerical/control/own-state validation selection and fresh final reproduction. No test-score selection, behavior/RL or biological promotion.",
+  "evidence":"E114 task timings and exact run path recorded in E114-server-summary.json; regression tests will include that workload and verify first-round admission after measured setup costs.",
+  "command":"sh scripts/launch_measured_atlas_fit_mbslnx2.sh"
+}

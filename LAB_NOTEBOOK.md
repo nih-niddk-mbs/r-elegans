@@ -12583,3 +12583,40 @@ correctly does not excuse missing the requested training. No new launch or
 scientific claim. Next obtain per-task elapsed times/run identifier, then correct
 cost estimation using measured work while preserving total watchdog and complete
 post-run audit. Do not simply repeat the unchanged launcher.
+
+### 2026-11-22 — E114 measured tasks; E115 scheduling correction planned
+
+User supplied exact E114 run identifier:
+`/home/carsonc/r-elegans-results/own-state-atlas-fit-20261122T142801Z-860515`.
+Own-anchor generation2.41min; source checks per group/grid0.36/3.92/0.53/7.70min;
+own baseline1.01/3.82/1.96/7.66min. Independent parent/selected autonomy runs
+13.96/13.91min in parallel. Final coarse/fine levels2.12/3.92,4.04/7.75,
+7.90/15.45min; fresh-parent finest validation1.96/7.78min. These are individual
+task times, not additive wall times because two GPUs overlap. Full record in
+E114-server-summary.json. No locally measured server times claimed.
+
+Plan E115 before scheduler edits: fresh audited parent/optimizer seed1150. Keep
+own-state science/gates unchanged. Replace startup multiplier by batch-specific
+cost from per-step/per-batch replay times and own-state generation; simulate two
+GPU workers for perturbation, acceptance and full validation; retain1.3margin.
+Log each predicted/actual/admission decision, including skipped work. Calibrate
+from actual completed startup tasks of the new run. Split240min into120min
+baseline/search/selection and120min final/audit (last10min audit), justified by
+measured E114 final work. No oversized unconditional first round or softened
+qualification. Preserve E114 legacy settings via separate E115 launcher/flag.
+Regression tests must cover measured workload admission, expensive refused
+rounds and unchanged own-state selection/audit criteria. Server pending.
+
+E115 implementation/local verification:12 focused stable-atlas software tests
+pass (CPU,float64). Includes synthetic complete E115 coordinator/selection/audit,
+refused next round with independently recomputed admission arithmetic, measured
+E114 source/anchor durations projected onto a synthetic135-target workload,
+first-round admission within revised120min search allowance, refusal without
+remaining time, and unchanged own-state validation regression rejection.
+Scientific forward kernels/criteria unchanged; no A100 run or empirical fitting
+improvement claimed. Costs are predictions with30% admission margin, not runtime
+guarantees. Runtime recalibrates per-step batch costs from this run's completed
+tasks, snapshots timing-input hashes, and records total actual round duration.
+Final artifact/parameter/source/state/control/numerical/selection audits retained.
+Exact E114 task starts/ends are absent; listed task times overlap on two GPUs.
+No further server experiment executed by this agent; E115 launch prepared.

@@ -105,8 +105,8 @@ def test_interrupted_run_audit_explicitly_unavailable(tmp_path):
     assert result['problems'] and not result['behavioral_gates']['swimming']
 
 
-@pytest.mark.parametrize('own_state,improve,validation_regression', [(False,False,False),(True,False,False),(True,True,False),(True,True,True)])
-def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeypatch,own_state,improve,validation_regression):
+@pytest.mark.parametrize('own_state,improve,validation_regression,measured', [(False,False,False,False),(True,False,False,False),(True,True,False,False),(True,True,True,False),(True,True,False,True)])
+def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeypatch,own_state,improve,validation_regression,measured):
     """Drive one actual optimizer round/final selection and complete saved-data audit."""
     import types
     import scripts.run_stable_atlas_fit as runner
@@ -131,7 +131,7 @@ def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeyp
     monkeypatch.setattr(runner,'prepare',prepare)
     rounds=iter([True,False]);monkeypatch.setattr(runner,'admit',lambda *a:next(rounds))
     clock=[100.];monkeypatch.setattr(runner,'time',types.SimpleNamespace(monotonic=lambda:clock[0]))
-    write(root/'deadline.json',dict(started_monotonic=100.,deadline_monotonic=28900.,source='synthetic', own_state=own_state))
+    write(root/'deadline.json',dict(started_monotonic=100.,deadline_monotonic=28900.,source='synthetic', own_state=own_state, measured_schedule=measured))
     class FakePool:
         def __init__(self,folder):self.root=folder
         def close(self):pass
@@ -164,8 +164,10 @@ def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeyp
                         duplicate_mean_error=0.,duplicate_trace_error=0.)
                 r.update(status='completed',task=t,elapsed_seconds=1.)
                 write(t['result'],r);results.append(r)
+            if measured and any(t['name'].startswith('validation-') for t in tasks):clock[0]=100.+330*60-1
             return results
     monkeypatch.setattr(runner,'Pool',FakePool)
+    if measured:monkeypatch.setattr(runner,'admit',admit)
     runner.coordinator(root)
     summary=json.loads((root/'summary.json').read_text())
     assert summary['execution_complete'] and summary['validation_complete'] and summary['iterations']==1
@@ -180,3 +182,21 @@ def test_coordinator_and_complete_audit_with_synthetic_gpu_pool(tmp_path,monkeyp
     damaged=saved_arrays(chosen);damaged['fixed_bias_pA'][0]+=1
     np.savez_compressed(chosen,**damaged)
     assert not audit(root)['integrity_passed']
+
+
+def test_measured_two_gpu_admission_uses_work_not_startup():
+    from scripts.stable_atlas_policy import estimate_own_round, two_worker_seconds
+    # E114 reported source replay and anchor seconds. Group counts below are a
+    # synthetic full135-target projection; actual server group lengths read at runtime.
+    targets=[f'C{i}' for i in range(123)]+[f'F{i}' for i in range(12)];hard=targets[123:]
+    rows=[dict(status='completed',elapsed_seconds=2.41*60,task=dict(kind='anchors'))]
+    for step,minutes,name in [(.0625,.36,'C0'),(.03125,.53,'C0'),(.00390625,3.92,'F0'),(.001953125,7.7,'F0')]:
+        rows.append(dict(status='completed',elapsed_seconds=minutes*60,task=dict(kind='replay',step_ms=step,targets=[name])))
+    estimate=estimate_own_round(rows,targets,hard,['C1','F1'])
+    assert 50*60 < estimate['predicted_seconds'] < 70*60
+    assert admit(26*60,120*60,estimate['predicted_seconds'])
+    assert not admit(26*60,90*60,3*26*60)  # old startup multiplier skips all work
+    assert not admit(100*60,120*60,estimate['predicted_seconds'])
+    assert two_worker_seconds([10,1,1,10]) == 12
+    with pytest.raises(ValueError):estimate_own_round([],targets,hard,['C1','F1'])
+    with pytest.raises(ValueError):two_worker_seconds([float('nan')])

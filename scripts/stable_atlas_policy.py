@@ -100,3 +100,48 @@ def preserved(reference, candidate):
 
 def admit(now, deadline, recent_seconds):
     return deadline-now > max(120., 1.3*recent_seconds)
+
+
+def two_worker_seconds(durations):
+    """FIFO task dispatch onto two workers, matching Pool.tasks admission order."""
+    lanes = [0., 0.]
+    for duration in durations:
+        if not np.isfinite(duration) or duration <= 0:raise ValueError('Positive finite task time required')
+        lane = int(np.argmin(lanes));lanes[lane] += float(duration)
+    return max(lanes)
+
+
+def estimate_own_round(results, targets, hard, batch):
+    """Estimate perturbations + acceptance + selection, excluding one-time setup.
+
+    Times come from this run's completed tasks; unseen coarser level costs half
+    the next finer level per batch. Cost projections are scheduling estimates,
+    never scientific qualification or guarantees.
+    """
+    rates = {};anchor_times = []
+    for row in results:
+        if row.get('status') != 'completed':continue
+        task = row['task'];elapsed = float(row['elapsed_seconds'])
+        if not np.isfinite(elapsed) or elapsed <= 0:raise ValueError('Invalid measured task time')
+        if task['kind'] == 'anchors':anchor_times.append(elapsed)
+        elif task['kind'] == 'replay':
+            step = float(task['step_ms']);chunks = (len(task['targets'])+7)//8
+            rates[step] = max(rates.get(step, 0.), elapsed/chunks)
+    if not anchor_times:raise ValueError('Own-anchor timing required')
+    coarse = (.125,.0625,.03125);fine = (.0078125,.00390625,.001953125)
+    for steps in (coarse, fine):
+        for step in reversed(steps):
+            if step not in rates:
+                if step/2 not in rates:raise ValueError('Missing replay calibration')
+                rates[step] = rates[step/2]/2
+    def times(names, levels):
+        return [rates[steps[level]]*((len(chunk)+7)//8)
+                for level in levels for group, steps in ((False,coarse),(True,fine))
+                if (chunk := [t for t in names if (t in hard) == group])]
+    paired = two_worker_seconds(times(batch,(1,2))*2)
+    anchors = 2*max(anchor_times)  # plus/minus together, proposal separately; current cached
+    validation = two_worker_seconds(times(targets,(0,1,2)))
+    return dict(predicted_seconds=anchors+2*paired+validation, anchor_seconds=anchors,
+        perturbation_seconds=paired, acceptance_seconds=paired, selection_seconds=validation,
+        measured_seconds_per_batch={str(k):v for k,v in rates.items()},
+        scope='Two-worker recurring round estimate; outer admission adds30% margin')
