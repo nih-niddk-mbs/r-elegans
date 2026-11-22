@@ -1,0 +1,693 @@
+{
+  "experiment": "E108",
+  "recorded_date": "2026-11-21",
+  "evidence_kind": "User-reported server launch and final audit stdout; no independent access to raw artifacts",
+  "evidence_sha256": "f32bd27e29b62b8abc7f0858a6449fa09598e8c88978b65debc907e60965deff",
+  "run": "/home/carsonc/r-elegans-results/common-state-20261122T010707Z-782722",
+  "log": "/home/carsonc/r-elegans-results/common-state-20261122T010707Z-782722.log",
+  "reported_pid": 782873,
+  "reported_pull_revision": "5cdf6aa",
+  "headline": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": []
+  },
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_minutes": 120.0,
+    "total_elapsed_seconds": 297.00754551799037,
+    "audit_complete": true,
+    "all_steps_finished": true,
+    "model_promoted": false
+  },
+  "models": {
+    "selected": {
+      "metadata": {
+        "complete": true,
+        "checkpoint_sha256": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f",
+        "anchors_sha256": "882a7f41805e952048dc8801e42bf5f534f301a858718db290d5a3f40c76c879",
+        "anchor_reference": {
+          "indices": [
+            64,
+            124,
+            184,
+            245
+          ],
+          "peak_indices": [
+            64,
+            305
+          ],
+          "time_s": [
+            0.065,
+            0.125,
+            0.185,
+            0.246
+          ],
+          "sample_dt_s": 0.001,
+          "reference_step_ms": 0.03125,
+          "warmup_seconds": 60.0
+        },
+        "controls_passed": true,
+        "per_phase_response_checks_passed": true,
+        "phase_mean_response_checks_passed": true,
+        "error": null
+      },
+      "levels": [
+        {
+          "level": 0,
+          "response_max_abs": 3.025962952162703e-06,
+          "phase_mean_response_max_abs": 3.025962886181628e-06,
+          "phase_response_std_max": 2.0509714293478235e-09,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        },
+        {
+          "level": 1,
+          "response_max_abs": 3.0245653096089287e-06,
+          "phase_mean_response_max_abs": 3.024565214933793e-06,
+          "phase_response_std_max": 2.8437600389814014e-09,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        },
+        {
+          "level": 2,
+          "response_max_abs": 3.023868285309539e-06,
+          "phase_mean_response_max_abs": 3.0238681763333428e-06,
+          "phase_response_std_max": 3.5935663646679013e-09,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        },
+        {
+          "level": 3,
+          "response_max_abs": 3.023520213748382e-06,
+          "phase_mean_response_max_abs": 3.02352009726517e-06,
+          "phase_response_std_max": 4.071476598581122e-09,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        }
+      ],
+      "comparisons": [
+        {
+          "levels": [
+            0,
+            1
+          ],
+          "per_phase": [
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999987969081183,
+              "max_abs_difference": 3.5264582365357455e-09,
+              "max_abs_reference_response": 3.0259629073686733e-06,
+              "max_abs_difference_over_max_abs_response": 0.001165400351718883,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999992755630379,
+              "max_abs_difference": 3.2379424697026593e-09,
+              "max_abs_reference_response": 3.025962952162703e-06,
+              "max_abs_difference_over_max_abs_response": 0.0010700535733223209,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999987695169834,
+              "max_abs_difference": 4.40047276395461e-09,
+              "max_abs_reference_response": 3.0259628699159935e-06,
+              "max_abs_difference_over_max_abs_response": 0.0014542388499554774,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999987014253848,
+              "max_abs_difference": 4.9496686749250784e-09,
+              "max_abs_reference_response": 3.025962815279143e-06,
+              "max_abs_difference_over_max_abs_response": 0.0016357334762781858,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            }
+          ],
+          "phase_mean": {
+            "passed": true,
+            "finite_and_same_shape": true,
+            "correlation": 0.9999994142616067,
+            "max_abs_difference": 3.887485805487145e-09,
+            "max_abs_reference_response": 3.025962886181628e-06,
+            "max_abs_difference_over_max_abs_response": 0.001284710339059263,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "short20ms": {
+            "voltage_mV": {
+              "max_abs": 0.21210325103275451,
+              "rms": 0.007927054498114223
+            },
+            "gates": {
+              "max_abs": 0.004443678097378334,
+              "rms": 6.115616565348199e-05
+            },
+            "calcium_uM": {
+              "max_abs": 0.0008634124974231661,
+              "rms": 3.469899559244095e-05
+            },
+            "indicator": {
+              "max_abs": 7.899934329813618e-06,
+              "rms": 3.402159740542181e-07
+            }
+          }
+        },
+        {
+          "levels": [
+            1,
+            2
+          ],
+          "per_phase": [
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999996467695539,
+              "max_abs_difference": 2.3876638444164655e-09,
+              "max_abs_reference_response": 3.024565212346453e-06,
+              "max_abs_difference_over_max_abs_response": 0.0007894238268263754,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999994333755856,
+              "max_abs_difference": 2.858878800360287e-09,
+              "max_abs_reference_response": 3.0245653096089287e-06,
+              "max_abs_difference_over_max_abs_response": 0.0009452197283615396,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999996135365992,
+              "max_abs_difference": 2.8310808142251176e-09,
+              "max_abs_reference_response": 3.0245652202394446e-06,
+              "max_abs_difference_over_max_abs_response": 0.000936029018412435,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999996357101879,
+              "max_abs_difference": 3.0591369437615867e-09,
+              "max_abs_reference_response": 3.0245651175403454e-06,
+              "max_abs_difference_over_max_abs_response": 0.0010114303461415822,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            }
+          ],
+          "phase_mean": {
+            "passed": true,
+            "finite_and_same_shape": true,
+            "correlation": 0.9999998867128201,
+            "max_abs_difference": 1.8878567042968086e-09,
+            "max_abs_reference_response": 3.024565214933793e-06,
+            "max_abs_difference_over_max_abs_response": 0.0006241745739108269,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "short20ms": {
+            "voltage_mV": {
+              "max_abs": 0.10752661807660857,
+              "rms": 0.004033622567365269
+            },
+            "gates": {
+              "max_abs": 0.0022490686114625957,
+              "rms": 3.116247638847753e-05
+            },
+            "calcium_uM": {
+              "max_abs": 0.00044173912570955043,
+              "rms": 1.779030755794013e-05
+            },
+            "indicator": {
+              "max_abs": 4.054319239110704e-06,
+              "rms": 1.7390764925518686e-07
+            }
+          }
+        },
+        {
+          "levels": [
+            2,
+            3
+          ],
+          "per_phase": [
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999998653233165,
+              "max_abs_difference": 1.7267982599378229e-09,
+              "max_abs_reference_response": 3.0238681646005405e-06,
+              "max_abs_difference_over_max_abs_response": 0.0005710560665815061,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999998580613928,
+              "max_abs_difference": 1.6817560677395704e-09,
+              "max_abs_reference_response": 3.023868285309539e-06,
+              "max_abs_difference_over_max_abs_response": 0.0005561604901608395,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.99999985458237,
+              "max_abs_difference": 1.649353209565163e-09,
+              "max_abs_reference_response": 3.0238681901460784e-06,
+              "max_abs_difference_over_max_abs_response": 0.0005454448097109303,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999998841681317,
+              "max_abs_difference": 1.4156552596844563e-09,
+              "max_abs_reference_response": 3.023868065277213e-06,
+              "max_abs_difference_over_max_abs_response": 0.0004681603922936618,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            }
+          ],
+          "phase_mean": {
+            "passed": true,
+            "finite_and_same_shape": true,
+            "correlation": 0.9999999668661044,
+            "max_abs_difference": 1.039174857275782e-09,
+            "max_abs_reference_response": 3.0238681763333428e-06,
+            "max_abs_difference_over_max_abs_response": 0.0003436574601396335,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "short20ms": {
+            "voltage_mV": {
+              "max_abs": 0.05410388961908197,
+              "rms": 0.0020339222178246915
+            },
+            "gates": {
+              "max_abs": 0.0011308381567214365,
+              "rms": 1.5726137645680733e-05
+            },
+            "calcium_uM": {
+              "max_abs": 0.00022337634535785078,
+              "rms": 9.007008072323245e-06
+            },
+            "indicator": {
+              "max_abs": 2.0539620596560226e-06,
+              "rms": 8.79374160912165e-08
+            }
+          }
+        }
+      ]
+    },
+    "parent": {
+      "metadata": {
+        "complete": true,
+        "checkpoint_sha256": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d",
+        "anchors_sha256": "bb941a77275d39be693a1f2d9a4548365599e1624fe1e1c09b7728028241840b",
+        "anchor_reference": {
+          "indices": [
+            160,
+            215,
+            270,
+            326
+          ],
+          "peak_indices": [
+            160,
+            381
+          ],
+          "time_s": [
+            0.161,
+            0.216,
+            0.271,
+            0.327
+          ],
+          "sample_dt_s": 0.001,
+          "reference_step_ms": 0.03125,
+          "warmup_seconds": 60.0
+        },
+        "controls_passed": true,
+        "per_phase_response_checks_passed": true,
+        "phase_mean_response_checks_passed": true,
+        "error": null
+      },
+      "levels": [
+        {
+          "level": 0,
+          "response_max_abs": 3.1642260664953292e-06,
+          "phase_mean_response_max_abs": 3.164225383202497e-06,
+          "phase_response_std_max": 2.1410335905385814e-07,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        },
+        {
+          "level": 1,
+          "response_max_abs": 3.1627638474238107e-06,
+          "phase_mean_response_max_abs": 3.162763155641242e-06,
+          "phase_response_std_max": 1.804143397880098e-07,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        },
+        {
+          "level": 2,
+          "response_max_abs": 3.162034665011443e-06,
+          "phase_mean_response_max_abs": 3.1620339737952613e-06,
+          "phase_response_std_max": 2.0116124598533633e-07,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        },
+        {
+          "level": 3,
+          "response_max_abs": 3.16167054702568e-06,
+          "phase_mean_response_max_abs": 3.1616698573395247e-06,
+          "phase_response_std_max": 2.2637669943924165e-07,
+          "duplicate_shams_passed": true,
+          "sham_rhythm_persistent": true
+        }
+      ],
+      "comparisons": [
+        {
+          "levels": [
+            0,
+            1
+          ],
+          "per_phase": [
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9996625844352072,
+              "max_abs_difference": 1.08665855647061e-07,
+              "max_abs_reference_response": 3.164224717043529e-06,
+              "max_abs_difference_over_max_abs_response": 0.03434201593260803,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.999908006169221,
+              "max_abs_difference": 4.038547340989851e-08,
+              "max_abs_reference_response": 3.164225329494591e-06,
+              "max_abs_difference_over_max_abs_response": 0.012763147122758518,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9998504599931117,
+              "max_abs_difference": 6.684411868462803e-08,
+              "max_abs_reference_response": 3.1642260664953292e-06,
+              "max_abs_difference_over_max_abs_response": 0.021124950392265755,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9995003699611464,
+              "max_abs_difference": 1.3684298760807678e-07,
+              "max_abs_reference_response": 3.1642254197765396e-06,
+              "max_abs_difference_over_max_abs_response": 0.04324691494885366,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            }
+          ],
+          "phase_mean": {
+            "passed": true,
+            "finite_and_same_shape": true,
+            "correlation": 0.9999388051219515,
+            "max_abs_difference": 3.667715064992194e-08,
+            "max_abs_reference_response": 3.164225383202497e-06,
+            "max_abs_difference_over_max_abs_response": 0.011591194118037563,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "short20ms": {
+            "voltage_mV": {
+              "max_abs": 0.12501124352722393,
+              "rms": 0.004823235224642054
+            },
+            "gates": {
+              "max_abs": 0.00258058258193411,
+              "rms": 4.034533078791159e-05
+            },
+            "calcium_uM": {
+              "max_abs": 0.0005847374646406056,
+              "rms": 2.4948732113534e-05
+            },
+            "indicator": {
+              "max_abs": 8.151005212009288e-06,
+              "rms": 3.546567210619537e-07
+            }
+          }
+        },
+        {
+          "levels": [
+            1,
+            2
+          ],
+          "per_phase": [
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999028737389928,
+              "max_abs_difference": 5.5383653774221386e-08,
+              "max_abs_reference_response": 3.162762477373904e-06,
+              "max_abs_difference_over_max_abs_response": 0.01751116442364252,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999138898692644,
+              "max_abs_difference": 6.766899285359784e-08,
+              "max_abs_reference_response": 3.162763191101592e-06,
+              "max_abs_difference_over_max_abs_response": 0.021395529404156465,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9998239840739936,
+              "max_abs_difference": 7.761966713815127e-08,
+              "max_abs_reference_response": 3.1627638474238107e-06,
+              "max_abs_difference_over_max_abs_response": 0.02454172074888721,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999478072219254,
+              "max_abs_difference": 3.94885808496781e-08,
+              "max_abs_reference_response": 3.1627631066656614e-06,
+              "max_abs_difference_over_max_abs_response": 0.012485469040173825,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            }
+          ],
+          "phase_mean": {
+            "passed": true,
+            "finite_and_same_shape": true,
+            "correlation": 0.9999835478771999,
+            "max_abs_difference": 1.917660730210713e-08,
+            "max_abs_reference_response": 3.162763155641242e-06,
+            "max_abs_difference_over_max_abs_response": 0.006063244814238745,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "short20ms": {
+            "voltage_mV": {
+              "max_abs": 0.06441505510816192,
+              "rms": 0.002469821403177503
+            },
+            "gates": {
+              "max_abs": 0.0013332245829713596,
+              "rms": 2.0643583137526814e-05
+            },
+            "calcium_uM": {
+              "max_abs": 0.00029822066441675954,
+              "rms": 1.27818815849151e-05
+            },
+            "indicator": {
+              "max_abs": 4.144642064995985e-06,
+              "rms": 1.8002088893754529e-07
+            }
+          }
+        },
+        {
+          "levels": [
+            2,
+            3
+          ],
+          "per_phase": [
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999572935478119,
+              "max_abs_difference": 3.498866341100637e-08,
+              "max_abs_reference_response": 3.1620332942676466e-06,
+              "max_abs_difference_over_max_abs_response": 0.01106524193607836,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999112896333042,
+              "max_abs_difference": 4.706561929079811e-08,
+              "max_abs_reference_response": 3.1620340539863234e-06,
+              "max_abs_difference_over_max_abs_response": 0.014884602280441373,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999490786215813,
+              "max_abs_difference": 4.4286916023317247e-08,
+              "max_abs_reference_response": 3.162034665011443e-06,
+              "max_abs_difference_over_max_abs_response": 0.01400582875113957,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999858921017816,
+              "max_abs_difference": 1.6755867027207216e-08,
+              "max_abs_reference_response": 3.1620338819156324e-06,
+              "max_abs_difference_over_max_abs_response": 0.0052990789007789285,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            }
+          ],
+          "phase_mean": {
+            "passed": true,
+            "finite_and_same_shape": true,
+            "correlation": 0.9999956415074032,
+            "max_abs_difference": 9.902001218975442e-09,
+            "max_abs_reference_response": 3.1620339737952613e-06,
+            "max_abs_difference_over_max_abs_response": 0.0031315290414449504,
+            "relative_tolerance": 0.1,
+            "absolute_tolerance": 0.0,
+            "minimum_correlation": 0.9,
+            "constant_response": false
+          },
+          "short20ms": {
+            "voltage_mV": {
+              "max_abs": 0.032694614629832586,
+              "rms": 0.0012498000912594272
+            },
+            "gates": {
+              "max_abs": 0.0006776389829551421,
+              "rms": 1.0442799120897624e-05
+            },
+            "calcium_uM": {
+              "max_abs": 0.00015060291033430762,
+              "rms": 6.470100506872837e-06
+            },
+            "indicator": {
+              "max_abs": 2.089964656670773e-06,
+              "rms": 9.070775400588899e-08
+            }
+          }
+        }
+      ]
+    }
+  },
+  "interpretation": [
+    "Complete two-model/four-grid/four-phase/three-target experiment; all per-phase and phase-mean response checks pass on every adjacent pair. All duplicate-sham controls and reported sham-rhythm persistence checks pass; integrity problems empty.",
+    "At finest comparison selected per-phase normalized errors0.0468-0.0571%, phase-mean0.0344%; parent per-phase0.530-1.488%, phase-mean0.313%. These are global maximum-normalized array errors, not certified relative errors for every target/receiver pair.",
+    "Short20ms max differences roughly halve with refinement: voltage selected0.2121->0.1075->0.0541mV; parent0.1250->0.0644->0.03269mV. Other state fields contract similarly; no new short-state physiological acceptance threshold applied.",
+    "This supports a workable matched-initial-state numerical response protocol for these test cases. Original E107 independently re-settled response failures remain negative; different target subset/step range/recording clock and initialization also changed, so phase alone is not established as cause.",
+    "Finest response maxima~3.02e-6/3.16e-6 indicator units. Selected max phase SD~4.07e-9, parent~2.26e-7; phase-dependent variability differs by model. These statistics do not establish biologically useful amplitude or correctly modeled downstream signaling.",
+    "Reference anchors differ in slow variables/other phases; only one reference-cycle initialization per model. Full-atlas accuracy, per-target/receiver numerical validity and robustness to independently built anchors remain untested.",
+    "No optimizer or parameter changes, model promotion, full-body dynamics, sensory start/stop or biological validation."
+  ],
+  "unavailable_evidence": [
+    "Full input/artifact/source/environment hashes, recorded float64/field checks and detailed per-phase sham-rhythm/zero errors remain in external audit; only model/anchor hashes and aggregate flags printed.",
+    "No independent solver, full long-horizon neural-state convergence, repeated anchor cycles, raw stimulus-locked indicator traces or full-atlas accuracy evaluation."
+  ],
+  "decision": "Use this matched-state design for a prospective expansion to the atlas target set and observed receiver pairs before another long fit; preserve rhythm and original negative results. No new experiment or optimization launched by this record."
+}

@@ -11863,3 +11863,71 @@ is not a selective causal intervention on RMDL phase. Audit records this limit
 and preserves original failed atlas criteria. The launcher prints the main log
 and exact report command; the final report includes full checkpoint/anchor hashes
 and reference timings. Per-model logs remain inside the output folder. Scientific execution/results remain pending user server output.
+
+### 2026-11-21 — E108 reported server result: shared-state response checks pass
+
+User supplied launch stdout after pull through5cdf6aa, dedicated two-GPU/float64
+preflight, PID782873, and completed automatic report. Run:
+`/home/carsonc/r-elegans-results/common-state-20261122T010707Z-782722`;
+log:adjacent`.log`; audit:`audit.json` inside run. UTC identifier Nov22, local
+record date Nov21. Exact printed results/model/anchor hashes and attachment
+SHA256 transcribed in `experiments/records/E108-server-summary.json`. No independent
+raw server artifact access is asserted. Capture actual source/environment remains
+external; pulled revision does not by itself prove a clean execution tree.
+
+Execution/budget:297.00754551799037s (4.95min), exit0, no timeout, all steps finished
+within120min total cap. Reported post-run audit complete, execution complete and
+integrity passed, problems[]. Both fixed models, four grids, four reference
+phases, three a priori pulse targets and two duplicate shams were completed
+(160 trials:96pulse,64sham). No optimization, reselection, trainable parameters
+or RNG updates. Checkpoint/anchor hashes are printed; full input/artifact hashes,
+complete-state shape/float64 checks and source/environment records are retained
+in the external audit. Code rechecks immutable weights, exact saved anchor
+identity and quarter-phase metadata, finite arrays, original input hashes and
+all artifacts. No undocumented parameter bound or frozen-field exception added.
+
+Selected reference cycle: peak indices64/305, anchors64/124/184/245 at0.065,
+0.125,0.185,0.246s after the60s warmup. Parent: peaks160/381, anchors160/215/270/326
+at0.161,0.216,0.271,0.327s. Full voltage/gates/calcium/indicator states reused
+across every grid. All duplicate-sham checks pass and sham RMD rhythms persist
+for every reported phase/grid. Full indicator time traces were intentionally
+not retained, so the saved-data audit verifies means/checksums rather than
+independently reconstructing those means from long all-neuron traces.
+
+All24 per-phase adjacent comparisons (4phases x3pairs x2models) and all6 phase-
+mean comparisons pass existing error/correlation criteria, including the two
+finest successive pairs. Finest selected per-phase normalized error0.0468-0.0571%,
+phase-mean0.03437%; parent per-phase0.5299-1.4885%, phase-mean0.31315%.
+Correlations remain above0.9999 at the finest comparison. Normalization uses
+the maximum response across each3x302array, not separate certified errors for
+every receiver; tiny downstream responses may require stricter targeted checks.
+These findings are a limited numerical protocol result, not a full-atlas fit.
+
+Short20ms maximum voltage differences contract selected0.2121->0.1075->0.05410mV
+and parent0.1250->0.06442->0.03269mV; gates/calcium/indicator also roughly halve.
+No new physiological bound was applied to these absolute full-state differences.
+Matched cue-minus-sham response convergence is distinct from absolute trajectory
+error or independently verified continuum dynamics. Finest response maxima
+selected3.02352e-6/parent3.16167e-6 indicator units. Maximum phase standard deviation
+selected4.0715e-9/parent2.2638e-7; variability differs between models and does not
+by itself prove a causal effect of RMDL phase or biologically adequate amplitude.
+
+Interpretation: identical complete-state initialization yields reproducible
+response differences for these targets/phases and tested steps. This supports
+initial-state consistency as an important diagnostic issue, rather than declaring
+the solver fundamentally broken. E107 used independently re-settled states;
+E108 also changed the target subset, step range and recording/accumulation clock.
+Thus this is not a one-factor causal isolation of the original failure. Reference
+anchors are generated at one finest grid and one cycle per model; they also
+differ in other phases and slow variables. Independent reference-state accuracy,
+new anchor cycles, other targets, observed downstream pairs and full-atlas
+accuracy remain untested. Original failed atlas/cycle checks are not overwritten.
+
+Decision: before another long fit, prospectively expand this shared-state design
+to the atlas target set and actually observed receiver pairs, reporting target/
+receiver-scale discrepancies and excluding direct stimulated-cell dominance from
+claims about downstream propagation. Preserve existing rhythm during any later
+fit. No new scientific run or training launched on this evidence upload. No
+body gait, sensory start/stop, rest/restart, swimming or biological qualification;
+no model promoted. Documentation/evidence-only update: parsing/shape checks and
+whitespace check pass; no software code or new tests required.

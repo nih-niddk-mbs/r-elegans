@@ -1,13 +1,15 @@
 # r-elegans
 
-2026-11-21 E108 prepared; server execution pending. Compare pulse/sham
-responses from identical saved complete neural states across four integration
-grids and four reference RMDL phases, on both pinned unchanged models. Fixed
-targets ADAL/AIYL/AIYR; no fitting. Short20ms full-state errors and long-window
-per-phase/phase-mean responses are separate diagnostics. Two A100 workers,
-maximum120minutes TOTAL with automatic post-run audit; no model/behavior promotion.
-[Plan](experiments/records/E108-plan.json).
-Launch: `sh scripts/launch_common_state_mbslnx2.sh`.
+2026-11-21 E108 completed (user-reported): both unchanged models pass
+shared-complete-state pulse-response checks at all four reference phases and
+all grid comparisons. Integrity, duplicate shams and sham rhythms pass; all
+steps finished in297.01s without timeout. Finest per-phase maximum-normalized
+errors: selected below0.058%, parent below1.49%; short-state errors contract
+roughly by half. This validates the limited numerical protocol, not full atlas
+accuracy or biological behavior. Original independently settled failures remain.
+Next: expand matched-state validation to the atlas targets/observed receiver
+pairs before another long fit; no automatic model or behavior promotion.
+[Evidence](experiments/records/E108-server-summary.json).
 
 2026-11-21 E107 saved-cycle analysis completed (user-reported): full-window
 RMD periods change monotonically with refinement, with period increments roughly
