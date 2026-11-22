@@ -13,13 +13,14 @@ from scripts.atlas_shared_checks import observed_pairs
 BUNDLE=Path('r_elegans/assets/mac_rhythm_v1_polarized/network.npz')
 
 
-def fixture_source(root,monkeypatch):
+def fixture_source(root,monkeypatch,include_extra_pair=False):
     import scripts.run_atlas_target_refinement as job
     root.mkdir();digest=file_sha256(BUNDLE)
     monkeypatch.setattr(job,'SELECTED_SHA',digest);monkeypatch.setattr(job,'PARENT_SHA',digest)
     with np.load(BUNDLE) as z:ids=z['neuron_ids'].tolist()
     targets=sorted(['ADAL','AIYL','AIYR','RMDL','RMDR','RIVL'])
     pairs=sorted([('ADAL','AIYR'),('AIYR','ADAL'),('RMDL','RMDR'),('RIVL','RMDVL')])
+    if include_extra_pair:pairs=sorted(pairs+[('RMDR','RMDL')])
     statistics=dict(targets=targets,stats=dict(train=dict(pairs=pairs)))
     statpath=root/'statistics.json';statpath.write_text(json.dumps(statistics))
     models={};audited={};anchor_shas={}

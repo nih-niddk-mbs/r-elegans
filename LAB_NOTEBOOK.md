@@ -12273,3 +12273,54 @@ anchor-cycle robustness, body movement, sensory start/stop/rest/restart, swimmin
 or biological qualification. No model promoted. Documentation-only update;
 transcription/coverage assertions and whitespace checks pass. No source code
 changed or new tests required.
+
+### 2026-11-21 — E112 planned: saved-data full-atlas target-dependent audit
+
+User approved the proposed saved-data audit. Prospective plan recorded in
+`experiments/records/E112-plan.json` before implementation. No simulation or
+fitting. Fixed groups: entire E11112target set at0.0078125/.00390625/.001953125ms;
+remaining123targets at E1090.125/.0625/.03125ms. Preserve original target/neuron
+orders, split statistics, full6462observed downstream support, both models and
+all phases; every target halves its step at each of three composite levels.
+No choosing per-pair favorable values, new group reassignment or performance
+selection. Original homogeneous-grid failures remain separate historical outcomes.
+
+Require source execution/integrity/budget completion and immutable model/anchor/
+statistics hashes. Verify archived common forward code and recorded JAX/JAXlib/
+NumPy versions match across coarse/fine workers; missing evidence fails. Recompute
+same-step bridges E109->E110 at0.03125ms and E110->E111 at0.0078125ms from saved
+responses. Reconstruct original E109 failure-mask group, not just trust a latest
+success flag. Recheck source controls/sham rhythms, assemble and save complete
+matrices with per-target step maps, then apply unchanged vector/mixed-pair
+criteria to full downstream support and both successive comparisons. Preserve
+all ratios/signs and compute finest descriptive split scores with explicit
+numerical status; test set already repeatedly inspected, not a fresh holdout.
+
+Output separate external folder; source/parents unchanged, exact invocation/
+environment/code and consumed/output hashes captured. This would qualify only
+an explicitly target-dependent numerical protocol, not uniform finest-grid truth,
+independent solver accuracy, new weights, biology, body motion or sensory-control
+behavior. No model promotion. Execution pending user server command.
+
+E112 implementation/local verification:78 focused software checks pass across
+new composite audit and existing source workflows. New synthetic-source tests
+verify all-target coverage, target-name assembly with reordered subset and no
+mutation of unaffected rows, exact per-target factor2 step maps, original-source
+immutability, independent observed-downstream bridge checks despite dominant self
+responses, and refusal of changed/missing artifacts, forward code, package
+versions, archives, statistics or pulse amplitude. Source fixtures are synthetic;
+no scientific model replay or composite result computed locally. Existing E110/
+E111 source lineage and invalid-target/timeout controls still pass. CLI help,
+shell syntax and whitespace checks pass. No full-suite status asserted.
+
+The analyzer requires one matching worker source record per model/run and checks
+three archived core forward modules plus recorded Python/JAX/JAXlib/NumPy and
+numerical settings. Recorded version equality is not a wheel/image checksum;
+this limit accompanies baseline bridges and frozen model/state hashes. Reproduction
+is checked both on all modeled receivers and separately observed downstream pairs
+so direct self response cannot conceal a mismatch. Both source-step groups and
+bridge-layer controls/rhythms are included. New outputs are complete response
+matrices/step maps, full downstream error/sign masks and descriptive split scores,
+with input/output hashes and elapsed time in a separate external folder. CPU-only
+foreground launcher prints progress before source capture. Server E112 analysis
+remains pending; no fitting or promotion occurred during implementation.

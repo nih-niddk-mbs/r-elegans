@@ -1,5 +1,14 @@
 # Current model: exact scope and computation path
 
+2026-11-21 E112 saved-data composite audit prepared; server execution pending.
+Explicit target-dependent steps combine E111's fine12target outputs with E109's
+coarser remaining123target outputs at three complete refinement levels. Verify
+archived forward identity, exact same-step bridges, coverage, controls and all
+observed-pair/vector criteria. No simulation or fitting; original failures remain.
+This is a new numerical protocol, not a uniform finest-grid or biological claim.
+[Plan](experiments/records/E112-plan.json).
+Command: `sh scripts/launch_atlas_composite_audit_mbslnx2.sh`.
+
 2026-11-21 E111 completed (user-reported): selected checkpoint passes both
 successive per-phase AND phase-mean numerical checks for the entire12target/
 986pair subset through0.001953125ms. All baselines reproduce exactly; integrity,

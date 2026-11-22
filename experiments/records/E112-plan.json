@@ -1,0 +1,15 @@
+{
+  "experiment": "E112",
+  "recorded_date": "2026-11-21",
+  "status": "planned saved-data composite audit; no execution evidenced",
+  "coarse_source": "/home/carsonc/r-elegans-results/atlas-shared-state-20261122T014924Z-785140",
+  "fine_source": "/home/carsonc/r-elegans-results/atlas-target-continuation-20261122T032855Z-792463",
+  "question": "Does a separately declared target-dependent refinement protocol pass full-atlas downstream numerical checks when assembled from existing common-state responses?",
+  "protocol": "Keep exact original135target order,302neuron order,6462observed pairs and four phases for both unchanged models. Use E111 levels0/1/2 (0.0078125/0.00390625/0.001953125ms) for its entire12target group and E109 levels1/2/3 (0.125/0.0625/0.03125ms) for remaining123targets. Every target halves its step between composite levels. No choosing outputs by accuracy or new target reassignment.",
+  "identity": "Require completed passing-integrity E109/E110/E111 source audits/budgets; pinned model/anchor hashes, identical cached statistics, stimulus amplitude,1ms clock and common forward-source archive hashes/JAX/JAXlib/NumPy versions. Independently reconstruct original E109 failure-mask group. Recompute E109-to-E1100.03125ms and E110-to-E1110.0078125ms subset replay bridges under original reproduction criteria. Missing identity evidence fails rather than asserting equivalence.",
+  "checks": "Reload and hash-check all source/control artifacts. Recompute duplicate/padded-sham controls and RMD persistence. Assemble complete response matrices and explicit per-target step maps; recompute both successive full observed-vector and individual mixed pair checks (same thresholds), phase and phase mean separately, excluding self. Preserve per-pair ratios/sign masks and original failures. Report frozen finest composite Spearman/AUC descriptively by original split with numerical status; repeated test inspection is not a new holdout or selection mechanism.",
+  "fixed_trainable": "All model parameters, anchors, target-group assignment and numerical thresholds fixed; no simulation, optimizer, RNG draws or fitting.",
+  "scope": "New target-dependent numerical protocol, not reclassification of original homogeneous-grid results, proof of a uniform finest-grid atlas, independent solver truth, or validation of new fitted weights. No biological, body movement, sensory start/stop or swimming/model promotion.",
+  "artifacts": "Separate external timestamped composite-audit directory with invocation/environment/source, source/input/output hashes, full matrices/step maps, comparisons and compact summary. Preserve source folders unchanged. No full-brain trajectories or raw data in Git.",
+  "command": "python -m scripts.audit_atlas_composite --coarse-run <E109> --fine-run <E111>"
+}
