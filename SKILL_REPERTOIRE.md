@@ -1,13 +1,14 @@
 # r-elegans skill repertoire and action-space plan
 
-2026-11-21 E110 prepared; server execution pending. Identify every target
-implicated by the complete E109 last-two-comparison failure masks, union across
-both fixed models/phases/means, plus fixed ADAL/AIYL/AIYR controls. Reuse exact
-anchors and source baseline, verify same-step targeted replay, then test
-0.015625/0.0078125ms. Unchanged criteria, no fitting or full-atlas promotion.
-Two A100s,120min TOTAL including automatic post-run audit.
-[Plan](experiments/records/E110-plan.json).
-Launch: `sh scripts/launch_atlas_target_refinement_mbslnx2.sh`.
+2026-11-21 E110 completed (user-reported):12 failure-selected/control
+targets,986 observed pairs;8.47min, integrity/controls/sham rhythms pass. Same-step
+baseline replay matches exactly. Selected model passes both targeted phase-mean
+refinements through0.0078125ms; finest individual-phase check still fails one
+RMDL->RMDR pair at one phase. Parent phase mean still fails RIVL->RMDVL despite
+shrinking absolute differences. Neither full per-phase protocol nor full atlas
+is qualified. Next: retain the subset and test further refinement without
+changing criteria; no fitting or behavioral promotion.
+[Evidence](experiments/records/E110-server-summary.json).
 
 2026-11-21 E109 completed (user-reported):135 targets,6462 observed
 downstream pairs,17.48min; all steps, integrity, controls and sham rhythms pass.

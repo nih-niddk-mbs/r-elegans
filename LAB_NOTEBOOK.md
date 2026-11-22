@@ -12114,3 +12114,65 @@ same-step reproduction plus two finer steps; existing E109 and E108 tests pass.
 Every new input, source mask, original baseline and selected/final reference
 remains outside Git with hashes and source/environment records at execution.
 No optimizer or parent files are overwritten and no numerical threshold relaxed.
+
+### 2026-11-21 — E110 reported result: selected phase mean converges on targeted subset
+
+User supplied launcher/preparation/final audit output after pull througha14dc0a.
+Run:`/home/carsonc/r-elegans-results/atlas-target-refinement-20261122T025343Z-789212`;
+external report:`audit.json` and `budget_receipt.json`. Local dateNov21; UTC run
+identifierNov22. Only scientific output is transcribed in
+`experiments/records/E110-server-summary.json`, with full attachment SHA256; raw
+login/session text remains external. No independent raw artifact access claimed.
+
+Audit/execution:508.2427590029547s (8.47min), exit0, no timeout, all steps finished
+within120min total cap. Audit complete, execution complete, integrity passed,
+problems[]. Both fixed model/anchor hashes printed unchanged. Input selection
+was fixed by full source error masks; source failed pairs and exact target union
+printed before simulation. Targets:ADAL,AIYL,AIYR,AIZR,AVER,RIAL,RIAR,RIMR,RIVL,
+RMDL,RMDR,SMDDL. All986observed downstream pairs for this subset included; AIYL
+has no qualifying cached pair, but was simulated as a fixed control. No model/
+target reselection using accuracy, optimizer/RNG changes or fitting. New replay
+trials:288pulse and192control across both models (12targets,8duplicate/padded
+controls per phase/grid,4phases,3new grids). Old copied E109 baseline is not a
+new forward trial. Complete source-selection locations/masks, residuals and
+artifact/source/environment hashes remain external; aggregate integrity and
+checkpoint/anchor hashes are the supplied evidence, not independently verified.
+
+All10same-step reproduction vectors (4phases+mean,2models) have exactly zero
+maximum response difference. Changing to the smaller target batch reproduced
+source baseline responses; baseline mismatch is not responsible for these new
+refinement differences. All controls and sham rhythms are preserved. Original
+parameters/anchors, source baseline and original negative gates remain intact.
+
+Selected model targeted phase-mean check now passes BOTH0.03125->0.015625 and
+0.015625->0.0078125ms comparisons. All986pair mixed criteria pass in each;
+vector errors3.143%/1.409%, correlations0.999920/0.999982; max mixed ratios
+0.2938/0.1341. This is the first passing two-successive phase-mean result for
+the entire identified target subset under the declared criteria. It is separate
+from any full atlas, body or biological claim.
+
+Selected individual phases: first comparison mixed counts1/2/0/0 and two vector
+failures; finest comparison0/1/0/0, with all finest vector checks passing.
+Remaining finest pair RMDL->RMDR at phase index1 changes1.66391e-5->1.91355e-5;
+absolute difference2.49648e-6 versus tolerance2.01355e-6 (ratio1.23984).
+Overall targeted_per_phase_checks_passed remains False. Do not discard this
+phase or retrospectively replace its criterion with phase averaging.
+
+Parent targeted phase mean still fails only RIVL->RMDVL. Differences shrink
+6.33543e-7->3.27905e-7 across the new refinements, ratios3.9747->1.7062;
+finest tolerance1.92183e-7. Finest individual mixed counts0/1/0/2, involving
+RMDR->RMDVL, RMDL->RMDR and RIVL->RMDVL; parent per-phase and phase-mean flags
+remain False. All printed E110 active-sign-flip counts are zero; changes of
+sign below the modeled activity deadband are not ruled out. This is numerical
+resolution evidence, not a biological tolerance or sign validation.
+
+Decision: retain selected phase-mean component success and outstanding per-phase/
+parent failures separately. Absolute differences continue shrinking; a prospective
+continuation can keep all12targets/anchors, reuse the0.0078125ms baseline and add
+two finer levels, requiring two successive passes unchanged. No new simulation
+or fitting launched by this result upload. Full135target/6462pair finer-grid
+qualification is not established by the986pair subset. No new atlas accuracy
+scores, independent-solver/anchor-cycle tests, body movement, sensory start/stop,
+rest/restart, swimming or biological qualification. No model promoted.
+Documentation-only update; transcription/coverage assertions and whitespace check
+pass; no source-code changes or new tests required.

@@ -1,0 +1,1445 @@
+{
+  "experiment": "E110",
+  "recorded_date": "2026-11-21",
+  "evidence_kind": "User-reported server launch/preparation/automatic audit stdout; no independent raw artifact access",
+  "evidence_sha256": "3ad8d9051187e30d83e727e1eff9ed3475f0069bd64a22d10f22ac45be2b0004",
+  "run": "/home/carsonc/r-elegans-results/atlas-target-refinement-20261122T025343Z-789212",
+  "reported_pull_revision": "a14dc0a",
+  "headline": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "targets": [
+      "ADAL",
+      "AIYL",
+      "AIYR",
+      "AIZR",
+      "AVER",
+      "RIAL",
+      "RIAR",
+      "RIMR",
+      "RIVL",
+      "RMDL",
+      "RMDR",
+      "SMDDL"
+    ],
+    "observed_downstream_pairs": 986,
+    "targets_without_observed_pairs": [
+      "AIYL"
+    ]
+  },
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "total_minutes": 120.0,
+    "total_elapsed_seconds": 508.2427590029547,
+    "audit_complete": true,
+    "all_steps_finished": true,
+    "model_promoted": false
+  },
+  "models": {
+    "selected": {
+      "metadata": {
+        "complete": true,
+        "checkpoint_sha256": "4d72ef33f194806155bfb893f1744848f79414a8e333042fbe6970b97835111f",
+        "anchors_sha256": "882a7f41805e952048dc8801e42bf5f534f301a858718db290d5a3f40c76c879",
+        "controls_passed": true,
+        "sham_rhythms_preserved": true,
+        "targeted_per_phase_checks_passed": false,
+        "targeted_phase_mean_checks_passed": true,
+        "error": null
+      },
+      "baseline_reproduction": [
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 1.0,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 1.418308391232248e-05,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 1.0,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 3.0945863774944904e-05,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 0.9999999999999999,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 5.0617447498346735e-05,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 1.0,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 2.7683351946139467e-05,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 0.9999999999999998,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 2.6117368868761037e-05,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        }
+      ],
+      "comparisons": [
+        {
+          "steps_ms": [
+            0.03125,
+            0.015625
+          ],
+          "per_phase": [
+            {
+              "mixed_failures": 1,
+              "maximum_tolerance_ratio": 1.17571312580986,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": false,
+                "finite_and_same_shape": true,
+                "correlation": 0.9962361260603384,
+                "max_abs_difference": 1.4851677141436426e-06,
+                "max_abs_reference_response": 1.418308391232248e-05,
+                "max_abs_difference_over_max_abs_response": 0.10471401870881594,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDL",
+                  "coarse": 1.0146890919382479e-05,
+                  "fine": 1.1632058633526121e-05,
+                  "abs_difference": 1.4851677141436426e-06,
+                  "tolerance": 1.263205863352612e-06,
+                  "tolerance_ratio": 1.17571312580986
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": 1.418308391232248e-05,
+                  "fine": 1.2926261101164904e-05,
+                  "abs_difference": 1.2568228111575763e-06,
+                  "tolerance": 1.518308391232248e-06,
+                  "tolerance_ratio": 0.8277783475447621
+                },
+                {
+                  "target": "RIAL",
+                  "receiver": "RMDR",
+                  "coarse": 1.3673363492561208e-06,
+                  "fine": 1.2093307029115152e-06,
+                  "abs_difference": 1.5800564634460557e-07,
+                  "tolerance": 2.367336349256121e-07,
+                  "tolerance_ratio": 0.6674406296099626
+                }
+              ]
+            },
+            {
+              "mixed_failures": 2,
+              "maximum_tolerance_ratio": 2.638159240817236,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": false,
+                "finite_and_same_shape": true,
+                "correlation": 0.9943017456163262,
+                "max_abs_difference": 4.653463850257111e-06,
+                "max_abs_reference_response": 3.0945863774944904e-05,
+                "max_abs_difference_over_max_abs_response": 0.1503743403027824,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": 1.1985592118235466e-05,
+                  "fine": 1.6639055968492578e-05,
+                  "abs_difference": 4.653463850257111e-06,
+                  "tolerance": 1.7639055968492578e-06,
+                  "tolerance_ratio": 2.638159240817236
+                },
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDVL",
+                  "coarse": -3.643910173600773e-08,
+                  "fine": -1.93043328988729e-07,
+                  "abs_difference": 1.5660422725272127e-07,
+                  "tolerance": 1.193043328988729e-07,
+                  "tolerance_ratio": 1.3126449261944682
+                },
+                {
+                  "target": "RIAL",
+                  "receiver": "RMDR",
+                  "coarse": 1.0836376089784494e-06,
+                  "fine": 1.2196893136584563e-06,
+                  "abs_difference": 1.3605170468000694e-07,
+                  "tolerance": 2.2196893136584563e-07,
+                  "tolerance_ratio": 0.6129312955774369
+                }
+              ]
+            },
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.882710387980544,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9995862567359909,
+                "max_abs_difference": 1.284643400989438e-06,
+                "max_abs_reference_response": 5.0617447498346735e-05,
+                "max_abs_difference_over_max_abs_response": 0.025379458358333794,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDL",
+                  "coarse": 1.3198900309485673e-05,
+                  "fine": 1.1945548629377356e-05,
+                  "abs_difference": 1.2533516801083167e-06,
+                  "tolerance": 1.4198900309485674e-06,
+                  "tolerance_ratio": 0.882710387980544
+                },
+                {
+                  "target": "RIAL",
+                  "receiver": "RMDL",
+                  "coarse": 2.6925040836900394e-06,
+                  "fine": 2.531510524872438e-06,
+                  "abs_difference": 1.6099355881760147e-07,
+                  "tolerance": 3.692504083690039e-07,
+                  "tolerance_ratio": 0.43600103119375666
+                },
+                {
+                  "target": "RIAL",
+                  "receiver": "RMDR",
+                  "coarse": 2.8258868690622663e-06,
+                  "fine": 2.9560165621944634e-06,
+                  "abs_difference": 1.3012969313219713e-07,
+                  "tolerance": 3.956016562194464e-07,
+                  "tolerance_ratio": 0.3289412243006692
+                }
+              ]
+            },
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.9703179744475492,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9997413317413988,
+                "max_abs_difference": 1.3977007784493622e-06,
+                "max_abs_reference_response": 2.7683351946139467e-05,
+                "max_abs_difference_over_max_abs_response": 0.05048885630499944,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDL",
+                  "coarse": 2.7081499416325983e-06,
+                  "fine": 2.3483414876013242e-06,
+                  "abs_difference": 3.5980845403127404e-07,
+                  "tolerance": 3.708149941632598e-07,
+                  "tolerance_ratio": 0.9703179744475492
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDVL",
+                  "coarse": 1.7201998947502517e-07,
+                  "fine": 2.770754784497953e-07,
+                  "abs_difference": 1.0505548897477013e-07,
+                  "tolerance": 1.2770754784497952e-07,
+                  "tolerance_ratio": 0.822625527993803
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": 2.7683351946139467e-05,
+                  "fine": 2.6285651167690105e-05,
+                  "abs_difference": 1.3977007784493622e-06,
+                  "tolerance": 2.868335194613947e-06,
+                  "tolerance_ratio": 0.4872864165505875
+                }
+              ]
+            }
+          ],
+          "phase_mean": {
+            "vector": {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999195383982701,
+              "max_abs_difference": 8.208959154099027e-07,
+              "max_abs_reference_response": 2.6117368868761037e-05,
+              "max_abs_difference_over_max_abs_response": 0.03143103424908072,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            "pair_count": 986,
+            "mixed_tolerance_passed": true,
+            "mixed_failures": 0,
+            "mixed_pass_fraction": 1.0,
+            "maximum_tolerance_ratio": 0.29382494644943014,
+            "modeled_active_pairs": 24,
+            "active_sign_flips": 0,
+            "maximum_downstream_response": 2.693826478417094e-05,
+            "worst_pairs": [
+              {
+                "target": "RMDL",
+                "receiver": "RMDR",
+                "coarse": 2.6117368868761037e-05,
+                "fine": 2.693826478417094e-05,
+                "abs_difference": 8.208959154099027e-07,
+                "tolerance": 2.7938264784170942e-06,
+                "tolerance_ratio": 0.29382494644943014
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDVL",
+                "coarse": -3.055752447189697e-07,
+                "fine": -3.267183280031283e-07,
+                "abs_difference": 2.1143083284158593e-08,
+                "tolerance": 1.3267183280031282e-07,
+                "tolerance_ratio": 0.15936376876606126
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDVL",
+                "coarse": 2.5269831821495004e-07,
+                "fine": 2.6840888514567673e-07,
+                "abs_difference": 1.57105669307267e-08,
+                "tolerance": 1.2684088851456768e-07,
+                "tolerance_ratio": 0.12386042950907222
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDL",
+                "coarse": 1.4249951236361413e-05,
+                "fine": 1.4436451768379266e-05,
+                "abs_difference": 1.8650053201785255e-07,
+                "tolerance": 1.5436451768379268e-06,
+                "tolerance_ratio": 0.12081826498489034
+              },
+              {
+                "target": "AVER",
+                "receiver": "RMDL",
+                "coarse": 1.3180462490047784e-06,
+                "fine": 1.3382535796468975e-06,
+                "abs_difference": 2.0207330642119103e-08,
+                "tolerance": 2.3382535796468976e-07,
+                "tolerance_ratio": 0.0864206124520106
+              },
+              {
+                "target": "RIAR",
+                "receiver": "RMDR",
+                "coarse": 8.584072606898641e-07,
+                "fine": 8.504099906214702e-07,
+                "abs_difference": 7.997270068393902e-09,
+                "tolerance": 1.858407260689864e-07,
+                "tolerance_ratio": 0.04303292522342608
+              },
+              {
+                "target": "AIZR",
+                "receiver": "RMDR",
+                "coarse": 2.332454556053243e-06,
+                "fine": 2.319567092096131e-06,
+                "abs_difference": 1.2887463957111933e-08,
+                "tolerance": 3.332454556053243e-07,
+                "tolerance_ratio": 0.03867258724864673
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDDR",
+                "coarse": 6.875411487361482e-08,
+                "fine": 6.468493127242958e-08,
+                "abs_difference": 4.0691836011852445e-09,
+                "tolerance": 1.0687541148736148e-07,
+                "tolerance_ratio": 0.03807408593384873
+              },
+              {
+                "target": "SMDDL",
+                "receiver": "RMDR",
+                "coarse": -1.7085323087140392e-06,
+                "fine": -1.6993271721443826e-06,
+                "abs_difference": 9.205136569656602e-09,
+                "tolerance": 2.708532308714039e-07,
+                "tolerance_ratio": 0.03398569970917951
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDDL",
+                "coarse": -6.978673336432983e-08,
+                "fine": -7.270106130996545e-08,
+                "abs_difference": 2.9143279456356197e-09,
+                "tolerance": 1.0727010613099654e-07,
+                "tolerance_ratio": 0.02716812773613451
+              }
+            ],
+            "absolute_tolerance": 1e-07,
+            "relative_tolerance": 0.1,
+            "scope": "Mixed tolerance is a prospective engineering resolution convention, not biological noise; vector check remains separate"
+          }
+        },
+        {
+          "steps_ms": [
+            0.015625,
+            0.0078125
+          ],
+          "per_phase": [
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.6429521382271968,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9989891860128095,
+                "max_abs_difference": 8.67988411368259e-07,
+                "max_abs_reference_response": 1.2926261101164904e-05,
+                "max_abs_difference_over_max_abs_response": 0.06714922471201178,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDL",
+                  "coarse": 1.1632058633526121e-05,
+                  "fine": 1.250004704489438e-05,
+                  "abs_difference": 8.67988411368259e-07,
+                  "tolerance": 1.350004704489438e-06,
+                  "tolerance_ratio": 0.6429521382271968
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": 1.2926261101164904e-05,
+                  "fine": 1.2385265999226291e-05,
+                  "abs_difference": 5.409951019386128e-07,
+                  "tolerance": 1.3926261101164904e-06,
+                  "tolerance_ratio": 0.388471175435135
+                },
+                {
+                  "target": "RIAL",
+                  "receiver": "RMDR",
+                  "coarse": 1.2093307029115152e-06,
+                  "fine": 1.137323200617324e-06,
+                  "abs_difference": 7.200750229419128e-08,
+                  "tolerance": 2.2093307029115153e-07,
+                  "tolerance_ratio": 0.32592450826532154
+                }
+              ]
+            },
+            {
+              "mixed_failures": 1,
+              "maximum_tolerance_ratio": 1.23983581131396,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9984976307333857,
+                "max_abs_difference": 2.4964752710632254e-06,
+                "max_abs_reference_response": 3.181985832301226e-05,
+                "max_abs_difference_over_max_abs_response": 0.07845651749045543,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": 1.6639055968492578e-05,
+                  "fine": 1.9135531239555803e-05,
+                  "abs_difference": 2.4964752710632254e-06,
+                  "tolerance": 2.01355312395558e-06,
+                  "tolerance_ratio": 1.23983581131396
+                },
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDVL",
+                  "coarse": -1.93043328988729e-07,
+                  "fine": -2.6883888115669663e-07,
+                  "abs_difference": 7.579555216796763e-08,
+                  "tolerance": 1.2688388811566966e-07,
+                  "tolerance_ratio": 0.5973615192093659
+                },
+                {
+                  "target": "RIAL",
+                  "receiver": "RMDR",
+                  "coarse": 1.2196893136584563e-06,
+                  "fine": 1.3041709068239982e-06,
+                  "abs_difference": 8.448159316554182e-08,
+                  "tolerance": 2.304170906823998e-07,
+                  "tolerance_ratio": 0.36664638423887047
+                }
+              ]
+            },
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.5129427534183983,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999126326498001,
+                "max_abs_difference": 6.640325358464594e-07,
+                "max_abs_reference_response": 5.190209089933617e-05,
+                "max_abs_difference_over_max_abs_response": 0.012793945760958781,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDL",
+                  "coarse": 1.1945548629377356e-05,
+                  "fine": 1.1281516093530897e-05,
+                  "abs_difference": 6.640325358464594e-07,
+                  "tolerance": 1.2945548629377356e-06,
+                  "tolerance_ratio": 0.5129427534183983
+                },
+                {
+                  "target": "RIAL",
+                  "receiver": "RMDL",
+                  "coarse": 2.531510524872438e-06,
+                  "fine": 2.443927563766657e-06,
+                  "abs_difference": 8.758296110578101e-08,
+                  "tolerance": 3.531510524872438e-07,
+                  "tolerance_ratio": 0.2480042477261047
+                },
+                {
+                  "target": "AIZR",
+                  "receiver": "RMDL",
+                  "coarse": 1.8773307300934405e-06,
+                  "fine": 1.8252960771736326e-06,
+                  "abs_difference": 5.203465291980791e-08,
+                  "tolerance": 2.8773307300934407e-07,
+                  "tolerance_ratio": 0.18084348933401234
+                }
+              ]
+            },
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.3602587183688288,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999279302649815,
+                "max_abs_difference": 7.403177191278587e-07,
+                "max_abs_reference_response": 2.6285651167690105e-05,
+                "max_abs_difference_over_max_abs_response": 0.028164328682785122,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDVL",
+                  "coarse": 2.770754784497953e-07,
+                  "fine": 3.2480264888778976e-07,
+                  "abs_difference": 4.772717043799446e-08,
+                  "tolerance": 1.3248026488877898e-07,
+                  "tolerance_ratio": 0.3602587183688288
+                },
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDL",
+                  "coarse": 2.3483414876013242e-06,
+                  "fine": 2.246413228546018e-06,
+                  "abs_difference": 1.0192825905530611e-07,
+                  "tolerance": 3.348341487601324e-07,
+                  "tolerance_ratio": 0.30441416872424565
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": 2.6285651167690105e-05,
+                  "fine": 2.5545333448562246e-05,
+                  "abs_difference": 7.403177191278587e-07,
+                  "tolerance": 2.7285651167690107e-06,
+                  "tolerance_ratio": 0.2713212576742514
+                }
+              ]
+            }
+          ],
+          "phase_mean": {
+            "vector": {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999824348526708,
+              "max_abs_difference": 3.7962041507522137e-07,
+              "max_abs_reference_response": 2.693826478417094e-05,
+              "max_abs_difference_over_max_abs_response": 0.014092237125024039,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            "pair_count": 986,
+            "mixed_tolerance_passed": true,
+            "mixed_failures": 0,
+            "mixed_pass_fraction": 1.0,
+            "maximum_tolerance_ratio": 0.13405676744721287,
+            "modeled_active_pairs": 24,
+            "active_sign_flips": 0,
+            "maximum_downstream_response": 2.731788519924616e-05,
+            "worst_pairs": [
+              {
+                "target": "RMDL",
+                "receiver": "RMDR",
+                "coarse": 2.693826478417094e-05,
+                "fine": 2.731788519924616e-05,
+                "abs_difference": 3.7962041507522137e-07,
+                "tolerance": 2.831788519924616e-06,
+                "tolerance_ratio": 0.13405676744721287
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDVL",
+                "coarse": -3.267183280031283e-07,
+                "fine": -3.3846472549670104e-07,
+                "abs_difference": 1.1746397493572758e-08,
+                "tolerance": 1.338464725496701e-07,
+                "tolerance_ratio": 0.08776023207644637
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDVL",
+                "coarse": 2.6840888514567673e-07,
+                "fine": 2.758171808725507e-07,
+                "abs_difference": 7.408295726873959e-09,
+                "tolerance": 1.2758171808725505e-07,
+                "tolerance_ratio": 0.058067063509893435
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDL",
+                "coarse": 1.4436451768379266e-05,
+                "fine": 1.4498479569968747e-05,
+                "abs_difference": 6.202780158948151e-08,
+                "tolerance": 1.5498479569968746e-06,
+                "tolerance_ratio": 0.04002186234427291
+              },
+              {
+                "target": "AVER",
+                "receiver": "RMDL",
+                "coarse": 1.3382535796468975e-06,
+                "fine": 1.346652017536476e-06,
+                "abs_difference": 8.398437889578503e-09,
+                "tolerance": 2.346652017536476e-07,
+                "tolerance_ratio": 0.035789021238842283
+              },
+              {
+                "target": "RIAR",
+                "receiver": "RMDR",
+                "coarse": 8.504099906214702e-07,
+                "fine": 8.461892125888326e-07,
+                "abs_difference": 4.22077803263754e-09,
+                "tolerance": 1.85040999062147e-07,
+                "tolerance_ratio": 0.022809961327651333
+              },
+              {
+                "target": "AIZR",
+                "receiver": "RMDR",
+                "coarse": 2.319567092096131e-06,
+                "fine": 2.312572099955057e-06,
+                "abs_difference": 6.994992141073908e-09,
+                "tolerance": 3.3195670920961306e-07,
+                "tolerance_ratio": 0.021072001098362922
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDDR",
+                "coarse": 6.468493127242958e-08,
+                "fine": 6.272695132758521e-08,
+                "abs_difference": 1.957979944844368e-09,
+                "tolerance": 1.0646849312724296e-07,
+                "tolerance_ratio": 0.018390228764713905
+              },
+              {
+                "target": "SMDDL",
+                "receiver": "RMDR",
+                "coarse": -1.6993271721443826e-06,
+                "fine": -1.6948051192455793e-06,
+                "abs_difference": 4.522052898803253e-09,
+                "tolerance": 2.699327172144383e-07,
+                "tolerance_ratio": 0.016752518721955705
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDDL",
+                "coarse": -7.270106130996545e-08,
+                "fine": -7.431504600585725e-08,
+                "abs_difference": 1.6139846958918014e-09,
+                "tolerance": 1.0743150460058573e-07,
+                "tolerance_ratio": 0.015023383521364196
+              }
+            ],
+            "absolute_tolerance": 1e-07,
+            "relative_tolerance": 0.1,
+            "scope": "Mixed tolerance is a prospective engineering resolution convention, not biological noise; vector check remains separate"
+          }
+        }
+      ]
+    },
+    "parent": {
+      "metadata": {
+        "complete": true,
+        "checkpoint_sha256": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d",
+        "anchors_sha256": "bb941a77275d39be693a1f2d9a4548365599e1624fe1e1c09b7728028241840b",
+        "controls_passed": true,
+        "sham_rhythms_preserved": true,
+        "targeted_per_phase_checks_passed": false,
+        "targeted_phase_mean_checks_passed": false,
+        "error": null
+      },
+      "baseline_reproduction": [
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 1.0,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 0.0002192801836654601,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 1.0,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 0.00016418980235066716,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 0.9999999999999999,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 0.00026424037191730143,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 1.0,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 0.0002581656917508557,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        },
+        {
+          "passed": true,
+          "finite_and_same_shape": true,
+          "correlation": 0.9999999999999998,
+          "max_abs_difference": 0.0,
+          "max_abs_reference_response": 0.0002264690124210711,
+          "max_abs_difference_over_max_abs_response": 0.0,
+          "relative_tolerance": 1e-06,
+          "absolute_tolerance": 1e-12,
+          "minimum_correlation": 0.999999,
+          "constant_response": false
+        }
+      ],
+      "comparisons": [
+        {
+          "steps_ms": [
+            0.03125,
+            0.015625
+          ],
+          "per_phase": [
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.3918813235879005,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999579318955244,
+                "max_abs_difference": 1.6348012236155895e-06,
+                "max_abs_reference_response": 0.0002192801836654601,
+                "max_abs_difference_over_max_abs_response": 0.007455307617352636,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RIVL",
+                  "receiver": "RMDVL",
+                  "coarse": 3.908194119850439e-05,
+                  "fine": 4.071674242211998e-05,
+                  "abs_difference": 1.6348012236155895e-06,
+                  "tolerance": 4.171674242211998e-06,
+                  "tolerance_ratio": 0.3918813235879005
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": -2.9173935190529576e-05,
+                  "fine": -2.807582653618912e-05,
+                  "abs_difference": 1.0981086543404572e-06,
+                  "tolerance": 3.0173935190529578e-06,
+                  "tolerance_ratio": 0.36392623216248926
+                },
+                {
+                  "target": "RIAR",
+                  "receiver": "RMDR",
+                  "coarse": 2.2226487599308342e-06,
+                  "fine": 2.3188769004978127e-06,
+                  "abs_difference": 9.622814056697848e-08,
+                  "tolerance": 3.3188769004978127e-07,
+                  "tolerance_ratio": 0.2899418792921931
+                }
+              ]
+            },
+            {
+              "mixed_failures": 2,
+              "maximum_tolerance_ratio": 4.890302102618104,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999782112410666,
+                "max_abs_difference": 1.1820806042894816e-06,
+                "max_abs_reference_response": 0.00016418980235066716,
+                "max_abs_difference_over_max_abs_response": 0.007199476382612738,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDVL",
+                  "coarse": -1.010832431647124e-06,
+                  "fine": -2.747462479746332e-08,
+                  "abs_difference": 9.833578068496607e-07,
+                  "tolerance": 2.010832431647124e-07,
+                  "tolerance_ratio": 4.890302102618104
+                },
+                {
+                  "target": "RIAR",
+                  "receiver": "RMDR",
+                  "coarse": 4.0761315844850543e-07,
+                  "fine": 1.9969934239583154e-07,
+                  "abs_difference": 2.079138160526739e-07,
+                  "tolerance": 1.4076131584485054e-07,
+                  "tolerance_ratio": 1.4770664426143896
+                },
+                {
+                  "target": "AVER",
+                  "receiver": "RMDR",
+                  "coarse": -7.012952435436759e-07,
+                  "fine": -8.707428948984131e-07,
+                  "abs_difference": 1.6944765135473716e-07,
+                  "tolerance": 1.870742894898413e-07,
+                  "tolerance_ratio": 0.9057773348589341
+                }
+              ]
+            },
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.48331484017036036,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999726995279131,
+                "max_abs_difference": 2.25225577055177e-06,
+                "max_abs_reference_response": 0.00026424037191730143,
+                "max_abs_difference_over_max_abs_response": 0.008523511203869528,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RIAR",
+                  "receiver": "RMDR",
+                  "coarse": -1.7995986204555336e-06,
+                  "fine": -1.9417791735643064e-06,
+                  "abs_difference": 1.4218055310877276e-07,
+                  "tolerance": 2.9417791735643064e-07,
+                  "tolerance_ratio": 0.48331484017036036
+                },
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDVL",
+                  "coarse": -1.0108809160191967e-05,
+                  "fine": -9.769429055728196e-06,
+                  "abs_difference": 3.393801044637712e-07,
+                  "tolerance": 1.1108809160191968e-06,
+                  "tolerance_ratio": 0.30550538727402754
+                },
+                {
+                  "target": "AIZR",
+                  "receiver": "RMDR",
+                  "coarse": 1.9670255783088564e-06,
+                  "fine": 1.8793804577033058e-06,
+                  "abs_difference": 8.764512060555063e-08,
+                  "tolerance": 2.9670255783088565e-07,
+                  "tolerance_ratio": 0.2953972532164908
+                }
+              ]
+            },
+            {
+              "mixed_failures": 3,
+              "maximum_tolerance_ratio": 2.370260669845705,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.999966856033931,
+                "max_abs_difference": 1.6611085350559662e-06,
+                "max_abs_reference_response": 0.0002581656917508557,
+                "max_abs_difference_over_max_abs_response": 0.006434272981008757,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RIVL",
+                  "receiver": "RMDVL",
+                  "coarse": 2.5207128282467295e-06,
+                  "fine": 3.6144601747167826e-06,
+                  "abs_difference": 1.0937473464700531e-06,
+                  "tolerance": 4.614460174716783e-07,
+                  "tolerance_ratio": 2.370260669845705
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": -6.062073544366164e-06,
+                  "fine": -4.400965009310198e-06,
+                  "abs_difference": 1.6611085350559662e-06,
+                  "tolerance": 7.062073544366165e-07,
+                  "tolerance_ratio": 2.3521541153888594
+                },
+                {
+                  "target": "RIAR",
+                  "receiver": "RMDR",
+                  "coarse": -3.627677304107735e-07,
+                  "fine": -2.1577238118464237e-07,
+                  "abs_difference": 1.469953492261311e-07,
+                  "tolerance": 1.3627677304107733e-07,
+                  "tolerance_ratio": 1.0786529937997793
+                }
+              ]
+            }
+          ],
+          "phase_mean": {
+            "vector": {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999815507804276,
+              "max_abs_difference": 1.5395467407863794e-06,
+              "max_abs_reference_response": 0.0002264690124210711,
+              "max_abs_difference_over_max_abs_response": 0.0067980458974401265,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            "pair_count": 986,
+            "mixed_tolerance_passed": false,
+            "mixed_failures": 1,
+            "mixed_pass_fraction": 0.9989858012170385,
+            "maximum_tolerance_ratio": 3.97472670046374,
+            "modeled_active_pairs": 34,
+            "active_sign_flips": 0,
+            "maximum_downstream_response": 0.0002264690124210711,
+            "worst_pairs": [
+              {
+                "target": "RIVL",
+                "receiver": "RMDVL",
+                "coarse": -3.961438146959928e-08,
+                "fine": 5.939287245348979e-07,
+                "abs_difference": 6.335431060044971e-07,
+                "tolerance": 1.5939287245348978e-07,
+                "tolerance_ratio": 3.97472670046374
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDVL",
+                "coarse": -1.0648679607844214e-05,
+                "fine": -1.0102177343956908e-05,
+                "abs_difference": 5.465022638873052e-07,
+                "tolerance": 1.1648679607844214e-06,
+                "tolerance_ratio": 0.46915382883334766
+              },
+              {
+                "target": "RIAR",
+                "receiver": "RMDR",
+                "coarse": 1.1697389187825813e-07,
+                "fine": 9.025617203617387e-08,
+                "abs_difference": 2.6717719842084264e-08,
+                "tolerance": 1.116973891878258e-07,
+                "tolerance_ratio": 0.23919735310157367
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDR",
+                "coarse": -8.351933733410921e-05,
+                "fine": -8.197979059332283e-05,
+                "abs_difference": 1.5395467407863794e-06,
+                "tolerance": 8.451933733410923e-06,
+                "tolerance_ratio": 0.18215319586575474
+              },
+              {
+                "target": "AVER",
+                "receiver": "RMDR",
+                "coarse": -2.876839044957391e-06,
+                "fine": -2.9232457111616483e-06,
+                "abs_difference": 4.640666620425726e-08,
+                "tolerance": 3.9232457111616487e-07,
+                "tolerance_ratio": 0.1182864128857138
+              },
+              {
+                "target": "RIAL",
+                "receiver": "RMDVL",
+                "coarse": 1.3600579193195905e-05,
+                "fine": 1.3726174431377691e-05,
+                "abs_difference": 1.2559523818178597e-07,
+                "tolerance": 1.472617443137769e-06,
+                "tolerance_ratio": 0.08528707762293976
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDDL",
+                "coarse": -1.0185970328313587e-07,
+                "fine": -1.0691769503079485e-07,
+                "abs_difference": 5.057991747658974e-09,
+                "tolerance": 1.1069176950307947e-07,
+                "tolerance_ratio": 0.04569437972096254
+              },
+              {
+                "target": "ADAL",
+                "receiver": "RMDR",
+                "coarse": -1.2012465000488248e-07,
+                "fine": -1.2508764365981584e-07,
+                "abs_difference": 4.9629936549333564e-09,
+                "tolerance": 1.1250876436598158e-07,
+                "tolerance_ratio": 0.044112062583757064
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDL",
+                "coarse": 0.0002264690124210711,
+                "fine": 0.00022563335520880967,
+                "abs_difference": 8.356572122614203e-07,
+                "tolerance": 2.274690124210711e-05,
+                "tolerance_ratio": 0.03673718909521282
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDVL",
+                "coarse": 6.38284468061634e-05,
+                "fine": 6.406618320856095e-05,
+                "abs_difference": 2.3773640239754812e-07,
+                "tolerance": 6.5066183208560946e-06,
+                "tolerance_ratio": 0.036537628407603974
+              }
+            ],
+            "absolute_tolerance": 1e-07,
+            "relative_tolerance": 0.1,
+            "scope": "Mixed tolerance is a prospective engineering resolution convention, not biological noise; vector check remains separate"
+          }
+        },
+        {
+          "steps_ms": [
+            0.015625,
+            0.0078125
+          ],
+          "per_phase": [
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.19726978871390152,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999893803699637,
+                "max_abs_difference": 8.395062177646295e-07,
+                "max_abs_reference_response": 0.0002180143677996682,
+                "max_abs_difference_over_max_abs_response": 0.00385069216417904,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RIVL",
+                  "receiver": "RMDVL",
+                  "coarse": 4.071674242211998e-05,
+                  "fine": 4.155624863988461e-05,
+                  "abs_difference": 8.395062177646295e-07,
+                  "tolerance": 4.255624863988461e-06,
+                  "tolerance_ratio": 0.19726978871390152
+                },
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": -2.807582653618912e-05,
+                  "fine": -2.75835290629578e-05,
+                  "abs_difference": 4.922974732313179e-07,
+                  "tolerance": 2.907582653618912e-06,
+                  "tolerance_ratio": 0.1693150399761058
+                },
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDVL",
+                  "coarse": -1.7708857707576797e-05,
+                  "fine": -1.7533793955415433e-05,
+                  "abs_difference": 1.7506375216136405e-07,
+                  "tolerance": 1.8708857707576799e-06,
+                  "tolerance_ratio": 0.09357265681189393
+                }
+              ]
+            },
+            {
+              "mixed_failures": 1,
+              "maximum_tolerance_ratio": 3.3819371303539385,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999945637713347,
+                "max_abs_difference": 5.935284774771787e-07,
+                "max_abs_reference_response": 0.00016300772174637768,
+                "max_abs_difference_over_max_abs_response": 0.0036411065139640725,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDVL",
+                  "coarse": -2.747462479746332e-08,
+                  "fine": 4.6950156618041916e-07,
+                  "abs_difference": 4.969761909778825e-07,
+                  "tolerance": 1.4695015661804192e-07,
+                  "tolerance_ratio": 3.3819371303539385
+                },
+                {
+                  "target": "RIAR",
+                  "receiver": "RMDR",
+                  "coarse": 1.9969934239583154e-07,
+                  "fine": 8.614929469796806e-08,
+                  "abs_difference": 1.1355004769786348e-07,
+                  "tolerance": 1.1996993423958314e-07,
+                  "tolerance_ratio": 0.9464875380451657
+                },
+                {
+                  "target": "AVER",
+                  "receiver": "RMDR",
+                  "coarse": -8.707428948984131e-07,
+                  "fine": -9.591563803201808e-07,
+                  "abs_difference": 8.841348542176775e-08,
+                  "tolerance": 1.9591563803201809e-07,
+                  "tolerance_ratio": 0.4512834519484275
+                }
+              ]
+            },
+            {
+              "mixed_failures": 0,
+              "maximum_tolerance_ratio": 0.18800776568885244,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999930412059452,
+                "max_abs_difference": 1.0903423341979135e-06,
+                "max_abs_reference_response": 0.0002647481349631331,
+                "max_abs_difference_over_max_abs_response": 0.004118413655113176,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RIAR",
+                  "receiver": "RMDR",
+                  "coarse": -1.9417791735643064e-06,
+                  "fine": -1.998146659021316e-06,
+                  "abs_difference": 5.6367485457009536e-08,
+                  "tolerance": 2.998146659021316e-07,
+                  "tolerance_ratio": 0.18800776568885244
+                },
+                {
+                  "target": "RMDR",
+                  "receiver": "RMDVL",
+                  "coarse": -9.769429055728196e-06,
+                  "fine": -9.609839114910201e-06,
+                  "abs_difference": 1.595899408179946e-07,
+                  "tolerance": 1.0769429055728195e-06,
+                  "tolerance_ratio": 0.14818793084774506
+                },
+                {
+                  "target": "AIZR",
+                  "receiver": "RMDR",
+                  "coarse": 1.8793804577033058e-06,
+                  "fine": 1.8446400830152143e-06,
+                  "abs_difference": 3.4740374688091435e-08,
+                  "tolerance": 2.879380457703306e-07,
+                  "tolerance_ratio": 0.12065225557515094
+                }
+              ]
+            },
+            {
+              "mixed_failures": 2,
+              "maximum_tolerance_ratio": 1.6030321472430846,
+              "active_sign_flips": 0,
+              "vector": {
+                "passed": true,
+                "finite_and_same_shape": true,
+                "correlation": 0.9999908081403116,
+                "max_abs_difference": 8.657920536059294e-07,
+                "max_abs_reference_response": 0.0002567631963260597,
+                "max_abs_difference_over_max_abs_response": 0.0033719476388916468,
+                "relative_tolerance": 0.1,
+                "absolute_tolerance": 0.0,
+                "minimum_correlation": 0.9,
+                "constant_response": false
+              },
+              "worst_pairs": [
+                {
+                  "target": "RMDL",
+                  "receiver": "RMDR",
+                  "coarse": -4.400965009310198e-06,
+                  "fine": -3.535172955704269e-06,
+                  "abs_difference": 8.657920536059294e-07,
+                  "tolerance": 5.400965009310198e-07,
+                  "tolerance_ratio": 1.6030321472430846
+                },
+                {
+                  "target": "RIVL",
+                  "receiver": "RMDVL",
+                  "coarse": 3.6144601747167826e-06,
+                  "fine": 4.176964173541187e-06,
+                  "abs_difference": 5.62503998824404e-07,
+                  "tolerance": 5.176964173541187e-07,
+                  "tolerance_ratio": 1.08655184770119
+                },
+                {
+                  "target": "RIAR",
+                  "receiver": "RMDR",
+                  "coarse": -2.1577238118464237e-07,
+                  "fine": -1.3149603228512774e-07,
+                  "abs_difference": 8.427634889951463e-08,
+                  "tolerance": 1.2157723811846422e-07,
+                  "tolerance_ratio": 0.6931918359372188
+                }
+              ]
+            }
+          ],
+          "phase_mean": {
+            "vector": {
+              "passed": true,
+              "finite_and_same_shape": true,
+              "correlation": 0.9999953038116791,
+              "max_abs_difference": 7.604900846280849e-07,
+              "max_abs_reference_response": 0.00022563335520880967,
+              "max_abs_difference_over_max_abs_response": 0.003370468359717022,
+              "relative_tolerance": 0.1,
+              "absolute_tolerance": 0.0,
+              "minimum_correlation": 0.9,
+              "constant_response": false
+            },
+            "pair_count": 986,
+            "mixed_tolerance_passed": false,
+            "mixed_failures": 1,
+            "mixed_pass_fraction": 0.9989858012170385,
+            "maximum_tolerance_ratio": 1.7062088544906633,
+            "modeled_active_pairs": 34,
+            "active_sign_flips": 0,
+            "maximum_downstream_response": 0.00022563335520880967,
+            "worst_pairs": [
+              {
+                "target": "RIVL",
+                "receiver": "RMDVL",
+                "coarse": 5.939287245348979e-07,
+                "fine": 9.218336904925906e-07,
+                "abs_difference": 3.279049659576927e-07,
+                "tolerance": 1.9218336904925905e-07,
+                "tolerance_ratio": 1.7062088544906633
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDVL",
+                "coarse": -1.0102177343956908e-05,
+                "fine": -9.819900439134166e-06,
+                "abs_difference": 2.822769048227425e-07,
+                "tolerance": 1.1102177343956907e-06,
+                "tolerance_ratio": 0.25425364419745133
+              },
+              {
+                "target": "RIAR",
+                "receiver": "RMDR",
+                "coarse": 9.025617203617387e-08,
+                "fine": 7.625468473326791e-08,
+                "abs_difference": 1.4001487302905957e-08,
+                "tolerance": 1.0902561720361738e-07,
+                "tolerance_ratio": 0.12842382975697017
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDR",
+                "coarse": -8.197979059332283e-05,
+                "fine": -8.121930050869475e-05,
+                "abs_difference": 7.604900846280849e-07,
+                "tolerance": 8.297979059332285e-06,
+                "tolerance_ratio": 0.09164762639076597
+              },
+              {
+                "target": "AVER",
+                "receiver": "RMDR",
+                "coarse": -2.9232457111616483e-06,
+                "fine": -2.9430360889148854e-06,
+                "abs_difference": 1.979037775323711e-08,
+                "tolerance": 3.9430360889148856e-07,
+                "tolerance_ratio": 0.05019070915651542
+              },
+              {
+                "target": "RIAL",
+                "receiver": "RMDVL",
+                "coarse": 1.3726174431377691e-05,
+                "fine": 1.3792141633856003e-05,
+                "abs_difference": 6.5967202478312e-08,
+                "tolerance": 1.4792141633856003e-06,
+                "tolerance_ratio": 0.044596113335831904
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDDL",
+                "coarse": -1.0691769503079485e-07,
+                "fine": -1.0972877589887631e-07,
+                "abs_difference": 2.8110808680814614e-09,
+                "tolerance": 1.1097287758988763e-07,
+                "tolerance_ratio": 0.02533124245430597
+              },
+              {
+                "target": "ADAL",
+                "receiver": "RMDR",
+                "coarse": -1.2508764365981584e-07,
+                "fine": -1.27699078089627e-07,
+                "abs_difference": 2.6114344298111547e-09,
+                "tolerance": 1.127699078089627e-07,
+                "tolerance_ratio": 0.023157192202684446
+              },
+              {
+                "target": "RMDL",
+                "receiver": "RMDVL",
+                "coarse": 6.406618320856095e-05,
+                "fine": 6.418721714734898e-05,
+                "abs_difference": 1.2103393878803992e-07,
+                "tolerance": 6.518721714734899e-06,
+                "tolerance_ratio": 0.018567127741387572
+              },
+              {
+                "target": "RMDR",
+                "receiver": "RMDL",
+                "coarse": 0.00022563335520880967,
+                "fine": 0.00022521267981964743,
+                "abs_difference": 4.2067538916223945e-07,
+                "tolerance": 2.266333552088097e-05,
+                "tolerance_ratio": 0.018561936250498002
+              }
+            ],
+            "absolute_tolerance": 1e-07,
+            "relative_tolerance": 0.1,
+            "scope": "Mixed tolerance is a prospective engineering resolution convention, not biological noise; vector check remains separate"
+          }
+        }
+      ]
+    }
+  },
+  "interpretation": [
+    "All12 preselected targets, four phases and new baseline/two fine grids complete. Integrity, controls and sham rhythms pass;10 baseline-reproduction vectors match exactly (zero max difference). No parameter updates or fitting.",
+    "Selected targeted phase mean passes both new successive comparisons for all986observed pairs at0.03125->0.015625->0.0078125ms. Max-normalized vector errors3.143% then1.409%, max per-pair tolerance ratios0.2938 then0.1341.",
+    "Selected finest individual-phase counts0/1/0/0: remaining RMDL->RMDR at phase index1, mixed ratio1.2398. Previous comparison also has phase0/1 failures. Overall per-phase check remainsFalse.",
+    "Parent finest individual-phase counts0/1/0/2; phase mean still one failure RIVL->RMDVL, max ratio1.7062. Parent phase-mean absolute adjacent error6.335e-7->3.279e-7 shrinks with refinement, though both comparisons still fail.",
+    "Zero active modeled sign flips throughout printed E110 comparisons; sub-deadband sign changes can still occur. No relaxation of1e-7+10% engineering pair tolerance or vector gate.",
+    "Only12targets/986pairs tested at finer steps; AIYL has no qualifying cached observed pair and remains a simulated fixed control. Full135-target atlas is not qualified by this subset result.",
+    "No new atlas accuracy evaluation, independent solver, reference-cycle robustness, body dynamics, sensory start/stop or biological promotion."
+  ],
+  "unavailable_evidence": [
+    "Full per-file hashes, source/environment archives, control residuals, complete all-pair ratio masks and source-selection location records remain external; supplied stdout reports aggregate audit and model/anchor hashes.",
+    "No new unsimulated-target finer-grid evidence or fitted-weight revalidation."
+  ],
+  "decision": "Retain selected phase-mean targeted success separately from failed per-phase and parent checks. Next prospective test can retain all12targets and same anchors, add two finer levels and require two successive passes without threshold changes; no new optimization authorized or launched by this upload."
+}
