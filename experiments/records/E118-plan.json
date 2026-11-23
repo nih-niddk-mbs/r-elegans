@@ -1,0 +1,10 @@
+{
+  "experiment": "E118",
+  "recorded_date": "2026-11-22",
+  "status": "planned; not executed",
+  "parent": "Same pinned qualified E115, never rejected E117 weights",
+  "method": "One averaged-gradient proposal:16 train-only targets (two fine/fourteen coarse),eight independent antithetic SPSA directions,seed1180,perturbation0.005,Adam first step0.00025. All302cells/9538unknown coordinates, own states and original cumulative/frozen bounds unchanged. More directions reduce Monte Carlo variance in principle; improvement not guaranteed. Panel size/directions/step all changed, so outcome cannot isolate their effects.",
+  "budget": "480minutes TOTAL including final validation/audit; last10min audit reserve. One broader proposal, not eight hours of repeated updates; may finish early.",
+  "acceptance": "Same E117 full135target/threegrid checks, own-state long dynamics/panel replay, training+validation improvement, parameters changed and clean complete audit. Full atlas evaluated once; no independent full-loss reproduction claim. No behavior qualification.",
+  "command": "sh scripts/launch_extended_panel_atlas_fit_mbslnx2.sh"
+}

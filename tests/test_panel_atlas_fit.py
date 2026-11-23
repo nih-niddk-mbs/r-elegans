@@ -21,8 +21,8 @@ def test_train_only_stratification_and_no_silent_short_panel():
     assert expensive_first(tasks)[0]['step_ms']==.01
 
 
-@pytest.mark.parametrize('improve',[False,True])
-def test_full_proposal_selection_and_independent_audit(tmp_path,monkeypatch,improve):
+@pytest.mark.parametrize('improve,extended',[(False,False),(True,False),(True,True)])
+def test_full_proposal_selection_and_independent_audit(tmp_path,monkeypatch,improve,extended):
     import scripts.run_panel_atlas_fit as pilot
     from scripts.stable_atlas_policy import Coordinates
     from r_elegans.brain.rhythm_qualification import rhythm_metrics
@@ -30,10 +30,10 @@ def test_full_proposal_selection_and_independent_audit(tmp_path,monkeypatch,impr
     root=tmp_path/'run';root.mkdir();source=tmp_path/'source';source.mkdir()
     inputs=root/'inputs';inputs.mkdir();origin=saved_arrays(BUNDLE);ids=origin['neuron_ids'].tolist()
     parent=inputs/'parent.npz';np.savez_compressed(parent,**origin);codec=Coordinates(origin)
-    names=ids[:9];pairs=[[t,r] for t in names for r in ids[20:27]]
+    names=ids[:17] if extended else ids[:9];pairs=[[t,r] for t in names for r in ids[20:27]]
     stats=dict(targets=names,stats={s:dict(pairs=pairs,mean_z=np.linspace(-1,1,len(pairs)).tolist()) for s in ('train','val','test')})
     st=inputs/'statistics.json';write(st,stats)
-    base=np.random.default_rng(9).normal(0,1e-5,(4,9,302));baselines=[]
+    base=np.random.default_rng(9).normal(0,1e-5,(4,len(names),302));baselines=[]
     for i in range(3):
         path=inputs/f'base-{i}.npz';np.savez_compressed(path,response=base);baselines.append(str(path))
     absfile=inputs/'absolute.npz';np.savez_compressed(absfile,offsets=np.zeros(codec.size))
@@ -42,13 +42,13 @@ def test_full_proposal_selection_and_independent_audit(tmp_path,monkeypatch,impr
     vv=20*np.sin(2*np.pi*2*np.arange(20000)*.002)-40;longrm=[[rhythm_metrics(vv,.002)]*2 for _ in range(2)]
     write(source/'autonomy.json',dict(selected=dict(rhythms=longrm)))
     steps=(.125,.0625,.03125,.0078125,.00390625,.001953125)
-    manifest=dict(parent=str(parent),parent_sha256=file_sha256(parent),statistics=str(st),targets=names,hard=[names[0]],
+    manifest=dict(parent=str(parent),parent_sha256=file_sha256(parent),statistics=str(st),targets=names,hard=names[:2] if extended else [names[0]],
         stimulus_nS=.03,baselines=baselines,parent_absolute_offsets=str(absfile),parent_absolute_offsets_sha256=file_sha256(absfile),
         evidence_sha256={str(source/'autonomy.json'):file_sha256(source/'autonomy.json')},
         rhythm_references={str(step):rm for step in steps},source=str(source),continuation={},policy={})
     def prepare(src,out):return manifest
     monkeypatch.setattr(pilot,'prepare_continuation',prepare)
-    write(root/'deadline.json',dict(coordinator_deadline=100000000000,parent_run=str(source)))
+    write(root/'deadline.json',dict(coordinator_deadline=100000000000,parent_run=str(source),extended=extended,total_minutes=480 if extended else 120))
     class FakePool:
         def __init__(self,root):pass
         def close(self):pass

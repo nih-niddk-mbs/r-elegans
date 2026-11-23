@@ -15,10 +15,10 @@ from scripts.selected_atlas_audit_checks import saved_arrays
 from scripts.experiment_records import capture_run_record, file_sha256
 
 
-def training_panel(statistics, hard, rng):
+def training_panel(statistics, hard, rng, *, size=8, fine_count=1):
     pool=eligible_targets(statistics,'train');fine=sorted(set(pool)&set(hard));coarse=sorted(set(pool)-set(hard))
-    if not fine or len(coarse)<7:raise ValueError('Eight-target stratified train support unavailable')
-    return sorted(rng.choice(fine,1,replace=False).tolist()+rng.choice(coarse,7,replace=False).tolist())
+    if len(fine)<fine_count or len(coarse)<size-fine_count:raise ValueError('Eight-target stratified train support unavailable')
+    return sorted(rng.choice(fine,fine_count,replace=False).tolist()+rng.choice(coarse,size-fine_count,replace=False).tolist())
 
 
 def expensive_first(specs):
@@ -39,29 +39,31 @@ def decision(metrics):
 
 
 def coordinator(root):
-    deadline=json.loads((root/'deadline.json').read_text())['coordinator_deadline']
+    budget=json.loads((root/'deadline.json').read_text());deadline=budget['coordinator_deadline']
+    extended=budget.get('extended',False);seed=1180 if extended else 1170
+    count=8 if extended else 2;size=16 if extended else 8;fine_count=2 if extended else 1;lr=.00025 if extended else .0005
     source=Path(json.loads((root/'deadline.json').read_text())['parent_run'])
-    m=prepare_continuation(source,root);m.update(experiment='E117',seed=1170,own_state=True,
-        pilot=dict(targets=8,directions=2,learning_rate=.0005,one_proposal=True,
+    m=prepare_continuation(source,root);m.update(experiment='E118' if extended else 'E117',seed=seed,own_state=True,
+        pilot=dict(targets=size,fine_count=fine_count,directions=count,learning_rate=lr,one_proposal=True,
             final_numerics='Full atlas once; independently repeat fresh-state finest panel, not full loss'))
-    m['continuation']['seed']=1170
-    m['policy'].update(lr=.0005,minibatch=8,directions=2,total_minutes=120,training_cutoff_minutes=110,
+    m['continuation']['seed']=seed
+    m['policy'].update(lr=lr,minibatch=size,directions=count,total_minutes=budget.get('total_minutes',120),training_cutoff_minutes=budget.get('total_minutes',120)-10,
         selection='Single own-state full-atlas candidate evaluation plus independent fresh-state/panel replay')
     write(root/'manifest.json',m)
     arrays=saved_arrays(m['parent']);codec=Coordinates(arrays);ids=arrays['neuron_ids'].tolist()
-    stats=json.loads(Path(m['statistics']).read_text());rng=np.random.default_rng(1170)
-    panel=training_panel(stats,m['hard'],rng);directions=rng.choice([-1.,1.],(2,codec.size))
+    stats=json.loads(Path(m['statistics']).read_text());rng=np.random.default_rng(seed)
+    panel=training_panel(stats,m['hard'],rng,size=size,fine_count=fine_count);directions=rng.choice([-1.,1.],(count,codec.size))
     absolute=saved_arrays(m['parent_absolute_offsets'])['offsets'];lower=np.maximum(-.1,-.1-absolute);upper=np.minimum(.1,.1-absolute)
     trials=root/'trials';trials.mkdir();values={};models={'current':m['parent']}
     def save(name,x):
         if np.max(abs(absolute+x))>.1+1e-12:raise ValueError('Cumulative bound exceeded')
         folder=trials/name;folder.mkdir();path=folder/'network.npz';np.savez_compressed(path,**codec.apply(x))
         np.savez_compressed(folder/'coordinates.npz',offsets=x);values[name]=x;models[name]=str(path);return path
-    for i in range(2):
+    for i in range(count):
         save(f'd{i}-plus',np.clip(.005*directions[i],lower,upper))
         save(f'd{i}-minus',np.clip(-.005*directions[i],lower,upper))
     np.savez_compressed(root/'directions.npz',directions=directions)
-    write(root/'rng.json',rng.bit_generator.state);write(root/'panel.json',dict(targets=panel,seed=1170,labels='train only'))
+    write(root/'rng.json',rng.bit_generator.state);write(root/'panel.json',dict(targets=panel,seed=seed,labels='train only'))
     pool=Pool(root)
     try:
         # All models get their own full states; current parent is reproduced too.
@@ -82,13 +84,13 @@ def coordinator(root):
             old=saved_arrays(m['baselines'][level])['response'][:,[m['targets'].index(t) for t in panel]]
             parent_errors.append(float(abs(matrices['current'][level]-old).max()))
         gradients=[]
-        for i in range(2):
+        for i in range(count):
             a,b=f'd{i}-plus',f'd{i}-minus'
             gradients.append(((metrics[a]['data_loss']+prior(values[a]))-(metrics[b]['data_loss']+prior(values[b])))/.01*directions[i])
         averaged=np.mean(gradients,axis=0)
         gradient_pass=all(r['passed'] for r in metrics.values()) and max(parent_errors)<=1e-10
         used=averaged if gradient_pass else np.zeros_like(averaged)
-        z=np.zeros(codec.size);proposal,mom,var=adam_step(z,z,z,used,1,learning_rate=.0005);proposal=np.clip(proposal,lower,upper)
+        z=np.zeros(codec.size);proposal,mom,var=adam_step(z,z,z,used,1,learning_rate=lr);proposal=np.clip(proposal,lower,upper)
         save('proposal',proposal)
         np.savez_compressed(root/'optimizer.npz',per_direction_gradients=gradients,averaged_gradient=averaged,
             used_gradient=used,first_moment=mom,second_moment=var,proposal=proposal,iteration=1)
@@ -122,7 +124,7 @@ def coordinator(root):
             selected_sha256=file_sha256(models['proposal'] if chosen else m['parent']),gates=gates,
             parent_validation_loss=parent_val,candidate_validation_loss=final['data_loss']))
         scores={split:loss(fullmat[2],m['targets'],ids,stats,split) for split in ('train','val','test')}
-        result=dict(experiment='E117',execution_complete=True,validation_complete=True,iterations=1,
+        result=dict(experiment=m['experiment'],execution_complete=True,validation_complete=True,iterations=1,
             accepted_updates=int(gates['training_improved']),fit_qualified_before_audit=chosen,
             selected_sha256=file_sha256(models['proposal'] if chosen else m['parent']),candidate_scores=scores,
             candidate_parameters=codec.audit(saved_arrays(models['proposal']),proposal),gates=gates,
@@ -151,10 +153,11 @@ def audit(root):
         for path,sha in m['evidence_sha256'].items():pin(path,sha)
         stats=json.loads(pin(m['statistics']).read_text());codec=Coordinates(saved_arrays(pin(m['parent'],m['parent_sha256'])))
         ids=saved_arrays(m['parent'])['neuron_ids'].tolist();panel=json.loads(pin(root/'panel.json').read_text())['targets']
-        checkrng=np.random.default_rng(1170)
-        if panel!=training_panel(stats,m['hard'],checkrng):raise ValueError('Training panel selection differs')
+        config=m['pilot'];count=config['directions'];lr=config['learning_rate']
+        checkrng=np.random.default_rng(m['seed'])
+        if panel!=training_panel(stats,m['hard'],checkrng,size=config['targets'],fine_count=config.get('fine_count',1)):raise ValueError('Training panel selection differs')
         directions=saved_arrays(pin(root/'directions.npz'))['directions']
-        if not np.array_equal(directions,checkrng.choice([-1.,1.],(2,codec.size))):raise ValueError('Direction RNG differs')
+        if not np.array_equal(directions,checkrng.choice([-1.,1.],(count,codec.size))):raise ValueError('Direction RNG differs')
         if json.loads(pin(root/'rng.json').read_text())!=checkrng.bit_generator.state:raise ValueError('RNG state differs')
         absolute=saved_arrays(pin(m['parent_absolute_offsets'],m['parent_absolute_offsets_sha256']))['offsets']
         values={};parameter_checks={}
@@ -194,7 +197,7 @@ def audit(root):
         if not (root/'summary.json').exists():missing.append('Final summary unavailable')
         else:
             s=json.loads(pin(root/'summary.json').read_text());metrics={};matrices={}
-            for name in ('current','d0-plus','d0-minus','d1-plus','d1-minus','proposal'):
+            for name in ['current']+[f'd{i}-{sign}' for i in range(count) for sign in ('plus','minus')]+['proposal']:
                 metrics[name],matrices[name]=analyze_panel(root,m,stats,ids,panel,'panel-'+name)
             for name in s['panel_metrics']:
                 if metrics[name]!=s['panel_metrics'][name]:raise ValueError('Panel score differs')
@@ -203,7 +206,7 @@ def audit(root):
             final,full=analyze_results(final_rows,m,stats,ids,m['targets'],[0,1,2],'val',final=True,reference=False)
             if final!=s['final_metrics']:raise ValueError('Full numerical/validation gates differ')
             optim=saved_arrays(pin(root/'optimizer.npz'));grads=[]
-            for i in range(2):
+            for i in range(count):
                 plus,minus=f'd{i}-plus',f'd{i}-minus'
                 expected_plus=np.clip(.005*directions[i],np.maximum(-.1,-.1-absolute),np.minimum(.1,.1-absolute))
                 expected_minus=np.clip(-.005*directions[i],np.maximum(-.1,-.1-absolute),np.minimum(.1,.1-absolute))
@@ -212,7 +215,7 @@ def audit(root):
             parent_errors=[float(abs(matrices['current'][l]-saved_arrays(m['baselines'][l])['response'][:,[m['targets'].index(t) for t in panel]]).max()) for l in (1,2)]
             screen=all(metrics[name]['passed'] for name in metrics if name!='proposal') and max(parent_errors)<=1e-10
             averaged=np.mean(grads,axis=0);used=averaged if screen else np.zeros_like(averaged);z=np.zeros(codec.size)
-            x,mom,var=adam_step(z,z,z,used,1,learning_rate=.0005);x=np.clip(x,np.maximum(-.1,-.1-absolute),np.minimum(.1,.1-absolute))
+            x,mom,var=adam_step(z,z,z,used,1,learning_rate=lr);x=np.clip(x,np.maximum(-.1,-.1-absolute),np.minimum(.1,.1-absolute))
             for key,a in dict(per_direction_gradients=np.asarray(grads),averaged_gradient=averaged,used_gradient=used,first_moment=mom,second_moment=var,proposal=x).items():
                 if not np.array_equal(optim[key],a):raise ValueError('Optimizer arithmetic differs: '+key)
             if not np.array_equal(x,values['proposal']):raise ValueError('Proposed coordinates differ')
@@ -246,7 +249,7 @@ def audit(root):
         if path.is_file() and path.name not in ('audit.json','budget_receipt.json') and path.suffix in ('.json','.npz','.py'):
             try:pin(path)
             except Exception as exc:problems.append(repr(exc))
-    result=dict(experiment='E117',audit_complete=True,execution_complete=not missing and (root/'summary.json').exists(),
+    result=dict(experiment='E118' if (root/'deadline.json').exists() and json.loads((root/'deadline.json').read_text()).get('extended') else 'E117',audit_complete=True,execution_complete=not missing and (root/'summary.json').exists(),
         integrity_passed=not problems,problems=problems,unavailable_evidence=missing,evidence_sha256=evidence,
         recomputed=report,behavioral_qualification=False,
         limits=['Saved-data audit, no independent scientific forward rerun.',
@@ -257,7 +260,7 @@ def audit(root):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir',type=Path,required=True)
-    p.add_argument('--parent-run',type=Path);p.add_argument('--coordinator',action='store_true');p.add_argument('--audit',action='store_true');p.add_argument('--report',action='store_true')
+    p.add_argument('--extended',action='store_true');p.add_argument('--parent-run',type=Path);p.add_argument('--coordinator',action='store_true');p.add_argument('--audit',action='store_true');p.add_argument('--report',action='store_true')
     a=p.parse_args();root=a.output_dir.resolve()
     if a.report:
         print('Run:',root)
@@ -273,19 +276,20 @@ def main():
         except Exception as exc:traceback.print_exc();write(root/'failure.json',dict(error=repr(exc)));raise
         return
     if root==REPO or REPO in root.parents or root in REPO.parents:p.error('External output required')
-    start=time.monotonic();end=start+120*60;root.mkdir(parents=True,exist_ok=False)
+    total=480 if a.extended else 120
+    start=time.monotonic();end=start+total*60;root.mkdir(parents=True,exist_ok=False)
     parent=a.parent_run.resolve() if a.parent_run else latest_parent('/home/carsonc/r-elegans-results')
-    write(root/'deadline.json',dict(parent_run=str(parent),total_minutes=120,coordinator_deadline=end-600,
-        deadline_monotonic=end,started_monotonic=start,protocol='One eight-target/two-direction proposal; final audit included'))
-    capture_run_record(root,REPO,vars(a),phase='E117-supervisor')
+    write(root/'deadline.json',dict(parent_run=str(parent),total_minutes=total,extended=a.extended,coordinator_deadline=end-600,
+        deadline_monotonic=end,started_monotonic=start,protocol='One16-target/8-direction proposal; final audit included' if a.extended else 'One8-target/2-direction proposal; final audit included'))
+    capture_run_record(root,REPO,vars(a),phase='E118-supervisor' if a.extended else 'E117-supervisor')
     from scripts.total_job_budget import run_group
     code,timeout=run_group([sys.executable,'-u','-m','scripts.run_panel_atlas_fit','--output-dir',str(root),'--coordinator'],max(.01,end-time.monotonic()-600))
     ac,at=run_group([sys.executable,'-u','-m','scripts.run_panel_atlas_fit','--output-dir',str(root),'--audit'],max(.01,end-time.monotonic()-10))
     def read(name):
         path=root/(name+'.json');return json.loads(path.read_text()) if path.exists() else {}
     au,s=read('audit'),read('summary');elapsed=time.monotonic()-start
-    complete=bool(code==0 and not timeout and ac==0 and not at and au.get('audit_complete') and au.get('execution_complete') and elapsed<=120*60)
-    receipt=dict(total_minutes=120,elapsed_seconds=elapsed,all_steps_finished=complete,timed_out=timeout,
+    complete=bool(code==0 and not timeout and ac==0 and not at and au.get('audit_complete') and au.get('execution_complete') and elapsed<=total*60)
+    receipt=dict(total_minutes=total,elapsed_seconds=elapsed,all_steps_finished=complete,timed_out=timeout,
         exit_code=code,audit_exit_code=ac,audit_timed_out=at,validation_complete=bool(s.get('validation_complete')),
         fit_qualified=bool(complete and au.get('integrity_passed') and s.get('fit_qualified_before_audit')))
     write(root/'budget_receipt.json',receipt);print(json.dumps(receipt),flush=True)

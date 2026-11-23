@@ -1,0 +1,55 @@
+{
+  "experiment": "E117",
+  "recorded_date": "2026-11-22",
+  "evidence_type": "User-reported compact server stdout",
+  "run": "/home/carsonc/r-elegans-results/panel-atlas-fit-20261123T021919Z-885592",
+  "iterations": 1,
+  "accepted_updates": 1,
+  "selected_sha256": "5fd6e9c90dbb46fd89a10ed9ce34a492347fa772c95c44155a68d33b29d84f92",
+  "candidate_scores": {
+    "train": 0.8530077867289719,
+    "val": 0.9374705707482043,
+    "test": 0.9207859779319396
+  },
+  "candidate_parameters": {
+    "passed": true,
+    "changed_coordinates": 9538,
+    "maximum_offset": 0.0004999996347661963,
+    "near_bound": 0,
+    "fixed_fields_exact": true
+  },
+  "gates": {
+    "parent_replay_passed": true,
+    "gradient_screen_passed": true,
+    "training_improved": true,
+    "validation_improved": false,
+    "full_numerical_passed": false,
+    "parameters_passed": true,
+    "parameters_changed": true,
+    "autonomy_passed": true,
+    "state_reproduced": true,
+    "panel_reproduced": true
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "unavailable_evidence": []
+  },
+  "budget": {
+    "total_minutes": 120,
+    "elapsed_seconds": 5588.480088144075,
+    "all_steps_finished": true,
+    "timed_out": false,
+    "validation_complete": true,
+    "fit_qualified": false
+  },
+  "independent_full_loss_reproduction": false,
+  "interpretation": "Panel training improves while full train and validation worsen relative to E115; numerical gate additionally fails. E115 remains selected; eight targets/two directions did not fix transfer on this single proposal. No plateau or causal diagnosis established.",
+  "unavailable_in_report": [
+    "Exact failed numerical pairs/phases",
+    "Parent-comparison detailed scores, source/env/optimizer artifacts not locally inspected"
+  ],
+  "decision": "Preserve negative result and E115. User explicitly authorizes next eight-hour pilot."
+}

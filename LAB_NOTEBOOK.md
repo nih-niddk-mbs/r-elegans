@@ -12766,3 +12766,34 @@ external. Audit limitations explicitly distinguish saved voltage-error reduction
 from unavailable full duplicate traces, and panel replay from full-loss replay.
 A zero-change proposal cannot qualify. Same two-hour hard ceiling includes audit
 and process-group cleanup; partial/timeout evidence remains unqualified.
+
+### 2026-11-22 — E117 negative result; E118 eight-hour pilot planned
+
+User reports E117 run panel-atlas-fit-20261123T021919Z-885592:one panel update,
+validation0.9374705707482043 versus E1150.9327709759189401; full train loss also
+worsens to0.8530077867289719. Numerical gate fails; own-state replay/autonomy,
+fixed parameters, complete audit/integrity pass.5588.480088144075s,no timeout.
+E115 selectedSHA5fd6e9c90dbb46fd89a10ed9ce34a492347fa772c95c44155a68d33b29d84f92
+retained. Failed pair details not supplied; raw artifacts not locally inspected.
+Eight-target/two-direction trial did not establish validation progress. Preserve
+negative result; no biological claim.
+
+User requests eight-hour next run and quick push. Before edits, E118 plan:
+same qualified E115, fresh seed1180,16 train targets(two fine/fourteen coarse),
+eight averaged independent antithetic directions,smaller Adam step0.00025.
+One broader proposal, not iterative eight-hour optimization.480min total cap
+includes10min audit reserve; may finish earlier. All E117 own-state, full numerical,
+parameter/cumulative/frozen, controls and independent state/panel replay checks
+retained. Full atlas runs once; no independent full-loss reproduction claim.
+Changing panel size/direction count/step jointly limits causal attribution.
+Scientific success not guaranteed; server execution pending. Plans/results in
+E117-server-summary.json and E118-plan.json; no raw data/checkpoints in Git.
+
+E118 local verification:5 focused panel tests pass, including legacy positive/
+negative cases and extended16-target/eight-direction positive proposal with full
+independent saved-data audit and optimizer tamper detection. Panel/RNG/gradient
+and learning-rate metadata are read from each run manifest by audit. Shell syntax,
+Python compilation and diff checks pass. No local scientific fitting or server
+execution claimed. User requests quick push; no additional Mac validation run.
+Eight hours is an inclusive ceiling for one broader averaged-gradient trial,
+not a promise to use the entire duration or produce multiple accepted updates.

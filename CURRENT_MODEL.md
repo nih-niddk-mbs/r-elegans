@@ -1,15 +1,18 @@
 # Current model: exact scope and computation path
 
-2026-11-22 E117 prepared; server execution pending. Two-hour TOTAL pilot
-from qualified E115: one proposal using eight train targets and two averaged
-antithetic SPSA directions, reduced step0.0005. Own-state and cumulative/fixed
-parameter rules retained. Full135-target/all3grid numerical validation executes
-once; own states and finest8-target panel independently replayed. This does not
-claim a second independent full-atlas loss evaluation. Candidate must improve
-training and validation and pass full controls/numerics/autonomy/audit. Last10min
-reserved for audit within120min inclusive watchdog. No behavior promotion.
-Launch: `sh scripts/launch_panel_atlas_fit_mbslnx2.sh`.
-[Plan](experiments/records/E117-plan.json).
+2026-11-22 E118 prepared; server execution pending. Eight-hour maximum
+single-proposal pilot from E115:16 train targets,8 averaged directions,step0.00025,
+seed1180. Full numerical/own-state/control/audit gates preserved; full atlas once
+plus independent state/panel replay. Includes final validation/audit within480min;
+may finish earlier. No rejected E117 weights promoted.
+Launch: `sh scripts/launch_extended_panel_atlas_fit_mbslnx2.sh`.
+[Plan](experiments/records/E118-plan.json).
+
+2026-11-22 E117 completed (user-reported):93.14min, clean complete audit,
+panel training improved but full validation worsened to0.93747 and numerical gate
+failed. E115 retained; no new qualifying fit. One eight-target/two-direction
+trial does not establish optimizer convergence or model insufficiency.
+[Evidence](experiments/records/E117-server-summary.json).
 
 2026-11-22 E116 completed (user-reported):3 optimizer iterations,2 accepted
 training updates, but no improved qualifying validation checkpoint selected.
