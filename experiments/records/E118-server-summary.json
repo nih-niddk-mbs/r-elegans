@@ -59,5 +59,12 @@
     "Estimated directional derivatives, variance/alignment and predicted versus actual proposal loss change",
     "Detailed source/environment, traces and optimizer records retained on server"
   ],
-  "decision": "Keep E115. Read saved optimizer/panel scores to compare predicted descent with actual change before another long run. No next experiment launched; unchanged full qualification gates."
+  "decision": "Keep E115; perform small bidirectional along-proposal finite-difference/step-scale check from each model own states before more optimization. If direction remains unreliable near zero, consider fewer grouped unknown coordinates per update with rotating coverage. No next experiment launched.",
+  "directional_prediction_user_reported": {
+    "parent_panel_loss": 0.8103271361418858,
+    "candidate_panel_loss": 0.8104708343431264,
+    "predicted_linear_loss_change": -3.023339049361331,
+    "actual_loss_change_including_prior": 0.0001437044511983787
+  },
+  "followup_interpretation": "Raw averaged SPSA linear prediction gives a negative candidate objective despite nonnegative correlation loss plus prior, while actual change is positive. The local predictor is quantitatively unreliable at the actual proposal, with wrong sign. This does not isolate finite-difference bias, high-dimensional variance, nonlinear/attractor effects or step length, nor establish a gradient implementation sign error. Audit verified the implemented arithmetic, not derivative accuracy. First-step Adam largely follows coordinate signs, so clipping gradient norm does not impose a loss-based trust region."
 }

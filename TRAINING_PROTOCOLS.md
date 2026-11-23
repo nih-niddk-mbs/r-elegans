@@ -6,8 +6,9 @@ state/panel replay checks, but failed training-panel and validation improvement.
 Candidate validation0.936115 versus E1150.932771; no update accepted, E115 retained.
 Complete audit/integrity pass;190.45min elapsed under480min ceiling, no timeout.
 Full atlas evaluated once; no independent full-loss reproduction claimed.
-Next inspect saved directional estimates versus actual panel loss change before
-more optimization; gradient_screen_passed is not derivative validation.
+Follow-up: raw linear estimate predicts loss change-3.0233 but actual change
+is+0.0001437; local predictor fails at this step. Next check bidirectional small
+step scales before optimization. Gradient-screen pass is not derivative validation.
 [Evidence](experiments/records/E118-server-summary.json).
 
 2026-11-22 E117 completed (user-reported):93.14min, clean complete audit,

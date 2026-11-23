@@ -12827,3 +12827,31 @@ long unchanged run. No diagnosis of proven plateau, architectural insufficiency
 or biological failure. Preserve E115 and rejected E118 models/optimizer/RNG.
 Raw server artifacts/source/env not locally inspected. Documentation-only update;
 no new simulation or tests required. No next experiment launched.
+
+### 2026-11-23 — E118 local linear prediction has wrong sign and unrealistic magnitude
+
+User-reported saved optimizer/panel arithmetic:current panel loss
+0.8103271361418858,proposal0.8104708343431264; raw averaged-SPSA dot proposal
+predicts change-3.023339049361331, actual loss+prior change+0.0001437044511983787.
+The predicted endpoint would be negative, outside the nonnegative correlation
+loss+prior range. Thus the linear approximation is unreliable at this finite
+proposal, both sign and magnitude; it is not evidence a negative objective is
+actually possible. Do not interpret it as calibrated expected improvement.
+
+Local source inspection:gradient arithmetic uses antithetic loss differences,
+mean across8directions, then first-step Adam with norm clipping. First-step Adam
+largely preserves coordinate sign-based step lengths despite scaling gradient
+norm; clipping is not a loss-calibrated trust region. Existing audit independently
+recomputed that arithmetic. This does not validate the derivative estimate and
+does not prove an implementation sign error. Eight random directions over9538
+coordinates, finite perturbation scale, nonlinear response/state/phase changes
+and step size remain possible contributors, not established causes.
+
+Recommendation before further long fitting: symmetric finite differences along
+the actual proposal direction at several much smaller fractions, compare slope
+with raw g dot direction and evaluate loss decrease on own settled states. If no
+reliable local direction emerges, reduce update dimension using grouped unknown
+coordinates/rotating blocks rather than blindly repeating full-dimensional SPSA.
+No next experiment or altered criterion authorized/executed here. E115 remains
+best qualified parent. This is user-reported saved-data analysis, no local forward
+simulation or raw artifact inspection; documentation-only update, no tests needed.
