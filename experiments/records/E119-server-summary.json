@@ -1,0 +1,54 @@
+{
+  "experiment": "E119",
+  "recorded_date": "2026-11-23",
+  "evidence_type": "User-reported server compact diagnostic/audit stdout; raw files not locally inspected",
+  "run": "/home/carsonc/r-elegans-results/atlas-direction-check-20261123T151107Z-958304",
+  "finest_grid_reported": [
+    {
+      "radius": 0.01,
+      "central_slope": 0.00018884892144521714,
+      "forward_slope": 0.0001868333370680375,
+      "backward_slope": 0.00019086450582239678,
+      "plus_change": 1.868333370680375e-06,
+      "minus_change": -1.908645058223968e-06
+    },
+    {
+      "radius": 0.1,
+      "central_slope": 0.0005337008457811931,
+      "forward_slope": 0.0008486467404367204,
+      "backward_slope": 0.0002187549511256659,
+      "plus_change": 8.486467404367204e-05,
+      "minus_change": -2.187549511256659e-05
+    }
+  ],
+  "cross_grid_evidence": "Both reported grids have positive central and one-sided slopes at both radii: forward raises loss and reverse lowers it. Magnitudes differ; do not claim derivative convergence or certified derivative error. Compact transcription keeps finest-grid numeric rows and qualitative coarse-grid result; complete curve retained on server.",
+  "source_raw_linear_slope": -3.023339049361331,
+  "cached_endpoints": {
+    "parent": 0.8103271361418858,
+    "proposal": 0.8104708343431264
+  },
+  "all_panel_screens_passed": true,
+  "parent_reproduced": true,
+  "repeat_passed": true,
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "unavailable_evidence": []
+  },
+  "budget": {
+    "total_minutes": 120,
+    "elapsed_seconds": 3115.266457416001,
+    "all_steps_finished": true,
+    "timed_out": false,
+    "diagnostic_checks_passed": true
+  },
+  "interpretation": "Measured proposal direction is uphill on the train panel at both tested smaller scales and grids, opposite sign from raw SPSA linear prediction. Simply shrinking positive step to1% did not yield descent. Negative10% lowers panel loss on tested grids. No claim about still smaller scales, full validation generalization, uniquely identified cause or an implementation sign bug. One-sided slopes at1% closely agree within each grid, but magnitudes vary with grid and radius.",
+  "decision": "Retain E115. Saved negative10% diagnostic trial is a possible candidate for full train/validation/numerical/autonomy assessment before any promotion; no new fitting or promotion performed. Future optimizer should use checked descent directions, potentially grouped/rotating unknown-coordinate blocks.",
+  "limits": [
+    "Panel-only diagnostic; full atlas and long autonomy not requalified.",
+    "No biological, swimming or sensory start/stop qualification.",
+    "Source/runtime/parameter/control artifact details reported audited on server, not locally inspected."
+  ]
+}

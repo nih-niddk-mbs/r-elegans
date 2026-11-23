@@ -12889,3 +12889,32 @@ forward run or actual mbslnx2 result claimed. Exact source/environment commands,
 all trial weights/anchors and compact responses/hash records external. Source
 E118 rejected candidate is used solely to define a direction; no training or
 selection is performed and no model can be promoted by this diagnostic.
+
+### 2026-11-23 — E119 directional check: forward uphill even at1%, reverse downhill
+
+User-reported server result atlas-direction-check-20261123T151107Z-958304:
+all panel screens,parent reproduction,independent zero-state/panel repeat pass.
+Complete audit/execution/integrity pass, no problems/missing evidence reported.
+3115.266457416001s (51.92min) under120min, all steps finished,no timeout,
+diagnostic_checks_passed=True. Exact source/runtime traces remain external;
+not locally inspected or rerun. Structured compact transcription E119-server-summary.
+
+Both grids report positive central/forward/backward slopes at1% and10% of the
+E118 direction. Finest-grid central slopes+0.00018884892144521714 and
++0.0005337008457811931, versus raw averaged-SPSA prediction-3.023339049361331.
+Finest-grid forward loss changes+0.000001868333370680375 and
++0.00008486467404367204; reverse changes-0.000001908645058223968 and
+-0.00002187549511256659. At1% the two one-sided slopes closely agree within each
+grid, but cross-grid/radius magnitudes differ; do not certify derivative accuracy
+or a limiting derivative. Complete coarse/fine curve retained in server summary;
+compact repo record retains finest values and cross-grid qualitative evidence.
+
+Interpretation: at these tested scales, estimated update direction is actually
+uphill on this train panel. It is not merely a forward step that becomes downhill
+when shrunk to1%. Do not claim an implementation sign error, unique cause or
+behavioral/model failure. Negative10% is a potential checked panel-descent trial,
+not yet a qualified whole-atlas model. Keep E115; any use of reverse trial requires
+full train/validation, numerical/control/autonomy checks before promotion. Future
+optimization should check candidate descent, potentially use lower-dimensional
+unknown-coordinate groups/rotating blocks. No new training, model selection or
+promotion performed by this diagnostic; no subsequent experiment launched.

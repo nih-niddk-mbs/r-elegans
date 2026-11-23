@@ -1,13 +1,13 @@
 # WormGym: training and validation protocols
 
-2026-11-23 E119 prepared; server execution pending. Read-only local direction
-check of E118 saved step at alpha0,+/-0.01,+/-0.1 on the same16-target train panel,
-fresh settled states per trial, two neural grids, independent zero-state/panel
-repeat and complete automatic audit. Reports central/one-sided slopes against
-raw SPSA prediction; no fitting or checkpoint promotion. Two-hour inclusive cap
-on two A100s; derivative accuracy not certified by engineering grid screens.
-Launch: `sh scripts/launch_atlas_direction_check_mbslnx2.sh`.
-[Plan](experiments/records/E119-plan.json).
+2026-11-23 E119 completed (user-reported): both grids/radii show E118's
+forward direction raises panel loss and reverse direction lowers it. Finest-grid
+central slope+0.00018885 at1%/+0.00053370 at10%, opposite raw SPSA prediction-3.02334.
+Negative10% lowers panel loss by0.00002188; no full validation claim. Magnitudes
+vary across grids/radii; derivative accuracy not certified. All panel screens,
+parent/zero replay and complete audit/integrity pass;51.92min,no timeout. No
+model updated/promoted. Retain E115; reverse trial needs full qualification.
+[Evidence](experiments/records/E119-server-summary.json).
 
 2026-11-23 E118 completed (user-reported):16-target/eight-direction proposal
 passed full numerical, control, autonomous-rhythm, parameter and independent
