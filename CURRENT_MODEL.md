@@ -1,5 +1,15 @@
 # Current model: exact scope and computation path
 
+2026-11-23 E120 prepared; server execution pending. Evaluate exact saved
+E119 negative10% trial on full135-target/threegrid validation, own settled states,
+long two-grid RMD dynamics and independent finest-panel/state replay. No optimizer
+or weight edits. Require improved full training AND validation plus all numerical,
+parameter/control/rhythm/audit gates; otherwise retain E115. Two-hour total cap
+including10min audit reserve, two A100s. Stop repeating this direction path if
+it fails; no automatic behavioral or biological promotion.
+Launch: `sh scripts/launch_reverse_candidate_mbslnx2.sh`.
+[Plan](experiments/records/E120-plan.json).
+
 2026-11-23 E119 completed (user-reported): both grids/radii show E118's
 forward direction raises panel loss and reverse direction lowers it. Finest-grid
 central slope+0.00018885 at1%/+0.00053370 at10%, opposite raw SPSA prediction-3.02334.

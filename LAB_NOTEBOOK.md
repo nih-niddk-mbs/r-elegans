@@ -12918,3 +12918,38 @@ full train/validation, numerical/control/autonomy checks before promotion. Futur
 optimization should check candidate descent, potentially use lower-dimensional
 unknown-coordinate groups/rotating blocks. No new training, model selection or
 promotion performed by this diagnostic; no subsequent experiment launched.
+
+### 2026-11-23 — E120 planned: definitive full validation of saved reverse trial
+
+User explicitly authorizes trying negative10% candidate but notes continuing
+failure. Acknowledge no improvement since E115; no new optimizer sweep. Plan before
+edits in experiments/records/E120-plan.json. Exact E119 run
+atlas-direction-check-20261123T151107Z-958304, trials/minus-large/network.npz.
+Require completed clean direction diagnostic, pin model/hash/coordinates and
+all recursive references, reconstruct exactly from its E115 parent. Candidate
+weights fixed throughout; no invented checkpoint hash. Full135target/threegrid/
+fourphase validation, strict vector+pair criteria/controls, fresh states and
+independent long RMD/autonomy/state/finest-panel replication. Parent existing
+qualified own-state evidence reused only with hash/runtime checks. Full atlas
+run once; no independent full-loss replication claim.
+
+Predeclare lower full TRAIN and validation losses (raw+prior) vs E115, not just
+16-target training improvement, plus fixed/cumulative/changed-coordinate gates,
+long RMD, state/panel reproduction and complete post-run audit. Test statistics
+after decision.120min inclusive watchdog with10min audit reserve, two A100s.
+No behavior promotion or numerical threshold relaxation. If failed/incomplete,
+retain E115 and stop repeating this update-direction path; revisit fitting
+strategy before any new experiment. Server execution not yet evidenced.
+
+E120 local verification:12 focused tests passed across fixed-candidate assessment,
+direction diagnostic and panel pilot. Synthetic positive/negative full candidate
+assessments include full train/validation gating, zero optimizer activity, source
+files unchanged, long RMD/cycle diagnostics and own-state/panel replay, complete
+independent saved-data audit and candidate tamper detection. Incomplete direction
+source refuses evaluation; missing final artifacts report incomplete evidence.
+Python compilation, shell syntax and diff checks pass. No Mac scientific run or
+actual server execution claimed. Candidate is copied byte-for-byte from saved
+minus-large trial and reconstructed against E115 before use; raw server artifacts
+and recursive dependencies remain external. Full-atlas loss run once, not twice;
+strict cycle diagnostics retained separately from RMD preservation gates. No
+new fit/promotion or continuation is implied by preparing this test.

@@ -1,0 +1,9 @@
+{
+ "experiment":"E120","recorded_date":"2026-11-23","status":"planned; server execution pending",
+ "question":"Does the exact saved E119 negative10% trial improve full training/validation relative to E115 while preserving numerical and autonomous-rhythm criteria?",
+ "source":"/home/carsonc/r-elegans-results/atlas-direction-check-20261123T151107Z-958304/trials/minus-large/network.npz; require completed E119 diagnostic and clean audit, verify all identities/recursive evidence and exact reconstruction against E115 parent. No new optimizer or weight modification.",
+ "method":"Single fixed candidate evaluation. Fresh own states, all135targets/fourphases/all3declared neural grid levels, full observed-pair numerical and controls checks. Independently regenerate states with60s-settle/40s-autonomy at0.03125/0.015625ms, compare preserved E115 RMD period/amplitude. Finest original16-target panel replay verifies state/response reproduction; full atlas evaluated once, not independent full-loss replication.",
+ "acceptance":"Require changed bounded coordinates/frozen properties, lower raw and regularized full train AND validation loss than pinned E115 reference, complete full numerical/control/RMD gates, independent state/panel reproduction and complete audit. Test scores only after decision. No behavior/swimming/sensory start-stop or biological qualification.",
+ "budget":"120min TOTAL including10min saved-data audit and process cleanup; two A100s/nohup. Failure/incomplete never qualifies. Preserve E115 and all rejected trials. If failed, stop repeating this SPSA-direction path; revisit fitting strategy rather than automatically launch another trial.",
+ "command":"sh scripts/launch_reverse_candidate_mbslnx2.sh"
+}
