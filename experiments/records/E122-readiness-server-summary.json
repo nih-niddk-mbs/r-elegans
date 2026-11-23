@@ -1,0 +1,176 @@
+{
+  "experiment": "E122",
+  "recorded_date": "2026-11-23",
+  "evidence": "User-pasted report stdout; original server files not independently opened locally",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-pilot-20261123T211006Z-970232",
+  "coverage": {
+    "usable_animals": 87,
+    "accepted_trials": 650,
+    "train_animals": 69,
+    "heldout_animals": 18,
+    "train_observed_pairs": 7077,
+    "heldout_observed_pairs": 1445,
+    "training_targets": [
+      "I1L",
+      "OLLL",
+      "SAADL",
+      "URXR"
+    ]
+  },
+  "network": {
+    "selected": "/home/carsonc/r-elegans-results/cv-peptide-pilot-20261123T211006Z-970232/network/eval-0009/network.npz",
+    "recorded_sha256": "1a62cbcb0496cad3be8cedc0ff9825b523597d13a41a4eec60251b6b78806ce3",
+    "short_window_rmd_passed": true,
+    "duplicate_sham_error": 0.0,
+    "parameter_audit": {
+      "passed": true,
+      "mismatched_fields": [],
+      "coordinates": 9538,
+      "changed_coordinates": 7762,
+      "maximum_offset": 0.01,
+      "near_bound": 0,
+      "fixed_fields_exact": true,
+      "channel_chemical_gap_coordinates": [
+        4736,
+        3709,
+        1093
+      ]
+    },
+    "peptide_bounds_passed": true,
+    "peptide_log_gains": [
+      0.0,
+      0.0
+    ],
+    "maximum_final_peptide_conductance_nS": 0.0,
+    "all_evaluations_safe": true,
+    "selection_history": [
+      {
+        "group": "calcium_density",
+        "before": "eval-0000",
+        "proposals": [
+          "eval-0001",
+          "eval-0002"
+        ],
+        "selected": "eval-0001"
+      },
+      {
+        "group": "potassium_density",
+        "before": "eval-0001",
+        "proposals": [
+          "eval-0003",
+          "eval-0004"
+        ],
+        "selected": "eval-0004"
+      },
+      {
+        "group": "chemical",
+        "before": "eval-0004",
+        "proposals": [
+          "eval-0005",
+          "eval-0006"
+        ],
+        "selected": "eval-0005"
+      },
+      {
+        "group": "gap",
+        "before": "eval-0005",
+        "proposals": [
+          "eval-0007",
+          "eval-0008"
+        ],
+        "selected": "eval-0007"
+      }
+    ]
+  },
+  "peptide": {
+    "selected": "/home/carsonc/r-elegans-results/cv-peptide-pilot-20261123T211006Z-970232/peptide/eval-0009/network.npz",
+    "recorded_sha256": "1a62cbcb0496cad3be8cedc0ff9825b523597d13a41a4eec60251b6b78806ce3",
+    "short_window_rmd_passed": true,
+    "duplicate_sham_error": 0.0,
+    "parameter_audit": {
+      "passed": true,
+      "mismatched_fields": [],
+      "coordinates": 9538,
+      "changed_coordinates": 7762,
+      "maximum_offset": 0.01,
+      "near_bound": 0,
+      "fixed_fields_exact": true,
+      "channel_chemical_gap_coordinates": [
+        4736,
+        3709,
+        1093
+      ]
+    },
+    "peptide_bounds_passed": true,
+    "peptide_log_gains": [
+      0.0,
+      0.0
+    ],
+    "maximum_final_peptide_conductance_nS": 0.0068132353113447884,
+    "all_evaluations_safe": true,
+    "selection_history": [
+      {
+        "group": "calcium_density",
+        "before": "eval-0000",
+        "proposals": [
+          "eval-0001",
+          "eval-0002"
+        ],
+        "selected": "eval-0001"
+      },
+      {
+        "group": "potassium_density",
+        "before": "eval-0001",
+        "proposals": [
+          "eval-0003",
+          "eval-0004"
+        ],
+        "selected": "eval-0004"
+      },
+      {
+        "group": "chemical",
+        "before": "eval-0004",
+        "proposals": [
+          "eval-0005",
+          "eval-0006"
+        ],
+        "selected": "eval-0005"
+      },
+      {
+        "group": "gap",
+        "before": "eval-0005",
+        "proposals": [
+          "eval-0007",
+          "eval-0008"
+        ],
+        "selected": "eval-0007"
+      }
+    ]
+  },
+  "signal_comparison": {
+    "baseline_response_max_difference": 8.109605748374271e-06,
+    "baseline_sham_rmd_max_difference_mV": 19.758172890988728,
+    "scope": "Same wired prior, separately settled states with extrasynaptic term off/on; no behavior inference"
+  },
+  "gpu_samples": {
+    "0": {
+      "samples": 138,
+      "mean_utilization_percent": 94.92753623188406,
+      "peak_memory_MiB": 971.0,
+      "mean_power_W": 127.40550724637681
+    },
+    "1": {
+      "samples": 138,
+      "mean_utilization_percent": 96.3768115942029,
+      "peak_memory_MiB": 971.0,
+      "mean_power_W": 121.1573188405797
+    }
+  },
+  "retained_run_GiB": 0.264,
+  "interpretation": [
+    "Both arms selected the same four wired group moves and have identical network-only NPZ hashes; peptide activation, asset/prior and state must be included in full-model identity.",
+    "Wired fixed fields preserved, max offset0.01, no near-bound coordinates, all evaluations reported safe, duplicate sham error0.",
+    "Observed GPU means94.93%/96.38%, peak971MiB; this does not prove optimal throughput or justify concurrent context oversubscription without measurement.",
+    "Pointwise separately settled voltage differences may include phase/frequency changes; not channel-current or behavior attribution."
+  ]
+}

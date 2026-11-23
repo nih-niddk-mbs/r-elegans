@@ -13268,3 +13268,58 @@ not repeat simulations, modify weights or replace the completed audit. Kept
 run_cv_peptide_pilot.py and forward sources unchanged to preserve original E122
 source pins for future rechecks. Local compile/CLI help checks pass. No server
 execution of this compact reporter or inspection of its omitted data evidenced.
+
+### 2026-11-23 — E122 detailed coverage, complete-model identity and resource report
+
+User supplies report_cv_peptide_readiness stdout. Evidence saved compactly in
+E122-readiness-server-summary.json; full stdout remains external.87usableanimals,
+650acceptedtrials,69fit/18heldout;7077train/1445heldout observed pairs across full
+fold statistics, not all simulated in the four-target pilot. Actual targets:I1L,
+OLLL,SAADL,URXR. All evaluations safe, zero duplicate-sham error, fixed fields exact,
+max offset0.01, no near-bound coordinates. Both arms select calcium negative,
+potassium positive, chemical negative and gap negative group probes. Therefore
+both wired network.npz files have identical SHA
+1a62cbcb0496cad3be8cedc0ff9825b523597d13a41a4eec60251b6b78806ce3.
+This is expected from identical accepted wired moves, not an independent peptide
+parameter fit or proof that every weight was uniquely recovered. Full models
+must include peptide activation/asset/prior/state; network-only SHA is insufficient.
+
+Peptide gains remain log offsets[0,0], maximum final extrasynaptic conductance
+0.0068132353113447884nS versus0network-only. Reported baseline response maxdifference
+8.109605748374271e-6 and separately settled shamRMD maxdifference19.758172890988728mV.
+Pointwise differences can include phase/frequency effects; no channel-current or
+behavioral causal attribution follows. GPU means94.9275%/96.3768%,138samples each,
+peak971MiB each; mean power127.4055/121.1573W. Retained run0.264GiB. Both GPUs busy
+is measured, but optimal batch throughput is not. Do not pack extra GPU processes
+solely because memory is low; measure vectorized target batches first.
+
+### 2026-11-23 — E123 fixed-endpoint numerical/recovery/batching stage (planned)
+
+Before multi-day optimization, implement missing concrete readiness tests rather
+than silently promoting E122. Plan:E123-plan.json, launcher
+scripts/launch_cv_peptide_validation_mbslnx2.sh. Both E122 endpoints pinned to exact
+known network SHA above; own states/source references copied/hash-checked. New
+full-model schema2 embeds extrasynaptic on/off, expression arrays, gains/tau and
+four-phase neural+peptide memory. Standard schema1 loader rejects schema2, reducing
+risk of silently loading the peptide model as network-only. No old E122 forward
+sources changed; source pins and old results remain valid. No fitting in E123.
+
+Two A100s in parallel:three clocks, E122 response replay,300s uncued dynamics on
+two clocks, and save/reload neural+peptide continuation in a separate interpreter
+against uninterrupted execution. Exact test tolerance1e-10; this tests numerical
+continuation, not optimizer/RNG/reboot recovery. CPU bounds/frozen fields, short
+and sustained RMD rhythm/cycle comparisons, duplicate shams, adjacent grid response
+criteria and source/artifact identity are independently recalculated afterward.
+Benchmark duplicated target slots4/8/16 with separate cold/warm timings only if
+measured admission cost fits. Larger batching is a performance test, not broader
+data coverage. Maximum60min inclusive; private workers54min; final audit/cleanup
+reserve6min, hard launcher guard. Any incomplete/missing evidence explicit; no
+automatic next fit. This is a new forward validation, not repeating the saved-data
+audit or pretending peptide gains/fivefold fitting are already done.
+
+Local software evidence:7focused CPU float64 tests pass, including same wired
+weights/distinct full-model identities, refusal of implicit enable flags/nonfinite
+memory, schema1 refusal and serialized neural+peptide continuation equality with
+sensitivity to lost memory; plus existing four pilot tests. CLI/compile/shell syntax
+checks pass. No server E123 run ID/hash/outcome fabricated. Previous broad-suite
+six float64 failures still unresolved; no new behavior or biological qualification.

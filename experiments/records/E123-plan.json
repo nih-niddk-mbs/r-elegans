@@ -1,0 +1,33 @@
+{
+  "experiment": "E123",
+  "recorded_date": "2026-11-23",
+  "status": "implemented locally; server execution planned, not evidenced",
+  "question": "Are unchanged E122 endpoints robust on a third clock grid and over300s, and can explicit complete neural/peptide state recover in a fresh interpreter? Which tested batch gives best warm throughput?",
+  "command": "sh scripts/launch_cv_peptide_validation_mbslnx2.sh",
+  "source_run": "/home/carsonc/r-elegans-results/cv-peptide-pilot-20261123T211006Z-970232",
+  "selected_network_sha256_both_arms": "1a62cbcb0496cad3be8cedc0ff9825b523597d13a41a4eec60251b6b78806ce3",
+  "parent_model_scope": "Two distinct models: identical selected wired weights with peptide enabled versus disabled. New schema2 bundles embed activation flag, expression arrays, gains/tau and four complete start states. New full-bundle hashes generated at execution; not invented here.",
+  "fixed": "All weights, channels, passive/kinetic constants, anatomy, peptide gains/tau, stimuli and E122target panel; no training or selection.",
+  "trainable": [],
+  "seeds": "No random fitting/proposals; fixed E122targets I1L/OLLL/SAADL/URXR, same starts and metadata.",
+  "method": [
+    "Copy and verify pinned E122 model/state references; preserve wired/frozen fields exactly; refuse unexpected gain offsets.",
+    "Freshly settle each model60s and derive four own-phase anchors for each of three grid pairs:dt0.001/0.0005/0.00025s, neural step0.03125/0.015625/0.0078125ms. Replay existing four targets and two duplicate shams for12s.",
+    "Reproduce original E122 coarse responses within1e-10; both adjacent response maximum differences <=1e-7+0.1*maxabs(finer response), same prospective two-grid criterion now on third grid.",
+    "Save complete state after1s uncued continuation; load in separate Python process and run1s more; compare every neural/peptide state field and RMD trace with uninterrupted2s. Absolute tolerance1e-10. Not exact optimizer/RNG or reboot fault recovery.",
+    "Run300s uncued dynamics on coarse and half outer/neural clocks. Save compact RMD, all-neuron voltage bounds and peptide means. Apply existing rhythm_metrics and compare_cycles:period<1%, amplitude<2%, phase-aligned cycleRMSE<0.5mV. All-cell voltage within[-120,80]mV and finite final state.",
+    "If measured cost admits it before deadline, benchmark4/8/16target slots using duplicated existing stimuli for throughput only. First-call compilation-inclusive and warm synchronized times separate; incomplete sweep explicit, not evidence of added labels.",
+    "Complete saved-data artifact/source/input, wired-field, control/rhythm/numerical/recovery arithmetic audit. No automatic fitting or behavior promotion."
+  ],
+  "resources": "One arm per A100; four distinct physical CPU cores per arm; float64; GPU telemetry; compact traces and minimum5GiB free.",
+  "budget": "Maximum60min total, coordinator private group54min ceiling, final6min audit/cleanup; launcher timeout guard. Benchmark admission uses measured times with margin and can be skipped. Timeout/incomplete evidence cannot qualify.",
+  "next_decision": "After audit, use validated settings and complete-bundle identity to prepare broader independent-fold fitting. No automatic multi-day launch. If numerical/dynamics/recovery fail, diagnose before long training.",
+  "limits": [
+    "Not full atlas/all five folds",
+    "Peptide parameters still fixed priors",
+    "Not full extrasynaptic biology",
+    "Not sensory/body/swimming qualification",
+    "Continuation recovery drill is not optimizer/crash recovery"
+  ],
+  "local_verification": "Seven focused CPU float64 tests pass (three checkpoint/continuation plus four pilot tests). CLI/compilation/shell syntax checked. No server GPU execution or new model qualification evidenced."
+}

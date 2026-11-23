@@ -11,6 +11,18 @@ arms concurrently, or46.47h across five folds, before added validation/coverage
 costs. Long-run readiness remains false; no model/behavior promotion. E120 is
 preserved. [Evidence](experiments/records/E122-server-summary.json).
 
+E122 detailed resource/identity report is now recorded:69fit/18heldout animals,
+all evaluations safe, zero duplicate-sham error, fixed fields exact and offset
+maximum0.01. Both arms chose identical wired group moves and share a network-only
+SHA; complete identities differ by peptide activation/state. Measured mean GPU
+utilization94.93%/96.38%, peak971MiB each, retained0.264GiB. See
+[E122 readiness](experiments/records/E122-readiness-server-summary.json).
+E123 is prepared for fixed-endpoint third-grid,300s dynamics, fresh-process
+neural/peptide continuation and measured batch throughput checks; maximum60min,
+no fitting, automatic audit. Server execution remains planned. New explicit
+schema2 model bundles prevent silently treating an enabled peptide model as a
+network-only checkpoint. [E123 plan](experiments/records/E123-plan.json).
+
 2026-11-23 E121 server audit completed (user-reported): E120 saved-data
 qualification independently rechecks; source records unchanged.110 distinct
 metadata animal IDs,all WT labels,no missing/repeated/conflicting identities;
