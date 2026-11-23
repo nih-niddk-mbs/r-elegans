@@ -5,8 +5,9 @@ training updates, but no improved qualifying validation checkpoint selected.
 Final selection retains E115 parent (zero local parameter changes; identical
 train/val/test losses). All final own-state numerical/rhythm/control/reproduction
 checks and complete audit/integrity pass;139.11min elapsed, no timeout.
-fit_qualified=False means no new fit; E115 qualification is retained. Inspect
-candidate validation losses/penalties and gates before another run. Exact E116
+fit_qualified=False means no new fit; E115 qualification is retained. Follow-up: both candidates regress on validation (0.94012/0.94405 versus
+0.93277); prior penalties negligible. Candidate3 also fails a numerical check.
+Broader training panels/more stable update estimates proposed, not launched. Exact E116
 run and selected SHA recorded; original E115 file identity not inferred.
 [Evidence](experiments/records/E116-server-summary.json).
 

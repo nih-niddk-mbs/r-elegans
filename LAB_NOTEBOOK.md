@@ -12708,3 +12708,25 @@ E115 path/hash remains in server manifest, not supplied; no byte-hash identity
 inferred from newly saved unchanged arrays. Preserve proposals and optimizer-final
 weights independently; do not launch another fit or weaken criteria yet.
 Documentation-only transcription/status update, no local scientific simulation.
+
+### 2026-11-22 — E116 candidate decisions: validation regression, not prior penalty
+
+User-reported saved validation records:iteration1 raw val0.9401195450729516,
+score with prior0.9401199450721703 versus best0.9327709759189401; all controls,
+rhythms, numerical and grid-loss checks pass, selectedFalse. Iteration3 raw
+val0.944049988136095,score0.9440507645271158; same previous best; controls/
+rhythms/grid-loss pass but numericalFalse, selectedFalse. Raw regressions about
+0.00735/0.01128 dominate prior penalties about4e-7/7.76e-7. Thus regularization
+is not blocking improvement. First candidate alone demonstrates this outcome is
+not solely a numerical rejection. Iteration3 numerical breakdown not supplied.
+
+Interpretation: training-batch acceptance failed to transfer to full own-state
+validation. Current estimator uses one SPSA direction over9538 coordinates and
+training minibatches2; noisy/narrow-batch directions are a plausible contributor,
+not a proved mechanistic diagnosis from two examples. Keep E115 as selected
+parent. Proposed next design: broader fixed/stratified train panel, averaged
+perturbation directions and/or step-size backtracking, while keeping own-state
+selection and numerical gates. Full train-panel/per-target changes not supplied;
+no claim of an established plateau, and no further experiment launched. Preserve
+negative candidate records. Documentation-only evidence update; no new tests or
+scientific simulation.

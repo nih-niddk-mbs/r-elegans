@@ -52,9 +52,35 @@
   },
   "interpretation": "Actual optimization attempted, unlike E114. Two training-batch updates accepted but no candidate supplanted the E115 parent under full validation/selection criteria. Selected final artifact is unchanged relative to immediate E115 parent and retains its scores/gates. fit_qualified=False means no new qualifying fit, not loss of prior E115 qualification. One seed and three rounds do not establish plateau or architecture insufficiency.",
   "unavailable_in_compact_stdout": [
-    "Per-candidate validation losses/prior penalties and gate failure details",
-    "Exact immediate E115 parent path/hash from manifest (do not infer original file hash from newly saved selected artifact)",
+    "Exact numerical comparison failure at iteration3",
+    "Broader training-panel performance and per-target validation changes",
+    "Exact immediate E115 parent path/hash from manifest",
     "Detailed runtime source/environment/cumulative-bound and signal records retained on server"
   ],
-  "decision": "Keep E115 as best reported fitting parent; inspect saved validation decision records before proposing further fitting or changing optimizer. Preserve all E116 proposals/final optimizer checkpoint and original references. No new experiment launched."
+  "decision": "Keep E115. Recommend broader fixed/stratified train panels and averaged SPSA directions or step-size backtracking before next optimization; preserve own-state validation and all qualification gates. This is a proposal, not an executed experiment.",
+  "candidate_validation_user_reported": [
+    {
+      "iteration": 1,
+      "validation_loss": 0.9401195450729516,
+      "score_with_prior": 0.9401199450721703,
+      "previous_best_score": 0.9327709759189401,
+      "selected": false,
+      "controls_passed": true,
+      "rhythms_passed": true,
+      "numerical_passed": true,
+      "loss_grid_stable": true
+    },
+    {
+      "iteration": 3,
+      "validation_loss": 0.944049988136095,
+      "score_with_prior": 0.9440507645271158,
+      "previous_best_score": 0.9327709759189401,
+      "selected": false,
+      "controls_passed": true,
+      "rhythms_passed": true,
+      "numerical_passed": false,
+      "loss_grid_stable": true
+    }
+  ],
+  "followup_interpretation": "Both accepted training-batch candidates regress on own-state validation. Iteration1 passes all numerical/control/rhythm screens yet worsens raw validation by0.0073485691540115. Iteration3 worsens by0.0112790122171549 and additionally fails numerical gate. Prior penalties about4e-7/7.76e-7 are negligible compared with loss regressions; prior is not the reason for rejection. Evidence consistent with noisy/narrow-batch update directions; two candidates do not distinguish overfitting, objective mismatch and estimator variance."
 }
