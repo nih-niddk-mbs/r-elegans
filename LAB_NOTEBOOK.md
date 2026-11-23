@@ -12730,3 +12730,39 @@ selection and numerical gates. Full train-panel/per-target changes not supplied;
 no claim of an established plateau, and no further experiment launched. Preserve
 negative candidate records. Documentation-only evidence update; no new tests or
 scientific simulation.
+
+### 2026-11-22 — E117 planned: two-hour broader-panel averaged-direction pilot
+
+User requests one hour, then extends to two. Plan recorded before code changes
+in experiments/records/E117-plan.json. Two hours TOTAL including automatic audit.
+Use pinned qualified E115 parent, fresh seed1170. One proposal from eight train
+only targets (one fine-group/seven coarse, each>=5measuredpairs), two independent
+antithetic SPSA directions averaged, reduced Adam step0.0005. Own60s-settled
+states at all perturbation/current/proposal endpoints; same fixed and local/
+cumulative bounds. All302cells simulated, all9538unknown coordinates remain
+eligible. This is one controlled update trial, not a long optimization sweep.
+
+Budget adaptation is explicit: retain full135target/all3grid/allphase numerical
+criteria, but execute that expensive validation once for the proposal; it is both
+selection and final numerical evidence. Independently regenerate own states and
+repeat the finest8target panel; report state/panel reproduction, NOT independent
+full-atlas loss reproduction. Parent saved full validation/autonomy artifacts
+reused only after qualification/hash/source/environment checks; fresh parent
+panel reproduced as startup control. Expensive tasks dispatched first on two
+GPUs.110min coordinator plus10min audit/cleanup within120min watchdog. Timeout
+or incomplete evidence never qualifies. Complete saved-data audit must recompute
+parameter projection, two-direction gradient, panel/validation scores, selection,
+controls, state/panel replay and all artifact hashes. No new behavioral promotion.
+
+E117 implementation/local verification:24 focused software tests passed across
+panel pilot, continuation pinning and stable-atlas tests (CPU,float64). Synthetic
+end-to-end tests cover positive/negative proposal selection, two-direction gradient
+and Adam arithmetic recomputed by audit, own-state/panel replay gates, cumulative
+bounds, optimizer-artifact tampering, incomplete evidence refusal, train-only panel
+support and longest-task-first dispatch. No server GPU fitting result claimed.
+Shell syntax/Python compilation/diff checks pass. All per-task source/env records,
+models, coordinates, panel/RNG/directions/optimizer and signal matrices remain
+external. Audit limitations explicitly distinguish saved voltage-error reductions
+from unavailable full duplicate traces, and panel replay from full-loss replay.
+A zero-change proposal cannot qualify. Same two-hour hard ceiling includes audit
+and process-group cleanup; partial/timeout evidence remains unqualified.

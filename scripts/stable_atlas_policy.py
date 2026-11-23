@@ -67,11 +67,11 @@ def loss(response, targets, ids, statistics, split):
 def prior(x):return float(.001*np.mean((np.asarray(x)/BOUND)**2))
 
 
-def adam_step(x, m, v, gradient, iteration):
+def adam_step(x, m, v, gradient, iteration, *, learning_rate=.002):
     gradient = np.asarray(gradient, dtype=float)
     gradient = gradient/max(1., float(np.linalg.norm(gradient)))
     m = .9*m+.1*gradient;v = .999*v+.001*gradient**2
-    step = .002*(m/(1-.9**iteration))/(np.sqrt(v/(1-.999**iteration))+1e-8)
+    step = learning_rate*(m/(1-.9**iteration))/(np.sqrt(v/(1-.999**iteration))+1e-8)
     return np.clip(x-step, -BOUND, BOUND), m, v
 
 

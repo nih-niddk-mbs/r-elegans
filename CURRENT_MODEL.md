@@ -1,5 +1,16 @@
 # Current model: exact scope and computation path
 
+2026-11-22 E117 prepared; server execution pending. Two-hour TOTAL pilot
+from qualified E115: one proposal using eight train targets and two averaged
+antithetic SPSA directions, reduced step0.0005. Own-state and cumulative/fixed
+parameter rules retained. Full135-target/all3grid numerical validation executes
+once; own states and finest8-target panel independently replayed. This does not
+claim a second independent full-atlas loss evaluation. Candidate must improve
+training and validation and pass full controls/numerics/autonomy/audit. Last10min
+reserved for audit within120min inclusive watchdog. No behavior promotion.
+Launch: `sh scripts/launch_panel_atlas_fit_mbslnx2.sh`.
+[Plan](experiments/records/E117-plan.json).
+
 2026-11-22 E116 completed (user-reported):3 optimizer iterations,2 accepted
 training updates, but no improved qualifying validation checkpoint selected.
 Final selection retains E115 parent (zero local parameter changes; identical
