@@ -1,5 +1,15 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-23 strategy revision H1.3 recorded: the present goal is plausible
+physiology initialization, allowing modest labeled overfit before later behavior
+refitting. Proposed five animal-grouped folds across all87 usable animals, then
+an all-data calibration. New folds require independent verified pre-atlas starts;
+E120 remains an informed warm start for all-data fitting. Numerical/physical
+safeguards remain mandatory; no existing results reclassified. Data/fold audit
+and a reliable low-dimensional descent pilot precede further long fitting.
+[Coherent plan](TRAINING_PROTOCOLS.md#physiology-initialization-and-animal-level-cross-validation-h13-2026-11-23).
+No new split, fitting run or behavior training executed by this planning update.
+
 2026-11-23 E120 completed (user-reported): fixed reverse trial qualifies.
 Full train loss0.852886642->0.852871157 and validation0.932770976->0.932315353;
 all numerical/control/parameter/cumulative-bound/autonomy/state/panel checks pass.

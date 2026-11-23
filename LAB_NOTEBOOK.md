@@ -12981,3 +12981,50 @@ qualification. Repeated historical test inspection prevents untouched-holdout
 claims. Raw source/runtime/strict-cycle/response artifacts not locally inspected;
 record is supplied server stdout, not an independent scientific rerun. No next
 experiment launched. Documentation-only update; no new tests required.
+
+### 2026-11-23 — H1.3: coherent initialization plan, grouped resampling and allowed overfit
+
+User explicitly reframes near-term purpose as obtaining reasonable neuron
+parameters before behavior refitting, accepts modest overfit, requests jackknife/
+CV and a coherent explanation. Record that preference as H1.3, not a retroactive
+rewrite of E113-E120 criteria. Planned strategy and stages in
+experiments/physiology_initialization_strategy_v2.json and new top section of
+TRAINING_PROTOCOLS.md. No numerical code/data/split changed; no run launched.
+
+Verified local implementation: recent objective fits pooled stimulus-response
+z-score patterns, not complete traces or calibrated amplitudes.9538 trainable
+coordinates include channels and synapses; many constants/RMD profiles remain
+fixed priors/assumptions. Current best E120 is a small qualifying fit, not uniquely
+identified physiology or behavior. E118/E119 exposed an uphill raw-gradient update
+on the same training data. Data partitioning alone cannot fix that optimizer.
+
+Propose audit of currently87usable animals/file identities/genotype/QC/exclusions/
+coverage and five fixed animal-grouped folds, each about69-70fit/17-18heldout.
+Release historical29test animals only in explicitly new development/calibration
+protocol; no pristine holdout claim after historical inspection. Every fold starts
+independently from one verified pre-atlas-fit ancestor; E120/fold-to-fold warm
+starts would leak fitted information. Ancestor identity must be verified before
+execution, not invented now. E120 can warm-start separate all-data calibration.
+Per-fold preprocessing/response aggregation/support must exclude heldout animals;
+filename fallback for missing subject IDs requires audit before grouping.
+
+First demonstrate actual reliable descent on a small named set of unknown
+parameter groups with +/- checks/backtracking; rotate groups for coverage, retain
+all302cells and do not freeze all unknowns permanently. Then five fixed-budget
+independent fits report score/coverage distributions and parameter sensitivity;
+CV is development evidence if used for method selection. Finally freeze procedure
+and fit all usable animals; some overfit allowed, labeled calibration. Plausibility,
+prior deviations, stable numerical dynamics remain hard gates; heldout score is
+not a universal veto for this initialization objective. No averaging of potentially
+nonidentifiable fold weights or claims of true unique channels. Calibration of
+absolute amplitude/kinetics requires appropriate observation model/data, not
+correlation score alone. Later behavior fitting must retain physiology evidence
+and revalidate actual-checkpoint sensory start/sustain/stop/restart per H1.2.
+
+Browsed official scikit-learn guidance on grouped CV, leave-one-out cost and
+selection bias (URLs in strategy document). Fivefold chosen for practical cost;
+jackknife87full refits not first step. Cheap animal resampling of cached statistics
+is data uncertainty only, not network-parameter uncertainty. Dataset already
+inspected; independent final generalization needs new evidence. No invented
+fold assignments/IDs/checkpoints/timestamps or claim CV has run. Documentation
+and structured plan only; JSON syntax/link/diff checks appropriate, no new tests.

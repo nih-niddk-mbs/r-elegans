@@ -1,5 +1,105 @@
 # WormGym: training and validation protocols
 
+## Physiology initialization and animal-level cross-validation (H1.3, 2026-11-23)
+
+User clarified the present goal: obtain reasonable neuron/synapse parameter
+initializations before later embodied behavior refitting. Some overfit to the
+available animals is acceptable. It must be labeled as calibration, not treated
+as proof of biological fidelity/generalization. This changes the *next* fitting
+protocol; earlier acceptance criteria and negative outcomes remain unchanged.
+The structured plan is [physiology_initialization_strategy_v2.json](experiments/physiology_initialization_strategy_v2.json).
+This strategy is recorded; new folds, all-data fit and code changes are not yet executed.
+
+### What we are currently fitting
+
+The full302-cell conductance network is simulated. The recent atlas objective
+pools stimulus-evoked calcium-response summaries and compares their pattern with
+clipped empirical response z scores. It does not fit complete voltage/calcium
+traces, calibrated amplitudes, all channel kinetics or behavior. Current trainable
+coordinates are4736channel scales,3709chemical strengths and1093undirected gap
+strengths. Fixed passive/kinetic/release/indicator properties and RMD profiles
+include modeling assumptions, not exclusively measured biological constants.
+The current narrow +/-0.1 coordinate bounds are engineering choices. Any future
+revision requires explicit scientific justification and a recorded new protocol.
+
+E120 is the best reported qualifying physiological candidate, with only a small
+loss improvement. E118's raw SPSA derivative prediction was wrong-sign on its own
+train panel; E119 verified this at smaller steps, and E120 evaluated a reverse
+trial successfully. Data scarcity and unreliable optimization are separate issues.
+Adding animals or changing the split alone does not fix an uphill update.
+
+### One coherent sequence
+
+| Stage | Work | Concrete output |
+|---|---|---|
+|1 Data audit|Verify animal IDs across files, genotype/QC, all trial/target/responder coverage and exclusions.|Versioned inventory and five fixed animal-fold manifests; uncertainty explicit.|
+|2 Descent pilot|Use a small named group of unknown parameters, +/- trials and checked step sizes; rotate groups later.|Actual repeatable training descent, not just a predicted gradient.|
+|3 Resampling|Five independent animal-grouped fits with one locked protocol and verified common pre-atlas initialization.|Held-out fit/coverage distributions, parameter sensitivity and dynamics.|
+|4 Calibration|Freeze procedure, fit all usable animals for a final initialization or small ensemble.|Plausible stable parameter sets with prior deviations and uncertainty recorded.|
+|5 Behavior later|Refit sensory-controlled motor behaviors while retaining physiology evidence as a prior/rehearsal.|Separate H1.2 initiation/sustain/stop/restart and body/task qualification.|
+
+### How the data will be used
+
+The proposed pool is all87 currently usable animals, after the identity/QC audit.
+The old43/15/29 split stays reproducible as historical evidence. The old29 test
+animals can enter the *new* calibration protocol; their scores then become
+in-sample rather than held out. We have inspected these animals' outcomes already,
+so a new partition cannot produce an untouched final test set.
+
+Use five fixed folds: each fit sees about69-70 animals and holds out17-18. Every
+worm is held out once; its trials/recordings stay together. Do not simply rotate
+the validation animals while carrying forward one trained checkpoint. Each fold
+must start independently from the same verified pre-atlas-fit ancestor. E120 has
+already been influenced by atlas training/selection and cannot be the initializer
+for an unqualified claim of independent fold validation. E120 remains a useful
+explicitly informed warm start for the final all-data fit. Even clean fold fits
+here are exploratory development evidence, given historical dataset exposure.
+
+Rebuild fold response statistics/support from raw trials, not a mixture of old
+train/validation/test aggregates. Keep preprocessing rules fixed; do not pool
+held-out animal responses into training statistics. Record all named/missing
+neurons, target coverage and sparse/unscorable outcomes. Existing loader fallback
+to a filename when subject ID is missing needs audit before animal-level CV;
+uncertain identities cannot silently be treated as different animals.
+
+Fivefold CV is preferred initially to87 leave-one-animal-out refits because of
+compute. Jackknife-style animal influence analysis may follow; resampling cached
+response summaries alone measures data-statistic sensitivity, not the uncertainty
+of a fully refitted network. Do not report it as fitted-parameter confidence.
+Official references: [group-wise CV](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data),
+[leave-one-out cost](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html),
+[model-selection bias](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html).
+
+### What counts as progress under the revised goal
+
+For an all-data initialization, primary requirements are improved calibration fit,
+plausible parameter/prior deviations and reproducible own-state/numerical dynamics.
+A modest CV gap is acceptable and reported; the former15-worm validation score is
+not an automatic veto after those animals become training data. Numerical and
+physical safeguards remain hard requirements. Any new checkpoint category will
+be labeled initialization/calibration, not retroactively substituted for previous
+fit_qualified/behavioral criteria. No software acceptance code is changed by this
+strategy document.
+
+The existing correlation objective cannot identify absolute activity amplitude;
+we must audit the measurement/indicator model and available time-resolved data
+before adding amplitude, latency or decay targets. Do not force ionic conductances
+to explain fluorescence gains. Many weights can reproduce similar summaries;
+retain multiple plausible initializations if needed rather than claiming unique
+true channel compositions. Do not average weights across folds as a final model.
+
+Cross-validation is for stability and method development here. Use a fixed compute
+budget and training-based stopping within each fold; if fold scores guide method
+choices, disclose that development reuse rather than presenting them as an unbiased
+final assessment. A strong independent generalization claim needs new animals or
+an independent suitable dataset after the fitting procedure is fixed.
+
+Next work is the versioned data/identity/coverage audit and fold manifest, then a
+single-fold descent pilot. Do not launch another long full-dimensional SPSA run.
+Every actual run still requires complete post-run audit and exact artifact/source/
+environment/RNG provenance. H1.1 independent-skill preservation and H1.2 behavior
+control requirements remain in force; physiological initialization is not a waiver.
+
 2026-11-23 E120 completed (user-reported): fixed reverse trial qualifies.
 Full train loss0.852886642->0.852871157 and validation0.932770976->0.932315353;
 all numerical/control/parameter/cumulative-bound/autonomy/state/panel checks pass.

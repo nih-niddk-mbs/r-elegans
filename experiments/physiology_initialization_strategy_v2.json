@@ -1,0 +1,84 @@
+{
+  "strategy": "H1.3 physiology initialization with animal-grouped resampling",
+  "recorded_date": "2026-11-23",
+  "status": "User-directed purpose adopted; proposed implementation/data split not yet executed",
+  "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
+  "existing_evidence": {
+    "best_reported": "E120",
+    "selected_sha256": "ac621eaa129c1c533691f52cce802d6ff259ada754d159bf287a30895c48adf3",
+    "existing_split": {
+      "fit": 43,
+      "validation": 15,
+      "test": 29
+    },
+    "eligible_animals_reported": 87,
+    "limitations": [
+      "Static pooled optogenetic/calcium-response statistics, not complete temporal/behavior fitting.",
+      "Scale-invariant correlation objective does not identify absolute calcium/voltage amplitudes.",
+      "Prior SPSA direction empirically uphill on its own training panel; resampling cannot fix that optimization defect.",
+      "Many physical constants and RMD profiles are fixed priors/engineering assumptions, not all independently measured."
+    ]
+  },
+  "proposed_data_policy": {
+    "development_pool": "All87 currently usable animals, subject to renewed identity/QC/genotype/coverage audit; release original29 test animals from permanent holdout only in new explicitly labeled protocol. No changes to old statistics/results.",
+    "cross_validation": "Five fixed documented animal-level folds; about69-70fit and17-18heldout per fold, never trial-wise leakage. Five independent fits from common verified pre-atlas-fit ancestor and fixed budgets/stopping rules; no E120/fold-to-fold trained-weight warm starts for held-out reporting.",
+    "historical_exposure": "Existing dataset/test scores have been inspected repeatedly. Resampling is development/stability evidence, not a new pristine test. Protocol/hyperparameter selection on CV must be disclosed.",
+    "jackknife": "Optional animal-level influence/data-statistic sensitivity after pilot;87full leave-one-animal-out refits are not first step. Resampling cached statistics without refitting estimates data uncertainty, not fitted-parameter uncertainty.",
+    "final_calibration": "After freezing method, fit one or several candidate initializations on all87; E120 may be an explicitly informed warm start here. Do not average nonidentifiable weights across CV folds. Validate strong generalization later on independent data."
+  },
+  "work_packages": [
+    {
+      "order": 1,
+      "name": "Data and observable audit",
+      "deliverable": "Versioned animal/file identity map, reason for unused records, genotype/QC, per-animal trials and stimulated/observed coverage, fivefold membership and hashes; per-fold preprocessing/aggregation regenerated using that fold only. Keep unknown identities out of CV until resolved.",
+      "gate": "No animal overlap; support/coverage and missing evidence explicit; no hidden outcome-based reassignment."
+    },
+    {
+      "order": 2,
+      "name": "Optimizer/parameterization pilot",
+      "deliverable": "Common pre-atlas parent verification; small named groups of unknown channel/chemical/gap scales with rotating coverage, central +/- trials and actual-loss backtracking. Test one fixed fold/train panel first; no9538-dimensional blind SPSA resumption.",
+      "gate": "Demonstrated repeatable training descent and admissible own-state dynamics; known/passive properties remain fixed, engineering bounds reviewed before changes, no quantitative derivative claim below measured numeric resolution."
+    },
+    {
+      "order": 3,
+      "name": "Fivefold stability assessment",
+      "deliverable": "Independent per-fold fits, held-out per-animal/pair/target scores, raw coverage, loss vs initialization, parameter/group variability and dynamics. Same model capacity/compute/stopping protocol; heldout fold scores do not secretly stop/select checkpoints.",
+      "gate": "Report distribution and limitations, not aggregate pass alone. CV gap diagnoses robustness, not an automatic veto of useful all-data initialization; no claim all individual channels identified."
+    },
+    {
+      "order": 4,
+      "name": "All-data initialization",
+      "deliverable": "All87 calibration with frozen method, plausible constrained parameter set or small ensemble, prior deviations/uncertainty and all numerical/dynamics gates.",
+      "gate": "Full calibration improves without numerical artifacts/nonphysical parameters; label training/in-sample and CV evidence separately. No requirement to improve former15-worm validation after those animals become training data."
+    },
+    {
+      "order": 5,
+      "name": "Later sensory/body refitting",
+      "deliverable": "Retain physiology calibration as prior/rehearsal while fitting sensory initiation, sustained execution, stop/rest/restart, then movement and task behaviors in baby steps.",
+      "gate": "H1.2 actual-checkpoint repeated/varied cues, sensory/no-cue/control-dependence and physics/numerics still required; no new behavior training automatically authorized/launched by this plan."
+    }
+  ],
+  "progress_reporting": {
+    "each_run": [
+      "Purpose and observable: what is actually being fitted",
+      "Animal/trial/target/parameter coverage and exact parent/source/env",
+      "Training objective change and parameter-prior deviations",
+      "Own-state/numerical/control checks",
+      "Development CV held-out scores and variability, if actually measured",
+      "Execution/budget/audit and negative results",
+      "Next decision tied to finding"
+    ],
+    "scope": [
+      "A numerical pass is software/solver evidence, not a good biological fit.",
+      "Pooled calcium fit is not full time-series agreement.",
+      "Rhythmic neurons are not autonomous locomotion or sensory start/stop.",
+      "A plausible initialization is not uniquely identified true weights."
+    ]
+  },
+  "next_action": "Prepare data inventory/fold manifest and explain optimizer/observable design; no new long fitting run yet.",
+  "sources": [
+    "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",
+    "https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html"
+  ]
+}
