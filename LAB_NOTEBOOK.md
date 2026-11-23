@@ -13384,3 +13384,28 @@ NumPy,SciPy and x64/matmul/XLA settings before mixing old/new outputs. Source
 environment files hashed as explicit dependencies. Read-only status groups process
 roles by run directory so one supervisor/coordinator/two workers is not presented
 as multiple runs. No live server process state inferred from local checks.
+
+### 2026-11-23 — E123 continuation launch and stage reuse confirmed by server stdout
+
+User-pasted stdout confirms explicit stop of accidental232806Z-977760worker group,
+original files preserved; subsequent active-process check clear. New continuation
+cv-peptide-continuation-20261123T234553Z-979314 obtains exclusive launch lock;
+coordinator reports network and peptide workers running. Budget240min total. No
+independent server process/file inspection performed here. Compact evidence in
+E123-continuation-start-server-summary.json; original source remains220426Z-974332.
+
+Both arms verify/reuse all three completed grid levels0/1/2, complete recovery
+outputs, and completed coarse300s long trace(level0). Original grid times roughly
+174/341/676seconds per arm, recorded exactly in evidence. All cached short RMD
+checks pass, finite flags true and duplicate-sham error0. This proves completed
+work is being reused; not a rerun of the entire original validation. Phase anchors
+not saved by original source still need reconstruction when required. Fine-clock
+300s trace, optional admitted batching and full combined post-run audit remain by
+protocol. No final receipt or qualification supplied; do not convert cached stage
+existence/RMD flags into adjacent-grid convergence, recovery-tolerance, sustained
+or behavioral success claims. No model parameters changed and no fitting launched.
+
+This update changes scientific records only; running continuation and original
+forward source files remain unchanged, preserving pinned runtime hashes. No
+restart/cancellation requested by this update; leave the confirmed continuation
+running and read its final report after completion.

@@ -1,0 +1,93 @@
+{
+  "experiment": "E123-continuation",
+  "recorded_date": "2026-11-23",
+  "evidence": "User-pasted launch/log stdout; not direct server file or process inspection",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
+  "source_run": "/home/carsonc/r-elegans-results/cv-peptide-validation-20261123T220426Z-974332",
+  "duplicate_run": "/home/carsonc/r-elegans-results/cv-peptide-validation-20261123T232806Z-977760",
+  "duplicate_stop_reported": true,
+  "active_job_check_reported_clear_before_launch": true,
+  "exclusive_lock_launch_reported": true,
+  "coordinator_reports_running": [
+    "network",
+    "peptide"
+  ],
+  "total_budget_minutes": 240,
+  "arms": {
+    "network": {
+      "reused_grid_levels": [
+        0,
+        1,
+        2
+      ],
+      "original_grid_elapsed_seconds": {
+        "0": 173.92730467498768,
+        "1": 341.4439356139628,
+        "2": 677.6380509879673
+      },
+      "cached_grid_finite": {
+        "0": true,
+        "1": true,
+        "2": true
+      },
+      "cached_short_rmd_checks_passed": {
+        "0": true,
+        "1": true,
+        "2": true
+      },
+      "cached_duplicate_sham_error": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0
+      },
+      "completed_long_trace_levels": [
+        0
+      ],
+      "complete_recovery_outputs_reused": true
+    },
+    "peptide": {
+      "reused_grid_levels": [
+        0,
+        1,
+        2
+      ],
+      "original_grid_elapsed_seconds": {
+        "0": 174.55568481201772,
+        "1": 341.0798705009511,
+        "2": 675.2409138249932
+      },
+      "cached_grid_finite": {
+        "0": true,
+        "1": true,
+        "2": true
+      },
+      "cached_short_rmd_checks_passed": {
+        "0": true,
+        "1": true,
+        "2": true
+      },
+      "cached_duplicate_sham_error": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0
+      },
+      "completed_long_trace_levels": [
+        0
+      ],
+      "complete_recovery_outputs_reused": true
+    }
+  },
+  "status": "Running at last supplied log; no final audit/receipt/results supplied",
+  "remaining_work_by_protocol": [
+    "Recalculate combined grid/recovery metrics",
+    "Fine-clock300s dynamics; reconstruct unsaved phase anchors as needed",
+    "Optional batching admitted by budget",
+    "Complete combined post-run audit and receipt"
+  ],
+  "limits": [
+    "Reusable completed grid outputs do not establish adjacent-grid convergence",
+    "Complete recovery files do not alone establish recovery tolerance pass",
+    "Saved coarse300s trace does not alone establish sustained/refinement qualification",
+    "No fitting, behavioral or biological claim; final qualification pending"
+  ]
+}
