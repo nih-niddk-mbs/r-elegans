@@ -1,0 +1,13 @@
+{
+  "experiment":"E119",
+  "recorded_date":"2026-11-23",
+  "status":"planned; server execution pending",
+  "question":"Is the E118 proposed update a local descent direction at1% and10% of its length, and are directional loss slopes consistent across neural grids?",
+  "source":"/home/carsonc/r-elegans-results/extended-panel-atlas-fit-20261123T040511Z-890436; require completed clean audit/budget, but do not require rejected candidate qualification",
+  "method":"Read-only diagnostic. Pin E118 immediate E115 parent, exact saved proposal vector/optimizer/panel and all recursive evidence hashes. Simulate offsets alpha*proposal at alpha0,+/-0.01,+/-0.1 on the original16-target train panel; independently settle each trial60s and generate its own quarter-phase full states. Same middle/finest target-specific grids, four phases, controls and RMD checks. Independently repeat zero own states and finest zero replay. No clipping: reject any cumulative-bound violation rather than alter direction.",
+  "analysis":"Report regularized loss changes from freshly reproduced zero, central slopes at both radii on both grids, forward/backward one-sided slopes and raw E118 gradient dot proposal. Full-phase response/pair numeric screens retained; descriptive slopes only, no certified derivative/error/noise-floor claim. Parent/proposal cached E118 endpoints reported separately, not represented as new simulations.",
+  "budget":"120min inclusive watchdog on two A100s under nohup;110min simulation/coordinator and10min post-run audit/cleanup. May finish earlier; incomplete evidence explicitly unqualified.",
+  "parameters":"All trial models transient diagnostic copies; original E115/E118 unchanged. Same9538 coordinates and fixed/stereotypical/cumulative0.1 bounds. No fitting, candidate selection, optimizer advance, model promotion, test-score use, swimming or sensory-control qualification.",
+  "audit":"Independently reconstruct trial parameters, saved model/state/source identities, controls/rhythms, original panel endpoints, both-grid loss/slope arithmetic, zero replay and all artifact hashes. Missing evidence explicit. Full-atlas/long-autonomy not rerun: panel-level direction diagnostic only.",
+  "command":"sh scripts/launch_atlas_direction_check_mbslnx2.sh"
+}

@@ -1,5 +1,14 @@
 # r-elegans
 
+2026-11-23 E119 prepared; server execution pending. Read-only local direction
+check of E118 saved step at alpha0,+/-0.01,+/-0.1 on the same16-target train panel,
+fresh settled states per trial, two neural grids, independent zero-state/panel
+repeat and complete automatic audit. Reports central/one-sided slopes against
+raw SPSA prediction; no fitting or checkpoint promotion. Two-hour inclusive cap
+on two A100s; derivative accuracy not certified by engineering grid screens.
+Launch: `sh scripts/launch_atlas_direction_check_mbslnx2.sh`.
+[Plan](experiments/records/E119-plan.json).
+
 2026-11-23 E118 completed (user-reported):16-target/eight-direction proposal
 passed full numerical, control, autonomous-rhythm, parameter and independent
 state/panel replay checks, but failed training-panel and validation improvement.

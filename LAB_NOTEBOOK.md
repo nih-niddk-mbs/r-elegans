@@ -12855,3 +12855,37 @@ coordinates/rotating blocks rather than blindly repeating full-dimensional SPSA.
 No next experiment or altered criterion authorized/executed here. E115 remains
 best qualified parent. This is user-reported saved-data analysis, no local forward
 simulation or raw artifact inspection; documentation-only update, no tests needed.
+
+### 2026-11-23 — E119 planned: bidirectional local check of E118 proposal
+
+User agrees to small positive/negative direction checks. Plan recorded before
+implementation in experiments/records/E119-plan.json. Pin exact completed E118
+run extended-panel-atlas-fit-20261123T040511Z-890436 and its saved E115 parent,
+16-target train panel, optimizer/proposal, hashes and recursive dependencies.
+Require clean execution/audit, not failed candidate's fit qualification.
+Fresh own-state simulations at alpha0,+/-0.01,+/-0.1 times E118 proposal; preserve
+original direction without clipping and enforce local/cumulative bounds and
+fixed fields. Both middle/finest target-specific neural grids, four phases,
+shams/RMD checks. Repeat zero state generation and finest panel independently.
+Two-hour inclusive maximum,110min coordinator+10min audit reserve, two A100s/nohup.
+
+Report current/predicted loss changes, central/one-sided slopes at both radii and
+grids, per-grid stability, parent cached endpoint reproduction and zero repeat.
+Do not interpret engineering mixed tolerances as certified derivative error.
+No full atlas or long-autonomy rerun; this checks local panel objective, not model
+qualification. No training/selection/weight promotion or test-score tuning; all
+transient trial weights and source/env/control/state/response artifacts external.
+Complete post-run saved-data audit required before any later training. Server
+execution/results remain pending; no run ID invented.
+
+E119 local verification:8 focused tests passed across direction diagnostic and
+panel pilot; final3direction tests also pass after explicit repeat-model and
+neuron/control coverage checks. Synthetic tests verify known quadratic central
+slopes, no clipping of bound violations, complete own-state curve/replay/audit,
+unchanged source parent, tampered trial-model detection and incomplete-evidence
+reporting. Legacy panel positive/negative/extended cases remain covered. Python
+compilation, launcher shell syntax and diff checks pass. No local scientific
+forward run or actual mbslnx2 result claimed. Exact source/environment commands,
+all trial weights/anchors and compact responses/hash records external. Source
+E118 rejected candidate is used solely to define a direction; no training or
+selection is performed and no model can be promoted by this diagnostic.
