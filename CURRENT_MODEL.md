@@ -1,15 +1,14 @@
 # Current model: exact scope and computation path
 
-2026-11-22 E116 prepared; server execution pending. Continue from latest
-completed, qualified E115 selected checkpoint, resolving/pinning its actual
-server path and SHA at launch; no fallback if parent evidence fails. Fresh
-optimizer seed1160, not exact state resume. Original E112 cumulative coordinate
-bounds retained alongside local bounds. Own-state training/selection, full
-numerical/RMD/control checks, measured two-GPU scheduling and automatic audit
-unchanged. Four-hour inclusive maximum (120min fitting/selection,120min final/
-audit). E115 and E112 parents preserved independently.
-Launch: `sh scripts/launch_atlas_continuation_mbslnx2.sh`.
-[Plan](experiments/records/E116-plan.json).
+2026-11-22 E116 completed (user-reported):3 optimizer iterations,2 accepted
+training updates, but no improved qualifying validation checkpoint selected.
+Final selection retains E115 parent (zero local parameter changes; identical
+train/val/test losses). All final own-state numerical/rhythm/control/reproduction
+checks and complete audit/integrity pass;139.11min elapsed, no timeout.
+fit_qualified=False means no new fit; E115 qualification is retained. Inspect
+candidate validation losses/penalties and gates before another run. Exact E116
+run and selected SHA recorded; original E115 file identity not inferred.
+[Evidence](experiments/records/E116-server-summary.json).
 
 2026-11-22 E115 completed (user-reported): one training iteration/update,
 all9538 unknown coordinates changed (maximum offset0.002); frozen fields exact,

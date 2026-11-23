@@ -12682,3 +12682,29 @@ anchors, statistics, final response matrices, original origin and cumulative
 offsets while retaining recursive external reference hashes. Reports now print
 run path and selected SHA to avoid the earlier compact-report identity gap.
 No numerical criterion or biological acceptance threshold changed.
+
+### 2026-11-22 — E116 complete: training updates did not replace validation parent
+
+User compact server stdout for
+`/home/carsonc/r-elegans-results/atlas-continuation-20261122T230258Z-877424`:
+iterations3/accepted2. Final selected SHA
+`5fd6e9c90dbb46fd89a10ed9ce34a492347fa772c95c44155a68d33b29d84f92`;
+zero coordinate changes relative to immediate E115 parent, maximum local offset0,
+fixed fields exact, parameter gate passes. Final train/val/test losses exactly
+match E1150.8528866418648333/0.9327709759189401/0.9194401323047322.
+Autonomy preservation, selection reproduction, full numerical/rhythm/control/
+loss-grid checks pass. Audit complete/execution/integrity pass; no problems or
+missing server evidence reported.8346.472364971996s (139.11min) of240min;
+no timeout, all steps complete, fit_qualified=False.
+
+Interpretation: unlike E114, actual fitting occurred. Training-batch acceptance
+and validation checkpoint selection are distinct. No candidate displaced E115
+under full validation loss/prior/gates, so protected selection retained parent.
+False new-fit qualification does not revoke earlier E115 qualification. Do not
+call this forgetting, optimizer convergence or architectural insufficiency based
+on one seed/three rounds. Candidate losses, penalties and individual failed gates
+absent from supplied report; inspect saved validation records next. Exact prior
+E115 path/hash remains in server manifest, not supplied; no byte-hash identity
+inferred from newly saved unchanged arrays. Preserve proposals and optimizer-final
+weights independently; do not launch another fit or weaken criteria yet.
+Documentation-only transcription/status update, no local scientific simulation.

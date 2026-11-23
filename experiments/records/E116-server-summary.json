@@ -1,0 +1,60 @@
+{
+  "experiment": "E116",
+  "recorded_date": "2026-11-22",
+  "evidence_type": "User-reported compact server stdout; raw artifacts not locally inspected",
+  "run": "/home/carsonc/r-elegans-results/atlas-continuation-20261122T230258Z-877424",
+  "iterations": 3,
+  "accepted_updates": 2,
+  "autonomy_passed": true,
+  "selection_reproduced": true,
+  "selected_sha256": "5fd6e9c90dbb46fd89a10ed9ce34a492347fa772c95c44155a68d33b29d84f92",
+  "parameters": {
+    "passed": true,
+    "mismatched_fields": [],
+    "coordinates": 9538,
+    "changed_coordinates": 0,
+    "maximum_offset": 0.0,
+    "near_bound": 0,
+    "fixed_fields_exact": true,
+    "channel_chemical_gap_coordinates": [
+      4736,
+      3709,
+      1093
+    ]
+  },
+  "scores": {
+    "train": 0.8528866418648333,
+    "val": 0.9327709759189401,
+    "test": 0.9194401323047322
+  },
+  "final_gates": {
+    "passed": true,
+    "controls_passed": true,
+    "rhythms_passed": true,
+    "numerical_passed": true,
+    "loss_grid_stable": true
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "unavailable_evidence": []
+  },
+  "budget": {
+    "total_minutes": 240,
+    "elapsed_seconds": 8346.472364971996,
+    "all_steps_finished": true,
+    "timed_out": false,
+    "validation_complete": true,
+    "audit_complete": true,
+    "fit_qualified": false
+  },
+  "interpretation": "Actual optimization attempted, unlike E114. Two training-batch updates accepted but no candidate supplanted the E115 parent under full validation/selection criteria. Selected final artifact is unchanged relative to immediate E115 parent and retains its scores/gates. fit_qualified=False means no new qualifying fit, not loss of prior E115 qualification. One seed and three rounds do not establish plateau or architecture insufficiency.",
+  "unavailable_in_compact_stdout": [
+    "Per-candidate validation losses/prior penalties and gate failure details",
+    "Exact immediate E115 parent path/hash from manifest (do not infer original file hash from newly saved selected artifact)",
+    "Detailed runtime source/environment/cumulative-bound and signal records retained on server"
+  ],
+  "decision": "Keep E115 as best reported fitting parent; inspect saved validation decision records before proposing further fitting or changing optimizer. Preserve all E116 proposals/final optimizer checkpoint and original references. No new experiment launched."
+}
