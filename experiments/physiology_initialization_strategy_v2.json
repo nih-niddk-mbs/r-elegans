@@ -30,13 +30,13 @@
     {
       "order": 1,
       "name": "Data and observable audit",
-      "deliverable": "Versioned animal/file identity map, reason for unused records, genotype/QC, per-animal trials and stimulated/observed coverage, fivefold membership and hashes; per-fold preprocessing/aggregation regenerated using that fold only. Keep unknown identities out of CV until resolved.",
+      "deliverable": "Versioned animal/file identity map, reason for unused records, genotype/QC, per-animal trials and stimulated/observed coverage, fivefold membership and hashes; per-fold preprocessing/aggregation regenerated using that fold only. Keep unknown identities out of CV until resolved. Audit WT/unc-31 availability and genotype; mark network-only versus extrasynaptic model scope.",
       "gate": "No animal overlap; support/coverage and missing evidence explicit; no hidden outcome-based reassignment."
     },
     {
       "order": 2,
       "name": "Optimizer/parameterization pilot",
-      "deliverable": "Common pre-atlas parent verification; small named groups of unknown channel/chemical/gap scales with rotating coverage, central +/- trials and actual-loss backtracking. Test one fixed fold/train panel first; no9538-dimensional blind SPSA resumption.",
+      "deliverable": "Common pre-atlas parent verification; small named groups of unknown channel/chemical/gap scales with rotating coverage, central +/- trials and actual-loss backtracking. Test one fixed fold/train panel first; no9538-dimensional blind SPSA resumption. Establish matched, numerically verified network-only/extrasynaptic variants before interpreting physiology fits; include peptide levels in full-state records.",
       "gate": "Demonstrated repeatable training descent and admissible own-state dynamics; known/passive properties remain fixed, engineering bounds reviewed before changes, no quantitative derivative claim below measured numeric resolution."
     },
     {
@@ -80,5 +80,20 @@
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",
     "https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html"
-  ]
+  ],
+  "extrasynaptic_scope_correction": {
+    "recorded_date": "2026-11-23",
+    "implemented": "r_elegans/brain/extrasynaptic.py with packaged extrasynaptic_v1 asset:269 expression/affinity-supported peptide-receptor combinations; positive/negative gains and shared release-filter timescale. Optional older atlas/rhythm forward path supports it.",
+    "active_best_model": "E120 and E113-E120 common_state_replay path have no peptide state or extrasynaptic term. They are network-only baselines, not complete biological communication models.",
+    "limitations": [
+      "Voltage-sigmoid release proxy, one shared low-pass timescale, expression-defined coupling without spatial diffusion/range.",
+      "No full monoaminergic/receptor-specific intracellular modulation model.",
+      "Expression/affinity constrains possible interactions, not measured effective strengths or release kinetics.",
+      "Earlier E105/E106 optional peptide variants failed to establish qualified improvement; their numerical failures cannot establish that the biology is unimportant."
+    ],
+    "biology_source": "https://www.nature.com/articles/s41586-023-06683-4",
+    "implication": "Missing extrasynaptic signaling could be absorbed into fitted channels/wired strengths. This is plausible model misspecification, not a demonstrated explanation of the optimizer sign failure.",
+    "proposed_next_design": "Matched network-only versus small constrained extrasynaptic model under identical animal folds/own-state forward numerics. Peptide levels must be part of settling, phase anchors and every trial/replay, not reset as hidden state. Initially small grouped gains; no automatic269-pair strength expansion. Audit genotype and availability of matched WT/unc-31 evidence before using it; UNC-31 perturbation is not a perfect isolated peptide subtraction.",
+    "status": "Plan addition only; no code activation, data partition change, fit or promotion."
+  }
 }

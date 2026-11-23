@@ -28,6 +28,33 @@ train panel; E119 verified this at smaller steps, and E120 evaluated a reverse
 trial successfully. Data scarcity and unreliable optimization are separate issues.
 Adding animals or changing the split alone does not fix an uphill update.
 
+### Extrasynaptic scope correction (2026-11-23)
+
+Current E120 and recent common-state fits are **network-only**. Optional code in
+`r_elegans/brain/extrasynaptic.py` and an expression/affinity asset with269
+peptide-receptor combinations exist, and older atlas workers used peptide sidecars.
+The current `common_state_replay` runner neither advances peptide state nor adds
+its membrane input. Existing E105/E106 peptide experiments did not establish a
+numerically qualified benefit; their failures do not exclude extrasynaptic biology.
+
+The existing approximation uses voltage-dependent release, one shared release
+filter and expression-defined coupling. Spatial diffusion/range, receptor-specific
+intracellular signaling and a full monoamine model are absent. Those are model
+assumptions, not known peptide kinetics. The Randi atlas reports extrasynaptic
+contributions even on short timescales; it cannot be presumed merely a slow
+background correction. [Primary study](https://www.nature.com/articles/s41586-023-06683-4).
+
+Add a matched network-only/extrasynaptic comparison to H1.3 before interpreting
+channel/synapse fits as physiological estimates. Missing modulation could be
+absorbed by wired weights; that possibility is distinct from the observed bad
+optimization direction. Both variants need identical data/folds, stable integration
+and own states. Peptide levels must be included in settling, quarter-phase anchor
+snapshots, stimulation, sham and replay states. Start with few constrained grouped
+gains, then expand only if supported. Audit WT/unc-31 data availability/genotype;
+mutation effects and monoamine contributions prevent treating their difference as
+an exact isolated peptide signal. No extrasynaptic activation or new fitting is
+performed by this documentation update.
+
 ### One coherent sequence
 
 | Stage | Work | Concrete output |

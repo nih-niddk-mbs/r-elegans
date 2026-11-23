@@ -13028,3 +13028,26 @@ is data uncertainty only, not network-parameter uncertainty. Dataset already
 inspected; independent final generalization needs new evidence. No invented
 fold assignments/IDs/checkpoints/timestamps or claim CV has run. Documentation
 and structured plan only; JSON syntax/link/diff checks appropriate, no new tests.
+
+### 2026-11-23 — extrasynaptic scope checked and added to H1.3
+
+User asks whether extrasynaptic contribution is present. Local source inspection:
+extrasynaptic.py and extrasynaptic_v1 asset exist (269peptide/receptor pairs,
+CeNGEN/external affinity priors). Older selected_atlas_replay supports optional
+peptide sidecar. Current common_state_replay, E113-E120 workers and E120 checkpoint
+path do not advance or apply peptide state: current best is network-only.
+Approximation uses voltage-sigmoid release, one shared slow filter and expression
+coupling; no spatial diffusion/range or full monoamine/intracellular modulation.
+E105/E106 failed peptide qualification, including unresolved numerical issues;
+this is not evidence extrasynaptic signaling is unnecessary.
+
+Browsed primary Randi et al Nature2023 DOI10.1038/s41586-023-06683-4: dense-core
+UNC-31-dependent extrasynaptic contributions include short-timescale responses,
+with neuropeptide/receptor expression supporting candidate interactions. UNC-31
+perturbs dense-core release including peptides/monoamines, not an isolated
+single peptide term. Missing mechanism may be compensated by wired/channel fit;
+plausible, not proven cause of optimization failures. Added explicit matched
+network-only/extrasynaptic mechanism comparison to H1.3, shared CV/data/own states,
+full peptide-state propagation in settling/anchors/shams/replay, few constrained
+gains first and genotype/WT-unc31 data audit. No new code activation, numerical
+run or checkpoint promotion. Documentation/JSON checks only; no tests required.

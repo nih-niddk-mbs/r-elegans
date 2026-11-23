@@ -1,5 +1,12 @@
 # Current model: exact scope and computation path
 
+2026-11-23 scope clarification: extrasynaptic peptide code/assets exist but
+are NOT active in E120/recent common-state fits. Their results are network-only
+baselines. H1.3 now includes matched, own-state/numerically verified extrasynaptic
+comparison before interpreting fitted channels/weights as physiological estimates.
+Earlier peptide trials did not establish qualified benefit; no biological exclusion
+or new module activation claimed. [Plan](TRAINING_PROTOCOLS.md#extrasynaptic-scope-correction-2026-11-23).
+
 2026-11-23 strategy revision H1.3 recorded: the present goal is plausible
 physiology initialization, allowing modest labeled overfit before later behavior
 refitting. Proposed five animal-grouped folds across all87 usable animals, then
