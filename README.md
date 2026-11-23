@@ -1,5 +1,14 @@
 # r-elegans
 
+2026-11-23 E121 execution audit: major gaps confirmed. H1.3 fivefold/all-animal
+fitting and a reusable checked grouped optimizer are not implemented in the active
+pipeline; extrasynaptic code remains inactive. Local broad float64 suite620pass/
+6fail; all six pass in isolated float32 mode, so full suite is not declared green.
+New read-only server audit rechecks E120 evidence without overwriting originals,
+inventories actual animal IDs/genotypes/filters, and emits draft fold identities
+(not fitted CV). Server execution pending. No new training launched.
+[Full execution audit](REPRODUCE.md#e121-execution-audit--2026-11-23).
+
 2026-11-23 scope clarification: extrasynaptic peptide code/assets exist but
 are NOT active in E120/recent common-state fits. Their results are network-only
 baselines. H1.3 now includes matched, own-state/numerically verified extrasynaptic

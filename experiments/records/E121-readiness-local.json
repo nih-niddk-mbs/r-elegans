@@ -1,0 +1,144 @@
+{
+  "audit": "E121-local-readiness",
+  "audit_complete": true,
+  "inspection": "Static source and committed records, not server execution",
+  "flags": {
+    "active_anchor_fields": [
+      "voltage_mV",
+      "gates",
+      "calcium_uM",
+      "indicator"
+    ],
+    "active_extrasynaptic_state": false,
+    "active_replay_calls_peptide_step": false,
+    "optional_extrasynaptic_module_present": true,
+    "active_replay_simulates_body": false,
+    "active_replay_objective": "Pooled stimulus-response correlation; no full time-series/amplitude fit"
+  },
+  "findings": [
+    {
+      "id": "GAP-CV",
+      "status": "NOT_IMPLEMENTED_IN_ACTIVE_FITTER",
+      "severity": "blocking_requested_workflow",
+      "finding": "Five independent animal-fold model fits, fold-aware trainer and all-animal calibration are plans. E121 draft identities are not fitted CV.",
+      "evidence": [
+        "experiments/physiology_initialization_strategy_v2.json",
+        "scripts/run_saved_atlas_candidate.py"
+      ]
+    },
+    {
+      "id": "GAP-EXTRA",
+      "status": "OPTIONAL_LEGACY_ONLY",
+      "severity": "blocking_full_model_claim",
+      "finding": "Peptide module/assets exist but current four-field common-state runner does not propagate peptide state or apply extrasynaptic input.",
+      "evidence": [
+        "r_elegans/brain/common_state_replay.py",
+        "r_elegans/brain/extrasynaptic.py",
+        "scripts/stable_atlas_worker.py"
+      ]
+    },
+    {
+      "id": "GAP-OPT",
+      "status": "DIAGNOSTIC_NOT_GENERAL_FITTER",
+      "severity": "blocking_further_blind_updates",
+      "finding": "E119 tested one saved direction; a reusable low-dimensional checked-descent/grouped fitter is not implemented. E118 raw direction was measured uphill.",
+      "evidence": [
+        "scripts/run_atlas_direction_check.py",
+        "scripts/run_panel_atlas_fit.py",
+        "experiments/records/E119-server-summary.json"
+      ]
+    },
+    {
+      "id": "SCOPE-OBS",
+      "status": "LIMITED_OBJECTIVE",
+      "severity": "claim_limit",
+      "finding": "Current correlation loss cannot identify calibrated amplitudes or complete kinetics; mean calcium summaries are fitted, not complete neural time courses.",
+      "evidence": [
+        "scripts/stable_atlas_policy.py",
+        "r_elegans/brain/common_state_replay.py"
+      ]
+    },
+    {
+      "id": "RISK-ID",
+      "status": "SERVER_DATA_CHECK_REQUIRED",
+      "severity": "data_integrity_risk",
+      "finding": "Missing animal IDs fall back to filenames; actual metadata must be inventoried before animal-grouped CV.",
+      "evidence": [
+        "r_elegans/data/randi_atlas.py"
+      ]
+    },
+    {
+      "id": "RISK-GENO",
+      "status": "SERVER_DATA_CHECK_REQUIRED",
+      "severity": "model_assumption_risk",
+      "finding": "Current build_statistics does not filter by genotype; NWB file count is called animals. Genotype mixture and unique worm counts need actual data audit.",
+      "evidence": [
+        "scripts/run_atlas_baseline.py"
+      ]
+    },
+    {
+      "id": "SCOPE-BODY",
+      "status": "NOT_TESTED_ON_E120",
+      "severity": "claim_limit",
+      "finding": "Sensory/body/physical environment modules exist, but E120 is an atlas-only neural evaluation; no E120 body, swimming or sensory start/stop qualification.",
+      "evidence": [
+        "scripts/run_saved_atlas_candidate.py",
+        "r_elegans/body/channel_bridge.py",
+        "r_elegans/body/embodied_sensory.py"
+      ]
+    },
+    {
+      "id": "SCOPE-NUMERIC",
+      "status": "REPORTED_PASS_RECHECK_REQUIRED",
+      "severity": "evidence_limit",
+      "finding": "E120 reports full three-level atlas checks and independent state/panel repeat; full atlas loss was not independently repeated. Historical E104/E105 failures preserved.",
+      "evidence": [
+        "experiments/records/E120-server-summary.json"
+      ]
+    },
+    {
+      "id": "GAP-CELLPRIORS",
+      "status": "SHARED_TEMPLATE_PRIORS",
+      "severity": "blocking_measured_cell_model_claim",
+      "finding": "Historical polarized baseline used296 transferred AWC channel templates plus6 RMD profiles. Per-cell fitting can change scales; this is not302 independently measured neuron models. Server snapshot checks E120 base/effective conductances and template match.",
+      "evidence": [
+        "experiments/records/model_data_audit_mac_rhythm_v1_polarized_summary.json",
+        "r_elegans/brain/conductance_network.py"
+      ]
+    },
+    {
+      "id": "SCOPE-PARAM",
+      "status": "STRUCTURED_PRIORS_NOT_UNIQUE_RECOVERY",
+      "severity": "claim_limit",
+      "finding": "9538 fitted scales/strengths; stereotypical fields, LEAK/RMD and anatomy fixed. Some are engineering priors, not independently measured values.",
+      "evidence": [
+        "scripts/stable_atlas_policy.py"
+      ]
+    },
+    {
+      "id": "GAP-CLEAN-START",
+      "status": "UNVERIFIED_FOR_NEW_FOLDS",
+      "severity": "blocking_independent_cv_claim",
+      "finding": "E120 has atlas exposure. A common verified pre-atlas-fit ancestor is required for independent fold fits; no new CV ancestor lineage audit/fold runs evidenced.",
+      "evidence": [
+        "experiments/physiology_initialization_strategy_v2.json"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "r_elegans/brain/common_state_replay.py": "4eedcad4c325022916be272314bced8f4466102ba756ea096bf9bfaa9630530e",
+    "r_elegans/brain/extrasynaptic.py": "63d3f2c5ec0c0869be4641c182972e715a29faf244d79a4e1a75373161c84f76",
+    "scripts/stable_atlas_worker.py": "dcd5c533b1dda048b7635de6cae59908188b0fbe5bd96ab180f86c71c8d2653c",
+    "scripts/stable_atlas_policy.py": "98bd8ac049404808e1d51de684da578273f31bae658b048d68fbbee6de35a73c",
+    "scripts/run_saved_atlas_candidate.py": "ffbc62ba96a713eb352772ac64f64d2b385a6b12a013a270ef10829d5ee3fef7",
+    "scripts/run_selected_atlas_audit.py": "f25fdad8a0a448351167236e3194eafb7e7519370264224951627163ef12d59b",
+    "scripts/run_atlas_baseline.py": "001b35ab5b7e95687e2195794d808530e2c832dbdbec155125537dca21d4dd13",
+    "r_elegans/data/randi_atlas.py": "d0e265cd996bf6f6cf6aeae94e32808ceb9e34eb1cb3eec589990188eb97b0fd",
+    "r_elegans/atlas_evaluation.py": "da210167b5956a5ea4a7134e8c371a6d880930c31a463e6c590b067fc1b51f7c",
+    "r_elegans/body/channel_bridge.py": "17442d96312f3d0235e0699559a45054715c1a83580fa41f7c14f19143b1a5a4",
+    "r_elegans/body/embodied_sensory.py": "34321bafed377b93668cff732819b2cdd1fa05ee6c5c557661fe15a056d8059f",
+    "experiments/physiology_initialization_strategy_v2.json": "e45b18900b7cf6ccf5b3644e35af76689adef218327e3907fdfa25dd66f8adac"
+  },
+  "ready_for_requested_training": false,
+  "conclusion": "Concrete implementation/execution gaps remain; more success flags on existing network-only runs do not close them."
+}

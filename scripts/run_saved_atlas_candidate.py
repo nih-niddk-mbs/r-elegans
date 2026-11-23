@@ -110,7 +110,13 @@ def coordinator(root):
     finally:pool.close()
 
 
-def audit(root):
+def audit(root, *, output_dir=None):
+    root=Path(root).resolve()
+    destination=root
+    if output_dir is not None:
+        destination=Path(output_dir).resolve()
+        if destination==root or root in destination.parents:raise ValueError('Independent audit output must be outside source run')
+        destination.mkdir(parents=True,exist_ok=False)
     hashes={};problems=[];missing=[];computed=None
     def pin(path,expected=None):
         path=Path(path);sha=file_sha256(path);hashes[str(path)]=sha
@@ -135,7 +141,8 @@ def audit(root):
     result=dict(experiment='E120',audit_complete=True,execution_complete=bool(computed and not missing),integrity_passed=not problems,
         problems=problems,unavailable_evidence=missing,evidence_sha256=hashes,model_promoted=False,
         limits=['Saved-data audit; no independent full-atlas loss rerun.','Duplicate voltage errors saved as reductions, not full duplicate traces.','Long RMD preservation is not body movement or behavior qualification.'])
-    write(root/'audit.json',result);return result
+    if output_dir is not None:result.update(source_run=str(root),independent_saved_data_recheck=True)
+    write(destination/'audit.json',result);return result
 
 
 def main():

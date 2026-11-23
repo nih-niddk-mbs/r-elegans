@@ -1,0 +1,67 @@
+{
+  "experiment": "E121",
+  "recorded_date": "2026-11-23",
+  "status": "Local source/tests completed; independent server artifacts/raw-data audit pending execution",
+  "source_revision_at_audit_start": "951ccb2",
+  "source_worktree_at_audit_start": "clean according to git status output",
+  "checks": {
+    "full_suite_float64": {
+      "tests": 626,
+      "failures": 6,
+      "passed": 620,
+      "failure_details": [
+        {
+          "test": "tests.test_builtin_model::test_builtin_model_drives_neural_body_without_external_files",
+          "message": "TypeError: scan body function carry input and carry output must have equal types, but they differ:\n\nThe input carry component state.phase has type float32[] but the corresponding output carry component has type float64[], so the dtypes do not match.\n\nRevise the function so that all output types match the corresponding input types.\n--------------------\nFor simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these."
+        },
+        {
+          "test": "tests.test_channel_body::test_default_bundle_is_exact_mac_reference_with_complete_readout",
+          "message": "AssertionError: \nArrays are not equal\n\nMismatched elements: 5104 / 5134 (99.4%)\nFirst 5 mismatches are at indices:\n [0, 0]: 0.029000001028180122 (ACTUAL), 0.028999999999999998 (DESIRED)\n [0, 1]: 0.0010000000474974513 (ACTUAL), 0.001 (DESIRED)\n [0, 2]: 0.00800000037997961 (ACTUAL), 0.008 (DESIRED)\n [0, 3]: 0.008500000461935997 (ACTUAL), 0.0085 (DESIRED)\n [0, 4]: 9.999999747378752e-06 (ACTUAL), 1e-05 (DESIRED)\nMax absolute difference among violations: 4.76837159e-08\nMax relative difference among violations: 7.64285366e-08\n ACTUAL: array([[0.029 , 0.001 , 0.008 , ..., 0.0006, 0.0025, 0.03  ],\n       [0.029 , 0.001 , 0.008 , ..., 0.0006, 0.0025, 0.03  ],\n       [0.029 , 0.001 , 0.008 , ..., 0.0006, 0.0025, 0.03  ],...\n DESIRED: array([[0.029 , 0.001 , 0.008 , ..., 0.0006, 0.0025, 0.03  ],\n       [0.029 , 0.001 , 0.008 , ..., 0.0006, 0.0025, 0.03  ],\n       [0.029 , 0.001 , 0.008 , ..., 0.0006, 0.0025, 0.03  ],..."
+        },
+        {
+          "test": "tests.test_embodied_sensory::test_membrane_input_matches_passive_conductance_solution",
+          "message": "TypeError: scan body function carry input and carry output must have equal types, but they differ:\n\n  * the input carry component s.gates has type float32[302,35] but the corresponding output carry component has type float64[302,35], so the dtypes do not match;\n  * the input carry component s.calcium_uM has type float32[302] but the corresponding output carry component has type float64[302], so the dtypes do not match.\n\nRevise the function so that all output types match the corresponding input types.\n--------------------\nFor simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these."
+        },
+        {
+          "test": "tests.test_embodied_sensory::test_disabled_gains_recover_legacy_and_streaming_preserves_memory",
+          "message": "TypeError: scan body function carry input and carry output must have equal types, but they differ:\n\n  * the input carry component s.voltage_mV has type float32[302] but the corresponding output carry component has type float64[302], so the dtypes do not match;\n  * the input carry component s.calcium_uM has type float32[302] but the corresponding output carry component has type float64[302], so the dtypes do not match.\n\nRevise the function so that all output types match the corresponding input types.\n--------------------\nFor simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these."
+        },
+        {
+          "test": "tests.test_intrinsic_motor::test_intrinsic_full_network_carry_temporal_gradients_and_legacy_compatibility",
+          "message": "AssertionError: \nArrays are not equal\n\nMismatched elements: 302 / 302 (100%)\nFirst 5 mismatches are at indices:\n [0]: -0.3526792990887455 (ACTUAL), -0.35267929912952495 (DESIRED)\n [1]: -0.36477207060853006 (ACTUAL), -0.3647720706411578 (DESIRED)\n [2]: -0.3101154873211933 (ACTUAL), -0.31011548753175405 (DESIRED)\n [3]: -0.3417014673182421 (ACTUAL), -0.34170146755276704 (DESIRED)\n [4]: -0.3429864796320823 (ACTUAL), -0.34298647992726167 (DESIRED)\nMax absolute difference among violations: 5.77223699e-09\nMax relative difference among violations: 2.49334291e-08\n ACTUAL: array([-0.352679, -0.364772, -0.310115, -0.341701, -0.342986, -0.344565,\n       -0.322362, -0.340465, -0.344751, -0.36346 , -0.328158, -0.369231,\n       -0.329009, -0.285545, -0.344094, -0.35359 , -0.358974, -0.339746,...\n DESIRED: array([-0.352679, -0.364772, -0.310115, -0.341701, -0.342986, -0.344565,\n       -0.322362, -0.340465, -0.344751, -0.36346 , -0.328158, -0.369231,\n       -0.329009, -0.285545, -0.344094, -0.35359 , -0.358974, -0.339746,..."
+        },
+        {
+          "test": "tests.test_posterior_excitability::test_isolation_matches_zero_edge_network_with_same_cells_and_initial_state",
+          "message": "TypeError: scan body function carry input and carry output must have equal types, but they differ:\n\n  * the input carry component s.voltage_mV has type float32[3] but the corresponding output carry component has type float64[3], so the dtypes do not match;\n  * the input carry component s.calcium_uM has type float32[3] but the corresponding output carry component has type float64[3], so the dtypes do not match.\n\nRevise the function so that all output types match the corresponding input types.\n--------------------\nFor simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these."
+        }
+      ],
+      "xml_sha256": "80c3ec8e50adfb9501b1261976126b146525f4e8681bb86f086589cf6824068d",
+      "log_sha256": "86c73363371d6afb84dc051236ecfbfc526055a048d55b835dad27218e0f66fd",
+      "local_output": {
+        "xml": "/tmp/r-elegans-execution-audit-tests.xml",
+        "log": "/tmp/r-elegans-execution-audit-tests.log"
+      },
+      "command": "JAX_PLATFORMS=cpu JAX_ENABLE_X64=true MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q --junitxml=/tmp/r-elegans-execution-audit-tests.xml"
+    },
+    "isolated_six_float32": {
+      "tests": 6,
+      "failures": 0,
+      "passed": 6,
+      "failure_details": [],
+      "xml_sha256": "6da5db0bd1c980e4c527936f8c7ebdedf19047496e74258d4fcec3c7e663e81a",
+      "log_sha256": "ab2e923ea04140fe8f314ccc6fff4010ebbfff52308970c2b05413567e158317",
+      "local_output": {
+        "xml": "/tmp/r-elegans-execution-audit-precision.xml",
+        "log": "/tmp/r-elegans-execution-audit-precision.log"
+      },
+      "note": "Only the six failed node IDs were rerun in a separate JAX_ENABLE_X64=false CPU process; not whole suite."
+    },
+    "new_audit_and_adjacent_tests": {
+      "passed": 29,
+      "failed": 0,
+      "command": "JAX_PLATFORMS=cpu JAX_ENABLE_X64=true MPLCONFIGDIR=/tmp/r-elegans-mpl .venv/bin/python -m pytest -q tests/test_execution_audit.py tests/test_saved_atlas_candidate.py tests/test_atlas_fit_continuation.py tests/test_atlas_direction_check.py tests/test_panel_atlas_fit.py tests/test_extrasynaptic.py --tb=short",
+      "scope": "New read-only audit/draft-fold/cache-comparison behavior and adjacent existing paths; does not supersede broad-suite failures."
+    }
+  },
+  "interpretation": "Broad suite is not green in CPU/float64 mode. Six selected failing tests pass in a separate CPU/float32 process; this establishes precision/configuration sensitivity, not full float32 suite success. No forward-model source altered to suppress failures. These tests do not independently verify E120 server weights or biology."
+}

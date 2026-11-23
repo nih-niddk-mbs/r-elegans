@@ -13051,3 +13051,70 @@ network-only/extrasynaptic mechanism comparison to H1.3, shared CV/data/own stat
 full peptide-state propagation in settling/anchors/shams/replay, few constrained
 gains first and genotype/WT-unc31 data audit. No new code activation, numerical
 run or checkpoint promotion. Documentation/JSON checks only; no tests required.
+
+### 2026-11-23 — E121 full execution/readiness audit requested
+
+User explicitly objects that discussed capabilities remain unexecuted and requests
+full audit again. Audit scope before new implementation:trace commitments against
+active E120 paths, implementation/execution evidence, scientific assumptions,
+dataset/animal splits/metadata, optimizer, extrasynaptic state, body/sensory/behavior
+scope, checkpoint/budget/controls/artifact integrity, broad software verification.
+Local full CPU/float64 pytest verification started, output external /tmp; not a
+scientific experiment. No new fitting/forward simulation authorized by audit.
+
+Initial source findings:active common_state_replay has only voltage/gates/calcium/
+indicator state; optional peptide module inactive. H1.3 five independent fold fits,
+all-animal calibration and checked grouped optimizer remain prose plans, not active
+training. Loader falls back to filename when subject_id missing; statistics builder
+counts NWB files as animals and does not filter genotype. Whether these affect
+actual server records needs raw inventory, not inference. Current atlas runs do
+not execute body/sensory/behavior paths; existing modules cannot qualify E120.
+
+Deliver local findings + read-only server audit to recompute saved E120 checks
+without overwriting previous audits and inventory actual raw data. Emit draft
+five-fold identities/coverage only with verified IDs, explicitly not model fitting
+or genotype-reviewed training readiness. Snapshot source/input/output hashes and
+record missing/unavailable evidence. Source/server boundaries remain explicit.
+Plan:E121-execution-audit-plan.json. No result claimed before evidence.
+
+E121 local outcomes:full CPU/float64 suite620passed/6failed,9warnings,161.99s.
+Failure nodes/messages and raw XML/stdout hashes in E121-local-test-results.json;
+raw outputs outside Git under /tmp. The six failures pass when rerun alone in a
+CPU/float32 process; do not call full suite green. Four scan carry dtype mismatches
+and two exact-reference equality failures are precision/configuration sensitive.
+No scientific forward-model change or relaxed tolerance was made to hide them.
+Current audit helpers/adjacent protocols29focused tests pass, including raw cache
+reconstruction/mismatch, missing/repeated animal IDs, mixed genotype reporting,
+non-overlap/deterministic draft folds, static feature-scope checks and independent
+saved-data recheck into a new output without changing original audit. Shell syntax,
+Python compilation, JSON validation and diff checks pass.
+
+Additional important provenance finding:recorded polarized base model audit shows
+296transferred AWC compositions and6RMD profiles. Subsequent per-cell scale fits
+can differ; this is NOT302independently characterized neuron models. Server audit
+now snapshots actual E120 base/effective conductance rows, base/topology match to
+bundled polarized reference and prior provenance conditional on that match. Exact
+E120 base match is pending server execution, not inferred here. Historical Cook
+chemical/gap processing decisions and unknown synapse signs remain prior/model
+assumptions; source masks alone are not complete biological proof.
+
+Delivered E121 implementation:read-only server recheck recomputes all saved E120
+parameter/selection/control/numerical/state/panel/long-RMD/cycle diagnostics and
+ancestry hashes in a NEW audit directory; verifies original source records remain
+unchanged. Actual raw dataset inventory reuses unchanged filtering, separates
+files/metadata subjects/eligible subjects, records genotypes/missing IDs/repeated
+sessions/conflicts, and rebuilds historical train/val/test means/pair counts from
+raw trials against E120's actual statistics cache. Cache discrepancies are failures,
+not quietly overwritten. Draft fivefold identities exclude uncertain metadata IDs
+and have explicit training_ready=False pending genotype/protocol review; no CV
+model fits. Partial raw inventory retained on timeout. Maximum60min inclusive,
+CPU/nohup, no forward simulation/fitting or checkpoint edits.
+
+Full local requirement/status table in REPRODUCE.md; machine source-readiness in
+E121-readiness-local.json. Verified gaps:CV model fitting, all-animal calibration,
+active extrasynaptic state and reusable grouped checked-descent optimizer remain
+unimplemented/unexecuted. Sensory/body modules exist but E120 has no new behavior
+qualification. This substantiates user's execution-gap concern; more planning
+entries/per-run audit flags did not implement those capabilities. Audit completion
+is not training readiness. Server raw files/weights are not locally inspected;
+E121 server execution/results remain pending. No next training run launched.

@@ -70,6 +70,10 @@ def test_single_candidate_full_validation_audit_and_source_unchanged(tmp_path,mo
     assert s['gates']['panel_reproduced'] and not s['model_promoted'] and s['evaluation_only']
     assert before=={p:file_sha256(p) for p in before}
     a=run.audit(root);assert a['integrity_passed'],a['problems'];assert a['execution_complete']
+    audit_sha=file_sha256(root/'audit.json')
+    independent=run.audit(root,output_dir=tmp_path/'independent-audit')
+    assert independent['integrity_passed'] and independent['execution_complete']
+    assert file_sha256(root/'audit.json')==audit_sha
     data=saved_arrays(candidate);data['fixed_bias_pA'][0]+=1;np.savez_compressed(candidate,**data)
     assert not run.audit(root)['integrity_passed']
 
