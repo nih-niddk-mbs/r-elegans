@@ -1,0 +1,63 @@
+{
+  "experiment": "E118",
+  "recorded_date": "2026-11-23",
+  "evidence_type": "User-reported compact server stdout; no local inspection of raw server artifacts",
+  "run": "/home/carsonc/r-elegans-results/extended-panel-atlas-fit-20261123T040511Z-890436",
+  "iterations": 1,
+  "accepted_updates": 0,
+  "selected_sha256": "5fd6e9c90dbb46fd89a10ed9ce34a492347fa772c95c44155a68d33b29d84f92",
+  "candidate_scores": {
+    "train": 0.8530051782744786,
+    "val": 0.936115025691699,
+    "test": 0.9201866958513967
+  },
+  "candidate_parameters": {
+    "passed": true,
+    "mismatched_fields": [],
+    "coordinates": 9538,
+    "changed_coordinates": 9538,
+    "maximum_offset": 0.00024999986143125607,
+    "near_bound": 0,
+    "fixed_fields_exact": true,
+    "channel_chemical_gap_coordinates": [
+      4736,
+      3709,
+      1093
+    ]
+  },
+  "gates": {
+    "parent_replay_passed": true,
+    "gradient_screen_passed": true,
+    "training_improved": false,
+    "validation_improved": false,
+    "full_numerical_passed": true,
+    "parameters_passed": true,
+    "parameters_changed": true,
+    "autonomy_passed": true,
+    "state_reproduced": true,
+    "panel_reproduced": true
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "unavailable_evidence": []
+  },
+  "budget": {
+    "total_minutes": 480,
+    "elapsed_seconds": 11427.153288643924,
+    "all_steps_finished": true,
+    "timed_out": false,
+    "validation_complete": true,
+    "fit_qualified": false
+  },
+  "independent_full_loss_reproduction": false,
+  "interpretation": "Eight-direction/sixteen-target/smaller-step candidate passes numerical, control, autonomous-rhythm, state/panel reproduction and parameter gates but fails same-panel training improvement and validation improvement. Candidate train/val/test losses all exceed previously reported E115 values. E115 retained; no accepted update. Numerical improvement relative to E117 is a result for this candidate, not proof of cause or learning. gradient_screen_passed checks replay/persistence, not correctness of optimization derivative.",
+  "unavailable_in_compact_stdout": [
+    "Raw current/proposal panel loss and perturbation directional losses",
+    "Estimated directional derivatives, variance/alignment and predicted versus actual proposal loss change",
+    "Detailed source/environment, traces and optimizer records retained on server"
+  ],
+  "decision": "Keep E115. Read saved optimizer/panel scores to compare predicted descent with actual change before another long run. No next experiment launched; unchanged full qualification gates."
+}

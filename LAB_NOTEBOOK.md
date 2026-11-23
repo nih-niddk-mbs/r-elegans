@@ -12797,3 +12797,33 @@ Python compilation and diff checks pass. No local scientific fitting or server
 execution claimed. User requests quick push; no additional Mac validation run.
 Eight hours is an inclusive ceiling for one broader averaged-gradient trial,
 not a promise to use the entire duration or produce multiple accepted updates.
+
+### 2026-11-23 — E118 completed: stable rejected proposal, no optimization improvement
+
+User compact stdout run
+`/home/carsonc/r-elegans-results/extended-panel-atlas-fit-20261123T040511Z-890436`:
+one proposal,accepted0; selectedSHA5fd6e9c90dbb46fd89a10ed9ce34a492347fa772c95c44155a68d33b29d84f92
+remains E115. Candidate9538coordinates changed,maxoffset0.00024999986143125607,
+no near bounds,frozen fields exact. All parent-replay/gradient-screen/full-numerical/
+parameter/autonomy/state/panel checks pass, but training_improved=False and
+validation_improved=False. Full candidate train/val/test losses
+0.8530051782744786/0.936115025691699/0.9201866958513967 exceed prior E115
+0.8528866418648333/0.9327709759189401/0.9194401323047322. Same-panel current/proposal
+losses are not printed. All steps/validation/audit/integrity complete, no problems
+or missing server evidence reported.11427.153288643924s (190.45min),480min cap,
+no timeout,fit_qualified=False. Full numerical atlas evaluated once; independent
+state/panel replay only, no independent full-loss reproduction.
+
+Interpretation: this particular proposal is numerically admissible but provides
+no fitting progress. E117 numerical failure is absent here, yet no causal
+attribution to increased directions/panel or reduced step is justified because
+all changed jointly. gradient_screen_passed checks replay consistency/rhythms,
+not derivative correctness or whether the update direction descends the actual
+objective. Independent saved-data audit recomputed the implemented optimizer;
+that does not establish accuracy of its gradient approximation. Next inspect
+saved directional slopes/average and predicted versus actual panel objective
+change; then consider a small line-search/derivative check rather than another
+long unchanged run. No diagnosis of proven plateau, architectural insufficiency
+or biological failure. Preserve E115 and rejected E118 models/optimizer/RNG.
+Raw server artifacts/source/env not locally inspected. Documentation-only update;
+no new simulation or tests required. No next experiment launched.

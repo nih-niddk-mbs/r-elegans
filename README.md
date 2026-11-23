@@ -1,12 +1,14 @@
 # r-elegans
 
-2026-11-22 E118 prepared; server execution pending. Eight-hour maximum
-single-proposal pilot from E115:16 train targets,8 averaged directions,step0.00025,
-seed1180. Full numerical/own-state/control/audit gates preserved; full atlas once
-plus independent state/panel replay. Includes final validation/audit within480min;
-may finish earlier. No rejected E117 weights promoted.
-Launch: `sh scripts/launch_extended_panel_atlas_fit_mbslnx2.sh`.
-[Plan](experiments/records/E118-plan.json).
+2026-11-23 E118 completed (user-reported):16-target/eight-direction proposal
+passed full numerical, control, autonomous-rhythm, parameter and independent
+state/panel replay checks, but failed training-panel and validation improvement.
+Candidate validation0.936115 versus E1150.932771; no update accepted, E115 retained.
+Complete audit/integrity pass;190.45min elapsed under480min ceiling, no timeout.
+Full atlas evaluated once; no independent full-loss reproduction claimed.
+Next inspect saved directional estimates versus actual panel loss change before
+more optimization; gradient_screen_passed is not derivative validation.
+[Evidence](experiments/records/E118-server-summary.json).
 
 2026-11-22 E117 completed (user-reported):93.14min, clean complete audit,
 panel training improved but full validation worsened to0.93747 and numerical gate
