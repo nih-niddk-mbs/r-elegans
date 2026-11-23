@@ -1,5 +1,15 @@
 # WormGym: training and validation protocols
 
+2026-11-23 E122 integration pilot implemented; server execution remains planned.
+The new runner fits one animal-held-out fold with matched network-only and active
+peptide-state arms on two A100s, using bounded channel/synapse group probes and
+training-only selection. Peptide gains/timescale remain fixed priors. The one-hour
+ceiling includes endpoint refinement, artifact/selection/parameter/control audit
+and cleanup; partial evidence is explicit. Four-target/two-grid pilot evidence
+cannot qualify full fivefold fitting, biology or behavior. E120 remains unchanged.
+See [E122 plan](experiments/records/E122-plan.json). Earlier E121 implementation
+findings below describe the pipeline at the time of that audit.
+
 2026-11-23 E121 server audit completed (user-reported): E120 saved-data
 qualification independently rechecks; source records unchanged.110 distinct
 metadata animal IDs,all WT labels,no missing/repeated/conflicting identities;

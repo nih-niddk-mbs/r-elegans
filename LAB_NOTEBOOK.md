@@ -13159,3 +13159,62 @@ E121-reconciled-findings.json records source+reported-component interpretation;
 E121-readiness-local.json preserved as original local/pending snapshot. Audit plan
 marked complete with outcome reference. Current docs now supersede stale pending
 phrases. No numerical code/data/physics changes or further simulations/training.
+
+### 2026-11-23 — E122 one-hour CV/peptide integration and throughput pilot (planned server run)
+
+User requests a one-hour test before longer fitting, efficient mbslnx2 use, and an
+explicit policy for duration and human monitoring; multi-day/month budgets are
+acceptable if productive. Question, seeds, fixed/trainable fields, pinned bundled
+prior, acceptance criteria, invocation and scope are in E122-plan.json. The prior
+SHA47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d
+is the bundled pre-atlas reference, not E120 or a fold-trained warm start. Historical
+AWC/RMD/rhythm engineering remains disclosed. No server ID or result invented.
+
+Implemented a separate peptide-state replay, preserving the E120 solver unchanged.
+Full state now includes neural state and sender peptide memory, carried through
+60s settling, quarter-phase anchors, stimulus/sham and saved initial/final peptide
+levels. The new explicit outer-clock conductance coupling requires its own numeric
+validation; refinement halves both outer and neural clocks. Expression-based
+269-pair priors, shared5s memory and gains are fixed in this pilot; no spatial
+range/diffusion, monoamines or fitted release kinetics. This closes activation/state
+plumbing for the pilot, not general physiological completeness or E120 activation.
+
+Raw file parsing/statistics run on up to6CPU processes with identity/WT/hash checks;
+five documented animal folds, no trial leakage. Only fold0 is fitted on four
+train-coverage-selected targets, with held-out scores withheld until search ends.
+Each A100 runs one arm with four disjoint physical CPU cores;24phase/condition
+streams are vectorized per arm. Named non-RMD calcium/potassium, chemical and gap
+groups get bounded symmetric actual-loss probes. Safety/sham/short-RMD gates and
+actual train loss decide; no presumed SPSA derivative or held-out selection. Full
+9538-dimensional coverage, five independent completed fold fits, peptide gain
+fitting, all-animal calibration and exact interruption resume remain unavailable.
+
+Search admission ends around30min; endpoints and half-step checks have24min more.
+Coordinator's whole private group is killed by54min if needed; parent audits
+completed artifacts and partial evidence with final6min reserved, launcher guard
+at60min. Incomplete runs never qualify; no automatic next training. Audit covers
+selection arithmetic, raw/source/artifact hashes, bounds/frozen fields, short RMD,
+shams, signal comparison and numerical response differences; unavailable long
+neural/body/start-stop/three-grid/full-atlas evidence is explicitly listed. All
+weights/coordinates, deterministic search position, panel RNG state, sources,
+environments and compact traces stay external. Per-proposal output avoids full
+brain trajectory archives; free-space preflight requires5GiB.
+
+Timing records include compilation in first endpoint time, subsequent synchronized
+evaluation times, GPU utilization/memory/power and projections for100group probes
+and five folds. Projections exclude expanded target coverage, new compilation,
+validation/audits and saturation; they cannot predict time to biological success.
+Next decision uses training gain per GPU-hour and checkpoint recovery, not hours
+spent. Before multi-day work: full audit, three-grid/dynamics checks, target batch
+measurement and recovery drill. Monitor launch5-10min and completed pilot; later
+proven unattended jobs first hour, then daily and at audited block boundaries.
+Month-long computation is permitted when progress justifies it; no month estimate
+is justified yet. Preserve E120 independently; H1.2 still gates behavior training.
+
+Local verification only:10 focused CPU/float64 tests pass (new4 plus existing6
+execution-audit tests), Python compilation and shell syntax pass. Tests exercise
+animal leakage isolation, actual safe descent, incomplete-audit failure and peptide
+memory causally affecting passive neural continuation/shams. They do not establish
+real302-cell GPU numerical fidelity/performance. No full Mac fitting, new server
+execution, CV fit result or long-run qualification evidenced. Prior broad-suite
+six float64 failures remain recorded and unresolved.

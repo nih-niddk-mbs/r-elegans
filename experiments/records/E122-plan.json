@@ -1,0 +1,29 @@
+{
+  "experiment": "E122",
+  "recorded_date": "2026-11-23",
+  "status": "implemented locally; server execution planned, not evidenced",
+  "question": "Can an animal-held-out grouped fitting pilot run with explicit peptide state, checked actual training descent and both A100s, and what are its measured costs?",
+  "command": "sh scripts/launch_cv_peptide_pilot_mbslnx2.sh",
+  "parent": "r_elegans/assets/mac_rhythm_v1_polarized/network.npz",
+  "parent_sha256": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d",
+  "parent_scope": "Bundled reference predating atlas fitting, with historical shared AWC/RMD and rhythm-engineering priors. Not E120; not a new pristine dataset. Historical physiological limitations remain.",
+  "seeds": {"animal_folds": 1210, "train_panel": 1220, "raw_trial_filter": 0},
+  "data": "Re-read and hash raw NWB inputs, require unique verified WT identities, regenerate per-fold statistics from accepted trials, retain all five memberships. Fit only fold0 in this integration pilot; four targets chosen solely from train coverage. Held-out animals never select an update.",
+  "method": "Two concurrent independent arms on separate A100s: network-only and explicit peptide coupling. Same full302 network, wired priors, train panel and bounded +/-0.01 group probes; maximum four groups. Select actual finite safe train-loss improvements; no global gradient prediction. Fresh own-state settling and four phase starts for every changed model. Evaluate selected endpoint and repeated half outer/neural-step endpoint; expose held-out scores only after search.",
+  "trainable": ["Grouped non-RMD calcium channel log-scales", "Grouped non-RMD potassium channel log-scales", "Existing chemical raw strengths as one group", "Existing paired gap raw strengths as one group"],
+  "fixed": ["Anatomy and masks", "LEAK and RMD channels", "Capacitances, reversals, kinetics and calcium/indicator law", "Peptide expression asset and default equal gain priors", "Peptide5s memory timescale", "Stimulus0.03nS and measurement windows"],
+  "extrasynaptic_scope": "269 expression-defined peptide/receptor combinations; voltage-release proxy and shared memory, no spatial diffusion or monoamines. Memory propagated in settling, phase states, stimulation, sham and saved continuations. Group gain/kinetic optimization deferred; no claim all extrasynaptic biology is represented.",
+  "resources": "Two A100s, float64, one persistent arm per GPU, 24phase/condition streams per arm; four distinct physical CPU cores each. Six CPU file-preparation processes. GPU utilization/memory/power samples and synchronized endpoint times retained. No claim this is the optimal batch size before server measurements.",
+  "budget": "60minutes maximum total. Search admission target30min; numerical/endpoint checks through54min; remaining time for complete saved-data audit and cleanup. Outer process-group timeout54min plus launcher60min guard. Work may finish earlier or time out; incomplete never qualifies.",
+  "acceptance_and_reporting": [
+    "Both arms completed and correct animal separation; training-only selection independently recomputed",
+    "All checkpoint hashes, offsets/bounds/frozen fields, raw/source references and duplicate sham controls audited",
+    "Short-window RMD rhythms, safety, signal propagation and two-grid response differences reported",
+    "Measured train and held-out changes reported separately; numeric failure does not become an accepted physiological model",
+    "Timing report estimates100group probes and fivefold cost, excluding explicitly stated setup/validation costs",
+    "All unavailable evidence and incomplete tasks explicit; no automatic long-run, best-model or behavior promotion"
+  ],
+  "long_run_policy": "Review complete pilot audit before further training. Measure progress per GPU-hour, setup/validation overhead and disk growth. Verify recovery from saved state before multi-day fitting. Choose budgets in completed evaluations rather than arbitrary hours; stop/revise a plateauing or numerically invalid objective. Days/weeks/months are allowed when measured progress and recovery justify them, not presumed necessary.",
+  "monitoring": "Inspect launch after5-10minutes and complete pilot audit. For subsequently proven unattended jobs inspect first hour, then daily and after each completed audited block; no continual human monitoring intended.",
+  "local_validation": "10 focused CPU float64 tests passed, including six existing execution-audit tests; launch shell syntax and Python compilation checked. No full Mac fitting and no A100/server execution evidenced. Existing broader six float64 suite failures remain unresolved."
+}
