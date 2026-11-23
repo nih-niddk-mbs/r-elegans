@@ -50,6 +50,32 @@ def local_readiness(repo=REPO):
         conclusion='Concrete implementation/execution gaps remain; more success flags on existing network-only runs do not close them.')
 
 
+def reconcile_readiness(readiness,components):
+    """Resolve observed risks from completed components; preserve original evidence."""
+    from copy import deepcopy
+    result=deepcopy(readiness);data=components.get('dataset',{});checkpoint=components.get('checkpoint',{})
+    def observed_count(full,compact):
+        value=data.get(full)
+        return len(value) if value is not None else data.get(compact)
+    for finding in result['findings']:
+        resolved=None
+        if finding['id']=='RISK-ID' and data.get('integrity_passed') and observed_count('files_with_unverified_identity','unverified_identity_files')==0 and observed_count('repeated_subject_files','repeated_subjects')==0:
+            resolved=('VERIFIED_METADATA_NO_ID_CONFLICTS','Raw audit confirms distinct metadata IDs with no missing IDs/repeated subjects in this dataset. Filename fallback remains a structural risk for future data.')
+        elif finding['id']=='RISK-GENO' and data.get('integrity_passed') and data.get('genotype_file_counts')=={'WT':data.get('raw_nwb_files')} and observed_count('subjects_with_conflicting_genotypes','conflicting_genotype_subjects')==0:
+            resolved=('VERIFIED_METADATA_ALL_WT','All audited file genotype labels are WT with no subject conflicts. Source code still lacks explicit genotype selection for future data.')
+        elif finding['id']=='SCOPE-NUMERIC' and checkpoint.get('reported_qualification_confirmed'):
+            resolved=('SAVED_DATA_RECHECK_PASSED','E120 stored numerical/parameter/control/rhythm/state/panel qualification independently recomputed, source records unchanged. No new forward/full-loss replication.')
+        elif finding['id']=='GAP-CELLPRIORS' and checkpoint.get('parameter_scope',{}).get('base_matches_bundled_polarized_reference'):
+            scope=checkpoint['parameter_scope']
+            resolved=('CONFIRMED_BASE_TEMPLATE_PROVENANCE',f"Base template inheritance confirmed; {scope['unique_base_conductance_rows']} distinct base rows and {scope['unique_effective_conductance_rows']} effective rows. Per-cell variation does not imply independently measured physiology.")
+        if resolved:
+            finding.setdefault('initial_status',finding['status']);finding.setdefault('initial_finding',finding['finding'])
+            finding['status'],finding['finding']=resolved;finding['component_evidence_applied']=True
+    result['ready_for_requested_training']=False
+    result['inspection']='Static source review reconciled with available completed server components; implementation gaps remain.'
+    return result
+
+
 def checkpoint_scope(source):
     import numpy as np
     from scripts.selected_atlas_audit_checks import saved_arrays
@@ -101,6 +127,7 @@ def worker(root):
             'repeated_subject_files','genotype_file_counts','subjects_with_conflicting_genotypes','legacy_split_counts','draft_fold_count','training_ready','cached_statistics_comparison','errors')}
     except Exception as exc:
         traceback.print_exc();components['dataset']=dict(inventory_complete=False,error=repr(exc));problems.append('dataset: '+repr(exc))
+    readiness=reconcile_readiness(readiness,components)
     result=dict(experiment='E121',audit_complete=True,components=components,problems=problems,
         evidence_integrity_passed=bool(components.get('checkpoint',{}).get('reported_qualification_confirmed') and components.get('dataset',{}).get('integrity_passed')),
         readiness=readiness,training_launched=False,forward_simulation_performed=False,ready_for_requested_training=False,
@@ -127,7 +154,7 @@ def main():
                         brief={k:c.get(k) for k in keys};brief.update(unverified_identity_files=len(c.get('files_with_unverified_identity',[])),repeated_subjects=len(c.get('repeated_subject_files',{})),conflicting_genotype_subjects=len(c.get('subjects_with_conflicting_genotypes',{})),error=c.get('error'),first_errors=c.get('errors',[])[:3])
                     else:brief=c
                     print(label+':',json.dumps(brief))
-                for f in s.get('readiness',{}).get('findings',[]):print(f['id'],f['status'])
+                for f in reconcile_readiness(s['readiness'],s.get('components',{})).get('findings',[]) if s.get('readiness') else []:print(f['id'],f['status'])
                 print('ready_for_requested_training:',s.get('ready_for_requested_training'));print('problems:',s.get('problems'))
             else:print(name+':',json.dumps(s))
         return

@@ -1,12 +1,23 @@
 # WormGym: training and validation protocols
 
+2026-11-23 E121 server audit completed (user-reported): E120 saved-data
+qualification independently rechecks; source records unchanged.110 distinct
+metadata animal IDs,all WT labels,no missing/repeated/conflicting identities;
+87animals yield650accepted trials,23yield none under current filters. Raw
+train/validation/test statistics match cache; five draft folds generated, no CV
+models trained. E120 inherits two base templates(296AWC/6RMD) but297effective
+conductance rows; no peptide state. Data/checkpoint integrity pass,35.27s,no
+simulation or fitting. Implementation gaps remain; no reason to repeat unchanged
+training or audit instead of implementing H1.3. Static pending-risk labels are
+superseded by actual component checks. [Evidence](experiments/records/E121-server-summary.json).
+
 2026-11-23 E121 execution audit: major gaps confirmed. H1.3 fivefold/all-animal
 fitting and a reusable checked grouped optimizer are not implemented in the active
 pipeline; extrasynaptic code remains inactive. Local broad float64 suite620pass/
 6fail; all six pass in isolated float32 mode, so full suite is not declared green.
 New read-only server audit rechecks E120 evidence without overwriting originals,
 inventories actual animal IDs/genotypes/filters, and emits draft fold identities
-(not fitted CV). Server execution pending. No new training launched.
+(not fitted CV). Server execution is now reported complete above. No new training launched.
 [Full execution audit](REPRODUCE.md#e121-execution-audit--2026-11-23).
 
 ## Physiology initialization and animal-level cross-validation (H1.3, 2026-11-23)

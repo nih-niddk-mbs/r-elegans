@@ -18,11 +18,11 @@ new simulation, fitting or model promotion was performed by E121 locally.
 |---|---|---|
 |302-cell channel network|Conductance network and topology exist; active in atlas replay.|Local source; E120 reported server checks. Neuron count does not certify physiological completeness.|
 |Ion/channel parameters|17 channel templates, fixed kinetics and many prior fields;9538 unknown channel/edge coordinates trained in recent protocols.|`brain/single_compartment.py`, `scripts/stable_atlas_policy.py`; not all measured channels/parameters, not unique recovery.|
-|Best candidate|E120 selectedSHAac621eaa129c1c533691f52cce802d6ff259ada754d159bf287a30895c48adf3.|Reported server qualification; new independent saved-data recheck pending server job. E115/E112 retained.|
+|Best candidate|E120 selectedSHAac621eaa129c1c533691f52cce802d6ff259ada754d159bf287a30895c48adf3.|Reported server qualification independently rechecked from saved artifacts in E121; no new forward replication. E115/E112 retained.|
 |Dataset fitting|Cached mean stimulus-response z statistics, correlation loss; original43/15/29 split.|`scripts/run_selected_atlas_audit.py`, `stable_atlas_policy.py`; no full time-course/amplitude fit.|
 |Fivefold / jackknife model refits|No active fold-aware fitting runner or five independent model fits.|H1.3 is a plan, not an executed capability. New audit emits draft identities only.|
 |All87-animal initialization fit|Not implemented/executed in active fitter; existing checkpoint acceptance still uses old split.|New all-data protocol remains to implement; no old result reclassified.|
-|Animal identity and genotype audit|Loader can substitute filename for missing ID. Statistics builder counts NWB files as animals and has no genotype filter.|Source-confirmed risks; actual missing IDs/genotype mixture unknown pending raw server inventory. Do not assume contamination exists without evidence.|
+|Animal identity and genotype audit|Loader can substitute filename for missing ID. Statistics builder counts NWB files as animals and has no genotype filter.|Raw audit confirms110 distinct metadata IDs/allWT/no conflicts; source fallback/no-filter risks remain relevant only for future data.|
 |Extrasynaptic signaling|Optional legacy peptide module and269-pair asset; current common-state runner has four state fields and no peptide update.|Implemented separately, inactive in E120. E105 failed variants do not prove the mechanism unimportant.|
 |Neuron-specific physiology provenance|Historical polarized baseline used296 transferred AWC templates and6 RMD profiles; later per-cell scales can differ.|Server audit now checks current base/effective rows and exact template match. Not302 independently measured neuron models.|
 |Complete extrasynaptic state / paired mechanism comparison|Not integrated into settling/phase states/shams/replays of current runner; no matched new-fold comparison.|Blocking a complete model claim; requires implementation and validation, not another document entry.|
@@ -33,6 +33,26 @@ new simulation, fitting or model promotion was performed by E121 locally.
 |Sensory start/sustain/stop/restart and swimming|Not established on the E120 checkpoint.|Remain unqualified; H1.2 gate retained. Rhythmic RMD is not locomotion or learned stopping.|
 |Behavior refit from physiological initialization|Discussed future phase, not implemented as an integrated E120+extrasynaptic+CV workflow.|No new RL/behavior launch authorized by audit.|
 |Recordkeeping|Source/env/argv, weights, RNG, bounds, controls and per-run audit scripts exist; small summaries in Git.|Much server evidence has only been supplied as compact stdout locally. New recheck writes a separate audit; originals immutable.|
+
+### Server audit outcome received
+
+Run `execution-audit-20261123T202419Z-968700` completed in35.27s, no timeout or
+training. Saved E120 qualification and hashes independently recheck without
+changing source records. Raw110files correspond to110distinct metadata subjects,
+all WT labels; no missing IDs, repeats or genotype conflicts.87animals yield650
+accepted trials;23yield none under current filters. Exact rejection-cause breakdown
+is not provided. Raw split statistics match the E120 cache at declared1e-12tolerance.
+Five fold drafts exist; model-level CV has not run.
+
+E120 base matches bundled reference:two base rows with296transferredAWC priors and
+6RMDprofiles;297effective rows after scaling. This confirms shared initialization
+provenance, not identical final neurons or neuron-specific biological validation.
+No peptide fields in checkpoint. Identity/genotype/data-cache and saved numerical
+record risks are resolved for this dataset; the printed old pending-risk labels
+were static review statuses. Report reconciliation now derives these labels from
+completed components, preserving original status history. CV/extrasynaptic/optimizer/
+clean-fold-initialization/body and full-suite-compatibility gaps remain. No need to
+rerun the audit merely to change labels. [Server record](experiments/records/E121-server-summary.json).
 
 ### Software verification actually run
 
@@ -74,9 +94,10 @@ Local readiness/source hashes in [E121-readiness-local.json](experiments/records
 4. Records unimplemented/inactive capabilities and missing evidence, with compact
    report. A completed audit can correctly report the requested workflow unready.
 
-Raw files/E120 weights are not locally mounted and have not yet been independently
-rechecked in this audit. The launcher is concrete and tested; its server result
-remains pending. No checkpoint, original audit, dataset or active split is changed.
+Raw files/E120 weights are not locally mounted. User-reported server E121 results
+confirm independent saved-data recheck and raw inventory completed; see outcome
+above. No direct local raw-artifact inspection or new forward replication claimed.
+No checkpoint, original audit, dataset or active split was changed.
 
 ### Execution order after the audit
 

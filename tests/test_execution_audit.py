@@ -94,3 +94,20 @@ def test_checkpoint_scope_reports_templates_without_claiming_measured_neurons(tm
     assert result['checkpoint_sha256']==digest and file_sha256(model)==digest
     assert not result['checkpoint_contains_peptide_fields'] and result['all_effective_conductances_finite_nonnegative']
     assert result['chemical_edges']>0 and 'independently validated' in result['scope']
+
+
+def test_completed_components_resolve_risk_labels_but_not_missing_implementations():
+    from scripts.run_execution_audit import local_readiness,reconcile_readiness
+    original=local_readiness()
+    components=dict(dataset=dict(integrity_passed=True,raw_nwb_files=110,genotype_file_counts={'WT':110},
+        files_with_unverified_identity=[],repeated_subject_files={},subjects_with_conflicting_genotypes={}),
+        checkpoint=dict(reported_qualification_confirmed=True,parameter_scope=dict(base_matches_bundled_polarized_reference=True,unique_base_conductance_rows=2,unique_effective_conductance_rows=297)))
+    result=reconcile_readiness(original,components);statuses={f['id']:f['status'] for f in result['findings']}
+    assert statuses['RISK-ID']=='VERIFIED_METADATA_NO_ID_CONFLICTS'
+    assert statuses['RISK-GENO']=='VERIFIED_METADATA_ALL_WT'
+    assert statuses['SCOPE-NUMERIC']=='SAVED_DATA_RECHECK_PASSED'
+    assert statuses['GAP-CELLPRIORS']=='CONFIRMED_BASE_TEMPLATE_PROVENANCE'
+    assert statuses['GAP-CV']=='NOT_IMPLEMENTED_IN_ACTIVE_FITTER' and not result['ready_for_requested_training']
+    assert next(f for f in original['findings'] if f['id']=='RISK-ID')['status']=='SERVER_DATA_CHECK_REQUIRED'
+    incomplete=reconcile_readiness(original,dict(dataset=dict(integrity_passed=True)))
+    assert next(f for f in incomplete['findings'] if f['id']=='RISK-ID')['status']=='SERVER_DATA_CHECK_REQUIRED'

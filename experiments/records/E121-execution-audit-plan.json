@@ -1,9 +1,12 @@
 {
- "experiment":"E121","recorded_date":"2026-11-23","status":"audit in progress; no new training authorized by this audit",
- "question":"Which agreed r-elegans capabilities are implemented, active in E120, supported by execution evidence, or still only planned?",
- "local":"Review active call paths and data/objective/parameter assumptions, compare H1.3 commitments with executable code, run broad CPU/float64 software suite, record exact source hashes and findings with evidence distinctions.",
- "server":"Deliver read-only audit launcher that independently recomputes saved E120 candidate/audit gates into a new output directory (never overwrite original audit), verifies dependency/artifact hashes, inventories raw atlas files/subjects/genotypes/QC/current-filter exclusions, reconstructs existing animal split and emits five-fold identity-only drafts with overlap/coverage checks. No fitting, no installed-package changes, no checkpoint changes.",
- "limits":"Raw server records and E120 weights not locally mounted; user-reported prior summaries are not a new independent server audit. Fold drafts do not constitute implemented cross-validation fitting or genotype-approved datasets. No forward simulation or behavior qualification.",
- "deliverables":"Repository execution audit with requirement/status/evidence table, machine-readable findings and source hashes, runnable server audit and tests. Expose blockers and next concrete implementation priorities; do not claim planning as execution.",
- "command":"sh scripts/launch_execution_audit_mbslnx2.sh"
+  "experiment": "E121",
+  "recorded_date": "2026-11-23",
+  "status": "Completed local audit and user-reported server raw-data/saved-checkpoint audit; no new training; workflow implementation remains incomplete",
+  "question": "Which agreed r-elegans capabilities are implemented, active in E120, supported by execution evidence, or still only planned?",
+  "local": "Review active call paths and data/objective/parameter assumptions, compare H1.3 commitments with executable code, run broad CPU/float64 software suite, record exact source hashes and findings with evidence distinctions.",
+  "server": "Deliver read-only audit launcher that independently recomputes saved E120 candidate/audit gates into a new output directory (never overwrite original audit), verifies dependency/artifact hashes, inventories raw atlas files/subjects/genotypes/QC/current-filter exclusions, reconstructs existing animal split and emits five-fold identity-only drafts with overlap/coverage checks. No fitting, no installed-package changes, no checkpoint changes.",
+  "limits": "Raw server records and E120 weights not locally mounted; user-reported prior summaries are not a new independent server audit. Fold drafts do not constitute implemented cross-validation fitting or genotype-approved datasets. No forward simulation or behavior qualification.",
+  "deliverables": "Repository execution audit with requirement/status/evidence table, machine-readable findings and source hashes, runnable server audit and tests. Expose blockers and next concrete implementation priorities; do not claim planning as execution.",
+  "command": "sh scripts/launch_execution_audit_mbslnx2.sh",
+  "outcome_record": "E121-server-summary.json"
 }

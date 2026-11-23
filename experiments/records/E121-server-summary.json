@@ -1,0 +1,103 @@
+{
+  "experiment": "E121",
+  "recorded_date": "2026-11-23",
+  "evidence_type": "User-reported compact server audit stdout; audit recomputed saved model evidence and rebuilt raw statistics on server, no local access to these artifacts",
+  "run": "/home/carsonc/r-elegans-results/execution-audit-20261123T202419Z-968700",
+  "audit_complete": true,
+  "evidence_integrity_passed": true,
+  "checkpoint": {
+    "neurons": 302,
+    "channel_templates": 17,
+    "unique_base_conductance_rows": 2,
+    "unique_effective_conductance_rows": 297,
+    "base_matches_bundled_polarized_reference": true,
+    "base_provenance": {
+      "AWC transferred composition": 296,
+      "RMD measured profile subject to rhythm-prior modification": 6
+    },
+    "positive_base_channel_entries": 5116,
+    "chemical_edges": 3709,
+    "gap_directed_entries": 2186,
+    "topology_matches_bundled_reference": true,
+    "all_effective_conductances_finite_nonnegative": true,
+    "capacitance_pF_range": [
+      1.0,
+      20.0
+    ],
+    "checkpoint_contains_peptide_fields": false,
+    "checkpoint_sha256": "ac621eaa129c1c533691f52cce802d6ff259ada754d159bf287a30895c48adf3",
+    "reference_sha256": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d",
+    "provenance_sha256": "9a639e2bcc925458af082896b53a6d35501daa5b7374544421abc2bf60e29634",
+    "saved_data_recheck_complete": true,
+    "integrity_passed": true,
+    "reported_qualification_confirmed": true,
+    "source_records_unchanged": true,
+    "problems": [],
+    "unavailable_evidence": [],
+    "forward_simulation_performed": false
+  },
+  "dataset": {
+    "inventory_complete": true,
+    "integrity_passed": true,
+    "raw_nwb_files": 110,
+    "raw_verified_unique_subjects": 110,
+    "legacy_usable_subjects": 87,
+    "verified_usable_subjects": 87,
+    "successful_trials": 650,
+    "files_with_no_accepted_trials": 23,
+    "genotype_file_counts": {
+      "WT": 110
+    },
+    "unverified_identity_files": 0,
+    "repeated_subjects": 0,
+    "conflicting_genotype_subjects": 0,
+    "legacy_split_counts": {
+      "train": 43,
+      "validation": 15,
+      "test": 29
+    },
+    "draft_fold_count": 5,
+    "training_ready": false,
+    "cached_statistics_comparison": {
+      "passed": true,
+      "mismatches": [],
+      "statistics_sha256": "480939713876fcd44a7f7452f8cdbf502b443c55b3fe5eb33c87db2e9733582f",
+      "seed": 0,
+      "validation_every_nth": 4,
+      "relative_tolerance": 1e-12,
+      "absolute_tolerance": 1e-12
+    }
+  },
+  "budget": {
+    "total_minutes": 60,
+    "elapsed_seconds": 35.26679794397205,
+    "exit_code": 0,
+    "timed_out": false,
+    "audit_finished": true,
+    "training_launched": false
+  },
+  "resolved_checks": [
+    "No missing/repeated metadata animal IDs in this dataset.",
+    "All genotype labels WT; no observed genotype mixing or conflicts.",
+    "Raw trial/pair statistics reproduce E120 cache.",
+    "E120 saved-data qualification independently recomputed with source records unchanged.",
+    "Shared base conductance template inheritance confirmed; effective rows vary after fitting."
+  ],
+  "remaining_gaps": [
+    "Fivefold model fitting and all-animal calibration not implemented in active fitter.",
+    "Extrasynaptic mechanism inactive in E120.",
+    "Reusable grouped/checked-descent optimizer absent.",
+    "Verified common clean initialization for new fold refits not yet established.",
+    "E120 body/swimming/sensory-start-stop unqualified; limited calcium-summary objective.",
+    "Local full float64 suite six failures remain unresolved."
+  ],
+  "limits": [
+    "110 animal IDs are distinct in metadata; genotype WT is metadata, not independent genetic assay.",
+    "Twenty-three animals have no accepted trials under current filters; detailed per-trial rejection reasons not supplied and no claim they are unusable for other analyses.",
+    "Five draft folds are not five fitted models.",
+    "Full forward simulation/full atlas loss not independently repeated by saved-data audit.",
+    "Displayed pending identity/genotype/numerical labels were unreconciled static statuses; actual component evidence resolves those checks only.",
+    "All110 audited files are WT-labeled; unc-31 data were not found in this audited set. Availability in other data folders/sources was not assessed."
+  ],
+  "decision": "Data/cache/checkpoint corruption is not supported by this audit. Stop audits/training repetitions as substitute for implementation. Next implementation should activate extrasynaptic full-state variant, checked grouped optimizer and fold-aware fitting with verified independent initialization. Do not represent drafts as trained CV. No new fit launched."
+}

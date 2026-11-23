@@ -13118,3 +13118,44 @@ qualification. This substantiates user's execution-gap concern; more planning
 entries/per-run audit flags did not implement those capabilities. Audit completion
 is not training readiness. Server raw files/weights are not locally inspected;
 E121 server execution/results remain pending. No next training run launched.
+
+### 2026-11-23 — E121 server audit outcome: data clean, execution gaps confirmed
+
+User supplies execution-audit-20261123T202419Z-968700 result:complete/integrity
+pass,35.26679794397205s,no timeout or training. Saved E120 qualification rechecked
+with source records unchanged; no forward simulation. CandidateSHAac621eaa...
+8adf3confirmed.110NWBfiles/110distinct metadata subjects,allWT labels; no missing
+IDs/repeats/genotype conflicts.87animals/650successful trials,23animals with no
+accepted trials under current filters. Exact original43/15/29split and raw-derived
+pair statistics match E120 cache to1e-12; statisticsSHA480939713876fcd44a7f7452f8cdbf502b443c55b3fe5eb33c87db2e9733582f.
+Five identity-only fold drafts generated, no fitted CV,training_ready=False.
+
+Actual E120 snapshot confirms17channel templates,two distinct base rows,297unique
+effective rows,296transferredAWC/6RMDbase provenance,5116positivebaseentries,
+3709chemicaledges/2186directedgapentries,reference topology match,finite nonnegative
+effective conductances,capacitance range1-20pF,no peptidefields. Do not conflate
+shared base templates with identical final cells or measured per-cell physiology.
+Metadata WT is not an independent genetic assay;23no-accepted cases are not proven
+bad animals or unusable for other analyses. Current summary lacks stage-specific
+exclusion causes; retain uncertainty.
+
+Static findings in initial report still said ID/genotype/numerical recheck pending,
+although actual completed components resolved them. Correct report reconciliation
+now uses component evidence while preserving initial labels/history. This does not
+change original source audit, dataset, weights or readiness status. Remaining gaps
+are real unimplemented H1.3 training/model integration, not observed corruption:
+CV model fits/all-data calibration, active extrasynaptic state, reusable checked
+optimizer, verified clean-fold parent, E120body/start-stop/swimming, six local
+float64 suite failures. No repeat audit or new unchanged training is justified.
+Record:E121-server-summary.json. Next work must be implementation, not plan-only
+claims; no new training launched in this evidence/report update.
+
+E121 reporting correction verification:6local audit tests pass. Reconciliation
+resolves identity/genotype/saved-numerical checks only from completed component
+evidence, leaves missing CV/extrasynaptic/optimizer readiness false, preserves
+initial statuses and does not mutate original records. --report can reconcile
+existing source output after pull; no new server audit is needed to change labels.
+E121-reconciled-findings.json records source+reported-component interpretation;
+E121-readiness-local.json preserved as original local/pending snapshot. Audit plan
+marked complete with outcome reference. Current docs now supersede stale pending
+phrases. No numerical code/data/physics changes or further simulations/training.
