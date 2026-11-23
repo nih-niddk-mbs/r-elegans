@@ -13218,3 +13218,53 @@ memory causally affecting passive neural continuation/shams. They do not establi
 real302-cell GPU numerical fidelity/performance. No full Mac fitting, new server
 execution, CV fit result or long-run qualification evidenced. Prior broad-suite
 six float64 failures remain recorded and unresolved.
+
+### 2026-11-23 — E122 server outcome: integration/descent established on one small fold panel
+
+Evidence is user-reported stdout for cv-peptide-pilot-20261123T211006Z-970232,
+not a new local/server forward run. See E122-server-summary.json for exact values.
+Both arms11evaluations,7762coordinates changed by tied group moves, no timeout,
+all steps/audit complete, integrity pass/no problems,2111.762947399053s=35.20min.
+Endpoint selection repeats; response differences1.08973e-7(network)/1.48600e-7
+(peptide) below respective8.90761e-7/3.11069e-7two-grid tolerances. No evidence
+supports saying every unknown coordinate or each parameter was independently fit.
+
+Training loss changes:-0.01842668network,-0.01001556peptide. Held-out endpoints
+0.78364079network(change-0.40209941),0.71228287peptide(change+0.00296186).
+Peptide baseline was already lower than its endpoint; training descent did not
+improve that held-out score. The lower peptide endpoint is suggestive on this
+panel, not an established biological or generalization advantage. Do not select
+new hyperparameters/checkpoints on this observed held-out score. Dataset has
+historical exposure; this is development CV evidence, not pristine test evidence.
+
+Steady evaluation times167.10076/167.29913seconds, roughly2.79min per endpoint.
+A +/-group probe costs two endpoints per arm with arms concurrent:about5.58min
+wall.100probes for both arms on one fold project9.2944h; same count in fivefolds
+46.472h before setup, larger target coverage and validation/audits. More CPU/GPU
+utilization is not inferred from elapsed time; actual telemetry remains on server.
+No estimate of weeks/months to biological success follows from these timings.
+
+Full report says long_run_ready=False and training_qualified=False, with8items of
+unavailable evidence. These are intentionally separate from successful software
+integration. Third-grid/long neural-dynamics checks, checkpoint-recovery drill,
+measured batching/memory/disk and five independent fits remain. Actual selected
+SHAs/group ledger, full safety/sham/RMD/signal comparison, animal/trial/target
+coverage and GPU telemetry are not included in received stdout; do not invent
+them or describe those details as independently inspected. Prior source audit
+implements saved-data checks; its reported integrity pass is recorded as such.
+
+Decision: retain both endpoints independently, preserve E120 and qualify neither
+as swimming/control/biological physiology. Prepare readiness measurements before
+multi-day fitting, using measured compute costs and audit boundaries. Avoid
+month-long blind runs; long budgets are allowed once progress/recovery are
+supported. No new training launched by this result reconciliation. Docs supersede
+E122 planned status; earlier plan and negative findings remain in notebook.
+
+E122 follow-up tooling: added separate read-only report_cv_peptide_readiness module
+for exact selected checkpoint paths/recorded SHAs, fold/pair/target coverage,
+parameter/frozen-field summaries, short-window RMD/sham/signal checks, existing
+GPU telemetry and retained artifact size. This reads existing files only and does
+not repeat simulations, modify weights or replace the completed audit. Kept
+run_cv_peptide_pilot.py and forward sources unchanged to preserve original E122
+source pins for future rechecks. Local compile/CLI help checks pass. No server
+execution of this compact reporter or inspection of its omitted data evidenced.

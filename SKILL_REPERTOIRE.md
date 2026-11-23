@@ -1,14 +1,15 @@
 # r-elegans skill repertoire and action-space plan
 
-2026-11-23 E122 integration pilot implemented; server execution remains planned.
-The new runner fits one animal-held-out fold with matched network-only and active
-peptide-state arms on two A100s, using bounded channel/synapse group probes and
-training-only selection. Peptide gains/timescale remain fixed priors. The one-hour
-ceiling includes endpoint refinement, artifact/selection/parameter/control audit
-and cleanup; partial evidence is explicit. Four-target/two-grid pilot evidence
-cannot qualify full fivefold fitting, biology or behavior. E120 remains unchanged.
-See [E122 plan](experiments/records/E122-plan.json). Earlier E121 implementation
-findings below describe the pipeline at the time of that audit.
+2026-11-23 E122 server pilot completed (user-reported): both network-only and
+peptide-state arms finished11evaluations in35.20min total, with clean integrity
+audits, reproduced selection and passing two-grid checks. Training loss decreased
+in both arms. Network held-out loss improved by0.40210 to0.78364; peptide held-out
+loss worsened by0.00296 to0.71228. One fold/four targets cannot establish an
+extrasynaptic advantage. Peptide gains/timescale were fixed priors. Evaluations
+cost about167s each;100paired-sign group probes project9.29h per fold for both
+arms concurrently, or46.47h across five folds, before added validation/coverage
+costs. Long-run readiness remains false; no model/behavior promotion. E120 is
+preserved. [Evidence](experiments/records/E122-server-summary.json).
 
 2026-11-23 E121 server audit completed (user-reported): E120 saved-data
 qualification independently rechecks; source records unchanged.110 distinct

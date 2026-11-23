@@ -1,0 +1,74 @@
+{
+  "experiment": "E122",
+  "recorded_date": "2026-11-23",
+  "evidence": "User-reported server report stdout; server files not independently opened locally",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-pilot-20261123T211006Z-970232",
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "long_run_ready": false,
+    "problems": [],
+    "unavailable_evidence_count": 8
+  },
+  "budget": {
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 2111.762947399053,
+    "total_minutes": 60,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "long_run_ready": false,
+    "training_qualified": false
+  },
+  "arms": {
+    "network": {
+      "completed": true,
+      "evaluations": 11,
+      "changed_coordinates": 7762,
+      "train_loss_change": -0.018426677141377246,
+      "heldout_loss": 0.7836407939655523,
+      "heldout_loss_change": -0.4020994063704464,
+      "numerical": {
+        "max_response_difference": 1.0897258428954615e-07,
+        "tolerance": 8.907608762791618e-07,
+        "passed": true
+      },
+      "selection_reproduced": true,
+      "estimated_steady_evaluation_seconds": 167.10076046700124
+    },
+    "peptide": {
+      "completed": true,
+      "evaluations": 11,
+      "changed_coordinates": 7762,
+      "train_loss_change": -0.01001555805786647,
+      "heldout_loss": 0.7122828689266755,
+      "heldout_loss_change": 0.0029618625377032526,
+      "numerical": {
+        "max_response_difference": 1.485999617800715e-07,
+        "tolerance": 3.110693805495306e-07,
+        "passed": true
+      },
+      "selection_reproduced": true,
+      "estimated_steady_evaluation_seconds": 167.2991289179772
+    }
+  },
+  "cost_projection": {
+    "hours_100_group_probes_both_arms_one_fold": 9.294396050998735,
+    "hours_100_group_probes_each_of_five_folds": 46.47198025499367,
+    "limitations": "Small four-target panel at current solver/batch settings. Excludes setup, expanded coverage, validation and audits; not time to successful physiology."
+  },
+  "interpretation": [
+    "Both arms show measured safe-selection training descent and reproducible endpoint selection; reported two-grid tests pass.",
+    "Network heldout score improves; peptide heldout score slightly worsens while its final absolute score remains lower than network. Paired coverage across five folds is needed before claiming extrasynaptic advantage.",
+    "7762 changed coordinates are tied by four group probes, not7762 independently identified parameters.",
+    "One fold/four targets, fixed peptide priors and two grids do not qualify fivefold calibration or behavior. E120 remains independently preserved."
+  ],
+  "unavailable_in_received_stdout": [
+    "Selected checkpoint identities/hashes and per-group selection ledger",
+    "Full sham/safety/RMD and signal-comparison details from audit.json",
+    "GPU telemetry utilization/memory/power and actual disk growth",
+    "Actual fold animal/trial/pair coverage from fold.json"
+  ],
+  "decision": "Retain both independent endpoints. Review compact missing evidence and prepare a checkpoint-recovery/third-grid/long-dynamics and batching readiness stage before multi-day fitting. No new fitting launched or endpoint promoted by this record."
+}
