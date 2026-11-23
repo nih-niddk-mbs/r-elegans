@@ -1,5 +1,15 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-23 E123 original validation timed out after54.1min; audit completed with
+both arms incomplete. No numerical/behavior qualification follows. A newer repeat
+was previously active; its current state is not evidenced. Guarded stage
+continuation is implemented: reuse verified completed artifacts in a new directory,
+reconstruct unsaved anchors as needed, and redo interrupted computations. Default
+4h total ceiling including audit; no fitting. Status/report commands are read-only,
+and launchers refuse active duplicate jobs using process checks and an exclusive
+lock. [Timeout evidence](experiments/records/E123-timeout-server-summary.json);
+[continuation plan](experiments/records/E123-continuation-plan.json).
+
 2026-11-23 E122 server pilot completed (user-reported): both network-only and
 peptide-state arms finished11evaluations in35.20min total, with clean integrity
 audits, reproduced selection and passing two-grid checks. Training loss decreased

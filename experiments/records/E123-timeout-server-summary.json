@@ -1,0 +1,36 @@
+{
+  "experiment": "E123",
+  "recorded_date": "2026-11-23",
+  "evidence": "User-reported server stdout; no server logs/progress opened locally",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-validation-20261123T220426Z-974332",
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": false,
+    "integrity_passed": false,
+    "problems": [
+      "Incomplete network",
+      "Incomplete peptide"
+    ],
+    "endpoint_checks_passed": false,
+    "models": {
+      "network": "769e130b3429a79c12a8b2c48194f0e47cf234896331428f902ed9e718ae1d56",
+      "peptide": "7989556a2243b699cde83bc1e1492d6c61a8766148ba32a163be2f39656a282e"
+    },
+    "training_launched": false,
+    "behavior_qualified": false
+  },
+  "budget_receipt": {
+    "total_minutes": 60,
+    "elapsed_seconds": 3243.3462514410494,
+    "exit_code": 124,
+    "timed_out": true,
+    "all_steps_finished": false,
+    "audit_complete": true,
+    "validation_passed": false,
+    "training_launched": false
+  },
+  "interpretation": "Worker deadline reached54.1min. Neither arm wrote final summary. This is incomplete evidence, not proof of numerical/biological failure. Which stages were completed is unavailable in received report.",
+  "repeat_run_last_seen": "/home/carsonc/r-elegans-results/cv-peptide-validation-20261123T232806Z-977760",
+  "repeat_state": "Previously user-reported active; current state and cancellation not evidenced.",
+  "decision": "Implement guarded stage continuation into new external directory; preserve failed source receipt and audit. Reuse only audited/hash-verified complete artifacts and recheck cached metrics. Repeat interrupted work only. No new training or model promotion."
+}

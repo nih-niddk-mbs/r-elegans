@@ -1,7 +1,7 @@
 {
   "experiment": "E123",
   "recorded_date": "2026-11-23",
-  "status": "implemented locally; server execution planned, not evidenced",
+  "status": "Original server run timed out; no final arm qualification",
   "question": "Are unchanged E122 endpoints robust on a third clock grid and over300s, and can explicit complete neural/peptide state recover in a fresh interpreter? Which tested batch gives best warm throughput?",
   "command": "sh scripts/launch_cv_peptide_validation_mbslnx2.sh",
   "source_run": "/home/carsonc/r-elegans-results/cv-peptide-pilot-20261123T211006Z-970232",
@@ -29,5 +29,6 @@
     "Not sensory/body/swimming qualification",
     "Continuation recovery drill is not optimizer/crash recovery"
   ],
-  "local_verification": "Seven focused CPU float64 tests pass (three checkpoint/continuation plus four pilot tests). CLI/compilation/shell syntax checked. No server GPU execution or new model qualification evidenced."
+  "local_verification": "Seven focused CPU float64 tests pass (three checkpoint/continuation plus four pilot tests). CLI/compilation/shell syntax checked. No server GPU execution or new model qualification evidenced.",
+  "outcome_record": "E123-timeout-server-summary.json"
 }

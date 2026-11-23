@@ -13323,3 +13323,64 @@ memory, schema1 refusal and serialized neural+peptide continuation equality with
 sensitivity to lost memory; plus existing four pilot tests. CLI/compile/shell syntax
 checks pass. No server E123 run ID/hash/outcome fabricated. Previous broad-suite
 six float64 failures still unresolved; no new behavior or biological qualification.
+
+### 2026-11-23 — E123 timeout and duplicate-launch confusion (server report)
+
+User reports original cv-peptide-validation-20261123T220426Z-974332 stopped after
+3243.3462514410494s,exit124,timed_out=True. Audit complete but neither arm complete;
+problems Incomplete network/peptide, integrity and endpoint/validation gates false.
+Exact complete-model SHAs in E123-timeout-server-summary.json. No training. This
+is missing validation evidence after deadline, not a demonstrated failing physical
+model. Saved stage contents/timings/logs are not supplied; do not invent where it
+stalled or claim how much can be reused. Latest repeated run232806Z-977760 was
+previously active; its current completion/cancellation has not been evidenced.
+
+User explains accidental repeat and requires checking for existing work before
+restarting; confused launch command with expected report. Acknowledge interaction
+failure; stop relying on naming/explanations alone. Implement read-only status
+command, explicit LAUNCH/CONTINUATION wording, prelaunch own-user ps inspection
+(including legacy jobs) and nonblocking kernel lock. Reports/status cannot launch.
+Exclude own timeout/launcher ancestors so a guarded job does not falsely reject
+itself. A simultaneous launch race is blocked by flock. No /proc dependency.
+Explicit stop-run only identifies an exact named own-user private coordinator
+process group; no broad pkill, supervisor retained to audit. No actual server
+process stopped from this workspace. Active jobs otherwise cause launch refusal.
+
+### 2026-11-23 — Guarded E123 stage continuation (planned server execution)
+
+User asks to continue the timed-out run. New module and launcher preserve original
+files/audit/receipt and create separate continuation directory. Validate runtime,
+input and original post-run NPZ hashes. Reuse complete grid+final-state artifacts
+only with committed progress/clocks, independently recalculate cached response,
+sham,finite and RMD metrics. Reuse complete recovery outputs and committed long
+traces. Incomplete archives/unfinished stages are recomputed, never certified from
+existence alone. Copy reference dependencies and record input hashes. No fitting
+or change to physics/model parameters, source forward code or acceptance criteria.
+
+Original E123 did not save grid-specific phase starts. Reconstruct missing anchors
+only when needed; completed grid response replays remain reusable. New starts are
+saved for later stage continuation. GPU instructions/JIT compilation in flight
+are lost; this is not an exact optimizer/RNG resume. More generous240min total
+ceiling (including final6min audit/cleanup), both A100s, finish earlier if possible.
+Read-only status/report commands explicit. Launch refuses while duplicate remains
+active; targeted cancellation is an explicit separate command. Source root stays
+220426Z-974332; do not silently choose newest accidental folder. No new run ID or
+outcome invented. E122 remains the latest completed integration evidence; E120
+and both E122 endpoints preserved. No biological or behavior qualification.
+
+Continuation verification:15focused CPU float64 tests pass, covering active legacy
+worker/wrapper detection, read-only report/status exclusion, own-ancestor exclusion,
+prelaunch refusal, lock race, exact-target stop-group isolation, missing/unhashed/
+changed cache rejection, cached response/clock checks, plus checkpoint/memory tests.
+Compile/CLI/shell syntax checks pass. Local sandbox initially denied ps; read-only
+status verified outside sandbox (no local active jobs), not evidence of server
+process state. No stop/launch executed on mbslnx2. Both original E123 Python forward
+and validation source modules remain unchanged; guarded old/new shell launchers
+and separate continuation code preserve original runtime pins and old audits.
+
+Final continuation verification expands to16passing focused tests, adding rejection
+of changed source runtime/library/numerical settings. Match Python,JAX,JAXlib,
+NumPy,SciPy and x64/matmul/XLA settings before mixing old/new outputs. Source
+environment files hashed as explicit dependencies. Read-only status groups process
+roles by run directory so one supervisor/coordinator/two workers is not presented
+as multiple runs. No live server process state inferred from local checks.

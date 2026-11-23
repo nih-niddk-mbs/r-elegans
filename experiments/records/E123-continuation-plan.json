@@ -1,0 +1,21 @@
+{
+  "experiment": "E123-continuation",
+  "recorded_date": "2026-11-23",
+  "status": "implemented locally; server execution not evidenced",
+  "question": "Complete interrupted fixed-model validation without rerunning verified completed stages or launching duplicate GPU jobs.",
+  "source": "/home/carsonc/r-elegans-results/cv-peptide-validation-20261123T220426Z-974332",
+  "command": "sh scripts/launch_cv_peptide_continuation_mbslnx2.sh",
+  "read_only_status": "sh scripts/status_cv_peptide_validation_mbslnx2.sh",
+  "guard": "Inspect own-user ps for legacy/current validation modules, excluding report-only invocations and own ancestors. Check before GPU startup and under an exclusive kernel flock. Refuse if another job exists; never silently cancel active work. Explicit --stop-run targets only one named own-user private coordinator group, leaving its supervisor alive for audit.",
+  "parent_models": {
+    "network": "769e130b3429a79c12a8b2c48194f0e47cf234896331428f902ed9e718ae1d56",
+    "peptide": "7989556a2243b699cde83bc1e1492d6c61a8766148ba32a163be2f39656a282e"
+  },
+  "fixed_trainable": "All model/state equations/parameters fixed; no optimizer or fitting.",
+  "reuse": "New external run directory. Original audit/receipt/files unchanged. Verify source runtime/input/artifact hashes. Copy completed grid+final-state pairs only with matching progress metadata/clocks, independently recompute cached metrics. Copy complete audited recovery set; reuse long traces only after committed progress and archive checks. Mark reused stages in manifest/logs. Save new phase anchors for subsequent continuation. Require matching original Python/JAX/JAXlib/NumPy/SciPy versions and numerical settings before mixing cached/new outputs.",
+  "not_exact_resume": "Interrupted GPU/JIT computation cannot be recovered. Original E123 did not save grid-specific starting states, so regenerate missing anchors when needed; retain completed response replays. This is stage continuation, not optimizer/RNG or exact instruction resume.",
+  "method_acceptance": "Same E123 three grids, response tolerance,2s split/fresh-interpreter continuation,300s long dynamics on two grids and optional batching. Full saved-data post-audit and source/model/parameter/selection/control/numerical evidence on combined reused/new artifacts. Incomplete never qualifies.",
+  "seeds": "No random proposals; original fixed target panel and models.",
+  "budget": "Default240min maximum total, may finish earlier; final6min reserved for audit/cleanup. Both A100s,4physicalcores per arm. Global launcher guard matches budget. New budget does not change simulation durations or numerical criteria.",
+  "local_checks": "16focused CPU float64 tests passed; shell syntax, CLI compilation and read-only local process status checked. Local sandbox ps permission was unavailable; actual read-only status verified outside sandbox. No server continuation evidenced."
+}
