@@ -1,14 +1,15 @@
 # WormGym: training and validation protocols
 
-2026-11-23 E120 prepared; server execution pending. Evaluate exact saved
-E119 negative10% trial on full135-target/threegrid validation, own settled states,
-long two-grid RMD dynamics and independent finest-panel/state replay. No optimizer
-or weight edits. Require improved full training AND validation plus all numerical,
-parameter/control/rhythm/audit gates; otherwise retain E115. Two-hour total cap
-including10min audit reserve, two A100s. Stop repeating this direction path if
-it fails; no automatic behavioral or biological promotion.
-Launch: `sh scripts/launch_reverse_candidate_mbslnx2.sh`.
-[Plan](experiments/records/E120-plan.json).
+2026-11-23 E120 completed (user-reported): fixed reverse trial qualifies.
+Full train loss0.852886642->0.852871157 and validation0.932770976->0.932315353;
+all numerical/control/parameter/cumulative-bound/autonomy/state/panel checks pass.
+Complete audit/integrity passes,45.06min,no timeout. SelectedSHA
+`ac621eaa129c1c533691f52cce802d6ff259ada754d159bf287a30895c48adf3` is
+new best reported physiology candidate; preserve E115/E112 separately. Small
+engineering fitting improvement, not biological or behavioral qualification.
+Full atlas once; no independent full-loss replication. Wrong-sign original SPSA
+is not rehabilitated by this reverse-trial result. No subsequent run launched.
+[Evidence](experiments/records/E120-server-summary.json).
 
 2026-11-23 E119 completed (user-reported): both grids/radii show E118's
 forward direction raises panel loss and reverse direction lowers it. Finest-grid

@@ -12953,3 +12953,31 @@ minus-large trial and reconstructed against E115 before use; raw server artifact
 and recursive dependencies remain external. Full-atlas loss run once, not twice;
 strict cycle diagnostics retained separately from RMD preservation gates. No
 new fit/promotion or continuation is implied by preparing this test.
+
+### 2026-11-23 — E120 qualified fixed reverse trial: small full-train/validation gain
+
+User compact stdout for reverse-candidate-20261123T173934Z-963315 reports candidate
+and selectedSHAac621eaa129c1c533691f52cce802d6ff259ada754d159bf287a30895c48adf3.
+Fixed candidate train0.8528711574679856,val0.9323153530673849,test0.9193971847920257;
+parent train0.8528866418648333,val0.9327709759189401. Both full training and
+validation improve, including declared regularized criteria; gates allTrue.
+Parameters9538changed,maxlocaloffset2.499998614312561e-05,no near bounds,
+fixed fields exact,cumulative bounds pass. Full numerical/control,RMD autonomy,
+independent state and finest-panel reproduction pass. Full atlas evaluated once,
+independent_full_loss_reproduction=False. Complete audit/execution/integrity
+pass,no problems or missing server evidence reported.2703.6615218099905s
+(45.06min) under120min,no timeout,all steps finished,candidate_qualified=True.
+
+Interpretation: predeclared candidate evaluation succeeds after checking reverse
+small-step descent; no new optimizer update in this run. Small engineered fitting
+improvement rather than biological accuracy or statistical significance. E115
+remains preserved as parent, E112 original numerical reference also preserved;
+E120 becomes best reported qualifying physiology candidate. Original E118 SPSA
+prediction was wrong-sign; this result does not justify simply resuming unchanged
+global random-direction updates or systematically negating all gradients.
+Future updates should use checked descent/step-scale logic or reconsider update
+dimension. No new body motion/swimming/sensory start-stop or behavioral autonomy
+qualification. Repeated historical test inspection prevents untouched-holdout
+claims. Raw source/runtime/strict-cycle/response artifacts not locally inspected;
+record is supplied server stdout, not an independent scientific rerun. No next
+experiment launched. Documentation-only update; no new tests required.
