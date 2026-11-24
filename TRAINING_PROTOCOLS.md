@@ -1,5 +1,15 @@
 # WormGym: training and validation protocols
 
+2026-11-24 E126 saved-cycle diagnosis (user-reported): sampling screen fails
+on six network pairs (four measured downstream) and three peptide pairs (one
+measured) at both clocks. Worst case is RMDL self-stimulation, excluded from fitting
+labels; measured failures remain, so excluding self-responses is insufficient.
+Cycle-dependent sign/magnitude variation is similar across clocks. Next proposed:
+expand cycle/time coverage on affected targets before repeating full-target
+validation; no fitting, original gate changes or model promotion.
+[Evidence](experiments/records/E126-sampling-localization-server-summary.json).
+
+
 2026-11-24 E126 detailed continuation audit (user-reported): all execution,
 integrity, controls, bounds and RMD rhythm checks pass;34/34batches saved, three
 levels reused, no worker errors. Full135-target phase-mean two-clock convergence

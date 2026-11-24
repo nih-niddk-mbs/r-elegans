@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E126 continuation audit complete/integrity pass. Midpoint two-clock full-target response convergence passes both arms, sole reported remaining gate is four-cycle sampling stability in all four grids.",
+  "status": "E126 all-target midpoint convergence passes; sampling sensitivity localized to6network/3peptide pairs, including4/1measured pairs. Worst is RMDL self-response in both arms. Original gates remain failed.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Read saved per-cycle response arrays to localize worst omitted cycle and target/receiver, count affected measured versus other pairs. Do not force state-independent responses or assume adding cycles is sufficient before inspecting. No GPU rerun yet.",
+  "next_action": "Preserve original failed sampling gates; do not force state-independent responses or promote parent. Next proposed bounded sampling study automatically selects union of affected target/pairs from saved arrays, samples more cycles over a longer time window on those targets, and tests whether ensemble mean stabilizes before another full135-target sweep. Preserve all prior results; no immediate fitting.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",
@@ -104,7 +104,8 @@
       "experiments/records/E123-saved-cycle-analysis-server-summary.json",
       "experiments/records/E124-server-summary.json",
       "experiments/records/E125-server-summary.json",
-      "experiments/records/E126-continuation-server-audit.json"
+      "experiments/records/E126-continuation-server-audit.json",
+      "experiments/records/E126-sampling-localization-server-summary.json"
     ],
     "scope": "87eligibleWTanimals; fold0 uses69train/18heldout, four stimulation targets, full302forward, four tied channel/wired group moves in each arm. Active peptide state and fixed priors in one arm; peptide gains not fitted. Not9538 independently recovered parameters.",
     "numerics": "Short response three-grid and state continuation pass. Original last-five-cycle long-clock gates fail; subsequent full-late/50s descriptive averages agree closely. Original failures preserved; no retrospective model promotion."

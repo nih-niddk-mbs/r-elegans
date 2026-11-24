@@ -1,0 +1,235 @@
+{
+  "experiment": "E126-sampling-localization",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported read-only diagnose_cycle_sampling stdout; parsed locally, no direct server artifact access or new forward simulation.",
+  "attachment_sha256": "4711488f8bca0619aee9d88bca0a3df06ae947ed97704ee9418a4aa7f6a6ad47",
+  "run": "/home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532",
+  "report": "/home/carsonc/r-elegans-results/cycle-sampling-diagnosis-20261124T223951Z.json",
+  "source_unchanged_reported": true,
+  "acceptance_gates_changed": false,
+  "model_promoted": false,
+  "grids": [
+    {
+      "arm": "network",
+      "level": 0,
+      "measured_pairs_above_tolerance": 4,
+      "original_screen": {
+        "leave_one_cycle_out_max_difference": 0.00015918279527279744,
+        "passed": false,
+        "tolerance": 3.388618550297849e-05
+      },
+      "pairs_above_tolerance": 6,
+      "worst": {
+        "cycle_means": [
+          6.185193578311932e-05,
+          -0.00032101619318350427,
+          0.00035155269636785724,
+          0.0005337403315720801
+        ],
+        "four_cycle_mean": 0.0001565321926348881,
+        "measured_in_development_pool": false,
+        "omitted_cycle": 1,
+        "phase_responses_by_cycle": [
+          [
+            -0.0001690134157209533,
+            0.00030974762050473004,
+            0.00024170150786051448,
+            -0.00013502796951181395
+          ],
+          [
+            -0.0003637302087057259,
+            -0.0005228276881468208,
+            -0.00040936074176800563,
+            1.1853865886535253e-05
+          ],
+          [
+            0.000163383639395831,
+            0.0004051591162170798,
+            0.00044227932038876094,
+            0.00039538870946975724
+          ],
+          [
+            0.00020138792655055582,
+            0.0006712637580211789,
+            0.0006871314499221626,
+            0.0005751781917944232
+          ]
+        ],
+        "receiver": "RMDL",
+        "self_response": true,
+        "target": "RMDL"
+      }
+    },
+    {
+      "arm": "network",
+      "level": 1,
+      "measured_pairs_above_tolerance": 4,
+      "original_screen": {
+        "leave_one_cycle_out_max_difference": 0.00015841377765625264,
+        "passed": false,
+        "tolerance": 3.3897681911952595e-05
+      },
+      "pairs_above_tolerance": 6,
+      "worst": {
+        "cycle_means": [
+          6.213006652541764e-05,
+          -0.00031849551934773346,
+          0.00035070467885822687,
+          0.000532644028448187
+        ],
+        "four_cycle_mean": 0.00015674581362102452,
+        "measured_in_development_pool": false,
+        "omitted_cycle": 1,
+        "phase_responses_by_cycle": [
+          [
+            -0.00017278806849296835,
+            0.00030986221605677766,
+            0.0002444854334435753,
+            -0.00013303931490571408
+          ],
+          [
+            -0.00034726495209158603,
+            -0.0005219453427716125,
+            -0.00041632243982148154,
+            1.155065729374627e-05
+          ],
+          [
+            0.00016106276656890905,
+            0.000404986263533913,
+            0.000442389197448656,
+            0.00039438048788142943
+          ],
+          [
+            0.00019583422515701,
+            0.0006713496649768391,
+            0.0006872165478737369,
+            0.0005761756757851622
+          ]
+        ],
+        "receiver": "RMDL",
+        "self_response": true,
+        "target": "RMDL"
+      }
+    },
+    {
+      "arm": "peptide",
+      "level": 0,
+      "measured_pairs_above_tolerance": 1,
+      "original_screen": {
+        "leave_one_cycle_out_max_difference": 7.535028337631497e-05,
+        "passed": false,
+        "tolerance": 2.6131198355415397e-05
+      },
+      "pairs_above_tolerance": 3,
+      "worst": {
+        "cycle_means": [
+          0.00017263470626519006,
+          0.00018897377890358946,
+          0.0001318959013731913,
+          -0.0001368996713246029
+        ],
+        "four_cycle_mean": 8.915117880434198e-05,
+        "measured_in_development_pool": false,
+        "omitted_cycle": 3,
+        "phase_responses_by_cycle": [
+          [
+            4.3364636732823314e-05,
+            0.00027784254914797746,
+            0.0002272045432618608,
+            0.0001421270959180987
+          ],
+          [
+            5.828773211791205e-05,
+            0.0002720623259169219,
+            0.000242528500662198,
+            0.00018301655691732588
+          ],
+          [
+            6.934508660516592e-06,
+            0.0002163160684639509,
+            0.00018408529111346716,
+            0.00012024773725483051
+          ],
+          [
+            -0.00030434287425018525,
+            -4.6349494092767785e-06,
+            -6.587198234231373e-05,
+            -0.00017274887929663585
+          ]
+        ],
+        "receiver": "RMDL",
+        "self_response": true,
+        "target": "RMDL"
+      }
+    },
+    {
+      "arm": "peptide",
+      "level": 1,
+      "measured_pairs_above_tolerance": 1,
+      "original_screen": {
+        "leave_one_cycle_out_max_difference": 7.4846363894078e-05,
+        "passed": false,
+        "tolerance": 2.6140880788204962e-05
+      },
+      "pairs_above_tolerance": 3,
+      "worst": {
+        "cycle_means": [
+          0.0001730471054299243,
+          0.00018959482793864946,
+          0.00013231699879137637,
+          -0.00013439914485632865
+        ],
+        "four_cycle_mean": 9.013994682590537e-05,
+        "measured_in_development_pool": false,
+        "omitted_cycle": 3,
+        "phase_responses_by_cycle": [
+          [
+            4.492717986148698e-05,
+            0.0002771389213003239,
+            0.00022812233543734184,
+            0.00014199998512054446
+          ],
+          [
+            6.051197141609954e-05,
+            0.0002721704606323261,
+            0.00024289608790806216,
+            0.00018280079179811004
+          ],
+          [
+            8.954721454679238e-06,
+            0.00021659789205874524,
+            0.00018441220925369262,
+            0.00011930317239838839
+          ],
+          [
+            -0.0002933838254244314,
+            -4.773803920721242e-06,
+            -6.613023323898126e-05,
+            -0.00017330871684118065
+          ]
+        ],
+        "receiver": "RMDL",
+        "self_response": true,
+        "target": "RMDL"
+      }
+    }
+  ],
+  "findings": [
+    "Six network response pairs exceed global sampling tolerance at each clock; four are measured development downstream pairs. Three peptide pairs exceed at each clock; one is measured. Counts under current global tolerance do not imply universal accuracy over weak/unmeasured responses.",
+    "Worst at all four grids is RMDL self-stimulation response, not a measured downstream pair used in fitting. Cannot resolve gate solely by excluding self-responses because measured pairs also fail.",
+    "Network worst omitted cycle1; coarse cycle means approximately[6.19e-5,-3.21e-4,3.52e-4,5.34e-4]. Peptide worst omitted cycle3; coarse cycle means approximately[1.73e-4,1.89e-4,1.32e-4,-1.37e-4]. Fine grids show similar variation.",
+    "Variation is reproducible across tested clocks; this supports model starting-state/cycle dependence rather than the previous neural timestep problem. Does not establish biological correctness or its unique dynamical mechanism."
+  ],
+  "decision": "Preserve original failed sampling gates; do not force state-independent responses or promote parent. Next proposed bounded sampling study automatically selects union of affected target/pairs from saved arrays, samples more cycles over a longer time window on those targets, and tests whether ensemble mean stabilizes before another full135-target sweep. Preserve all prior results; no immediate fitting.",
+  "next_proposed": {
+    "status": "proposed, not implemented/launched",
+    "panel": "All targets contributing failing pairs, including measured downstream cases and RMDL self-case; derive automatically from saved arrays, not held-out performance.",
+    "method": "Increase cycle/time coverage prospectively, e.g. nested8/16/32-cycle ensembles over longer window; checkpoint each state/target batch and retain per-cycle responses. Check mean sensitivity and timestep agreement on panel; report remaining state dependence rather than train it away. No claim a fixed larger ensemble will suffice.",
+    "scope": "Deterministic sampling/numerical engineering, no new biological or behavior qualification; validation allowed to finish."
+  },
+  "unavailable": [
+    "Identities of the other failing pairs were not printed; exact affected-panel union can be derived from saved response arrays without new simulation.",
+    "No longer-window/more-cycle ensemble results, phase-reset/current attribution or biological validation.",
+    "Individual server artifact/source hashes in saved diagnostic JSON not printed; attachment hash records supplied evidence only."
+  ]
+}

@@ -14106,3 +14106,41 @@ Planned read-only invocation: python -m scripts.diagnose_cycle_sampling
 No random seed/draws; deterministic saved-array arithmetic. Acceptance is exact
 reproduction of original sampling screen and recorded input hashes only, with
 no new model pass/fail criteria. New output refuses overwrite and source-run path.
+
+
+## 2026-11-24 — E126 sampling sensitivity localized to few pairs, worst self-response
+
+User provides read-only diagnose_cycle_sampling output, report
+/home/carsonc/r-elegans-results/cycle-sampling-diagnosis-20261124T223951Z.json,
+source midpoint-continuation-20261124T210840Z-1129532. Source unchanged; no
+forward/fitting/gate change. Exact four rows and attachment hash in
+E126-sampling-localization-server-summary.json. Repeated full continuation audit
+in same paste agrees with earlier recorded result; not a new execution.
+
+Both clocks: network6pairs above global sampling tolerance,4measured development
+downstream pairs; peptide3above,1measured. These are model target/receiver pairs,
+not independent animals, and not proof all other weak/unmeasured outputs are
+accurate. Worst at all levels RMDL->RMDL, not measured downstream fitting label.
+Network omission cycle1 is worst; coarse four cycle means[6.1851935783e-5,
+-3.2101619318e-4,3.5155269637e-4,5.3374033157e-4], mean1.5653219263e-4.
+Peptide omission cycle3 worst; coarse means[1.7263470627e-4,1.8897377890e-4,
+1.3189590137e-4,-1.3689967132e-4], mean8.9151178804e-5. Fine clock values
+similar, supporting reproducible cycle/starting-state dependence within model.
+No unique causal attribution (phase resetting/slow modulation etc.) established.
+
+Interpretation: integrator passes tested timestep checks, but four cycles across
+4s do not give representative enough mean under declared screen for these pairs.
+The self-response dominates the all-output maximum; excluding it would not remove
+the4/1measured failures and would be a prospective domain change, not retroactive
+qualification. Do not train away model state dependence merely to pass averaging.
+Need a defensible sampled-state response estimate, or eventual explicitly
+state-conditioned observable; no evidence that all cycle responses should match.
+
+Next proposed (not implemented/launched): derive all failing target/pair IDs from
+saved arrays, expand cycle/time coverage on affected targets only (e.g. nested
+8/16/32cycles over longer window), checkpoint each expensive state/target batch,
+check mean stabilization and timestep agreement, then full135-target validation
+only after targeted protocol is justified. Do not guess other pair identities or
+claim any fixed cycle count sufficient. Validation allowed to finish; original
+criteria/outcomes and all independent parents retained. No new fitting or parent
+promotion until this sampling issue is addressed prospectively.
