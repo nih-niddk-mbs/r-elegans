@@ -1,4 +1,4 @@
-"""Read-only full-window E107 cycle analysis; no simulation or changed gates."""
+"""Analyze saved E107/E123 cycle windows; source read-only, no simulation or changed gates."""
 import argparse
 from datetime import datetime, timezone
 import json
@@ -69,6 +69,9 @@ def descriptive_comparison(coarse, fine):
 
 
 def analyze(run, out):
+    kind=json.loads((run/'manifest.json').read_text()).get('experiment')
+    if kind in ('E123','E123-continuation'):
+        return analyze_validation(run,out)
     evidence = {}
     def read(path, expected=None):
         path = Path(path)
@@ -140,6 +143,54 @@ def analyze(run, out):
     return result
 
 
+def analyze_validation(run,out):
+    """Use all late cycles of the existing300s E123 traces; no new pass flag."""
+    evidence={}
+    def read(path,expected=None):
+        path=Path(path);digest=file_sha256(path)
+        if expected is not None and digest!=expected:raise ValueError('Input checksum mismatch: '+str(path))
+        evidence[str(path)]=digest;return path
+    manifest=json.loads(read(run/'manifest.json').read_text())
+    audit=json.loads(read(run/'audit.json').read_text())
+    budget=json.loads(read(run/'budget_receipt.json').read_text())
+    if not (audit.get('audit_complete') and audit.get('execution_complete') and audit.get('integrity_passed') and budget.get('all_steps_finished')):
+        raise ValueError('Completed E123 execution with passing integrity required; scientific gates may fail')
+    if set(manifest['model_sha256'])!={'network','peptide'}:raise ValueError('Both predetermined model arms required')
+    models={}
+    for label,sha in manifest['model_sha256'].items():
+        read(run/label/'model.npz',sha)
+        if audit['models'][label]!=sha:raise ValueError('Original audited model differs')
+        summary=json.loads(read(run/label/'summary.json').read_text())
+        levels=[]
+        if len(summary['long'])!=2:raise ValueError('Two complete long clocks required')
+        for level,row in enumerate(summary['long']):
+            dt=.001/2**level
+            if row['level']!=level or row['dt']!=dt:raise ValueError('Unexpected long clock')
+            path=run/label/f'long-{level}.npz'
+            if str(path) not in audit['artifact_sha256']:raise ValueError('Original artifact hash unavailable')
+            data=saved_arrays(read(path,audit['artifact_sha256'][str(path)]));v=data['rmd']
+            if v.shape!=(round(300./dt),2) or not np.isfinite(v).all():raise ValueError('Unexpected300s voltage data')
+            cells={name:dict(full_late=window_stats(v[:,i],dt,150.,300.),
+                windows=[window_stats(v[:,i],dt,t,t+50.) for t in (150.,200.,250.)]) for i,name in enumerate(('RMDL','RMDR'))}
+            levels.append(dict(level=level,rhythm_step_ms=.03125/2**level,sample_dt_s=dt,cells=cells))
+        comparisons=[dict(levels=[0,1],cells={name:descriptive_comparison(levels[0]['cells'][name]['full_late'],levels[1]['cells'][name]['full_late']) for name in ('RMDL','RMDR')})]
+        windows=[dict(window_seconds=[t,t+50.],cells={name:descriptive_comparison(levels[0]['cells'][name]['windows'][i],levels[1]['cells'][name]['windows'][i]) for name in ('RMDL','RMDR')}) for i,t in enumerate((150.,200.,250.))]
+        models[label]=dict(checkpoint_sha256=sha,levels=levels,descriptive_comparisons=comparisons,
+            window_comparisons=windows,original_comparisons=summary['long_cycle_checks'],original_checks_passed=summary['checks_passed'])
+    for path,sha in evidence.items():
+        if file_sha256(path)!=sha:raise ValueError('Source changed during analysis: '+path)
+    result=dict(source_run=str(run),source_experiment=manifest['experiment'],analysis_complete=True,integrity_passed=True,
+        evidence_sha256=evidence,models=models,original_execution_budget=budget,
+        original_numerical_component_passed=audit['endpoint_checks_passed'],acceptance_gates_changed=False,model_promoted=False,
+        limits=['Descriptive analysis of saved voltage only; outputs saved separately, source records unchanged.',
+            '150s aggregate and50s windows do not replace original last-five-cycle gates or prove convergence.',
+            'Peak interpolation estimates timing within saved samples; no independent solver or new trajectories.',
+            'Different grid-specific own-state anchors and slow modulation can affect comparisons; causation unproven.',
+            'A third long-trace grid, biological fidelity, full atlas/CV fitting and body/sensory start-stop are not established.'])
+    write(out/'summary.json',result)
+    return result
+
+
 def plot_periods(result, out):
     try:
         import matplotlib
@@ -160,7 +211,7 @@ def plot_periods(result, out):
             ax.set_ylabel('Interpolated cycle period (s)')
             ax.set_xlabel('Time after recording begins (s)')
             ax.legend(fontsize=7, ncol=2)
-    fig.suptitle('E107 saved cycles: descriptive timing; acceptance gates unchanged')
+    fig.suptitle(result.get('source_experiment','E107')+' saved RMD cycles: descriptive timing; acceptance gates unchanged')
     fig.tight_layout()
     path = out / 'cycle-periods.png'
     fig.savefig(path, dpi=160)
@@ -180,6 +231,9 @@ def print_report(result, output):
                     'period_cv', 'period_quantiles_5_50_95_s')},
                     'window_period_s', [w.get('whole_train_period_s') for w in cell['windows']])
         print(label, 'finest descriptive comparison:', model['descriptive_comparisons'][-1])
+        if model.get('window_comparisons'):
+            print(label,'50s descriptive comparisons:',model['window_comparisons'])
+            print(label,'Original last-five-cycle gates:',model['original_comparisons'])
     print('Original numerical component pass:', result['original_numerical_component_passed'])
     print('Acceptance gates unchanged; no model promoted. No simulation or fitting performed.')
     print('Report:', output / 'summary.json')

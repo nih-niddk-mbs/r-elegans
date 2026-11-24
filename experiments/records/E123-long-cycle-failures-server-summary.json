@@ -1,0 +1,113 @@
+{
+  "experiment": "E123-continuation",
+  "recorded_date": "2026-11-23",
+  "evidence": "User-pasted detailed read-only report; no direct server file inspection or new simulation",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
+  "models": {
+    "network": {
+      "failure_report": {
+        "reported_checks_passed": false,
+        "failed": [
+          {
+            "gate": "300s coarse/fine cycle RMDL",
+            "details": {
+              "passed": false,
+              "period_relative_error": 0.005176876617773971,
+              "amplitude_relative_error": 0.021987777441008292,
+              "phase_aligned_waveform_rmse_mV": 0.21279075425793312,
+              "coarse_period_s": 0.2306,
+              "fine_period_s": 0.2318,
+              "pointwise_rmse_mV": 9.034066133028801
+            }
+          }
+        ],
+        "unavailable": []
+      },
+      "long_cycle_comparisons": {
+        "RMDL": {
+          "passed": false,
+          "period_relative_error": 0.005176876617773971,
+          "amplitude_relative_error": 0.021987777441008292,
+          "phase_aligned_waveform_rmse_mV": 0.21279075425793312,
+          "coarse_period_s": 0.2306,
+          "fine_period_s": 0.2318,
+          "pointwise_rmse_mV": 9.034066133028801
+        },
+        "RMDR": {
+          "passed": true,
+          "period_relative_error": 0.003827751196172226,
+          "amplitude_relative_error": 0.013705127540999677,
+          "phase_aligned_waveform_rmse_mV": 0.11678995590179124,
+          "coarse_period_s": 0.2082,
+          "fine_period_s": 0.209,
+          "pointwise_rmse_mV": 9.060903154073463
+        }
+      }
+    },
+    "peptide": {
+      "failure_report": {
+        "reported_checks_passed": false,
+        "failed": [
+          {
+            "gate": "300s coarse/fine cycle RMDL",
+            "details": {
+              "passed": false,
+              "period_relative_error": 0.023498694516971227,
+              "amplitude_relative_error": 0.07021304690949322,
+              "phase_aligned_waveform_rmse_mV": 0.8401868983650451,
+              "coarse_period_s": 0.2352,
+              "fine_period_s": 0.2298,
+              "pointwise_rmse_mV": 8.455658985337607
+            }
+          },
+          {
+            "gate": "300s coarse/fine cycle RMDR",
+            "details": {
+              "passed": false,
+              "period_relative_error": 0.02504638218923928,
+              "amplitude_relative_error": 0.02409320464657361,
+              "phase_aligned_waveform_rmse_mV": 0.21486424951081715,
+              "coarse_period_s": 0.2102,
+              "fine_period_s": 0.21559999999999999,
+              "pointwise_rmse_mV": 8.6445126212957
+            }
+          }
+        ],
+        "unavailable": []
+      },
+      "long_cycle_comparisons": {
+        "RMDL": {
+          "passed": false,
+          "period_relative_error": 0.023498694516971227,
+          "amplitude_relative_error": 0.07021304690949322,
+          "phase_aligned_waveform_rmse_mV": 0.8401868983650451,
+          "coarse_period_s": 0.2352,
+          "fine_period_s": 0.2298,
+          "pointwise_rmse_mV": 8.455658985337607
+        },
+        "RMDR": {
+          "passed": false,
+          "period_relative_error": 0.02504638218923928,
+          "amplitude_relative_error": 0.02409320464657361,
+          "phase_aligned_waveform_rmse_mV": 0.21486424951081715,
+          "coarse_period_s": 0.2102,
+          "fine_period_s": 0.21559999999999999,
+          "pointwise_rmse_mV": 8.6445126212957
+        }
+      }
+    }
+  },
+  "original_criteria": {
+    "period_relative_error_strictly_less_than": 0.01,
+    "amplitude_relative_error_strictly_less_than": 0.02,
+    "phase_aligned_waveform_rmse_mV_strictly_less_than": 0.5
+  },
+  "established": [
+    "Failure identity known: last-five-cycle long-clock comparisons only, unavailable fields empty.",
+    "All other reported predicate checks pass: E122 reproduction, grid safety/shams/short RMD, adjacent response comparisons, serialized-state continuation,300s finite/bounds/RMD persistence.",
+    "Network RMDL amplitude2.19878% misses2% criterion; period0.51769% and phase-alignedRMSE0.21279mV pass. Network RMDR passes.",
+    "Peptide RMDL period2.34987%, amplitude7.02130%, waveformRMSE0.84019mV fail; RMDR period2.50464% and amplitude2.40932% fail, waveformRMSE0.21486mV passes."
+  ],
+  "interpretation": "Rhythms persist; long-clock waveform/cycle agreement is not qualified. Code samples the last five cycles only. Slow modulation, independent grid-specific full-state anchors and discretization are possible influences, not established causes. Pointwise8-9mV error can include phase drift; phase-aligned errors also remain and cannot all be dismissed as phase shift.",
+  "decision": "Preserve failed original criteria. Analyze full150-300s and50s subwindows from existing saved traces before choosing finer long-clock simulations or more fitting. No model promoted."
+}

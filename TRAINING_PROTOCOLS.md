@@ -1,5 +1,14 @@
 # WormGym: training and validation protocols
 
+2026-11-23 E123 detailed failures identified:both models retain bounded sustained
+RMD voltage rhythms over300s. Failed gates concern coarse/fine last-five-cycle
+agreement. Network RMDL amplitude differs2.20%(limit2%); other network checks pass.
+Peptide RMDL differs2.35%in period,7.02%in amplitude and0.840mV in aligned waveform;
+RMDR differs2.50%/2.41%in period/amplitude. Original failures retained. Existing
+saved-cycle analysis now supports E123 full late windows to diagnose variability
+without another simulation. Server analysis remains planned; no model promoted.
+[Detailed evidence](experiments/records/E123-long-cycle-failures-server-summary.json).
+
 2026-11-23 E123 continuation completed (user-reported):34.93min, no active jobs,
 all execution/audit steps finished and integrity pass. Both adjacent three-grid
 response comparisons and exact saved neural/peptide continuation checks pass.

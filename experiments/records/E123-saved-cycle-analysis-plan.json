@@ -1,0 +1,17 @@
+{
+  "recorded_date": "2026-11-23",
+  "status": "saved-trace analysis implemented locally; server execution planned, not evidenced",
+  "question": "Do late-cycle discrepancies persist when aggregating all late cycles and50s subwindows, or are they sensitive to cycle selection/modulation?",
+  "source_run": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
+  "command": "python -m scripts.analyze_convergence_cycles --run /home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
+  "method": "Reuse existing window_stats/descriptive_comparison. Verify completed source execution/integrity and actual audited model/trace SHA256. Analyze native-resolution300s RMD traces:150-300s aggregate and150-200/200-250/250-300s windows. Compare full-train period regression, interpolated periods, variability, mean cycle amplitude and mean phase-aligned waveform; retain original five-cycle failures.",
+  "fixed_trainable": "All model parameters, traces, criteria and source files fixed. No training, forward simulation or new qualification. Analysis outputs only in a separate sibling directory.",
+  "seeds": "No random fitting/simulation.",
+  "acceptance": "All source hashes checked before/after, trace shapes/clocks verified, descriptive fields only, acceptance_gates_changed=False/model_promoted=False. New plots/statistics cannot retrospectively reclassify source failures.",
+  "local_validation": "28focused CPU float64 tests passed in3.41s, including old E107 source preservation and new E123 failed-gate preservation/hash rejection.",
+  "limits": [
+    "Descriptive two-clock analysis cannot prove numerical convergence or isolate cause.",
+    "Third long clock/independent solver or matched-state sensitivity tests may still be needed.",
+    "No whole-animal behavior or uniquely recovered physiology."
+  ]
+}

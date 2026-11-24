@@ -13496,3 +13496,46 @@ no automatic launch/resume/file writes. Local18focused tests pass, including
 correct failure decomposition and read-only/no-subprocess report semantics.
 Detailed server failure report not yet supplied; no cause invented. E120 and E122
 independent checkpoints remain preserved; H1.2 gates future behavior training.
+
+### 2026-11-23 — E123 failed gates localized to late-cycle clock agreement
+
+User-pasted detailed report has no unavailable predicates. Only300s coarse/fine
+last-five-cycle comparisons fail. Both models'300s bounded/finite/RMD persistence
+checks pass, as do original response reproduction, short grids/shams, three-grid
+responses and fresh-process state continuation. This is not evidence that activity
+died or that artifacts were corrupted. Exact metrics in
+E123-long-cycle-failures-server-summary.json; original failed labels unchanged.
+
+Network RMDL:perioderror0.51769%,amplitudeerror2.19878%,alignedRMSE0.21279mV;
+only amplitude misses prospective2%gate. RMDR passes all. Peptide RMDL:error2.34987%
+period,7.02130%amplitude,0.84019mV shape(allfail1%/2%/0.5mV thresholds). Peptide
+RMDR:2.50464%period,2.40932%amplitude fail;shape0.21486mV passes. PointwiseRMSE
+8.46-9.06mV includes possible phase drift; aligned errors remain, so discrepancies
+cannot all be dismissed as timing offsets. The peptide initialization is not
+numerically qualified on this long comparison merely because its atlas score is
+lower. No threshold relaxation or model promotion.
+
+Inspecting compare_cycles confirms it extracts the last6peaks and averages the
+last5cycles, despite a300s trace. Short E123 voltage records already show period
+variation; long modulation, grid-specific full-state anchors and integration error
+are possible influences, not established explanations. Check full saved late-time
+statistics before proposing another expensive forward run. Existing reusable
+scripts/analyze_convergence_cycles.py has full-window cycle statistics/plots;
+extend it for E123 instead of creating another one-off analyzer.
+
+Saved-trace plan:E123-saved-cycle-analysis-plan.json. Require completed source
+execution/audit integrity, verify actual recorded model and long-trace hashes,
+keep original comparisons, analyze150-300s plus three50s windows with interpolated
+peak timing, period regression/variability, mean amplitude/waveform. Source hashes
+rechecked after analysis. Outputs JSON/optionalPNG in separate external sibling
+folder; source untouched, no GPU simulation/fitting. Descriptive comparisons have
+no replacement pass flag. A third long-clock or independent/matched-state study
+may still be needed afterward; this CPU analysis alone cannot certify convergence.
+No server analysis invocation/outcome yet evidenced. E120/E122 parents retained;
+H1.2 future behavior gate unaffected.
+
+Local verification:28focused CPU/float64 tests pass in3.41s (existing E107 analysis,
+new E123 full-trace analysis and guarded validation/continuation reporting). Tests
+preserve original failed gates/source bytes, reject changed trace hashes, and
+keep descriptive comparisons free of invented acceptance flags. No full Mac or
+server forward simulation; no new biological or numerical qualification.
