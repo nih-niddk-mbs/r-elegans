@@ -1,0 +1,250 @@
+{
+  "recorded_date": "2026-11-23",
+  "purpose": "User-directed removal of unused files while keeping required code",
+  "status": "obsolete files removed; local dependency, protected-source and focused regression checks passed",
+  "pre_cleanup_revision": "bb64e58d92567575b1c4305b901573f97b774e8a",
+  "scope": "Remove obsolete experiment launch wrappers and two unreferenced/superseded standalone tools. Retain reusable runners, readers, tests, assets, dataset utilities and current workflow.",
+  "removed": [
+    {
+      "path": "scripts/assay_checkpoint_gait.py",
+      "sha256": "b2a53f865f7a31b2d64e8defc8e5ac284654a487d4caee187f04bc30137e20cc",
+      "bytes": 7781,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "scripts/launch_polarity_sweep_mbslnx2.sh"
+      ],
+      "classification": "retired E099 gait-polarity replay"
+    },
+    {
+      "path": "scripts/launch_all_parameters_mbslnx2.sh",
+      "sha256": "bce8df6391779479afafe4b1cb06c43cd188d1d46bb53b08dea84f75e594c6b7",
+      "bytes": 2153,
+      "references": [
+        "LAB_NOTEBOOK.md"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_composite_audit_mbslnx2.sh",
+      "sha256": "3384f4f04b6db098b5bfe9bdd82b501c3778072e4e96c2849fe6fc2bf59e8586",
+      "bytes": 472,
+      "references": [],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_continuation_mbslnx2.sh",
+      "sha256": "a3f3ca16c72966053850b1c1b78167787903ca9fa2fd2fac46f623e5e01db0c4",
+      "bytes": 1589,
+      "references": [
+        "experiments/records/E116-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_direction_check_mbslnx2.sh",
+      "sha256": "98b2f6bcd467f0db1babe13077a3cb6c681f8b06e37d8fb932d85ad728a666b4",
+      "bytes": 1035,
+      "references": [
+        "experiments/records/E119-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_gradient_continue_mbslnx2.sh",
+      "sha256": "233d70c270049575cfc87df3dac49a6d20c476f7dbcfbd3b14f95afc10f21d61",
+      "bytes": 1912,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E102-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_gradient_mbslnx2.sh",
+      "sha256": "edc521dcea8cfbda4ee1067e9d5ab5e735959322516eaa8e38277c89149fde26",
+      "bytes": 1159,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E101-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_peptides_mbslnx2.sh",
+      "sha256": "235a91d0161b28460832c262a81ed75b956f0127e26fcf0c2f3c674f2138c32f",
+      "bytes": 2326,
+      "references": [
+        "LAB_NOTEBOOK.md"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_shared_state_mbslnx2.sh",
+      "sha256": "fd0e8f07a01dd5961cc9c080fccd3db5c2930680469e629b42f52594ea6790d5",
+      "bytes": 1303,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E109-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_target_continuation_mbslnx2.sh",
+      "sha256": "71e25fd9605bc0cc7389f9edfc8bc95eac78ff8f46529888d890c214ccea2b4e",
+      "bytes": 1216,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E111-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_atlas_target_refinement_mbslnx2.sh",
+      "sha256": "a6b8533c4f92593c2b999382e331b19955d8f7a299a5d3e0e503fc1af1b7b50d",
+      "bytes": 1316,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E110-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_common_state_mbslnx2.sh",
+      "sha256": "2b396a993f8ef10537954d4339c0e5df820266f914846ab7bcd81e2859787bf9",
+      "bytes": 1187,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E108-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_extended_panel_atlas_fit_mbslnx2.sh",
+      "sha256": "191bc6b75f6d782b9dfbfc633e1fdf969d4e26659e4af93ae4fd1233a6755d69",
+      "bytes": 1527,
+      "references": [
+        "experiments/records/E118-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_measured_atlas_fit_mbslnx2.sh",
+      "sha256": "60c5e723d742cc4c9503101b1ef5db17f966010207980825d34bd19addfe36d6",
+      "bytes": 1190,
+      "references": [
+        "experiments/records/E115-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_neural_convergence_mbslnx2.sh",
+      "sha256": "18c6f30f142435b900b73ba93bcde115e9518609b3359eecf1c1d623c7a37d38",
+      "bytes": 1314,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E107-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_own_state_atlas_fit_mbslnx2.sh",
+      "sha256": "e501b41cf7637a90dc9ee35c37fe5c64e51b26ab5695db1bbf7a19dea15accea",
+      "bytes": 1144,
+      "references": [
+        "experiments/records/E114-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_panel_atlas_fit_mbslnx2.sh",
+      "sha256": "87cbc7076f57808ce906a04735c338629eace57562286f5e4127bc5eaec72879",
+      "bytes": 1516,
+      "references": [
+        "experiments/records/E117-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_polarity_sweep_mbslnx2.sh",
+      "sha256": "60328974634880d84c802b7b60854cc892575d93d8f98859bf05cd43a17207ba",
+      "bytes": 1854,
+      "references": [
+        "LAB_NOTEBOOK.md"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_reverse_candidate_mbslnx2.sh",
+      "sha256": "baf39b52819106838b33f0556ab5daa21758e78b73b08d21ffe2a33a784b85e5",
+      "bytes": 1028,
+      "references": [
+        "experiments/records/E120-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_selected_atlas_audit_mbslnx2.sh",
+      "sha256": "cd43cf1582bbfa93261819f6ba80c42248ff2e95ddf87dffd3dca8aa216df9ae",
+      "bytes": 1349,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E106-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/launch_stable_atlas_fit_mbslnx2.sh",
+      "sha256": "4f0e50f3fd60d0d10a677429c61cf80847d4239922cde99e45c47af08eb534be",
+      "bytes": 1152,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E113-plan.json"
+      ],
+      "classification": "retired one-experiment launcher"
+    },
+    {
+      "path": "scripts/prepare_embodied_bundle.py",
+      "sha256": "c0fcf17eaac76638fb4a51fce3f5d1a5c74ca1e1ca9755a3a7266f148efabeec",
+      "bytes": 3930,
+      "references": [
+        "LAB_NOTEBOOK.md"
+      ],
+      "classification": "superseded E028 input-archive generator"
+    }
+  ],
+  "protected_sha256": {
+    "r_elegans/brain/dynamics.py": "3cb6dd099d19d4a8f5cb344cdf7761e32a7aa37765afb1ae17a19060b93464aa",
+    "r_elegans/brain/peptide_checkpoint.py": "5f5878a036c8176c09d22c809c3d1f7629a6f0500948f29f02dfda15c22a1939",
+    "r_elegans/brain/peptide_state_replay.py": "d94c3fab0adbbe946afceb1dbe5764cb698ba604d8f6de81b64aef316e6ef2d5",
+    "scripts/run_cv_peptide_pilot.py": "25ab677a73389d90155fd8d69fe98aaa557fe650810ca22ff184481c295504c9",
+    "scripts/run_cv_peptide_validation.py": "c93319686b97eb135b5429a666e14d904b1ea11f9a3f8d63fc99d6c3884f178e",
+    "scripts/continue_cv_peptide_validation.py": "2501e5e5bc1a50f55e9d6d25097d4c0369a8fabad8e3380b0e58d74cca0185e4",
+    "scripts/cv_validation_job.py": "4fa6b19823bdb013a0ad13208fe676bfaedb7684409896b00a380a04139b801f",
+    "scripts/experiment_records.py": "a5d5f0d01a29d47785ace1f17baf4cf6173c014c12acc293fdc1b8e6122ca795",
+    "scripts/launch_cv_peptide_pilot_mbslnx2.sh": "da6f010cd27ec8c60a91a0de88936bde527bff8daefe504ff79e7e48c8ec656c",
+    "scripts/launch_cv_peptide_validation_mbslnx2.sh": "627be6243362bb5aba0154bd6c27ac0de3f06005b36c3f109dee64b75fe2d1cc",
+    "scripts/launch_cv_peptide_continuation_mbslnx2.sh": "5c057a5ca9ead4ce70d99f852c6b011e638da13ab468eb3d079f84970cac3fab",
+    "scripts/status_cv_peptide_validation_mbslnx2.sh": "c5d7c018664b6d718e18506daffd5eebfa88cf676775529e74ec414e6b1036a8"
+  },
+  "verification": {
+    "no_live_references_outside_removal_set": true,
+    "python_imports_pending": false,
+    "focused_checks_pending": false,
+    "python_syntax_files_checked": 398,
+    "unresolved_script_imports": [],
+    "protected_file_hashes_unchanged": true,
+    "focused_test_result": "30 passed in17.82s; CPU,float64",
+    "focused_tests": [
+      "tests/test_cv_validation_continuation.py",
+      "tests/test_peptide_checkpoint.py",
+      "tests/test_cv_peptide_pilot.py",
+      "tests/test_execution_audit.py",
+      "tests/test_polarity_variants.py",
+      "tests/test_full_network.py"
+    ],
+    "remaining_live_references": [],
+    "all_removed_paths_absent": true
+  },
+  "reproducibility": "Historical notebook/experiment references retained as history. Removed files recoverable at pre_cleanup_revision; exact historical reproduction uses original recorded source/environment.",
+  "limits": "Static references cannot enumerate external user commands. Generic standalone utilities retained despite having no imports. No external datasets, checkpoints, archived source, active processes or experiment results deleted."
+}

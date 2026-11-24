@@ -13421,3 +13421,39 @@ E123 validation/continuation and shared rhythm_qualification.py remain unchanged
 No simulations or model parameters changed. Verification:script absent and no live
 repository references outside historical notebook; no simulation tests warranted
 for removal of this unreferenced standalone entry point.
+
+### 2026-11-23 — User-directed unused-file cleanup with dependency checks
+
+User requests preserving required files and deleting unneeded ones. Reviewed264
+script entries against tracked Python/shell/docs/config/experiment references,
+entry points and tests. Standalone utilities are not classified unused solely
+because no module imports them. Retain package modules (including brain/dynamics),
+reusable runners/helpers, report readers, tested polarity utilities, datasets/assets,
+current guarded CV/peptide launch/status/report/continuation and source-record tools.
+
+Removed22files:20superseded atlas/polarity experiment launch wrappers, historical
+assay_checkpoint_gait.py together with its only caller launch_polarity_sweep, and
+superseded one-off E028 prepare_embodied_bundle.py. Current embodied workflow uses
+bootstrap_embodied_inputs.py. Generic data acquisition, inspection, plotting and
+benchmark utilities remain. Exact paths/pre-deletion SHA256/bytes/reference lists
+in experiments/records/repository-cleanup-20261123.json. Total39453source bytes;
+this is source/workflow cleanup, not large server disk cleanup. No raw data,
+checkpoints, archived source, experiment records or active processes deleted.
+
+Pre-cleanup Git revisionbb64e58d92567575b1c4305b901573f97b774e8a retains removed
+files. Historical notebook/experiment command references stay as historical
+records; reproduce old experiments from their recorded revision/environment,
+rather than silently repointing commands at the present implementation. Keep
+underlying Python runners/readers and tests for reusable numerical/data routines.
+No current code/test/nonhistorical documentation references a removed entry point.
+Static search cannot enumerate private external commands; no claim of that made.
+
+Local verification:398remaining Python sources parse, script imports resolve;
+current workflow source hashes match before/after cleanup.30focused CPU/float64
+tests pass in17.82s covering guarded continuation/checkpoints, pilot/execution
+audit, polarity utilities and full-network dynamics. No new tests needed for the
+unreferenced entrypoint deletion; existing checks suffice. Entire r_elegans package
+and tests are unchanged. Previously recorded broader float64-suite failures remain
+unresolved; this does not declare a new full-suite pass. No forward experiments,
+model changes or new scientific/behavior qualification. Running validation's
+pinned sources remain byte-identical; outside source archives are untouched.
