@@ -1,5 +1,15 @@
 # Current model: exact scope and computation path
 
+2026-11-24 E126 detailed continuation audit (user-reported): all execution,
+integrity, controls, bounds and RMD rhythm checks pass;34/34batches saved, three
+levels reused, no worker errors. Full135-target phase-mean two-clock convergence
+passes both network and peptide parents (errors3.48e-7/1.25e-6 versus tolerances
+3.39e-5/2.61e-5). Sole remaining qualification failure is four-cycle sampling
+stability in every arm/clock grid. No model promotion or fitting. Next: saved-data
+localization of cycle/target/receiver variability before changing sampling.
+[Audit](experiments/records/E126-continuation-server-audit.json).
+
+
 2026-11-24 E126 continuation completed (user-reported): execution and audit
 finished, no timeout, parent-validation false; no training or model promotion.
 Receipt elapsed68m42s excludes initial preparation/copying in current supervisor.

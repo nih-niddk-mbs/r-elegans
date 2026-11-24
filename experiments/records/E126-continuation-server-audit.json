@@ -1,0 +1,245 @@
+{
+  "experiment": "E126-continuation",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported completed audit stdout; parsed locally. No direct server artifact access or new forward simulation.",
+  "attachment_sha256": "ed440b2d9879886f2cf2b76204a415015bb71c0f937c3883547f05120a277287",
+  "run": "/home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532",
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "arms": {
+      "network": {
+        "completed": true,
+        "selected_level": 0,
+        "benchmark_comparisons": [
+          {
+            "level": 0,
+            "reference": {
+              "maximum_difference": 0.00017050351562430954,
+              "tolerance": 0.00022101539870049417,
+              "passed": true
+            },
+            "adjacent": {
+              "maximum_difference": 3.2571056786112607e-06,
+              "tolerance": 0.00023839146083078625,
+              "passed": true
+            },
+            "improves_over_legacy": true,
+            "safe": true,
+            "passed": true
+          },
+          {
+            "level": 1,
+            "reference": {
+              "maximum_difference": 0.0001737606213029208,
+              "tolerance": 0.00022101539870049417,
+              "passed": true
+            },
+            "adjacent": {
+              "maximum_difference": 9.088947339197517e-07,
+              "tolerance": 0.00023848235030417823,
+              "passed": true
+            },
+            "improves_over_legacy": true,
+            "safe": true,
+            "passed": true
+          }
+        ],
+        "legacy_reproduction_error": 0.0,
+        "full_target_response_check": {
+          "maximum_difference": 3.4810375200422516e-07,
+          "tolerance": 3.3897681911952595e-05,
+          "passed": true
+        },
+        "cycle_sampling": [
+          {
+            "leave_one_cycle_out_max_difference": 0.00015918279527279744,
+            "tolerance": 3.388618550297849e-05,
+            "passed": false,
+            "scope": "Prospective four-cycle sampling stability screen, not confidence interval or biological test"
+          },
+          {
+            "leave_one_cycle_out_max_difference": 0.00015841377765625264,
+            "tolerance": 3.3897681911952595e-05,
+            "passed": false,
+            "scope": "Prospective four-cycle sampling stability screen, not confidence interval or biological test"
+          }
+        ],
+        "parent_validation_passed": false,
+        "level_checks": [
+          {
+            "level": 0,
+            "finite": true,
+            "bounded": true,
+            "duplicate_mean_error": 0.0,
+            "duplicate_voltage_error": 0.0,
+            "failed_rhythms": [],
+            "passed": true
+          },
+          {
+            "level": 1,
+            "finite": true,
+            "bounded": true,
+            "duplicate_mean_error": 0.0,
+            "duplicate_voltage_error": 0.0,
+            "failed_rhythms": [],
+            "passed": true
+          }
+        ],
+        "benchmark_gate_blocked": false
+      },
+      "peptide": {
+        "completed": true,
+        "selected_level": 0,
+        "benchmark_comparisons": [
+          {
+            "level": 0,
+            "reference": {
+              "maximum_difference": 3.6906033623607115e-06,
+              "tolerance": 3.035295883027912e-05,
+              "passed": true
+            },
+            "adjacent": {
+              "maximum_difference": 1.5603023362231738e-07,
+              "tolerance": 3.031671475834653e-05,
+              "passed": true
+            },
+            "improves_over_legacy": true,
+            "safe": true,
+            "passed": true
+          },
+          {
+            "level": 1,
+            "reference": {
+              "maximum_difference": 3.5720683657647356e-06,
+              "tolerance": 3.035295883027912e-05,
+              "passed": true
+            },
+            "adjacent": {
+              "maximum_difference": 7.719435668462893e-08,
+              "tolerance": 3.0309129913871813e-05,
+              "passed": true
+            },
+            "improves_over_legacy": true,
+            "safe": true,
+            "passed": true
+          }
+        ],
+        "legacy_reproduction_error": 0.0,
+        "full_target_response_check": {
+          "maximum_difference": 1.2513576349640343e-06,
+          "tolerance": 2.6140880788204962e-05,
+          "passed": true
+        },
+        "cycle_sampling": [
+          {
+            "leave_one_cycle_out_max_difference": 7.535028337631497e-05,
+            "tolerance": 2.6131198355415397e-05,
+            "passed": false,
+            "scope": "Prospective four-cycle sampling stability screen, not confidence interval or biological test"
+          },
+          {
+            "leave_one_cycle_out_max_difference": 7.4846363894078e-05,
+            "tolerance": 2.6140880788204962e-05,
+            "passed": false,
+            "scope": "Prospective four-cycle sampling stability screen, not confidence interval or biological test"
+          }
+        ],
+        "parent_validation_passed": false,
+        "level_checks": [
+          {
+            "level": 0,
+            "finite": true,
+            "bounded": true,
+            "duplicate_mean_error": 0.0,
+            "duplicate_voltage_error": 0.0,
+            "failed_rhythms": [],
+            "passed": true
+          },
+          {
+            "level": 1,
+            "finite": true,
+            "bounded": true,
+            "duplicate_mean_error": 0.0,
+            "duplicate_voltage_error": 0.0,
+            "failed_rhythms": [],
+            "passed": true
+          }
+        ],
+        "benchmark_gate_blocked": false
+      }
+    },
+    "parent_validation_passed": false,
+    "unavailable": [
+      "No full-target third clock or300s embodiment",
+      "Four-cycle jackknife is a deterministic stability screen, not a confidence interval",
+      "Neural midpoint is second-order locally; held outer peptide coupling remains first-order",
+      "No fitting, optimizer recovery, sensory start/stop, swimming or biological qualification",
+      "Original interrupted network level1 batches were unsaved; replay from saved starts required. Batch checkpoints apply to this continuation, not historical in-memory work."
+    ],
+    "legacy_gates_changed": false,
+    "model_promoted": false,
+    "continuation_source": "/home/carsonc/r-elegans-results/midpoint-validation-20261124T165552Z-1120675",
+    "reused_levels": [
+      {
+        "arm": "network",
+        "level": 0,
+        "status": "complete_source_stage"
+      },
+      {
+        "arm": "peptide",
+        "level": 0,
+        "status": "complete_source_stage"
+      },
+      {
+        "arm": "peptide",
+        "level": 1,
+        "status": "complete_source_stage"
+      }
+    ],
+    "saved_batches": 34,
+    "planned_batches": 34,
+    "training_budget_minutes": 0,
+    "validation_allowed_to_finish": true,
+    "worker_error_history": []
+  },
+  "budget_receipt": {
+    "status": "finished",
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 4122.322458276991,
+    "training_budget_minutes": 0,
+    "validation_allowed_to_finish": true,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "parent_validation_passed": false,
+    "training_launched": false,
+    "model_promoted": false
+  },
+  "interpretation": "Both135-target parent variants pass prospective midpoint phase-mean two-clock response checks. Finite/bounded/control/rhythm, legacy reproduction and artifact integrity checks pass. All four arm/clock grids fail four-cycle sampling stability; this is the sole remaining reported qualification gate. No promotion or fitting follows.",
+  "next_action": "Read saved per-cycle response arrays to localize worst omitted cycle and target/receiver, count affected measured versus other pairs. Do not force state-independent responses or assume adding cycles is sufficient before inspecting. No GPU rerun yet.",
+  "unavailable": [
+    "Full audit artifact/source hash list omitted from supplied reporter stdout; server retains it.",
+    "No full-target third clock,300s/body, independent biological validation or new fitting.",
+    "Four-cycle jackknife is a deterministic engineering screen, not statistical confidence.",
+    "No proof of adequate phase ensemble or unique biological parameters."
+  ],
+  "derived": {
+    "network": {
+      "timestep_tolerance_margin": 97.37809982450622,
+      "sampling_excess_ratios": [
+        4.697571972472551,
+        4.673292352784592
+      ]
+    },
+    "peptide": {
+      "timestep_tolerance_margin": 20.89001581786512,
+      "sampling_excess_ratios": [
+        2.8835372320649606,
+        2.863192120437253
+      ]
+    }
+  }
+}

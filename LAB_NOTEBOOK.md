@@ -14057,3 +14057,52 @@ sampling/batch-reuse details require full audit report. No inference that all
 remaining failures are solely sampling until report inspected. Next read-only
 command uses continue_midpoint_validation --output-dir exact-run --report. No
 additional fitting or experiment pending detailed post-run audit review.
+
+
+## 2026-11-24 — E126 continuation full audit: timestep checks pass, cycle-sampling fails
+
+Evidence: user-pasted full audit report for midpoint-continuation-20261124T210840Z-1129532,
+parent source midpoint-validation-20261124T165552Z-1120675. Parsed exact audit/
+receipt in E126-continuation-server-audit.json with attachment hash. Execution
+and audit complete, integrity true, problems[],34/34saved batches, source
+network0/peptide0/peptide1 reused, worker error history[]. No timeout, no training
+or promotion. Receipt elapsed4122.322s excludes initial preparation as noted
+earlier; full runtime/source/artifact hash list remains server-side.
+
+Network135-target phase-mean timestep discrepancy3.4810375200422516e-7 versus
+3.3897681911952595e-5 tolerance passes (~97.4x margin). Peptide1.2513576349640343e-6
+versus2.6140880788204962e-5 passes (~20.9x). Both benchmark clock levels safe and
+improve over legacy. Legacy reproduction exact0 in both arms. All four complete
+levels finite/bounded, duplicate mean and voltage errors0, failed_rhythms[].
+Neural midpoint solves these tested response-clock gates; not a universal proof
+of continuum accuracy, biological fidelity or old E124 qualification.
+
+Sole remaining parent gate is four-cycle sampling: network coarse/fine
+leave-one-out changes1.5918279527279744e-4/1.5841377765625264e-4 versus
+3.388618550297849e-5/3.3897681911952595e-5; peptide7.535028337631497e-5/
+7.4846363894078e-5 versus2.6131198355415397e-5/2.6140880788204962e-5.
+All fail. Removing one of four sampled cycles changes mean too much by declared
+engineering screen. Not evidence neurons must have identical cycle responses,
+that dynamics are biologically wrong, or that another fixed number of cycles
+will necessarily suffice. Could reflect model state dependence, poorly represented
+slow dynamics, localized self-responses or insufficient averaging; localization
+not yet supplied. No training out natural model state dependence or relaxing gates.
+
+Next cheap saved-data diagnostic implemented: diagnose_cycle_sampling recomputes
+original screen, identifies worst omitted cycle/target/receiver, prints four
+cycle means and phase responses, counts all and measured development pairs over
+tolerance. Uses union of documented train-pair support over independent folds
+only to annotate coverage, not to change acceptance or choose weights. Verifies
+response/model/support hashes against recorded evidence, all input hashes before/
+after; optional new report outside source refusing overwrite. No JAX/GPU forward,
+fitting or model promotion. Local2pure NumPy tests cover localization, masks,
+stable/self cases and invalid array refusal. Server execution remains planned.
+Preserve original failed gates. Interpret this report before deciding whether to
+extend cycle/time coverage on a representative panel and then full targets.
+
+Planned read-only invocation: python -m scripts.diagnose_cycle_sampling
+--run /home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532
+--output-file /home/carsonc/r-elegans-results/cycle-sampling-diagnosis-$(date -u +%Y%m%dT%H%M%SZ).json.
+No random seed/draws; deterministic saved-array arithmetic. Acceptance is exact
+reproduction of original sampling screen and recorded input hashes only, with
+no new model pass/fail criteria. New output refuses overwrite and source-run path.

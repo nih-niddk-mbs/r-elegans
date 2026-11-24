@@ -40,5 +40,6 @@
   "unavailable": [
     "Detailed final integrity/problems, full-target network convergence, per-level sampling/control results and saved/reused batch counts pending report.",
     "No fit, accepted parent, behavior or biological qualification."
-  ]
+  ],
+  "detailed_audit_record": "experiments/records/E126-continuation-server-audit.json"
 }
