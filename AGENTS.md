@@ -2,6 +2,14 @@
 
 Maintain [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) for scientific work in this repo.
 
+- User instruction 2026-11-24: a training time allowance ends optimization,
+  not final validation/audit. Let validation finish; do not impose an inherited
+  total-job timeout unless the user explicitly requests a hard total ceiling.
+  Planned stops must occur only after a durable, verified continuation checkpoint.
+  Save expensive validation batches independently, reuse completed stages, and
+  distinguish batch-boundary continuation from exact in-kernel/optimizer resume.
+  Never silently restart completed work or overwrite the source run.
+
 - User instruction 2026-11-16: after every run, perform a complete post-run audit
   before continuing training. Include execution/budget, candidate selection,
   parameter changes/bounds/frozen fields, signal propagation, all behavioral and

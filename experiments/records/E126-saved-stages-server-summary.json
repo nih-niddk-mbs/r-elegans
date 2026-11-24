@@ -1,0 +1,93 @@
+{
+  "experiment": "E126",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported saved-stage inspection; no local server artifact access or forward simulation.",
+  "run": "/home/carsonc/r-elegans-results/midpoint-validation-20261124T165552Z-1120675",
+  "execution_complete": false,
+  "integrity_passed": true,
+  "problems": [],
+  "network": {
+    "completed": false,
+    "selected_level": 0,
+    "legacy_reproduction_error": 0.0,
+    "benchmark_level0": {
+      "reference_difference": 0.00017050351562430954,
+      "reference_tolerance": 0.00022101539870049417,
+      "adjacent_difference": 3.2571056786112607e-06,
+      "adjacent_tolerance": 0.00023839146083078625,
+      "passed": true
+    },
+    "full0": {
+      "finite": true,
+      "bounded": true,
+      "duplicate_mean_error": 0.0,
+      "duplicate_voltage_error": 0.0,
+      "failed_rhythms": [],
+      "passed": true,
+      "sampling_difference": 0.00015918279527279744,
+      "sampling_tolerance": 3.388618550297849e-05,
+      "sampling_passed": false
+    },
+    "full1": "Only starts.npz and phases.json saved; no response/final/metrics files."
+  },
+  "peptide": {
+    "completed": true,
+    "selected_level": 0,
+    "legacy_reproduction_error": 0.0,
+    "benchmark_level0": {
+      "reference_difference": 3.6906033623607115e-06,
+      "reference_tolerance": 3.035295883027912e-05,
+      "adjacent_difference": 1.5603023362231738e-07,
+      "adjacent_tolerance": 3.031671475834653e-05,
+      "passed": true
+    },
+    "full_target_response_check": {
+      "maximum_difference": 1.2513576349640343e-06,
+      "tolerance": 2.6140880788204962e-05,
+      "passed": true
+    },
+    "sampling": [
+      {
+        "difference": 7.535028337631497e-05,
+        "tolerance": 2.6131198355415397e-05,
+        "passed": false
+      },
+      {
+        "difference": 7.4846363894078e-05,
+        "tolerance": 2.6140880788204962e-05,
+        "passed": false
+      }
+    ],
+    "both_levels_finite_bounded_duplicate_and_rhythm_passed": true
+  },
+  "file_sizes_MiB_rounded": {
+    "network/full-0": {
+      "starts.npz": 1.1,
+      "phases.json": 0.1,
+      "response.npz": 9.0,
+      "final.npz": 209.2,
+      "metrics.json": 0.0
+    },
+    "network/full-1": {
+      "starts.npz": 1.1,
+      "phases.json": 0.2
+    },
+    "peptide/full-0": {
+      "starts.npz": 1.1,
+      "phases.json": 0.1,
+      "response.npz": 9.5,
+      "final.npz": 213.0,
+      "metrics.json": 0.0
+    },
+    "peptide/full-1": {
+      "starts.npz": 1.1,
+      "phases.json": 0.2,
+      "response.npz": 9.5,
+      "final.npz": 213.0,
+      "metrics.json": 0.0
+    }
+  },
+  "interpretation": "Midpoint benchmark passes in both arms; peptide all-target timestep comparison passes. Four-cycle sampling fails in every completed level; completion cannot erase those failures. Network fine level remains unmeasured/unpersisted. metrics.json size0.0MiB is rounded, not evidence of empty file.",
+  "user_policy": "Training budget ends optimization only. Validation/audit must be allowed to finish. Planned stops require durable verified checkpoints and continuation; no silent replay of completed work.",
+  "decision": "Continue missing network fine level from exact saved starts, reuse three completed levels and benchmark. Historical in-memory132targets cannot be recovered. New continuation divides34batches between two GPUs, saves each atomically, and removes validation timeout; preserve source and gate failures."
+}

@@ -1,0 +1,24 @@
+{
+  "experiment": "E126-continuation",
+  "recorded_date": "2026-11-24",
+  "status": "planned; implemented and locally verified, no server execution evidenced",
+  "question": "Complete missing network fine-clock parent validation while reusing audited results and preserving restartable per-batch work.",
+  "source_run": "/home/carsonc/r-elegans-results/midpoint-validation-20261124T165552Z-1120675",
+  "authorization": "User asks continue from saved progress; never planned-stop where work must restart; validation finishes after training timer ends.",
+  "method": "Copy verified stage artifacts into new continuation directory; never modify original. Reuse network full0, peptide full0/full1 and all benchmark outputs. Verify saved network full1 full-state phases; replay only that missing level. Both GPUs split34four-target batches into17assignments each with exact original model/starts/numerics. Assemble full response/final arrays, finish unchanged metrics and independent post-run audit.",
+  "checkpoint": "Each complete batch written via temporary NPZ, fsync, atomic rename and directory fsync; provenance contains exact model/start hashes, arm/clock/target list. Read/hash verification before marking saved. Resume skips verified batch checkpoints; in-flight batch/JIT may restart after unplanned interruption. No historical in-memory batch recovery or exact in-kernel/optimizer resume claim.",
+  "resources": "No training; no validation/total wall-clock cutoff. Shared exclusive GPU lock and own-user duplicate detection. Both A100s, four distinct cores each, float64, compact traces/final states.5GiB initial free. Automatic report/audit even on failure. Future training time allowance stops optional updates only after durable checkpoint, then validation/audit finish.",
+  "identity": "Original model, start, source and all reused artifact hashes verified; same midpoint solver/sampling thresholds. New exact invocation/env/source records. Original E124/E125/E126 dependencies remain external and unchanged.",
+  "completion": "Validation completion is separate from passing sampling/response criteria. Existing four-cycle sampling failures remain false; no fitting, model promotion or behavior qualification.",
+  "commands": {
+    "launch_or_continue": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_midpoint_continuation_mbslnx2.sh",
+    "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.continue_midpoint_validation --status",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.continue_midpoint_validation --output-dir RUN --report"
+  },
+  "notes": [
+    "Rerun launcher selects same existing continuation; complete result starts no work.",
+    "Historical network fine135target level must be replayed because only its starts were persisted. No completed level or benchmark replay.",
+    "Four-cycle sampling insufficiency needs separate future investigation; this continuation only completes original validation."
+  ],
+  "local_validation": "41 focused float64 CPU tests passed: source remains unchanged, exactly three complete levels reused and only34network-fine batches scheduled,17perGPU; durable batch readback/provenance/checksum, interrupted-write preservation, saved-batch GPU skip, idempotent completed-run refusal, no validation timeout (including actual private-process helper), numerical/state and guard regressions. Shell syntax/compilation/diff checks pass. No local full-network/GPU forward run."
+}

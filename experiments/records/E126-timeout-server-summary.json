@@ -2,8 +2,8 @@
   "experiment": "E126",
   "recorded_date": "2026-11-24",
   "evidence": "User-pasted progress and final budget receipt; no direct artifact inspection or local forward execution.",
-  "run_path": null,
-  "run_path_note": "Exact midpoint-validation output directory not supplied.",
+  "run_path": "/home/carsonc/r-elegans-results/midpoint-validation-20261124T165552Z-1120675",
+  "run_path_note": "Exact path supplied in subsequent saved-stage inspection.",
   "last_progress": {
     "network": {
       "stage": "all_targets",
@@ -37,5 +37,6 @@
     "Exact run identifier/source revision/environment and audit integrity/problems not supplied.",
     "Selected benchmark clocks, completed levels, valid raw NPZs and individual numerical/sampling/control gates not supplied.",
     "No completed parent-validation result, full stage timings, optimizer recovery, model promotion or behavior qualification."
-  ]
+  ],
+  "saved_stage_record": "experiments/records/E126-saved-stages-server-summary.json"
 }

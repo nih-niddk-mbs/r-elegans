@@ -13972,3 +13972,63 @@ Then prepare bounded stage continuation/recovery with explicit new phase records
 reuse validated completed stages, persist batches for future interruption safety
 and improve progress timing. Do not give another launch before checking active
 processes and saved evidence; no blind restart or accepted-parent claim.
+
+
+## 2026-11-24 — E126 saved stages, timing-policy correction and batch continuation (planned)
+
+User supplies exact source run midpoint-validation-20261124T165552Z-1120675,
+execution incomplete, integrity true, problems[]. Source remains untouched.
+Detailed metrics/file sizes in E126-saved-stages-server-summary.json. Both
+benchmark arms choose level0 safely and reproduce legacy response exactly.
+Network full0 and peptide full0/full1 are complete, finite/bounded, duplicate
+controls exact, no failed RMD rhythms. Peptide full-target phase-mean clock
+difference1.2513576349640343e-6 vs tolerance2.6140880788204962e-5 passes.
+Sampling fails: network coarse1.59182795e-4 vs3.38861855e-5; peptide coarse
+7.53502834e-5 vs2.61311984e-5 and fine7.48463639e-5 vs2.61408808e-5.
+Thus midpoint improves numerical reliability but4sampled cycles insufficient
+under declared stability screen. Completing another level will not erase failures.
+
+Network full1 contains starts/phases only, no response/final/metrics. Original
+E126 has no durable per-batch response checkpoints; historical132in-memory
+targets were lost at timeout. Admit checkpointing gap. Only this level needs
+replay from exact saved starts, not source benchmark or three complete levels.
+Raw file metrics0.0MiB is rounded size, not proof of empty JSON.
+
+User correction: training allowance stops optimization, never final validation/
+audit; planned stops only where continuation is possible. Recorded in AGENTS.md.
+Earlier4hTOTAL scheme superseded for future jobs unless explicit new hard total
+ceiling requested. This run has no training and continuation has no automatic
+validation wall-clock cutoff. General policy: finish/checkpoint update before
+planned optimization stop, then validation/audit finish. Cannot recover original
+unsaved in-memory work or promise exact in-kernel crash resume.
+
+New continue_midpoint_validation/launcher: copy and verify audited source stages
+into new directory, preserve source/dependency tree outside Git. Reuse completed
+levels/benchmark and saved fine initial full states. If complete raw arrays exist
+without metrics, finalize CPU-only; actual source lacks fine raw arrays. Both
+A100s split remaining34batches (17each), original16states x4targets+2shams,
+exact original midpoint clocks/model. Save per-batch means/final neural+peptide
+states, control voltage for first batch and bounds. NPZ commit uses temp file,
+flush/fsync, atomic replace, directory fsync; provenance checked, content re-read
+and hash sidecar recorded before declaring saved. Finite diagnostics preserved
+separately if nonfinite outputs fail. Resume skips verified committed batches;
+interrupted current batch/JIT may restart after unplanned failure. No optimizer
+resume claim. Atomic progress distinguishes computation/checkpointing/assembly/
+metrics/audit. Source/model/start/source-code hashes remain enforced.
+
+Launcher chooses existing continuation for source, so repeating it resumes rather
+than starts fresh; completed continuation does no forward work. Own-user active
+checks and shared CV lock before launch/resume; no broad process cancellation.
+Validation allowed to finish; automatic audit and separate execution/qualification
+receipt. Four-cycle sampling false stays false; no training or promotion.
+Prospective details/commands in E126-continuation-plan.json; server execution
+not yet evidenced.
+
+Local final verification:41 focused float64 CPU tests pass. Fixture source shows
+exactly three levels reused,34network-fine batches scheduled17perGPU, saved
+starting states unchanged and source hashes untouched. Interrupted file write
+keeps previous committed checkpoint; saved batches skip GPU launch; partial
+preparation selects same job; complete continuation starts no work. Supervisor
+passes None as validation timeout and actual private-process helper accepts it.
+Existing numeric/state/guard regressions also pass. Shell syntax, compilation and
+diff checks pass. No Mac full-network/GPU forward run.

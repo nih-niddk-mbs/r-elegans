@@ -1,5 +1,16 @@
 # r-elegans
 
+2026-11-24 E126 saved-stage inspection (user-reported): integrity passes,
+no problems. Network coarse and both peptide levels are complete and reusable;
+network fine contains saved starts/phases only. Peptide full-target timestep
+comparison passes, but all completed levels fail four-cycle sampling stability.
+A batch-checkpointed continuation is implemented/planned to finish only the missing
+network level, split between both GPUs. Validation has no inherited training-time
+cutoff; original files, solver and gates remain unchanged. Historical unsaved
+fine-level work must be replayed once. [Evidence](experiments/records/E126-saved-stages-server-summary.json),
+[continuation](experiments/records/E126-continuation-plan.json).
+
+
 2026-11-24 E126 timed out (user-reported):225m10s elapsed including final
 audit;225min execution watchdog stopped workers. Both last progress markers were
 level1 at132/135 targets. Audit completed, but execution/parent validation did not.
