@@ -13409,3 +13409,15 @@ This update changes scientific records only; running continuation and original
 forward source files remain unchanged, preserving pinned runtime hashes. No
 restart/cancellation requested by this update; leave the confirmed continuation
 running and read its final report after completion.
+
+### 2026-11-23 — Remove unused historical network rhythm assay (user-directed)
+
+User explicitly requests deleting scripts/assay_network_rhythm.py after its role
+was reviewed. Removed the standalone historical network-only RMD assay. Repository
+search found references only in historical notebook entries, with no current
+launcher/import dependency. Preserve those entries as records of what ran; recover
+the old script from Git revision05cb948 if reproducing those experiments. Current
+E123 validation/continuation and shared rhythm_qualification.py remain unchanged.
+No simulations or model parameters changed. Verification:script absent and no live
+repository references outside historical notebook; no simulation tests warranted
+for removal of this unreferenced standalone entry point.
