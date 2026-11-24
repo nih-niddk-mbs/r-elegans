@@ -1,0 +1,171 @@
+{
+  "experiment": "E124",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported server stdout from read-only status and run_cv_peptide_fit --report; no local artifact access or forward execution.",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-fit-20261124T042745Z-989175",
+  "active_jobs": [],
+  "budget_receipt": {
+    "status": "finished",
+    "exit_code": 0,
+    "timed_out": false,
+    "total_minutes": 480,
+    "elapsed_seconds": 26059.60500487103,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "development_checks_passed": false,
+    "behavior_qualified": false
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "arms": {
+      "network": [
+        {
+          "fold": 0,
+          "optimization_probes": 3,
+          "selected_candidate": true,
+          "changed_coordinates": 4893,
+          "heldout_loss": 0.9681288817523346,
+          "parent_heldout_loss": 0.974131277519138,
+          "development_checks_passed": false,
+          "model_sha256": "bc411528999e8150fa48fa622058496d682031ea3a8fbd29ba630ac0cf206ca7",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 1,
+          "optimization_probes": 4,
+          "selected_candidate": true,
+          "changed_coordinates": 9538,
+          "heldout_loss": 0.9676064781841384,
+          "parent_heldout_loss": 0.9902900036470317,
+          "development_checks_passed": true,
+          "model_sha256": "306b405350c262477277c1ce7aa70d0b208bbbf03b23a15f4f6b4585e6c5582c",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 2,
+          "optimization_probes": 5,
+          "selected_candidate": true,
+          "changed_coordinates": 5829,
+          "heldout_loss": 0.9983810240426113,
+          "parent_heldout_loss": 1.0015561574627005,
+          "development_checks_passed": false,
+          "model_sha256": "564e95922a5fee837548aa74e96fc78673d60804d46b17ab86f9b8571bdcb7fa",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 3,
+          "optimization_probes": 7,
+          "selected_candidate": true,
+          "changed_coordinates": 9538,
+          "heldout_loss": 0.9781016010972546,
+          "parent_heldout_loss": 0.9687515907509806,
+          "development_checks_passed": true,
+          "model_sha256": "437148401333ec7fea570f2efeb59508dbca86bd331925c3d9bdd1610e5496d0",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 4,
+          "optimization_probes": 11,
+          "selected_candidate": true,
+          "changed_coordinates": 5986,
+          "heldout_loss": 0.9821529276181398,
+          "parent_heldout_loss": 1.011517831589775,
+          "development_checks_passed": true,
+          "model_sha256": "470e68a0258588102c858610c40598172119deaa4d26992dd8b48b2494db19e3",
+          "peptide_balance": 0.0
+        }
+      ],
+      "peptide": [
+        {
+          "fold": 0,
+          "optimization_probes": 3,
+          "selected_candidate": true,
+          "changed_coordinates": 7261,
+          "heldout_loss": 0.9724767364709261,
+          "parent_heldout_loss": 0.9414085223607431,
+          "development_checks_passed": false,
+          "model_sha256": "cf3f3dc8d67cf7c63b06361281d9d037029e86af91bd6d5160205df5bf017030",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 1,
+          "optimization_probes": 4,
+          "selected_candidate": false,
+          "changed_coordinates": 0,
+          "heldout_loss": 0.9806707362611957,
+          "parent_heldout_loss": 0.9806707362611957,
+          "development_checks_passed": false,
+          "model_sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 2,
+          "optimization_probes": 7,
+          "selected_candidate": true,
+          "changed_coordinates": 5829,
+          "heldout_loss": 0.9728198220784434,
+          "parent_heldout_loss": 0.9706122510004527,
+          "development_checks_passed": false,
+          "model_sha256": "332094ea309f21005e19d188089e65ba1c7e82cae9c42b9ec20bd5370b86c5e2",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 3,
+          "optimization_probes": 8,
+          "selected_candidate": false,
+          "changed_coordinates": 0,
+          "heldout_loss": 0.998830571783819,
+          "parent_heldout_loss": 0.998830571783819,
+          "development_checks_passed": false,
+          "model_sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+          "peptide_balance": 0.0
+        },
+        {
+          "fold": 4,
+          "optimization_probes": 14,
+          "selected_candidate": false,
+          "changed_coordinates": 0,
+          "heldout_loss": 0.9712550168373685,
+          "parent_heldout_loss": 0.9712550168373685,
+          "development_checks_passed": false,
+          "model_sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+          "peptide_balance": 0.0
+        }
+      ]
+    },
+    "development_checks_passed": false
+  },
+  "derived": {
+    "network": {
+      "unweighted_mean_heldout_loss": 0.9788741825388957,
+      "unweighted_mean_parent_loss": 0.9892493721939252,
+      "unweighted_mean_loss_change": -0.010375189655029482,
+      "folds_improved": 4,
+      "folds_unchanged": 0,
+      "development_passes": 3,
+      "probes": 30
+    },
+    "peptide": {
+      "unweighted_mean_heldout_loss": 0.9792105766863506,
+      "unweighted_mean_parent_loss": 0.9725554196487158,
+      "unweighted_mean_loss_change": 0.006655157037634751,
+      "folds_improved": 0,
+      "folds_unchanged": 3,
+      "development_passes": 0,
+      "probes": 36
+    }
+  },
+  "unavailable": [
+    "Detailed failed gate names and measurements absent from pasted aggregate report; inspect each fold summary before diagnosing.",
+    "Full training score changes, proposal-group outcomes, numerical/control/dynamics details and current disk/GPU timings not pasted.",
+    "No300s or full-atlas third-clock qualification",
+    "No optimizer/reboot recovery test",
+    "Structured groups, not9538 independently identified parameters",
+    "No full channel-current attribution or complete sensory/body propagation assay",
+    "No body/swimming/sensory start-stop or biological qualification"
+  ],
+  "decision": "Preserve all parents/selected folds. Read saved per-fold gates and group histories next; no new training or global model promotion. Do not choose CV fold winner by held-out score."
+}

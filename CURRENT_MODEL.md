@@ -1,5 +1,16 @@
 # Current model: exact scope and computation path
 
+2026-11-24 E124 completed on mbslnx2 (user-reported):7h14m20s, within8h,
+all10 arm/fold endpoints and audit finished, no active jobs, integrity pass and no
+reported problems. Network-only held-out loss improves in4/5 folds (unweighted
+mean0.98925 to0.97887);3/5 pass development checks. Peptide held-out loss improves
+in0/5 (two worse, three parent fallbacks; mean0.97256 to0.97921);0/5 pass. Selected
+peptide balance remains0 in every fold; active peptide signaling was included but
+no changed balance survived final selection. Detailed failed numerical/dynamics
+categories are absent from this report and remain pending saved-summary inspection.
+No new training or model/behavior promotion. [Outcome](experiments/records/E124-server-summary.json).
+
+
 2026-11-23 E124 is implemented and planned for mbslnx2: an eight-hour **total**
 fivefold development fit, one network-only and one active peptide arm on the two
 A100s. Each fold starts independently from the verified pre-atlas parent. Checked

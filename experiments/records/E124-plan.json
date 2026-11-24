@@ -1,7 +1,7 @@
 {
   "experiment": "E124",
   "recorded_date": "2026-11-23",
-  "status": "planned; implemented and CPU-tested locally, no server execution evidenced",
+  "status": "Executed: user-reported all steps/audit complete within budget, integrity pass, development gates fail; detailed failures pending saved-data report.",
   "question": "Can bounded train-only grouped fitting produce useful independent animal-fold physiology initializations with active peptide signaling while completing validation and a saved-data audit within eight hours?",
   "authorization": "User requested eight-hour run and completion within its budget; ongoing H1.3 development initialization, no behavior/RL promotion.",
   "parent": {
@@ -48,5 +48,6 @@
     "readonly_status": "sh scripts/status_cv_peptide_fit_mbslnx2.sh",
     "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_peptide_fit --output-dir RUN --report"
   },
-  "local_validation": "38 focused CPU tests passed; no local long forward run or server GPU execution."
+  "local_validation": "38 focused CPU tests passed; no local long forward run or server GPU execution.",
+  "outcome_record": "experiments/records/E124-server-summary.json"
 }

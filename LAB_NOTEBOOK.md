@@ -13641,3 +13641,42 @@ Launch: cd /home/carsonc/github/r-elegans && git pull --ff-only &&
 sh scripts/launch_cv_peptide_fit_mbslnx2.sh. Read-only:
 sh scripts/status_cv_peptide_fit_mbslnx2.sh; exact per-run report command printed
 by launcher. Review complete post-run audit before continuing training.
+
+
+## 2026-11-24 — E124 fivefold paired fit finished; integrity passes, development gates fail
+
+Evidence: user-reported server stdout from read-only status/report, source run
+/home/carsonc/r-elegans-results/cv-peptide-fit-20261124T042745Z-989175. No active
+jobs. Exact compact per-fold model hashes, losses, coordinate counts and receipt
+in experiments/records/E124-server-summary.json. No local artifact access or
+new forward execution. Elapsed26059.60500487103s =7h14m19.605s, below480min.
+Exit0, no timeout, all execution/audit steps complete, integrity true, problems[].
+Development checks false; behavior false. Completion and integrity do not imply
+physiological/numerical qualification of every endpoint.
+
+All five network folds select a changed candidate (4893,9538,5829,9538,5986
+coordinates;3,4,5,7,11 probes). Four held-out losses improve, fold3 worsens.
+Network folds1,3,4 pass development criteria;0,2 fail. Unweighted fold mean
+held-out loss0.9892493721939251 ->0.9788741825388957, change-0.0103751896550294.
+A passing fold can still worsen held-out loss: these gates test controls/numerics/
+dynamics, not universal generalization. No CV fold chosen as a new global parent.
+
+Peptide folds0/2 select changed wired/channel weights (7261/5829 coordinates),
+both worsen held-out loss. Folds1/3/4 retain common parent, with0 changed
+coordinates and identical model hashf626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652.
+Probes3,4,7,8,14; all five development checks fail. Unweighted held-out mean
+0.9725554196487158 ->0.9792105766863506, change+0.0066551570376348. Selected
+peptide balance is0 everywhere. This does not mean peptide signaling was off: the
+arm includes active prior coupling/memory. Whether balance proposals were tested,
+rejected on panel loss, or lost during full-training fallback requires histories.
+Do not infer extrasynaptic biology is unnecessary from these small structured fits.
+The two arms have different parent losses; compare within-arm changes as well as
+absolute values, not a pooled headline or biological causation claim.
+
+Detailed failed gate names/values, training improvements, signal propagation,
+parameter-bound/frozen checks and controls are audited by server code but their
+individual results are not printed in supplied aggregate report. Inspect saved
+fold summaries and histories next, without new simulation/training. Missing
+300s/full-atlas third-clock, optimizer/reboot recovery, full channel-current and
+body/sensory start-stop/biological evidence remain explicit. No relaxation of
+gates, no model promotion and no new training until this detailed audit is reviewed.
