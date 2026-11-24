@@ -167,6 +167,7 @@
     "No full channel-current attribution or complete sensory/body propagation assay",
     "No body/swimming/sensory start-stop or biological qualification"
   ],
-  "decision": "Before more fitting, localize saved-array errors by target/receiver/phase and measured training support; compare phase means descriptively. Preserve original gates. If errors persist on fitted observable, evaluate finer clocks or solver/coupling changes in a separate prospective experiment.",
-  "detailed_gate_record": "experiments/records/E124-response-gates-server-summary.json"
+  "decision": "Phase averaging does not eliminate measured-pair response discrepancies. Propose targeted fixed-weight solver/outer-clock/anchor diagnostic before more fitting. Preserve all original gates and weights.",
+  "detailed_gate_record": "experiments/records/E124-response-gates-server-summary.json",
+  "response_localization_record": "experiments/records/E124-response-localization-server-summary.json"
 }

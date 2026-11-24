@@ -1,0 +1,292 @@
+{
+  "experiment": "E124-saved-response-localization",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-pasted server stdout, no local server artifacts or new forward execution.",
+  "attachment_sha256": "783f1b7153965323170f9d696a26bc1b736fe3e6ae7f3a310ef8c090df421c86",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-fit-20261124T042745Z-989175",
+  "server_report": "/home/carsonc/r-elegans-results/response-diagnosis-20261124T130637Z.json",
+  "source_unchanged_reported": true,
+  "acceptance_gates_changed": false,
+  "model_promoted": false,
+  "failed_comparisons": [
+    {
+      "arm": "network",
+      "fold": 0,
+      "grids": [
+        0,
+        1
+      ],
+      "phase_mean": 0.00016905026113120392,
+      "phasewise": 0.0006723694166145266,
+      "tolerance_ratio": 4.373139492235652,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 0.0004271881094843888,
+        "pairs": 7077,
+        "phase_mean_max_difference": 0.00016905026113120392,
+        "phasewise_max_difference": 0.0006723694166145266
+      },
+      "worst": {
+        "coarse": 0.000864128799045627,
+        "fine": 0.0015364982156601537,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDVL",
+        "target": "RIVL"
+      }
+    },
+    {
+      "arm": "network",
+      "fold": 2,
+      "grids": [
+        0,
+        1
+      ],
+      "phase_mean": 0.00014453285431623164,
+      "phasewise": 0.0005719604641843956,
+      "tolerance_ratio": 3.936506119022256,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 0.0004188957879367461,
+        "pairs": 7111,
+        "phase_mean_max_difference": 0.00014453285431623164,
+        "phasewise_max_difference": 0.0005719604641843956
+      },
+      "worst": {
+        "coarse": 0.0008800042890533266,
+        "fine": 0.0014519647532377222,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDVL",
+        "target": "RIVL"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 0,
+      "grids": [
+        0,
+        1
+      ],
+      "phase_mean": 6.459615515599926e-05,
+      "phasewise": 0.0001953709389581615,
+      "tolerance_ratio": 6.93068938552815,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 0.00013117415689758993,
+        "pairs": 7077,
+        "phase_mean_max_difference": 6.459615515599926e-05,
+        "phasewise_max_difference": 0.0001953709389581615
+      },
+      "worst": {
+        "coarse": -0.00022523056637568928,
+        "fine": -2.985962741752779e-05,
+        "in_training_objective": true,
+        "phase": 3,
+        "receiver": "RMDL",
+        "target": "RMDR"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 1,
+      "grids": [
+        0,
+        1
+      ],
+      "phase_mean": 7.395059966011641e-05,
+      "phasewise": 0.00013788861517216588,
+      "tolerance_ratio": 4.046846823636289,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 2.4280907499674154e-05,
+        "pairs": 6933,
+        "phase_mean_max_difference": 7.395059966011641e-05,
+        "phasewise_max_difference": 0.00013788861517216588
+      },
+      "worst": {
+        "coarse": -0.00014738465095542885,
+        "fine": -9.496035783262968e-06,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDL",
+        "target": "RMDR"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 1,
+      "grids": [
+        1,
+        2
+      ],
+      "phase_mean": 1.7589393211392412e-05,
+      "phasewise": 3.6904900259537854e-05,
+      "tolerance_ratio": 1.214671836670701,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 9.7726396957043e-06,
+        "pairs": 1365,
+        "phase_mean_max_difference": 1.6787170165066811e-06,
+        "phasewise_max_difference": 1.0432470645693748e-05
+      },
+      "worst": {
+        "coarse": 0.00033973099670292495,
+        "fine": 0.0003028260964433871,
+        "in_training_objective": false,
+        "phase": 1,
+        "receiver": "RMDL",
+        "target": "RMDL"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 2,
+      "grids": [
+        0,
+        1
+      ],
+      "phase_mean": 7.570467951492632e-05,
+      "phasewise": 0.00012352001277038394,
+      "tolerance_ratio": 3.7598103670443304,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 6.499081171590371e-05,
+        "pairs": 7111,
+        "phase_mean_max_difference": 7.570467951492632e-05,
+        "phasewise_max_difference": 0.00012352001277038394
+      },
+      "worst": {
+        "coarse": -4.4289777119677076e-05,
+        "fine": 7.923023565070686e-05,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDL",
+        "target": "RMDR"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 2,
+      "grids": [
+        1,
+        2
+      ],
+      "phase_mean": 3.0484151581133823e-05,
+      "phasewise": 4.982734232583663e-05,
+      "tolerance_ratio": 1.3731493859689743,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 9.547496329703753e-05,
+        "pairs": 1119,
+        "phase_mean_max_difference": 3.0484151581133823e-05,
+        "phasewise_max_difference": 4.982734232583663e-05
+      },
+      "worst": {
+        "coarse": 7.923023565070686e-05,
+        "fine": 0.0001290575779765435,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDL",
+        "target": "RMDR"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 3,
+      "grids": [
+        0,
+        1
+      ],
+      "phase_mean": 7.395059966011641e-05,
+      "phasewise": 0.00013788861517216588,
+      "tolerance_ratio": 4.046846823636289,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 4.573865391788168e-05,
+        "pairs": 7153,
+        "phase_mean_max_difference": 7.395059966011641e-05,
+        "phasewise_max_difference": 0.00013788861517216588
+      },
+      "worst": {
+        "coarse": -0.00014738465095542885,
+        "fine": -9.496035783262968e-06,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDL",
+        "target": "RMDR"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 4,
+      "grids": [
+        0,
+        1
+      ],
+      "phase_mean": 7.395059966011641e-05,
+      "phasewise": 0.00013788861517216588,
+      "tolerance_ratio": 4.046846823636289,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 2.586730370526813e-05,
+        "pairs": 6737,
+        "phase_mean_max_difference": 7.395059966011641e-05,
+        "phasewise_max_difference": 0.00013788861517216588
+      },
+      "worst": {
+        "coarse": -0.00014738465095542885,
+        "fine": -9.496035783262968e-06,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDL",
+        "target": "RMDR"
+      }
+    },
+    {
+      "arm": "peptide",
+      "fold": 4,
+      "grids": [
+        1,
+        2
+      ],
+      "phase_mean": 3.706346149537354e-05,
+      "phasewise": 6.050781755251311e-05,
+      "tolerance_ratio": 1.9903091496428746,
+      "training_observed": {
+        "available": true,
+        "fine_phase_mean_max_response": 4.800327300666374e-05,
+        "pairs": 1272,
+        "phase_mean_max_difference": 3.706346149537354e-05,
+        "phasewise_max_difference": 6.050781755251311e-05
+      },
+      "worst": {
+        "coarse": -9.496035783262968e-06,
+        "fine": 5.101178176925014e-05,
+        "in_training_objective": true,
+        "phase": 0,
+        "receiver": "RMDL",
+        "target": "RMDR"
+      }
+    }
+  ],
+  "findings": [
+    "Every printed full-target coarse/half worst pair is included in the training objective.",
+    "Network folds0/2 worst pair RIVL->RMDVL at phase0. Phase mean max differences remain0.0001690503/0.0001445329 versus finest measured phase-mean maxima0.0004271881/0.0004188958 (different maximizing pairs possible).",
+    "Peptide full-target worst pair RMDR->RMDL in every fold. Fold2 same phase response changes from-0.0000442898 to+0.0000792302 across coarse/half. This is phase-specific; not proof phase-mean response changes sign.",
+    "Peptide unchanged-parent phase-mean max difference0.0000739506 persists. Phase averaging alone does not remove discrepancy.",
+    "Peptide fold1 half/quarter worst pair RMDL->RMDL is outside downstream objective, with training-observed phase-mean difference0.0000016787; folds2/4 half/quarter worst pair remains measured RMDR->RMDL.",
+    "Fine phase-mean global maxima are normalization context, not the amplitude of the worst-error pair and not biological units directly."
+  ],
+  "interpretation": "Observed-response clock sensitivity remains. Saved arrays do not distinguish solver truncation, outer peptide coupling clock, grid-specific phase selection or long-settling state divergence. Stable unforced rhythm statistics do not establish convergence of forced calcium response.",
+  "next_proposed_experiment": {
+    "status": "proposed, not implemented or launched",
+    "method": "Small targeted forward numerical diagnostic on RIVL,RMDR,RMDL stimulation plus matched sham, four phases, unchanged relevant parent/failed endpoint. Refine neural and outer coupling clocks separately and together; compare common full-state starts against independently settled/phase-anchored starts. Retain calcium/voltage and peptide traces for implicated cells, phase means and phase-specific responses, matched no-cue trajectories and exact source/state hashes. Establish intended full-target parent convergence before another fit.",
+    "limits": "Shared-state short replay diagnoses forward-clock sensitivity but alone does not qualify grid-specific settled dynamics or a full fitting domain."
+  },
+  "unavailable": [
+    "Full server report/source evidence hashes not printed; local attachment hash is not a substitute.",
+    "Per-target phase-mean values, full time courses, common-anchor replay and finer-grid isolated-clock tests not yet available.",
+    "No new solver, causal attribution, relaxed tolerance, retraining, behavior or biological qualification."
+  ]
+}

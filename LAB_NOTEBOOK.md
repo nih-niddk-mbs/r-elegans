@@ -13733,3 +13733,43 @@ establish parent response convergence over the intended fitting domain.
 
 Correct-environment rerun:13 focused tests passed in2.09s. No server saved-array
 diagnosis executed locally; no forward simulation.
+
+
+## 2026-11-24 — E124 saved-response localization rules out phase averaging as sufficient remedy
+
+Evidence: user-pasted diagnose_cv_response_grids output after pull92c3cd0, source
+run cv-peptide-fit-20261124T042745Z-989175. New external report:
+/home/carsonc/r-elegans-results/response-diagnosis-20261124T130637Z.json.
+Source unchanged true, original gates unchanged, no forward simulation or fitting.
+Ten failing comparison rows parsed exactly into
+experiments/records/E124-response-localization-server-summary.json, with local
+attachment hash; full server report hashes were not pasted and are not invented.
+
+Network folds0/2: worst RIVL->RMDVL phase0, included in training objective.
+Phasewise differences0.0006723694/0.0005719605 reduce to phase-mean max errors
+0.0001690503/0.0001445329, still about39.6%/34.5% of measured fine phase-mean
+global response maxima0.0004271881/0.0004188958. These are maximum-over-domain
+normalizations, not pair-specific relative errors or new acceptance thresholds.
+Peptide full-target worst pair RMDR->RMDL in every fold, all measured. Fold2
+phase0 changes sign from-0.0000442898 to+0.0000792302; does not establish a
+phase-mean sign change. Unchanged peptide parent phase-mean max error0.0000739506
+persists. Phase averaging and excluding unmeasured outputs cannot explain away
+full-target failures. Peptide fold1 half/quarter worst self-response RMDL->RMDL
+is outside fitting objective, with much smaller measured phase-mean error
+0.0000016787; folds2/4 half/quarter still fail on measured RMDR->RMDL.
+
+Interpretation: real numerical/anchor sensitivity of the predicted observable is
+present, beyond a phase-specific gate versus averaged-objective distinction.
+Unforced rhythm averages can be stable while stimulus responses are sensitive.
+Cannot yet attribute to neural solver, held outer peptide conductance, independent
+phase anchoring or settled-state divergence. No evidence that extrasynaptic
+biology itself is unnecessary, no tolerance change and no model promotion.
+
+Next proposed (not implemented/launched): targeted fixed-weight RIVL/RMDR/RMDL
+stimuli and shams over four phases; separate neural-step and outer-clock
+refinement, and compare common full-state replay with independent per-clock
+settling/phase anchoring. Retain implicated voltage/calcium/indicator/peptide
+traces and exact full-state/source hashes. Diagnose using appropriate unchanged
+parent and failed endpoint, not held-out winner selection. Shared-state short
+replay alone cannot qualify independently settled long dynamics or all targets.
+Verify parent across intended fitting target domain before another long fit.

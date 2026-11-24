@@ -1,5 +1,16 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-24 E124 saved-response localization (user-reported) confirms the
+convergence problem affects measured training responses after phase averaging.
+Network worst pair:RIVL → RMDVL; peptide worst pair:RMDR → RMDL. Network phase-mean
+max discrepancies remain about35-40% of the corresponding finest measured global
+phase-mean response maxima; these maxima need not refer to the same pair. Peptide
+sensitivity also persists; one phase-specific response changes sign. Source files
+unchanged; no simulation or gate changes. Next proposed step is a small fixed-weight
+clock/anchor diagnostic before more fitting, not a new long training run.
+[Evidence](experiments/records/E124-response-localization-server-summary.json).
+
+
 2026-11-24 E124 detailed gates (user-reported): every failure is response
 convergence. All other recorded gates pass. Network folds0/2 and all peptide folds
 fail coarse/half full-target comparison; peptide folds1/2/4 also fail half/quarter
