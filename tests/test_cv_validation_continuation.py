@@ -106,3 +106,36 @@ def test_cache_checks_reject_clock_or_response_mismatch():
     with pytest.raises(ValueError,match='response arithmetic'):check_cached_grid(trace,{},row,n)
     trace['response'][0,0,0]=0.;trace['rmd']=voltage[:,:,:-1]
     with pytest.raises(ValueError,match='shape/clock'):check_cached_grid(trace,{},row,n)
+
+
+def validation_summary():
+    return dict(completed=True,checks_passed=False,e122_response_reproduction_max_difference=0.,
+        grids=[dict(level=i,finite=True,duplicate_sham_error=0.,rhythms=[dict(passed=True) for _ in range(8)]) for i in range(3)],
+        response_comparisons=[dict(passed=True),dict(passed=True)],restart=dict(passed=True),
+        long=[dict(level=i,finite=True,all_cell_voltage_bounded=True,checks=[dict(passed=True),dict(passed=True)]) for i in range(2)],
+        long_cycle_checks=[dict(passed=True),dict(passed=True)],batching=[])
+
+
+def test_report_names_failures_without_reclassifying_passing_components():
+    from copy import deepcopy
+    from scripts.report_cv_peptide_readiness import validation_failures
+    s=validation_summary()
+    s['long'][0]['checks'][0]=dict(passed=False,gates=dict(amplitude_retained=False),amplitude_retention=.7)
+    s['long_cycle_checks'][1]=dict(passed=False,period_relative_error=.02)
+    before=deepcopy(s);r=validation_failures(s)
+    assert [f['gate'] for f in r['failed']]==['300s grid0 RMDL','300s coarse/fine cycle RMDR']
+    assert r['unavailable']==[] and s==before
+    r=validation_failures(validation_summary())
+    assert not r['failed'] and r['unavailable']  # Contradictory aggregate is explicit.
+
+
+def test_validation_report_reads_existing_json_without_launching_or_writing(tmp_path,monkeypatch):
+    import subprocess
+    from scripts.report_cv_peptide_readiness import report
+    (tmp_path/'manifest.json').write_text(json.dumps(dict(experiment='E123-continuation')))
+    for arm in ('network','peptide'):
+        (tmp_path/arm).mkdir();(tmp_path/arm/'summary.json').write_text(json.dumps(validation_summary()))
+    before={str(p):p.read_bytes() for p in tmp_path.rglob('*') if p.is_file()}
+    monkeypatch.setattr(subprocess,'Popen',lambda *a,**k:pytest.fail('Reporter launched a process'))
+    report(tmp_path)
+    assert before=={str(p):p.read_bytes() for p in tmp_path.rglob('*') if p.is_file()}

@@ -1,5 +1,14 @@
 # Current model: exact scope and computation path
 
+2026-11-23 E123 continuation completed (user-reported):34.93min, no active jobs,
+all execution/audit steps finished and integrity pass. Both adjacent three-grid
+response comparisons and exact saved neural/peptide continuation checks pass.
+Overall endpoint validation fails for both arms; existing reporter omitted the
+failing component details, so their cause remains unknown pending saved-data
+inspection. No fitting or model/behavior promotion. Batch16 gave about2.73x warm
+replay throughput versus4slots; full-fitting speedup is not established.
+[Outcome](experiments/records/E123-continuation-server-summary.json).
+
 2026-11-23 E123 original validation timed out after54.1min; audit completed with
 both arms incomplete. No numerical/behavior qualification follows. A newer repeat
 was previously active; its current state is not evidenced. Guarded stage

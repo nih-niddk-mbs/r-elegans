@@ -13457,3 +13457,42 @@ and tests are unchanged. Previously recorded broader float64-suite failures rema
 unresolved; this does not declare a new full-suite pass. No forward experiments,
 model changes or new scientific/behavior qualification. Running validation's
 pinned sources remain byte-identical; outside source archives are untouched.
+
+### 2026-11-23 — E123 continuation completed; scientific endpoint checks fail
+
+User supplies status/report for cv-peptide-continuation-20261123T234553Z-979314:
+Active runs{},2096.014247064013s=34.93min,exit0,no timeout,all execution/audit steps
+finished. Source/artifact/parameter audit integrity passes,problems[]. Both arms
+completed but checks_passed=False; endpoint_checks_passed/validation_passed=False.
+No training or behavior qualification. Exact reported values/model SHAs saved in
+E123-continuation-server-summary.json. Canceled accidental repeat232806Z-977760
+has exit-15 after1064.4707986810245s with completed partial audit; expected explicit
+termination, not a new model failure. Original timeout remains recorded separately.
+
+Both adjacent response-grid comparisons pass. Network maxdifferences1.08973e-7/
+6.54923e-8; peptide1.48600e-7/5.63657e-8, each below its declared tolerance. All
+recorded fresh-process continuation field errors and RMD trace errors exactly0.
+This supports recovery of serialized neural/peptide state, not optimizer/RNG or
+machine-crash recovery. Clean audit means evidence is internally consistent; it
+does not override failed model criteria. Existing aggregate report omitted coarse
+E122 reproduction, individual grid and300s gates/long-cycle metrics. We cannot
+name the failed predicate or attribute it to dying rhythms/numerics from this
+stdout; inspect actual stored component fields before further fitting.
+
+Both GPUs benchmarked4/8/16target slots(24/40/72phase+condition streams). Warm
+replay durations network26.55/29.39/38.93s,peptide26.53/29.43/38.88s. Throughput
+about0.603/1.088/1.645target-phase trials/s per GPU:16slots about2.73x versus4.
+This duplicates existing stimuli for measurement; no broader animal/target data
+coverage. Own-state settling, source/setup, loss/optimizer, long validation and
+audits are excluded from warm replay times. Do not divide earlier full-evaluation
+or fivefold cost projections by2.73 or infer time to a good biological model.
+
+Decision:no new training, no endpoint promotion. Extend the existing read-only
+report_cv_peptide_readiness module to expose every failed existing E123 predicate,
+including actual reported metrics, rather than adding new acceptance thresholds
+or rerunning simulations. Both runtime solvers/continuation and original results
+remain unchanged. New reporter supports E122 and E123/E123-continuation explicitly;
+no automatic launch/resume/file writes. Local18focused tests pass, including
+correct failure decomposition and read-only/no-subprocess report semantics.
+Detailed server failure report not yet supplied; no cause invented. E120 and E122
+independent checkpoints remain preserved; H1.2 gates future behavior training.

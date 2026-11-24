@@ -1,7 +1,7 @@
 {
   "experiment": "E123-continuation",
   "recorded_date": "2026-11-23",
-  "status": "User reports guarded launch and verified stage reuse; running at last supplied log, final results pending",
+  "status": "User-reported execution/audit complete; both endpoint validation gates fail, exact omitted failing components pending detailed report",
   "question": "Complete interrupted fixed-model validation without rerunning verified completed stages or launching duplicate GPU jobs.",
   "source": "/home/carsonc/r-elegans-results/cv-peptide-validation-20261123T220426Z-974332",
   "command": "sh scripts/launch_cv_peptide_continuation_mbslnx2.sh",
@@ -18,5 +18,6 @@
   "seeds": "No random proposals; original fixed target panel and models.",
   "budget": "Default240min maximum total, may finish earlier; final6min reserved for audit/cleanup. Both A100s,4physicalcores per arm. Global launcher guard matches budget. New budget does not change simulation durations or numerical criteria.",
   "local_checks": "16focused CPU float64 tests passed; shell syntax, CLI compilation and read-only local process status checked. Local sandbox ps permission was unavailable; actual read-only status verified outside sandbox. No server continuation evidenced.",
-  "launch_evidence": "E123-continuation-start-server-summary.json"
+  "launch_evidence": "E123-continuation-start-server-summary.json",
+  "outcome_record": "E123-continuation-server-summary.json"
 }

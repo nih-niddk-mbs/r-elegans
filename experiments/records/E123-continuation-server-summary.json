@@ -1,0 +1,155 @@
+{
+  "experiment": "E123-continuation",
+  "recorded_date": "2026-11-23",
+  "evidence": "User-reported read-only status/report stdout; server files not directly inspected locally",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
+  "active_runs_at_report": {},
+  "budget_receipt": {
+    "total_minutes": 240,
+    "elapsed_seconds": 2096.014247064013,
+    "exit_code": 0,
+    "timed_out": false,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "validation_passed": false,
+    "training_launched": false
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "endpoint_checks_passed": false,
+    "models": {
+      "network": "769e130b3429a79c12a8b2c48194f0e47cf234896331428f902ed9e718ae1d56",
+      "peptide": "7989556a2243b699cde83bc1e1492d6c61a8766148ba32a163be2f39656a282e"
+    },
+    "training_launched": false,
+    "behavior_qualified": false
+  },
+  "arms": {
+    "network": {
+      "completed": true,
+      "checks_passed": false,
+      "response_comparisons": [
+        {
+          "maximum_difference": 1.0897258428954615e-07,
+          "tolerance": 8.907608762791618e-07,
+          "passed": true
+        },
+        {
+          "maximum_difference": 6.549228948049546e-08,
+          "tolerance": 8.881947579058135e-07,
+          "passed": true
+        }
+      ],
+      "restart": {
+        "state_errors": {
+          "voltage_mV": 0.0,
+          "gates": 0.0,
+          "calcium_uM": 0.0,
+          "indicator": 0.0,
+          "peptide": 0.0
+        },
+        "rmd_trace_error_mV": 0.0,
+        "passed": true
+      },
+      "batching": [
+        {
+          "target_slots": 4,
+          "streams": 24,
+          "first_call_seconds": 29.537679650005884,
+          "warm_seconds": 26.548750713001937,
+          "target_trials_per_second": 0.6026648927086498
+        },
+        {
+          "target_slots": 8,
+          "streams": 40,
+          "first_call_seconds": 32.33102262404282,
+          "warm_seconds": 29.392769003054127,
+          "target_trials_per_second": 1.0887031431667755
+        },
+        {
+          "target_slots": 16,
+          "streams": 72,
+          "first_call_seconds": 41.77753612701781,
+          "warm_seconds": 38.92580646905117,
+          "target_trials_per_second": 1.6441534756867435
+        }
+      ]
+    },
+    "peptide": {
+      "completed": true,
+      "checks_passed": false,
+      "response_comparisons": [
+        {
+          "maximum_difference": 1.485999617800715e-07,
+          "tolerance": 3.110693805495306e-07,
+          "passed": true
+        },
+        {
+          "maximum_difference": 5.636573618961194e-08,
+          "tolerance": 3.1111654980796035e-07,
+          "passed": true
+        }
+      ],
+      "restart": {
+        "state_errors": {
+          "voltage_mV": 0.0,
+          "gates": 0.0,
+          "calcium_uM": 0.0,
+          "indicator": 0.0,
+          "peptide": 0.0
+        },
+        "rmd_trace_error_mV": 0.0,
+        "passed": true
+      },
+      "batching": [
+        {
+          "target_slots": 4,
+          "streams": 24,
+          "first_call_seconds": 29.516692850971594,
+          "warm_seconds": 26.530194123042747,
+          "target_trials_per_second": 0.6030864277055263
+        },
+        {
+          "target_slots": 8,
+          "streams": 40,
+          "first_call_seconds": 32.35277903499082,
+          "warm_seconds": 29.42613044194877,
+          "target_trials_per_second": 1.0874688421275405
+        },
+        {
+          "target_slots": 16,
+          "streams": 72,
+          "first_call_seconds": 41.76415189693216,
+          "warm_seconds": 38.884045996004716,
+          "target_trials_per_second": 1.6459192545594643
+        }
+      ]
+    }
+  },
+  "canceled_repeat_receipt": {
+    "run": "/home/carsonc/r-elegans-results/cv-peptide-validation-20261123T232806Z-977760",
+    "elapsed_seconds": 1064.4707986810245,
+    "exit_code": -15,
+    "timed_out": false,
+    "all_steps_finished": false,
+    "audit_complete": true,
+    "validation_passed": false,
+    "training_launched": false
+  },
+  "interpretation": [
+    "Finished34.93min, no jobs active, complete clean artifact/source audit; scientific endpoint criteria failed for both arms.",
+    "Adjacent three-grid response comparisons and fresh-process neural/peptide state continuation pass. Reported continuation errors exactly0, not a claim of optimizer/reboot recovery.",
+    "Which remaining predicate failed is unavailable from received reporter output: original coarse-response reproduction, grid finite/sham/RMD,300s finite/bounds/persistence or long-cycle agreement need actual saved component fields.",
+    "Batch16 is best among tested4/8/16 slots, about2.73x warm replay target-trial throughput. Duplicated stimuli benchmark; not increased data coverage or guaranteed full-fitting speedup."
+  ],
+  "decision": "Keep both endpoint models unpromoted. Read existing detailed gate metrics before more training; no new simulation or fitting launched by result reconciliation.",
+  "limitations": [
+    "Full fivefold fitting not completed",
+    "Peptide gains fixed",
+    "No body/swimming/start-stop or biological qualification",
+    "No optimizer/machine-crash recovery test"
+  ]
+}
