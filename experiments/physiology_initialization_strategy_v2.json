@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E126 three levels complete, integrity pass, peptide all-target timestep convergence pass; four-cycle sampling fails in every completed level. Network fine response missing.",
+  "status": "E126 continuation completed execution/audit without timeout; parent-validation false. Final network convergence and detailed audit not yet supplied.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Finish E126 with verified saved-stage reuse and atomic batch continuation; validation allowed to finish beyond training budgets. Review unchanged sampling failures before more fitting.",
+  "next_action": "Read completed E126 continuation audit before more fitting. Keep known sampling failures; distinguish execution completion from numerical/sampling qualification.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

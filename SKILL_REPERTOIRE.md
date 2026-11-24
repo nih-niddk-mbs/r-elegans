@@ -1,5 +1,13 @@
 # r-elegans skill repertoire and action-space plan
 
+2026-11-24 E126 continuation completed (user-reported): execution and audit
+finished, no timeout, parent-validation false; no training or model promotion.
+Receipt elapsed68m42s excludes initial preparation/copying in current supervisor.
+Final network convergence, integrity components and cycle-sampling results await
+the detailed audit report. Preserve existing sampling failures; no further fitting
+until that report is reviewed. [Receipt](experiments/records/E126-continuation-server-receipt.json).
+
+
 2026-11-24 E126 saved-stage inspection (user-reported): integrity passes,
 no problems. Network coarse and both peptide levels are complete and reusable;
 network fine contains saved starts/phases only. Peptide full-target timestep

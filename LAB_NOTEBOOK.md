@@ -14032,3 +14032,28 @@ preparation selects same job; complete continuation starts no work. Supervisor
 passes None as validation timeout and actual private-process helper accepts it.
 Existing numeric/state/guard regressions also pass. Shell syntax, compilation and
 diff checks pass. No Mac full-network/GPU forward run.
+
+
+## 2026-11-24 — E126 continuation execution/audit finished, parent criteria false (reported)
+
+User supplies final progress plus receipt for previously identified run
+/home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532,
+source midpoint-validation-20261124T165552Z-1120675. Worker0last shown
+network/fine level1 begin128 (URADL,URXL,URXR,URYDL);worker1assigned batches
+complete after begin132 (URYDR,URYVL,URYVR). Receipt finished, exit0, no timeout,
+all_steps_finished true, audit_complete true, parent_validation_passed false,
+training_budget_minutes0, validation_allowed_to_finish true. No training or
+promotion. Exact receipt in E126-continuation-server-receipt.json.
+
+Elapsed4122.322458276991s =68m42.322s. Source review notes supervisor timer
+starts after new-run preparation/copying; this is supervised-phase elapsed, not
+complete launch-to-exit wall time. Historical total/preparation time remains
+unreported. Do not invent an end timestamp, environment or evidence hashes.
+
+Interpretation: continuation solved incomplete execution, not all scientific
+criteria. Existing source four-cycle sampling failures remain on unchanged data.
+Whether network full-target convergence now passes and exact final hash/control/
+sampling/batch-reuse details require full audit report. No inference that all
+remaining failures are solely sampling until report inspected. Next read-only
+command uses continue_midpoint_validation --output-dir exact-run --report. No
+additional fitting or experiment pending detailed post-run audit review.

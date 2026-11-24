@@ -1,7 +1,7 @@
 {
   "experiment": "E126-continuation",
   "recorded_date": "2026-11-24",
-  "status": "planned; implemented and locally verified, no server execution evidenced",
+  "status": "Executed: user-reported all steps and audit complete without timeout, parent validation false; detailed audit pending report.",
   "question": "Complete missing network fine-clock parent validation while reusing audited results and preserving restartable per-batch work.",
   "source_run": "/home/carsonc/r-elegans-results/midpoint-validation-20261124T165552Z-1120675",
   "authorization": "User asks continue from saved progress; never planned-stop where work must restart; validation finishes after training timer ends.",
@@ -20,5 +20,6 @@
     "Historical network fine135target level must be replayed because only its starts were persisted. No completed level or benchmark replay.",
     "Four-cycle sampling insufficiency needs separate future investigation; this continuation only completes original validation."
   ],
-  "local_validation": "41 focused float64 CPU tests passed: source remains unchanged, exactly three complete levels reused and only34network-fine batches scheduled,17perGPU; durable batch readback/provenance/checksum, interrupted-write preservation, saved-batch GPU skip, idempotent completed-run refusal, no validation timeout (including actual private-process helper), numerical/state and guard regressions. Shell syntax/compilation/diff checks pass. No local full-network/GPU forward run."
+  "local_validation": "41 focused float64 CPU tests passed: source remains unchanged, exactly three complete levels reused and only34network-fine batches scheduled,17perGPU; durable batch readback/provenance/checksum, interrupted-write preservation, saved-batch GPU skip, idempotent completed-run refusal, no validation timeout (including actual private-process helper), numerical/state and guard regressions. Shell syntax/compilation/diff checks pass. No local full-network/GPU forward run.",
+  "outcome_record": "experiments/records/E126-continuation-server-receipt.json"
 }

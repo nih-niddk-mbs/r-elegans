@@ -1,0 +1,44 @@
+{
+  "experiment": "E126-continuation",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported final progress and budget receipt; exact run path from earlier launcher stdout. No local forward execution or server artifact access.",
+  "run": "/home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532",
+  "source_run": "/home/carsonc/r-elegans-results/midpoint-validation-20261124T165552Z-1120675",
+  "budget_receipt": {
+    "status": "finished",
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 4122.322458276991,
+    "training_budget_minutes": 0,
+    "validation_allowed_to_finish": true,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "parent_validation_passed": false,
+    "training_launched": false,
+    "model_promoted": false
+  },
+  "last_reported_progress": {
+    "0": {
+      "stage": "computing_batch",
+      "arm": "network",
+      "level": 1,
+      "begin": 128,
+      "targets": [
+        "URADL",
+        "URXL",
+        "URXR",
+        "URYDL"
+      ]
+    },
+    "1": {
+      "stage": "assigned_batches_complete"
+    }
+  },
+  "interpretation": "Validation execution and audit now complete; no training or timeout. Parent criteria still false. Original completed levels had sampling failures, but final network response-convergence and all audit component results have not yet been supplied.",
+  "timing_limit": "Receipt elapsed4122.322s is68m42.322s for supervised phase; in current code its counter starts after fresh preparation/copying, so this is not evidence of entire launch-to-exit wall time.",
+  "decision": "Read the completed continuation audit before any fitting or further numerical/sampling experiments. Preserve original failures and all saved stages/batches.",
+  "unavailable": [
+    "Detailed final integrity/problems, full-target network convergence, per-level sampling/control results and saved/reused batch counts pending report.",
+    "No fit, accepted parent, behavior or biological qualification."
+  ]
+}
