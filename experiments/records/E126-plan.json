@@ -1,0 +1,48 @@
+{
+  "experiment": "E126",
+  "recorded_date": "2026-11-24",
+  "status": "planned; implemented, local software tests passed; no server execution",
+  "authorization": "User ok after recommendation to improve neural integration and multi-cycle phase sampling, validate parent before more fitting. No fitting authorized/launched by this protocol.",
+  "question": "Does an opt-in exponential midpoint neural step reduce fixed-state response errors, and do clean-parent responses converge over all fitting targets under multi-cycle full-state phase sampling?",
+  "parents": {
+    "benchmark": "Same pinned E125 network fold0 endpoint and unchanged peptide parent, same E124 saved states; exact hashes in E125-plan.json. No held-out winner selection.",
+    "full_target": "All folds share pre-atlas wired reference47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d; active fixed peptide prior from full parentf626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652 enabled/disabled explicitly in derived schema2 bundles. Every wired/base/config coordinate checked identical to clean parent. Fresh initialization and own-state settling per clock; stored peptide-parent start arrays not used for settling."
+  },
+  "method": {
+    "solver": "Separate midpoint_network.advance_midpoint: half-step predictor using old neural coefficients; recompute conductance/release/gap/gate/calcium/indicator coefficients at predictor; full exponential update from original state using midpoint coefficients. Old conductance_network.advance_network and all E124/E125 numerical files unchanged.",
+    "order_scope": "Second-order neural update for smooth cases; not a second-order claim for the whole coupled system. Peptide conductance is held during each outer interval and peptide memory law is unchanged, so coupling remains first order.",
+    "fixed": "All channel/synapse/topology/passive/kinetic/release/indicator parameters and peptide expression/gains/tau; no trainable coordinates or optimizer. Dense release overrides are unsupported in new solver and not used.",
+    "benchmark": "RIVL,RMDR,RMDL, two shams, four exact saved states. Legacy own-coarse reproduction, legacy common-coarse and common fine(dt0.000125s,neural0.00390625ms), midpoint common levels0/1/2. Select coarsest midpoint level0 or1 with safe duplicate/finite/bounds checks, adjacent and fine-reference responses within1e-7+0.1max_abs_reference and error smaller than legacy coarse. No held-out calcium labels used.",
+    "clocks": "level k: outer0.001/2**k seconds, neural0.03125/2**k milliseconds.",
+    "full_target": "Only if benchmark passes: separately settle each clean parent60s then record4s. Detect RMDL complete cycles; choose four evenly distributed complete cycles, four phases each =16 full neural+peptide starting states. Simulate every original E124 fitting stimulus target, batches4 plus two shams, at selected level and next finer level. Twelve-second stimulus trials,0.03nS for0.5s, indicator mean1.5-11.5s accumulated at every outer update.",
+    "sampling": "Record exact cycle/phase indices and reference RMDL voltage plus selected full states. Report deterministic leave-one-cycle-out variation; not statistical jackknife confidence interval.",
+    "artifacts": "Compact full302 response arrays and final states, sham RMD voltage traces from first batch, duplicate sham means across all batches, all-cell outer voltage bounds aggregated per batch/phase/condition. Endpoint clock/input/source/env/weight hashes external. No entire all-brain trial voltage history."
+  },
+  "acceptance": {
+    "benchmark": "Legacy own-state response reproduces E124 <=1e-10; numerical clock selection as above. If no eligible level0/1, gated all-target stage is explicitly skipped and parent_validation_passed false.",
+    "full_target": "Finite outputs/final states, outer-step voltage[-120,80]mV, duplicate means<=1e-12 and sham voltage<=1e-10; persistent sham RMD rhythms. Phase-mean full-target response coarse/fine error <=1e-7+0.1max_abs_fine. Each level leave-one-cycle-out phase-mean max change <=1e-7+0.1max_abs_full_mean.",
+    "limits": "Prospective numerical/sampling engineering screen, not retrospective change to E124 phase-specific gates. Fine legacy reference not certified continuum truth. No full-target third clock,300s body, biological or controllable behavior qualification."
+  },
+  "resources": {
+    "maximum_total_minutes": 240,
+    "execution_watchdog_minutes": 225,
+    "audit_cleanup_reserve_minutes": 15,
+    "outer": "240min including kill grace; source/data preparation and compilation included. May finish early on benchmark block. Timeout/incomplete never validates parent.",
+    "hardware": "Both A100s, one model arm per GPU, four distinct physical cores per worker, float64;16phase x6condition streams for full-target batches. No claim of optimal hardware use.",
+    "disk": "At least10GiB initial free required; compact final/control data, no deletions; full transient4s neural state recording on GPU gathered to16 selected states before host transfer."
+  },
+  "audit": "Automatic saved-data audit even on partial execution: execution/budget, original reproduction, benchmark response arithmetic and numerical selection, parent/model/input/source/checkpoint hashes, phase index reconstruction and correspondence to saved RMDL state values, full target dimensions, controls/rhythms/finite/bounds, mean-response convergence and deterministic cycle sampling arithmetic. No fitting/selection by behavioral score. Missing stages and limitations explicit.",
+  "local_validation": "35 focused CPU tests passed in float64: analytic passive leak exactness; coupled-cell analytic solution shows second-order ratios for midpoint and first-order legacy; unchanged fixed params; four-cycle phase coverage;16-phase sham trace dimensions; sampling/clock selection; read-only/duplicate/lock/timeout paths and prior peptide/state diagnostic regressions. No Mac full-network conductance or GPU forward run.",
+  "commands": {
+    "launch": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_midpoint_validation_mbslnx2.sh",
+    "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_midpoint_validation --status",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_midpoint_validation --output-dir RUN --report"
+  },
+  "unavailable": [
+    "No solver/full-target server results until actual execution.",
+    "No formal global order proof across nonsmooth channel branches; no second-order peptide coupling claim.",
+    "Four-cycle sampling is a prospective test, not proven sufficient.",
+    "No optimizer/reboot recovery or exact interrupted-stage resume.",
+    "No unique cell physiology recovery, body/start-stop/swimming or biological qualification."
+  ]
+}

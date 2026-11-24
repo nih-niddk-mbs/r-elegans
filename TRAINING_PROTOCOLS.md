@@ -1,5 +1,15 @@
 # WormGym: training and validation protocols
 
+2026-11-24 E126 planned/implemented: separate exponential midpoint neural
+update plus four-cycle/sixteen-state sampling. Legacy solver and model weights
+remain unchanged. Two-GPU fixed-weight benchmark must pass before independently
+settled clean parents are checked across all fitting targets at two clocks.
+Prospective phase-mean convergence and cycle-sampling stability gates; no fitting
+or retrospective E124 qualification. Maximum4h total including automatic audit;
+may finish early if benchmark blocks.35 focused local CPU tests pass; server
+execution not evidenced. [Protocol](experiments/records/E126-plan.json).
+
+
 2026-11-24 E125 completed (user-reported):12m38s, all18 fixed-weight cases
 and audit complete, integrity/control/reproduction checks pass, no active jobs.
 Network common-state response changes are dominated by neural-step refinement;

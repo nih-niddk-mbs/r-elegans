@@ -13878,3 +13878,68 @@ before launching another fit. This record update implements no solver or protoco
 change, starts no simulation and does not promote E124/E125 models. Missing:
 new60s/300s or all-target evidence, solver correction, optimizer recovery,
 full current attribution, body/start-stop/swimming and biological qualification.
+
+
+## 2026-11-24 — E126 opt-in midpoint integrator and multi-cycle full-target parent validation (planned)
+
+User ok authorizes recommended integration and phase-sampling work after E125.
+Prospective question/method/constants/models/clocks/criteria/commands/resource
+limits in experiments/records/E126-plan.json. No server execution or outcome
+inferred. No fitting, optimizer, held-out-score selection or body training.
+
+New midpoint_network.advance_midpoint predicts half neural step, reevaluates
+conductance/release/gap/gate/Ca/indicator coefficients and takes full exponential
+step from original state with midpoint coefficients. Separate module; historical
+advance_network, E124/E125 replay and checkpoints untouched. Smooth neural-step
+second-order consistency is supported by analytic coupled-cell tests; held outer
+peptide conductance/memory update still first order, nonsmooth channel branches
+may affect observed convergence. No claim whole coupled solver is second order.
+
+Benchmark: same pinned E125 failed network endpoint and unchanged peptide parent
+from E124, exact saved four-phase full states. Three targets and duplicate shams.
+Legacy own-coarse response reproduction <=1e-10; common legacy coarse/fine
+reference and midpoint three levels. Choose coarsest level0/1 only if safe and
+adjacent/fine-reference response differences <=1e-7+0.1max_abs_fine and better
+than legacy coarse. Reference legacy finest is not continuum truth. If blocked,
+no all-target run; explicit false parent-validation flag, audit all completed
+benchmark evidence. No new fit or automatic model promotion in either branch.
+
+If eligible, load clean pre-atlas wired reference47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d
+with active fixed peptide prior enabled/disabled. Verify all wired/base/config
+fields equal clean parent, inherit fixed peptide gains/tau/expression from
+f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652; derived schema2 copies differ in enabled flag
+only between arms. Fresh deterministic initial state/zero peptide memory and60s
+settling each clock,4s reference recording. Four evenly spread complete RMDL
+cycles, four phases each =16 full-state samples. Keep exact state arrays, phase
+indices and reference voltage for saved-data correspondence audit. Simulate all
+E124 stimulus targets in4-target batches plus two shams at chosen/next finer
+clock;12s trials,0.5s0.03nS cue,1.5-11.5s mean at every outer update. Compare
+phase-averaged responses <=1e-7+0.1max_abs_fine. Require leave-one-cycle-out
+mean variation within same-form tolerance at each clock. This deterministic
+stability screen is not a statistical CI and four cycles may prove insufficient.
+Original E124 phase-specific gate labels remain unchanged.
+
+Controls: finite final full states/responses, all-cell outer voltage bounds
+[-120,80]mV, duplicate sham mean<=1e-12 across all batches and voltage<=1e-10
+on retained first-batch controls, persistent RMD rhythms for16states. Compact
+final states/responses and sham voltages, per-batch aggregated outer voltage
+bounds rather than full brain trajectories. Exact input/source/env and artifact
+hashes retained outside Git; no deletions. Full transient4s state record remains
+on GPU until selected16states gathered. Minimum10GiB free.
+
+Both A100s, four distinct physical cores/arm, float64.240min TOTAL ceiling,
+225min private execution watchdog includes preparation/JIT/bench/validation;
+15min for automatic saved-data audit/cleanup, outer240min ceiling. Duplication
+checks and shared CV exclusive lock; status/report read-only. Incomplete/timeout
+never qualifies parent. Audit independent score/selection/control/phase/response
+arithmetic, source/model/input/weight/state hashes and unavailable evidence.
+No optimizer/reboot or exact interrupted-stage resume. No full-target third clock
+or300s dynamics, behavior/start-stop/swimming or biological qualification.
+
+Local35 focused float64 CPU tests passed (6.03s): analytic coupled-cell solution
+shows midpoint error reducing >3.5x per halving where legacy ~2x; isolated leak
+exact; fixed arrays unchanged; multi-cycle coverage;16-phase compact sham traces;
+clock/cycle stability selection and read-only/duplicate/lock/timeout behavior,
+plus existing peptide/model/state/diagnostic tests. No Mac full-network/GPU
+forward verification. Tests establish software evidence, not scientific success.
+Launch/report commands in E126-plan.json; server launch remains user action.
