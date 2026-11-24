@@ -1,0 +1,190 @@
+{
+  "experiment": "E124",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported per-fold summary inspection; empty failed-gate lists and no failed rest/window rows. No new forward execution.",
+  "run": "/home/carsonc/r-elegans-results/cv-peptide-fit-20261124T042745Z-989175",
+  "folds": [
+    {
+      "arm": "network",
+      "fold": 0,
+      "parent_training_score": 0.9933768037324058,
+      "selected_training_score": 0.9924620877344992,
+      "failed_gates": [
+        "response_convergence"
+      ],
+      "failed_response_checks": [
+        {
+          "grid": 0,
+          "maximum_difference": 0.0006723694166145266,
+          "tolerance": 0.00015374982156601537,
+          "tolerance_ratio": 4.373139492235652
+        }
+      ],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "network",
+      "fold": 1,
+      "parent_training_score": 0.9886633519673728,
+      "selected_training_score": 0.9821693606722213,
+      "failed_gates": [],
+      "failed_response_checks": [],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "network",
+      "fold": 2,
+      "parent_training_score": 0.987283473470885,
+      "selected_training_score": 0.9854692584345935,
+      "failed_gates": [
+        "response_convergence"
+      ],
+      "failed_response_checks": [
+        {
+          "grid": 0,
+          "maximum_difference": 0.0005719604641843956,
+          "tolerance": 0.00014529647532377223,
+          "tolerance_ratio": 3.936506119022256
+        }
+      ],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "network",
+      "fold": 3,
+      "parent_training_score": 0.9949101870262701,
+      "selected_training_score": 0.9900064993368803,
+      "failed_gates": [],
+      "failed_response_checks": [],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "network",
+      "fold": 4,
+      "parent_training_score": 0.9855738312342829,
+      "selected_training_score": 0.9661027737428997,
+      "failed_gates": [],
+      "failed_response_checks": [],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "peptide",
+      "fold": 0,
+      "parent_training_score": 0.9763608523108391,
+      "selected_training_score": 0.9716836079233647,
+      "failed_gates": [
+        "response_convergence"
+      ],
+      "failed_response_checks": [
+        {
+          "grid": 0,
+          "maximum_difference": 0.0001953709389581615,
+          "tolerance": 2.818925046130506e-05,
+          "tolerance_ratio": 6.93068938552815
+        }
+      ],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "peptide",
+      "fold": 1,
+      "parent_training_score": 0.980015242501494,
+      "selected_training_score": 0.980015242501494,
+      "failed_gates": [
+        "response_convergence"
+      ],
+      "failed_response_checks": [
+        {
+          "grid": 0,
+          "maximum_difference": 0.00013788861517216588,
+          "tolerance": 3.40730996702925e-05,
+          "tolerance_ratio": 4.046846823636289
+        },
+        {
+          "grid": 1,
+          "maximum_difference": 3.6904900259537854e-05,
+          "tolerance": 3.038260964433871e-05,
+          "tolerance_ratio": 1.214671836670701
+        }
+      ],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "peptide",
+      "fold": 2,
+      "parent_training_score": 0.9823320664238437,
+      "selected_training_score": 0.9811498416405292,
+      "failed_gates": [
+        "response_convergence"
+      ],
+      "failed_response_checks": [
+        {
+          "grid": 0,
+          "maximum_difference": 0.00012352001277038394,
+          "tolerance": 3.2852724130202805e-05,
+          "tolerance_ratio": 3.7598103670443304
+        },
+        {
+          "grid": 1,
+          "maximum_difference": 4.982734232583663e-05,
+          "tolerance": 3.628690573289341e-05,
+          "tolerance_ratio": 1.3731493859689743
+        }
+      ],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "peptide",
+      "fold": 3,
+      "parent_training_score": 0.981667353540496,
+      "selected_training_score": 0.981667353540496,
+      "failed_gates": [
+        "response_convergence"
+      ],
+      "failed_response_checks": [
+        {
+          "grid": 0,
+          "maximum_difference": 0.00013788861517216588,
+          "tolerance": 3.40730996702925e-05,
+          "tolerance_ratio": 4.046846823636289
+        }
+      ],
+      "other_reported_gates_passed": true
+    },
+    {
+      "arm": "peptide",
+      "fold": 4,
+      "parent_training_score": 0.9673744192063801,
+      "selected_training_score": 0.9673744192063801,
+      "failed_gates": [
+        "response_convergence"
+      ],
+      "failed_response_checks": [
+        {
+          "grid": 0,
+          "maximum_difference": 0.00013788861517216588,
+          "tolerance": 3.40730996702925e-05,
+          "tolerance_ratio": 4.046846823636289
+        },
+        {
+          "grid": 1,
+          "maximum_difference": 6.050781755251311e-05,
+          "tolerance": 3.0401215591743702e-05,
+          "tolerance_ratio": 1.9903091496428746
+        }
+      ],
+      "other_reported_gates_passed": true
+    }
+  ],
+  "findings": [
+    "All failures are response_convergence; no reported parameter, control, sustained rhythm, full-window or loss-grid failure.",
+    "Unchanged peptide parent in folds1/3/4 has identical coarse-half discrepancy; fitting did not introduce that parent failure.",
+    "Full-target coarse-half comparisons fail in7/10 folds; half-quarter16-target panel fails in3 peptide folds. Panels differ, so failing counts are not a same-domain convergence order estimate.",
+    "Local source review: objective averages four phases and uses measured downstream pairs; response gate compares each phase separately across all302receivers. Both clocks independently settle/anchor. This is a diagnostic distinction, not evidence that errors cancel or are harmless."
+  ],
+  "decision": "Before more fitting, localize saved-array errors by target/receiver/phase and measured training support; compare phase means descriptively. Preserve original gates. If errors persist on fitted observable, evaluate finer clocks or solver/coupling changes in a separate prospective experiment.",
+  "unavailable": [
+    "Saved-array error localization, phase-mean errors, shared-anchor/clock-specific attribution not yet executed on server.",
+    "No solver fix, new forward simulation or relaxed qualification."
+  ]
+}

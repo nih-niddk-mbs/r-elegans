@@ -1,5 +1,15 @@
 # Current model: exact scope and computation path
 
+2026-11-24 E124 detailed gates (user-reported): every failure is response
+convergence. All other recorded gates pass. Network folds0/2 and all peptide folds
+fail coarse/half full-target comparison; peptide folds1/2/4 also fail half/quarter
+training-panel comparison. The unchanged peptide parent fails too, so fitting is
+not the sole source. Fitting uses phase-averaged observed responses; the gate
+compares phase-specific responses across all receivers. Saved-array localization
+is next; this distinction does not excuse errors or change acceptance gates.
+[Details](experiments/records/E124-response-gates-server-summary.json).
+
+
 2026-11-24 E124 completed on mbslnx2 (user-reported):7h14m20s, within8h,
 all10 arm/fold endpoints and audit finished, no active jobs, integrity pass and no
 reported problems. Network-only held-out loss improves in4/5 folds (unweighted

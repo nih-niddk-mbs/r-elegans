@@ -159,7 +159,7 @@
     }
   },
   "unavailable": [
-    "Detailed failed gate names and measurements absent from pasted aggregate report; inspect each fold summary before diagnosing.",
+    "Detailed failed gates now supplied separately: all response_convergence; localization/cause pending saved-array diagnosis.",
     "Full training score changes, proposal-group outcomes, numerical/control/dynamics details and current disk/GPU timings not pasted.",
     "No300s or full-atlas third-clock qualification",
     "No optimizer/reboot recovery test",
@@ -167,5 +167,6 @@
     "No full channel-current attribution or complete sensory/body propagation assay",
     "No body/swimming/sensory start-stop or biological qualification"
   ],
-  "decision": "Preserve all parents/selected folds. Read saved per-fold gates and group histories next; no new training or global model promotion. Do not choose CV fold winner by held-out score."
+  "decision": "Before more fitting, localize saved-array errors by target/receiver/phase and measured training support; compare phase means descriptively. Preserve original gates. If errors persist on fitted observable, evaluate finer clocks or solver/coupling changes in a separate prospective experiment.",
+  "detailed_gate_record": "experiments/records/E124-response-gates-server-summary.json"
 }

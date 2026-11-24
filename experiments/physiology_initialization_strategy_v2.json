@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E124 fivefold paired development fitting executed, all steps/audit complete, integrity pass, development gates fail. Detailed failed gates pending.",
+  "status": "E124 complete, integrity pass; three network folds pass development checks. All failed folds fail response convergence only, including unchanged peptide parent.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Inspect saved E124 per-fold gate and training/group diagnostics before further fitting. Preserve all independent models; no held-out winner promotion.",
+  "next_action": "Before more fitting, localize saved-array errors by target/receiver/phase and measured training support; compare phase means descriptively. Preserve original gates. If errors persist on fitted observable, evaluate finer clocks or solver/coupling changes in a separate prospective experiment.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

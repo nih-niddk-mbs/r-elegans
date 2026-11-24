@@ -13680,3 +13680,56 @@ fold summaries and histories next, without new simulation/training. Missing
 300s/full-atlas third-clock, optimizer/reboot recovery, full channel-current and
 body/sensory start-stop/biological evidence remain explicit. No relaxation of
 gates, no model promotion and no new training until this detailed audit is reviewed.
+
+
+## 2026-11-24 — E124 failures isolated to response convergence (reported)
+
+User supplied detailed saved fold summaries: all failed gates are exclusively
+response_convergence; no failed full-window or sustained dynamics rows. All other
+recorded parameter/control/loss-grid/dynamics gates pass. Exact training scores
+and discrepancy/tolerance pairs in E124-response-gates-server-summary.json.
+Network coarse/half error is4.373x tolerance in fold0 and3.937x in fold2. All
+peptide folds fail coarse/half (about3.76-6.93x); folds1/2/4 also fail half/quarter
+16-target panel (about1.21/1.37/1.99x). The comparisons use different target sets;
+these ratios do not establish a convergence order. Gates remain unchanged.
+
+Peptide folds1/3/4 retained the identical parent and share the same full-target
+coarse/half maximum0.00013788861517216588 vs tolerance0.0000340730996702925.
+Therefore this parent-level numerical/observable sensitivity is not introduced
+by optimization alone. It does not establish which integrator, coupling clock or
+phase anchor is responsible; no causal solver attribution from aggregate data.
+Full-training scores improve in all five network candidates and two selected
+peptide candidates; parent fallbacks unchanged. CV improvements modest and mixed.
+
+Local source review: stable_atlas_policy.loss averages four phases then scores
+measured downstream pairs. cv_fit_core.response_check takes maximum error over
+all four separate phases, targets and all302receivers, relative to global finest
+response maximum. make_engine independently settles60s and picks phase anchors
+per clock; peptide coupling held each outer interval with memory updated afterward.
+These are possible influences, not demonstrated causes. Mean loss-grid stability
+and rhythm stability do not imply individual response convergence.
+
+Added diagnose_cv_response_grids: read saved selected coarse/half and half/quarter
+response arrays, reproduce original max discrepancies, locate worst phase/target/
+receiver and whether included in training objective, compare phase averages and
+training-observed/outside-objective subsets descriptively. Hash all read inputs
+before/after; optional new external JSON report, refusing overwrite/source-run
+output. No simulations, fitting, new acceptance flags or weight changes. Local
+synthetic tests cover cancellation without reclassification, error localization
+and invalid-grid refusal. Server execution remains planned. Next: inspect this
+saved-data report before another fit; retain parents and all original failures.
+
+Local validation note: the first combined test invocation omitted JAX_ENABLE_X64;
+12tests passed and the existing exact peptide round-trip test failed because JAX
+truncated gains to float32. This is a local invocation error, not evidence about
+server convergence (server fitting requires float64). Rerun uses the declared
+JAX_PLATFORMS=cpu JAX_ENABLE_X64=true environment.
+
+Process correction: E124 baseline preflight required safety/control/rhythm checks
+but did not gate fitting on full-target parent response convergence. Earlier E123
+response convergence was shown on four stimulation targets only. That evidence
+was insufficient to prequalify E124 expanded targets; future fitting should first
+establish parent response convergence over the intended fitting domain.
+
+Correct-environment rerun:13 focused tests passed in2.09s. No server saved-array
+diagnosis executed locally; no forward simulation.
