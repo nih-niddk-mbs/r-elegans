@@ -1,0 +1,41 @@
+{
+  "experiment": "E126",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-pasted progress and final budget receipt; no direct artifact inspection or local forward execution.",
+  "run_path": null,
+  "run_path_note": "Exact midpoint-validation output directory not supplied.",
+  "last_progress": {
+    "network": {
+      "stage": "all_targets",
+      "level": 1,
+      "targets_done": 132,
+      "targets_total": 135
+    },
+    "peptide": {
+      "stage": "all_targets",
+      "level": 1,
+      "targets_done": 132,
+      "targets_total": 135
+    }
+  },
+  "budget_receipt": {
+    "status": "finished",
+    "total_minutes": 240,
+    "elapsed_seconds": 13510.392675818992,
+    "exit_code": 124,
+    "timed_out": true,
+    "all_steps_finished": false,
+    "audit_complete": true,
+    "parent_validation_passed": false,
+    "training_launched": false,
+    "model_promoted": false
+  },
+  "interpretation": "Hit225min private execution watchdog, audit then completed. This is incomplete execution, not evidence of a passed or failed completed numerical comparison. Source progress marker remains unchanged during last batch, saving and metrics, so it cannot locate interruption precisely.",
+  "local_source_review": "Full-level response/final NPZ files are written only after all target batches. No per-batch checkpoints exist. Completed levels and benchmark can be reused after integrity review; an unsaved level requires replay. Valid complete NPZs might allow metrics/finalization without forward work, to be checked.",
+  "decision": "Inspect read-only audit, per-arm summaries, saved full-level metrics and artifact sizes before continuation. Preserve source run unchanged; never restart entire job blindly. Runtime estimate was too optimistic; continuation budget and per-batch persistence need correction before another launch.",
+  "unavailable": [
+    "Exact run identifier/source revision/environment and audit integrity/problems not supplied.",
+    "Selected benchmark clocks, completed levels, valid raw NPZs and individual numerical/sampling/control gates not supplied.",
+    "No completed parent-validation result, full stage timings, optimizer recovery, model promotion or behavior qualification."
+  ]
+}

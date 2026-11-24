@@ -13943,3 +13943,32 @@ clock/cycle stability selection and read-only/duplicate/lock/timeout behavior,
 plus existing peptide/model/state/diagnostic tests. No Mac full-network/GPU
 forward verification. Tests establish software evidence, not scientific success.
 Launch/report commands in E126-plan.json; server launch remains user action.
+
+
+## 2026-11-24 — E126 hit execution watchdog near final target batch (reported)
+
+User-pasted progress and receipt only; exact output directory/source revision
+and full audit not printed. Both arms last stage all_targets,level1,132/135.
+Final elapsed13510.392675818992s =225m10.393s (3h45m10.393s), exit124,
+timeout true.240min total budget includes225min private worker allowance and
+15min audit/cleanup reserve; cutoff was worker ceiling, not total ceiling. Audit
+completed but all_steps_finished false, parent validation false. No fitting or
+model promotion. Audit integrity/problem list and numerical/control/sampling
+results unavailable until full report read. Compact receipt recorded in
+experiments/records/E126-timeout-server-summary.json.
+
+Source review: progress set before each batch; after final132marker, it remains
+unchanged during last three-target replay, assembling arrays, NPZ compression,
+metrics and hash calculation. Repeated132does not locate bottleneck or establish
+all135responses were saved. Worker writes responses/final NPZ only at end of a
+whole level, not each batch. Thus completed levels/benchmark can be reused after
+integrity verification; an unfinished unsaved level cannot resume at last3targets.
+Complete saved raw arrays may permit CPU-only finalization if interrupted during
+metrics/hashing. Must inspect before choosing. Preserve source run unchanged.
+
+Runtime estimate was too optimistic for16states/full-target/second-order compute.
+Next: read-only full audit, summaries, completed-level metrics and artifact sizes.
+Then prepare bounded stage continuation/recovery with explicit new phase records,
+reuse validated completed stages, persist batches for future interruption safety
+and improve progress timing. Do not give another launch before checking active
+processes and saved evidence; no blind restart or accepted-parent claim.

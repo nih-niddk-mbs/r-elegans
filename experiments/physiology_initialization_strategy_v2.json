@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E125 fixed-weight clock/state diagnostic complete, integrity/reproduction/control pass. Network response discrepancy dominated by neural clock; peptide test strongly anchor-dependent. Full-domain convergence unresolved.",
+  "status": "E126 midpoint/multicycle validation reached full-target level1 in both arms but hit225min execution watchdog. Audit finished; full outcome/integrity details pending.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Launch and audit E126 midpoint/multi-cycle fixed-weight validation; no fitting until full-target clean-parent numerical and sampling checks pass. Original E124 failures preserved.",
+  "next_action": "Inspect read-only audit, per-arm summaries, saved full-level metrics and artifact sizes before continuation. Preserve source run unchanged; never restart entire job blindly. Runtime estimate was too optimistic; continuation budget and per-batch persistence need correction before another launch.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

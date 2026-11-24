@@ -1,7 +1,7 @@
 {
   "experiment": "E126",
   "recorded_date": "2026-11-24",
-  "status": "planned; implemented, local software tests passed; no server execution",
+  "status": "User-reported execution timed out at225min worker ceiling; final audit completed, all_steps_finished false, parent validation false. Saved stages/integrity require inspection.",
   "authorization": "User ok after recommendation to improve neural integration and multi-cycle phase sampling, validate parent before more fitting. No fitting authorized/launched by this protocol.",
   "question": "Does an opt-in exponential midpoint neural step reduce fixed-state response errors, and do clean-parent responses converge over all fitting targets under multi-cycle full-state phase sampling?",
   "parents": {
@@ -44,5 +44,6 @@
     "Four-cycle sampling is a prospective test, not proven sufficient.",
     "No optimizer/reboot recovery or exact interrupted-stage resume.",
     "No unique cell physiology recovery, body/start-stop/swimming or biological qualification."
-  ]
+  ],
+  "outcome_record": "experiments/records/E126-timeout-server-summary.json"
 }

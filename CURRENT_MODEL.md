@@ -1,5 +1,14 @@
 # Current model: exact scope and computation path
 
+2026-11-24 E126 timed out (user-reported):225m10s elapsed including final
+audit;225min execution watchdog stopped workers. Both last progress markers were
+level1 at132/135 targets. Audit completed, but execution/parent validation did not.
+Audit integrity and individual gate details have not been supplied. Inspect saved
+levels before continuation; original code saves complete levels, not individual
+batches. No blind full restart or model promotion. Runtime estimate was too
+optimistic. [Receipt](experiments/records/E126-timeout-server-summary.json).
+
+
 2026-11-24 E126 planned/implemented: separate exponential midpoint neural
 update plus four-cycle/sixteen-state sampling. Legacy solver and model weights
 remain unchanged. Two-GPU fixed-weight benchmark must pass before independently
