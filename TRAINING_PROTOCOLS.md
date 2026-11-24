@@ -1,5 +1,16 @@
 # WormGym: training and validation protocols
 
+2026-11-24 E125 completed (user-reported):12m38s, all18 fixed-weight cases
+and audit complete, integrity/control/reproduction checks pass, no active jobs.
+Network common-state response changes are dominated by neural-step refinement;
+outer-clock-only changes are much smaller. Peptide responses show a larger
+starting-state/anchor effect, with smaller common-state neural-step errors.
+Successive finer-clock differences shrink, but full-domain convergence remains
+unverified. No fitting or model promotion. Proposed next: improve neural integration
+and multi-cycle phase sampling, then validate full-target independently settled
+parent responses. [Evidence](experiments/records/E125-server-summary.json).
+
+
 2026-11-24 E125 is planned and implemented: fixed-weight diagnostic for the
 measured response discrepancies, with network fold0 endpoint and unchanged peptide
 parent pinned by full-model hashes. Three stimuli plus two shams, four saved phases;

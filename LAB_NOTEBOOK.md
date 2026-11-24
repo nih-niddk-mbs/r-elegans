@@ -13824,3 +13824,57 @@ and JAX_PLATFORMS=cpu. Shell syntax, compilation and diff checks pass. Added
 same-state/same-clock quarter repeat response<=1e-12 as diagnostic execution
 control. Pinned prior numerical sources remain unchanged. Server execution
 planned; launcher prints explicit read-only status/report and exact external path.
+
+
+## 2026-11-24 — E125 completed: neural-clock sensitivity and peptide anchor dependence separated
+
+Evidence: user-pasted read-only status/report, all cases complete, active jobs[].
+Exact output directory was not printed (selected latest response-clock-*/);
+run path remains explicitly unknown. Do not invent an identifier. Parsed compact
+comparisons, pair means, fixed model hashes, exact receipt and local attachment
+hash in experiments/records/E125-server-summary.json. Full artifact/source/env
+records remain server-side and their individual hashes were not pasted.
+Elapsed757.9494375539944s =12m37.949s, budget120min; exit0, no timeout.
+All18 cases (nine/arm), execution/audit complete; integrity true, problems[].
+Diagnostic execution valid: finite/bounded states and duplicate shams pass;
+coarse/half original responses reproduce exactly for all3targets in both arms;
+peptide quarter RMDL reproduces exactly. Network original quarter panel lacked
+all3targets, explicitly unavailable. Same-state/same-clock quarter repeat exact.
+Weights fixed, no selection/fitting or original gate changes.
+
+Network fixed failed endpoint: common-state neural-only phasewise error
+0.0005923527 vs outer-only0.00000031495 (~1881x); phase-mean0.0001492090 vs
+0.0000000828815 (~1800x). Coarse common/own anchor effect phase-mean
+0.0000400762, meaningful but smaller than neural-clock effect. Successive common
+joint-refinement phase-mean max differences0.0001493018,0.0001000588,
+0.0000485841. RIVL->RMDVL mean changes0.0002554524 coarse ->0.0004047542
+half ->0.0005048130 quarter ->0.0005533971 eighth. Last gap~8.78% of finest
+pair mean is a resolution diagnostic, not an error bound or qualification.
+
+Peptide unchanged parent: common-state neural-only max changes phasewise
+0.0000131018 and mean0.00000727019, outer-only0.00000016767/0.000000097421
+(~78x/~75x). Coarse common/own anchor effect0.000195867/0.000106111, about
+15x the corresponding neural-only maxima. Independent saved settled/phase states
+therefore strongly influence this response. Own-state RMDR->RMDL phase mean
+changes from-0.0000630108 coarse to+0.0000109398 half and+0.0000480033 quarter;
+common-state means remain positive4.31e-5 to4.87e-5. Joint successive mean
+max differences7.22764e-6,3.69081e-6,1.86172e-6 decrease about twofold late.
+Comparisons isolate changes in these two selected models/three stimuli, not a
+causal variance decomposition or evidence all other cells behave similarly.
+
+Local source review: advance_network documents frozen-conductance exponential
+voltage/gate/Ca update as first order; coefficients and drive use old state within
+each neural substep. Results are consistent with integration error shrinking,
+not proof of formal order, continuum truth or universal solver defect. Outer-clock
+refinement alters all outer updates, so no exclusive peptide-kinetics conclusion.
+Stable spontaneous rhythms do not establish stimulus-response convergence.
+
+Decision: numerical forward reliability remains prerequisite to further fitting.
+Propose a separate tested more accurate neural integration option, retaining
+legacy solver for reproduction, and sampling phases across multiple cycles/full
+states rather than one four-phase reference cycle. Benchmark against fine
+common-state replay, then independently settled full-target parent responses
+before launching another fit. This record update implements no solver or protocol
+change, starts no simulation and does not promote E124/E125 models. Missing:
+new60s/300s or all-target evidence, solver correction, optimizer recovery,
+full current attribution, body/start-stop/swimming and biological qualification.

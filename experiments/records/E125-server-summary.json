@@ -1,0 +1,642 @@
+{
+  "experiment": "E125",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported read-only status/report stdout; parsed locally, no direct server artifact access or local forward execution.",
+  "attachment_sha256": "2f2e734838f529635f56448010dc48f67607d3ea7d9ebc5d7fbfd1309fe27c3d",
+  "run_path": null,
+  "run_path_note": "Reporter omitted exact output directory; user selected latest response-clock-*/. Do not invent a run identifier.",
+  "active_jobs": [],
+  "budget_receipt": {
+    "status": "finished",
+    "total_minutes": 120,
+    "elapsed_seconds": 757.9494375539944,
+    "exit_code": 0,
+    "timed_out": false,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "diagnostic_execution_valid": true,
+    "training_launched": false,
+    "model_promoted": false
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "diagnostic_execution_valid": true,
+    "unavailable": [
+      "network joint-quarter original target panel contains none of the three diagnostic stimuli; no original-response reproduction for that case",
+      "No new60s settling/300s dynamics, full target domain or behavior test",
+      "No model fitting, optimizer recovery or biological qualification",
+      "Outer-only changes all outer update operations, not exclusively peptide memory",
+      "Only four cells have dense state traces; all-cell outer-voltage bounds and final full state retained"
+    ],
+    "acceptance_gates_changed": false,
+    "model_promoted": false
+  },
+  "arms": {
+    "network": {
+      "completed_cases": 9,
+      "case_checks_passed": true,
+      "original_reproduction": [
+        {
+          "clock": "coarse",
+          "available_targets": [
+            "RIVL",
+            "RMDR",
+            "RMDL"
+          ],
+          "maximum_difference": 0.0,
+          "passed": true
+        },
+        {
+          "clock": "joint-half",
+          "available_targets": [
+            "RIVL",
+            "RMDR",
+            "RMDL"
+          ],
+          "maximum_difference": 0.0,
+          "passed": true
+        },
+        {
+          "clock": "joint-quarter",
+          "available_targets": [],
+          "maximum_difference": null,
+          "passed": null
+        }
+      ],
+      "reproduction_passed": true,
+      "same_state_same_clock_error": 0.0,
+      "same_state_same_clock_passed": true,
+      "differences": [
+        {
+          "pair": [
+            "common-coarse",
+            "common-neural-half"
+          ],
+          "kind": "neural-only",
+          "phasewise_max": 0.000592352679900765,
+          "phase_mean_max": 0.00014920897580322778,
+          "per_target_phase_mean_max": [
+            0.00014920897580322778,
+            5.956336068729806e-06,
+            2.784316550707988e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-coarse",
+            "common-outer-half"
+          ],
+          "kind": "outer-only",
+          "phasewise_max": 3.149495957366355e-07,
+          "phase_mean_max": 8.288148975466036e-08,
+          "per_target_phase_mean_max": [
+            8.288148975466036e-08,
+            2.5827470800932062e-08,
+            6.964350690585874e-08
+          ]
+        },
+        {
+          "pair": [
+            "common-coarse",
+            "common-joint-half"
+          ],
+          "kind": "joint-first",
+          "phasewise_max": 0.000592706375856733,
+          "phase_mean_max": 0.00014930176072464052,
+          "per_target_phase_mean_max": [
+            0.00014930176072464052,
+            5.974191948560081e-06,
+            2.7557130378164096e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-half",
+            "common-joint-quarter"
+          ],
+          "kind": "joint-second",
+          "phasewise_max": 0.0003979135246311438,
+          "phase_mean_max": 0.00010005879226027137,
+          "per_target_phase_mean_max": [
+            0.00010005879226027137,
+            3.3023625377326393e-06,
+            1.4130195802597445e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-quarter",
+            "common-joint-eighth"
+          ],
+          "kind": "joint-third",
+          "phasewise_max": 0.00019315849432255394,
+          "phase_mean_max": 4.858414021477464e-05,
+          "per_target_phase_mean_max": [
+            4.858414021477464e-05,
+            1.6676979358309918e-06,
+            7.103629504900955e-07
+          ]
+        },
+        {
+          "pair": [
+            "common-coarse",
+            "own-coarse"
+          ],
+          "kind": "anchor-effect",
+          "phasewise_max": 0.00016124679314888368,
+          "phase_mean_max": 4.0076151974460794e-05,
+          "per_target_phase_mean_max": [
+            4.0076151974460794e-05,
+            5.743979911820851e-06,
+            5.850108503513418e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-half",
+            "own-joint-half"
+          ],
+          "kind": "anchor-effect",
+          "phasewise_max": 8.158375239109006e-05,
+          "phase_mean_max": 2.0327651567897398e-05,
+          "per_target_phase_mean_max": [
+            2.0327651567897398e-05,
+            4.313922141369053e-06,
+            2.2048623908588194e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-quarter",
+            "own-joint-quarter"
+          ],
+          "kind": "anchor-effect",
+          "phasewise_max": 0.0,
+          "phase_mean_max": 0.0,
+          "per_target_phase_mean_max": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "model_sha256": "bc411528999e8150fa48fa622058496d682031ea3a8fbd29ba630ac0cf206ca7",
+      "implicated_pair_means": [
+        {
+          "case": "common-coarse",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.00025545243878163926
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.00042747525188477353
+            }
+          ]
+        },
+        {
+          "case": "common-neural-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.00040466141458486704
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.00042436745047388924
+            }
+          ]
+        },
+        {
+          "case": "common-outer-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.0002555353202713939
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.00042750107935557446
+            }
+          ]
+        },
+        {
+          "case": "common-joint-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.0004047541995062798
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.00042439181662190517
+            }
+          ]
+        },
+        {
+          "case": "common-joint-quarter",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.0005048129917665511
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.0004228506540816801
+            }
+          ]
+        },
+        {
+          "case": "common-joint-eighth",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.0005533971319813258
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.00042213481523184493
+            }
+          ]
+        },
+        {
+          "case": "own-coarse",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.00021537628680717846
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.0004332192317965944
+            }
+          ]
+        },
+        {
+          "case": "own-joint-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.0003844265479383824
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.0004271881094843888
+            }
+          ]
+        },
+        {
+          "case": "own-joint-quarter",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": 0.0005048129917665511
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 0.0004228506540816801
+            }
+          ]
+        }
+      ],
+      "derived_neural_over_outer_change_ratios": {
+        "phasewise": 1880.7856492570234,
+        "phase_mean": 1800.2689894318396
+      }
+    },
+    "peptide": {
+      "completed_cases": 9,
+      "case_checks_passed": true,
+      "original_reproduction": [
+        {
+          "clock": "coarse",
+          "available_targets": [
+            "RIVL",
+            "RMDR",
+            "RMDL"
+          ],
+          "maximum_difference": 0.0,
+          "passed": true
+        },
+        {
+          "clock": "joint-half",
+          "available_targets": [
+            "RIVL",
+            "RMDR",
+            "RMDL"
+          ],
+          "maximum_difference": 0.0,
+          "passed": true
+        },
+        {
+          "clock": "joint-quarter",
+          "available_targets": [
+            "RMDL"
+          ],
+          "maximum_difference": 0.0,
+          "passed": true
+        }
+      ],
+      "reproduction_passed": true,
+      "same_state_same_clock_error": 0.0,
+      "same_state_same_clock_passed": true,
+      "differences": [
+        {
+          "pair": [
+            "common-coarse",
+            "common-neural-half"
+          ],
+          "kind": "neural-only",
+          "phasewise_max": 1.3101796430547985e-05,
+          "phase_mean_max": 7.270192465019809e-06,
+          "per_target_phase_mean_max": [
+            1.843618502306299e-07,
+            4.655336552111811e-06,
+            7.270192465019809e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-coarse",
+            "common-outer-half"
+          ],
+          "kind": "outer-only",
+          "phasewise_max": 1.6767004706874644e-07,
+          "phase_mean_max": 9.742103102006183e-08,
+          "per_target_phase_mean_max": [
+            7.859573658564045e-09,
+            9.742103102006183e-08,
+            3.105074863896107e-08
+          ]
+        },
+        {
+          "pair": [
+            "common-coarse",
+            "common-joint-half"
+          ],
+          "kind": "joint-first",
+          "phasewise_max": 1.2940276454709299e-05,
+          "phase_mean_max": 7.227641385804118e-06,
+          "per_target_phase_mean_max": [
+            1.762103850611041e-07,
+            4.63391304136862e-06,
+            7.227641385804118e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-half",
+            "common-joint-quarter"
+          ],
+          "kind": "joint-second",
+          "phasewise_max": 6.685644983739358e-06,
+          "phase_mean_max": 3.6908123408896376e-06,
+          "per_target_phase_mean_max": [
+            8.30150111985617e-08,
+            2.489587024340212e-06,
+            3.6908123408896376e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-quarter",
+            "common-joint-eighth"
+          ],
+          "kind": "joint-third",
+          "phasewise_max": 3.3837520510004993e-06,
+          "phase_mean_max": 1.8617235284512645e-06,
+          "per_target_phase_mean_max": [
+            4.086926694291115e-08,
+            1.2846664093624227e-06,
+            1.8617235284512645e-06
+          ]
+        },
+        {
+          "pair": [
+            "common-coarse",
+            "own-coarse"
+          ],
+          "kind": "anchor-effect",
+          "phasewise_max": 0.00019586716116681835,
+          "phase_mean_max": 0.00010611075526678615,
+          "per_target_phase_mean_max": [
+            7.091124585911768e-06,
+            0.00010611075526678615,
+            2.196383345759445e-05
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-half",
+            "own-joint-half"
+          ],
+          "kind": "anchor-effect",
+          "phasewise_max": 5.970548827416433e-05,
+          "phase_mean_max": 3.5526644898253856e-05,
+          "per_target_phase_mean_max": [
+            1.6735735707262833e-06,
+            3.5526644898253856e-05,
+            1.3898580870502775e-05
+          ]
+        },
+        {
+          "pair": [
+            "common-joint-quarter",
+            "own-joint-quarter"
+          ],
+          "kind": "anchor-effect",
+          "phasewise_max": 0.0,
+          "phase_mean_max": 0.0,
+          "per_target_phase_mean_max": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "model_sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+      "implicated_pair_means": [
+        {
+          "case": "common-coarse",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.9904012257487835e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 4.3099967117959936e-05
+            }
+          ]
+        },
+        {
+          "case": "common-neural-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.9904796796477164e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 4.656139476622023e-05
+            }
+          ]
+        },
+        {
+          "case": "common-outer-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.9910318750732126e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 4.3002546086939875e-05
+            }
+          ]
+        },
+        {
+          "case": "common-joint-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.9911110421544365e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 4.6466456409544055e-05
+            }
+          ]
+        },
+        {
+          "case": "common-joint-quarter",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.991470739012846e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 4.800327300666374e-05
+            }
+          ]
+        },
+        {
+          "case": "common-joint-eighth",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.9916532593700076e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 4.873779138891976e-05
+            }
+          ]
+        },
+        {
+          "case": "own-coarse",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -2.0176915587893918e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": -6.301078814882621e-05
+            }
+          ]
+        },
+        {
+          "case": "own-joint-half",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.9981894181703153e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 1.0939811511290198e-05
+            }
+          ]
+        },
+        {
+          "case": "own-joint-quarter",
+          "pairs": [
+            {
+              "target": "RIVL",
+              "receiver": "RMDVL",
+              "phase_mean": -1.991470739012846e-05
+            },
+            {
+              "target": "RMDR",
+              "receiver": "RMDL",
+              "phase_mean": 4.800327300666374e-05
+            }
+          ]
+        }
+      ],
+      "derived_neural_over_outer_change_ratios": {
+        "phasewise": 78.14035159885245,
+        "phase_mean": 74.62651943729341
+      }
+    }
+  },
+  "findings": [
+    "Both nine-case arms complete, all case controls/finite/bounds pass, integrity pass with no problems. Exact original coarse/half reproduction; exact repeated common/own quarter case.",
+    "Network common-state neural-only refinement changes responses about1881x more than outer-only phasewise,1800x phase-mean. Starting-state effect is material but smaller than neural-step effect in this test.",
+    "Peptide common-state neural-only changes about78x more than outer-only phasewise,75x phase-mean. Coarse anchor effect is about15x common-state neural-only, so independent settled/phase state is a dominant contributor for this selected model/test. Ratios compare separate maxima, not a causal variance decomposition.",
+    "Successive common-state joint phase-mean differences network:0.0001493018,0.0001000588,0.0000485841; peptide:0.00000722764,0.00000369081,0.00000186172. Shrinking differences support convergence tendency, not proof finest level meets full-domain tolerance.",
+    "Network RIVL->RMDVL common-state phase mean grows0.0002554524 to0.0005533971 from coarse to eighth; quarter->eighth difference is about8.78% of finest value, not an error bound.",
+    "Peptide RMDR->RMDL own-state mean changes sign from-0.0000630108 coarse to+0.0000109398 half to+0.0000480033 quarter. Common-state means stay positive across tested clocks; anchor dependence matters."
+  ],
+  "local_source_review": "conductance_network.advance_network explicitly implements a frozen-conductance exponential voltage/gate/calcium/indicator step of first order. This is consistent with observed shrinking errors, but no formal order estimate or unique cause is established.",
+  "decision": "No more parameter fitting yet. Propose a separately tested more accurate neural update and a multi-cycle full-state phase-sampling policy; benchmark against fine fixed-state reference and then independently settled full-target parent responses before fitting. Preserve existing source/weights and all historical failed gates. No new solver implemented by this evidence update.",
+  "unavailable": [
+    "network joint-quarter original target panel contains none of the three diagnostic stimuli; no original-response reproduction for that case",
+    "No new60s settling/300s dynamics, full target domain or behavior test",
+    "No model fitting, optimizer recovery or biological qualification",
+    "Outer-only changes all outer update operations, not exclusively peptide memory",
+    "Only four cells have dense state traces; all-cell outer-voltage bounds and final full state retained",
+    "Exact E125 run path, full artifact/source hashes, environment/source revision and per-case wall times not printed in report; full records remain external.",
+    "No verified continuum limit or full-domain response convergence; no new solver/phase-sampling implementation yet."
+  ]
+}

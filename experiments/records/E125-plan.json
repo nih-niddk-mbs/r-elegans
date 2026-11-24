@@ -1,7 +1,7 @@
 {
   "experiment": "E125",
   "recorded_date": "2026-11-24",
-  "status": "planned; implemented and locally software-verified, no server execution evidenced",
+  "status": "Executed: user-reported all18 cases/audit complete in757.95s; integrity and diagnostic execution valid; no fitting or model promotion.",
   "question": "Are E124 response discrepancies dominated by neural integration clock, outer update clock, or different independently generated full-state phase anchors?",
   "authorization": "User Fine following proposed small fixed-weight numerical diagnostic; no fitting or model promotion.",
   "parents": {
@@ -93,5 +93,6 @@
     "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_response_clock_diagnostic --status",
     "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_response_clock_diagnostic --output-dir RUN --report"
   },
-  "local_validation": "35 focused CPU tests passed in float64, including independent toy-update oracle and source/model/state preparation. Shell syntax, Python compilation and diff checks pass. No Mac conductance/GPU forward run."
+  "local_validation": "35 focused CPU tests passed in float64, including independent toy-update oracle and source/model/state preparation. Shell syntax, Python compilation and diff checks pass. No Mac conductance/GPU forward run.",
+  "outcome_record": "experiments/records/E125-server-summary.json"
 }

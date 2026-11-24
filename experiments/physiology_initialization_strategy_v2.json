@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E124 completed/audited; response localization executed on saved arrays, with material timestep sensitivity on measured RIVL->RMDVL and RMDR->RMDL responses. Phase averaging insufficient.",
+  "status": "E125 fixed-weight clock/state diagnostic complete, integrity/reproduction/control pass. Network response discrepancy dominated by neural clock; peptide test strongly anchor-dependent. Full-domain convergence unresolved.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Launch and audit E125 fixed-weight clock/state diagnostic (E125-plan.json) before more fitting. No original gate reclassification.",
+  "next_action": "No more parameter fitting yet. Propose a separately tested more accurate neural update and a multi-cycle full-state phase-sampling policy; benchmark against fine fixed-state reference and then independently settled full-target parent responses before fitting. Preserve existing source/weights and all historical failed gates. No new solver implemented by this evidence update.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",
@@ -102,7 +102,8 @@
       "experiments/records/E122-server-summary.json",
       "experiments/records/E123-continuation-server-summary.json",
       "experiments/records/E123-saved-cycle-analysis-server-summary.json",
-      "experiments/records/E124-server-summary.json"
+      "experiments/records/E124-server-summary.json",
+      "experiments/records/E125-server-summary.json"
     ],
     "scope": "87eligibleWTanimals; fold0 uses69train/18heldout, four stimulation targets, full302forward, four tied channel/wired group moves in each arm. Active peptide state and fixed priors in one arm; peptide gains not fitted. Not9538 independently recovered parameters.",
     "numerics": "Short response three-grid and state continuation pass. Original last-five-cycle long-clock gates fail; subsequent full-late/50s descriptive averages agree closely. Original failures preserved; no retrospective model promotion."
