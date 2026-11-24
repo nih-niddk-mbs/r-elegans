@@ -1,0 +1,52 @@
+{
+  "experiment": "E124",
+  "recorded_date": "2026-11-23",
+  "status": "planned; implemented and CPU-tested locally, no server execution evidenced",
+  "question": "Can bounded train-only grouped fitting produce useful independent animal-fold physiology initializations with active peptide signaling while completing validation and a saved-data audit within eight hours?",
+  "authorization": "User requested eight-hour run and completion within its budget; ongoing H1.3 development initialization, no behavior/RL promotion.",
+  "parent": {
+    "path": "r_elegans/assets/mac_rhythm_v1_polarized/network.npz",
+    "sha256": "47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d",
+    "policy": "Every fold and arm starts from this same pre-atlas parent, zero new offsets and default peptide balance. Never E120/E122 trained weights or a previous fold. Inherited rhythm/physiology engineering priors remain."
+  },
+  "data": {
+    "inventory_required": [
+      110,
+      87,
+      650
+    ],
+    "meaning": "Verified unique WT files, usable animals, accepted trials; mismatch refuses fitting. Five animal folds seed1210; training-panel seeds1240 through1244. All87 animals held out exactly once. Historically inspected development data, not a pristine test.",
+    "selection": "16 eligible training targets per fold selected without held-out labels. Probes use training panel; final candidate/parent comparison uses full training statistics at finer clock. Held-out scores are reported only after selection. All observed stimulus targets simulated at two clocks; per-animal held-out scores report missing support explicitly."
+  },
+  "method": {
+    "optimizer": "Up to20 central +/- .01 checked coordinate-group probes per fold, rotating four wired/channel directions and one peptide balance direction in peptide arm. Actual safe training-loss descent plus prior required; no blind high-dimensional SPSA or gradient claim. Final finer-clock full-training descent or retain parent.",
+    "trainable": [
+      "Non-RMD non-LEAK channel scale coordinates grouped inward/outward",
+      "3709 chemical coordinates grouped together",
+      "1093 gap-pair coordinates grouped together",
+      "Peptide arm only: shared excitation/inhibition balance, inverse changes to positive gains"
+    ],
+    "bounds": "All9538 wired/channel coordinates and peptide balance within +/-0.1 of common origin; group movement does not independently identify9538 parameters.",
+    "fixed": "Topology, RMD/LEAK profiles, base conductance templates, passive constants, kinetics, calcium/indicator/release law, initial-state rules; water/body absent. Peptide expression asset, shared5s filter and overall reference gain fixed.",
+    "extrasynaptic": "Active during settling, all own-state phase anchors, trial replay and sustained checks; selected schema2 model embeds asset, fitted gains, full neural and peptide state. Expression-defined coupling, no spatial diffusion or monoamine model."
+  },
+  "resources": {
+    "hardware": "One persistent arm per A100, four distinct physical CPU cores each; six raw-preparation CPU workers. Float64, batch16 stimulation targets plus two sham slots, four phases.",
+    "basis": "E123 batch16 measured about2.73x warmed replay throughput versus4; not a whole-fit speedup claim or proof of global hardware optimum.",
+    "budget": "480min TOTAL. Private worker group watchdog455min includes source capture and data preparation; workers target450min. Measured costs reserve endpoint checks before optional probes, maximum90min search per fold. Final25min reserved for audit/cleanup; outer480min watchdog. Slowdowns/failures explicitly incomplete, never qualified.",
+    "storage": "Compact responses, sham RMD traces, endpoint states, weights, coordinates, group history, source/environment and hashes outside Git. No full-brain trial voltage history. Requires5GiB initial free, stops optional probes below3GiB; does not delete results."
+  },
+  "prospective_criteria": {
+    "version": "E124-initialization-v1",
+    "short": "Duplicate no-stimulus controls; finite state; endpoint and sampled RMD voltage [-120,80]mV; RMD persistent rhythms. All-target response coarse/half and16-target train-panel half/quarter error <=1e-7+0.1*max_abs_fine. Full training loss clock difference <=0.02.",
+    "sustained": "New prospective60s uncued continuation after own60s initialization at half/quarter clocks. RMD rhythms/bounds and full30-60s plus30-40/40-50/50-60s windows: period difference<1%, mean-cycle amplitude<2%, aligned mean waveform RMSE<0.5mV.",
+    "limits": "Does not reclassify original E123300s last-five-cycle failures. No full-atlas third-clock or new300s validation. No body, swimming, sensory start/stop or biological qualification.",
+    "audit": "Execution/budget, every completed proposal score and train-only selection, full-training fallback, coordinates/bounds/frozen fields, complete peptide checkpoint state/gains, held-out/per-animal arithmetic, numerical/control/rest gates, source/input/artifact hashes. Missing evidence explicit. Signal records are downstream calcium responses, control RMD voltage and peptide endpoint conductance; no full channel-current attribution. No optimizer/reboot recovery claim."
+  },
+  "commands": {
+    "launch": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_cv_peptide_fit_mbslnx2.sh",
+    "readonly_status": "sh scripts/status_cv_peptide_fit_mbslnx2.sh",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_peptide_fit --output-dir RUN --report"
+  },
+  "local_validation": "38 focused CPU tests passed; no local long forward run or server GPU execution."
+}

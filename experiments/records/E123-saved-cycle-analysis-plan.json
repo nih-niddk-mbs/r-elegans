@@ -1,6 +1,6 @@
 {
   "recorded_date": "2026-11-23",
-  "status": "saved-trace analysis implemented locally; server execution planned, not evidenced",
+  "status": "Server analysis completed according to user stdout; long-window descriptive agreement close, original failed gates unchanged",
   "question": "Do late-cycle discrepancies persist when aggregating all late cycles and50s subwindows, or are they sensitive to cycle selection/modulation?",
   "source_run": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
   "command": "python -m scripts.analyze_convergence_cycles --run /home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
@@ -13,5 +13,6 @@
     "Descriptive two-clock analysis cannot prove numerical convergence or isolate cause.",
     "Third long clock/independent solver or matched-state sensitivity tests may still be needed.",
     "No whole-animal behavior or uniquely recovered physiology."
-  ]
+  ],
+  "outcome_record": "E123-saved-cycle-analysis-server-summary.json"
 }

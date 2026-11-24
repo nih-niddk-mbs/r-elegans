@@ -1,5 +1,27 @@
 # WormGym: training and validation protocols
 
+2026-11-23 E124 is implemented and planned for mbslnx2: an eight-hour **total**
+fivefold development fit, one network-only and one active peptide arm on the two
+A100s. Each fold starts independently from the verified pre-atlas parent. Checked
+training-only group probes fit unknown channel/wired scales and a bounded shared
+peptide balance; held-out animal scores do not select updates. Measured timing
+reserves validation before further probes, with a private-group watchdog and
+post-run audit. Status/report commands never launch work and active jobs/shared
+locks refuse duplicate launch. Local verification:38 focused CPU tests; no server
+execution evidenced. Prospective60s whole/subwindow stability checks do not
+reclassify E123300s failures. This is physiology initialization, with no body or
+sensory start/stop qualification. [Protocol](experiments/records/E124-plan.json).
+
+
+2026-11-23 E123 saved-trace analysis completed(user-reported):full150-300s
+period differences across grids are0.084-0.094%,mean amplitude0.104-0.141%,mean
+waveformRMSE0.011-0.016mV. Three50s subwindows also agree closely(max0.097%period,
+0.289%amplitude,0.034mVwaveform). This supports short-window variability as an
+important influence on last-five-cycle failures; it does not prove convergence or
+retroactively pass original gates. No model promoted or training launched. Next
+fitting design should declare full-window monitoring prospectively and validate
+changed candidates at finer resolution. [Evidence](experiments/records/E123-saved-cycle-analysis-server-summary.json).
+
 2026-11-23 E123 detailed failures identified:both models retain bounded sustained
 RMD voltage rhythms over300s. Failed gates concern coarse/fine last-five-cycle
 agreement. Network RMDL amplitude differs2.20%(limit2%); other network checks pass.

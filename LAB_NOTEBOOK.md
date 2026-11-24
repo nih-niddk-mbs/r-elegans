@@ -13539,3 +13539,105 @@ new E123 full-trace analysis and guarded validation/continuation reporting). Tes
 preserve original failed gates/source bytes, reject changed trace hashes, and
 keep descriptive comparisons free of invented acceptance flags. No full Mac or
 server forward simulation; no new biological or numerical qualification.
+
+### 2026-11-23 — E123 full-window analysis: close statistical agreement across grids
+
+User supplies successful saved-trace analyzer output. New external report/figure
+paths and exact printed statistics recorded in E123-saved-cycle-analysis-server-
+summary.json. Artifact timestamp20261124T035317Z is UTC; notebook date uses client's
+America/New_York2026-11-23. No direct local opening of server JSON/PNG; no figure
+interpretation invented. Analyzer executed source before/after hash checks and
+printed completion; exact evidence hashes not pasted. No forward simulation or
+fitting; original source unchanged and failed gates retained.
+
+Across150-300s:network RMDL/RMDR mean-period relative differences0.093376%/0.094325%,
+mean amplitudes0.114022%/0.104222%,mean waveformRMSE0.012071/0.010929mV. Peptide:
+period0.084262%/0.090739%,amplitude0.140615%/0.134899%,shape0.016346/0.012171mV.
+All three50s windows agree closely too:overall maxima0.096815%period,0.288022%
+amplitude and0.033972mVwaveform. Both clocks contain hundreds of late peaks per
+cell(roughly662-697), with individual-cycle periodCV around1.72-2.29%. Mean timing
+is much more stable than the original last-five-cycle samples. These are neural
+RMD voltage measurements, not body-bend frequency or swimming evidence.
+
+Interpretation:large reduction of discrepancies when aggregating many cycles
+strongly supports phase/modulation and short-window selection sensitivity as an
+important influence on original long-cycle failures. It is not proof that numerical
+error is zero or that those influences uniquely caused each failure. Independent
+grid-specific full-state anchors and deterministic phase accumulation still matter.
+Two-grid agreement of averages is not continuum/pointwise convergence, true cell
+physiology or behavior qualification. Do not relabel the original1%/2%/0.5mV
+five-cycle failures as passes; analysis has acceptance_gates_changed=False and
+model_promoted=False. New prospective criteria are a separate protocol decision.
+
+Decision:enough descriptive evidence to progress toward bounded exploratory
+physiology fitting, using batch16for measured replay throughput and prospectively
+declared full-window/subwindow monitoring while preserving boundedness, persistence,
+short-response convergence, frozen-field/control/source checks and finer-resolution
+candidate validation. No new fitting launched in this documentation update. Full
+fivefold/all-animal long fitter, rotating unknown parameter groups and peptide gain
+learning remain pending. H1.3 strategy status now reflects executed E121-E123 rather
+than stale plan-only labels; E120remains network-only, E122adds active fixed-prior
+peptide signaling in one-fold pilot. No unique9538parameter recovery claimed.
+
+
+## 2026-11-23 — E124 eight-hour total independent-fold initialization fit (planned)
+
+User requests an eight-hour run and that it finishes. Prior E123 saved-cycle
+analysis supports stable long-window averages but leaves original last-five-cycle
+failures unchanged. Question: can checked training-only grouped descent improve
+initialization across independent animal folds, including an active constrained
+extrasynaptic arm, without exhausting final validation/audit time? Full prospective
+method, constants, unknown groups, seeds, parent hash, acceptance criteria and
+commands are recorded in experiments/records/E124-plan.json. Server execution is
+planned, not evidenced. No run identifier or successful outcome is inferred.
+
+Implementation: new run_cv_peptide_fit/cv_fit_core, dedicated launch and read-only
+status scripts. Common verified pre-atlas parent47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d;
+all five folds restart independently, never another fold/E120/E122 trained weights.
+Strict verified110/87/650 inventory; five animal folds seed1210, training-panel
+seeds1240-1244. Six CPU preparation workers, one persistent float64 A100 worker
+per arm, four physical cores per arm, batch16 plus two sham slots and four phases.
+Training panel selection/updates exclude held-out labels. Full-training fine-clock
+loss chooses endpoint versus parent; held-out and per-animal scores follow. Four
+tied unknown wired/channel directions cover9538 coordinates, not9538 identified
+parameters. Peptide arm additionally fits one shared bounded gain-balance direction;
+asset, total reference gain and5s memory prior fixed. Full model embeds active
+coupling, gain arrays and complete neural/peptide phase state.
+
+Budget:480min includes preparation/fitting/validation/audit/cleanup. Preparation
+and workers run within a private455min watchdog; workers aim for450min. Measured
+anchor/batch costs reserve full endpoint work before admitting +/- proposals;
+up to20 group probes and90min search cap per fold. Reuse compiled replay/rest
+kernels across folds. Final25min reserved for saved-data audit; outer480min
+watchdog. Finishes earlier when work/probes complete. Hard ceiling bounds runtime;
+resource faults or unexpectedly slow stages may still yield an explicit incomplete
+report rather than completed scientific validation. Cannot guarantee scientific
+success or completion of every stage under arbitrary machine failure. Duplicate
+active process check plus shared exclusive legacy validation lock prevent restart
+confusion. Status and report paths are read-only.
+
+Prospective E124 numerical protocol: all observed stimulus targets at two clocks,
+third clock on each16-target training panel;60s uncued sustained checks at half/quarter
+clocks after independent60s settling. Compare all cycles in30-60s plus three10s
+windows using1%period/2%mean amplitude/0.5mV aligned waveform limits. This is a new
+initialization screen, not retroactive E123 qualification or replacement evidence
+for300s/all-target third-clock behavior. Full saved-data audit covers execution,
+selection, bounds/frozen constants, peptide checkpoint state/gains, downstream
+response/RMD/control arithmetic, per-animal scores, numerical gates, all input/
+source/artifact hashes. Full channel-current attribution, whole-body propagation,
+optimizer/crash recovery and biological/behavior evidence explicitly unavailable.
+No behavior/RL promotion; H1.2 sensory start/stop prerequisite remains.
+
+Storage: compact responses/control traces and endpoint states; all proposal and
+selected weights, optimizer/group history, RNG/panel records, source/environment
+and dependencies external. No full-brain trial-voltage archive. Initial5GiB free
+check and3GiB optional-probe reserve; no deletions. Local38 focused CPU tests pass
+(leakage, selection, parameter groups, prospective window metrics, peptide model
+round trip, audited timeout, read-only paths, duplicate and lock refusal, existing
+validation/replay/data-audit regressions). Tests validate software; no long Mac
+forward simulation or server GPU fitting performed.
+
+Launch: cd /home/carsonc/github/r-elegans && git pull --ff-only &&
+sh scripts/launch_cv_peptide_fit_mbslnx2.sh. Read-only:
+sh scripts/status_cv_peptide_fit_mbslnx2.sh; exact per-run report command printed
+by launcher. Review complete post-run audit before continuing training.

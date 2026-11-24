@@ -1,0 +1,394 @@
+{
+  "recorded_date": "2026-11-23",
+  "analysis": "E123 saved long-cycle analysis",
+  "evidence": "User-pasted server CLI output; report JSON and figure not opened directly locally",
+  "source_run": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314",
+  "report": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314-cycles-20261124T035317257840Z/summary.json",
+  "figure": "/home/carsonc/r-elegans-results/cv-peptide-continuation-20261123T234553Z-979314-cycles-20261124T035317257840Z/cycle-periods.png",
+  "cli_completed_without_reported_error": true,
+  "models": {
+    "network": {
+      "full_late_comparison": {
+        "levels": [
+          0,
+          1
+        ],
+        "cells": {
+          "RMDL": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.0009337608309896162,
+            "full_window_mean_amplitude_relative_difference": 0.0011402207660823338,
+            "full_window_cycle_rmse_mV": 0.01207057032418312,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          },
+          "RMDR": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.0009432473643311567,
+            "full_window_mean_amplitude_relative_difference": 0.0010422154607087064,
+            "full_window_cycle_rmse_mV": 0.01092886580328137,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          }
+        }
+      },
+      "window_comparisons": [
+        {
+          "window_seconds": [
+            150.0,
+            200.0
+          ],
+          "cells": {
+            "RMDL": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0009402005164527161,
+              "full_window_mean_amplitude_relative_difference": 0.0010834137056225934,
+              "full_window_cycle_rmse_mV": 0.010058312979741088,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            },
+            "RMDR": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0009423218327946348,
+              "full_window_mean_amplitude_relative_difference": 0.0009760345327778364,
+              "full_window_cycle_rmse_mV": 0.013078259113893098,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            }
+          }
+        },
+        {
+          "window_seconds": [
+            200.0,
+            250.0
+          ],
+          "cells": {
+            "RMDL": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0009274539945187676,
+              "full_window_mean_amplitude_relative_difference": 0.0010331301472930043,
+              "full_window_cycle_rmse_mV": 0.009304086109419178,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            },
+            "RMDR": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0009538369338115693,
+              "full_window_mean_amplitude_relative_difference": 0.0010674336040532584,
+              "full_window_cycle_rmse_mV": 0.011496589200841399,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            }
+          }
+        },
+        {
+          "window_seconds": [
+            250.0,
+            300.0
+          ],
+          "cells": {
+            "RMDL": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0009002192733889025,
+              "full_window_mean_amplitude_relative_difference": 0.0011585868878412064,
+              "full_window_cycle_rmse_mV": 0.015358095833761715,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            },
+            "RMDR": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0009681426303715934,
+              "full_window_mean_amplitude_relative_difference": 0.0009677483275729593,
+              "full_window_cycle_rmse_mV": 0.008381009697647107,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            }
+          }
+        }
+      ],
+      "reported_cycle_statistics": [
+        {
+          "step_ms": 0.03125,
+          "neuron": "RMDL",
+          "statistics": {
+            "peaks": 671,
+            "whole_train_period_s": 0.22319022525473514,
+            "interpolated_median_period_s": 0.22098074296673076,
+            "last_five_sampled_mean_period_s": 0.230600000000004,
+            "last_five_interpolated_mean_period_s": 0.23060287752010708,
+            "period_cv": 0.021345907867623297,
+            "period_quantiles_5_50_95_s": [
+              0.21984595598698037,
+              0.22098074296673076,
+              0.23501704551931227
+            ]
+          },
+          "window_period_s": [
+            0.22317031212199737,
+            0.22316451089018258,
+            0.22316436110174007
+          ]
+        },
+        {
+          "step_ms": 0.03125,
+          "neuron": "RMDR",
+          "statistics": {
+            "peaks": 696,
+            "whole_train_period_s": 0.215435891346048,
+            "interpolated_median_period_s": 0.21724446123053553,
+            "last_five_sampled_mean_period_s": 0.20819999999999936,
+            "last_five_interpolated_mean_period_s": 0.20819657222036766,
+            "period_cv": 0.01721159606903843,
+            "period_quantiles_5_50_95_s": [
+              0.20667272603905645,
+              0.21724446123053553,
+              0.21810976575685004
+            ]
+          },
+          "window_period_s": [
+            0.21545467124855325,
+            0.21545598469052646,
+            0.21545117172257475
+          ]
+        },
+        {
+          "step_ms": 0.015625,
+          "neuron": "RMDL",
+          "statistics": {
+            "peaks": 673,
+            "whole_train_period_s": 0.22298201338462137,
+            "interpolated_median_period_s": 0.22078068449378918,
+            "last_five_sampled_mean_period_s": 0.23160000000000308,
+            "last_five_interpolated_mean_period_s": 0.23164675147563685,
+            "period_cv": 0.021360386757638884,
+            "period_quantiles_5_50_95_s": [
+              0.21964036574754148,
+              0.22078068449378918,
+              0.2348132384477182
+            ]
+          },
+          "window_period_s": [
+            0.22296068437140273,
+            0.22295772785487472,
+            0.22296364493130788
+          ]
+        },
+        {
+          "step_ms": 0.015625,
+          "neuron": "RMDR",
+          "statistics": {
+            "peaks": 697,
+            "whole_train_period_s": 0.2152328735053966,
+            "interpolated_median_period_s": 0.21703716624297442,
+            "last_five_sampled_mean_period_s": 0.20919999999999844,
+            "last_five_interpolated_mean_period_s": 0.2091842538023684,
+            "period_cv": 0.017197892610194363,
+            "period_quantiles_5_50_95_s": [
+              0.20649748301198656,
+              0.21703716624297442,
+              0.2179029173613003
+            ]
+          },
+          "window_period_s": [
+            0.21525183474512383,
+            0.21525067065083198,
+            0.2152427860055628
+          ]
+        }
+      ]
+    },
+    "peptide": {
+      "full_late_comparison": {
+        "levels": [
+          0,
+          1
+        ],
+        "cells": {
+          "RMDL": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.00084261776930461,
+            "full_window_mean_amplitude_relative_difference": 0.0014061529932304362,
+            "full_window_cycle_rmse_mV": 0.01634594651066968,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          },
+          "RMDR": {
+            "available": true,
+            "whole_train_period_relative_difference": 0.0009073900381029176,
+            "full_window_mean_amplitude_relative_difference": 0.0013489912985338304,
+            "full_window_cycle_rmse_mV": 0.012171308088274276,
+            "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+          }
+        }
+      },
+      "window_comparisons": [
+        {
+          "window_seconds": [
+            150.0,
+            200.0
+          ],
+          "cells": {
+            "RMDL": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0008895698043298594,
+              "full_window_mean_amplitude_relative_difference": 0.0009253565280514797,
+              "full_window_cycle_rmse_mV": 0.011606890988368828,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            },
+            "RMDR": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0008806782497579047,
+              "full_window_mean_amplitude_relative_difference": 0.0010853057950380718,
+              "full_window_cycle_rmse_mV": 0.011407869947763126,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            }
+          }
+        },
+        {
+          "window_seconds": [
+            200.0,
+            250.0
+          ],
+          "cells": {
+            "RMDL": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.000890417358317741,
+              "full_window_mean_amplitude_relative_difference": 0.0006012896755637209,
+              "full_window_cycle_rmse_mV": 0.008003550296343644,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            },
+            "RMDR": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0008937461990512485,
+              "full_window_mean_amplitude_relative_difference": 0.0014239841072964943,
+              "full_window_cycle_rmse_mV": 0.014962189714462707,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            }
+          }
+        },
+        {
+          "window_seconds": [
+            250.0,
+            300.0
+          ],
+          "cells": {
+            "RMDL": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0008343414887126421,
+              "full_window_mean_amplitude_relative_difference": 0.0028802177673384888,
+              "full_window_cycle_rmse_mV": 0.0339724297623739,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            },
+            "RMDR": {
+              "available": true,
+              "whole_train_period_relative_difference": 0.0009500393295693854,
+              "full_window_mean_amplitude_relative_difference": 0.0012520612837603196,
+              "full_window_cycle_rmse_mV": 0.010810492218548325,
+              "scope": "Descriptive full-window comparison only; does not replace last-five-cycle gates"
+            }
+          }
+        }
+      ],
+      "reported_cycle_statistics": [
+        {
+          "step_ms": 0.03125,
+          "neuron": "RMDL",
+          "statistics": {
+            "peaks": 662,
+            "whole_train_period_s": 0.22668398473447574,
+            "interpolated_median_period_s": 0.22435441516489618,
+            "last_five_sampled_mean_period_s": 0.23519999999999755,
+            "last_five_interpolated_mean_period_s": 0.235138964219027,
+            "period_cv": 0.022715163047172388,
+            "period_quantiles_5_50_95_s": [
+              0.2229385576540892,
+              0.22435441516489618,
+              0.24039887705802698
+            ]
+          },
+          "window_period_s": [
+            0.22669636516653893,
+            0.22667906673057242,
+            0.22666755546003733
+          ]
+        },
+        {
+          "step_ms": 0.03125,
+          "neuron": "RMDR",
+          "statistics": {
+            "peaks": 689,
+            "whole_train_period_s": 0.2176147699969815,
+            "interpolated_median_period_s": 0.21950589340438853,
+            "last_five_sampled_mean_period_s": 0.21019999999999756,
+            "last_five_interpolated_mean_period_s": 0.21018349374638773,
+            "period_cv": 0.01900723960948148,
+            "period_quantiles_5_50_95_s": [
+              0.20890483885661695,
+              0.21950589340438853,
+              0.22083275061644797
+            ]
+          },
+          "window_period_s": [
+            0.21760999776014558,
+            0.21762456286347615,
+            0.21762756817748447
+          ]
+        },
+        {
+          "step_ms": 0.015625,
+          "neuron": "RMDL",
+          "statistics": {
+            "peaks": 662,
+            "whole_train_period_s": 0.22649313759211506,
+            "interpolated_median_period_s": 0.22420369426413345,
+            "last_five_sampled_mean_period_s": 0.2296999999999912,
+            "last_five_interpolated_mean_period_s": 0.2296937423640884,
+            "period_cv": 0.022896494789702418,
+            "period_quantiles_5_50_95_s": [
+              0.22274819937547363,
+              0.22420369426413345,
+              0.23914662411937115
+            ]
+          },
+          "window_period_s": [
+            0.22649488215853547,
+            0.22647740731583163,
+            0.2264785949719469
+          ]
+        },
+        {
+          "step_ms": 0.015625,
+          "neuron": "RMDR",
+          "statistics": {
+            "peaks": 689,
+            "whole_train_period_s": 0.21741748753468318,
+            "interpolated_median_period_s": 0.21931245762026208,
+            "last_five_sampled_mean_period_s": 0.21570000000000392,
+            "last_five_interpolated_mean_period_s": 0.2157225932037818,
+            "period_cv": 0.018992903450957978,
+            "period_quantiles_5_50_95_s": [
+              0.20793040582754257,
+              0.21931245762026208,
+              0.22063980427834196
+            ]
+          },
+          "window_period_s": [
+            0.21741852199672854,
+            0.2174302354170134,
+            0.2174210096672259
+          ]
+        }
+      ]
+    }
+  },
+  "extrema": {
+    "full_late_maximum_period_relative_difference": 0.0009432473643311567,
+    "full_late_maximum_amplitude_relative_difference": 0.0014061529932304362,
+    "full_late_maximum_waveform_rmse_mV": 0.01634594651066968,
+    "windows_maximum_period_relative_difference": 0.0009681426303715934,
+    "windows_maximum_amplitude_relative_difference": 0.0028802177673384888,
+    "windows_maximum_waveform_rmse_mV": 0.0339724297623739
+  },
+  "original_numerical_component_passed": false,
+  "acceptance_gates_changed": false,
+  "model_promoted": false,
+  "interpretation": "Long-window average period, amplitude and waveform agree closely across the two grids, including all three50s subwindows. This strongly supports sensitivity of the last-five-cycle comparison to local cycle variability/modulation and accumulated phase. It does not isolate cause or establish continuum convergence, pointwise trajectory agreement, correct biology or a retroactive original gate pass.",
+  "next_decision": "Proceed toward bounded exploratory physiology fitting with batch16 and prospectively declared full-window stability diagnostics, retaining original five-cycle failures and using finer/independent validation on fitted candidates. Full fivefold optimizer implementation and peptide gain fitting remain pending. No new fitting launched here.",
+  "unavailable_evidence": [
+    "Exact analysis evidence hashes not pasted; analyzer verified source hashes before/after according to executed code",
+    "Generated PNG not viewed locally",
+    "No third long-clock or independent-solver trace",
+    "No full fivefold calibration or biological/behavior qualification"
+  ]
+}

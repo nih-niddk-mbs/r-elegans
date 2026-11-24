@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "User-directed purpose adopted; proposed implementation/data split not yet executed",
+  "status": "E121-E123 executed; E124 guarded fivefold paired fitter implemented and CPU-tested, server execution planned.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Prepare data inventory/fold manifest and explain optimizer/observable design; no new long fitting run yet.",
+  "next_action": "Launch E124 eight-hour-total paired fivefold development fit, then review its complete saved-data audit before further training.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",
@@ -94,6 +94,21 @@
     "biology_source": "https://www.nature.com/articles/s41586-023-06683-4",
     "implication": "Missing extrasynaptic signaling could be absorbed into fitted channels/wired strengths. This is plausible model misspecification, not a demonstrated explanation of the optimizer sign failure.",
     "proposed_next_design": "Matched network-only versus small constrained extrasynaptic model under identical animal folds/own-state forward numerics. Peptide levels must be part of settling, phase anchors and every trial/replay, not reset as hidden state. Initially small grouped gains; no automatic269-pair strength expansion. Audit genotype and availability of matched WT/unc-31 evidence before using it; UNC-31 perturbation is not a perfect isolated peptide subtraction.",
-    "status": "Plan addition only; no code activation, data partition change, fit or promotion."
+    "status": "E122 active fixed-prior pilot executed; E124 prospectively adds bounded shared peptide balance fitting in five independent folds. Server execution not yet evidenced."
+  },
+  "executed_development_evidence": {
+    "records": [
+      "experiments/records/E121-server-summary.json",
+      "experiments/records/E122-server-summary.json",
+      "experiments/records/E123-continuation-server-summary.json",
+      "experiments/records/E123-saved-cycle-analysis-server-summary.json"
+    ],
+    "scope": "87eligibleWTanimals; fold0 uses69train/18heldout, four stimulation targets, full302forward, four tied channel/wired group moves in each arm. Active peptide state and fixed priors in one arm; peptide gains not fitted. Not9538 independently recovered parameters.",
+    "numerics": "Short response three-grid and state continuation pass. Original last-five-cycle long-clock gates fail; subsequent full-late/50s descriptive averages agree closely. Original failures preserved; no retrospective model promotion."
+  },
+  "prospective_numerical_policy": {
+    "status": "E124-initialization-v1 declared prospectively in E124-plan.json; implemented, not yet server-executed. Original E123 labels unchanged.",
+    "proposal": "Declare full-late and multiple subwindow period/amplitude/waveform criteria before future fitting; keep boundedness/persistent activity, response convergence, source/parameter controls and restart checks. Retain last-five results as recorded diagnostics. Validate fitted candidates at finer/independent resolution.",
+    "rationale": "E123 whole150s mean differences <0.095%period,<0.141%amplitude,<0.017mVwaveform;50s subwindow maxima <0.097%,<0.289%,<0.034mV. Two-grid descriptive agreement supports stable averages, not proof of convergence or biological fidelity."
   }
 }
