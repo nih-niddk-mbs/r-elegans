@@ -1,0 +1,46 @@
+{
+  "experiment": "E127",
+  "recorded_date": "2026-11-24",
+  "status": "planned; implemented and locally software-verified; no server execution evidenced",
+  "question": "Does additional cycle/time coverage stabilize the affected response means without parameter changes?",
+  "authorization": "User requests3hour run after discussion of8/16/32cycle sampling. This is fixed-weight sampling, not optimization; validation/audit finish beyond the sampling allowance.",
+  "source_run": "/home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532",
+  "parents": "Exact source audited parent-model.npz files, hashes read/enforced from source manifest/audit. Wired reference47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d with fixed peptide prior enabled/disabled; full-model hashes are not substituted by this wired-only hash. All neuron/synapse/physiology/peptide parameters fixed.",
+  "method": {
+    "panel": "Automatically derive union of stimulus targets for all above-tolerance sampling pairs at both source clocks/arms, including self and measured downstream cases. Same panel for both arms; no held-out performance or weight selection.",
+    "reuse": "Retain all four original cycles (16states) and their panel-filtered responses at both source clocks. No replay of original135targets or source four cycles.",
+    "extension": "From exact last saved original full neural+peptide state (last quarter-phase of last selected cycle), continue same unstimulated model32s. Preserve peptide memory; no reinitialization/warmup repeat. Record RMDL reference voltage; select28distinct complete cycles near deterministic spread-order centres in32one-second bins. Four phases/cycle,112new full states; checkpoint selected states, trajectory end state and metadata atomically together.",
+    "nesting": "Four original cycles plus first4/12/28new cycles give8/16/32total cycles. New cycle order is deterministic farthest-bin coverage; nested subsets share exact previous states/responses. At intermediate N, original4cycles are overweighted in time relative to later extension; not a claim of uniform temporal sampling.",
+    "forward": "Midpoint solver unchanged. Outer/neural clocks sourcelevels0/1 (0.001s/0.03125ms and0.0005s/0.015625ms),16states (four cycles) per batch,4targets+2shams,0.03nS0.5s cue,12s total,1.5-11.5s indicator mean. Fixed parameters; no RNG draws/new seeds.",
+    "checkpoints": "Atomic per-extension and response-batch NPZ with provenance, file/directory fsync, readback and hash. Resume unfinished work; completed stages not replayed. In-flight kernel/JIT may restart after unplanned failure; no exact optimizer/in-kernel resume claim."
+  },
+  "criteria": {
+    "fixed_tolerances": "Use original per-arm/per-clock E126 absolute sampling tolerances, and original full-target numerical tolerances, without increasing them as ensemble grows. Original E126 gates remain failed.",
+    "sampling": "At each expanded N: leave-one-cycle-out mean change, chronological early/late-half mean difference, and prefix N/2-to-N mean difference each <=original sampling tolerance. Temporal/prefix criteria added prospectively so1/N leave-out shrinkage alone cannot produce a pass. Deterministic engineering checks, not confidence intervals.",
+    "numeric": "Panel phase-mean coarse/fine difference <=original source full-target numerical tolerance for that arm.",
+    "controls": "Finite full final states/responses; all-cell outer voltage bounded[-120,80]mV; duplicate sham means<=1e-12 and voltage<=1e-10, persistent RMD rhythms across new sampled states. Extension finite/all-cell bounds checked. Exact source models/starts/inputs/runtime and archived-source/artifact hashes.",
+    "stopping": "Stop early when all panel sampling/numerical/control criteria pass. Otherwise proceed8->16->32subject to allowance. No automatic full135target run, parent/model promotion or training."
+  },
+  "resources": {
+    "sampling_allowance_minutes": 180,
+    "timing": "Allowance begins before new-run preparation. No wall-clock kill. Finish admitted stage at verified checkpoints and complete validation/audit even if allowance expires. Before admitting another stage, estimate from source/per-batch timings with30%margin plus compilation reserve. If insufficient allowance, stop adding work and report untested stages explicitly.",
+    "parallelism": "Both A100s, four distinct physical cores each, float64. Same16state batch shape as E126. Targeted panel only; no global performance-optimality claim.",
+    "storage": "Requires10GiB free. Compact new states, batch means/controls/bounds/full final states, exact source/env and hashes external. Full32s all-cell transient is on GPU, not archived; selected states/end state and RMDL reference plus all-cell reductions preserved. No deletions."
+  },
+  "operations": {
+    "duplicate": "Own-user active-process checks and shared CV lock before launch; status/report/select-output read-only.",
+    "rerun": "Select existing job for same source; resume incomplete work. Completed allowance does nothing by default. Explicit --extend-sampling adds another3h only when planned stages remain; it does not exceed max32cycles or silently start a new experiment.",
+    "audit": "Full post-run saved-data audit even on partial work: input/runtime/source/archive/model/state hashes, panel and reused-response arithmetic, cycle phase selection/state correspondence, batch provenance and checksums, response/control/rhythm/bounds, per-stage sampling/time/numeric metrics, allowance/stage decisions and unavailable evidence. No parameter/candidate fitting to audit."
+  },
+  "commands": {
+    "launch": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_cycle_ensemble_mbslnx2.sh",
+    "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cycle_ensemble --status",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cycle_ensemble --output-dir RUN --report"
+  },
+  "limits": [
+    "Panel stabilization is not full135-target expanded-ensemble qualification.",
+    "Mixed old/new sample-time support and deterministic cycles do not define independent biological observations.",
+    "No fit, source gate reclassification, biological parameter recovery, behavior/start-stop/swimming or model promotion."
+  ],
+  "local_verification": "29 focused float64 CPU tests pass in5.26s, including nested cycle/bin coverage, time/prefix stability checks, affected-panel derivation and old-cycle/source preservation, batch checkpoint response/clock/control validation, extension checkpoint materialization, allowance admission/finish semantics, actual no-timeout supervisor use, read-only/active-job and prior midpoint/batch-recovery tests. Shell syntax, compilation and diff checks pass. No local full-network/GPU forward run."
+}

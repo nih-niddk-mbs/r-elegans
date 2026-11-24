@@ -1,5 +1,15 @@
 # Current model: exact scope and computation path
 
+2026-11-24 E127 planned/implemented: three-hour additional sampling allowance,
+nested8/16/32cycles on automatically derived affected targets, both model variants
+and both clocks. Reuses original four-cycle responses, extends saved full-state
+trajectories32s, checkpoints new states and each batch. Original absolute tolerances
+fixed; adds prospective temporal-half and prefix checks alongside leave-one-out.
+Admitted stages and final validation/audit finish without a kill deadline. No
+fitting, full-target expanded-ensemble qualification or model promotion. Server
+execution not evidenced. [Protocol](experiments/records/E127-plan.json).
+
+
 2026-11-24 E126 saved-cycle diagnosis (user-reported): sampling screen fails
 on six network pairs (four measured downstream) and three peptide pairs (one
 measured) at both clocks. Worst case is RMDL self-stimulation, excluded from fitting

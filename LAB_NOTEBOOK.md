@@ -14144,3 +14144,69 @@ only after targeted protocol is justified. Do not guess other pair identities or
 claim any fixed cycle count sufficient. Validation allowed to finish; original
 criteria/outcomes and all independent parents retained. No new fitting or parent
 promotion until this sampling issue is addressed prospectively.
+
+
+## 2026-11-24 — E127 three-hour nested cycle/time sampling study (planned)
+
+User authorizes3hour run after hypothesis that4cycles are too few. Full prospective
+question/method/parents/fixed parameters/commands/criteria and caveats in
+experiments/records/E127-plan.json. No server execution or results inferred.
+This run samples fixed-weight dynamics, not neuronal/synapse optimization.
+Source midpoint-continuation-20261124T210840Z-1129532, complete integrity-passed
+audit, midpoint two-clock/control gates passed. Read exact model hashes from
+source manifest and enforce; underlying clean wired reference47a369a17f8e8c1387cd20f66c00f48db34b935591e043eb216731880c22482d
+is not substituted for full schema2 model hashes. All params/kinetics/physiology/
+peptide gains/tau/anatomy fixed; no RNG draws, no new fit or held-out selection.
+
+Panel: union of source stimulus targets driving any above-tolerance cycle sampling
+pair across both arms/clocks, including self/downstream cases. Derive directly
+from saved arrays; no guessed pair identities. Reuse four source cycles/16full
+states and response means exactly (panel filtered), no replay. Continue from last
+saved full neural+peptide source phase for32s under unchanged unstimulated model.
+Sample28complete cycles near deterministic nested spread-order centres across
+32one-second bins. Preserve full state (including peptide memory), no re-warmup.
+Four phases per new cycle; first4/12/28new cycles plus4sourcecycles yield8/16/32
+nested totals. Mixed time weighting changes as N grows; not uniform-time/
+independent sampling or statistical confidence evidence. Save extension selected
+states, end state and metadata as a single durable atomic checkpoint before
+materialization. Full transientall-cell32s states on GPU, not full disk archive.
+Retain reference RMDL trace, all-cell finite/bounds reductions and source hashes.
+
+New responses use unchanged midpoint/time clocks0/1,16states/group,4targets and
+two shams per batch,12s trial,0.5s0.03nS cue and1.5-11.5s indicator mean.
+Both A100s, four distinct cores each, float64. Reuse completed batches across
+stages and after interruption. Every batch atomic temp/fsync/rename/directory
+fsync, provenance/readback/hash; original inputs remain untouched. No exact
+in-kernel/optimizer resume claim. Minimum10GiB free, compact external artifacts,
+no deletions. Model/start/source/input hashes checked before reuse/compute.
+
+Sampling criteria fixed to original E126 absolute per-arm/clock tolerance.
+Require leave-one-cycle-out, chronological early/late half and prefix(N/2->N)
+mean changes below that tolerance. Added prospective temporal/prefix criteria
+prevent trivial1/N leave-out shrinkage as sole success argument. Panel numeric
+coarse/fine mean error below original full-target numerical tolerance. Finite/
+bounded outputs, full final states and duplicate sham/rhythm checks on new
+states required. Report per-case bounds, duplicate errors, failed rhythm details
+and all sampling/numerical criteria independently. Original E126 failures
+unchanged; panel pass not full135target or biological/behavior qualification.
+
+Three-hour allowance begins before preparation. No worker/job time kill.
+Admit each new nested stage only when measured estimated cost (source/per-batch
+median,30%margin and compilation reserve) fits allowance. Once admitted, finish
+stage/checkpoint, then validate/audit even beyond3hours. May stop early if panel
+stable or next stage cannot fit; max32cycles. Re-launch resumes unfinished job,
+completed allowance starts nothing by default; explicit --extend-sampling can
+add3hours for uncompleted planned stages. No source overwrite, duplicate process
+check and shared lock. Final audit rechecks selection/phase/panel/reuse/response/
+control/numeric/arithmetic and all artifact/source hashes; missing stages/errors
+explicit. Next full135target expanded-ensemble validation only after review.
+
+Local software verification:29 focused float64 CPU tests pass (5.26s): nested
+cycle/time selection; temporal drift can fail despite small leave-out error;
+source untouched and original cycle responses exactly reused; affected panel
+automatically derived; nested tasks only add groups; durable extension recovery;
+saved batch assembly/control and both-clock criteria; already-admitted stage
+finishes after allowance while next stage is not admitted; supervisor passes no
+validation timeout; read-only/active-job guards; midpoint and earlier batch
+recovery regressions. Shell syntax, compilation and diff checks pass. No Mac
+full-network/GPU forward simulation; server execution remains planned.
