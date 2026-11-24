@@ -1,0 +1,97 @@
+{
+  "experiment": "E125",
+  "recorded_date": "2026-11-24",
+  "status": "planned; implemented and locally software-verified, no server execution evidenced",
+  "question": "Are E124 response discrepancies dominated by neural integration clock, outer update clock, or different independently generated full-state phase anchors?",
+  "authorization": "User Fine following proposed small fixed-weight numerical diagnostic; no fitting or model promotion.",
+  "parents": {
+    "network": {
+      "source_fold": 0,
+      "model_sha256": "bc411528999e8150fa48fa622058496d682031ea3a8fbd29ba630ac0cf206ca7",
+      "role": "Failed changed network-only endpoint"
+    },
+    "peptide": {
+      "source_fold": 1,
+      "model_sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+      "role": "Unchanged peptide-enabled parent, failed full-target convergence"
+    }
+  },
+  "source_run": "/home/carsonc/r-elegans-results/cv-peptide-fit-20261124T042745Z-989175",
+  "method": {
+    "stimuli": [
+      "RIVL",
+      "RMDR",
+      "RMDL"
+    ],
+    "shams": 2,
+    "stimulus_nS": 0.03,
+    "stimulus_seconds": 0.5,
+    "duration_seconds": 12,
+    "indicator_observation_window_seconds": [
+      1.5,
+      11.5
+    ],
+    "phases": "Four exact saved phases; deterministic, no new RNG or phase selection.",
+    "common_start": "Identical saved E124 quarter-clock full neural and peptide state across all six clock settings.",
+    "own_start": "Saved E124 coarse, half and quarter independently settled/phase-selected states at matching three joint clocks. No new settling.",
+    "clocks": {
+      "coarse": [
+        0.001,
+        0.03125
+      ],
+      "neural-half": [
+        0.001,
+        0.015625
+      ],
+      "outer-half": [
+        0.0005,
+        0.03125
+      ],
+      "joint-half": [
+        0.0005,
+        0.015625
+      ],
+      "joint-quarter": [
+        0.00025,
+        0.0078125
+      ],
+      "joint-eighth": [
+        0.000125,
+        0.00390625
+      ]
+    },
+    "clock_units": [
+      "outer seconds",
+      "neural milliseconds"
+    ],
+    "fixed": "Every weight, conductance, anatomical mask, passive/kinetic/release/calcium/indicator parameter and peptide coupling/gain/timescale; no trainable parameters. Load pinned explicit schema2 model. Original numerical modules unchanged.",
+    "outputs": "Matched1ms voltage/calcium/indicator/peptide traces for RIVL,RMDVL,RMDR,RMDL; exact full-cell indicator means, all-cell outer-voltage min/max, final full states, all four phase responses. Means accumulated at every outer update before export downsampling.",
+    "comparisons": "Neural-only versus coarse; outer-only versus coarse; successive joint refinements from common state; own versus common state at same clock. Original saved own-state response reproduction on available targets. Differences descriptive; no automatic causal attribution."
+  },
+  "resources": {
+    "total_minutes": 120,
+    "execution_minutes": 110,
+    "audit_cleanup_reserve_minutes": 10,
+    "outer_watchdog": "120min including kill grace; may finish earlier. Timeout/incomplete remains explicit.",
+    "hardware": "Two A100s, one pinned model per GPU, four distinct physical CPU cores per worker, float64; compact three-stimulus/two-sham batches.",
+    "storage": "Requires5GiB free. External compact traces/final states/full model copies, input/source hashes and exact source/env records; no result deletions."
+  },
+  "acceptance": {
+    "execution": "All nine cases per arm finish, source/model hashes unchanged, saved metrics independently reproduced. Finite outputs and full final states, all-cell outer voltage bounds[-120,80]mV, duplicate-sham means<=1e-12 and traces<=1e-10. Repeat common/own quarter state at identical clock must reproduce response within1e-12.",
+    "reproduction": "Original own-state coarse/half three-target response maximum error<=1e-10; quarter comparison only for original training-panel overlap, missing overlap explicit.",
+    "inference": "No new numerical qualification gate. Preserve E124 failures. Common-state short replay is not independently settled full-domain convergence or a solver fix."
+  },
+  "audit": "Automatic even on partial execution: execution/budget, all model/state/input/source/artifact hashes, exact same checkpoint per case, starting-state hashes, response/sham arithmetic, finite/bounds checks, reproduction and clock/state comparisons. No selection/parameter update/behavior to qualify; all unavailable evidence explicit.",
+  "limits": [
+    "Outer-only refinement changes all outer operations, not exclusively peptide memory.",
+    "No fresh60s settling or300s dynamics; only three stimuli and two models, not full-domain or all-fold acceptance.",
+    "Dense state traces for four cells only; no full channel-current attribution.",
+    "No optimizer or restart/reboot recovery, no behavior/start-stop/swimming or biological qualification."
+  ],
+  "commands": {
+    "launch": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_response_clock_diagnostic_mbslnx2.sh",
+    "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_response_clock_diagnostic --status",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_response_clock_diagnostic --output-dir RUN --report"
+  },
+  "local_validation": "35 focused CPU tests passed in float64, including independent toy-update oracle and source/model/state preparation. Shell syntax, Python compilation and diff checks pass. No Mac conductance/GPU forward run."
+}

@@ -13773,3 +13773,54 @@ traces and exact full-state/source hashes. Diagnose using appropriate unchanged
 parent and failed endpoint, not held-out winner selection. Shared-state short
 replay alone cannot qualify independently settled long dynamics or all targets.
 Verify parent across intended fitting target domain before another long fit.
+
+
+## 2026-11-24 — E125 fixed-weight clock and saved-anchor isolation (planned)
+
+User Fine authorizes the proposed small numerical diagnostic. Complete prospective
+question, exact model hashes, fixed parameters, clocks, command, criteria, resource
+ceiling and limits in experiments/records/E125-plan.json. No server execution or
+scientific outcome inferred. Network failed fold0 full modelbc411528999e8150fa48fa622058496d682031ea3a8fbd29ba630ac0cf206ca7;
+peptide unchanged-parent fold1 full modelf626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652.
+Both from E124cv-peptide-fit-20261124T042745Z-989175, not a held-out winner choice.
+
+New response_clock_probe kernel uses existing advance_network and peptide update
+laws unchanged. Compare six clocks from exact common saved quarter-clock full
+state: coarse, neural-half, outer-half, joint-half/quarter/eighth. Replay matching
+coarse/half/quarter with exact original saved independently generated anchors too.
+Three targets RIVL/RMDR/RMDL, two duplicate shams, four phases;0.03nS stimulus
+0-0.5s,12s total, mean indicator1.5-11.5s at every outer update. Export selected
+voltage/calcium/indicator/peptide at matched1ms via nested scan to bound storage;
+retain all-cell outer voltage min/max and full final states. Original per-clock
+response must reproduce within1e-10 for available original targets; coarse/half
+require all three. Original quarter training panel may lack diagnostic targets;
+that comparison unavailable explicitly. Weights/constants, anatomy, peptide gains
+and memory timescale all fixed. No new random draws/seeds; exact four saved phases.
+
+Two A100 workers, four distinct physical cores each, float64. One private110min
+execution group includes preparation/source capture/forward; final10min reserved
+for automatic saved-data audit and cleanup, outer120min ceiling. No fitting or
+promotion. Shared exclusive CV lock and explicit process detection refuse duplicate
+launch; status/report never start a job. Requires5GiB free; no deletions, compact
+external artifacts and recursive source/reference hashes retained. Audit even on
+partial execution; model/state hash, sham/response arithmetic, finite/bounds checks,
+source/environment/artifact integrity and all descriptive comparisons. Original
+E124 pass/fail unchanged. New diagnostic valid flag concerns execution/reproduction
+only, not numerical/biological qualification. Outer-clock refinement affects all
+outer operations, not exclusively peptide kinetics. Shared short replay cannot
+qualify independently settled long or full-target dynamics. No new settling, body,
+start/stop or optimizer recovery test.
+
+Local software verification uses a toy update with an independent sequential
+NumPy oracle to check every outer step, observation-window mean and matched-time
+export; checks clock divisibility, sham controls, separate phase/mean diagnostics,
+source-model/state preparation, read-only paths, duplicate refusal and audited
+timeout. No Mac conductance forward/GPU validation. First toy test used a Python
+namespace as a JIT argument and failed JAX type checking; fixture corrected to
+actual PeptideParams pytree. This was a test fixture issue, not a solver change.
+
+Final local verification:35 focused CPU tests passed in3.19s with JAX_ENABLE_X64=true
+and JAX_PLATFORMS=cpu. Shell syntax, compilation and diff checks pass. Added
+same-state/same-clock quarter repeat response<=1e-12 as diagnostic execution
+control. Pinned prior numerical sources remain unchanged. Server execution
+planned; launcher prints explicit read-only status/report and exact external path.

@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Small targeted forward numerical diagnostic on RIVL,RMDR,RMDL stimulation plus matched sham, four phases, unchanged relevant parent/failed endpoint. Refine neural and outer coupling clocks separately and together; compare common full-state starts against independently settled/phase-anchored starts. Retain calcium/voltage and peptide traces for implicated cells, phase means and phase-specific responses, matched no-cue trajectories and exact source/state hashes. Establish intended full-target parent convergence before another fit.",
+  "next_action": "Launch and audit E125 fixed-weight clock/state diagnostic (E125-plan.json) before more fitting. No original gate reclassification.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

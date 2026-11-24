@@ -1,5 +1,14 @@
 # Current model: exact scope and computation path
 
+2026-11-24 E125 is planned and implemented: fixed-weight diagnostic for the
+measured response discrepancies, with network fold0 endpoint and unchanged peptide
+parent pinned by full-model hashes. Three stimuli plus two shams, four saved phases;
+shared full-state and original per-clock starts separate clock sensitivity from
+anchor differences. Two A100s,120min total ceiling including automatic audit. No
+fitting, solver replacement, original gate changes or model promotion. No server
+execution evidenced. [Plan](experiments/records/E125-plan.json).
+
+
 2026-11-24 E124 saved-response localization (user-reported) confirms the
 convergence problem affects measured training responses after phase averaging.
 Network worst pair:RIVL → RMDVL; peptide worst pair:RMDR → RMDL. Network phase-mean
