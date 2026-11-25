@@ -1,0 +1,19 @@
+{
+  "recorded_date": "2026-11-25",
+  "status": "Cleanup implementation prepared; no server deletion or disk savings evidenced yet",
+  "authorization": "User asks to reduce disk output to parameters and detailed logs, and explicitly requests a cleanup script. Supersedes permanent retention of completed-run simulation arrays.",
+  "scope": "Only /home/carsonc/r-elegans-results by default; no downloaded data, environments, source repository or /data access.",
+  "implementation": "scripts/clean_results_storage.py; scripts/launch_storage_prune_mbslnx2.sh",
+  "retained": "All model/parameter/coordinate/origin/checkpoint/optimizer/RNG files; all JSON/text/log/source records and archives. Active and incomplete/unknown runs and their recursive source/input dependencies. Unknown NPZ names/content remain untouched.",
+  "removed": "Recognized simulation-only NPZ trajectories, response/final/start/extension arrays and group/batch outputs from explicit completed runs quiet for at least one hour. Parameter-looking names/keys veto deletion. Best/final/baseline simulation arrays can be removed; model weights cannot.",
+  "journal": "Fsynced UTC JSONL at results/.cleanup-records with script hash, inventory/protection reasons, every planned/deleted path, size, inode/mtime and pre-deletion SHA256, final count/bytes and evidence limitations. Worker stdout remains in /tmp log.",
+  "safety": "Own-user ps argv inventory, recursive JSON file/directory reference closure, default dry run, explicit --apply in requested cleanup launcher, quiet-age and terminal-state rechecks, no symlinks/hardlinks, serialized cleanup lock, stop if new result-using processes appear. Unreadable dependency metadata refuses cleanup rather than guessing.",
+  "current_run": "No changes to scripts/run_full_cycle_validation.py or its numerical/import dependencies: a running E128 source pin must remain valid. Current active run data and continuation inputs are protected. This script does not migrate or restart it.",
+  "limits": "Completed raw output arrays deleted under this new policy cannot subsequently be independently re-audited or reused. Historical audits are retained as historical evidence, not rewritten. Incomplete/unknown metadata may intentionally prevent substantial reclamation; no guessed success or reclaimed size.",
+  "commands": {
+    "apply": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_storage_prune_mbslnx2.sh",
+    "dryrun": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.clean_results_storage",
+    "verification": "df -h /home; du -sh /home/carsonc/r-elegans-results"
+  },
+  "local_verification": "11 focused synthetic cleanup tests pass in 0.11 seconds, including parameter/log/source preservation, dry-run/apply, active and recursive dependencies, unknown/incomplete protection, recent files, symlinks, malformed live metadata and a new job appearing while hashing. Shell syntax, AST and diff checks pass. No server deletion performed."
+}

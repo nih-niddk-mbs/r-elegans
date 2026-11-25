@@ -14367,3 +14367,47 @@ batches, no completed rerun, read-only/active-job guards, partial-coverage rejec
 and detection of altered response means. Shell syntax, AST parse and diff checks
 pass. These are software checks; no full-network/GPU forward run was performed
 on the Mac, and no server execution or result is claimed.
+
+
+## 2026-11-25 — Parameter-and-log retention; completed simulation cleanup planned
+
+User reports disk filling and explicitly requests keeping parameters and a detailed
+log, followed by a cleanup-script request. New standing retention policy replaces
+permanent retention of completed simulation arrays. Keep all model/parameter,
+optimizer/RNG, source/invocation/environment and scientific text/JSON/log records.
+Only arrays required by current/incomplete work or recursive dependencies must
+remain until that work finishes. Historical audit conclusions remain dated;
+pruning does not imply the raw evidence remains available for future re-audit.
+
+Prepared `scripts/clean_results_storage.py` and the separate
+`launch_storage_prune_mbslnx2.sh` launcher. The older archive-to-/data launcher is
+unchanged. No /data or /proc access is used. Default Python invocation is dry-run;
+the user-requested launcher applies deletion in the background and prints PID/log.
+Only recognized simulation-only NPZ files in explicitly completed, one-hour-quiet
+runs qualify. Unknown files and any model/parameter-looking names or NPZ keys are
+retained. Best/final/baseline trajectories can be removed, but weights and all
+text/JSON logs cannot. NPZ ZIP member names are inspected without loading arrays.
+
+Active-process argv and incomplete/unknown runs seed recursive input/source-run
+protection via JSON references and hash-map keys. Parameter/source/optimizer
+folders, symlinks and hardlinks are excluded. Terminal metadata and quiet age
+are rechecked before unlinking. A new result-using process stops cleanup so
+protection can be rebuilt; unreadable dependency metadata refuses deletion.
+A dedicated cleanup lock prevents duplicate cleanup. The deletion journal records
+UTC actions, script hash, protected runs, per-file SHA256/size/path/inode/mtime,
+planned/deleted events and final totals, with fsync. No reclaimed bytes are claimed
+until the server reports execution. No raw data/checkpoints/stdout are committed.
+
+Current E128 validation and its pinned runtime modules are unchanged. Pulling this
+maintenance change must not invalidate its source checks or restart it. Active
+run continuation files and recursive inputs are preserved. This means cleanup
+can reclaim older completed arrays while current validation continues; protected
+incomplete historical work may limit savings. No deletion or server storage
+inventory has been performed locally. Full details and commands:
+`experiments/records/storage-retention-20261125.json`.
+
+Local software checks: 11 cleanup/prune tests pass in 0.11 seconds, covering
+parameter/log/source preservation, dry-run/apply, active and recursive dependency
+protection, incomplete/unknown runs, recent files, symlinks, unreadable metadata
+and a new job appearing during hashing. Shell syntax, AST and diff checks pass.
+These are synthetic software tests, not evidence of server disk reclamation.

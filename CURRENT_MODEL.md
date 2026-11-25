@@ -1,5 +1,13 @@
 # Current model: exact scope and computation path
 
+2026-11-25 retention update: keep parameter/optimizer/RNG checkpoints and detailed
+records; simulation arrays are temporary. The new storage cleanup removes only
+recognized arrays from completed, quiet runs and protects active/incomplete runs
+and their recursive inputs. Deletions are journaled with hashes; raw evidence
+removed by cleanup is explicitly unavailable for later replay/audit. Current
+pinned validation runners are unchanged. See
+[the cleanup plan](experiments/records/storage-retention-20261125.json).
+
 2026-11-25 E128 is planned: validate the fixed peptide parent across all 135
 stimulus targets using the saved 32-cycle ensemble. Both A100s share 462 missing
 batches; 14 panel batches, both state extensions and original four-cycle results

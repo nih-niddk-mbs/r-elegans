@@ -2,6 +2,13 @@
 
 Maintain [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) for scientific work in this repo.
 
+- User instruction 2026-11-25: retain parameters/checkpoints and detailed logs,
+  rather than permanent simulation arrays. Keep optimizer/RNG and small scientific
+  records. Arrays required for active/incomplete continuation or its recursive
+  inputs remain protected; audit before pruning completed-run arrays. Record
+  deletions with file hashes and explicitly mark raw evidence unavailable.
+  Existing pinned active runners must not be edited in place to change storage.
+
 - User instruction 2026-11-24: a training time allowance ends optimization,
   not final validation/audit. Let validation finish; do not impose an inherited
   total-job timeout unless the user explicitly requests a hard total ceiling.
