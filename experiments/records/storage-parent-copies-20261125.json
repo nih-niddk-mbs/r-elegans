@@ -1,0 +1,20 @@
+{
+  "recorded_date": "2026-11-25",
+  "evidence": "User-pasted du -h --max-depth=2 output; source code inspection performed locally. No server file-level inventory or revised deletion performed.",
+  "reported_total": "975G",
+  "largest_reported_roots": {
+    "cue-precision-20261112T004158Z-781583": "146G",
+    "alternation64-20261112T042107Z-791518": "111G",
+    "sensorimotor64-20261112T020300Z-784477": "92G",
+    "sensorimotor-20261111T193810Z-773573": "73G",
+    "cue-split-20261111T224206Z-778307": "73G",
+    "cue-resolution-20261111T213856Z-776777": "73G",
+    "sensorimotor-20261111T181101Z-771391": "55G",
+    "sensorimotor-20261111T163646Z-769197": "37G",
+    "relay-experiments-20261118T035453Z-398433": "23G"
+  },
+  "interpretation": "Many reported large subdirectories are recursive warm_start_parent, resume_parent, parent_run and float32_reference copies. Local train_sensorimotor.py and assess_sensorimotor_resolution.py use whole-tree shutil.copytree, supporting duplicated historical run content as a storage cause. du sizes include descendants and must not be summed twice. Exact raw-versus-parameter bytes remain unknown.",
+  "implementation_issue": "clean_results_storage.references promoted every absolute file reference to its owning run directory. One referenced parameter file could prevent deletion of all unrelated trajectories in that completed run.",
+  "correction": "Exact file/directory dependency protection and relative NPZ/JSON resolution; still protects whole active/incomplete roots and recursive directory dependencies. No eligibility bypass for completed-state/quiet-age/model-key checks. Per-run counts/bytes now logged.",
+  "test_result": "15 focused synthetic tests pass in 0.11 seconds; no revised server cleanup outcome claimed."
+}

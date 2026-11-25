@@ -15,5 +15,6 @@
     "dryrun": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.clean_results_storage",
     "verification": "df -h /home; du -sh /home/carsonc/r-elegans-results"
   },
-  "local_verification": "11 focused synthetic cleanup tests pass in 0.11 seconds, including parameter/log/source preservation, dry-run/apply, active and recursive dependencies, unknown/incomplete protection, recent files, symlinks, malformed live metadata and a new job appearing while hashing. Shell syntax, AST and diff checks pass. No server deletion performed."
+  "local_verification": "15 focused synthetic cleanup/prune tests pass in 0.11 seconds, including exact parameter-file reference versus unrelated nested parent-copy traces, referenced raw inputs, recursive JSON inputs, directory subtree and relative input protection, plus prior deletion-safety checks. Shell syntax and diff checks pass. No revised cleaner execution on server yet.",
+  "dependency_protection_correction": "After the first server cleanup reclaimed only 901185388 bytes and user inventory showed 975G remaining, code inspection found that every referenced file was promoted to protection of its entire owning run. Corrected to protect exact referenced files and directory subtrees, including relative NPZ/JSON paths and recursively referenced JSON manifests. Whole active/incomplete roots remain protected. No standalone safety bypass or blanket parent-directory deletion added."
 }

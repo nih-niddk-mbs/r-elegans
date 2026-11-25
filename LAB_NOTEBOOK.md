@@ -14434,3 +14434,34 @@ beyond the reported byte count is made. Raw arrays deleted under the retention
 policy are unavailable for future independent replay/audit; historical records
 remain. Compact evidence/hash:
 `experiments/records/storage-cleanup-20261125-server-summary.json`.
+
+
+## 2026-11-25 — Large parent copies identified; dependency overprotection corrected
+
+User-reported `du --max-depth=2` shows 975G in results. Largest roots include
+cue-precision (146G), alternation64 (111G), sensorimotor64 (92G), three 73G roots
+and older sensorimotor runs. Nested `parent_run`, `warm_start_parent`,
+`resume_parent` and `float32_reference` copies account for many large entries.
+Parent and child sizes include the same blocks and must not be added twice.
+Local source inspection confirms whole-tree shutil.copytree calls in
+train_sensorimotor.py and assess_sensorimotor_resolution.py. The directory list
+alone does not quantify parameter versus simulation-array content.
+
+Code inspection also found a concrete cleaner defect: every JSON reference to a
+single file was converted into protection of the entire owning run. One needed
+network checkpoint could therefore protect tens of GiB of unrelated traces in a
+completed run. Corrected references to retain exact files or directory subtrees;
+JSON file dependencies are followed recursively, with relative NPZ/JSON paths
+resolved against the containing manifest. Whole active/incomplete run directories
+remain protected. No deletion bypass for unknown completion, recent files,
+parameter names/keys, source/optimizer folders or required directory dependencies
+was added. Per-run deletion counts/bytes now appear in the detailed journal.
+
+Fifteen synthetic cleanup/prune tests pass in 0.11 seconds, including preservation
+of referenced parameter files while unrelated nested-copy traces are deleted,
+exact raw input and JSON dependencies, directory subtree dependencies, relative
+inputs, active/incomplete runs and prior change/race checks. Shell syntax and
+diff checks pass. No revised server execution or additional reclaimed bytes are
+yet evidenced. The current E128 runner and pinned numerical modules are unchanged.
+The same storage-prune launcher applies the corrected policy after git pull.
+Evidence summary: `experiments/records/storage-parent-copies-20261125.json`.

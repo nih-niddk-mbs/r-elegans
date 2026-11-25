@@ -92,3 +92,49 @@ def test_new_job_appearing_while_hashing_stops_deletion(tmp_path, monkeypatch):
     events = []
     assert clean.clean(tmp_path, True, 1, lambda event, **kw: events.append(event)) == (0, 0)
     assert (root/'trajectory.npz').exists() and 'stopped_new_job' in events
+
+
+def test_parameter_reference_does_not_protect_unrelated_nested_parent_trajectories(tmp_path, monkeypatch):
+    live = tmp_path/'incomplete'; live.mkdir()
+    parent = tmp_path/'large-completed'; done(parent)
+    raw(parent/'network_best.npz', chemical=np.ones(3))
+    raw(parent/'parent_run/warm_start_parent/active-trajectory.npz')
+    raw(parent/'active-trajectory.npz')
+    (live/'manifest.json').write_text(json.dumps(dict(input_sha256={str(parent/'network_best.npz'): 'hash'})))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 2
+    assert (parent/'network_best.npz').exists()
+
+
+def test_exact_raw_input_and_its_referenced_json_dependencies_remain(tmp_path, monkeypatch):
+    live = tmp_path/'incomplete'; live.mkdir()
+    parent = tmp_path/'parent'; done(parent)
+    raw(parent/'active-trajectory.npz'); raw(parent/'sham-trajectory.npz')
+    raw(parent/'other/active-trajectory.npz')
+    (parent/'inputs.json').write_text(json.dumps(dict(raw_input=str(parent/'active-trajectory.npz'))))
+    (live/'manifest.json').write_text(json.dumps(dict(input_manifest=str(parent/'inputs.json'), input_sha256={str(parent/'sham-trajectory.npz'): 'hash'})))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1
+    assert (parent/'active-trajectory.npz').exists() and (parent/'sham-trajectory.npz').exists()
+
+
+def test_directory_dependency_protects_subtree_not_sibling_copy(tmp_path, monkeypatch):
+    live = tmp_path/'incomplete'; live.mkdir()
+    parent = tmp_path/'parent'; done(parent)
+    raw(parent/'needed/active-trajectory.npz'); raw(parent/'oldcopy/active-trajectory.npz')
+    (live/'manifest.json').write_text(json.dumps(dict(source_run=str(parent/'needed'))))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1 and (parent/'needed/active-trajectory.npz').exists()
+
+
+def test_relative_input_paths_are_protected_without_protecting_sibling_arrays(tmp_path, monkeypatch):
+    live = tmp_path/'incomplete'; live.mkdir()
+    parent = tmp_path/'parent'; done(parent)
+    raw(parent/'active-trajectory.npz'); raw(parent/'sham-trajectory.npz')
+    (live/'manifest.json').write_text(json.dumps(dict(input='../parent/active-trajectory.npz')))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1 and (parent/'active-trajectory.npz').exists()

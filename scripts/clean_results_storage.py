@@ -63,6 +63,10 @@ def process_runs(base):
 
 
 def json_files(root):
+    if root.is_file():
+        if root.suffix == '.json' and not root.is_symlink():
+            yield root
+        return
     for folder, dirs, files in os.walk(root, followlinks=False):
         dirs[:] = [d for d in dirs if d not in ('run_records', 'source') and not (Path(folder)/d).is_symlink()]
         for name in files:
@@ -74,10 +78,19 @@ def json_files(root):
 def references(value, context, base):
     found = set()
     if isinstance(value, str):
+        candidate = None
         if value.startswith(str(base)+'/'):
-            root = owner_run(Path(value), base)
-            if root:
-                found.add(root)
+            candidate = Path(value)
+        elif not value.startswith('/') and '://' not in value and len(value) < 4096:
+            if value.endswith(('.npz', '.json')) or value.startswith(('../', './')):
+                candidate = context/value
+        if candidate is not None:
+            path = candidate.resolve()
+            try:
+                path.relative_to(base)
+            except ValueError:
+                return found
+            found.add(path)
     elif isinstance(value, list):
         for item in value:
             found.update(references(item, context, base))
@@ -131,7 +144,7 @@ def inventory(base, quiet_hours):
                 raise RuntimeError('Unreadable live/incomplete-run metadata: '+str(path))
             for dependency in refs-protected:
                 protected.add(dependency)
-                if dependency.is_dir():
+                if dependency.is_dir() or dependency.suffix == '.json':
                     queue.append(dependency)
     return [r for r in eligible if r not in protected and (r/'budget_receipt.json' if (r/'budget_receipt.json').exists() else r/'summary.json').stat().st_mtime <= cutoff], protected
 
@@ -153,7 +166,8 @@ def recognized_raw(path, root):
 def clean(base, apply, quiet_hours, event):
     initial_active = process_runs(base)
     eligible, protected = inventory(base, quiet_hours)
-    event('inventory', eligible_runs=len(eligible), protected_runs=sorted(str(p) for p in protected))
+    event('inventory', eligible_runs=len(eligible), protected_paths=sorted(str(p) for p in protected),
+          dependency_policy='Whole active/incomplete runs; exact referenced files and directory subtrees, not whole runs for a parameter-file reference')
     count = total = 0
     cutoff = time.time()-quiet_hours*3600
     for root in sorted(eligible):
@@ -161,10 +175,14 @@ def clean(base, apply, quiet_hours, event):
         # process inventory per run and terminal metadata before each deletion.
         if root in process_runs(base):
             continue
+        run_count, run_bytes = count, total
         for folder, dirs, files in os.walk(root, followlinks=False):
             dirs[:] = [d for d in dirs if d not in KEEP_PARTS and not (Path(folder)/d).is_symlink()]
             for name in files:
                 path = Path(folder)/name
+                resolved = path.resolve()
+                if resolved in protected or any(p in resolved.parents for p in protected):
+                    continue
                 if not recognized_raw(path, root):
                     continue
                 before = path.lstat()
@@ -189,6 +207,7 @@ def clean(base, apply, quiet_hours, event):
                     path.unlink()
                     event('deleted', **details)
                 count += 1; total += before.st_size
+        event('run_finished', run=str(root), apply=apply, files=count-run_count, bytes=total-run_bytes)
     event('finished', apply=apply, files=count, bytes=total,
           evidence_limit='Deleted arrays cannot be independently replayed or re-audited from raw outputs; historical logs/audits remain, with this explicit retention change.')
     return count, total
