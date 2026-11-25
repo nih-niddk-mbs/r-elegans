@@ -1,0 +1,23 @@
+{
+  "recorded_date": "2026-11-25",
+  "evidence": "User-reported log tail; no direct server inspection or independent disk/parameter audit",
+  "attachment_sha256": "d711866ccb54fd6b52b9d525478cdfb96a9b2d26f87f4a57a57e66c9dbe9a8cb",
+  "log": "/tmp/r-elegans-storage-clean-20261125T051725Z-1152298.log",
+  "journal": "/home/carsonc/r-elegans-results/.cleanup-records/storage-20261125T051726Z-1152302.jsonl",
+  "reported_completion": {
+    "event": "finished",
+    "at_utc": "2026-11-25T05:21:18.812343+00:00",
+    "apply": true,
+    "files": 205,
+    "bytes": 901185388,
+    "evidence_limit": "Deleted arrays cannot be independently replayed or re-audited from raw outputs; historical logs/audits remain, with this explicit retention change."
+  },
+  "deleted_GiB": 0.839294295758009,
+  "interpretation": "Cleanup completed, but 901185388 bytes is only about 0.84 GiB and too small to noticeably change percentage usage of the 3.5 TiB home filesystem. No cause of remaining large storage established from log tail. Protected/unknown files were not inventoried in this excerpt.",
+  "limitations": [
+    "Only last log lines provided; full protected-run inventory and deletion journal not independently checked.",
+    "Deleted raw arrays are no longer available for independent replay/re-audit; historical records and hashes retained.",
+    "Parameter preservation is covered by implementation/tests, not independently re-hashed on the server in this excerpt."
+  ],
+  "next_step": "Read-only largest-directory and largest-file inventory; do not rerun training or broaden deletion without identifying actual remaining consumers."
+}

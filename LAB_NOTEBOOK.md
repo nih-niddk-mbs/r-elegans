@@ -14411,3 +14411,26 @@ parameter/log/source preservation, dry-run/apply, active and recursive dependenc
 protection, incomplete/unknown runs, recent files, symlinks, unreadable metadata
 and a new job appearing during hashing. Shell syntax, AST and diff checks pass.
 These are synthetic software tests, not evidence of server disk reclamation.
+
+
+## 2026-11-25 — Cleanup completed; limited space reclaimed
+
+User-reported log tail from
+`/tmp/r-elegans-storage-clean-20261125T051725Z-1152298.log` ends with an explicit
+successful `finished` event: apply=true, 205 files, 901185388 bytes (about 0.84 GiB)
+deleted. Journal:
+`/home/carsonc/r-elegans-results/.cleanup-records/storage-20261125T051726Z-1152302.jsonl`.
+The displayed individual deletions include roughly 1.36 MB final-state arrays
+from response-clock diagnostics. These rows are only a tail, not an inventory of
+all remaining or protected storage. The user sees no meaningful change in `df`;
+this small reclaimed amount explains the lack of percentage movement on a
+roughly 3.5 TiB filesystem, without establishing why most storage was skipped.
+
+No new cleanup, training or validation has been launched. Next step is a read-only
+largest-directory/file inventory to locate actual consumers before expanding
+eligibility. Full journal/protected inventory and parameter preservation were
+not independently checked on the server; no aggregate disk-reclamation claim
+beyond the reported byte count is made. Raw arrays deleted under the retention
+policy are unavailable for future independent replay/audit; historical records
+remain. Compact evidence/hash:
+`experiments/records/storage-cleanup-20261125-server-summary.json`.
