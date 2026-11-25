@@ -14548,3 +14548,44 @@ source-directory regression in an existing test; it was corrected before release
 and the full focused set passes. No server deletion or new savings are claimed.
 Current E128/pinned numerical modules remain unchanged. The same launcher runs
 the corrected cleanup and the compact report remains read-only.
+
+
+## 2026-11-25 — E128 full-target validation reported qualified; component extract pending
+
+User reports the existing run
+`/home/carsonc/r-elegans-results/full-cycle-validation-20261125T051038Z-1150797`
+finished with exit code 0, elapsed_seconds 41052.862577572, all_steps_finished=true,
+audit_complete=true, full_target_complete=true and full_target_qualified=true.
+The post-run audit extract reports integrity_passed=true, the same complete/
+qualification flags, and problems=[]. This is user-reported server JSON, not a
+local/server forward rerun or direct artifact inspection. No timestamp, model
+hash, runtime source revision or environment is inferred from folder names.
+
+The elapsed runner clock is 11 hours 24 minutes 12.863 seconds. The eight-hour
+planning allowance did not terminate validation; it was permitted to complete as
+required. Earlier user progress reports showed 446/476 saved batches while both
+workers were present. Final batch counts were not in this latest extract; they
+remain unavailable rather than inferred from qualification alone.
+
+The fixed-parent protocol covers 135 stimulus targets with the 32-cycle/four-phase
+ensemble and two clocks, reusing E126/E127 saved computation. Reported full-target
+qualification is a positive numerical/sampling engineering milestone. It does
+not show new fitting, unique neuron physiology, peptide biological necessity,
+heldout-data advantage, swimming, sensory start/stop or a new autonomous skill.
+The E127 network-only temporal/prefix failures remain negative evidence. No
+weights were automatically promoted or new experiment started.
+
+Server audit completion is evidenced, but this compact extract omits component
+values. Request the existing audit's model/frozen-parameter fields, target/batch
+coverage, per-clock sampling differences and tolerances, numerical error/tolerance,
+controls/voltage/rhythm details and unavailable-evidence list before further
+training. Exact source/environment/artifact hashes remain external. Record this
+as pending local component review, not a replacement for a complete audit based
+only on an aggregate flag. Current cleanup continues independently; no deletion
+or preservation status of these now-completed raw arrays is inferred. Parameters
+and detailed records remain required under the retention policy.
+
+Compact outcome: `experiments/records/E128-server-summary.json`. Updated the plan,
+current model/README/training protocols/skill repertoire and initialization
+strategy to supersede the pending E128 status. Local verification for this record
+is JSON parsing and diff checks only; no new simulation or software changes.

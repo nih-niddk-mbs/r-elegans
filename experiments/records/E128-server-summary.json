@@ -1,0 +1,36 @@
+{
+  "experiment": "E128",
+  "recorded_date": "2026-11-25",
+  "evidence": "User-pasted compact budget_receipt.json and audit.json extracts; no direct server artifact access or local forward execution.",
+  "run": "/home/carsonc/r-elegans-results/full-cycle-validation-20261125T051038Z-1150797",
+  "reported_budget_receipt": {
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 41052.862577572,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "full_target_complete": true,
+    "full_target_qualified": true
+  },
+  "reported_audit": {
+    "audit_complete": true,
+    "integrity_passed": true,
+    "full_target_complete": true,
+    "full_target_qualified": true,
+    "problems": []
+  },
+  "elapsed_interpretation": "41052.862577572 seconds = 11 hours 24 minutes 12.863 seconds, including preparation/computation/audit under the runner clock. The eight-hour figure was planning, not a cutoff.",
+  "protocol": "Fixed peptide-enabled parent; planned all 135 source targets, 32 cycles x four phases, two clocks; source states and completed response batches reused. Full target completeness and qualification are explicitly reported by the server.",
+  "scope": "Reported full-target numerical/sampling engineering pass. No fitting, new parameter discovery, biological/heldout-data advantage, swimming or sensory-controlled start/stop demonstrated by this validation. Original network-only E127 failures remain unchanged.",
+  "audit_review_status": "Server audit reports complete and clean. Local quantitative component review pending: supplied extract contains aggregate gates only. Do not continue training solely from this compact extract.",
+  "unavailable_in_supplied_extract": [
+    "Model hash and frozen-parameter/change fields",
+    "Saved and total batch counts, explicit target coverage list",
+    "Per-clock sampling tolerances and leave-out/temporal-half/prefix differences",
+    "Two-clock numerical difference and tolerance",
+    "Duplicate-sham errors, voltage bounds/finiteness and rhythm failure lists",
+    "Exact source/environment/argv and artifact/archive hash maps",
+    "Post-validation cleanup/deletion status for these raw arrays"
+  ],
+  "decision": "Record the successful reported fixed-parent validation milestone. Request compact component evidence from the existing audit before planning further fitting; no automatic new run, promotion or deletion. Preserve parameters and detailed records under current storage policy."
+}

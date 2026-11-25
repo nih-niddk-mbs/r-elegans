@@ -1,7 +1,7 @@
 {
   "experiment": "E128",
   "recorded_date": "2026-11-25",
-  "status": "Planned; server execution not yet evidenced",
+  "status": "Executed, user-reported: full-target validation and integrity audit passed; elapsed 41052.862577572 seconds. Local component-metric review pending compact extraction.",
   "question": "Does the fixed peptide-enabled parent pass the 32-cycle sampling and two-clock numerical checks across all 135 stimulus targets?",
   "authorization": "User requests an eight-hour run after E127 and the recommendation for full-target validation. This is fixed-weight validation, not optimization. The eight-hour figure is a planning allowance, not a validation cutoff; full validation and audit finish even if longer.",
   "parent": {
@@ -44,5 +44,6 @@
     "Nested old/new cycles are deterministic and change time support; stability screens are not confidence intervals.",
     "Passing this validation does not establish a biological necessity or data-fitting advantage for peptide signaling. Network-only E127 negative results remain unchanged."
   ],
-  "local_verification": "31 focused CPU float64 software tests passed in 5.14 seconds: full-target task coverage and exact panel reuse, full-response/source preservation, checkpoint continuation, no validation cutoff, read-only and duplicate guards, partial-coverage rejection, sampling/numerical perturbation detection, and prior cycle/midpoint continuation checks. Shell syntax, AST parse and git diff checks pass. No local full-network or GPU forward run."
+  "local_verification": "31 focused CPU float64 software tests passed in 5.14 seconds: full-target task coverage and exact panel reuse, full-response/source preservation, checkpoint continuation, no validation cutoff, read-only and duplicate guards, partial-coverage rejection, sampling/numerical perturbation detection, and prior cycle/midpoint continuation checks. Shell syntax, AST parse and git diff checks pass. No local full-network or GPU forward run.",
+  "outcome_record": "experiments/records/E128-server-summary.json"
 }

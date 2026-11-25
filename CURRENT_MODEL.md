@@ -9,15 +9,15 @@ pinned validation runners are unchanged. See
 [the cleanup plan](experiments/records/storage-retention-20261125.json). Historical `inputs/parent_lineage`
 validation traces are now recognized separately from parameters/data inputs;
 `python -m scripts.clean_results_storage --report` gives a compact read-only
-cleanup result. No revised server savings are yet evidenced.
+cleanup result. User-reported cleanup has reached old parent-copy arrays; final totals remain pending.
 
-2026-11-25 E128 is planned: validate the fixed peptide parent across all 135
-stimulus targets using the saved 32-cycle ensemble. Both A100s share 462 missing
-batches; 14 panel batches, both state extensions and original four-cycle results
-are reused. Eight hours is a planning allowance: full validation and audit finish
-without a wall-clock cutoff. Batch checkpoints support continuation after an
-interruption, and duplicate launches are refused. No fitting or model promotion.
-[Plan and commands](experiments/records/E128-plan.json).
+2026-11-25 E128 completed (user-reported): full 135-target peptide validation
+and its integrity audit passed in 11 hours 24 minutes 13 seconds. The eight-hour
+figure was a planning allowance; validation finished without a cutoff. This is
+a fixed-parent numerical/sampling milestone, with no new fitting or behavioral
+qualification. Quantitative component metrics and the model hash were omitted
+from the supplied compact extract and remain pending local record review before
+further training. No automatic model promotion. [Outcome](experiments/records/E128-server-summary.json).
 
 2026-11-24 E127 completed (user-reported): all 8-, 16- and 32-cycle stages
 and the audit finished in 57 minutes 37 seconds. Integrity checks passed, with

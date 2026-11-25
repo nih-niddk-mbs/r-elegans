@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E127 complete/integrity pass. Peptide32cycles passes targeted sampling/numeric/control screens at both clocks; network32fails temporal-half/prefix, combined panel false.",
+  "status": "E128 user-reported complete: full 135-target peptide 32-cycle/two-clock validation qualified, integrity audit clean. Quantitative component extraction pending local evidence review; no fitting/behavior promotion.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Planned E128: fixed peptide full-target 32-cycle validation on both GPUs, reusing E127/E126 states and responses; eight-hour planning allowance, validation/audit finish without cutoff. No new optimization or behavior training.",
+  "next_action": "Collect compact E128 component audit metrics and model hash before planning further CV fitting. Preserve parameters and detailed logs; current cleanup remains independent. E127 network-only temporal/prefix failures remain unchanged.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",
