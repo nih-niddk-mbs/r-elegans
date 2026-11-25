@@ -1,7 +1,7 @@
 {
   "experiment": "E128",
   "recorded_date": "2026-11-25",
-  "status": "Executed, user-reported: full-target validation and integrity audit passed; elapsed 41052.862577572 seconds. Local component-metric review pending compact extraction.",
+  "status": "Executed and component-reviewed from user server extracts: full-target validation and integrity audit passed; 476/476 batches, zero parameter changes, both sampling clocks and numerical/control/rhythm gates pass. Elapsed 41052.862577572 seconds.",
   "question": "Does the fixed peptide-enabled parent pass the 32-cycle sampling and two-clock numerical checks across all 135 stimulus targets?",
   "authorization": "User requests an eight-hour run after E127 and the recommendation for full-target validation. This is fixed-weight validation, not optimization. The eight-hour figure is a planning allowance, not a validation cutoff; full validation and audit finish even if longer.",
   "parent": {

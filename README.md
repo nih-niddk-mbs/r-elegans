@@ -11,13 +11,15 @@ validation traces are now recognized separately from parameters/data inputs;
 `python -m scripts.clean_results_storage --report` gives a compact read-only
 cleanup result. User-reported cleanup has reached old parent-copy arrays; final totals remain pending.
 
-2026-11-25 E128 completed (user-reported): full 135-target peptide validation
-and its integrity audit passed in 11 hours 24 minutes 13 seconds. The eight-hour
-figure was a planning allowance; validation finished without a cutoff. This is
-a fixed-parent numerical/sampling milestone, with no new fitting or behavioral
-qualification. Quantitative component metrics and the model hash were omitted
-from the supplied compact extract and remain pending local record review before
-further training. No automatic model promotion. [Outcome](experiments/records/E128-server-summary.json).
+2026-11-25 E128 completed and component-reviewed (user-reported): the fixed
+peptide parent passed full 135-target validation and its integrity audit in
+11 hours 24 minutes 13 seconds. All 476 batches completed with zero parameter
+changes. Both clocks passed leave-out, temporal-half and prefix sampling checks;
+controls passed with no failed RMD rhythms. The timestep discrepancy was
+4.8883e-7 against a 2.6141e-5 tolerance (about 53 times smaller). Exact parent hash:
+`f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652`.
+This validates the fixed-parent numerical/sampling protocol; it is not a fit or
+behavioral milestone. No automatic promotion or new run. [Outcome](experiments/records/E128-server-summary.json).
 
 2026-11-24 E127 completed (user-reported): all 8-, 16- and 32-cycle stages
 and the audit finished in 57 minutes 37 seconds. Integrity checks passed, with

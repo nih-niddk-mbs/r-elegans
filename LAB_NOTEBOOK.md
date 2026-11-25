@@ -14589,3 +14589,45 @@ Compact outcome: `experiments/records/E128-server-summary.json`. Updated the pla
 current model/README/training protocols/skill repertoire and initialization
 strategy to supersede the pending E128 status. Local verification for this record
 is JSON parsing and diff checks only; no new simulation or software changes.
+
+
+## 2026-11-25 — E128 quantitative component review confirms full-target pass
+
+User supplied compact quantitative fields from the same existing server audit;
+no new simulation or cleanup was launched. Exact full-model hash is
+`f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652`, with
+parameter_changes=0 and all_parameters_frozen=true. All 476/476 batches are saved.
+This is the unchanged peptide-enabled pre-atlas initialization, not new fitted
+weights or independent neuron physiology recovery.
+
+Full-target coarse/fine maximum response difference is 4.888257710885385e-7
+against 2.6140880788204962e-5 (about 53.47 times smaller); numerical pass=true.
+Clock 0 sampling tolerance is 2.6131198355415397e-5; leave-one-cycle-out,
+chronological-half and prefix differences are respectively
+9.760295315554686e-6, 2.1140884540160956e-5 and 1.5732852394611564e-5.
+Clock 1 tolerance is 2.6140880788204962e-5; corresponding differences are
+1.0043801379116982e-5, 2.0616881724087183e-5 and 1.587839278585114e-5.
+Both clocks report sampling passed=true, controls/dynamics passed=true and zero
+failed RMD rhythms. The worst temporal-half difference is below tolerance with
+about 19% margin at clock 0. Passing is specific to this fixed parent and the
+stated deterministic ensemble; it is not proof of uniform stationarity or a
+biological confidence interval. Original network-only E127 failures remain.
+
+Together with the previously reported complete, clean integrity audit, these
+components close the pending compact metric review. Remaining unavailable local
+evidence includes exact duplicate-sham errors/voltage extrema, full target-name
+and source/environment/artifact hash maps, and the current deletion status of raw
+arrays. Those omissions do not become invented values; reported controls and
+integrity gates are recorded as such. No independent raw-array replay occurred.
+No fitting, changed-candidate validation, channel-current/body propagation,
+optimizer/reboot recovery, swimming, sensory start/stop or biology was qualified.
+
+Decision: retain this as a fixed-parent numerical/sampling initialization
+milestone. Proposed next step is a small training-direction/descent and throughput
+pilot with animal-grouped CV discipline, before longer optimization. Heldout
+labels must not select updates. Changed weights require their own freshly
+settled/sampled states and renewed numerical/control checks; the old saved
+ensemble does not automatically qualify them. No new experiment or promotion
+was launched. H1.2 start/stop remains a gate for later behavior training.
+Updated compact server record, current status documents and initialization
+strategy; prior aggregate-only record remains dated in this notebook.

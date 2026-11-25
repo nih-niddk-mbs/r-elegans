@@ -22,15 +22,51 @@
   "elapsed_interpretation": "41052.862577572 seconds = 11 hours 24 minutes 12.863 seconds, including preparation/computation/audit under the runner clock. The eight-hour figure was planning, not a cutoff.",
   "protocol": "Fixed peptide-enabled parent; planned all 135 source targets, 32 cycles x four phases, two clocks; source states and completed response batches reused. Full target completeness and qualification are explicitly reported by the server.",
   "scope": "Reported full-target numerical/sampling engineering pass. No fitting, new parameter discovery, biological/heldout-data advantage, swimming or sensory-controlled start/stop demonstrated by this validation. Original network-only E127 failures remain unchanged.",
-  "audit_review_status": "Server audit reports complete and clean. Local quantitative component review pending: supplied extract contains aggregate gates only. Do not continue training solely from this compact extract.",
+  "audit_review_status": "Reported component review completed: all 476 batches, exact unchanged parent hash, both sampling clocks, numerical/control/dynamics/rhythm gates confirmed in user-pasted extracts; server integrity audit already complete with no problems. This is not independent raw-array replay.",
   "unavailable_in_supplied_extract": [
-    "Model hash and frozen-parameter/change fields",
-    "Saved and total batch counts, explicit target coverage list",
-    "Per-clock sampling tolerances and leave-out/temporal-half/prefix differences",
-    "Two-clock numerical difference and tolerance",
-    "Duplicate-sham errors, voltage bounds/finiteness and rhythm failure lists",
-    "Exact source/environment/argv and artifact/archive hash maps",
-    "Post-validation cleanup/deletion status for these raw arrays"
+    "Per-cell voltage extrema and duplicate-sham error values; aggregate controls/dynamics pass is reported, with zero failed rhythms",
+    "Exact source/environment/argv and full artifact/archive hash maps; retained externally, not retrieved here",
+    "Explicit full target name list; full-target completion and batch coverage are reported, protocol declares 135 targets",
+    "Post-validation cleanup/deletion status for these raw arrays",
+    "No fitting, optimizer/reboot recovery, full channel-current/body attribution, swimming/start-stop or biological qualification"
   ],
-  "decision": "Record the successful reported fixed-parent validation milestone. Request compact component evidence from the existing audit before planning further fitting; no automatic new run, promotion or deletion. Preserve parameters and detailed records under current storage policy."
+  "decision": "Accept the reported full-target fixed-parent numerical/sampling milestone. No further component extract required to establish the reported gates. Proposed next step is a small training-direction/throughput pilot with animal-grouped CV discipline before long optimization. Changed parameters need fresh own-state sampling and numerical checks; heldout labels must not choose updates. No run, model promotion or deletion automatically launched.",
+  "reported_component_audit": {
+    "model_sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+    "parameter_changes": 0,
+    "all_parameters_frozen": true,
+    "saved_batches": 476,
+    "batches_total": 476,
+    "numerical": {
+      "maximum_difference": 4.888257710885385e-07,
+      "tolerance": 2.6140880788204962e-05,
+      "passed": true
+    },
+    "cases": [
+      {
+        "level": 0,
+        "sampling": {
+          "tolerance": 2.6131198355415397e-05,
+          "leave_one_cycle_out_max_difference": 9.760295315554686e-06,
+          "temporal_half_max_difference": 2.1140884540160956e-05,
+          "prefix_mean_max_difference": 1.5732852394611564e-05,
+          "passed": true
+        },
+        "controls_and_dynamics_passed": true,
+        "failed_rhythm_count": 0
+      },
+      {
+        "level": 1,
+        "sampling": {
+          "tolerance": 2.6140880788204962e-05,
+          "leave_one_cycle_out_max_difference": 1.0043801379116982e-05,
+          "temporal_half_max_difference": 2.0616881724087183e-05,
+          "prefix_mean_max_difference": 1.587839278585114e-05,
+          "passed": true
+        },
+        "controls_and_dynamics_passed": true,
+        "failed_rhythm_count": 0
+      }
+    ]
+  }
 }
