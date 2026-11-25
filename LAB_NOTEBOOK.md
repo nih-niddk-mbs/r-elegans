@@ -14306,3 +14306,64 @@ support and weights change with sample count. Full source/model/artifact hashes
 and environment records were not printed in this stdout and remain external.
 No automatic fitting or behavior training was launched. The H1.2 sensory
 start/stop prerequisite remains unchanged.
+
+
+## 2026-11-25 — E128 full-target peptide validation planned
+
+User requested an eight-hour run after E127 showed that the peptide-enabled
+model passes all three sampling screens at 32 cycles on RIVL/RMDL/RMDR. E127
+network-only temporal/prefix failures and the combined false gate remain intact.
+Question: does the identical peptide model and sampling protocol pass across all
+135 stimulus targets? This is validation, with no trainable parameters or new
+optimizer. No server execution is yet evidenced.
+
+Exact source: `/home/carsonc/r-elegans-results/cycle-ensemble-20261125T001721Z-1137019`.
+The source full-model SHA256, two saved clocks, 112 extension states per clock,
+16 original full states and original four-cycle all-target response arrays are
+read and enforced on the server. All model parameters and solver kernels remain
+unchanged. Source files and recursive dependencies stay external and immutable.
+No seeds are drawn: the existing deterministic 32 cycles and four phases per
+cycle are used. Full protocol and acceptance criteria are in
+`experiments/records/E128-plan.json`.
+
+The first three-target padded batch remains unchanged, allowing all 14 completed
+peptide response batches to be reused exactly. The other 132 targets occupy 33
+four-target batches, giving 462 new batches out of 476 total. Two GPU workers
+cache the unchanged 16-state/six-slot replay kernels and alternate coarse/fine
+clocks while completing target blocks. Fixed source CPU affinities and float64
+are retained. Every response batch is written atomically with fsync, readback,
+provenance and checksum; retained outputs include full final states, means,
+controls and voltage bounds, rather than full-brain trial trajectories.
+
+Timing clarification: because this work is validation, the eight-hour figure is
+a planning allowance, not a kill timer or a new-batch admission cutoff. The full
+validation stage is admitted durably before computation; all missing batches and
+the final audit finish even if longer. An unplanned interruption can restart the
+in-flight kernel/JIT but must reuse every verified completed batch. This is
+batch-boundary continuation, not exact in-kernel/optimizer recovery. Existing
+same-source jobs are selected, active jobs/shared GPU locks are checked before
+launch, completed jobs start nothing again, and status/report commands are
+read-only. Earlier receipts/audits are preserved on continuation.
+
+Acceptance requires all 135 targets at both clocks, unchanged original sampling
+and numerical tolerances, leave-one-cycle-out/chronological-half/prefix stability,
+duplicate shams, bounded and finite states and persistent recorded RMD rhythms.
+The post-run audit independently checks saved gate arithmetic, source/model/
+input/archive hashes, reused base responses, phase/state correspondence, batch
+provenance and completeness. No fitting, parent promotion, CV/data advantage,
+body movement, learned start/stop, swimming or biological qualification is implied.
+Unavailable evidence is listed in the audit, including lack of full channel-
+current/body attribution and optimizer/reboot recovery. H1.2 remains in force.
+
+Launch: `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_full_cycle_validation_mbslnx2.sh`.
+Read-only status: dedicated Python `-m scripts.run_full_cycle_validation --status`.
+Read-only report: dedicated Python `-m scripts.run_full_cycle_validation --output-dir RUN --report`.
+
+Local verification: 31 focused CPU float64 software tests pass in 5.14 seconds
+(full-cycle runner, existing cycle ensemble and midpoint continuation). Synthetic
+fixtures verify exact panel/full-base reuse without source mutation, coverage of
+all 135 targets once per clock/group, no validation cutoff, recovery after saved
+batches, no completed rerun, read-only/active-job guards, partial-coverage rejection
+and detection of altered response means. Shell syntax, AST parse and diff checks
+pass. These are software checks; no full-network/GPU forward run was performed
+on the Mac, and no server execution or result is claimed.

@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Retain midpoint and checkpoint/reuse workflow. Treat peptide32-cycle ensemble as candidate sampling protocol, not qualified full135target parent. Next proposed: full-target expanded-ensemble validation of peptide candidate using saved32-cycle states and responses; preserve network-only negative baseline, inspect its saved time-resolved responses before allocating more simulation. No new fitting or behavior training automatically launched.",
+  "next_action": "Planned E128: fixed peptide full-target 32-cycle validation on both GPUs, reusing E127/E126 states and responses; eight-hour planning allowance, validation/audit finish without cutoff. No new optimization or behavior training.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

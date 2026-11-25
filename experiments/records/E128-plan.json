@@ -1,0 +1,48 @@
+{
+  "experiment": "E128",
+  "recorded_date": "2026-11-25",
+  "status": "Planned; server execution not yet evidenced",
+  "question": "Does the fixed peptide-enabled parent pass the 32-cycle sampling and two-clock numerical checks across all 135 stimulus targets?",
+  "authorization": "User requests an eight-hour run after E127 and the recommendation for full-target validation. This is fixed-weight validation, not optimization. The eight-hour figure is a planning allowance, not a validation cutoff; full validation and audit finish even if longer.",
+  "parent": {
+    "source_run": "/home/carsonc/r-elegans-results/cycle-ensemble-20261125T001721Z-1137019",
+    "source_evidence": "experiments/records/E127-server-summary.json",
+    "identity": "Exact peptide/model.npz hash must match source audit and both source case hashes. Model identity is read and enforced on server; no full-model hash invented locally. The wired-only reference hash is not substituted for the full peptide model hash.",
+    "all_parameters": "Frozen: neural, chemical, electrical, passive, release, indicator, peptide expression/affinity/gains/memory constants and solver/medium-independent neural protocol. No trainable coordinates, optimizer or weight selection."
+  },
+  "method": {
+    "targets": "All 135 unique source targets. Original three-target panel is the first padded batch; other 132 targets in 33 four-target batches. No already-computed panel targets are combined with new targets or replayed.",
+    "reuse": "Reuse 14 verified E127 peptide response batches (seven cycle groups x two clocks), both existing 112-state extensions, exact four-cycle base states, and original full-target four-cycle responses from the E126 continuation. Source files remain immutable and recursively hash checked.",
+    "additional_work": "462 missing response batches out of 476 total; 16 starting states and six stimulus/sham slots per batch. Every target receives the identical 32 cycles x four phases at both clocks.",
+    "clocks": "Unchanged midpoint neural integration: outer/neural 0.001 s / 0.03125 ms and 0.0005 s / 0.015625 ms. Peptide outer coupling remains first order.",
+    "stimulus": "Unchanged source replay: 0.03 nS, 0.5-second cue; 12-second trial, 1.5\u201311.5-second calcium-indicator mean. Duplicate shams, source RMD traces, full final states and all-cell outer voltage bounds retained.",
+    "seeds": "No random draws or new seeds; exact saved states and deterministic cycle/phase order.",
+    "resources": "Two A100 workers, four source-pinned CPU cores each, float64, preallocation disabled. Source-validated batch shape and cached kernels; alternate coarse/fine clocks across GPU slots and complete target blocks early. No claim of globally optimal GPU/CPU utilization."
+  },
+  "acceptance": {
+    "source": "E127 execution/audit/integrity complete and peptide per-arm 32-cycle sampling/numerical/control checks pass. Combined network+peptide E127 gate remains false.",
+    "sampling": "Fixed original E126 absolute per-clock tolerances: leave-one-cycle-out, chronological-half and 16-to-32-cycle prefix mean differences all pass over all targets/302 receivers. No tolerance increase from new responses.",
+    "numeric": "Full-target phase-mean coarse/fine maximum difference <= original peptide full-target numerical tolerance.",
+    "controls": "Finite full states/responses, all-cell outer voltage in [-120,80] mV, duplicate sham means <=1e-12 and voltage <=1e-10, persistent RMD rhythms; source extension phase/state correspondence and full-state finiteness.",
+    "integrity": "Source/input/runtime/archived-source hashes, copied/reused response arithmetic, per-task target/clock/group/model provenance, checkpoint checksums, exact unchanged parent.",
+    "qualification": "Only full-target numerical/sampling engineering criteria. No automatic parent promotion, fitting, biological or behavior qualification. Partial execution cannot qualify."
+  },
+  "operations": {
+    "timing": "480-minute planning allowance recorded. Entire validation stage is durably admitted before workers start, with no timeout wrapper or batch-admission deadline; final audit always attempted after worker return. May finish earlier or later than eight hours.",
+    "checkpoint": "Atomic NPZ writes, file and directory fsync, readback validation, provenance and SHA256. Durable completion per response batch; in-flight kernel/JIT may restart after interruption. No exact in-kernel or optimizer resume claim.",
+    "repeat": "Active-process check and shared exclusive GPU lock. Same-source launch selects existing job, reuses completed batches, preserves earlier receipts/audits, and resumes incomplete work. Completed full validation/audit starts nothing again. Status/report/select-output are read-only.",
+    "storage": "20 GiB free-space check before preparation. Compact means, full final states, controls/bounds and saved starting states only; no full-brain trial trajectories, no deletions. Preserve source runs and recursive dependencies externally.",
+    "post_run_audit": "Recompute every sampling/numerical/control/dynamics gate from saved arrays; audit frozen model/source/copied inputs/batches/archived invocation snapshots, full-target completeness and unavailable evidence. Raw/source/environment records remain external."
+  },
+  "commands": {
+    "launch": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_full_cycle_validation_mbslnx2.sh",
+    "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_full_cycle_validation --status",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_full_cycle_validation --output-dir RUN --report"
+  },
+  "limits": [
+    "No new fitting, five-fold assessment, heldout-data result, optimizer recovery, body propagation, sensory start/stop, swimming or biological qualification.",
+    "Nested old/new cycles are deterministic and change time support; stability screens are not confidence intervals.",
+    "Passing this validation does not establish a biological necessity or data-fitting advantage for peptide signaling. Network-only E127 negative results remain unchanged."
+  ],
+  "local_verification": "31 focused CPU float64 software tests passed in 5.14 seconds: full-target task coverage and exact panel reuse, full-response/source preservation, checkpoint continuation, no validation cutoff, read-only and duplicate guards, partial-coverage rejection, sampling/numerical perturbation detection, and prior cycle/midpoint continuation checks. Shell syntax, AST parse and git diff checks pass. No local full-network or GPU forward run."
+}
