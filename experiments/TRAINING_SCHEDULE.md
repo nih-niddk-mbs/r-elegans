@@ -1,5 +1,14 @@
 # Training and experiment schedule
 
+2026-11-24 repository cleanup:46retired one-experiment server shell recipes
+were removed; reusable Python runners/reports, tests, assets and all current
+E121-E127 tools remain. Some dated launch commands below are historical recipes.
+Removed files and recovery revisions are listed in
+[the cleanup record](records/repository-cleanup-20261124.json).
+Historical reproduction needs the matching recorded source/environment/inputs;
+restoring an old wrapper alone does not reproduce an experiment.
+
+
 Generated from `experiments/records/E*-plan.json` and outcome records by `python -m scripts.build_training_schedule`.
 Each row is what was planned (command, budget, parent, trainable fields) and, where recorded, the outcome. A plan is not evidence that
 the run happened; outcomes link to the user-reported summaries. Narrative, audits and negative results are in `LAB_NOTEBOOK.md`;

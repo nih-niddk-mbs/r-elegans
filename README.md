@@ -1,5 +1,14 @@
 # r-elegans
 
+2026-11-24 repository cleanup:46retired one-experiment server shell recipes
+were removed; reusable Python runners/reports, tests, assets and all current
+E121-E127 tools remain. Some dated launch commands below are historical recipes.
+Removed files and recovery revisions are listed in
+[the cleanup record](experiments/records/repository-cleanup-20261124.json).
+Historical reproduction needs the matching recorded source/environment/inputs;
+restoring an old wrapper alone does not reproduce an experiment.
+
+
 2026-11-24 E127 planned/implemented: three-hour additional sampling allowance,
 nested8/16/32cycles on automatically derived affected targets, both model variants
 and both clocks. Reuses original four-cycle responses, extends saved full-state

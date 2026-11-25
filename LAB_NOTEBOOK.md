@@ -14210,3 +14210,42 @@ finishes after allowance while next stage is not admitted; supervisor passes no
 validation timeout; read-only/active-job guards; midpoint and earlier batch
 recovery regressions. Shell syntax, compilation and diff checks pass. No Mac
 full-network/GPU forward simulation; server execution remains planned.
+
+
+## 2026-11-24 — User-directed obsolete repository file cleanup
+
+User asks find/remove obsolete files. Scope: repository code, not server storage
+or results. Pre-cleanup revision and exact per-file hashes/bytes/references in
+experiments/records/repository-cleanup-20261124.json. Removed46one-off shell
+launch/assessment recipes pinned to completed pre-E121 experiments and historical
+parents;58402bytes total. Their reusable Python runners, reports and tests remain.
+No experimental result/parameter/acceptance criterion changed. Original launcher
+contents recoverable from pre-cleanup Git revision; historical scientific records
+and exact commands remain intact. Reproduction needs matching source/env/data,
+not merely restored wrapper against current code.
+
+Reference review retained launch_body_amplitude_mbslnx2.sh because autonomous
+movement/wave compatibility wrappers call it; retained launch_sensorimotor64
+because continue_sensorimotor64 calls it. General paired fitting, downloading,
+maintenance, all E121-E127 launch/status/report tools retained. Unreferenced
+standalone Python is not automatically obsolete; keep all418Python files and
+assets/data manifests. No server process, checkpoint, dataset, archived source,
+external result or local environment touched. README/current model/protocol/skill
+and historical schedule notices distinguish retired recipes from current entry
+points. Earlier negative scientific outcomes and notebook history unchanged.
+
+Verification in progress: reference/dependency scan, protected hash comparisons,
+shell/Python syntax and focused active-workflow regressions. No new training or
+forward experiment executed.
+
+Cleanup verification completed: all46removed paths absent, no retained Python/
+shell/config/test filename references to removed wrappers, all418Python files
+byte-for-byte unchanged and parse, assets/data-manifest hashes unchanged, all
+protected current runner/solver/launcher hashes unchanged,30remaining shell
+scripts pass their interpreter syntax check.40focused CPU float64 tests pass
+in7.05s (current cycle ensemble, midpoint continuation/solver, saved sampling
+diagnosis and CV continuation guards). Historical schedule generator inspected: it
+renders recorded commands as documentation and does not execute retired recipes.
+No new tests added for these deletions. External private commands cannot be
+enumerated; deleted wrappers remain recoverable in Git. No scientific execution,
+results or acceptance gates changed.

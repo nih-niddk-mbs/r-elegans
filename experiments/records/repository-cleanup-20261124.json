@@ -1,0 +1,626 @@
+{
+  "recorded_date": "2026-11-24",
+  "purpose": "User-directed obsolete repository file cleanup",
+  "status": "completed;46retired recipes removed, no live repository consumers, protected hashes/syntax/focused tests pass",
+  "pre_cleanup_revision": "e18fe016b8450ece666798dff95d88a99bab672c",
+  "scope": "Delete only retired one-experiment shell launch/assessment recipes; preserve all reusable Python, tests, assets, records, current CV/midpoint/cycle workflows and shell utilities with live consumers.",
+  "removed": [
+    {
+      "path": "scripts/assess_sensorimotor_precision_mbslnx2.sh",
+      "sha256": "7fef38ecd9e1ecf78d407a41b300e8a728d6fa03e264f922e424f092f80d5e60",
+      "bytes": 1870,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "README.md"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/assess_sensorimotor_resolution_mbslnx2.sh",
+      "sha256": "b05f9073a628b1e1fc2c4d46345dd265b280ef4fb794bb54643fb27a8984efa3",
+      "bytes": 1685,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "README.md"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/assess_sensorimotor_steps_mbslnx2.sh",
+      "sha256": "ef4307ea91f4e388fb6106159f09191a70e29c06bd12d8c2817d04f2be0b8f52",
+      "bytes": 1685,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "README.md"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/assess_wet_surface_mbslnx2.sh",
+      "sha256": "75cc2292e0bcf473f803dcf9f83cba4e973099c430997f380730d8f850f1f9d1",
+      "bytes": 2177,
+      "references": [
+        "CURRENT_MODEL.md",
+        "PHYSICS.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E046-wet-surface-assessment.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/assess_winner_mbslnx2.sh",
+      "sha256": "8f22921da0b1d81249ad1add145c1824a2517794fd7c10d558076589ea3a6e6c",
+      "bytes": 2092,
+      "references": [
+        "CURRENT_MODEL.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E044-full-body-assessment.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/continue_posterior_motor_mbslnx2.sh",
+      "sha256": "c0ab6eada98283eeddb85295b51748abe24daff310e93c3eda9a7f2afe7197c2",
+      "bytes": 1897,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E042-continuation-plan.json",
+        "experiments/records/E043-continuation-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_alternation64_mbslnx2.sh",
+      "sha256": "2be03fb4ccf9496dcc23f5b4e803eff1ce2dc24a4a6edb6d109293e2a41fc8bd",
+      "bytes": 1998,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E063-alternation-plan.json",
+        "experiments/records/E063-server-summary.json",
+        "experiments/sensorimotor_curriculum_v1.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_alternation_diagnostic_mbslnx2.sh",
+      "sha256": "de8c836010d2d8b81007c8aa1104adc92cb27d4f90513133a5b6782e4851ebb2",
+      "bytes": 1159,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E064-signal-chain-diagnostic.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_atlas_baseline_mbslnx2.sh",
+      "sha256": "f7ae75cf5fc7a4b9e91b1ca2474b5a39331ed1fe33777b11c3b2178a7652a624",
+      "bytes": 1230,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E100-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_avb_audit_mbslnx2.sh",
+      "sha256": "31ef8f51ed1cfa35612f4664b50238320fe8cd9393e9bf6edd269340aa8cbdbe",
+      "bytes": 735,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E079-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_avb_training_mbslnx2.sh",
+      "sha256": "0db1c5a8288c7de9cd453a20c00d93b27d79c1687f5e9b383e7fa4bb3a2f4fd6",
+      "bytes": 1182,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E078-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_body_timing_mbslnx2.sh",
+      "sha256": "788673a9a3eb9ef35dddd5b82228a3d9999640edb316071ac1c6e177aa2ab539",
+      "bytes": 952,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E069-body-timing.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_cma_curriculum_mbslnx2.sh",
+      "sha256": "09c5f5a31f7962e454deba4aa891a1f504756f9af2a3cda5412815d4daa4fb34",
+      "bytes": 983,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E077-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_connection_amplitude_mbslnx2.sh",
+      "sha256": "0d3c3213a24a0bc9e6ed504d12f1f05ecad0edb2c25225087cabb9a0645c974d",
+      "bytes": 1517,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E067-connection-amplitude.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_control_access_mbslnx2.sh",
+      "sha256": "6576b43e8b3275eb6cf1629a7de573de5d57b9eb8828e3639d4deed2b83e6774",
+      "bytes": 824,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E076-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_control_signal_audit_mbslnx2.sh",
+      "sha256": "3f223b23995b251317f64545e99e35c0360ed6694b779b3c2b03f82b6bbdd3ca",
+      "bytes": 756,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E075-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_controlled_swimming_mbslnx2.sh",
+      "sha256": "5a4a533d8a4326023480361e4502be5d0842dcf9d968ec6e35950560eb589aa8",
+      "bytes": 891,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E072-plan.json",
+        "experiments/records/E073-plan.json",
+        "experiments/records/E074-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_edge_scan_mbslnx2.sh",
+      "sha256": "81e42e9e231b1d1befb204bfc5dd6388606366bd9c6e8f76a96efcad2931cb22",
+      "bytes": 1249,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E095-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_embodied_senses_mbslnx2.sh",
+      "sha256": "4d568229bedf14a12ad2cc0d7f81ebd029cdc9a7824f59ce92f173c04aa387cc",
+      "bytes": 2175,
+      "references": [
+        "TRAINING_PROTOCOLS.md"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_head_split_mbslnx2.sh",
+      "sha256": "7d4f094e29a1c9f265bc5c706562fb6a2ad90a6395cf0d5e624a1fc9bbb0859e",
+      "bytes": 873,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E081-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_hybrid_validation_mbslnx2.sh",
+      "sha256": "586362ff5d0cfec685f5203f14df8f2a410c41478c72cdcc32525924027b3569",
+      "bytes": 1280,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E066-hybrid-validation.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_neural_timing_mbslnx2.sh",
+      "sha256": "9e8505bedc152b738942e176e2d71dc56b99eb98347c5c660e58fa00e0c993cb",
+      "bytes": 1627,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E070-neural-timing.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_nmj_source_mbslnx2.sh",
+      "sha256": "88b3d45486f5ddd6ca13180021923c6ec39a0e66dc26db598b872ce9c0151041",
+      "bytes": 818,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E080-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_node_calibration_mbslnx2.sh",
+      "sha256": "6076002a782bb537996554f23f57ef06be14f6bc1409b6014dfb64bbc6006e60",
+      "bytes": 1274,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E097-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_node_probe_mbslnx2.sh",
+      "sha256": "920d444efad3ed5c670aba100bce526583d4e84c37402b70d5589c33ff472ebe",
+      "bytes": 1144,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E096-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_output_audit_mbslnx2.sh",
+      "sha256": "e12812e9b482247bad13328f29c5c34727f23258b8dd2f79a8547ac7fabfd4ec",
+      "bytes": 1093,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/records/E068-output-path-audit.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_pathway_continuation_mbslnx2.sh",
+      "sha256": "4514d255665bd716a6386f547609e7e1d46d18b327d235fead55625852e41db5",
+      "bytes": 1308,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E099-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_pathway_training_mbslnx2.sh",
+      "sha256": "7bc309fe9286477f5fd6b7dcc76690f2accee2f6455aee45a686ef9d3af89525",
+      "bytes": 1247,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E098-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_posterior_excitability_mbslnx2.sh",
+      "sha256": "10f7de38ae49803c897836424173eb6c1c5931c3d14cddc7c22bdb31a7dfb1cd",
+      "bytes": 1853,
+      "references": [
+        "CURRENT_MODEL.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_posterior_motor_mbslnx2.sh",
+      "sha256": "f9196e5edeaa3d69c7a4c1ea28a8fd78ea77b29b7fdfeb4dfbec1e98ce3b6448",
+      "bytes": 1418,
+      "references": [
+        "CURRENT_MODEL.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E041-posterior-motor.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_relay_8h_mbslnx2.sh",
+      "sha256": "f59d555da39b5237f2f88772c2d9ffe741b4c543e0fc88846d66b8f044fdf8c8",
+      "bytes": 1139,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E089-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_relay_continuation_mbslnx2.sh",
+      "sha256": "72ed86eced2ef898bb734270cf4fc19b5a1402bbb1cd3db488a2120393a1b96d",
+      "bytes": 1002,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E088-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_relay_e090_mbslnx2.sh",
+      "sha256": "6c3673643e34480d90be769df3336637dd401de1c39922fb32ffe81a55fd2bd6",
+      "bytes": 1182,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E090-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_relay_e091_mbslnx2.sh",
+      "sha256": "e04527496c6f37b6be974fab1d9c573764da3355da82d2284161be3aac2f6883",
+      "bytes": 1223,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E091-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_relay_experiments_mbslnx2.sh",
+      "sha256": "0972fe4edfafa4f8075c54d4d47398b4f86439977256da5bcc30517b3ac5a296",
+      "bytes": 1231,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E092-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_relay_range_mbslnx2.sh",
+      "sha256": "1319c26c76b9e93f02e82d2140b1d9bc93425a08832037037a10bb32ca98810a",
+      "bytes": 973,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E087-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_rhythm_comparison_mbslnx2.sh",
+      "sha256": "1f486a6ecad459684bdcb3ea49ad8128ece2f9458cdc4ebf95ee811d81db4790",
+      "bytes": 1329,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E065-rhythm-comparison.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_rial_control_mbslnx2.sh",
+      "sha256": "070d40ebe6bc89307ca8aad8501d7bc39dab8996362959a15212059c8be2b0eb",
+      "bytes": 924,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E084-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_rial_release_mbslnx2.sh",
+      "sha256": "8df455753fd0eaef4ba2ec02d42c3b9b8feb56d4b4a2f8bf2cd6e98540901a6d",
+      "bytes": 978,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E086-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_rial_sensory_mbslnx2.sh",
+      "sha256": "dfa99ae14eeef9e8ebd9aa70f62b69587a62bf5d809b9ba4f4ec3ca844d18c86",
+      "bytes": 1068,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E085-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_sensory_motion_bilateral_mbslnx2.sh",
+      "sha256": "03b9393a62ff535a9c9e3219781952725a64e4b27df333c5609ed11022b844ac",
+      "bytes": 1256,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E094-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_sensory_motion_mbslnx2.sh",
+      "sha256": "433368a272af5b3d173547d5ff0de38a52694fda26f9c56431d058acb08bb1a6",
+      "bytes": 1221,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E093-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_smd_control_mbslnx2.sh",
+      "sha256": "eccc03f9d8e383039ca9031f473f30c8c7b44036813eebe54573d1c89bd717bd",
+      "bytes": 1015,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E082-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_smd_drive_audit_mbslnx2.sh",
+      "sha256": "fe0888696333b497edde4c044c087d69c1c016d2591216863c0157ff47932aea",
+      "bytes": 763,
+      "references": [
+        "LAB_NOTEBOOK.md",
+        "experiments/TRAINING_SCHEDULE.md",
+        "experiments/records/E083-plan.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/launch_tail_amplitude_mbslnx2.sh",
+      "sha256": "c4bd1795b9dee488913366f564bdbec06c9dcd08e34129fbd5ad5489c0bb6f7c",
+      "bytes": 1334,
+      "references": [
+        "CURRENT_MODEL.md",
+        "README.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E039-tail-amplitude.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    },
+    {
+      "path": "scripts/reaudit_relay_experiments_mbslnx2.sh",
+      "sha256": "c3a8959d656abe0901c85021247913aea34045bee168982c7cfcc806e2611ce9",
+      "bytes": 772,
+      "references": [
+        "CURRENT_MODEL.md",
+        "LAB_NOTEBOOK.md",
+        "README.md",
+        "SKILL_REPERTOIRE.md",
+        "TRAINING_PROTOCOLS.md",
+        "experiments/records/E092-server-summary.json"
+      ],
+      "classification": "Retired one-off server recipe for completed pre-E121 experiment; historical source/run defaults and watchdog policy superseded. Reusable Python entry points retained."
+    }
+  ],
+  "bytes": 58402,
+  "protected_sha256": {
+    "scripts/run_cycle_ensemble.py": "f5fef28a7148c8f7d0f0015885a0d9db32d21d2322d7409ad287af8295135591",
+    "scripts/launch_cycle_ensemble_mbslnx2.sh": "0f326e1db37b70211ed12efa9d29ae64b844413d2abfde7028be44518aa3f686",
+    "scripts/continue_midpoint_validation.py": "36581d6def14dfb5157ef712f0d63084f650ba73d9852415c14d9c9aceceaf47",
+    "scripts/launch_midpoint_continuation_mbslnx2.sh": "afa14c94d0dda2cdf2646f40bf0c0d07289a4b077b27a10020dffb3350a99fe4",
+    "scripts/run_midpoint_validation.py": "8edae0ce936f9a3bed03af5d714a53bdbf9cef52c7bb6a69ab71c4436521f142",
+    "scripts/run_response_clock_diagnostic.py": "f2010c0452ac54f3348647191a80c78cdec71d4fcdcb21b01a38b9db3c9a8186",
+    "scripts/run_cv_peptide_fit.py": "7115a229ab2436183de05493fd4cbf7f045910bbbdab8b624300d963801a7ece",
+    "scripts/cv_fit_core.py": "f29a8e3dad7451e16e7059c44d4c088db57f48f648f2439f3654814907651602",
+    "scripts/run_cv_peptide_pilot.py": "25ab677a73389d90155fd8d69fe98aaa557fe650810ca22ff184481c295504c9",
+    "scripts/run_cv_peptide_validation.py": "c93319686b97eb135b5429a666e14d904b1ea11f9a3f8d63fc99d6c3884f178e",
+    "scripts/continue_cv_peptide_validation.py": "2501e5e5bc1a50f55e9d6d25097d4c0369a8fabad8e3380b0e58d74cca0185e4",
+    "scripts/cv_validation_job.py": "4fa6b19823bdb013a0ad13208fe676bfaedb7684409896b00a380a04139b801f",
+    "scripts/experiment_records.py": "a5d5f0d01a29d47785ace1f17baf4cf6173c014c12acc293fdc1b8e6122ca795",
+    "scripts/total_job_budget.py": "61c7f3046d1df447accd7dc90b59c66d46a83bcfdbdaec5c9814cf31456377c3",
+    "r_elegans/brain/dynamics.py": "3cb6dd099d19d4a8f5cb344cdf7761e32a7aa37765afb1ae17a19060b93464aa",
+    "r_elegans/brain/cycle_ensemble.py": "67020b3a4d9ed452bc768cc490b94adf8bdaa50959cb32a471154c33d0a1ad13",
+    "r_elegans/brain/midpoint_network.py": "690d168b7cd531a1ae525efd335b19a61ac0cc94681fac2a4a58e937ab5be649",
+    "r_elegans/brain/midpoint_replay.py": "fa17d963212f8828b18a069cb27d84ed24be177d758313f368bd952dd1d46242",
+    "r_elegans/brain/peptide_state_replay.py": "d94c3fab0adbbe946afceb1dbe5764cb698ba604d8f6de81b64aef316e6ef2d5",
+    "r_elegans/brain/peptide_checkpoint.py": "5f5878a036c8176c09d22c809c3d1f7629a6f0500948f29f02dfda15c22a1939"
+  },
+  "before": {
+    "python_count": 418,
+    "python_tree_sha256": "d33ffe10fbab14895a77ab05e9ad418fa1c67432875f609026576e3146d2aa64",
+    "asset_manifest_count": 19,
+    "asset_manifest_tree_sha256": "7c22e57f1400f4988a88649d76b99e2a97fd29251c7bd7c239644a7efb7c8cdb"
+  },
+  "deliberately_retained": {
+    "scripts/launch_body_amplitude_mbslnx2.sh": "Required by retained autonomous movement/wave compatibility launchers.",
+    "scripts/launch_sensorimotor64_mbslnx2.sh": "Required by retained continue_sensorimotor64 wrapper.",
+    "reusable_python_and_tests": "Imports are not the only consumers; standalone CLI and scientific reproduction tools retained.",
+    "current_workflow": "All E121-E127 launch/status/report and numeric source retained."
+  },
+  "reproduction": "Original files recoverable at pre_cleanup_revision and Git history; historical commands remain in notebook/experiment records. Reproduction requires matching recorded source, environment and external inputs, not a restored launcher alone.",
+  "external_scope": "No server processes/results, checkpoints, archived source, datasets or local environments modified.",
+  "verification": {
+    "all_removed_paths_absent": true,
+    "python_files_checked": 418,
+    "all_python_bytes_unchanged": true,
+    "asset_manifest_bytes_unchanged": true,
+    "protected_hashes_unchanged": true,
+    "remaining_live_references": [],
+    "python_syntax_passed": true,
+    "shell_syntax_files_checked": 30,
+    "focused_tests": "40passed in7.05s, CPU float64",
+    "focused_test_files": [
+      "tests/test_cycle_ensemble.py",
+      "tests/test_midpoint_continuation.py",
+      "tests/test_cv_validation_continuation.py",
+      "tests/test_cycle_sampling_diagnosis.py",
+      "tests/test_midpoint_network.py"
+    ]
+  },
+  "limits": "Static repository scans do not enumerate external private commands/cron jobs. No Python/runtime code, science records, archived source, external results or environments deleted. Use pre-cleanup revision and matching external records for historical reproduction."
+}
