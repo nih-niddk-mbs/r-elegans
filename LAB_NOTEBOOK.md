@@ -14631,3 +14631,85 @@ ensemble does not automatically qualify them. No new experiment or promotion
 was launched. H1.2 start/stop remains a gate for later behavior training.
 Updated compact server record, current status documents and initialization
 strategy; prior aggregate-only record remains dated in this notebook.
+
+
+## 2026-11-25 — E129 three-hour fivefold fitting pilot planned
+
+User requests a three-hour run following E128's component-confirmed full-target
+fixed-parent validation. Question: do measured, bounded neural/synaptic and peptide
+proposals produce useful training descent under the corrected numerical/sampling
+protocol? This is a restricted physiology initialization fitting/throughput pilot,
+not a behavioral training run. All five independent animal folds start from exact
+clean peptide parent f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652
+in E128. No E120/fold-fit initialization, shared fold updates or biological recovery
+claim. No server execution has yet occurred.
+
+Detailed method/parent/bounds/seeds/commands/acceptance and unavailable evidence
+are preregistered in `experiments/records/E129-plan.json`. Reuse the audited E124
+fivefold statistics after manifest SHA256 and87-animal identity/partition checks.
+This remains development CV on historically inspected data. Four common training-
+eligible targets are selected deterministically (seed1290, saved RNG), using pair
+identity/availability, not numerical heldout labels. It is not all135-target CV.
+
+Five bounded structured coefficients couple the existing9538 unknown neural
+coordinates into inward/outward/chemical/gap directions plus peptide excitation/
+inhibition balance. Step0.01, bounds+/-0.1, existing fixed-field masks and penalty.
+Known passives/kinetics/RMD/LEAK, release/indicator, peptide assets and5s memory
+remain fixed. Two persistent A100 workers evaluate +/- proposals concurrently;
+round-robin fold selection uses measured coarse training objective only. No
+unverified differentiable gradient is assumed. All endpoint decisions freeze
+before heldout scoring. Unsafe, sampling-failed or nonfinite proposals cannot
+replace the parent. Changed endpoints must improve fine training score and pass
+own-state two-clock checks; otherwise retain exact parent and failed candidates.
+
+Every changed model/clock gets fresh60s settling, four initial sampled cycles,
+then the same32s extension/28-cycle nested addition as E128:32cycles,128full
+starting states total. Temporary starts and each16-phase response batch are
+atomic/fsynced/verified, with model/source provenance. Parent four-target means
+are reused from E128 only when matching audited hashes; authorized pruning leads
+to explicit recomputation of just that baseline, not a hidden full-target rerun.
+A hash mismatch refuses reuse. Source runs are never overwritten.
+
+Optimization gets180minutes after baseline preparation. Pending +/- pairs and
+optimizer state persist before work; planned stop occurs after verified completion.
+Final selected endpoints and audit have no inherited timeout. An already admitted
+evaluation is allowed to finish its batches even if the coordinator has an error;
+there is no deliberate in-kernel kill. Unplanned interruption may restart the
+in-flight kernel/JIT, not completed batches. Read-only status/report never launch;
+active-job checks/shared lock refuse duplicate GPU work. The same-source launcher
+selects existing unfinished work; completed work starts nothing.
+
+Permanent output: all parameter checkpoints, optimizer/RNG, exact source/env/argv,
+per-proposal/fold metrics and audit. Full trial trajectories/final-state arrays are
+not archived; in-memory finite/bounds/control/RMD metrics are recorded explicitly
+as reductions. Temporary start/response arrays are pruned only after a clean
+complete audit, with file hashes/sizes/deletion journal and unavailable-raw marker.
+Incomplete/failed audits retain continuation inputs. Requires5GiB temporary space.
+Current pinned historical runners are unchanged. A concurrently running storage
+cleaner may stop when it detects this new results-using job, by its existing
+protection guard; no cleanup bypass is introduced.
+
+The audit recomputes all training-only choices and fold histories, actual model
+changes/bounds/frozen fields, sampled-phase/state correspondence, compact response
+and control/sampling arithmetic, numerical endpoint and post-selection heldout
+scores, and all retained source/input/model/archive/artifact hashes. Pilot readiness
+requires all five folds probed, clean audit and at least one safe selected training
+improvement. Throughput may limit probe coverage; unprobed folds are explicit.
+No full135-target changed-model, pristine heldout, optimizer/reboot recovery,
+body/sensory start-stop/swimming or biological qualification is claimed. H1.2 is
+unchanged. Runtime projections must use observed per-evaluation/pair timing.
+
+Launch: `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_cv_cycle_pilot_mbslnx2.sh`.
+Read-only: dedicated Python `-m scripts.run_cv_cycle_pilot --status`, or
+`-m scripts.run_cv_cycle_pilot --output-dir RUN --report`.
+
+Local verification: 63 focused CPU float64 tests pass in 8.66 seconds (new pilot,
+full-cycle validation, cycle ensemble, midpoint continuation and storage cleanup).
+The synthetic checkpoint test interrupts after three response batches and proves
+own-state warmup/extension are not repeated; only missing batches resume. A full
+coordinator/audit test with an expired optimization deadline still completes all
+five endpoint validations, preserves exact parent bundles and correctly reports
+no descent. Tests also cover bounds/frozen fields, heldout-invariant target choice,
+read-only/duplicate guards and parameter/optimizer/log preservation during audited
+pruning. AST, plan JSON, shell syntax and diff checks pass. No local full-network
+or GPU forward run was performed; server performance/results remain planned.

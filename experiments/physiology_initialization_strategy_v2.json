@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Proposed: small train-only descent/directional and throughput pilot using the validated 32-cycle protocol, with animal-grouped CV and no heldout-driven update selection. Parameter changes require fresh own-state sampling and renewed numerical/control checks. No new run launched.",
+  "next_action": "Planned E129 three-hour optimization pilot: five independent animal folds, common four-target development panel, bounded structured neural and peptide balance probes, fresh32-cycle own states, endpoint two-clock validation/audit without cutoff, compact retention. Not yet executed; no behavior promotion.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

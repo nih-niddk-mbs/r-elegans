@@ -1,0 +1,53 @@
+{
+  "experiment": "E129",
+  "recorded_date": "2026-11-25",
+  "status": "Planned; server execution not yet evidenced",
+  "authorization": "User requests a three-hour run after E128 component-confirmed full-target fixed-parent validation. Three hours is optimization admission allowance, not a final validation/audit cutoff.",
+  "question": "Can bounded structured neural/synaptic and peptide-gain changes produce reproducible training descent under the validated midpoint/32-cycle protocol, with independent animal folds and compact storage?",
+  "parent": {
+    "run": "/home/carsonc/r-elegans-results/full-cycle-validation-20261125T051038Z-1150797",
+    "model": "peptide/model.npz",
+    "sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+    "required_evidence": "E128 complete/integrity/full-target-qualified audit; exact unchanged parent identity. All five fits start independently from this clean pre-atlas peptide parent; no E120/fold-fit warm starts."
+  },
+  "data": {
+    "fold_source": "/home/carsonc/r-elegans-results/cv-peptide-fit-20261124T042745Z-989175/folds.json",
+    "verification": "Enforce stored manifest SHA256; five disjoint animal folds, 87 unique animals covered exactly once by heldout folds, each train+heldout union exactly87. Reuse audited cached statistics, not a new raw-data inventory.",
+    "scope": "Historically inspected development CV, not a pristine test. Same static pooled/per-target clipped-z response-correlation objective as before; no full calcium time-series or biological recovery claim.",
+    "panel": "Four deterministic common training-eligible stimulus targets from the source135 list, seed1290. Common coverage uses training-pair identities/availability across folds, not numerical heldout means or scores. This is a restricted fitting/throughput pilot, not fivefold full-atlas fitting.",
+    "heldout": "Heldout means/losses are never used for target-ranking by outcome, proposal choice, stopping, endpoint acceptance or parameter selection. All endpoint choices freeze before first heldout scoring; missing heldout panel coverage is explicit."
+  },
+  "parameters": {
+    "trainable": "Five bounded group coordinates: non-RMD/non-LEAK inward channels, outward channels, chemical edges, symmetric electrical pairs, and peptide excitation/inhibition balance. Existing9538 neural coordinates remain coupled into four directions, not9538 independently recovered parameters.",
+    "bounds": "Each group coefficient within[-0.1,0.1], symmetric probe step0.01. Existing Coordinates mask and audit enforce fixed fields; peptide balance changes raw gains with the established smooth-gain mapping.",
+    "fixed": "Known passives, kinetics, RMD/LEAK reference channels, anatomy, release and observation constants, peptide expression/affinity and5s time constant, numerical clocks/stimulus/sampling. Stored initial-state fields are reference/continuation data, not trainable physiology; selected changed bundles receive fresh coarse initial states."
+  },
+  "method": {
+    "search": "Round-robin five independent folds. Two persistent A100 workers evaluate symmetric +/- group probes concurrently, with fresh own-model states. Greedy selection uses measured coarse training objective plus fixed prior only; no backprop/SPSA derivative trusted. Unsafe/nonfinite/sampling-failed proposals are rejected.",
+    "baseline": "Reuse verified E12832-cycle means for the four pilot targets, preserving source hashes. If arrays were pruned under authorized retention, explicitly log and recompute only the missing four-target baseline, not135targets. A source hash mismatch fails rather than silently regenerating it.",
+    "states": "Each changed parameter set/clock settles60s, selects four cycles x four phases in4s, then extends from the last saved phase32s and selects28 more cycles x four phases. Own128-state checkpoint and metadata are atomic and verified; old-parent states do not qualify changed weights.",
+    "numerics": "Unchanged midpoint replay at outer/neural0.001s/0.03125ms and0.0005s/0.015625ms; peptide outer coupling still first order. Four target+two sham slots x16 phases x8 groups/evaluation; cue0.03nS0.5s,12s trial, indicator window1.5-11.5s.",
+    "seeds": "Panel seed1290 and its saved RNG state. No stochastic optimizer draws; all group/sign proposals and fold order deterministic."
+  },
+  "acceptance": {
+    "candidate_search": "All phases finite/bounded, duplicate shams and sustained RMD rhythms pass;32-cycle leave-out/chronological-half/prefix stability uses fixed E128 per-clock tolerances. Training objective improvement must exceed1e-8.",
+    "endpoint": "Freeze chosen endpoints, then finish fine-clock own-state evaluation. Accept changed endpoint only if safe, sampling-qualified, original fixed coarse/fine tolerance passes, parameters/frozen fields audit exactly, and fine training score improves versus parent. Otherwise retain exact parent parameters and keep failed candidate evidence. Heldout does not decide.",
+    "pilot_success": "Report every fold, including any unprobed fold if throughput limited. Readiness requires all five folds probed, clean audit and at least one selected, numerically checked training improvement. Full-target/behavior flags remain false.",
+    "scope": "No automatic full135-target changed-model, swimming, start/stop or biological qualification; H1.2 gates future behavior training."
+  },
+  "operations": {
+    "optimization_allowance_minutes": 180,
+    "timing": "Optimization allowance starts after parent baseline preparation and is stored durably once. Admit symmetric pairs with measured wall-time margin; finish an admitted pair at verified checkpoint. Final endpoint validation and audit have no inherited wall-clock cutoff; total elapsed can exceed3h. Preparation or optimization may finish earlier.",
+    "resources": "Two persistent float64 A100 workers, four distinct physical CPU cores each; compiled anchor/extension/replay kernels reused. Measured elapsed times logged per evaluation for deciding efficient longer runs. No global throughput-optimality claim.",
+    "checkpoint": "Atomic verified own-state checkpoint and each compact response batch; durable pending pair plus optimizer JSON/NPZ/RNG. Existing same-source run is selected, active jobs/shared GPU lock prevent duplicates, completed runs start nothing. Unplanned in-kernel/JIT work may restart; completed states/batches are reused. No optimizer/reboot recovery drill claimed.",
+    "storage": "5GiB temporary free-space preflight. Retain every model/parameter checkpoint, optimizer/RNG, source/environment/invocation, metrics and detailed JSON logs. Do not save full trial trajectories/final-state arrays. Temporary initial states and mean response arrays are required until audit; prune them only after complete clean audit, with path/bytes/SHA256 deletion journal and explicit raw-unavailability record. Failed/incomplete audits keep continuation arrays.",
+    "audit": "Recompute training scores/choices, cross-fold independent optimizer history, bounds/frozen fields/selected models, phase/state correspondence, response and sampling/control arithmetic, endpoint numerical gates and post-selection heldout scores. Verify source/input/model/archive/batch hashes and counts. In-memory final-state finite/bounds checks are logged reductions, not independently replayable raw evidence.",
+    "cleanup_interaction": "An existing storage cleaner may stop when it detects this new results-using job, per its safety guard. Completed deletions remain logged; do not bypass active dependency protection."
+  },
+  "commands": {
+    "launch": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_cv_cycle_pilot_mbslnx2.sh",
+    "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_cycle_pilot --status",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_cycle_pilot --output-dir RUN --report"
+  },
+  "local_verification": "63 focused CPU float64 software tests pass in 8.66 seconds. Includes durable interrupted-batch reuse without redoing own-state warmup, expired optimization allowance still completing all five endpoint validations and audit, exact parent fallback, bound/frozen-field audit, heldout-invariant target choice, read-only/duplicate guards, post-audit parameter-preserving pruning, and prior cycle/midpoint/storage tests. AST/JSON/shell/diff checks pass. No Mac full-network or GPU experiment."
+}
