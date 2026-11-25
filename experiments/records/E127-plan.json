@@ -1,7 +1,7 @@
 {
   "experiment": "E127",
   "recorded_date": "2026-11-24",
-  "status": "planned; implemented and locally software-verified; no server execution evidenced",
+  "status": "Executed: all8/16/32stages/audit complete in3456.80s, integrity pass. Peptide32per-arm panel gates pass; network32temporal/prefix fail; combined panel false. No promotion.",
   "question": "Does additional cycle/time coverage stabilize the affected response means without parameter changes?",
   "authorization": "User requests3hour run after discussion of8/16/32cycle sampling. This is fixed-weight sampling, not optimization; validation/audit finish beyond the sampling allowance.",
   "source_run": "/home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532",
@@ -42,5 +42,6 @@
     "Mixed old/new sample-time support and deterministic cycles do not define independent biological observations.",
     "No fit, source gate reclassification, biological parameter recovery, behavior/start-stop/swimming or model promotion."
   ],
-  "local_verification": "29 focused float64 CPU tests pass in5.26s, including nested cycle/bin coverage, time/prefix stability checks, affected-panel derivation and old-cycle/source preservation, batch checkpoint response/clock/control validation, extension checkpoint materialization, allowance admission/finish semantics, actual no-timeout supervisor use, read-only/active-job and prior midpoint/batch-recovery tests. Shell syntax, compilation and diff checks pass. No local full-network/GPU forward run."
+  "local_verification": "29 focused float64 CPU tests pass in5.26s, including nested cycle/bin coverage, time/prefix stability checks, affected-panel derivation and old-cycle/source preservation, batch checkpoint response/clock/control validation, extension checkpoint materialization, allowance admission/finish semantics, actual no-timeout supervisor use, read-only/active-job and prior midpoint/batch-recovery tests. Shell syntax, compilation and diff checks pass. No local full-network/GPU forward run.",
+  "outcome_record": "experiments/records/E127-server-summary.json"
 }

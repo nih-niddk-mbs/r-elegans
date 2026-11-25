@@ -1,0 +1,420 @@
+{
+  "experiment": "E127",
+  "recorded_date": "2026-11-24",
+  "evidence": "User-reported read-only status and audit stdout; parsed locally. No direct server artifacts or local forward execution.",
+  "attachment_sha256": "42d9cbb9883d6728ae62d5ab6471880bff3fb14d5f5393d41fca2b9b1483107c",
+  "run": "/home/carsonc/r-elegans-results/cycle-ensemble-20261125T001721Z-1137019",
+  "source_run": "/home/carsonc/r-elegans-results/midpoint-continuation-20261124T210840Z-1129532",
+  "active_jobs": [],
+  "budget_receipt": {
+    "status": "finished",
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 3456.802616144996,
+    "sampling_minutes": 180,
+    "validation_allowed_to_finish": true,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "panel_qualified": false,
+    "completed_cycle_counts": [
+      8,
+      16,
+      32
+    ],
+    "stop_reason": "maximum32cycles_reached",
+    "training_launched": false,
+    "model_promoted": false
+  },
+  "audit": {
+    "audit_complete": true,
+    "execution_complete": true,
+    "integrity_passed": true,
+    "problems": [],
+    "panel": [
+      "RIVL",
+      "RMDL",
+      "RMDR"
+    ],
+    "stop_reason": "maximum32cycles_reached",
+    "panel_qualified": false,
+    "saved_batches": 28,
+    "worker_error_history": [],
+    "unavailable": [
+      "Panel only, not all135-target qualification at expanded ensemble",
+      "Four old cycles retained; nested extension changes time support/weights as N grows",
+      "Deterministic stability screens, not confidence intervals or biological validation",
+      "Full32s all-cell trajectory not archived; selected full states/end state, reference RMDL voltage and recorded all-cell bounds/finite reductions retained",
+      "No fitting, optimizer resume, body/start-stop/swimming or biological qualification"
+    ],
+    "legacy_gates_changed": false,
+    "model_promoted": false
+  },
+  "stages": [
+    {
+      "cycles": 8,
+      "cases": [
+        {
+          "arm": "network",
+          "level": 0,
+          "sampling": {
+            "cycles": 8,
+            "tolerance": 3.388618550297849e-05,
+            "leave_one_cycle_out_max_difference": 8.515919006729607e-05,
+            "temporal_half_max_difference": 0.00010688631769546764,
+            "prefix_mean_max_difference": 5.344315884773382e-05,
+            "leave_one_out_passed": false,
+            "temporal_halves_passed": false,
+            "prefix_passed": false,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -80.0933712936864,
+          "voltage_max_mV": -0.3041623335772939,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "network",
+          "level": 1,
+          "sampling": {
+            "cycles": 8,
+            "tolerance": 3.3897681911952595e-05,
+            "leave_one_cycle_out_max_difference": 8.444870992009134e-05,
+            "temporal_half_max_difference": 0.00010653484967786814,
+            "prefix_mean_max_difference": 5.326742483893407e-05,
+            "leave_one_out_passed": false,
+            "temporal_halves_passed": false,
+            "prefix_passed": false,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -80.09337139154363,
+          "voltage_max_mV": -0.297438045140139,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "peptide",
+          "level": 0,
+          "sampling": {
+            "cycles": 8,
+            "tolerance": 2.6131198355415397e-05,
+            "leave_one_cycle_out_max_difference": 4.291037889913843e-05,
+            "temporal_half_max_difference": 7.289392929009375e-05,
+            "prefix_mean_max_difference": 3.6446964645046875e-05,
+            "leave_one_out_passed": false,
+            "temporal_halves_passed": false,
+            "prefix_passed": false,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -79.5030407547471,
+          "voltage_max_mV": -0.7397689041600601,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "peptide",
+          "level": 1,
+          "sampling": {
+            "cycles": 8,
+            "tolerance": 2.6140880788204962e-05,
+            "leave_one_cycle_out_max_difference": 4.3004008935273416e-05,
+            "temporal_half_max_difference": 7.402991139882076e-05,
+            "prefix_mean_max_difference": 3.701495569941038e-05,
+            "leave_one_out_passed": false,
+            "temporal_halves_passed": false,
+            "prefix_passed": false,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -79.50304075806756,
+          "voltage_max_mV": -0.744266704780627,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        }
+      ],
+      "numerical": [
+        {
+          "arm": "network",
+          "maximum_difference": 6.79957143492893e-07,
+          "tolerance": 3.3897681911952595e-05,
+          "passed": true
+        },
+        {
+          "arm": "peptide",
+          "maximum_difference": 6.285079461459953e-07,
+          "tolerance": 2.6140880788204962e-05,
+          "passed": true
+        }
+      ],
+      "reported_combined_panel_qualified": false,
+      "derived_per_arm_panel_pass": {
+        "network": false,
+        "peptide": false
+      }
+    },
+    {
+      "cycles": 16,
+      "cases": [
+        {
+          "arm": "network",
+          "level": 0,
+          "sampling": {
+            "cycles": 16,
+            "tolerance": 3.388618550297849e-05,
+            "leave_one_cycle_out_max_difference": 4.0269662898743605e-05,
+            "temporal_half_max_difference": 4.947977945396129e-05,
+            "prefix_mean_max_difference": 2.7250952278340748e-05,
+            "leave_one_out_passed": false,
+            "temporal_halves_passed": false,
+            "prefix_passed": true,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -80.09337961807539,
+          "voltage_max_mV": -0.3041623335772939,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "network",
+          "level": 1,
+          "sampling": {
+            "cycles": 16,
+            "tolerance": 3.3897681911952595e-05,
+            "leave_one_cycle_out_max_difference": 3.986124753064326e-05,
+            "temporal_half_max_difference": 4.818830331505125e-05,
+            "prefix_mean_max_difference": 2.6868409079450206e-05,
+            "leave_one_out_passed": false,
+            "temporal_halves_passed": false,
+            "prefix_passed": true,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -80.09337957865395,
+          "voltage_max_mV": -0.297438045140139,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "peptide",
+          "level": 0,
+          "sampling": {
+            "cycles": 16,
+            "tolerance": 2.6131198355415397e-05,
+            "leave_one_cycle_out_max_difference": 1.9423748494743853e-05,
+            "temporal_half_max_difference": 3.3492318599143145e-05,
+            "prefix_mean_max_difference": 1.5508070344687555e-05,
+            "leave_one_out_passed": true,
+            "temporal_halves_passed": false,
+            "prefix_passed": true,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -79.5030407547471,
+          "voltage_max_mV": -0.7397689041600601,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "peptide",
+          "level": 1,
+          "sampling": {
+            "cycles": 16,
+            "tolerance": 2.6140880788204962e-05,
+            "leave_one_cycle_out_max_difference": 1.942626314053303e-05,
+            "temporal_half_max_difference": 3.3308443677170646e-05,
+            "prefix_mean_max_difference": 1.5539659399096267e-05,
+            "leave_one_out_passed": true,
+            "temporal_halves_passed": false,
+            "prefix_passed": true,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -79.50304075806756,
+          "voltage_max_mV": -0.744266704780627,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        }
+      ],
+      "numerical": [
+        {
+          "arm": "network",
+          "maximum_difference": 1.062500342383435e-06,
+          "tolerance": 3.3897681911952595e-05,
+          "passed": true
+        },
+        {
+          "arm": "peptide",
+          "maximum_difference": 3.8918791279117515e-07,
+          "tolerance": 2.6140880788204962e-05,
+          "passed": true
+        }
+      ],
+      "reported_combined_panel_qualified": false,
+      "derived_per_arm_panel_pass": {
+        "network": false,
+        "peptide": false
+      }
+    },
+    {
+      "cycles": 32,
+      "cases": [
+        {
+          "arm": "network",
+          "level": 0,
+          "sampling": {
+            "cycles": 32,
+            "tolerance": 3.388618550297849e-05,
+            "leave_one_cycle_out_max_difference": 2.0684495881255363e-05,
+            "temporal_half_max_difference": 6.0432306113031645e-05,
+            "prefix_mean_max_difference": 4.256486195971989e-05,
+            "leave_one_out_passed": true,
+            "temporal_halves_passed": false,
+            "prefix_passed": false,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -80.09338140556876,
+          "voltage_max_mV": -0.04658581251125552,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "network",
+          "level": 1,
+          "sampling": {
+            "cycles": 32,
+            "tolerance": 3.3897681911952595e-05,
+            "leave_one_cycle_out_max_difference": 2.0491738646609837e-05,
+            "temporal_half_max_difference": 5.864565530784918e-05,
+            "prefix_mean_max_difference": 4.261129616930145e-05,
+            "leave_one_out_passed": true,
+            "temporal_halves_passed": false,
+            "prefix_passed": false,
+            "passed": false,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -80.09338149379366,
+          "voltage_max_mV": -0.045276245443778694,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "peptide",
+          "level": 0,
+          "sampling": {
+            "cycles": 32,
+            "tolerance": 2.6131198355415397e-05,
+            "leave_one_cycle_out_max_difference": 9.760295315554686e-06,
+            "temporal_half_max_difference": 2.1140884540160956e-05,
+            "prefix_mean_max_difference": 1.5732852394611564e-05,
+            "leave_one_out_passed": true,
+            "temporal_halves_passed": true,
+            "prefix_passed": true,
+            "passed": true,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -79.5030407547471,
+          "voltage_max_mV": -0.634861616582927,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        },
+        {
+          "arm": "peptide",
+          "level": 1,
+          "sampling": {
+            "cycles": 32,
+            "tolerance": 2.6140880788204962e-05,
+            "leave_one_cycle_out_max_difference": 1.0043801379116982e-05,
+            "temporal_half_max_difference": 2.0616881724087183e-05,
+            "prefix_mean_max_difference": 1.587839278585114e-05,
+            "leave_one_out_passed": true,
+            "temporal_halves_passed": true,
+            "prefix_passed": true,
+            "passed": true,
+            "scope": "Prospective deterministic panel stability; temporal/prefix checks prevent automatic pass merely from1/N leave-out shrinkage; not a confidence interval"
+          },
+          "controls_and_dynamics_passed": true,
+          "maximum_duplicate_mean_error": 0.0,
+          "maximum_duplicate_voltage_error": 0.0,
+          "voltage_min_mV": -79.50304075806756,
+          "voltage_max_mV": -0.6381982350567814,
+          "failed_rhythms": [],
+          "final_states_finite": true
+        }
+      ],
+      "numerical": [
+        {
+          "arm": "network",
+          "maximum_difference": 2.3450600338936062e-07,
+          "tolerance": 3.3897681911952595e-05,
+          "passed": true
+        },
+        {
+          "arm": "peptide",
+          "maximum_difference": 4.888257710885385e-07,
+          "tolerance": 2.6140880788204962e-05,
+          "passed": true
+        }
+      ],
+      "reported_combined_panel_qualified": false,
+      "derived_per_arm_panel_pass": {
+        "network": false,
+        "peptide": true
+      }
+    }
+  ],
+  "interpretation": [
+    "Execution/audit complete, integrity pass, no problems or worker errors;28saved response batches. Completed8/16/32stages, stopped at declared maximum, not time cutoff.",
+    "Peptide arm at32passes all three sampling screens at both clocks, and numeric/control/dynamics checks. This is a derived per-arm panel result; reported combined panel_qualified remains false because network fails.",
+    "Network at32passes leave-one-out and numeric/control/dynamics checks but fails chronological halves and16->32prefix means. These prospective criteria prevented false success from1/N leave-out shrinkage.",
+    "Increasing cycle/time coverage supports too-few-samples explanation for peptide arm on this three-target panel; network results do not establish sufficient ensemble or unique cause of remaining mean drift.",
+    "Nested sample-time weights change with N, original4cycles retained. Temporal failures may reflect model slow dynamics, finite sample coverage or changing mixture/time support; no unique mechanism or biological conclusion."
+  ],
+  "decision": "Retain midpoint and checkpoint/reuse workflow. Treat peptide32-cycle ensemble as candidate sampling protocol, not qualified full135target parent. Next proposed: full-target expanded-ensemble validation of peptide candidate using saved32-cycle states and responses; preserve network-only negative baseline, inspect its saved time-resolved responses before allocating more simulation. No new fitting or behavior training automatically launched.",
+  "unavailable": [
+    "Panel only, not all135-target qualification at expanded ensemble",
+    "Four old cycles retained; nested extension changes time support/weights as N grows",
+    "Deterministic stability screens, not confidence intervals or biological validation",
+    "Full32s all-cell trajectory not archived; selected full states/end state, reference RMDL voltage and recorded all-cell bounds/finite reductions retained",
+    "No fitting, optimizer resume, body/start-stop/swimming or biological qualification",
+    "Per-arm qualification is derived from reported component gates, not a retrospective change to E127 combined acceptance.",
+    "Full artifact/source/model hashes and environment revision not printed; remain in external source records.",
+    "No held-out-data advantage or biological necessity of peptide signaling established."
+  ]
+}

@@ -14249,3 +14249,60 @@ renders recorded commands as documentation and does not execute retired recipes.
 No new tests added for these deletions. External private commands cannot be
 enumerated; deleted wrappers remain recoverable in Git. No scientific execution,
 results or acceptance gates changed.
+
+
+## 2026-11-24 — E127 peptide panel stabilizes at 32 cycles
+
+Evidence: user-pasted read-only status/report for
+`/home/carsonc/r-elegans-results/cycle-ensemble-20261125T001721Z-1137019`.
+The UTC folder date is November 25; this entry uses the client-local date.
+Exact component metrics and the attachment hash are retained in
+`experiments/records/E127-server-summary.json`. No source revision, environment,
+model hashes or end timestamp were inferred from folder names or earlier pulls.
+
+Execution and audit completed with integrity checks passing, no problems or
+worker errors, and 28 saved response batches. All planned 8-, 16- and 32-cycle
+stages finished. Exit code was 0, with no timeout; elapsed time was
+3456.802616144996 seconds (57 minutes 36.803 seconds). The declared 32-cycle
+maximum ended the run before the three-hour sampling allowance. No training or
+model promotion occurred. The panel contained RIVL, RMDL and RMDR.
+
+All arms, stages and clocks passed the recorded controls and dynamics checks:
+finite final states, bounded voltages, zero duplicate mean/voltage errors and no
+failed RMD rhythm checks. Timestep comparisons passed throughout. At 32 cycles,
+network coarse/fine response difference was 2.3450600338936062e-7 against a
+3.3897681911952595e-5 tolerance; peptide difference was 4.888257710885385e-7
+against 2.6140880788204962e-5. These checks cover the tested panel only.
+
+The peptide arm failed all sampling screens at 8 cycles. At 16 cycles,
+leave-one-cycle-out and prefix checks passed, but temporal halves differed too
+much. At 32 cycles, all three screens passed at both clocks. Coarse differences
+were 9.7602953e-6 (leave-out), 2.11408845e-5 (temporal halves) and 1.57328524e-5
+(prefix), against 2.61311984e-5. Fine differences were 1.00438014e-5,
+2.06168817e-5 and 1.58783928e-5, against 2.61408808e-5. This supports a derived
+per-arm panel pass. The reported combined `panel_qualified` remains false.
+
+The network-only arm at 32 cycles passed leave-out checks (about 2.05e-5), but
+chronological-half differences remained 6.04323061e-5/5.86456553e-5 against
+about 3.39e-5. Its 16-to-32-cycle prefix differences, about 4.26e-5, also failed.
+A representative mean is therefore not established: single-cycle influence
+shrinks with sample count, while time coverage still matters. Similar results
+at both clocks point beyond the previous timestep issue. Slow dynamics, finite
+coverage and changing time weights remain possible explanations; none is proven.
+
+Decision: retain midpoint integration and the durable continuation workflow.
+Treat the peptide 32-cycle ensemble as a candidate sampling protocol for
+full-target validation, reusing saved states, responses and completed source
+stages. Preserve the network-only negative comparison and inspect its saved
+responses over time before allocating more simulation. More cycles helped the
+peptide model on this panel; this does not establish universal sufficiency of
+32 cycles or a biological advantage of peptide signaling.
+
+Unavailable evidence: expanded-ensemble coverage of all 135 targets; independent
+or stationary sampling; confidence intervals; full 32-second all-cell trajectory
+archives; optimizer recovery; and body, start/stop, swimming or biological
+qualification. Four original cycles remain in the nested ensemble, whose time
+support and weights change with sample count. Full source/model/artifact hashes
+and environment records were not printed in this stdout and remain external.
+No automatic fitting or behavior training was launched. The H1.2 sensory
+start/stop prerequisite remains unchanged.

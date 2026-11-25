@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E126 all-target midpoint convergence passes; sampling sensitivity localized to6network/3peptide pairs, including4/1measured pairs. Worst is RMDL self-response in both arms. Original gates remain failed.",
+  "status": "E127 complete/integrity pass. Peptide32cycles passes targeted sampling/numeric/control screens at both clocks; network32fails temporal-half/prefix, combined panel false.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Launch/audit E1273hour nested cycle/time coverage study on affected targets only. Preserve source4cycles and fixed tolerances; no fitting until phase ensemble is justified prospectively.",
+  "next_action": "Retain midpoint and checkpoint/reuse workflow. Treat peptide32-cycle ensemble as candidate sampling protocol, not qualified full135target parent. Next proposed: full-target expanded-ensemble validation of peptide candidate using saved32-cycle states and responses; preserve network-only negative baseline, inspect its saved time-resolved responses before allocating more simulation. No new fitting or behavior training automatically launched.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",
@@ -105,7 +105,8 @@
       "experiments/records/E124-server-summary.json",
       "experiments/records/E125-server-summary.json",
       "experiments/records/E126-continuation-server-audit.json",
-      "experiments/records/E126-sampling-localization-server-summary.json"
+      "experiments/records/E126-sampling-localization-server-summary.json",
+      "experiments/records/E127-server-summary.json"
     ],
     "scope": "87eligibleWTanimals; fold0 uses69train/18heldout, four stimulation targets, full302forward, four tied channel/wired group moves in each arm. Active peptide state and fixed priors in one arm; peptide gains not fitted. Not9538 independently recovered parameters.",
     "numerics": "Short response three-grid and state continuation pass. Original last-five-cycle long-clock gates fail; subsequent full-late/50s descriptive averages agree closely. Original failures preserved; no retrospective model promotion."

@@ -1,5 +1,16 @@
 # WormGym: training and validation protocols
 
+2026-11-24 E127 completed (user-reported): all 8-, 16- and 32-cycle stages
+and the audit finished in 57 minutes 37 seconds. Integrity checks passed, with
+28 saved batches and no worker errors or timeout. At 32 cycles, the peptide arm
+passes sampling, timestep, control and rhythm checks at both clocks on the
+RIVL/RMDL/RMDR panel. The network-only arm passes timestep and leave-one-cycle-out
+checks but fails temporal-half and prefix stability; the combined panel gate
+remains false. The peptide result supports full-target validation next, using
+saved states and responses. No fitting or model promotion occurred; this panel
+result does not qualify all 135 targets or biological behavior.
+[Outcome](experiments/records/E127-server-summary.json).
+
 2026-11-24 repository cleanup:46retired one-experiment server shell recipes
 were removed; reusable Python runners/reports, tests, assets and all current
 E121-E127 tools remain. Some dated launch commands below are historical recipes.
