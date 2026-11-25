@@ -6,7 +6,10 @@ recognized arrays from completed, quiet runs and protects active/incomplete runs
 and their recursive inputs. Deletions are journaled with hashes; raw evidence
 removed by cleanup is explicitly unavailable for later replay/audit. Current
 pinned validation runners are unchanged. See
-[the cleanup plan](experiments/records/storage-retention-20261125.json).
+[the cleanup plan](experiments/records/storage-retention-20261125.json). Historical `inputs/parent_lineage`
+validation traces are now recognized separately from parameters/data inputs;
+`python -m scripts.clean_results_storage --report` gives a compact read-only
+cleanup result. No revised server savings are yet evidenced.
 
 2026-11-25 E128 is planned: validate the fixed peptide parent across all 135
 stimulus targets using the saved 32-cycle ensemble. Both A100s share 462 missing

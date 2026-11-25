@@ -14465,3 +14465,51 @@ diff checks pass. No revised server execution or additional reclaimed bytes are
 yet evidenced. The current E128 runner and pinned numerical modules are unchanged.
 The same storage-prune launcher applies the corrected policy after git pull.
 Evidence summary: `experiments/records/storage-parent-copies-20261125.json`.
+
+
+## 2026-11-25 — Legacy lineage traces and completion metadata cleanup correction
+
+User reports revision d8d5fb8, no active cleaner process, and an explicit cleanup
+finished event at 2026-11-25T14:44:09.423599+00:00 with zero files/bytes deleted.
+A subsequent read-only probe reports cue-precision's root ineligible and three
+largest files at approximately 0.13 GiB each, all recognized=False/protected=True:
+`parent_run/parent_run/inputs/parent_lineage/validation-long.npz` and equivalent
+deeper resume_parent copies. These are diagnostic observations; exact protection
+origins and full payloads were not retrieved. No additional freed space claimed.
+
+Local inspection confirms two deterministic recognition blockers: `inputs` was
+excluded from traversal and `validation-long.npz` did not match the raw filename
+allowlist. The legacy reference verifier reads parameter/readout/checkpoint and
+configuration files; it does not consume these validation trace arrays. Whole-tree
+copytree historically replicated both parameters and many simulation outputs.
+
+Corrected the cleaner to traverse the specific `inputs/parent_lineage` subtree
+and recognize `validation-*.npz` simulation payloads. General input directories
+remain excluded; parameter-looking filenames/keys still veto deletion. Active
+and incomplete roots, exact required files and directory dependencies remain
+protected. No blanket parent-folder deletion or current-run pin changes occur.
+
+Also corrected dependency/completion semantics: output destinations (output_dir,
+output, log/report/figure paths) are not input requirements. A completed saved-data
+audit should not seed live dependency protection forever. Explicit incomplete
+computational receipts or execution flags still take precedence. Older final cue
+assay/sensorimotor reports lacking a status field are accepted only for known
+report schemas with a matching saved parameter SHA256; incomplete or mismatched
+models remain protected. This is completion recognition, not scientific gate
+reclassification. No assumption that failed behavior/sampling means unfinished
+computation is introduced.
+
+Added a read-only compact `--report` mode: final status/count/bytes and up to
+three largest per-run reclaimed sizes, without starting cleanup or creating
+records. The launcher prints that command. Detailed deletion records retain
+paths, hashes and evidence limitations as before. Twenty-two synthetic tests
+pass in 0.15 seconds, covering the actual nested-lineage layout, preservation of
+models/readouts/general inputs, active raw dependencies, output-provenance
+handling, completed audits versus partial computation, legacy model checksums
+and nonmutating report mode. Shell syntax and diff checks pass. No revised server
+execution or disk savings are yet evidenced. Retention plan updated in
+`experiments/records/storage-retention-20261125.json`.
+
+The journal now records each protection edge and its source metadata file. If no
+space is reclaimed, the compact report shows up to three blockers for the largest
+legacy roots, so future diagnosis does not require dumping the entire log.

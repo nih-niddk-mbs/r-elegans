@@ -19,7 +19,7 @@ import zipfile
 BASE = Path('/home/carsonc/r-elegans-results')
 KEEP_PARTS = {'run_records', 'source', 'inputs', 'optimizer', 'checkpoints', 'weights', 'models', 'parameters'}
 KEEP_NAME = re.compile(r'network|model|param|weight|checkpoint|coordinate|origin|optimizer|rng|random|profile|candidate', re.I)
-RAW_NAME = re.compile(r'(?:.*trajectory.*|trace-\d+|(?:no_cue|stop_only|stop_start|start_only|active|sham|dose-low)|(?:base-)?(?:starts|response)|final|extension(?:-states|-end)?|group-\d+-target-\d+|batch-\d+|(?:confirm|screen)-.+|(?:current|candidate)-(?:full|posterior-subcircuit))\.npz$')
+RAW_NAME = re.compile(r'(?:.*trajectory.*|trace-\d+|(?:no_cue|stop_only|stop_start|start_only|active|sham|dose-low)|(?:base-)?(?:starts|response)|final|extension(?:-states|-end)?|group-\d+-target-\d+|batch-\d+|(?:confirm|screen)-.+|validation-[A-Za-z0-9_-]+|(?:current|candidate)-(?:full|posterior-subcircuit))\.npz$')
 RAW_KEYS = {'dense_time_s', 'dense_joints', 'time_s', 'voltage_mV', 'means', 'response', 'final_voltage_mV', 'metadata_json', 'provenance_json', 'joints', 'voltage', 't', 'q'}
 PARAM_KEYS = re.compile(r'chemical|electrical|conductance|density|densities|capacitance|reversal|neuron_ids|weights|params|parameters|log_|rng|offsets|proposal|covariance', re.I)
 
@@ -96,10 +96,33 @@ def references(value, context, base):
             found.update(references(item, context, base))
     elif isinstance(value, dict):
         for key, item in value.items():
+            # Output destinations are provenance, not inputs. Following them
+            # turns an old configuration into protection of all its outputs.
+            if key in ('output_dir', 'output', 'log', 'log_path', 'report', 'motion_preview', 'figure'):
+                continue
             # Hash maps carry file references in keys as well as values.
             found.update(references(key, context, base))
             found.update(references(item, context, base))
     return found
+
+
+def legacy_complete(root, row):
+    """Recognize final legacy reports by schema plus exact saved model identity."""
+    if row.get('status') not in (None, 'completed'):
+        return False
+    assay = (root.name.startswith(('cue-precision-', 'cue-split-', 'cue-resolution-'))
+             and isinstance(row.get('all_grids_response_pass'), bool)
+             and bool(row.get('cases')) and 'comparisons' in row)
+    fit = (root.name.startswith(('sensorimotor-', 'sensorimotor64-', 'alternation64-'))
+           and row.get('stop_reason') in ('time_budget', 'iterations')
+           and isinstance(row.get('iterations'), int) and bool(row.get('validation')))
+    if not (assay or fit):
+        return False
+    expected = row.get('checkpoint_sha256', '')
+    if not isinstance(expected, str) or not re.fullmatch('[0-9a-f]{64}', expected):
+        return False
+    model = root/('parent_run/network_best.npz' if assay else 'network_best.npz')
+    return model.is_file() and not model.is_symlink() and digest(model) == expected
 
 
 def completed(root):
@@ -108,15 +131,25 @@ def completed(root):
         path = root/name
         if path.exists():
             row = load(path)
-            if row.get('status') == 'running':
+            if row.get('status') == 'running' or row.get('execution_complete') is False or row.get('all_steps_finished') is False:
                 return False
             if name == 'budget_receipt.json':
-                return row.get('all_steps_finished') is True and row.get('audit_complete') is True
-            return row.get('status') == 'completed' or row.get('all_stages_finished') is True
+                return ((row.get('all_steps_finished') is True and row.get('audit_complete') is True)
+                        or (row.get('audit_finished') is True and row.get('exit_code') == 0 and not row.get('timed_out')))
+            return (row.get('status') == 'completed' or row.get('all_stages_finished') is True
+                    or (row.get('audit_complete') is True and row.get('integrity_passed') is True)
+                    or legacy_complete(root, row))
+    audit = root/'audit.json'
+    if audit.exists():
+        row = load(audit)
+        return (row.get('audit_complete') is True and row.get('integrity_passed') is True
+                and row.get('execution_complete') is not False and row.get('all_steps_finished') is not False
+                and row.get('full_target_complete') is not False)
     return False
 
 
-def inventory(base, quiet_hours):
+def inventory(base, quiet_hours, event=None):
+    event = event or (lambda *a, **k: None)
     active = process_runs(base)
     protected = set(active)
     eligible = []
@@ -131,6 +164,7 @@ def inventory(base, quiet_hours):
         # Unknown/incomplete runs are protected, as are their dependencies.
         if not is_done:
             protected.add(root)
+            event('protected_path', path=str(root), reason='Incomplete or unrecognized completion metadata')
         else:
             eligible.append(root)
     queue = list(protected)
@@ -144,14 +178,28 @@ def inventory(base, quiet_hours):
                 raise RuntimeError('Unreadable live/incomplete-run metadata: '+str(path))
             for dependency in refs-protected:
                 protected.add(dependency)
+                event('protected_path', path=str(dependency), reason='Required reference', referenced_by=str(path))
                 if dependency.is_dir() or dependency.suffix == '.json':
                     queue.append(dependency)
-    return [r for r in eligible if r not in protected and (r/'budget_receipt.json' if (r/'budget_receipt.json').exists() else r/'summary.json').stat().st_mtime <= cutoff], protected
+    return [r for r in eligible if r not in protected and terminal_record(r).stat().st_mtime <= cutoff], protected
+
+
+def terminal_record(root):
+    return next(p for p in (root/'budget_receipt.json', root/'summary.json', root/'audit.json') if p.exists())
+
+
+def retained_folder(parts, index):
+    part = parts[index]
+    # Old whole-run copies put simulation traces beside model inputs here.
+    # Only this specific lineage subtree is traversed, not general data inputs.
+    lineage_inputs = part == 'inputs' and index+1 < len(parts) and parts[index+1] == 'parent_lineage'
+    return ((part in KEEP_PARTS and not lineage_inputs)
+            or 'optimizer' in part.lower() or 'checkpoint' in part.lower())
 
 
 def recognized_raw(path, root):
     relative = path.relative_to(root)
-    if any(part in KEEP_PARTS or 'optimizer' in part.lower() or 'checkpoint' in part.lower() for part in relative.parts[:-1]):
+    if any(retained_folder(relative.parts, i) for i in range(len(relative.parts)-1)):
         return False
     if path.is_symlink() or KEEP_NAME.search(path.name) or not RAW_NAME.fullmatch(path.name):
         return False
@@ -165,7 +213,7 @@ def recognized_raw(path, root):
 
 def clean(base, apply, quiet_hours, event):
     initial_active = process_runs(base)
-    eligible, protected = inventory(base, quiet_hours)
+    eligible, protected = inventory(base, quiet_hours, event)
     event('inventory', eligible_runs=len(eligible), protected_paths=sorted(str(p) for p in protected),
           dependency_policy='Whole active/incomplete runs; exact referenced files and directory subtrees, not whole runs for a parameter-file reference')
     count = total = 0
@@ -177,7 +225,7 @@ def clean(base, apply, quiet_hours, event):
             continue
         run_count, run_bytes = count, total
         for folder, dirs, files in os.walk(root, followlinks=False):
-            dirs[:] = [d for d in dirs if d not in KEEP_PARTS and not (Path(folder)/d).is_symlink()]
+            dirs[:] = [d for d in dirs if (d not in KEEP_PARTS or (d == 'inputs' and (Path(folder)/d/'parent_lineage').is_dir())) and not (Path(folder)/d).is_symlink()]
             for name in files:
                 path = Path(folder)/name
                 resolved = path.resolve()
@@ -201,7 +249,7 @@ def clean(base, apply, quiet_hours, event):
                     event('stopped_new_job', reason='New result-using process appeared while hashing; nothing further deleted')
                     return count, total
                 now = path.lstat()
-                if (now.st_ino, now.st_size, now.st_mtime_ns) != (before.st_ino, before.st_size, before.st_mtime_ns) or not completed(root) or (root/'budget_receipt.json' if (root/'budget_receipt.json').exists() else root/'summary.json').stat().st_mtime > cutoff:
+                if (now.st_ino, now.st_size, now.st_mtime_ns) != (before.st_ino, before.st_size, before.st_mtime_ns) or not completed(root) or terminal_record(root).stat().st_mtime > cutoff:
                     event('skipped_changed', path=str(path)); continue
                 if apply:
                     path.unlink()
@@ -213,15 +261,51 @@ def clean(base, apply, quiet_hours, event):
     return count, total
 
 
+def report(base):
+    journals = sorted((base/'.cleanup-records').glob('storage-*.jsonl'))
+    if not journals:
+        print('No cleanup journal found; nothing started.')
+        return
+    last = None
+    runs = []
+    blockers = []
+    with journals[-1].open() as stream:
+        for line in stream:
+            try:
+                row = json.loads(line)
+            except ValueError:
+                continue
+            if row.get('event') in ('finished', 'failed', 'stopped_new_job'):
+                last = row
+            if row.get('event') == 'protected_path' and Path(row['path']).parent == base and Path(row['path']).name.startswith(('cue-precision-', 'alternation64-', 'sensorimotor64-')):
+                blockers.append(row)
+            if row.get('event') == 'run_finished' and row.get('files', 0):
+                runs.append(row)
+    print('READ-ONLY cleanup report; nothing started.')
+    if last is None:
+        print('No final event yet; cleanup may still be running.')
+    else:
+        print(json.dumps({k: last[k] for k in ('event', 'apply', 'files', 'bytes', 'error', 'reason') if k in last}))
+    if not runs:
+        for row in blockers[:3]:
+            print('Protected:', Path(row['path']).name, row['reason'], row.get('referenced_by', ''))
+    for row in sorted(runs, key=lambda r: r['bytes'], reverse=True)[:3]:
+        print(f"{row['bytes']/1024**3:.2f} GiB", Path(row['run']).name)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--base', type=Path, default=BASE)
     p.add_argument('--apply', action='store_true')
+    p.add_argument('--report', action='store_true', help='Read-only compact latest cleanup report; starts nothing')
     p.add_argument('--quiet-hours', type=float, default=1.)
     a = p.parse_args()
     base = a.base.expanduser().resolve()
     if not base.is_dir() or base in (Path('/'), Path.home()) or a.quiet_hours < 1 or not a.quiet_hours < float('inf'):
         p.error('Existing results directory and at least one quiet hour required')
+    if a.report:
+        report(base)
+        return
     import fcntl
     with (Path('/tmp')/f'r-elegans-storage-clean-{os.getuid()}.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)

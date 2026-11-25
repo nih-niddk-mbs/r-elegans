@@ -138,3 +138,87 @@ def test_relative_input_paths_are_protected_without_protecting_sibling_arrays(tm
     monkeypatch.setattr(clean, 'process_runs', lambda base: set())
     count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
     assert count == 1 and (parent/'active-trajectory.npz').exists()
+
+
+def test_historical_parent_lineage_validation_copies_are_removed_but_inputs_and_weights_kept(tmp_path, monkeypatch):
+    root = tmp_path/'completed'; done(root)
+    lineage = root/'parent_run/resume_parent/inputs/parent_lineage'
+    raw(lineage/'validation-long.npz', voltage_mV=np.zeros((10, 302)), body_joint_angles=np.zeros((10, 11)))
+    raw(lineage/'network_best.npz', chemical=np.ones(3))
+    raw(lineage/'source_inputs/parent_actor.npz', weights=np.ones(3))
+    raw(root/'inputs/response.npz', response=np.ones(3))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1 and not (lineage/'validation-long.npz').exists()
+    assert (lineage/'network_best.npz').exists() and (lineage/'source_inputs/parent_actor.npz').exists()
+    assert (root/'inputs/response.npz').exists()
+
+
+def test_output_destination_cannot_turn_parameter_reference_into_whole_run_protection(tmp_path, monkeypatch):
+    live = tmp_path/'incomplete'; live.mkdir()
+    parent = tmp_path/'completed'; done(parent)
+    raw(parent/'network_best.npz', chemical=np.ones(3)); raw(parent/'trajectory.npz')
+    (parent/'configuration.json').write_text(json.dumps(dict(arguments=dict(output_dir=str(parent)))))
+    (live/'manifest.json').write_text(json.dumps(dict(input_sha256={str(parent/'configuration.json'): 'hash', str(parent/'network_best.npz'): 'hash'})))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1 and (parent/'network_best.npz').exists()
+
+
+def test_finished_saved_data_audit_does_not_seed_live_dependency_protection(tmp_path, monkeypatch):
+    parent = tmp_path/'completed'; done(parent); raw(parent/'trajectory.npz')
+    audit = tmp_path/'saved-audit'; audit.mkdir()
+    path = audit/'audit.json'
+    path.write_text(json.dumps(dict(audit_complete=True, integrity_passed=True, run=str(parent))))
+    os.utime(path, (time.time()-7200,)*2)
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1
+    # An explicit incomplete computational receipt still takes priority.
+    (audit/'budget_receipt.json').write_text(json.dumps(dict(all_steps_finished=False, audit_complete=True)))
+    assert not clean.completed(audit)
+
+
+def test_active_lineage_dependency_stays_protected_despite_new_trace_recognition(tmp_path, monkeypatch):
+    live = tmp_path/'active'; live.mkdir()
+    parent = tmp_path/'completed'; done(parent)
+    trace = parent/'inputs/parent_lineage/validation-long.npz'
+    raw(trace, voltage_mV=np.zeros((10, 302)))
+    (live/'manifest.json').write_text(json.dumps(dict(input_sha256={str(trace): 'hash'})))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: {live})
+    assert clean.clean(tmp_path, True, 1, lambda *a, **k: None) == (0, 0)
+    assert trace.exists()
+
+
+def test_legacy_final_assay_without_status_requires_matching_parameter_hash(tmp_path, monkeypatch):
+    root = tmp_path/'cue-precision-legacy'; root.mkdir()
+    raw(root/'parent_run/network_best.npz', chemical=np.ones(3))
+    raw(root/'parent_run/inputs/parent_lineage/validation-long.npz', voltage_mV=np.zeros((10, 302)))
+    path = root/'summary.json'
+    path.write_text(json.dumps(dict(checkpoint_sha256=clean.digest(root/'parent_run/network_best.npz'),
+         all_grids_response_pass=False, cases=[dict(case='coarse')], comparisons=[])))
+    os.utime(path, (time.time()-7200,)*2)
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    assert clean.completed(root)
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1 and (root/'parent_run/network_best.npz').exists()
+    (root/'parent_run/network_best.npz').write_bytes(b'changed')
+    assert not clean.completed(root)
+
+
+def test_compact_report_is_readonly_and_never_launches_cleanup(tmp_path, monkeypatch, capsys):
+    import sys
+    monkeypatch.setattr(clean, 'clean', lambda *a, **k: pytest.fail('Report started cleanup'))
+    monkeypatch.setattr(sys, 'argv', ['clean', '--base', str(tmp_path), '--report'])
+    clean.main()
+    assert list(tmp_path.iterdir()) == []
+    directory = tmp_path/'.cleanup-records'; directory.mkdir()
+    (directory/'storage-test.jsonl').write_text(json.dumps(dict(event='finished', apply=True, files=10, bytes=1024))+'\n')
+    clean.main()
+    assert '"files": 10' in capsys.readouterr().out
+
+
+def test_audit_of_incomplete_computation_never_counts_as_completed_run(tmp_path):
+    root = tmp_path/'partial'; root.mkdir()
+    (root/'audit.json').write_text(json.dumps(dict(audit_complete=True, integrity_passed=True, execution_complete=False)))
+    assert not clean.completed(root)
