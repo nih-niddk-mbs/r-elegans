@@ -28,5 +28,12 @@
     ],
     "unchanged": "Protect active/incomplete roots, exact raw inputs and directory dependencies; keep parameters, optimizer/RNG and all logs. Pinned E128 runtime unchanged.",
     "execution": "New revision not yet executed on server; reclaimed size unknown."
+  },
+  "provenance_recursion_correction": {
+    "reported_result": "Latest user compact report still shows zero deletions, with blockers in node-calibration inputs/new_configuration.json, old sensorimotor configuration.json, and archived run_records/.../source/experiments/records/E064-server-summary.json. No timestamps or new journal identifiers supplied.",
+    "root_cause": "The archive exclusion applied only to directory traversal, not to directly referenced archived JSON files. Copied and completed historical configuration parent fields were still treated as live whole-directory inputs.",
+    "correction": "Never recursively parse run_records provenance as live dependencies. In copied inputs configuration snapshots and completed-run configuration.json, historical parent_run/warm_start_run/resume_run/precision_reference_assay/parent/warm_start/resume directory fields are provenance; explicit NPZ/JSON file references remain protected. Other directory roles such as data_root remain runtime dependencies. Original active/incomplete top-level configurations still protect directory inputs.",
+    "tests": "26 focused cleanup/prune tests pass in 0.15 seconds, including faithful layouts for all reported blockers and preservation of actual live data/input dependencies.",
+    "execution": "Revised cleaner not yet run on server. No additional reclaimed space claimed."
   }
 }

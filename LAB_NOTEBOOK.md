@@ -14513,3 +14513,38 @@ execution or disk savings are yet evidenced. Retention plan updated in
 The journal now records each protection edge and its source metadata file. If no
 space is reclaimed, the compact report shows up to three blockers for the largest
 legacy roots, so future diagnosis does not require dumping the entire log.
+
+
+## 2026-11-25 — Zero-deletion report exposes provenance recursion blockers
+
+User compact report still shows a finished apply with zero files and bytes.
+Its blocker edges identify sensorimotor64 through
+`node-calibration-20261119T041158Z-494689/inputs/new_configuration.json`,
+cue-precision through sensorimotor64's configuration.json, and alternation64
+through archived `stable-atlas-fit-20261122T045223Z-795974/run_records/20261122T045223977823Z-6632a24d/source/experiments/records/E064-server-summary.json`.
+No new cleanup event timestamp/journal path is supplied; none is inferred.
+
+The exact archived JSON case exposes a traversal bug: run_records was excluded
+by os.walk, but directly referenced JSON files bypassed that exclusion and made
+historical experiment summaries seed protection of obsolete runs. Fixed the
+exclusion for direct files and subtrees. Archived records themselves remain
+retained. Source history is not treated as executable input dependency metadata.
+
+Inspected the legacy reference/configuration readers. Copied new/old configuration
+snapshots preserve historical launch parents, while runtime code reads their
+scalar settings or exact model/config inputs. For copied inputs configuration
+snapshots and already completed-run configuration.json, only historical parent
+and warm-start/resume/precision-reference directory roles cease to propagate
+whole-directory protection. Explicit file references remain protected; general
+data_root directories and all directories in original active/incomplete top-level
+configurations still propagate protection. This is a narrow provenance/input
+separation, not abandonment of interrupted work or a blanket dependency bypass.
+
+Twenty-six synthetic cleanup/prune tests pass in 0.15 seconds. Tests recreate
+all three reported blocker layouts and verify deletion eligibility for unrelated
+legacy traces while preserving parameter files, explicit raw inputs and actual
+data directories. A broader initial archive-name check caught a legitimate
+source-directory regression in an existing test; it was corrected before release
+and the full focused set passes. No server deletion or new savings are claimed.
+Current E128/pinned numerical modules remain unchanged. The same launcher runs
+the corrected cleanup and the compact report remains read-only.

@@ -62,7 +62,14 @@ def process_runs(base):
     return roots
 
 
+def archived_provenance(path):
+    return 'run_records' in path.parts
+
+
 def json_files(root):
+    # Direct file references must obey the same archive exclusion as os.walk.
+    if archived_provenance(root):
+        return
     if root.is_file():
         if root.suffix == '.json' and not root.is_symlink():
             yield root
@@ -75,7 +82,10 @@ def json_files(root):
                 yield path
 
 
-def references(value, context, base):
+HISTORICAL_CONFIG_DIRS = {'parent_run', 'warm_start_run', 'resume_run', 'precision_reference_assay', 'parent', 'warm_start', 'resume'}
+
+
+def references(value, context, base, follow_directories=True, role=None):
     found = set()
     if isinstance(value, str):
         candidate = None
@@ -90,10 +100,11 @@ def references(value, context, base):
                 path.relative_to(base)
             except ValueError:
                 return found
-            found.add(path)
+            if follow_directories or role not in HISTORICAL_CONFIG_DIRS or path.suffix in ('.npz', '.json'):
+                found.add(path)
     elif isinstance(value, list):
         for item in value:
-            found.update(references(item, context, base))
+            found.update(references(item, context, base, follow_directories, role))
     elif isinstance(value, dict):
         for key, item in value.items():
             # Output destinations are provenance, not inputs. Following them
@@ -101,8 +112,8 @@ def references(value, context, base):
             if key in ('output_dir', 'output', 'log', 'log_path', 'report', 'motion_preview', 'figure'):
                 continue
             # Hash maps carry file references in keys as well as values.
-            found.update(references(key, context, base))
-            found.update(references(item, context, base))
+            found.update(references(key, context, base, follow_directories))
+            found.update(references(item, context, base, follow_directories, key))
     return found
 
 
@@ -172,7 +183,13 @@ def inventory(base, quiet_hours, event=None):
         root = queue.pop()
         for path in json_files(root):
             try:
-                refs = references(load(path), path.parent, base)
+                owner = owner_run(path, base)
+                config = path.name in ('configuration.json', 'new_configuration.json', 'old_configuration.json')
+                # Copied configurations document old launch directories. Runtime
+                # readers use their scalar settings and explicit file inputs,
+                # not every trajectory under the historical launch parents.
+                snapshot = config and ('inputs' in path.relative_to(base).parts or (owner is not None and completed(owner)))
+                refs = references(load(path), path.parent, base, follow_directories=not snapshot)
             except (OSError, ValueError):
                 # Cannot establish dependencies reliably: refuse deletion.
                 raise RuntimeError('Unreadable live/incomplete-run metadata: '+str(path))

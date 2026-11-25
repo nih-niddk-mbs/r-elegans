@@ -222,3 +222,48 @@ def test_audit_of_incomplete_computation_never_counts_as_completed_run(tmp_path)
     root = tmp_path/'partial'; root.mkdir()
     (root/'audit.json').write_text(json.dumps(dict(audit_complete=True, integrity_passed=True, execution_complete=False)))
     assert not clean.completed(root)
+
+
+def test_reported_old_configuration_chain_is_provenance_not_whole_runtime_input(tmp_path, monkeypatch):
+    node = tmp_path/'node-calibration'; node.mkdir()
+    old = tmp_path/'sensorimotor64-old'; done(old)
+    precision = tmp_path/'cue-precision-old'; done(precision)
+    raw(old/'network_best.npz', chemical=np.ones(3))
+    raw(old/'inputs/parent_lineage/validation-long.npz', voltage_mV=np.zeros((10, 302)))
+    raw(precision/'parent_run/inputs/parent_lineage/validation-long.npz', voltage_mV=np.zeros((10, 302)))
+    (old/'configuration.json').write_text(json.dumps(dict(arguments=dict(precision_reference_assay=str(precision)))))
+    (node/'inputs').mkdir()
+    (node/'inputs/new_configuration.json').write_text(json.dumps(dict(parent_run=str(old), arguments=dict(warm_start_run=str(old)), input_sha256={str(old/'network_best.npz'): 'hash'})))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 2 and (old/'network_best.npz').exists()
+
+
+def test_direct_archived_experiment_json_cannot_protect_historical_run(tmp_path, monkeypatch):
+    live = tmp_path/'incomplete'; live.mkdir()
+    old = tmp_path/'alternation64-old'; done(old); raw(old/'trajectory.npz')
+    archived = tmp_path/'old-record/run_records/snapshot/source/experiments/records/E064.json'
+    archived.parent.mkdir(parents=True)
+    archived.write_text(json.dumps(dict(run=str(old))))
+    (live/'manifest.json').write_text(json.dumps(dict(source_record=str(archived))))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    count, _ = clean.clean(tmp_path, True, 1, lambda *a, **k: None)
+    assert count == 1 and archived.exists()
+
+
+def test_live_original_configuration_directory_input_remains_protected(tmp_path, monkeypatch):
+    live = tmp_path/'active'; live.mkdir()
+    old = tmp_path/'required'; done(old); raw(old/'trajectory.npz')
+    (live/'configuration.json').write_text(json.dumps(dict(arguments=dict(parent_run=str(old)))))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: {live})
+    assert clean.clean(tmp_path, True, 1, lambda *a, **k: None) == (0, 0)
+    assert (old/'trajectory.npz').exists()
+
+
+def test_copied_configuration_nonhistorical_data_directory_remains_required(tmp_path, monkeypatch):
+    live = tmp_path/'incomplete'; (live/'inputs').mkdir(parents=True)
+    data = tmp_path/'actual-data'; done(data); raw(data/'trajectory.npz')
+    (live/'inputs/new_configuration.json').write_text(json.dumps(dict(data_root=str(data))))
+    monkeypatch.setattr(clean, 'process_runs', lambda base: set())
+    assert clean.clean(tmp_path, True, 1, lambda *a, **k: None) == (0, 0)
+    assert (data/'trajectory.npz').exists()
