@@ -14815,3 +14815,89 @@ whole-run retirement or cleanup is started. The user's instruction to let curren
 cleanup finish remains in force. Full-target changed-model and H1.2 behavioral
 qualifications remain outstanding. Update current status and initialization
 strategy; this closes the pending reported component review.
+
+
+## 2026-11-25 — E130 wider-panel eight-hour fit planned
+
+User requests an eight-hour run after E129's complete component review. E129
+showed small training descent but only four stimuli and two unscorable heldout
+folds; available heldout changes were mixed. Question: does a wider objective and
+measured GPU batching improve useful fitting efficiency, with complete available
+heldout-stimulus evaluation after selection? No server execution has occurred.
+Full preregistration: `experiments/records/E130-plan.json`.
+
+Five independent searches initialize from the exact validated common peptide
+parent f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652 in E128.
+This is a new wider objective and fresh optimizer, not exact E129 continuation;
+its five independent selected models remain preserved. Reuse E124 cached animal
+folds with original manifest hash,87-animal partition/identity checks and no raw
+reprocessing. Training panel is up to16 common training-eligible source targets,
+requiring at least8, seed1300 with RNG saved. Eligibility uses training pair
+identity/availability, not heldout numerical values. All data are historically
+inspected development CV, not a pristine test.
+
+Before optimization, two persistent A100 workers calibrate4/8/16target slots
+(one clock per GPU, four distinct physical CPU cores each). For the same parent's
+first16 sampled states, run the entire wider panel at each capacity twice, saving
+each first/warm tile independently. Require response equivalence/repeatability
+within1e-10 and all finite/bound/duplicate-sham/RMD gates. Choose the fastest
+passing warm full-panel capacity per clock; record compile/cold versus warm time,
+throughput and available memory metadata. No tolerance relaxation or global
+optimality claim. A failed larger shape remains explicit with4-slot fallback.
+
+Same five bounded group coefficients, step0.01 and cumulative+/-0.1 limits:
+inward/outward unknown non-RMD/non-LEAK channels, chemical edges, symmetric gap
+pairs and peptide excitation/inhibition balance. Four neural directions couple
+9538 coordinates; this does not identify individual physiology independently.
+Known passives/kinetics/reference channels, release/indicator, peptide assets/
+5s memory and solver clocks remain fixed. Actual changed weights receive their
+own60s settling,4s/four-cycle base and32s/28-cycle extension:32cycles/four phases
+per cycle,128full starting states. Parent benchmark states and matching warm
+first-group outputs are reused when identical; a changed model's heldout
+extension reuses its own verified fine states, not parent states. No whole-tree
+parent copy is made.
+
+Eight hours is optimization admission allowance after calibration/baseline setup.
+Use measured pair times and finish admitted work at verified checkpoints. Final
+fine train-panel acceptance, expanded heldout evaluation, audit and retention
+have no inherited deadline and may substantially extend total time beyond8h.
+Pending pairs, own states, every response/benchmark tile and optimizer/RNG persist.
+Unplanned in-flight kernel/JIT work can restart; completed batches do not. Active
+GPU checks/shared lock/read-only reports and completed-run no-op guards remain.
+Current pinned historical runners are unchanged.
+
+Train objective alone chooses +/- proposals. Fine endpoint train/safety/numeric
+acceptance happens for every fold, then actual final model hashes/choices are
+persisted before any heldout target allocation or scores. For each fold, add all
+recorded downstream heldout stimulus identities outside the training panel,
+including those needed for per-animal scoring. Evaluate those stimuli at the
+fine clock for the frozen changed model, and identical parent predictions (reuse
+verified E128 means if available). This fixes missing panel coverage directly,
+not by selecting targets to improve heldout values. Expanded response safety/
+sampling failure yields unavailable heldout results without changing frozen
+weights. Report per-fold and per-animal losses/availability; a wider training
+panel alone does not imply every one of87animals contributed labels.
+
+Numerical qualification remains two-clock on the training panel, with fine-clock
+safety/sampling on the extra heldout stimuli. This is not a claim of full135-target
+two-clock qualification of changed weights. Pilot/longer-fit readiness additionally
+requires a heldout score on every fold, all folds probed, clean audit and at least
+one train improvement; favorable heldout values are not an update/gate criterion.
+No new body behavior, sensory start/stop/swimming, biological parameter recovery
+or automatic model consolidation/promotion is claimed. H1.2 remains unchanged.
+
+Keep parameters, optimizer/RNG, source/environment/argv and detailed metrics.
+Full trial/final-state arrays are not archived. Required temporary starts and
+means remain until complete clean audit, then are pruned with hashes/sizes and
+explicit unavailable-raw record. Five GiB temporary reserve; no source deletion.
+The audit recomputes benchmark/capacity choices, target/phase/state arithmetic,
+train-only fold histories, all selected parameter/bounds/frozen gates, numerical
+endpoints and frozen-model expanded heldout/animal score identity/arithmetic,
+plus source/input/archive/batch hashes. Log in-memory finite/bound/control metrics
+as reductions, not independently replayable final trajectories. Existing cleanup
+may stop when a new job appears, preserving deletions and requiring refreshed
+protection; no safety bypass or obsolete whole-run retirement starts here.
+
+Launch: `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_cv_wide_cycle_fit_mbslnx2.sh`.
+Read-only: dedicated Python `-m scripts.run_cv_wide_cycle_fit --status`, or
+`-m scripts.run_cv_wide_cycle_fit --output-dir RUN --report`.

@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Proposed: broaden/rotate training target coverage using protocol/training metadata, preserve animal folds and no heldout-driven selection, benchmark larger target batches, then size a longer fit from measured throughput. Do not simply extend the sparse four-target pilot. No new work or whole-run retirement until user authorizes; let current cleanup finish.",
+  "next_action": "Planned E130: GPU-batch calibration4/8/16, wider(up to16) training panel, eight-hour optimization allowance for five independent clean-parent fits, final frozen-choice expanded heldout stimulus/per-animal scoring and audit without cutoff. Fresh objective/optimizer; E129 models retained. Not yet executed.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

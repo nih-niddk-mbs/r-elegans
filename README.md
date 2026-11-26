@@ -1,5 +1,15 @@
 # r-elegans
 
+2026-11-25 E130 is planned: eight hours of optimization on a wider training
+panel (up to16 targets), five independent animal folds and the validated common
+peptide parent. First benchmark4/8/16-target GPU batches for identical results and
+measured throughput. Final weights freeze before additional heldout stimulus
+predictions and per-animal scoring; heldout values never select updates.
+Calibration/baseline and final validation/audit are additional time with no cutoff.
+Keep parameters and detailed records; prune temporary arrays after clean audit.
+E129 models stay separate. No full-target two-clock or behavior promotion.
+[Plan and commands](experiments/records/E130-plan.json).
+
 2026-11-25 E129 completed and component-reviewed (user-reported): seven probes
 selected small training-objective improvements in all five animal folds. Parameter,
 fixed-field and timestep checks passed; no parameters are near their bounds. The

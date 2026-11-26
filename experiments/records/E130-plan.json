@@ -1,0 +1,66 @@
+{
+  "experiment": "E130",
+  "recorded_date": "2026-11-25",
+  "status": "Planned; no server execution evidenced",
+  "authorization": "User requests an eight-hour run following E129 component review and recommendation to broaden target coverage and benchmark larger GPU batches. Eight hours is optimization allowance; calibration/baseline and final validation/audit are additional time, with no inherited hard total ceiling.",
+  "question": "Does a wider training objective yield useful fold-independent physiology descent, and can measured target batching improve throughput while complete heldout-stimulus scoring removes the four-target coverage gap?",
+  "parents": {
+    "source_run": "/home/carsonc/r-elegans-results/full-cycle-validation-20261125T051038Z-1150797",
+    "model": "peptide/model.npz",
+    "sha256": "f626ded0494902820432046f1031cafe35b65216cb25ecc6ffb1cee2d829e652",
+    "initialization": "Five independent fresh searches from the same validated clean pre-atlas peptide model. The objective changes from E129; this is not exact optimizer continuation or reuse of its four-target scores. All five E129 selected checkpoint hashes/models remain independent evidence and are not overwritten or consolidated.",
+    "required_audit": "E128 execution/integrity/full-target qualification complete; E129 endpoint/heldout review is recorded in experiments/records/E129-server-summary.json."
+  },
+  "data": {
+    "folds": "Reuse E124 folds.json with enforced source-manifest hash,87unique eligible animals, five disjoint animal folds, each animal heldout exactly once. Cached audited statistics, no new raw-data preprocessing.",
+    "training_panel": "Up to16 common training-eligible source targets, requiring at least8; seed1300, deterministic selection and saved RNG. Pair identity/availability defines eligibility; numerical heldout labels/scores never select targets or updates. Fixed wider panel gives consistent train-objective comparisons.",
+    "heldout": "After every final train/numerical weight decision is frozen, request additional fine-clock predictions for all recorded downstream heldout stimulus identities outside the training panel, including per-animal identities. This is evaluation coverage, not heldout-driven weight or hyperparameter selection. All model choices freeze before this allocation or any heldout scores.",
+    "coverage": "Report fold-level score availability and per-animal scored/total counts. No claim that a narrow training panel uses all87animals or all135stimuli. Missing/unsafe expanded predictions remain unavailable, not imputed.",
+    "labels": "Historically inspected development CV, not a pristine test. Same static pooled/per-target clipped-z response correlation and parameter prior; no complete calcium-time-series/biological-identification claim."
+  },
+  "parameters": {
+    "trainable": "Same five bounded structured coefficients as E129: inward/outward non-RMD/non-LEAK channel coordinates, chemical strengths, symmetric gap pairs and peptide excitation/inhibition balance. Four neural groups couple9538 unknown coordinates; no independent9538parameter recovery.",
+    "bounds": "Coefficient bounds[-0.1,0.1], symmetric step0.01, existing fixed-field masks and prior. Fixed physical/kinetic/reference/peptide asset/tau fields unchanged.",
+    "fixed": "Anatomy, passives, kinetics, RMD/LEAK priors, release/indicator laws, peptide expression/affinity and5s memory, stimulus and32-cycle sampling, solver/clocks. Initial state fields are continuation data, not trained physiology; changed selected bundles receive their own coarse phase state."
+  },
+  "gpu_calibration": {
+    "capacities": [
+      4,
+      8,
+      16
+    ],
+    "workers": "One float64 A100 per clock, four physical CPU cores each, both concurrent. Persistent worker kernels continue into fitting.",
+    "method": "Same fresh parent128states per clock; first16states replay the entire wider panel at each target capacity with first/cold and repeated/warm full-panel passes. Two duplicate shams per tile. Atomic checkpoint per cold/warm tile; no benchmark restart of completed work.",
+    "equivalence": "All shared full-panel phase/receiver responses across capacities and repeat must agree with the passing4-slot reference within1e-10 absolute, plus finite/bound/control/RMD gates. No automatic tolerance relaxation.",
+    "choice": "Fastest passing measured warm full-panel time independently per clock. Log first/steady times, target trials/s, batch dimensions and memory stats when available; unsupported memory reporting does not reject a numerically good shape. Failed larger capacities remain explicit; valid4-slot fallback is allowed.",
+    "limits": "This benchmarks the training-panel/parent shape on these GPUs, not globally optimal resource use. Extra heldout domains may have padding. Calibration/initialization time is outside the optimization allowance."
+  },
+  "fitting": {
+    "search": "Two concurrent +/- probes, deterministic round-robin independent fold states and group order. Train objective alone chooses greedy updates; unsafe/nonfinite/sampling-failed proposals rejected. No unverified differentiable-gradient sign used.",
+    "own_states": "Every changed model/clock gets its own60s settling, four cycles/four phases in4s and32s extension selecting28additional cycles/four phases. Source benchmark states may be reused only for the identical parent and clock; heldout extensions reuse exact selected-model fine states by verified model hash and clock, not old-parent states.",
+    "response": "12s trial,0.03nS0.5s input,1.5\u201311.5s indicator mean. All32cycles x4phases. Fixed midpoint outer/neural0.001s/0.03125ms and0.0005s/0.015625ms; peptide outer coupling remains first order.",
+    "endpoints": "Train-panel final coarse/fine sampling/control and training-descent acceptance; reject changed endpoint to exact parent if those fail. Freeze actual final selected weights/hashes before heldout expansion. Additional heldout-response failure records unavailable heldout results and never changes the frozen weight choice.",
+    "reuse": "Verify and reuse E128 parent response subsets wherever retained. Authorized raw pruning leads to explicitly logged recomputation of missing subsets. Hash mismatch fails rather than silently replacing evidence. Parent replay reuses completed benchmark states and matching warm first-group means. No full source run trees copied."
+  },
+  "acceptance": {
+    "search_and_numeric": "Original E128 fixed sampling/response tolerances; per-clock leave-out, chronological-half and prefix screens, finite/bounded all-cell trial states, duplicate shams and persistent RMD voltage rhythms. Candidate train objective improvement >1e-8; fixed fields/bounds audited exactly.",
+    "heldout": "All available heldout target identities evaluated after frozen selection; fold and per-animal losses compared with matching parent predictions on the same domains. Heldout values never accept/reject weights or choose updates. Expanded scoring uses fine clock and sampling/safety checks; it is not full135-target two-clock changed-model qualification.",
+    "readiness": "Clean complete audit, all five folds probed, at least one selected training improvement and a valid heldout score on every fold. Record actual per-animal coverage separately; no assertion all87are scorable. Readiness does not require favorable heldout values and is not generalization/biology/behavior qualification.",
+    "scope": "No automatic model consolidation/promotion, full-target changed-model qualification, body/sensory start-stop/swimming or biological success. H1.2 applies to later behavior work."
+  },
+  "operations": {
+    "optimization_minutes": 480,
+    "timing": "Start optimization admission clock after measured calibration and baseline preparation; persist deadline once. Admit symmetric pairs with measured timing margin, finish admitted work at durable checkpoint; no hard total job timeout. Finish fine endpoints, expanded heldout scoring, audit and retention afterward even if total is substantially longer than8h.",
+    "checkpoint": "Atomic/fsynced/readback own-state and every response/benchmark tile, pending pair, optimizer JSON/NPZ and RNG. Resume same-source unfinished output; verified completed stages not replayed. An in-flight kernel/JIT may restart after unplanned interruption; no exact kernel/reboot recovery claim.",
+    "duplicates": "Read-only status/report/output selection, own-user GPU-process check including prior pilot, shared exclusive GPU lock. Completed run starts nothing again.",
+    "storage": "5GiB temporary reserve. Parameters/optimizer/RNG, exact source/env/argv, per-case metrics and retention journal are permanent. No full trial/final-state trajectories saved. Temporary own states and means are pruned only after complete clean audit, with file hashes/sizes and raw-unavailability marker. Failed/incomplete work remains resumable.",
+    "cleanup": "Current cleaner may stop when it detects a new results-using job. Its completed deletions remain journaled; no bypass of current input protection or whole-run retirement.",
+    "audit": "Recompute measured batch choices, benchmark and normal target/phase arithmetic, training-only histories and cross-fold independence, bounds/frozen fields, endpoint gates, final-selection hash/barrier and expanded heldout model/target identity, heldout/animal scores and source/input/archive/batch artifacts. In-memory final-state/trace reductions are logged but raw trajectories intentionally not archived."
+  },
+  "commands": {
+    "launch": "cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_cv_wide_cycle_fit_mbslnx2.sh",
+    "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_wide_cycle_fit --status",
+    "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_wide_cycle_fit --output-dir RUN --report"
+  },
+  "local_verification": "75 focused CPU float64 tests pass in9.10s before final record writes; AST/shell/diff checks pass. Includes benchmark equivalence/faster-invalid-shape rejection, variable-width target completeness/checkpoint reuse, immutable same-model state reuse for additional heldout stimuli, frozen-choice expanded-score ordering/failure handling, plus previous fitter/numerics/storage checks. No local full-network or GPU run; server throughput/calibration outcome remains planned."
+}
