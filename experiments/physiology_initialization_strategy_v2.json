@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E129 reported complete/clean audit:7probes across5animalfolds,5selected small training-objective improvements. Four-target pilot readiness passed; endpoint/heldout component review pending, with2heldout scores unavailable. E128 fixed-parent full-target numeric pass preserved.",
+  "status": "E129 component review complete from server extracts:5small train improvements, clean audit, parameter/frozen/bound/timestep checks pass. Four-target heldout coverage missing2folds; other3mixed(2improve/1worsen). No generalization/behavior qualification. Temporary-array retention complete.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Inspect E129 selected model hashes/parameter changes/bounds, per-fold numerical gates, parent heldout comparisons/missing-score reasons and evaluation timings before a longer fitting plan. No automatic new experiment; cleanup remains independent.",
+  "next_action": "Proposed: broaden/rotate training target coverage using protocol/training metadata, preserve animal folds and no heldout-driven selection, benchmark larger target batches, then size a longer fit from measured throughput. Do not simply extend the sparse four-target pilot. No new work or whole-run retirement until user authorizes; let current cleanup finish.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

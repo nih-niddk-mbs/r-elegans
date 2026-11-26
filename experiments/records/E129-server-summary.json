@@ -31,7 +31,30 @@
       "relative_decrease_percent": 0.06743692515297418,
       "heldout_loss": null,
       "parent_heldout_loss": null,
-      "heldout_unavailable_reason": null
+      "heldout_unavailable_reason": "No measured downstream labels",
+      "heldout_loss_change": null,
+      "selected_coefficients": [
+        0.01,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_model_sha256": "1f2e32d7dee418bfc878c12a1b8f96cd900d4a6443702b5772f0a9f7809e9596",
+      "parameters": {
+        "passed": true,
+        "mismatched_fields": [],
+        "changed_neural_coordinates": 1184,
+        "peptide_balance": 0.0,
+        "maximum_neural_offset": 0.01,
+        "fixed_parameter_fields_exact": true,
+        "near_bound": 0
+      },
+      "numerical": {
+        "maximum_difference": 2.5167527584538107e-09,
+        "tolerance": 2.6140880788204962e-05,
+        "passed": true
+      }
     },
     {
       "fold": 1,
@@ -43,7 +66,30 @@
       "relative_decrease_percent": 0.08415422588559056,
       "heldout_loss": null,
       "parent_heldout_loss": null,
-      "heldout_unavailable_reason": null
+      "heldout_unavailable_reason": "No measured downstream labels",
+      "heldout_loss_change": null,
+      "selected_coefficients": [
+        0.0,
+        -0.01,
+        -0.01,
+        0.0,
+        0.0
+      ],
+      "selected_model_sha256": "97d35fcd0b88dc7d1af2890a838b417b3030871e5488b5888aed809bab798879",
+      "parameters": {
+        "passed": true,
+        "mismatched_fields": [],
+        "changed_neural_coordinates": 7261,
+        "peptide_balance": 0.0,
+        "maximum_neural_offset": 0.01,
+        "fixed_parameter_fields_exact": true,
+        "near_bound": 0
+      },
+      "numerical": {
+        "maximum_difference": 2.4361016858279183e-09,
+        "tolerance": 2.6140880788204962e-05,
+        "passed": true
+      }
     },
     {
       "fold": 2,
@@ -54,8 +100,31 @@
       "objective_decrease": 9.499254395772816e-05,
       "relative_decrease_percent": 0.011813540518987451,
       "heldout_loss": 0.7682658302163916,
-      "parent_heldout_loss": null,
-      "heldout_unavailable_reason": null
+      "parent_heldout_loss": 0.7674495106757661,
+      "heldout_unavailable_reason": null,
+      "heldout_loss_change": 0.0008163195406255541,
+      "selected_coefficients": [
+        0.0,
+        0.0,
+        -0.01,
+        0.0,
+        0.0
+      ],
+      "selected_model_sha256": "078a1e597c4d0def0a0799e561b299b8b9f5e4daa7abd0e8b3025c3f378c0af4",
+      "parameters": {
+        "passed": true,
+        "mismatched_fields": [],
+        "changed_neural_coordinates": 3709,
+        "peptide_balance": 0.0,
+        "maximum_neural_offset": 0.01,
+        "fixed_parameter_fields_exact": true,
+        "near_bound": 0
+      },
+      "numerical": {
+        "maximum_difference": 2.3955742702030935e-09,
+        "tolerance": 2.6140880788204962e-05,
+        "passed": true
+      }
     },
     {
       "fold": 3,
@@ -66,8 +135,31 @@
       "objective_decrease": 0.0003498394947681893,
       "relative_decrease_percent": 0.041580764170903506,
       "heldout_loss": 0.8266003019002651,
-      "parent_heldout_loss": null,
-      "heldout_unavailable_reason": null
+      "parent_heldout_loss": 0.8266297931444306,
+      "heldout_unavailable_reason": null,
+      "heldout_loss_change": -2.949124416551374e-05,
+      "selected_coefficients": [
+        0.0,
+        0.0,
+        0.0,
+        -0.01,
+        0.0
+      ],
+      "selected_model_sha256": "bc5c50e048dcab40b5c0bc5580c296a2b72ea51aa578fd667532129184b08dad",
+      "parameters": {
+        "passed": true,
+        "mismatched_fields": [],
+        "changed_neural_coordinates": 1093,
+        "peptide_balance": 0.0,
+        "maximum_neural_offset": 0.01,
+        "fixed_parameter_fields_exact": true,
+        "near_bound": 0
+      },
+      "numerical": {
+        "maximum_difference": 2.653093438519105e-09,
+        "tolerance": 2.6140880788204962e-05,
+        "passed": true
+      }
     },
     {
       "fold": 4,
@@ -78,23 +170,69 @@
       "objective_decrease": 0.0005025456234228898,
       "relative_decrease_percent": 0.06078651030431588,
       "heldout_loss": 0.9516326349250491,
-      "parent_heldout_loss": null,
-      "heldout_unavailable_reason": null
+      "parent_heldout_loss": 0.9524894794576029,
+      "heldout_unavailable_reason": null,
+      "heldout_loss_change": -0.0008568445325537466,
+      "selected_coefficients": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.01
+      ],
+      "selected_model_sha256": "e3ca80f3b0c26a368496084ff7e000c4b4ffe43a12a78950de4d8be00656fccd",
+      "parameters": {
+        "passed": true,
+        "mismatched_fields": [],
+        "changed_neural_coordinates": 0,
+        "peptide_balance": -0.01,
+        "maximum_neural_offset": 0.0,
+        "fixed_parameter_fields_exact": true,
+        "near_bound": 0
+      },
+      "numerical": {
+        "maximum_difference": 2.3324713584182977e-09,
+        "tolerance": 2.6140880788204962e-05,
+        "passed": true
+      }
     }
   ],
   "scope": "Four-target five-animal-fold structured peptide physiology pilot. Reported train values are objectives including the parameter prior, not necessarily raw data loss. All five selected models improved fine-clock training objective and satisfy the pilot selected-candidate contract; no full135-target changed-model or behavior qualification.",
   "interpretation": [
     "Elapsed 17556.500141102006 seconds =4h52m36.500s; three-hour optimization allowance followed by endpoint validation/audit, without inherited cutoff.",
     "All five folds received probes, with counts2/2/1/1/1, and selected changed candidates. Improvements are small: absolute0.00009499\u20130.00070271, approximately0.0118%\u20130.0842% relative. This supports measured train-objective descent under the corrected protocol.",
-    "Two heldout scores are unavailable. Their exact reasons and heldout parent comparisons are omitted. Scores on three folds alone do not establish heldout improvement or complete CV performance.",
-    "Readiness is the predefined pilot engineering/descent criterion, not biological readiness or evidence that the entire cohort generalizes."
+    "Two folds have no measured downstream heldout labels for the four-target panel. Of the other three, fold2 worsens by0.0008163195406255, fold3 improves by0.0000294912441655, and fold4 improves by0.0008568445325538. Two improve/one worsens with small and largely cancelling changes; this is not a complete87-animal CV/generalization result.",
+    "Readiness is the predefined pilot engineering/descent criterion, not biological readiness or evidence that the entire cohort generalizes.",
+    "All five parameter/frozen-field audits pass; no coordinates near bound. Fold4 changes peptide balance only, with zero changed neural coordinates. Neural changed counts on folds0\u20133 are1184/7261/3709/1093; these are coupled structured coordinates, not independently identified neurons.",
+    "All five coarse/fine mean-response errors are2.33e-9\u20132.65e-9, below the fixed2.6140880788204962e-5 tolerance. This is panel-limited numerical qualification, not full135-target validation of the changed weights.",
+    "14coarse and5fine evaluations have reported medians22.29/44.52minutes, including own-state initialization and replay under the evaluator timing scope. These are baseline planning data, not guaranteed linear scaling to wider panels or time to success.",
+    "Temporary-array retention pass is explicitly complete. Parameters/optimizer/RNG and detailed records are retained by the runner contract; raw state/response arrays were pruned after audit and cannot now be independently replayed from those deleted artifacts."
   ],
-  "pending_components": [
-    "Four target identities and exact selected model hashes/parameter group coordinates",
-    "Per-fold parameter audit, changed-coordinate counts, bounds/frozen fields and numerical differences/tolerances",
-    "Parent heldout losses and exact missing-score reasons for folds0/1",
-    "Per-evaluation timing needed for an efficient longer-run plan",
-    "Temporary-array retention-completion flag and post-run raw evidence availability"
+  "decision": "Keep independent selected model checkpoints and detailed audit/retention records. Do not simply extend the fixed four-target pilot as if it were full CV. Proposed next work: broaden/rotate training target coverage based on training/protocol metadata, keep animal folds and heldout scores out of selection, and benchmark larger target batches before choosing a long optimization duration. No new run, retirement or cleanup starts; earlier request to let current cleanup finish remains in force.",
+  "reported_panel": [
+    "ASHR",
+    "I2R",
+    "M1",
+    "OLQVR"
   ],
-  "decision": "Record successful reported measured-descent pilot; obtain compact endpoint/heldout/timing details before committing to a longer optimization plan. No new run, retirement or extra cleanup is launched."
+  "reported_retention_completed": true,
+  "reported_timings": [
+    {
+      "clock": 0,
+      "evaluations": 14,
+      "median_minutes": 22.29
+    },
+    {
+      "clock": 1,
+      "evaluations": 5,
+      "median_minutes": 44.52
+    }
+  ],
+  "audit_component_review": "Reported endpoint parameter, bound/frozen, model hash, numerical, heldout-comparison and retention components reviewed. All five endpoints pass declared parameter/timestep criteria. No independent replay of pruned raw outputs performed.",
+  "unavailable_evidence": [
+    "Raw starting-state and response arrays pruned under retention policy; no local independent raw replay",
+    "Full source/environment/invocation and archive maps retained externally, not provided in these compact extracts",
+    "Detailed per-batch dynamics/sham/sampling reductions not pasted here; clean audit and selected endpoints are reported",
+    "No full135-target changed-model, heldout results on folds0/1 for this panel, body/sensory start-stop/swimming or biological qualification"
+  ]
 }

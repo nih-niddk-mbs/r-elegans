@@ -14760,3 +14760,58 @@ Exact compact values/derived deltas are in
 `experiments/records/E129-server-summary.json`. Updated current status documents,
 initialization strategy and plan; local checks cover JSON arithmetic/diff only,
 with no new forward simulation.
+
+
+## 2026-11-25 — E129 endpoints sound; sparse/mixed heldout result and measured costs
+
+User supplied the remaining compact metrics for the same E129 run. Panel is
+ASHR, I2R, M1, OLQVR and retention-complete.json exists. All five parameter audits
+pass with no mismatched fields, fixed_parameter_fields_exact=true and near_bound=0.
+Neural changed-coordinate counts are1184/7261/3709/1093/0; maximum offsets are
+0.01 on folds0–3 and0 on fold4. Group coefficients (inward/outward/chemical/gap/
+peptide balance) are [+.01,0,0,0,0], [0,-.01,-.01,0,0], [0,0,-.01,0,0],
+[0,0,0,-.01,0] and [0,0,0,0,-.01]. Fold4 therefore changes peptide gain balance
+only, not neural coordinates. These are structured coupled groups, not independent
+identification of thousands of neuronal properties. Exact selected checkpoint
+hashes and all numbers are retained in E129-server-summary.json.
+
+The five coarse/fine response discrepancies are2.5167527584538107e-9,
+2.4361016858279183e-9,2.3955742702030935e-9,2.653093438519105e-9 and
+2.3324713584182977e-9, all passing the fixed2.6140880788204962e-5 tolerance.
+This validates the tested four-target endpoints; E128's full135-target evidence
+belongs to the unchanged parent and does not qualify the new weights globally.
+No independent raw replay is performed locally.
+
+Exact reason for heldout None on folds0/1 is 'No measured downstream labels'.
+This concerns this stimulus/receiver subset, not a claim that those animals lack
+all data. Fold2 heldout worsens0.7674495106757661 ->0.7682658302163916
+(change+0.0008163195406255). Fold3 improves0.8266297931444306 ->
+0.8266003019002651 (-0.0000294912441655). Fold4 improves0.9524894794576029 ->
+0.9516326349250491 (-0.0008568445325538). Two improve and one worsens, with small
+mostly cancelling changes; no partial mean is treated as an87-animal CV estimate.
+The pilot readiness flag is an engineering/train-descent gate, not heldout success.
+
+Reported medians are22.29minutes for14coarse evaluations and44.52minutes for5fine
+evaluations. Evaluator timing includes fresh own-state initialization and response
+work (and compilation when encountered). These are useful throughput observations,
+not guaranteed forecasts or a biological time-to-success estimate. Larger panels
+would be costly at the current four-target batch shape; a larger-batch benchmark
+is warranted before allocating long multi-fold optimization. Kernel batching
+improvements remain a proposal, not an executed optimization.
+
+Retention completion is explicitly reported: temporary start/response arrays
+are removed after audit by contract, with parameter/optimizer/RNG checkpoints,
+source/env/command records, scalar metrics and deletion hashes retained externally.
+Deleted raw evidence cannot be independently re-audited from those arrays. Detailed
+per-batch reductions and source/archive maps are not in the pasted extract; the
+clean audit is reported, not an assertion of local artifact inspection.
+
+Decision: keep each selected independent model and the negative/missing heldout
+evidence. Do not blindly extend this sparse fixed panel. Proposed next work is
+broader/rotating training-stimulus coverage from protocol/training metadata (not
+optimizing heldout outcomes), maintaining animal folds and no heldout-driven
+updates; benchmark larger target batches before sizing a longer fit. No new run,
+whole-run retirement or cleanup is started. The user's instruction to let current
+cleanup finish remains in force. Full-target changed-model and H1.2 behavioral
+qualifications remain outstanding. Update current status and initialization
+strategy; this closes the pending reported component review.

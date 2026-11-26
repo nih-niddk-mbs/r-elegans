@@ -1,7 +1,7 @@
 {
   "experiment": "E129",
   "recorded_date": "2026-11-25",
-  "status": "Executed, user-reported complete and integrity audit clean:7probes, all5folds trained, all5selected training improvements, pilot-ready gate true. Endpoint/heldout component extraction pending.",
+  "status": "Executed and component-reviewed from user server extracts:7probes/5folds/5small training improvements, clean audit, all parameter/timestep endpoints pass. Four-target heldout coverage absent on2folds; available heldout changes mixed(2improve/1worsen). Retention complete.",
   "authorization": "User requests a three-hour run after E128 component-confirmed full-target fixed-parent validation. Three hours is optimization admission allowance, not a final validation/audit cutoff.",
   "question": "Can bounded structured neural/synaptic and peptide-gain changes produce reproducible training descent under the validated midpoint/32-cycle protocol, with independent animal folds and compact storage?",
   "parent": {

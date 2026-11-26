@@ -1,14 +1,15 @@
 # r-elegans
 
-2026-11-25 E129 completed (user-reported): seven symmetric probes across all
-five animal folds selected five training-objective improvements. The audit reports
-complete, integrity passed and no problems; the pilot readiness gate passed.
-Total elapsed was 4 hours 52 minutes 37 seconds, including endpoint validation
-and audit after the optimization allowance. Gains are small (about 0.012–0.084%).
-Two heldout scores are unavailable and parent heldout comparisons were omitted,
-so generalization is not established. This remains a four-target structured
-fitting pilot, not full-target or behavior qualification. Endpoint/heldout/timing
-component review is pending before a longer fit. [Outcome](experiments/records/E129-server-summary.json).
+2026-11-25 E129 completed and component-reviewed (user-reported): seven probes
+selected small training-objective improvements in all five animal folds. Parameter,
+fixed-field and timestep checks passed; no parameters are near their bounds. The
+panel was ASHR/I2R/M1/OLQVR. Folds 0/1 have no measured downstream heldout labels;
+of three scored folds, two improved and one worsened. Generalization remains
+unproven. Coarse/fine evaluations took median 22.29/44.52 minutes. Total runtime
+was 4h53m including endpoint validation/audit; temporary-array retention completed.
+Next proposed: improve target coverage and benchmark larger batches before longer
+optimization. This is a four-target pilot, not full-target or behavior qualification.
+[Outcome](experiments/records/E129-server-summary.json).
 
 2026-11-25 retention update: keep parameter/optimizer/RNG checkpoints and detailed
 records; simulation arrays are temporary. The new storage cleanup removes only
