@@ -1,0 +1,100 @@
+{
+  "experiment": "E129",
+  "recorded_date": "2026-11-25",
+  "evidence": "User-pasted read-only run_cv_cycle_pilot --report output. No direct server artifact inspection or local simulation.",
+  "run": "/home/carsonc/r-elegans-results/cv-cycle-pilot-20261125T171314Z-1224904",
+  "reported_receipt": {
+    "status": "finished",
+    "elapsed_seconds": 17556.500141102006,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "integrity_passed": true,
+    "pilot_ready_for_longer_fit": true
+  },
+  "reported_audit": {
+    "audit_complete": true,
+    "integrity_passed": true,
+    "optimization_probes": 7,
+    "trained_folds": 5,
+    "selected_improvements": 5,
+    "pilot_ready_for_longer_fit": true,
+    "problems": []
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "optimization_probes": 2,
+      "selected_candidate": true,
+      "parent_train_objective": 0.8155388154248097,
+      "selected_train_objective": 0.8149888411242582,
+      "objective_decrease": 0.0005499743005514812,
+      "relative_decrease_percent": 0.06743692515297418,
+      "heldout_loss": null,
+      "parent_heldout_loss": null,
+      "heldout_unavailable_reason": null
+    },
+    {
+      "fold": 1,
+      "optimization_probes": 2,
+      "selected_candidate": true,
+      "parent_train_objective": 0.8350267995749316,
+      "selected_train_objective": 0.8343240892358121,
+      "objective_decrease": 0.0007027103391195055,
+      "relative_decrease_percent": 0.08415422588559056,
+      "heldout_loss": null,
+      "parent_heldout_loss": null,
+      "heldout_unavailable_reason": null
+    },
+    {
+      "fold": 2,
+      "optimization_probes": 1,
+      "selected_candidate": true,
+      "parent_train_objective": 0.8040988542346833,
+      "selected_train_objective": 0.8040038616907256,
+      "objective_decrease": 9.499254395772816e-05,
+      "relative_decrease_percent": 0.011813540518987451,
+      "heldout_loss": 0.7682658302163916,
+      "parent_heldout_loss": null,
+      "heldout_unavailable_reason": null
+    },
+    {
+      "fold": 3,
+      "optimization_probes": 1,
+      "selected_candidate": true,
+      "parent_train_objective": 0.8413493636872419,
+      "selected_train_objective": 0.8409995241924737,
+      "objective_decrease": 0.0003498394947681893,
+      "relative_decrease_percent": 0.041580764170903506,
+      "heldout_loss": 0.8266003019002651,
+      "parent_heldout_loss": null,
+      "heldout_unavailable_reason": null
+    },
+    {
+      "fold": 4,
+      "optimization_probes": 1,
+      "selected_candidate": true,
+      "parent_train_objective": 0.8267387302001588,
+      "selected_train_objective": 0.8262361845767359,
+      "objective_decrease": 0.0005025456234228898,
+      "relative_decrease_percent": 0.06078651030431588,
+      "heldout_loss": 0.9516326349250491,
+      "parent_heldout_loss": null,
+      "heldout_unavailable_reason": null
+    }
+  ],
+  "scope": "Four-target five-animal-fold structured peptide physiology pilot. Reported train values are objectives including the parameter prior, not necessarily raw data loss. All five selected models improved fine-clock training objective and satisfy the pilot selected-candidate contract; no full135-target changed-model or behavior qualification.",
+  "interpretation": [
+    "Elapsed 17556.500141102006 seconds =4h52m36.500s; three-hour optimization allowance followed by endpoint validation/audit, without inherited cutoff.",
+    "All five folds received probes, with counts2/2/1/1/1, and selected changed candidates. Improvements are small: absolute0.00009499\u20130.00070271, approximately0.0118%\u20130.0842% relative. This supports measured train-objective descent under the corrected protocol.",
+    "Two heldout scores are unavailable. Their exact reasons and heldout parent comparisons are omitted. Scores on three folds alone do not establish heldout improvement or complete CV performance.",
+    "Readiness is the predefined pilot engineering/descent criterion, not biological readiness or evidence that the entire cohort generalizes."
+  ],
+  "pending_components": [
+    "Four target identities and exact selected model hashes/parameter group coordinates",
+    "Per-fold parameter audit, changed-coordinate counts, bounds/frozen fields and numerical differences/tolerances",
+    "Parent heldout losses and exact missing-score reasons for folds0/1",
+    "Per-evaluation timing needed for an efficient longer-run plan",
+    "Temporary-array retention-completion flag and post-run raw evidence availability"
+  ],
+  "decision": "Record successful reported measured-descent pilot; obtain compact endpoint/heldout/timing details before committing to a longer optimization plan. No new run, retirement or extra cleanup is launched."
+}

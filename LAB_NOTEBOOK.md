@@ -14713,3 +14713,50 @@ no descent. Tests also cover bounds/frozen fields, heldout-invariant target choi
 read-only/duplicate guards and parameter/optimizer/log preservation during audited
 pruning. AST, plan JSON, shell syntax and diff checks pass. No local full-network
 or GPU forward run was performed; server performance/results remain planned.
+
+
+## 2026-11-25 — E129 fitting pilot reports descent in all five folds
+
+User-pasted read-only report identifies
+`/home/carsonc/r-elegans-results/cv-cycle-pilot-20261125T171314Z-1224904`.
+Receipt reports finished, elapsed17556.500141102006s, all_steps_finished=true,
+audit_complete=true, integrity_passed=true and pilot_ready_for_longer_fit=true.
+Audit reports seven probes, five trained folds, five selected improvements and
+problems=[]. No direct server artifact access or independent replay occurred.
+Actual source revision/model hashes/end timestamp are not inferred from folder
+names or previous pushes. This supersedes the planned E129 status.
+
+Total elapsed is4h52m36.500s. The three-hour optimization admission allowance
+was followed by endpoint validation/audit, as planned. Probe counts were2/2/1/1/1.
+Fine selected training objectives (including parameter prior) were:
+fold0 0.8155388154248097 ->0.8149888411242582;
+fold1 0.8350267995749316 ->0.8343240892358121;
+fold2 0.8040988542346833 ->0.8040038616907256;
+fold3 0.8413493636872419 ->0.8409995241924737;
+fold4 0.8267387302001588 ->0.8262361845767359.
+Absolute decreases range9.4992544e-5 to7.0271034e-4 (about0.0118–0.0842%).
+All five selected-candidate flags are true. Under the runner contract these
+require safe own-state endpoints, fine training descent and two-clock agreement;
+quantitative endpoint components were not included in this report and must not
+be invented. This is useful but small measured training descent under the
+corrected method, distinct from the earlier untrustworthy gradient direction.
+
+Heldout loss is None for folds0/1; folds2/3/4 report0.7682658302163916,
+0.8266003019002651 and0.9516326349250491. Parent heldout losses and exact
+unavailable reasons were omitted. No heldout improvement/generalization claim
+can follow from these values alone. Sparse four-target coverage is a possibility,
+not an established cause until the saved reason is read. All87animal folds remain
+development data historically inspected; no pristine test interpretation.
+
+Decision: record the successful reported pilot gate, not full135-target changed-
+model or biological/behavior qualification. Obtain compact endpoint model hashes,
+coordinates/parameter audits, numerical checks, parent heldout comparisons and
+missing-score reasons, and per-evaluation timing before choosing a longer run.
+No new run or whole-run retirement launched. Current cleanup remains independent;
+no final cleanup totals or pilot raw-retention status are inferred. Parameter/
+optimizer/RNG and detailed logs remain protected. H1.2 is unchanged.
+
+Exact compact values/derived deltas are in
+`experiments/records/E129-server-summary.json`. Updated current status documents,
+initialization strategy and plan; local checks cover JSON arithmetic/diff only,
+with no new forward simulation.

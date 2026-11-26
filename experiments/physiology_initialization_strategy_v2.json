@@ -1,7 +1,7 @@
 {
   "strategy": "H1.3 physiology initialization with animal-grouped resampling",
   "recorded_date": "2026-11-23",
-  "status": "E128 full-target fixed-peptide validation component-reviewed from server extracts: 476/476 batches, zero changes, both sampling clocks and numerical/control/rhythm checks pass; integrity audit clean. No fitting or behavior promotion.",
+  "status": "E129 reported complete/clean audit:7probes across5animalfolds,5selected small training-objective improvements. Four-target pilot readiness passed; endpoint/heldout component review pending, with2heldout scores unavailable. E128 fixed-parent full-target numeric pass preserved.",
   "purpose": "Obtain plausible, numerically stable neuron/synapse initializations for later sensory-controlled embodied fitting; modest data overfit is acceptable and labeled, unique true biological parameter recovery is not claimed.",
   "existing_evidence": {
     "best_reported": "E120",
@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Planned E129 three-hour optimization pilot: five independent animal folds, common four-target development panel, bounded structured neural and peptide balance probes, fresh32-cycle own states, endpoint two-clock validation/audit without cutoff, compact retention. Not yet executed; no behavior promotion.",
+  "next_action": "Inspect E129 selected model hashes/parameter changes/bounds, per-fold numerical gates, parent heldout comparisons/missing-score reasons and evaluation timings before a longer fitting plan. No automatic new experiment; cleanup remains independent.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

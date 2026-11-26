@@ -1,13 +1,14 @@
 # r-elegans
 
-2026-11-25 E129 is planned: a three-hour optimization pilot with five independent
-animal folds, the validated peptide parent, four training targets and five bounded
-neural/synaptic/peptide parameter groups. Both A100s test symmetric proposals;
-heldout scores never choose updates. Changed weights get fresh32-cycle own states
-and final two-clock checks. Validation/audit finish after the optimization allowance.
-Parameters, optimizer/RNG and detailed records remain; temporary simulation arrays
-are pruned only after a clean complete audit. No full-target or behavior promotion.
-[Plan and commands](experiments/records/E129-plan.json).
+2026-11-25 E129 completed (user-reported): seven symmetric probes across all
+five animal folds selected five training-objective improvements. The audit reports
+complete, integrity passed and no problems; the pilot readiness gate passed.
+Total elapsed was 4 hours 52 minutes 37 seconds, including endpoint validation
+and audit after the optimization allowance. Gains are small (about 0.012–0.084%).
+Two heldout scores are unavailable and parent heldout comparisons were omitted,
+so generalization is not established. This remains a four-target structured
+fitting pilot, not full-target or behavior qualification. Endpoint/heldout/timing
+component review is pending before a longer fit. [Outcome](experiments/records/E129-server-summary.json).
 
 2026-11-25 retention update: keep parameter/optimizer/RNG checkpoints and detailed
 records; simulation arrays are temporary. The new storage cleanup removes only

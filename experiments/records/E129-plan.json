@@ -1,7 +1,7 @@
 {
   "experiment": "E129",
   "recorded_date": "2026-11-25",
-  "status": "Planned; server execution not yet evidenced",
+  "status": "Executed, user-reported complete and integrity audit clean:7probes, all5folds trained, all5selected training improvements, pilot-ready gate true. Endpoint/heldout component extraction pending.",
   "authorization": "User requests a three-hour run after E128 component-confirmed full-target fixed-parent validation. Three hours is optimization admission allowance, not a final validation/audit cutoff.",
   "question": "Can bounded structured neural/synaptic and peptide-gain changes produce reproducible training descent under the validated midpoint/32-cycle protocol, with independent animal folds and compact storage?",
   "parent": {
@@ -49,5 +49,6 @@
     "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_cycle_pilot --status",
     "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_cycle_pilot --output-dir RUN --report"
   },
-  "local_verification": "63 focused CPU float64 software tests pass in 8.66 seconds. Includes durable interrupted-batch reuse without redoing own-state warmup, expired optimization allowance still completing all five endpoint validations and audit, exact parent fallback, bound/frozen-field audit, heldout-invariant target choice, read-only/duplicate guards, post-audit parameter-preserving pruning, and prior cycle/midpoint/storage tests. AST/JSON/shell/diff checks pass. No Mac full-network or GPU experiment."
+  "local_verification": "63 focused CPU float64 software tests pass in 8.66 seconds. Includes durable interrupted-batch reuse without redoing own-state warmup, expired optimization allowance still completing all five endpoint validations and audit, exact parent fallback, bound/frozen-field audit, heldout-invariant target choice, read-only/duplicate guards, post-audit parameter-preserving pruning, and prior cycle/midpoint/storage tests. AST/JSON/shell/diff checks pass. No Mac full-network or GPU experiment.",
+  "outcome_record": "experiments/records/E129-server-summary.json"
 }
