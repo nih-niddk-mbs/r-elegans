@@ -75,7 +75,7 @@
       "A plausible initialization is not uniquely identified true weights."
     ]
   },
-  "next_action": "Planned E130: GPU-batch calibration4/8/16, wider(up to16) training panel, eight-hour optimization allowance for five independent clean-parent fits, final frozen-choice expanded heldout stimulus/per-animal scoring and audit without cutoff. Fresh objective/optimizer; E129 models retained. Not yet executed.",
+  "next_action": "E130 finished per user report:15 probes, one retained training improvement, heldout scores for87animals, audit clean. Review candidate rejection reasons, fine-clock training changes, parameter/numerical/control components and paired heldout deltas before further fitting. User notes apparent stagnation; do not repeat a longer identical search without diagnosis.",
   "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html",

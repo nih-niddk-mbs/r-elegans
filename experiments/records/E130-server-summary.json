@@ -1,0 +1,95 @@
+{
+  "experiment": "E130",
+  "recorded_date": "2026-11-26",
+  "evidence": "User-pasted read-only server status/report. No direct server artifact access or independent forward rerun.",
+  "run": "/home/carsonc/r-elegans-results/cv-wide-cycle-fit-20261126T034851Z-1274597",
+  "receipt": {
+    "status": "finished",
+    "elapsed_seconds": 48755.91467488208,
+    "all_steps_finished": true,
+    "audit_complete": true,
+    "integrity_passed": true,
+    "pilot_ready_for_longer_fit": true
+  },
+  "audit": {
+    "audit_complete": true,
+    "integrity_passed": true,
+    "optimization_probes": 15,
+    "trained_folds": 5,
+    "selected_improvements": 1,
+    "heldout_coverage_complete": true,
+    "pilot_ready_for_longer_fit": true,
+    "batch_policy": {
+      "0": {
+        "capacity": 16,
+        "source": "benchmark-0"
+      },
+      "1": {
+        "capacity": 16,
+        "source": "benchmark-1"
+      }
+    },
+    "problems": []
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "probes": 3,
+      "selected_candidate": false,
+      "parent_train_score": 1.0065377704805303,
+      "selected_train_score": 1.0065377704805303,
+      "heldout_loss": 0.9597259532460077,
+      "heldout_animals_scored": 18,
+      "heldout_animals_total": 18
+    },
+    {
+      "fold": 1,
+      "probes": 3,
+      "selected_candidate": false,
+      "parent_train_score": 0.9929759487734431,
+      "selected_train_score": 0.9929759487734431,
+      "heldout_loss": 0.9953152562664451,
+      "heldout_animals_scored": 18,
+      "heldout_animals_total": 18
+    },
+    {
+      "fold": 2,
+      "probes": 3,
+      "selected_candidate": true,
+      "parent_train_score": 1.0273447422235706,
+      "selected_train_score": 1.026952239169974,
+      "heldout_loss": 0.9612875145035377,
+      "heldout_animals_scored": 17,
+      "heldout_animals_total": 17
+    },
+    {
+      "fold": 3,
+      "probes": 3,
+      "selected_candidate": false,
+      "parent_train_score": 0.9775367352996734,
+      "selected_train_score": 0.9775367352996734,
+      "heldout_loss": 0.9919319391502045,
+      "heldout_animals_scored": 17,
+      "heldout_animals_total": 17
+    },
+    {
+      "fold": 4,
+      "probes": 3,
+      "selected_candidate": false,
+      "parent_train_score": 0.9782905236298975,
+      "selected_train_score": 0.9782905236298975,
+      "heldout_loss": 0.9649389136836999,
+      "heldout_animals_scored": 17,
+      "heldout_animals_total": 17
+    }
+  ],
+  "interpretation": "All87animals scored heldout; one of five folds retains a small training improvement. Readiness flag is execution/descent/coverage, not demonstrated heldout improvement or biological qualification.",
+  "unavailable_in_pasted_report": [
+    "Parent heldout scores and paired heldout deltas",
+    "Per-fold parameter/bounds/frozen fields and candidate rejection reasons",
+    "Numerical component values and signal/control checks",
+    "Benchmark timing/speedup and retention receipt",
+    "Selected model hashes and optimizer details"
+  ],
+  "decision": "Request compact component review from saved summary/audit before proposing further training. Preserve selected independent models; no full-target changed-model or behavior promotion."
+}

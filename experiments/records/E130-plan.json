@@ -1,7 +1,7 @@
 {
   "experiment": "E130",
   "recorded_date": "2026-11-25",
-  "status": "Planned; no server execution evidenced",
+  "status": "Executed per user-reported server report; component review pending",
   "authorization": "User requests an eight-hour run following E129 component review and recommendation to broaden target coverage and benchmark larger GPU batches. Eight hours is optimization allowance; calibration/baseline and final validation/audit are additional time, with no inherited hard total ceiling.",
   "question": "Does a wider training objective yield useful fold-independent physiology descent, and can measured target batching improve throughput while complete heldout-stimulus scoring removes the four-target coverage gap?",
   "parents": {
@@ -62,5 +62,6 @@
     "readonly_status": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_wide_cycle_fit --status",
     "readonly_report": "/home/carsonc/miniconda3/envs/r-elegans/bin/python -m scripts.run_cv_wide_cycle_fit --output-dir RUN --report"
   },
-  "local_verification": "75 focused CPU float64 tests pass in9.10s before final record writes; AST/shell/diff checks pass. Includes benchmark equivalence/faster-invalid-shape rejection, variable-width target completeness/checkpoint reuse, immutable same-model state reuse for additional heldout stimuli, frozen-choice expanded-score ordering/failure handling, plus previous fitter/numerics/storage checks. No local full-network or GPU run; server throughput/calibration outcome remains planned."
+  "local_verification": "75 focused CPU float64 tests pass in9.10s before final record writes; AST/shell/diff checks pass. Includes benchmark equivalence/faster-invalid-shape rejection, variable-width target completeness/checkpoint reuse, immutable same-model state reuse for additional heldout stimuli, frozen-choice expanded-score ordering/failure handling, plus previous fitter/numerics/storage checks. No local full-network or GPU run; server throughput/calibration outcome remains planned.",
+  "outcome_record": "experiments/records/E130-server-summary.json"
 }

@@ -14901,3 +14901,23 @@ protection; no safety bypass or obsolete whole-run retirement starts here.
 Launch: `cd /home/carsonc/github/r-elegans && git pull --ff-only && sh scripts/launch_cv_wide_cycle_fit_mbslnx2.sh`.
 Read-only: dedicated Python `-m scripts.run_cv_wide_cycle_fit --status`, or
 `-m scripts.run_cv_wide_cycle_fit --output-dir RUN --report`.
+
+## 2026-11-26 — E130 wider-panel CV server result; component review pending
+
+User-pasted read-only status reports no active E130 jobs. Run: `/home/carsonc/r-elegans-results/cv-wide-cycle-fit-20261126T034851Z-1274597`.
+Finished in48755.91467488208seconds (13h32m36s); all steps, audit and integrity
+passed, no reported problems. Optimization allowance was8h, not a total-job cutoff.
+15 probes, three per independent fold; one final selected training improvement.
+Both clocks chose16-target batches. All87animals have heldout scores (18/18,18/18,
+17/17,17/17,17/17). Fold2 training objective decreases1.0273447422235706 to
+1.026952239169974; other four selected objectives remain parent values. Exact
+reported scores are in `experiments/records/E130-server-summary.json`.
+
+Interpretation: wider heldout coverage and completed audited computation are
+progress; optimization remains weak. The readiness flag does not require heldout
+improvement. Parent heldout values, per-fold parameter/numerical/signal/control
+components, rejection reasons, model hashes and retention receipt were not pasted.
+Request compact saved-data component review before further training. No invented
+paired deltas, speedup, cleanup completion or model qualification. No forward
+simulation performed locally; runtime code unchanged. Preserve independent parents
+and selected models; no swimming/start-stop or full-target changed-model promotion.
