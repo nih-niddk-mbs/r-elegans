@@ -91,6 +91,8 @@ def classify(base, repo, cap_bytes, log=lambda message: None):
     entries = []
     seen_full = set()
     count = 0
+    hashed = 0
+    last_log = time.monotonic()
     for folder, dirs, files in os.walk(base, followlinks=False):
         dirs.sort()
         folder = Path(folder)
@@ -101,8 +103,9 @@ def classify(base, repo, cap_bytes, log=lambda message: None):
             path = folder/name
             rel = str(path.relative_to(base))
             count += 1
-            if count % 20000 == 0:
-                log(f'classified {count} files')
+            if time.monotonic()-last_log >= 10:
+                last_log = time.monotonic()
+                log(f'{count} files classified, {hashed/2**30:.1f} GiB hashed, at {rel}')
             if path.is_symlink():
                 entries.append(dict(rel=rel, kind='symlink', size=0, mtime_ns=0))
                 continue
@@ -113,7 +116,11 @@ def classify(base, repo, cap_bytes, log=lambda message: None):
                 like = bool(TIER_B_NAME.search(name))
                 if stat.st_size > cap_bytes:
                     entry.update(kind='discard', why='oversize_param_like' if like else 'array')
+                elif lower.endswith('.npz') and npz_is_simulation(path):
+                    # Cheap key check first: simulation arrays are never hashed or kept.
+                    entry.update(kind='discard', why='simulation')
                 else:
+                    hashed += stat.st_size
                     sha = digest(path)
                     entry['sha256'] = sha
                     if sha in full_documented:

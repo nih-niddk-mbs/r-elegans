@@ -51,7 +51,7 @@ def test_classification_tiers(tmp_path):
     base, repo = make_tree(tmp_path)
     by, summary = entries_by_rel(base, repo)
     assert by['run1/actor_best.npz']['tier'] == 'B'
-    assert by['run1/trajectory.npz']['why'] == 'tier_c'
+    assert by['run1/trajectory.npz']['why'] == 'simulation' and 'sha256' not in by['run1/trajectory.npz']
     assert by['run1/candidate-001.npz']['why'] == 'tier_c'
     assert by['run2/odd-name.npz']['tier'] == 'A'
     assert by['run2/network_huge.npz']['why'] == 'oversize_param_like'
