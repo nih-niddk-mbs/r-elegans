@@ -14921,3 +14921,52 @@ Request compact saved-data component review before further training. No invented
 paired deltas, speedup, cleanup completion or model qualification. No forward
 simulation performed locally; runtime code unchanged. Preserve independent parents
 and selected models; no swimming/start-stop or full-target changed-model promotion.
+
+
+## 2026-11-28 — Results directory vault-and-purge planned (user-directed; not executed)
+
+User instruction 2026-11-28: clean the whole mbslnx2 results directory, keeping only
+what was learned (records) and useful trained parameters, and rethink the project
+with everything on the table. This supersedes the earlier rule to preserve all
+selected/final checkpoints and recursive dependencies; old lineages will no longer be
+reproducible from their raw runs, and simulation arrays deleted are unavailable for
+re-audit. The project rethink is a separate pending item; no decision recorded here.
+
+Evidence (user-pasted server output, 2026-11-28; no independent retrieval): /home
+3.5T, 2.8T used, 729G free; results directory 671G; /data/carsonc/r-elegans-results
+20K on a separate 3.5T device with 3.3T free. No active r-elegans processes and no
+GPU compute processes. By extension: 604.8 GiB / 234,230 .npz files, 45.1 GiB / 1,086
+.jsonl, 13.6 GiB / 3,184 .gif, 2.6 GiB / 161,789 .json, 1.7 GiB / 295,623 .py,
+1.2 GiB .md, 0.3 GiB / 68 .msgpack, 406 .pkl. Four early runs hold 422G:
+cue-precision-20261112T004158Z-781583 (146G), alternation64-20261112T042107Z-791518
+(111G), sensorimotor64-20261112T020300Z-784477 (92G), sensorimotor-20261111T193810Z-773573
+(73G). The name-based parameter-like NPZ count (89,471 files, 5.71 GiB) mostly reflects
+per-candidate optimizer files, not selected checkpoints. The E130 run is only 114M
+(arrays already pruned under the 2026-11-25 retention policy). The existing cleaner
+was deliberately dependency-protective and left ~975G in an earlier report.
+
+Method (`scripts/vault_results.py`, stdlib only): `plan` (read-only), `build` (copy into
+a new vault on a different filesystem; never touches the source), `verify` (re-hash
+manifest), `purge` (dry run by default). Kept: parameter NPZ/pkl/msgpack files, content-
+addressed (dedup), if referenced by hash in repository documents (tier A) or checkpoint-
+named with non-simulation array keys (tier B); every non-array file per run as tar.gz
+(gif excluded). Discarded: simulation arrays, per-candidate evaluations (tier C) and
+parameter-like files over --max-param-mb (default 100; listed in plan). Purge requires a
+fresh verification, no active processes, source unchanged since the build inventory
+(path, size, mtime) and a typed confirmation of the manifest hash; symlinks are unlinked,
+never followed. Documented full 64-hex hashes absent from the results are reported.
+An off-machine copy of the vault is a user step before purge; a /data copy is not a backup.
+
+Local verification: 9 synthetic-tree tests pass (tiers, hash/prefix documentation match,
+dedup, same-device/non-empty/active-run refusals, tamper and stray-file detection,
+dry run, wrong confirmation, source changed after build, symlink safety). No server
+run has occurred; reclaimed size and vault size are unknown until it is executed.
+The cleaner tests were not rerun locally (no numpy in the temporary test environment);
+`clean_results_storage.py` is unchanged.
+
+E130 component review remains pending: the committed record lacks parent heldout
+scores, rejection reasons for 14 of 15 probes, parameter/bound audits, numerical
+values and model hashes. Four of five folds selected the parent unchanged, so their
+heldout losses are parent values; only fold 2 (train 1.0273447422 -> 1.0269522392) is
+informative and its parent heldout loss is unavailable. The server review bundle is at
+/tmp/e130-review (user-run; contents not yet transferred).

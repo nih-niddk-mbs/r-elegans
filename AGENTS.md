@@ -2,6 +2,13 @@
 
 Maintain [LAB_NOTEBOOK.md](LAB_NOTEBOOK.md) for scientific work in this repo.
 
+- User instruction 2026-11-28: keep what was learned (records) and useful trained
+  parameters; the results directory may be vaulted and purged (`scripts/vault_results.py`),
+  superseding the rule below to preserve all selected/final checkpoints and recursive
+  dependencies for already-completed runs. Verify the vault, keep an off-machine copy
+  before purging, never delete without a verified manifest, and record what became
+  unavailable. Everything about project direction is open for reconsideration.
+
 - User instruction 2026-11-25: retain parameters/checkpoints and detailed logs,
   rather than permanent simulation arrays. Keep optimizer/RNG and small scientific
   records. Arrays required for active/incomplete continuation or its recursive
